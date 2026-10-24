@@ -1,0 +1,69 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:RogueEssence.Dev.ViewModels;assembly=RogueEssence.Editor.Avalonia"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:converters="clr-namespace:RogueEssence.Dev.Converters"
+             x:Class="RogueEssence.Dev.Views.RangeDictBox">
+  <Design.DataContext>
+    <vm:RangeDictBoxViewModel/>
+  </Design.DataContext>
+  <UserControl.Resources>
+    <converters:ValidIdxConverter x:Key="ValidIdxConverter"/>
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition Height="42"/>
+      <RowDefinition Height="36"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <DataGrid Name="gridItems" IsReadOnly="true" Items="{Binding Collection}" SelectedIndex="{Binding CurrentElement, Mode=TwoWay}" DoubleTapped="doubleClickStart" PointerReleased="lbxCollection_DoubleClick" Margin="4" Grid.RowSpan="2" Grid.ColumnSpan="2" MinHeight="60">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Start"
+                        Binding="{Binding DisplayStart}" />
+          <DataGridTextColumn Header="End"
+                        Binding="{Binding DisplayEnd}" />
+          <DataGridTextColumn Header="Value"
+                              Binding="{Binding Path=DisplayValue}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </Grid>
+    <Grid Grid.Row="1">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="30"/>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="30"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <TextBlock VerticalAlignment="Center" Margin="4" Grid.Row="0" Grid.Column="0">Start:</TextBlock>
+      <NumericUpDown IsEnabled="{Binding Path=CurrentElement, Converter={StaticResource ValidIdxConverter}, ConverterParameter=false}" Value="{Binding CurrentStart}" ValueChanged="nudStart_ValueChanged" Margin="4" Grid.Row="0" Grid.Column="1"/>
+      <TextBlock VerticalAlignment="Center" Margin="4" Grid.Row="0" Grid.Column="2">End:</TextBlock>
+      <NumericUpDown IsEnabled="{Binding Path=CurrentElement, Converter={StaticResource ValidIdxConverter}, ConverterParameter=false}" Value="{Binding CurrentEnd}" ValueChanged="nudEnd_ValueChanged" Margin="4" Grid.Row="0" Grid.Column="3"/>
+    </Grid>
+    <Grid Grid.Row="2">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Button Command="{Binding btnAdd_Click}" Margin="4" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">Add</Button>
+      <Button Command="{Binding btnDelete_Click}" Margin="4" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">Delete</Button>
+    </Grid>
+  </Grid>
+</UserControl>

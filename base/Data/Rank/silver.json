@@ -1,0 +1,25 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.RankData, RogueEssence",
+"Name": {
+"DefaultText": "Silver",
+"LocalTexts": {
+"fr": "Argent",
+"fr-ca": "Argent",
+"de": "Silber",
+"es": "Plata",
+"pt": "Prata",
+"it": "Argento",
+"ko": "실버",
+"ja": "シルバー",
+"ja-jp": "シルバー",
+"zh-hans": "白银等级"
+}
+},
+"Comment": "",
+"BagSize": 40,
+"FameToNext": 1200,
+"Next": "gold"
+}
+}

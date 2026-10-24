@@ -1,0 +1,276 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.ItemData, RogueEssence",
+"Name": {
+"DefaultText": "Rowap Berry",
+"LocalTexts": {
+"fr": "Baie Pommo",
+"de": "Roselbeere",
+"es": "Baya Magua",
+"it": "Baccaroam",
+"ko": "애터열매",
+"ja": "レンブのみ",
+"ja-jp": "レンブのみ",
+"zh-hans": "雾莲果",
+"zh-hant": "霧蓮果"
+}
+},
+"Desc": {
+"DefaultText": "In days of old, people worked the top-shaped pieces of this berry free and used them as toys. If a special attack hits the Pokémon, the damage will be reflected to all enemies nearby.",
+"LocalTexts": {
+"fr": "Autrefois, on détachait les morceaux supérieurs de cette Baie pour en faire des jouets. Si une attaque spécial touche le Pokémon, les dégâts seront reflétés à tout les ennemis proches.",
+"de": "Früher haben die Menschen die kreiselförmige Oberfläche dieser Beere abgetrennt und sie als Spielzeug verwendet. Falls eine spezielle Attacke das Pokémon trifft, wird der Schaden an alle benachbarten Gegner reflektiert.",
+"it": "I suoi chicchi ricordano delle trottole, perciò in tempi antichi venivano usati come giocattoli. Se un attacco speciale colpisce il Pokémon, il danno viene riflesso a tutti i nemici adiacenti.",
+"ko": "열매를 떼어내면 하나하나가 팽이 모양이다. 옛날에는 이것을 장난감 삼았다고 한다. 먹은 포켓몬은 특수공격을 받았을 때 데미지를 근처 적들에게 반사시킨다.",
+"zh-hans": "如果剥下果肉，它的形状就像一个个的陀螺。以前的人会把它当玩具。食用后，在受到特殊招式攻击时，能给予附近所有对手伤害。",
+"zh-hant": "若把果肉分解開，形狀就像一個個的陀螺。以前的人會把它當玩具。食用後，在受到特殊招式攻擊時，也能給予附近所有對手傷害。"
+}
+},
+"Released": true,
+"Comment": "",
+"Sprite": "Berry_Rowap",
+"Icon": 3,
+"SortCategory": 6,
+"Price": 50,
+"Rarity": 0,
+"MaxStack": 0,
+"CannotDrop": false,
+"BagEffect": false,
+"ItemStates": [
+{
+"$type": "PMDC.Dungeon.EdibleState, PMDC"
+},
+{
+"$type": "PMDC.Dungeon.BerryState, PMDC"
+}
+],
+"GroundUseActions": [],
+"UseAction": {
+"$type": "RogueEssence.Dungeon.SelfAction, RogueEssence",
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+},
+"TargetAlignments": 1,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 1,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"UseEvent": {
+"Element": "none",
+"Category": 0,
+"HitRate": -1,
+"SkillStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusStateBattleEvent, PMDC",
+"States": [
+{
+"$type": "PMDC.Dungeon.CategoryState, PMDC",
+"Category": 2
+}
+],
+"StatusID": "area_counter",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RestoreBellyEvent, PMDC",
+"BoostAnims": [],
+"Heal": 3,
+"Msg": false,
+"AddMaxBelly": 0,
+"NeedFullBelly": false
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 15,
+"AbsoluteDelay": false,
+"Sound": "DUN_Berry",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+},
+"UsageType": 4,
+"ArcThrow": false,
+"BreakOnThrow": false,
+"ThrowAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

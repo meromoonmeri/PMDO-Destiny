@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    mkdir _build &&
+    cd _build &&
+    cmake .. &&
+    cmake --build . --config Release
+  displayName: 'Build'
+
+- script: |
+    ctest -V -C Release
+  displayName: 'Test'
+  workingDirectory: _build

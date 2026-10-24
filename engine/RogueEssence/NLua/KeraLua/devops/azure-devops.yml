@@ -1,0 +1,352 @@
+# Repo: codefoco/AzureDevopsTemplates
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: codefoco/AzureDevopsTemplates
+      endpoint: codefoco
+
+stages:
+
+- stage: Build_Mac
+  displayName: 'Build Mac'
+
+  jobs:
+  - job: 'KeraLuaMac'
+    displayName: 'Mac'
+    variables:
+      - group: 'Keys'
+
+    pool:
+      vmImage: 'macOS-11'
+      demands: msbuild
+
+    steps:
+    - checkout: self 
+      submodules: 'true'
+
+    - template: common-dotnet.yml@templates
+    - template: common-macos.yml@templates
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore KeraLua.Mac.sln'
+      inputs:
+        restoreSolution: KeraLua.Mac.sln
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore KeraLua.sln'
+      inputs:
+        restoreSolution: KeraLua.sln
+
+    - task: PowerShell@2
+      displayName: 'PowerShell Script'
+      inputs:
+        targetType: filePath
+        filePath: ./devops/PreBuild.ps1
+        arguments: 'KeraLua'
+        pwsh: true
+
+    - task: MSBuild@1
+      displayName: 'Build solution KeraLua.sln'
+      inputs:
+        solution: KeraLua.sln
+        configuration: Release
+
+    - task: MSBuild@1
+      displayName: 'Build solution KeraLua.Mac.sln'
+      inputs:
+        solution: KeraLua.Mac.sln
+        configuration: Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build ./build/iOS/KeraLua.net6.0-ios.csproj'
+      inputs:
+        command: custom
+        custom: build
+        arguments: './build/iOS/KeraLua.net6.0-ios.csproj /p:Configuration=Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build ./build/iOS/KeraLua.net6.0-maccatalyst.csproj'
+      inputs:
+        command: custom
+        custom: build
+        arguments: './build/iOS/KeraLua.net6.0-maccatalyst.csproj /p:Configuration=Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build ./build/macOS/KeraLua.net6.0-macos.csproj'
+      inputs:
+        command: custom
+        custom: build
+        arguments: './build/macOS/KeraLua.net6.0-macos.csproj /p:Configuration=Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build ./build/TVOS/KeraLua.net6.0-tvos.csproj'
+      inputs:
+        command: custom
+        custom: build
+        arguments: './build/TVOS/KeraLua.net6.0-tvos.csproj /p:Configuration=Release'
+
+    - script: 'dotnet test ./tests/build/net46/bin/Release/KeraLuaTest.dll -l:trx'
+      displayName: 'Run OSX tests'
+
+    - script: 'mv TestResults/*.trx ./KeraLuaTest.Mac.xml'
+      displayName: 'Rename Test result'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: 'KeraLuaTest.Mac.xml'
+        failTaskOnFailedTests: true
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish KeraLuaTest.Mac.xml'
+      inputs:
+        targetPath: KeraLuaTest.Mac.xml
+        artifact: 'KeraLuaTest.Mac.xml'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact: libs.mac'
+      inputs:
+        targetPath: lib/Release/
+        artifact: 'libs.mac'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact: runtimes'
+      inputs:
+        targetPath: runtimes
+        artifact: 'runtimes.mac'
+        publishLocation: 'pipeline'
+
+    - template: send-telegram.yml@templates
+
+- stage: Build_Linux
+  displayName: 'Build Linux'
+  jobs:
+
+  - job: 'KeraLuaLinux'
+    displayName: 'Linux'
+    variables:
+      - group: 'Keys'
+
+    pool:
+      vmImage: 'ubuntu-20.04'
+      demands: msbuild
+
+    steps:
+    - template: common-dotnet.yml@templates
+
+    - checkout: self 
+      submodules: 'true'
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        restoreSolution: KeraLua.sln
+
+    - task: MSBuild@1
+      displayName: 'Build solution KeraLua.sln'
+      inputs:
+        solution: KeraLua.sln
+        configuration: Release
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact: liblua54.so'
+      inputs:
+        targetPath: 'runtimes/linux-x64/native/liblua54.so'
+        artifact: 'liblua54.so'
+        publishLocation: 'pipeline'
+
+    - template: send-telegram.yml@templates
+
+- stage: Build_Windows
+  displayName: Build Windows
+  dependsOn: ['Build_Mac', 'Build_Linux']
+
+  jobs:
+  - job: 'KeraLuaWindows'
+    displayName: 'Windows'
+    variables:
+      - group: 'Keys'
+
+    pool:
+      vmImage: 'windows-2019'
+      demands:
+      - msbuild
+      - visualstudio
+
+    steps:
+    - checkout: self 
+      submodules: true
+
+    - template: common-dotnet.yml@templates
+    - template: common-win.yml@templates
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore KeraLua.sln'
+      inputs:
+        restoreSolution: KeraLua.sln
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore KeraLua.UWP.sln'
+      inputs:
+        restoreSolution: KeraLua.UWP.sln
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore KeraLua.net6.0-android.sln'
+      inputs:
+        command: custom
+        custom: restore
+        arguments: '.\KeraLua.net6.0-android.sln'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore KeraLua.net6.0.sln'
+      inputs:
+        command: custom
+        custom: restore
+        arguments: '.\KeraLua.net6.0.sln'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore KeraLua.netstandard.sln'
+      inputs:
+        command: custom
+        custom: restore
+        arguments: '.\KeraLua.netstandard.sln'
+
+    - task: PowerShell@2
+      displayName: 'PreBuild Script'
+      inputs:
+        filePath: './devops/PreBuild.ps1'
+        arguments: 'KeraLua'
+        errorActionPreference: 'silentlyContinue'
+        pwsh: true
+
+    - task: MSBuild@1
+      displayName: 'Build solution KeraLua.sln'
+      inputs:
+        solution: KeraLua.sln
+        configuration: Release
+
+    - task: MSBuild@1
+      displayName: 'Build solution KeraLua.UWP.sln'
+      inputs:
+        solution: KeraLua.UWP.sln
+        configuration: Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build KeraLua.net6.0.sln'
+      inputs:
+        command: custom
+        custom: build
+        arguments: '.\KeraLua.net6.0.sln /p:Configuration=Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build KeraLua.netstandard.sln'
+      inputs:
+        command: custom
+        custom: build
+        arguments: '.\KeraLua.netstandard.sln /p:Configuration=Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build KeraLua.net6.0-android.sln'
+      inputs:
+        command: custom
+        custom: build
+        arguments: '.\KeraLua.net6.0-android.sln /p:Configuration=Release /p:AndroidNdkDirectory="C:\Android\android-sdk\ndk-bundle"'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet vstest'
+      inputs:
+        command: custom
+        custom: vstest
+        arguments: 'tests\build\net6.0\bin\Release\net6.0\KeraLuaTest.net6.0.dll'
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore Android solution'
+      inputs:
+        restoreSolution: KeraLua.Android.sln
+        
+    - task: MSBuild@1
+      displayName: 'Build Android'
+      inputs:
+        solution: 'KeraLua.Android.sln'
+        platform: 'Any CPU'
+        configuration: 'Release'
+        msbuildArguments: '/p:AndroidNdkDirectory="C:\Android\android-sdk\ndk-bundle"'
+    
+    - script: 'dotnet test .\tests\build\net46\bin\Release\KeraLuaTest.dll -l:trx'
+      displayName: 'Run Windows Tests'
+        
+    - script: 'RENAME TestResults\*.trx KeraLuaTest.Windows.xml'
+      displayName: 'Rename Test result'
+
+    - script: 'MOVE TestResults\KeraLuaTest.Windows.xml .'
+      displayName: 'Move Test result'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: 'KeraLuaTest.Windows.xml'
+        failTaskOnFailedTests: true
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish KeraLuaTest.Windows.xml'
+      inputs:
+        targetPath: KeraLuaTest.Windows.xml
+        artifact: 'KeraLuaTest.Windows.xml'
+        publishLocation: 'pipeline'
+      
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Build libs.mac'
+      inputs:
+        buildType: 'current'
+        artifactName: 'libs.mac'
+        targetPath: './lib/Release/'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Build runtimes.mac'
+      inputs:
+        buildType: 'current'
+        artifactName: 'runtimes.mac'
+        targetPath: './runtimes/'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Build liblua54.so (Linux)'
+      inputs:
+        buildType: 'current'
+        artifactName: 'liblua54.so'
+        targetPath: 'runtimes/linux-x64/native/'
+
+    - script: 'nuget setapikey $(apikey)'
+      displayName: 'Set NuGet API Key'
+
+    - task: PowerShell@2
+      displayName: 'Package NuGet'
+      inputs:
+        targetType: filePath
+        filePath: ./devops/Package.ps1
+        arguments: 'KeraLua'
+        pwsh: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save KeraLua.nupkg Artifact'
+      inputs:
+        PathtoPublish: KeraLua.nupkg
+        ArtifactName: KeraLua.nupkg
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save KeraLua.snupkg Artifact'
+      inputs:
+        PathtoPublish: KeraLua.snupkg
+        ArtifactName: KeraLua.snupkg
+
+    - task: PowerShell@2
+      displayName: 'Publish NuGet'
+      inputs:
+        targetType: filePath
+        filePath: ./devops/Publish.ps1
+        arguments: KeraLua
+        pwsh: true
+
+    - template: send-telegram.yml@templates

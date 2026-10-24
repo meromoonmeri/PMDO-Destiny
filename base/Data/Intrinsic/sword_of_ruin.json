@@ -1,0 +1,104 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Sword of Ruin",
+"LocalTexts": {
+"fr": "Épée du Fléau",
+"de": "Unheilsschwert",
+"es": "Espada Debacle",
+"it": "Spada Nefasta",
+"ja": "わざわいのつるぎ",
+"ja-jp": "わざわいのつるぎ",
+"zh-hans": "灾祸之剑"
+}
+},
+"Desc": {
+"DefaultText": "The power of the Pokémon's ruinous sword lowers the Defense stats of all Pokémon except itself.",
+"LocalTexts": {
+"es": "El catastrófico poder de la espada del Pokémon reduce la Defensa de todos los Pokémon menos el usuario.",
+"zh-hans": "以能呼唤灾厄的剑的力量降低除自己以外的宝可梦的防御。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 285,
+"ProximityEvent": {
+"Radius": 3,
+"TargetAlignments": 6,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 1,
+"Numerator": 4,
+"Denominator": 3,
+"Anims": []
+}
+}
+],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

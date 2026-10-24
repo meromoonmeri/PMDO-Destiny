@@ -1,0 +1,329 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.ItemData, RogueEssence",
+"Name": {
+"DefaultText": "Grimy Food",
+"LocalTexts": {
+"fr": "Morviture",
+"de": "Sleimkost",
+"es": "Grimmerola",
+"it": "Grimerpappa",
+"ko": "질퍽음식",
+"ja": "ベトベタフード",
+"ja-jp": "ベトベタフード",
+"zh-hans": "腐烂食物"
+}
+},
+"Desc": {
+"DefaultText": "A food item that somewhat fills the Pokémon's belly. However, it will also inflict a variety of status problems because it's covered in filthy grime. Be careful of what you eat!",
+"LocalTexts": {
+"fr": "Aliment qui remplit un peu l'Estomac du Pokémon. Provoque cependant divers problèmes de statut car il est couvert de crasse répugnante. Faites attention à ce que vous mangez!",
+"de": "Ein Nahrungsmittel, welches den Magen des Pokémons etwas füllt. Jedoch wird der Anwender auch von einer Reihe möglicher Statusproblemen getroffen, da dieses Item in ekligem Sleim überzogen ist. Sei vorsichtig was du isst!",
+"es": "Alimento que llena algo la tripa de un Pokémon. Sin embargo, causa a su vez diversos problemas de estado. ",
+"it": "Un cibo che riempie un po' la pancia, ma che causa vari problemi di stato perché è ricoperto di sporcizia. Meglio fare attenzione quando la si mangia.",
+"ko": "포만감이 약간 회복되지만, 위생적이지 않아 상태이상에 걸리게 된다. 식중독에 주의하도록 하자.",
+"zh-hans": "一种食物，食用后回复少量满腹度，但它覆盖着肮脏的污垢，食用后也会陷入异常状态。要小心食用！"
+}
+},
+"Released": true,
+"Comment": "",
+"Sprite": "Rock_Purple",
+"Icon": 16,
+"SortCategory": 4,
+"Price": 1,
+"Rarity": 0,
+"MaxStack": 0,
+"CannotDrop": false,
+"BagEffect": false,
+"ItemStates": [
+{
+"$type": "PMDC.Dungeon.EdibleState, PMDC"
+},
+{
+"$type": "PMDC.Dungeon.FoodState, PMDC"
+}
+],
+"GroundUseActions": [],
+"UseAction": {
+"$type": "RogueEssence.Dungeon.SelfAction, RogueEssence",
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+},
+"TargetAlignments": 1,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 1,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"UseEvent": {
+"Element": "none",
+"Category": 0,
+"HitRate": -1,
+"SkillStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RestoreBellyEvent, PMDC",
+"BoostAnims": [],
+"Heal": 30,
+"Msg": false,
+"AddMaxBelly": 0,
+"NeedFullBelly": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ChooseOneEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "sleep",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+},
+{
+"$type": "PMDC.Dungeon.MultiBattleEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -3,
+"StatusID": "mod_defense",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+},
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -3,
+"StatusID": "mod_special_defense",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+},
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "burn",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+},
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "poison_toxic",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 15,
+"AbsoluteDelay": false,
+"Sound": "DUN_Seed",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+},
+"UsageType": 4,
+"ArcThrow": false,
+"BreakOnThrow": false,
+"ThrowAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

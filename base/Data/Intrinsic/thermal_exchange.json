@@ -1,0 +1,130 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Thermal Exchange",
+"LocalTexts": {
+"fr": "Thermodynamique",
+"de": "Thermowandel",
+"es": "Termoscambio",
+"it": "Termoscambio",
+"ja": "ねつこうかん",
+"ja-jp": "ねつこうかん",
+"zh-hans": "热交换"
+}
+},
+"Desc": {
+"DefaultText": "Boosts the Attack stat when the Pokémon is hit by a Fire-type move.",
+"LocalTexts": {
+"fr": "Augmente l'attaque si touché par une capacité feu."
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 270,
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": 1,
+"StatusID": "mod_attack",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_JUSTIFIED"
+},
+"Anims": []
+}
+],
+"NeededElement": "fire"
+}
+],
+"Targets": 6,
+"RequireDamage": false,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
+}
+]
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

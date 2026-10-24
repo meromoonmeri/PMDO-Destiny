@@ -1,0 +1,104 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Stance Change",
+"LocalTexts": {
+"fr": "Déclic Tactique",
+"de": "Taktikwechsel",
+"es": "Cambio Táctico",
+"it": "Accendilotta",
+"ko": "배틀스위치",
+"ja": "バトルスイッチ",
+"ja-jp": "バトルスイッチ",
+"zh-hans": "战斗切换",
+"zh-hant": "戰鬥切換"
+}
+},
+"Desc": {
+"DefaultText": "The Pokémon changes its form to Blade Forme when it uses an attack move, and changes to Shield Forme when it uses a status move.",
+"LocalTexts": {
+"zh-hans": "如果使出攻击招式，会变为刀剑形态，如果使出变化招式，会变为盾牌形态。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 176,
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StanceChangeEvent, PMDC",
+"ReqSpecies": "aegislash",
+"DefenseForme": 0,
+"AttackForme": 1
+}
+}
+],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

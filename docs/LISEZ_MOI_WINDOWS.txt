@@ -1,0 +1,36 @@
+POKÉMON MYSTERY DUNGEON: DESTINY
+Base technique autonome — Windows x64
+
+LANCER LE JEU
+1. Extraire entièrement le ZIP.
+2. Double-cliquer sur JOUER_A_DESTINY.bat.
+3. À l'écran-titre, appuyer sur une touche puis choisir Nouvelle partie.
+
+Aucune installation séparée de PMDO n'est nécessaire.
+Destiny est déjà fusionné avec son moteur : il n'y a pas de quest à sélectionner.
+Ne pas déplacer Destiny.exe seul : les dossiers Base, Content, Data, Strings et les bibliothèques natives sont nécessaires.
+
+SON
+Si le son grésille, utiliser JOUER_A_DESTINY_WASAPI.bat.
+
+CONTRÔLES PRINCIPAUX
+- Flèches : déplacement
+- X : confirmer / attaquer
+- Z : annuler / courir avec une direction
+- Échap : menu
+- A + S/D/Z/X : capacités
+- Q : capacités, W : objets, E : tactiques, R : équipe
+- F11 : couper/réactiver la musique
+
+Les contrôles complets et les crédits PMDO sont dans README.txt.
+
+CONTENU ACTUEL
+Cette version est un socle de développement : écran-titre Destiny, sélection du héros et clairière technique. Elle ne contient pas encore une campagne ni les chapitres d'Halcyon.
+
+SAUVEGARDES
+Le jeu fonctionne de façon portable dans son dossier. Extraire le jeu dans un emplacement où Windows autorise l'écriture, par exemple Documents ou le Bureau, plutôt que Program Files.
+
+CRÉDITS
+Moteur PMDC / RogueEssence et ressources PMDO : voir README.txt, Licenses et spritebot_credits.txt.
+Organisation inspirée de Halcyon, sans reprise de son histoire.
+Destiny est un fangame non officiel et non commercial.

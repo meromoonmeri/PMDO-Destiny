@@ -1,0 +1,18 @@
+# PROJET Destiny intentionally uses no Git LFS.
+* text=auto
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ogg binary
+*.wav binary
+*.dll binary
+*.exe binary
+*.so binary
+*.dylib binary
+*.chara binary
+*.portrait binary
+*.tile binary
+*.font binary
+*.dir binary

@@ -1,0 +1,216 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.SkillData, RogueEssence",
+"Name": {
+"DefaultText": "Axe Kick",
+"LocalTexts": {
+"fr": "Talon-Marteau",
+"es": "Patada Hacha",
+"it": "Calcio ad Ascia",
+"ja": "かかとおとし",
+"ja-jp": "かかとおとし",
+"zh-hans": "下压踢",
+"zh-hant": "下压踢"
+}
+},
+"Desc": {
+"DefaultText": "The user jumps high, then slams its heel down upon the target. This may also confuse the target. If it misses, the user takes damage instead.",
+"LocalTexts": {
+"fr": "Le lanceur donne un coup de talon descendant à la cible, ce qui peut aussi la rendre confuse. S'il échoue, le lanceur se blesse.",
+"zh-hans": "将踢起的脚跟往下劈向对手进行攻击。有时会使对手混乱。如果劈偏则自己会受到伤害。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 853,
+"BaseCharges": 10,
+"Strikes": 1,
+"HitboxAction": {
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"WideAngle": 0,
+"SnapBack": false,
+"CharAnim": 21,
+"AppearanceMod": 4,
+"HitTiles": true,
+"Range": 3,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 4,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Cross_Chop",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 6,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"Data": {
+"Element": "fighting",
+"Category": 1,
+"HitRate": 80,
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
+"$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+"Power": 85
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 35
+}
+],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "confuse",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": ""
+},
+"Anims": []
+}
+]
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CrashLandEvent, PMDC",
+"HPFraction": 4
+}
+}
+],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Punch",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Print_Foot",
+"FrameTime": 12,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+"ActionType": 0
+}
+}
+}
+}

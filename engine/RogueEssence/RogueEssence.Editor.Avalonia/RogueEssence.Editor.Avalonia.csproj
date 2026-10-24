@@ -1,0 +1,187 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RogueEssence\RogueEssence.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+    <PackageReference Include="ResXResourceReader.NetStandard" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="DataEditor\DataEditRootForm.axaml.cs">
+      <DependentUpon>DataEditRootForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\RankedCollectionBox.axaml.cs">
+      <DependentUpon>RankedCollectionBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\RangeDictBox.axaml.cs">
+      <DependentUpon>RangeDictBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\Editors\RogueEssence\Tiles\TileEditForm.axaml.cs">
+      <DependentUpon>TileEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\Editors\RogueEssence\Tiles\TileBox.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\ParentForm.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\CategorySpawnBox.axaml.cs">
+      <DependentUpon>CategorySpawnBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\SpawnListViewBox.axaml.cs">
+      <DependentUpon>SpawnListViewBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\SpawnRangeListBox.axaml.cs">
+      <DependentUpon>SpawnRangeListBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\SpawnListBox.axaml.cs">
+      <DependentUpon>SpawnListBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\PriorityListBox.axaml.cs">
+      <DependentUpon>PriorityListBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\DictionaryBox.axaml.cs">
+      <DependentUpon>DictionaryBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\CollectionBox.axaml.cs">
+      <DependentUpon>CollectionBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\DataEditForm.axaml.cs">
+      <DependentUpon>DataEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\StringsEditForm.axaml.cs">
+      <DependentUpon>StringsEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\TilesetEditForm.axaml.cs">
+      <DependentUpon>TilesetEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AnimEditForm.axaml.cs">
+      <DependentUpon>AnimEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\ClassBox.axaml.cs">
+      <DependentUpon>ClassBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\SpeciesEditForm.axaml.cs">
+      <DependentUpon>SpeciesEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DataListForm.axaml.cs">
+      <DependentUpon>DataListForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DialogBoxes\ModConfigWindow.axaml.cs">
+      <DependentUpon>ModConfigWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\Layers\GroundLayerWindow.axaml.cs">
+      <DependentUpon>GroundLayerWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabDecorations.axaml.cs">
+      <DependentUpon>MapTabDecorations.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\Teams\TeamWindow.axaml.cs">
+      <DependentUpon>TeamWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Testing\TextTestForm.axaml.cs">
+      <DependentUpon>TextTestForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DevForm\DevTabConstants.axaml.cs">
+      <DependentUpon>DevTabConstants.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DevForm\DevTabMods.axaml.cs">
+      <DependentUpon>DevTabMods.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DialogBoxes\AnimChoiceWindow.axaml.cs">
+      <DependentUpon>AnimChoiceWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DialogBoxes\RenameWindow.axaml.cs">
+      <DependentUpon>RenameWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundTabScript.axaml.cs">
+      <DependentUpon>GroundTabScript.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\Layers\EntityLayerWindow.axaml.cs">
+      <DependentUpon>EntityLayerWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\Layers\AnimLayerWindow.axaml.cs">
+      <DependentUpon>AnimLayerWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\Layers\MapLayerWindow.axaml.cs">
+      <DependentUpon>MapLayerWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundTabDecorations.axaml.cs">
+      <DependentUpon>GroundTabDecorations.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabSpawns.axaml.cs">
+      <DependentUpon>MapTabSpawns.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabEntrances.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabItems.axaml.cs">
+      <DependentUpon>MapTabItems.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabEffects.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabProperties.axaml.cs">
+      <DependentUpon>MapTabProperties.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabEntities.axaml.cs">
+      <DependentUpon>MapTabEntities.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabTiles.axaml.cs">
+      <DependentUpon>MapTabTiles.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabTerrain.axaml.cs">
+      <DependentUpon>MapTabTerrain.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapTabTextures.axaml.cs">
+      <DependentUpon>MapTabTextures.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapEditForm\MapEditForm.axaml.cs">
+      <DependentUpon>MapEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SearchListBox.axaml.cs">
+      <DependentUpon>SearchListBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundTabEntities.axaml.cs">
+      <DependentUpon>GroundTabEntities.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundTabWalls.axaml.cs">
+      <DependentUpon>GroundTabWalls.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundTabTextures.axaml.cs">
+      <DependentUpon>GroundTabTextures.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\GroundEditForm.axaml.cs">
+      <DependentUpon>GroundEditForm.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\TeamBox.axaml.cs">
+      <DependentUpon>TeamBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\LayerBox.axaml.cs">
+      <DependentUpon>LayerBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GroundEditForm\EntityBrowser.axaml.cs">
+      <DependentUpon>EntityBrowser.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\Editors\RogueEssence\Tiles\AutotileBrowser.axaml.cs">
+      <DependentUpon>AutotileBrowser.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="DataEditor\Editors\RogueEssence\Tiles\TileBrowser.axaml.cs">
+      <DependentUpon>TileBrowser.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+</Project>

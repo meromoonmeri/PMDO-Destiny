@@ -1,0 +1,118 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Grassy Surge",
+"LocalTexts": {
+"fr": "Créa-Herbe",
+"de": "Gras-Erzeuger",
+"es": "Herbogénesis",
+"it": "Erbogenesi",
+"ko": "그래스메이커",
+"ja": "グラスメイカー",
+"ja-jp": "グラスメイカー",
+"zh-hans": "青草制造者",
+"zh-hant": "青草製造者"
+}
+},
+"Desc": {
+"DefaultText": "Turns the ground into Grassy Terrain when the Pokémon is battling.",
+"LocalTexts": {
+"de": "Erzeugt im Kampf ein Grasfeld auf dem Boden.",
+"zh-hans": "交战中，会布下青草场地。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 229,
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.GiveMapStatusEvent, PMDC",
+"StatusID": "grassy_terrain",
+"Counter": 10,
+"MsgOverride": {
+"Key": null
+},
+"States": [
+{
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.ExtendWeatherState"
+}
+]
+}
+]
+}
+}
+],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

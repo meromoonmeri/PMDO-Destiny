@@ -1,0 +1,28 @@
+# Build outputs
+build/
+dist/
+engine/publish/
+**/bin/
+**/obj/
+**/obj_core/
+
+# Local tools and caches
+.cache/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# Portable game data produced during testing
+SAVE/
+LOG/
+LOGS/
+REPLAY/
+REPLAYS/
+RESCUE/
+RESCUE_IN/
+RESCUE_OUT/
+userdata/
+
+# OS files
+.DS_Store
+Thumbs.db

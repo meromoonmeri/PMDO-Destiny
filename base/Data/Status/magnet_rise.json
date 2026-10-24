@@ -1,0 +1,224 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.StatusData, RogueEssence",
+"Name": {
+"DefaultText": "Magnet Rise",
+"LocalTexts": {
+"fr": "Vol Magnétik",
+"de": "Magnetflug",
+"es": "Levitón",
+"it": "Magnetascesa",
+"zh-hans": "电磁飘浮"
+}
+},
+"Desc": {
+"DefaultText": "The Pokémon is levitating with electromagnetism, allowing it to avoid Ground-type attacks. This status wears off after many turns have passed.",
+"LocalTexts": {
+"fr": "Le Pokémon lévite par électromagnétisme, ce qui lui permet d'éviter les attaques de type Sol. Ce statut disparaît après plusieurs tours.",
+"de": "Das Pokémon schwebt dank Elektromagnetismus, wodurch es Boden-Attacken ausweicht. Dieser Status lässt nach vielen Zügen nach.",
+"es": "El Pokémon está levitando con electromagnetismo, permitiendo evitar ataques de tipo Tierra. Este estado desaparece tras pasar varios turnos.",
+"it": "Il Pokémon levita grazie all'elettromagnetismo, permettendogli di evitare gli attacchi di tipo Terra. Questo stato svanisce dopo un po' di turni.",
+"zh-hans": "这只宝可梦利用电气产生的磁力浮在空中，免疫了地面属性的攻击。该状态在大量回合后解除。"
+}
+},
+"Released": true,
+"Comment": "",
+"MenuName": true,
+"CarryOver": false,
+"Emoticon": "Cycle_Yellow",
+"DropEmoticon": "",
+"FreeEmote": "",
+"DrawEffect": -1,
+"Targeted": false,
+"StatusStates": [
+{
+"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
+},
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 25
+}
+],
+"OnSkillChanges": [],
+"TargetPassive": {
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_MAGNET_RISE_START"
+},
+"Delay": true
+}
+}
+],
+"OnStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_STATUS_END"
+},
+"Delay": false
+}
+}
+],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"ShowMessage": true
+}
+}
+],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 1
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 4
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 2
+}
+}
+],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TypeImmuneEvent, PMDC",
+"Element": "ground"
+}
+}
+],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

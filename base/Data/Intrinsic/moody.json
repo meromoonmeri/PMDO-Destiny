@@ -1,0 +1,138 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Moody",
+"LocalTexts": {
+"fr": "Lunatique",
+"de": "Gefühlswippe",
+"es": "Veleta",
+"it": "Altalena",
+"ko": "변덕쟁이",
+"ja": "ムラっけ",
+"ja-jp": "ムラっけ",
+"zh-hans": "心情不定",
+"zh-hant": "心情不定"
+}
+},
+"Desc": {
+"DefaultText": "Raises one stat and lowers another.",
+"LocalTexts": {
+"fr": "Monte une stat tout en en baissant une autre.",
+"de": "Erhöht einen Statuswert und senkt einen anderen.",
+"es": "Sube una característica mucho, pero baja otra.",
+"it": "Aumenta una statistica e ne riduce un’altra.",
+"ko": "능력이 오르락내리락한다.",
+"ja": "のうりょくが　あがったり さがったりする。",
+"ja-jp": "能力が　あがったり さがったりする。",
+"zh-hans": "提高一项能力，而降低另一项。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 141,
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MoodyEvent, PMDC",
+"OnPhysicalID": "mod_defense",
+"OnSpecialID": "mod_special_defense"
+}
+],
+"Targets": 6,
+"RequireDamage": true,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MoodyEvent, PMDC",
+"OnPhysicalID": "mod_attack",
+"OnSpecialID": "mod_special_attack"
+}
+]
+}
+}
+],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

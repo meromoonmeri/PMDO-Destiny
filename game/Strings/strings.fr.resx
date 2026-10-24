@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="GAME_TITLE" xml:space="preserve">
+    <value>Pokémon Donjon Mystère : Destiny</value>
+    <comment>Titre du fangame autonome Destiny.</comment>
+  </data>
+</root>

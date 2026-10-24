@@ -1,0 +1,69 @@
+<Project DefaultTargets="Build" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{BBF77001-98E9-4FCD-90FB-626B555CE418}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PMDC</RootNamespace>
+    <AssemblyName>PMDC</AssemblyName>
+    <AssemblyVersion>0.8.12</AssemblyVersion>
+    <AssemblyCopyright>Audino 2025</AssemblyCopyright>
+    <TargetFramework>net8.0</TargetFramework>
+    <Deterministic>true</Deterministic>
+    <RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <Configuration>Release</Configuration>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishDir>..\publish\$(RuntimeIdentifier)\$(AssemblyName)</PublishDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  
+  <ItemGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <Content Include="runtimes\$(RuntimeIdentifier)\native\*" Link="%(FileName)%(Extension)">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(RuntimeIdentifier)' == ''">
+    <Content Include="runtimes\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\base\**\*" Exclude="..\..\base\.git;..\..\base\.gitignore">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RogueEssence\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\RogueEssence\RogueEssence.Editor.Avalonia\RogueEssence.Editor.Avalonia.csproj" />
+    <ProjectReference Include="..\RogueEssence\RogueEssence\RogueEssence.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\net8.0\PMDC.xml</DocumentationFile>
+  </PropertyGroup>
+</Project>

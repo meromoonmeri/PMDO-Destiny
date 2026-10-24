@@ -1,0 +1,175 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Flower Gift",
+"LocalTexts": {
+"fr": "Don Floral",
+"de": "Pflanzengabe",
+"es": "Don Floral",
+"it": "Regalfiore",
+"ko": "플라워기프트",
+"ja": "フラワーギフト",
+"ja-jp": "フラワーギフト",
+"zh-hans": "花之礼",
+"zh-hant": "花之禮"
+}
+},
+"Desc": {
+"DefaultText": "Boosts the Attack and Sp. Def stats of itself and allies in harsh sunlight.",
+"LocalTexts": {
+"fr": "Augmente l’Attaque et la Défense Spéciale du Pokémon et de ses alliés lorsque le soleil brille.",
+"de": "Erhöht bei Sonnenschein den Angriff und die Spezial-Verteidigung aller Team-Pokémon.",
+"es": "Aumenta el Ataque y la Defensa Especial de todos los Pokémon del equipo si hace sol.",
+"it": "Se la luce del sole è intensa, aumenta la Difesa Speciale e l’Attacco del Pokémon e dei suoi alleati.",
+"ko": "날씨가 맑을 때 자신과 같은 편의 공격과 특수방어의 능력이 올라간다.",
+"ja": "てんきが　はれのとき じぶんと　みかたの　こうげきと とくぼうの　のうりょくが　あがる。",
+"ja-jp": "天気が　晴れのとき 自分と　味方の　攻撃と 特防の　能力が　上がる。",
+"zh-hans": "日照强烈时，自己与同伴的攻击和特防能力会提高。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 122,
+"ProximityEvent": {
+"Radius": 3,
+"TargetAlignments": 3,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyCategoryInWeatherEvent, PMDC",
+"WeatherID": "sunny",
+"Category": 1,
+"Numerator": 5,
+"Denominator": 4
+}
+}
+],
+"BeforeHittings": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyCategoryInWeatherEvent, PMDC",
+"WeatherID": "sunny",
+"Category": 2,
+"Numerator": 4,
+"Denominator": 5
+}
+}
+],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherFormeChangeEvent, PMDC",
+"ReqSpecies": "cherrim",
+"DefaultForme": 0,
+"WeatherPair": {
+"sunny": 1
+}
+}
+}
+],
+"OnMapStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherFormeChangeEvent, PMDC",
+"ReqSpecies": "cherrim",
+"DefaultForme": 0,
+"WeatherPair": {
+"sunny": 1
+}
+}
+}
+],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+-11
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherFormeEvent, PMDC",
+"ReqSpecies": "cherrim",
+"DefaultForme": 0,
+"WeatherPair": {
+"sunny": 1
+}
+}
+}
+],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

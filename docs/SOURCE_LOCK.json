@@ -1,0 +1,89 @@
+{
+  "project": "PMDO-Destiny",
+  "game_version": "0.8.12",
+  "git_lfs": false,
+  "submodules": false,
+  "sources": {
+    "PMDC": {
+      "repository": "https://github.com/PMDCollab/PMDC",
+      "commit": "5f6f893746375e7ffb461eec14372956a740b8af"
+    },
+    "PMDODump": {
+      "repository": "https://github.com/audinowho/PMDODump",
+      "commit": "68965e74c2f627bcdcffae78c9e1ec1c1b13968a"
+    },
+    "DumpAsset": {
+      "repository": "https://github.com/audinowho/DumpAsset",
+      "commit": "3e767571f9dd94270b848b3a73de9bec2553a2eb"
+    },
+    "Halcyon": {
+      "repository": "https://github.com/Palikadude/Halcyon",
+      "commit": "da6c2130d641507447e6386a5e47a296e8cb4c71",
+      "used_for": "structure reference only; no chapters or story maps copied"
+    }
+  },
+  "former_submodules": [
+    {
+      "status": " ",
+      "commit": "8b7eafafa73ff0c10b9e8fd9348559ee1b5dfe8b",
+      "path": "RogueEssence"
+    },
+    {
+      "status": " ",
+      "commit": "99a5b2100110592f7ef998c509dbb57006983085",
+      "path": "RogueEssence/FNA"
+    },
+    {
+      "status": " ",
+      "commit": "d8db58212434963909c0e30ed987887fb02d74b1",
+      "path": "RogueEssence/FNA/lib/FAudio"
+    },
+    {
+      "status": " ",
+      "commit": "b36e1f789c2124467e938a5fc576d0bb4df7d77b",
+      "path": "RogueEssence/FNA/lib/FNA3D"
+    },
+    {
+      "status": " ",
+      "commit": "72895d05c9219e04960ebc7862aae2b017aed954",
+      "path": "RogueEssence/FNA/lib/FNA3D/MojoShader"
+    },
+    {
+      "status": " ",
+      "commit": "85470b32ad5d0d7d67fdf411b6e7b502c09c9c52",
+      "path": "RogueEssence/FNA/lib/FNA3D/Vulkan-Headers"
+    },
+    {
+      "status": " ",
+      "commit": "1eb20e5c690aee9a5188ba9cf06207295c51d935",
+      "path": "RogueEssence/FNA/lib/SDL2-CS"
+    },
+    {
+      "status": " ",
+      "commit": "ea5fd6d34053ff72b0abe83fa4f2cd0771d92663",
+      "path": "RogueEssence/FNA/lib/Theorafile"
+    },
+    {
+      "status": " ",
+      "commit": "9884d7742201c677e990672af5fbc88f3f4cd4a6",
+      "path": "RogueEssence/NLua"
+    },
+    {
+      "status": " ",
+      "commit": "7636d17f2d020a11c2499931a8e2b902474c56a9",
+      "path": "RogueEssence/NLua/KeraLua"
+    },
+    {
+      "status": " ",
+      "commit": "0780af0ca8ba0b595bc694a9d3e7bdedf4e348b6",
+      "path": "RogueEssence/NLua/KeraLua/external/lua"
+    },
+    {
+      "status": " ",
+      "commit": "a3869ec8f451ada25efdb453b85281fd098c1671",
+      "path": "RogueEssence/RogueElements"
+    }
+  ],
+  "quest_uuid": "746CBBCD-426F-5419-A735-D50248440935",
+  "title_source_sha256": "ab78c9bad3b00fa2d63bfe76b64fa9bc91c4bf4518399c253828d36c254977c2"
+}

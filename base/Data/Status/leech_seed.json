@@ -1,0 +1,209 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.StatusData, RogueEssence",
+"Name": {
+"DefaultText": "Leech Seed",
+"LocalTexts": {
+"fr": "Vampigraine",
+"de": "Egelsamen",
+"es": "Drenadoras",
+"it": "Parassiseme",
+"zh-hans": "寄生种子"
+}
+},
+"Desc": {
+"DefaultText": "The Pokémon's HP is sapped and given to a foe every turn. This status wears off if there are no foes around.",
+"LocalTexts": {
+"fr": "Les PV du Pokémon sont drainés et absorbé par l'ennemi à chaque tour. Ce statut disparaît si il n'y plus d'ennemis aux alentours.",
+"de": "Die KP des Pokémon werden in jedem Zug aufgezehrt und an einen Gegner weitergegeben. Dieser Status lässt nach, sobald keine Gegner in der Nähe sind. ",
+"es": "Los PS del Pokémon son absorbidos y dados a un enemigo cada turno. Este estado desaparece si no hay enemigos alrededor.",
+"it": "I PS del Pokémon vengono assorbiti e ceduti al nemico ogni turno. Questo stato svanisce quando non sono più presenti nemici accanto al Pokémon.",
+"zh-hans": "这只宝可梦会被夺取HP并将其分给一个对手。如果周围没有对手，该状态解除。"
+}
+},
+"Released": true,
+"Comment": "",
+"MenuName": true,
+"CarryOver": false,
+"Emoticon": "",
+"DropEmoticon": "",
+"FreeEmote": "",
+"DrawEffect": -1,
+"Targeted": false,
+"StatusStates": [
+{
+"$type": "PMDC.Dungeon.BadStatusState, PMDC"
+},
+{
+"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
+}
+],
+"OnSkillChanges": [],
+"TargetPassive": {
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TypeCheck, PMDC",
+"Element": "grass",
+"Message": {
+"Key": "MSG_LEECH_SEED_FAIL_ELEMENT"
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SameStatusCheck, PMDC",
+"Message": {
+"Key": "MSG_LEECH_SEED_ALREADY"
+}
+}
+}
+],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_LEECH_SEED_START"
+},
+"Delay": true
+}
+}
+],
+"OnStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_LEECH_SEED_END"
+},
+"Delay": false
+}
+}
+],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.LeechSeedEvent, PMDC",
+"Message": {
+"Key": "MSG_LEECH_SEED"
+},
+"Range": 4,
+"HPFraction": 12
+}
+}
+],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}
