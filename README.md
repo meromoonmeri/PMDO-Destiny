@@ -21,8 +21,7 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 - données et ressources PMDO dans `base/` ;
 - quest autonome `destiny` dans `game/`, fusionnée au moteur dans le ZIP ;
 - sélection du héros proposée par PMDO ;
-- première map technique `destiny_hub`, avec son script et sa zone indexée ;
-- aucun chapitre ni scénario repris de Halcyon.
+- première map technique `destiny_hub`, avec son script et sa zone indexée.
 
 Il s'agit d'un socle de développement jouable, pas encore d'une histoire complète.
 
@@ -41,8 +40,6 @@ Il s'agit d'un socle de développement jouable, pas encore d'une histoire compl�
 | `art/` | Illustrations sources, dont l'écran-titre |
 | `tools/` | Validation et construction du ZIP Windows |
 | `docs/` | Architecture, provenance et crédits |
-
-L'organisation de `game/` suit le modèle de Halcyon, sans reprendre son histoire.
 
 ## Compiler le ZIP Windows
 
@@ -83,11 +80,9 @@ Le contrôle vérifie notamment :
 
 Les maps de l'ancien dépôt peuvent être importées sélectivement dans `game/Data/Ground/`. Elles ne sont pas copiées massivement : certaines ressources de PROJET-PMD dépassent 100 Mio et devront être optimisées ou reconstruites pour conserver ce nouveau dépôt sans LFS.
 
-## Crédits et statut
+## Moteur et statut
 
-- Moteur : PMDC / RogueEssence, licence MIT.
-- Données de base : PMDO / DumpAsset, avec les crédits et licences d'origine conservés.
-- Modèle d'organisation : Halcyon par Palikadude ; aucun chapitre Halcyon n'est inclus.
-- Illustration Destiny : créée pour ce projet.
+- Moteur : PMDO / PMDC / RogueEssence.
+- Notices du moteur : `licenses/` et `base/Licenses/`.
 
-Destiny est un fangame non officiel et non commercial. Pokémon et Pokémon Mystery Dungeon appartiennent à leurs ayants droit respectifs. Voir `docs/SOURCES.md`, `docs/SOURCE_LOCK.json`, `licenses/` et `base/Licenses/`.
+Destiny est un fangame non officiel et non commercial. Pokémon et Pokémon Mystery Dungeon appartiennent à leurs ayants droit respectifs.

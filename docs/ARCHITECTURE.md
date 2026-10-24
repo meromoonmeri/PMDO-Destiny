@@ -22,7 +22,7 @@ PMDO-Destiny/
 └── docs/
 ```
 
-Cette sélection reprend la logique d'organisation de Halcyon : les Grounds, les maps de donjons, les zones, les ressources et les scripts sont séparés. Contrairement à Halcyon, le dépôt contient aussi le moteur et les données runtime nécessaires.
+Les Grounds, les maps de donjons, les zones, les ressources et les scripts sont séparés. Le dépôt contient aussi le moteur et les données runtime nécessaires.
 
 ## Pourquoi aucun sous-module ?
 

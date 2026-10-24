@@ -11,4 +11,4 @@ Ce dossier est temporairement copié dans `MODS/Destiny/` pendant la constructio
 - `Content/UI/Title.png` : écran-titre interne PMDO.
 - `Strings/` : titre du jeu et futures traductions.
 
-La map actuelle `destiny_hub` est un socle technique original. Les scénarios et chapitres Halcyon ne font pas partie de cette quest.
+La map actuelle `destiny_hub` est le socle technique de cette quest.

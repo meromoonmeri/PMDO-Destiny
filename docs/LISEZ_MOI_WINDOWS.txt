@@ -25,12 +25,11 @@ CONTRÔLES PRINCIPAUX
 Les contrôles complets et les crédits PMDO sont dans README.txt.
 
 CONTENU ACTUEL
-Cette version est un socle de développement : écran-titre Destiny, sélection du héros et clairière technique. Elle ne contient pas encore une campagne ni les chapitres d'Halcyon.
+Cette version est un socle de développement : écran-titre Destiny, sélection du héros et clairière technique. Elle ne contient pas encore de campagne complète.
 
 SAUVEGARDES
 Le jeu fonctionne de façon portable dans son dossier. Extraire le jeu dans un emplacement où Windows autorise l'écriture, par exemple Documents ou le Bureau, plutôt que Program Files.
 
-CRÉDITS
-Moteur PMDC / RogueEssence et ressources PMDO : voir README.txt, Licenses et spritebot_credits.txt.
-Organisation inspirée de Halcyon, sans reprise de son histoire.
+MOTEUR
+PMDO / PMDC / RogueEssence. Notices du moteur disponibles dans Licenses.
 Destiny est un fangame non officiel et non commercial.

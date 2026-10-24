@@ -7,19 +7,6 @@
     "PMDC": {
       "repository": "https://github.com/PMDCollab/PMDC",
       "commit": "5f6f893746375e7ffb461eec14372956a740b8af"
-    },
-    "PMDODump": {
-      "repository": "https://github.com/audinowho/PMDODump",
-      "commit": "68965e74c2f627bcdcffae78c9e1ec1c1b13968a"
-    },
-    "DumpAsset": {
-      "repository": "https://github.com/audinowho/DumpAsset",
-      "commit": "3e767571f9dd94270b848b3a73de9bec2553a2eb"
-    },
-    "Halcyon": {
-      "repository": "https://github.com/Palikadude/Halcyon",
-      "commit": "da6c2130d641507447e6386a5e47a296e8cb4c71",
-      "used_for": "structure reference only; no chapters or story maps copied"
     }
   },
   "former_submodules": [
