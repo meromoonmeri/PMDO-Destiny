@@ -88,7 +88,6 @@ function dev_room.Dev_Note_Action(obj, activator)
   
   UI:ResetSpeaker(true)
   UI:WaitShowDialogue("You can use the dev panel to mod any aspect of the game,[pause=0] even make an entirely new fangame if you go far enough!")
-  UI:WaitShowDialogue("Another developer is using this engine already.[pause=0] Their project is called Halcyon.")
   UI:WaitShowDialogue("Want to try it yourself?[pause=0] Visit https://wiki.pmdo.pmdcollab.org/Main_Page for tutorials.")
   
   UI:ResetSpeaker(false)
