@@ -21,6 +21,9 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   blason Œuf Ailé une fois par session, service Lua `destiny_title_anim`
   enregistré par `game/Data/Script/destiny/main.lua`. Voir
   `docs/MENU_TITRE.md`.
+- **Aperçus des maps** : `tools/preview_maps.py` rend hors-moteur les 229
+  cartes au sol (fonds + calques, pose 0) dans `import_work/apercus_site/`
+  (galerie HTML, hors Git, régénérable) — générés le 27/10/2026 (0 erreur).
 - **Validation** : `tools/validate.py` (Python + Pillow) couvre désormais
   aussi les cartes/zones/index importés et le menu-titre — `VALIDATION OK`
   le 27/10/2026.
