@@ -16,7 +16,7 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
 ## Contenu actuel
 
-- écran-titre Destiny avec nuages et mer ;
+- écran-titre animé Destiny : mer et ciel JOUR/NUIT selon l'heure (24 poses), blason Œuf Ailé animé à l'ouverture du menu — voir [`docs/MENU_TITRE.md`](docs/MENU_TITRE.md) ;
 - moteur PMDO compilable et inclu dans `engine/` ;
 - données et ressources PMDO dans `base/` ;
 - quest autonome `destiny` dans `game/`, fusionnée au moteur dans le ZIP ;

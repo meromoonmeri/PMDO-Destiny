@@ -15,8 +15,15 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   Rapport complet : `docs/IMPORT_GUILDE_TREEHOUSE.md` ; crédits :
   `CREDITS.md`. **Aucun raccordement au hub pour l'instant** (choix de
   l'auteur : import d'abord, cinématiques ensuite).
+- **Menu-titre animé** (27/10/2026) : récupéré depuis l'atelier
+  `projet-creation-pmdo` et reconstruit à l'octet près depuis son pipeline —
+  fonds mer/ciel JOUR et NUIT animés (24 poses, selon l'heure), apparition du
+  blason Œuf Ailé une fois par session, service Lua `destiny_title_anim`
+  enregistré par `game/Data/Script/destiny/main.lua`. Voir
+  `docs/MENU_TITRE.md`.
 - **Validation** : `tools/validate.py` (Python + Pillow) couvre désormais
-  aussi les cartes/zones/index importés — `VALIDATION OK` le 26/10/2026.
+  aussi les cartes/zones/index importés et le menu-titre — `VALIDATION OK`
+  le 27/10/2026.
 
 ## Chantiers suivants (par priorité)
 

@@ -24,6 +24,20 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   droit de réutilisation interne au projet). Méthode décrite dans
   `MANUEL_METHODE_PMDO.md` et `AGENTS.md` de ce dépôt.
 
+## Menu-titre animé (récupéré le 27 octobre 2026)
+
+- **meromoonmeri** (auteur du projet) — fonds animés jour/nuit, blason
+  « Œuf Ailé », séquence d'ouverture et service Lua `destiny_title_anim`,
+  créés dans son atelier
+  [`meromoonmeri/projet-creation-pmdo`](https://github.com/meromoonmeri/projet-creation-pmdo)
+  (branche `arena/637b0828-projet-creation-pmdo`, commit
+  `24c84f45c8bdd62969ef58de8b22ce2a874d415a` ; dépôt sans licence publique,
+  import à la demande de l'auteur). Les images sources sont ses propres
+  générations détourées par son pipeline
+  (`source/pmd_destiny_fangame_v1/bruts/`) ; les sorties ont été reconstruites
+  à l'octet près depuis ce pipeline (voir
+  [`docs/MENU_TITRE.md`](docs/MENU_TITRE.md)).
+
 ## Banques de tuiles réemployées par ces cartes
 
 - **Métano Town / Vast Steppe** (`Metano_Town_*`, `Vast_Steppe_*`, variantes

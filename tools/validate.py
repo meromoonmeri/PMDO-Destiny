@@ -173,6 +173,50 @@ def main() -> None:
     except Exception as exc:
         errors.append(f'Imported content validation failed: {exc}')
 
+    # ----- Menu-titre anime (service destiny_title_anim) -----
+    # Les trois DirSheet du titre doivent etre presents et structurellement valides
+    # (format DirSheet.Save : [int64 png_len][PNG][int32 tileW, tileH, rotate, frames]),
+    # le service doit etre enregistre par destiny/main.lua, et les valeurs de
+    # game/Content/ContentParams.xml doivent pointer sur des fichiers existants.
+    def _check_dirsheet(path):
+        raw = path.read_bytes()
+        (png_len,) = struct.unpack_from('<q', raw, 0)
+        if 8 + png_len + 16 != len(raw):
+            raise ValueError(f'DirSheet size mismatch: {path}')
+        tile_w, tile_h, _rot, frames = struct.unpack_from('<iiii', raw, 8 + png_len)
+        if (tile_w, tile_h) != (320, 240) or frames < 1:
+            raise ValueError(f'DirSheet trailer unexpected in {path}: {(tile_w, tile_h, frames)}')
+
+    try:
+        for rel in ['game/Content/BG/Title_Screen_Background_Jour.dir',
+                    'game/Content/BG/Title_Screen_Background_Nuit.dir',
+                    'game/Content/Object/Destiny_Logo_Anime_Opening.dir']:
+            path = ROOT / rel
+            if not path.is_file():
+                errors.append(f'Title DirSheet missing: {rel}')
+            else:
+                _check_dirsheet(path)
+        main_lua = ROOT / 'game/Data/Script/destiny/main.lua'
+        if not main_lua.is_file() or 'destiny.services.destiny_title_anim' not in main_lua.read_text(encoding='utf-8-sig'):
+            errors.append('destiny/main.lua must require destiny.services.destiny_title_anim')
+        if not (ROOT / 'game/Data/Script/destiny/services/destiny_title_anim/init.lua').is_file():
+            errors.append('Title service missing: game/Data/Script/destiny/services/destiny_title_anim/init.lua')
+        params_path = ROOT / 'game/Content/ContentParams.xml'
+        if params_path.is_file():
+            params = ET.parse(params_path).getroot()
+            title_bg = params.findtext('TitleBG')
+            bg_found = any((ROOT / base_rel / f'{title_bg}.dir').is_file()
+                           for base_rel in ['game/Content/BG', 'base/Content/BG'])
+            if not bg_found:
+                errors.append(f'ContentParams TitleBG not found as .dir: {title_bg}')
+            for tag in ['TitleBGM', 'MonsterBGM']:
+                music = params.findtext(tag)
+                if not any((ROOT / base_rel / music).is_file()
+                           for base_rel in ['game/Content/Music', 'base/Content/Music']):
+                    errors.append(f'ContentParams {tag} not found: {music}')
+    except Exception as exc:
+        errors.append(f'Title menu validation failed: {exc}')
+
     total = sum(path.stat().st_size for path in files)
     largest = max(files, key=lambda path: path.stat().st_size)
     print(f'Files checked: {len(files)}')
