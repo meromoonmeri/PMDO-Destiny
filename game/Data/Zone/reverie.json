@@ -1,0 +1,42 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Reverie Town and the Guild",
+      "LocalTexts": {
+        "fr": "Reverie Town, la guilde et la clairière"
+      }
+    },
+    "Released": true,
+    "Comment": "Quartiers de Reverie Town, sentier de la guilde, clairières et zone de réveil (import guilde-treehouse-pmd).",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "clairiere",
+      "guild_path",
+      "pmd_petal_clearing",
+      "rvt2_ne_jour",
+      "rvt2_ne_nuit",
+      "rvt2_no_jour",
+      "rvt2_no_nuit",
+      "zrv2_zone_reveil_aube",
+      "zrv2_zone_reveil_crepuscule",
+      "zrv2_zone_reveil_jour",
+      "zrv2_zone_reveil_nuit"
+    ]
+  }
+}
