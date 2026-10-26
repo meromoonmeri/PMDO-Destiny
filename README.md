@@ -76,9 +76,19 @@ Le contrôle vérifie notamment :
 - cohérence de la map, de la zone, de l'index et des paramètres de départ ;
 - dimensions de l'écran-titre interne PMDO.
 
-## Maps de PROJET-PMD
+## Maps importées de l'atelier guilde-treehouse-pmd
 
-Les maps de l'ancien dépôt peuvent être importées sélectivement dans `game/Data/Ground/`. Elles ne sont pas copiées massivement : certaines ressources de PROJET-PMD dépassent 100 Mio et devront être optimisées ou reconstruites pour conserver ce nouveau dépôt sans LFS.
+Le 26 octobre 2026, les créations de l'atelier
+[`guilde-treehouse-pmd`](https://github.com/meromoonmeri/guilde-treehouse-pmd)
+ont été importées (228 cartes au sol + 1 carte de donjon, 1 023 banques de
+tuiles, 102 fonds/objets), après audit de provenance et déduplication par
+lieu (dernière version de chaque lieu). Elles sont rangées dans trois zones
+dédiées — `cotes_metano`, `ateliers_donjons`, `reverie` — en plus de
+`destiny_hub`, avec des scripts squelettes ; les raccordements, collisions et
+cinématiques viendront ensuite. Rapport complet :
+[`docs/IMPORT_GUILDE_TREEHOUSE.md`](docs/IMPORT_GUILDE_TREEHOUSE.md) ;
+provenance et crédits : [`CREDITS.md`](CREDITS.md) ; état du projet :
+[`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md).
 
 ## Moteur et statut
 
