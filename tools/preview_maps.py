@@ -366,7 +366,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </div><img id="ovimg" alt=""></div>
 <script>
 let DATA=null, flat=[], idx=0;
-const ZONE_ORDER = ["destiny_hub","menu_titre","cotes_metano","reverie","ateliers_donjons","autres"];
+const ZONE_ORDER = ["destiny_hub","chapitres_destiny","menu_titre","cotes_metano","reverie","ateliers_donjons","autres"];
 fetch('manifest.json').then(r=>r.json()).then(d=>{DATA=d;render();});
 function allMaps(){return DATA.maps;}
 function render(){
