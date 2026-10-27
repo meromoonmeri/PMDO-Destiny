@@ -38,6 +38,32 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   à l'octet près depuis ce pipeline (voir
   [`docs/MENU_TITRE.md`](docs/MENU_TITRE.md)).
 
+## Cartes récupérées de `projet-creation-pmdo` (27 octobre 2026)
+
+- **meromoonmeri** (auteur du projet) — cartes et assemblages produits dans
+  son atelier
+  [`meromoonmeri/projet-creation-pmdo`](https://github.com/meromoonmeri/projet-creation-pmdo)
+  (dépôt sans licence publique ; import effectué à la demande de l'auteur).
+  Lot 1 (7 cartes construites) : paquets des branches
+  `arena/f9b9e04a-projet-creation-pmdo` (commit
+  `f243f3e8107390940390f1af7c39230374ab60ee`),
+  `arena/52e6a9de-projet-creation-pmdo` (commit
+  `c2d77959d87bf334e9603b47df012bc4f1e3dd7a`) et
+  `arena/e39626d2-projet-creation-pmdo` (commit
+  `ef492fec6612924c7b2185e7c9555a562f3882db` ; seuls les grounds, tuiles et
+  fonds des falaises ont été repris, les scripts de la cinématique Pichu sont
+  restés dans l'atelier). Lot 2 (21 cartes) : sorties régénérées depuis les
+  `build.py` committés de la branche `arena/637b0828-projet-creation-pmdo`
+  (commit `24c84f45c8bdd62969ef58de8b22ce2a874d415a`), avec des `zip_bytes`
+  et des comptes de tuiles identiques aux `metadata.json` d'origine.
+  Plusieurs feuilles générées par ces pipelines réemploient de la matière
+  pixellique dite « canonique » de *Pokémon Donjon Mystère : Équipe de
+  Secours Rouge* / *Explorers of Sky* : même réserve de redistribution que
+  pour les cellules DTEF ci-dessous. Aucun fichier source extrait
+  (`.bpl`/`.bpc`/`.bma`) ni décodeur n'a été importé dans Destiny. Le rapport
+  détaillé sera consolidé dans `docs/IMPORT_CREATION_PMDO.md` à la clôture de
+  la tâche D.
+
 ## Banques de tuiles réemployées par ces cartes
 
 - **Métano Town / Vast Steppe** (`Metano_Town_*`, `Vast_Steppe_*`, variantes

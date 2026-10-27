@@ -4,7 +4,7 @@ Fangame PMDO autonome (moteur 0.8.12 épinglé, voir `docs/SOURCES.md`),
 Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
 (**ne jamais les modifier** — voir `docs/LESSONS.md`).
 
-## État actuel (26 octobre 2026)
+## État actuel (27 octobre 2026)
 
 - **`destiny_hub`** : carte de départ d'origine, inchangée ; la partie démarre
   toujours dessus (`game/Data/StartParams.xml`).
@@ -21,29 +21,46 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   blason Œuf Ailé une fois par session, service Lua `destiny_title_anim`
   enregistré par `game/Data/Script/destiny/main.lua`. Voir
   `docs/MENU_TITRE.md`.
-- **Aperçus des maps** : `tools/preview_maps.py` rend hors-moteur les 229
-  cartes au sol (fonds + calques, pose 0) dans `import_work/apercus_site/`
-  (galerie HTML, hors Git, régénérable) — générés le 27/10/2026 (0 erreur).
+- **Import `projet-creation-pmdo` (tâche D, en cours)** : lot 1, 7 cartes
+  construites saines (crevasse enneigée, grotte aux vasques, traversée
+  cristalline, falaises Reverie jour/nuit) ; lot 2, 21 cartes reconstruites
+  depuis leurs pipelines d'atelier avec des `zip_bytes` identiques aux
+  métadonnées commitées. Les 8 lieux des Chapitres I/II forment la nouvelle
+  zone `chapitres_destiny` ; les 13 autres seuils/arènes rejoignent
+  `ateliers_donjons`. État après ces deux lots : **257 cartes au sol** (dont
+  `destiny_hub`), 1 carte de donjon, **1 289 banques de tuiles**, 113
+  `.dir`, 5 zones et 257 scripts squelettes. Aucune de ces nouvelles cartes
+  n'est encore raccordée au hub ni scénarisée ; sur les falaises, la
+  cinématique Pichu d'origine est volontairement inactive.
+- **Aperçus des maps** : `tools/preview_maps.py` rend hors-moteur les cartes
+  au sol (fonds + calques, pose 0) dans `import_work/apercus_site/` (galerie
+  HTML, hors Git, régénérable). La galerie actuelle est antérieure aux lots
+  de la tâche D ; une régénération complète est prévue à sa clôture.
 - **Validation** : `tools/validate.py` (Python + Pillow) couvre désormais
   aussi les cartes/zones/index importés et le menu-titre — `VALIDATION OK`
   le 27/10/2026.
 
 ## Chantiers suivants (par priorité)
 
-1. **Tests en jeu** PMDO Dev 0.8.12 (checklist dans
+1. **Clôturer la tâche D (`projet-creation-pmdo`)** : étudier puis, si le
+   format le permet proprement, convertir les 5 grounds `exports/` au schéma
+   maison `AssetLayers` ; documenter les exclusions prouvées (intérieurs
+   `metano_gen_*`, SpindaV4 sans ground, tour temporelle en `.ora`) ; écrire
+   `docs/IMPORT_CREATION_PMDO.md` et régénérer la galerie complète.
+2. **Tests en jeu** PMDO Dev 0.8.12 (checklist dans
    `docs/IMPORT_GUILDE_TREEHOUSE.md` §8) — surtout les 98 cartes en
    sérialisation 0.7.x/0.8.9 et les plages.
-2. **Collisions et entrées/sorties** des bases côtières (`Tags = 0` dans
+3. **Collisions et entrées/sorties** des bases côtières (`Tags = 0` dans
    l'atelier), puis raccordements entre cartes voisines et vers `destiny_hub`.
-3. **Dépendances manquantes** : MapStatus `steam` et 4 musiques à récupérer
+4. **Dépendances manquantes** : MapStatus `steam` et 4 musiques à récupérer
    depuis New Era / l'installation de l'auteur
    (`docs/IMPORT_GUILDE_TREEHOUSE.md` §6).
-4. **Pièces de la guilde** : les 12 salles n'existent qu'en PNG dans l'atelier ;
+5. **Pièces de la guilde** : les 12 salles n'existent qu'en PNG dans l'atelier ;
    à construire en `GroundMap`.
-5. **Cinématiques (Partie 2)** : cadrage, foreshadowing
+6. **Cinématiques (Partie 2)** : cadrage, foreshadowing
    (`docs/foreshadowing.md`), puis scènes en français avec portraits vérifiés,
    caméra dynamique, boss motivés (règles dans `docs/LESSONS.md`).
-6. **Renommage « univers Destiny »** des cartes au fil des raccordements (les
+7. **Renommage « univers Destiny »** des cartes au fil des raccordements (les
    `AssetName` actuels sont ceux de l'atelier).
 
 ## Règles qui ne changent pas
