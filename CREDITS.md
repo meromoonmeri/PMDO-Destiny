@@ -56,6 +56,13 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   `build.py` committés de la branche `arena/637b0828-projet-creation-pmdo`
   (commit `24c84f45c8bdd62969ef58de8b22ce2a874d415a`), avec des `zip_bytes`
   et des comptes de tuiles identiques aux `metadata.json` d'origine.
+  Lot 3 (5 cartes) : exports de la branche
+  `arena/52e6a9de-projet-creation-pmdo` convertis depuis leur format maison
+  `AssetLayers` (atlas PNG + cartes de coordonnées par frame) vers le format
+  natif PMDO (`TileIndexNode`/`BaseSheet`, `Frames`/`FrameLength` dans les
+  grounds) ; seuls les fichiers convertis ont été importés, les images de
+  référence citées par les manifestes (`D02P…`, `D09P11A`, `D27P11A`) sont
+  restées dans l'atelier.
   Plusieurs feuilles générées par ces pipelines réemploient de la matière
   pixellique dite « canonique » de *Pokémon Donjon Mystère : Équipe de
   Secours Rouge* / *Explorers of Sky* : même réserve de redistribution que

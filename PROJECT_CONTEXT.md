@@ -25,11 +25,16 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   construites saines (crevasse enneigée, grotte aux vasques, traversée
   cristalline, falaises Reverie jour/nuit) ; lot 2, 21 cartes reconstruites
   depuis leurs pipelines d'atelier avec des `zip_bytes` identiques aux
-  métadonnées commitées. Les 8 lieux des Chapitres I/II forment la nouvelle
-  zone `chapitres_destiny` ; les 13 autres seuils/arènes rejoignent
-  `ateliers_donjons`. État après ces deux lots : **257 cartes au sol** (dont
-  `destiny_hub`), 1 carte de donjon, **1 289 banques de tuiles**, 113
-  `.dir`, 5 zones et 257 scripts squelettes. Aucune de ces nouvelles cartes
+  métadonnées commitées ; lot 3, 5 seuils sud-nord convertis depuis le
+  schéma maison `AssetLayers` vers le format natif PMDO (animations par
+  `Frames`/`FrameLength`, collisions et marqueurs d'origine conservés ;
+  poses 0 relues par le renderer du projet sans tuile manquante ni écart de
+  pixel). Les 8 lieux des Chapitres I/II forment la nouvelle zone
+  `chapitres_destiny` ; les autres seuils/arènes rejoignent
+  `ateliers_donjons` (156 cartes). État après ces trois lots : **262 cartes
+  au sol** (dont `destiny_hub`), 1 carte de donjon, **1 322 banques de
+  tuiles**, 113 `.dir`, 5 zones et 262 scripts squelettes. Aucune de ces
+  nouvelles cartes
   n'est encore raccordée au hub ni scénarisée ; sur les falaises, la
   cinématique Pichu d'origine est volontairement inactive.
 - **Aperçus des maps** : `tools/preview_maps.py` rend hors-moteur les cartes
@@ -42,11 +47,10 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
 
 ## Chantiers suivants (par priorité)
 
-1. **Clôturer la tâche D (`projet-creation-pmdo`)** : étudier puis, si le
-   format le permet proprement, convertir les 5 grounds `exports/` au schéma
-   maison `AssetLayers` ; documenter les exclusions prouvées (intérieurs
-   `metano_gen_*`, SpindaV4 sans ground, tour temporelle en `.ora`) ; écrire
-   `docs/IMPORT_CREATION_PMDO.md` et régénérer la galerie complète.
+1. **Clôturer la tâche D (`projet-creation-pmdo`)** : écrire
+   `docs/IMPORT_CREATION_PMDO.md` (dont les exclusions prouvées : intérieurs
+   `metano_gen_*` non résolubles proprement, SpindaV4 sans ground, tour
+   temporelle en `.ora`) et régénérer la galerie complète des maps.
 2. **Tests en jeu** PMDO Dev 0.8.12 (checklist dans
    `docs/IMPORT_GUILDE_TREEHOUSE.md` §8) — surtout les 98 cartes en
    sérialisation 0.7.x/0.8.9 et les plages.
