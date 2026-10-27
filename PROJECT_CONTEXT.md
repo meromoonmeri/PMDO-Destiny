@@ -39,18 +39,20 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   cinématique Pichu d'origine est volontairement inactive.
 - **Aperçus des maps** : `tools/preview_maps.py` rend hors-moteur les cartes
   au sol (fonds + calques, pose 0) dans `import_work/apercus_site/` (galerie
-  HTML, hors Git, régénérable). La galerie actuelle est antérieure aux lots
-  de la tâche D ; une régénération complète est prévue à sa clôture.
+  HTML, hors Git, régénérable). Galerie complète régénérée à la clôture de
+  la tâche D : 264 entrées (262 cartes + 2 écrans-titre), 0 erreur,
+  0 tuile irrésolue.
 - **Validation** : `tools/validate.py` (Python + Pillow) couvre désormais
   aussi les cartes/zones/index importés et le menu-titre — `VALIDATION OK`
   le 27/10/2026.
 
 ## Chantiers suivants (par priorité)
 
-1. **Clôturer la tâche D (`projet-creation-pmdo`)** : écrire
-   `docs/IMPORT_CREATION_PMDO.md` (dont les exclusions prouvées : intérieurs
-   `metano_gen_*` non résolubles proprement, SpindaV4 sans ground, tour
-   temporelle en `.ora`) et régénérer la galerie complète des maps.
+1. **Tâche D (`projet-creation-pmdo`) — terminée le 27/10/2026** : 33 cartes
+   importées en 3 lots, rapport `docs/IMPORT_CREATION_PMDO.md` (exclusions
+   prouvées incluses : intérieurs `metano_gen_*`, SpindaV4, tour temporelle),
+   galerie complète régénérée. Reste l'arbitrage « pixels canoniques »
+   du lot 2 (réserve dans `CREDITS.md`).
 2. **Tests en jeu** PMDO Dev 0.8.12 (checklist dans
    `docs/IMPORT_GUILDE_TREEHOUSE.md` §8) — surtout les 98 cartes en
    sérialisation 0.7.x/0.8.9 et les plages.

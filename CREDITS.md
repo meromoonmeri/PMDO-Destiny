@@ -67,9 +67,8 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   pixellique dite « canonique » de *Pokémon Donjon Mystère : Équipe de
   Secours Rouge* / *Explorers of Sky* : même réserve de redistribution que
   pour les cellules DTEF ci-dessous. Aucun fichier source extrait
-  (`.bpl`/`.bpc`/`.bma`) ni décodeur n'a été importé dans Destiny. Le rapport
-  détaillé sera consolidé dans `docs/IMPORT_CREATION_PMDO.md` à la clôture de
-  la tâche D.
+  (`.bpl`/`.bpc`/`.bma`) ni décodeur n'a été importé dans Destiny. Rapport
+  détaillé des trois lots : [`docs/IMPORT_CREATION_PMDO.md`](docs/IMPORT_CREATION_PMDO.md).
 
 ## Banques de tuiles réemployées par ces cartes
 
