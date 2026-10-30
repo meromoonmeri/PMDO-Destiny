@@ -1,0 +1,96 @@
+{
+ "cliffdaytest_source": [
+  "TILE MANQUANTE: v2_promontoire_jour_03",
+  "TILE MANQUANTE: 13_avancee_basse_gauche_terrain",
+  "sheet \"\" (texture par défaut)",
+  "TILE MANQUANTE: Metano_Town_Animated",
+  "TILE MANQUANTE: 01_long_cap_jour_02",
+  "TILE MANQUANTE: Altere_Pond_Objects_Under"
+ ],
+ "cliffnordouesttest1": [
+  "TILE MANQUANTE: v2_promontoire_jour_03",
+  "TILE MANQUANTE: terrain",
+  "TILE MANQUANTE: terrain (4)",
+  "TILE MANQUANTE: terrain (3)",
+  "TILE MANQUANTE: terrain (2)"
+ ],
+ "caféspindaaccueil": [
+  "BG base PMDO: Berry_Basket_Blue",
+  "BG base PMDO: Berry_Basket_Red",
+  "BG base PMDO: Flowerpot_Pink",
+  "BG base PMDO: Flowerpot_White",
+  "BG base PMDO: Flowers_Tropical_1",
+  "MUSIC MANQUANTE: Spinda's Cafe.ogg"
+ ],
+ "spindacaféétage1": [
+  "BG base PMDO: Pot",
+  "MUSIC MANQUANTE: Spinda's Cafe.ogg"
+ ],
+ "spindacaféétage1salle2": [
+  "MUSIC MANQUANTE: Spinda's Cafe.ogg"
+ ],
+ "v50812_beach_cave_entrance_v2": [
+  "MUSIC MANQUANTE: BGM_DUN_BeachCave"
+ ],
+ "cliffdaytest_nuit_v3_compat_town02": [
+  "TILE MANQUANTE: WoN_overwyh_spring",
+  "TILE MANQUANTE: GouffreMuetBord_Base",
+  "TILE MANQUANTE: D04p12a_Base",
+  "TILE MANQUANTE: D41p41a_Base",
+  "TILE MANQUANTE: Metano_Town_Animated_Night",
+  "TILE MANQUANTE: P05p03a_Base",
+  "TILE MANQUANTE: Ledian_Dojo_Ceiling",
+  "TILE MANQUANTE: GrotteEchos_Base",
+  "TILE MANQUANTE: Metano_Town_Objects_Over_Night",
+  "TILE MANQUANTE: b05p02c_Base",
+  "TILE MANQUANTE: D31p11a_Base",
+  "TILE MANQUANTE: Metano_Town_Water_Home_Base_Animated",
+  "TILE MANQUANTE: D54p11a_Base",
+  "TILE MANQUANTE: b05p02a_Base",
+  "TILE MANQUANTE: RecifGenereux_Base",
+  "TILE MANQUANTE: zone_corrigee_magenta",
+  "TILE MANQUANTE: AntreDragon_Base",
+  "TILE MANQUANTE: MarecageCacahuete_Base",
+  "TILE MANQUANTE: Metano_Town_River_Animation_3_Night",
+  "TILE MANQUANTE: WoN_overwyh_summer",
+  "TILE MANQUANTE: d21p01_DirectBase",
+  "TILE MANQUANTE: V12p01a_Base"
+ ],
+ "destiny_hub": [
+  "TILE base PMDO: InsideHut",
+  "BG base PMDO: Flowerpot_Pink",
+  "BG base PMDO: Flowerpot_White",
+  "MUSIC base PMDO: Guildmaster.ogg"
+ ],
+ "glacier_cliff_aurora_v1": [
+  "TILE base PMDO: VastIceMountain"
+ ],
+ "guild_path": [
+  "TILE base PMDO: GuildPath",
+  "BG base PMDO: Flowers_Tropical_1",
+  "BG base PMDO: Flowers_Tropical_2",
+  "BG base PMDO: Flowers_Tropical_3",
+  "BG base PMDO: Flowers_Tropical_4",
+  "BG base PMDO: Flowers_Tropical_5",
+  "BG base PMDO: House_Normal",
+  "MUSIC base PMDO: Title.ogg"
+ ],
+ "plage_cv2_anse": [
+  "MUSIC MANQUANTE: Brine Cave.ogg"
+ ],
+ "plage_cv2_crique": [
+  "MUSIC MANQUANTE: Brine Cave.ogg"
+ ],
+ "pmd_petal_clearing": [
+  "MUSIC MANQUANTE: Sky Peak Prairie.ogg"
+ ],
+ "v50812_beach_cave_anse_des_marees": [
+  "MUSIC MANQUANTE: BGM_DUN_BeachCave"
+ ],
+ "v50812_beach_cave_entrance_v3": [
+  "MUSIC MANQUANTE: BGM_DUN_BeachCave"
+ ],
+ "v50812_beach_reference_multilayer_v1": [
+  "MUSIC MANQUANTE: BGM_DUN_BeachCave"
+ ]
+}

@@ -26,3 +26,7 @@ userdata/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Carte town02 de 233 Mo : non versionnée telle quelle (limite GitHub, budget LFS du compte épuisé).
+# Reconstituée depuis payload/WaterfallVillageCapital.rsground.gz par tools/unpack_payload.py
+game/Data/Ground/WaterfallVillageCapital.rsground

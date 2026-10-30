@@ -207,7 +207,7 @@
   <StartLevel>5</StartLevel>
   <MaxLevel>100</MaxLevel>
   <StartPersonality>5</StartPersonality>
-  <DefaultZone>destiny_hub</DefaultZone>
+  <DefaultZone>personality_test</DefaultZone>
   <DefaultRank>none</DefaultRank>
   <DefaultSkin>normal</DefaultSkin>
   <DefaultAI>stick_together</DefaultAI>
@@ -218,9 +218,9 @@
   <DefaultSkill>attack</DefaultSkill>
   <DefaultMonster>missingno</DefaultMonster>
   <StartMap>
-    <Zone>destiny_hub</Zone>
+    <Zone>personality_test</Zone>
     <Segment>-1</Segment>
-    <ID>0</ID>
+    <ID>1</ID>
     <Entry>0</Entry>
   </StartMap>
   <GenFloor>floor</GenFloor>

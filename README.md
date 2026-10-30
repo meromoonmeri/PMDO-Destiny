@@ -4,6 +4,14 @@ Base autonome du fangame **Pokémon Mystery Dungeon: Destiny**, construite avec 
 
 Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symbolique**. Le moteur, les ressources de base et le mod Destiny sont de vrais fichiers présents dans le dépôt.
 
+> **Branche `destiny-unifiee`** : Quest unique rassemblant tout le travail existant (scénario,
+> cinématique Pichu × Team Dazzling, falaises nord centre, paquets d'atelier, archives des anciennes
+> versions, `WaterfallVillageCapital` de town02). État des lieux, provenance de chaque carte,
+> correctifs et fichiers introuvables : [`docs/UNIFICATION_DESTINY.md`](docs/UNIFICATION_DESTINY.md).
+> `game/Data/Ground/WaterfallVillageCapital.rsground` (233 Mo > limite GitHub, budget LFS du compte
+> épuisé) est livrée compressée dans `payload/` : lancer `python3 tools/unpack_payload.py` après le
+> clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`).
+
 ## Jouer sous Windows
 
 1. Télécharger `PMDO-Destiny-Windows-x64.zip` dans la section Releases.

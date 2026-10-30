@@ -1,0 +1,805 @@
+[
+ {
+  "name": "cliff_centre_01_grand_cap_panoramique_jour",
+  "repo": "pcp",
+  "oid": "0f6d80199a66ac59cf1fad3117640353edaf920c",
+  "paths": [
+   "livrables_cliff_nord_centre_pmdo/cliff_centre_01_grand_cap_panoramique_jour.rsground"
+  ],
+  "file": "stage/candidates/cliff_centre_01_grand_cap_panoramique_jour__0f6d8019.rsground",
+  "bytes": 4978889
+ },
+ {
+  "name": "cliff_centre_01_grand_cap_panoramique_jour",
+  "repo": "pcp",
+  "oid": "0f83a791960c5f90cf50ad3185ad9fdda59d64b9",
+  "paths": [
+   "livrables_cliff_nord_centre_pmdo/cliff_centre_01_grand_cap_panoramique_jour.rsground"
+  ],
+  "file": "stage/candidates/cliff_centre_01_grand_cap_panoramique_jour__0f83a791.rsground",
+  "bytes": 7812098
+ },
+ {
+  "name": "cliff_centre_01_grand_cap_panoramique_nuit",
+  "repo": "pcp",
+  "oid": "02b6d687004c9f25bde465a7bef6238066aa11e5",
+  "paths": [
+   "livrables_cliff_nord_centre_pmdo/cliff_centre_01_grand_cap_panoramique_nuit.rsground"
+  ],
+  "file": "stage/candidates/cliff_centre_01_grand_cap_panoramique_nuit__02b6d687.rsground",
+  "bytes": 7820387
+ },
+ {
+  "name": "cliff_centre_01_grand_cap_panoramique_nuit",
+  "repo": "pcp",
+  "oid": "9ea06bef0a8886103939f9105824d60d222b0417",
+  "paths": [
+   "livrables_cliff_nord_centre_pmdo/cliff_centre_01_grand_cap_panoramique_nuit.rsground"
+  ],
+  "file": "stage/candidates/cliff_centre_01_grand_cap_panoramique_nuit__9ea06bef.rsground",
+  "bytes": 4979174
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "pcp",
+  "oid": "4633c9abec94fcee153c587651957f004c210ed9",
+  "paths": [
+   "BIBLIOTHEQUE_MAPS/grounds/cliffnordouesttest1.rsground",
+   "quest_pmdo_0812/Data/Ground/cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__4633c9ab.rsground",
+  "bytes": 7103176
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "pcp",
+  "oid": "51e9dd3b896cbd5563acf1d03ddc5433b22eaf96",
+  "paths": [
+   "cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__51e9dd3b.rsground",
+  "bytes": 7812806
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "pcp",
+  "oid": "84c80b74459a0ead232029ba2daff0dfcf0d6023",
+  "paths": [
+   "cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__84c80b74.rsground",
+  "bytes": 7819106
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "pcp",
+  "oid": "b40eaa93daaa3a7612d4350e85d6e7d9291338d7",
+  "paths": [
+   "cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__b40eaa93.rsground",
+  "bytes": 5463316
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "gtp",
+  "oid": "1737733ccade61f788892bf9ff98e2353cf0d8f9",
+  "paths": [
+   "cliffnordouesttest1.rsground",
+   "exports/cliffnordouesttest1_nuit_v2/a_copier/Data/Ground/cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__1737733c.rsground",
+  "bytes": 7814414
+ },
+ {
+  "name": "cliffnordouesttest1",
+  "repo": "gtp",
+  "oid": "65c48168ca4e22ff66b3c9245379acfe8fe0b6d6",
+  "paths": [
+   "cliffnordouesttest1.rsground",
+   "exports/cliffnordouesttest1_animation_v1/a_copier/Data/Ground/cliffnordouesttest1.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1__65c48168.rsground",
+  "bytes": 7813554
+ },
+ {
+  "name": "cliffnordouesttest1_nuit",
+  "repo": "pcp",
+  "oid": "377b14d876f601d01aab2dbefe7f77bc47fffc99",
+  "paths": [
+   "livrables_cliff_nord_nuit_pmdo/MOD_CLIFF_NORD_NUIT_PMDO/Data/Ground/cliffnordouesttest1_nuit.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1_nuit__377b14d8.rsground",
+  "bytes": 7385715
+ },
+ {
+  "name": "cliffnordouesttest1_nuit",
+  "repo": "pcp",
+  "oid": "a67c011d2962e8491f4596bd9f7266895fb74a54",
+  "paths": [
+   "livrables_cliff_nord_nuit_pmdo/MOD_CLIFF_NORD_NUIT_PMDO/Data/Ground/cliffnordouesttest1_nuit.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1_nuit__a67c011d.rsground",
+  "bytes": 5473377
+ },
+ {
+  "name": "cliffnordouesttest1_nuit",
+  "repo": "pcp",
+  "oid": "fd40bd986a95949ca0cbf9d71b4da08d6ff770f6",
+  "paths": [
+   "livrables_cliff_nord_nuit_pmdo/MOD_CLIFF_NORD_NUIT_PMDO/Data/Ground/cliffnordouesttest1_nuit.rsground"
+  ],
+  "file": "stage/candidates/cliffnordouesttest1_nuit__fd40bd98.rsground",
+  "bytes": 7373899
+ },
+ {
+  "name": "etc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "fd716f464ba3b1f9d2d538d1fe8fa9721b2a4a46",
+  "paths": [
+   "renders/tour_celeste_entree_v1/package/Data/Ground/etc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/etc1_tour_celeste__fd716f46.rsground",
+  "bytes": 35645154
+ },
+ {
+  "name": "gma1_tour_celeste",
+  "repo": "pcp",
+  "oid": "a89137616756921db6bc61159bc64ae62a8ddbf5",
+  "paths": [
+   "renders/grotte_meteore_arene_v1/package/Data/Ground/gma1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/gma1_tour_celeste__a8913761.rsground",
+  "bytes": 9199469
+ },
+ {
+  "name": "gme1_tour_celeste",
+  "repo": "pcp",
+  "oid": "4dd8dcded62be9bbfcc9e60326033fbd93c81cd3",
+  "paths": [
+   "renders/grotte_meteore_entree_v1/package/Data/Ground/gme1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/gme1_tour_celeste__4dd8dcde.rsground",
+  "bytes": 9034075
+ },
+ {
+  "name": "grotte_meteore_arene",
+  "repo": "pcp",
+  "oid": "09b24b06153e86217b4d2355d218b25e5286b27d",
+  "paths": [
+   "renders/grotte_meteore_arene_v1/package/Data/Ground/grotte_meteore_arene.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_arene__09b24b06.rsground",
+  "bytes": 9199472
+ },
+ {
+  "name": "grotte_meteore_arene",
+  "repo": "pcp",
+  "oid": "5130a2335c4fa88d59ac0038d8e9cadeb5fc4e7b",
+  "paths": [
+   "renders/grotte_meteore_arene_v1/package/Data/Ground/grotte_meteore_arene.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_arene__5130a233.rsground",
+  "bytes": 8414652
+ },
+ {
+  "name": "grotte_meteore_arene",
+  "repo": "pcp",
+  "oid": "e25bb61d85fc3b11e05a6fc9e0a2bb2421a37392",
+  "paths": [
+   "renders/grotte_meteore_arene_v1/package/Data/Ground/grotte_meteore_arene.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_arene__e25bb61d.rsground",
+  "bytes": 8315080
+ },
+ {
+  "name": "grotte_meteore_entree",
+  "repo": "pcp",
+  "oid": "80c3cd800ec320585c2d5b415441aaa73902d868",
+  "paths": [
+   "renders/grotte_meteore_entree_v1/package/Data/Ground/grotte_meteore_entree.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_entree__80c3cd80.rsground",
+  "bytes": 9034079
+ },
+ {
+  "name": "grotte_meteore_entree",
+  "repo": "pcp",
+  "oid": "9cb20154181807476fbeff0cd7ae95a222a69c44",
+  "paths": [
+   "renders/grotte_meteore_entree_v1/package/Data/Ground/grotte_meteore_entree.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_entree__9cb20154.rsground",
+  "bytes": 8207832
+ },
+ {
+  "name": "grotte_meteore_entree",
+  "repo": "pcp",
+  "oid": "ed349f6ab676de0935956f4257413dea350ec299",
+  "paths": [
+   "renders/grotte_meteore_entree_v1/package/Data/Ground/grotte_meteore_entree.rsground"
+  ],
+  "file": "stage/candidates/grotte_meteore_entree__ed349f6a.rsground",
+  "bytes": 8216150
+ },
+ {
+  "name": "metano_gen_accueil",
+  "repo": "pcp",
+  "oid": "5e959a8cf153e18569e22a202c2799037499e2a6",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_accueil.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_accueil__5e959a8c.rsground",
+  "bytes": 1351739
+ },
+ {
+  "name": "metano_gen_accueil",
+  "repo": "pcp",
+  "oid": "6f16fc049d82ff8ac7a77786a85bea7b3b669fb5",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_accueil.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_accueil__6f16fc04.rsground",
+  "bytes": 1003122
+ },
+ {
+  "name": "metano_gen_accueil",
+  "repo": "pcp",
+  "oid": "9bf0b6cd0834d5d5c0c2460a6ea8df370d19bba9",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_accueil.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_accueil__9bf0b6cd.rsground",
+  "bytes": 559042
+ },
+ {
+  "name": "metano_gen_accueil",
+  "repo": "pcp",
+  "oid": "ac4d728198698c3a04e4de7f9816289a71a0f015",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_accueil.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_accueil__ac4d7281.rsground",
+  "bytes": 995614
+ },
+ {
+  "name": "metano_gen_cafe",
+  "repo": "pcp",
+  "oid": "16ffa750d2bd1fe10202022f0e92038a4449ccff",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_cafe.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_cafe__16ffa750.rsground",
+  "bytes": 547049
+ },
+ {
+  "name": "metano_gen_cafe",
+  "repo": "pcp",
+  "oid": "1d776a4557cfc0e69c6e5bb862b82ed40eaaafb5",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_cafe.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_cafe__1d776a45.rsground",
+  "bytes": 953847
+ },
+ {
+  "name": "metano_gen_cafe",
+  "repo": "pcp",
+  "oid": "607f0f0c1717567aab8bd551111d951660f0b4b5",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_cafe.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_cafe__607f0f0c.rsground",
+  "bytes": 975486
+ },
+ {
+  "name": "metano_gen_cafe",
+  "repo": "pcp",
+  "oid": "72d8d0899afc10dae9fae04bec3a644bf09a1559",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_cafe.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_cafe__72d8d089.rsground",
+  "bytes": 1326303
+ },
+ {
+  "name": "metano_gen_casino",
+  "repo": "pcp",
+  "oid": "1a75313bc1cf876beba4602e2ee7b4185418619b",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_casino.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_casino__1a75313b.rsground",
+  "bytes": 972693
+ },
+ {
+  "name": "metano_gen_casino",
+  "repo": "pcp",
+  "oid": "aa24abe20bac84bc4e0b7ef0f6d99d2114d3889f",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_casino.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_casino__aa24abe2.rsground",
+  "bytes": 546051
+ },
+ {
+  "name": "metano_gen_casino",
+  "repo": "pcp",
+  "oid": "bcf7a4374d65e9473963b4090bfce0d4c55f9d01",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_casino.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_casino__bcf7a437.rsground",
+  "bytes": 1400361
+ },
+ {
+  "name": "metano_gen_casino",
+  "repo": "pcp",
+  "oid": "df084727e44b3faf08b12d5d191718e43150c7c3",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_casino.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_casino__df084727.rsground",
+  "bytes": 1028659
+ },
+ {
+  "name": "metano_gen_salon_bas",
+  "repo": "pcp",
+  "oid": "16869e6e0922ed5c6fe013adc57dfc5340691c2a",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_bas.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_bas__16869e6e.rsground",
+  "bytes": 1055158
+ },
+ {
+  "name": "metano_gen_salon_bas",
+  "repo": "pcp",
+  "oid": "2b44c79fd8dc8270dcd90d144cea1f10c686909b",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_bas.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_bas__2b44c79f.rsground",
+  "bytes": 1094438
+ },
+ {
+  "name": "metano_gen_salon_bas",
+  "repo": "pcp",
+  "oid": "cbbcd0caf031d9e380b04268b465ccf56c047f1c",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_bas.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_bas__cbbcd0ca.rsground",
+  "bytes": 589684
+ },
+ {
+  "name": "metano_gen_salon_bas",
+  "repo": "pcp",
+  "oid": "fe860b6887718d53aa8be8fec2ec27a67a8185f2",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_bas.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_bas__fe860b68.rsground",
+  "bytes": 1444354
+ },
+ {
+  "name": "metano_gen_salon_haut",
+  "repo": "pcp",
+  "oid": "121ebaf7849ff92bc1c40beb9384c93daa6f9d9a",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_haut.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_haut__121ebaf7.rsground",
+  "bytes": 992045
+ },
+ {
+  "name": "metano_gen_salon_haut",
+  "repo": "pcp",
+  "oid": "be93f1319bf0d57b8ff40dd5c3a03f3b8320b8e8",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_haut.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_haut__be93f131.rsground",
+  "bytes": 1319548
+ },
+ {
+  "name": "metano_gen_salon_haut",
+  "repo": "pcp",
+  "oid": "caadc1bfdce2cce1e0ed59ba8e832b0476b3bc37",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_haut.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_haut__caadc1bf.rsground",
+  "bytes": 980842
+ },
+ {
+  "name": "metano_gen_salon_haut",
+  "repo": "pcp",
+  "oid": "ce4a19619fd97ca0fd8fe35c12cc40e3cf45d11b",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_gen_salon_haut.rsground"
+  ],
+  "file": "stage/candidates/metano_gen_salon_haut__ce4a1961.rsground",
+  "bytes": 556923
+ },
+ {
+  "name": "metano_reseau_accueil",
+  "repo": "pcp",
+  "oid": "bef4fbfa830d4a13b3a95f005c03a79426eb9b50",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_reseau_accueil.rsground"
+  ],
+  "file": "stage/candidates/metano_reseau_accueil__bef4fbfa.rsground",
+  "bytes": 999272
+ },
+ {
+  "name": "metano_reseau_cafe",
+  "repo": "pcp",
+  "oid": "b4bae7383af336d03716a702f3ea215c3d91736f",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_reseau_cafe.rsground"
+  ],
+  "file": "stage/candidates/metano_reseau_cafe__b4bae738.rsground",
+  "bytes": 994661
+ },
+ {
+  "name": "metano_reseau_casino",
+  "repo": "pcp",
+  "oid": "592c1b645bfc459001bb2809e765e32176c891b6",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_reseau_casino.rsground"
+  ],
+  "file": "stage/candidates/metano_reseau_casino__592c1b64.rsground",
+  "bytes": 999268
+ },
+ {
+  "name": "metano_reseau_salon_bas",
+  "repo": "pcp",
+  "oid": "5280425e434444e08d016266a9f01e06abf3be6e",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_reseau_salon_bas.rsground"
+  ],
+  "file": "stage/candidates/metano_reseau_salon_bas__5280425e.rsground",
+  "bytes": 998759
+ },
+ {
+  "name": "metano_reseau_salon_haut",
+  "repo": "pcp",
+  "oid": "5401955b7b9cdd3358edb0e8a4c19334f1fadbdc",
+  "paths": [
+   "renders/reseau_metano_normal_v1/grounds/metano_reseau_salon_haut.rsground"
+  ],
+  "file": "stage/candidates/metano_reseau_salon_haut__5401955b.rsground",
+  "bytes": 999061
+ },
+ {
+  "name": "rtc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "cc7a29a947b52772f4d4355cf4e9d376f4bef2c6",
+  "paths": [
+   "renders/tour_celeste_relais_v1/package/Data/Ground/rtc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/rtc1_tour_celeste__cc7a29a9.rsground",
+  "bytes": 35826292
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "425d67262bae34c7a38bf07f6f1c2e756b0c3866",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__425d6726.rsground",
+  "bytes": 7322870
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "7cea4a1fd316b8f07cb932bbe5131e7aa1516eae",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__7cea4a1f.rsground",
+  "bytes": 16440839
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "a91c5337c2d55a22994e379710351c25ed85f450",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__a91c5337.rsground",
+  "bytes": 19790874
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "ad9bcc5e21a99f33459b417c03dd5f07ad01a8ab",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__ad9bcc5e.rsground",
+  "bytes": 7285936
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "d1b6f8ecd7e8672d7733924d45f4ac3df6b2b529",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__d1b6f8ec.rsground",
+  "bytes": 16196165
+ },
+ {
+  "name": "stc1_tour_celeste",
+  "repo": "pcp",
+  "oid": "d8d6cebe6c726cb554b724f35be17dd1fbba7cc7",
+  "paths": [
+   "renders/tour_celeste_sommet_v1/package/Data/Ground/stc1_tour_celeste.rsground"
+  ],
+  "file": "stage/candidates/stc1_tour_celeste__d8d6cebe.rsground",
+  "bytes": 7422438
+ },
+ {
+  "name": "v50812_beach_cave_entrance_v2",
+  "repo": "gtp",
+  "oid": "e4df4aa7c36d7459a9ec8c6930200aa526249dbc",
+  "paths": [
+   "renders/beach_cave_entrance_v2/v50812_beach_cave_entrance_v2.rsground"
+  ],
+  "file": "stage/candidates/v50812_beach_cave_entrance_v2__e4df4aa7.rsground",
+  "bytes": 782070
+ },
+ {
+  "name": "spindacafetest",
+  "repo": "pcp",
+  "oid": "c8bdbff0b0b5a0756777485b6031ca46502a8130",
+  "paths": [
+   "spindacafetest.rsground"
+  ],
+  "file": "stage/candidates/spindacafetest__c8bdbff0.rsground",
+  "bytes": 962590
+ },
+ {
+  "name": "forest_magenta_v1",
+  "repo": "gtp",
+  "oid": "bc18f16c726cbfb9ae73c14043d202780432c41f",
+  "paths": [
+   "exports/forest_cave_magenta_v1_pmdo/Data/Ground/forest_magenta_v1.rsground"
+  ],
+  "file": "stage/candidates/forest_magenta_v1__bc18f16c.rsground",
+  "bytes": 2687988
+ },
+ {
+  "name": "forest_render_v1",
+  "repo": "gtp",
+  "oid": "5dba77d7e7da96a92d829b5773d4a95857bf8ea9",
+  "paths": [
+   "exports/forest_cave_render_v1_pmdo/Data/Ground/forest_render_v1.rsground"
+  ],
+  "file": "stage/candidates/forest_render_v1__5dba77d7.rsground",
+  "bytes": 2665640
+ },
+ {
+  "name": "rvt_ne_jour",
+  "repo": "gtp",
+  "oid": "4999bf9d71cbb192298f6c9cc9cb1e6b167be301",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_ne_jour.rsground"
+  ],
+  "file": "stage/candidates/rvt_ne_jour__4999bf9d.rsground",
+  "bytes": 5411560
+ },
+ {
+  "name": "rvt_ne_jour",
+  "repo": "gtp",
+  "oid": "0610263a8c6dbb7d603c1e865a120c2753bec8ec",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_ne_jour.rsground"
+  ],
+  "file": "stage/candidates/rvt_ne_jour__0610263a.rsground",
+  "bytes": 5410539
+ },
+ {
+  "name": "rvt_ne_nuit",
+  "repo": "gtp",
+  "oid": "42312f0dc9ab485216791f50a3d84ef2023d42e2",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_ne_nuit.rsground"
+  ],
+  "file": "stage/candidates/rvt_ne_nuit__42312f0d.rsground",
+  "bytes": 5466372
+ },
+ {
+  "name": "rvt_ne_nuit",
+  "repo": "gtp",
+  "oid": "6696d80e3644dbd1339041c3300adf9d83e55dfc",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_ne_nuit.rsground"
+  ],
+  "file": "stage/candidates/rvt_ne_nuit__6696d80e.rsground",
+  "bytes": 5465279
+ },
+ {
+  "name": "rvt_no_jour",
+  "repo": "gtp",
+  "oid": "f322fec24b5e67ed34a53de0710550b236e5ef2a",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_no_jour.rsground"
+  ],
+  "file": "stage/candidates/rvt_no_jour__f322fec2.rsground",
+  "bytes": 5361920
+ },
+ {
+  "name": "rvt_no_jour",
+  "repo": "gtp",
+  "oid": "679b3d7848d0ad8e19dd7802694d3a2ecd852463",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_no_jour.rsground"
+  ],
+  "file": "stage/candidates/rvt_no_jour__679b3d78.rsground",
+  "bytes": 5361920
+ },
+ {
+  "name": "rvt_no_nuit",
+  "repo": "gtp",
+  "oid": "86073b2030d09e1740f61f748beb9ffbc919585f",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_no_nuit.rsground"
+  ],
+  "file": "stage/candidates/rvt_no_nuit__86073b20.rsground",
+  "bytes": 5423203
+ },
+ {
+  "name": "rvt_no_nuit",
+  "repo": "gtp",
+  "oid": "b55c1037ecbf29972830a816d83367898fb0d7a2",
+  "paths": [
+   "exports/reverie_town_v1/paquet_natif/Data/Ground/rvt_no_nuit.rsground"
+  ],
+  "file": "stage/candidates/rvt_no_nuit__b55c1037.rsground",
+  "bytes": 5423203
+ },
+ {
+  "name": "guild_path_halcyon",
+  "repo": "gtp",
+  "oid": "1d6b7e3f9d7ac63f85e592dc51397f293a7b37f1",
+  "paths": [
+   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon.rsground"
+  ],
+  "file": "stage/candidates/guild_path_halcyon__1d6b7e3f.rsground",
+  "bytes": 1078540
+ },
+ {
+  "name": "guild_path_halcyon_layers",
+  "repo": "gtp",
+  "oid": "44ade487df64221cd8a551aff12f408980a5c732",
+  "paths": [
+   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon_layers.rsground"
+  ],
+  "file": "stage/candidates/guild_path_halcyon_layers__44ade487.rsground",
+  "bytes": 951250
+ },
+ {
+  "name": "guild_path_halcyon_palika",
+  "repo": "gtp",
+  "oid": "2bf26df82c72427f3c4abe9039cd80ab583e097e",
+  "paths": [
+   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon_palika.rsground"
+  ],
+  "file": "stage/candidates/guild_path_halcyon_palika__2bf26df8.rsground",
+  "bytes": 1035248
+ },
+ {
+  "name": "luminous_spring_pmdo",
+  "repo": "gtp",
+  "oid": "7434ef0fdce8a78ee0e2f3f3611d4ef9d0c216e0",
+  "paths": [
+   "tileset_pmd/pmd/Data/Ground/luminous_spring_pmdo.rsground"
+  ],
+  "file": "stage/candidates/luminous_spring_pmdo__7434ef0f.rsground",
+  "bytes": 5734137
+ },
+ {
+  "name": "luminous_spring_pmdo",
+  "repo": "gtp",
+  "oid": "dad2812de8e8a30b8773667b5c57a245fada3652",
+  "paths": [
+   "tileset_pmd/pmd/Data/Ground/luminous_spring_pmdo.rsground"
+  ],
+  "file": "stage/candidates/luminous_spring_pmdo__dad2812d.rsground",
+  "bytes": 3549561
+ },
+ {
+  "name": "plage_pmd_sky_large",
+  "repo": "gtp",
+  "oid": "e7f4286c3ac6f99389dba212d4ff603c1a352708",
+  "paths": [
+   "sprites/plage_pmd_sky_pmdo/plage_pmd_sky_large.rsground"
+  ],
+  "file": "stage/candidates/plage_pmd_sky_large__e7f4286c.rsground",
+  "bytes": 789
+ },
+ {
+  "name": "mer_houleuse_entree",
+  "repo": "pcp",
+  "oid": "ae32210acc846989485987a535e1beb41fadea3f",
+  "paths": [
+   "renders/mer_houleuse_entree_v1/package/Data/Ground/mer_houleuse_entree.rsground"
+  ],
+  "file": "stage/candidates/mer_houleuse_entree__ae32210a.rsground",
+  "bytes": 79
+ },
+ {
+  "name": "mer_houleuse_sanctuaire",
+  "repo": "pcp",
+  "oid": "1c42e70814bdb56ae876735299316a6ecea28025",
+  "paths": [
+   "renders/mer_houleuse_sanctuaire_v1/package/Data/Ground/mer_houleuse_sanctuaire.rsground"
+  ],
+  "file": "stage/candidates/mer_houleuse_sanctuaire__1c42e708.rsground",
+  "bytes": 87
+ },
+ {
+  "name": "tour_celeste_relais",
+  "repo": "pcp",
+  "oid": "cd35c98af1f7fb19f193aaef47a87e4c637e3b85",
+  "paths": [
+   "renders/tour_celeste_relais_v1/package/Data/Ground/tour_celeste_relais.rsground"
+  ],
+  "file": "stage/candidates/tour_celeste_relais__cd35c98a.rsground",
+  "bytes": 79
+ },
+ {
+  "name": "tour_du_temps_entree",
+  "repo": "pcp",
+  "oid": "3e17509e226bb8c369be6b83cd2b33194ec5d616",
+  "paths": [
+   "renders/tour_du_temps_entree_v1/package/Data/Ground/tour_du_temps_entree.rsground"
+  ],
+  "file": "stage/candidates/tour_du_temps_entree__3e17509e.rsground",
+  "bytes": 81
+ },
+ {
+  "name": "tour_du_temps_pinacle",
+  "repo": "pcp",
+  "oid": "a763c5b2f71905c568e8b1d63bcecb5dd3446d46",
+  "paths": [
+   "renders/tour_du_temps_pinacle_v1/package/Data/Ground/tour_du_temps_pinacle.rsground"
+  ],
+  "file": "stage/candidates/tour_du_temps_pinacle__a763c5b2.rsground",
+  "bytes": 83
+ },
+ {
+  "name": "caféspindaaccueil",
+  "repo": "pcp",
+  "oid": "490832c343b3c40048a219b429661c21df0efe77",
+  "paths": [
+   "caféspindaaccueil.rsground"
+  ],
+  "file": "stage/candidates/caféspindaaccueil__490832c3.rsground",
+  "bytes": 2259906
+ },
+ {
+  "name": "spindacaféétage1",
+  "repo": "pcp",
+  "oid": "0052a0ae668db36f072b18f169100172a7fdc152",
+  "paths": [
+   "spindacaféétage1.rsground"
+  ],
+  "file": "stage/candidates/spindacaféétage1__0052a0ae.rsground",
+  "bytes": 1604932
+ },
+ {
+  "name": "spindacaféétage1salle2",
+  "repo": "pcp",
+  "oid": "20b4fe53ca645833f5718fc8bbc58920ac525ab0",
+  "paths": [
+   "spindacaféétage1salle2.rsground"
+  ],
+  "file": "stage/candidates/spindacaféétage1salle2__20b4fe53.rsground",
+  "bytes": 2269156
+ }
+]

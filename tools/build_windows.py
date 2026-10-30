@@ -6,6 +6,7 @@ import argparse
 import os
 from pathlib import Path
 import shutil
+import sys
 import subprocess
 import zipfile
 
@@ -18,7 +19,13 @@ def run(command: list[str], cwd: Path) -> None:
     subprocess.run([str(part) for part in command], cwd=cwd, check=True)
 
 
+def unpack_payload() -> None:
+    # Reconstitue game/Data/Ground/WaterfallVillageCapital.rsground (233 Mo) depuis payload/.
+    run([sys.executable, str(ROOT / 'tools' / 'unpack_payload.py')], ROOT)
+
+
 def install_quest(directory: Path) -> None:
+    unpack_payload()
     quest = directory / 'MODS' / 'Destiny'
     if quest.exists():
         shutil.rmtree(quest)

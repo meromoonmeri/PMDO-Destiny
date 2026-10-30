@@ -30,7 +30,8 @@ def main() -> None:
             errors.append(f'Symlink forbidden: {rel}')
         if path.name == '.gitmodules':
             errors.append(f'Submodule metadata remains: {rel}')
-        if path.is_file() and path.stat().st_size > GITHUB_LIMIT:
+        if path.is_file() and path.stat().st_size > GITHUB_LIMIT and str(rel) != 'game/Data/Ground/WaterfallVillageCapital.rsground':
+            # (WaterfallVillageCapital est ignorée par git et reconstituée depuis payload/)
             errors.append(f'File exceeds GitHub limit: {rel} ({path.stat().st_size} bytes)')
 
     for path in files:
@@ -78,8 +79,15 @@ def main() -> None:
         if 'destiny_hub' not in index['Object']:
             errors.append('destiny_hub missing from zone index')
         start = ET.parse(ROOT / 'game/Data/StartParams.xml').getroot()
-        if start.find('StartMap/Zone').text != 'destiny_hub' or start.find('StartMap/ID').text != '0':
-            errors.append('StartMap does not target destiny_hub ground 0')
+        # Depuis l'unification (scénario arena/64113588), la partie démarre sur intro_halo :
+        # zone personality_test, carte d'index 1. L'ancien départ destiny_hub reste accepté.
+        sz, sid = start.find('StartMap/Zone').text, start.find('StartMap/ID').text
+        if (sz, sid) not in (('destiny_hub', '0'), ('personality_test', '1')):
+            errors.append('StartMap does not target destiny_hub ground 0 nor personality_test ground 1')
+        else:
+            szone = json.loads((ROOT / f'game/Data/Zone/{sz}.json').read_text(encoding='utf-8-sig'))
+            if len(szone['Object']['GroundMaps']) <= int(sid):
+                errors.append('StartMap ID out of range')
         with Image.open(ROOT / 'game/Content/UI/Title.png') as image:
             if image.size != (320, 240):
                 errors.append(f'PMDO title must be 320x240, got {image.size}')
@@ -117,6 +125,14 @@ def main() -> None:
         if off != len(buf):
             raise ValueError(f'tile guide size mismatch in {path}')
         return nodes
+
+    # WaterfallVillageCapital (233 Mo) est livrée compressée dans payload/ : reconstitution si absente.
+    try:
+        import subprocess as _sp
+        if not (ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground').is_file() and (ROOT / 'tools/unpack_payload.py').is_file():
+            _sp.run([sys.executable, str(ROOT / 'tools/unpack_payload.py')], check=False)
+    except Exception as exc:
+        errors.append(f'unpack_payload failed: {exc}')
 
     try:
         ground_dir = ROOT / 'game/Data/Ground'

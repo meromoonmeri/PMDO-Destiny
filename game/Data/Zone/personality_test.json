@@ -1,0 +1,34 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Personality Test (quiz)",
+      "LocalTexts": {
+        "fr": "Personality Test (quiz)"
+      }
+    },
+    "Released": true,
+    "Comment": "Zone intro + quiz + retrouvailles nocturnes — StartMap = intro_halo ; reveil_nuit est atteint après l’aller solo de Lost Wood et lance le retour en duo.",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "personality_test",
+      "intro_halo",
+      "reveil_nuit"
+    ]
+  }
+}

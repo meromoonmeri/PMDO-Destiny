@@ -16,3 +16,6 @@
 *.tile binary
 *.font binary
 *.dir binary
+# cartes PMDO stockées octet pour octet (certaines contiennent des CRLF d'origine)
+*.rsground -text
+*.rsmap -text
