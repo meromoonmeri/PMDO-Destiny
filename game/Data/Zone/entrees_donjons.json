@@ -1,0 +1,41 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Entrées de donjon et plages",
+      "LocalTexts": {}
+    },
+    "Released": true,
+    "Comment": "Zone Destiny — Entrées de donjon et plages",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "KeepTreasure": false,
+    "BagRestrict": -1,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "crooked_cavern_entrance",
+      "Brine_Cave_Entrance",
+      "drenched_bluff_entrance",
+      "vast_steppe_entrance",
+      "altere_pond",
+      "ledian_dojo",
+      "luminous_spring",
+      "amp_plains_entrance",
+      "beach",
+      "beach_cave_pit",
+      "forest_magenta_v1",
+      "rvt_ne_jour"
+    ]
+  }
+}

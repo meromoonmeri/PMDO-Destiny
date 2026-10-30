@@ -1,0 +1,39 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Bourg de Métano et cafés",
+      "LocalTexts": {}
+    },
+    "Released": true,
+    "Comment": "Zone Destiny — Bourg de Métano et cafés",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "KeepTreasure": false,
+    "BagRestrict": -1,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "metano_gen_accueil",
+      "metano_gen_cafe",
+      "metano_gen_casino",
+      "metano_gen_salon_bas",
+      "metano_gen_salon_haut",
+      "metano_normal_home",
+      "metano_cafe",
+      "spinda_cafe",
+      "spindacafetest",
+      "treasure_town"
+    ]
+  }
+}

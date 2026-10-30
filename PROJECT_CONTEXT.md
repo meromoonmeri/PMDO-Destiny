@@ -46,6 +46,21 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   aussi les cartes/zones/index importés et le menu-titre — `VALIDATION OK`
   le 27/10/2026.
 
+- **Fusion complète du 30/10/2026 — 303 cartes au sol.** La branche
+  `arena/c40fd96f-pmdo-destiny` (262 cartes, 5 zones) a été fusionnée dans la
+  lignée de `main`, puis complétée par la récupération sur les branches des
+  autres dépôts : guilde (13 intérieurs + parvis + extérieur + sentier),
+  entrées de donjon livrées par l'atelier, cafés, cartes de cinématique
+  (`intro_halo`, `reveil_nuit`) et **quiz de personnalité complet** (script
+  11 Ko + 15 questions, 16 natures, 17 badges), intérieurs `metano_gen_*` et
+  `WaterfallVillageCapital`. Cinq zones ont été ajoutées aux cinq existantes
+  (`guilde`, `cinematiques`, `bourg_metano`, `entrees_donjons`, `capitale`).
+  `Content/Tile/index.idx` — qui est un `TileGuide` binaire et non un cache
+  facultatif — a été étendu par `tools/ajouter_tilesheets_index.py` :
+  **1 640 entrées pour 1 640 tilesets, 0 écart**. Contrôle des 303 Grounds
+  relus en entier (3,15 Go) : **0 TileSheet manquant**. Rapport :
+  `docs/QUEST_DESTINY_RECUPERATION.md`.
+
 ## Chantiers suivants (par priorité)
 
 1. **Tâche D (`projet-creation-pmdo`) — terminée le 27/10/2026** : 33 cartes
@@ -62,7 +77,8 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
    depuis New Era / l'installation de l'auteur
    (`docs/IMPORT_GUILDE_TREEHOUSE.md` §6).
 5. **Pièces de la guilde** : les 12 salles n'existent qu'en PNG dans l'atelier ;
-   à construire en `GroundMap`.
+   à construire en `GroundMap`. La guilde est d'ores et déjà jouable via les
+   17 cartes de la zone `guilde`.
 6. **Cinématiques (Partie 2)** : cadrage, foreshadowing
    (`docs/foreshadowing.md`), puis scènes en français avec portraits vérifiés,
    caméra dynamique, boss motivés (règles dans `docs/LESSONS.md`).
