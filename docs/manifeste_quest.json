@@ -1,0 +1,2067 @@
+{
+  "quest": "destiny",
+  "version_pmdo": "0.8.12.0",
+  "grounds": {
+    "guild_first_floor": {
+      "groupe": "guilde",
+      "titre": "Rez-de-chaussée de la guilde",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_first_floor.rsground",
+      "sha256": "8973c3a3c56b60b99e0b3e98afdd29cece76a5f08eb16bc1b768e4d447c04f72",
+      "octets": 304081,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 1,
+      "tuiles": 40,
+      "tilesheets": [
+        {
+          "nom": "Guild_First_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild First Floor",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_second_floor": {
+      "groupe": "guilde",
+      "titre": "Second étage de la guilde",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_second_floor.rsground",
+      "sha256": "2eb61ab0d6aff7b5d74025394767a22c5e416f4d67447318a235954f32712c84",
+      "octets": 3949026,
+      "version": "0.7.12.0",
+      "texsize": 1,
+      "couches": 8,
+      "tuiles": 672,
+      "tilesheets": [
+        {
+          "nom": "Guild_Second_Floor_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Fringe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Objects_Under",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Second_Floor_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Second Floor",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_third_floor_lobby": {
+      "groupe": "guilde",
+      "titre": "Palier du troisième étage",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_third_floor_lobby.rsground",
+      "sha256": "ab9582c785c09a7a4127d9e63f6411211308500e5e0c9380e555ca381b93919c",
+      "octets": 4737222,
+      "version": "0.7.12.0",
+      "texsize": 1,
+      "couches": 8,
+      "tuiles": 800,
+      "tilesheets": [
+        {
+          "nom": "Guild_Third_Floor_Lobby_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Fringe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Third_Floor_Lobby_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Third Floor Lobby",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_bedroom_hallway": {
+      "groupe": "guilde",
+      "titre": "Couloir des chambres",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_bedroom_hallway.rsground",
+      "sha256": "75a85c0e17be985b53523e7da9d8d933589ce46d99cc00af233a78dfef4e9d8e",
+      "octets": 1158179,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 4,
+      "tuiles": 240,
+      "tilesheets": [
+        {
+          "nom": "Guild_Bedroom_Hallway_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bedroom_Hallway_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bedroom_Hallway_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bedroom_Hallway_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Bedroom Hallway",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_heros_room": {
+      "groupe": "guilde",
+      "titre": "Chambre du héros",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_heros_room.rsground",
+      "sha256": "56cdfd65b6a8fea2732a3c82d84c32c47b61209a5158b523efa31889c9fd52bd",
+      "octets": 1446083,
+      "version": "0.7.15.1",
+      "texsize": 1,
+      "couches": 6,
+      "tuiles": 264,
+      "tilesheets": [
+        {
+          "nom": "Guild_Heros_Room_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Heros_Room_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Heros_Room_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Heros_Room_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Heros_Room_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Heros_Room_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [
+        {
+          "nom": "Diary_Red_Opening",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Your Room",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_dining_room": {
+      "groupe": "guilde",
+      "titre": "Cantine de la guilde",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_dining_room.rsground",
+      "sha256": "70f802731bf04998317f7c41f9f6204079b69a2464c6192e2887b9420005bb27",
+      "octets": 1577114,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 7,
+      "tuiles": 392,
+      "tilesheets": [
+        {
+          "nom": "Guild_Dining_Room_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Fringe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Dining_Room_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [
+        {
+          "nom": "Banana_Yellow",
+          "statut": "manquant"
+        },
+        {
+          "nom": "Food",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Food_Big",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Food_Flipped",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Dining Room",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_guildmasters_room": {
+      "groupe": "guilde",
+      "titre": "Bureau du maître de guilde",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_guildmasters_room.rsground",
+      "sha256": "c78d9787890033e76ee685d42f2b897300632781ce4ce5582a163450856a3c9a",
+      "octets": 1650540,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 6,
+      "tuiles": 288,
+      "tilesheets": [
+        {
+          "nom": "Guild_Guildmasters_Room_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Guildmasters_Room_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Guildmasters_Room_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Guildmasters_Room_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Guildmasters_Room_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Guildmasters_Room_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guildmaster's Office",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_storage_hallway": {
+      "groupe": "guilde",
+      "titre": "Couloir des réserves",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_storage_hallway.rsground",
+      "sha256": "01cc45020aa6feff45c7d05dfcb9ea35f16ee1e01c34f3bd45c3f530137f389f",
+      "octets": 1201326,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 4,
+      "tuiles": 176,
+      "tilesheets": [
+        {
+          "nom": "Guild_Storage_Hallway_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Hallway_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Hallway_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Hallway_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Storage Hallway",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_storage_room": {
+      "groupe": "guilde",
+      "titre": "Réserve",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_storage_room.rsground",
+      "sha256": "872c8c2048f16e2d35c534587c8b309c4176a4634e1508966995a6ab82e62af8",
+      "octets": 1774223,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 8,
+      "tuiles": 352,
+      "tilesheets": [
+        {
+          "nom": "Guild_Storage_Room_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Fringe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Objects_Under",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Storage_Room_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Storage Room",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_top_left_bedroom": {
+      "groupe": "guilde",
+      "titre": "Chambre haut-gauche",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_top_left_bedroom.rsground",
+      "sha256": "176bbef601cae955eced1c5870c76cbe602920b3bc8f78bebb89e706eb23e7f3",
+      "octets": 1247167,
+      "version": "0.7.13.0",
+      "texsize": 1,
+      "couches": 5,
+      "tuiles": 220,
+      "tilesheets": [
+        {
+          "nom": "Guild_Top_Left_Bedroom_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Left_Bedroom_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Left_Bedroom_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Left_Bedroom_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Left_Bedroom_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Top Left Bedroom",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_top_right_bedroom": {
+      "groupe": "guilde",
+      "titre": "Chambre haut-droite",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_top_right_bedroom.rsground",
+      "sha256": "90ca0fdc728df71291a2c302da8bb3d3252f92d87e643428f5774e637c212880",
+      "octets": 1311100,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 5,
+      "tuiles": 220,
+      "tilesheets": [
+        {
+          "nom": "Guild_Top_Right_Bedroom_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Right_Bedroom_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Right_Bedroom_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Right_Bedroom_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Top_Right_Bedroom_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Top Right Bedroom",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_bottom_left_bedroom": {
+      "groupe": "guilde",
+      "titre": "Chambre bas-gauche",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_bottom_left_bedroom.rsground",
+      "sha256": "7df86f72863b9875040214391468dacf32f9e10d04de9f1bc92d82379b6772bb",
+      "octets": 1469124,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 6,
+      "tuiles": 264,
+      "tilesheets": [
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Left_Bedroom_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Bottom Left Bedroom",
+      "entites": true,
+      "decorations": true
+    },
+    "guild_bottom_right_bedroom": {
+      "groupe": "guilde",
+      "titre": "Chambre bas-droite",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/guild_bottom_right_bedroom.rsground",
+      "sha256": "d6320d24d338b0659a8b851f8f4496fbd5968390e882f3915e784533da3b0726",
+      "octets": 1472689,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 6,
+      "tuiles": 264,
+      "tilesheets": [
+        {
+          "nom": "Guild_Bottom_Right_Bedroom_Floor",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Right_Bedroom_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Right_Bedroom_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Right_Bedroom_Supports",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Guild_Bottom_Right_Bedroom_Walls",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [
+        {
+          "nom": "Diary_Blue_Opening",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Diary_Red_Opening",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "musique": "Wigglytuff's Guild.ogg",
+      "nom_interne": "Guild Bottom Right Bedroom",
+      "entites": true,
+      "decorations": true
+    },
+    "guilde_parvis": {
+      "groupe": "guilde",
+      "titre": "Parvis de la guilde",
+      "source_repo": "projetpmd",
+      "source_chemin": "Data/Ground/guilde_parvis.rsground",
+      "sha256": "64f1e09e9c1a30414e9d303680eae82258ac25b2f77ac22ca369c1fad7a0aef6",
+      "octets": 2103299,
+      "version": "0.8.9.0",
+      "texsize": 1,
+      "couches": 1,
+      "tuiles": 60,
+      "tilesheets": [
+        {
+          "nom": "G01p01a_Base",
+          "statut": "ok",
+          "source": "projetpmd"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": null,
+      "nom_interne": "Guild Forecourt",
+      "entites": true,
+      "decorations": true
+    },
+    "crooked_cavern_entrance": {
+      "groupe": "entrees",
+      "titre": "Entrée de la Grotte Sinueuse",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/crooked_cavern_entrance.rsground",
+      "sha256": "2923ee91eaee79fd647b076aa982a9561e6ea2fe6c5ad8008b2d415d31bb1d48",
+      "octets": 507742,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 3,
+      "tuiles": 120,
+      "tilesheets": [
+        {
+          "nom": "Crooked_Cavern_Base",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Crooked_Cavern_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Crooked_Cavern_Shadows",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": null,
+      "nom_interne": "Crooked Cavern Entrance",
+      "entites": true,
+      "decorations": true
+    },
+    "Brine_Cave_Entrance": {
+      "groupe": "entrees",
+      "titre": "Entrée de la Grotte Salée",
+      "source_repo": "pcp",
+      "source_chemin": "source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__Brine_Cave_Entrance.rsground",
+      "sha256": "a253bb1fd7983c4a5a281866cac92b45a8a1a36fda2d21072b941244c10f196b",
+      "octets": 1020585,
+      "version": "0.8.11.0",
+      "texsize": 3,
+      "couches": 1,
+      "tuiles": 27,
+      "tilesheets": [
+        {
+          "nom": "Brine Cave Entrance",
+          "statut": "ok",
+          "source": "projetpmd"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Brine Cave.ogg",
+      "nom_interne": "",
+      "entites": true,
+      "decorations": true
+    },
+    "drenched_bluff_entrance": {
+      "groupe": "entrees",
+      "titre": "Entrée de la Falaise Trempée",
+      "source_repo": "pcp",
+      "source_chemin": "source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__drenched_bluff_entrance.rsground",
+      "sha256": "e6d7cd8486d578157f8547d240846bded43aa067b4ec3b7109ed22feeaf33ff8",
+      "octets": 1339647,
+      "version": "0.8.12.0",
+      "texsize": 1,
+      "couches": 2,
+      "tuiles": 132,
+      "tilesheets": [
+        {
+          "nom": "DrenchedBluffEntranceBackground",
+          "statut": "ok",
+          "source": "projetpmd"
+        },
+        {
+          "nom": "DrenchedBluffEntranceDetails",
+          "statut": "ok",
+          "source": "projetpmd"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": null,
+      "nom_interne": "",
+      "entites": true,
+      "decorations": true
+    },
+    "vast_steppe_entrance": {
+      "groupe": "entrees",
+      "titre": "Entrée de la Vaste Steppe",
+      "source_repo": "pcp",
+      "source_chemin": "source/amp_plains_fleurie_v1/references/vast_steppe_entrance.rsground",
+      "sha256": "3bf12f6e6e27263dff7781a396252b98740f56a99e60764a236f178dfab9ea99",
+      "octets": 2552633,
+      "version": "0.8.9.0",
+      "texsize": 1,
+      "couches": 5,
+      "tuiles": 320,
+      "tilesheets": [
+        {
+          "nom": "Vast_Steppe_Base",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Vast_Steppe_Cliifs",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Vast_Steppe_Flower_Animations",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Vast_Steppe_Fringe",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Vast_Steppe_Objects",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Vast_Steppe_Objects_Under",
+          "statut": "ok",
+          "source": "pcp"
+        }
+      ],
+      "autotiles": [],
+      "animations": [
+        {
+          "nom": "Grassy_Bag",
+          "statut": "ok",
+          "source": "projetpmd"
+        },
+        {
+          "nom": "Kangaskhan_Rock",
+          "statut": "ok",
+          "source": "projetpmd"
+        }
+      ],
+      "musique": "Sky Peak Prairie.ogg",
+      "nom_interne": "Vast Steppe Entrance",
+      "entites": true,
+      "decorations": true
+    },
+    "altere_pond": {
+      "groupe": "entrees",
+      "titre": "Étang d'Altere",
+      "source_repo": "pcp",
+      "source_chemin": "source/antre_harmonie_v3/references/altere_pond.rsground",
+      "sha256": "2c7d423a25d43027bc7eca467d46fd53831156da2f79269517408898f09a54de",
+      "octets": 10187675,
+      "version": "0.8.9.0",
+      "texsize": 1,
+      "couches": 8,
+      "tuiles": 928,
+      "tilesheets": [
+        {
+          "nom": "Altere_Pond_Base",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Cliffs",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Fringe",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Objects",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Objects_Over",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Objects_Under",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_River_Animations",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Altere_Pond_Shadows",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Treasure_Town_Animation_Tileset",
+          "statut": "ok",
+          "source": "pcp"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "File Select.ogg",
+      "nom_interne": "Altere Pond",
+      "entites": true,
+      "decorations": true
+    },
+    "ledian_dojo": {
+      "groupe": "donjons",
+      "titre": "Dojo de Ledian",
+      "source_repo": "pcp",
+      "source_chemin": "source/ledian_dojo_v1/references/ledian_dojo.rsground",
+      "sha256": "002b904339ab26d7e7fea52b57ab2811f788e380750419343df4443298a95fa8",
+      "octets": 1332361,
+      "version": "0.7.4.0",
+      "texsize": 1,
+      "couches": 6,
+      "tuiles": 306,
+      "tilesheets": [
+        {
+          "nom": "Ledian_Dojo_Animated",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Ceiling",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Floor",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Objects",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Objects_Over",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Objects_Under",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "Ledian_Dojo_Shadows",
+          "statut": "ok",
+          "source": "pcp"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Wigglytuff's Guild Remix.ogg",
+      "nom_interne": "Ledian Dojo",
+      "entites": true,
+      "decorations": true
+    },
+    "luminous_spring": {
+      "groupe": "donjons",
+      "titre": "Source Lumineuse",
+      "source_repo": "pcp",
+      "source_chemin": "source/soleil_spring_v1/references/luminous_spring.rsground",
+      "sha256": "3c800caef4ddd422f6eab41b9d0b1d8e6356e9e2ebc36e54e62633dc755e0687",
+      "octets": 599016,
+      "version": "0.7.4.0",
+      "texsize": 3,
+      "couches": 2,
+      "tuiles": 50,
+      "tilesheets": [
+        {
+          "nom": "LuminousSpring",
+          "statut": "ok",
+          "source": "projetpmd"
+        },
+        {
+          "nom": "LuminousSpringAnim",
+          "statut": "ok",
+          "source": "projetpmd"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": null,
+      "nom_interne": "Luminous Spring",
+      "entites": true,
+      "decorations": true
+    },
+    "spinda_cafe": {
+      "groupe": "bourg",
+      "titre": "Café de Spinda",
+      "source_repo": "pcp",
+      "source_chemin": "source/cafe_multietage_v1/references/spinda_cafe.rsground",
+      "sha256": "f7be15712d09507281d0ef6fb16a98b81a7a0d98e9c414303b97eefbf5f5aadd",
+      "octets": 1671742,
+      "version": "0.8.11.0",
+      "texsize": 1,
+      "couches": 2,
+      "tuiles": 174,
+      "tilesheets": [
+        {
+          "nom": "SpindaCafe1",
+          "statut": "ok",
+          "source": "pcp"
+        },
+        {
+          "nom": "SpindaCafe2",
+          "statut": "ok",
+          "source": "pcp"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "027 - Spinda's Cafe.ogg",
+      "nom_interne": "Spinda Cafe",
+      "entites": true,
+      "decorations": true
+    },
+    "metano_cafe": {
+      "groupe": "bourg",
+      "titre": "Café de Métano",
+      "source_repo": "halcyon",
+      "source_chemin": "Data/Ground/metano_cafe.rsground",
+      "sha256": "495fac3e8b198620295654b399731954e93568410a4a74b5bed4c4131c0f5cdb",
+      "octets": 1380320,
+      "version": "0.7.17.0",
+      "texsize": 1,
+      "couches": 5,
+      "tuiles": 285,
+      "tilesheets": [
+        {
+          "nom": "Metano_Town_Cafe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Metano_Town_Cafe_Base",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Metano_Town_Cafe_Objects",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Metano_Town_Cafe_Objects_Fringe",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Metano_Town_Cafe_Objects_Over",
+          "statut": "ok",
+          "source": "halcyon"
+        },
+        {
+          "nom": "Metano_Town_Cafe_Objects_Under",
+          "statut": "ok",
+          "source": "halcyon"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": "Spinda's Cafe.ogg",
+      "nom_interne": "Metano Café",
+      "entites": true,
+      "decorations": true
+    },
+    "WaterfallVillageCapital": {
+      "groupe": "capitale",
+      "titre": "Capitale de Waterfall Village",
+      "source_repo": "town02",
+      "source_chemin": "Data/Ground/WaterfallVillageCapital.rsground",
+      "sha256": "afc5081f7348b2afed306953bf5e66a358e442cb00f93fa139ec239cf94c98ee",
+      "octets": 233727831,
+      "version": "0.8.12.0",
+      "texsize": 1,
+      "couches": 28,
+      "tuiles": 5600,
+      "tilesheets": [
+        {
+          "nom": "Altere_Pond_Base",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Altere_Pond_Cliffs",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Altere_Pond_Objects",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Altere_Pond_Objects_Over",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Altere_Pond_River",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Altere_Pond_River_Animations",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "CLIFF MIROR",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "CLIFF MIROR-Photoroom",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "CanyonCamp",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "INVERSEPATHWAY",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Illuminant_Riverbed_Base",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Illuminant_Riverbed_River_Animations",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "KINGAMBIT DOJO",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Altere_Transition_Base",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Altere_Transition_Objects",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Animation_Tileset",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Base",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Cliffs",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Fringe",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Objects",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Objects_Over",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Objects_Under",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_River",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_River_Animation_1",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_River_Animation_2",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_River_Animation_3",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_River_Animation_4",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "Metano_Town_Trimmed",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "PMD_TREES",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "alakazam_redimensionne",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "arcanine_hut_tileset_by_geoisevil-d5pujgf (2)",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "charmina_hut",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "drifblim_balloon_wip_by_geoisevil-d5re7m4",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "patwhay",
+          "statut": "ok",
+          "source": "town02"
+        },
+        {
+          "nom": "tiles8_0058",
+          "statut": "ok",
+          "source": "town02"
+        }
+      ],
+      "autotiles": [],
+      "animations": [],
+      "musique": null,
+      "nom_interne": "",
+      "entites": true,
+      "decorations": true
+    }
+  },
+  "zones": {
+    "Brine_Cave_Entrance": "Zone Destiny — Entrées de donjon. Importée depuis pcp:source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__Brine_Cave_Entrance.rsground",
+    "WaterfallVillageCapital": "Zone Destiny — Capitale. Importée depuis town02:Data/Ground/WaterfallVillageCapital.rsground",
+    "altere_pond": "Zone Destiny — Entrées de donjon. Importée depuis pcp:source/antre_harmonie_v3/references/altere_pond.rsground",
+    "crooked_cavern_entrance": "Zone Destiny — Entrées de donjon. Importée depuis halcyon:Data/Ground/crooked_cavern_entrance.rsground",
+    "drenched_bluff_entrance": "Zone Destiny — Entrées de donjon. Importée depuis pcp:source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__drenched_bluff_entrance.rsground",
+    "guild_bedroom_hallway": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_bedroom_hallway.rsground",
+    "guild_bottom_left_bedroom": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_bottom_left_bedroom.rsground",
+    "guild_bottom_right_bedroom": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_bottom_right_bedroom.rsground",
+    "guild_dining_room": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_dining_room.rsground",
+    "guild_first_floor": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_first_floor.rsground",
+    "guild_guildmasters_room": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_guildmasters_room.rsground",
+    "guild_heros_room": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_heros_room.rsground",
+    "guild_second_floor": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_second_floor.rsground",
+    "guild_storage_hallway": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_storage_hallway.rsground",
+    "guild_storage_room": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_storage_room.rsground",
+    "guild_third_floor_lobby": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_third_floor_lobby.rsground",
+    "guild_top_left_bedroom": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_top_left_bedroom.rsground",
+    "guild_top_right_bedroom": "Zone Destiny — Guilde Treehouse. Importée depuis halcyon:Data/Ground/guild_top_right_bedroom.rsground",
+    "guilde_parvis": "Zone Destiny — Guilde Treehouse. Importée depuis projetpmd:Data/Ground/guilde_parvis.rsground",
+    "ledian_dojo": "Zone Destiny — Donjons. Importée depuis pcp:source/ledian_dojo_v1/references/ledian_dojo.rsground",
+    "luminous_spring": "Zone Destiny — Donjons. Importée depuis pcp:source/soleil_spring_v1/references/luminous_spring.rsground",
+    "metano_cafe": "Zone Destiny — Bourg. Importée depuis halcyon:Data/Ground/metano_cafe.rsground",
+    "spinda_cafe": "Zone Destiny — Bourg. Importée depuis pcp:source/cafe_multietage_v1/references/spinda_cafe.rsground",
+    "vast_steppe_entrance": "Zone Destiny — Entrées de donjon. Importée depuis pcp:source/amp_plains_fleurie_v1/references/vast_steppe_entrance.rsground"
+  },
+  "tilesheets_ecrits": {
+    "Guild_First_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_First_Floor.tile",
+      "octets": 173839
+    },
+    "Guild_Second_Floor_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Floor.tile",
+      "octets": 47522
+    },
+    "Guild_Second_Floor_Fringe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Fringe.tile",
+      "octets": 1792
+    },
+    "Guild_Second_Floor_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Objects.tile",
+      "octets": 96506
+    },
+    "Guild_Second_Floor_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Objects_Over.tile",
+      "octets": 5364
+    },
+    "Guild_Second_Floor_Objects_Under": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Objects_Under.tile",
+      "octets": 2856
+    },
+    "Guild_Second_Floor_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Shadows.tile",
+      "octets": 5148
+    },
+    "Guild_Second_Floor_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Supports.tile",
+      "octets": 67281
+    },
+    "Guild_Second_Floor_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Second_Floor_Walls.tile",
+      "octets": 74155
+    },
+    "Guild_Third_Floor_Lobby_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Floor.tile",
+      "octets": 55458
+    },
+    "Guild_Third_Floor_Lobby_Fringe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Fringe.tile",
+      "octets": 5383
+    },
+    "Guild_Third_Floor_Lobby_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Objects.tile",
+      "octets": 88569
+    },
+    "Guild_Third_Floor_Lobby_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Objects_Over.tile",
+      "octets": 7562
+    },
+    "Guild_Third_Floor_Lobby_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Shadows.tile",
+      "octets": 7485
+    },
+    "Guild_Third_Floor_Lobby_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Supports.tile",
+      "octets": 75035
+    },
+    "Guild_Third_Floor_Lobby_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Third_Floor_Lobby_Walls.tile",
+      "octets": 82553
+    },
+    "Guild_Bedroom_Hallway_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bedroom_Hallway_Floor.tile",
+      "octets": 41708
+    },
+    "Guild_Bedroom_Hallway_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bedroom_Hallway_Objects.tile",
+      "octets": 13286
+    },
+    "Guild_Bedroom_Hallway_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bedroom_Hallway_Supports.tile",
+      "octets": 33313
+    },
+    "Guild_Bedroom_Hallway_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bedroom_Hallway_Walls.tile",
+      "octets": 48126
+    },
+    "Guild_Heros_Room_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Floor.tile",
+      "octets": 40594
+    },
+    "Guild_Heros_Room_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Objects.tile",
+      "octets": 41207
+    },
+    "Guild_Heros_Room_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Objects_Over.tile",
+      "octets": 2237
+    },
+    "Guild_Heros_Room_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Shadows.tile",
+      "octets": 4470
+    },
+    "Guild_Heros_Room_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Supports.tile",
+      "octets": 38367
+    },
+    "Guild_Heros_Room_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Heros_Room_Walls.tile",
+      "octets": 52103
+    },
+    "Guild_Dining_Room_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Floor.tile",
+      "octets": 17027
+    },
+    "Guild_Dining_Room_Fringe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Fringe.tile",
+      "octets": 1896
+    },
+    "Guild_Dining_Room_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Objects.tile",
+      "octets": 37594
+    },
+    "Guild_Dining_Room_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Objects_Over.tile",
+      "octets": 29413
+    },
+    "Guild_Dining_Room_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Shadows.tile",
+      "octets": 5195
+    },
+    "Guild_Dining_Room_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Supports.tile",
+      "octets": 37646
+    },
+    "Guild_Dining_Room_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Dining_Room_Walls.tile",
+      "octets": 46214
+    },
+    "Guild_Guildmasters_Room_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Floor.tile",
+      "octets": 34154
+    },
+    "Guild_Guildmasters_Room_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Objects.tile",
+      "octets": 96908
+    },
+    "Guild_Guildmasters_Room_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Objects_Over.tile",
+      "octets": 15081
+    },
+    "Guild_Guildmasters_Room_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Shadows.tile",
+      "octets": 15912
+    },
+    "Guild_Guildmasters_Room_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Supports.tile",
+      "octets": 40767
+    },
+    "Guild_Guildmasters_Room_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Guildmasters_Room_Walls.tile",
+      "octets": 56283
+    },
+    "Guild_Storage_Hallway_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Hallway_Floor.tile",
+      "octets": 27523
+    },
+    "Guild_Storage_Hallway_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Hallway_Objects.tile",
+      "octets": 14581
+    },
+    "Guild_Storage_Hallway_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Hallway_Supports.tile",
+      "octets": 34810
+    },
+    "Guild_Storage_Hallway_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Hallway_Walls.tile",
+      "octets": 44346
+    },
+    "Guild_Storage_Room_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Floor.tile",
+      "octets": 39074
+    },
+    "Guild_Storage_Room_Fringe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Fringe.tile",
+      "octets": 3097
+    },
+    "Guild_Storage_Room_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Objects.tile",
+      "octets": 45693
+    },
+    "Guild_Storage_Room_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Objects_Over.tile",
+      "octets": 23420
+    },
+    "Guild_Storage_Room_Objects_Under": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Objects_Under.tile",
+      "octets": 9669
+    },
+    "Guild_Storage_Room_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Shadows.tile",
+      "octets": 15713
+    },
+    "Guild_Storage_Room_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Supports.tile",
+      "octets": 37295
+    },
+    "Guild_Storage_Room_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Storage_Room_Walls.tile",
+      "octets": 44605
+    },
+    "Guild_Top_Left_Bedroom_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Left_Bedroom_Floor.tile",
+      "octets": 32146
+    },
+    "Guild_Top_Left_Bedroom_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Left_Bedroom_Objects.tile",
+      "octets": 36696
+    },
+    "Guild_Top_Left_Bedroom_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Left_Bedroom_Shadows.tile",
+      "octets": 4614
+    },
+    "Guild_Top_Left_Bedroom_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Left_Bedroom_Supports.tile",
+      "octets": 38746
+    },
+    "Guild_Top_Left_Bedroom_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Left_Bedroom_Walls.tile",
+      "octets": 41079
+    },
+    "Guild_Top_Right_Bedroom_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Right_Bedroom_Floor.tile",
+      "octets": 42574
+    },
+    "Guild_Top_Right_Bedroom_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Right_Bedroom_Objects.tile",
+      "octets": 34236
+    },
+    "Guild_Top_Right_Bedroom_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Right_Bedroom_Shadows.tile",
+      "octets": 4391
+    },
+    "Guild_Top_Right_Bedroom_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Right_Bedroom_Supports.tile",
+      "octets": 38701
+    },
+    "Guild_Top_Right_Bedroom_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Top_Right_Bedroom_Walls.tile",
+      "octets": 41115
+    },
+    "Guild_Bottom_Left_Bedroom_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Floor.tile",
+      "octets": 41399
+    },
+    "Guild_Bottom_Left_Bedroom_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Objects.tile",
+      "octets": 26718
+    },
+    "Guild_Bottom_Left_Bedroom_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Objects_Over.tile",
+      "octets": 1710
+    },
+    "Guild_Bottom_Left_Bedroom_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Shadows.tile",
+      "octets": 5382
+    },
+    "Guild_Bottom_Left_Bedroom_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Supports.tile",
+      "octets": 38708
+    },
+    "Guild_Bottom_Left_Bedroom_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Left_Bedroom_Walls.tile",
+      "octets": 44934
+    },
+    "Guild_Bottom_Right_Bedroom_Floor": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Right_Bedroom_Floor.tile",
+      "octets": 39083
+    },
+    "Guild_Bottom_Right_Bedroom_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Right_Bedroom_Objects.tile",
+      "octets": 31179
+    },
+    "Guild_Bottom_Right_Bedroom_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Right_Bedroom_Shadows.tile",
+      "octets": 2710
+    },
+    "Guild_Bottom_Right_Bedroom_Supports": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Right_Bedroom_Supports.tile",
+      "octets": 38696
+    },
+    "Guild_Bottom_Right_Bedroom_Walls": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Guild_Bottom_Right_Bedroom_Walls.tile",
+      "octets": 44880
+    },
+    "G01p01a_Base": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/G01p01a_Base.tile",
+      "octets": 281901
+    },
+    "Crooked_Cavern_Base": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Crooked_Cavern_Base.tile",
+      "octets": 175061
+    },
+    "Crooked_Cavern_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Crooked_Cavern_Objects.tile",
+      "octets": 21787
+    },
+    "Crooked_Cavern_Shadows": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Crooked_Cavern_Shadows.tile",
+      "octets": 10036
+    },
+    "Brine Cave Entrance": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/Brine Cave Entrance.tile",
+      "octets": 485512
+    },
+    "DrenchedBluffEntranceBackground": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/DrenchedBluffEntranceBackground.tile",
+      "octets": 107976
+    },
+    "DrenchedBluffEntranceDetails": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/DrenchedBluffEntranceDetails.tile",
+      "octets": 175539
+    },
+    "Vast_Steppe_Base": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Base.tile",
+      "octets": 68781
+    },
+    "Vast_Steppe_Cliifs": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Cliifs.tile",
+      "octets": 89519
+    },
+    "Vast_Steppe_Flower_Animations": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Flower_Animations.tile",
+      "octets": 5624
+    },
+    "Vast_Steppe_Fringe": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Fringe.tile",
+      "octets": 47883
+    },
+    "Vast_Steppe_Objects": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Objects.tile",
+      "octets": 34574
+    },
+    "Vast_Steppe_Objects_Under": {
+      "source": "pcp",
+      "chemin": "source/amp_plains_fleurie_v1/references/Vast_Steppe_Objects_Under.tile",
+      "octets": 15116
+    },
+    "Altere_Pond_Base": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_Base.tile",
+      "octets": 384006
+    },
+    "Altere_Pond_Cliffs": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_Cliffs.tile",
+      "octets": 72887
+    },
+    "Altere_Pond_Fringe": {
+      "source": "pcp",
+      "chemin": "source/antre_harmonie_v3/references/Altere_Pond_Fringe.tile",
+      "octets": 225096
+    },
+    "Altere_Pond_Objects": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_Objects.tile",
+      "octets": 356996
+    },
+    "Altere_Pond_Objects_Over": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_Objects_Over.tile",
+      "octets": 25723
+    },
+    "Altere_Pond_Objects_Under": {
+      "source": "pcp",
+      "chemin": "source/antre_harmonie_v3/references/Altere_Pond_Objects_Under.tile",
+      "octets": 74327
+    },
+    "Altere_Pond_River_Animations": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_River_Animations.tile",
+      "octets": 251325
+    },
+    "Altere_Pond_Shadows": {
+      "source": "pcp",
+      "chemin": "source/antre_harmonie_v3/references/Altere_Pond_Shadows.tile",
+      "octets": 5749
+    },
+    "Treasure_Town_Animation_Tileset": {
+      "source": "pcp",
+      "chemin": "source/eau_treasure/natifs/Treasure_Town_Animation_Tileset.tile",
+      "octets": 412402
+    },
+    "Ledian_Dojo_Animated": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Animated.tile",
+      "octets": 14231
+    },
+    "Ledian_Dojo_Ceiling": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Ceiling.tile",
+      "octets": 101399
+    },
+    "Ledian_Dojo_Floor": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Floor.tile",
+      "octets": 152844
+    },
+    "Ledian_Dojo_Objects": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Objects.tile",
+      "octets": 26577
+    },
+    "Ledian_Dojo_Objects_Over": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Objects_Over.tile",
+      "octets": 8638
+    },
+    "Ledian_Dojo_Objects_Under": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Objects_Under.tile",
+      "octets": 6504
+    },
+    "Ledian_Dojo_Shadows": {
+      "source": "pcp",
+      "chemin": "source/ledian_dojo_v1/references/Ledian_Dojo_Shadows.tile",
+      "octets": 9571
+    },
+    "LuminousSpring": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/LuminousSpring.tile",
+      "octets": 468273
+    },
+    "LuminousSpringAnim": {
+      "source": "projetpmd",
+      "chemin": "Content/Tile/LuminousSpringAnim.tile",
+      "octets": 49692
+    },
+    "SpindaCafe1": {
+      "source": "pcp",
+      "chemin": "source/cafe_multietage_v1/references/SpindaCafe1.tile",
+      "octets": 311478
+    },
+    "SpindaCafe2": {
+      "source": "pcp",
+      "chemin": "source/cafe_multietage_v1/references/SpindaCafe2.tile",
+      "octets": 136455
+    },
+    "Metano_Town_Cafe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe.tile",
+      "octets": 198200
+    },
+    "Metano_Town_Cafe_Base": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe_Base.tile",
+      "octets": 130940
+    },
+    "Metano_Town_Cafe_Objects": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe_Objects.tile",
+      "octets": 87016
+    },
+    "Metano_Town_Cafe_Objects_Fringe": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe_Objects_Fringe.tile",
+      "octets": 1128
+    },
+    "Metano_Town_Cafe_Objects_Over": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe_Objects_Over.tile",
+      "octets": 23454
+    },
+    "Metano_Town_Cafe_Objects_Under": {
+      "source": "halcyon",
+      "chemin": "Content/Tile/Metano_Town_Cafe_Objects_Under.tile",
+      "octets": 18758
+    },
+    "Altere_Pond_River": {
+      "source": "town02",
+      "chemin": "Content/Tile/Altere_Pond_River.tile",
+      "octets": 67425
+    },
+    "CLIFF MIROR": {
+      "source": "town02",
+      "chemin": "Content/Tile/CLIFF MIROR.tile",
+      "octets": 312414
+    },
+    "CLIFF MIROR-Photoroom": {
+      "source": "town02",
+      "chemin": "Content/Tile/CLIFF MIROR-Photoroom.tile",
+      "octets": 192365
+    },
+    "CanyonCamp": {
+      "source": "town02",
+      "chemin": "Content/Tile/CanyonCamp.tile",
+      "octets": 366167
+    },
+    "INVERSEPATHWAY": {
+      "source": "town02",
+      "chemin": "Content/Tile/INVERSEPATHWAY.tile",
+      "octets": 929812
+    },
+    "Illuminant_Riverbed_Base": {
+      "source": "town02",
+      "chemin": "Content/Tile/Illuminant_Riverbed_Base.tile",
+      "octets": 56202
+    },
+    "Illuminant_Riverbed_River_Animations": {
+      "source": "town02",
+      "chemin": "Content/Tile/Illuminant_Riverbed_River_Animations.tile",
+      "octets": 98379
+    },
+    "KINGAMBIT DOJO": {
+      "source": "town02",
+      "chemin": "Content/Tile/KINGAMBIT DOJO.tile",
+      "octets": 172290
+    },
+    "Metano_Altere_Transition_Base": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Altere_Transition_Base.tile",
+      "octets": 111753
+    },
+    "Metano_Altere_Transition_Objects": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Altere_Transition_Objects.tile",
+      "octets": 58309
+    },
+    "Metano_Town_Animation_Tileset": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Animation_Tileset.tile",
+      "octets": 412402
+    },
+    "Metano_Town_Base": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Base.tile",
+      "octets": 1231857
+    },
+    "Metano_Town_Cliffs": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Cliffs.tile",
+      "octets": 108536
+    },
+    "Metano_Town_Fringe": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Fringe.tile",
+      "octets": 24787
+    },
+    "Metano_Town_Objects": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Objects.tile",
+      "octets": 984599
+    },
+    "Metano_Town_Objects_Over": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Objects_Over.tile",
+      "octets": 43527
+    },
+    "Metano_Town_Objects_Under": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Objects_Under.tile",
+      "octets": 94390
+    },
+    "Metano_Town_River": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_River.tile",
+      "octets": 164077
+    },
+    "Metano_Town_River_Animation_1": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_River_Animation_1.tile",
+      "octets": 164077
+    },
+    "Metano_Town_River_Animation_2": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_River_Animation_2.tile",
+      "octets": 167796
+    },
+    "Metano_Town_River_Animation_3": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_River_Animation_3.tile",
+      "octets": 167934
+    },
+    "Metano_Town_River_Animation_4": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_River_Animation_4.tile",
+      "octets": 167361
+    },
+    "Metano_Town_Trimmed": {
+      "source": "town02",
+      "chemin": "Content/Tile/Metano_Town_Trimmed.tile",
+      "octets": 7140629
+    },
+    "PMD_TREES": {
+      "source": "town02",
+      "chemin": "Content/Tile/PMD_TREES.tile",
+      "octets": 383254
+    },
+    "alakazam_redimensionne": {
+      "source": "town02",
+      "chemin": "Content/Tile/alakazam_redimensionne.tile",
+      "octets": 140070
+    },
+    "arcanine_hut_tileset_by_geoisevil-d5pujgf (2)": {
+      "source": "town02",
+      "chemin": "Content/Tile/arcanine_hut_tileset_by_geoisevil-d5pujgf (2).tile",
+      "octets": 92721
+    },
+    "charmina_hut": {
+      "source": "town02",
+      "chemin": "Content/Tile/charmina_hut.tile",
+      "octets": 129921
+    },
+    "drifblim_balloon_wip_by_geoisevil-d5re7m4": {
+      "source": "town02",
+      "chemin": "Content/Tile/drifblim_balloon_wip_by_geoisevil-d5re7m4.tile",
+      "octets": 20133
+    },
+    "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII": {
+      "source": "town02",
+      "chemin": "Content/Tile/kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII.tile",
+      "octets": 139999
+    },
+    "patwhay": {
+      "source": "town02",
+      "chemin": "Content/Tile/patwhay.tile",
+      "octets": 125059
+    },
+    "tiles8_0058": {
+      "source": "town02",
+      "chemin": "Content/Tile/tiles8_0058.tile",
+      "octets": 12178
+    }
+  },
+  "animations_ecrites": {
+    "Diary_Red_Opening": {
+      "source": "halcyon",
+      "chemin": "Content/Object/Diary_Red_Opening.dir"
+    },
+    "Food": {
+      "source": "halcyon",
+      "chemin": "Content/Object/Food.dir"
+    },
+    "Food_Big": {
+      "source": "halcyon",
+      "chemin": "Content/Object/Food_Big.dir"
+    },
+    "Food_Flipped": {
+      "source": "halcyon",
+      "chemin": "Content/Object/Food_Flipped.dir"
+    },
+    "Diary_Blue_Opening": {
+      "source": "halcyon",
+      "chemin": "Content/Object/Diary_Blue_Opening.dir"
+    },
+    "Grassy_Bag": {
+      "source": "projetpmd",
+      "chemin": "Content/Object/Grassy_Bag.dir"
+    },
+    "Kangaskhan_Rock": {
+      "source": "projetpmd",
+      "chemin": "Content/Object/Kangaskhan_Rock.dir"
+    }
+  },
+  "manquants": [],
+  "renommages_normalises": [
+    {
+      "fichier_source": "source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__Brine_Cave_Entrance.rsground",
+      "asset_interne": "Brine_Cave_Entrance",
+      "nom_retenu": "Brine_Cave_Entrance.rsground",
+      "raison": "le nom de fichier doit correspondre à Object.AssetName"
+    },
+    {
+      "fichier_source": "source/cote_v5_expeditions/references/ExplorersOfSkyOrigins__drenched_bluff_entrance.rsground",
+      "asset_interne": "drenched_bluff_entrance",
+      "nom_retenu": "drenched_bluff_entrance.rsground",
+      "raison": "le nom de fichier doit correspondre à Object.AssetName"
+    }
+  ],
+  "fournis_par_la_base_pmdo": [
+    {
+      "reference": "InsideHut",
+      "type": "TileSheet",
+      "cible": "base/Content/Tile/InsideHut.tile",
+      "utilise_par": "destiny_hub"
+    },
+    {
+      "reference": "Banana_Yellow",
+      "type": "Animation",
+      "cible": "base/Content/Item/Banana_Yellow.dir",
+      "utilise_par": "guild_dining_room"
+    }
+  ],
+  "manquants_reels": []
+}
