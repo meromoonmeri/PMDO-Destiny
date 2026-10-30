@@ -61,6 +61,17 @@ Namespace `destiny`, UUID `746CBBCD-426F-5419-A735-D50248440935`
   relus en entier (3,15 Go) : **0 TileSheet manquant**. Rapport :
   `docs/QUEST_DESTINY_RECUPERATION.md`.
 
+- **Capitale étendue au sud (30/10/2026).** La version la plus avancée du
+  Ground — celle du Drive de l'auteur, 330 233 300 o, 37 calques, 41 planches —
+  remplace la version `town02`. Son sud (lignes 348 à 499, soit 29 200 cases)
+  n'était qu'un remplissage uniforme sans chemin ni collision : il est
+  désormais couvert par une **coupe contiguë de 132 lignes du village**,
+  copiée par blocs natifs avec report des tags `obstacles` (0 → 15 994 cases
+  bloquées). Outil : `tools/editer_ground.py`, qui édite le texte des cases
+  sans désérialiser les 330 Mo, et dont la réécriture à vide est vérifiée
+  exacte à l'octet. Rapport : `docs/AMELIORATION_WVC_SUD.md`, aperçus dans
+  `docs/apercus/`.
+
 ## Chantiers suivants (par priorité)
 
 1. **Tâche D (`projet-creation-pmdo`) — terminée le 27/10/2026** : 33 cartes

@@ -32,9 +32,11 @@ standalone.
 
 ## Avant de lancer le jeu
 
-`WaterfallVillageCapital.rsground` pèse 228 Mio, au-delà de la limite GitHub de
+`WaterfallVillageCapital.rsground` pèse 315 Mio, au-delà de la limite GitHub de
 100 Mio par fichier, et le dépôt n'utilise pas Git LFS. Il est versionné
-compressé sans perte dans `ressources/`. Restauration unique :
+compressé sans perte dans `ressources/` (1,9 Mio). C'est la version du Drive de
+l'auteur, **étendue au sud** (voir `docs/AMELIORATION_WVC_SUD.md`).
+Restauration unique :
 
 ```bash
 python tools/restaurer_waterfall.py

@@ -26,3 +26,6 @@ userdata/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Ground de la capitale : 315 Mio, restauré par tools/restaurer_waterfall.py
+game/Data/Ground/WaterfallVillageCapital.rsground
