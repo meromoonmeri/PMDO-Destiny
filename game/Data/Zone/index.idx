@@ -30,6 +30,606 @@
       "Released": true,
       "Comment": "Zone de départ technique de PROJET Destiny.",
       "SortOrder": -1000
+    },
+    "Brine_Cave_Entrance": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "Brine_Cave_Entrance"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Entrée de la Grotte Salée",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "WaterfallVillageCapital": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "WaterfallVillageCapital"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Capitale de Waterfall Village",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "altere_pond": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "altere_pond"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Étang d'Altere",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "crooked_cavern_entrance": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "crooked_cavern_entrance"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Entrée de la Grotte Sinueuse",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "drenched_bluff_entrance": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "drenched_bluff_entrance"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Entrée de la Falaise Trempée",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_bedroom_hallway": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_bedroom_hallway"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Couloir des chambres",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_bottom_left_bedroom": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_bottom_left_bedroom"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Chambre bas-gauche",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_bottom_right_bedroom": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_bottom_right_bedroom"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Chambre bas-droite",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_dining_room": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_dining_room"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Cantine de la guilde",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_first_floor": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_first_floor"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Rez-de-chaussée de la guilde",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_guildmasters_room": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_guildmasters_room"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Bureau du maître de guilde",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_heros_room": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_heros_room"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Chambre du héros",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_second_floor": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_second_floor"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Second étage de la guilde",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_storage_hallway": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_storage_hallway"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Couloir des réserves",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_storage_room": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_storage_room"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Réserve",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_third_floor_lobby": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_third_floor_lobby"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Palier du troisième étage",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_top_left_bedroom": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_top_left_bedroom"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Chambre haut-gauche",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guild_top_right_bedroom": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guild_top_right_bedroom"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Chambre haut-droite",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "guilde_parvis": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guilde_parvis"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Parvis de la guilde",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "ledian_dojo": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "ledian_dojo"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Dojo de Ledian",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "luminous_spring": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "luminous_spring"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Source Lumineuse",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "metano_cafe": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "metano_cafe"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Café de Métano",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "spinda_cafe": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "spinda_cafe"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Café de Spinda",
+        "LocalTexts": {}
+      },
+      "Released": true
+    },
+    "vast_steppe_entrance": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "vast_steppe_entrance"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Entrée de la Vaste Steppe",
+        "LocalTexts": {}
+      },
+      "Released": true
     }
   }
 }
