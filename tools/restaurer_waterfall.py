@@ -3,11 +3,13 @@
 
 GitHub refuse tout fichier de plus de 100 Mio. Le Ground de la capitale pèse
 315 Mio : il est donc stocké ici **compressé sans perte**
-(ressources/WaterfallVillageCapital.rsground.gz, 1,9 Mio) et restauré à
+(ressources/WaterfallVillageCapital.rsground.gz, 2,0 Mio) et restauré à
 l'identique. L'empreinte SHA-256 du fichier produit est vérifiée.
 
-Version restaurée : celle du Drive (330 233 300 o) **étendue au sud** par
-tools/editer_ground.py — voir docs/AMELIORATION_WVC_SUD.md.
+Version restaurée : celle du Drive de l'auteur (330 233 300 o), prolongée par
+les chemins de la plaine sud (330 315 007 o). L'extension est reproductible :
+tools/dessiner_chemins.py applique exactement les mêmes retouches à partir du
+fichier du Drive. Voir docs/AMELIORATION_WVC_SUD.md.
 
 Usage :
     python tools/restaurer_waterfall.py
@@ -21,9 +23,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "ressources" / "WaterfallVillageCapital.rsground.gz"
 TARGET = ROOT / "game" / "Data" / "Ground" / "WaterfallVillageCapital.rsground"
 
-# empreinte de la version étendue (Drive + extension du sud), calculée après édition
-ATTENDU_SHA256 = "e4ee71d7b8082a361bcae1be909ca77dcb80d162b83dd5c5f411eb7d851f48b3"
-TAILLE = 330_482_389
+# empreinte du fichier livré = fichier du Drive + chemins de la plaine sud
+ATTENDU_SHA256 = "867a90e78eaf5bb1520d4db4f2e2e82de881f1023e4c5aa1b4410670a9c56777"
+TAILLE = 330_315_007
+# empreinte du fichier du Drive, avant retouches (contrôle de la source)
+SHA_DRIVE = "2268e2696e259bbac012eb0d7ef9b530e2926161c2140b9e346715b2ab4a446a"
 
 
 def main() -> int:

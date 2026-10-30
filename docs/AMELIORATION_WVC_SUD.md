@@ -1,102 +1,124 @@
 # Waterfall Village — amélioration de la partie sud
 
-Basé sur la version **la plus avancée** du Ground : celle du Drive de l'auteur
-(`WaterfallVillageCapital (1).rsground`, 330 233 300 octets, modifiée le
-27/10/2026, 37 calques, 41 planches). Elle remplace la version `town02`
-(233 727 831 octets, 28 calques) jusque-là intégrée.
+Point de départ : le fichier **du Drive de l'auteur**
+(`WaterfallVillageCapital.rsground`, 330 233 300 octets, sha256
+`2268e269…4a446a`, 37 calques, 200 × 500 cases de 8 px). C'est la base de
+travail retenue ; la version `town02` et les essais intermédiaires sont écartés.
+
+Consigne appliquée : **ne pas remplacer le sud par une copie du village du
+nord**. La plaine d'herbe et ses arbres sont conservés tels quels ; on n'ajoute
+que des **chemins**, et on corrige les raccords.
 
 ---
 
 ## 1. Ce qui n'allait pas
 
-Le rendu hors-moteur (`docs/apercus/`) montrait trois défauts nets :
+1. **Les chemins s'arrêtaient net.** Les deux ponts de bois qui franchissent la
+   rivière (lignes 351-355) débouchaient sur le gazon : les chemins descendaient
+   à la ligne 368 puis s'interrompaient, laissant 130 lignes de plaine sans
+   aucune voie.
+2. **Les deux rives ne communiquaient pas.** Rien ne reliait le chemin du pont
+   ouest (tx 11-14) à celui du pont est (tx 86-89) : il fallait traverser
+   72 cases d'herbe.
+3. **Des amorces orphelines.** Les tronçons déjà posés au sud de la rivière
+   s'arrêtaient sur un embout, sans destination.
 
-1. **Un grand vide vert au sud.** Le contenu s'arrêtait à la ligne 348 (case 8 px).
-   En dessous, un **unique calque de remplissage** répétait la même case de
-   gazon (`Altere_Pond_Cliffs` @ 106,5) sur 146 lignes × 200 colonnes, soit
-   **29 200 cases** sans chemin, sans objet, sans collision (0 case bloquée).
-2. **Des buissons posés en grille.** Le calque `Layer 34` plaçait le même
-   buisson (`Metano_Town_Objects_Under` @ 64,18) à intervalle régulier : le
-   motif se lit immédiatement comme un tampon automatique.
-3. **Aucun réseau de chemins au sud.** Les deux ponts de bois qui franchissent
-   la rivière débouchaient sur du gazon : les chemins s'arrêtaient net.
-
----
-
-## 2. Ce qui a été fait
-
-Le sud est désormais une **extension réelle du village**, construite
-exclusivement par **copie de blocs natifs** de la carte elle-même : aucun
-graphique inventé, aucune planche ajoutée, aucun tileset nouveau.
-
-| Opération | Source (cases) | Destination | Cases |
-|---|---|---|---:|
-| Village continu | (0,216) → (200,348) | (0,366) | 26 400 |
-| Berge boisée sous la rivière | (0,337) → (200,348) | (0,355) | 2 200 |
-| Lisière forestière de bord | (0,337) → (200,347) | (0,490) | 2 000 |
-
-La coupe source est **contiguë sur 132 lignes** : le réseau de chemins, les
-murs, les escaliers et les bassins restent donc connectés à l'intérieur de la
-zone copiée — c'est ce qui manquait à la première tentative, faite de trois
-bandes non adjacentes où les chemins se coupaient aux jonctions.
-
-Les **collisions suivent** : chaque copie reporte aussi les tags `obstacles`
-de la zone source. Le sud passe de **0 à 15 994 cases bloquées** sur 26 800
-(arbres, murs, maisons, bassins) — sans quoi on traverserait les arbres.
-
-### Deux primitives d'édition nouvelles
-
-`tools/editer_ground.py` travaille **au niveau du texte de chaque case** :
-une carte PMDO est une grille de cases JSON indépendantes, donc un bloc se
-copie sans jamais désérialiser les 330 Mo (interdit sur 2 Go de RAM).
-
-- `copier` : rectangle source → destination, avec miroir optionnel, sur les
-  37 calques **et** sur le tableau `obstacles` ;
-- `vider` / `poser` : effacer un calque sur une zone, ou y répéter une case
-  donnée (utilisé pour supprimer la grille de buissons).
-
-**Contrôle d'intégrité obligatoire** : l'outil réécrit le fichier sans aucune
-édition (`--verifier`) et compare les empreintes SHA-256. Résultat :
-`2268e269…a446a` dans les deux cas — la réécriture est **exacte à l'octet**.
+Le défaut n'était donc pas l'absence de contenu au sud — la plaine et ses
+arbres sont voulus — mais l'**absence de circulation**.
 
 ---
 
-## 3. Résultat
+## 2. Le problème technique à résoudre
 
-| | Avant (Drive) | Après |
-|---|---:|---:|
-| Lignes avec du contenu | 0 → 348 | **0 → 499** (toute la carte) |
-| Cases bloquées au sud | 0 / 26 800 | **15 994 / 26 800** |
-| Calques de remplissage uniforme | 1 (29 200 cases) | 0 |
-| Taille | 330 233 300 o | 330 482 389 o |
-| Empreinte SHA-256 | — | `e4ee71d7…1f48b3` |
-| Compressé (sans perte) | — | **1,90 Mo** |
+Les chemins du nord sont dessinés avec trois planches (`INVERSEPATHWAY`,
+`CanyonCamp`, `Metano_Town_Base`) réparties sur les calques **1, 3, 24, 26,
+27, 32 et 33** — la répartition n'est pas régulière, et le calque 33 ne contient
+que des **fragments** (509 cases isolées), ce qui exclut d'en déduire une règle
+d'auto-jointure à partir des quatre voisins : la table testée
+(`tools/chemins.py`) s'est révélée non déterministe, l'hypothèse a été
+abandonnée.
 
-Aperçus : `docs/apercus/WaterfallVillageCapital_etendue.png` (carte entière),
-`…_sud.png` (la zone étendue), `avant_apres_sud.png` (comparaison).
+Autre contrainte : tout le sud est couvert par un **remplissage de gazon**
+(calque 27, `Altere_Pond_Cliffs` @ 106,5) posé *au-dessus* des calques 1 à 26.
+Écrire un chemin dans ces calques ne produirait rien de visible : le gazon le
+recouvrirait.
 
----
-
-## 4. Ce qui reste, dit franchement
-
-- **La zone sud est une réplique** d'une bande du nord (cliff, cascade, bassin,
-  maisons). Vue d'ensemble, la répétition se remarque ; à l'échelle d'un écran
-  de jeu, non. Différencier demanderait de dessiner des pièces nouvelles, ce que
-  la règle « pas de ressource inventée » interdit sans validation.
-- **Le canevas n'a pas été agrandi** : la carte fait toujours 200 × 500 cases.
-  J'ai rempli la surface existante plutôt que d'ajouter des lignes ; ajouter
-  des rangées toucherait les 37 calques, les obstacles et le fond parallaxe.
-  C'est faisable sur demande.
-- **`FORGE` reste introuvable** dans les 113 branches des six dépôts : 262
-  tuiles de la forge du nord-est ne s'affichent pas. Rien à fabriquer ici.
-- Le rendu est statique : ni les PNJ, ni les animations d'eau ne sont évalués.
-  **Un aperçu approuvé n'est pas une validation en jeu.**
+Solution retenue : **recopier des tronçons natifs complets** (chaussée + berges,
+toutes couches confondues) dans le **calque 33**, celui que l'auteur utilise
+déjà pour les amorces sous les ponts et qui passe au-dessus du remplissage.
+Aucune tuile inventée, aucune planche ajoutée, aucune retouche du gazon.
 
 ---
 
-## 5. Reproduction
+## 3. Ce qui a été fait
+
+Script : `tools/dessiner_chemins.py` (reproductible, voir § 6).
+
+| Tronçon ajouté | Empreinte d'origine | Calque source | Cellules |
+|---|---|---|---|
+| Route du pont ouest, de ty 356 au bord sud | tx 9-16 × ty 336-349 (7 × 13) | 26 | ~ 1 100 |
+| Route du pont est, de ty 356 au bord sud | tx 84-91 × ty 336-349 (7 × 13) | 3 | ~ 1 100 |
+| Route est-ouest, sur toute la largeur, ty 427-431 | lignes 196-200, tx 40-90 (50 × 5), sans aucun trou | 1 (`WaterfallVillage-base`) | ~ 210 |
+
+Les empreintes sont prises **juste au nord des ponts**, là où les chemins font
+3 à 4 cases de large : c'est exactement la largeur des amorces déjà présentes au
+sud, donc le prolongement ne crée pas de rupture d'échelle. Les répétitions se
+chevauchent de 6 cases pour que les embouts arrondis ne laissent pas de coupure.
+
+Enfin, les **buissons qui empiétaient sur les nouveaux chemins ont été retirés
+en entier** (composante connexe complète, jamais un demi-buisson) : 1 514 cases
+sur les calques d'objets.
+
+Bilan des calques modifiés — et de ceux qui ne le sont pas :
+
+```
+calque 33 : 2 119 → 4 545 cases   (+2 426)
+calque 34 : 7 568 → 6 054 cases   (-1 514)
+tous les autres calques : inchangés à l'octet
+```
+
+Aucune zone existante n'a été réécrite, aucun arbre de la plaine n'a été
+déplacé hors des emprises de chemin, aucune case de gazon n'a été remplacée.
+
+---
+
+## 4. Contrôles passés
+
+- **Réécriture à vide identique à l'octet** :
+  `python tools/editer_ground.py <fichier> --verifier` → `IDENTIQUE`
+  (sha256 `867a90e7…c56777`).
+- **Taille** : 330 315 007 octets (+ 81 707).
+- **Relecture de l'archive** : `gzip.decompress()` du `.gz` livré redonne
+  exactement le fichier ci-dessus.
+- **Aperçu** : rendu hors-moteur complet (`docs/apercus/avant_apres_chemins.png`).
+
+---
+
+## 5. Limites assumées
+
+- **Aucun aperçu ne vaut validation en jeu.** Il reste à charger la carte dans
+  PMDO 0.8.12 et à marcher les trois chemins pour vérifier le passage.
+- **Collisions** : la grille `obstacles` du fichier est uniforme (200 × 500
+  entrées `{"Bounds": …, "Tags": 0}`) — elle ne porte aucune information de
+  blocage par objet. Aucune n'a donc été modifiée : les buissons retirés
+  n'étaient pas, dans ce fichier, des obstacles déclarés.
+- **Motif répété** : la route est-ouest reprend le même tronçon de 50 cases ; à
+  fort grossissement, les petites décorations (cailloux, touffes) se répètent.
+  C'est le prix d'une texture 100 % native — aucune retouche peinte n'a été
+  introduite.
+- **Rien n'a été ajouté au sud en dehors des chemins** : pas de bâti, pas de
+  nouvel objet, pas de nouvel ennemi. La plaine reste la plaine, comme demandé.
+
+---
+
+## 6. Reproduire
 
 ```bash
-python tools/editer_ground.py ../wvc_drive.rsground ../wvc_v5.rsground tools/scenarios/sud.json
-python tools/restaurer_waterfall.py     # installe la version étendue dans game/
+python tools/restaurer_waterfall.py          # remet le .rsground depuis le .gz livré
+# ou, depuis le fichier du Drive intact :
+python tools/dessiner_chemins.py <drive.rsground> <sortie.rsground>
+python tools/editer_ground.py <sortie.rsground> --verifier
 ```
+
+`tools/dessiner_chemins.py` ne dépend que de `tools/editer_ground.py` (numpy
+inutile) et n'écrit que dans le calque 33.

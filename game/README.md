@@ -32,18 +32,20 @@ standalone.
 
 ## Avant de lancer le jeu
 
-`WaterfallVillageCapital.rsground` pèse 315 Mio, au-delà de la limite GitHub de
-100 Mio par fichier, et le dépôt n'utilise pas Git LFS. Il est versionné
-compressé sans perte dans `ressources/` (1,9 Mio). C'est la version du Drive de
-l'auteur, **étendue au sud** (voir `docs/AMELIORATION_WVC_SUD.md`).
-Restauration unique :
+`WaterfallVillageCapital.rsground` pèse 330 315 007 octets, au-delà de la limite
+GitHub de 100 Mio par fichier, et le dépôt n'utilise pas Git LFS. Il est
+versionné compressé sans perte dans `ressources/` (2,0 Mio). C'est la version du
+Drive de l'auteur (330 233 300 o), dont les **chemins de la plaine sud ont été
+prolongés** sans toucher à l'herbe ni aux arbres (voir
+`docs/AMELIORATION_WVC_SUD.md`). Restauration unique :
 
 ```bash
 python tools/restaurer_waterfall.py
 ```
 
-Le script vérifie la taille (233 727 831 octets) et l'empreinte SHA-256 publiée
-dans `town02`.
+Le script vérifie la taille et l'empreinte SHA-256 (`867a90e7…c56777`). Pour
+refaire l'extension à partir du fichier du Drive intact :
+`python tools/dessiner_chemins.py <drive.rsground> <sortie.rsground>`.
 
 ## Documentation
 
