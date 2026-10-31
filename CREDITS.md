@@ -77,12 +77,12 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   Reverie Town. Selon l'auteur du projet, ce sont les tuiles de
   **« Reverie Town (waterfallvillagecapital) »**. La chaîne documentée dans
   l'atelier (`provenance.json`, sha256 à l'appui) les fait transiter par le mod
-  **Halcyon** de Palikadude (dépôt `Palikadude/Halcyon`, branche
+  **projet de Palikadude** ([dépôt source](https://github.com/Palikadude/%48alcyon), branche
   `working-copy`, commit `1522c7a8b7a34d70078e11ed605b21d563b0dc51`).
-  Halcyon ne publie **pas** de fichier LICENSE et son readme ne contient pas de
+  Le projet de Palikadude ne publie **pas** de fichier LICENSE et son readme ne contient pas de
   clause de réutilisation : crédit affiché ici, et **accord de Palika à
   confirmer avant toute redistribution publique** du fangame.
-  Crédits Halcyon (readme) : Palika (auteur) ; pixel art notamment Edan Momu,
+  Crédits du projet de Palikadude (readme) : Palika (auteur) ; pixel art notamment Edan Momu,
   D4yz, Jaifain, Sunkern (Apricorn Grove).
 - **Filtre nocturne Abyss** — `tools/tile_night.py` du projet New Era / Abyss
   de l'auteur (`new-era-abyss-to-ascension-V4`, commit
@@ -118,3 +118,8 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
 - Anciennes versions des lieux importés : la liste et le motif de chaque
   exclusion sont consignés dans
   [`docs/IMPORT_GUILDE_TREEHOUSE.md`](docs/IMPORT_GUILDE_TREEHOUSE.md).
+
+## Starters et Source irisée
+
+- **Gala1D**, avec **Darkpawra** et **TinchoX** : version Explorers 2.3.28 étudiée ; [page du projet](https://projectpokemon.org/home/files/file/5247-pok%C3%A9mon-mystery-dungeon-explorers-%72emixed/). Les crédits par forme sont dans `docs/audit/source_2_3_28/preparation_report.json`. Le Pokédex public attribue Canarbello à `◥θ┴θ◤/N-A` ; la répartition exacte de ces crédits reste à confirmer. Ressources issues d'une ROM privée, sans autorisation de redistribution publique présumée.
+- **meromoonmeri** : calques de la Source irisée, avec escalier et pulsation, retrouvés dans son atelier. La carte utilise aussi le socle et les chaînes d'évolution PMDO existants. Voir [SOURCE_IRISEE.md](docs/SOURCE_IRISEE.md) pour la provenance et les différences.

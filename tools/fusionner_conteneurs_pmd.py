@@ -7,7 +7,7 @@ préserve les nœuds et les blobs d'origine, applique seulement les sous-nœuds
 importés, et produit un index profond. Les anciennes feuilles remplacées
 restent intactes dans base/ ; ce script ne modifie jamais ses entrées.
 
-Les données Remixed doivent être fournies séparément par leur détenteur ;
+Les données source doivent être fournies séparément par leur détenteur ;
 aucun contenu d'une ROM n'est fourni ou téléchargé par ce programme.
 """
 from __future__ import annotations

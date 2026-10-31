@@ -15,7 +15,7 @@ dans `docs/audit/assemble.py`) ; données brutes d'audit dans `docs/audit/*.json
   `arena/c40fd96f-pmdo-destiny`, 262 cartes, 1 322 planches, 5 zones). Rien n'y a été supprimé.
 * Anciennes versions remplacées → zone `archives` (fichiers individuels, intacts ; seul le champ
   `AssetName` est réécrit quand un renommage est indispensable pour coexister — voir §6).
-* Cartes de référence tierces (Halcyon / EoS / « references ») exclues ; seules les planches
+* Cartes de référence tierces (projet de Palikadude / EoS / « references ») exclues ; seules les planches
   requises par des cartes de l'utilisateur sont embarquées (aucune dépendance à un autre mod :
   tout ce qui n'est pas dans le PMDO de base est copié dans `game/Content`).
 * `WaterfallVillageCapital` : intégrée telle quelle (233 727 831 o) — livrée compressée dans `payload/`
@@ -32,8 +32,8 @@ dans `docs/audit/assemble.py`) ; données brutes d'audit dans `docs/audit/*.json
 | `projet-creation-pmdo` racine `main` | `cliffnordouesttest1.rsground` canonique (blob 51e9dd3b), cartes café Spinda, `town02/` (copie), `town02_tiles_pack_*`. |
 | `projet-pmdo` `main` | `cliffdaytest.rsground` original sans entités (cd276dab), `cotes_v2_0812_pmdo.zip`, `cote_metano_v2_pmdo.zip`. |
 | `guilde-treehouse-pmd` (82 branches) | `renders/*/*_projet_pmdo_0812.zip` (13 paquets), `exports/*` (reverie_town_v1, forest_cave_*, cliffnordouesttest1_*), `base/` = copie des cartes PMDO, `source/*/references` = cartes tierces. Aucune cinématique propre. |
-| `town02` (`main`) | Quest « New Era » (namespace halcyon, 621 cartes) : `WaterfallVillageCapital.rsground` et `waterfall_cave_1.rsground` (Git LFS), 1 271 planches, musiques EoS (LFS). |
-| `Palikadude/Halcyon` | Modèle d'organisation : `Data/Ground/*.rsground` à plat, `Data/Zone/*.json + index.idx`, `Data/Script/ground/<carte>/init.lua`, `Data/Script/zone/<zone>/init.lua`, `Content/Tile/*.tile + index.idx`, `Content/BG|Object/*.dir`, `Data/StartParams.xml`. En 0.8.12 les scripts sont sous `Data/Script/<namespace>/…`. |
+| `town02` (`main`) | Quest « New Era » (namespace namespace amont, 621 cartes) : `WaterfallVillageCapital.rsground` et `waterfall_cave_1.rsground` (Git LFS), 1 271 planches, musiques EoS (LFS). |
+| `dépôt de Palikadude` | Modèle d'organisation : `Data/Ground/*.rsground` à plat, `Data/Zone/*.json + index.idx`, `Data/Script/ground/<carte>/init.lua`, `Data/Script/zone/<zone>/init.lua`, `Content/Tile/*.tile + index.idx`, `Content/BG|Object/*.dir`, `Data/StartParams.xml`. En 0.8.12 les scripts sont sous `Data/Script/<namespace>/…`. |
 
 Méthode : clones « blobless » de tous les dépôts, index de tous les blobs `.rsground/.tile/.dir`
 sur l'ensemble des commits (`docs/audit/rsground_index_all.json`, `tile_dir_index_all.json`),
@@ -272,7 +272,7 @@ Renommages (champ `AssetName` réécrit, reste du fichier identique) : `cliffday
 * **Grotte Météore** (`grotte_meteore_entree` 80c3cd80/9cb20154/ed349f6a, `grotte_meteore_arene` 09b24b06/5130a233/e25bb61d, `gme1_/gma1_tour_celeste`) : `.rsground` réels dans `renders/grotte_meteore_*/package`, mais leurs 10 planches `GME1_*`/`GMA1_*` sont des liens symboliques vers `.cache` (absents de git) → non intégrées.
 * **Placeholders** (blobs de 79–789 o = liens vers `.cache`) : `mer_houleuse_entree/sanctuaire`, `tour_celeste_relais`, `tour_du_temps_entree/pinacle`, `plage_pmd_sky_large`. (`rtc1_tour_celeste` = relais, intégrée.)
 * **Intérieurs générés « Metano Normal Home »** `metano_gen_{accueil,cafe,casino,salon_bas,salon_haut}` (4 blobs chacun : 3 versions 0×0 invalides, 1 version 100×75 de 65–139 planches tierces), `metano_reseau_*` (0×0), `treasure_gen_*` (planches `Treasure_*` absentes) : non intégrés (déjà exclus par le socle) ; blobs listés dans `docs/audit/candidates_manifest.json`.
-* **Cartes tierces** (références, exclusion décidée) : `guild_path_halcyon(_layers,_palika)`, `luminous_spring(_pmdo)`, `beach`, `altere_pond`, `crooked_cavern_entrance`, `guild_second_floor`, `ledian_dojo`, `treasure_cafe`, `vast_steppe_entrance`, `spinda_cafe`, `treasure_normal_home`.
+* **Cartes tierces** (références, exclusion décidée) : `guild_path_<référence>(_layers,_palika)`, `luminous_spring(_pmdo)`, `beach`, `altere_pond`, `crooked_cavern_entrance`, `guild_second_floor`, `ledian_dojo`, `treasure_cafe`, `vast_steppe_entrance`, `spinda_cafe`, `treasure_normal_home`.
 * **Versions intermédiaires du pack falaises nord centre** : 10 mods individuels (`MOD_01..10_*.zip`, planches `Cliff0N_Canon_*`, cartes plus petites) et 4 blobs git de `cliff_centre_01_*` (0f6d8019, 0f83a791, 02b6d687, 9ea06bef) : remplacés par le PACK consolidé (`CliffCentre10_Canon_*`).
 * **Variantes de `cliffnordouesttest1`** 4633c9ab, 84c80b74, 1737733c, 65c48168 (même grille, mêmes planches manquantes ; fonds `CLIFFNW_*` des exports gtp non récupérés car les cartes ne sont pas intégrées).
 * `cliffdaytest_2/_3/_4`, `cliffnordouesttest1_2/_3` : noms présents dans la zone du scénario, aucun fichier nulle part.

@@ -1,8 +1,8 @@
 -- Mégaévolution persistante et réversible à la Source de Destiny.
 -- La forme est changée avec Character:Promote (pas Transform, qui est temporaire).
 -- Les noms / identifiants proviennent de la ROM privée et des fiches fusionnées.
-local qi = require 'destiny.remixed_iq'
-local donnees = require 'destiny.remixed_mega_data'
+local qi = require 'destiny.qi'
+local donnees = require 'destiny.mega_data'
 local M = {}
 
 local function contient(tab, val)

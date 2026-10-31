@@ -1798,8 +1798,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emboarger/N-A",
-      "type_remixed_public": "Grass/Poison",
-      "talents_remixed_public": "Thick Fat/Chlorophyll",
+      "type_source_public": "Grass/Poison",
+      "talents_source_public": "Thick Fat/Chlorophyll",
       "male": {
         "md_id": 201,
         "sprite": 779,
@@ -1820,8 +1820,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emboarger/Kevin0itachi",
-      "type_remixed_public": "Fire/Dragon",
-      "talents_remixed_public": "Drought/Solar Power",
+      "type_source_public": "Fire/Dragon",
+      "talents_source_public": "Drought/Solar Power",
       "male": {
         "md_id": 202,
         "sprite": 776,
@@ -1842,8 +1842,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/N-A",
-      "type_remixed_public": "Water/Steel",
-      "talents_remixed_public": "Swift Swim/Rain Dish",
+      "type_source_public": "Water/Steel",
+      "talents_source_public": "Swift Swim/Rain Dish",
       "male": {
         "md_id": 203,
         "sprite": 781,
@@ -1864,8 +1864,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emboarger/SilverDeoxys563",
-      "type_remixed_public": "Bug/Poison",
-      "talents_remixed_public": "Adaptability/Sniper",
+      "type_source_public": "Bug/Poison",
+      "talents_source_public": "Adaptability/Sniper",
       "male": {
         "md_id": 1686,
         "sprite": 949,
@@ -1886,8 +1886,8 @@
       "forme": 2,
       "nouvelle_forme": true,
       "credit_public": "Deeshura/",
-      "type_remixed_public": "Electric/Fighting",
-      "talents_remixed_public": "Static/Galvanize",
+      "type_source_public": "Electric/Fighting",
+      "talents_source_public": "Static/Galvanize",
       "male": {
         "md_id": 172,
         "sprite": 187,
@@ -1908,8 +1908,8 @@
       "forme": 3,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin/",
-      "type_remixed_public": "Electric/Fairy",
-      "talents_remixed_public": "Hydration/LightningRod",
+      "type_source_public": "Electric/Fairy",
+      "talents_source_public": "Hydration/LightningRod",
       "male": {
         "md_id": 278,
         "sprite": 22,
@@ -1930,8 +1930,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/Emmuffin",
-      "type_remixed_public": "Ghost/Poison",
-      "talents_remixed_public": "Cursed Body/Shadow Tag",
+      "type_source_public": "Ghost/Poison",
+      "talents_source_public": "Cursed Body/Shadow Tag",
       "male": {
         "md_id": 402,
         "sprite": 576,
@@ -1952,8 +1952,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/N-A",
-      "type_remixed_public": "Water/Dark",
-      "talents_remixed_public": "Mold Breaker/Moxie",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Mold Breaker/Moxie",
       "male": {
         "md_id": 398,
         "sprite": 571,
@@ -1974,8 +1974,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Water/Poison",
-      "talents_remixed_public": "Water Absorb/Poison Point",
+      "type_source_public": "Water/Poison",
+      "talents_source_public": "Water Absorb/Poison Point",
       "male": {
         "md_id": 1339,
         "sprite": 691,
@@ -1996,8 +1996,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Electric/Bug",
-      "talents_remixed_public": "Volt Absorb/CompoundEyes",
+      "type_source_public": "Electric/Bug",
+      "talents_source_public": "Volt Absorb/CompoundEyes",
       "male": {
         "md_id": 1341,
         "sprite": 692,
@@ -2018,8 +2018,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Fire/Ghost",
-      "talents_remixed_public": "Flash Fire/White Smoke",
+      "type_source_public": "Fire/Ghost",
+      "talents_source_public": "Flash Fire/White Smoke",
       "male": {
         "md_id": 1343,
         "sprite": 693,
@@ -2040,8 +2040,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/Caitemis",
-      "type_remixed_public": "Rock/Flying",
-      "talents_remixed_public": "Rock Head/Speed Boost",
+      "type_source_public": "Rock/Flying",
+      "talents_source_public": "Rock Head/Speed Boost",
       "male": {
         "md_id": 473,
         "sprite": 370,
@@ -2062,8 +2062,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Garbage, NOLASMOR/Crazy_Dragon, Deeshura",
-      "type_remixed_public": "Dragon/Flying",
-      "talents_remixed_public": "Filter/Marvel Scale",
+      "type_source_public": "Dragon/Flying",
+      "talents_source_public": "Filter/Marvel Scale",
       "male": {
         "md_id": 339,
         "sprite": 1084,
@@ -2084,8 +2084,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin",
-      "type_remixed_public": "Grass/Fairy",
-      "talents_remixed_public": "Drought/Heatproof",
+      "type_source_public": "Grass/Fairy",
+      "talents_source_public": "Drought/Heatproof",
       "male": {
         "md_id": 219,
         "sprite": 784,
@@ -2106,8 +2106,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "N/A/Delta L, pi",
-      "type_remixed_public": "Water/Dragon",
-      "talents_remixed_public": "Dragonize/Sheer Force",
+      "type_source_public": "Water/Dragon",
+      "talents_source_public": "Dragonize/Sheer Force",
       "male": {
         "md_id": 223,
         "sprite": 787,
@@ -2128,8 +2128,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Psychic/Fighting",
-      "talents_remixed_public": "Magic Bounce/Competitive",
+      "type_source_public": "Psychic/Fighting",
+      "talents_source_public": "Magic Bounce/Competitive",
       "male": {
         "md_id": 1345,
         "sprite": 694,
@@ -2150,8 +2150,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Dark/Steel",
-      "talents_remixed_public": "Inner Focus/Prankster",
+      "type_source_public": "Dark/Steel",
+      "talents_source_public": "Inner Focus/Prankster",
       "male": {
         "md_id": 1347,
         "sprite": 695,
@@ -2172,8 +2172,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Ichor/baronessfaron",
-      "type_remixed_public": "Steel/Ground",
-      "talents_remixed_public": "Sand Rush/Sheer Force",
+      "type_source_public": "Steel/Ground",
+      "talents_source_public": "Sand Rush/Sheer Force",
       "male": {
         "md_id": 118,
         "sprite": 128,
@@ -2194,8 +2194,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/N-A",
-      "type_remixed_public": "Bug/Steel",
-      "talents_remixed_public": "Unburden/Technician",
+      "type_source_public": "Bug/Steel",
+      "talents_source_public": "Unburden/Technician",
       "male": {
         "md_id": 210,
         "sprite": 229,
@@ -2216,8 +2216,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/N-A",
-      "type_remixed_public": "Bug/Fighting",
-      "talents_remixed_public": "Skill Link/Guts",
+      "type_source_public": "Bug/Fighting",
+      "talents_source_public": "Skill Link/Guts",
       "male": {
         "md_id": 436,
         "sprite": 319,
@@ -2238,8 +2238,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Sonikku_A/Johanne2",
-      "type_remixed_public": "Steel/Flying",
-      "talents_remixed_public": "Aerilate/Sturdy",
+      "type_source_public": "Steel/Flying",
+      "talents_source_public": "Aerilate/Sturdy",
       "male": {
         "md_id": 363,
         "sprite": 532,
@@ -2260,8 +2260,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Top_Kec/Top_Kec",
-      "type_remixed_public": "Dark/Fire",
-      "talents_remixed_public": "Early Bird/Solar Power",
+      "type_source_public": "Dark/Fire",
+      "talents_source_public": "Early Bird/Solar Power",
       "male": {
         "md_id": 1794,
         "sprite": 878,
@@ -2282,8 +2282,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "0palite/Emmuffin",
-      "type_remixed_public": "Grass/Dragon",
-      "talents_remixed_public": "LightningRod/Unburden",
+      "type_source_public": "Grass/Dragon",
+      "talents_source_public": "LightningRod/Unburden",
       "male": {
         "md_id": 212,
         "sprite": 1079,
@@ -2304,8 +2304,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Sugi/N-A",
-      "type_remixed_public": "Fire/Fighting",
-      "talents_remixed_public": "Iron Fist/Speed Boost",
+      "type_source_public": "Fire/Fighting",
+      "talents_source_public": "Iron Fist/Speed Boost",
       "male": {
         "md_id": 213,
         "sprite": 841,
@@ -2326,8 +2326,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/N-A",
-      "type_remixed_public": "Water/Ground",
-      "talents_remixed_public": "Swift Swim/Damp",
+      "type_source_public": "Water/Ground",
+      "talents_source_public": "Swift Swim/Damp",
       "male": {
         "md_id": 214,
         "sprite": 842,
@@ -2348,8 +2348,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/baronessfaron",
-      "type_remixed_public": "Psychic/Fairy",
-      "talents_remixed_public": "Pixilate/Trace",
+      "type_source_public": "Psychic/Fairy",
+      "talents_source_public": "Pixilate/Trace",
       "male": {
         "md_id": 215,
         "sprite": 846,
@@ -2370,8 +2370,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Ichor, NOLASMOR/Emmuffin",
-      "type_remixed_public": "Dark/Ghost",
-      "talents_remixed_public": "Prankster/Magic Bounce",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Prankster/Magic Bounce",
       "male": {
         "md_id": 119,
         "sprite": 129,
@@ -2392,8 +2392,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/N-A",
-      "type_remixed_public": "Steel/Fairy",
-      "talents_remixed_public": "Huge Power/Intimidate",
+      "type_source_public": "Steel/Fairy",
+      "talents_source_public": "Huge Power/Intimidate",
       "male": {
         "md_id": 1796,
         "sprite": 877,
@@ -2414,8 +2414,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/Top_Kec",
-      "type_remixed_public": "Electric/Steel",
-      "talents_remixed_public": "Intimidate/LightningRod",
+      "type_source_public": "Electric/Steel",
+      "talents_source_public": "Intimidate/LightningRod",
       "male": {
         "md_id": 1692,
         "sprite": 946,
@@ -2436,8 +2436,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/baronessfaron",
-      "type_remixed_public": "Water/Dark",
-      "talents_remixed_public": "Rough Skin/Sheer Force",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Rough Skin/Sheer Force",
       "male": {
         "md_id": 1383,
         "sprite": 712,
@@ -2458,8 +2458,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/Caitemis",
-      "type_remixed_public": "Fire/Ground",
-      "talents_remixed_public": "Sheer Force/Solid Rock",
+      "type_source_public": "Fire/Ground",
+      "talents_source_public": "Sheer Force/Solid Rock",
       "male": {
         "md_id": 1385,
         "sprite": 713,
@@ -2480,8 +2480,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Ichor, Emmuffin, ◥θ┴θ◤/N-A",
-      "type_remixed_public": "Dragon/Fairy",
-      "talents_remixed_public": "Natural Cure/Magic Guard",
+      "type_source_public": "Dragon/Fairy",
+      "talents_source_public": "Natural Cure/Magic Guard",
       "male": {
         "md_id": 1770,
         "sprite": 843,
@@ -2502,8 +2502,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "chime, baronessfaron/baronessfaron",
-      "type_remixed_public": "Ghost/Dark",
-      "talents_remixed_public": "Prankster/Cursed Body",
+      "type_source_public": "Ghost/Dark",
+      "talents_source_public": "Prankster/Cursed Body",
       "male": {
         "md_id": 1768,
         "sprite": 891,
@@ -2524,8 +2524,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/Emboarger",
-      "type_remixed_public": "Dark/Fairy",
-      "talents_remixed_public": "Super Luck/Magic Bounce",
+      "type_source_public": "Dark/Fairy",
+      "talents_source_public": "Super Luck/Magic Bounce",
       "male": {
         "md_id": 1308,
         "sprite": 689,
@@ -2546,8 +2546,8 @@
       "forme": 2,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin/",
-      "type_remixed_public": "Dark/Ghost",
-      "talents_remixed_public": "Super Luck/Defiant",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Super Luck/Defiant",
       "male": {
         "md_id": 128,
         "sprite": 138,
@@ -2568,8 +2568,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/baronessfaron",
-      "type_remixed_public": "Ice/Dark",
-      "talents_remixed_public": "Refrigerate/Slush Rush",
+      "type_source_public": "Ice/Dark",
+      "talents_source_public": "Refrigerate/Slush Rush",
       "male": {
         "md_id": 389,
         "sprite": 844,
@@ -2590,8 +2590,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/N-A",
-      "type_remixed_public": "Steel/Psychic",
-      "talents_remixed_public": "Levitate/Iron Fist",
+      "type_source_public": "Steel/Psychic",
+      "talents_source_public": "Levitate/Iron Fist",
       "male": {
         "md_id": 218,
         "sprite": 686,
@@ -2612,8 +2612,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Top_Kec/Top_Kec",
-      "type_remixed_public": "Dragon/Flying",
-      "talents_remixed_public": "Air Lock/Adaptability",
+      "type_source_public": "Dragon/Flying",
+      "talents_source_public": "Air Lock/Adaptability",
       "male": {
         "md_id": 451,
         "sprite": 330,
@@ -2634,8 +2634,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "baronessfaron/JFain",
-      "type_remixed_public": "Normal/Fighting",
-      "talents_remixed_public": "Cute Charm/Scrappy",
+      "type_source_public": "Normal/Fighting",
+      "talents_source_public": "Cute Charm/Scrappy",
       "male": {
         "md_id": 1732,
         "sprite": 852,
@@ -2656,8 +2656,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Caitemis/baronessfaron",
-      "type_remixed_public": "Fighting/Steel",
-      "talents_remixed_public": "Steadfast/Adaptability",
+      "type_source_public": "Fighting/Steel",
+      "talents_source_public": "Steadfast/Adaptability",
       "male": {
         "md_id": 1858,
         "sprite": 853,
@@ -2678,8 +2678,8 @@
       "forme": 2,
       "nouvelle_forme": true,
       "credit_public": "Deeshura/",
-      "type_remixed_public": "Fighting/Ghost",
-      "talents_remixed_public": "Steadfast/Iron Fist",
+      "type_source_public": "Fighting/Ghost",
+      "talents_source_public": "Steadfast/Iron Fist",
       "male": {
         "md_id": 1012,
         "sprite": 1087,
@@ -2700,8 +2700,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Grass/Rock",
-      "talents_remixed_public": "Leaf Guard/Solid Rock",
+      "type_source_public": "Grass/Rock",
+      "talents_source_public": "Leaf Guard/Solid Rock",
       "male": {
         "md_id": 1349,
         "sprite": 696,
@@ -2722,8 +2722,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Ice/Ground",
-      "talents_remixed_public": "Snow Cloak/Sand Veil",
+      "type_source_public": "Ice/Ground",
+      "talents_source_public": "Snow Cloak/Sand Veil",
       "male": {
         "md_id": 1138,
         "sprite": 670,
@@ -2744,8 +2744,8 @@
       "forme": 1,
       "nouvelle_forme": false,
       "credit_public": "Emmuffin/JFain",
-      "type_remixed_public": "Psychic/Fighting",
-      "talents_remixed_public": "Steadfast/Defiant",
+      "type_source_public": "Psychic/Fighting",
+      "talents_source_public": "Steadfast/Defiant",
       "male": {
         "md_id": 220,
         "sprite": 421,
@@ -2766,8 +2766,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin/N-A",
-      "type_remixed_public": "Ice/Ghost",
-      "talents_remixed_public": "Snow Cloak/Snow Warning",
+      "type_source_public": "Ice/Ghost",
+      "talents_source_public": "Snow Cloak/Snow Warning",
       "male": {
         "md_id": 204,
         "sprite": 850,
@@ -2788,8 +2788,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Deeshura/Chi, baronessfaron",
-      "type_remixed_public": "Dark/Ghost",
-      "talents_remixed_public": "Bad Dreams/Shadow Tag",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Bad Dreams/Shadow Tag",
       "male": {
         "md_id": 1620,
         "sprite": 1026,
@@ -2810,8 +2810,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Garbage/NeroIntruder, Emboarger",
-      "type_remixed_public": "Fire/Fighting",
-      "talents_remixed_public": "Rock Head/Reckless",
+      "type_source_public": "Fire/Fighting",
+      "talents_source_public": "Rock Head/Reckless",
       "male": {
         "md_id": 460,
         "sprite": 337,
@@ -2832,8 +2832,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin/baronessfaron",
-      "type_remixed_public": "Ghost/Fire",
-      "talents_remixed_public": "Infiltrator/Flame Body",
+      "type_source_public": "Ghost/Fire",
+      "talents_source_public": "Infiltrator/Flame Body",
       "male": {
         "md_id": 461,
         "sprite": 338,
@@ -2854,8 +2854,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "baronessfaron/baronessfaron",
-      "type_remixed_public": "Ground/Ghost",
-      "talents_remixed_public": "Iron Fist/Simple",
+      "type_source_public": "Ground/Ghost",
+      "talents_source_public": "Iron Fist/Simple",
       "male": {
         "md_id": 1618,
         "sprite": 856,
@@ -2876,8 +2876,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Soulja/Soulja",
-      "type_remixed_public": "Grass/Fighting",
-      "talents_remixed_public": "Thick Fat/Battle Armor",
+      "type_source_public": "Grass/Fighting",
+      "talents_source_public": "Thick Fat/Battle Armor",
       "male": {
         "md_id": 217,
         "sprite": 858,
@@ -2898,8 +2898,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Top_Kec/",
-      "type_remixed_public": "Fire/Psychic",
-      "talents_remixed_public": "Levitate/Magic Guard",
+      "type_source_public": "Fire/Psychic",
+      "talents_source_public": "Levitate/Magic Guard",
       "male": {
         "md_id": 211,
         "sprite": 859,
@@ -2920,8 +2920,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin/",
-      "type_remixed_public": "Water/Dark",
-      "talents_remixed_public": "Poison Heal/Protean",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Poison Heal/Protean",
       "male": {
         "md_id": 216,
         "sprite": 908,
@@ -2942,8 +2942,8 @@
       "forme": 2,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin, NeroIntruder, JFain/NeroIntruder, Garbage",
-      "type_remixed_public": "Psychic",
-      "talents_remixed_public": "Trace/Prankster",
+      "type_source_public": "Psychic",
+      "talents_source_public": "Trace/Prankster",
       "male": {
         "md_id": 1150,
         "sprite": 1130,
@@ -2964,8 +2964,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Gala1D",
-      "type_remixed_public": "Fairy/Flying",
-      "talents_remixed_public": "Pixilate/Filter",
+      "type_source_public": "Fairy/Flying",
+      "talents_source_public": "Pixilate/Filter",
       "male": {
         "md_id": 1351,
         "sprite": 697,
@@ -2986,8 +2986,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Soulja, G~",
-      "type_remixed_public": "Bug/Steel",
-      "talents_remixed_public": "Sheer Force/Shell Armor",
+      "type_source_public": "Bug/Steel",
+      "talents_source_public": "Sheer Force/Shell Armor",
       "male": {
         "md_id": 474,
         "sprite": 371,
@@ -3008,8 +3008,8 @@
       "forme": 1,
       "nouvelle_forme": true,
       "credit_public": "Emmuffin, Delta L, pi",
-      "type_remixed_public": "Electric",
-      "talents_remixed_public": "Speed Boost/Iron Fist",
+      "type_source_public": "Electric",
+      "talents_source_public": "Speed Boost/Iron Fist",
       "male": {
         "md_id": 1148,
         "sprite": 1129,
@@ -3027,49 +3027,49 @@
       "mega": "Mega Raichu X",
       "forme": 2,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Raichu Y",
       "forme": 3,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Vaporeon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Jolteon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Flareon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Dragonite",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Meganium",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Feraligatr",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Feraligatr",
@@ -3081,25 +3081,25 @@
       "mega": "Mega Espeon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Umbreon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Skarmory",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Absol Z",
       "forme": 2,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Metagross",
@@ -3117,31 +3117,31 @@
       "mega": "Mega Lucario Z",
       "forme": 2,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Leafeon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Glaceon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Froslass",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Darkrai",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Darkrai",
@@ -3153,19 +3153,19 @@
       "mega": "Mega Emboar",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Chandelure",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Golurk",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Golurk",
@@ -3177,43 +3177,43 @@
       "mega": "Mega Chesnaught",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Delphox",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Greninja",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Meowstic",
       "forme": 2,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Sylveon",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Golisopod",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Zeraora",
       "forme": 1,
       "nature": "statistiques provisoires",
-      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes Remixed ne sont pas directement portables."
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
     },
     {
       "mega": "Mega Zeraora",

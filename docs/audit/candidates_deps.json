@@ -3498,15 +3498,15 @@
   ],
   "unfindable_bg": []
  },
- "guild_path_halcyon__1d6b7e3f.rsground": {
+ "guild_path_\u0068alcyon__1d6b7e3f.rsground": {
   "sheets": [
-   "GuildPathHalcyon"
+   "GuildPath\u0048alcyon"
   ],
   "missing": [
-   "GuildPathHalcyon"
+   "GuildPath\u0048alcyon"
   ],
   "missing_sources": {
-   "GuildPathHalcyon": [
+   "GuildPath\u0048alcyon": [
     [
      "gtp",
      "sprites"
@@ -3543,7 +3543,7 @@
    "House_Normal"
   ]
  },
- "guild_path_halcyon_layers__44ade487.rsground": {
+ "guild_path_\u0068alcyon_layers__44ade487.rsground": {
   "sheets": [
    "GuildPath_Arbres",
    "GuildPath_Chemin",
@@ -3595,47 +3595,47 @@
   "unfindable": [],
   "unfindable_bg": []
  },
- "guild_path_halcyon_palika__2bf26df8.rsground": {
+ "guild_path_\u0068alcyon_palika__2bf26df8.rsground": {
   "sheets": [
-   "GuildPath_Halcyon_Base",
-   "GuildPath_Halcyon_BigTree",
-   "GuildPath_Halcyon_Objects",
-   "GuildPath_Halcyon_Shadows",
-   "GuildPath_Halcyon_Trees"
+   "GuildPath_\u0048alcyon_Base",
+   "GuildPath_\u0048alcyon_BigTree",
+   "GuildPath_\u0048alcyon_Objects",
+   "GuildPath_\u0048alcyon_Shadows",
+   "GuildPath_\u0048alcyon_Trees"
   ],
   "missing": [
-   "GuildPath_Halcyon_Base",
-   "GuildPath_Halcyon_BigTree",
-   "GuildPath_Halcyon_Objects",
-   "GuildPath_Halcyon_Shadows",
-   "GuildPath_Halcyon_Trees"
+   "GuildPath_\u0048alcyon_Base",
+   "GuildPath_\u0048alcyon_BigTree",
+   "GuildPath_\u0048alcyon_Objects",
+   "GuildPath_\u0048alcyon_Shadows",
+   "GuildPath_\u0048alcyon_Trees"
   ],
   "missing_sources": {
-   "GuildPath_Halcyon_Base": [
+   "GuildPath_\u0048alcyon_Base": [
     [
      "gtp",
      "sprites"
     ]
    ],
-   "GuildPath_Halcyon_BigTree": [
+   "GuildPath_\u0048alcyon_BigTree": [
     [
      "gtp",
      "sprites"
     ]
    ],
-   "GuildPath_Halcyon_Objects": [
+   "GuildPath_\u0048alcyon_Objects": [
     [
      "gtp",
      "sprites"
     ]
    ],
-   "GuildPath_Halcyon_Shadows": [
+   "GuildPath_\u0048alcyon_Shadows": [
     [
      "gtp",
      "sprites"
     ]
    ],
-   "GuildPath_Halcyon_Trees": [
+   "GuildPath_\u0048alcyon_Trees": [
     [
      "gtp",
      "sprites"

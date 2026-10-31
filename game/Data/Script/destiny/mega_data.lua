@@ -1,4 +1,4 @@
--- 56 formes relevées dans la ROM privée Remixed 2.3.28 (condition QI 410).
+-- 56 formes relevées dans la ROM privée source 2.3.28 (condition QI 410).
 -- Numéros de formes Destiny vérifiés contre les fiches et conteneurs fusionnés.
 -- Les sprites et statistiques ont les réserves détaillées dans docs/.
 return {

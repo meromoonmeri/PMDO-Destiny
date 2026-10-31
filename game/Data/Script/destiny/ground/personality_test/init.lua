@@ -12,13 +12,13 @@
        partenaire sur cliffdaytest (version nuit) → donjon Lost Wood
        (7 étages) → clairière du réveil (reveil_nuit).
      Données : questions et recommandations dans quiz_data.lua ; 85 choix
-     Remixed dans remixed_starters.lua, plus les choix Destiny sans doublon.
+     source dans starters_source.lua, plus les choix Destiny sans doublon.
 ]]
 
 require 'origin.common'
 
 local quiz_data = require 'destiny.ground.personality_test.quiz_data'
-local remixed_starters = require 'destiny.ground.personality_test.remixed_starters'
+local starters_source = require 'destiny.ground.personality_test.starters_source'
 
 local personality_test = {}
 
@@ -76,7 +76,7 @@ local function choisir_talent(espece, forme)
   return talent
 end
 
--- Réunit les choix Remixed et ceux du quiz préexistant. La clé comprend la
+-- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
 -- forme : un Goupix d'Alola n'est pas confondu avec celui de Kanto.
 local function construire_pool(espece_exclue)
   local pool, deja_vu = {}, {}
@@ -87,7 +87,7 @@ local function construire_pool(espece_exclue)
       table.insert(pool, s)
     end
   end
-  for _, s in ipairs(remixed_starters.starters) do ajouter(s) end
+  for _, s in ipairs(starters_source.starters) do ajouter(s) end
   for _, s in pairs(quiz_data.starters) do ajouter(s) end
   table.sort(pool, function(a, b)
     if a.gen ~= b.gen then return a.gen < b.gen end
@@ -203,7 +203,7 @@ function personality_test.Quiz()
   if not UI:ChoiceResult() then
     starter = choisir_dans_pool(pool_heros, "Choisis ton héros")
   else
-    -- Réutilise l'entrée complète Remixed correspondant à la recommandation.
+    -- Réutilise l'entrée complète source correspondant à la recommandation.
     for _, s in ipairs(pool_heros) do
       if s.espece == starter.espece and s.forme == starter.forme then starter = s; break end
     end
@@ -227,7 +227,7 @@ function personality_test.Quiz()
   -- création du héros (niveau 5, talent choisi)
   local mon_id = RogueEssence.Dungeon.MonsterID(starter.espece, starter.forme, 'normal', genre)
   -- "none" est le rang initial de Destiny (StartParams.xml) ; "unranked"
-  -- est un identifiant de Halcyon absent des données de cette Quest.
+  -- est un identifiant de projet de Palikadude absent des données de cette Quest.
   _DATA.Save.ActiveTeam:SetRank("none")
   _DATA.Save.ActiveTeam.Money = 0
   _DATA.Save.NoSwitching = true

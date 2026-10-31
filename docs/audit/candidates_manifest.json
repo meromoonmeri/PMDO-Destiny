@@ -663,33 +663,33 @@
   "bytes": 5423203
  },
  {
-  "name": "guild_path_halcyon",
+  "name": "guild_path_\u0068alcyon",
   "repo": "gtp",
   "oid": "1d6b7e3f9d7ac63f85e592dc51397f293a7b37f1",
   "paths": [
-   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon.rsground"
+   "sprites/sentier_guilde_\u0068alcyon_pmdo/guild_path_\u0068alcyon.rsground"
   ],
-  "file": "stage/candidates/guild_path_halcyon__1d6b7e3f.rsground",
+  "file": "stage/candidates/guild_path_\u0068alcyon__1d6b7e3f.rsground",
   "bytes": 1078540
  },
  {
-  "name": "guild_path_halcyon_layers",
+  "name": "guild_path_\u0068alcyon_layers",
   "repo": "gtp",
   "oid": "44ade487df64221cd8a551aff12f408980a5c732",
   "paths": [
-   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon_layers.rsground"
+   "sprites/sentier_guilde_\u0068alcyon_pmdo/guild_path_\u0068alcyon_layers.rsground"
   ],
-  "file": "stage/candidates/guild_path_halcyon_layers__44ade487.rsground",
+  "file": "stage/candidates/guild_path_\u0068alcyon_layers__44ade487.rsground",
   "bytes": 951250
  },
  {
-  "name": "guild_path_halcyon_palika",
+  "name": "guild_path_\u0068alcyon_palika",
   "repo": "gtp",
   "oid": "2bf26df82c72427f3c4abe9039cd80ab583e097e",
   "paths": [
-   "sprites/sentier_guilde_halcyon_pmdo/guild_path_halcyon_palika.rsground"
+   "sprites/sentier_guilde_\u0068alcyon_pmdo/guild_path_\u0068alcyon_palika.rsground"
   ],
-  "file": "stage/candidates/guild_path_halcyon_palika__2bf26df8.rsground",
+  "file": "stage/candidates/guild_path_\u0068alcyon_palika__2bf26df8.rsground",
   "bytes": 1035248
  },
  {

@@ -190,7 +190,7 @@ shutil.copy2(S / 'Data/Script/ground/personality_test/quiz_data.lua', SCRIPT / '
 (SCRIPT / 'ground/cliffdaytest_nuit/init.lua').write_text(scripts_fixed['cliffdaytest_nuit'], encoding='utf-8')
 # variante nocturne de la cinématique Dazzling conservée telle quelle (non chargée automatiquement)
 C = W / 'stage/cutscene/mod_pmdo'
-daz_nuit = (C / 'Data/Script/halcyon/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
+daz_nuit = (C / 'Data/Script/\u0068alcyon/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
 (SCRIPT / 'ground/cliffdaytest_nuit/cinematique_dazzling_nuit.lua').write_text(
     "-- Variante nocturne originale de la cinématique « Pichu × Team Dazzling »\n"
     "-- (MOD_CUTSCENE_PICHU_DAZZLING_PMDO.zip, branche arena/e39626d2). Conservée intacte ;\n"
@@ -198,7 +198,7 @@ daz_nuit = (C / 'Data/Script/halcyon/ground/cliffdaytest_nuit/init.lua').read_te
     "-- Pour la rejouer : remplacer init.lua par ce fichier (et require 'origin.common').\n" + daz_nuit, encoding='utf-8')
 
 # ================================================================ 2. CINÉMATIQUE DAZZLING (cliffdaytest, jour)
-daz = (C / 'Data/Script/halcyon/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
+daz = (C / 'Data/Script/\u0068alcyon/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
 daz = fix_script(daz, [COMMON_FIX])
 (SCRIPT / 'ground/cliffdaytest').mkdir(parents=True, exist_ok=True)
 (SCRIPT / 'ground/cliffdaytest/init.lua').write_text(daz, encoding='utf-8')

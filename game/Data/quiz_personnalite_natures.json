@@ -2,7 +2,7 @@
  "Version": "0.8.12.0",
  "Object": {
   "$type": "RogueEssence.Data.DataType, RogueEssence",
-  "Comment": "Quiz de personnalité — 16 natures (ordre = STARTERS_HERO_IDS de PMD Explorers of Sky, pret/pmd-sky overlay_13). Le ruban d'aura est remplacé par le badge étoile de l'opening (Content/UI/quiz_badges), coloré selon la nature conclue. Questions/résultats PMD Remixed à venir.",
+  "Comment": "Quiz de personnalité — 16 natures (ordre = STARTERS_HERO_IDS de PMD Explorers of Sky, pret/pmd-sky overlay_13). Le ruban d'aura est remplacé par le badge étoile de l'opening (Content/UI/quiz_badges), coloré selon la nature conclue. Questions/résultats PMD source à venir.",
   "Natures": [
    {
     "Index": 0,

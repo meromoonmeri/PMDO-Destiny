@@ -1,6 +1,6 @@
 -- Service importe dans la quest Destiny (27/10/2026) depuis l'atelier
 -- meromoonmeri/projet-creation-pmdo @ 24c84f4 (branche arena/637b0828-projet-creation-pmdo),
--- chemin renders/pmd_destiny_fangame_v1/fangame_base/Data/Script/halcyon/services/destiny_title_anim/init.lua.
+-- chemin renders/pmd_destiny_fangame_v1/fangame_base/Data/Script/<namespace-amont>/services/destiny_title_anim/init.lua.
 -- Code inchange ; seul l'en-tete a ete ajoute. Les require 'origin.*' sont fournis par
 -- les scripts de la base PMDO (base/Data/Script/origin). Enregistre via destiny/main.lua.
 -- Voir docs/MENU_TITRE.md.

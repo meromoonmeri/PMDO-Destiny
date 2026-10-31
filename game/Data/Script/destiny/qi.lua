@@ -1,7 +1,7 @@
 -- QI individuel pour les Mégaévolutions de Destiny.
 -- Le stockage est propre à chaque Character (LuaData sérialisé par PMDO).
 -- Les gains reprennent la formule documentée d'Explorers of Sky ; leur
--- identité exacte avec Remixed 2.3.28 reste à confirmer dans la ROM.
+-- identité exacte avec source 2.3.28 reste à confirmer dans la ROM.
 local M = {}
 M.SEUIL_MEGA = 410
 M.MAX_QI = 999

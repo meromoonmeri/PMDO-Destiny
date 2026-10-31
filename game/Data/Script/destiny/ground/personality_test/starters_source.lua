@@ -1,4 +1,4 @@
--- Les 85 choix de la ROM privée Explorers Remixed 2.3.28.
+-- Les 85 choix de la ROM privée version Explorers 2.3.28 2.3.28.
 -- Miaouss, préexistant dans Destiny, est ajouté par init.lua, sans doublon.
 -- Les talents et graphiques sont cherchés par espèce + forme dans les données PMDO.
 local M = {}

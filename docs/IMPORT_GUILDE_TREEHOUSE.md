@@ -96,17 +96,17 @@ donjon qui l'utilise** : fichier inerte tant qu'aucune zone ne le référence.
   conformément à l'exclusion ferme du projet.
 - **Références embarquées dans certains packs** : `altere_pond.rsground` et
   `vast_steppe_entrance.rsground`, identifiées par sha256 comme les copies de
-  référence Halcyon → exclues.
-- **Fichiers non chargeables** : `guild_path_halcyon_layers` et
-  `guild_path_halcyon_palika` (JSON sans enveloppe `{Version, Object}`,
+  référence projet de Palikadude → exclues.
+- **Fichiers non chargeables** : `guild_path_<référence>_layers` et
+  `guild_path_<référence>_palika` (JSON sans enveloppe `{Version, Object}`,
   `TexSize=24` brut) ; `plage_pmd_sky_large.rsground` (descripteur JSON de
   789 o, pas un `GroundMap`).
-- Crédits détaillés (Halcyon/Palika et mention « Reverie Town
+- Crédits détaillés (projet de Palikadude/Palika et mention « Reverie Town
   (waterfallvillagecapital) » de l'auteur, filtre Abyss, DumpAsset, cellules
   DTEF, SpriteCollab) : voir [`CREDITS.md`](../CREDITS.md).
 
 **Point d'attention tuiles** : la matière « Métano » provient des planches
-`Metano_Town_*` / `Vast_Steppe_*` transitant par Halcyon (aucune licence
+`Metano_Town_*` / `Vast_Steppe_*` transitant par projet de Palikadude (aucune licence
 publique trouvée) — accord de Palika à confirmer avant redistribution.
 
 ## 6. Dépendances non résolues (5)

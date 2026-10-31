@@ -1,4 +1,4 @@
-local qi = require 'destiny.remixed_iq'
+local qi = require 'destiny.qi'
 
 -- Ajouté après l'effet natif des gelées : l'effet d'origine n'est pas écrasé.
 function BATTLE_SCRIPT.DestinyGeleeQI(owner, ownerChar, context, args)
