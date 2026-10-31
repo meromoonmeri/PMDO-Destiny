@@ -5,15 +5,24 @@
      explorateurs, porter secours, découvrir des lieux et trouver des trésors.
      Retour : à la fin de cette discussion, ils retraversent Lost Wood ensemble.
      Échec du retour : bref rappel, puis nouvelle tentative en duo.
-     Textes originaux PMD Destiny. Honnêteté : runtime_tested false.
+     Textes originaux PMD Destiny. Transitions et cadrage testés sur un banc
+     moteur avec sorties forcées ; parcours complet des étages non testé.
 ]]
 
 require 'origin.common'
+local equipe_scene = require 'destiny.equipe_scene'
 
 local reveil_nuit = {}
 
 function reveil_nuit.Init(map)
-  COMMON.RespawnAllies()
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.LostWoodTrip == 'rencontre' then
+    equipe_scene.RestaurerHeros()
+  end
+  local hero = CH('PLAYER')
+  if hero ~= nil then
+    equipe_scene.Partenaire(hero.Position.X + 24, hero.Position.Y, Direction.Down)
+  end
 end
 
 function reveil_nuit.Enter(map)
@@ -49,15 +58,30 @@ function reveil_nuit.PlotScripting()
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.RetrouvaillesFaites then
     if SV.Destiny.LostWoodTrip == 'retour' and SV.Destiny.LostWoodRetourEchec then
-      local partner = CH('Teammate1')
+      local hero, partner = CH('PLAYER'), CH('Teammate1')
+      if hero == nil or partner == nil then
+        GAME:FadeIn(20)
+        print('[Destiny] Retour à deux impossible : membre de l’équipe absent.')
+        return
+      end
+      local point = MRKR('ScenicOverlook')
       GAME:CutsceneMode(true)
+      GROUND:TeleportTo(hero, point.Position.X - 20, point.Position.Y, Direction.Up)
+      GROUND:TeleportTo(partner, point.Position.X, point.Position.Y, Direction.Up)
+      GAME:MoveCamera(point.Position.X, point.Position.Y, 1, false)
+      GAME:FadeIn(30)
       UI:SetSpeaker(partner)
       UI:SetSpeakerEmotion("Worried")
       UI:WaitShowDialogue("Le sentier nous a repoussés cette fois. On reprend notre souffle… puis on repart ensemble.")
       UI:SetSpeakerEmotion("Happy")
-      UI:WaitShowDialogue("Nous savons maintenant comment nous aider. Lost Wood ne nous séparera pas.")
+      UI:WaitShowDialogue("Nous savons maintenant comment nous aider. [color=#69D98C]Lost Wood[color] ne nous séparera pas.")
       lancer_retour()
     end
+    return
+  end
+  if CH('PLAYER') == nil or CH('Teammate1') == nil then
+    GAME:FadeIn(20)
+    print('[Destiny] Retrouvailles suspendues : héros ou partenaire absent, réserve préservée.')
     return
   end
   reveil_nuit.CinematiqueRetrouvailles()
@@ -70,7 +94,9 @@ function reveil_nuit.CinematiqueRetrouvailles()
   local partner = CH('Teammate1')
   local wake = MRKR('WakeupLocation')
   local overlook = MRKR('ScenicOverlook')
-  local entrance = MRKR('Main_Entrance_Marker')
+  -- Les deux marqueurs d'origine se trouvent sous un avant-plan opaque.
+  -- Utiliser l'ouverture voisine du même chemin, sans modifier la carte.
+  local reveil_x, reveil_y = wake.Position.X + 112, wake.Position.Y - 16
 
   SOUND:StopBGM()
   GAME:CutsceneMode(true)
@@ -80,8 +106,8 @@ function reveil_nuit.CinematiqueRetrouvailles()
   -- Le partenaire rentre du premier trajet ; le héros attend, inconscient,
   -- dans le même panorama nocturne. La caméra gardera la montagne en vue.
   GROUND:CharSetAnim(hero, 'Laying', true)
-  GROUND:TeleportTo(hero, wake.Position.X, wake.Position.Y, Direction.Right)
-  GROUND:TeleportTo(partner, entrance.Position.X, entrance.Position.Y, Direction.Up)
+  GROUND:TeleportTo(hero, reveil_x, reveil_y, Direction.Right)
+  GROUND:TeleportTo(partner, reveil_x + 48, reveil_y, Direction.Up)
   GAME:MoveCamera(overlook.Position.X, overlook.Position.Y, 1, false)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(45)
@@ -92,13 +118,13 @@ function reveil_nuit.CinematiqueRetrouvailles()
   -- Il aperçoit le héros, quitte le chemin et s'approche.
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("J'ai traversé Lost Wood ! Sept étages, du début à la fin… et je suis revenu jusqu'ici !")
+  UI:WaitShowDialogue("J'ai traversé [color=#69D98C]Lost Wood[color] ! Sept étages, du début à la fin… et je suis revenu jusqu'ici !")
   UI:WaitShowDialogue("Je pensais que le plus dur était derrière moi. Mais… attends. Qu'est-ce qui bouge dans l'herbe ?")
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
   GROUND:CharSetEmote(partner, "exclaim", 1)
   UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue("Hé ! Tu m'entends ? Tu es blessé ?")
-  GROUND:MoveToPosition(partner, wake.Position.X + 24, wake.Position.Y, false, 1)
+  GROUND:MoveToPosition(partner, reveil_x + 24, reveil_y, false, 1)
   GAME:WaitFrames(20)
   UI:WaitShowDialogue("Tu es inconscient… Je ne vais pas te laisser seul au milieu de la nuit.")
   UI:WaitShowDialogue("Allez, réveille-toi. Je suis là. Tu peux ouvrir les yeux.")
@@ -115,7 +141,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   GROUND:CharSetEmote(hero, "question", 1)
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue("Pfiou… tu m'as fait peur. Je reviens tout juste de Lost Wood et je t'ai trouvé là, étendu dans l'herbe.")
+  UI:WaitShowDialogue("Pfiou… tu m'as fait peur. Je reviens tout juste de [color=#69D98C]Lost Wood[color] et je t'ai trouvé là, étendu dans l'herbe.")
   UI:WaitShowDialogue("Tu te souviens de ton nom ? D'un endroit où tu voudrais aller ? De quelqu'un qui t'attend ?")
   UI:SetSpeaker(hero)
   UI:SetSpeakerEmotion("Worried")
@@ -153,7 +179,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     {hero,"Happy","Une carte qui aiderait tous ceux qui viendront après toi."},
     {partner,"Happy","C'est ça ! Une carte qui ne serait pas juste à moi, mais qui pourrait servir à toute une équipe."},
     {partner,"Worried","Mais quand je pense à partir vraiment, à quitter les sentiers connus… j'ai parfois le trac."},
-    {hero,"Normal","Tu avais peur d'entrer dans Lost Wood aussi ?"},
+    {hero,"Normal","Tu avais peur d'entrer dans [color=#69D98C]Lost Wood[color] aussi ?"},
     {partner,"Worried","Un peu. Je me demandais si j'étais assez fort, assez malin, assez courageux."},
     {partner,"Normal","À l'entrée, j'ai failli faire demi-tour. Puis j'ai pensé à tout ce que je ne saurais jamais si je n'essayais pas."},
     {hero,"Happy","Et tu as essayé. Tu as traversé les sept étages et tu es revenu."},
@@ -184,7 +210,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     {partner,"Normal","La voix de ton rêve te demande de la retrouver. Peut-être qu'en explorant, tu trouveras aussi des indices."},
     {hero,"Normal","Tu crois qu'un explorateur pourrait m'aider à comprendre ce qui m'est arrivé ?"},
     {partner,"Happy","Je crois qu'une équipe peut chercher beaucoup plus loin qu'un Pokémon tout seul."},
-    {hero,"Normal","Tu viens juste de traverser Lost Wood sans moi. Pourquoi voudrais-tu repartir avec un inconnu ?"},
+    {hero,"Normal","Tu viens juste de traverser [color=#69D98C]Lost Wood[color] sans moi. Pourquoi voudrais-tu repartir avec un inconnu ?"},
     {partner,"Normal","Parce que je t'ai trouvé seul et désorienté. Et parce que je sais ce que c'est que d'hésiter au bord d'un chemin."},
     {partner,"Happy","Je ne te demande pas de me faire confiance aveuglément. Je te propose qu'on avance ensemble et qu'on apprenne à se connaître."},
     {hero,"Worried","Et si je ralentis ton rêve ?"},
@@ -192,7 +218,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     {partner,"Normal","Secourir, découvrir, trouver des trésors… ces choses-là ont plus de sens quand on peut les partager."},
     {hero,"Happy","Je ne sais pas encore qui j'étais. Mais je veux bien découvrir qui je peux devenir."},
     {partner,"Happy","Alors faisons un premier choix ensemble : nous allons revenir au croisement, tous les deux."},
-    {hero,"Normal","Par Lost Wood ? Il faudra retraverser les sept étages ?"},
+    {hero,"Normal","Par [color=#69D98C]Lost Wood[color] ? Il faudra retraverser les sept étages ?"},
     {partner,"Normal","Oui. Cette fois, je connais déjà les passages. Mais à deux, on devra rester attentifs l'un à l'autre."},
     {partner,"Normal","On se garde des objets de soin, on surveille nos PP et notre faim, et on ne fonce pas dans chaque combat."},
     {hero,"Happy","Et si l'un de nous ne voit pas l'escalier, l'autre pourra l'aider à le chercher."},
@@ -203,7 +229,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     {hero,"Happy","Et on dessinera la route pour que d'autres puissent la suivre après nous."},
     {partner,"Happy","Marché conclu ! Notre première expédition à deux commence par le chemin du retour."},
     {hero,"Normal","Alors, guide-moi. Je marcherai à tes côtés."},
-    {partner,"Happy","D'accord. On reprend notre souffle, puis on repart. Cette fois, personne ne traverse Lost Wood seul."},
+    {partner,"Happy","D'accord. On reprend notre souffle, puis on repart. Cette fois, personne ne traverse [color=#69D98C]Lost Wood[color] seul."},
   }
 
   for _, ligne in ipairs(discussion) do
@@ -224,7 +250,6 @@ function reveil_nuit.CinematiqueRetrouvailles()
   SV.Destiny.RetrouvaillesFaites = true
   SV.Destiny.LostWoodTrip = 'retour'
   SV.Destiny.LostWoodRetourEchec = false
-  COMMON.RespawnAllies()
   lancer_retour()
 end
 

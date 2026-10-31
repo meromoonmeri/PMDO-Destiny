@@ -1,74 +1,51 @@
---[[ Zone « Lost Wood » — structure aller/retour de la quête Destiny.
-     1) Aller : le partenaire traverse les 7 étages seul (le héros, inconscient,
-        est en réserve). Au succès, l'équipe est réunie sur le panorama nocturne.
-     2) Retour : après la longue scène de retrouvailles, héros + partenaire
-        retraversent les mêmes 7 étages ensemble. Au succès, ils reviennent au
-        cliffdaytest_nuit. Échec de l'aller = croisement ; échec du retour =
-        retrouvaille nocturne puis nouvelle tentative en duo.
-     Honnêteté : runtime_tested false.
-]]
-
+-- Lost Wood : aller seul, retrouvailles, retour en équipe.
+-- Un échec de l'aller ne réintroduit jamais le héros dans la scène du partenaire.
 require 'origin.common'
 
 local lost_wood = {}
+function lost_wood.Init(zone) end
+function lost_wood.Rescued(zone, mail) end
 
-function lost_wood.Init(zone)
-end
-
-function lost_wood.Rescued(zone, mail)
-end
-
-local function restaurer_heros()
-  if SV.Destiny == nil or SV.Destiny.HeroAssemblyIndex == nil then return end
-  local idx = SV.Destiny.HeroAssemblyIndex
-  local heros = GAME:GetPlayerAssemblyMember(idx)
-  if heros ~= nil then
-    GAME:RemovePlayerAssembly(idx)
-    GAME:AddPlayerTeam(heros)
-    -- le héros devient PLAYER ; le partenaire devient Teammate1
-    GAME:SetTeamLeaderIndex(1)
-  end
-  SV.Destiny.HeroAssemblyIndex = nil
-end
-
-local function terminer_et_entrer(result, zone_id, structure_id, map_id, entry_id)
-  GAME:EndDungeonRun(result, zone_id, structure_id, map_id, entry_id, false, false)
-  GAME:EnterZone(zone_id, structure_id, map_id, entry_id)
+local function terminer(result, zone_id, map_id)
+  GAME:EndDungeonRun(result, zone_id, -1, map_id, 0, false, false)
 end
 
 function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   GAME:SetRescueAllowed(false)
   SV.Destiny = SV.Destiny or {}
-  local aller_reussi = result == RogueEssence.Data.GameProgress.ResultType.Cleared
+  local reussi = result == RogueEssence.Data.GameProgress.ResultType.Cleared
   local trajet = SV.Destiny.LostWoodTrip or 'aller'
 
   if trajet == 'retour' then
-    -- Cette fois, l'équipe entière ressort de la forêt.
-    if aller_reussi then
+    if reussi then
       SV.Destiny.LostWoodRetourEchec = false
       SV.Destiny.RetourAccompli = true
       SV.Destiny.LostWoodTrip = 'termine'
-      terminer_et_entrer(result, 'destiny_cliff_tests', -1, 4, 0)
+      terminer(result, 'destiny_cliff_tests', 4)
+      GAME:EnterZone('destiny_cliff_tests', -1, 4, 0)
     else
-      -- La scène ne recommence pas : elle reprend au panorama et propose
-      -- une nouvelle tentative ensemble.
       SV.Destiny.LostWoodRetourEchec = true
-      terminer_et_entrer(result, 'personality_test', -1, 2, 0)
+      terminer(result, 'personality_test', 2)
+      GAME:EnterZone('personality_test', -1, 2, 0)
     end
     return
   end
 
-  -- Fin de l'aller solitaire : le héros revient de réserve avant la réunion.
-  restaurer_heros()
-  if aller_reussi then
+  if reussi then
     SV.Destiny.LostWoodTrip = 'rencontre'
     SV.Destiny.PartenaireParti = true
     SV.Destiny.LostWoodRetourEchec = false
-    terminer_et_entrer(result, 'personality_test', -1, 2, 0)
+    terminer(result, 'personality_test', 2)
+    -- La réunion est faite à l'arrivée sur le panorama. La sauvegarde de fin
+    -- reste ainsi cohérente même si le jeu est interrompu avant la transition.
+    GAME:EnterZone('personality_test', -1, 2, 0)
   else
-    SV.Destiny.LostWoodTrip = nil
-    SV.Destiny.PartenaireParti = false
-    terminer_et_entrer(result, 'destiny_cliff_tests', -1, 4, 0)
+    SV.Destiny.LostWoodTrip = 'echec_aller'
+    SV.Destiny.PartenaireParti = true
+    local R = RogueEssence.Data.GameProgress.ResultType
+    SV.Destiny.LostWoodCause = (result == R.Downed or result == R.Failed) and 'ko' or 'abandon'
+    terminer(result, 'destiny_cliff_tests', 4)
+    GAME:EnterZone('destiny_cliff_tests', -1, 4, 0)
   end
 end
 

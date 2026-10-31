@@ -123,3 +123,14 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
 
 - **Gala1D**, avec **Darkpawra** et **TinchoX** : version Explorers 2.3.28 étudiée ; [page du projet](https://projectpokemon.org/home/files/file/5247-pok%C3%A9mon-mystery-dungeon-explorers-%72emixed/). Les crédits par forme sont dans `docs/audit/source_2_3_28/preparation_report.json`. Le Pokédex public attribue Canarbello à `◥θ┴θ◤/N-A` ; la répartition exacte de ces crédits reste à confirmer. Ressources issues d'une ROM privée, sans autorisation de redistribution publique présumée.
 - **meromoonmeri** : calques de la Source irisée, avec escalier et pulsation, retrouvés dans son atelier. La carte utilise aussi le socle et les chaînes d'évolution PMDO existants. Voir [SOURCE_IRISEE.md](docs/SOURCE_IRISEE.md) pour la provenance et les différences.
+
+## Lost Wood — matières et autotiles (31 octobre 2026)
+
+- Matières de sol et de canopée et guide visuel : images générées à la
+  demande pour ce projet, conservées dans `art/lost_wood_sources/`. Il s'agit
+  d'une interprétation non canonique ; les raccords et détails en pixels ont
+  été construits pour PMDO, pas copiés d'un jeu commercial.
+- Les couches d'eau animée reprises dans le DTEF proviennent des ressources
+  Lost Wood déjà présentes dans la quête. Voir
+  [`docs/LOST_WOOD_DTEF_ET_SCENARIO.md`](docs/LOST_WOOD_DTEF_ET_SCENARIO.md)
+  pour leur structure, les outils et les limites de validation.

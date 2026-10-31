@@ -1,0 +1,4 @@
+Essai Linux instrumenté : personnage téléporté en (292, 320), puis tenu immobile.
+Avant offset : IsCameraOnChar=true, centre (300, 328).
+Offset relatif (0, -64), même commande que la fin de Spring_Touch : IsCameraOnChar=true, centre (300, 264).
+Les captures sont recadrées à la fenêtre de jeu. Le marqueur de joueur affiché est celui du personnage par défaut de ce banc ; le menu complet n’a pas été déroulé pendant cet essai.

@@ -27,6 +27,12 @@ jobs:
         run: python -m pip install Pillow
       - name: Validate source tree
         run: python tools/validate.py
+      - name: Check Lost Wood DTEF
+        run: python tools/tests/test_lost_wood_dtef.py
+      - name: Check Lost Wood autotile edges
+        run: python tools/tests/test_lost_wood_raccords.py
+      - name: Check Lost Wood reconstruction
+        run: python tools/tests/test_lost_wood_reproduction.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP
