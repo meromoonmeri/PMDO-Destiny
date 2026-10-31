@@ -1,0 +1,146 @@
+[2026/10/31 17:13:15.853] =========================================
+
+[2026/10/31 17:13:15.860] SESSION STARTED: 2026/10/31 17:13:15
+
+[2026/10/31 17:13:15.861] Version: 0.8.12.0
+
+[2026/10/31 17:13:15.861] .NET 8.0.33
+
+[2026/10/31 17:13:15.861] =========================================
+
+[2026/10/31 17:13:15.882] -----------------------------------------
+
+[2026/10/31 17:13:15.882] -----------------------------------------
+
+[2026/10/31 17:13:16.084] FNA3D Driver: OpenGL
+
+[2026/10/31 17:13:16.085] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+
+[2026/10/31 17:13:16.085] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+
+[2026/10/31 17:13:16.085] OpenGL Vendor: Mesa
+
+[2026/10/31 17:13:16.086] MojoShader Profile: glsl120
+
+[2026/10/31 17:13:16.121] [SE]:Initialized Lua 5.4
+
+[2026/10/31 17:13:16.121] [SE]:Importing .NET packages..
+
+[2026/10/31 17:13:16.130] [SE]: **- Lua engine started! -**
+
+[2026/10/31 17:13:19.883] [SE]:Exposing game engine components instances..
+
+[2026/10/31 17:13:19.899] [SE]:Exposing script interface..
+
+[2026/10/31 17:13:19.903] [SE]:Setting up lua globals..
+
+[2026/10/31 17:13:19.903] [SE]:Setting up lua paths..
+
+[2026/10/31 17:13:19.907] [SE]:Setting up lua functions...
+
+[2026/10/31 17:13:19.907] [SE]:Setting up debug functions...
+
+[2026/10/31 17:13:19.910] [SE]:Setting up default script vars...
+
+[2026/10/31 17:13:19.914] [SE]:Caching common lib...
+
+[2026/10/31 17:13:19.931] [SE]:Loading events...
+
+[2026/10/31 17:13:19.939] [SE]:Installing game interface functions..
+
+[2026/10/31 17:13:19.945] [SE]:DebugTools:initialize()
+
+[2026/10/31 17:13:19.948] [SE]:Registered service DebugTools!
+
+[2026/10/31 17:13:19.948] [SE]:UpgradeTools:initialize()
+
+[2026/10/31 17:13:19.949] [SE]:Registered service UpgradeTools!
+
+[2026/10/31 17:13:19.950] [SE]:MenuTools:initialize()
+
+[2026/10/31 17:13:19.950] [SE]:Registered service MenuTools!
+
+[2026/10/31 17:13:19.950] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+
+[2026/10/31 17:13:19.951] [SE]:Registered service DestinyTitleAnim!
+
+[2026/10/31 17:13:19.951] [SE]: **- Lua engine ready! -**
+
+[2026/10/31 17:13:19.951] [SE]:
+<!> ExampleSvc: Init..
+
+[2026/10/31 17:13:32.204] LuaEngine.OnMusicChange()..
+
+[2026/10/31 17:13:39.150] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:13:39.153] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:13:43.933] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:13:43.985] Zone Seed: 960991213521153959
+
+[2026/10/31 17:13:43.986] Zone.OnInit(): Initializing the zone..
+
+[2026/10/31 17:13:43.989] Loading rsground file: destiny_clairiere_source_lumineuse
+
+[2026/10/31 17:13:44.991] Completed file load.
+
+[2026/10/31 17:13:44.997] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 17:13:45.001] GroundMap.LoadScriptEvents(): Added event Init to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:13:45.002] GroundMap.LoadScriptEvents(): Added event Enter to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:13:45.046] [SE]:DESTINY_QA_GELÉE : IQ initial=nil
+
+[2026/10/31 17:13:45.046] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 17:13:45.063] LuaEngine.SaveData()..
+
+[2026/10/31 17:13:45.688] LuaEngine.SaveData()..
+
+[2026/10/31 17:13:46.058] LuaEngine.OnGroundMapEnter()..
+
+[2026/10/31 17:13:46.059] LuaEngine.OnGroundMapExit()..
+
+[2026/10/31 17:13:46.060] GroundMap.~GroundMap(): Finalizing destiny_clairiere_source_lumineuse..
+
+[2026/10/31 17:13:46.060] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+
+[2026/10/31 17:13:46.060] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+
+[2026/10/31 17:13:46.063] Zone.~Zone(): Finalizing chapitres_destiny..
+
+[2026/10/31 17:13:46.205] Zone Seed: 3958346068884648242
+
+[2026/10/31 17:13:46.205] Zone.OnInit(): Initializing the zone..
+
+[2026/10/31 17:13:46.206] Zone.LoadScriptEvents(): Added event Init to zone lost_wood!
+
+[2026/10/31 17:13:46.207] Zone.LoadScriptEvents(): Added event ExitSegment to zone lost_wood!
+
+[2026/10/31 17:13:46.207] Zone.LoadScriptEvents(): Added event Rescued to zone lost_wood!
+
+[2026/10/31 17:13:46.207] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+
+[2026/10/31 17:13:46.207] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+
+[2026/10/31 17:13:46.207] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+
+[2026/10/31 17:13:46.209] Zone Seed: 3958346068884648242
+
+[2026/10/31 17:13:46.214] Map Count: 0
+
+[2026/10/31 17:13:46.214] Map Seed: 0
+
+[2026/10/31 17:13:46.343] Steps:
+
+
+[2026/10/31 17:13:46.376] Map.OnInit(): Initializing the map..
+
+[2026/10/31 17:13:46.378] LuaEngine.OnDungeonMapInit()..
+
+[2026/10/31 17:13:47.089] LuaEngine.OnMusicChange()..
+
+[2026/10/31 17:13:48.440] LuaEngine.OnDungeonMapEnter()..
+

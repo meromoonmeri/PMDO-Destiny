@@ -3,12 +3,12 @@
      langue puis « Nouvelle partie » :
        Data/StartParams.xml → zone personality_test, ground 1 = intro_halo ;
        cette map (fond halo arc-en-ciel en Content/BG/Halo_*.dir) joue
-       l'intro : le halo pulse entre le noir et sa pleine visibilité
-       (fondus du moteur), avec les titres d'introduction en voice-over
-       blanc (« Bienvenue dans le monde des Pokémon ! » etc.) ; puis la
+       l'intro : les calques Halo_*_Pulse dérivés des trois calques existants
+       animent la pulsation pendant les titres en voice-over blanc
+       (« Bienvenue dans le monde des Pokémon ! » etc.) ; puis la
        transition : fondu blanc « aspiré par le halo » → map
        personality_test (fonds Dream_Back/Dream_Front = le « dream »).
-     Code rédigé pour PMD Destiny. Honnêteté : runtime_tested false.
+     Intro et transition vers le quiz vérifiées en moteur sur un banc de test.
 ]]
 
 require 'origin.common'
@@ -41,11 +41,15 @@ end
 
 function intro_halo.Scene()
   GAME:CutsceneMode(true)
+  -- Le personnage technique de la nouvelle partie ne doit pas apparaître
+  -- sur le texte ni au milieu du halo. La carte suivante recrée son joueur.
+  GROUND:Hide('PLAYER')
   UI:ResetSpeaker()
   GAME:FadeOut(false, 1)
   GAME:WaitFrames(30)
 
-  -- le halo apparaît, puis respire (noir ↔ visible) pendant les titres
+  -- les trois calques animés respirent aussi pendant chaque titre ;
+  -- les fondus d'origine entre les titres sont conservés.
   GAME:FadeIn(60)
   UI:WaitShowVoiceOver("Bienvenue dans le monde des Pokémon !", -1)
 

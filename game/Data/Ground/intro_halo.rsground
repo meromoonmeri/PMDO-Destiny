@@ -10914,7 +10914,7 @@
        "Y": 0
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Fond",
+       "AnimIndex": "Halo_Fond_Pulse",
        "FrameTime": 8,
        "StartFrame": -1,
        "EndFrame": -1,
@@ -10938,7 +10938,7 @@
        "Y": 0
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Anneau",
+       "AnimIndex": "Halo_Anneau_Pulse",
        "FrameTime": 8,
        "StartFrame": -1,
        "EndFrame": -1,
@@ -10962,7 +10962,7 @@
        "Y": 40
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Shine",
+       "AnimIndex": "Halo_Shine_Pulse",
        "FrameTime": 8,
        "StartFrame": -1,
        "EndFrame": -1,

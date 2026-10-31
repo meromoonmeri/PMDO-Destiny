@@ -5,7 +5,8 @@
      (7 étages). Après la rencontre et la longue discussion sous la montagne,
      ils retraversent le donjon ensemble ; le retour aboutit sur cette map.
      Le héros reste allongé jusqu'à la rencontre. Dialogues originaux Destiny.
-     Honnêteté : runtime_tested false.
+     Début de scène et entrée au premier étage vérifiés en moteur ;
+     le trajet complet et la scène de retour restent à tester.
 ]]
 
 require 'origin.common'
@@ -94,8 +95,13 @@ function cliffdaytest_nuit.ScenePartenaire()
   partenaire = GROUND:SpawnerDoSpawn('Adagio')
   AI:DisableCharacterAI(partenaire)
   local croisement = MRKR('Pichu_Crossroads')
-  GROUND:TeleportTo(partenaire, croisement.Position.X, croisement.Position.Y, Direction.Up)
+  -- Le marqueur central se trouve sous une partie opaque du décor en avant-plan.
+  -- Garder la caméra au croisement, mais placer le partenaire dans l'ouverture
+  -- voisine, sans modifier la carte ni l'ordre de ses calques.
+  GROUND:TeleportTo(partenaire, croisement.Position.X + 64, croisement.Position.Y + 28, Direction.Up)
   GAME:MoveCamera(croisement.Position.X, croisement.Position.Y, 1, false)
+  -- Le quiz termine sur un fondu noir ; révéler la carte avant les dialogues.
+  GAME:FadeIn(30)
   GAME:WaitFrames(30)
 
   UI:SetSpeaker(partenaire)

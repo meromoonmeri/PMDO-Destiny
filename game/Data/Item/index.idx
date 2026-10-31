@@ -1,0 +1,633 @@
+{
+ "Version": "0.8.12.0",
+ "Object": {
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+  "gummi_black": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Black Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Noire",
+     "de": "Schwarzgummi",
+     "it": "Gommanera",
+     "ko": "검정구미",
+     "ja": "くろいグミ",
+     "ja-jp": "くろいグミ",
+     "zh-hans": "黑色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_blue": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Blue Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Bleue",
+     "de": "Blaugummi",
+     "it": "Gommablu",
+     "ko": "파란구미",
+     "ja": "あおいグミ",
+     "ja-jp": "あおいグミ",
+     "zh-hans": "蓝色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_brown": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Brown Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Marron",
+     "de": "Braungummi",
+     "it": "Gommamarrone",
+     "ko": "갈색구미",
+     "ja": "ちゃいろグミ",
+     "ja-jp": "ちゃいろグミ",
+     "zh-hans": "棕色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_clear": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Clear Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Ivoire",
+     "de": "Klargummi",
+     "it": "Gommachiara",
+     "ko": "투명구미",
+     "ja": "とうめいグミ",
+     "ja-jp": "とうめいグミ",
+     "zh-hans": "透明软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_gold": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Gold Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Dorée",
+     "de": "Goldgummi",
+     "it": "Gommadoro",
+     "ko": "금색구미",
+     "ja": "きんいろグミ",
+     "ja-jp": "きんいろグミ",
+     "zh-hans": "金色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_grass": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Grass Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Plante",
+     "de": "Floragummi",
+     "it": "Gommaerba",
+     "ko": "새싹구미",
+     "ja": "わかくさグミ",
+     "ja-jp": "わかくさグミ",
+     "zh-hans": "草色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_gray": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Gray Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Grise",
+     "de": "Graugummi",
+     "it": "Gommagrigia",
+     "ko": "회색구미",
+     "ja": "はいいろグミ",
+     "ja-jp": "はいいろグミ",
+     "zh-hans": "灰色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_green": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Green Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Verte",
+     "de": "Grüngummi",
+     "it": "Gommaverde",
+     "ko": "초록구미",
+     "ja": "みどりグミ",
+     "ja-jp": "みどりグミ",
+     "zh-hans": "绿色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_magenta": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Magenta Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Fuschia",
+     "de": "Magentagummi",
+     "it": "Gommamagenta",
+     "ko": "자홍구미",
+     "ja": "ようせいグミ",
+     "ja-jp": "ようせいグミ",
+     "zh-hans": "桃红软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_orange": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Orange Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Orange",
+     "de": "Orangegummi",
+     "it": "Gommarancia",
+     "ko": "주황구미",
+     "ja": "オレンジグミ",
+     "ja-jp": "オレンジグミ",
+     "zh-hans": "橘色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_pink": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Pink Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Pêche",
+     "de": "Rosagummi",
+     "it": "Gommarosea",
+     "ko": "분홍구미",
+     "ja": "ももいろグミ",
+     "ja-jp": "ももいろグミ",
+     "zh-hans": "粉色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_purple": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Purple Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Mauve",
+     "de": "Lilagummi",
+     "it": "Gommaviola",
+     "ko": "보라구미",
+     "ja": "むらさきグミ",
+     "ja-jp": "むらさきグミ",
+     "zh-hans": "紫色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_red": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Red Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Rouge",
+     "de": "Rotgummi",
+     "it": "Gommarossa",
+     "ko": "빨간구미",
+     "ja": "あかいグミ",
+     "ja-jp": "あかいグミ",
+     "zh-hans": "红色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_royal": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Royal Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Royale",
+     "de": "Royalgummi",
+     "it": "Gommareale",
+     "ko": "로열구미",
+     "ja": "ドラゴングミ",
+     "ja-jp": "ドラゴングミ",
+     "zh-hans": "藏蓝软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_silver": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Silver Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Argent",
+     "de": "Silbergummi",
+     "it": "Gommargento",
+     "ko": "은색구미",
+     "ja": "ぎんいろグミ",
+     "ja-jp": "ぎんいろグミ",
+     "zh-hans": "银色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_sky": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Sky Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Azur",
+     "de": "Azurgummi",
+     "it": "Gommacielo",
+     "ko": "하늘색구미",
+     "ja": "みずいろグミ",
+     "ja-jp": "みずいろグミ",
+     "zh-hans": "天蓝软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_white": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "White Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Claire",
+     "de": "Weißgummi",
+     "it": "Gommabianca",
+     "ko": "하얀구미",
+     "ja": "しろいグミ",
+     "ja-jp": "しろいグミ",
+     "zh-hans": "白色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_wonder": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Wonder Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Miracle",
+     "de": "Wundergummi",
+     "it": "Gommaincanto",
+     "ko": "이상한구미",
+     "ja": "ふしぎなグミ",
+     "ja-jp": "ふしぎなグミ",
+     "zh-hans": "不可思议软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  },
+  "gummi_yellow": {
+   "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
+   "Icon": 6,
+   "UsageType": 4,
+   "States": [
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.EdibleState"
+    },
+    {
+     "assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
+     "type": "PMDC.Dungeon.GummiState"
+    }
+   ],
+   "MaxStack": 0,
+   "CannotDrop": false,
+   "BagEffect": false,
+   "Name": {
+    "DefaultText": "Yellow Gummi",
+    "LocalTexts": {
+     "fr": "Gelée Jaune",
+     "de": "Gelbgummi",
+     "it": "Gommagialla",
+     "ko": "노란구미",
+     "ja": "きいろグミ",
+     "ja-jp": "きいろグミ",
+     "zh-hans": "黄色软糖"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 5
+  }
+ }
+}
