@@ -19,6 +19,7 @@ require 'origin.common'
 
 local quiz_data = require 'destiny.ground.personality_test.quiz_data'
 local starters_source = require 'destiny.ground.personality_test.starters_source'
+local talents_depart = require 'destiny.talents_depart'
 
 local personality_test = {}
 
@@ -55,25 +56,6 @@ local function calculer_nature(scores)
     end
   end
   return best
-end
-
--- Menu de talent (Intrinsic1/2/3, talent caché inclus) pour un Pokémon.
-local function choisir_talent(espece, forme)
-  local fiche = _DATA:GetMonster(espece).Forms[forme]
-  local talent = fiche.Intrinsic1
-  local candidats, affiches = { fiche.Intrinsic1 }, { _DATA:GetIntrinsic(fiche.Intrinsic1):GetColoredName() }
-  for _, cand in ipairs({ fiche.Intrinsic2, fiche.Intrinsic3 }) do
-    if cand ~= nil and cand ~= 'none' then
-      table.insert(candidats, cand)
-      table.insert(affiches, _DATA:GetIntrinsic(cand):GetColoredName())
-    end
-  end
-  if #affiches > 1 then
-    UI:BeginChoiceMenu("Quel talent veux-tu ?", affiches, 1, 1)
-    UI:WaitForChoice()
-    talent = candidats[UI:ChoiceResult()]
-  end
-  return talent
 end
 
 -- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
@@ -213,7 +195,7 @@ function personality_test.Quiz()
   local ok = false
   while not ok do
     genre = choisir_genre("Quel est ton sexe ?")
-    talent = choisir_talent(starter.espece, starter.forme)
+    talent = talents_depart.choisir(starter.espece, starter.forme, starter.nom, 'héros')
     local msg = "Êtes-vous sûr de sélectionner ce Pokémon ?\n" .. starter.nom
     if starter.mega_famille then
       msg = msg .. "\nUne évolution de cette lignée possède une forme de " .. arc_en_ciel(quiz_data.mega_texte) .. "."
@@ -254,7 +236,7 @@ function personality_test.Quiz()
 
   local pgenre = choisir_genre("Quel est le sexe de ton partenaire ?")
   local partner_id = RogueEssence.Dungeon.MonsterID(partenaire.espece, partenaire.forme, 'normal', pgenre)
-  local ptalent = choisir_talent(partenaire.espece, partenaire.forme)
+  local ptalent = talents_depart.choisir(partenaire.espece, partenaire.forme, partenaire.nom, 'partenaire')
 
   -- création du partenaire
   _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, partner_id, 5, ptalent, 0))
