@@ -107,11 +107,29 @@ def main() -> None:
     shutil.copy2(ROOT / 'art' / 'destiny_icon.png', publish_dir / 'Destiny.png')
     shutil.copy2(ROOT / 'art' / 'destiny_icon.png', publish_dir / 'PMDO.png')
 
-    (publish_dir / 'JOUER_A_DESTINY.bat').write_text(
-        '@echo off\r\ncd /d "%~dp0"\r\nstart "" "Destiny.exe"\r\n', encoding='utf-8')
-    (publish_dir / 'JOUER_A_DESTINY_WASAPI.bat').write_text(
-        '@echo off\r\ncd /d "%~dp0"\r\nstart "" "Destiny.exe" -audiodriver:wasapi\r\n', encoding='utf-8')
+    def create_launcher(name: str, options: str = '') -> None:
+        # write_bytes évite que Windows ne transforme CRLF en CR-CR-LF.
+        script = f'@echo off\r\ncd /d "%~dp0"\r\nstart "" "Destiny.exe"{options}\r\n'
+        (publish_dir / name).write_bytes(script.encode('ascii'))
+
+    create_launcher('JOUER_A_DESTINY.bat')
+    create_launcher('JOUER_A_DESTINY_WASAPI.bat', ' -audiodriver:wasapi')
+    # Le dev.bat de la base vise PMDO.exe, mais l'exécutable s'appelle Destiny.exe ici.
+    create_launcher('dev.bat', ' -dev')
     shutil.copy2(ROOT / 'docs' / 'LISEZ_MOI_WINDOWS.txt', publish_dir / 'LISEZ_MOI.txt')
+
+    # Vérifier la présence dans le build de toutes les cartes de la Quest et en
+    # donner la liste : le build contient aussi des cartes de base du moteur.
+    source_grounds = sorted(path.stem for path in (ROOT / 'game/Data/Ground').glob('*.rsground'))
+    if not source_grounds:
+        raise SystemExit('No Destiny ground maps found in game/Data/Ground.')
+    missing_grounds = [name for name in source_grounds
+                       if not (publish_dir / 'Data' / 'Ground' / f'{name}.rsground').is_file()]
+    if missing_grounds:
+        raise SystemExit('Destiny ground maps missing from package: ' + ', '.join(missing_grounds))
+    listing = f'CARTES DESTINY : {len(source_grounds)}\n\n' + '\n'.join(source_grounds) + '\n'
+    (publish_dir / 'LISTE_CARTES_DESTINY.txt').write_bytes(listing.replace('\n', '\r\n').encode('utf-8'))
+    print(f'Destiny ground maps in package: {len(source_grounds)}')
 
     # Structural checks on the actual package.
     required = [
