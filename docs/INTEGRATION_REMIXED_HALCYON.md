@@ -40,7 +40,7 @@ Le module `remixed_mega.lua` vérifie 410 points de QI et change durablement de 
 - Source en démarrage direct : menu réel, choix Méga-Raichu X/Y, X puis retour via l'interface. La consultation du QI a été vérifiée. Assertions de seuil 409/410, gains QI et conservation du talent.
 - Utilisation réelle en donjon : Raichu mange une gelée jaune et reçoit +5 QI en gardant les effets natifs ; une gelée Miracle donne +15. Les 19 définitions ajoutées ont été comparées aux définitions de la release : seul l'événement QI a été ajouté. Aucune de ces définitions n'existait dans la Quest HEAD ; la base d'origine demeure intacte.
 - **Vraie sauvegarde/rechargement** du banc : Raichu Méga X à 410 QI sauvegardé sur disque, processus redémarré puis « Continuer » ; forme, QI et métadonnées relus, retour à la forme initiale et talent `static` vérifiés. C'est un scénario de test isolé, pas une validation générale de toutes les espèces ni de toutes les sauvegardes existantes.
-- Les images et logs de test sont conservés localement dans `halcyon_audit/tests_persistants/` ; ils ne sont pas nécessaires à l'exécution de la Quest. Le banc isolé demandait un index graphique fusionné de la base et de la Quest ; le moteur normal combine les index par espèce au chargement.
+- Des images et logs de test sont conservés dans `docs/audit/remixed_2_3_28/tests/` ; ils ne sont pas nécessaires à l'exécution de la Quest. Le banc isolé demandait un index graphique fusionné de la base et de la Quest ; le moteur normal combine les index par espèce au chargement.
 
 ## Sources, crédits et droits
 
