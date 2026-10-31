@@ -11,6 +11,10 @@ Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symb
 > `game/Data/Ground/WaterfallVillageCapital.rsground` (233 Mo > limite GitHub, budget LFS du compte
 > épuisé) est livrée compressée dans `payload/` : lancer `python3 tools/unpack_payload.py` après le
 > clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`).
+> Phase 2 (planches des cartes falaises restaurées à l'identique) et phase 3 (les 33 cartes « générées »
+> de l'atelier `projet-creation-pmdo` reconstruites par leurs `build.py` et intégrées : 28 identiques à
+> l'inventaire, 5 reconstructions déclarées) : §11 et §12 du même rapport ; `tools/build_tile_index.py`
+> regénère `game/Content/Tile/index.idx` après tout ajout de planche.
 
 ## Jouer sous Windows
 

@@ -46,11 +46,11 @@ dépendances cherchées dans tous les dépôts **avant** intégration (`candidat
 ```
 game/
   Mod.xml
-  Content/Tile/*.tile (1 740) + index.idx      Content/BG (117) Content/Object (27)
+  Content/Tile/*.tile (2 076 : 1 740 + 7 §11 + 329 §12) + index.idx      Content/BG (117) Content/Object (27)
   Content/Music (4 .ogg)  Content/UI/quiz_badges (17 PNG)
-  Data/Ground/*.rsground (342, fichiers individuels)
-  Data/Zone/<zone>.json (11) + index.idx       Data/AutoTile (3 Lost Wood) + index.idx
-  Data/Script/destiny/{main,scriptvars}.lua, services/, ground/<carte>/init.lua (342), zone/lost_wood/init.lua
+  Data/Ground/*.rsground (375 = 342 + 33 §12, fichiers individuels)
+  Data/Zone/<zone>.json (12 : 11 + vitrines_menu §12) + index.idx       Data/AutoTile (3 Lost Wood) + index.idx
+  Data/Script/destiny/{main,scriptvars}.lua, services/, ground/<carte>/init.lua (375), zone/lost_wood/init.lua
   Data/StartParams.xml  Data/quiz_personnalite_*.json
 ```
 
@@ -268,7 +268,7 @@ Renommages (champ `AssetName` réécrit, reste du fichier identique) : `cliffday
 | `destiny_hub`, `glacier_cliff_aurora_v1`, `guild_path` | `InsideHut`, `VastIceMountain`, `GuildPath`, objets `Flowerpot_*`, `Flowers_Tropical_*`, `Berry_Basket_*`, `Pot`, `House_Normal`, `Guildmaster.ogg`, `Title.ogg` | fournis par le PMDO de base (`base/Content`), pas par un mod |
 
 ### 7.2 Cartes non intégrées
-* **33 cartes « générées » sans sortie committée** (inventaire 262, catégorie `generated_build`, sorties dans `.cache/` jamais poussées ; seuls `source/<lot>/build.py` + bruts existent sur `arena/e39626d2`) : `ekr1_entree_caverne_cristal`, `eoc1_entree_old_castle`, `faille_spatiale_sanctuaire_avant_portail`, `fct1_fin_clairiere_tropicale`, `fkr1_fin_caverne_cristal`, `fosse_argent_entree`, `fosse_argent_sanctuaire_lugia`, `fse1_fin_jardin_secret`, `fth1_fin_mt_thunder`, `fvc1_fin_couloir_violet`, `great_canyon_entree`, `great_canyon_fin`, `grotte_ouest_entree`, `grotte_ouest_sanctuaire_mewtwo`, `kyurem_cratere_entree`, `kyurem_sanctuaire_glace`, `pmd_destiny_menu_jour` (ses 10 planches `DSTJ_00..09` sont présentes), `reshiram_montagne_entree`, `reshiram_sommet_flamme`, `ruines_enfouies_entree`, `ruines_enfouies_sanctuaire_mew`, `silent_chasm_entree`, `silent_chasm_fin`, `sinister_woods_entree`, `sinister_woods_entree_nuit`, `sinister_woods_fin`, `sinister_woods_fin_nuit`, `tiny_woods_entree`, `tiny_woods_fin`, `zekrom_montagne_entree`, `zekrom_sommet_tornade` ; `flu1_fin_underground_lake` et `fmy1_fin_mystifying_forest` correspondent aux versions publiées `ful1_rive_underground_lake` et `fmf1/fmf2_*` (intégrées). SHA attendus : `docs/audit/inventory_sha.json`. Reconstruction possible par les `build.py` (non exécutée : sorties non vérifiables sans les `.cache`).
+* **33 cartes « générées » sans sortie committée** — **Résolu le 2026-10-31 (§12) : les 33 cartes ont été reconstruites en exécutant leurs `build.py` ; 28 sont identiques octet pour octet aux SHA-256 de l'inventaire, 5 sont reconstruites à partir de l'état committé de leur lot avec un SHA divergent (états d'origine non committés, détail au §12.3).** Constat de la phase 1 : inventaire 262, catégorie `generated_build`, sorties dans `.cache/` jamais poussées ; seuls `source/<lot>/build.py` + bruts existent sur `arena/e39626d2` (bruts pleine taille des deux lots `caverne_cristal` sur `arena/2a041d50`).
 * **Grotte Météore** (`grotte_meteore_entree` 80c3cd80/9cb20154/ed349f6a, `grotte_meteore_arene` 09b24b06/5130a233/e25bb61d, `gme1_/gma1_tour_celeste`) : `.rsground` réels dans `renders/grotte_meteore_*/package`, mais leurs 10 planches `GME1_*`/`GMA1_*` sont des liens symboliques vers `.cache` (absents de git) → non intégrées.
 * **Placeholders** (blobs de 79–789 o = liens vers `.cache`) : `mer_houleuse_entree/sanctuaire`, `tour_celeste_relais`, `tour_du_temps_entree/pinacle`, `plage_pmd_sky_large`. (`rtc1_tour_celeste` = relais, intégrée.)
 * **Intérieurs générés « Metano Normal Home »** `metano_gen_{accueil,cafe,casino,salon_bas,salon_haut}` (4 blobs chacun : 3 versions 0×0 invalides, 1 version 100×75 de 65–139 planches tierces), `metano_reseau_*` (0×0), `treasure_gen_*` (planches `Treasure_*` absentes) : non intégrés (déjà exclus par le socle) ; blobs listés dans `docs/audit/candidates_manifest.json`.
@@ -356,3 +356,94 @@ composition (zone d'herbe différente), les images `ocean/jour_0N`, les calques 
 méthode « générateur d'images + fond magenta » (layout verrouillé sur les planches d'origine,
 cf. `METHODE_MAGENTA_ET_GENERATEUR.md`). Elle reste un **aperçu local** (`maps_work/variant/`,
 `maps_work/preview/apercu_falaises.html`), étiquetée « Généré », et ne remplace rien dans la Quest.
+
+
+## 12. Phase 3 (2026-10-31) — reconstruction des 33 cartes « générées » et vérification de couverture
+
+### 12.1 Couverture de l'inventaire (224 cartes de `docs/audit/inventory_sha.json`) avant cette phase
+* **169** cartes présentes dans la Quest avec un SHA-256 identique à l'inventaire.
+* **8** cartes présentes sous le même nom avec un contenu différent, **conservées telles quelles** (versions choisies en phase 1, comparées une à une) :
+  `cliffdaytest` (l'inventaire pointe le `cliffdaytest.rsground` de la racine de l'atelier, 10 042 767 o : c'est la version livrée dans la Quest sous `cliffdaytest_source`, 10 042 774 o, l'écart étant le suffixe `_source` de l'`AssetName` ; `cliffdaytest` reste la version complète de 54,5 Mo) ;
+  `cliffnordouesttest1` (inventaire = version de 7 103 176 o ; la Quest garde la version complète de 7 812 806 o retenue en phase 1, plus la variante `_compat_town02` en archives) ;
+  `entree_falaise_trempee_sud_nord_v1`, `entree_promontoire_nuages_sud_nord_v1`, `entree_tourbiere_piliers_sud_nord_v1`, `fin_falaise_trempee_source_v1`, `fin_promontoire_nuages_clairiere_v1` (inventaire = exports du commit c2d77959, versions antérieures 2 à 3 fois plus petites que celles de la Quest) ;
+  `agm2_arene_groudon_magma` (inventaire = sortie `.cache` 14 322 020 o introuvable, cf. `generated_002` de l'atelier ; la Quest a le rendu publié 16 860 369 o).
+* **47** absentes : 33 cartes générées (traitées ci-dessous), 9 références tierces exclues par décision de phase 1
+  (`altere_pond`, `ledian_dojo`, `vast_steppe_entrance`, `crooked_cavern_entrance`, `guild_second_floor`, `luminous_spring`, `treasure_cafe`, `spinda_cafe`, `treasure_normal_home`)
+  et 5 `treasure_gen_*` dont les planches `Treasure_*` n'existent nulle part (toujours non intégrées, §7.2).
+
+### 12.2 Méthode de reconstruction
+* Checkout partiel sans blobs de `projet-creation-pmdo` `arena/e39626d2` (commit `f9c97fc0`, dossier `source/` complet : les `build.py`
+  chargent dynamiquement ceux d'autres lots, `source/pmdo_cote/{build,INSTALLER}.py`, les planches natives `source/eau_metano/natifs/*.tile`,
+  `cliffdaytest.rsground` à la racine…) ; les deux lots `caverne_cristal` ont été construits depuis `arena/2a041d50` (commit `586ad232`),
+  seule branche portant leurs bruts en pleine taille 1200×896.
+* Images de référence racine jamais committées sur ces branches mais présentes comme blobs git (récupérées par OID, SHA-256 égal au
+  `reference_da.sha256` des manifestes committés) : `oldcastlepmd.png`, `large.S01P03A…png`, `large.S05P03A…png`, `secretgarden.png`,
+  `Mystifying_Forest_entrance_TDS.png`, `Underground_Lake_shore_TDS.png`.
+* `fin_mt_thunder_v1` lit la planche *The Spriters Resource* « Dungeon Boss Rooms – Mt. Thunder » (432×498), absente de tous les dépôts :
+  récupérée depuis la Wayback Machine (asset 75100, snapshots 2016 et 2023 identiques), SHA-256 `6f1dc6a9…` = valeur du manifeste committé.
+  La planche n'est pas ajoutée au dépôt (ressource tierce) ; l'URL et le SHA sont dans `docs/audit/reconstruction_generees_33.json`.
+* Gabarit `mod_metano_expeditions_pmdo_0812.zip` (absent partout) : seul le membre `v50812_01_crete_sillage_jour.rsground` est lu ;
+  il a été reconstitué avec le fichier de la Quest (même SHA-256 que le membre du zip `treasure_expeditions` de l'inventaire) ;
+  trois reconstructions exactes en dépendent, ce qui valide le gabarit.
+* Pipeline déterministe : mêmes octets avec Python 3.13/3.12, Pillow 12.3/12.0/11.3 et des `PYTHONHASHSEED` différents.
+  Résultats, journaux et manifestes : `docs/audit/reconstruction_generees_33.json`.
+
+### 12.3 Résultat par carte (SHA-256 comparé à `inventory_sha.json`)
+| Carte (`game/Data/Ground/`) | Lot source | Branche | Octets | SHA-256 (12) | Inventaire | Planches | Référence racine |
+|---|---|---|---:|---|---|---:|---|
+| `ekr1_entree_caverne_cristal` | `entree_caverne_cristal_sud_nord_v1` | 2a041d50 | 7 012 283 | `91cfa0d42cff` | **divergent** | 10 | — |
+| `eoc1_entree_old_castle` | `entree_old_castle_sud_nord_v1` | e39626d2 | 6 721 154 | `bf187e305b4a` | identique | 10 | oldcastlepmd.png |
+| `faille_spatiale_sanctuaire_avant_portail` | `faille_spatiale_sanctuaire_avant_portail_v1` | e39626d2 | 16 102 905 | `ddb87dd417eb` | identique | 10 | — |
+| `fkr1_fin_caverne_cristal` | `fin_caverne_cristal_v1` | 2a041d50 | 8 043 144 | `5085a04684dd` | **divergent** | 11 | — |
+| `fct1_fin_clairiere_tropicale` | `fin_clairiere_tropicale_v1` | e39626d2 | 9 933 334 | `838079eb3ce3` | **divergent** | 14 | large.S01P03A.png.84e22fb77c4061e77b0… |
+| `fvc1_fin_couloir_violet` | `fin_couloir_violet_v1` | e39626d2 | 6 633 633 | `93da935f53b2` | **divergent** | 10 | large.S05P03A.png.301f7a1eadda348357b… |
+| `fse1_fin_jardin_secret` | `fin_jardin_secret_v1` | e39626d2 | 8 759 023 | `496604f3da37` | **divergent** | 14 | secretgarden.png |
+| `fth1_fin_mt_thunder` | `fin_mt_thunder_v1` | e39626d2 | 7 019 039 | `6976b508b072` | identique | 10 | Game Boy Advance - Pokemon Mystery Du… |
+| `fmy1_fin_mystifying_forest` | `fin_mystifying_forest_v1` | e39626d2 | 7 297 382 | `3c3cde3e2c8c` | identique | 10 | Mystifying_Forest_entrance_TDS.png |
+| `flu1_fin_underground_lake` | `fin_underground_lake_v1` | e39626d2 | 6 969 478 | `7dfc38161539` | identique | 10 | Underground_Lake_shore_TDS.png |
+| `fosse_argent_entree` | `fosse_argent_entree_v1` | e39626d2 | 8 353 179 | `381f26e9d662` | identique | 10 | — |
+| `fosse_argent_sanctuaire_lugia` | `fosse_argent_sanctuaire_v1` | e39626d2 | 10 071 340 | `4603b84368e5` | identique | 10 | — |
+| `great_canyon_entree` | `great_canyon_entree_v1` | e39626d2 | 15 341 205 | `4b3ae266c097` | identique | 10 | — |
+| `great_canyon_fin` | `great_canyon_fin_v1` | e39626d2 | 11 853 510 | `25017c110eaf` | identique | 10 | — |
+| `grotte_ouest_entree` | `grotte_ouest_entree_v1` | e39626d2 | 8 931 839 | `6a801f2bc53a` | identique | 10 | — |
+| `grotte_ouest_sanctuaire_mewtwo` | `grotte_ouest_sanctuaire_v1` | e39626d2 | 10 664 280 | `ab117fcbc820` | identique | 10 | — |
+| `kyurem_cratere_entree` | `kyurem_cratere_entree_v1` | e39626d2 | 21 689 711 | `39ed735016b4` | identique | 10 | — |
+| `kyurem_sanctuaire_glace` | `kyurem_sanctuaire_glace_v1` | e39626d2 | 19 301 469 | `3cf9e3727263` | identique | 10 | — |
+| `pmd_destiny_menu_jour` | `pmd_destiny_fangame_v1` | e39626d2 | 11 910 878 | `2d00c56d4733` | identique | 10 | — |
+| `reshiram_montagne_entree` | `reshiram_montagne_entree_v1` | e39626d2 | 7 936 038 | `e703a89c30a4` | identique | 10 | — |
+| `reshiram_sommet_flamme` | `reshiram_sommet_flamme_v1` | e39626d2 | 25 357 906 | `2883ee375434` | identique | 10 | — |
+| `ruines_enfouies_entree` | `ruines_enfouies_entree_v1` | e39626d2 | 7 849 669 | `9fc4de40fca2` | identique | 10 | — |
+| `ruines_enfouies_sanctuaire_mew` | `ruines_enfouies_sanctuaire_v1` | e39626d2 | 9 714 092 | `c76815935f47` | identique | 10 | — |
+| `silent_chasm_entree` | `silent_chasm_entree_v1` | e39626d2 | 11 699 993 | `f2aee444072b` | identique | 10 | — |
+| `silent_chasm_fin` | `silent_chasm_fin_v1` | e39626d2 | 11 056 998 | `102bbe455a0f` | identique | 10 | — |
+| `sinister_woods_entree_nuit` | `sinister_woods_entree_nuit_v1` | e39626d2 | 15 736 445 | `6345506818fc` | identique | 10 | — |
+| `sinister_woods_entree` | `sinister_woods_entree_v1` | e39626d2 | 15 977 636 | `3fa39cefc8db` | identique | 10 | — |
+| `sinister_woods_fin_nuit` | `sinister_woods_fin_nuit_v1` | e39626d2 | 16 558 712 | `9feb8a53549b` | identique | 10 | — |
+| `sinister_woods_fin` | `sinister_woods_fin_v1` | e39626d2 | 16 731 268 | `70cf328a210e` | identique | 10 | — |
+| `tiny_woods_entree` | `tiny_woods_entree_v1` | e39626d2 | 8 434 537 | `cc3cf7a719aa` | identique | 10 | — |
+| `tiny_woods_fin` | `tiny_woods_fin_v1` | e39626d2 | 8 111 689 | `6cd00033a66c` | identique | 10 | — |
+| `zekrom_montagne_entree` | `zekrom_montagne_entree_v1` | e39626d2 | 8 233 507 | `fd7ae6101e0c` | identique | 10 | — |
+| `zekrom_sommet_tornade` | `zekrom_sommet_tornade_v1` | e39626d2 | 24 193 715 | `5d2d8effcc6e` | identique | 10 | — |
+
+* **28 cartes identiques octet pour octet** à l'inventaire (dont `fth1_fin_mt_thunder` grâce à la planche retrouvée).
+* **5 cartes reconstruites avec un SHA divergent** (`ekr1_entree_caverne_cristal`, `fkr1_fin_caverne_cristal`, `fct1_fin_clairiere_tropicale`,
+  `fvc1_fin_couloir_violet`, `fse1_fin_jardin_secret`) : pour chacune, le manifeste produit est **identique au manifeste committé**
+  `renders/<lot>/manifest.json` (mêmes banques, mêmes comptes de tuiles, mêmes mesures d'accessibilité) — la reconstruction correspond donc
+  à l'état publié du lot. L'empreinte de l'inventaire provient d'un état de travail antérieur jamais committé (sorties `.cache/`). Tous les
+  états historiques des sources de `fct1`, `fvc1` et `fse1` (respectivement 8, 3 et 5 commits distincts) ont été reconstruits sans retrouver le SHA ;
+  pour `ekr1`/`fkr1`, les deux branches qui portent le lot donnent le même résultat. L'atelier lui-même consigne la même impossibilité
+  (`source/pmdo_cote/DESTINY_262_RECOVERY.md` : `generated_030/031/035` « sorties reconstruites aux hashes divergents », `generated_007/029`
+  « sorties originales attendues non retrouvées à hash exact, rebuilds non exacts »). Ces 5 cartes sont intégrées **comme reconstructions**
+  (étiquetées dans `docs/audit/reconstruction_generees_33.json`), pas comme copies certifiées de l'inventaire.
+
+### 12.4 Intégration
+* 33 `.rsground` ajoutés individuellement dans `game/Data/Ground/` (aucun nom existant écrasé) ; 329 planches ajoutées dans `game/Content/Tile/`
+  (aucune collision de nom ; les 10 planches `DSTJ_*` de `pmd_destiny_menu_jour` étaient déjà présentes et sont **identiques octet pour octet**,
+  donc non dupliquées) ; `index.idx` recalculé (2 076 entrées, 95,2 Mo — proche de la limite GitHub de 100 Mio : `tools/build_tile_index.py`
+  le regénère et prévient si elle est dépassée).
+* Zones : les 32 entrées/fins/sanctuaires rejoignent `ateliers_donjons` (200 cartes) ; `pmd_destiny_menu_jour` (décor animé du menu-titre, pas
+  une carte jouable) va dans la nouvelle zone `vitrines_menu`. `Data/Zone/index.idx` mis à jour.
+* Scripts : squelette Destiny standard (`require 'origin.common'`, fondu d'entrée) pour chaque carte ; le `init.lua` du paquet généré était une
+  table vide, sans callback ni warp.
+* Rendu de contrôle : les 33 cartes rendues avec les planches de la Quest, aucune planche manquante (planche d'aperçu : `docs/apercus/reconstruction_33_cartes.png`).
+* Toujours non intégrés (inchangé) : les 9 références tierces exclues, `treasure_gen_*`, Grotte Météore, placeholders et intérieurs générés du §7.2.

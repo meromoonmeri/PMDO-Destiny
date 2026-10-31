@@ -534,7 +534,39 @@
         "raz2_terrasses_cascades",
         "raz3_fond_cristallin",
         "stc1_tour_celeste",
-        "rtc1_tour_celeste"
+        "rtc1_tour_celeste",
+        "ekr1_entree_caverne_cristal",
+        "eoc1_entree_old_castle",
+        "faille_spatiale_sanctuaire_avant_portail",
+        "fkr1_fin_caverne_cristal",
+        "fct1_fin_clairiere_tropicale",
+        "fvc1_fin_couloir_violet",
+        "fse1_fin_jardin_secret",
+        "fth1_fin_mt_thunder",
+        "fmy1_fin_mystifying_forest",
+        "flu1_fin_underground_lake",
+        "fosse_argent_entree",
+        "fosse_argent_sanctuaire_lugia",
+        "great_canyon_entree",
+        "great_canyon_fin",
+        "grotte_ouest_entree",
+        "grotte_ouest_sanctuaire_mewtwo",
+        "kyurem_cratere_entree",
+        "kyurem_sanctuaire_glace",
+        "reshiram_montagne_entree",
+        "reshiram_sommet_flamme",
+        "ruines_enfouies_entree",
+        "ruines_enfouies_sanctuaire_mew",
+        "silent_chasm_entree",
+        "silent_chasm_fin",
+        "sinister_woods_entree_nuit",
+        "sinister_woods_entree",
+        "sinister_woods_fin_nuit",
+        "sinister_woods_fin",
+        "tiny_woods_entree",
+        "tiny_woods_fin",
+        "zekrom_montagne_entree",
+        "zekrom_sommet_tornade"
       ],
       "Maps": [],
       "Name": {
@@ -650,6 +682,35 @@
       "Released": true,
       "Comment": "Anciennes versions et variantes conservées telles quelles (comparaison avant remplacement). Voir docs/UNIFICATION_DESTINY.md.",
       "SortOrder": 100
+    },
+    "vitrines_menu": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "pmd_destiny_menu_jour"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Title-screen showcase maps",
+        "LocalTexts": {
+          "fr": "Cartes vitrines du menu-titre"
+        }
+      },
+      "Released": true,
+      "Comment": "Carte vitrine pmd_destiny_menu_jour (lot pmd_destiny_fangame_v1 de projet-creation-pmdo), reconstruite à l'identique (SHA-256 d'inventaire). Décor animé du menu-titre, pas une carte jouable.",
+      "SortOrder": 301
     }
   }
 }
