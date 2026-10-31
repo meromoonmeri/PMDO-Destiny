@@ -86,8 +86,8 @@ nom + 8 octets d'en-tête + n×16 octets par planche, vérifié par `tools/valid
 
 | Carte (AssetName) | Nom d'origine | Source | Octets | SHA-256 (12) | Remarques |
 |---|---|---|---:|---|---|
-| `cliffdaytest_source` | `cliffdaytest` | projet-pmdo main cliffdaytest.rsground (blob cd276dab) = source canonique de la cinématique (nom attendu par la zone du scénario) | 10 042 774 | `fb216699246c` | TILE MANQUANTE: v2_promontoire_jour_03; TILE MANQUANTE: 13_avancee_basse_gauche_terrain; sheet "" (texture par défaut); TILE MANQUANTE: Metano_Town_Animated; TILE MANQUANTE: 01_long_cap_jour_02; TILE MANQUANTE: Altere_Pond_Objects_Under |
-| `cliffnordouesttest1` |  | projet-creation-pmdo main cliffnordouesttest1.rsground (blob 51e9dd3b) | 7 812 806 | `2cb10918d6bf` | INCOMPLETE: planches v2_promontoire_jour_03  terrain  terrain (2)  terrain (3)  terrain (4) introuvables dans tous les dépôts; TILE MANQUANTE: v2_promontoire_jour_03; TILE MANQUANTE: terrain; TILE MANQUANTE: terrain (4); TILE MANQUANTE: terrain (3); TILE MANQUANTE: terrain (2) |
+| `cliffdaytest_source` | `cliffdaytest` | projet-pmdo main cliffdaytest.rsground (blob cd276dab) = source canonique de la cinématique (nom attendu par la zone du scénario) | 10 042 774 | `fb216699246c` | TILE MANQUANTE: v2_promontoire_jour_03; TILE MANQUANTE: 13_avancee_basse_gauche_terrain; sheet "" (texture par défaut); TILE MANQUANTE: Metano_Town_Animated; TILE MANQUANTE: 01_long_cap_jour_02; TILE MANQUANTE: Altere_Pond_Objects_Under — **résolu §11** (`Metano_Town_Animated` et `Altere_Pond_Objects_Under` étaient déjà fournies à la fin de la phase 1) |
+| `cliffnordouesttest1` |  | projet-creation-pmdo main cliffnordouesttest1.rsground (blob 51e9dd3b) | 7 812 806 | `2cb10918d6bf` | INCOMPLETE: planches v2_promontoire_jour_03  terrain  terrain (2)  terrain (3)  terrain (4) introuvables dans tous les dépôts; TILE MANQUANTE: v2_promontoire_jour_03; TILE MANQUANTE: terrain; TILE MANQUANTE: terrain (4); TILE MANQUANTE: terrain (3); TILE MANQUANTE: terrain (2) — **résolu §11** |
 | `cliffnordouesttest1_nuit` |  | projet-creation-pmdo commit e6c22020 (2026-10-21 21:44) livrables_cliff_nord_nuit_pmdo — version « compatible town02 » | 5 473 377 | `2f7b49835873` |  |
 
 #### Zone `town02_waterfallvillage` (2 cartes ajoutées)
@@ -259,8 +259,8 @@ Renommages (champ `AssetName` réécrit, reste du fichier identique) : `cliffday
 ### 7.1 Dépendances manquantes de cartes intégrées (aucun remplacement fabriqué)
 | Carte | Ressource manquante | Détail |
 |---|---|---|
-| `cliffnordouesttest1` | planches `v2_promontoire_jour_03` (6 209 cases), `terrain` (992), `terrain (4)` (451), `terrain (3)` (130), `terrain (2)` (94) | absentes de tous les commits de tous les dépôts (seuls des PNG non convertibles à l'identique existent : `guilde-treehouse-pmd sprites/cote_dix_zones/v2_promontoire/jour_00.png`). Les cases concernées s'affichent avec la texture d'erreur du moteur. Les planches `00_ciel`, `Altere_Pond_Cliffs`, `INVERSEPATHWAY`, `Metano_Altere_Transition_Base`, `Metano_Town_Animation_Tileset` sont fournies. |
-| `cliffdaytest_source` | `v2_promontoire_jour_03`, `13_avancee_basse_gauche_terrain`, `01_long_cap_jour_02` + 12 cases de planche vide `""` | idem (version d'avant la cinématique ; la version socle est complète) |
+| `cliffnordouesttest1` | planches `v2_promontoire_jour_03` (6 209 cases), `terrain` (992), `terrain (4)` (451), `terrain (3)` (130), `terrain (2)` (94) | **Résolu le 2026-10-31 (§11) : planches reconstruites à l'identique à partir de leurs PNG sources, rendu = 0 pixel d'écart.** Constat de la phase 1 : absentes de tous les commits de tous les dépôts (seuls des PNG non convertibles à l'identique existent : `guilde-treehouse-pmd sprites/cote_dix_zones/v2_promontoire/jour_00.png`). Les cases concernées s'affichent avec la texture d'erreur du moteur. Les planches `00_ciel`, `Altere_Pond_Cliffs`, `INVERSEPATHWAY`, `Metano_Altere_Transition_Base`, `Metano_Town_Animation_Tileset` sont fournies. |
+| `cliffdaytest_source` | `v2_promontoire_jour_03`, `13_avancee_basse_gauche_terrain`, `01_long_cap_jour_02` + 12 cases de planche vide `""` | **Résolu le 2026-10-31 (§11)** pour les trois planches ; seules les 12 cases `""` (état natif) subsistent. Constat de la phase 1 : idem (version d'avant la cinématique ; la version socle est complète) |
 | `WaterfallVillageCapital` | 282 cases référencent la planche vide `""` | état natif du fichier town02 (même rendu dans New Era : texture par défaut) |
 | `v50812_beach_cave_*` (4 cartes) | musique `BGM_DUN_BeachCave` | introuvable partout (nom interne EoS) |
 | socle : `plage_cv2_anse/crique`, `pmd_petal_clearing`, café Spinda | `Brine Cave.ogg`, `Sky Peak Prairie.ogg`, `Spinda's Cafe.ogg` | **récupérées** dans town02 (LFS) → `Content/Music` |
@@ -308,3 +308,51 @@ Renommages (champ `AssetName` réécrit, reste du fichier identique) : `cliffday
 * Le moteur PMDO n'a pas pu être lancé dans l'environnement de travail : rendu et scripts restent à
   confirmer en jeu (`-dev -quest`, Dev Warp). Les scripts du scénario proviennent d'une Quest non testée
   par son auteur (voir README du scénario) ; ils n'ont reçu que les correctifs du §5.1.
+
+## 11. Phase 2 (2026-10-31) — restauration exacte des planches des cartes falaises
+
+Objectif choisi par l'utilisateur : compléter `cliffnordouesttest1` et `cliffdaytest_source`
+(zone `destiny_cliff_tests`) dont 7 planches étaient introuvables sous forme `.tile` (§7.1).
+Aucune carte n'a été modifiée : seules des planches ont été ajoutées à `game/Content/Tile/`
+(+ leurs en-têtes dans `index.idx`, 1 740 → 1 747 entrées).
+
+### 11.1 Méthode
+Les `.tile` n'existaient dans aucun dépôt (exports côté utilisateur jamais poussés), mais leurs
+**images sources** existent dans `meromoonmeri/guilde-treehouse-pmd`. Pour chaque candidate, chaque
+case référencée par la carte (`TexLoc`) a été comparée au bloc 8×8 correspondant du rendu de
+référence « jour » (`cliffnordouesttest1_jour_ref.png`, `cliffdaytest_jour_ref.png`, exports
+`png_1x` du pack nuit), en ne jugeant que les cases non recouvertes par les calques supérieurs.
+Les planches sont découpées en tuiles 8 px avec la règle du moteur (`largeur // 8` colonnes, tuiles
+vides omises, doublons partagés). Preuve finale : le rendu complet des deux cartes avec les 7
+planches reconstruites est **identique pixel pour pixel** aux références (image 0 des animations ;
+pour `cliffdaytest_source` les images 1–4 ne diffèrent que par la phase des animations d'eau natives).
+
+### 11.2 Sources exactes (blobs git de `guilde-treehouse-pmd`)
+| Planche (`game/Content/Tile/`) | Source | Taille px | Octets | SHA-256 (12) |
+|---|---|---:|---:|---|
+| `v2_promontoire_jour_03.tile` | `sprites/cote_dix_zones/fonds/jour_ciel.png` (0f8e3343…) composé avec `fonds/jour_mer_00.png` (f4430c96…) | 1312×1024 | 523 985 | `9d155e5775c4` |
+| `01_long_cap_jour_02.tile` | `sprites/cote_dix_zones/fonds/jour_nuages.png` (bb246c94…) | 1440×208 | 38 457 | `c9683b952a4a` |
+| `terrain.tile` | `renders/references_calques_v2/falaises/02/terrain.png` (8e10bd0f…) | 1115×398 | 1 431 483 | `763e828b0e09` |
+| `terrain (2).tile` | `renders/references_calques_v2/falaises/04/terrain.png` (c1798e1b…) | 1032×384 | 1 360 600 | `0c8b20abaf18` |
+| `terrain (3).tile` | `renders/references_calques_v2/falaises/08/terrain.png` (73c29f9f…) | 1312×816 | 2 911 253 | `c477930b2809` |
+| `terrain (4).tile` | même source que `terrain (3)` (la carte référence deux noms pour la même planche) | 1312×816 | 2 911 253 | `c477930b2809` |
+| `13_avancee_basse_gauche_terrain.tile` | `renders/caps_terrasses_v4/13_avancee_basse_gauche_terrain.png` (bf0c3fb7…) | 1640×656 | 1 499 356 | `ebfb36d302c4` |
+
+Pistes écartées (vérifiées case par case, non identiques) : `v2_promontoire/jour_00.png` et sa
+composition (zone d'herbe différente), les images `ocean/jour_0N`, les calques `cote_v2/01_promontoire`
+(autre lot), `falaises_metano_calques`, `sprites_falaises_*`, `long_cap/jour_00|01`.
+
+### 11.3 Vérifications
+* Rendu `cliffnordouesttest1` (138×98) et `cliffdaytest_source` (123×99) avec les planches du dépôt
+  + les 7 nouvelles : 0 pixel de différence avec les références ; plus aucune texture absente
+  (il ne reste que la planche de nom vide `""`, 4 références, comportement natif conservé).
+* `index.idx` : l'ancien index réécrit par l'outil est identique octet pour octet à l'original
+  (format vérifié sur les 1 740 entrées) avant ajout des 7 en-têtes.
+* `docs/audit/final_dependency_problems.json` mis à jour (les deux cartes n'ont plus de manque,
+  hors la planche `""`).
+
+### 11.4 Variante « Généré » (non commitée)
+À la demande de l'utilisateur, une variante du terrain des deux cartes a aussi été produite par la
+méthode « générateur d'images + fond magenta » (layout verrouillé sur les planches d'origine,
+cf. `METHODE_MAGENTA_ET_GENERATEUR.md`). Elle reste un **aperçu local** (`maps_work/variant/`,
+`maps_work/preview/apercu_falaises.html`), étiquetée « Généré », et ne remplace rien dans la Quest.

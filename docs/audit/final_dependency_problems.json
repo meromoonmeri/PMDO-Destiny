@@ -1,18 +1,6 @@
 {
  "cliffdaytest_source": [
-  "TILE MANQUANTE: v2_promontoire_jour_03",
-  "TILE MANQUANTE: 13_avancee_basse_gauche_terrain",
-  "sheet \"\" (texture par défaut)",
-  "TILE MANQUANTE: Metano_Town_Animated",
-  "TILE MANQUANTE: 01_long_cap_jour_02",
-  "TILE MANQUANTE: Altere_Pond_Objects_Under"
- ],
- "cliffnordouesttest1": [
-  "TILE MANQUANTE: v2_promontoire_jour_03",
-  "TILE MANQUANTE: terrain",
-  "TILE MANQUANTE: terrain (4)",
-  "TILE MANQUANTE: terrain (3)",
-  "TILE MANQUANTE: terrain (2)"
+  "sheet \"\" (texture par défaut)"
  ],
  "caféspindaaccueil": [
   "BG base PMDO: Berry_Basket_Blue",
