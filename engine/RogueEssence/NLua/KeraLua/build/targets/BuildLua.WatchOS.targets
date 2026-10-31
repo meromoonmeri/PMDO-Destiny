@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <watchOSBuildDir>ios_build</watchOSBuildDir>
+        <watchOSOutputDir>watchos</watchOSOutputDir>
+        <DylibFileFramework>liblua54.framework</DylibFileFramework>
+    </PropertyGroup>
+    <Target Name="BuildLuaXamarinWatchOS" BeforeTargets="PrepareForBuild" Condition="'$(OS)'=='Unix' and Exists('/usr/bin/xcodebuild')" >
+        <Message Text="Building watchOS Lua library (arm64/x86_64)" />
+        <Exec Command="make watchos" WorkingDirectory="$(ExternalLuaPath)\$(watchOSBuildDir)" />
+        <Exec Command="ditto $(ExternalLuaPath)\$(watchOSBuildDir)\$(watchOSOutputDir)\$(DylibFileFramework) $(OutputRuntimeDir)\$(watchOSOutputDir)\native\$(DylibFileFramework)"  />
+        <RemoveDir Directories="$(OutputRuntimeDir)\$(watchOSOutputDir)\native\$(DylibFileFramework)\Headers" />    
+    </Target>
+    <Target Name="CleanLuaXamarinWatchOS" AfterTargets="Clean" Condition="'$(OS)'=='Unix' and Exists('/usr/bin/xcodebuild')" >
+        <Message Text="Cleaning Lua library (watchOS)" />
+        <RemoveDir Directories="
+        $(ExternalLuaPath)\$(watchOSBuildDir)\$(watchOSOutputDir); 
+        $(OutputRuntimeDir)\$(watchOSOutputDir) " />
+    </Target>
+</Project>
+

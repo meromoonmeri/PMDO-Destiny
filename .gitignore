@@ -1,6 +1,7 @@
-# Build outputs
-build/
-dist/
+# Build outputs (racine du dépôt seulement : les dossiers build/ des sources du moteur,
+# ex. engine/RogueEssence/NLua/build/*.csproj, font partie des sources et doivent être versionnés)
+/build/
+/dist/
 engine/publish/
 **/bin/
 **/obj/
