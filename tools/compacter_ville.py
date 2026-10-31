@@ -48,7 +48,7 @@ def compact(source: Path, destination: Path) -> int:
         raise ValueError('Empreinte de la copie compacte inattendue.')
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(result)
-    print(f'Carte de jeu : {len(original)} → {len(result)} octets ; {count} cellules par défaut.')
+    print(f'Carte de jeu : {len(original)} -> {len(result)} octets ; {count} cellules par défaut.')
     return count
 
 

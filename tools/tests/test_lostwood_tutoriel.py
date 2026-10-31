@@ -29,16 +29,16 @@ length = struct.unpack_from('<q', binary)[0]
 assert binary[8:16] == b'\x89PNG\r\n\x1a\n'
 assert struct.unpack_from('<iiii', binary, 8 + length) == (32, 32, 0, 1)
 assert len(binary) == 8 + length + 16
-assert "require 'destiny.services.statue_kangourex'" in (GAME / 'Data/Script/destiny/main.lua').read_text()
+assert "require 'destiny.services.statue_kangourex'" in (GAME / 'Data/Script/destiny/main.lua').read_text(encoding='utf-8')
 event = (GAME / 'Data/Script/destiny/event.lua').read_text(encoding='utf-8')
 assert "require 'destiny.event_battle'" in event  # garder les événements préexistants
 assert 'function SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson' in event
 assert 'BATTLE_SCRIPT = {}' not in event and 'SINGLE_CHAR_SCRIPT = {}' not in event
-scene = (GAME / 'Data/Script/destiny/ground/cliffdaytest_nuit/init.lua').read_text()
+scene = (GAME / 'Data/Script/destiny/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
 assert 'SOUND:PlayBGM' not in scene
 assert 'GROUND:MoveToPosition(partenaire' in scene
 assert 'Pichu_Home_Door' in scene and 'Pichu_Crossroads' in scene
 assert 'LostWoodTutorialDone' not in scene
-quiz = (GAME / 'Data/Script/destiny/ground/personality_test/init.lua').read_text()
+quiz = (GAME / 'Data/Script/destiny/ground/personality_test/init.lua').read_text(encoding='utf-8')
 assert quiz.index('SOUND:FadeOutBGM(60)') < quiz.index("Une faille s'ouvre dans le rêve")
 print('OK : 7 étages, 7 événements compatibles, boucle Vorbis, objet .dir et transition.')
