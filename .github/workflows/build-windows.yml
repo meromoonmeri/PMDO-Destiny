@@ -33,6 +33,10 @@ jobs:
         run: python tools/tests/test_lost_wood_raccords.py
       - name: Check Lost Wood reconstruction
         run: python tools/tests/test_lost_wood_reproduction.py
+      - name: Check Lost Wood tutorial and statue assets
+        run: python tools/tests/test_lostwood_tutoriel.py
+      - name: Check safe native city payload and compact copy
+        run: python tools/tests/test_payload_ville.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

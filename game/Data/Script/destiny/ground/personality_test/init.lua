@@ -276,9 +276,12 @@ function personality_test.Quiz()
   -- ------------------------------------- la faille : le rêve se fend
   -- pendant que le héros est encore allongé, on rejoint celui qui hésite
   -- encore à devenir explorateur (map cliffdaytest, version nuit)
+  -- La musique du questionnaire s'éteint avant la première voix de la
+  -- cinématique. Elle ne reprendra pas sur la carte nocturne.
+  SOUND:FadeOutBGM(60)
+  GAME:WaitFrames(60)
   UI:WaitShowVoiceOver("Une faille s'ouvre dans le rêve...", -1)
   UI:WaitShowVoiceOver("...quelque part, quelqu'un hésite encore\n à devenir explorateur.", -1)
-  SOUND:FadeOutBGM(120)
   GAME:FadeOut(false, 120)
   GAME:WaitFrames(60)
   GAME:CutsceneMode(false)

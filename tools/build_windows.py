@@ -99,6 +99,12 @@ def main() -> None:
     if (publish_dir / 'BUILD').exists():
         shutil.rmtree(publish_dir / 'BUILD')
 
+    # Conserver la carte native du dépôt et alléger uniquement sa copie de jeu.
+    # Les cellules vides utilisent les valeurs par défaut du moteur PMDO 0.8.12.
+    from compacter_ville import compact
+    compact(ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground',
+            publish_dir / 'Data/Ground/WaterfallVillageCapital.rsground')
+
     exe = publish_dir / 'PMDC.exe'
     destiny_exe = publish_dir / 'Destiny.exe'
     if destiny_exe.exists():

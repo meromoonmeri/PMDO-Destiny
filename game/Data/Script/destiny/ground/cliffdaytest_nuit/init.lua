@@ -56,6 +56,9 @@ function cliffdaytest_nuit.PlotScripting()
   if SV.Destiny.RetourAccompli then
     if not SV.Destiny.FinaleDestiny then
       cliffdaytest_nuit.SceneRetour()
+    elseif SV.Destiny.VisiteVille == 'en_route' then
+      -- Reprendre la transition si elle a été interrompue après le retour.
+      cliffdaytest_nuit.AllerEnVille()
     else
       GAME:FadeIn(20)
     end
@@ -124,6 +127,14 @@ end
 
 -- -------------------------------------------------------- retour en duo
 
+function cliffdaytest_nuit.AllerEnVille()
+  SOUND:FadeOutBGM(45)
+  GAME:FadeOut(false, 45)
+  GAME:CutsceneMode(false)
+  -- La ville reste une carte distincte, dans sa zone d'origine.
+  GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
+end
+
 function cliffdaytest_nuit.SceneRetour()
   local hero = CH('PLAYER')
   local partner = equipe_scene.Partenaire(666, 516, Direction.Up)
@@ -149,12 +160,22 @@ function cliffdaytest_nuit.SceneRetour()
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Happy")
   UI:WaitShowDialogue("Ensemble. Notre aventure ne fait que commencer.")
+  UI:WaitShowDialogue("Le jour se lève. Viens, je te ramène en ville ; je te présenterai les endroits où nous préparer.")
+  GROUND:CharEndAnim(hero)
+  GROUND:CharEndAnim(partner)
+  hero.CollisionDisabled = true
+  local marche_partenaire = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(partner, 694, 522, false, 1)
+  end)
+  local marche_hero = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(8)
+    GROUND:MoveToPosition(hero, 674, 522, false, 1)
+  end)
+  TASK:JoinCoroutines({marche_partenaire, marche_hero})
+  hero.CollisionDisabled = false
   SV.Destiny.FinaleDestiny = true
-  GAME:WaitFrames(30)
-  -- Une caméra absolue de cinématique ne suit pas le joueur : la rendre.
-  GAME:MoveCamera(0, 0, 30, true)
-  equipe_scene.Suivre(partner, hero)
-  GAME:CutsceneMode(false)
+  SV.Destiny.VisiteVille = 'en_route'
+  cliffdaytest_nuit.AllerEnVille()
 end
 
 -- ------------------------------------------------------- scène (hésitation)
@@ -162,26 +183,44 @@ end
 function cliffdaytest_nuit.ScenePartenaire()
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
-  SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
+  -- Aucun morceau ici : le quiz s'est tu et Tiny Woods démarre dans le donjon.
 
-  -- le héros est allongé, inconscient, ailleurs : seul le partenaire est ici
-  local hero = CH('PLAYER')
+  -- Le héros est inconscient ailleurs et le Pichu décoratif de la carte ne
+  -- doit pas doubler le partenaire sélectionné au quiz.
   GROUND:Hide('PLAYER')
+  if CH('Pichu') ~= nil then GROUND:Hide('Pichu') end
 
-  -- le partenaire apparaît au croisement (spawn réutilisé de la map)
   local partenaire = GAME:GetPlayerPartyMember(1)
   GROUND:SpawnerSetSpawn('Adagio', partenaire)
   partenaire = GROUND:SpawnerDoSpawn('Adagio')
   AI:DisableCharacterAI(partenaire)
-  local croisement = MRKR('Pichu_Crossroads')
-  -- Le marqueur central se trouve sous une partie opaque du décor en avant-plan.
-  -- Garder la caméra au croisement, mais placer le partenaire dans l'ouverture
-  -- voisine, sans modifier la carte ni l'ordre de ses calques.
-  GROUND:TeleportTo(partenaire, croisement.Position.X + 64, croisement.Position.Y + 28, Direction.Up)
-  GAME:MoveCamera(croisement.Position.X, croisement.Position.Y, 1, false)
-  -- Le quiz termine sur un fondu noir ; révéler la carte avant les dialogues.
+  local porte, croisement = MRKR('Pichu_Home_Door'), MRKR('Pichu_Crossroads')
+
+  -- Sur cette carte, l'avant-plan contient aussi un morceau opaque du chemin.
+  -- Pendant la marche seulement, le dessiner avec le sol : le décor reste
+  -- identique mais ne masque plus le Pokémon. L'ordre natif est ensuite remis.
+  local avant_plan, ordre_avant_plan
+  local carte = _ZONE.CurrentGround
+  for i = 0, carte.Layers.Count - 1 do
+    local couche = carte.Layers[i]
+    if couche.Name == 'Canopée — avant-plan' then
+      avant_plan, ordre_avant_plan = couche, couche.Layer
+      couche.Layer = DrawLayer.Normal
+      break
+    end
+  end
+
+  GROUND:TeleportTo(partenaire, porte.Position.X, porte.Position.Y, Direction.Down)
+  -- Le cadre contient la porte, la jonction et le début du chemin du donjon.
+  GAME:MoveCamera(croisement.Position.X + 24, croisement.Position.Y - 26, 1, false)
   GAME:FadeIn(30)
-  GAME:WaitFrames(30)
+  GAME:WaitFrames(10)
+  GROUND:MoveToPosition(partenaire, porte.Position.X, porte.Position.Y + 58, false, 1)
+  GROUND:MoveToPosition(partenaire, croisement.Position.X + 4, croisement.Position.Y + 12, false, 1)
+  GROUND:MoveToPosition(partenaire, croisement.Position.X + 64, croisement.Position.Y + 28, false, 1)
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 8)
+  if avant_plan ~= nil then avant_plan.Layer = ordre_avant_plan end
+  GAME:WaitFrames(20)
 
   UI:SetSpeaker(partenaire)
   UI:SetSpeakerEmotion("Worried")
@@ -199,21 +238,8 @@ function cliffdaytest_nuit.ScenePartenaire()
   UI:SetSpeakerEmotion("Happy")
   UI:WaitShowDialogue("C'est décidé ! Je traverserai [color=#69D98C]Lost Wood[color] —\n et je sortirai de là en vrai explorateur !")
 
-  -- tutoriel du donjon à son entrée : explications intégrées au récit,
-  -- commandes abstraites pour respecter la configuration du joueur
+  -- Les conseils sont maintenant présentés dans Lost Wood, étage par étage.
   SV.Destiny = SV.Destiny or {}
-  if not SV.Destiny.LostWoodTutorialDone then
-    UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue("Avant d'entrer, je dois me rappeler les règles d'un donjon.")
-    UI:WaitShowDialogue("[color=#69D98C]Lost Wood[color] compte sept étages. À chaque étage, il faut trouver l'escalier qui descend ; le septième mène au fond de la forêt.")
-    UI:WaitShowDialogue("Les déplacements se font avec les commandes de direction. Chaque pas prend un tour : les Pokémon autour de moi peuvent bouger et agir pendant ce temps.")
-    UI:WaitShowDialogue("La commande d'attaque permet de frapper tout près. Dans le menu des capacités, je choisis une attaque à distance ou un pouvoir spécial — mais chaque capacité consomme des PP.")
-    UI:WaitShowDialogue("Le sac contient des objets utiles : soins, baies et autres outils. Je peux les sélectionner dans le menu des objets ; certains peuvent aussi servir contre les obstacles ou les adversaires.")
-    UI:WaitShowDialogue("Je dois surveiller mon ventre : avancer longtemps sans manger épuise. Si je trouve de la nourriture, je la garde pour les moments où j'en aurai besoin.")
-    UI:WaitShowDialogue("Je n'ai pas besoin de combattre tout le monde. Je peux contourner un adversaire, utiliser un objet, ou économiser mes PP pour un passage difficile.")
-    UI:WaitShowDialogue("Quand j'aurai trouvé l'escalier du septième étage, je sortirai dans la clairière. Alors… en avant !")
-    SV.Destiny.LostWoodTutorialDone = true
-  end
   UI:WaitShowDialogue("En route ! La nuit est à moi !")
 
   -- le partenaire part seul : le héros est gardé hors de l'équipe jusqu'au réveil

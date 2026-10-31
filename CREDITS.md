@@ -134,3 +134,18 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   Lost Wood déjà présentes dans la quête. Voir
   [`docs/LOST_WOOD_DTEF_ET_SCENARIO.md`](docs/LOST_WOOD_DTEF_ET_SCENARIO.md)
   pour leur structure, les outils et les limites de validation.
+
+## Départ, tutoriel et statue de Lost Wood
+
+- **Tiny Woods** — musique originale de *Pokémon Mystery Dungeon: Blue Rescue
+  Team*, convertie depuis la [bande-son archivée](https://archive.org/details/pmd-blue-rescue-team-original-soundtrack).
+  Métadonnées de la piste : Arata Iiyoshi ; bande-son du jeu créditée à
+  Arata Iiyoshi et Atsuhiro Ishizuna. Œuvre commerciale, autorisation de
+  redistribution publique non établie.
+- **Statue Kangourex** — sprite original [Kangaskhan Rock](https://archives.bulbagarden.net/wiki/File:Kangaskhan_Rock.png),
+  encapsulé en objet PMDO ; droits Pokémon/Chunsoft distincts, aucune licence
+  libre ni autorisation de redistribution publique établie.
+- **Structure du tutoriel** — étude du projet de Palikadude au commit
+  `da6c2130d641507447e6386a5e47a296e8cb4c71`. Les textes français de Destiny
+  sont nouveaux. Détails et conditions d'utilisation :
+  [`docs/TUTORIEL_LOST_WOOD_ET_STATUE.md`](docs/TUTORIEL_LOST_WOOD_ET_STATUE.md).
