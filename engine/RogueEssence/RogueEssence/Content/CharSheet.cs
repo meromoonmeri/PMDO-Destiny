@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RogueElements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -156,6 +156,62 @@ namespace RogueEssence.Content
             this.AnimData = animData;
             this.OffsetData = offsetData;
             this.ShadowSize = shadowSize;
+        }
+
+        private CharSheet destinyNightCopy;
+
+        /// <summary>
+        /// Returns the filtered sheet cached alongside its original. When the
+        /// engine's LRU evicts the original, Dispose releases both textures.
+        /// </summary>
+        public CharSheet GetDestinyNightCopy()
+        {
+            if (destinyNightCopy == null)
+                destinyNightCopy = CreateDestinyNightCopy();
+            return destinyNightCopy;
+        }
+
+        public override void Dispose()
+        {
+            if (destinyNightCopy != null)
+            {
+                destinyNightCopy.Dispose();
+                destinyNightCopy = null;
+            }
+            base.Dispose();
+        }
+
+        /// <summary>
+        /// Creates an independent GPU sheet using Destiny's existing night
+        /// grade. Animation metadata is shared; the source is never modified.
+        /// </summary>
+        private CharSheet CreateDestinyNightCopy()
+        {
+            Color[] pixels = new Color[Width * Height];
+            baseTexture.GetData(pixels);
+            for (int ii = 0; ii < pixels.Length; ii++)
+            {
+                Color pixel = pixels[ii];
+                int alpha = pixel.A;
+                if (alpha == 0)
+                    continue;
+
+                // CharSheet PNGs contain premultiplied pixels. Recover their
+                // source RGB before the nonlinear grade, then premultiply again.
+                int r = Math.Min(255, pixel.R * 255 / alpha);
+                int g = Math.Min(255, pixel.G * 255 / alpha);
+                int b = Math.Min(255, pixel.B * 255 / alpha);
+                double gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                double lum = gray / 255.0;
+                double k = 0.20 + 0.30 * lum;
+                int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
+                int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
+                int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
+                pixels[ii] = new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
+            }
+            Texture2D texture = new Texture2D(device, Width, Height);
+            texture.SetData(pixels);
+            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData);
         }
 
         //frompath (import) will take a folder containing all elements (xml and all animations, or xml and a sheet)

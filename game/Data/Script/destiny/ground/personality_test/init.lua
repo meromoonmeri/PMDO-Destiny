@@ -78,12 +78,33 @@ local function construire_pool(espece_exclue)
   return pool
 end
 
--- MultiPageMenu accepte des libellés explicites, contrairement au menu
--- MonsterID qui n'affiche que le nom d'espèce et masque les formes régionales.
+-- Le menu de sélection natif PMDO utilise le même portrait bordé que le
+-- sélecteur du projet de référence. Les libellés propres à Destiny gardent la
+-- distinction entre formes et le replay continue d'enregistrer un indice.
 local function choisir_dans_pool(pool, titre)
   local labels = {}
   for _, s in ipairs(pool) do table.insert(labels, s.nom) end
-  UI:BeginMultiPageMenu(16, 16, 224, titre, labels, 8, 1, -1)
+
+  if _DATA.CurrentReplay ~= nil then
+    UI:BeginMultiPageMenu(16, 16, 112, titre, labels, 12, 1, -1)
+    UI:WaitForChoice()
+    return pool[UI:ChoiceResult()]
+  end
+
+  local ListType = luanet.import_type('System.Collections.Generic.List`1')
+  local StartChar = luanet.import_type('RogueEssence.Data.StartChar')
+  local choix = LUA_ENGINE:MakeGenericType(ListType, { StartChar }, {})
+  for _, s in ipairs(pool) do
+    local id = RogueEssence.Dungeon.MonsterID(s.espece, s.forme, 'normal', Gender.Genderless)
+    choix:Add(StartChar(id, s.nom))
+  end
+  local function selection(index)
+    local code = index + 1
+    _DATA:LogUIPlay(code)
+    UI:GetChoiceAction(code):Invoke()
+  end
+  local menu = RogueEssence.Menu.ChooseMonsterMenu(titre, choix, 0, selection, nil, false, 12)
+  UI:SetCustomMenu(menu)
   UI:WaitForChoice()
   return pool[UI:ChoiceResult()]
 end
@@ -183,7 +204,7 @@ function personality_test.Quiz()
   UI:WaitForChoice()
   local pool_heros = construire_pool(nil)
   if not UI:ChoiceResult() then
-    starter = choisir_dans_pool(pool_heros, "Choisis ton héros")
+    starter = choisir_dans_pool(pool_heros, "Ton héros")
   else
     -- Réutilise l'entrée complète source correspondant à la recommandation.
     for _, s in ipairs(pool_heros) do
@@ -203,7 +224,7 @@ function personality_test.Quiz()
     UI:ChoiceMenuYesNo(msg, true)
     UI:WaitForChoice()
     ok = UI:ChoiceResult()
-    if not ok then starter = choisir_dans_pool(pool_heros, "Choisis ton héros") end
+    if not ok then starter = choisir_dans_pool(pool_heros, "Ton héros") end
   end
 
   -- création du héros (niveau 5, talent choisi)
@@ -228,7 +249,7 @@ function personality_test.Quiz()
   local pool_partenaire = construire_pool(starter.espece)
   local partenaire, ok_partenaire
   repeat
-    partenaire = choisir_dans_pool(pool_partenaire, "Choisis ton partenaire")
+    partenaire = choisir_dans_pool(pool_partenaire, "Partenaire")
     UI:ChoiceMenuYesNo("Est-ce que " .. partenaire.nom .. " convient comme partenaire ?", true)
     UI:WaitForChoice()
     ok_partenaire = UI:ChoiceResult()

@@ -10914,8 +10914,8 @@
        "Y": 0
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Fond_Pulse",
-       "FrameTime": 8,
+       "AnimIndex": "Halo_Destiny_Fond",
+       "FrameTime": 1,
        "StartFrame": -1,
        "EndFrame": -1,
        "AnimDir": -1,
@@ -10934,12 +10934,12 @@
     {
      "BG": {
       "MapLoc": {
-       "X": 40,
+       "X": 0,
        "Y": 0
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Anneau_Pulse",
-       "FrameTime": 8,
+       "AnimIndex": "Halo_Destiny_Orbes",
+       "FrameTime": 3,
        "StartFrame": -1,
        "EndFrame": -1,
        "AnimDir": -1,
@@ -10958,12 +10958,36 @@
     {
      "BG": {
       "MapLoc": {
-       "X": 80,
-       "Y": 40
+       "X": 96,
+       "Y": 56
       },
       "BGAnim": {
-       "AnimIndex": "Halo_Shine_Pulse",
-       "FrameTime": 8,
+       "AnimIndex": "Halo_Destiny_Rayons",
+       "FrameTime": 3,
+       "StartFrame": -1,
+       "EndFrame": -1,
+       "AnimDir": -1,
+       "Alpha": 255,
+       "AnimFlip": 0
+      },
+      "BGMovement": {
+       "X": 0,
+       "Y": 0
+      },
+      "Parallax": "0, 0",
+      "RepeatX": false,
+      "RepeatY": false
+     }
+    },
+    {
+     "BG": {
+      "MapLoc": {
+       "X": 0,
+       "Y": 0
+      },
+      "BGAnim": {
+       "AnimIndex": "Halo_Destiny_Voile",
+       "FrameTime": 1,
        "StartFrame": -1,
        "EndFrame": -1,
        "AnimDir": -1,

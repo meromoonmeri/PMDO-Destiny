@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueEssence.Data;
 using RogueElements;
@@ -407,6 +407,8 @@ namespace RogueEssence.Ground
         public override void Draw(SpriteBatch spriteBatch, Loc offset)
         {
             CharSheet sheet = GraphicsManager.GetChara(CurrentForm.ToCharID());
+            if (Map is GroundMap ground && ground.FilterNightCharacters)
+                sheet = sheet.GetDestinyNightCopy();
             currentCharAction.Draw(spriteBatch, offset, sheet);
 
             if (currentEmote != null)
