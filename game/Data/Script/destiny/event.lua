@@ -1,6 +1,7 @@
 -- Les tables d'événements sont créées par le moteur et alimentées par origin.
 -- Conserver les événements de combat existants sans réinitialiser BATTLE_SCRIPT.
 require 'destiny.event_battle'
+require 'destiny.mapgen_lost_wood'
 
 -- La table SINGLE_CHAR_SCRIPT est créée par le moteur : ne pas la remplacer.
 local lecons = {

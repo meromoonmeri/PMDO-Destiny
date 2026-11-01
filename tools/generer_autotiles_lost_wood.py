@@ -12,6 +12,9 @@ from PIL import Image, ImageEnhance
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT/'game'
 SOURCE = ROOT/'art/lost_wood_sources'
+# Les définitions actives utilisent maintenant le DTEF aux lucioles. Garder
+# les définitions historiques permet de reconstruire sans les remplacer.
+ORIGINAL_DEFINITIONS = SOURCE/'autotiles_originaux'
 OUT = Path(os.environ.get('DESTINY_AUTOTILE_OUT', ROOT/'build/lost_wood_generation'))
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -158,7 +161,7 @@ def build(kind):
     for i in range(count):
         x,y,pos=struct.unpack_from('<iiq',original,8+i*16);positions[(x,y)]=pos
     dest=bytearray(original)
-    doc=json.loads((GAME/'Data/AutoTile'/f'lost_wood_{kind}.json').read_text(encoding='utf-8-sig'))
+    doc=json.loads((ORIGINAL_DEFINITIONS/f'lost_wood_{kind}.json').read_text(encoding='utf-8-sig'))
     definitions=doc['Object']['Tiles'];atlas=Image.new('RGBA',(192,(max(y for x,y in positions)+1)*24),(0,0,0,0)); used=set(); info=[]
     for key,variants in definitions.items():
         if not key.startswith('Tilex'):continue

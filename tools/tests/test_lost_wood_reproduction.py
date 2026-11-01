@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the Lost Wood sheets and DTEF outside the source tree and compare pixels."""
+"""Rebuild historical material and the active firefly DTEF outside the source tree."""
 from pathlib import Path
 import os
 import subprocess
@@ -34,9 +34,10 @@ def main():
                 expected.close()
                 actual.close()
 
-        original = ROOT / 'art/dtef/LostWoodDestiny'
+        original = ROOT / 'art/dtef/LostWoodLucioles'
         rebuilt = temp / 'dtef'
-        expected_names = {p.name for p in original.iterdir() if p.is_file()}
+        # Le README documente la provenance ; il n'est pas un export DTEF.
+        expected_names = {p.name for p in original.iterdir() if p.is_file() and p.suffix in {'.png', '.xml'}}
         actual_names = {p.name for p in rebuilt.iterdir() if p.is_file()}
         assert expected_names == actual_names, (expected_names - actual_names, actual_names - expected_names)
         for name in expected_names:
@@ -45,7 +46,7 @@ def main():
                     assert a.size == b.size and a.convert('RGBA').tobytes() == b.convert('RGBA').tobytes(), name
             else:
                 assert (original / name).read_text(encoding='utf-8') == (rebuilt / name).read_text(encoding='utf-8'), name
-    print('Reconstruction Lost Wood : adresses, pixels et paquet DTEF identiques.')
+    print('Reconstruction Lost Wood : anciennes matières préservées et DTEF actif identique.')
 
 
 if __name__ == '__main__':

@@ -28,10 +28,10 @@ def code(values,x,y):
     return n
 
 def test_headers():
-    for name in ['LostWoodFloor','LostWoodWall']:
+    for name in ['LostWoodFloor','LostWoodWall','LostWoodLucioles']:
         data=(T/(name+'.tile')).read_bytes()
         ts,count=struct.unpack_from('<ii',data)
-        expected={'LostWoodFloor':49,'LostWoodWall':57}[name]
+        expected={'LostWoodFloor':49,'LostWoodWall':57,'LostWoodLucioles':1233}[name]
         assert ts==24 and count==expected
         reader=SheetReader(T/(name+'.tile'))
         assert len(reader.positions)==count
@@ -63,8 +63,10 @@ def test_raccords():
     mean=difference/(compared*3)
     print('Paires adjacentes:',tested,'; codes de murs:',sum(k=='wall' for k,c in seen),'/47')
     print(f'Pixels de bord identiques : {100*exact/compared:.2f} % ; écart RGB moyen {mean:.2f}/255 ; écart maximal par canal cumulé {max_difference}/765')
-    # Les coins complexes ne sont pas tous pixel-identiques : ne pas qualifier
-    # ces mesures de validation artistique. Aucune case absente n'est tolérée.
-    assert sum(k=='wall' for k,c in seen)==47 and mean<3 and max_difference<200
+    # La texture Treehouse validée est plus nuancée que l'ancienne : sa
+    # moyenne observée est 9,38/255. La borne 10,5 détecte une régression
+    # importante mais ne démontre pas un raccord artistique parfait.
+    # La fidélité exacte au DTEF est contrôlée par test_lost_wood_dtef.py.
+    assert sum(k=='wall' for k,c in seen)==47 and mean<10.5 and max_difference<200
 
 if __name__=='__main__':test_headers();test_raccords();print('OK: feuilles natives et couverture des cas')

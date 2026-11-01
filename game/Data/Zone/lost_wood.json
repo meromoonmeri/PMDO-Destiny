@@ -55,10 +55,10 @@
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                   "CellWidth": 10,
-                  "CellHeight": 10,
-                  "CellX": 3,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -69,46 +69,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 25
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -130,11 +140,11 @@
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -533,6 +543,90 @@
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -564,10 +658,10 @@
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                   "CellWidth": 10,
-                  "CellHeight": 10,
-                  "CellX": 3,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -578,46 +672,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 25
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -639,11 +743,11 @@
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -1042,6 +1146,90 @@
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -1073,10 +1261,10 @@
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                   "CellWidth": 10,
-                  "CellHeight": 10,
-                  "CellX": 3,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -1087,46 +1275,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 25
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           },
                           "Height": {
                             "Min": 5,
-                            "Max": 10
+                            "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -1148,11 +1346,11 @@
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -1551,6 +1749,90 @@
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -1581,11 +1863,11 @@
                 },
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "CellWidth": 9,
-                  "CellHeight": 9,
-                  "CellX": 4,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellWidth": 10,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -1596,46 +1878,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 35
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -1651,17 +1943,17 @@
                       {
                         "Spawn": {
                           "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                          "HallTurnBias": 0,
+                          "HallTurnBias": 50,
                           "Brush": {
                             "$type": "RogueElements.DefaultHallBrush, RogueElements"
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -2202,6 +2494,90 @@
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -2232,11 +2608,11 @@
                 },
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "CellWidth": 9,
-                  "CellHeight": 9,
-                  "CellX": 4,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellWidth": 10,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -2247,46 +2623,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 35
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -2302,17 +2688,17 @@
                       {
                         "Spawn": {
                           "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                          "HallTurnBias": 0,
+                          "HallTurnBias": 50,
                           "Brush": {
                             "$type": "RogueElements.DefaultHallBrush, RogueElements"
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -3238,6 +3624,90 @@
                   "$type": "RogueEssence.LevelGen.DetectTileStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
                   "FindTile": "stairs_secret_up"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -3268,11 +3738,11 @@
                 },
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "CellWidth": 9,
-                  "CellHeight": 9,
-                  "CellX": 4,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellWidth": 10,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -3283,46 +3753,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 35
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -3338,17 +3818,17 @@
                       {
                         "Spawn": {
                           "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                          "HallTurnBias": 0,
+                          "HallTurnBias": 50,
                           "Brush": {
                             "$type": "RogueElements.DefaultHallBrush, RogueElements"
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -4004,6 +4484,90 @@
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
                 }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
+                }
               }
             ],
             "Comment": ""
@@ -4034,11 +4598,11 @@
                 },
                 "Value": {
                   "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "CellWidth": 9,
-                  "CellHeight": 9,
-                  "CellX": 4,
-                  "CellY": 3,
-                  "CellWall": 1,
+                  "CellWidth": 10,
+                  "CellHeight": 8,
+                  "CellX": 2,
+                  "CellY": 4,
+                  "CellWall": 6,
                   "Wrap": false
                 }
               },
@@ -4049,46 +4613,56 @@
                   ]
                 },
                 "Value": {
-                  "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "RoomRatio": {
-                    "Min": 90,
-                    "Max": 90
-                  },
-                  "BranchRatio": {
-                    "Min": 0,
-                    "Max": 35
-                  },
-                  "NoForcedBranches": false,
+                  "$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                  "GapAxis": 1,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenBump`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
-                            "Max": 9
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "BumpPercent": {
+                            "Min": 20,
+                            "Max": 31
                           }
                         },
                         "Rate": 10
                       },
                       {
                         "Spawn": {
-                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
                           "Width": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           },
                           "Height": {
-                            "Min": 4,
+                            "Min": 5,
                             "Max": 8
                           }
                         },
-                        "Rate": 10
+                        "Rate": 7
+                      },
+                      {
+                        "Spawn": {
+                          "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Width": {
+                            "Min": 5,
+                            "Max": 8
+                          },
+                          "Height": {
+                            "Min": 5,
+                            "Max": 8
+                          }
+                        },
+                        "Rate": 7
                       }
                     ]
                   },
@@ -4104,17 +4678,17 @@
                       {
                         "Spawn": {
                           "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                          "HallTurnBias": 0,
+                          "HallTurnBias": 50,
                           "Brush": {
                             "$type": "RogueElements.DefaultHallBrush, RogueElements"
                           },
                           "Width": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           },
                           "Height": {
                             "Min": 0,
-                            "Max": 0
+                            "Max": 1
                           }
                         },
                         "Rate": 10
@@ -4769,6 +5343,90 @@
                 },
                 "Value": {
                   "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    0,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.LoadBlobStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "PreventChanges": 0,
+                  "TerrainStencil": {
+                    "$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                    "List": [
+                      {
+                        "$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "RequireAny": false
+                      },
+                      {
+                        "$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                        "TileStencil": {
+                          "$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+                          "Room": true,
+                          "Wall": false,
+                          "Blocked": false,
+                          "Not": false
+                        },
+                        "Global": false,
+                        "Negate": false
+                      }
+                    ],
+                    "RequireAny": false
+                  },
+                  "Amount": {
+                    "Min": 4,
+                    "Max": 7
+                  },
+                  "Maps": [
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_right",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_fallen_left",
+                      "Rate": 7
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_broken_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_rubble",
+                      "Rate": 4
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_pillar",
+                      "Rate": 8
+                    },
+                    {
+                      "Spawn": "destiny_lost_wood_ruine_ruins",
+                      "Rate": 15
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": {
+                  "str": [
+                    3,
+                    3
+                  ]
+                },
+                "Value": {
+                  "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+                  "Script": "DestinyLostWoodRiviereEtLucioles",
+                  "ArgTable": "{}"
                 }
               }
             ],
