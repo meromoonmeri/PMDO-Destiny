@@ -1,5 +1,5 @@
 POKÉMON MYSTERY DUNGEON: DESTINY
-Version de développement unifiée — Windows x64
+Version 0.3.5-dev-quiz — Windows x64
 
 LANCER LE JEU
 1. Extraire entièrement le ZIP dans un dossier où vous pouvez écrire, par exemple Documents ou le Bureau.

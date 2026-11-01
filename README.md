@@ -18,9 +18,11 @@ Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symb
 
 ## Jouer sous Windows
 
-1. Télécharger `PMDO-Destiny-Windows-x64.zip` dans la section Releases.
+1. Télécharger `PMDO-Destiny-Windows-x64-<version>.zip` dans la section Releases (version actuelle : **0.3.5-dev-quiz**, voir le [journal des mises à jour](docs/MISE_A_JOUR.md)).
 2. Extraire tout le ZIP dans un dossier accessible en écriture.
 3. Double-cliquer sur **`JOUER_A_DESTINY.bat`**.
+
+La version est indiquée dans `LISEZ_MOI.txt` à la racine de l'installation. Pour mettre à jour une installation existante, extraire le `PMDO-Destiny-Mise-a-jour-<version>.zip` de la même release dans le dossier contenant `PMDO-Destiny` (comparer le `MANIFEST.txt` avant d'écraser des fichiers modifiés).
 
 PMDO fusionne la quest pendant la construction : le lanceur démarre simplement `Destiny.exe`. Il n'est pas nécessaire d'installer PMDO séparément, de choisir une quest ou de conserver un dossier `MODS`.
 

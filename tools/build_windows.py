@@ -14,6 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 MERGED_DIRS = ('Base', 'Content', 'Controls', 'Data', 'Editor', 'Licenses', 'Strings')
 
 
+def read_version() -> str:
+    """Version publiée, source unique : le fichier VERSION à la racine."""
+    version = (ROOT / 'VERSION').read_text(encoding='utf-8').strip()
+    if not version:
+        raise SystemExit('VERSION file is empty.')
+    return version
+
+
 def run(command: list[str], cwd: Path) -> None:
     print('+', ' '.join(str(part) for part in command), flush=True)
     subprocess.run([str(part) for part in command], cwd=cwd, check=True)
@@ -122,7 +130,16 @@ def main() -> None:
     create_launcher('JOUER_A_DESTINY_WASAPI.bat', ' -audiodriver:wasapi')
     # Le dev.bat de la base vise PMDO.exe, mais l'exécutable s'appelle Destiny.exe ici.
     create_launcher('dev.bat', ' -dev')
-    shutil.copy2(ROOT / 'docs' / 'LISEZ_MOI_WINDOWS.txt', publish_dir / 'LISEZ_MOI.txt')
+    # LISEZ_MOI.txt embarque la version (fichier VERSION) : l'installation
+    # complète indique toujours la version qu'elle contient.
+    version = read_version()
+    liasse = (ROOT / 'docs' / 'LISEZ_MOI_WINDOWS.txt').read_text(encoding='utf-8')
+    import re
+    liasse, nb = re.subn(r'^Version .* — Windows x64$',
+                         f'Version {version} — Windows x64', liasse, count=1, flags=re.M)
+    if nb != 1:
+        raise SystemExit('LISEZ_MOI_WINDOWS.txt : ligne de version introuvable.')
+    (publish_dir / 'LISEZ_MOI.txt').write_bytes(liasse.replace('\n', '\r\n').encode('utf-8'))
 
     # Vérifier la présence dans le build de toutes les cartes de la Quest et en
     # donner la liste : le build contient aussi des cartes de base du moteur.
@@ -154,7 +171,8 @@ def main() -> None:
     if not args.no_zip:
         dist = ROOT / 'dist'
         dist.mkdir(exist_ok=True)
-        archive = dist / 'PMDO-Destiny-Windows-x64.zip'
+        # L'installation complète porte la version dans son nom.
+        archive = dist / f'PMDO-Destiny-Windows-x64-{read_version()}.zip'
         if archive.exists():
             archive.unlink()
         print(f'Creating {archive}...', flush=True)
