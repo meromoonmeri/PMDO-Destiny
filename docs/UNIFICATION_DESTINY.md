@@ -447,3 +447,37 @@ cf. `METHODE_MAGENTA_ET_GENERATEUR.md`). Elle reste un **aperçu local** (`maps_
   table vide, sans callback ni warp.
 * Rendu de contrôle : les 33 cartes rendues avec les planches de la Quest, aucune planche manquante (planche d'aperçu : `docs/apercus/reconstruction_33_cartes.png`).
 * Toujours non intégrés (inchangé) : les 9 références tierces exclues, `treasure_gen_*`, Grotte Météore, placeholders et intérieurs générés du §7.2.
+
+## 13. Phase 3 (2026-11-01) — Waterfall Village étendue depuis town02-main_BACKUP
+
+La version `WaterfallVillageCapital (1).rsground` du backup Drive
+`town02-main_BACKUP/Data/Ground` remplace la version de 233 727 831 octets
+décrite au §8. Source : 330 293 103 octets, MD5
+`e5dc1889005b0d0ac39cf87d29ec3fa2`, SHA-256
+`c065f603d6cc621fa932715bf9b925f2ae181c222c49d7590d5a52500460ba86`.
+L'intégration normalise uniquement CRLF → LF, renomme `AssetName` en
+`WaterfallVillageCapital`, et donne des noms explicites aux entités de
+service/entrée (`Kecleon`, `Kecleon_Violet`, `Kangourex`, `Drifloon`,
+`entrance`, `entrance_partner`). Fichier intégré : 304 752 270 octets,
+SHA-256 `3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952`,
+livré dans `payload/WaterfallVillageCapital.rsground.gz` (1 883 690 octets).
+
+Contenu vérifié : 200 × 500 cases, 37 calques, 25 habitants, 7 objets au
+sol, 3 décorations `Flowers_Town_1`, 2 marqueurs et 43 Tilesheets. Les
+36 Tilesheets déjà présentes sont identiques au backup ; ajout de `FORGE`,
+`Ledian_Dojo_Objects`, `Metano_Inn_Floor_Decor`,
+`Metano_Town_Normal_Home_Objects`, `kioskspinda` et `tile_0021`
+(`Metano_Town_Animated` était déjà identique), puis régénération de
+`game/Content/Tile/index.idx` (2 091 planches, 95 210 861 octets).
+Dépendances d'objets/décorations récupérées : `Grassy_Bag.dir`, les 30
+overrides `game/Content/Object/*.dir` de town02 et les 74 PNG sources de
+décoration `game/Content/Objects/*.png`. `Flowers_Town_1`,
+`Flowers_Tropical_1` et `Flowers_Tropical_2` restent fournis par la base.
+La forme violette de Kecleon est ajoutée en override Destiny
+(`game/Data/Monster/kecleon.json` + résumé d'index), avec les sprites et
+portraits town02 `352.chara` / `352.portrait`. Les 24 autres espèces des
+habitants utilisent les données et sprites déjà présents.
+
+La copie compacte de jeu fait 54 622 678 octets (SHA-256
+`ff5b28e1c29bccb2e5c8a51b04c658df9de028e938f755dfaaa7a4f344442782`).
+Le parcours de cette version étendue en moteur réel reste à valider.

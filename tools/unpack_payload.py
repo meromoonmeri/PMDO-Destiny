@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAYLOADS = {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'afc5081f7348b2afed306953bf5e66a358e442cb00f93fa139ec239cf94c98ee', 233727831),
+        '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952', 304752270),
 }
 
 

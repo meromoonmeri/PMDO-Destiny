@@ -127,7 +127,7 @@ def main() -> None:
             raise ValueError(f'tile guide size mismatch in {path}')
         return nodes
 
-    # WaterfallVillageCapital (233 Mo) est livrée compressée dans payload/ : reconstitution si absente.
+    # WaterfallVillageCapital (305 Mo) est livrée compressée dans payload/ : reconstitution si absente.
     try:
         import subprocess as _sp
         if not (ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground').is_file() and (ROOT / 'tools/unpack_payload.py').is_file():

@@ -159,7 +159,7 @@
     }
    },
    "Released": true,
-   "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT). Tuiles/BG town02 déjà compatibles quest (import tuiles). WaterfallVillageCapital.rsground (233 Mo) : objet Git LFS non téléchargeable depuis le sandbox, intégration automatique via OUTILS/integrer_waterfall_town02.py dès que le fichier est fourni.",
+   "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT).",
    "SortOrder": 40
   },
   "cotes_metano": {

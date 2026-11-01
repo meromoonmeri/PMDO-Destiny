@@ -1,6 +1,7 @@
 -- Réverie Town : arrivée après Lost Wood et présentation des lieux existants.
--- La carte et ses calques restent ceux de l'utilisateur ; les habitants sont
--- créés à l'exécution pour ne pas réécrire le ground d'origine.
+-- La version town02 étendue contient ses habitants, objets et marqueurs ;
+-- Kecleon et Kangourex sérialisés sont réutilisés, avec création en repli
+-- uniquement si une ancienne sauvegarde/carte ne les fournit pas.
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 

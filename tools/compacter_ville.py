@@ -13,11 +13,11 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 233727831
-ORIGINAL_SHA256 = 'afc5081f7348b2afed306953bf5e66a358e442cb00f93fa139ec239cf94c98ee'
-COMPACT_SHA256 = '2d755a510cb2fb923cc7acdb7803d4b9a6a10d2908dcba13a0114466d69187e9'
+ORIGINAL_SIZE = 304752270
+ORIGINAL_SHA256 = '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952'
+COMPACT_SHA256 = 'ff5b28e1c29bccb2e5c8a51b04c658df9de028e938f755dfaaa7a4f344442782'
 EMPTY_TILE = b'{\n"AutoTileset": "",\n"Associates": [],\n"Layers": [],\n"NeighborCode": -1\n}'
-EMPTY_COUNT = 2645785
+EMPTY_COUNT = 3522952
 
 
 def sha256(data: bytes) -> str:

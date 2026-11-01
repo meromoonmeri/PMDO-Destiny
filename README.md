@@ -8,7 +8,7 @@ Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symb
 > cinématique Pichu × Team Dazzling, falaises nord centre, paquets d'atelier, archives des anciennes
 > versions, `WaterfallVillageCapital` de town02). État des lieux, provenance de chaque carte,
 > correctifs et fichiers introuvables : [`docs/UNIFICATION_DESTINY.md`](docs/UNIFICATION_DESTINY.md).
-> `game/Data/Ground/WaterfallVillageCapital.rsground` (233 Mo > limite GitHub, budget LFS du compte
+> `game/Data/Ground/WaterfallVillageCapital.rsground` (305 Mo > limite GitHub, budget LFS du compte
 > épuisé) est livrée compressée dans `payload/` : lancer `python3 tools/unpack_payload.py` après le
 > clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`).
 > Phase 2 (planches des cartes falaises restaurées à l'identique) et phase 3 (les 33 cartes « générées »
