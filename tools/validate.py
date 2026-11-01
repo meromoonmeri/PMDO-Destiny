@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 import struct
 import sys
 import xml.etree.ElementTree as ET
@@ -194,13 +195,13 @@ def main() -> None:
     # (format DirSheet.Save : [int64 png_len][PNG][int32 tileW, tileH, rotate, frames]),
     # le service doit etre enregistre par destiny/main.lua, et les valeurs de
     # game/Content/ContentParams.xml doivent pointer sur des fichiers existants.
-    def _check_dirsheet(path):
+    def _check_dirsheet(path, expected_tile=(320, 240)):
         raw = path.read_bytes()
         (png_len,) = struct.unpack_from('<q', raw, 0)
         if 8 + png_len + 16 != len(raw):
             raise ValueError(f'DirSheet size mismatch: {path}')
         tile_w, tile_h, _rot, frames = struct.unpack_from('<iiii', raw, 8 + png_len)
-        if (tile_w, tile_h) != (320, 240) or frames < 1:
+        if (tile_w, tile_h) != expected_tile or frames < 1:
             raise ValueError(f'DirSheet trailer unexpected in {path}: {(tile_w, tile_h, frames)}')
 
     try:
@@ -232,6 +233,61 @@ def main() -> None:
                     errors.append(f'ContentParams {tag} not found: {music}')
     except Exception as exc:
         errors.append(f'Title menu validation failed: {exc}')
+
+    # ----- Quiz de personnalite (20 questions + etoile au clic droit) -----
+    try:
+        quiz_config = json.loads((ROOT / 'game/Data/quiz_personnalite_config.json').read_text(encoding='utf-8-sig'))['Object']
+        quiz_questions = quiz_config.get('Questions', [])
+        if len(quiz_questions) != 20:
+            errors.append(f'Personality quiz must contain exactly 20 questions: {len(quiz_questions)}')
+        counts = [len(q.get('Choix', [])) for q in quiz_questions]
+        if counts and (min(counts) < 2 or max(counts) > 5):
+            errors.append(f'Personality quiz choices must stay between 2 and 5: {counts}')
+        visible_quiz = '\n'.join(
+            [q.get('Texte', '') for q in quiz_questions]
+            + [c.get('Texte', '') for q in quiz_questions for c in q.get('Choix', [])]
+        )
+        if re.search(r'(?<!\d)(?:\(?\s*\d+\s*/\s*(?:15|20)\s*\)?)(?!\d)', visible_quiz):
+            errors.append('Personality quiz must not display a question counter')
+
+        quiz_starters = {s['Id']: s for s in quiz_config.get('Starters', [])}
+        for item in quiz_config.get('Mapping', []):
+            starter = quiz_starters.get(item.get('Starter'))
+            if starter is None:
+                errors.append(f"Personality quiz mapped starter missing: {item}")
+                continue
+            for stage in range(5):
+                rel = f"game/Content/BG/Quiz_Etoile_{starter.get('EtoileType')}_{stage}.dir"
+                path = ROOT / rel
+                if not path.is_file():
+                    errors.append(f'Quiz star DirSheet missing: {rel}')
+                else:
+                    _check_dirsheet(path)
+            fluid_assets = [
+                ('game/Content/BG/Quiz_Etoile_Fond.dir', (320, 240)),
+                (f"game/Content/Particle/Quiz_Etoile_Particule_{starter.get('EtoileType')}.dir", (16, 16)),
+                (f"game/Content/Object/Quiz_Etoile_Halo_{starter.get('EtoileType')}.dir", (160, 160)),
+                (f"game/Content/Object/Quiz_Etoile_Forme_{starter.get('EtoileType')}.dir", (160, 184)),
+            ]
+            for rel, tile in fluid_assets:
+                path = ROOT / rel
+                if not path.is_file():
+                    errors.append(f'Quiz fluid DirSheet missing: {rel}')
+                else:
+                    _check_dirsheet(path, tile)
+
+        quiz_init_path = ROOT / 'game/Data/Script/destiny/ground/personality_test/init.lua'
+        quiz_init = quiz_init_path.read_text(encoding='utf-8-sig') if quiz_init_path.is_file() else ''
+        for needle in ['INPUT_RIGHT_MOUSE = 30', 'GAME:IsInputDown',
+                       'MetaInputManager.MouseLoc', 'GraphicsManager.WindowZoom',
+                       'RogueEssence.Menu.ScriptableMenu', 'FLUIDE_CONVERGENCE = 0.70',
+                       'Quelqu’un comme toi serait ', "UI:SetSpeaker('', false, starter.espece"]:
+            if needle not in quiz_init:
+                errors.append(f'Personality quiz reveal is incomplete: missing {needle!r}')
+        if 'UI:BeginChoiceMenu(q.texte' not in quiz_init:
+            errors.append('Personality quiz questions must be shown without a progress prefix')
+    except Exception as exc:
+        errors.append(f'Personality quiz validation failed: {exc}')
 
     total = sum(path.stat().st_size for path in files)
     largest = max(files, key=lambda path: path.stat().st_size)
