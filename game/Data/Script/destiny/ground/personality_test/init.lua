@@ -4,8 +4,9 @@
      Data/Script/destiny/ground/intro_halo/init.lua.
      Flux (schéma de sélection complet, code entièrement rédigé pour
      PMD Destiny) :
-       purge de l'équipe par défaut → 15 questions → nature (max de points)
-       → badge étoile coloré → recommandation selon la nature ou choix libre
+       purge de l'équipe par défaut → 20 questions → étoile forgée au
+       maintien du clic droit (revelation_etoile) → nature (max de points)
+       → recommandation selon la nature ou choix libre
        → sexe → talent → confirmation → choix du partenaire (pool complet, espèce
        différente du héros) → sexe + talent du partenaire → NOM du
        partenaire (NameMenu + confirmation) → la faille du rêve : scène du
@@ -18,6 +19,7 @@
 require 'origin.common'
 
 local quiz_data = require 'destiny.ground.personality_test.quiz_data'
+local revelation_etoile = require 'destiny.ground.personality_test.revelation_etoile'
 local starters_source = require 'destiny.ground.personality_test.starters_source'
 local talents_depart = require 'destiny.talents_depart'
 
@@ -172,14 +174,15 @@ function personality_test.Quiz()
     _DATA.Save.ActiveTeam.Assembly:RemoveAt(0)
   end
 
-  -- 15 questions — chaque choix distribue +4/+2 sur les 16 natures
+  -- 20 questions sans compteur affiché — chaque choix distribue +4/+2
+  -- sur les 16 natures.
   local scores = {}
   for _, n in ipairs(quiz_data.natures) do scores[n.slug] = 0 end
 
-  for num, q in ipairs(quiz_data.questions) do
+  for _, q in ipairs(quiz_data.questions) do
     local intitules = {}
     for _, c in ipairs(q.choix) do table.insert(intitules, c.texte) end
-    UI:BeginChoiceMenu('(' .. num .. '/15) ' .. q.texte, intitules, 1, 1)
+    UI:BeginChoiceMenu(q.texte, intitules, 1, 1)
     UI:WaitForChoice()
     local choix = UI:ChoiceResult()
     for slug, pts in pairs(q.choix[choix].points) do
@@ -187,19 +190,18 @@ function personality_test.Quiz()
     end
   end
 
-  -- nature = score maximal ; le badge étoile prend sa couleur
+  -- nature = score maximal ; la révélation passe par l'étoile
   local slug = calculer_nature(scores)
   local nature = nature_par_slug(slug)
   local starter_id = quiz_data.mapping[slug]
   local starter = quiz_data.starters[starter_id]
 
   UI:WaitShowVoiceOver("L'analyse est terminée...", -1)
-  UI:WaitShowVoiceOver("Ton aura révèle une nature de couleur\n" .. nature.couleur ..
-    " ! Le badge étoile s'illumine.", -1)
-  -- TODO visuel : afficher Content/UI/quiz_badges/badge_etoile_<slug>.png
-  -- (menu image custom) — la scène est fonctionnelle en dialogues sans.
-
-  UI:WaitShowVoiceOver("Le starter qui te correspond est...\n" .. starter.nom .. " !", -1)
+  -- Animation de révélation : le joueur maintient le clic droit, une
+  -- lumière pixel-art forge une étoile aux couleurs du type du starter,
+  -- puis « Quelqu'un comme toi serait [Nom en couleur] ! » + portrait.
+  revelation_etoile.derouler(starter)
+  UI:WaitShowVoiceOver("Ton aura révèle une nature de couleur\n" .. nature.couleur .. " !", -1)
   UI:ChoiceMenuYesNo("Veux-tu garder ce résultat ?\nSinon, choisis librement ton Pokémon.", true)
   UI:WaitForChoice()
   local pool_heros = construire_pool(nil)

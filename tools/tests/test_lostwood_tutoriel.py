@@ -55,6 +55,16 @@ assert "'stairs_back_up'" in event and 'SegLoc(0, -1)' in event
 quiz = (GAME / 'Data/Script/destiny/ground/personality_test/init.lua').read_text(encoding='utf-8')
 assert quiz.index('SOUND:FadeOutBGM(60)') < quiz.index("Une faille s'ouvre dans le rêve")
 assert "'zrv2_zone_reveil_nuit'" in quiz
+# Quiz PMD : 20 questions sans compteur affiché, révélation par l'étoile
+assert '/15)' not in quiz and '/20)' not in quiz and "num .. '/" not in quiz
+assert "require 'destiny.ground.personality_test.revelation_etoile'" in quiz
+assert 'revelation_etoile.derouler' in quiz
+donnees_quiz = (GAME / 'Data/Script/destiny/ground/personality_test/quiz_data.lua').read_text(encoding='utf-8')
+assert donnees_quiz.count('texte = "') >= 20  # questions + choix
+assert 'couleurs_types' in donnees_quiz
+# Les sprites de l'étoile forgée existent bien dans le contenu du jeu
+etoiles = sorted((GAME / 'Content/BG').glob('quiz_star_*.dir'))
+assert len(etoiles) >= 22, etoiles
 
 reveil = (GAME / 'Data/Script/destiny/ground/zrv2_zone_reveil_nuit/init.lua').read_text(encoding='utf-8')
 for extrait in (

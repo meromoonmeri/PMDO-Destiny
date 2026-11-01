@@ -1,24 +1,148 @@
--- Généré par OUTILS/generer_quiz_destiny.py — NE PAS ÉDITER À LA MAIN.
--- Données du quiz de personnalité PMD Destiny (15 questions, 16 natures,
+-- Données du quiz de personnalité PMD Destiny (20 questions, 16 natures,
 -- pool starters gen 1-9 + extras, mapping, méga-évolution).
+--
+-- Le format des questions s'inspire des tests de personnalité de
+-- Pokémon Mystery Dungeon : Rouge Rescue Team et Explorers of Sky —
+-- 20 situations parlantes, 5 choix axés sur la personnalité (certains
+-- choix tiennent en plusieurs phrases, certaines questions se répondent
+-- par « Oui » ou « Non »). Aucun compteur n'est affiché dans le dialogue.
+--
+-- Chaque choix crédite deux natures : +4 pour la nature dominante du
+-- choix, +2 pour la nature secondaire. À la fin, la nature au score
+-- maximal désigne le starter proposé via quiz_data.mapping.
 local quiz_data = {}
 
 quiz_data.questions = {
-  { texte = "Une nouvelle journée d'aventure commence ! Comment la commences-tu ?", choix = { { texte = "Je prépare déjà mon sac et ma carte !", points = { hardy = 4, bold = 2 } }, { texte = "Je profite du ciel et je vois où mes pieds me mènent.", points = { relaxed = 4, calm = 2 } } } },
-  { texte = "Un trésor scintille au fond d'une grotte sombre.", choix = { { texte = "J'y vais sans hésiter !", points = { brave = 4, rash = 2 } }, { texte = "J'observe d'abord les alentours.", points = { quiet = 4, timid = 2 } } } },
-  { texte = "Ton partenaire raconte une blague nulle pendant le repas.", choix = { { texte = "J'éclate de rire, c'est hilarant !", points = { jolly = 4, naive = 2 } }, { texte = "Je lève un sourcil… puis je lâche un petit sourire.", points = { sassy = 4, quirky = 2 } } } },
-  { texte = "Dans un donjon, le groupe hésite entre deux chemins.", choix = { { texte = "Je propose un plan et je lance le groupe.", points = { bold = 4, impish = 2 } }, { texte = "Je demande l'avis de chacun avant de trancher.", points = { docile = 4, calm = 2 } } } },
-  { texte = "Tu trouves un Poké Ball abandonné sur la plage.", choix = { { texte = "Je l'ouvre tout de suite, curieux !", points = { naive = 4, hasty = 2 } }, { texte = "Je le garde, il a peut-être une histoire.", points = { lonely = 4, quiet = 2 } } } },
-  { texte = "Un Pokémon plus fort que toi te provoque en duel.", choix = { { texte = "Jamais je ne refuse un défi !", points = { brave = 4, rash = 2 } }, { texte = "Je prépare une ruse pour gagner autrement.", points = { impish = 4, quirky = 2 } } } },
-  { texte = "La fête de la ville bat son plein ce soir.", choix = { { texte = "Je suis le premier sur la piste !", points = { jolly = 4, hasty = 2 } }, { texte = "Je préfère une petite veillée au bord de l'eau.", points = { relaxed = 4, lonely = 2 } } } },
-  { texte = "On te confie une mission secrète de la guilde.", choix = { { texte = "Je note tout et je suis le plan à la lettre.", points = { hardy = 4, docile = 2 } }, { texte = "Je m'adapte au fur et à mesure, ça ira !", points = { quirky = 4, naive = 2 } } } },
-  { texte = "Un ami garde un lourd secret et te le confie.", choix = { { texte = "Je le garde religieusement.", points = { calm = 4, sassy = 2 } }, { texte = "Je lui trouve une solution, tout de suite !", points = { hasty = 4, bold = 2 } } } },
-  { texte = "Tu découvres une fleur rare, personne ne te voit.", choix = { { texte = "Je la cueille pour l'offrir à quelqu'un.", points = { docile = 4, jolly = 2 } }, { texte = "Je la laisse, elle est plus belle ici.", points = { quiet = 4, calm = 2 } } } },
-  { texte = "La pluie tombe enfin sur les cultures de la guilde.", choix = { { texte = "Parfait pour courir dehors les pieds dans la boue !", points = { rash = 4, hasty = 2 } }, { texte = "Parfait pour lire sous le porche, au chaud.", points = { quiet = 4, timid = 2 } } } },
-  { texte = "Un inconnu te demande ton aide pour porter son fardeau.", choix = { { texte = "Bien sûr ! En route !", points = { naive = 4, docile = 2 } }, { texte = "Je regarde d'abord ce qu'il transporte.", points = { timid = 4, sassy = 2 } } } },
-  { texte = "Ton équipe perdra la finale si tu ne trouves pas l'idée gagnante.", choix = { { texte = "Je lance une idée folle, on verra bien !", points = { quirky = 4, rash = 2 } }, { texte = "Je me concentre et je respire, l'idée viendra.", points = { relaxed = 4, hardy = 2 } } } },
-  { texte = "On te propose de diriger une expédition lointaine.", choix = { { texte = "Je pars, l'inconnu m'appelle !", points = { lonely = 4, brave = 2 } }, { texte = "Je préfère veiller sur ceux qui restent.", points = { calm = 4, bold = 2 } } } },
-  { texte = "Pour toi, une belle aventure c'est surtout…", choix = { { texte = "…des amis avec qui la vivre !", points = { jolly = 4, docile = 2 } }, { texte = "…la sensation d'être pleinement soi-même.", points = { lonely = 4, sassy = 2 } } } },
+  { texte = "Une nouvelle journée d'aventure commence ! Comment la commences-tu ?", choix = {
+    { texte = "Je prépare déjà mon sac et ma carte ! Demain ne m'attendra pas.", points = { hardy = 4, bold = 2 } },
+    { texte = "Je contemple le ciel un moment… et je vois où mes pieds me mènent.", points = { relaxed = 4, calm = 2 } },
+    { texte = "Je fonce réveiller tout le monde avec des cris de joie !", points = { jolly = 4, hasty = 2 } },
+    { texte = "J'observe les autres s'agiter, et je les rejoins sans bruit.", points = { quiet = 4, timid = 2 } },
+    { texte = "Je mijote une surprise pour surprendre les copains au réveil.", points = { impish = 4, quirky = 2 } },
+  } },
+  { texte = "Un trésor scintille au fond d'une grotte sombre. Personne ne te voit.", choix = {
+    { texte = "J'y vais sans hésiter !", points = { brave = 4, rash = 2 } },
+    { texte = "J'observe d'abord les alentours, patiemment.", points = { quiet = 4, timid = 2 } },
+    { texte = "J'appelle un ami : à deux, c'est mieux !", points = { docile = 4, jolly = 2 } },
+    { texte = "Je garde la trouvaille pour moi… chacun a son jardin secret.", points = { lonely = 4, sassy = 2 } },
+    { texte = "Je conçois une astuce pour l'attraper sans danger.", points = { hardy = 4, calm = 2 } },
+  } },
+  { texte = "Ton partenaire t'invite à explorer un canyon inconnu, ce soir même, sans préparation.", choix = {
+    { texte = "Oui ! L'aventure ne peut pas attendre.", points = { brave = 4, rash = 2 } },
+    { texte = "Non. On prépare nos sacs, et on part demain frais et dispos.", points = { calm = 4, hardy = 2 } },
+  } },
+  { texte = "Ton partenaire raconte une blague nulle pendant le repas.", choix = {
+    { texte = "J'éclate de rire, c'est hilarant !", points = { jolly = 4, naive = 2 } },
+    { texte = "Je lève un sourcil… puis je lâche un petit sourire.", points = { sassy = 4, quirky = 2 } },
+    { texte = "Je note la blague pour la resservir plus tard, au meilleur moment.", points = { impish = 4, lonely = 2 } },
+    { texte = "Je remercie mon partenaire : il a essayé pour nous faire rire.", points = { docile = 4, calm = 2 } },
+    { texte = "Je propose une blague encore plus nulle !", points = { rash = 4, bold = 2 } },
+  } },
+  { texte = "Dans un donjon, le groupe hésite entre deux chemins.", choix = {
+    { texte = "Je propose un plan et je lance le groupe.", points = { bold = 4, hardy = 2 } },
+    { texte = "Je demande l'avis de chacun avant de trancher.", points = { docile = 4, calm = 2 } },
+    { texte = "Je prends le chemin le plus dangereux, forcément.", points = { brave = 4, rash = 2 } },
+    { texte = "Je laisse les autres choisir, je suivrai avec plaisir.", points = { relaxed = 4, naive = 2 } },
+    { texte = "Je lance une pièce ! Le destin décidera pour nous.", points = { quirky = 4, hasty = 2 } },
+  } },
+  { texte = "Tu trouves un Poké Ball abandonné sur la plage.", choix = {
+    { texte = "Je l'ouvre tout de suite, je suis trop curieux !", points = { naive = 4, hasty = 2 } },
+    { texte = "Je le garde, il a peut-être une histoire.", points = { lonely = 4, quiet = 2 } },
+    { texte = "Je le rapporte au bureau des explorateurs.", points = { docile = 4, hardy = 2 } },
+    { texte = "Je le jette à l'eau pour voir s'il flotte !", points = { impish = 4, rash = 2 } },
+    { texte = "J'attends patiemment que quelqu'un revienne le chercher.", points = { calm = 4, relaxed = 2 } },
+  } },
+  { texte = "Un Pokémon plus fort que toi te provoque en duel.", choix = {
+    { texte = "Jamais je ne refuse un défi !", points = { brave = 4, bold = 2 } },
+    { texte = "Je prépare une ruse pour gagner autrement.", points = { impish = 4, quirky = 2 } },
+    { texte = "Je décline poliment : mon équipe m'attend ailleurs.", points = { calm = 4, docile = 2 } },
+    { texte = "Je fuis… mais j'en rêve toute la nuit.", points = { timid = 4, lonely = 2 } },
+    { texte = "J'accepte et je frappe le premier ! Ou le deuxième.", points = { rash = 4, hasty = 2 } },
+  } },
+  { texte = "La fête de la ville bat son plein ce soir.", choix = {
+    { texte = "Je suis le premier sur la piste de danse, sans attendre !", points = { hasty = 4, jolly = 2 } },
+    { texte = "Je préfère une petite veillée tranquille au bord de l'eau.", points = { relaxed = 4, lonely = 2 } },
+    { texte = "J'organise les jeux et les concours de la soirée.", points = { bold = 4, docile = 2 } },
+    { texte = "Je mijote une surprise spectaculaire pour la fin de la fête.", points = { impish = 4, quirky = 2 } },
+    { texte = "Je regarde les étoiles en silence, loin du bruit.", points = { quiet = 4, calm = 2 } },
+  } },
+  { texte = "On te confie une mission secrète de la guilde.", choix = {
+    { texte = "Je note tout et je suis le plan à la lettre.", points = { hardy = 4, docile = 2 } },
+    { texte = "Je m'adapte au fur et à mesure, ça ira !", points = { quirky = 4, naive = 2 } },
+    { texte = "Je vérifie chaque détail avant de partir.", points = { sassy = 4, calm = 2 } },
+    { texte = "Je pars immédiatement, la mission ne peut pas attendre !", points = { hasty = 4, rash = 2 } },
+    { texte = "Je demande un coéquipier : les missions se partagent.", points = { jolly = 4, brave = 2 } },
+  } },
+  { texte = "Un ami garde un lourd secret et te le confie.", choix = {
+    { texte = "Je le garde religieusement.", points = { calm = 4, sassy = 2 } },
+    { texte = "Je lui trouve une solution, tout de suite !", points = { hasty = 4, bold = 2 } },
+    { texte = "Je l'écoute en silence, aussi longtemps qu'il faudra.", points = { quiet = 4, docile = 2 } },
+    { texte = "Je lui confie un de mes secrets pour l'aider à s'alléger.", points = { lonely = 4, naive = 2 } },
+    { texte = "Je le transforme en devinette pour le rendre moins lourd.", points = { quirky = 4, jolly = 2 } },
+  } },
+  { texte = "Tu découvres une fleur rare. Personne ne te voit.", choix = {
+    { texte = "Je la cueille pour l'offrir à quelqu'un.", points = { docile = 4, jolly = 2 } },
+    { texte = "Je la laisse, elle est plus belle ici.", points = { quiet = 4, calm = 2 } },
+    { texte = "Je la dessine et je repars fier de ma découverte.", points = { hardy = 4, relaxed = 2 } },
+    { texte = "Je la garde pour moi, mon petit secret botanique.", points = { lonely = 4, sassy = 2 } },
+    { texte = "Je la sens, je la goûte… elle pique ! Aïe !", points = { naive = 4, rash = 2 } },
+  } },
+  { texte = "La pluie tombe enfin sur les cultures de la guilde.", choix = {
+    { texte = "Parfait pour courir dehors, les pieds dans la boue !", points = { rash = 4, hasty = 2 } },
+    { texte = "Parfait pour lire sous le porche, au chaud.", points = { quiet = 4, timid = 2 } },
+    { texte = "Parfait pour danser sous la pluie avec les copains !", points = { jolly = 4, naive = 2 } },
+    { texte = "Parfait pour vérifier que les récoltes tiennent le coup.", points = { hardy = 4, docile = 2 } },
+    { texte = "Parfait pour contempler le ciel changer de couleur.", points = { relaxed = 4, calm = 2 } },
+  } },
+  { texte = "Un inconnu te demande ton aide pour porter son fardeau jusqu'au village.", choix = {
+    { texte = "Oui, bien sûr ! En route.", points = { naive = 4, docile = 2 } },
+    { texte = "Non, je regarde d'abord ce qu'il transporte.", points = { timid = 4, sassy = 2 } },
+  } },
+  { texte = "Ton équipe perdra la finale si tu ne trouves pas l'idée gagnante.", choix = {
+    { texte = "Je lance une idée folle, on verra bien !", points = { quirky = 4, rash = 2 } },
+    { texte = "Je me concentre et je respire, l'idée viendra.", points = { relaxed = 4, hardy = 2 } },
+    { texte = "Je motive tout le monde à voix haute !", points = { bold = 4, jolly = 2 } },
+    { texte = "Je laisse les meilleurs stratèges décider pour nous tous.", points = { calm = 4, docile = 2 } },
+    { texte = "Je tente le tout pour le tout, à la dernière minute !", points = { brave = 4, hasty = 2 } },
+  } },
+  { texte = "On te propose de diriger une expédition lointaine.", choix = {
+    { texte = "Je pars, l'inconnu m'appelle !", points = { lonely = 4, brave = 2 } },
+    { texte = "Je préfère veiller sur ceux qui restent.", points = { calm = 4, bold = 2 } },
+    { texte = "Je pars si on m'emmène avec mes trésors préférés.", points = { naive = 4, quirky = 2 } },
+    { texte = "J'étudie la route et les dangers avant de répondre.", points = { sassy = 4, quiet = 2 } },
+    { texte = "On y va en équipe, ou pas du tout !", points = { docile = 4, jolly = 2 } },
+  } },
+  { texte = "Pour toi, une belle aventure c'est surtout…", choix = {
+    { texte = "…des amis avec qui la vivre !", points = { jolly = 4, docile = 2 } },
+    { texte = "…la sensation d'être pleinement soi-même.", points = { lonely = 4, sassy = 2 } },
+    { texte = "…un grand mystère à résoudre de bout en bout.", points = { quirky = 4, quiet = 2 } },
+    { texte = "…un défi à relever, toujours plus haut.", points = { brave = 4, bold = 2 } },
+    { texte = "…un voyage sans empêchement, au fil de l'eau.", points = { relaxed = 4, calm = 2 } },
+  } },
+  { texte = "Sous les étoiles, à quoi rêves-tu pour ton avenir ?", choix = {
+    { texte = "Devenir le plus grand explorateur de tous les temps !", points = { brave = 4, bold = 2 } },
+    { texte = "Des amis fidèles et des rires pour toujours.", points = { jolly = 4, docile = 2 } },
+    { texte = "Une cabane tranquille au bord d'un lac.", points = { relaxed = 4, calm = 2 } },
+    { texte = "Résoudre un mystère que personne n'a jamais percé.", points = { quirky = 4, quiet = 2 } },
+    { texte = "Prouver à tous ceux qui me sous-estimaient.", points = { lonely = 4, rash = 2 } },
+  } },
+  { texte = "Tu découvres qu'un ami a menti sur un petit détail sans importance.", choix = {
+    { texte = "Je lui en parle franchement, mais avec douceur.\nLes amis méritent la vérité, même pour les petites choses.", points = { hardy = 4, docile = 2 } },
+    { texte = "Je fais semblant de ne rien avoir remarqué.\nS'il voulait me le dire, il l'aurait fait ; ce n'est pas grave.", points = { calm = 4, relaxed = 2 } },
+    { texte = "Je lui prépare une histoire encore plus rocambolesque.\nIl verra bien : les mensonges, ça se retourne toujours !", points = { impish = 4, quirky = 2 } },
+    { texte = "Je m'en fais du souci en silence.\nAi-je fait quelque chose pour qu'il ne me fasse pas confiance ?", points = { timid = 4, lonely = 2 } },
+  } },
+  { texte = "La guilde te propose de diriger l'expédition de demain. C'est ta première fois.", choix = {
+    { texte = "Oui, je suis prêt à guider tout le monde !", points = { bold = 4, brave = 2 } },
+    { texte = "Non, je préfère seconder quelqu'un d'expérimenté.", points = { timid = 4, docile = 2 } },
+  } },
+  { texte = "La veille de ta première grande aventure, tu…", choix = {
+    { texte = "Je vérifie mon sac trois fois et je me couche tôt.\nDemain, rien ne doit pouvoir m'arrêter.", points = { hardy = 4, calm = 2 } },
+    { texte = "Je reste debout tard à rêver de tout ce qui m'attend.\nLe sommeil, ce sera après l'aventure !", points = { naive = 4, hasty = 2 } },
+    { texte = "Je rejoins mes amis pour un dernier goûter ensemble.\nLes grands départs ont besoin de douceur.", points = { jolly = 4, docile = 2 } },
+    { texte = "Je marche seul dans la nuit pour me prouver que je suis prêt.\nLe silence et moi, on se comprend.", points = { lonely = 4, brave = 2 } },
+    { texte = "Je glisse deux ou trois surprises dans mon sac.\nOn ne sait jamais : l'aventure adore les astuces !", points = { impish = 4, quirky = 2 } },
+  } },
 }
 
 quiz_data.natures = {
@@ -98,5 +222,32 @@ quiz_data.mapping = {
   ["bold"] = "piplup",
 }
 
+-- Noms français et couleurs des types (Element1) pour la révélation
+-- finale : « Quelqu'un comme toi serait [Nom en couleur du type] ! ».
+-- Les hex sont partagés avec tools/generer_etoile_quiz.py (étoiles BG).
+quiz_data.couleurs_types = {
+  ["normal"] = { hex = "#A8A878", fr = "Normal" },
+  ["fire"] = { hex = "#F08030", fr = "Feu" },
+  ["water"] = { hex = "#6890F0", fr = "Eau" },
+  ["grass"] = { hex = "#78C850", fr = "Plante" },
+  ["electric"] = { hex = "#F8D030", fr = "Électrik" },
+  ["ice"] = { hex = "#98D8D8", fr = "Glace" },
+  ["fighting"] = { hex = "#C03028", fr = "Combat" },
+  ["poison"] = { hex = "#A040A0", fr = "Poison" },
+  ["ground"] = { hex = "#E0C068", fr = "Sol" },
+  ["flying"] = { hex = "#A890F0", fr = "Vol" },
+  ["psychic"] = { hex = "#F85888", fr = "Psy" },
+  ["bug"] = { hex = "#A8B820", fr = "Insecte" },
+  ["rock"] = { hex = "#B8A038", fr = "Roche" },
+  ["ghost"] = { hex = "#705898", fr = "Spectre" },
+  ["dragon"] = { hex = "#7038F8", fr = "Dragon" },
+  ["dark"] = { hex = "#705848", fr = "Ténèbres" },
+  ["steel"] = { hex = "#B8B8D0", fr = "Acier" },
+  ["fairy"] = { hex = "#EE99AC", fr = "Fée" },
+  ["none"] = { hex = "#9098A0", fr = "Incolore" },
+}
+
+-- Texte affiché quand le Pokémon possède une Méga-Évolution.
 quiz_data.mega_texte = "MÉGA-ÉVOLUTION"
+
 return quiz_data
