@@ -141,7 +141,7 @@ function personality_test.GameLoad(map)
 end
 
 function personality_test.PlotScripting()
-  if SV.Destiny ~= nil and (SV.Destiny.ReveilFait or SV.Destiny.PartenaireParti) then
+  if SV.Destiny ~= nil and (SV.Destiny.IntroReveilHerosFait or SV.Destiny.ReveilFait or SV.Destiny.PartenaireParti) then
     -- la séquence du rêve est déjà engagée : ne jamais renvoyer le héros
     -- vers une autre ville pendant qu'il est encore allongé.
     return
@@ -295,18 +295,19 @@ function personality_test.Quiz()
   pTbl.Importance = 'Partner'
 
   -- ------------------------------------- la faille : le rêve se fend
-  -- pendant que le héros est encore allongé, on rejoint celui qui hésite
-  -- encore à devenir explorateur (map cliffdaytest, version nuit)
   -- La musique du questionnaire s'éteint avant la première voix de la
-  -- cinématique. Elle ne reprendra pas sur la carte nocturne.
+  -- cinématique. On assiste d'abord au sommeil brumeux du héros dans la
+  -- prairie nocturne (zrv2_zone_reveil_nuit), puis à la scène du partenaire.
   SOUND:FadeOutBGM(60)
   GAME:WaitFrames(60)
   UI:WaitShowVoiceOver("Une faille s'ouvre dans le rêve...", -1)
   UI:WaitShowVoiceOver("...quelque part, quelqu'un hésite encore\n à devenir explorateur.", -1)
   GAME:FadeOut(false, 120)
   GAME:WaitFrames(60)
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.IntroReveilHerosFait = false
   GAME:CutsceneMode(false)
-  GAME:EnterGroundMap('destiny_cliff_tests', 'cliffdaytest_nuit', 'Pichu_Crossroads')
+  GAME:EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')
 end
 
 return personality_test

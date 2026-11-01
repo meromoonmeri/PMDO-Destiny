@@ -1,32 +1,43 @@
 # Lost Wood : départ, leçons et statue Kangourex
 
-## Départ et musique
+## Départ, sommeil du héros et musique
 
-Le quiz termine sa musique en fondu avant le passage au noir. Dans la scène
-nocturne, le partenaire sort de la porte de sa maison, emprunte le chemin et
-s'arrête au croisement. La cinématique ne joue pas la musique de Lost Wood.
-La piste `Content/Music/Tiny Woods.ogg` est sélectionnée à l'entrée dans le
-donjon et sur chacun de ses sept étages. Elle comporte des métadonnées de
-boucle (`LOOPSTART=176400`, `LOOPLENGTH=1882031`, en échantillons à 44,1 kHz).
+Le quiz termine sa musique en fondu avant le passage au noir, puis bascule sur
+`zrv2_zone_reveil_nuit` pour une brève scène où le héros endormi murmure ses
+questions confuses (« … Où suis-je… ? », « Qui suis-je… ? », « Tout me semble
+si flou… », « J'ai sommeil… ») avant un fondu au noir vers `cliffdaytest_nuit`.
+Dans cette scène nocturne, le partenaire sort de la porte de sa maison, suit le
+chemin vers l'est sans s'arrêter devant le croisement, hésite devant l'entrée
+orientale de Lost Wood puis s'y engage seul. La cinématique ne joue pas la
+musique de Lost Wood. La piste `Content/Music/Tiny Woods.ogg` est sélectionnée
+à l'entrée dans le donjon et sur chacun de ses sept étages. Elle comporte des
+métadonnées de boucle (`LOOPSTART=176400`, `LOOPLENGTH=1882031`, en échantillons
+à 44,1 kHz).
 
 Le tracé utilise les marqueurs de la carte existante ; aucune carte n'a été
 recréée. Le calque de premier plan temporairement déplacé pour rendre le
 personnage visible est restauré avant la suite. Le halo de l'introduction
 n'est pas modifié : l'aperçu historique attend encore confirmation.
 
-## Sept leçons dans le donjon
+## Leçons neutres dans le donjon (aller solo et retour inverse)
 
 Chaque étage de `Data/Zone/lost_wood.json` possède un `MapEffectStep` dont
-`OnMapStarts` appelle `SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson`. Ces leçons
-françaises sont affichées pour le meneur, lors du trajet aller seulement ;
-elles portent sur le déplacement et les tours, les attaques et PP, le sac,
-la faim, les états, les difficultés puis la fin du parcours. Les touches
-citées sont celles du clavier par défaut et peuvent être modifiées.
+`OnMapStarts` appelle `SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson`. Ces encadrés
+système neutres (sans nom ni portrait de personnage, `UI:ResetSpeaker()` +
+`Fanfare/Note`, avec affichage dynamique des touches via `STRINGS:LocalKeyString`)
+sont présentés directement au joueur :
+- **Aller solo (`1F -> 7F`)** : tour par tour et attaque directe, capacités et
+  gain d'expérience, sac d'objets, estomac, course/orientation/diagonales,
+  altérations d'état et repli, puis dernière vérification avant la sortie.
+- **Retour en duo en sens inverse (`7F -> 1F`)** : escaliers montants inversés
+  (`stairs_back_up`, `SegLoc(0, -1)`), PV des coéquipiers, expérience partagée
+  et montée de niveau, menu des tactiques, échange de place / poussée d'allié,
+  Mode Équipe, journal / mini-carte / état de l'équipe, puis options du jeu.
 
 `SV.Destiny.LostWoodLessonsSeen` enregistre chaque leçon après sa dernière
-page : si elle est interrompue avant, elle peut être revue. Les leçons déjà
-vues ne sont pas répétées lors d'un nouvel aller et ne s'affichent pas au
-retour. `LostWoodTutorialDone` est conservé comme indicateur de complétion.
+page (`'1'..'7'` à l'aller, `'retour_7'..'retour_1'` au retour) : si elle est
+interrompue avant, elle peut être revue. `LostWoodTutorialDone` et
+`LostWoodReturnTutorialDone` indiquent la fin respective des deux séries.
 
 Le principe étage par étage est inspiré du tutoriel du projet de Palikadude,
 étudié au commit `da6c2130d641507447e6386a5e47a296e8cb4c71` :

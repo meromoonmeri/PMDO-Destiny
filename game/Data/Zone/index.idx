@@ -98,7 +98,7 @@
   "lost_wood": {
    "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
    "ExpPercent": 100,
-   "Level": 10,
+   "Level": 3,
    "LevelCap": false,
    "KeepSkills": false,
    "TeamRestrict": false,
@@ -129,7 +129,7 @@
     }
    },
    "Released": true,
-   "Comment": "Lost Wood — 7 étages traversés deux fois : aller solitaire du partenaire, puis retour en duo après la scène nocturne du réveil. Le succès du premier trajet conduit à reveil_nuit ; celui du retour ramène au croisement nocturne.",
+   "Comment": "Lost Wood — donjon d'initiation facile (7 étages) traversé deux fois : aller solo du partenaire (1F->7F) vers zrv2_zone_reveil_nuit, puis retour en duo en sens inverse (7F->1F) vers cliffdaytest de jour.",
    "SortOrder": 30
   },
   "town02_waterfallvillage": {

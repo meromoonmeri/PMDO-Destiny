@@ -1,11 +1,23 @@
--- Tests sans moteur des règles de progression et de l'installation des statues.
+-- Tests sans moteur des leçons neutres (aller + retour inverse) et de l'installation des statues.
 -- Lancer depuis la racine du dépôt : lua5.4 tools/tests/test_lostwood_lecons_statue.lua
 package.path = 'game/Data/Script/?.lua;game/Data/Script/?/init.lua;' .. package.path
 local battle_loaded = false
 package.preload['destiny.event_battle'] = function() battle_loaded = true; return true end
+package.preload['destiny.mapgen_lost_wood'] = function() return true end
+
 SINGLE_CHAR_SCRIPT = {}
 local leader, autre = {}, {}
-local pending, pages = nil, {}
+local pending, pages, fanfares, resets = nil, {}, 0, 0
+
+STRINGS = {
+  LocalKeyString = function(_, idx) return '<Touche' .. tostring(idx) .. '>' end,
+}
+SOUND = {
+  PlayFanfare = function(_, nom)
+    assert(nom == 'Fanfare/Note')
+    fanfares = fanfares + 1
+  end,
+}
 GAME = {
   GetTeamLeaderIndex = function() return 0 end,
   GetPlayerPartyMember = function(_, i) if i == 0 then return leader end end,
@@ -13,30 +25,78 @@ GAME = {
   WaitFrames = function() end,
 }
 UI = {
-  SetSpeaker = function(_, c) assert(c == leader) end,
-  SetSpeakerEmotion = function() end,
-  ResetSpeaker = function() end,
+  SetSpeaker = function() error('le tutoriel Halcyon doit rester neutre sans orateur') end,
+  SetSpeakerEmotion = function() error('aucune émotion de portrait attendue') end,
+  ResetSpeaker = function() resets = resets + 1 end,
   WaitShowDialogue = function(_, msg) pages[#pages + 1] = msg end,
 }
+
 SV = { Destiny = { LostWoodTrip = 'aller' } }
 dofile('game/Data/Script/destiny/event.lua')
 assert(battle_loaded, 'les événements de combat existants doivent rester chargés')
+
 local lesson = SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson
 local function apply(user, floor)
   lesson(nil, nil, { User = user }, { Etage = floor })
 end
+
+-- Aller (1F -> 7F) : uniquement pour le meneur, neutre (ResetSpeaker + Fanfare/Note), touches dynamiques.
 apply(autre, 1); assert(pending == nil)
-apply(leader, 1); assert(pending); pending(); pending = nil
-assert(SV.Destiny.LostWoodLessonsSeen['1'] and #pages == 2)
-apply(leader, 1); assert(pending == nil) -- même étage et après KO/reprise
-SV.Destiny.LostWoodTrip = 'echec_aller'; apply(leader, 2); assert(pending == nil)
-SV.Destiny.LostWoodTrip = 'aller'; apply(leader, 2); assert(pending); pending(); pending = nil
-for floor = 3, 7 do
-  apply(leader, floor); assert(pending); pending(); pending = nil
-  assert(SV.Destiny.LostWoodLessonsSeen[tostring(floor)])
+for etage = 1, 7 do
+  pages = {}
+  local fanfares_avant = fanfares
+  apply(leader, etage); assert(pending); pending(); pending = nil
+  assert(SV.Destiny.LostWoodLessonsSeen[tostring(etage)] and #pages == 2)
+  assert(fanfares == fanfares_avant + 1 and resets >= 2)
+  if etage == 1 then assert(pages[2]:find('<Touche2>', 1, true)) end
+  -- Ne pas rejouer la même leçon deux fois sur le même trajet.
+  apply(leader, etage); assert(pending == nil)
 end
-assert(#pages == 14 and SV.Destiny.LostWoodTutorialDone)
-SV.Destiny.LostWoodTrip = 'retour'; apply(leader, 7); assert(pending == nil)
+assert(SV.Destiny.LostWoodTutorialDone == true)
+
+-- Retour inverse (7F -> 1F) : leçons complémentaires d'équipe + inversion des escaliers en stairs_back_up.
+RogueElements = { Loc = function(x, y) return { X = x, Y = y } end }
+RogueEssence = { Dungeon = { SegLoc = function(seg, id) return { Segment = seg, ID = id } end } }
+PMDC = { Dungeon = { DestState = function(secloc, back) return { Dest = secloc, Back = back } end } }
+
+local function creer_carte_test(id_escalier)
+  local tuile_escalier = {
+    Effect = {
+      ID = id_escalier or 'stairs_go_down',
+      states = {},
+      TileStates = { Set = function(self_ts, st) self_ts.last = st end },
+    },
+  }
+  return {
+    Width = 2, Height = 2,
+    escalier = tuile_escalier,
+    GetTile = function(self, loc)
+      if loc.X == 1 and loc.Y == 1 then return self.escalier end
+      return { Effect = { ID = '' } }
+    end,
+  }
+end
+
+SV.Destiny.LostWoodTrip = 'retour'
+for etage = 7, 1, -1 do
+  local carte = creer_carte_test('stairs_go_down')
+  _ZONE = { CurrentMap = carte }
+  pages = {}
+  apply(leader, etage); assert(pending); pending(); pending = nil
+  assert(SV.Destiny.LostWoodLessonsSeen['retour_' .. tostring(etage)] and #pages == 2)
+  assert(carte.escalier.Effect.ID == 'stairs_back_up')
+  local st = carte.escalier.Effect.TileStates.last
+  assert(st and st.Dest.Segment == 0 and st.Dest.ID == -1 and st.Back == true and st.PreserveMusic == true)
+end
+assert(SV.Destiny.LostWoodReturnTutorialDone == true)
+
+-- Même quand la leçon du retour a déjà été vue (nouvelle tentative), l'escalier reste inversé !
+local carte_reprise = creer_carte_test('stairs_go_down')
+_ZONE = { CurrentMap = carte_reprise }
+apply(leader, 7)
+assert(pending == nil and carte_reprise.escalier.Effect.ID == 'stairs_back_up')
+_ZONE = nil
+
 -- Une interruption au milieu d'une leçon ne la marque pas comme terminée.
 SV.Destiny = { LostWoodTrip = 'aller' }
 local normal = UI.WaitShowDialogue
@@ -57,8 +117,8 @@ function Class(_, base)
   return c
 end
 local triggers = { None = 0, Action = 1, Touch = 2, TouchOnce = 3 }
-RogueEssence = { Ground = { GroundEntity = { EEntityTriggerTypes = triggers,
-                                              EEntTypes = { Object = 0, Character = 1 } } } }
+RogueEssence.Ground = { GroundEntity = { EEntityTriggerTypes = triggers,
+                                         EEntTypes = { Object = 0, Character = 1 } } }
 EngineServiceEvents = { GroundMapInit = 'GroundMapInit' }
 local registered
 SCRIPT = { AddService = function(_, name, inst) assert(name == 'StatueKangourex'); registered = inst end }
@@ -122,4 +182,4 @@ service:OnGroundMapInit(map)
 assert(CURMAPSCR and CURMAPSCR.NewObject_Action)
 CURMAPSCR.NewObject_Action(a, leader); assert(stores == 7)
 service:UnSubscribe(med); assert(events.GroundMapInit == nil)
-print('OK : sept leçons, reprise/retour, interruption, statues automatiques et callbacks conservés.')
+print('OK : leçons neutres aller (1..7) et retour inverse (7..1), escaliers inversés, statues et callbacks conservés.')

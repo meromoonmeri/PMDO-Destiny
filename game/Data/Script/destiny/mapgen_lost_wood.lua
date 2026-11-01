@@ -10,6 +10,8 @@ local function est_eau(map, x, y)
   return tile ~= nil and tile.ID == 'water'
 end
 
+FLOOR_GEN_SCRIPT = FLOOR_GEN_SCRIPT or {}
+
 function FLOOR_GEN_SCRIPT.DestinyLostWoodRiviereEtLucioles(map, args)
   local center = math.ceil(map.Width / 2)
   local shift = map.Rand:Next(-2, 3)
@@ -126,4 +128,8 @@ function FLOOR_GEN_SCRIPT.DestinyLostWoodRiviereEtLucioles(map, args)
     end
   end
   map.Map.Decorations:Add(lights)
+
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.LostWoodTrip == 'retour' and DestinyInverserEscaliersLostWood ~= nil then
+    DestinyInverserEscaliersLostWood(map)
+  end
 end
