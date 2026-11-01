@@ -186,6 +186,16 @@ def main() -> None:
             if bad:
                 raise SystemExit(f'ZIP integrity failure: {bad}')
         print(f'ZIP verified: {archive} ({archive.stat().st_size / 1048576:.1f} MiB)')
+        # Alias non versionné : compatibilité avec l'ancien workflow CI
+        # (actions/upload-artifact vise dist/PMDO-Destiny-Windows-x64.zip).
+        alias = dist / 'PMDO-Destiny-Windows-x64.zip'
+        if alias.exists():
+            alias.unlink()
+        try:
+            os.link(archive, alias)
+        except OSError:
+            shutil.copy2(archive, alias)
+        print(f'Alias CI : {alias}')
 
 
 if __name__ == '__main__':

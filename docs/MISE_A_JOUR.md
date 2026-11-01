@@ -11,6 +11,7 @@
 
 **📦 Installation complète : `PMDO-Destiny-Windows-x64-0.3.5-dev-quiz.zip`** (avec LISEZ_MOI versionné)
 **🩹 Mise à jour depuis la 0.3.4 : `PMDO-Destiny-Mise-a-jour-0.3.5-dev-quiz.zip`**
+**🔗 Release : https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.3.5-dev-quiz**
 
 ### ✨ Quiz de personnalité refondu — 20 questions façon PMD Sky / Red
 - **20 questions** (au lieu de 15) avec **5 choix axés personnalité** sur la majorité d'entre elles, chaque choix correspondant à une nature différente

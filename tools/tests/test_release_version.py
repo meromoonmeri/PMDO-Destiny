@@ -30,6 +30,8 @@ def test_version_source_unique():
     build = (ROOT / 'tools' / 'build_windows.py').read_text(encoding='utf-8')
     assert 'read_version' in build and 'PMDO-Destiny-Windows-x64-' in build
     assert "re.subn(r'^Version .* — Windows x64$'" in build
+    # alias non versionné pour l'artefact de l'ancien workflow CI
+    assert 'PMDO-Destiny-Windows-x64.zip' in build
 
 
 def test_notes_de_release():
