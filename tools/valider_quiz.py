@@ -5,8 +5,8 @@ Contrôle, sans lancer PMDO :
   * 20 questions synchronisées en JSON, réponses de 2 à 5 choix ;
   * aucun compteur de progression dans les textes visibles ;
   * les 16 natures gagnent leur test ciblé ;
-  * chaque starter conclu a ses anciens fonds de secours et ses sprites
-    fluides (particules, halo, étoile en 61 poses) ;
+  * chaque starter conclu a ses quatre calques VFX transparents
+    (particules, halo, ondes et étoile en 73 poses), sans fond de secours ;
   * format binaire des DirSheet et alpha prémultiplié des sprites ;
   * présence du suivi de la souris, du clic droit, du portrait et de la
     phrase finale dans le Lua.
@@ -29,7 +29,6 @@ CONFIG = GAME / "Data/quiz_personnalite_config.json"
 NATURES = GAME / "Data/quiz_personnalite_natures.json"
 INIT = GAME / "Data/Script/destiny/ground/personality_test/init.lua"
 DATA_LUA = GAME / "Data/Script/destiny/ground/personality_test/quiz_data.lua"
-BG_DIR = GAME / "Content/BG"
 PARTICLE_DIR = GAME / "Content/Particle"
 OBJECT_DIR = GAME / "Content/Object"
 
@@ -132,45 +131,30 @@ def main() -> int:
             continue
         asset_type = starter.get("EtoileType")
         needed_types.add(asset_type)
-        for stage in range(5):
-            p = BG_DIR / f"Quiz_Etoile_{asset_type}_{stage}.dir"
-            if not p.exists():
-                missing_assets.append(str(p))
-    check(not missing_assets, f"fonds de secours des starters conclus présents ({len(needed_types)} types)")
+    check(not missing_assets, f"starters conclus et types d'étoile présents ({len(needed_types)} types)")
 
     missing_fluid = []
     for asset_type in sorted(t for t in needed_types if t):
         for path in (
             PARTICLE_DIR / f"Quiz_Etoile_Particule_{asset_type}.dir",
             OBJECT_DIR / f"Quiz_Etoile_Halo_{asset_type}.dir",
+            OBJECT_DIR / f"Quiz_Etoile_Ondes_{asset_type}.dir",
             OBJECT_DIR / f"Quiz_Etoile_Forme_{asset_type}.dir",
         ):
             if not path.exists():
                 missing_fluid.append(str(path))
-    check((BG_DIR / "Quiz_Etoile_Fond.dir").exists() and not missing_fluid,
-          "fond fluide + particules/halo/étoile présents pour chaque type conclu")
+    check(not missing_fluid, "particules, halo, ondes et étoile présents pour chaque type conclu")
 
-    dirs = sorted(BG_DIR.glob("Quiz_Etoile_*_?.dir"))
-    check(len(dirs) == 35, f"35 anciens DirSheet de secours ({len(dirs)})")
-    bad_dirs = []
-    for p in dirs:
-        try:
-            im, trailer = read_dirsheet(p)
-            if trailer != (320, 240, 0, 4) or im.size != (640, 480) or im.mode != "RGB":
-                bad_dirs.append(p.name)
-        except Exception:
-            bad_dirs.append(p.name)
-    check(not bad_dirs, "format des fonds de secours 320×240, atlas 2×2, 4 poses" +
-          (f" — KO: {bad_dirs}" if bad_dirs else ""))
+    legacy_backgrounds = sorted((GAME / "Content/BG").glob("Quiz_Etoile*.dir"))
+    check(not legacy_backgrounds, "aucun ancien fond plein écran du quiz conservé")
 
-    fluid_specs = [
-        (BG_DIR / "Quiz_Etoile_Fond.dir", (640, 480), (320, 240, 0, 4), False),
-    ]
+    fluid_specs = []
     for asset_type in sorted(t for t in needed_types if t):
         fluid_specs.extend([
-            (PARTICLE_DIR / f"Quiz_Etoile_Particule_{asset_type}.dir", (64, 64), (16, 16, 0, 16), True),
-            (OBJECT_DIR / f"Quiz_Etoile_Halo_{asset_type}.dir", (1120, 960), (160, 160, 0, 41), True),
-            (OBJECT_DIR / f"Quiz_Etoile_Forme_{asset_type}.dir", (1280, 1472), (160, 184, 0, 61), True),
+            (PARTICLE_DIR / f"Quiz_Etoile_Particule_{asset_type}.dir", (144, 96), (24, 24, 0, 24), True),
+            (OBJECT_DIR / f"Quiz_Etoile_Halo_{asset_type}.dir", (1728, 1728), (192, 192, 0, 81), True),
+            (OBJECT_DIR / f"Quiz_Etoile_Ondes_{asset_type}.dir", (1344, 1344), (224, 224, 0, 36), True),
+            (OBJECT_DIR / f"Quiz_Etoile_Forme_{asset_type}.dir", (1536, 2160), (192, 216, 0, 73), True),
         ])
     bad_fluid = []
     bad_premultiply = []
@@ -185,7 +169,7 @@ def main() -> int:
                 bad_premultiply.append(path.name)
         except Exception:
             bad_fluid.append(path.name)
-    check(not bad_fluid, "formats DirSheet fluides : fond, 16 poses particule, 41 halo, 61 étoile" +
+    check(not bad_fluid, "formats DirSheet fluides : 24 poses particule, 81 halo, 36 ondes, 73 étoile" +
           (f" — KO: {bad_fluid}" if bad_fluid else ""))
     check(not bad_premultiply, "alpha prémultiplié des sprites fluides" +
           (f" — KO: {bad_premultiply}" if bad_premultiply else ""))
@@ -195,8 +179,8 @@ def main() -> int:
         try:
             halo = fluid_atlases[f"Quiz_Etoile_Halo_{asset_type}.dir"]
             star = fluid_atlases[f"Quiz_Etoile_Forme_{asset_type}.dir"]
-            halo_values = [frame_alpha_sum(halo, f, 160, 160) for f in (0, 10, 20, 30, 40)]
-            star_values = [frame_alpha_sum(star, f, 160, 184) for f in (0, 15, 30, 45, 60)]
+            halo_values = [frame_alpha_sum(halo, f, 192, 192) for f in (0, 20, 40, 60, 80)]
+            star_values = [frame_alpha_sum(star, f, 192, 216) for f in (0, 14, 28, 42, 56, 72)]
             if not (star_values[0] == 0 and
                     all(b > a for a, b in zip(halo_values, halo_values[1:])) and
                     all(b > a for a, b in zip(star_values, star_values[1:]))):
@@ -214,15 +198,21 @@ def main() -> int:
           "point d'ancrage lu à la souris et converti en 320×240")
     check("RogueEssence.Menu.ScriptableMenu" in init and "UI:SetCustomMenu(hote)" in init,
           "menu scriptable mis à jour à chaque frame")
-    check("Quiz_Etoile_Particule_" in init and "Quiz_Etoile_Halo_" in init and "Quiz_Etoile_Forme_" in init,
-          "particules, halo et étoile dessinés séparément au point du clic")
+    check("Quiz_Etoile_Particule_" in init and "Quiz_Etoile_Halo_" in init and
+          "Quiz_Etoile_Ondes_" in init and "Quiz_Etoile_Forme_" in init,
+          "particules, halo, ondes et étoile dessinés séparément au point du clic")
     check("FLUIDE_CONVERGENCE = 0.70" in init and "etat.progression > FLUIDE_CONVERGENCE" in init,
           "l'étoile ne se matérialise qu'après la convergence des particules")
     check("StartFrame = pose_etoile" in init and "EndFrame = pose_etoile" in init,
-          "parcours fluide des 61 poses de matérialisation")
+          "parcours fluide des poses de matérialisation et de scintillement")
     check("clic_droit and not etat.clic_droit_precedent" in init,
           "ancrage immédiat au point où le clic droit commence")
-    check("UI:WaitShowBG(fond_etoile" in init, "ancien affichage en cinq étapes conservé en secours")
+    check("UI:WaitShowBG" not in init and "UI:WaitHideBG" not in init,
+          "le fond de base du quiz n'est jamais remplacé")
+    check("UI:TextPopUp" not in init,
+          "aucune consigne ni symbole de souris en surimpression en bas")
+    check("clic droit[color] sans le relâcher" in init,
+          "la consigne du clic droit est donnée dans la boîte de dialogue")
     check("Quelqu’un comme toi serait " in init, "phrase finale demandée")
     check("UI:SetSpeaker('', false, starter.espece, starter.forme" in init,
           "portrait du starter avant sa création")

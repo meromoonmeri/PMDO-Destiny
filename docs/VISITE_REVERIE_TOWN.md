@@ -1,11 +1,23 @@
 # Retour à Réverie Town et visite de la ville
 
-Après les retrouvailles et le retour à deux dans Lost Wood, le partenaire invite
-le héros à le suivre. Ils quittent le croisement nocturne ; à l'aube ils
-arrivent dans la carte existante `WaterfallVillageCapital`, qui reste une
-carte distincte de celles des falaises et du donjon. La visite est déclenchée
-une seule fois par `SV.Destiny.VisiteVille` : une transition interrompue reste
-reprenable ; la visite n'est marquée `terminee` qu'après le dernier dialogue.
+Après les retrouvailles, le retour à deux emprunte le segment inverse de
+Lost Wood (générateurs 7 → 1). Le duo débouche sur `cliffdaytest` au lever
+du jour. Devant sa maison, le partenaire explique au héros qu’il n’a pas
+connu ses parents et que tatie Kangourex l’a recueilli ; il présente ensuite
+Réverie Town, les équipes de secours et d’exploration, puis le rôle des
+guildes à travers le monde. Le héros répond par gestes, sans parler.
+
+Au moment où le partenaire formule son rêve de guilde, la Team Dazzling
+remonte le chemin du sud vers une mission à l’est. Adagio, Aria et Sonata
+se présentent sous les sparkles et raillent les deux novices ; le héros
+répond par une posture déterminée et le partenaire refuse de renoncer.
+Après leur départ vers l’est seulement, le duo prend la route de la ville.
+
+Ils gagnent ensuite la carte existante `WaterfallVillageCapital`, qui reste
+une carte distincte de celles des falaises et du donjon. La visite est
+déclenchée une seule fois par `SV.Destiny.VisiteVille` : une transition
+interrompue reste reprenable ; la visite n'est marquée `terminee` qu'après
+le dernier dialogue.
 
 Le partenaire guide le héros à pied vers la place. La caméra présente ensuite
 la boutique Kecleon, le stockage Kangourex, les étals colorés, les autres

@@ -10,9 +10,10 @@
        → recommandation selon la nature ou choix libre
        → sexe → talent → confirmation → choix du partenaire (pool complet, espèce
        différente du héros) → sexe + talent du partenaire → NOM du
-       partenaire (NameMenu + confirmation) → la faille du rêve : scène du
-       partenaire sur cliffdaytest (version nuit) → donjon Lost Wood
-       (7 étages) → clairière du réveil (reveil_nuit).
+       partenaire (NameMenu + confirmation) → la faille du rêve : héros
+       endormi dans la prairie du réveil (zrv2_zone_reveil_nuit), puis scène
+       du partenaire sur cliffdaytest (version nuit) → donjon Lost Wood
+       (7 étages) → retrouvailles dans la même prairie.
      Données : questions et recommandations dans quiz_data.lua ; 85 choix
      source dans starters_source.lua, plus les choix Destiny sans doublon.
 ]]
@@ -29,20 +30,24 @@ local personality_test = {}
 -- 0 = Confirm, 30 = RightMouse. IsInputDown lit l'état de la frame courante.
 local INPUT_CONFIRM = 0
 local INPUT_RIGHT_MOUSE = 30
-local CHARGE_MAX = 150 -- ancien secours : environ 2,5 secondes à 60 images/s
-local ETAPES_ETOILE = 5
+local CHARGE_MAX = 150 -- secours sans VFX : environ 2,5 s à 60 images/s
 
--- Animation fluide : progression continue calculée à chaque frame.
--- Les particules ont toutes rejoint le point à 70 % ; l'étoile ne commence
--- donc à se matérialiser qu'après cette convergence.
+-- Animation fluide : progression continue calculée à chaque frame, sans
+-- jamais remplacer le fond Dream de la carte. Les particules ont toutes
+-- rejoint le point à 70 % ; l'étoile ne commence donc à se matérialiser
+-- qu'après cette convergence. Les ondes bouclent à leur propre rythme,
+-- le halo suit la charge et l'étoile finit par seize poses scintillantes.
 local FLUIDE_FRAMES = 192 -- environ 3,2 secondes de maintien à 60 images/s
 local FLUIDE_CONVERGENCE = 0.70
 local FLUIDE_PARTICULES = 72
-local FLUIDE_HALO_POSES = 41
-local FLUIDE_ETOILE_POSES = 61
-local FLUIDE_HALO_TAILLE = 160
-local FLUIDE_PARTICULE_TAILLE = 16
-local FLUIDE_ETOILE_L, FLUIDE_ETOILE_H = 160, 184
+local FLUIDE_HALO_POSES = 81
+local FLUIDE_ONDES_POSES = 36
+local FLUIDE_ETOILE_POSES = 73
+local FLUIDE_ETOILE_MATERISATION_FIN = 56
+local FLUIDE_HALO_TAILLE = 192
+local FLUIDE_ONDES_TAILLE = 224
+local FLUIDE_PARTICULE_TAILLE = 24
+local FLUIDE_ETOILE_L, FLUIDE_ETOILE_H = 192, 216
 
 -- ----------------------------------------------------------------- helpers
 
@@ -217,7 +222,6 @@ local function former_etoile_fluide(starter)
     clic_droit_precedent = false,
     confirmer_arme = false,
     entree_vue = false,
-    secours_affiche = false,
     mode_secours = false,
     son_materisation = false,
     ferme = false,
@@ -225,6 +229,8 @@ local function former_etoile_fluide(starter)
     erreur = false,
     pose_halo = -1,
     pose_etoile = -1,
+    ondes_anim = nil,
+    ondes_element = nil,
     halo_anim = nil,
     halo_element = nil,
     etoile_anim = nil,
@@ -252,7 +258,7 @@ local function former_etoile_fluide(starter)
       rotation = 0.45 + hasard(i * 7 + 5) * 1.35,
       orbite = 0.22 + hasard(i * 7 + 6) * 0.38,
       anneau = 50 + hasard(i * 7 + 7) * 34,
-      phase = (i - 1) % 8,
+      phase = (i - 1) % 16,
       element = nil,
     }
   end
@@ -269,8 +275,11 @@ local function former_etoile_fluide(starter)
   -- dessiné depuis (-16, -16). On ajoute donc 16 pour obtenir un sprite
   -- centré sur les coordonnées écran réelles demandées.
   local function placer_elements()
-    if etat.halo_element == nil or etat.etoile_element == nil then return end
+    if etat.ondes_element == nil or etat.halo_element == nil or etat.etoile_element == nil then return end
     local cx, cy = etat.ancre_x, etat.ancre_y
+    etat.ondes_element.Loc = RogueElements.Loc(
+      math.floor(cx - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5),
+      math.floor(cy - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5))
     etat.halo_element.Loc = RogueElements.Loc(
       math.floor(cx - FLUIDE_HALO_TAILLE / 2 + 16 + 0.5),
       math.floor(cy - FLUIDE_HALO_TAILLE / 2 + 16 + 0.5))
@@ -295,12 +304,16 @@ local function former_etoile_fluide(starter)
     end
 
     -- Étoile : invisible tant que la convergence n'est pas terminée.
+    -- Les poses 1 à 56 la matérialisent ; les poses 57 à 72 forment ensuite
+    -- une courte boucle de scintillement pendant le maintien final.
     local pose_etoile = 0
     if etat.final_frames > 0 then
-      pose_etoile = FLUIDE_ETOILE_POSES - 1
+      local poses_finales = FLUIDE_ETOILE_POSES - FLUIDE_ETOILE_MATERISATION_FIN - 1
+      pose_etoile = FLUIDE_ETOILE_MATERISATION_FIN + 1 +
+        (math.floor(etat.final_frames / 3) % poses_finales)
     elseif etat.progression > FLUIDE_CONVERGENCE then
       local t = (etat.progression - FLUIDE_CONVERGENCE) / (1 - FLUIDE_CONVERGENCE)
-      pose_etoile = 1 + math.floor(t * (FLUIDE_ETOILE_POSES - 2) + 0.5)
+      pose_etoile = 1 + math.floor(t * (FLUIDE_ETOILE_MATERISATION_FIN - 1) + 0.5)
     end
     if pose_etoile ~= etat.pose_etoile then
       etat.etoile_anim.StartFrame = pose_etoile
@@ -378,14 +391,6 @@ local function former_etoile_fluide(starter)
     end
     etat.clic_droit_precedent = clic_droit
 
-    if not etat.secours_affiche and etat.frames >= 1200 and not etat.entree_vue then
-      etat.secours_affiche = true
-      pcall(function()
-        UI:TextPopUp("Maintiens le [color=#FFE16A]CLIC DROIT[color] — ou [color=#FFE16A]Confirmer[color]",
-          -1, 20, 209, 280, 20, true, true)
-      end)
-    end
-
     if etat.progression >= 1 then
       etat.final_frames = etat.final_frames + 1
       if etat.final_frames >= 55 then
@@ -413,8 +418,8 @@ local function former_etoile_fluide(starter)
     placer_elements()
   end
 
-  -- Toute erreur NLua dans le callback ferme proprement ce menu et laisse
-  -- l'ancien rendu en cinq fonds prendre le relais.
+  -- Toute erreur NLua dans le callback ferme proprement ce menu ; le
+  -- secours temporisé ci-dessous ne remplace jamais le fond de la carte.
   local function maj_menu(_input)
     local ok = pcall(maj_interne)
     if not ok then
@@ -431,6 +436,15 @@ local function former_etoile_fluide(starter)
     local tex = RogueEssence.Menu.MenuDirTex.TexType
     local type_objet = tex.Object or tex.OBJ
     local type_particule = tex.Particle
+
+    -- Les ondes sont le calque le plus profond : leur AnimData boucle seul
+    -- pendant que le callback déplace l'ensemble autour du point choisi.
+    etat.ondes_anim = RogueEssence.Content.AnimData('Quiz_Etoile_Ondes_' .. type_slug, 2)
+    etat.ondes_anim.StartFrame = 0
+    etat.ondes_anim.EndFrame = FLUIDE_ONDES_POSES - 1
+    etat.ondes_element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_ONDES',
+      RogueElements.Loc(64, 24), 0, type_objet, etat.ondes_anim)
+    overlay.Elements:Add(etat.ondes_element)
 
     etat.halo_anim = RogueEssence.Content.AnimData('Quiz_Etoile_Halo_' .. type_slug, 999)
     etat.halo_anim.StartFrame = 0
@@ -469,9 +483,9 @@ local function former_etoile_fluide(starter)
   local ok_premier_placement = pcall(placer_elements)
   if not ok_premier_placement then return false end
 
-  UI:WaitShowBG('Quiz_Etoile_Fond', 6, 40)
-  UI:TextPopUp("Maintiens le [color=#FFE16A]CLIC DROIT[color]", -1, 60, 209, 200, 20, true, true)
-
+  -- Aucun fond de substitution et aucune consigne en surimpression : les
+  -- quatre calques du VFX se dessinent directement sur Dream_Back et
+  -- Dream_Front, déjà animés par la carte personality_test.
   local ok_menu = pcall(function() UI:SetCustomMenu(hote) end)
   if not ok_menu then return false end
   UI:WaitForChoice()
@@ -486,81 +500,62 @@ local function reveler_starter(nature, starter)
   UI:ResetSpeaker()
   UI:WaitShowVoiceOver("L'analyse est terminée...", -1)
   UI:WaitShowVoiceOver("Une lumière répond à tes réponses...\nElle cherche la forme de ton aura.", -1)
-  UI:WaitShowVoiceOver("Place ta souris au point où ton aura doit naître,\npuis maintiens le [color=#FFE16A]clic droit[color].", -1)
+  UI:WaitShowVoiceOver("Place ta souris au point où ton aura doit naître,\npuis maintiens le [color=#FFE16A]clic droit[color] sans le relâcher.", -1)
 
-  -- Chemin normal : animation continue au point du clic droit. L'ancien
-  -- rendu plein écran ci-dessous ne sert que si le menu scriptable ou un
-  -- de ses sprites ne peut pas être construit.
+  -- Chemin normal : animation continue au point du clic droit, directement
+  -- sur le fond de la carte. Le secours ci-dessous ne sert que si le menu
+  -- scriptable ou l'un de ses sprites ne peut pas être construit ; même
+  -- dans ce cas, aucun fond n'est remplacé et rien n'est écrit en bas.
   if not former_etoile_fluide(starter) then
-  local function fond_etoile(etape)
-    return 'Quiz_Etoile_' .. (starter.etoile_type or 'Normal') .. '_' .. etape
-  end
-
-  UI:WaitShowBG(fond_etoile(0), 6, 40)
-  UI:TextPopUp("Maintiens le [color=#FFE16A]CLIC DROIT[color]", -1, 60, 209, 200, 20, true, true)
-
-  -- Évite qu'une pression déjà maintenue pour fermer la voice-over soit
-  -- comptée comme le début du geste (attente bornée à deux secondes).
-  local attente_relachement = 0
-  while geste_etoile_maintenu() and attente_relachement < 120 do
-    GAME:WaitFrames(1)
-    attente_relachement = attente_relachement + 1
-  end
-
-  local charge = 0
-  local etape = 0
-  local frames_total = 0
-  local entree_vue = false
-  local secours_affiche = false
-  local mode_secours = false
-
-  while charge < CHARGE_MAX do
-    local maintenu = geste_etoile_maintenu()
-    if maintenu then entree_vue = true end
-
-    if mode_secours or maintenu then
-      charge = math.min(CHARGE_MAX, charge + 1)
-    else
-      charge = math.max(0, charge - 0.35)
+    -- Évite qu'une pression déjà maintenue pour fermer la boîte de dialogue
+    -- soit comptée comme le début du geste (attente bornée à deux secondes).
+    local attente_relachement = 0
+    while geste_etoile_maintenu() and attente_relachement < 120 do
+      GAME:WaitFrames(1)
+      attente_relachement = attente_relachement + 1
     end
 
-    frames_total = frames_total + 1
-    if not secours_affiche and frames_total >= 1200 and not entree_vue then
-      secours_affiche = true
-      UI:TextPopUp("Maintiens le [color=#FFE16A]CLIC DROIT[color] — ou [color=#FFE16A]Confirmer[color]",
-        -1, 20, 209, 280, 20, true, true)
-    end
-    -- Dernier anti-blocage : si aucune entrée n'a jamais été détectée
-    -- (configuration ou rejeu sans souris), l'étoile finit de se former seule.
-    if frames_total >= 2700 and not entree_vue then
-      mode_secours = true
-    end
+    local charge = 0
+    local seuil_sonore = 0
+    local frames_total = 0
+    local entree_vue = false
+    local mode_secours = false
 
-    local nouvelle_etape = math.min(ETAPES_ETOILE - 1,
-      math.floor((charge / CHARGE_MAX) * ETAPES_ETOILE))
-    if nouvelle_etape ~= etape then
-      local montee = nouvelle_etape > etape
-      etape = nouvelle_etape
-      UI:WaitShowBG(fond_etoile(etape), 6, 1)
-      if montee and etape < ETAPES_ETOILE - 1 then
-        SOUND:PlaySE('Menu/Skip')
+    while charge < CHARGE_MAX do
+      local maintenu = geste_etoile_maintenu()
+      if maintenu then entree_vue = true end
+
+      if mode_secours or maintenu then
+        charge = math.min(CHARGE_MAX, charge + 1)
+      else
+        charge = math.max(0, charge - 0.35)
       end
-    else
+
+      frames_total = frames_total + 1
+      -- Dernier anti-blocage : si aucune entrée n'a jamais été détectée
+      -- (configuration ou rejeu sans souris), la scène finit seule.
+      if frames_total >= 2700 and not entree_vue then
+        mode_secours = true
+      end
+
+      local nouveau_seuil = math.floor((charge / CHARGE_MAX) * 5)
+      if nouveau_seuil > seuil_sonore then
+        seuil_sonore = nouveau_seuil
+        if seuil_sonore < 5 then SOUND:PlaySE('Menu/Skip') end
+      elseif nouveau_seuil < seuil_sonore then
+        seuil_sonore = nouveau_seuil
+      end
       GAME:WaitFrames(1)
     end
   end
-  end -- fin de l'ancien secours en cinq fonds
-
-  -- Remplace la consigne par un texte vide à expiration immédiate.
-  UI:TextPopUp(" ", 1, 60, 209, 200, 20, true, true)
   SOUND:PlayBattleSE('EVT_Battle_Flash')
   GAME:FadeOut(true, 8)
   GAME:FadeIn(24)
   GAME:WaitFrames(35)
 
-  -- Le ciel de la révélation reste derrière la boîte de dialogue pendant
-  -- que le portrait natif du starter apparaît. Le nom vide évite le préfixe
-  -- « Nom : » : la phrase elle-même porte le nom coloré selon le type.
+  -- Le fond Dream de la carte n'a jamais été remplacé : il reste donc tel
+  -- quel derrière le portrait natif du starter. Le nom vide évite le
+  -- préfixe « Nom : » ; la phrase porte le nom coloré selon le type.
   UI:SetSpeaker('', false, starter.espece, starter.forme, 'normal', Gender.Genderless)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Quelqu’un comme toi serait ' .. nom_colore_type(starter) .. ' !')
@@ -568,7 +563,6 @@ local function reveler_starter(nature, starter)
 
   UI:WaitShowVoiceOver('Nature [color=' .. nature.hex .. ']' .. nature.fr .. '[color].\n' ..
     (nature.description or ''), -1)
-  UI:WaitHideBG(30)
 end
 
 -- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
@@ -807,18 +801,21 @@ function personality_test.Quiz()
   pTbl.Importance = 'Partner'
 
   -- ------------------------------------- la faille : le rêve se fend
-  -- pendant que le héros est encore allongé, on rejoint celui qui hésite
-  -- encore à devenir explorateur (map cliffdaytest, version nuit)
+  -- Avant de rejoindre le partenaire, la faille dépose le héros, déjà
+  -- endormi, au marqueur reveil de la prairie ZRV2. Son monologue intérieur
+  -- se joue sur fond noir, puis le fondu se lève brièvement sur lui avant
+  -- de basculer vers la maison du partenaire.
   -- La musique du questionnaire s'éteint avant la première voix de la
-  -- cinématique. Elle ne reprendra pas sur la carte nocturne.
+  -- cinématique. Elle ne reprendra pas sur les cartes nocturnes.
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.PrologueHeros = 'a_voir'
   SOUND:FadeOutBGM(60)
   GAME:WaitFrames(60)
   UI:WaitShowVoiceOver("Une faille s'ouvre dans le rêve...", -1)
-  UI:WaitShowVoiceOver("...quelque part, quelqu'un hésite encore\n à devenir explorateur.", -1)
   GAME:FadeOut(false, 120)
   GAME:WaitFrames(60)
   GAME:CutsceneMode(false)
-  GAME:EnterGroundMap('destiny_cliff_tests', 'cliffdaytest_nuit', 'Pichu_Crossroads')
+  GAME:EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')
 end
 
 return personality_test

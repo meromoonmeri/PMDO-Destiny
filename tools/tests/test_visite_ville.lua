@@ -17,7 +17,7 @@ package.loaded['destiny.equipe_scene'] = {
   Suivre = function(p, h) assert(p==partner and h==hero); follow_count=follow_count+1 end,
 }
 function CH(name) return actors[name] end
-Direction = { Up=1, Down=0 }
+Direction = { Up=1, Down=0, Left=2, Right=3 }
 Gender = { Male=1, Female=2 }
 RogueEssence = { Dungeon = {
   BaseMap = { ScrollEdge = { Clamp=1 } },
@@ -31,6 +31,7 @@ GROUND = {
   TeleportTo=function(_, a, x, y) a.Position.X=x; a.Position.Y=y end,
   MoveToPosition=function(_, a, x, y) a.Position.X=x; a.Position.Y=y end,
   CharAnimateTurnTo=function() end,
+  CharSetEmote=function() end,
 }
 local money, bag, baglimit, item = 500, 0, 20, nil
 GAME = {
@@ -49,7 +50,7 @@ TASK = {
   BranchCoroutine=function(_, f) f(); return true end,
   JoinCoroutines=function() end,
 }
-SOUND = { PlayBGM=function(_, name) assert(name=='Base Town.ogg') end }
+SOUND = { PlayBGM=function(_, name) assert(name=='Base Town.ogg') end, PlayBattleSE=function() end }
 UI = {
   SetSpeaker=function() end, SetSpeakerEmotion=function() end, ResetSpeaker=function() end,
   WaitShowDialogue=function(_, text) dialogues[#dialogues+1]=text end,

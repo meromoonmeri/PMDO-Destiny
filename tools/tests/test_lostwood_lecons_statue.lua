@@ -4,6 +4,7 @@ package.path = 'game/Data/Script/?.lua;game/Data/Script/?/init.lua;' .. package.
 local battle_loaded = false
 package.preload['destiny.event_battle'] = function() battle_loaded = true; return true end
 SINGLE_CHAR_SCRIPT = {}
+FLOOR_GEN_SCRIPT = {}
 local leader, autre = {}, {}
 local pending, pages = nil, {}
 GAME = {
@@ -12,10 +13,11 @@ GAME = {
   QueueLeaderEvent = function(_, f) assert(pending == nil); pending = f end,
   WaitFrames = function() end,
 }
+local resets = 0
 UI = {
-  SetSpeaker = function(_, c) assert(c == leader) end,
-  SetSpeakerEmotion = function() end,
-  ResetSpeaker = function() end,
+  SetSpeaker = function() error('le tutoriel ne doit être prononcé par aucun personnage') end,
+  SetSpeakerEmotion = function() error('le tutoriel ne doit avoir ni portrait ni émotion') end,
+  ResetSpeaker = function() resets = resets + 1 end,
   WaitShowDialogue = function(_, msg) pages[#pages + 1] = msg end,
 }
 SV = { Destiny = { LostWoodTrip = 'aller' } }
@@ -35,7 +37,7 @@ for floor = 3, 7 do
   apply(leader, floor); assert(pending); pending(); pending = nil
   assert(SV.Destiny.LostWoodLessonsSeen[tostring(floor)])
 end
-assert(#pages == 14 and SV.Destiny.LostWoodTutorialDone)
+assert(#pages == 14 and resets == 14 and SV.Destiny.LostWoodTutorialDone)
 SV.Destiny.LostWoodTrip = 'retour'; apply(leader, 7); assert(pending == nil)
 -- Une interruption au milieu d'une leçon ne la marque pas comme terminée.
 SV.Destiny = { LostWoodTrip = 'aller' }

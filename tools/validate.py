@@ -256,18 +256,11 @@ def main() -> None:
             if starter is None:
                 errors.append(f"Personality quiz mapped starter missing: {item}")
                 continue
-            for stage in range(5):
-                rel = f"game/Content/BG/Quiz_Etoile_{starter.get('EtoileType')}_{stage}.dir"
-                path = ROOT / rel
-                if not path.is_file():
-                    errors.append(f'Quiz star DirSheet missing: {rel}')
-                else:
-                    _check_dirsheet(path)
             fluid_assets = [
-                ('game/Content/BG/Quiz_Etoile_Fond.dir', (320, 240)),
-                (f"game/Content/Particle/Quiz_Etoile_Particule_{starter.get('EtoileType')}.dir", (16, 16)),
-                (f"game/Content/Object/Quiz_Etoile_Halo_{starter.get('EtoileType')}.dir", (160, 160)),
-                (f"game/Content/Object/Quiz_Etoile_Forme_{starter.get('EtoileType')}.dir", (160, 184)),
+                (f"game/Content/Particle/Quiz_Etoile_Particule_{starter.get('EtoileType')}.dir", (24, 24)),
+                (f"game/Content/Object/Quiz_Etoile_Halo_{starter.get('EtoileType')}.dir", (192, 192)),
+                (f"game/Content/Object/Quiz_Etoile_Ondes_{starter.get('EtoileType')}.dir", (224, 224)),
+                (f"game/Content/Object/Quiz_Etoile_Forme_{starter.get('EtoileType')}.dir", (192, 216)),
             ]
             for rel, tile in fluid_assets:
                 path = ROOT / rel
@@ -286,6 +279,11 @@ def main() -> None:
                 errors.append(f'Personality quiz reveal is incomplete: missing {needle!r}')
         if 'UI:BeginChoiceMenu(q.texte' not in quiz_init:
             errors.append('Personality quiz questions must be shown without a progress prefix')
+        for forbidden in ['UI:WaitShowBG', 'UI:WaitHideBG', 'UI:TextPopUp']:
+            if forbidden in quiz_init:
+                errors.append(f'Personality quiz reveal must keep its base background and dialogue-only prompt: {forbidden}')
+        if list((ROOT / 'game/Content/BG').glob('Quiz_Etoile*.dir')):
+            errors.append('Legacy full-screen quiz star backgrounds must not be shipped')
     except Exception as exc:
         errors.append(f'Personality quiz validation failed: {exc}')
 

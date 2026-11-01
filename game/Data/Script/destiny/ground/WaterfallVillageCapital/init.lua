@@ -43,6 +43,34 @@ local function parler(personnage, emotion, texte)
   UI:WaitShowDialogue(texte)
 end
 
+-- Le héros ne parle pas pendant la visite : le partenaire lit ses gestes.
+local function geste_heros(hero, geste)
+  if hero == nil then return end
+  UI:ResetSpeaker()
+  if geste == 'question' then
+    SOUND:PlayBattleSE('EVT_Emote_Confused')
+    GROUND:CharSetEmote(hero, 'question', 1)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+    GAME:WaitFrames(28)
+  elseif geste == 'autour' then
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 8)
+    GAME:WaitFrames(14)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 8)
+    GAME:WaitFrames(14)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
+    GAME:WaitFrames(22)
+  else
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
+    GAME:WaitFrames(9)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GAME:WaitFrames(10)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
+    GAME:WaitFrames(7)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GAME:WaitFrames(16)
+  end
+end
+
 local function retour_au_joueur(hero, partenaire)
   if hero ~= nil then hero.CollisionDisabled = false end
   GAME:MoveCamera(0, 0, 45, true)
@@ -71,7 +99,8 @@ function ville.Visite()
 
   parler(partenaire, 'Happy', 'Nous y voilà ! Bienvenue à [color=#F5D27A]Réverie Town[color].')
   parler(partenaire, 'Normal', 'Le jour se lève. Reste avec moi : je vais te montrer les endroits importants.')
-  parler(hero, 'Normal', 'D’accord. Après cette nuit, je suis content de ne pas arriver ici tout seul.')
+  geste_heros(hero, 'oui')
+  parler(partenaire, 'Happy', 'Après cette nuit, tu n’arrives pas ici tout seul. On avance ensemble.')
 
   -- Le partenaire guide le héros vers la place, tous deux à pied ; la caméra
   -- les accompagne plutôt que de téléporter les personnages au milieu du plan.
@@ -91,12 +120,14 @@ function ville.Visite()
   GAME:MoveCamera(616, 925, 90, false)
   parler(partenaire, 'Normal', 'Là-bas, c’est la boutique de Kecleon. On peut y acheter des provisions pour les expéditions.')
   if kecleon ~= nil then parler(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.') end
-  parler(hero, 'Happy', 'Je penserai à vérifier notre sac avant de repartir.')
+  geste_heros(hero, 'oui')
+  parler(partenaire, 'Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
 
   GAME:MoveCamera(936, 940, 100, false)
   parler(partenaire, 'Normal', 'Et voici Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
   if kangourex ~= nil then parler(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.') end
-  parler(hero, 'Normal', 'Comme ça, nous n’avons pas besoin de tout porter dans le donjon.')
+  geste_heros(hero, 'question')
+  parler(partenaire, 'Normal', 'Exactement : ce que nous laissons à tatie Kangourex n’a pas à traverser le donjon avec nous.')
 
   GAME:MoveCamera(1100, 950, 75, false)
   parler(partenaire, 'Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
@@ -109,7 +140,8 @@ function ville.Visite()
   GAME:MoveCamera(1425, 320, 135, false)
   parler(partenaire, 'Happy', 'Et ce grand bâtiment, là-haut… un jour, nous irons voir ce qui nous attend de ce côté !')
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
-  parler(hero, 'Happy', 'Je ne me souviens toujours pas de mon passé, mais je crois que je commence à trouver mes repères.')
+  geste_heros(hero, 'autour')
+  parler(partenaire, 'Normal', 'Tu ne te souviens toujours pas de ton passé, mais tu commences à trouver tes repères. Ça se voit.')
   parler(partenaire, 'Happy', 'Tu n’as pas besoin de tout retenir d’un coup. On explorera la ville et les alentours à notre rythme.')
   parler(partenaire, 'Normal', 'Pour l’instant, reposons-nous. Notre prochaine aventure commencera quand nous serons prêts.')
 

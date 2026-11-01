@@ -2,7 +2,7 @@
  "Version": "0.8.12.0",
  "Object": {
   "$type": "RogueEssence.Data.DataType, RogueEssence",
-  "Comment": "Quiz de personnalité — 16 natures. Le badge étoile de l'opening sert de base à la révélation finale ; les fonds Quiz_Etoile_<Type>_<étape>.dir sont colorés selon le type principal du starter conclu.",
+  "Comment": "Quiz de personnalité — 16 natures. Le badge étoile de l'opening sert de silhouette à la révélation finale ; ses VFX transparents sont colorés selon le type principal du starter conclu et restent dessinés par-dessus le fond de base du quiz.",
   "Natures": [
    {
     "Index": 0,

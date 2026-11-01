@@ -1,18 +1,33 @@
 --[[ init.lua — Scène du partenaire (map cliffdaytest — version nuit)
-     Enchaînement : fin du quiz → la faille du rêve → cette map, la nuit.
-     Le partenaire (celui choisi et nommé dans le quiz) hésite à devenir
-     explorateur au croisement, puis se décide et part seul dans Lost Wood
-     (7 étages). Après la rencontre et la longue discussion sous la montagne,
-     ils retraversent le donjon ensemble ; le retour aboutit sur cette map.
-     Le héros reste allongé jusqu'à la rencontre. Dialogues originaux Destiny.
-     Réveil solo, retrouvailles et retour testés sur un banc moteur avec
-     sorties forcées ; le parcours complet des étages reste à tester.
+     Enchaînement : fin du quiz → faille du rêve → prologue du héros endormi
+     dans la prairie ZRV2 (zrv2_zone_reveil_nuit) → cette map, la nuit.
+     Le partenaire (celui choisi et
+     nommé dans le quiz) sort de sa maison, dépasse le croisement et hésite
+     sur le chemin de l'est, devant l'entrée de Lost Wood, puis part seul.
+     Après les retrouvailles, le retour inverse en duo aboutit sur
+     cliffdaytest au jour. Le héros reste allongé jusqu'à la rencontre.
+     Dialogues originaux Destiny. Réveil solo, retrouvailles et retour
+     testés sur un banc moteur avec sorties forcées ; le parcours complet
+     des étages reste à tester.
 ]]
 
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 
 local cliffdaytest_nuit = {}
+local SON_MER = 'Destiny_Falaise_Mer'
+local garde_chemin_sud_en_cours = false
+
+local function demarrer_mer()
+  -- La BGM « Cliff Camp.ogg » est portée par la carte ; cette boucle ajoute
+  -- le ressac de la mer sous la musique pendant toute la visite.
+  SOUND:StopBattleSE(SON_MER)
+  SOUND:FadeInBattleSE(SON_MER, 90)
+end
+
+local function arreter_mer()
+  SOUND:FadeOutBattleSE(SON_MER, 45)
+end
 
 -- ------------------------------------------------------------- map callbacks
 
@@ -31,6 +46,29 @@ function cliffdaytest_nuit.Enter(map)
 end
 
 function cliffdaytest_nuit.Exit(map)
+  arreter_mer()
+end
+
+function cliffdaytest_nuit.GarderCheminSud(joueur)
+  if garde_chemin_sud_en_cours or joueur == nil then return end
+  garde_chemin_sud_en_cours = true
+  GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+  GROUND:CharAnimateTurnTo(joueur, Direction.Up, 8)
+  UI:SetSpeaker(joueur)
+  UI:SetSpeakerEmotion('Worried')
+  UI:WaitShowDialogue('Non. Je ne vais pas me dégonfler.')
+  UI:SetSpeakerEmotion('Determined')
+  UI:WaitShowDialogue('Il faut que je sois courageux. Je dois traverser [color=#69D98C]Lost Wood[color].')
+  UI:SetSpeakerEmotion('Normal')
+  UI:WaitShowDialogue('Je peux souffler un instant, d’accord… mais pas fuir par le chemin du sud. L’entrée est à l’est.')
+  UI:ResetSpeaker()
+  -- Le partenaire remonte de lui-même vers le croisement nord-sud.
+  GROUND:MoveToPosition(joueur, 720, 556, false, 1)
+  GROUND:CharAnimateTurnTo(joueur, Direction.Right, 8)
+  GAME:MoveCamera(0, 0, 30, true)
+  GAME:CutsceneMode(false)
+  garde_chemin_sud_en_cours = false
 end
 
 function cliffdaytest_nuit.Update(map)
@@ -40,6 +78,13 @@ function cliffdaytest_nuit.Update(map)
     if joueur and entree and joueur.Position.X >= entree.Position.X - 16
        and math.abs(joueur.Position.Y - entree.Position.Y) <= 24 then
       cliffdaytest_nuit.LancerAller()
+      return
+    end
+    -- Le sentier vertical qui descend vers le sud ramènerait le partenaire
+    -- loin de son objectif : il se ressaisit et remonte vers le croisement.
+    if joueur and joueur.Position.Y >= 600
+       and joueur.Position.X >= 670 and joueur.Position.X <= 785 then
+      cliffdaytest_nuit.GarderCheminSud(joueur)
     end
   end
 end
@@ -53,6 +98,7 @@ end
 
 function cliffdaytest_nuit.PlotScripting()
   SV.Destiny = SV.Destiny or {}
+  demarrer_mer()
   if SV.Destiny.RetourAccompli then
     if not SV.Destiny.FinaleDestiny then
       cliffdaytest_nuit.SceneRetour()
@@ -80,6 +126,7 @@ function cliffdaytest_nuit.LancerAller()
   SV.Destiny.LostWoodTrip = 'aller'
   SV.Destiny.PartenaireParti = true
   SOUND:FadeOutBGM(60)
+  arreter_mer()
   GAME:FadeOut(false, 60)
   GAME:WaitFrames(30)
   GAME:CutsceneMode(false)
@@ -129,72 +176,48 @@ end
 
 function cliffdaytest_nuit.AllerEnVille()
   SOUND:FadeOutBGM(45)
+  arreter_mer()
   GAME:FadeOut(false, 45)
   GAME:CutsceneMode(false)
   -- La ville reste une carte distincte, dans sa zone d'origine.
   GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
 end
 
+function cliffdaytest_nuit.AllerCliffJour()
+  SOUND:FadeOutBGM(45)
+  arreter_mer()
+  GAME:FadeOut(false, 45)
+  GAME:WaitFrames(20)
+  GAME:CutsceneMode(false)
+  GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)
+end
+
+-- Compatibilité avec une sauvegarde déjà revenue sur la version nuit :
+-- la scène d'arrivée se joue désormais sur la même falaise au jour.
 function cliffdaytest_nuit.SceneRetour()
-  local hero = CH('PLAYER')
-  local partner = equipe_scene.Partenaire(666, 516, Direction.Up)
-  if partner == nil then GAME:FadeIn(20); return end
-  GAME:CutsceneMode(true)
-  UI:ResetSpeaker()
-  GROUND:TeleportTo(hero, 648, 516, Direction.Up)
-  GROUND:TeleportTo(partner, 666, 516, Direction.Up)
-  GAME:MoveCamera(666, 516, 1, false)
-  GAME:FadeIn(30)
-  GAME:WaitFrames(30)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("On est revenus au croisement ! Et cette fois, on a traversé [color=#69D98C]Lost Wood[color] ensemble.")
-  UI:WaitShowDialogue("Regarde la montagne, là-bas. Elle n'a pas bougé… mais moi, j'ai l'impression d'avoir fait un grand pas vers elle.")
-  UI:SetSpeakerEmotion("Normal")
-  UI:WaitShowDialogue("Un jour, on suivra ce chemin jusqu'au pied de cette montagne. On ira secourir ceux qui en ont besoin et découvrir ce qui se cache au-delà.")
-  UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("Et si on trouve un trésor en route, on le partagera avec toute l'équipe !")
-  UI:SetSpeaker(hero)
-  UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("Alors, explorateur… on continue ensemble ?")
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("Ensemble. Notre aventure ne fait que commencer.")
-  UI:WaitShowDialogue("Le jour se lève. Viens, je te ramène en ville ; je te présenterai les endroits où nous préparer.")
-  GROUND:CharEndAnim(hero)
-  GROUND:CharEndAnim(partner)
-  hero.CollisionDisabled = true
-  local marche_partenaire = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(partner, 694, 522, false, 1)
-  end)
-  local marche_hero = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(8)
-    GROUND:MoveToPosition(hero, 674, 522, false, 1)
-  end)
-  TASK:JoinCoroutines({marche_partenaire, marche_hero})
-  hero.CollisionDisabled = false
-  SV.Destiny.FinaleDestiny = true
-  SV.Destiny.VisiteVille = 'en_route'
-  cliffdaytest_nuit.AllerEnVille()
+  cliffdaytest_nuit.AllerCliffJour()
 end
 
 -- ------------------------------------------------------- scène (hésitation)
 
 function cliffdaytest_nuit.ScenePartenaire()
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.PrologueHeros = 'termine'
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
-  -- Aucun morceau ici : le quiz s'est tu et Tiny Woods démarre dans le donjon.
+  -- La carte joue Cliff Camp et le ressac ; Tiny Woods prendra le relais
+  -- lorsque le partenaire entrera dans Lost Wood.
 
-  -- Le héros est inconscient ailleurs et le Pichu décoratif de la carte ne
-  -- doit pas doubler le partenaire sélectionné au quiz.
+  -- Le héros est inconscient ailleurs : seul le partenaire choisi au quiz
+  -- doit apparaître dans cette scène.
   GROUND:Hide('PLAYER')
-  if CH('Pichu') ~= nil then GROUND:Hide('Pichu') end
 
   local partenaire = GAME:GetPlayerPartyMember(1)
   GROUND:SpawnerSetSpawn('Adagio', partenaire)
   partenaire = GROUND:SpawnerDoSpawn('Adagio')
   AI:DisableCharacterAI(partenaire)
-  local porte, croisement = MRKR('Pichu_Home_Door'), MRKR('Pichu_Crossroads')
+  local porte, croisement, entree = MRKR('Pichu_Home_Door'), MRKR('Pichu_Crossroads'),
+    MRKR('Dazzling_Exit_East')
 
   -- Sur cette carte, l'avant-plan contient aussi un morceau opaque du chemin.
   -- Pendant la marche seulement, le dessiner avec le sol : le décor reste
@@ -211,20 +234,24 @@ function cliffdaytest_nuit.ScenePartenaire()
   end
 
   GROUND:TeleportTo(partenaire, porte.Position.X, porte.Position.Y, Direction.Down)
-  -- Le cadre contient la porte, la jonction et le début du chemin du donjon.
+  -- Le cadre contient d'abord la porte et la jonction. Le partenaire les
+  -- dépasse : son hésitation a lieu plus loin, sur le chemin de l'est et
+  -- non devant le croisement.
   GAME:MoveCamera(croisement.Position.X + 24, croisement.Position.Y - 26, 1, false)
   GAME:FadeIn(30)
   GAME:WaitFrames(10)
   GROUND:MoveToPosition(partenaire, porte.Position.X, porte.Position.Y + 58, false, 1)
   GROUND:MoveToPosition(partenaire, croisement.Position.X + 4, croisement.Position.Y + 12, false, 1)
   GROUND:MoveToPosition(partenaire, croisement.Position.X + 64, croisement.Position.Y + 28, false, 1)
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 8)
+  GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 110, false)
+  GROUND:MoveToPosition(partenaire, entree.Position.X - 40, entree.Position.Y, false, 1)
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
   if avant_plan ~= nil then avant_plan.Layer = ordre_avant_plan end
   GAME:WaitFrames(20)
 
   UI:SetSpeaker(partenaire)
   UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue("Bon... le voilà, le croisement.\n Plus loin, c'est le donjon le plus proche : [color=#69D98C]Lost Wood[color].")
+  UI:WaitShowDialogue("Bon... voilà le chemin de l’est.\n Au bout, c’est l’entrée du donjon le plus proche : [color=#69D98C]Lost Wood[color].")
   UI:WaitShowDialogue("Devenir explorateur...\n est-ce que je suis vraiment prêt pour ça ?")
   UI:SetSpeakerEmotion("Normal")
   UI:WaitShowDialogue("Si j'y vais seul et que ça tourne mal...\n personne ne saura même que je suis parti.")
@@ -252,9 +279,10 @@ function cliffdaytest_nuit.ScenePartenaire()
   GAME:SetTeamLeaderIndex(0)
   GROUND:Hide('PLAYER')
 
-  -- Le partenaire s'engage dans le chemin du donjon.
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 8)
+  -- Le partenaire s'engage jusqu'au seuil oriental du donjon.
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
   GAME:WaitFrames(20)
+  GROUND:MoveToPosition(partenaire, entree.Position.X - 16, entree.Position.Y, false, 1)
   cliffdaytest_nuit.LancerAller()
 end
 
