@@ -4,7 +4,7 @@
 Les objets AutoTile entièrement vides sont sérialisés sous la forme {} : le
 constructeur PMDO 0.8.12 leur redonne exactement leurs quatre valeurs par
 défaut. Toutes les autres données, dimensions, couches et références restent
-inchangées. L'entrée doit être la carte livrée vérifiée (payload 0.3.7), pas une carte éditée.
+inchangées. L'entrée doit être la carte livrée vérifiée (payload corrigé 0.3.8 : collisions reconstruites, PNJ replacés), pas une carte éditée.
 """
 from __future__ import annotations
 
@@ -13,9 +13,9 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 263169763
-ORIGINAL_SHA256 = 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
-COMPACT_SHA256 = 'b3fb4397269ef51f637b7f43c522474fb8369dbab121605718a6c2e16276e981'
+ORIGINAL_SIZE = 263169765
+ORIGINAL_SHA256 = '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b'
+COMPACT_SHA256 = 'cd44c8eb78ed7c1f170a0c8871c95e027da83309177cbfca38c9b08329d0d445'
 EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
 EMPTY_COUNT = 3522952
 
