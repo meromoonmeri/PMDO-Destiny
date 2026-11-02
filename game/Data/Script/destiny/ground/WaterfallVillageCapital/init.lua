@@ -21,9 +21,26 @@ local habitants_vivants = {
   'NewObject_16', 'NewObject_11', 'NewObject_18', 'NewObject_20',
   'NewObject_21', 'NewObject_15', 'NewObject_17', 'NewObject_22',
   'NewObject_23', 'NewObject_24',
+  'Pijako_Livreur', 'Cradopaud_Pecheur', 'Roserade_Fleuriste',
+  'Magneton_Garde', 'Babimanta_Enfant', 'Goinfrex_Voyageur',
 }
 local positions_habitants = {}
 local vie_ville_activee = false
+
+-- Jour de ville courant : la sieste au café Spinda fait passer au jour
+-- suivant (même compteur que la rotation des étals Kecleon).
+local function jour_actuel()
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.JourneeVille ~= nil then
+    return SV.Destiny.JourneeVille
+  end
+  return 0
+end
+
+-- Choisit la variante de dialogue du jour parmi une liste de variantes.
+local function repliques_du_jour(variantes)
+  if variantes == nil or #variantes == 0 then return {} end
+  return variantes[(jour_actuel() % #variantes) + 1]
+end
 
 -- La carte sérialise la plupart des habitants sous des noms d'entité
 -- génériques (NewObject_*) : on leur donne leur vrai nom affiché en
@@ -38,6 +55,9 @@ local noms_habitants = {
   NewObject_18 = 'Ronflex', NewObject_20 = 'Drattak', NewObject_21 = 'Cupcanaille',
   NewObject_15 = 'Écrémeuh', NewObject_17 = 'Arcanin', NewObject_22 = 'Arbok',
   NewObject_23 = 'Charmilly', NewObject_24 = 'Forgelina',
+  Pijako_Livreur = 'Pijako', Cradopaud_Pecheur = 'Cradopaud',
+  Roserade_Fleuriste = 'Roserade', Magneton_Garde = 'Magnéton',
+  Babimanta_Enfant = 'Babimanta', Goinfrex_Voyageur = 'Goinfrex',
 }
 
 local function habitant(nom, espece, genre, x, y)
@@ -107,6 +127,14 @@ function ville.Init(map)
   installer_portes(map)
   habitant('Kecleon', 'kecleon', Gender.Male, 616, 948)
   habitant('Kangourex', 'kangaskhan', Gender.Female, 936, 964)
+  -- Habitants ajoutés (ville vivante) : créés s'ils ne sont pas sérialisés
+  -- dans la carte (positions relevées sur le rendu, à confirmer au runtime).
+  habitant('Pijako_Livreur', 'chatot', Gender.Male, 664, 286)
+  habitant('Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
+  habitant('Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
+  habitant('Magneton_Garde', 'magneton', Gender.Genderless, 826, 2044)
+  habitant('Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
+  habitant('Goinfrex_Voyageur', 'munchlax', Gender.Male, 838, 1366)
   positions_habitants = {}
   for _, nom in ipairs(habitants_vivants) do
     local acteur = CH(nom)
@@ -118,6 +146,8 @@ function ville.Init(map)
   end
   vie_ville_activee = false
   partenaire_pour(CH('PLAYER'))
+  -- Ombres de nuages sur toute la ville : même statut natif que la ville de base PMDO.
+  GROUND:AddMapStatus('clouds_overhead')
 end
 
 local function parler(personnage, emotion, texte)
@@ -165,8 +195,20 @@ local function activer_vie_ville()
     local acteur, depart = CH(nom), positions_habitants[nom]
     if acteur ~= nil and depart ~= nil then
       local rayon = comptoirs[nom] and 28 or 56
+      local cx, cy = depart.x, depart.y
+      -- Chaque jour, quelques flâneurs changent de quartier de déambulation.
+      local vagabonds = {
+        Pijako_Livreur = {{0, 0}, {72, 0}, {-72, 0}},
+        Cradopaud_Pecheur = {{0, 0}, {0, 72}, {0, -72}},
+        Goinfrex_Voyageur = {{0, 0}, {72, 0}, {-72, 0}},
+      }
+      local decalages = vagabonds[nom]
+      if decalages ~= nil then
+        local d = decalages[(jour_actuel() % #decalages) + 1]
+        cx, cy = cx + d[1], cy + d[2]
+      end
       COMMON.CreateWalkArea(nom,
-        math.max(0, depart.x - rayon), math.max(0, depart.y - rayon),
+        math.max(0, cx - rayon), math.max(0, cy - rayon),
         rayon * 2, rayon * 2)
       AI:EnableCharacterAI(acteur)
     end
@@ -284,7 +326,75 @@ end
 function ville.Enter(map) entrer() end
 function ville.GameLoad(map) installer_portes(map) entrer() end
 function ville.Exit(map) end
-function ville.Update(map, time) end
+function ville.Update(map, time) tic_ambiance() end
+
+
+-- Ambiance vivante (non bloquante) : les marchands s'animent comme dans la
+-- ville de base PMDO (émotes périodiques) et des paires d'habitants
+-- discutent entre eux par émotes, en se tournant l'un vers l'autre.
+-- Les paires et les gestes tournent avec le temps… et avec le jour courant.
+local horloge_ambiance = 0
+local function geste_ambiance(nom, emote)
+  local acteur = CH(nom)
+  if acteur == nil then return end
+  pcall(function()
+    if acteur.IsInteracting then return end
+    GROUND:CharSetEmote(acteur, emote, 1)
+  end)
+end
+local function regarder(acteur, cible)
+  if acteur == nil or cible == nil then return end
+  pcall(function()
+    local dx = cible.Position.X - acteur.Position.X
+    local dy = cible.Position.Y - acteur.Position.Y
+    local dir = Direction.Down
+    if math.abs(dx) > math.abs(dy) then
+      dir = dx > 0 and Direction.Right or Direction.Left
+    elseif dy ~= 0 then
+      dir = dy > 0 and Direction.Down or Direction.Up
+    end
+    GROUND:CharAnimateTurnTo(acteur, dir, 6)
+  end)
+end
+local paires_ambiance = {
+  {'NewObject_7', 'NewObject_8'},    -- Lombre et Ludicolo
+  {'NewObject_10', 'NewObject_9'},   -- Luxio et Luxray
+  {'Doyen', 'Drifloon'},             -- le Doyen et Baudrive
+  {'NewObject_13', 'Babimanta_Enfant'}, -- Marill et Babimanta
+  {'NewObject_23', 'NewObject_15'},  -- Charmilly et Écrémeuh
+  {'NewObject_12', 'NewObject_21'},  -- Mackogneur et Cupcanaille
+}
+local function discussion_ambiance(cycle)
+  local paire = paires_ambiance[((cycle + jour_actuel()) % #paires_ambiance) + 1]
+  local a1, a2 = CH(paire[1]), CH(paire[2])
+  regarder(a1, a2)
+  regarder(a2, a1)
+  if cycle % 2 == 0 then
+    geste_ambiance(paire[1], 'question')
+    geste_ambiance(paire[2], 'happy')
+  else
+    geste_ambiance(paire[1], 'happy')
+    geste_ambiance(paire[2], 'glowing')
+  end
+end
+local function tic_ambiance()
+  if not vie_ville_activee then return end
+  horloge_ambiance = horloge_ambiance + 1
+  if horloge_ambiance % 540 == 0 then
+    local cycle = math.floor(horloge_ambiance / 540) % 6
+    if cycle == 0 then
+      geste_ambiance('Kecleon', 'happy')
+      geste_ambiance('Kecleon_Violet', 'glowing')
+    elseif cycle == 1 then geste_ambiance('Kangourex', 'happy')
+    elseif cycle == 2 then geste_ambiance('NewObject_24', 'exclaim')
+    elseif cycle == 3 then geste_ambiance('NewObject_4', 'glowing')
+    elseif cycle == 4 then geste_ambiance('NewObject_3', 'glowing')
+    else geste_ambiance('Kecleon_Violet', 'exclaim') end
+  end
+  if horloge_ambiance % 900 == 0 then
+    discussion_ambiance(math.floor(horloge_ambiance / 900))
+  end
+end
 
 function ville.PorteCafeSpinda_Action(obj, activator)
   UI:ResetSpeaker()
@@ -644,12 +754,25 @@ function ville.NewObject_24_Action(personnage, activator)
   UI:ResetSpeaker()
 end
 
-local function dialogue_lombre_ludicolo(premier, second)
-  conversation({premier, second}, {
+local dialogues_lombre_ludicolo = {
+  {
     {1, 'Normal', 'La cascade chante plus fort ce matin. Les ponts vont encore être glissants.'},
     {2, 'Happy', 'Alors dansons lentement en les traversant. Réverie Town récompense ceux qui gardent le rythme.'},
     {1, 'Happy', 'Facile à dire pour toi ! Mais je suivrai tes pas, comme toujours.'},
-  })
+  },
+  {
+    {1, 'Normal', 'Les filaments de la rivière glissent tout seuls aujourd’hui. On dirait qu’elle respire.'},
+    {2, 'Happy', 'Elle danse, mon ami ! Et quand la rivière danse, les poissons suivent la mesure.'},
+    {1, 'Happy', 'Alors je lancerai ma ligne en rythme. Une-deux, une-deux…'},
+  },
+  {
+    {1, 'Worried', 'Le marché était bondé ce matin. J’ai failli perdre une feuille dans la foule.'},
+    {2, 'Happy', 'C’est la preuve que la ville vit ! Demain, nous irons tôt, avant les équipes.'},
+    {1, 'Normal', 'D’accord. Mais c’est toi qui porteras les baies, cette fois.'},
+  },
+}
+local function dialogue_lombre_ludicolo(premier, second)
+  conversation({premier, second}, repliques_du_jour(dialogues_lombre_ludicolo))
 end
 function ville.NewObject_7_Action(personnage, activator)
   dialogue_lombre_ludicolo(personnage, CH('NewObject_8'))
@@ -658,12 +781,26 @@ function ville.NewObject_8_Action(personnage, activator)
   dialogue_lombre_ludicolo(personnage, CH('NewObject_7'))
 end
 
-local function dialogue_lux(second, premier)
-  conversation({second, premier}, {
+local dialogues_lux = {
+  {
     {1, 'Worried', 'Dis… Lost Wood fait vraiment aussi peur qu’on le raconte ?'},
     {2, 'Normal', 'Il demande du respect, pas de la peur. On y entre préparé, et jamais en se croyant invincible.'},
     {1, 'Happy', 'Alors je m’entraînerai encore. Un jour, je traverserai à tes côtés.'},
-  })
+  },
+  {
+    {1, 'Happy', 'J’ai couru jusqu’au pont de l’est sans m’arrêter ! Tu as vu ?'},
+    {2, 'Happy', 'Je regardais, oui. Encore un peu de souffle, et tu tiendras une vraie patrouille.'},
+    {1, 'Normal', 'Demain, je vise la place et retour. Chronomètre-moi !'},
+  },
+  {
+    {1, 'Worried', 'Et si une équipe se perd, un jour ? Qui ira la chercher ?'},
+    {2, 'Normal', 'Ceux qui connaissent les chemins… et qui ont appris à revenir. C’est pour cela qu’on s’entraîne.'},
+    {1, 'Happy', 'Alors un jour, ce sera nous. Promis ?'},
+    {2, 'Happy', 'Promis, petit frère.'},
+  },
+}
+local function dialogue_lux(second, premier)
+  conversation({second, premier}, repliques_du_jour(dialogues_lux))
 end
 function ville.NewObject_9_Action(personnage, activator)
   dialogue_lux(CH('NewObject_10'), personnage)
@@ -673,26 +810,116 @@ function ville.NewObject_10_Action(personnage, activator)
 end
 
 local dialogues_habitants = {
-  NewObject_6 = {{'Happy', 'De là-haut, on voit les toits, les chutes et même un morceau de la falaise. Réverie Town tient dans un battement d’ailes.'}},
-  NewObject_12 = {{'Normal', 'Je porte les caisses du marché le matin. L’après-midi, je laisse mes bras raconter qu’ils ont bien travaillé.'}},
-  NewObject_13 = {{'Happy', 'J’adore suivre les reflets sur l’eau. Quand une équipe revient de mission, toute la place semble briller.'}},
-  NewObject_14 = {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Kangourex et les Kecleon existent pour une raison.'}},
-  Doyen = {{'Normal', 'Je connais chaque courant qui passe au-dessus des cascades. La ville change, mais le vent se souvient.'}},
-  Drifloon = {{'Happy', 'Le vent m’emmène d’un quartier à l’autre. Aujourd’hui, il a décidé de rester près du Doyen.'}},
-  NewObject_16 = {{'Normal', 'Je surveille les chemins qui montent vers les hauteurs. Un ciel dégagé annonce souvent une bonne journée d’expédition.'}},
-  NewObject_11 = {{'Normal', 'Mon équipe se repose. Savoir s’arrêter à Réverie Town fait aussi partie du métier d’explorateur.'}},
-  NewObject_18 = {{'Normal', 'Zzz… prévenez-moi quand le café Spinda servira le goûter… Zzz…'}},
-  NewObject_20 = {{'Normal', 'Les jeunes équipes regardent toujours l’horizon. C’est bon signe : la ville a besoin de rêves neufs.'}},
-  NewObject_21 = {{'Happy', 'Le parfum des baies du marché me donne des idées de desserts pour tout le quartier !'}},
-  NewObject_15 = {{'Happy', 'Un bon lait chaud après une mission, et les pattes tremblent déjà moins.'}},
-  NewObject_17 = {{'Normal', 'Je fais ma ronde entre les ponts. Si vous cherchez la place, suivez le bruit des boutiques.'}},
-  NewObject_22 = {{'Normal', 'On dit que les ombres de Lost Wood se déplacent. Moi, je dis surtout de garder une Baie Lum à portée de patte.'}},
-  NewObject_23 = {{'Happy', 'Je décorerais bien la place pour le retour des équipes. Il suffit de peu pour qu’une ville sourie.'}},
+  NewObject_6 = {
+    {{'Happy', 'De là-haut, on voit les toits, les chutes et même un morceau de la falaise. Réverie Town tient dans un battement d’ailes.'}},
+    {{'Happy', 'Ce matin, le vent porte jusqu’à la forêt d’ambre. Parfait pour les ailes… et pour les nouvelles.'}},
+    {{'Normal', 'Les courants chauds tournent au-dessus de la rivière. Quand ils glissent vers l’est, le beau temps suit toujours.'}},
+  },
+  NewObject_12 = {
+    {{'Normal', 'Je porte les caisses du marché le matin. L’après-midi, je laisse mes bras raconter qu’ils ont bien travaillé.'}},
+    {{'Worried', 'Deux livraisons pour les Kecleon, une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
+    {{'Happy', 'Une caisse bien portée ne casse jamais. C’est ma devise. Bon, sauf celle de la semaine dernière. Une seule !'}},
+  },
+  NewObject_13 = {
+    {{'Happy', 'J’adore suivre les reflets sur l’eau. Quand une équipe revient de mission, toute la place semble briller.'}},
+    {{'Happy', 'Les filets bleu foncé de la rivière voyagent le long des berges. Je les suis du regard jusqu’au pont !'}},
+    {{'Normal', 'Aujourd’hui, je compte les équipes qui partent. Demain, je compterai celles qui reviennent. C’est mon rituel.'}},
+  },
+  NewObject_14 = {
+    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Kangourex et les Kecleon existent pour une raison.'}},
+    {{'Normal', 'Un sac vérifié le matin vaut deux jambes reposées. Notez-le quelque part, ça vous servira en donjon.'}},
+    {{'Worried', 'On prévoit du vent sur les hauteurs. Les équipes sages attendront demain, les autres… apprendront vite.'}},
+  },
+  Doyen = {
+    {{'Normal', 'Je connais chaque courant qui passe au-dessus des cascades. La ville change, mais le vent se souvient.'}},
+    {{'Normal', 'Chaque jour, la rivière déplace ses filaments d’un souffle. Rien ne reste, tout continue. Méditez-y.'}},
+    {{'Happy', 'Les jeunes Baudrive me demandent des histoires. Je leur raconte la ville… un quartier par jour.'}},
+  },
+  Drifloon = {
+    {{'Happy', 'Le vent m’emmène d’un quartier à l’autre. Aujourd’hui, il a décidé de rester près du Doyen.'}},
+    {{'Happy', 'Aujourd’hui, le vent sent les baies du marché. Demain, il sentira peut-être la pluie. Moi, je suivrai !'}},
+    {{'Worried', 'Le Doyen dit que le vent se souvient de tout. Alors je lui confie mes secrets… il les garde là-haut.'}},
+  },
+  NewObject_16 = {
+    {{'Normal', 'Je surveille les chemins qui montent vers les hauteurs. Un ciel dégagé annonce souvent une bonne journée d’expédition.'}},
+    {{'Normal', 'Ronde du matin terminée : ponts dégagés, sentiers secs. Les équipes peuvent partir tranquilles.'}},
+    {{'Worried', 'Des nuages s’accrochent à la falaise. Si vous montez aujourd’hui, restez sur les chemins balisés.'}},
+  },
+  NewObject_11 = {
+    {{'Normal', 'Mon équipe se repose. Savoir s’arrêter à Réverie Town fait aussi partie du métier d’explorateur.'}},
+    {{'Happy', 'Hier, les grottes ; aujourd’hui, la place et un vrai repas. Demain ? On verra ce que dit le tableau des missions.'}},
+    {{'Normal', 'Je révise nos cartes au bord de l’eau. Le courant m’aide à réfléchir, allez savoir pourquoi.'}},
+  },
+  NewObject_18 = {
+    {{'Normal', 'Zzz… prévenez-moi quand le café Spinda servira le goûter… Zzz…'}},
+    {{'Normal', 'Zzz… encore cinq minutes… ou cinq siestes… Zzz…'}},
+    {{'Happy', 'Hmm ? On a parlé de goûter ? Non ? Alors je rendors… Zzz…'}},
+  },
+  NewObject_20 = {
+    {{'Normal', 'Les jeunes équipes regardent toujours l’horizon. C’est bon signe : la ville a besoin de rêves neufs.'}},
+    {{'Normal', 'De mon temps, on partait avec une carte griffonnée sur une écorce. Vous avez bien de la chance, aujourd’hui.'}},
+    {{'Happy', 'Je vois passer les équipes chaque jour. Chacune repart un peu plus grande qu’à l’arrivée. Ça me suffit.'}},
+  },
+  NewObject_21 = {
+    {{'Happy', 'Le parfum des baies du marché me donne des idées de desserts pour tout le quartier !'}},
+    {{'Happy', 'Aujourd’hui : tarte aux Baies Pecha. Demain… tarte aux Baies Pecha aussi. On ne change pas un succès !'}},
+    {{'Worried', 'Mes réserves de baies fondent plus vite que prévu. Quelqu’un ici fait des réserves dans MON garde-manger ?'}},
+  },
+  NewObject_15 = {
+    {{'Happy', 'Un bon lait chaud après une mission, et les pattes tremblent déjà moins.'}},
+    {{'Happy', 'Le lait du matin est le meilleur, parole d’Écrémeuh. Passez avant les expéditions, il part vite !'}},
+    {{'Normal', 'Charmilly veut ma crème pour ses décorations. Entre voisines, on s’arrange toujours.'}},
+  },
+  NewObject_17 = {
+    {{'Normal', 'Je fais ma ronde entre les ponts. Si vous cherchez la place, suivez le bruit des boutiques.'}},
+    {{'Normal', 'Ronde du jour : ponts, place, berges. La rivière glisse vite aujourd’hui, surveillez vos pas près des quais.'}},
+    {{'Happy', 'Les petits m’utilisent comme point de repère. « Au troisième Arcanin, tournez à gauche », disent-ils. Il n’y en a qu’un…'}},
+  },
+  NewObject_22 = {
+    {{'Normal', 'On dit que les ombres de Lost Wood se déplacent. Moi, je dis surtout de garder une Baie Lum à portée de patte.'}},
+    {{'Normal', 'Près de ma grotte, l’air change selon les jours. Quand il sent la mousse froide, Lost Wood s’agite. Restez prudents.'}},
+    {{'Worried', 'Les filaments de la rivière fuient vers le sud, comme s’ils évitaient la forêt. Intéressant… non ?'}},
+  },
+  NewObject_23 = {
+    {{'Happy', 'Je décorerais bien la place pour le retour des équipes. Il suffit de peu pour qu’une ville sourie.'}},
+    {{'Happy', 'Programme du jour : un ruban de crème sur la fontaine, deux sur le pont. Réverie mérite sa douceur quotidienne !'}},
+    {{'Normal', 'Écrémeuh me garde sa meilleure crème. Demain, la place aura droit à une vraie fête des couleurs.'}},
+  },
+  Pijako_Livreur = {
+    {{'Happy', 'Une lettre lue au bon moment peut sauver une expédition. Enfin, presque. Je livre vite, quand même !'}},
+    {{'Happy', 'Tournée du jour : poste, place, café, et retour avant midi ! Le courrier de Réverie n’attend jamais.'}},
+    {{'Worried', 'Le vent a failli emporter une lettre au-dessus de la chute. Failli ! Un Pijako ne perd jamais son courrier.'}},
+  },
+  Cradopaud_Pecheur = {
+    {{'Normal', 'Les filets d’eau racontent la rivière : quand ils s’agitent, les poissons ne sont pas loin.'}},
+    {{'Normal', 'Regardez les filaments descendre le courant : là où ils ralentissent, les poissons se reposent. C’est mon coin, aujourd’hui.'}},
+    {{'Happy', 'Hier, trois prises avant le déjeuner. Aujourd’hui, je vise le double… ou une belle sieste. Verdict au couchant.'}},
+  },
+  Roserade_Fleuriste = {
+    {{'Happy', 'Je tresse des guirlandes pour les maisons de la ville. Réverie mérite des fleurs fraîches chaque matin.'}},
+    {{'Happy', 'Les fleurs des berges suivent les filaments de la rivière. Là où l’eau glisse douce, elles ouvrent plus tôt.'}},
+    {{'Normal', 'Une guirlande par jour, une porte à la fois. Au bout d’une saison, toute la ville fleurit.'}},
+  },
+  Magneton_Garde = {
+    {{'Normal', 'Bzz… Pont surveillé. Passage libre pour les équipes en règle. Bzz.'}},
+    {{'Normal', 'Bzz… Contrôle du jour : sacs fermés, badges visibles. Merci de votre coopération. Bzz.'}},
+    {{'Worried', 'Bzz… Interférences près de la cascade. Mes trois unités ne sont pas d’accord sur la cause. Bzz.'}},
+  },
+  Babimanta_Enfant = {
+    {{'Happy', 'Quand je serai grand, je traverserai la grande chute en nageant ! Enfin… peut-être en bateau.'}},
+    {{'Happy', 'Je fais la course avec les filaments de la rivière ! Ils vont vite… mais moi aussi !'}},
+    {{'Worried', 'Marill dit qu’elle comptera les équipes avec moi. Moi, je compte les reflets. On s’échangera nos totaux demain.'}},
+  },
+  Goinfrex_Voyageur = {
+    {{'Happy', 'On m’a dit que le café Spinda servait les meilleurs goûters du pays. Je vérifie. Rigoureusement.'}},
+    {{'Happy', 'Jour deux de mes vérifications : le goûter du café Spinda est toujours excellent. La science avance.'}},
+    {{'Normal', 'Je devais repartir ce matin… puis Cupcanaille a parlé de tarte. Je reste un jour de plus. Pour la science, toujours.'}},
+  },
 }
-for nom, repliques in pairs(dialogues_habitants) do
-  local texte = repliques
+for nom, variantes in pairs(dialogues_habitants) do
+  local choix = variantes
   ville[nom .. '_Action'] = function(personnage, activator)
-    dialogue_simple(personnage, texte)
+    dialogue_simple(personnage, repliques_du_jour(choix))
   end
 end
 
