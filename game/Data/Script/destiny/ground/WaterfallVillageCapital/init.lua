@@ -87,22 +87,21 @@ end
 -- sur le rendu de la carte, à confirmer au runtime). Chaque porte mène à
 -- l'intérieur correspondant et mémorise le point de retour devant la façade.
 local portes_batiments = {
-  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 613, y = 195, retour_x = 641, retour_y = 252, interieur = 'post_office', marqueur = 'entrance_south'},
-  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 233, y = 273, retour_x = 261, retour_y = 330, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1148, y = 359, retour_x = 1176, retour_y = 416, interieur = 'metano_water_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteBoutiqueKecleon', titre = 'Réserve de la boutique Kecleon', x = 443, y = 802, retour_x = 471, retour_y = 860, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonAlakazam', titre = "Maison d'Alakazam", x = 186, y = 1100, retour_x = 214, retour_y = 1158, interieur = 'metano_normal_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteBanque', titre = 'Salle des coffres', x = 361, y = 1050, retour_x = 389, retour_y = 1106, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteReserveKangourex', titre = 'Réserve Kangourex', x = 958, y = 940, retour_x = 986, retour_y = 998, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteForgeTinkaton', titre = 'Atelier de Tinkaton', x = 1217, y = 972, retour_x = 1245, retour_y = 1030, interieur = 'dojo_ossatueur', marqueur = 'MarowakDojoExitMarker'},
-  {nom = 'PorteMaisonEquipe', titre = "Maison de l'équipe", x = 316, y = 1755, retour_x = 344, retour_y = 1812, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 520, y = 2159, retour_x = 548, retour_y = 2216, interieur = 'metano_electric_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 779, y = 2160, retour_x = 807, retour_y = 2218, interieur = 'metano_inn', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteTenteEst', titre = "Dojo de l'est", x = 1422, y = 2250, retour_x = 1450, retour_y = 2308, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 286, y = 3193, retour_x = 314, retour_y = 3250, interieur = 'metano_rock_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 457, y = 3485, retour_x = 485, retour_y = 3542, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 736, y = 3527, retour_x = 764, retour_y = 3584, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPlanteOuest', titre = "Maison plante de l'ouest", x = 7, y = 2859, retour_x = 80, retour_y = 2916, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 60, y = 468, retour_x = 92, retour_y = 516, interieur = 'post_office', marqueur = 'entrance_south'},
+  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 400, y = 436, retour_x = 412, retour_y = 468, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1028, y = 472, retour_x = 1076, retour_y = 500, interieur = 'metano_water_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonEquipe', titre = 'Maison de l\'équipe', x = 660, y = 524, retour_x = 676, retour_y = 548, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 384, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
+  {nom = 'PorteMaisonAlakazam', titre = 'Maison d\'Alakazam', x = 344, y = 1112, retour_x = 372, retour_y = 1156, interieur = 'metano_normal_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteReserveKangourex', titre = 'Réserve Kangourex', x = 932, y = 968, retour_x = 964, retour_y = 1012, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteForgeTinkaton', titre = 'Atelier de Tinkaton', x = 1080, y = 1008, retour_x = 1108, retour_y = 1052, interieur = 'dojo_ossatueur', marqueur = 'MarowakDojoExitMarker'},
+  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'metano_electric_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'metano_inn', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonArcanine', titre = 'Maison d\'Arcanine', x = 140, y = 2552, retour_x = 172, retour_y = 2596, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 378, y = 2376, retour_x = 444, retour_y = 2396, interieur = 'metano_rock_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 580, y = 2492, retour_x = 612, retour_y = 2540, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 748, y = 2552, retour_x = 780, retour_y = 2596, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
 }
 
 local function installer_une_porte(map, nom, x, y)
@@ -116,7 +115,7 @@ end
 
 local function installer_portes(map)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
-  installer_une_porte(map, 'PorteCafeSpinda', 1160, 1588)
+  installer_une_porte(map, 'PorteCafeSpinda', 1020, 1344)
   for _, porte in ipairs(portes_batiments) do
     installer_une_porte(map, porte.nom, porte.x, porte.y)
   end
@@ -126,15 +125,15 @@ function ville.Init(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
   habitant('Kecleon', 'kecleon', Gender.Male, 616, 948)
-  habitant('Kangourex', 'kangaskhan', Gender.Female, 936, 964)
+  habitant('Kangourex', 'kangaskhan', Gender.Female, 932, 1004)
   -- Habitants ajoutés (ville vivante) : créés s'ils ne sont pas sérialisés
   -- dans la carte (positions relevées sur le rendu, à confirmer au runtime).
-  habitant('Pijako_Livreur', 'chatot', Gender.Male, 664, 286)
+  habitant('Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
   habitant('Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
   habitant('Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
-  habitant('Magneton_Garde', 'magneton', Gender.Genderless, 826, 2044)
+  habitant('Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
   habitant('Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
-  habitant('Goinfrex_Voyageur', 'munchlax', Gender.Male, 838, 1366)
+  habitant('Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
   positions_habitants = {}
   for _, nom in ipairs(habitants_vivants) do
     local acteur = CH(nom)

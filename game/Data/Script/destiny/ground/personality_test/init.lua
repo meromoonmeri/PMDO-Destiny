@@ -6,7 +6,8 @@
      PMD Destiny) :
        purge de l'équipe par défaut → 20 questions sans compteur affiché
        → nature (max de points, réponses récentes en départage) → étoile
-       fluide formée au point du clic droit, colorée selon le type du starter
+       déjà formée mais sans couleur, puis clic du joueur : l'animation de
+       couleur jaillit au point cliqué, teintée selon le type du starter
        → recommandation selon la nature ou choix libre
        → sexe → talent → confirmation → choix du partenaire (pool complet, espèce
        différente du héros) → sexe + talent du partenaire → NOM du
@@ -209,10 +210,15 @@ end
 -- Le menu hôte est placé entièrement hors écran. L'overlay plein écran est
 -- volontairement débordant (-16 en x/y) afin qu'un sprite centré ou presque
 -- sur le point de la souris ne soit pas coupé par la zone du menu.
-local function former_etoile_fluide(starter)
+local function former_etoile_fluide(starter, options)
+  options = options or {}
+  -- Phase « incolore » : l'étoile est déjà formée avec les assets « Normal »
+  -- (blancs, sans couleur) ; un clic du joueur la referme et déclenche ensuite
+  -- l'animation de couleur (phase « auto », au point cliqué).
   local type_slug = starter.etoile_type or 'Normal'
+  if options.incolore then type_slug = 'Normal' end
   local etat = {
-    progression = 0,
+    progression = options.incolore and 1 or 0,
     temps = 0,
     frames = 0,
     final_frames = 0,
@@ -220,7 +226,11 @@ local function former_etoile_fluide(starter)
     ancre_y = 104,
     ancre_prete = false,
     clic_droit_precedent = false,
+    clic_arme = false,
+    confirmer_precedent = false,
     confirmer_arme = false,
+    phase_incolore = options.incolore == true,
+    auto_couleur = options.auto == true,
     entree_vue = false,
     mode_secours = false,
     son_materisation = false,
@@ -363,12 +373,33 @@ local function former_etoile_fluide(starter)
     -- Confirm ne sert qu'en secours : on exige de le voir relâché une fois
     -- après la voice-over pour ne pas compter la pression qui l'a fermée.
     if not confirmer_brut then etat.confirmer_arme = true end
+    if not clic_droit then etat.clic_arme = true end
     local confirmer = confirmer_brut and etat.confirmer_arme
 
     if clic_droit or confirmer then etat.entree_vue = true end
     if etat.frames >= 2700 and not etat.entree_vue then etat.mode_secours = true end
-    local maintenu = clic_droit or confirmer or etat.mode_secours
+    local maintenu = clic_droit or confirmer or etat.mode_secours or etat.auto_couleur
 
+    -- Phase incolore : l'étoile blanche attend le clic du joueur (appui franc,
+    -- entrées préalablement relâchées) pour laisser jaillir sa couleur.
+    if etat.phase_incolore then
+      local appui_clic = clic_droit and not etat.clic_droit_precedent and etat.clic_arme
+      local appui_conf = confirmer and not etat.confirmer_precedent
+      if appui_clic or appui_conf or etat.mode_secours then
+        etat.termine = true
+        placer_elements()
+        fermer()
+        return
+      end
+    end
+    etat.confirmer_precedent = confirmer
+
+    if etat.auto_couleur then
+      -- Phase couleur : l'ancre reste le point du clic qui l'a déclenchée.
+      if not etat.ancre_prete then
+        etat.ancre_x, etat.ancre_y = options.ancre_x or mx, options.ancre_y or my
+        etat.ancre_prete = true
+      end
     -- Le point où le clic droit commence devient immédiatement l'ancre.
     -- Pendant le maintien, les particules suivent ensuite la souris avec un
     -- léger amortissement pour éviter tout tremblement.
@@ -379,7 +410,7 @@ local function former_etoile_fluide(starter)
       etat.ancre_x, etat.ancre_y = mx, my
     else
       local cible_x, cible_y = etat.ancre_x, etat.ancre_y
-      if clic_droit or (souris_ok and not confirmer_brut) then
+      if not etat.auto_couleur and (clic_droit or (souris_ok and not confirmer_brut)) then
         cible_x, cible_y = mx, my
       end
       if etat.mode_secours and not clic_droit then
@@ -389,11 +420,12 @@ local function former_etoile_fluide(starter)
       etat.ancre_x = etat.ancre_x + (cible_x - etat.ancre_x) * suivi
       etat.ancre_y = etat.ancre_y + (cible_y - etat.ancre_y) * suivi
     end
+    end
     etat.clic_droit_precedent = clic_droit
 
     if etat.progression >= 1 then
       etat.final_frames = etat.final_frames + 1
-      if etat.final_frames >= 55 then
+      if etat.final_frames >= 55 and not etat.phase_incolore then
         etat.termine = true
         placer_elements()
         fermer()
@@ -479,6 +511,9 @@ local function former_etoile_fluide(starter)
   if not ok_construction or hote == nil then return false end
 
   etat.ancre_x, etat.ancre_y = souris_ecran()
+  if options.ancre_x ~= nil and options.ancre_y ~= nil then
+    etat.ancre_x, etat.ancre_y = options.ancre_x, options.ancre_y
+  end
   etat.ancre_prete = true
   local ok_premier_placement = pcall(placer_elements)
   if not ok_premier_placement then return false end
@@ -490,7 +525,7 @@ local function former_etoile_fluide(starter)
   if not ok_menu then return false end
   UI:WaitForChoice()
 
-  return etat.termine and not etat.erreur
+  return etat.termine and not etat.erreur, etat.ancre_x, etat.ancre_y
 end
 
 -- Révélation interactive : les particules convergent vers le point du clic
@@ -499,14 +534,21 @@ end
 local function reveler_starter(nature, starter)
   UI:ResetSpeaker()
   UI:WaitShowVoiceOver("L'analyse est terminée...", -1)
-  UI:WaitShowVoiceOver("Une lumière répond à tes réponses...\nElle cherche la forme de ton aura.", -1)
-  UI:WaitShowVoiceOver("Place ta souris au point où ton aura doit naître,\npuis maintiens le [color=#FFE16A]clic droit[color] sans le relâcher.", -1)
+  UI:WaitShowVoiceOver("Une étoile sans couleur s'est déjà formée au-dessus de toi...\nElle attend la teinte de ton aura.", -1)
+  UI:WaitShowVoiceOver("Quand tu seras prêt, [color=#FFE16A]clique[color] (clic droit) :\nla couleur de ton étoile jaillira.", -1)
+
+  -- Phase 1 : l'étoile est déjà visible, blanche et scintillante (assets
+  -- « Normal »). Le clic du joueur referme cette attente et déclenche la
+  -- phase 2 : la même animation, mais colorée selon le type du starter et
+  -- jouée automatiquement au point cliqué.
+  local ok_incolore, ancre_x, ancre_y = former_etoile_fluide(starter, { incolore = true })
+  if not ok_incolore then ancre_x, ancre_y = nil, nil end
 
   -- Chemin normal : animation continue au point du clic droit, directement
   -- sur le fond de la carte. Le secours ci-dessous ne sert que si le menu
   -- scriptable ou l'un de ses sprites ne peut pas être construit ; même
   -- dans ce cas, aucun fond n'est remplacé et rien n'est écrit en bas.
-  if not former_etoile_fluide(starter) then
+  if not former_etoile_fluide(starter, { auto = true, ancre_x = ancre_x, ancre_y = ancre_y }) then
     -- Évite qu'une pression déjà maintenue pour fermer la boîte de dialogue
     -- soit comptée comme le début du geste (attente bornée à deux secondes).
     local attente_relachement = 0
