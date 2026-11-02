@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Reconstitue les fichiers volumineux depuis payload/*.gz, sans écraser une édition.
 
-WaterfallVillageCapital.rsground est la carte de Réverie Town (base town02, rivières animées 0.3.7) :
-263 169 763 octets reconstitués depuis l'archive Git. Son SHA-256 est vérifié.
+WaterfallVillageCapital.rsground est la carte de Réverie Town (base town02, rivières animées 0.3.7, collisions et PNJ corrigés 0.3.8) :
+263 169 765 octets reconstitués depuis l'archive Git. Son SHA-256 est vérifié.
 """
 import gzip
 import hashlib
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAYLOADS = {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab', 263169763),
+        '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b', 263169765),
 }
 
 

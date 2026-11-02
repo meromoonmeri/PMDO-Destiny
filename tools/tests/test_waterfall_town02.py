@@ -37,22 +37,22 @@ def md5(path: Path) -> str:
 assert unpack_payload.PAYLOADS == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab',
-        263169763,
+        '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b',
+        263169765,
     )
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 263169763
-assert sha256(MAP) == 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
+assert MAP.stat().st_size == 263169765
+assert sha256(MAP) == '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 263169763
-assert h.hexdigest() == 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
+assert size == 263169765
+assert h.hexdigest() == '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
