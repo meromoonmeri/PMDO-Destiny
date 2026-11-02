@@ -17,6 +17,7 @@ local equipe_scene = require 'destiny.equipe_scene'
 local cliffdaytest_nuit = {}
 local SON_MER = 'Destiny_Falaise_Mer'
 local garde_chemin_sud_en_cours = false
+local invite_retour_aller_en_cours = false
 
 local function demarrer_mer()
   -- La BGM « Cliff Camp.ogg » est portée par la carte ; cette boucle ajoute
@@ -72,12 +73,14 @@ function cliffdaytest_nuit.GarderCheminSud(joueur)
 end
 
 function cliffdaytest_nuit.Update(map)
-  -- Après une pause, rejoindre de nouveau le bord est relance l'aller solo.
-  if SV.Destiny and SV.Destiny.LostWoodTrip == 'pause_aller' then
+  -- Après une pause, se rapprocher du bord est ouvre le dialogue de reprise :
+  -- le donjon n'est jamais relancé sans le choix explicite du joueur.
+  if SV.Destiny and SV.Destiny.LostWoodTrip == 'pause_aller'
+     and not invite_retour_aller_en_cours then
     local joueur, entree = CH('PLAYER'), MRKR('Dazzling_Exit_East')
     if joueur and entree and joueur.Position.X >= entree.Position.X - 16
        and math.abs(joueur.Position.Y - entree.Position.Y) <= 24 then
-      cliffdaytest_nuit.LancerAller()
+      cliffdaytest_nuit.DemanderRetourAller()
       return
     end
     -- Le sentier vertical qui descend vers le sud ramènerait le partenaire
@@ -124,6 +127,7 @@ end
 function cliffdaytest_nuit.LancerAller()
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.LostWoodTrip = 'aller'
+  SV.Destiny.LostWoodRetry = nil
   SV.Destiny.PartenaireParti = true
   SOUND:FadeOutBGM(60)
   arreter_mer()
@@ -132,6 +136,39 @@ function cliffdaytest_nuit.LancerAller()
   GAME:CutsceneMode(false)
   GAME:EnterDungeon('lost_wood', 0, 0, 0,
     RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+end
+
+function cliffdaytest_nuit.DemanderRetourAller()
+  if invite_retour_aller_en_cours then return end
+  local partenaire, entree = CH('PLAYER'), MRKR('Dazzling_Exit_East')
+  if partenaire == nil or entree == nil then return end
+  invite_retour_aller_en_cours = true
+  GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
+  UI:SetSpeaker(partenaire)
+  UI:SetSpeakerEmotion('Normal')
+  UI:WaitShowDialogue('Voici l’entrée de [color=#69D98C]Lost Wood[color].')
+  UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans Lost Wood ?', true)
+  UI:WaitForChoice()
+  if UI:ChoiceResult() then
+    UI:SetSpeaker(partenaire)
+    UI:SetSpeakerEmotion('Determined')
+    UI:WaitShowDialogue('Allez… on y retourne. Cette fois, je vais jusqu’au bout !')
+    invite_retour_aller_en_cours = false
+    cliffdaytest_nuit.LancerAller()
+    return
+  end
+  UI:SetSpeaker(partenaire)
+  UI:SetSpeakerEmotion('Normal')
+  UI:WaitShowDialogue('Pas tout de suite. Je reviendrai vers l’entrée quand je serai prêt.')
+  UI:ResetSpeaker()
+  -- Reculer hors du seuil évite de rouvrir le menu à la frame suivante.
+  GROUND:MoveToPosition(partenaire, entree.Position.X - 56, entree.Position.Y, false, 1)
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
+  GAME:MoveCamera(0, 0, 30, true)
+  GAME:CutsceneMode(false)
+  invite_retour_aller_en_cours = false
 end
 
 function cliffdaytest_nuit.SceneEchecPartenaire()
@@ -160,16 +197,12 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
   GROUND:CharEndAnim(partenaire)
   UI:SetSpeakerEmotion('Normal')
   UI:WaitShowDialogue('Je peux me reposer ici, puis essayer encore quand je serai prêt.')
-  UI:ChoiceMenuYesNo('Repartir dans la forêt maintenant ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() then
-    cliffdaytest_nuit.LancerAller()
-  else
-    UI:WaitShowDialogue('Je prends une pause. Quand je serai prêt, je reviendrai à l’entrée, à l’est.')
-    SV.Destiny.LostWoodTrip = 'pause_aller'
-    GAME:MoveCamera(0, 0, 30, true)
-    GAME:CutsceneMode(false)
-  end
+  UI:WaitShowDialogue('Quand je me rapprocherai de l’entrée, à l’est, je déciderai si je repars dans la forêt.')
+  UI:ResetSpeaker()
+  SV.Destiny.LostWoodTrip = 'pause_aller'
+  SV.Destiny.LostWoodRetry = 'aller'
+  GAME:MoveCamera(0, 0, 30, true)
+  GAME:CutsceneMode(false)
 end
 
 -- -------------------------------------------------------- retour en duo

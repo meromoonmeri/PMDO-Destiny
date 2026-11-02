@@ -14,4 +14,7 @@ SV.Destiny = SV.Destiny or {
   PartenaireParti = false, RetourAccompli = false, LostWoodTrip = nil,
   LostWoodTutorialDone = false, HeroAssemblyIndex = nil, FinaleDestiny = false,
   PrologueHeros = nil, TeamDazzlingRencontree = false,
+  LostWoodRetry = nil, LostWoodCause = nil,
+  LostWoodEchecsAller = 0, LostWoodEchecsRetour = 0,
+  PenseesReveilVues = false, JourneeVille = 0, StocksKecleon = {},
 }

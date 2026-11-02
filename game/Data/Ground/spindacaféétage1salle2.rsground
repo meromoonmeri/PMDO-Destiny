@@ -63772,7 +63772,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 24,
+"X": 28,
 "Y": 9
 }
 }
@@ -63791,7 +63791,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 24,
+"X": 28,
 "Y": 10
 }
 }
@@ -63810,7 +63810,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 24,
+"X": 28,
 "Y": 11
 }
 }
@@ -63829,7 +63829,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 24,
+"X": 28,
 "Y": 12
 }
 }
@@ -64838,7 +64838,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 25,
+"X": 29,
 "Y": 9
 }
 }
@@ -64857,7 +64857,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 25,
+"X": 29,
 "Y": 10
 }
 }
@@ -64876,7 +64876,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 25,
+"X": 29,
 "Y": 11
 }
 }
@@ -64895,7 +64895,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 25,
+"X": 29,
 "Y": 12
 }
 }
@@ -65904,7 +65904,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 26,
+"X": 30,
 "Y": 9
 }
 }
@@ -65923,7 +65923,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 26,
+"X": 30,
 "Y": 10
 }
 }
@@ -65942,7 +65942,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 26,
+"X": 30,
 "Y": 11
 }
 }
@@ -65961,7 +65961,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 26,
+"X": 30,
 "Y": 12
 }
 }
@@ -66970,7 +66970,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 27,
+"X": 31,
 "Y": 9
 }
 }
@@ -66989,7 +66989,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 27,
+"X": 31,
 "Y": 10
 }
 }
@@ -67008,7 +67008,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 27,
+"X": 31,
 "Y": 11
 }
 }
@@ -67027,7 +67027,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 27,
+"X": 31,
 "Y": 12
 }
 }
@@ -87224,7 +87224,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 46,
+"X": 42,
 "Y": 9
 }
 }
@@ -87243,7 +87243,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 46,
+"X": 42,
 "Y": 10
 }
 }
@@ -87262,7 +87262,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 46,
+"X": 42,
 "Y": 11
 }
 }
@@ -87281,7 +87281,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 46,
+"X": 42,
 "Y": 12
 }
 }
@@ -88290,7 +88290,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 47,
+"X": 43,
 "Y": 9
 }
 }
@@ -88309,7 +88309,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 47,
+"X": 43,
 "Y": 10
 }
 }
@@ -88328,7 +88328,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 47,
+"X": 43,
 "Y": 11
 }
 }
@@ -88347,7 +88347,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 47,
+"X": 43,
 "Y": 12
 }
 }
@@ -89356,7 +89356,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 48,
+"X": 44,
 "Y": 9
 }
 }
@@ -89375,7 +89375,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 48,
+"X": 44,
 "Y": 10
 }
 }
@@ -89394,7 +89394,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 48,
+"X": 44,
 "Y": 11
 }
 }
@@ -89413,7 +89413,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 48,
+"X": 44,
 "Y": 12
 }
 }
@@ -90422,7 +90422,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 49,
+"X": 45,
 "Y": 9
 }
 }
@@ -90441,7 +90441,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 49,
+"X": 45,
 "Y": 10
 }
 }
@@ -90460,7 +90460,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 49,
+"X": 45,
 "Y": 11
 }
 }
@@ -90479,7 +90479,7 @@
 {
 "Sheet": "chantroom",
 "TexLoc": {
-"X": 49,
+"X": 45,
 "Y": 12
 }
 }

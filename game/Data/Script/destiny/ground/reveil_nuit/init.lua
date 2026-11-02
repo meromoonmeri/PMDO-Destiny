@@ -22,6 +22,8 @@ require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 
 local reveil_nuit = {}
+local invite_retour_en_cours = false
+local invite_retour_armee = false
 
 -- Points de mise en scène selon la carte réellement chargée. La prairie ZRV2
 -- possède ses propres marqueurs (reveil au nord, entrance au sud) ; le repli
@@ -81,6 +83,8 @@ local function points_scene()
     camera_panorama_y = overlook.Position.Y,
     camera_approche_x = overlook.Position.X,
     camera_approche_y = overlook.Position.Y,
+    entree_x = (MRKR('Dazzling_Exit_East') or MRKR('Main_Entrance_Marker')).Position.X,
+    entree_y = (MRKR('Dazzling_Exit_East') or MRKR('Main_Entrance_Marker')).Position.Y,
     partenaire_pres_x = reveil_x + 24,
     partenaire_pres_y = reveil_y,
   }
@@ -192,6 +196,20 @@ function reveil_nuit.Exit(map)
 end
 
 function reveil_nuit.Update(map)
+  if invite_retour_en_cours then return end
+  if SV.Destiny == nil or SV.Destiny.LostWoodTrip ~= 'pause_retour' then return end
+  local hero = CH('PLAYER')
+  if hero == nil then return end
+  local points = points_scene()
+  local dx = hero.Position.X - points.entree_x
+  local dy = hero.Position.Y - points.entree_y
+  local dist2 = dx * dx + dy * dy
+  if dist2 > 110 * 110 then
+    invite_retour_armee = true
+  elseif invite_retour_armee and dist2 <= 64 * 64 then
+    invite_retour_armee = false
+    reveil_nuit.DemanderRepriseRetour()
+  end
 end
 
 function reveil_nuit.GameSave(map)
@@ -239,13 +257,18 @@ function reveil_nuit.PrologueHerosEndormi()
 
   GAME:FadeOut(false, 1)
   GAME:WaitFrames(35)
-  UI:WaitShowVoiceOver("[i]Où suis-je…", -1)
+  UI:WaitShowVoiceOver("[i]…Où suis-je ?", -1)
   GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Qui suis-je…", -1)
+  UI:WaitShowVoiceOver("[i]Il fait si noir… Je n'entends rien. Je ne sens presque rien.", -1)
   GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Tout me semble si flou…", -1)
+  UI:WaitShowVoiceOver("[i]Qui suis-je ? Mon nom… il m'échappe, comme un rêve au matin.", -1)
+  GAME:WaitFrames(20)
+  UI:WaitShowVoiceOver("[i]Je me souviens d'une lumière… puis d'une chute sans fin.", -1)
+  GAME:WaitFrames(20)
+  UI:WaitShowVoiceOver("[i]Est-ce que quelqu'un… peut m'entendre ?", -1)
   GAME:WaitFrames(20)
   UI:WaitShowVoiceOver("[i]J’ai sommeil…", -1)
+  SV.Destiny.PenseesReveilVues = true
   GAME:WaitFrames(35)
 
   -- Le noir se lève lentement : le héros dort toujours, seul face à la mer.
@@ -274,6 +297,8 @@ end
 local function lancer_retour()
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.LostWoodTrip = 'retour'
+  SV.Destiny.LostWoodRetry = nil
+  SV.Destiny.LostWoodCause = nil
   SV.Destiny.LostWoodRetourEchec = false
   SOUND:FadeOutBGM(60)
   GAME:FadeOut(false, 60)
@@ -282,6 +307,37 @@ local function lancer_retour()
   -- Segment 1 : les sept générateurs d'étage dans l'ordre inverse (7 → 1).
   GAME:EnterDungeon('lost_wood', 1, 0, 0,
     RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+end
+
+function reveil_nuit.DemanderRepriseRetour()
+  if invite_retour_en_cours then return end
+  local hero, partner = CH('PLAYER'), CH('Teammate1')
+  if hero == nil or partner == nil then return end
+  invite_retour_en_cours = true
+  GAME:CutsceneMode(true)
+  AI:DisableCharacterAI(partner)
+  UI:ResetSpeaker()
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("Voici le chemin du retour, par [color=#69D98C]Lost Wood[color]…")
+  UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans Lost Wood ?', true)
+  UI:WaitForChoice()
+  if UI:ChoiceResult() then
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue("Alors on repart. Ensemble, cette fois encore.")
+    invite_retour_en_cours = false
+    lancer_retour()
+    return
+  end
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("D'accord, reposons-nous encore un peu. Je te suivrai quand tu reviendras vers l'entrée.")
+  UI:ResetSpeaker()
+  equipe_scene.Suivre(partner, hero)
+  GAME:MoveCamera(0, 0, 30, true)
+  GAME:CutsceneMode(false)
+  invite_retour_en_cours = false
 end
 
 function reveil_nuit.PlotScripting()
@@ -297,6 +353,13 @@ function reveil_nuit.PlotScripting()
     return
   end
   if SV.Destiny.RetrouvaillesFaites then
+    if SV.Destiny.LostWoodTrip == 'pause_retour' then
+      local hero, partner = CH('PLAYER'), CH('Teammate1')
+      GAME:FadeIn(20)
+      invite_retour_armee = true
+      equipe_scene.Suivre(partner, hero)
+      return
+    end
     if SV.Destiny.LostWoodTrip == 'retour' and SV.Destiny.LostWoodRetourEchec then
       local hero, partner = CH('PLAYER'), CH('Teammate1')
       if hero == nil or partner == nil then
@@ -320,10 +383,22 @@ function reveil_nuit.PlotScripting()
       end
       UI:SetSpeaker(partner)
       UI:SetSpeakerEmotion("Worried")
-      UI:WaitShowDialogue("Le sentier nous a repoussés cette fois. On reprend notre souffle… puis on repart ensemble.")
+      if SV.Destiny.LostWoodCause == 'abandon' then
+        UI:WaitShowDialogue("Nous avons rebroussé chemin à temps. On reprend notre souffle… puis on décidera ensemble de la suite.")
+      else
+        UI:WaitShowDialogue("Le sentier nous a repoussés cette fois. On reprend notre souffle… puis on repartira ensemble, quand tu seras prêt.")
+      end
       UI:SetSpeakerEmotion("Happy")
       UI:WaitShowDialogue("Nous savons maintenant comment nous aider. [color=#69D98C]Lost Wood[color] ne nous séparera pas.")
-      lancer_retour()
+      UI:WaitShowDialogue("Rapproche-toi de l'entrée de la forêt quand tu voudras décider de notre départ.")
+      UI:ResetSpeaker()
+      SV.Destiny.LostWoodTrip = 'pause_retour'
+      SV.Destiny.LostWoodRetry = 'retour'
+      SV.Destiny.LostWoodRetourEchec = true
+      invite_retour_armee = true
+      equipe_scene.Suivre(partner, hero)
+      GAME:MoveCamera(0, 0, 30, true)
+      GAME:CutsceneMode(false)
     end
     return
   end

@@ -149,7 +149,10 @@
    "Rogue": 0,
    "Grounds": [
     "WaterfallVillageCapital",
-    "waterfall_cave_1"
+    "waterfall_cave_1",
+    "caféspindaaccueil",
+    "spindacaféétage1",
+    "spindacaféétage1salle2"
    ],
    "Maps": [],
    "Name": {
@@ -664,9 +667,6 @@
     "v30812_09_cap_eventail_nuit",
     "v30812_10_esplanade_arrondie_jour",
     "v30812_10_esplanade_arrondie_nuit",
-    "caféspindaaccueil",
-    "spindacaféétage1",
-    "spindacaféétage1salle2",
     "spindacafetest",
     "rvt_ne_jour",
     "rvt_ne_nuit",

@@ -13,6 +13,11 @@ local function terminer(result, zone_id, map_id)
   GAME:EndDungeonRun(result, zone_id, -1, map_id, 0, false, false)
 end
 
+local function cause_echec(result)
+  local R = RogueEssence.Data.GameProgress.ResultType
+  return (result == R.Downed or result == R.Failed) and 'ko' or 'abandon'
+end
+
 function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   GAME:SetRescueAllowed(false)
   SV.Destiny = SV.Destiny or {}
@@ -22,9 +27,11 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   -- l'ancien drapeau pour une sauvegarde déjà engagée dans le segment 0.
   if segmentID == 1 then trajet = 'retour' end
 
-  if trajet == 'retour' then
+  if trajet == 'retour' or trajet == 'pause_retour' then
     if reussi then
       SV.Destiny.LostWoodRetourEchec = false
+      SV.Destiny.LostWoodRetry = nil
+      SV.Destiny.LostWoodCause = nil
       SV.Destiny.RetourAccompli = true
       SV.Destiny.LostWoodTrip = 'termine'
       -- Ground 0 de destiny_cliff_tests : cliffdaytest, version jour.
@@ -32,6 +39,10 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
       GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)
     else
       SV.Destiny.LostWoodRetourEchec = true
+      SV.Destiny.LostWoodRetry = 'retour'
+      SV.Destiny.LostWoodCause = cause_echec(result)
+      SV.Destiny.LostWoodEchecsRetour = (SV.Destiny.LostWoodEchecsRetour or 0) + 1
+      SV.Destiny.LostWoodTrip = 'retour'
       -- Ground 10 de reverie : zrv2_zone_reveil_nuit, entrée 0 = reveil.
       terminer(result, 'reverie', 10)
       GAME:EnterZone('reverie', -1, 10, 0)
@@ -42,6 +53,8 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   if reussi then
     SV.Destiny.LostWoodTrip = 'rencontre'
     SV.Destiny.PartenaireParti = true
+    SV.Destiny.LostWoodRetry = nil
+    SV.Destiny.LostWoodCause = nil
     SV.Destiny.LostWoodRetourEchec = false
     -- Ground 10 de reverie : zrv2_zone_reveil_nuit, entrée 0 = reveil.
     terminer(result, 'reverie', 10)
@@ -51,8 +64,9 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     SV.Destiny.LostWoodTrip = 'echec_aller'
     SV.Destiny.PartenaireParti = true
-    local R = RogueEssence.Data.GameProgress.ResultType
-    SV.Destiny.LostWoodCause = (result == R.Downed or result == R.Failed) and 'ko' or 'abandon'
+    SV.Destiny.LostWoodRetry = 'aller'
+    SV.Destiny.LostWoodCause = cause_echec(result)
+    SV.Destiny.LostWoodEchecsAller = (SV.Destiny.LostWoodEchecsAller or 0) + 1
     terminer(result, 'destiny_cliff_tests', 4)
     GAME:EnterZone('destiny_cliff_tests', -1, 4, 0)
   end
