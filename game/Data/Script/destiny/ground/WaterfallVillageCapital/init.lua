@@ -25,6 +25,21 @@ local habitants_vivants = {
 local positions_habitants = {}
 local vie_ville_activee = false
 
+-- La carte sérialise la plupart des habitants sous des noms d'entité
+-- génériques (NewObject_*) : on leur donne leur vrai nom affiché en
+-- dialogue, sans toucher à la carte.
+local noms_habitants = {
+  Kecleon = 'Kecleon', Kecleon_Violet = 'Kecleon violet',
+  NewObject_3 = 'Mordudor', NewObject_4 = 'Alakazam', Kangourex = 'Kangourex',
+  NewObject_6 = 'Altaria', NewObject_7 = 'Lombre', NewObject_8 = 'Ludicolo',
+  NewObject_9 = 'Luxray', NewObject_10 = 'Luxio', NewObject_12 = 'Mackogneur',
+  NewObject_13 = 'Marill', NewObject_14 = 'Tyranocif', Doyen = 'Doyen Grodrive',
+  Drifloon = 'Baudrive', NewObject_16 = 'Dracaufeu', NewObject_11 = 'Carchacrok',
+  NewObject_18 = 'Ronflex', NewObject_20 = 'Drattak', NewObject_21 = 'Cupcanaille',
+  NewObject_15 = 'Écrémeuh', NewObject_17 = 'Arcanin', NewObject_22 = 'Arbok',
+  NewObject_23 = 'Charmilly', NewObject_24 = 'Forgelina',
+}
+
 local function habitant(nom, espece, genre, x, y)
   local acteur = CH(nom)
   if acteur == nil then
@@ -97,6 +112,8 @@ function ville.Init(map)
     local acteur = CH(nom)
     if acteur ~= nil then
       positions_habitants[nom] = {x = acteur.Position.X, y = acteur.Position.Y}
+      local nom_affiche = noms_habitants[nom]
+      if nom_affiche ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = nom_affiche end
     end
   end
   vie_ville_activee = false

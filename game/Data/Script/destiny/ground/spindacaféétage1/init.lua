@@ -33,7 +33,15 @@ local function dire(acteur, emotion, texte)
   UI:WaitShowDialogue(texte)
 end
 
+local function nommer(nom, affiche)
+  local acteur = CH(nom)
+  if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
+end
+
 function spindacaféétage1.Init(map)
+  nommer('NewObject', 'Spinda')
+  nommer('NewObject_1', 'Okéoké')
+  nommer('NewObject_2', 'Qulbutoké')
   installer_escalier(map)
   activer('NewObject', 32)
   activer('NewObject_1', 28)

@@ -33,7 +33,23 @@ local function dire(acteur, emotion, texte)
   UI:WaitShowDialogue(texte)
 end
 
+local function nommer(nom, affiche)
+  local acteur = CH(nom)
+  if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
+end
+
 function spindacaféétage1salle2.Init(map)
+  nommer('NewObject', 'Mime Jr.')
+  nommer('NewObject_1', 'Rondoudou')
+  nommer('NewObject_2', 'Négapi')
+  nommer('NewObject_3', 'Magirêve')
+  nommer('NewObject_4', 'Goupilou')
+  nommer('NewObject_5', 'Nidoran♀')
+  nommer('NewObject_6', 'Nidoran♂')
+  nommer('NewObject_7', 'Mimiqui')
+  nommer('NewObject_8', 'Pachirisu')
+  nommer('NewObject_9', 'Posipi')
+  nommer('NewObject_10', 'Branette')
   installer_porte(map)
   for i = 0, 10 do
     local nom = i == 0 and 'NewObject' or ('NewObject_' .. i)
