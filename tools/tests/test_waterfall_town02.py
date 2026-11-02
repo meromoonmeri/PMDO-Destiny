@@ -37,49 +37,45 @@ def md5(path: Path) -> str:
 assert unpack_payload.PAYLOADS == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952',
-        304752270,
+        'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab',
+        263169763,
     )
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 304752270
-assert sha256(MAP) == '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952'
+assert MAP.stat().st_size == 263169763
+assert sha256(MAP) == 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 304752270
-assert h.hexdigest() == '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952'
+assert size == 263169763
+assert h.hexdigest() == 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
     try:
-        sheets = {m.group(1).decode('utf-8') for m in re.finditer(rb'"Sheet": "([^"]+)"', mm)}
+        sheets = {m.group(1).decode('utf-8') for m in re.finditer(rb'"Sheet":\s*"([^"]+)"', mm)}
         anims = collections.Counter(
             m.group(1).decode('utf-8')
-            for m in re.finditer(rb'"AnimIndex": "([^"]+)"', mm)
+            for m in re.finditer(rb'"AnimIndex":\s*"([^"]+)"', mm)
         )
-        def count_mm(needle: bytes) -> int:
-            count = 0
-            pos = mm.find(needle)
-            while pos != -1:
-                count += 1
-                pos = mm.find(needle, pos + 1)
-            return count
+        def count_mm(pattern: bytes) -> int:
+            return len(re.findall(pattern, mm))
 
-        assert count_mm(b'"Tiles": [') == 37
-        assert count_mm(b'"AssetName": "WaterfallVillageCapital"') == 1
+        assert count_mm(rb'"Tiles":\s*\[') == 37
+        assert count_mm(rb'"AssetName":\s*"WaterfallVillageCapital"') == 1
         for ent in (b'Kecleon', b'Kecleon_Violet', b'Kangourex', b'Drifloon', b'entrance', b'entrance_partner'):
-            assert count_mm(b'"EntName": "' + ent + b'"') == 1, ent
+            assert count_mm(rb'"EntName":\s*"' + ent + b'"') == 1, ent
         tail = mm[-2_000_000:].decode('utf-8-sig', errors='ignore')
     finally:
         mm.close()
 
-assert len(sheets) == 43, sorted(sheets)
+assert len(sheets) == 44, sorted(sheets)
 assert {
+    'Destiny_River_Filaments',
     'FORGE',
     'Ledian_Dojo_Objects',
     'Metano_Inn_Floor_Decor',
@@ -108,7 +104,7 @@ for anim in anims:
 
 # Les 25 habitants sérialisés doivent référencer des espèces/formes livrées.
 npcs = re.findall(
-    r'"EntName": "([^"]+)".*?"Species": "([^"]+)",\s*"Form": (\d+)',
+    r'"EntName":\s*"([^"]+)".*?"Species":\s*"([^"]+)",\s*"Form":\s*(\d+)',
     tail,
     re.S,
 )
@@ -151,4 +147,4 @@ for name in town02_objects:
     assert (GAME / 'Content/Object' / f'{name}.dir').is_file(), name
 assert len(list((GAME / 'Content/Objects').glob('*.png'))) == 74
 
-print('OK : Waterfall Village étendue, 43 Tilesheets, habitants, objets et décorations town02.')
+print('OK : Waterfall Village étendue, 44 Tilesheets, habitants, objets et décorations town02.')

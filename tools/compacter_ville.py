@@ -4,7 +4,7 @@
 Les objets AutoTile entièrement vides sont sérialisés sous la forme {} : le
 constructeur PMDO 0.8.12 leur redonne exactement leurs quatre valeurs par
 défaut. Toutes les autres données, dimensions, couches et références restent
-inchangées. L'entrée doit être le fichier natif vérifié, pas une carte éditée.
+inchangées. L'entrée doit être la carte livrée vérifiée (payload 0.3.7), pas une carte éditée.
 """
 from __future__ import annotations
 
@@ -13,10 +13,10 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 304752270
-ORIGINAL_SHA256 = '3710d542711bb98f384e8b63748e994d0a0240131a62ac09790a9b8947b02952'
-COMPACT_SHA256 = 'ff5b28e1c29bccb2e5c8a51b04c658df9de028e938f755dfaaa7a4f344442782'
-EMPTY_TILE = b'{\n"AutoTileset": "",\n"Associates": [],\n"Layers": [],\n"NeighborCode": -1\n}'
+ORIGINAL_SIZE = 263169763
+ORIGINAL_SHA256 = 'a267ccfedbf2a7eab958245a248c5053c3c8a98881005dd3b9aef0732ffd36ab'
+COMPACT_SHA256 = 'b3fb4397269ef51f637b7f43c522474fb8369dbab121605718a6c2e16276e981'
+EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
 EMPTY_COUNT = 3522952
 
 
@@ -39,7 +39,7 @@ def compact(source: Path, destination: Path) -> int:
             raise ValueError('La destination contient une autre carte ; aucun écrasement.')
     original = source.read_bytes()
     if len(original) != ORIGINAL_SIZE or sha256(original) != ORIGINAL_SHA256:
-        raise ValueError('Carte source différente de la version native vérifiée ; aucune copie produite.')
+        raise ValueError('Carte source différente de la version livrée vérifiée ; aucune copie produite.')
     count = original.count(EMPTY_TILE)
     if count != EMPTY_COUNT:
         raise ValueError('Nombre inattendu de cellules vides ; aucune copie produite.')
