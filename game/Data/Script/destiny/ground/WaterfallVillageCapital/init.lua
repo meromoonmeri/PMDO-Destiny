@@ -47,21 +47,49 @@ local function partenaire_pour(hero)
   return partenaire
 end
 
--- Porte du café Spinda : la carte town02 ne sérialise aucune sortie, on
--- installe donc un objet invisible sur le tapis rouge de l'annexe café
--- (centre relevé sur le rendu de la carte : x≈1188, y≈1605).
-local function installer_porte_cafe(map)
-  if map == nil or map:FindObject('PorteCafeSpinda') then return end
+-- Portes des bâtiments : la carte town02 ne sérialise aucune sortie, on
+-- installe donc un objet invisible sur chaque seuil (coordonnées relevées
+-- sur le rendu de la carte, à confirmer au runtime). Chaque porte mène à
+-- l'intérieur correspondant et mémorise le point de retour devant la façade.
+local portes_batiments = {
+  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 613, y = 195, retour_x = 641, retour_y = 252, interieur = 'post_office', marqueur = 'entrance_south'},
+  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 233, y = 273, retour_x = 261, retour_y = 330, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1148, y = 359, retour_x = 1176, retour_y = 416, interieur = 'metano_water_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteBoutiqueKecleon', titre = 'Réserve de la boutique Kecleon', x = 443, y = 802, retour_x = 471, retour_y = 860, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonAlakazam', titre = "Maison d'Alakazam", x = 186, y = 1100, retour_x = 214, retour_y = 1158, interieur = 'metano_normal_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteBanque', titre = 'Salle des coffres', x = 361, y = 1050, retour_x = 389, retour_y = 1106, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteReserveKangourex', titre = 'Réserve Kangourex', x = 958, y = 940, retour_x = 986, retour_y = 998, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteForgeTinkaton', titre = 'Atelier de Tinkaton', x = 1217, y = 972, retour_x = 1245, retour_y = 1030, interieur = 'dojo_ossatueur', marqueur = 'MarowakDojoExitMarker'},
+  {nom = 'PorteMaisonEquipe', titre = "Maison de l'équipe", x = 316, y = 1755, retour_x = 344, retour_y = 1812, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 520, y = 2159, retour_x = 548, retour_y = 2216, interieur = 'metano_electric_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 779, y = 2160, retour_x = 807, retour_y = 2218, interieur = 'metano_inn', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteTenteEst', titre = "Dojo de l'est", x = 1422, y = 2250, retour_x = 1450, retour_y = 2308, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 286, y = 3193, retour_x = 314, retour_y = 3250, interieur = 'metano_rock_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 457, y = 3485, retour_x = 485, retour_y = 3542, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 736, y = 3527, retour_x = 764, retour_y = 3584, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPlanteOuest', titre = "Maison plante de l'ouest", x = 7, y = 2859, retour_x = 80, retour_y = 2916, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
+}
+
+local function installer_une_porte(map, nom, x, y)
+  if map == nil or map:FindObject(nom) then return end
   local porte = RogueEssence.Ground.GroundObject()
-  porte.EntName = 'PorteCafeSpinda'
-  porte.Collider = RogueElements.Rect(1160, 1588, 56, 20)
+  porte.EntName = nom
+  porte.Collider = RogueElements.Rect(x, y, 56, 20)
   porte:OnMapInit()
   map:AddObject(porte)
 end
 
+local function installer_portes(map)
+  -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
+  installer_une_porte(map, 'PorteCafeSpinda', 1160, 1588)
+  for _, porte in ipairs(portes_batiments) do
+    installer_une_porte(map, porte.nom, porte.x, porte.y)
+  end
+end
+
 function ville.Init(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
-  installer_porte_cafe(map)
+  installer_portes(map)
   habitant('Kecleon', 'kecleon', Gender.Male, 616, 948)
   habitant('Kangourex', 'kangaskhan', Gender.Female, 936, 964)
   positions_habitants = {}
@@ -220,11 +248,16 @@ local function entrer()
     GROUND:TeleportTo(hero, PLACE_X, PLACE_Y, Direction.Up)
   end
   local partenaire = partenaire_pour(hero)
-  if SV.Destiny.ArriveeVille == 'cafe' then
-    -- Retour du café Spinda : réapparaître devant sa porte, au sud du tapis.
+  if SV.Destiny.ArriveeVille == 'cafe' or SV.Destiny.ArriveeVille == 'batiment' then
+    -- Retour d'un intérieur : réapparaître devant la façade utilisée.
+    local arrivee_x, arrivee_y = 1188, 1652
+    if SV.Destiny.ArriveeVille == 'batiment' then
+      arrivee_x = SV.Destiny.RetourBatimentX or PLACE_X
+      arrivee_y = SV.Destiny.RetourBatimentY or PLACE_Y
+    end
     SV.Destiny.ArriveeVille = nil
-    if hero ~= nil then GROUND:TeleportTo(hero, 1188, 1652, Direction.Down) end
-    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 1160, 1652, Direction.Down) end
+    if hero ~= nil then GROUND:TeleportTo(hero, arrivee_x, arrivee_y, Direction.Down) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, arrivee_x - 28, arrivee_y, Direction.Down) end
   end
   SOUND:PlayBGM('Base Town.ogg', true)
   GAME:FadeIn(20)
@@ -232,7 +265,7 @@ local function entrer()
 end
 
 function ville.Enter(map) entrer() end
-function ville.GameLoad(map) installer_porte_cafe(map) entrer() end
+function ville.GameLoad(map) installer_portes(map) entrer() end
 function ville.Exit(map) end
 function ville.Update(map, time) end
 
@@ -244,6 +277,22 @@ function ville.PorteCafeSpinda_Action(obj, activator)
   if UI:ChoiceResult() then
     GAME:FadeOut(false, 20)
     GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
+  end
+end
+
+for _, porte_def in ipairs(portes_batiments) do
+  local porte = porte_def
+  ville[porte.nom .. '_Action'] = function(obj, activator)
+    UI:ResetSpeaker()
+    UI:ChoiceMenuYesNo('Entrer : ' .. porte.titre .. ' ?', true)
+    UI:WaitForChoice()
+    if UI:ChoiceResult() then
+      SV.Destiny = SV.Destiny or {}
+      SV.Destiny.RetourBatimentX = porte.retour_x
+      SV.Destiny.RetourBatimentY = porte.retour_y
+      GAME:FadeOut(false, 20)
+      GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)
+    end
   end
 end
 

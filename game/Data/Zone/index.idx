@@ -152,7 +152,19 @@
     "waterfall_cave_1",
     "caféspindaaccueil",
     "spindacaféétage1",
-    "spindacaféétage1salle2"
+    "spindacaféétage1salle2",
+    "post_office",
+    "metano_fire_home",
+    "metano_water_home",
+    "metano_electric_home",
+    "metano_grass_home",
+    "metano_rock_home",
+    "metano_normal_home",
+    "metano_inn",
+    "guild_storage_room",
+    "guild_heros_room",
+    "ledian_dojo",
+    "dojo_ossatueur"
    ],
    "Maps": [],
    "Name": {
