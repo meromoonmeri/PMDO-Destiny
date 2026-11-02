@@ -95,7 +95,10 @@ assert "EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')" in quiz
 reverie = json.loads((GAME / 'Data/Zone/reverie.json').read_text(encoding='utf-8-sig'))['Object']
 assert reverie['GroundMaps'][10] == 'zrv2_zone_reveil_nuit'
 reveil = (GAME / 'Data/Script/destiny/ground/reveil_nuit/init.lua').read_text(encoding='utf-8')
-for phrase in ('Où suis-je…', 'Qui suis-je…', 'Tout me semble si flou…', 'J’ai sommeil…'):
+for phrase in ('…Où suis-je ?', "Il fait si noir… Je n'entends rien. Je ne sens presque rien.",
+               "Qui suis-je ? Mon nom… il m'échappe, comme un rêve au matin.",
+               "Je me souviens d'une lumière… puis d'une chute sans fin.",
+               "Est-ce que quelqu'un… peut m'entendre ?", 'J’ai sommeil…'):
     assert phrase in reveil
 assert "MRKR('reveil')" in reveil and "MRKR('entrance')" in reveil
 assert 'points_scene()' in reveil and 'dans les fleurs' in reveil
