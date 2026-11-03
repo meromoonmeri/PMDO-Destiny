@@ -27,6 +27,86 @@ local habitants_vivants = {
 local positions_habitants = {}
 local vie_ville_activee = false
 
+-- Services extérieurs : ils restent à leur comptoir ou devant leur bâtiment,
+-- sans IA de déambulation, donc dans leur idle par défaut.
+local marchands_fixes = {
+  Kecleon = true,          -- boutique verte
+  Kecleon_Violet = true,   -- boutique violette
+  Kangourex = true,        -- réserve d'objets
+  NewObject_3 = true,      -- Mordudor, banque
+  NewObject_4 = true,      -- Alakazam, souvenirs de capacités
+  NewObject_24 = true,     -- Forgelina, ouverture des boîtes
+}
+
+-- Discussions réelles : dialogues partagés (Lombre/Ludicolo, Luxio/Luxray)
+-- ou duo déjà placé côte à côte (Doyen/Baudrive). Les anciennes paires
+-- d'ambiance séparées par plusieurs centaines de pixels ne font plus
+-- semblant de discuter à travers la ville.
+local paires_discussion = {
+  {'NewObject_7', 'NewObject_8'},  -- Lombre et Ludicolo
+  {'NewObject_10', 'NewObject_9'}, -- Luxio et Luxray
+  {'Doyen', 'Drifloon'},           -- le Doyen et Baudrive
+}
+local partenaires_discussion = {}
+for _, paire in ipairs(paires_discussion) do
+  partenaires_discussion[paire[1]] = paire[2]
+  partenaires_discussion[paire[2]] = paire[1]
+end
+
+local function est_fixe(nom)
+  return marchands_fixes[nom] == true or partenaires_discussion[nom] ~= nil
+end
+
+local function tourner_vers(acteur, cible)
+  if acteur == nil or cible == nil or acteur == cible then return end
+  pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+end
+
+local function orienter_discussion(nom)
+  local autre_nom = partenaires_discussion[nom]
+  if autre_nom == nil then return end
+  local acteur, autre = CH(nom), CH(autre_nom)
+  tourner_vers(acteur, autre)
+  tourner_vers(autre, acteur)
+end
+
+local function restaurer_orientation(nom, acteur)
+  acteur = acteur or CH(nom)
+  if nom == nil or acteur == nil then return end
+  if partenaires_discussion[nom] ~= nil then
+    orienter_discussion(nom)
+    return
+  end
+  if marchands_fixes[nom] then
+    local depart = positions_habitants[nom]
+    if depart ~= nil and depart.dir ~= nil then
+      pcall(function() GROUND:EntTurn(acteur, depart.dir) end)
+    end
+  end
+end
+
+local function figer_habitant(nom, acteur)
+  acteur = acteur or CH(nom)
+  if nom == nil or acteur == nil then return end
+  pcall(function()
+    AI:DisableCharacterAI(acteur)
+    GROUND:CharEndAnim(acteur) -- idle par défaut, sans déplacement
+  end)
+  restaurer_orientation(nom, acteur)
+end
+
+-- Tout habitant abordé se tourne vers le joueur avant la première boîte.
+-- Les marchands et les duos en discussion reprennent ensuite leur
+-- orientation normale ; les promeneurs sont rendus à leur IA.
+local function commencer_dialogue(personnage, activator)
+  local joueur = CH('PLAYER') or activator
+  tourner_vers(personnage, joueur)
+end
+
+local function terminer_dialogue(personnage, nom)
+  restaurer_orientation(nom, personnage)
+end
+
 -- Jour de ville courant : la sieste au café Spinda fait passer au jour
 -- suivant (même compteur que la rotation des étals Kecleon).
 local function jour_actuel()
@@ -134,13 +214,26 @@ function ville.Init(map)
   habitant('Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
   habitant('Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
   habitant('Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
+  -- Luxio et Luxray partagent un vrai dialogue, mais la carte les place à
+  -- 136 px l'un de l'autre, de part et d'autre de la maison citrouille sud.
+  -- Luxray est donc posé juste à l'est de Luxio, sur l'herbe libre au nord
+  -- de la maison ; ils peuvent enfin se faire face sans se déplacer.
+  local luxio, luxray = CH('NewObject_10'), CH('NewObject_9')
+  if luxio ~= nil and luxray ~= nil then
+    GROUND:TeleportTo(luxray, luxio.Position.X + 24, luxio.Position.Y,
+      Direction.Left)
+    GROUND:EntTurn(luxio, Direction.Right)
+  end
   positions_habitants = {}
   for _, nom in ipairs(habitants_vivants) do
     local acteur = CH(nom)
     if acteur ~= nil then
-      positions_habitants[nom] = {x = acteur.Position.X, y = acteur.Position.Y}
+      positions_habitants[nom] = {
+        x = acteur.Position.X, y = acteur.Position.Y, dir = acteur.Direction,
+      }
       local nom_affiche = noms_habitants[nom]
       if nom_affiche ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = nom_affiche end
+      if est_fixe(nom) then figer_habitant(nom, acteur) end
     end
   end
   vie_ville_activee = false
@@ -186,30 +279,32 @@ end
 local function activer_vie_ville()
   if vie_ville_activee then return end
   vie_ville_activee = true
-  local comptoirs = {
-    Kecleon = true, Kecleon_Violet = true, Kangourex = true,
-    NewObject_3 = true, NewObject_4 = true, NewObject_24 = true,
-  }
   for _, nom in ipairs(habitants_vivants) do
     local acteur, depart = CH(nom), positions_habitants[nom]
     if acteur ~= nil and depart ~= nil then
-      local rayon = comptoirs[nom] and 28 or 56
-      local cx, cy = depart.x, depart.y
-      -- Chaque jour, quelques flâneurs changent de quartier de déambulation.
-      local vagabonds = {
-        Pijako_Livreur = {{0, 0}, {72, 0}, {-72, 0}},
-        Cradopaud_Pecheur = {{0, 0}, {0, 72}, {0, -72}},
-        Goinfrex_Voyageur = {{0, 0}, {72, 0}, {-72, 0}},
-      }
-      local decalages = vagabonds[nom]
-      if decalages ~= nil then
-        local d = decalages[(jour_actuel() % #decalages) + 1]
-        cx, cy = cx + d[1], cy + d[2]
+      if est_fixe(nom) then
+        -- Marchands à leur comptoir et duos en discussion : aucune zone de
+        -- marche, IA coupée, idle par défaut et orientation de repos.
+        figer_habitant(nom, acteur)
+      else
+        local rayon = 56
+        local cx, cy = depart.x, depart.y
+        -- Chaque jour, quelques flâneurs changent de quartier de déambulation.
+        local vagabonds = {
+          Pijako_Livreur = {{0, 0}, {72, 0}, {-72, 0}},
+          Cradopaud_Pecheur = {{0, 0}, {0, 72}, {0, -72}},
+          Goinfrex_Voyageur = {{0, 0}, {72, 0}, {-72, 0}},
+        }
+        local decalages = vagabonds[nom]
+        if decalages ~= nil then
+          local d = decalages[(jour_actuel() % #decalages) + 1]
+          cx, cy = cx + d[1], cy + d[2]
+        end
+        COMMON.CreateWalkArea(nom,
+          math.max(0, cx - rayon), math.max(0, cy - rayon),
+          rayon * 2, rayon * 2)
+        AI:EnableCharacterAI(acteur)
       end
-      COMMON.CreateWalkArea(nom,
-        math.max(0, cx - rayon), math.max(0, cy - rayon),
-        rayon * 2, rayon * 2)
-      AI:EnableCharacterAI(acteur)
     end
   end
 end
@@ -341,33 +436,13 @@ local function geste_ambiance(nom, emote)
     GROUND:CharSetEmote(acteur, emote, 1)
   end)
 end
-local function regarder(acteur, cible)
-  if acteur == nil or cible == nil then return end
-  pcall(function()
-    local dx = cible.Position.X - acteur.Position.X
-    local dy = cible.Position.Y - acteur.Position.Y
-    local dir = Direction.Down
-    if math.abs(dx) > math.abs(dy) then
-      dir = dx > 0 and Direction.Right or Direction.Left
-    elseif dy ~= 0 then
-      dir = dy > 0 and Direction.Down or Direction.Up
-    end
-    GROUND:CharAnimateTurnTo(acteur, dir, 6)
-  end)
-end
-local paires_ambiance = {
-  {'NewObject_7', 'NewObject_8'},    -- Lombre et Ludicolo
-  {'NewObject_10', 'NewObject_9'},   -- Luxio et Luxray
-  {'Doyen', 'Drifloon'},             -- le Doyen et Baudrive
-  {'NewObject_13', 'Babimanta_Enfant'}, -- Marill et Babimanta
-  {'NewObject_23', 'NewObject_15'},  -- Charmilly et Écrémeuh
-  {'NewObject_12', 'NewObject_21'},  -- Mackogneur et Cupcanaille
-}
 local function discussion_ambiance(cycle)
-  local paire = paires_ambiance[((cycle + jour_actuel()) % #paires_ambiance) + 1]
+  local paire = paires_discussion[((cycle + jour_actuel()) % #paires_discussion) + 1]
   local a1, a2 = CH(paire[1]), CH(paire[2])
-  regarder(a1, a2)
-  regarder(a2, a1)
+  if a1 == nil or a2 == nil then return end
+  -- Ne jamais détourner du joueur un PNJ déjà en interaction.
+  if a1.IsInteracting or a2.IsInteracting then return end
+  orienter_discussion(paire[1])
   if cycle % 2 == 0 then
     geste_ambiance(paire[1], 'question')
     geste_ambiance(paire[2], 'happy')
@@ -426,6 +501,7 @@ end
 -- Kangourex ne garde que les objets : dépôt et retrait, jamais l'argent.
 -- La banque est assurée par Gimmighoul (NewObject_3), plus bas.
 function ville.Kangourex_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Bienvenue, mes petits. Je garde vos objets bien au sec, loin des donjons.')
@@ -453,6 +529,7 @@ function ville.Kangourex_Action(personnage, activator)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Vos affaires vous attendront ici. Revenez quand vous voulez.')
   UI:ResetSpeaker()
+  terminer_dialogue(personnage, 'Kangourex')
 end
 
 -- Petits assortiments de départ : menus, argent et sac sont ceux de PMDO.
@@ -538,17 +615,22 @@ local function ouvrir_boutique(personnage, cle, assortiments, decalage, accueil)
 end
 
 function ville.Kecleon_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   ouvrir_boutique(personnage, 'vert', assortiments_kecleon_vert, 0,
     'Bienvenue à la boutique Kecleon ! Des provisions simples, mais qui ont sauvé plus d’une expédition.')
+  terminer_dialogue(personnage, 'Kecleon')
 end
 
 function ville.Kecleon_Violet_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   ouvrir_boutique(personnage, 'violet', assortiments_kecleon_violet, 1,
     'Mon étal violet garde les articles précieux. Ils coûtent plus cher, mais ils peuvent changer une traversée.')
+  terminer_dialogue(personnage, 'Kecleon_Violet')
 end
 
 -- Gimmighoul ambulant : seule banque de Réverie Town.
 function ville.NewObject_3_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Des pièces, des pièces ! Je peux garder votre argent dans mon coffre et vous le rendre au Poké près.')
@@ -559,6 +641,7 @@ function ville.NewObject_3_Action(personnage, activator)
   UI:SetSpeakerEmotion('Normal')
   UI:WaitShowDialogue('Votre trésor est compté. Kangourex garde les objets ; moi, je veille sur les Poké.')
   UI:ResetSpeaker()
+  terminer_dialogue(personnage, 'NewObject_3')
 end
 
 local function dialogue_simple(personnage, repliques)
@@ -657,6 +740,7 @@ local function alakazam_oublier(personnage)
 end
 
 function ville.NewObject_4_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   dialogue_simple(personnage, {
     {'Normal', 'Une capacité oubliée n’est pas effacée : elle dort dans la mémoire du corps, en attendant un déclic.'},
   })
@@ -669,11 +753,13 @@ function ville.NewObject_4_Action(personnage, activator)
   if choix == 1 then alakazam_se_souvenir(personnage)
   elseif choix == 2 then alakazam_oublier(personnage) end
   UI:ResetSpeaker()
+  terminer_dialogue(personnage, 'NewObject_4')
 end
 
 -- Tinkaton : ouvrir les boîtes au trésor (150 Poké par boîte), avec le menu
 -- natif d'expertise de PMDO.
 function ville.NewObject_24_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   local prix = 150
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
@@ -751,6 +837,7 @@ function ville.NewObject_24_Action(personnage, activator)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Chaque coffre a son secret. Revenez m’en montrer d’autres !')
   UI:ResetSpeaker()
+  terminer_dialogue(personnage, 'NewObject_24')
 end
 
 local dialogues_lombre_ludicolo = {
@@ -774,10 +861,14 @@ local function dialogue_lombre_ludicolo(premier, second)
   conversation({premier, second}, repliques_du_jour(dialogues_lombre_ludicolo))
 end
 function ville.NewObject_7_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   dialogue_lombre_ludicolo(personnage, CH('NewObject_8'))
+  terminer_dialogue(personnage, 'NewObject_7')
 end
 function ville.NewObject_8_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   dialogue_lombre_ludicolo(personnage, CH('NewObject_7'))
+  terminer_dialogue(personnage, 'NewObject_8')
 end
 
 local dialogues_lux = {
@@ -802,10 +893,14 @@ local function dialogue_lux(second, premier)
   conversation({second, premier}, repliques_du_jour(dialogues_lux))
 end
 function ville.NewObject_9_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   dialogue_lux(CH('NewObject_10'), personnage)
+  terminer_dialogue(personnage, 'NewObject_9')
 end
 function ville.NewObject_10_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
   dialogue_lux(personnage, CH('NewObject_9'))
+  terminer_dialogue(personnage, 'NewObject_10')
 end
 
 local dialogues_habitants = {
@@ -916,9 +1011,11 @@ local dialogues_habitants = {
   },
 }
 for nom, variantes in pairs(dialogues_habitants) do
-  local choix = variantes
+  local nom_action, choix = nom, variantes
   ville[nom .. '_Action'] = function(personnage, activator)
+    commencer_dialogue(personnage, activator)
     dialogue_simple(personnage, repliques_du_jour(choix))
+    terminer_dialogue(personnage, nom_action)
   end
 end
 
