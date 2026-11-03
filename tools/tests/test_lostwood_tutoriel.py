@@ -95,13 +95,16 @@ assert "EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')" in quiz
 reverie = json.loads((GAME / 'Data/Zone/reverie.json').read_text(encoding='utf-8-sig'))['Object']
 assert reverie['GroundMaps'][10] == 'zrv2_zone_reveil_nuit'
 reveil = (GAME / 'Data/Script/destiny/ground/reveil_nuit/init.lua').read_text(encoding='utf-8')
-for phrase in ('…Où suis-je ?', "Il fait si noir… Je n'entends rien. Je ne sens presque rien.",
-               "Qui suis-je ? Mon nom… il m'échappe, comme un rêve au matin.",
-               "Je me souviens d'une lumière… puis d'une chute sans fin.",
-               "Est-ce que quelqu'un… peut m'entendre ?", 'J’ai sommeil…'):
+for phrase in ('…Où suis-je ?', 'Il fait noir…',
+               'Je ne me souviens de rien…', 'J’ai sommeil…'):
     assert phrase in reveil
+# Pensées blanches sur le noir : phrases courtes, sans balise [i], avec le
+# fondu d'entrée/sortie des voix-off PMDO (SetAutoFinish), puis retour au
+# comportement normal pour les dialogues suivants.
+assert 'UI:SetAutoFinish(true)' in reveil and 'UI:SetAutoFinish(false)' in reveil
+assert 'WaitShowVoiceOver("[i]' not in reveil
 assert "MRKR('reveil')" in reveil and "MRKR('entrance')" in reveil
-assert 'points_scene()' in reveil and 'dans les fleurs' in reveil
+assert 'points_scene()' in reveil and 'Un jour, je ferai la carte de cette montagne !' in reveil
 # Viewport 320×240 : ouverture Y=136 et panorama Y=152 pour garder lune,
 # sommet et mer dans le cadre, avec des travelings rejoints explicitement.
 assert 'camera_ouverture_y = point_reveil.Position.Y - 104' in reveil
