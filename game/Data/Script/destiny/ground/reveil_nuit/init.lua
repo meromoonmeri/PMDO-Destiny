@@ -8,9 +8,11 @@
      sud et arrive au point de réveil où le héros est allongé. Il le réveille,
      lui apprend le nom et la nature de la forêt, puis ils regardent ensemble
      la montagne qui se dresse au-delà de la mer.
-     Pendant la rencontre, le héros ne prononce aucun mot : il répond par ses
-     orientations, ses émotes et quelques pas. Le partenaire formule les
-     questions, lit ces gestes à voix haute et porte seul le dialogue.
+     Pendant la rencontre, le héros ne prononce aucun mot : il répond par
+     l'animation Nod, son idle, ses orientations et ses émotes. Le partenaire
+     formule les questions, réagit à voix haute à ces gestes et porte seul le
+     dialogue. Sa déclaration d'explorateur utilise Pose, la patte levée,
+     uniquement lorsque la feuille SpriteCollab de son espèce la contient.
      Retour : le segment inverse de Lost Wood ramène le duo vers la falaise,
      cette fois au jour. Échec du retour : bref rappel, puis nouvelle
      tentative en duo.
@@ -103,73 +105,254 @@ local function attendre_camera(tache)
   if tache ~= nil then TASK:JoinCoroutines({tache}) end
 end
 
--- Le héros reste muet pendant toute la rencontre. Ses réponses sont donc
--- composées uniquement d'orientations et d'émotes déjà utilisées par PMDO :
--- regarder autour de soi, secouer la tête, approuver ou marquer l'inquiétude.
+-- Les feuilles SpriteCollab livrées avec Destiny ne contiennent pas toutes
+-- les animations d'événement des starters. Avant de jouer Nod, Pose, Wake,
+-- LookUp ou DeepBreath, on demande donc à la feuille de l'acteur si le groupe
+-- demandé existe réellement (et ne se résout pas vers un simple fallback).
+-- Si l'API graphique ne répond pas, la durée relevée dans l'inventaire des
+-- fichiers .chara sert de repli ; si le groupe est absent, l'appelant utilise
+-- un geste d'orientation ou l'idle par défaut.
+local function duree_animation(personnage, nom)
+  if personnage == nil then return 0 end
+  local ok, duree = pcall(function()
+    local gestionnaire = RogueEssence.Content.GraphicsManager
+    local index = gestionnaire.GetAnimIndex(nom)
+    if index == nil or index < 0 then return 0 end
+    local feuille = gestionnaire.GetChara(personnage.CurrentForm:ToCharID())
+    if feuille:GetReferencedAnimIndex(index) ~= index then return 0 end
+    return feuille:GetTotalTime(index, personnage.Direction)
+  end)
+  if ok then
+    local valeur = tonumber(duree)
+    if valeur ~= nil then return valeur end
+  end
+  return nil
+end
+
+local function jouer_animation(personnage, nom, duree_si_inconnue)
+  if personnage == nil then return false end
+  local duree = duree_animation(personnage, nom)
+  if duree == nil then duree = duree_si_inconnue or 20 end
+  if duree <= 0 then return false end
+  GROUND:CharSetAnim(personnage, nom, false)
+  GAME:WaitFrames(math.max(1, math.floor(duree)))
+  GROUND:CharEndAnim(personnage)
+  return true
+end
+
+-- Pose est l'animation SpriteCollab de la patte levée. PoseGroundAction la
+-- maintient pendant la réplique, comme dans les camps de base PMDO, au lieu
+-- de la laisser se terminer après ses 22 ticks.
+local function commencer_pose(personnage)
+  if personnage == nil then return false end
+  local duree = duree_animation(personnage, 'Pose')
+  if duree ~= nil and duree <= 0 then return false end
+  local ok = pcall(function()
+    local anim_id = RogueEssence.Content.GraphicsManager.GetAnimIndex('Pose')
+    GROUND:CharSetAction(personnage,
+      RogueEssence.Ground.PoseGroundAction(personnage.Position,
+        personnage.Direction, anim_id))
+  end)
+  if ok then
+    GAME:WaitFrames(8)
+    return true
+  end
+  return jouer_animation(personnage, 'Pose', 22)
+end
+
+local function terminer_pose(personnage)
+  if personnage ~= nil then GROUND:CharEndAnim(personnage) end
+end
+
+-- Vision du rêve, façon Cri Dimensionnel d'Explorateurs du Ciel : le flash
+-- s'ouvre jusqu'au blanc plein (frames 0–21 de Dimensional_Scream), la voix
+-- résonne sur le halo doré de l'intro Arceus de Pokémon Relict
+-- (Vision_Halo_Dore, boucle animée), puis le flash se referme (frames
+-- 22–32). Les sons EVT_Dimensional_Scream_Start/End sont ceux de la base
+-- PMDO. Une overlay 320×240 se dessine depuis son coin supérieur gauche :
+-- on vise donc le coin du cadre caméra, pas son centre.
+local function coin_camera()
+  local centre = GAME:GetCameraCenter()
+  return centre.X - 160, centre.Y - 120
+end
+
+local function jouer_cri_dimensionnel(debut, fin, temps_frame)
+  local x, y = coin_camera()
+  pcall(function()
+    local emitter = RogueEssence.Content.FiniteOverlayEmitter()
+    emitter.Anim = RogueEssence.Content.BGAnimData(
+      'Dimensional_Scream', temps_frame, debut, fin)
+    emitter.Layer = DrawLayer.Top
+    emitter.TotalTime = (fin - debut + 1) * temps_frame
+    emitter.FadeIn = 0
+    emitter.FadeOut = 0
+    emitter.RepeatX = false
+    emitter.RepeatY = false
+    GROUND:PlayVFX(emitter, x, y)
+  end)
+end
+
+local function demarrer_halo_vision()
+  local x, y = coin_camera()
+  local halo = nil
+  pcall(function()
+    halo = RogueEssence.Content.OverlayEmitter()
+    halo.Anim = RogueEssence.Content.BGAnimData('Vision_Halo_Dore', 4)
+    halo.Layer = DrawLayer.Top
+    halo.FadeIn = 0
+    halo.FadeOut = 12
+    halo:SetupEmit(RogueElements.Loc(x, y), RogueElements.Loc(x, y),
+      RogueElements.Dir8.Down)
+    _GROUND:CreateAnim(halo, DrawLayer.NoDraw)
+  end)
+  return halo
+end
+
+local function vision_cri_dimensionnel()
+  UI:ResetSpeaker()
+  SOUND:PlayBattleSE('EVT_Dimensional_Scream_Start')
+  jouer_cri_dimensionnel(0, 21, 3)
+  -- À 63 ticks, la frame blanche (21) vient d'apparaître : le halo la
+  -- remplace sans raccord visible, pendant que le son finit de résonner.
+  GAME:WaitFrames(63)
+  local halo = demarrer_halo_vision()
+  GAME:WaitFrames(12)
+  UI:WaitShowVoiceOver("[i]« Retrouve le chemin que tu as perdu…[br]nos routes finiront par se rejoindre. »", -0.38)
+  SOUND:PlayBattleSE('EVT_Dimensional_Scream_End')
+  jouer_cri_dimensionnel(22, 32, 4)
+  if halo ~= nil then pcall(function() halo:SwitchOff() end) end
+  GAME:WaitFrames(44)
+end
+
+-- Le héros reste muet pendant toute la rencontre. Il répond par le vrai
+-- hochement Nod quand son espèce le possède, par son idle lorsqu'il écoute,
+-- et par quelques orientations/émotes lisibles pour les autres réactions.
 local function hero_geste(hero, geste)
+  if hero == nil then return end
   UI:ResetSpeaker()
   if geste == 'question' then
     SOUND:PlayBattleSE('EVT_Emote_Confused')
     GROUND:CharSetEmote(hero, 'question', 1)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(30)
   elseif geste == 'non' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Left, 5)
+    -- Aucune feuille du pool n'a d'animation « secouer la tête » distincte :
+    -- le va-et-vient d'orientation reste le signe « non » le plus lisible.
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
     GAME:WaitFrames(7)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(7)
-    GROUND:CharAnimateTurnTo(hero, Direction.Left, 5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
     GAME:WaitFrames(7)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(16)
   elseif geste == 'oui' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
-    GAME:WaitFrames(9)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
-    GAME:WaitFrames(10)
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
-    GAME:WaitFrames(7)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
-    GAME:WaitFrames(16)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    if not jouer_animation(hero, 'Nod', 20) then
+      GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+      GAME:WaitFrames(9)
+      GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+      GAME:WaitFrames(10)
+      GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+      GAME:WaitFrames(7)
+      GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+      GAME:WaitFrames(16)
+    end
+  elseif geste == 'idle' then
+    -- Réponse d'écoute : retour à l'idle par défaut, face au partenaire.
+    GROUND:CharEndAnim(hero)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    GAME:WaitFrames(26)
   elseif geste == 'autour' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Left, 8)
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
     GAME:WaitFrames(14)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 8)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(14)
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
-    GAME:WaitFrames(22)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
+    GAME:WaitFrames(14)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    GAME:WaitFrames(20)
   elseif geste == 'montagne' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
-    GAME:WaitFrames(38)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
+    if jouer_animation(hero, 'LookUp', 18) then
+      GAME:WaitFrames(14)
+    else
+      GAME:WaitFrames(38)
+    end
   elseif geste == 'foret' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 8)
-    GAME:WaitFrames(34)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+    GAME:WaitFrames(24)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    GAME:WaitFrames(14)
   elseif geste == 'inquiet' then
     GROUND:CharSetEmote(hero, 'sweating', 1)
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 8)
-    GAME:WaitFrames(38)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+    GAME:WaitFrames(30)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    GAME:WaitFrames(10)
   elseif geste == 'surpris' then
     SOUND:PlayBattleSE('EVT_Emote_Exclaim')
     GROUND:CharSetEmote(hero, 'shock', 1)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(32)
   elseif geste == 'ecoute' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 7)
-    GAME:WaitFrames(30)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 7)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
+    if not jouer_animation(hero, 'LookUp', 18) then
+      GAME:WaitFrames(24)
+    end
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(18)
   elseif geste == 'determine' then
     SOUND:PlayBattleSE('EVT_Emote_Exclaim')
     GROUND:CharSetEmote(hero, 'exclaim', 1)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
-    GAME:WaitFrames(14)
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 6)
-    GAME:WaitFrames(26)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    if not jouer_animation(hero, 'Nod', 20) then
+      GAME:WaitFrames(18)
+    end
   elseif geste == 'remerciement' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 6)
-    GAME:WaitFrames(20)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+    GROUND:CharSetEmote(hero, 'happy', 1)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    if not jouer_animation(hero, 'Nod', 20) then
+      GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+      GAME:WaitFrames(18)
+      GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+      GAME:WaitFrames(14)
+    end
+  elseif geste == 'sourire' then
+    GROUND:CharSetEmote(hero, 'happy', 1)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    GAME:WaitFrames(24)
+  end
+end
+
+-- Petits gestes du partenaire : montrer la forêt au sud, lever les yeux vers
+-- la montagne, reprendre son souffle après le donjon ou sauter de joie.
+-- Dans cette scène, le partenaire se tient toujours à droite du héros ; Left
+-- le ramène donc face à son interlocuteur.
+local function partenaire_geste(partenaire, geste)
+  if partenaire == nil then return end
+  if geste == 'foret' then
+    GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4)
     GAME:WaitFrames(18)
+    GROUND:CharAnimateTurnTo(partenaire, Direction.Left, 4)
+    GAME:WaitFrames(8)
+  elseif geste == 'montagne' then
+    GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4)
+    if not jouer_animation(partenaire, 'LookUp', 18) then
+      GAME:WaitFrames(24)
+    end
+    GROUND:CharAnimateTurnTo(partenaire, Direction.Left, 4)
+    GAME:WaitFrames(8)
+  elseif geste == 'souffle' then
+    if not jouer_animation(partenaire, 'DeepBreath', 62) then
+      GROUND:CharEndAnim(partenaire)
+      GAME:WaitFrames(20)
+    end
+  elseif geste == 'joie' then
+    GROUND:CharSetEmote(partenaire, 'happy', 1)
+    if not jouer_animation(partenaire, 'Hop', 24) then
+      GAME:WaitFrames(18)
+    end
   end
 end
 
@@ -450,10 +633,15 @@ function reveil_nuit.CinematiqueRetrouvailles()
   local function geste(nom)
     hero_geste(hero, nom)
   end
+  local function geste_partenaire(nom)
+    partenaire_geste(partner, nom)
+  end
 
-  -- Il aperçoit le héros, quitte le chemin et s'approche.
+  -- Le partenaire sort du donjon, souffle un peu, puis aperçoit le héros.
   if points.zrv then
-    dire("Happy", "Je l’ai fait… [color=#69D98C]Lost Wood[color], sept étages, et me voilà enfin dans la prairie.")
+    dire("Happy", "Ouf… je suis sorti de [color=#69D98C]Lost Wood[color].")
+    geste_partenaire('souffle')
+    dire("Happy", "Sept étages, tout seul… Je l’ai fait !")
     -- Travelling d'accompagnement : le partenaire remonte les 224 pixels
     -- qui séparent l'entrée du point d'approche pendant que la caméra
     -- glisse, à la même vitesse, du sud vers un cadre contenant déjà les
@@ -466,14 +654,15 @@ function reveil_nuit.CinematiqueRetrouvailles()
     local travelling = lancer_camera(points.camera_approche_x,
       points.camera_approche_y, 224)
     TASK:JoinCoroutines({marche_partenaire, travelling})
-    dire("Normal", "Le vent est tombé d’un coup. On n’entend plus que la mer… attends. Là, dans les fleurs !")
+    dire("Normal", "C’est calme, ici. On entend la mer…")
   else
-    dire("Happy", "Je l’ai fait… [color=#69D98C]Lost Wood[color], sept étages, et me voilà enfin dans la clairière.")
-    dire("Normal", "Le vent est tombé d’un coup. On n’entend plus que— attends. Là, dans l’herbe !")
+    dire("Happy", "Ouf… je suis sorti de [color=#69D98C]Lost Wood[color].")
+    geste_partenaire('souffle')
+    dire("Normal", "C’est calme, ici. On entend la mer…")
   end
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
   GROUND:CharSetEmote(partner, "exclaim", 1)
-  dire("Worried", "Hé ! Tu m’entends ? Tu es blessé ?")
+  dire("Worried", "Hé ! Là, dans l’herbe !")
   -- Pendant les derniers pas, la caméra remonte du cadre d'approche vers
   -- le cadre de dialogue : les pentes de la montagne et le ciel nocturne
   -- occupent alors le haut de l'image, au-dessus du duo.
@@ -482,80 +671,113 @@ function reveil_nuit.CinematiqueRetrouvailles()
     travelling_approche = lancer_camera(points.camera_x, points.camera_y, 110)
   end
   GROUND:MoveToPosition(partner, points.partenaire_pres_x, points.partenaire_pres_y, false, 1)
-  GROUND:CharAnimateTurnTo(partner, Direction.Left, 6)
+  GROUND:CharAnimateTurnTo(partner, Direction.Left, 4)
   attendre_camera(travelling_approche)
   GAME:WaitFrames(20)
-  dire("Worried", "Tu es inconscient. D’accord… doucement. Personne ne te laissera passer la nuit seul dans cet état.")
-  dire("Normal", "Allez. Reviens vers moi. Ouvre les yeux, tout doucement.")
+  dire("Worried", "Hé… tu m’entends ?")
+  GAME:WaitFrames(30)
+  dire("Worried", "Tu ne réponds pas…")
+  dire("Normal", "Allez. Ouvre les yeux. Doucement.")
   GAME:WaitFrames(40)
 
-  -- Réveil du héros : aucun mot, seulement le regard et le corps qui
-  -- découvrent la clairière comme s'ils la voyaient pour la première fois.
-  GROUND:CharSetAnim(hero, 'Wake', false)
-  GAME:WaitFrames(35)
-  GROUND:CharEndAnim(hero)
+  -- Réveil du héros : Wake est jouée dans sa durée réelle pour les espèces
+  -- qui la possèdent. Le héros découvre ensuite les lieux du regard.
+  if not jouer_animation(hero, 'Wake', 42) then
+    GROUND:CharSetAnim(hero, 'Wake', false)
+    GAME:WaitFrames(20)
+    GROUND:CharEndAnim(hero)
+  end
   geste('autour')
   geste('question')
-  dire("Sigh", "Ah… merci. Tu m’as fait une de ces peurs. Reste tranquille encore un instant ; la tête te tourne peut-être.")
-  dire("Normal", "Je t’ai trouvé étendu dans cette prairie. Moi, je ressors à l’instant du donjon dont le sentier s’ouvre au sud, derrière nous. Ici, on l’appelle [color=#69D98C]Lost Wood[color].")
+  dire("Sigh", "Ah ! Enfin réveillé.")
+  dire("Happy", "Tu m’as fait peur, tu sais.")
+  dire("Worried", "Tu es blessé quelque part ?")
+  geste('non')
+  dire("Sigh", "Non ? Ouf… tant mieux.")
+  dire("Normal", "La tête te tourne ?")
+  geste('idle')
+  dire("Normal", "Un peu, peut-être. Reste tranquille une minute.")
+  dire("Normal", "Je t’ai trouvé endormi ici. Je ne sais pas depuis quand.")
+  geste_partenaire('foret')
+  dire("Normal", "Moi, je viens de traverser [color=#69D98C]Lost Wood[color]. C’est la forêt, au sud.")
   geste('question')
-  dire("Normal", "Ce nom ne te dit rien ? C’est une forêt-donjon : sept étages dont les salles, les couloirs et les escaliers ne se présentent jamais tout à fait de la même manière.")
-  geste('foret')
-  dire("Normal", "Tu ne connaissais pas cet endroit avant de te réveiller, alors. Au moins, voilà une première chose établie.")
-  dire("Worried", "Tu sais comment tu t’appelles ?")
+  dire("Normal", "Tu ne connais pas ?")
   geste('non')
-  dire("Worried", "Et d’où tu viens ? Il y a un foyer, une équipe, quelqu’un qui devrait s’inquiéter pour toi ?")
-  geste('non')
-  dire("Normal", "D’accord. On ne tire pas sur une porte fermée ; ta mémoire s’ouvrira si elle le peut. Et si les mots ne viennent pas, réponds-moi par gestes. Je saurai écouter autrement.")
-  geste('ecoute')
-  dire("Normal", "Tu relèves la tête… Tu as entendu quelque chose pendant que tu dormais ?")
-  geste('oui')
-  dire("Normal", "Une voix ?")
-  geste('oui')
-  geste('ecoute')
-  -- Le souvenir du rêve est entendu par le joueur seul : aucun portrait et
-  -- aucune parole du héros. Le partenaire ne retient que son geste.
-  UI:ResetSpeaker()
-  UI:WaitShowVoiceOver("[i]« Retrouve le chemin que tu as perdu…[br]nos routes finiront par se rejoindre. »", -0.38)
+  dire("Normal", "Non ? Alors retiens juste ça.")
+  dire("Normal", "C’est un donjon. Sept étages.")
+  dire("Normal", "Les chemins changent à chaque fois. Et des Pokémon sauvages y vivent.")
   geste('inquiet')
-  dire("Normal", "Tu t’es figé, comme si le rêve revenait. Gardons cette voix comme on garde une étoile entre les nuages : ce n’est pas encore une carte, mais c’est déjà une direction.")
-  dire("Normal", "Pour l’instant, laisse tes yeux apprivoiser la nuit. Restons face à la mer ; de ce promontoire, l’horizon entier se laisse deviner.")
+  dire("Worried", "Ça t’inquiète ?")
+  geste('oui')
+  dire("Normal", "C’est normal. Moi aussi, au début.")
+  dire("Normal", "On avance pas à pas. On cherche les escaliers. On garde de quoi manger et se soigner.")
+  geste('idle')
+  dire("Happy", "Voilà. Le reste, on l’apprendra en marchant.")
 
-  -- Déplacement lent vers le point de vue. Sur la prairie ZRV2, la caméra
-  -- bascule en même temps vers le panorama : lune, sommet et mer dominent
-  -- le cadre pendant que le duo se place tout en bas, face au nord.
+  dire("Worried", "Au fait… comment tu t’appelles ?")
+  geste('non')
+  dire("Worried", "Tu ne t’en souviens pas ?")
+  geste('oui')
+  dire("Worried", "Et tu viens d’où ?")
+  geste('non')
+  dire("Worried", "Ça non plus…")
+  geste('inquiet')
+  dire("Normal", "Hé. Ce n’est pas grave.")
+  dire("Normal", "On ne force pas les souvenirs. Ils reviendront peut-être tout seuls.")
+  geste('ecoute')
+  dire("Normal", "Qu’est-ce qu’il y a ? Tu as entendu quelque chose ?")
+  geste('oui')
+  dire("Normal", "Pendant que tu dormais ?")
+  geste('oui')
+  -- Le souvenir du rêve est entendu par le joueur seul : aucun portrait et
+  -- aucune parole du héros. Le partenaire ne retient que son geste. La voix
+  -- revient en vision : Cri Dimensionnel, halo doré, puis fermeture.
+  vision_cri_dimensionnel()
+  geste('inquiet')
+  dire("Normal", "Une voix, alors…")
+  dire("Normal", "Je ne sais pas qui c’était. Mais c’est un début.")
+  dire("Normal", "On le garde comme indice. D’accord ?")
+  geste('oui')
+  dire("Happy", "D’accord. On cherchera après.")
+
+  -- Déplacement lent vers le point de vue. Le héros se décale d'abord vers
+  -- l'ouest : sur la ZRV2, le partenaire ne marche ainsi jamais sur sa case
+  -- avant de prendre la sienne. Sur la prairie ZRV2, la caméra bascule en
+  -- même temps vers le panorama : lune, sommet et mer dominent le cadre
+  -- pendant que le duo se place tout en bas, face au nord.
   local travelling_panorama = nil
   if points.zrv then
     travelling_panorama = lancer_camera(points.camera_panorama_x,
       points.camera_panorama_y, 180)
   end
-  GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
   GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
+  GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
   if points.zrv then
     attendre_camera(travelling_panorama)
   else
     GAME:MoveCamera(points.camera_x, points.camera_y, 45, false)
   end
   GAME:WaitFrames(45)
-  GROUND:CharAnimateTurnTo(partner, Direction.Up, 8)
-  GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
+  GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
+  GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
   GAME:WaitFrames(30)
 
-  -- Le partenaire parle ; le héros répond par le regard, une hésitation ou
-  -- un signe de tête. Chaque interprétation est formulée par le partenaire.
-  dire("Normal", "Tu vois la grande silhouette qui se dresse au-delà de la mer et ferme l’horizon ?")
-  -- La question est posée dans le panorama. Pendant que le héros lève la
-  -- tête et que le partenaire répond, la caméra redescend lentement vers
-  -- le cadre de dialogue, sans perdre le haut des pentes ni le ciel.
+  -- Regard vers la montagne. Le héros répond par LookUp, Nod ou une émote ;
+  -- le partenaire dit à voix haute ce qu'il comprend de chaque geste.
   local retour_camera = nil
   if points.zrv then
     retour_camera = lancer_camera(points.camera_x, points.camera_y, 150)
   end
+  dire("Normal", "Tu vois la montagne, de l’autre côté de la mer ?")
   geste('montagne')
-  dire("Happy", "C’est la montagne. Le jour, on distingue ses arêtes, les forêts accrochées à ses pentes, parfois un filet d’eau qui brille entre les pierres. La nuit, elle ne garde que cette ligne immense.")
+  geste('oui')
+  GROUND:CharAnimateTurnTo(partner, Direction.Left, 4)
+  dire("Happy", "Personne ici ne connaît le chemin jusqu’en haut.")
   attendre_camera(retour_camera)
   geste('question')
-  dire("Normal", "Tu cherches un chemin du regard ? Moi aussi, depuis des années. S’il existe un passage jusqu’à sa cime, personne par ici ne peut encore le décrire d’un bout à l’autre.")
+  dire("Normal", "Tu te demandes ce qu’il y a derrière ?")
+  geste('oui')
+  dire("Happy", "Moi aussi. Tous les jours.")
   -- Dérive presque immobile pendant l'évocation du rêve : le cadre glisse
   -- de quelques pixels vers l'est et le nord, comme un regard qui suit la
   -- ligne de crête sans quitter les deux personnages.
@@ -563,69 +785,79 @@ function reveil_nuit.CinematiqueRetrouvailles()
   if points.zrv then
     derive_reve = lancer_camera(points.camera_x + 16, points.camera_y - 8, 300)
   end
-  dire("Normal", "Je me demande ce qui se dérobe derrière : une autre vallée, une mer, des villages que nos cartes n’ont jamais nommés… L’inconnu a parfois la forme exacte d’une montagne.")
+  -- La patte levée : Pose reste affichée pendant toute la réplique. Pour
+  -- les quelques espèces partenaires sans Pose, un petit Hop déterminé
+  -- (présent dans toutes les feuilles du pool) évite une image figée.
+  local pose_tenue = commencer_pose(partner)
+  if not pose_tenue then geste_partenaire('joie') end
+  dire("Happy", "Un jour, je ferai la carte de cette montagne !")
+  terminer_pose(partner)
+  dire("Normal", "Je veux devenir explorateur.")
   geste('question')
-  dire("Happy", "Oui, c’est mon rêve. Pas seulement grimper là-haut pour raconter que je l’ai fait. Je veux comprendre les sentiers, les rivières, les cols et les endroits où une équipe peut reprendre souffle.")
-  dire("Normal", "Je voudrais tracer une carte assez fidèle pour qu’un voyageur égaré retrouve sa route, et assez honnête pour avouer ce qu’elle ignore encore.")
+  dire("Normal", "Pourquoi ? Pour trouver les chemins où personne ne va.")
+  dire("Normal", "Et si un Pokémon se perd là-haut, je veux pouvoir aller le chercher.")
+  geste('surpris')
+  dire("Happy", "Ça te surprend ?")
+  geste('non')
+  dire("Happy", "Non ? Hmm… tu as raison. C’est simple, au fond.")
+  dire("Normal", "Explorer. Aider. Et revenir raconter le chemin.")
   geste('oui')
-  dire("Happy", "Une carte ne sert à rien si elle demeure roulée au fond d’un sac. Elle doit passer de patte en patte et rendre le chemin un peu moins solitaire.")
+  dire("Happy", "Tu approuves ? Merci.")
   attendre_camera(derive_reve)
 
-  dire("Worried", "Pourtant, quand je suis arrivé devant [color=#69D98C]Lost Wood[color], mes pattes ont hésité. Sept étages… Je me demandais si j’étais assez fort, assez patient, assez lucide pour les traverser seul.")
-  geste('surpris')
-  dire("Normal", "Oui, même après tout ce beau discours. J’ai failli rebrousser chemin à l’orée. Puis je me suis dit que la peur pouvait marcher avec moi ; elle n’avait pas à choisir la direction.")
-  dire("Normal", "La forêt m’a appris des choses simples : regarder avant d’avancer, garder de quoi se soigner, et reconnaître quand un couloir vaut mieux qu’une salle pleine d’ennemis.")
-  geste('oui')
-  dire("Happy", "Tu retiens vite, on dirait. Retiens surtout ceci : le courage n’est pas l’absence de crainte. C’est un pas fait proprement, puis un autre.")
-
   -- Retour tout aussi lent au centre du promontoire pendant que le
-  -- partenaire explique ce qu'être explorateur signifie pour lui.
+  -- partenaire avoue sa peur, puis parle trésors et prudence.
   local retour_centre = nil
   if points.zrv then
     retour_centre = lancer_camera(points.camera_x, points.camera_y, 300)
   end
-  dire("Normal", "Devenir explorateur, pour moi, ce n’est pas collectionner les exploits. C’est pouvoir répondre lorsqu’un appel vient d’un endroit où presque personne n’ose aller.")
-  dire("Worried", "Imagine un Pokémon égaré dans la montagne, blessé, incapable de reconnaître la descente. Je voudrais être de ceux qui savent le retrouver et le ramener auprès des siens.")
-  geste('question')
-  dire("Normal", "Même si je ne le connais pas ? Oui. On secourt d’abord ; les présentations attendront le retour, autour d’un feu, quand tout le monde respirera de nouveau.")
-  geste('remerciement')
-  dire("Happy", "Ne me remercie pas comme si je t’avais déjà ramené quelque part. Pour le moment, je t’ai seulement trouvé. C’est un commencement, pas une arrivée.")
+  dire("Worried", "Mais devant [color=#69D98C]Lost Wood[color], j’ai failli faire demi-tour.")
+  geste('surpris')
+  dire("Normal", "Eh oui. J’avais peur.")
+  dire("Normal", "Alors j’ai fait un pas. Puis un autre.")
+  geste('idle')
+  dire("Happy", "C’est comme ça que je suis arrivé jusqu’ici.")
+  dire("Happy", "Et s’il y a un trésor en route… je ne dirai pas non !")
+  geste('sourire')
+  dire("Happy", "Ha ! Toi aussi ?")
+  dire("Normal", "Mais si ça devient trop dangereux, on rentre. Un trésor ne vaut pas une équipe.")
+  geste('idle')
+  dire("Normal", "C’est ça. Savoir s’arrêter fait partie du chemin.")
   attendre_camera(retour_centre)
 
-  dire("Happy", "Et il y a les découvertes : des passages que personne n’a relevés, des ruines qui gardent la trace d’expéditions anciennes, des trésors endormis sous la poussière.")
-  geste('determine')
-  dire("Normal", "Un trésor peut équiper une équipe, réparer un toit, remplir les réserves d’un village ou financer une mission de secours. Il prend de la valeur lorsqu’il repart vers les autres.")
-  dire("Happy", "Et entre nous… soulever le couvercle d’un coffre après des jours de marche doit rester un plaisir d’enfant. Je ne compte pas faire semblant du contraire.")
-  geste('oui')
-  dire("Happy", "Les rencontres et les détours font aussi partie de la découverte. Parfois, le plus précieux ne tient pas dans un coffre ; il tient dans la route qui nous y a conduits.")
-
-  dire("Worried", "Mais un explorateur doit également savoir renoncer. Mettre son équipe en danger par orgueil n’a rien d’héroïque.")
-  geste('question')
-  dire("Normal", "Comment décider ? On regarde les forces qui restent, les objets, la nourriture, les blessures et le chemin déjà parcouru. On ne confond jamais ténacité et entêtement.")
-  dire("Normal", "À deux, on peut se signaler ce que l’autre ne voit pas. Un geste franc vaut mieux qu’un silence qui laisse le danger approcher.")
-
   geste('inquiet')
-  dire("Worried", "Tu baisses la tête… Tu te demandes ce que tu pourrais apporter à une équipe, alors que tu ignores jusqu’à ton propre nom ?")
+  dire("Worried", "Qu’est-ce qu’il y a ? Tu penses que tu vas me gêner ?")
   geste('oui')
-  dire("Normal", "Tu n’as pas à arriver avec un passé complet ni un talent déjà prouvé. On apprend en avançant. Ton regard, ta prudence et tes choix diront peu à peu qui tu es.")
-  dire("Normal", "Et si tes souvenirs ne reviennent pas tout de suite, nous chercherons des indices sans faire de ta vie une énigme à résoudre avant demain. La voix de ton rêve sera notre premier fil.")
+  dire("Happy", "Non. Pas du tout.")
+  dire("Normal", "Tu viens de te réveiller. Tu ne te souviens de rien. C’est normal d’avoir peur.")
+  geste('idle')
+  dire("Normal", "Moi, je connais un peu la forêt. Toi, tu garderas les yeux ouverts.")
+  dire("Normal", "À deux, on se relaie. C’est déjà beaucoup.")
 
-  dire("Normal", "Je ne vais pas te laisser dans cette prairie. Le chemin du retour traverse [color=#69D98C]Lost Wood[color] ; oui, cette même forêt dont je viens de sortir, et ses sept étages dans l’autre sens.")
+  geste_partenaire('foret')
+  dire("Normal", "Pour rentrer, on doit retraverser [color=#69D98C]Lost Wood[color].")
   geste('foret')
-  dire("Normal", "Tu ne la connais pas, alors écoute bien : les salles changent, les Pokémon sauvages y agissent tour après tour, et chaque escalier nous rapproche de la sortie si nous savons le chercher.")
-  dire("Normal", "Cette fois, nous veillerons l’un sur l’autre. Soins, nourriture et capacités seront à ménager ; aucun combat ne mérite que nous y laissions toutes nos forces.")
   geste('inquiet')
-  dire("Worried", "Tu crains de ralentir mon rêve ?")
-  geste('oui')
-  dire("Happy", "Alors écoute ma réponse : un rêve qui exige d’abandonner quelqu’un au bord du chemin n’est pas celui que je veux poursuivre.")
-  dire("Normal", "Je ne te demande ni promesse ni confiance aveugle. Seulement ceci : veux-tu faire la route avec moi et découvrir, pas à pas, ce que nous pouvons devenir ?")
+  dire("Worried", "Je sais. Ça fait peur.")
+  dire("Normal", "Mais je ne te laisse pas seul ici.")
+  geste('remerciement')
+  dire("Happy", "Tu me remercies ? Attends qu’on soit rentrés.")
+  dire("Normal", "On restera ensemble. Pas de course. Pas de risque inutile.")
+  geste('idle')
+  dire("Normal", "Alors… tu viens avec moi ?")
+  geste('idle')
+  dire("Normal", "Prends ton temps.")
   geste('determine')
-  dire("Happy", "C’est décidé, alors. Notre première expédition commence par un retour, et ce n’est pas le moins beau des commencements.")
+  dire("Happy", "Vraiment ?")
+  geste('oui')
+  geste_partenaire('joie')
+  dire("Happy", "C’est décidé ! On traverse ensemble !")
   GROUND:MoveToPosition(hero, points.vue_x - 12, points.vue_y, false, 1)
-  GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
+  GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
+  GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
   GAME:WaitFrames(20)
-  dire("Happy", "Un jour, nous suivrons la ligne de cette montagne. Nous porterons secours, nous nommerons les passages, et nous partagerons ce que la route voudra bien nous confier.")
-  dire("Normal", "Pour cette nuit, reprenons notre souffle. Quand nous repartirons, personne ne traversera [color=#69D98C]Lost Wood[color] seul.")
+  dire("Happy", "Un jour, on ira voir derrière cette montagne.")
+  dire("Normal", "Mais d’abord, rentrons.")
 
   -- Dernier regard vers la montagne, puis seconde traversée à deux. La
   -- caméra remonte une dernière fois vers le panorama et y reste pendant
@@ -635,13 +867,13 @@ function reveil_nuit.CinematiqueRetrouvailles()
     travelling_final = lancer_camera(points.camera_panorama_x - 8,
       points.camera_panorama_y, 180)
   end
-  GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 8)
-  GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 8)
+  GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
+  GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 4)
   GAME:WaitFrames(60)
   attendre_camera(travelling_final)
   if points.zrv then GAME:WaitFrames(45) end
-  GROUND:CharAnimateTurnTo(partner, Direction.Down, 8)
-  GROUND:CharAnimateTurnTo(hero, Direction.Down, 8)
+  GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
+  GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
   GAME:WaitFrames(30)
 
   SV.Destiny = SV.Destiny or {}
