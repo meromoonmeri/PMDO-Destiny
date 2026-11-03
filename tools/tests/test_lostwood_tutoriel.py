@@ -83,12 +83,25 @@ event = (GAME / 'Data/Script/destiny/event.lua').read_text(encoding='utf-8')
 assert "require 'destiny.event_battle'" in event  # garder les événements préexistants
 assert 'function SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson' in event
 assert 'BATTLE_SCRIPT = {}' not in event and 'SINGLE_CHAR_SCRIPT = {}' not in event
+cinematique = (GAME / 'Data/Script/destiny/cinematique.lua').read_text(encoding='utf-8')
+# Conventions partagées du PMD Cutscene Guide : portraits bas gauche/droite
+# en miroir, respiration de 20 frames et rotations de groupe désynchronisées.
+assert 'UI:SetSpeakerLoc(p[1], p[2])' in cinematique
+assert 'standard = {8, 132, false}' in cinematique
+assert 'droite = {256, 132, true}' in cinematique
+assert 'function cinematique.TournerGroupe' in cinematique
+assert 'function cinematique.RegarderGroupe' in cinematique
+assert 'GAME:WaitFrames(frames or 20)' in cinematique
 scene = (GAME / 'Data/Script/destiny/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
 assert 'SOUND:PlayBGM' not in scene
 assert 'GROUND:MoveToPosition(partenaire' in scene
 assert 'Pichu_Home_Door' in scene and 'Pichu_Crossroads' in scene
 assert 'Dazzling_Exit_East' in scene and 'chemin de l’est' in scene
 assert 'LostWoodTutorialDone' not in scene
+assert "require 'destiny.cinematique'" in scene
+assert 'GAME:MoveCamera(raccord_est_x, route_est_y + 12, 92, false)' in scene
+assert 'GAME:MoveCamera(entree.Position.X - 40, route_est_y + 12, 220, false)' in scene
+assert '\\n Au bout' not in scene and '\\n personne' not in scene
 quiz = (GAME / 'Data/Script/destiny/ground/personality_test/init.lua').read_text(encoding='utf-8')
 assert quiz.index('SOUND:FadeOutBGM(60)') < quiz.index("Une faille s'ouvre dans le rêve")
 assert "PrologueHeros = 'a_voir'" in quiz
@@ -112,6 +125,10 @@ assert 'camera_ouverture_y = point_reveil.Position.Y - 104' in reveil
 assert 'camera_panorama_y = point_reveil.Position.Y - 88' in reveil
 assert 'camera_approche_y = point_reveil.Position.Y + 48' in reveil
 assert 'TASK:BranchCoroutine' in reveil and 'TASK:JoinCoroutines' in reveil
+assert "require 'destiny.cinematique'" in reveil
+assert "cinematique.Dire(partner, emotion, texte, 'droite')" in reveil
+assert 'EVT_Emote_Shock' in reveil and 'EVT_Emote_Exclaim_2' in reveil
+assert 'cinematique.TournerGroupe' in reveil
 assert reveil.count('lancer_camera(') >= 8 and 'attendre_camera(travelling_final)' in reveil
 zrv2_script = (GAME / 'Data/Script/destiny/ground/zrv2_zone_reveil_nuit/init.lua').read_text(encoding='utf-8')
 assert "require 'destiny.ground.reveil_nuit.init'" in zrv2_script
@@ -130,6 +147,14 @@ assert "UI:SetSpeaker('???'" in cliff_jour and 'petits morveux' in cliff_jour
 assert 'Team Dazzling Social.ogg' in cliff_jour
 assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jour
 assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
+assert "require 'destiny.cinematique'" in cliff_jour
+assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
+assert 'GAME:MoveCamera(726, 672, 80, false)' in cliff_jour
+assert 'GROUND:MoveToPosition(sonata, 716, 714, false, 1)' in cliff_jour
+assert 'poser_dazzling(sonata, false)' in cliff_jour
+assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
+assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
+assert 'EVT_Emote_Complain' in cliff_jour
 assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jour
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour

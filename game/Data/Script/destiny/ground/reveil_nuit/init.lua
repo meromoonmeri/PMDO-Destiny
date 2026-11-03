@@ -22,6 +22,7 @@
 
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
+local cinematique = require 'destiny.cinematique'
 
 local reveil_nuit = {}
 local invite_retour_en_cours = false
@@ -229,6 +230,7 @@ end
 -- et par quelques orientations/émotes lisibles pour les autres réactions.
 local function hero_geste(hero, geste)
   if hero == nil then return end
+  cinematique.Respirer(20)
   UI:ResetSpeaker()
   if geste == 'question' then
     SOUND:PlayBattleSE('EVT_Emote_Confused')
@@ -291,7 +293,7 @@ local function hero_geste(hero, geste)
     GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(10)
   elseif geste == 'surpris' then
-    SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+    SOUND:PlayBattleSE('EVT_Emote_Shock')
     GROUND:CharSetEmote(hero, 'shock', 1)
     GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(32)
@@ -303,7 +305,7 @@ local function hero_geste(hero, geste)
     GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(18)
   elseif geste == 'determine' then
-    SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+    SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
     GROUND:CharSetEmote(hero, 'exclaim', 1)
     GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     if not jouer_animation(hero, 'Nod', 20) then
@@ -331,6 +333,7 @@ end
 -- le ramène donc face à son interlocuteur.
 local function partenaire_geste(partenaire, geste)
   if partenaire == nil then return end
+  cinematique.Respirer(20)
   if geste == 'foret' then
     GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4)
     GAME:WaitFrames(18)
@@ -502,22 +505,16 @@ function reveil_nuit.DemanderRepriseRetour()
   GAME:CutsceneMode(true)
   AI:DisableCharacterAI(partner)
   UI:ResetSpeaker()
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Normal")
-  UI:WaitShowDialogue("Voici le chemin du retour, par [color=#69D98C]Lost Wood[color]…")
+  cinematique.Dire(partner, 'Normal', "Voici le chemin du retour, par [color=#69D98C]Lost Wood[color]…", 'standard')
   UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans Lost Wood ?', true)
   UI:WaitForChoice()
   if UI:ChoiceResult() then
-    UI:SetSpeaker(partner)
-    UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue("Alors on repart. Ensemble, cette fois encore.")
+    cinematique.Dire(partner, 'Happy', "Alors on repart. Ensemble, cette fois encore.", 'standard')
     invite_retour_en_cours = false
     lancer_retour()
     return
   end
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Normal")
-  UI:WaitShowDialogue("D'accord, reposons-nous encore un peu. Je te suivrai quand tu reviendras vers l'entrée.")
+  cinematique.Dire(partner, 'Normal', "D'accord, reposons-nous encore un peu. Je te suivrai quand tu reviendras vers l'entrée.", 'standard')
   UI:ResetSpeaker()
   equipe_scene.Suivre(partner, hero)
   GAME:MoveCamera(0, 0, 30, true)
@@ -566,16 +563,13 @@ function reveil_nuit.PlotScripting()
         GAME:MoveCamera(points.camera_x, points.camera_y, 1, false)
         GAME:FadeIn(30)
       end
-      UI:SetSpeaker(partner)
-      UI:SetSpeakerEmotion("Worried")
       if SV.Destiny.LostWoodCause == 'abandon' then
-        UI:WaitShowDialogue("Nous avons rebroussé chemin à temps. On reprend notre souffle… puis on décidera ensemble de la suite.")
+        cinematique.Dire(partner, 'Worried', "Nous avons rebroussé chemin à temps.\nOn reprend notre souffle… puis on décidera ensemble de la suite.", 'droite')
       else
-        UI:WaitShowDialogue("Le sentier nous a repoussés cette fois. On reprend notre souffle… puis on repartira ensemble, quand tu seras prêt.")
+        cinematique.Dire(partner, 'Worried', "Le sentier nous a repoussés cette fois.\nOn reprend notre souffle… puis on repartira ensemble, quand tu seras prêt.", 'droite')
       end
-      UI:SetSpeakerEmotion("Happy")
-      UI:WaitShowDialogue("Nous savons maintenant comment nous aider. [color=#69D98C]Lost Wood[color] ne nous séparera pas.")
-      UI:WaitShowDialogue("Rapproche-toi de l'entrée de la forêt quand tu voudras décider de notre départ.")
+      cinematique.Dire(partner, 'Happy', "Nous savons maintenant comment nous aider. [color=#69D98C]Lost Wood[color] ne nous séparera pas.", 'droite')
+      cinematique.Dire(partner, 'Happy', "Rapproche-toi de l'entrée de la forêt quand tu voudras décider de notre départ.", 'droite')
       UI:ResetSpeaker()
       SV.Destiny.LostWoodTrip = 'pause_retour'
       SV.Destiny.LostWoodRetry = 'retour'
@@ -628,9 +622,9 @@ function reveil_nuit.CinematiqueRetrouvailles()
   SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
 
   local function dire(emotion, texte)
-    UI:SetSpeaker(partner)
-    UI:SetSpeakerEmotion(emotion)
-    UI:WaitShowDialogue(texte)
+    -- Le partenaire se tient à l'est du héros : portrait de droite, tourné
+    -- vers lui, pendant toute la conversation des retrouvailles.
+    cinematique.Dire(partner, emotion, texte, 'droite')
   end
   local function geste(nom)
     hero_geste(hero, nom)
@@ -662,7 +656,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     geste_partenaire('souffle')
     dire("Normal", "C’est calme, ici. On entend la mer…")
   end
-  SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+  SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
   GROUND:CharSetEmote(partner, "exclaim", 1)
   dire("Worried", "Hé ! Là, dans l’herbe !")
   -- Pendant les derniers pas, la caméra remonte du cadre d'approche vers
@@ -752,17 +746,25 @@ function reveil_nuit.CinematiqueRetrouvailles()
     travelling_panorama = lancer_camera(points.camera_panorama_x,
       points.camera_panorama_y, 180)
   end
-  GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
-  GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
+  local marche_vue_heros = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
+  end)
+  local marche_vue_partenaire = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(5)
+    GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
+  end)
+  TASK:JoinCoroutines({marche_vue_heros, marche_vue_partenaire})
   if points.zrv then
     attendre_camera(travelling_panorama)
   else
     GAME:MoveCamera(points.camera_x, points.camera_y, 45, false)
   end
   GAME:WaitFrames(45)
-  GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
-  GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
-  GAME:WaitFrames(30)
+  cinematique.TournerGroupe({
+    {partner, Direction.Up, 0, 4},
+    {hero, Direction.Up, 5, 4},
+  })
+  cinematique.Respirer(30)
 
   -- Regard vers la montagne. Le héros répond par LookUp, Nod ou une émote ;
   -- le partenaire dit à voix haute ce qu'il comprend de chaque geste.
@@ -855,9 +857,11 @@ function reveil_nuit.CinematiqueRetrouvailles()
   geste_partenaire('joie')
   dire("Happy", "C’est décidé ! On traverse ensemble !")
   GROUND:MoveToPosition(hero, points.vue_x - 12, points.vue_y, false, 1)
-  GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
-  GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
-  GAME:WaitFrames(20)
+  cinematique.TournerGroupe({
+    {partner, Direction.Up, 0, 4},
+    {hero, Direction.Up, 5, 4},
+  })
+  cinematique.Respirer(20)
   dire("Happy", "Un jour, on ira voir derrière cette montagne.")
   dire("Normal", "Mais d’abord, rentrons.")
 
@@ -869,14 +873,18 @@ function reveil_nuit.CinematiqueRetrouvailles()
     travelling_final = lancer_camera(points.camera_panorama_x - 8,
       points.camera_panorama_y, 180)
   end
-  GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
-  GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 4)
+  cinematique.TournerGroupe({
+    {partner, Direction.UpRight, 0, 4},
+    {hero, Direction.UpRight, 5, 4},
+  })
   GAME:WaitFrames(60)
   attendre_camera(travelling_final)
   if points.zrv then GAME:WaitFrames(45) end
-  GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
-  GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
-  GAME:WaitFrames(30)
+  cinematique.TournerGroupe({
+    {partner, Direction.Down, 0, 4},
+    {hero, Direction.Down, 5, 4},
+  })
+  cinematique.Respirer(30)
 
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.RetrouvaillesFaites = true

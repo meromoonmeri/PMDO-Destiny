@@ -13,6 +13,7 @@
 
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
+local cinematique = require 'destiny.cinematique'
 
 local cliffdaytest_nuit = {}
 local SON_MER = 'Destiny_Falaise_Mer'
@@ -55,18 +56,14 @@ function cliffdaytest_nuit.GarderCheminSud(joueur)
   garde_chemin_sud_en_cours = true
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
-  GROUND:CharAnimateTurnTo(joueur, Direction.Up, 8)
-  UI:SetSpeaker(joueur)
-  UI:SetSpeakerEmotion('Worried')
-  UI:WaitShowDialogue('Non. Je ne vais pas me dégonfler.')
-  UI:SetSpeakerEmotion('Determined')
-  UI:WaitShowDialogue('Il faut que je sois courageux. Je dois traverser [color=#69D98C]Lost Wood[color].')
-  UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Je peux souffler un instant, d’accord… mais pas fuir par le chemin du sud. L’entrée est à l’est.')
+  GROUND:CharAnimateTurnTo(joueur, Direction.Up, 4)
+  cinematique.Dire(joueur, 'Worried', 'Non. Je ne vais pas me dégonfler.', 'standard')
+  cinematique.Dire(joueur, 'Determined', 'Il faut que je sois courageux. Je dois traverser [color=#69D98C]Lost Wood[color].', 'standard')
+  cinematique.Dire(joueur, 'Normal', 'Je peux souffler un instant, d’accord… mais pas fuir par le chemin du sud. L’entrée est à l’est.', 'standard')
   UI:ResetSpeaker()
   -- Le partenaire remonte de lui-même vers le croisement nord-sud.
   GROUND:MoveToPosition(joueur, 720, 556, false, 1)
-  GROUND:CharAnimateTurnTo(joueur, Direction.Right, 8)
+  GROUND:CharAnimateTurnTo(joueur, Direction.Right, 4)
   GAME:MoveCamera(0, 0, 30, true)
   GAME:CutsceneMode(false)
   garde_chemin_sud_en_cours = false
@@ -145,27 +142,21 @@ function cliffdaytest_nuit.DemanderRetourAller()
   invite_retour_aller_en_cours = true
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
-  UI:SetSpeaker(partenaire)
-  UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Voici l’entrée de [color=#69D98C]Lost Wood[color].')
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
+  cinematique.Dire(partenaire, 'Normal', 'Voici l’entrée de [color=#69D98C]Lost Wood[color].', 'standard')
   UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans Lost Wood ?', true)
   UI:WaitForChoice()
   if UI:ChoiceResult() then
-    UI:SetSpeaker(partenaire)
-    UI:SetSpeakerEmotion('Determined')
-    UI:WaitShowDialogue('Allez… on y retourne. Cette fois, je vais jusqu’au bout !')
+    cinematique.Dire(partenaire, 'Determined', 'Allez… on y retourne. Cette fois, je vais jusqu’au bout !', 'standard')
     invite_retour_aller_en_cours = false
     cliffdaytest_nuit.LancerAller()
     return
   end
-  UI:SetSpeaker(partenaire)
-  UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Pas tout de suite. Je reviendrai vers l’entrée quand je serai prêt.')
+  cinematique.Dire(partenaire, 'Normal', 'Pas tout de suite. Je reviendrai vers l’entrée quand je serai prêt.', 'standard')
   UI:ResetSpeaker()
   -- Reculer hors du seuil évite de rouvrir le menu à la frame suivante.
   GROUND:MoveToPosition(partenaire, entree.Position.X - 56, entree.Position.Y, false, 1)
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
   GAME:MoveCamera(0, 0, 30, true)
   GAME:CutsceneMode(false)
   invite_retour_aller_en_cours = false
@@ -182,22 +173,19 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
   GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 1, false)
   GAME:FadeIn(30)
   GAME:WaitFrames(30)
-  UI:SetSpeaker(partenaire)
-  UI:SetSpeakerEmotion('Worried')
   if SV.Destiny.LostWoodCause == 'ko' then
-    UI:WaitShowDialogue('Aïe… Je suis devant l’entrée de [color=#69D98C]Lost Wood[color]…')
-    UI:WaitShowDialogue('J’ai perdu connaissance dans la forêt. Il faut que je reprenne mon souffle.')
+    cinematique.Dire(partenaire, 'Worried', 'Aïe… Je suis devant l’entrée de [color=#69D98C]Lost Wood[color]…', 'standard')
+    cinematique.Dire(partenaire, 'Worried', 'J’ai perdu connaissance dans la forêt. Il faut que je reprenne mon souffle.', 'standard')
   else
-    UI:WaitShowDialogue('Me voilà de retour devant [color=#69D98C]Lost Wood[color]. J’ai bien fait de rebrousser chemin.')
-    UI:WaitShowDialogue('Renoncer pour se protéger, ce n’est pas la fin de l’aventure.')
+    cinematique.Dire(partenaire, 'Worried', 'Me voilà de retour devant [color=#69D98C]Lost Wood[color]. J’ai bien fait de rebrousser chemin.', 'standard')
+    cinematique.Dire(partenaire, 'Worried', 'Renoncer pour se protéger, ce n’est pas la fin de l’aventure.', 'standard')
   end
   GROUND:CharSetAnim(partenaire, 'Wake', false)
   GAME:WaitFrames(35)
   -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.
   GROUND:CharEndAnim(partenaire)
-  UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Je peux me reposer ici, puis essayer encore quand je serai prêt.')
-  UI:WaitShowDialogue('Quand je me rapprocherai de l’entrée, à l’est, je déciderai si je repars dans la forêt.')
+  cinematique.Dire(partenaire, 'Normal', 'Je peux me reposer ici, puis essayer encore quand je serai prêt.', 'standard')
+  cinematique.Dire(partenaire, 'Normal', 'Quand je me rapprocherai de l’entrée, à l’est, je déciderai si je repars dans la forêt.', 'standard')
   UI:ResetSpeaker()
   SV.Destiny.LostWoodTrip = 'pause_aller'
   SV.Destiny.LostWoodRetry = 'aller'
@@ -211,6 +199,7 @@ function cliffdaytest_nuit.AllerEnVille()
   SOUND:FadeOutBGM(45)
   arreter_mer()
   GAME:FadeOut(false, 45)
+  GAME:WaitFrames(30)
   GAME:CutsceneMode(false)
   -- La ville reste une carte distincte, dans sa zone d'origine.
   GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
@@ -220,7 +209,7 @@ function cliffdaytest_nuit.AllerCliffJour()
   SOUND:FadeOutBGM(45)
   arreter_mer()
   GAME:FadeOut(false, 45)
-  GAME:WaitFrames(20)
+  GAME:WaitFrames(30)
   GAME:CutsceneMode(false)
   GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)
 end
@@ -296,32 +285,31 @@ function cliffdaytest_nuit.ScenePartenaire()
     GROUND:MoveToPosition(partenaire, entree.Position.X - 40, route_est_y, false, 1)
   end)
   local suivi_camera = TASK:BranchCoroutine(function()
-    GAME:MoveCamera(entree.Position.X - 40, route_est_y + 12, 312, false)
+    -- Deux pans calés sur les deux tronçons du trajet en L : raccord nord
+    -- en 92 frames, puis route de l'est en 220 frames, sans diagonale
+    -- parasite pendant le second tronçon.
+    GAME:MoveCamera(raccord_est_x, route_est_y + 12, 92, false)
+    GAME:MoveCamera(entree.Position.X - 40, route_est_y + 12, 220, false)
   end)
   TASK:JoinCoroutines({marche_est, suivi_camera})
   GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
   if avant_plan ~= nil then avant_plan.Layer = ordre_avant_plan end
   GAME:WaitFrames(20)
 
-  UI:SetSpeaker(partenaire)
-  UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue("Bon... voilà le chemin de l’est.\n Au bout, c’est l’entrée du donjon le plus proche : [color=#69D98C]Lost Wood[color].")
-  UI:WaitShowDialogue("Devenir explorateur...\n est-ce que je suis vraiment prêt pour ça ?")
-  UI:SetSpeakerEmotion("Normal")
-  UI:WaitShowDialogue("Si j'y vais seul et que ça tourne mal...\n personne ne saura même que je suis parti.")
-  SOUND:PlayBattleSE('EVT_Emote_Confused')
-  GROUND:CharSetEmote(partenaire, "question", 1)
-  GAME:WaitFrames(30)
-  UI:WaitShowDialogue("...Mais si je ne tente rien...\n je le regretterai toute ma vie, c'est certain.")
+  cinematique.Dire(partenaire, 'Worried', "Bon... voilà le chemin de l’est.\nAu bout, c’est l’entrée du donjon le plus proche : [color=#69D98C]Lost Wood[color].", 'standard')
+  cinematique.Dire(partenaire, 'Worried', "Devenir explorateur...\nest-ce que je suis vraiment prêt pour ça ?", 'standard')
+  cinematique.Dire(partenaire, 'Normal', "Si j'y vais seul et que ça tourne mal...\npersonne ne saura même que je suis parti.", 'standard')
+  cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
+  cinematique.Respirer(30)
+  cinematique.Dire(partenaire, 'Normal', "...Mais si je ne tente rien...\nje le regretterai toute ma vie, c'est certain.", 'standard')
 
-  SOUND:PlayBattleSE('EVT_Emote_Exclaim')
-  GROUND:CharSetEmote(partenaire, "exclaim", 1)
-  UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue("C'est décidé ! Je traverserai [color=#69D98C]Lost Wood[color] —\n et je sortirai de là en vrai explorateur !")
+  cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim_2')
+  cinematique.Respirer(20)
+  cinematique.Dire(partenaire, 'Happy', "C'est décidé ! Je traverserai [color=#69D98C]Lost Wood[color] —\net je sortirai de là en vrai explorateur !", 'standard')
 
   -- Les conseils sont maintenant présentés dans Lost Wood, étage par étage.
   SV.Destiny = SV.Destiny or {}
-  UI:WaitShowDialogue("En route ! La nuit est à moi !")
+  cinematique.Dire(partenaire, 'Happy', "En route ! La nuit est à moi !", 'standard')
 
   -- le partenaire part seul : le héros est gardé hors de l'équipe jusqu'au réveil
   local heros = GAME:GetPlayerPartyMember(0)
