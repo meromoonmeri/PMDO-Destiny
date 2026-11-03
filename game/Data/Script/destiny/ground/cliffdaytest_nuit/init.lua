@@ -273,12 +273,33 @@ function cliffdaytest_nuit.ScenePartenaire()
   GAME:MoveCamera(croisement.Position.X + 24, croisement.Position.Y - 26, 1, false)
   GAME:FadeIn(30)
   GAME:WaitFrames(10)
-  GROUND:MoveToPosition(partenaire, porte.Position.X, porte.Position.Y + 58, false, 1)
-  GROUND:MoveToPosition(partenaire, croisement.Position.X + 4, croisement.Position.Y + 12, false, 1)
-  GROUND:MoveToPosition(partenaire, croisement.Position.X + 64, croisement.Position.Y + 28, false, 1)
-  GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 110, false)
-  GROUND:MoveToPosition(partenaire, entree.Position.X - 40, entree.Position.Y, false, 1)
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
+
+  -- Suivre le sentier dessiné au sol plutôt que couper dans l'herbe.
+  -- MoveToPosition vise le coin haut-gauche de la boîte 16×16 du
+  -- personnage ; son ombre standard se trouve à (+8, +12). Les points
+  -- ci-dessous placent donc l'ombre sur l'axe du chemin : descente de la
+  -- maison (x 608), route basse (y 544), raccord qui remonte derrière le
+  -- panneau, puis route de l'est (y 452).
+  local route_basse_y = croisement.Position.Y + 14
+  local jonction_x = croisement.Position.X + 32
+  local raccord_est_x = croisement.Position.X + 68
+  local route_est_y = entree.Position.Y - 20
+
+  GROUND:MoveToPosition(partenaire, porte.Position.X, route_basse_y, false, 1)
+  GROUND:MoveToPosition(partenaire, jonction_x, route_basse_y, false, 1)
+
+  -- Le raccord vers la route haute dure 92 frames et le tronçon vers l'est
+  -- 220 frames à vitesse 1. La caméra accompagne les 312 frames au lieu de
+  -- devancer le partenaire pendant qu'il attend au croisement.
+  local marche_est = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(partenaire, raccord_est_x, route_est_y, false, 1)
+    GROUND:MoveToPosition(partenaire, entree.Position.X - 40, route_est_y, false, 1)
+  end)
+  local suivi_camera = TASK:BranchCoroutine(function()
+    GAME:MoveCamera(entree.Position.X - 40, route_est_y + 12, 312, false)
+  end)
+  TASK:JoinCoroutines({marche_est, suivi_camera})
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
   if avant_plan ~= nil then avant_plan.Layer = ordre_avant_plan end
   GAME:WaitFrames(20)
 
@@ -312,10 +333,11 @@ function cliffdaytest_nuit.ScenePartenaire()
   GAME:SetTeamLeaderIndex(0)
   GROUND:Hide('PLAYER')
 
-  -- Le partenaire s'engage jusqu'au seuil oriental du donjon.
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 8)
+  -- Le partenaire s'engage jusqu'au seuil oriental du donjon, toujours
+  -- dans l'axe de la route haute pour éviter un dernier écart dans l'herbe.
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
   GAME:WaitFrames(20)
-  GROUND:MoveToPosition(partenaire, entree.Position.X - 16, entree.Position.Y, false, 1)
+  GROUND:MoveToPosition(partenaire, entree.Position.X - 16, route_est_y, false, 1)
   cliffdaytest_nuit.LancerAller()
 end
 
