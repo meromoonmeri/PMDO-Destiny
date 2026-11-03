@@ -132,6 +132,37 @@
    "Comment": "Lost Wood — 7 étages traversés deux fois : aller solitaire du partenaire, puis retour en duo après la scène nocturne du réveil. Le succès du premier trajet conduit à reveil_nuit ; celui du retour ramène au croisement nocturne.",
    "SortOrder": 30
   },
+  "dazzling_fight": {
+   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+   "ExpPercent": 0,
+   "Level": -1,
+   "LevelCap": false,
+   "KeepSkills": false,
+   "TeamRestrict": false,
+   "TeamSize": -1,
+   "MoneyRestrict": false,
+   "BagRestrict": -1,
+   "KeepTreasure": false,
+   "BagSize": -1,
+   "Rescues": 0,
+   "CountedFloors": 1,
+   "Rogue": 0,
+   "Grounds": [],
+   "Maps": [
+    [
+     0
+    ]
+   ],
+   "Name": {
+    "DefaultText": "Falaise — Team Dazzling",
+    "LocalTexts": {
+     "fr": "Falaise — Team Dazzling"
+    }
+   },
+   "Released": false,
+   "Comment": "Zone technique du premier combat contre la Team Dazzling. Un seul segment fixe charge cliffdaytest.rsmap ; la défaite comme la victoire renvoient à cliffdaytest pour la reprise de la scène.",
+   "SortOrder": 35
+  },
   "town02_waterfallvillage": {
    "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
    "ExpPercent": 100,

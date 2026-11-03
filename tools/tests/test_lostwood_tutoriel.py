@@ -149,8 +149,9 @@ assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jo
 assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
 assert "require 'destiny.cinematique'" in cliff_jour
 assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
-assert 'GAME:MoveCamera(726, 672, 80, false)' in cliff_jour
-assert 'GROUND:MoveToPosition(sonata, 716, 714, false, 1)' in cliff_jour
+assert 'GAME:MoveCamera(800, 468, 80, false)' in cliff_jour
+assert 'GAME:MoveCamera(692, 544, 210, false)' in cliff_jour
+assert 'GROUND:MoveToPosition(sonata, 716, 484, false, 1)' in cliff_jour
 assert 'poser_dazzling(sonata, false)' in cliff_jour
 assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
 assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
@@ -159,8 +160,8 @@ assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jou
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
-for coordonnees in ('700, 560', '684, 572', '724, 572', '680, 528', '700, 528',
-                    '648, 532', '672, 532', '700, 468', '976, 468'):
+for coordonnees in ('660, 528', '684, 528', '708, 528', '684, 560', '708, 560',
+                    '656, 564', '680, 564', '716, 650', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
 assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
@@ -201,4 +202,59 @@ for ground_name in ('cliffdaytest', 'cliffdaytest_nuit'):
 mer = (GAME / 'Content/Sound/Battle/Destiny_Falaise_Mer.ogg').read_bytes()
 assert mer.startswith(b'OggS') and b'vorbis' in mer
 assert "parler(hero" not in (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
-print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling, tutoriel et statue.')
+
+# Premier combat jouable : Pose relevée, Woosh étoilé et musique au même
+# instant, segment donjon sur la version .rsmap de la même falaise.
+assert "montrez-moi ce que vous avez dans le ventre" in cliff_jour
+assert "Dazzling Fight.ogg" in cliff_jour and "Pre_Battle_Dazzling_Etoiles" in cliff_jour
+assert "SOUND:PlayBGM(MUSIQUE_DAZZLING_COMBAT, false)" in cliff_jour
+assert "jouer_woosh_dazzling()" in cliff_jour
+assert "GAME:EnterDungeon('dazzling_fight', 0, 0, 0" in cliff_jour
+assert "ApresCombatTeamDazzling" in cliff_jour and "TeamDazzlingVictoire" in cliff_jour
+zone_dazzling = json.loads((GAME / 'Data/Zone/dazzling_fight.json').read_text(encoding='utf-8-sig'))['Object']
+assert zone_dazzling['NoEXP'] is True and len(zone_dazzling['Segments']) == 1
+index_zones = json.loads((GAME / 'Data/Zone/index.idx').read_text(encoding='utf-8-sig'))['Object']
+assert index_zones['dazzling_fight']['Grounds'] == []
+assert index_zones['dazzling_fight']['Maps'] == [[0]]
+assert index_zones['dazzling_fight']['CountedFloors'] == 1
+segment_dazzling = zone_dazzling['Segments'][0]
+assert segment_dazzling['Floors'][0]['GenSteps'][0]['Value']['MapID'] == 'cliffdaytest'
+script_zone_dazzling = (GAME / 'Data/Script/destiny/zone/dazzling_fight/init.lua').read_text(encoding='utf-8')
+assert "CombatDazzling = 'victoire'" in script_zone_dazzling
+assert "CombatDazzling = 'defaite'" in script_zone_dazzling
+combat_map = json.loads((GAME / 'Data/Map/cliffdaytest.rsmap').read_text(encoding='utf-8-sig'))['Object']
+assert combat_map['AssetName'] == 'cliffdaytest' and combat_map['EdgeView'] == 1
+assert len(combat_map['Tiles']) == 41 and len(combat_map['Tiles'][0]) == 33
+assert combat_map['EntryPoints'] == [{'Loc': {'X': 28, 'Y': 23}, 'Dir': 4}]
+equipe_dazzling = combat_map['MapTeams'][0]['Players']
+assert [(p['Nickname'], p['CurrentForm']['Species'], p['Level'], p['serializationLoc'], p['serializationDir']) for p in equipe_dazzling] == [
+    ('Adagio', 'tsareena', 32, {'X': 28, 'Y': 22}, 0),
+    ('Sonata', 'lopunny', 31, {'X': 29, 'Y': 22}, 0),
+    ('Aria', 'mawile', 30, {'X': 27, 'Y': 22}, 0),
+]
+assert "Dazzling_Exit_East" in cliff_jour and "Réverie Town[color] nous attend" in cliff_jour
+effets_combat = [e['Value']['$type'] for e in combat_map['MapEffect']['OnMapStarts']]
+assert any('BattlePositionEvent' in t for t in effets_combat)
+assert any('BeginBattleEvent' in t for t in effets_combat)
+for sheet_name in ('CLIFFDAYTEST_BATTLE_BASE_24', 'CLIFFDAYTEST_BATTLE_FRONT_24'):
+    sheet = (GAME / f'Content/Tile/{sheet_name}.tile').read_bytes()
+    assert struct.unpack_from('<i', sheet)[0] == 24
+# Toute coordonnée référencée par la map doit exister dans sa planche :
+# sinon PMDO dessine sa texture d'erreur à la place du ciel.
+tile_locs = {}
+for sheet_name in ('CLIFFDAYTEST_BATTLE_BASE_24', 'CLIFFDAYTEST_BATTLE_FRONT_24'):
+    sheet = (GAME / f'Content/Tile/{sheet_name}.tile').read_bytes()
+    _ts, _count = struct.unpack_from('<ii', sheet)
+    tile_locs[sheet_name] = {struct.unpack_from('<ii', sheet, 8 + i * 16) for i in range(_count)}
+for layer in combat_map['Layers']:
+    for col in layer['Tiles']:
+        for cell in col:
+            for sub in cell['Layers']:
+                for fr in sub['Frames']:
+                    assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in tile_locs[fr['Sheet']]
+musique_combat = (GAME / 'Content/Music/Dazzling Fight.ogg').read_bytes()
+assert musique_combat.startswith(b'OggS') and b'vorbis' in musique_combat
+woosh_dazzling = (GAME / 'Content/BG/Pre_Battle_Dazzling_Etoiles.dir').read_bytes()
+assert struct.unpack_from('<q', woosh_dazzling)[0] > 0
+
+print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling (social + combat), tutoriel et statue.')
