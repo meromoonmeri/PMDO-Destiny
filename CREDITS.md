@@ -149,3 +149,20 @@ Le détail fichier par fichier de l'import d'octobre 2026 est dans
   `da6c2130d641507447e6386a5e47a296e8cb4c71`. Les textes français de Destiny
   sont nouveaux. Détails et conditions d'utilisation :
   [`docs/TUTORIEL_LOST_WOOD_ET_STATUE.md`](docs/TUTORIEL_LOST_WOOD_ET_STATUE.md).
+
+## Team Dazzling — Pose et thème social (3 novembre 2026)
+
+- **Pose V2 d'Adagio, Sonata et Aria** — adaptation Destiny réalisée à
+  partir des feuilles du **PMD Sprite Repository / SpriteCollab** de
+  Tsareena, Lopunny et Mawile, avec les poses d'événement de la Team Charm
+  (Gardevoir, Lopunny et Medicham d'*Explorers of Sky*) comme références de
+  rythme et de composition. Les sources `Pose-Anim/Shadow/Offsets.png` et
+  les `AnimData.xml` sont conservés dans `art/sprites/team_dazzling_pose_v2/`;
+  l'injection du vrai groupe `Pose` (index 13) dans les `.chara` est faite par
+  `tools/ajouter_pose_chara.py`. Créditer les artistes SpriteCollab des
+  feuilles d'origine avant toute redistribution.
+- **Encounter! Jacinthe** — thème social de la Team Dazzling, converti en OGG
+  bouclé (`game/Content/Music/Team Dazzling Social.ogg`) depuis la piste mise
+  à disposition par **ENLS's Pre-Looped Music Library**. Musique de
+  *Pokémon Legends: Z-A* ; droits Nintendo / Game Freak / The Pokémon
+  Company. Aucune autorisation de redistribution publique n'est présumée.

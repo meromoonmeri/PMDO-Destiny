@@ -28,19 +28,40 @@ local function personnage_dazzling(nom)
   end
   return ch
 end
-local function poser_dazzling(ch, animation)
+local MUSIQUE_DAZZLING_SOCIALE = 'Team Dazzling Social.ogg'
+local function etoiles_dazzling(ch)
+  if ch == nil then return end
+  SOUND:PlayBattleSE('_UNK_DUN_Twinkle')
+  local pos = ch.MapLoc or ch.Position
+  -- Deux couronnes discrètes de petites étoiles jaunes PMDO : une basse,
+  -- une à hauteur du buste/tête. Lucky_Chant_Star_Yellow fait 16x16 px et
+  -- scintille sur 8 frames ; l'émetteur les répartit autour du personnage.
+  for _, couronne in ipairs({{10, 28}, {28, 22}}) do
+    local emitter = RogueEssence.Content.FiniteAreaEmitter(
+      RogueEssence.Content.AnimData('Lucky_Chant_Star_Yellow', 3))
+    emitter.Range = couronne[2]
+    emitter.Speed = 24
+    emitter.TotalParticles = 5
+    emitter.LocHeight = couronne[1]
+    GROUND:PlayVFX(emitter, pos.X, pos.Y)
+  end
+end
+local function poser_dazzling(ch)
   if ch == nil then return end
   UI:ResetSpeaker()
-  GROUND:CharSetEmote(ch, 'glowing', 4)
-  local emitter = RogueEssence.Content.FiniteAreaEmitter(
-    RogueEssence.Content.AnimData('Sparkle_RSE', 3))
-  emitter.Range = 36
-  emitter.Speed = 16
-  emitter.TotalParticles = 7
-  emitter.LocHeight = 18
-  local pos = ch.MapLoc or ch.Position
-  GROUND:PlayVFX(emitter, pos.X, pos.Y)
-  anim(ch, animation or 'Pose', false)
+  etoiles_dazzling(ch)
+  -- PoseGroundAction joue la vraie Pose SpriteCollab (index 13) puis la
+  -- maintient sur sa frame de retour pendant la réplique, au lieu de la
+  -- laisser retomber en Idle après 14 à 16 ticks.
+  local ok = pcall(function()
+    local anim_id = RogueEssence.Content.GraphicsManager.GetAnimIndex('Pose')
+    GROUND:CharSetAction(ch,
+      RogueEssence.Ground.PoseGroundAction(ch.Position, ch.Direction, anim_id))
+  end)
+  if not ok then anim(ch, 'Pose', false) end
+end
+local function finir_pose_dazzling(ch)
+  if ch ~= nil then GROUND:CharEndAnim(ch) end
 end
 local function retour_destiny_en_attente()
   return SV.Destiny ~= nil and SV.Destiny.RetourAccompli
@@ -132,12 +153,16 @@ function cliffdaytest.AllerEnVille()
   GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
 end
 
--- La Team Dazzling remonte le chemin du sud en direction d'une mission à
--- l'est et croise le duo au panorama. Adagio (Tsareena) mène l'équipe avec
--- une arrogance très calculée ; Aria (Mawile) raille tout ce qui bouge ;
--- Sonata (Lopunny) transforme chaque réplique en numéro de scène, souvent
--- sous les corrections acides d'Aria. Leurs poses sont soulignées par
--- l'émote lumineuse et une pluie discrète de sparkles.
+-- Première rencontre de la Team Dazzling, sur le chemin de la falaise.
+-- Trajectoires figées sur les chemins de cliffdaytest :
+--   * révélation au sud : Adagio (726,704), Aria (708,720), Sonata (750,720) ;
+--   * remontée en colonne par le couloir x=716, puis éventail face au duo :
+--     Adagio (700,560), Aria (684,572), Sonata (724,572) ;
+--   * héros (680,528) et partenaire (700,528) barrent le chemin, puis sont
+--     poussés à l'ouest en (648,532) et (672,532) ;
+--   * sortie en colonne par (700,468), puis vers l'est et Hide hors champ.
+-- Leur thème social (Encounter! Jacinthe) ne couvre pas la voix hors champ :
+-- il démarre sur la révélation caméra, lorsque les trois prennent la pose.
 function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   local sud = MRKR('Dazzling_Entry_South')
   local adagio = personnage_dazzling('Adagio')
@@ -148,102 +173,194 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
     return
   end
 
-  GROUND:TeleportTo(adagio, sud.Position.X + 8, sud.Position.Y + 8, Direction.Up)
-  GROUND:TeleportTo(sonata, sud.Position.X - 14, sud.Position.Y + 10, Direction.Up)
-  GROUND:TeleportTo(Aria, sud.Position.X + 34, sud.Position.Y + 11, Direction.Up)
+  GROUND:TeleportTo(adagio, sud.Position.X - 5, sud.Position.Y - 58, Direction.Up)
+  GROUND:TeleportTo(Aria, sud.Position.X - 23, sud.Position.Y - 42, Direction.Up)
+  GROUND:TeleportTo(sonata, sud.Position.X + 19, sud.Position.Y - 42, Direction.Up)
 
-  say(adagio, 'Joyous', "Oh oh oh… Une guilde ? Vous deux ? J’ai failli manquer le début de la comédie.")
-  geste_heros(hero, 'question')
-  GROUND:CharTurnToCharAnimated(partner, adagio, 4)
-  say(partner, 'Worried', "Qui va là ?")
-  GAME:MoveCamera(700, 600, 45, false)
+  -- Voix hors champ, sans portrait : le duo entend Adagio avant de la voir.
+  GAME:WaitFrames(18)
+  UI:SetSpeaker('???', true, '', -1, '', RogueEssence.Data.Gender.Unknown)
+  UI:WaitShowDialogue("Mais regardez qui voilà… deux petits morveux. (Décidément, ils n’ont aucun style.)")
 
+  local reaction_partenaire = TASK:BranchCoroutine(function()
+    SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+    GROUND:CharSetEmote(partner, 'exclaim', 1)
+    GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
+  end)
+  local reaction_heros = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
+  end)
+  TASK:JoinCoroutines({reaction_partenaire, reaction_heros})
+  say(partner, 'Worried', "Qui va là ?!")
+
+  -- Le duo gagne le couloir qui descend au sud pour voir d'où vient la voix.
+  local approche_partenaire = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(partner, 700, 516, false, 1)
+    GROUND:MoveToPosition(partner, 700, 528, false, 1)
+  end)
+  local approche_heros = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(6)
+    GROUND:MoveToPosition(hero, 680, 516, false, 1)
+    GROUND:MoveToPosition(hero, 680, 528, false, 1)
+  end)
+  TASK:JoinCoroutines({approche_partenaire, approche_heros})
+
+  SOUND:FadeOutBGM(45)
+  GAME:MoveCamera(726, 688, 80, false)
+  GAME:WaitFrames(10)
+  SOUND:PlayBGM(MUSIQUE_DAZZLING_SOCIALE, true)
+  GROUND:CharAnimateTurnTo(adagio, Direction.Down, 4)
+  GROUND:CharAnimateTurnTo(Aria, Direction.Down, 5)
+  GROUND:CharAnimateTurnTo(sonata, Direction.Down, 6)
+  poser_dazzling(adagio)
+  GAME:WaitFrames(7)
+  poser_dazzling(Aria)
+  GAME:WaitFrames(7)
+  poser_dazzling(sonata)
+  GAME:WaitFrames(28)
+  finir_pose_dazzling(adagio)
+  finir_pose_dazzling(Aria)
+  finir_pose_dazzling(sonata)
+  GROUND:CharAnimateTurnTo(adagio, Direction.Up, 4)
+  GROUND:CharAnimateTurnTo(Aria, Direction.Up, 5)
+  GROUND:CharAnimateTurnTo(sonata, Direction.Up, 6)
+
+  -- Adagio mène la remontée ; ses deux coéquipières se rabattent derrière
+  -- elle dans l'étroit chemin du sud avant de s'ouvrir en éventail.
   local entree_adagio = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(adagio, 716, 650, false, 1)
-    GROUND:MoveToPosition(adagio, 708, 560, false, 1)
-    GROUND:MoveToPosition(adagio, point.Position.X + 20, point.Position.Y + 8, false, 1)
-  end)
-  local entree_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 704, 668, false, 1)
-    GROUND:MoveToPosition(sonata, 702, 574, false, 1)
-    GROUND:MoveToPosition(sonata, point.Position.X + 38, point.Position.Y - 10, false, 1)
+    GROUND:MoveToPosition(adagio, 708, 592, false, 1)
+    GROUND:MoveToPosition(adagio, 700, 560, false, 1)
   end)
   local entree_aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, 728, 664, false, 1)
-    GROUND:MoveToPosition(Aria, 718, 578, false, 1)
-    GROUND:MoveToPosition(Aria, point.Position.X + 40, point.Position.Y + 28, false, 1)
+    GAME:WaitFrames(6)
+    GROUND:MoveToPosition(Aria, 716, 674, false, 1)
+    GROUND:MoveToPosition(Aria, 704, 604, false, 1)
+    GROUND:MoveToPosition(Aria, 684, 572, false, 1)
   end)
-  TASK:JoinCoroutines({entree_adagio, entree_sonata, entree_aria})
-  GAME:MoveCamera(point.Position.X + 14, point.Position.Y + 10, 35, false)
-  GROUND:CharTurnToCharAnimated(hero, adagio, 4)
-  GROUND:CharTurnToCharAnimated(partner, adagio, 4)
+  local entree_sonata = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(12)
+    GROUND:MoveToPosition(sonata, 716, 698, false, 1)
+    GROUND:MoveToPosition(sonata, 712, 616, false, 1)
+    GROUND:MoveToPosition(sonata, 724, 572, false, 1)
+  end)
+  local suivi_entree = TASK:BranchCoroutine(function()
+    GAME:MoveCamera(700, 544, 175, false)
+  end)
+  TASK:JoinCoroutines({entree_adagio, entree_aria, entree_sonata, suivi_entree})
   GROUND:CharTurnToCharAnimated(adagio, partner, 4)
-  GROUND:CharTurnToCharAnimated(sonata, partner, 4)
-  GROUND:CharTurnToCharAnimated(Aria, partner, 4)
+  GROUND:CharTurnToCharAnimated(Aria, partner, 5)
+  GROUND:CharTurnToCharAnimated(sonata, hero, 5)
 
-  poser_dazzling(adagio, 'Pose')
+  say(adagio, 'Happy', "Hello~ [color=#F5D27A]Réverie Town[color] n’est pas un lieu pour des amateurs, voyons.")
+  say(partner, 'Angry', "Mais pour qui vous vous prenez ?!")
+  geste_heros(hero, 'question')
+
+  -- Présentation face caméra, comme une entrée en scène : la vraie Pose
+  -- reste tenue pendant les noms, petites étoiles autour des trois.
+  GROUND:CharAnimateTurnTo(adagio, Direction.Down, 4)
+  GROUND:CharAnimateTurnTo(Aria, Direction.Down, 5)
+  GROUND:CharAnimateTurnTo(sonata, Direction.Down, 6)
+  poser_dazzling(adagio)
+  GAME:WaitFrames(7)
+  poser_dazzling(Aria)
+  GAME:WaitFrames(7)
+  poser_dazzling(sonata)
   GAME:WaitFrames(18)
-  say(adagio, 'Happy', "Moi, c’est Adagio, meneuse de la [color=#FF9FD8]Team Dazzling[color]. Exploratrice recherchée, admirée… et en route pour une vraie mission.")
-  poser_dazzling(sonata, 'Appeal')
-  GAME:WaitFrames(14)
-  say(sonata, 'Joyous', "Et moi, c’est Sonata ! On pose, on brille, et tout le monde sait qu’on est les meilleures !")
-  poser_dazzling(Aria, 'Rotate')
-  GAME:WaitFrames(14)
-  say(Aria, 'Angry', "Non, Sonata. Tout le monde sait surtout que tu es capable de saluer l’affiche d’une mission au lieu de la lire.")
-  say(sonata, 'Worried', "Eh ! Elle était très bien encadrée, cette affiche.")
-  say(adagio, 'Normal', "Aria voit juste, même quand sa langue pique. Deux novices couverts de feuilles, à peine sortis de Lost Wood, et déjà le mot « guilde » à la bouche…")
-  say(partner, 'Determined', "Nous avons traversé [color=#69D98C]Lost Wood[color]. À l’aller, puis au retour.")
-  say(Aria, 'Happy', "Deux traversées ? Vous confondez persévérance et sens de l’orientation défaillant.")
-  say(sonata, 'Joyous', "Ou alors la forêt offre un ruban à la deuxième traversée ! Il est où, le vôtre ?")
-  say(Aria, 'Normal', "Au même endroit imaginaire que leur réputation.")
-  poser_dazzling(adagio, 'Pose')
-  GAME:WaitFrames(14)
-  say(adagio, 'Happy', "Écoutez le conseil gratuit d’une aînée : la société des explorateurs n’est pas une cour de récréation.")
-  say(adagio, 'Joyous', "Réverie Town n’a que faire d’amateurs comme vous. Des perdants feraient mieux d’aller briller ailleurs. Hahaha !")
-  poser_dazzling(sonata, 'Appeal')
-  say(sonata, 'Happy', "Briller en marchant, moi, je sais faire !")
-  say(Aria, 'Angry', "Briller, oui. Marcher droit, c’est encore en chantier.")
+  say(adagio, 'Happy', "Adagio, cheffe de la [color=#FF9FD8]Team Dazzling[color].")
+  say(Aria, 'Happy', "Aria. Retenez le nom : vous l’entendrez souvent.")
+  say(sonata, 'Joyous', "Et moi, Sonata ! La plus éblouissante des trois !")
+  say(Aria, 'Normal', "La plus bruyante, surtout.")
+  finir_pose_dazzling(adagio)
+  finir_pose_dazzling(Aria)
+  finir_pose_dazzling(sonata)
+  GROUND:CharAnimateTurnTo(adagio, Direction.Up, 4)
+  GROUND:CharAnimateTurnTo(Aria, Direction.Up, 5)
+  GROUND:CharAnimateTurnTo(sonata, Direction.Up, 6)
 
-  say(adagio, 'Normal', "Et ton compagnon silencieux, là ? Il attend que tu lui prêtes aussi ton courage ?")
-  GROUND:MoveToPosition(hero, point.Position.X - 6, point.Position.Y, false, 1)
-  geste_heros(hero, 'determine')
-  say(partner, 'Determined', "Il n’a pas besoin de parler pour tenir debout. Et moi non plus, je ne demanderai pas la permission d’avancer.")
-  say(sonata, 'Joyous', "Oh ! La pose du héros muet ! Aria, tu crois que je peux l’apprendre ?")
-  say(Aria, 'Normal', "Commence par fermer la bouche dix secondes. Ce sera ton premier exploit.")
-  say(adagio, 'Happy', "Touchant. Gardez cette belle assurance pour le jour où une guilde vous rira au nez.")
-  say(adagio, 'Joyous', "Et si, par miracle, elle vous ouvre sa porte, prévenez-moi. J’adore assister aux miracles… surtout lorsqu’ils s’effondrent en public.")
-  say(adagio, 'Normal', "Allons, les filles. Une mission nous attend à l’est, et notre réputation déteste patienter.")
-  poser_dazzling(adagio, 'Pose')
-  poser_dazzling(sonata, 'Appeal')
-  poser_dazzling(Aria, 'Rotate')
-  GAME:WaitFrames(22)
+  say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.")
+  say(partner, 'Determined', "On a traversé [color=#69D98C]Lost Wood[color]. Deux fois.")
+  say(Aria, 'Happy', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.")
+  say(sonata, 'Joyous', "Moi, je trouve ça mignon : ils font presque équipe d’explorateurs.")
+  say(adagio, 'Joyous', "« Presque ». C’est le mot parfait.")
+  say(partner, 'Angry', "Répète un peu pour voir ?!")
+  say(adagio, 'Normal', "Inutile. Les étoiles ne répètent pas pour les figurants.")
+  say(adagio, 'Normal', "Allons, les filles. L’est nous attend.")
   say(sonata, 'Happy', "Bye-bye, les presque-explorateurs !")
-  say(Aria, 'Angry', "Sonata, on ne fait pas de signes à la concurrence.")
-  say(sonata, 'Joyous', "Ah, pardon : au revoir, la concurrence !")
+  say(Aria, 'Normal', "Et dégagez le chemin.")
 
+  -- Aria et Sonata se replacent derrière Adagio ; le trio reprend le même
+  -- couloir au lieu de contourner poliment le duo.
+  local colonne_sonata = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 700, 584, false, 1)
+  end)
+  local colonne_aria = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(8)
+    GROUND:MoveToPosition(Aria, 700, 608, false, 1)
+  end)
+  TASK:JoinCoroutines({colonne_sonata, colonne_aria})
+
+  local contact_adagio = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(adagio, 700, 544, false, 1)
+  end)
+  local contact_sonata = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 700, 568, false, 1)
+  end)
+  local contact_aria = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(Aria, 700, 592, false, 1)
+  end)
+  TASK:JoinCoroutines({contact_adagio, contact_sonata, contact_aria})
+
+  SOUND:PlayBattleSE('DUN_Hit_Neutral')
+  local pousse_heros = TASK:BranchCoroutine(function()
+    GROUND:AnimateToPosition(hero, 'Hurt', Direction.Down, 648, 532, 1, 4, 0)
+    GROUND:CharEndAnim(hero)
+    GROUND:CharSetEmote(hero, 'shock', 1)
+  end)
+  local pousse_partenaire = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(3)
+    GROUND:AnimateToPosition(partner, 'Hurt', Direction.Down, 672, 532, 1, 4, 0)
+    GROUND:CharEndAnim(partner)
+    GROUND:CharSetEmote(partner, 'shock', 1)
+  end)
   local sortie_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, 696, 468, false, 1)
-    GROUND:MoveToPosition(adagio, 968, 468, false, 1)
+    GROUND:MoveToPosition(adagio, 700, 468, false, 1.25)
+    GROUND:MoveToPosition(adagio, 976, 468, false, 1.25)
   end)
   local sortie_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 704, 468, false, 1)
-    GROUND:MoveToPosition(sonata, 960, 468, false, 1)
+    GROUND:MoveToPosition(sonata, 700, 468, false, 1.25)
+    GROUND:MoveToPosition(sonata, 952, 468, false, 1.25)
   end)
   local sortie_aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, 712, 468, false, 1)
-    GROUND:MoveToPosition(Aria, 952, 468, false, 1)
+    GROUND:MoveToPosition(Aria, 700, 468, false, 1.25)
+    GROUND:MoveToPosition(Aria, 928, 468, false, 1.25)
   end)
-  TASK:JoinCoroutines({sortie_adagio, sortie_sonata, sortie_aria})
-  GROUND:RemoveCharacter('Adagio')
-  GROUND:RemoveCharacter('Sonata')
-  GROUND:RemoveCharacter('Aria')
+  local regard_duo = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(45)
+    GROUND:CharAnimateTurnTo(partner, Direction.Right, 5)
+    GAME:WaitFrames(5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+  end)
+  local suivi_sortie = TASK:BranchCoroutine(function()
+    GAME:MoveCamera(740, 520, 120, false)
+    GAME:WaitFrames(55)
+    SOUND:FadeOutBGM(60)
+  end)
+  TASK:JoinCoroutines({pousse_heros, pousse_partenaire, sortie_adagio,
+    sortie_sonata, sortie_aria, regard_duo, suivi_sortie})
+
+  GROUND:Hide('Adagio')
+  GROUND:Hide('Sonata')
+  GROUND:Hide('Aria')
   SV.Destiny.TeamDazzlingRencontree = true
 
-  GAME:MoveCamera(point.Position.X, point.Position.Y, 45, false)
+  SOUND:PlayBGM('Cliff Camp.ogg', true)
+  GAME:MoveCamera(660, 528, 60, false)
+  say(partner, 'Angry', "Non mais je rêve ! Elles nous ont bousculés comme si le chemin leur appartenait !")
   GROUND:CharTurnToCharAnimated(partner, hero, 4)
-  GROUND:CharTurnToCharAnimated(hero, partner, 4)
-  say(partner, 'Normal', "La [color=#FF9FD8]Team Dazzling[color]… On dit qu’elles sont brillantes en mission. Pour les manières, la mer pourrait leur donner des leçons de profondeur.")
-  say(partner, 'Worried', "Elles savent exactement où appuyer pour faire douter.")
+  GROUND:CharTurnToCharAnimated(hero, partner, 5)
+  say(partner, 'Worried', "La [color=#FF9FD8]Team Dazzling[color]… Brillantes, peut-être. Aimables, sûrement pas.")
 end
 
 -- Arrivée du retour inverse : la même falaise, mais au lever du jour.

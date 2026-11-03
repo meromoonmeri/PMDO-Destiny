@@ -3,6 +3,7 @@
 from pathlib import Path
 import json
 import struct
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 GAME = ROOT / 'game'
@@ -122,9 +123,46 @@ assert "GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)" in zone_script
 cliff_jour = (GAME / 'Data/Script/destiny/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
 assert 'SceneArriveeDestiny' in cliff_jour
 assert 'tatie Kangourex' in cliff_jour and 'guildes' in cliff_jour
-assert 'RencontreTeamDazzling' in cliff_jour and 'Sparkle_RSE' in cliff_jour
-assert 'meneuse de la' in cliff_jour and 'saluer l’affiche' in cliff_jour
-assert 'héros muet' in cliff_jour and 'TeamDazzlingRencontree' in cliff_jour
+assert 'RencontreTeamDazzling' in cliff_jour and 'TeamDazzlingRencontree' in cliff_jour
+# Voix hors champ sans portrait, thème social, vraie Pose tenue et petites
+# étoiles PMDO autour des trois membres.
+assert "UI:SetSpeaker('???'" in cliff_jour and 'petits morveux' in cliff_jour
+assert 'Team Dazzling Social.ogg' in cliff_jour
+assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jour
+assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
+assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jour
+assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
+assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
+# Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
+for coordonnees in ('700, 560', '684, 572', '724, 572', '680, 528', '700, 528',
+                    '648, 532', '672, 532', '700, 468', '976, 468'):
+    assert coordonnees in cliff_jour
+assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
+assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
+for nom in ('Adagio', 'Sonata', 'Aria'):
+    assert f"GROUND:Hide('{nom}')" in cliff_jour
+musique_dazzling = (GAME / 'Content/Music/Team Dazzling Social.ogg').read_bytes()
+assert musique_dazzling.startswith(b'OggS') and b'vorbis' in musique_dazzling
+assert b'Encounter! Jacinthe' in musique_dazzling
+assert b'LOOPSTART=003079417' in musique_dazzling
+assert b'LOOPLENGTH=003135999' in musique_dazzling
+# La Pose V2 est un vrai groupe 13 dans le payload normal des trois .chara,
+# avec huit directions et les durées SpriteCollab attendues.
+sys.path.insert(0, str(ROOT / 'tools'))
+from ajouter_pose_chara import parse_blob
+from fusionner_conteneurs_pmd import load_container, read_node
+index_chara, _ = read_node((GAME / 'Content/Chara/index.idx').read_bytes())
+assert {303, 428, 763} <= set(index_chara.kids)
+durees_pose = {
+    303: [4, 1, 2, 4, 2, 1, 2],
+    428: [4, 3, 3, 6],
+    763: [4, 4, 6],
+}
+for dex, durees in durees_pose.items():
+    conteneur = load_container(GAME / f'Content/Chara/{dex}.chara', 'Chara')
+    groupe_pose = parse_blob(conteneur.payload)['groups'][13]
+    assert groupe_pose['copy'] == -1 and len(groupe_pose['seqs']) == 8
+    assert all([frame[2] for frame in seq] == durees for seq in groupe_pose['seqs'])
 assert "CH('Pichu')" not in cliff_jour and 'PichuDazzling' not in cliff_jour
 assert 'GarderCheminSud' in scene
 assert 'Je ne vais pas me dégonfler' in scene and 'Il faut que je sois courageux' in scene
