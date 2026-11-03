@@ -217,7 +217,7 @@ local function vision_cri_dimensionnel()
   GAME:WaitFrames(63)
   local halo = demarrer_halo_vision()
   GAME:WaitFrames(12)
-  UI:WaitShowVoiceOver("[i]« Retrouve le chemin que tu as perdu…[br]nos routes finiront par se rejoindre. »", -0.38)
+  UI:WaitShowVoiceOver("« Retrouve le chemin que tu as perdu…[br]nos routes finiront par se rejoindre. »", -0.38)
   SOUND:PlayBattleSE('EVT_Dimensional_Scream_End')
   jouer_cri_dimensionnel(22, 32, 4)
   if halo ~= nil then pcall(function() halo:SwitchOff() end) end
@@ -439,20 +439,22 @@ function reveil_nuit.PrologueHerosEndormi()
   GAME:MoveCamera(points.camera_ouverture_x, points.camera_ouverture_y, 1, false)
 
   GAME:FadeOut(false, 1)
-  GAME:WaitFrames(35)
-  UI:WaitShowVoiceOver("[i]…Où suis-je ?", -1)
-  GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Il fait si noir… Je n'entends rien. Je ne sens presque rien.", -1)
-  GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Qui suis-je ? Mon nom… il m'échappe, comme un rêve au matin.", -1)
-  GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Je me souviens d'une lumière… puis d'une chute sans fin.", -1)
-  GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]Est-ce que quelqu'un… peut m'entendre ?", -1)
-  GAME:WaitFrames(20)
-  UI:WaitShowVoiceOver("[i]J’ai sommeil…", -1)
+  GAME:WaitFrames(45)
+  -- Quatre pensées courtes, sans balise [i]. SetAutoFinish(true) donne aux
+  -- voix-off le fondu d'entrée et de sortie du TitleDialog PMDO (60 ticks,
+  -- comme les textes de fin/crédits de la base) : chaque phrase apparaît
+  -- entière, puis s'efface lentement quand le joueur avance.
+  UI:SetAutoFinish(true)
+  UI:WaitShowVoiceOver("…Où suis-je ?", -1)
+  GAME:WaitFrames(30)
+  UI:WaitShowVoiceOver("Il fait noir…", -1)
+  GAME:WaitFrames(30)
+  UI:WaitShowVoiceOver("Je ne me souviens de rien…", -1)
+  GAME:WaitFrames(30)
+  UI:WaitShowVoiceOver("J’ai sommeil…", -1)
+  UI:SetAutoFinish(false)
   SV.Destiny.PenseesReveilVues = true
-  GAME:WaitFrames(35)
+  GAME:WaitFrames(45)
 
   -- Le noir se lève lentement : le héros dort toujours, seul face à la mer.
   -- Pendant le fondu, un premier travelling descend du ciel vers le
