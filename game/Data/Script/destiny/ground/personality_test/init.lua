@@ -24,6 +24,7 @@ require 'origin.common'
 local quiz_data = require 'destiny.ground.personality_test.quiz_data'
 local starters_source = require 'destiny.ground.personality_test.starters_source'
 local talents_depart = require 'destiny.talents_depart'
+local recrutement = require 'destiny.recrutement'
 
 local personality_test = {}
 
@@ -782,6 +783,11 @@ function personality_test.Quiz()
   _DATA.Save.ActiveTeam:SetRank("none")
   _DATA.Save.ActiveTeam.Money = 0
   _DATA.Save.NoSwitching = true
+  -- Nouvelle partie : aucun recrutement tant que l’Assemblée / la boutique
+  -- des Zones d’Accueil n’est pas disponible dans le scénario.
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.RecrutementDebloque = false
+  recrutement.synchroniser()
   _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 5, talent, 0))
   _DATA.Save.ActiveTeam.Players[0].IsFounder = true
   GAME:SetTeamLeaderIndex(0)

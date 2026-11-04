@@ -25,6 +25,7 @@
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local recrutement = require 'destiny.recrutement'
 
 local reveil_nuit = {}
 local invite_retour_en_cours = false
@@ -439,6 +440,7 @@ function reveil_nuit.PrologueHerosEndormi()
 end
 
 local function lancer_retour()
+  recrutement.synchroniser()
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.LostWoodTrip = 'retour'
   SV.Destiny.LostWoodRetry = nil

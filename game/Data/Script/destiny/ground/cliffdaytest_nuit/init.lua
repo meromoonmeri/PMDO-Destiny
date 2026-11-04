@@ -14,6 +14,7 @@
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local recrutement = require 'destiny.recrutement'
 
 local cliffdaytest_nuit = {}
 local SON_MER = 'Destiny_Falaise_Mer'
@@ -122,6 +123,7 @@ function cliffdaytest_nuit.PlotScripting()
 end
 
 function cliffdaytest_nuit.LancerAller()
+  recrutement.synchroniser()
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.LostWoodTrip = 'aller'
   SV.Destiny.LostWoodRetry = nil

@@ -137,6 +137,19 @@ zone_script = (GAME / 'Data/Script/destiny/zone/lost_wood/init.lua').read_text(e
 assert 'segmentID == 1' in zone_script
 assert zone_script.count("GAME:EnterZone('reverie', -1, 10, 0)") == 2
 assert "GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)" in zone_script
+# Recrutement et Noigrumes : indisponibles tant que la future Assemblée /
+# boutique des Zones d’Accueil n’est pas débloquée. Le module centralise le
+# verrou natif PMDO, et la zone des Bois Perdus ne génère aucun Noigrume.
+assert 'apricorn_' not in (GAME / 'Data/Zone/lost_wood.json').read_text(encoding='utf-8')
+scriptvars = (GAME / 'Data/Script/destiny/scriptvars.lua').read_text(encoding='utf-8')
+recrutement = (GAME / 'Data/Script/destiny/recrutement.lua').read_text(encoding='utf-8')
+assert 'RecrutementDebloque = false' in scriptvars
+assert 'GAME:SetCanRecruit(autorise)' in recrutement
+assert 'RecrutementDebloque = false' in quiz and 'recrutement.synchroniser()' in quiz
+assert 'recrutement.synchroniser()' in scene
+assert 'recrutement.synchroniser()' in reveil
+assert 'recrutement.synchroniser()' in zone_script
+assert 'recrutement.debloquer()' not in quiz + scene + reveil + zone_script
 cliff_jour = (GAME / 'Data/Script/destiny/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
 assert 'SceneArriveeDestiny' in cliff_jour
 assert 'tatie Kangourex' in cliff_jour and 'guildes' in cliff_jour

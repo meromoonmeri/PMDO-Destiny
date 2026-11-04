@@ -4,9 +4,15 @@
 -- dans la prairie du réveil, tandis que le succès du retour arrive sur la
 -- falaise au jour.
 require 'origin.common'
+local recrutement = require 'destiny.recrutement'
 
 local lost_wood = {}
-function lost_wood.Init(zone) end
+function lost_wood.Init(zone)
+  -- Couvre aussi les sauvegardes commencées avant l’ajout du verrou :
+  -- aucun recrutement dans les Bois Perdus tant que le futur déblocage
+  -- Assemblée / Zones d’Accueil n’a pas eu lieu.
+  recrutement.synchroniser()
+end
 function lost_wood.Rescued(zone, mail) end
 
 local function terminer(result, zone_id, map_id)
