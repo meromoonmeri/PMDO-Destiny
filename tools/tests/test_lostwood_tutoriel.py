@@ -159,6 +159,29 @@ assert 'nom_heros()' in cliff_jour and 'On est arrivés !' in cliff_jour
 assert 'tu ne te débrouilles pas trop mal' in cliff_jour
 assert "C’est ici que j’habite" in cliff_jour and 'capitale mondiale des explorateurs' in cliff_jour
 assert 'Je me demande dans quoi je me suis embarqué…' in cliff_jour
+# Pensées du héros : simplement entre parenthèses. La balise [i] n’existe
+# pas dans le moteur (Text.MsgTags) et s’affichait en toutes lettres.
+assert '"[i](' not in cliff_jour and '"[i](' not in reveil
+assert '"(" .. contenu .. ")"' in cliff_jour and '"(" .. texte .. ")"' in reveil
+# Retour à la falaise : la même falaise, un simple demi-tour, le jour levé.
+assert 'juste fait demi-tour' in cliff_jour
+assert 'mais dans l’autre sens.' not in cliff_jour
+# Devant la maison, le facteur Bekipan arrive de profil depuis l’est, se
+# pose sur la boîte aux lettres, salue le partenaire et son « nouvel ami »,
+# puis repart vers l’ouest ; la lettre déclenche les explications guildes.
+assert 'facteur_bekipan()' in cliff_jour and 'Bekipan, le facteur' in cliff_jour
+assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left)' in cliff_jour
+assert 'GROUND:MoveToPosition(bekipan, 659, 444, false, 2)' in cliff_jour
+assert "GROUND:Hide('Bekipan')" in cliff_jour
+assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour
+assert 'partout dans le monde' in cliff_jour and 'poste Bekipan' in cliff_jour
+assert 'bonne chance pour la suite' in cliff_jour
+assert 'Grande Guilde des Explorateurs' in cliff_jour
+assert 'ouvre ses portes' in cliff_jour and 'les inscriptions sont ouvertes' in cliff_jour
+assert 'ce rêve n’a jamais été aussi proche' in cliff_jour
+assert cliff_jour.index('nouvel ami') < cliff_jour.index('bonne chance pour la suite') \
+    < cliff_jour.index('ouvre ses portes') \
+    < cliff_jour.index('tu te demandes ce que c’est, une guilde')
 assert 'se_faire_face(partner, hero)' in cliff_jour and "geste_heros(hero, 'idle', partner)" in cliff_jour
 assert 'RencontreTeamDazzling' in cliff_jour and 'TeamDazzlingRencontree' in cliff_jour
 # Voix hors champ sans portrait, thème social, vraie Pose tenue et petites
@@ -186,6 +209,20 @@ assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
 assert 'EVT_Emote_Complain' in cliff_jour
 assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jour
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
+# Le héros ne fixe plus le partenaire pendant l’altercation : avant chaque
+# réplique d’une Dazzling, il se tourne vers celle qui parle. Il ne revient
+# vers le partenaire que pour les cinq réponses de celui-ci dans l’échange.
+lignes_cliff_jour = cliff_jour.splitlines()
+regards_vers_dazzling = 0
+for numero, ligne in enumerate(lignes_cliff_jour):
+    texte_ligne = ligne.strip()
+    for locutrice in ('adagio', 'Aria', 'Sonata'):
+        if texte_ligne.startswith(f'say({locutrice},'):
+            assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
+            regards_vers_dazzling += 1
+assert regards_vers_dazzling == 26
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 5
+assert '{hero, sonata' not in cliff_jour and '{ hero, sonata' not in cliff_jour
 # Issues du combat : en victoire, le trio détale en évitant le duo et Sonata
 # court en dernière ; en défaite, Tsareena humilie le duo après la poussée,
 # Sonata approuve, Aria lâche son insulte, puis Sonata part encore en dernière.
@@ -196,6 +233,30 @@ assert 'Mais attendez !' in cliff_jour
 assert cliff_jour.index('Bande de losers !') < cliff_jour.index('Mais attendez !')
 assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
 assert cliff_jour.count("GROUND:Hide('Sonata')") == 2
+# Portrait personnalisé de Aria (regard sournois, fond Determined) rangé
+# dans l’émotion Special0 (14) du payload racine de 303.portrait, cellule 17,
+# et utilisé pour sa pique sur les Bois Perdus traversés « deux fois ».
+assert "say(Aria, 'Special0', \"Deux fois ?" in cliff_jour
+import io as _io
+from PIL import Image as _ImagePIL
+sys.path.insert(0, str(ROOT / 'tools'))
+from fusionner_conteneurs_pmd import load_container as _charger_conteneur
+from fusionner_conteneurs_pmd import read as _lire_binaire
+portrait_mawhile = _charger_conteneur(GAME / 'Content/Portrait/303.portrait', 'Portrait')
+_blob = portrait_mawhile.payload
+_png_len, _pos = _lire_binaire('<q', _blob, 0)
+_atlas = _ImagePIL.open(_io.BytesIO(_blob[_pos:_pos + _png_len])).convert('RGBA')
+_pos += _png_len
+(_, _), _pos = _lire_binaire('<ii', _blob, _pos)
+_nb, _pos = _lire_binaire('<i', _blob, _pos)
+_frames = []
+for _ in range(_nb):
+    _v, _pos = _lire_binaire('<ii?', _blob, _pos)
+    _frames.append(_v)
+assert (14, 17, False) in _frames
+_cellule = _atlas.crop((80, 120, 120, 160))
+_source_portrait = _ImagePIL.open(ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').convert('RGBA')
+assert list(_cellule.getdata()) == list(_source_portrait.getdata())
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
 for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',
@@ -240,8 +301,11 @@ for ground_name in ('cliffdaytest', 'cliffdaytest_nuit'):
     entities = ground['Entities'][0]
     assert ground['Music'] == 'Cliff Camp.ogg'
     assert entities['MapChars'] == []
-    assert [(s['EntName'], s['NPCChar']['BaseForm']['Species']) for s in entities['Spawners']] == [
-        ('Adagio', 'tsareena'), ('Sonata', 'lopunny'), ('Aria', 'mawile')]
+    spawners_attendus = [('Adagio', 'tsareena'), ('Sonata', 'lopunny'), ('Aria', 'mawile')]
+    if ground_name == 'cliffdaytest':
+        # Le facteur Bekipan ne sert que dans la scène d’arrivée au jour.
+        spawners_attendus.append(('Bekipan', 'pelipper'))
+    assert [(s['EntName'], s['NPCChar']['BaseForm']['Species']) for s in entities['Spawners']] == spawners_attendus
 mer = (GAME / 'Content/Sound/Battle/Destiny_Falaise_Mer.ogg').read_bytes()
 assert mer.startswith(b'OggS') and b'vorbis' in mer
 ville_script = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
@@ -285,6 +349,10 @@ assert "CombatDazzling = 'defaite'" in script_zone_dazzling
 combat_map = json.loads((GAME / 'Data/Map/cliffdaytest.rsmap').read_text(encoding='utf-8-sig'))['Object']
 assert combat_map['AssetName'] == 'cliffdaytest' and combat_map['EdgeView'] == 1
 assert len(combat_map['Tiles']) == 41 and len(combat_map['Tiles'][0]) == 33
+# CategorySpawnChooser.Spawns est un SpawnDict côté moteur : sa forme native
+# est un objet spawns/spawnTotal. Un [] fait échouer GetMap puis génère le
+# NullReferenceException de FinishGen qui retombait sur une map vide.
+assert combat_map['ItemSpawns'] == {'Spawns': {'spawns': {}, 'spawnTotal': 0}}
 assert combat_map['EntryPoints'] == [{'Loc': {'X': 29, 'Y': 30}, 'Dir': 4}]
 equipe_dazzling = combat_map['MapTeams'][0]['Players']
 assert [(p['Nickname'], p['CurrentForm']['Species'], p['Level'], p['serializationLoc'], p['serializationDir']) for p in equipe_dazzling] == [

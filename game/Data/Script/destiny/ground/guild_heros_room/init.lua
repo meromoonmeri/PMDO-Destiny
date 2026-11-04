@@ -22,7 +22,7 @@ function guild_heros_room.Bedroom_Exit_Touch(obj, activator) sortir() end
 
 function guild_heros_room.Book_Action(obj, activator)
   UI:ResetSpeaker()
-  UI:WaitShowDialogue('[i]Un journal d’exploration, encore plein de pages blanches. Les prochaines aventures de l’équipe y trouveront leur place.')
+  UI:WaitShowDialogue('Un journal d’exploration, encore plein de pages blanches. Les prochaines aventures de l’équipe y trouveront leur place.')
 end
 function guild_heros_room.Save_Point_Touch(obj, activator) end
 

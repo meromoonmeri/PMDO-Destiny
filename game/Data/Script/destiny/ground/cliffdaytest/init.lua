@@ -8,6 +8,14 @@ end
 local function say(ch, emotion, text, placement)
   cinematique.Dire(ch, emotion, text, placement)
 end
+-- Pendant toute l’altercation avec la Team Dazzling, le héros suit la
+-- conversation du regard : il se tourne vers la fille qui parle, puis
+-- revient vers le partenaire uniquement quand celui-ci lui répond.
+local function hero_regarde_locuteur(hero, locuteur)
+  if hero ~= nil and locuteur ~= nil and locuteur ~= hero then
+    GROUND:CharTurnToCharAnimated(hero, locuteur, 4)
+  end
+end
 local SON_MER = 'Destiny_Falaise_Mer'
 local function demarrer_mer()
   -- La BGM « Cliff Camp.ogg » est portée par la carte ; cette boucle ajoute
@@ -23,6 +31,16 @@ local function personnage_dazzling(nom)
   if ch == nil then ch = GROUND:SpawnerDoSpawn(nom) end
   if ch ~= nil then
     GROUND:Unhide(nom)
+    AI:DisableCharacterAI(ch)
+  end
+  return ch
+end
+-- Le facteur Bekipan de la poste de Réverie Town, spawner dédié du ground.
+local function facteur_bekipan()
+  local ch = CH('Bekipan')
+  if ch == nil then ch = GROUND:SpawnerDoSpawn('Bekipan') end
+  if ch ~= nil then
+    GROUND:Unhide('Bekipan')
     AI:DisableCharacterAI(ch)
   end
   return ch
@@ -150,10 +168,18 @@ local function nom_heros()
   return 'toi'
 end
 
--- Pensée du héros : portrait et émotion, texte italique entre parenthèses,
--- exactement comme dans la scène du réveil.
+local function nom_partenaire()
+  local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(1) end)
+  if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
+    return membre.Nickname
+  end
+  return 'toi'
+end
+
+-- Pensée du héros : portrait et émotion, texte simplement entre
+-- parenthèses, exactement comme dans la scène du réveil.
 local function pense_heros(hero, emotion, contenu)
-  say(hero, emotion, "[i](" .. contenu .. ")", 'standard')
+  say(hero, emotion, "(" .. contenu .. ")", 'standard')
 end
 
 -- Voix hors champ sans portrait : les trois filles restent des « ??? »
@@ -388,11 +414,13 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
     { Aria, partner, 5, 4 },
     { sonata, hero, 10, 4 },
     { partner, adagio, 15, 4 },
-    { hero, sonata, 20, 4 },
+    { hero, adagio, 20, 4 },
   })
   cinematique.Respirer(20)
 
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Happy', "Hello~ [color=#F5D27A]Réverie Town[color] n’est pas un lieu pour des amateurs, voyons.", 'droite')
+  hero_regarde_locuteur(hero, partner)
   say(partner, 'Angry', "Mais pour qui vous vous prenez ?!", 'standard')
   cinematique.Respirer(10)
   geste_heros(hero, 'question', partner)
@@ -402,9 +430,13 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   tourner_trio(adagio, Aria, sonata, Direction.Down)
   poser_trio(adagio, Aria, sonata)
   cinematique.Respirer(20)
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Happy', "Adagio, cheffe de la [color=#FF9FD8]Team Dazzling[color].", 'droite')
+  hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Happy', "Aria. Retenez le nom : vous l’entendrez souvent.", 'droite')
+  hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Et moi, Sonata ! La plus éblouissante des trois !", 'droite')
+  hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Normal', "La plus bruyante, surtout.", 'droite')
   cinematique.Respirer(20)
   finir_pose_trio(adagio, Aria, sonata)
@@ -413,13 +445,17 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
     {Aria, partner, 3, 4},
     {sonata, hero, 6, 4},
     {partner, adagio, 9, 4},
-    {hero, sonata, 12, 4},
+    {hero, adagio, 12, 4},
   })
   cinematique.Respirer(10)
 
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.", 'droite')
+  hero_regarde_locuteur(hero, partner)
   say(partner, 'Determined', "On a traversé les [color=#69D98C]Bois Perdus[color]. Deux fois.", 'standard')
-  say(Aria, 'Happy', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
+  hero_regarde_locuteur(hero, Aria)
+  -- Special0 : le portrait personnalisé de Aria, regard sournois de côté.
+  say(Aria, 'Special0', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
   -- Aria cherche Sonata du regard pour partager sa pique, puis Sonata rit
   -- au sol (glowing sans SFX) avant de répondre au duo.
   cinematique.Respirer(10)
@@ -427,20 +463,24 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   cinematique.Respirer(10)
   cinematique.Emote(sonata, 'glowing')
   cinematique.Respirer(20)
+  hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Moi, je trouve ça mignon : ils font presque équipe d’explorateurs.", 'droite')
   cinematique.Respirer(10)
   GROUND:CharTurnToCharAnimated(Aria, partner, 4)
   cinematique.Respirer(10)
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Joyous', "« Presque ». C’est le mot parfait.", 'droite')
   cinematique.Respirer(10)
   cinematique.Emote(partner, 'angry', 'EVT_Emote_Complain')
   cinematique.Respirer(20)
+  hero_regarde_locuteur(hero, partner)
   say(partner, 'Angry', "Répète un peu pour voir ?!", 'standard')
   -- Adagio se détourne à 45° : le mépris se lit au sol, pas seulement dans
   -- le portrait, avant qu’elle ne relève finalement la provocation.
   cinematique.Respirer(10)
   GROUND:CharAnimateTurnTo(adagio, Direction.DownRight, 4)
   cinematique.Respirer(10)
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Normal', "Inutile. Les étoiles ne répètent pas pour les figurants.", 'droite')
   cinematique.Respirer(10)
   -- Au lieu de partir, Adagio relève la provocation du partenaire. Le trio
@@ -448,6 +488,7 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   tourner_trio(adagio, Aria, sonata, Direction.Down)
   poser_trio(adagio, Aria, sonata)
   cinematique.Respirer(20)
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Determined', "Bon, les microbes…\nmontrez-moi ce que vous avez dans le ventre.", 'droite')
   lancer_combat_dazzling()
 end
@@ -509,13 +550,18 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
     {Aria, partner, 3, 4},
     {sonata, hero, 6, 4},
     {partner, adagio, 9, 4},
-    {hero, sonata, 12, 4},
+    {hero, adagio, 12, 4},
   })
   cinematique.Respirer(10)
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Happy', "Des amateurs jusqu’au bout. Même votre chute manquait de style.", 'droite')
+  hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "C’est clair !", 'droite')
+  hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Happy', "Bande de losers !", 'droite')
+  hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Normal', "Retenez cette leçon, les microbes : on ne barre pas la route à la [color=#FF9FD8]Team Dazzling[color].", 'droite')
+  hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Ouais, aanh !", 'droite')
   cinematique.Respirer(10)
 
@@ -558,6 +604,7 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
   cinematique.Emote(sonata, 'sweating')
   cinematique.Respirer(10)
+  hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Worried', "Mais attendez !", 'droite')
   SOUND:FadeOutBGM(60)
   GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
@@ -619,12 +666,17 @@ function cliffdaytest.ApresCombatTeamDazzling()
     GROUND:CharSetEmote(sonata, 'shock', 1)
     GROUND:CharSetEmote(Aria, 'sweating', 1)
     cinematique.Respirer(20)
+    hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Shock', "Aïe… Non mais… on a perdu ?!", 'droite')
+    hero_regarde_locuteur(hero, Aria)
     say(Aria, 'Worried', "Contre eux ? C’est ridicule…", 'droite')
     GROUND:CharSetEmote(adagio, 'shock', 1)
     cinematique.Respirer(20)
+    hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Normal', "Assez. La Fédération nous attend à [color=#F5D27A]Réverie Town[color],\net je refuse d’arriver décoiffée.", 'droite')
+    hero_regarde_locuteur(hero, partner)
     say(partner, 'Joyous', "Alors ? On continue, les étoiles ?", 'standard')
+    hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Normal', "Profitez bien de votre petit miracle, les microbes.\nLa [color=#FF9FD8]Team Dazzling[color] ne perd jamais deux fois.", 'droite')
     cinematique.Respirer(20)
 
@@ -684,6 +736,7 @@ function cliffdaytest.ApresCombatTeamDazzling()
     GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
     cinematique.Emote(sonata, 'sweating')
     cinematique.Respirer(10)
+    hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Shock', "Eh ! Attendez-moi, les filles ! Aaanh !", 'droite')
     SOUND:FadeOutBGM(60)
     GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
@@ -701,10 +754,15 @@ function cliffdaytest.ApresCombatTeamDazzling()
     GROUND:CharSetEmote(partner, 'sweating', 1)
     GROUND:CharSetEmote(hero, 'sweating', 1)
     cinematique.Respirer(20)
+    hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Happy', "Voilà. C’était bref, mais très instructif.", 'droite')
+    hero_regarde_locuteur(hero, partner)
     say(partner, 'Pain', "On… on peut encore se battre !", 'standard')
+    hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Joyous', "Bien sûr, trésor. Dès que tes jambes auront décidé de te porter.", 'droite')
+    hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Normal', "Allons, les filles. [color=#F5D27A]Réverie Town[color] nous attend.", 'droite')
+    hero_regarde_locuteur(hero, Aria)
     say(Aria, 'Normal', "Et dégagez le chemin.", 'droite')
     cinematique.Respirer(20)
     cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, Aria)
@@ -769,7 +827,7 @@ function cliffdaytest.SceneArriveeDestiny()
   UI:ResetSpeaker()
   -- Réinitialiser les actrices si une tentative précédente de la scène a
   -- été interrompue : leurs spawners les recréeront au chemin est.
-  for _, nom in ipairs({'Adagio', 'Sonata', 'Aria'}) do
+  for _, nom in ipairs({'Adagio', 'Sonata', 'Aria', 'Bekipan'}) do
     if CH(nom) ~= nil then GROUND:RemoveCharacter(nom) end
   end
   AI:DisableCharacterAI(partner)
@@ -800,10 +858,10 @@ function cliffdaytest.SceneArriveeDestiny()
   GROUND:MoveToPosition(partner, entree.Position.X - 76, entree.Position.Y + 8, false, 1.5)
   se_faire_face(partner, hero)
   say(partner, 'Joyous', "Au fait, tu ne te débrouilles pas trop mal !", 'droite')
-  say(partner, 'Happy', "On est ressortis… et regarde : le jour s’est levé pendant que nous retraversions les [color=#69D98C]Bois Perdus[color].", 'droite')
+  say(partner, 'Happy', "On est ressortis… et regarde : le jour s’est levé\npendant que nous retraversions les [color=#69D98C]Bois Perdus[color].", 'droite')
   geste_heros(hero, 'autour', partner)
   se_faire_face(partner, hero)
-  say(partner, 'Normal', "C’est la même falaise que cette nuit, mais dans l’autre sens.\nLe chemin de l’est nous a ramenés chez moi.", 'droite')
+  say(partner, 'Happy', "C’est la même falaise que cette nuit !\nOn a juste fait demi-tour dans l’autre sens, et nous voilà chez moi.", 'droite')
 
   -- Direction la maison : les deux regardent d’abord vers l’ouest.
   cinematique.TournerGroupe({
@@ -844,8 +902,71 @@ function cliffdaytest.SceneArriveeDestiny()
   say(partner, 'Normal', "C’est tatie Kangourex qui m’a recueilli quand j’étais tout petit.\nTout le monde l’appelle comme ça, même ceux qui ne sont pas de sa famille.", 'droite')
   say(partner, 'Happy', "Elle s’occupe de moi depuis toujours :\nun repas chaud, un conseil avant de partir, un endroit où déposer ce qui compte. Sans elle, cette maison serait bien vide.", 'droite')
 
-  -- Le héros reste en Idle, perplexe : le partenaire réalise alors qu’il
-  -- ne sait ni ce qu’est une guilde, ni ce qu’est une équipe.
+  -- Le facteur Bekipan arrive en vol, de profil, depuis l’est. Il se pose
+  -- sur la boîte aux lettres (juste à droite de la porte), glisse son bec
+  -- dans la fente pour y déposer le courrier, échange quelques mots avec
+  -- le partenaire, puis repart en s’envolant dans l’autre sens, vers la mer.
+  local bekipan = facteur_bekipan()
+  if bekipan ~= nil then
+    GROUND:TeleportTo(bekipan, 790, 372, Direction.Left)
+    cinematique.Emote(partner, 'exclaim', 'EVT_Emote_Exclaim_2')
+    cinematique.TournerGroupe({
+      { partner, Direction.UpRight, 0, 4 },
+      { hero, Direction.UpRight, 5, 4 },
+    })
+    cinematique.Respirer(10)
+    say(partner, 'Surprised', "Oh ! C’est Bekipan, le facteur !", 'droite')
+    GROUND:MoveToPosition(bekipan, 712, 408, false, 2)
+    GROUND:MoveToPosition(bekipan, 659, 444, false, 2)
+    cinematique.RegarderGroupe({
+      { partner, bekipan, 0, 4 },
+      { hero, bekipan, 5, 4 },
+    })
+    -- Perché sur la boîte, il penche son bec dans la fente.
+    GROUND:CharAnimateTurnTo(bekipan, Direction.Down, 4)
+    anim(bekipan, 'Hop', false)
+    cinematique.Respirer(20)
+    GROUND:CharEndAnim(bekipan)
+    cinematique.Respirer(10)
+
+    -- Bekipan remarque le héros aux côtés du partenaire.
+    GROUND:CharAnimateTurnTo(bekipan, Direction.DownLeft, 4)
+    hero_regarde_locuteur(hero, bekipan)
+    say(bekipan, 'Happy', "Oh tiens, " .. nom_partenaire() .. " !\nTu t’es fait un nouvel ami, à ce que je vois !", 'droite')
+    hero_regarde_locuteur(hero, partner)
+    say(partner, 'Joyous', "Bekipan ! Oui ! Je te présente " .. nom_heros() .. " !\nOn vient de retraverser les [color=#69D98C]Bois Perdus[color] ensemble !", 'droite')
+    se_faire_face(partner, hero)
+    say(partner, 'Happy', "Bekipan distribue le courrier partout dans le monde :\nsa société, la poste Bekipan, porte les lettres des équipes par-delà les mers !", 'droite')
+    cinematique.RegarderGroupe({
+      { partner, bekipan, 0, 4 },
+      { hero, bekipan, 5, 4 },
+    })
+    hero_regarde_locuteur(hero, bekipan)
+    say(bekipan, 'Joyous', "Hé hé ! Enchanté, " .. nom_heros() .. " !\nAllez, je file : d’autres lettres m’attendent. Au revoir, et bonne chance pour la suite !", 'droite')
+    cinematique.Respirer(10)
+    GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
+    GROUND:MoveToPosition(bekipan, 545, 390, false, 2)
+    GROUND:MoveToPosition(bekipan, 430, 320, false, 2)
+    GROUND:Hide('Bekipan')
+    cinematique.Respirer(10)
+
+    -- Le partenaire va chercher la lettre dans la boîte, puis revient la
+    -- lire face au héros : la Grande Guilde ouvre ses portes.
+    GROUND:MoveToPosition(partner, 642, 476, false, 1.5)
+    GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
+    GROUND:CharTurnToCharAnimated(hero, partner, 4)
+    cinematique.Respirer(15)
+    GROUND:MoveToPosition(partner, 620, 468, false, 1.5)
+    se_faire_face(partner, hero)
+    say(partner, 'Normal', "Voyons voir ce qu’il m’a apporté…", 'droite')
+    say(partner, 'Normal', "« La [color=#F5D27A]Grande Guilde des Explorateurs[color] de [color=#F5D27A]Réverie Town[color]\nouvre ses portes ! »", 'droite')
+    say(partner, 'Normal', "« Équipes de secours et d’exploration, présentez-vous à la guilde :\nles inscriptions sont ouvertes ! »", 'droite')
+    say(partner, 'Joyous', "Tu te rends compte, " .. nom_heros() .. " ?\nLa grande guilde accueille de nouvelles équipes !", 'droite')
+  end
+
+  -- Le héros reste en Idle, perplexe devant la lettre : le partenaire
+  -- réalise alors qu’il ne sait ni ce qu’est une guilde, ni ce qu’est
+  -- une équipe.
   geste_heros(hero, 'idle', partner)
   geste_heros(hero, 'question', partner)
   cinematique.Emote(partner, 'exclaim', 'EVT_Emote_Exclaim_2')
@@ -866,6 +987,7 @@ function cliffdaytest.SceneArriveeDestiny()
   say(partner, 'Normal', "Les guildes ? Ce sont les maisons communes de ces équipes.\nOn y reçoit des demandes, on s’y entraîne, on y apprend les règles des donjons et on y partage les cartes.", 'droite')
   say(partner, 'Normal', "Il y en a dans plusieurs régions du monde.\nChacune a ses maîtres, ses traditions et ses explorateurs célèbres ; aucune ne détient toutes les routes.", 'droite')
   say(partner, 'Happy', "Moi, je rêve qu’un jour notre équipe soit reconnue par une guilde.\nPas pour briller sur une affiche… pour être prête quand un appel viendra de loin.", 'droite')
+  say(partner, 'Joyous', "Et avec cette lettre… ce rêve n’a jamais été aussi proche !\nNotre équipe pourrait être de celles-là, tu sais.", 'droite')
 
   -- En parlant de Réverie Town, le partenaire montre le sud : les deux
   -- regardent dans la direction des cascades.

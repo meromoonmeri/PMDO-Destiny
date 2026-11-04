@@ -102,7 +102,7 @@ function caféspindaaccueil.Spinda_Action(personnage, activator)
     SV.Destiny.StocksKecleon = {}
     GAME:FadeIn(60)
     UI:ResetSpeaker()
-    UI:WaitShowDialogue('[i]Une nouvelle journée commence à Réverie Town…')
+    UI:WaitShowDialogue('Une nouvelle journée commence à Réverie Town…')
     return
   end
   UI:ResetSpeaker()

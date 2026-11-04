@@ -400,7 +400,7 @@ function reveil_nuit.PrologueHerosEndormi()
 
   GAME:FadeOut(false, 1)
   GAME:WaitFrames(45)
-  -- Quatre pensées courtes, sans balise [i]. SetAutoFinish(true) donne aux
+  -- Quatre pensées courtes en voix-off. SetAutoFinish(true) donne aux
   -- voix-off le fondu d'entrée et de sortie du TitleDialog PMDO (60 ticks,
   -- comme les textes de fin/crédits de la base) : chaque phrase apparaît
   -- entière, puis s'efface lentement quand le joueur avance.
@@ -610,8 +610,8 @@ function reveil_nuit.CinematiqueRetrouvailles()
   end
   local function penser(emotion, texte)
     -- Pensée du héros : son portrait à gauche (placement standard), texte
-    -- en italique et entre parenthèses ; il ne prononce rien à voix haute.
-    cinematique.Dire(hero, emotion, "[i](" .. texte .. ")", 'standard')
+    -- simplement entre parenthèses ; il ne prononce rien à voix haute.
+    cinematique.Dire(hero, emotion, "(" .. texte .. ")", 'standard')
   end
 
   -- Le partenaire sort du donjon, souffle un peu, puis aperçoit le héros.
