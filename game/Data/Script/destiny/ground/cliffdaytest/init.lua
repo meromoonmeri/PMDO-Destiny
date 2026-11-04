@@ -53,9 +53,10 @@ local function poser_dazzling(ch, avec_son)
   if ch == nil then return end
   UI:ResetSpeaker()
   etoiles_dazzling(ch, avec_son)
-  -- PoseGroundAction joue la vraie Pose SpriteCollab (index 13) puis la
-  -- maintient sur sa frame de retour pendant la réplique, au lieu de la
-  -- laisser retomber en Idle après 14 à 16 ticks.
+  -- PoseGroundAction joue la vraie Pose SpriteCollab (FrameType moteur
+  -- Pose = 50 ; l’InternalIndex 13 reste conservé dans les .chara), puis
+  -- la maintient sur sa frame de retour pendant la réplique, au lieu de
+  -- la laisser retomber en Idle après 14 à 16 ticks.
   local ok = pcall(function()
     local anim_id = RogueEssence.Content.GraphicsManager.GetAnimIndex('Pose')
     GROUND:CharSetAction(ch,
@@ -272,8 +273,9 @@ end
 
 -- Première rencontre de la Team Dazzling, sur le chemin de la falaise.
 -- Le duo vient de dire « on y va » au warp sud (731, 762) quand la
--- musique se coupe : trois voix « ??? » hors champ, le héros réagit
--- avec un « ? », et le partenaire reconnaît les voix (« Ne me dis pas
+-- musique se coupe : trois voix « ??? » hors champ, le partenaire
+-- réagit avec un « ! », le héros avec un « ? » en léger différé, et
+-- le partenaire reconnaît les voix (« Ne me dis pas
 -- que… »). Le duo remonte se placer en (712/736, 732) face au nord
 -- pendant que la caméra révèle le trio sur le chemin de l’est. Le thème
 -- social ne démarre qu’au moment où les filles se mettent en marche :
@@ -302,19 +304,21 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   voix_dazzling("Je ne vois pas ce qu’il y a de drôle, Sonata. C’est gênant.")
   voix_dazzling("Les filles, assez. Faisons notre super entrée.")
 
-  -- Réaction du duo vers les voix (au nord), puis face à face : le
-  -- partenaire semble reconnaître ces voix.
+  -- Réaction du duo vers les voix (au nord), puis face à face : c’est
+  -- le partenaire qui reconnaît ces voix. Il réagit donc en premier
+  -- avec un « ! » (son unique de la réaction) ; le héros répond par un
+  -- « ? » en léger différé, avant que le partenaire prenne la parole.
+  local reaction_partenaire = TASK:BranchCoroutine(function()
+    SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+    GROUND:CharSetEmote(partner, 'exclaim', 1)
+    GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
+  end)
   local reaction_heros = TASK:BranchCoroutine(function()
-    SOUND:PlayBattleSE('EVT_Emote_Confused')
+    GAME:WaitFrames(5)
     GROUND:CharSetEmote(hero, 'question', 1)
     GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 4)
   end)
-  local reaction_partenaire = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(5)
-    GROUND:CharSetEmote(partner, 'sweating', 1)
-    GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
-  end)
-  TASK:JoinCoroutines({ reaction_heros, reaction_partenaire })
+  TASK:JoinCoroutines({ reaction_partenaire, reaction_heros })
   cinematique.Respirer(10)
   se_faire_face(partner, hero)
   say(partner, 'Worried', "Ne me dis pas que…", 'standard')

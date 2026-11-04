@@ -6,6 +6,7 @@ require 'origin.common'
 require 'origin.menu.skill.SkillSelectMenu'
 require 'origin.menu.team.AssemblySelectMenu'
 local equipe_scene = require 'destiny.equipe_scene'
+local cinematique = require 'destiny.cinematique'
 
 local ville = {}
 local ENTREE_X, ENTREE_Y = 800, 1320
@@ -242,38 +243,65 @@ function ville.Init(map)
   GROUND:AddMapStatus('clouds_overhead')
 end
 
-local function parler(personnage, emotion, texte)
-  UI:SetSpeaker(personnage)
-  UI:SetSpeakerEmotion(emotion)
-  UI:WaitShowDialogue(texte)
+local function parler(personnage, emotion, texte, placement)
+  if personnage == nil then return end
+  cinematique.Dire(personnage, emotion, texte, placement or 'standard')
 end
 
 -- Le héros ne parle pas pendant la visite : le partenaire lit ses gestes.
-local function geste_heros(hero, geste)
+-- Les rotations restent à la vitesse 4 des cinématiques Destiny, et un
+-- geste adressé au partenaire se termine en le regardant.
+local function geste_heros(hero, geste, partenaire)
   if hero == nil then return end
   UI:ResetSpeaker()
+  local function vers_partenaire()
+    if partenaire ~= nil then
+      GROUND:CharTurnToCharAnimated(hero, partenaire, 4)
+    else
+      GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+    end
+  end
   if geste == 'question' then
     SOUND:PlayBattleSE('EVT_Emote_Confused')
     GROUND:CharSetEmote(hero, 'question', 1)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 6)
+    vers_partenaire()
     GAME:WaitFrames(28)
   elseif geste == 'autour' then
-    GROUND:CharAnimateTurnTo(hero, Direction.Left, 8)
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
     GAME:WaitFrames(14)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 8)
+    GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(14)
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
-    GAME:WaitFrames(22)
-  else
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
-    GAME:WaitFrames(9)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
     GAME:WaitFrames(10)
-    GROUND:CharAnimateTurnTo(hero, Direction.Down, 5)
+    vers_partenaire()
+    GAME:WaitFrames(12)
+  else -- oui : regard vers le partenaire, deux inclinaisons, puis retour.
+    vers_partenaire()
     GAME:WaitFrames(7)
-    GROUND:CharAnimateTurnTo(hero, Direction.Right, 5)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+    GAME:WaitFrames(9)
+    vers_partenaire()
+    GAME:WaitFrames(7)
+    GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+    GAME:WaitFrames(9)
+    vers_partenaire()
     GAME:WaitFrames(16)
   end
+end
+
+local function se_faire_face_ville(a, b)
+  cinematique.RegarderGroupe({
+    {a, b, 0, 4},
+    {b, a, 5, 4},
+  })
+  cinematique.Respirer(10)
+end
+
+local function regarder_lieu_ville(hero, partenaire, direction)
+  cinematique.TournerGroupe({
+    {partenaire, direction, 0, 4},
+    {hero, direction, 5, 4},
+  })
 end
 
 local function activer_vie_ville()
@@ -327,6 +355,9 @@ function ville.Visite()
     return
   end
   local kecleon, kangourex = CH('Kecleon'), CH('Kangourex')
+  local function parler_guide(emotion, texte)
+    cinematique.Dire(partenaire, emotion, texte, 'droite')
+  end
   GAME:CutsceneMode(true)
   hero.CollisionDisabled = true
   AI:DisableCharacterAI(partenaire)
@@ -336,10 +367,11 @@ function ville.Visite()
   SOUND:PlayBGM('Base Town.ogg', true)
   GAME:FadeIn(45)
 
-  parler(partenaire, 'Happy', 'Nous y voilà ! Bienvenue à [color=#F5D27A]Réverie Town[color].')
-  parler(partenaire, 'Normal', 'Le jour se lève. Reste avec moi : je vais te montrer les endroits importants.')
-  geste_heros(hero, 'oui')
-  parler(partenaire, 'Happy', 'Après cette nuit, tu n’arrives pas ici tout seul. On avance ensemble.')
+  se_faire_face_ville(partenaire, hero)
+  parler_guide('Happy', 'Nous y voilà ! Bienvenue à [color=#F5D27A]Réverie Town[color].')
+  parler_guide('Normal', 'Le jour se lève. Reste avec moi : je vais te montrer les endroits importants.')
+  geste_heros(hero, 'oui', partenaire)
+  parler_guide('Happy', 'Après cette nuit, tu n’arrives pas ici tout seul. On avance ensemble.')
 
   -- Le partenaire guide le héros vers la place, tous deux à pied ; la caméra
   -- les accompagne plutôt que de téléporter les personnages au milieu du plan.
@@ -352,37 +384,50 @@ function ville.Visite()
   end)
   local suivi = TASK:BranchCoroutine(function() GAME:MoveCamera(PLACE_X, PLACE_Y + 20, 100, false) end)
   TASK:JoinCoroutines({avance_partenaire, avance_hero, suivi})
-  GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 8)
-  GROUND:CharAnimateTurnTo(hero, Direction.Up, 8)
-  parler(partenaire, 'Happy', 'Voici la place. Les chemins, les ponts et les boutiques se rejoignent ici.')
+  regarder_lieu_ville(hero, partenaire, Direction.Up)
+  parler_guide('Happy', 'Voici la place. Les chemins, les ponts et les boutiques se rejoignent ici.')
 
+  regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(616, 925, 90, false)
-  parler(partenaire, 'Normal', 'Là-bas, c’est la boutique de Kecleon. On peut y acheter des provisions pour les expéditions.')
-  if kecleon ~= nil then parler(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.') end
-  geste_heros(hero, 'oui')
-  parler(partenaire, 'Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
+  parler_guide('Normal', 'Là-bas, c’est la boutique de Kecleon. On peut y acheter des provisions pour les expéditions.')
+  if kecleon ~= nil then
+    GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
+    parler(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
+  end
+  geste_heros(hero, 'oui', partenaire)
+  parler_guide('Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
 
+  regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(936, 940, 100, false)
-  parler(partenaire, 'Normal', 'Et voici Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
-  if kangourex ~= nil then parler(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.') end
-  geste_heros(hero, 'question')
-  parler(partenaire, 'Normal', 'Exactement : ce que nous laissons à tatie Kangourex n’a pas à traverser le donjon avec nous.')
+  parler_guide('Normal', 'Et voici Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
+  if kangourex ~= nil then
+    GROUND:CharAnimateTurnTo(kangourex, Direction.Down, 4)
+    parler(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.')
+  end
+  geste_heros(hero, 'question', partenaire)
+  parler_guide('Normal', 'Exactement : ce que nous laissons à tatie Kangourex n’a pas à traverser le donjon avec nous.')
 
+  regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(1100, 950, 75, false)
-  parler(partenaire, 'Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
+  parler_guide('Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
+  regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(500, 1010, 110, false)
-  parler(partenaire, 'Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
+  parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
+  regarder_lieu_ville(hero, partenaire, Direction.DownLeft)
   GAME:MoveCamera(530, 2350, 200, false)
-  parler(partenaire, 'Happy', 'Plus au sud, les chemins passent devant les maisons. C’est un coin tranquille, entouré d’arbres.')
+  parler_guide('Happy', 'Plus au sud, les chemins passent devant les maisons. C’est un coin tranquille, entouré d’arbres.')
+  regarder_lieu_ville(hero, partenaire, Direction.Up)
   GAME:MoveCamera(800, 530, 240, false)
-  parler(partenaire, 'Normal', 'Regarde les ponts et les cascades : ils relient les différents quartiers de la ville.')
+  parler_guide('Normal', 'Regarde les ponts et les cascades : ils relient les différents quartiers de la ville.')
+  regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(1425, 320, 135, false)
-  parler(partenaire, 'Happy', 'Et ce grand bâtiment, là-haut… un jour, nous irons voir ce qui nous attend de ce côté !')
+  parler_guide('Happy', 'Et ce grand bâtiment, là-haut… un jour, nous irons voir ce qui nous attend de ce côté !')
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
-  geste_heros(hero, 'autour')
-  parler(partenaire, 'Normal', 'Tu ne te souviens toujours pas de ton passé, mais tu commences à trouver tes repères. Ça se voit.')
-  parler(partenaire, 'Happy', 'Tu n’as pas besoin de tout retenir d’un coup. On explorera la ville et les alentours à notre rythme.')
-  parler(partenaire, 'Normal', 'Pour l’instant, reposons-nous. Notre prochaine aventure commencera quand nous serons prêts.')
+  geste_heros(hero, 'autour', partenaire)
+  se_faire_face_ville(partenaire, hero)
+  parler_guide('Normal', 'Tu ne te souviens toujours pas de ton passé, mais tu commences à trouver tes repères. Ça se voit.')
+  parler_guide('Happy', 'Tu n’as pas besoin de tout retenir d’un coup. On explorera la ville et les alentours à notre rythme.')
+  parler_guide('Normal', 'Pour l’instant, reposons-nous. Notre prochaine aventure commencera quand nous serons prêts.')
 
   SV.Destiny.VisiteVille = 'terminee'
   UI:ResetSpeaker()

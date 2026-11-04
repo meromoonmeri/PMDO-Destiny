@@ -187,6 +187,9 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
   -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.
   GROUND:CharEndAnim(partenaire)
   cinematique.Dire(partenaire, 'Normal', 'Je peux me reposer ici, puis essayer encore quand je serai prêt.', 'standard')
+  -- Il regarde dans la direction qu’il nomme : l’entrée, à l’est.
+  GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
+  cinematique.Respirer(10)
   cinematique.Dire(partenaire, 'Normal', 'Quand je me rapprocherai de l’entrée, à l’est, je déciderai si je repars dans la forêt.', 'standard')
   UI:ResetSpeaker()
   SV.Destiny.LostWoodTrip = 'pause_aller'

@@ -164,7 +164,14 @@ assert 'RencontreTeamDazzling' in cliff_jour and 'TeamDazzlingRencontree' in cli
 # Voix hors champ sans portrait, thème social, vraie Pose tenue et petites
 # étoiles PMDO autour des trois membres.
 assert "UI:SetSpeaker('???'" in cliff_jour and 'Hilarant.' in cliff_jour and 'super entrée' in cliff_jour
-assert 'Ne me dis pas que…' in cliff_jour
+# La réplique appartient au partenaire : il réagit avec « ! » avant le
+# héros (« ? » en léger différé), puis dit lui-même « Ne me dis pas que… ».
+assert "say(partner, 'Worried', \"Ne me dis pas que…\", 'standard')" in cliff_jour
+rencontre_dazzling = cliff_jour[cliff_jour.index('function cliffdaytest.RencontreTeamDazzling'):]
+reaction_partenaire = rencontre_dazzling.index("GROUND:CharSetEmote(partner, 'exclaim', 1)")
+reaction_heros = rencontre_dazzling.index("GROUND:CharSetEmote(hero, 'question', 1)")
+assert reaction_partenaire < reaction_heros < rencontre_dazzling.index('Ne me dis pas que…')
+assert rencontre_dazzling.index("SOUND:PlayBattleSE('EVT_Emote_Exclaim')") < reaction_partenaire
 assert 'Team Dazzling Social.ogg' in cliff_jour
 assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jour
 assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
@@ -203,10 +210,12 @@ assert musique_dazzling.startswith(b'OggS') and b'vorbis' in musique_dazzling
 assert b'Encounter! Jacinthe' in musique_dazzling
 assert b'LOOPSTART=003079417' in musique_dazzling
 assert b'LOOPLENGTH=003135999' in musique_dazzling
-# La Pose V2 est un vrai groupe 13 dans le payload normal des trois .chara,
-# avec huit directions et les durées SpriteCollab attendues.
+# La Pose V2 est rangée sous la clé 50 (FrameType moteur Pose) dans le
+# payload normal des trois .chara ; l’InternalIndex SpriteCollab reste 13.
+# Huit directions et durées SpriteCollab attendues.
 sys.path.insert(0, str(ROOT / 'tools'))
-from ajouter_pose_chara import parse_blob
+from ajouter_pose_chara import POSE_FRAME_TYPE, parse_blob
+assert POSE_FRAME_TYPE == 50
 from fusionner_conteneurs_pmd import load_container, read_node
 index_chara, _ = read_node((GAME / 'Content/Chara/index.idx').read_bytes())
 assert {303, 428, 763} <= set(index_chara.kids)
@@ -217,7 +226,10 @@ durees_pose = {
 }
 for dex, durees in durees_pose.items():
     conteneur = load_container(GAME / f'Content/Chara/{dex}.chara', 'Chara')
-    groupe_pose = parse_blob(conteneur.payload)['groups'][13]
+    groupes = parse_blob(conteneur.payload)['groups']
+    assert POSE_FRAME_TYPE in groupes
+    groupe_pose = groupes[POSE_FRAME_TYPE]
+    assert groupe_pose['internal'] == 13
     assert groupe_pose['copy'] == -1 and len(groupe_pose['seqs']) == 8
     assert all([frame[2] for frame in seq] == durees for seq in groupe_pose['seqs'])
 assert "CH('Pichu')" not in cliff_jour and 'PichuDazzling' not in cliff_jour
@@ -232,7 +244,23 @@ for ground_name in ('cliffdaytest', 'cliffdaytest_nuit'):
         ('Adagio', 'tsareena'), ('Sonata', 'lopunny'), ('Aria', 'mawile')]
 mer = (GAME / 'Content/Sound/Battle/Destiny_Falaise_Mer.ogg').read_bytes()
 assert mer.startswith(b'OggS') and b'vorbis' in mer
-assert "parler(hero" not in (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
+ville_script = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
+assert "parler(hero" not in ville_script
+# Audit de la visite : guide en portrait de droite, face à face à
+# l’accueil et à la fin, regards vers les lieux montrés, rotations à 4.
+assert "require 'destiny.cinematique'" in ville_script
+assert "cinematique.Dire(partenaire, emotion, texte, 'droite')" in ville_script
+assert ville_script.count('se_faire_face_ville(partenaire, hero)') == 2
+assert 'regarder_lieu_ville(hero, partenaire, Direction.UpLeft)' in ville_script
+assert 'regarder_lieu_ville(hero, partenaire, Direction.DownLeft)' in ville_script
+assert 'Direction.Up, 8' not in ville_script and 'Direction.Right, 6' not in ville_script
+assert "geste_heros(hero, 'question', partenaire)" in ville_script
+# Reprise au lieu du réveil : montrer l’entrée au sud avant le choix,
+# puis se faire face pour la réponse.
+assert reveil.index('{partner, Direction.Down, 0, 4}') < reveil.index('Voici le chemin du retour')
+assert reveil.index('Souhaitez-vous retourner dans les Bois Perdus ?') < reveil.index('{partner, hero, 0, 4}')
+# Reprise solo de falaise : regarder à l’est avant de nommer l’entrée.
+assert scene.index('Direction.Right, 4') < scene.index('Quand je me rapprocherai de l’entrée, à l’est')
 
 # Premier combat jouable : Pose relevée, Woosh étoilé et musique au même
 # instant, segment donjon sur la version .rsmap de la même falaise.

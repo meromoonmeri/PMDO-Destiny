@@ -463,16 +463,28 @@ function reveil_nuit.DemanderRepriseRetour()
   GAME:CutsceneMode(true)
   AI:DisableCharacterAI(partner)
   UI:ResetSpeaker()
+  -- Le partenaire montre d’abord l’entrée, au sud de la carte ZRV.
+  cinematique.TournerGroupe({
+    {partner, Direction.Down, 0, 4},
+    {hero, Direction.Down, 5, 4},
+  })
+  cinematique.Respirer(10)
   cinematique.Dire(partner, 'Normal', "Voici le chemin du retour, par les [color=#69D98C]Bois Perdus[color]…", 'standard')
   UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans les Bois Perdus ?', true)
   UI:WaitForChoice()
+  -- La réponse s’adresse ensuite au héros : face à face, portrait droite.
+  cinematique.RegarderGroupe({
+    {partner, hero, 0, 4},
+    {hero, partner, 5, 4},
+  })
+  cinematique.Respirer(10)
   if UI:ChoiceResult() then
-    cinematique.Dire(partner, 'Happy', "Alors on repart. Ensemble, cette fois encore.", 'standard')
+    cinematique.Dire(partner, 'Happy', "Alors on repart. Ensemble, cette fois encore.", 'droite')
     invite_retour_en_cours = false
     lancer_retour()
     return
   end
-  cinematique.Dire(partner, 'Normal', "D'accord, reposons-nous encore un peu. Je te suivrai quand tu reviendras vers l'entrée.", 'standard')
+  cinematique.Dire(partner, 'Normal', "D'accord, reposons-nous encore un peu. Je te suivrai quand tu reviendras vers l'entrée.", 'droite')
   UI:ResetSpeaker()
   equipe_scene.Suivre(partner, hero)
   GAME:MoveCamera(0, 0, 30, true)
@@ -521,6 +533,12 @@ function reveil_nuit.PlotScripting()
         GAME:MoveCamera(points.camera_x, points.camera_y, 1, false)
         GAME:FadeIn(30)
       end
+      -- Après l’ouverture sur la montagne, le duo se parle face à face.
+      cinematique.RegarderGroupe({
+        {partner, hero, 0, 4},
+        {hero, partner, 5, 4},
+      })
+      cinematique.Respirer(10)
       if SV.Destiny.LostWoodCause == 'abandon' then
         cinematique.Dire(partner, 'Worried', "Nous avons rebroussé chemin à temps.\nOn reprend notre souffle… puis on décidera ensemble de la suite.", 'droite')
       else

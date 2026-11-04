@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Ajoute l'animation Pose (index moteur 13) au payload normal d'un .chara PMDO.
+"""Ajoute l'animation Pose au payload normal d'un .chara PMDO.
+
+Attention aux deux indices distincts : dans le .chara, la clé du groupe est
+le FrameType global du moteur (Pose = 50 dans GFXParams.xml), tandis que
+l'<Index> SpriteCollab (13 pour les sources Dazzling) est seulement
+l'InternalIndex conservé dans le groupe.
 
 Le conteneur et toutes ses autres formes/animations sont conservés.  La
 méthode suit RogueEssence.Content.CharSheet.Import pour AnimData.xml :
@@ -20,6 +25,9 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fusionner_conteneurs_pmd import load_container, node_at, read_node, walk, write_container, write_node
+
+POSE_FRAME_TYPE = 50  # GraphicsManager.GetAnimIndex('Pose') dans GFXParams.xml
+ANCIEN_MAUVAIS_FRAME_TYPE = 13  # Slice : ancienne Pose rangée sous la mauvaise clé
 
 
 def rd(fmt, data, pos):
@@ -135,7 +143,9 @@ def marker_offsets(offset_cell, bounds_center):
 
 def add_pose(blob, sprite_dir):
     data = parse_blob(blob)
-    if 13 in data['groups'] and data['groups'][13]['copy'] <= -1 and data['groups'][13]['seqs']:
+    if (POSE_FRAME_TYPE in data['groups']
+            and data['groups'][POSE_FRAME_TYPE]['copy'] <= -1
+            and data['groups'][POSE_FRAME_TYPE]['seqs']):
         raise ValueError('une vraie animation Pose existe déjà dans ce payload')
 
     root = ET.parse(sprite_dir / 'AnimData.xml').getroot()
@@ -218,29 +228,59 @@ def add_pose(blob, sprite_dir):
         atlas.alpha_composite(crop, (tx, ty))
         data['offsets'][tile_index] = offdata
     data['image'] = atlas
-    data['groups'][13] = {'internal': internal, 'copy': -1, 'rush': -1, 'hit': -1,
-                          'return': -1, 'seqs': sequences}
+    data['groups'][POSE_FRAME_TYPE] = {
+        'internal': internal, 'copy': -1, 'rush': -1, 'hit': -1,
+        'return': -1, 'seqs': sequences}
     return serialize_blob(data), {'frames': cols * 8, 'tuiles_ajoutees': len(additions),
                                    'atlas': atlas.size, 'tuile': (data['tw'], data['th'])}
+
+
+
+def migrate_pose(blob):
+    """Déplace l’ancienne Pose de la clé Slice (13) vers Pose (50).
+
+    L’InternalIndex SpriteCollab (13) et toutes les frames sont conservés.
+    Retourne (blob, True) si une migration a eu lieu, sinon (blob, False).
+    """
+    data = parse_blob(blob)
+    if POSE_FRAME_TYPE in data['groups']:
+        return blob, False
+    group = data['groups'].get(ANCIEN_MAUVAIS_FRAME_TYPE)
+    if group is None or group['copy'] > -1 or not group['seqs']:
+        raise ValueError('ancienne Pose introuvable sous la clé 13')
+    if group['internal'] != ANCIEN_MAUVAIS_FRAME_TYPE:
+        raise ValueError(
+            f"groupe 13 inattendu (InternalIndex {group['internal']}), migration refusée")
+    data['groups'][POSE_FRAME_TYPE] = data['groups'].pop(ANCIEN_MAUVAIS_FRAME_TYPE)
+    return serialize_blob(data), True
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--chara', type=Path, required=True)
-    ap.add_argument('--sprites', type=Path, required=True)
+    ap.add_argument('--sprites', type=Path)
+    ap.add_argument('--migrer', action='store_true',
+                    help='déplacer une ancienne Pose de la clé 13 vers la clé 50')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
 
     container = load_container(args.chara, 'Chara')
     if container.payload is None:
         raise ValueError('payload normal absent à la racine du conteneur')
-    new_payload, info = add_pose(container.payload, args.sprites)
+    if args.migrer:
+        new_payload, migre = migrate_pose(container.payload)
+        info = {'migré': migre}
+    else:
+        if args.sprites is None:
+            ap.error('--sprites est requis sans --migrer')
+        new_payload, info = add_pose(container.payload, args.sprites)
     container.payload = new_payload
     args.out.parent.mkdir(parents=True, exist_ok=True)
     write_container(args.out, container)
     reloaded = load_container(args.out, 'Chara')
     parsed = parse_blob(reloaded.payload)
-    assert 13 in parsed['groups'] and len(parsed['groups'][13]['seqs']) == 8
+    assert POSE_FRAME_TYPE in parsed['groups']
+    assert len(parsed['groups'][POSE_FRAME_TYPE]['seqs']) == 8
     print(args.out, info, 'groupes', sorted(parsed['groups']))
 
 
