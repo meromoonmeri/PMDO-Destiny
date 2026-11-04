@@ -211,17 +211,18 @@ assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jou
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 # Le héros ne fixe plus le partenaire pendant l’altercation : avant chaque
 # réplique d’une Dazzling, il se tourne vers celle qui parle. Il ne revient
-# vers le partenaire que pour les cinq réponses de celui-ci dans l’échange.
+# vers le partenaire que pour ses réponses (5 dans l’échange Dazzling,
+# plus celle au facteur Bekipan devant la maison).
 lignes_cliff_jour = cliff_jour.splitlines()
 regards_vers_dazzling = 0
 for numero, ligne in enumerate(lignes_cliff_jour):
     texte_ligne = ligne.strip()
-    for locutrice in ('adagio', 'Aria', 'Sonata'):
+    for locutrice in ('adagio', 'Aria', 'sonata'):
         if texte_ligne.startswith(f'say({locutrice},'):
             assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
             regards_vers_dazzling += 1
 assert regards_vers_dazzling == 26
-assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 5
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 6
 assert '{hero, sonata' not in cliff_jour and '{ hero, sonata' not in cliff_jour
 # Issues du combat : en victoire, le trio détale en évitant le duo et Sonata
 # court en dernière ; en défaite, Tsareena humilie le duo après la poussée,

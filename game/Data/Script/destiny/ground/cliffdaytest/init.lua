@@ -453,8 +453,8 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.", 'droite')
   hero_regarde_locuteur(hero, partner)
   say(partner, 'Determined', "On a traversé les [color=#69D98C]Bois Perdus[color]. Deux fois.", 'standard')
-  hero_regarde_locuteur(hero, Aria)
   -- Special0 : le portrait personnalisé de Aria, regard sournois de côté.
+  hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Special0', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
   -- Aria cherche Sonata du regard pour partager sa pique, puis Sonata rit
   -- au sol (glowing sans SFX) avant de répondre au duo.
