@@ -37,22 +37,22 @@ def md5(path: Path) -> str:
 assert unpack_payload.PAYLOADS == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b',
-        263169765,
+        'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f',
+        263169912,
     )
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 263169765
-assert sha256(MAP) == '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b'
+assert MAP.stat().st_size == 263169912
+assert sha256(MAP) == 'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 263169765
-assert h.hexdigest() == '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b'
+assert size == 263169912
+assert h.hexdigest() == 'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -66,6 +66,8 @@ with MAP.open('rb') as f:
             return len(re.findall(pattern, mm))
 
         assert count_mm(rb'"Tiles":\s*\[') == 37
+        assert count_mm(rb'"EdgeView":1') == 1
+        assert count_mm(rb'"EdgeView":0') == 0
         assert count_mm(rb'"AssetName":\s*"WaterfallVillageCapital"') == 1
         for ent in (b'Kecleon', b'Kecleon_Violet', b'Kangourex', b'Drifloon', b'entrance', b'entrance_partner'):
             assert count_mm(rb'"EntName":\s*"' + ent + b'"') == 1, ent
@@ -78,9 +80,9 @@ assert {
     'Destiny_River_Filaments',
     'FORGE',
     'Ledian_Dojo_Objects',
-    'Metano_Inn_Floor_Decor',
+    'Reverie_Inn_Floor_Decor',
     'Metano_Town_Animated',
-    'Metano_Town_Normal_Home_Objects',
+    'Reverie_Town_Normal_Home_Objects',
     'kioskspinda',
     'tile_0021',
 } <= sheets

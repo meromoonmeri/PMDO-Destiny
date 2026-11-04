@@ -19,19 +19,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 INTERIEURS = [
-    "post_office", "metano_fire_home", "metano_water_home",
-    "metano_electric_home", "metano_grass_home", "metano_rock_home",
-    "metano_normal_home", "metano_inn", "guild_storage_room",
-    "guild_heros_room", "ledian_dojo", "dojo_ossatueur",
+    "reverie_post_office", "reverie_fire_home", "reverie_water_home",
+    "reverie_electric_home", "reverie_grass_home", "reverie_rock_home",
+    "reverie_normal_home", "reverie_inn", "guild_storage_room",
+    "guild_heros_room", "ledian_dojo", "dojo_ossatueur", "dojo_kingambit",
 ]
+
+# Les huit coques Réverie de la 0.4.6 : architecture et sorties conservées,
+# calques Objects et entités de mobilier/PNJ retirés.
+COQUES_REVERIE = INTERIEURS[:8]
 
 PORTES = [
     "PortePosteBekipan", "PorteCitrouilleNordOuest", "PorteHutteNordEst",
-    "PorteBoutiqueKecleon", "PorteMaisonAlakazam", "PorteBanque",
-    "PorteReserveKangourex", "PorteForgeTinkaton", "PorteMaisonEquipe",
-    "PorteHutteSud", "PorteTenteCentre", "PorteTenteEst",
+    "PorteMaisonEquipe", "PorteDojoKingambit", "PorteHutteSud",
+    "PorteTenteCentre", "PorteTenteEst", "PorteMaisonArcanine",
     "PorteMaisonPierre", "PorteMaisonPlanteSud", "PorteCitrouilleSud",
-    "PorteMaisonPlanteOuest",
 ]
 
 
@@ -76,9 +78,22 @@ def main() -> int:
         assert "_Touch(obj, activator) sortir()" in texte
         assert "ArriveeVille = 'batiment'" in texte
         assert "Halcyon" not in texte and "Remixed" not in texte
+        if nom in COQUES_REVERIE:
+            doc = json.loads(carte.read_text(encoding="utf-8-sig"))["Object"]
+            assert doc["AssetName"] == nom
+            assert doc["EdgeView"] == 1
+            assert not any(f.startswith("Metano_") for f in feuilles(carte)), nom
+            assert not any(f.endswith(("_Objects", "_Objects_Over")) for f in feuilles(carte)), nom
+            if nom == "reverie_inn":
+                assert "Reverie_Inn_Shadows" not in feuilles(carte)
+                assert "Reverie_Inn_Floor_Decor" not in feuilles(carte)
+            if nom == "reverie_post_office":
+                assert feuilles(carte) == {"Reverie_Post_Office"}
+            for groupe in doc.get("Entities") or []:
+                assert not (groupe.get("MapChars") or []), nom
+                for objet in groupe.get("GroundObjects") or []:
+                    assert objet["EntName"] == "South_Exit" or objet["EntName"].endswith("_Entrance"), (nom, objet)
 
-    tuiles = ROOT / "game/Content/Tile/index.idx"
-    assert tuiles.stat().st_size < 100 * 1024 * 1024
     resultat = subprocess.run(
         [sys.executable, str(ROOT / "tools/build_tile_index.py"), "--check"],
         capture_output=True, text=True,

@@ -92,6 +92,11 @@ assert 'droite = {256, 132, true}' in cinematique
 assert 'function cinematique.TournerGroupe' in cinematique
 assert 'function cinematique.RegarderGroupe' in cinematique
 assert 'GAME:WaitFrames(frames or 20)' in cinematique
+# « Shock » n'existe pas dans les émotions de portrait PMDO : sans cet
+# alias, SetSpeakerEmotion produit l'index -1 et SpeakerPortrait.Draw
+# échoue à chaque frame. L'équivalent canonique est « Surprised ».
+assert "Shock = 'Surprised'" in cinematique
+assert 'UI:SetSpeakerEmotion(emotion_portrait(emotion), reverse)' in cinematique
 scene = (GAME / 'Data/Script/destiny/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
 assert 'SOUND:PlayBGM' not in scene
 assert 'GROUND:MoveToPosition(partenaire' in scene
@@ -121,15 +126,47 @@ assert "MRKR('reveil')" in reveil and "MRKR('entrance')" in reveil
 assert 'points_scene()' in reveil and 'Un jour, je ferai la carte de cette montagne !' in reveil
 # Viewport 320×240 : ouverture Y=136 et panorama Y=152 pour garder lune,
 # sommet et mer dans le cadre, avec des travelings rejoints explicitement.
-# Les dialogues utilisent Y=200 (pieds écran 160) ; l'entrée sud passe
-# temporairement en Blank pour placer le partenaire à 168 au lieu de 224,
-# puis le panorama descend de 40 px avant les pensées face au reflet.
+# Les dialogues utilisent Y=200 (pieds écran 160). La prairie reste en
+# Clamp : entrée silencieuse jusqu’à y=504 dans le cadre sud maximal
+# (392, 456), souffle sans respiration artificielle, puis travelling de
+# 168 frames vers (384, 288).
 assert 'camera_ouverture_y = point_reveil.Position.Y - 104' in reveil
 assert 'camera_panorama_y = point_reveil.Position.Y - 88' in reveil
 assert 'camera_approche_y = point_reveil.Position.Y + 48' in reveil
 assert 'camera_y = point_reveil.Position.Y - 40' in reveil
-assert 'camera_entree_y = entree.Position.Y - 48' in reveil
-assert 'ScrollEdge.Blank' in reveil and 'ScrollEdge.Clamp' in reveil
+assert 'camera_entree_y = 456' in reveil
+assert 'entree_dialogue_y = entree.Position.Y - 56' in reveil
+assert 'ScrollEdge.Blank' not in reveil and 'ScrollEdge.Clamp' in reveil
+assert 'regler_bord_camera' not in reveil
+assert reveil.count('map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp') == 2
+assert 'points.camera_approche_y, 168' in reveil
+assert "geste_partenaire('souffle', false)" in reveil
+assert reveil.index('points.entree_dialogue_y') < reveil.index("geste_partenaire('souffle', false)") \
+    < reveil.index('Ouf… je suis sorti')
+assert 'penser("Shock"' not in reveil
+assert 'penser("Surprised", "Je… je suis un Pokémon ?!")' in reveil
+# Respiration paramétrable, oui/non à 45°, balayage fluide, notice et
+# gestes combinés : aucun des anciens temps morts ciblés ne subsiste.
+assert 'local function hero_geste(hero, geste, respirer)' in reveil
+assert 'local function partenaire_geste(partenaire, geste, respirer)' in reveil
+assert reveil.count('if respirer ~= false then cinematique.Respirer(20) end') == 2
+assert 'Direction.UpRight' in reveil and 'Direction.DownRight' in reveil
+assert "geste('question', false)" in reveil
+assert "geste('idle')" not in reveil and "geste('surpris')" not in reveil
+assert reveil.count("geste('oui_inquiet')") == 2
+assert reveil.count("geste('notice')") == 2
+assert "GROUND:CharSetAnim(hero, 'Wake', false)" not in reveil
+assert 'local function decouvrir_reflet()' in reveil
+assert 'local function montrer_reflet()' in reveil
+assert 'local function regarder_montagne_ensemble()' in reveil
+assert 'local function acceptation_parallele()' in reveil
+assert 'cinematique.NomColore(nom_partenaire' not in reveil
+assert 'cinematique.NomColore(nom_heros' not in reveil
+assert '"Je m’appelle " .. nom_partenaire .. " !"' in reveil
+assert 'points.vue_x - 12' not in reveil
+_pose = reveil[reveil.index('local pose_tenue = commencer_pose(partner)'):]
+assert _pose.index('Un jour, je ferai la carte de cette montagne !') \
+    < _pose.index('Je veux devenir explorateur.') < _pose.index('terminer_pose(partner)')
 assert 'points.camera_panorama_y + 40' in reveil
 assert 'TASK:BranchCoroutine' in reveil and 'TASK:JoinCoroutines' in reveil
 assert "require 'destiny.cinematique'" in reveil
@@ -219,16 +256,31 @@ assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
 assert "require 'destiny.cinematique'" in cliff_jour
 assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
 assert 'GAME:MoveCamera(800, 468, 80, false)' in cliff_jour
-# Cadrages de dialogue au bord sud : Blank pendant les cinématiques, puis
-# centres 688/700/712/720 pour garder tous les pieds au-dessus du texte.
-assert 'ScrollEdge.Blank' in cliff_jour and 'ScrollEdge.Clamp' in cliff_jour
-assert 'GAME:MoveCamera(720, 688, 190, false)' in cliff_jour
-assert 'GAME:MoveCamera(720, 688, 1, false)' in cliff_jour
-assert 'GAME:MoveCamera(720, 712, 60, false)' in cliff_jour
-assert 'GAME:MoveCamera(720, 700, 140, false)' in cliff_jour
-assert 'GAME:MoveCamera(724, 720, 300, false)' in cliff_jour
-assert 'GAME:MoveCamera(720, 672' not in cliff_jour
-assert 'GROUND:MoveToPosition(sonata, 736, 700, false, 1.5)' in cliff_jour
+# Cadrage de dialogue permanent en Clamp : centre sud réel (720, 672),
+# trio à y=688 et duo à y=716, donc pieds écran 136/164 au-dessus du texte.
+assert 'ScrollEdge.Blank' not in cliff_jour and 'ScrollEdge.Clamp' in cliff_jour
+assert 'map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp' in cliff_jour
+assert 'autoriser_camera_cinematique_sud' not in cliff_jour
+assert 'retablir_camera_carte' not in cliff_jour
+assert "say(sonata, 'Shock'" not in cliff_jour
+assert cliff_jour.count("say(sonata, 'Surprised'") == 2
+assert 'GAME:MoveCamera(720, 672, 190, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672, 1, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672, 300, false)' in cliff_jour
+for ancien_centre in ('GAME:MoveCamera(720, 688', 'GAME:MoveCamera(720, 700',
+                      'GAME:MoveCamera(720, 712', 'GAME:MoveCamera(724, 720',
+                      'GAME:MoveCamera(696, 736', 'GAME:MoveCamera(680, 744'):
+    assert ancien_centre not in cliff_jour
+# Bifurcation après le point commun (713, 634), sans convergence du trio.
+assert 'GROUND:MoveToPosition(adagio, 713, 676, false, 1.5)' in cliff_jour
+assert 'GROUND:MoveToPosition(Aria, 700, 668, false, 1.5)' in cliff_jour
+assert 'GROUND:MoveToPosition(sonata, 726, 668, false, 1.5)' in cliff_jour
+assert 'GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)' in cliff_jour
+# Surnoms dynamiques blancs ; seuls les prénoms fixes Dazzling sont colorés.
+assert 'return membre.Nickname' in cliff_jour
+assert 'cinematique.NomColore(membre.Nickname' not in cliff_jour
+for prenom, espece in (('Adagio', 'tsareena'), ('Aria', 'mawile'), ('Sonata', 'lopunny')):
+    assert f"cinematique.NomColore('{prenom}', '{espece}')" in cliff_jour
 assert 'poser_dazzling(sonata, false)' in cliff_jour
 assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
 assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
@@ -237,9 +289,8 @@ assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jou
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 # Le héros ne fixe plus le partenaire pendant l’altercation : avant chaque
 # réplique d’une Dazzling, il se tourne vers celle qui parle. Il ne revient
-# vers le partenaire que pour ses réponses (5 dans l’échange Dazzling,
-# plus celle au facteur Bekipan devant la maison, plus sa colère après la
-# bousculade de la sortie en défaite).
+# vers le partenaire que pour ses réponses (échange Dazzling, facteur
+# Bekipan, gag commun des deux branches et colère après la bousculade).
 lignes_cliff_jour = cliff_jour.splitlines()
 regards_vers_dazzling = 0
 for numero, ligne in enumerate(lignes_cliff_jour):
@@ -248,19 +299,29 @@ for numero, ligne in enumerate(lignes_cliff_jour):
         if texte_ligne.startswith(f'say({locutrice},'):
             assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
             regards_vers_dazzling += 1
-assert regards_vers_dazzling == 26
-assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 7
-assert '{hero, sonata' not in cliff_jour and '{ hero, sonata' not in cliff_jour
-# Issues du combat : en victoire, le trio détale en évitant le duo et Sonata
-# court en dernière ; en défaite, Tsareena humilie le duo après la poussée,
-# Sonata approuve, Aria lâche son insulte, puis Sonata part encore en dernière.
-assert 'Eh ! Attendez-moi, les filles ! Aaanh !' in cliff_jour
+assert regards_vers_dazzling == 27
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 9
+assert '{hero, sonata, 5, 4}' in cliff_jour
+# Issues du combat : Adagio part, Aria suit à +12 frames, puis Sonata
+# joue le même gag dans les deux branches avec des répliques adaptées.
+assert 'Eh ! Attendez-moi, les filles ! Aaanh !' not in cliff_jour
+assert 'Mais attendez !' not in cliff_jour
+assert 'Ouaiiiiiis… bande de veinards !' in cliff_jour
+assert 'Ouaiiiiiis les looser !' in cliff_jour
+assert 'ANNNNNNNNNNH ATTENDEZ MOI LES FILLES' in cliff_jour
 assert 'Bande de losers !' in cliff_jour
 assert 'C’est clair !' in cliff_jour and 'Ouais, aanh !' in cliff_jour
-assert 'Mais attendez !' in cliff_jour
-assert cliff_jour.index('Bande de losers !') < cliff_jour.index('Mais attendez !')
 assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
-assert cliff_jour.count("GROUND:Hide('Sonata')") == 2
+_gag = cliff_jour[cliff_jour.index('local function gag_depart_sonata'):
+                  cliff_jour.index('-- Les surnoms choisis par le joueur')]
+assert _gag.count("anim(sonata, 'Hop', false)") == 2
+assert _gag.count("SOUND:PlayBattleSE('EVT_Emote_Sweatdrop')") == 1
+assert _gag.count("GROUND:CharSetEmote(hero, 'sweatdrop', 1)") == 1
+assert _gag.count("GROUND:CharSetEmote(partner, 'sweatdrop', 1)") == 1
+assert 'EVT_Emote_Startled' in _gag
+assert cliff_jour.count('gag_depart_sonata(hero, partner, sonata, true)') == 1
+assert cliff_jour.count('gag_depart_sonata(hero, partner, sonata, false)') == 1
+assert cliff_jour.count("GROUND:Hide('Sonata')") == 1
 # Aria n’utilise que des portraits canoniques : quand elle se moque
 # du héros et du partenaire, c’est Joyous. Aucune émotion de portrait 14
 # ne subsiste dans le payload racine de 303.portrait, et le portrait
@@ -271,6 +332,13 @@ assert "say(Aria, 'Joyous', \"Bande de losers !\"" in cliff_jour
 assert "GetAnimIndex('Special0')" in cliff_jour
 assert 'moquer_trio(adagio, Aria, sonata)' in cliff_jour
 assert 'finir_moquerie_trio(adagio, Aria, sonata)' in cliff_jour
+assert 'local function cascade_moquerie_Aria_adagio' in cliff_jour
+_rencontre = cliff_jour[cliff_jour.index('function cliffdaytest.RencontreTeamDazzling'):
+                        cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite')]
+assert _rencontre.index('problème d’orientation') \
+    < _rencontre.index('cascade_moquerie_Aria_adagio(adagio, Aria)') \
+    < _rencontre.index("cinematique.Emote(sonata, 'happy')") \
+    < _rencontre.index('Moi, je trouve ça mignon')
 sys.path.insert(0, str(ROOT / 'tools'))
 from fusionner_conteneurs_pmd import load_container as _charger_conteneur
 from fusionner_conteneurs_pmd import read as _lire_binaire
@@ -288,20 +356,28 @@ assert all(_emotion != 14 for _emotion, _cell, _flip in _frames)
 assert not (ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').exists()
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
-for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',
-                    '684, 736', '764, 736', '668, 744', '764, 744', '692, 744',
-                    '713, 676', 'sud.Position.X'):
+for coordonnees in ('688, 688', '712, 688', '736, 688', '712, 716', '736, 716',
+                    '684, 720', '764, 720', '668, 728', '764, 728', '692, 728',
+                    '700, 668', '726, 668', '713, 676', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
 assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
 sortie_defaite = cliff_jour[cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite'):cliff_jour.index('function cliffdaytest.ApresCombatTeamDazzling')]
 assert 'colonne' not in sortie_defaite
-for avance in ('GROUND:MoveToPosition(Aria, 688, 716, false, 1)',
+for avance in ('GROUND:MoveToPosition(Aria, 688, 704, false, 1)',
+               'GROUND:MoveToPosition(adagio, 712, 704, false, 1)',
+               'GROUND:MoveToPosition(sonata, 736, 704, false, 1)',
+               'GROUND:MoveToPosition(Aria, 688, 716, false, 1)',
                'GROUND:MoveToPosition(adagio, 712, 716, false, 1)',
                'GROUND:MoveToPosition(sonata, 736, 716, false, 1)',
-               'sud.Position.Y + 38, false, 2)',
-               'sud.Position.Y + 38, false, 2.5)'):
+               'GROUND:MoveToPosition(adagio, 736, 800, false, 2)',
+               'GROUND:MoveToPosition(Aria, 712, 800, false, 2)',
+               'gag_depart_sonata(hero, partner, sonata, false)'):
     assert avance in sortie_defaite
+assert sortie_defaite.index('Bande de losers !') \
+    < sortie_defaite.index('cascade_moquerie_Aria_adagio(adagio, Aria)') \
+    < sortie_defaite.index('Retenez cette leçon')
+assert "cinematique.Emote(sonata, 'happy')" not in sortie_defaite
 for nom in ('Adagio', 'Sonata', 'Aria'):
     assert f"GROUND:Hide('{nom}')" in cliff_jour
 musique_dazzling = (GAME / 'Content/Music/Team Dazzling Social.ogg').read_bytes()
@@ -430,6 +506,13 @@ musique_combat = (GAME / 'Content/Music/Dazzling Fight.ogg').read_bytes()
 assert musique_combat.startswith(b'OggS') and b'vorbis' in musique_combat
 woosh_dazzling = (GAME / 'Content/BG/Pre_Battle_Dazzling_Etoiles.dir').read_bytes()
 assert struct.unpack_from('<q', woosh_dazzling)[0] > 0
+
+for _ground_path in sorted((GAME / 'Data/Ground').glob('*.rsground')):
+    _raw = _ground_path.read_bytes()
+    assert _raw.count(b'"EdgeView"') == 1, _ground_path
+    assert b'"EdgeView":0' not in _raw and b'"EdgeView": 0' not in _raw, _ground_path
+for _lua_path in sorted((GAME / 'Data/Script/destiny').rglob('*.lua')):
+    assert 'ScrollEdge.Blank' not in _lua_path.read_text(encoding='utf-8'), _lua_path
 
 print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling (social + combat), tutoriel et statue.')
 

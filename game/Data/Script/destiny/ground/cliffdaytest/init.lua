@@ -26,24 +26,10 @@ end
 local function arreter_mer()
   SOUND:FadeOutBattleSE(SON_MER, 45)
 end
--- La carte fait 792 px de haut : avec ScrollEdge.Clamp, le centre de
--- caméra ne peut pas dépasser 672 et les personnages placés près du warp
--- sud (y=732 à 762) finissent sous la boîte de dialogue. Pendant les
--- cinématiques Destiny, Blank autorise donc les centres 688-744 déjà
--- écrits dans la mise en scène ; le peu de vide au sud tombe presque
--- entièrement derrière la boîte de texte. Clamp est rétabli à la sortie.
-local function autoriser_camera_cinematique_sud()
-  local carte = _ZONE.CurrentGround
-  if carte ~= nil then
-    carte.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Blank
-  end
-end
-local function retablir_camera_carte()
-  local carte = _ZONE.CurrentGround
-  if carte ~= nil then
-    carte.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
-  end
-end
+-- La falaise reste en ScrollEdge.Clamp en permanence. Sur cette carte de
+-- 792 px de haut, le centre sud maximal est donc y=672 ; toutes les
+-- scènes de dialogue du bas de la falaise sont mises en scène dans ce
+-- cadre réel, sans centre de caméra hors limites.
 local function personnage_dazzling(nom)
   local ch = CH(nom)
   if ch == nil then ch = GROUND:SpawnerDoSpawn(nom) end
@@ -155,6 +141,13 @@ local function finir_moquerie_trio(adagio, Aria, sonata)
   finir_moquerie_dazzling(Aria)
   finir_moquerie_dazzling(sonata)
 end
+-- Début de la cascade de ricanements : Aria rit derrière sa main, puis
+-- Adagio approuve 6 frames plus tard. Les deux glowing restent silencieux.
+local function cascade_moquerie_Aria_adagio(adagio, Aria)
+  cinematique.Emote(Aria, 'glowing')
+  GAME:WaitFrames(6)
+  cinematique.Emote(adagio, 'glowing')
+end
 
 -- Fight Woosh étoilé Team Dazzling : overlay plein écran 320×240, indépendant
 -- de la carte. On démarre à la frame 12 (première traversée des étoiles) ;
@@ -209,10 +202,67 @@ local function se_faire_face(premier, second)
   })
 end
 
+-- Gag commun du départ Dazzling : Adagio et Aria sont déjà parties,
+-- Sonata lance une dernière pique adaptée à l’issue du combat, comprend
+-- qu’elle est seule, sautille deux fois pendant que le duo transpire en
+-- silence gêné, puis court au sud en toute dernière.
+local function gag_depart_sonata(hero, partner, sonata, victoire)
+  cinematique.RegarderGroupe({
+    {partner, sonata, 0, 4},
+    {hero, sonata, 5, 4},
+  })
+  if victoire then
+    hero_regarde_locuteur(hero, sonata)
+    say(sonata, 'Joyous', "Ouaiiiiiis… bande de veinards !", 'droite')
+    hero_regarde_locuteur(hero, partner)
+    say(partner, 'Happy', "Euh… Sonata ? Elles sont déjà parties… et c’est nous qui avons gagné.", 'standard')
+  else
+    hero_regarde_locuteur(hero, sonata)
+    say(sonata, 'Joyous', "Ouaiiiiiis les looser !", 'droite')
+    hero_regarde_locuteur(hero, partner)
+    say(partner, 'Worried', "Euh… tu sais qu’elles sont déjà parties, hein ?", 'standard')
+  end
+
+  GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
+  hero_regarde_locuteur(hero, sonata)
+  say(sonata, 'Surprised', "ANNNNNNNNNNH ATTENDEZ MOI LES FILLES", 'droite')
+
+  local choc_sonata = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(5)
+    SOUND:PlayBattleSE('EVT_Emote_Startled')
+    GROUND:CharSetEmote(sonata, 'shock', 1)
+  end)
+  local sueur_duo = TASK:BranchCoroutine(function()
+    -- Une seule goutte sonore pour les deux réactions, déclenchées dans
+    -- la même frame au début des sautillements.
+    SOUND:PlayBattleSE('EVT_Emote_Sweatdrop')
+    GROUND:CharSetEmote(hero, 'sweatdrop', 1)
+    GROUND:CharSetEmote(partner, 'sweatdrop', 1)
+  end)
+  local sautillements = TASK:BranchCoroutine(function()
+    anim(sonata, 'Hop', false)
+    GAME:WaitFrames(24)
+    GAME:WaitFrames(4)
+    anim(sonata, 'Hop', false)
+    GAME:WaitFrames(24)
+    GROUND:CharEndAnim(sonata)
+  end)
+  TASK:JoinCoroutines({choc_sonata, sueur_duo, sautillements})
+
+  SOUND:FadeOutBGM(60)
+  local collision_sonata = sonata.CollisionDisabled
+  sonata.CollisionDisabled = true
+  GROUND:MoveToPosition(sonata, 760, 800, false, 2.5)
+  GROUND:Hide('Sonata')
+  sonata.CollisionDisabled = collision_sonata
+end
+
+-- Les surnoms choisis par le joueur restent blancs dans les phrases :
+-- seuls les prénoms fixes de PNJ (Adagio, Aria, Sonata…) sont colorés.
 local function nom_heros()
   local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(0) end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
-    return cinematique.NomColore(membre.Nickname, membre)
+    return membre.Nickname
   end
   return 'toi'
 end
@@ -220,7 +270,7 @@ end
 local function nom_partenaire()
   local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(1) end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
-    return cinematique.NomColore(membre.Nickname, membre)
+    return membre.Nickname
   end
   return 'toi'
 end
@@ -329,6 +379,11 @@ function cliffdaytest.Enter(map)
   cliffdaytest.PlotScripting()
 end
 function cliffdaytest.Exit(map)
+  -- Filet défensif : la falaise reste en Clamp, y compris si une
+  -- cinématique sud a été interrompue avant AllerEnVille.
+  if map ~= nil then
+    map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
+  end
   arreter_mer()
 end
 function cliffdaytest.Update(map) end
@@ -342,22 +397,20 @@ function cliffdaytest.AllerEnVille()
   GAME:FadeOut(false, 45)
   GAME:WaitFrames(30)
   GAME:CutsceneMode(false)
-  -- Écran déjà noir : rétablir le clamp normal sans saut de cadre visible.
-  retablir_camera_carte()
   -- Réverie Town reste une carte distincte, dans sa zone d'origine.
   GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
 end
 
 -- Première rencontre de la Team Dazzling, sur le chemin de la falaise.
--- Le duo vient de dire « on y va » au warp sud (731, 762) quand la
--- musique se coupe : trois voix « ??? » hors champ, le partenaire
--- réagit avec un « ! », le héros avec un « ? » en léger différé, et
--- le partenaire reconnaît les voix (« Ne me dis pas
--- que… »). Le duo remonte se placer en (712/736, 732) face au nord
+-- Le duo vient de dire « on y va » en (712/736, 716), dans le cadre
+-- Clamp maximal (720, 672), quand la musique se coupe : trois voix
+-- « ??? » hors champ, le partenaire réagit avec un « ! », le héros avec
+-- un « ? » en léger différé, et le partenaire reconnaît les voix. Le duo
+-- est déjà à sa place finale : il se contente de se tourner vers le nord
 -- pendant que la caméra révèle le trio sur le chemin de l’est. Le thème
--- social ne démarre qu’au moment où les filles se mettent en marche :
--- colonne le long de la ligne verte validée (à l’ouest du panneau, entre
--- l’arbre et les souches), puis éventail en (688/712/736, 700).
+-- social démarre quand les filles se mettent en marche : colonne le long
+-- de la ligne verte validée jusqu’à (713, 634), bifurcation des trois
+-- couloirs, puis éventail en (688/712/736, 688).
 function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   local est = MRKR('Dazzling_Exit_East')
   local adagio = personnage_dazzling('Adagio')
@@ -400,15 +453,8 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   se_faire_face(partner, hero)
   say(partner, 'Worried', "Ne me dis pas que…", 'standard')
 
-  -- Le duo remonte de quelques pas et se place face au nord.
-  local placement_partenaire = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(partner, 736, 732, false, 1)
-  end)
-  local placement_heros = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(6)
-    GROUND:MoveToPosition(hero, 712, 732, false, 1)
-  end)
-  TASK:JoinCoroutines({ placement_partenaire, placement_heros })
+  -- Le duo est déjà à sa place finale (712/736, 716) : simple rotation
+  -- vers le nord, partenaire d’abord, héros 5 frames plus tard.
   cinematique.TournerGroupe({
     { partner, Direction.Up, 0, 4 },
     { hero, Direction.Up, 5, 4 },
@@ -431,36 +477,42 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   local route_verte = {
     { 800, 447 }, { 709, 441 }, { 693, 462 }, { 677, 489 },
     { 665, 510 }, { 666, 544 }, { 681, 572 }, { 695, 593 },
-    { 713, 634 }, { 713, 676 },
+    { 713, 634 },
   }
   local function marcher_route_verte(fille)
     for _, etape in ipairs(route_verte) do
       GROUND:MoveToPosition(fille, etape[1], etape[2], false, 1.5)
     end
   end
+  -- Après le point commun (713, 634), chaque fille bifurque dans son
+  -- propre couloir : Adagio au centre, Aria à l’ouest, Sonata à l’est.
+  -- Elles ne convergent donc plus toutes en (713, 676) avant l’éventail.
   local entree_adagio = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(adagio, 852, 452, false, 1.5)
     marcher_route_verte(adagio)
-    GROUND:MoveToPosition(adagio, 712, 700, false, 1.5)
+    GROUND:MoveToPosition(adagio, 713, 676, false, 1.5)
+    GROUND:MoveToPosition(adagio, 712, 688, false, 1.5)
   end)
   local entree_mawhile = TASK:BranchCoroutine(function()
     GAME:WaitFrames(6)
     marcher_route_verte(Aria)
-    GROUND:MoveToPosition(Aria, 688, 700, false, 1.5)
+    GROUND:MoveToPosition(Aria, 700, 668, false, 1.5)
+    GROUND:MoveToPosition(Aria, 688, 688, false, 1.5)
   end)
   local entree_lopunny = TASK:BranchCoroutine(function()
     GAME:WaitFrames(24)
     GROUND:MoveToPosition(sonata, 884, 452, false, 1.5)
     marcher_route_verte(sonata)
-    GROUND:MoveToPosition(sonata, 736, 700, false, 1.5)
+    GROUND:MoveToPosition(sonata, 726, 668, false, 1.5)
+    GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)
   end)
   -- La caméra redescend le long du chemin puis se pose sur le face-à-face.
   local suivi_entree = TASK:BranchCoroutine(function()
     GAME:MoveCamera(690, 470, 150, false)
-    -- Cadrage de dialogue : trio à y=700 et duo à y=732. Avec un centre à
-    -- 688, leurs pieds tombent aux ordonnées écran 132 et 164, donc
-    -- entièrement au-dessus de la boîte de texte (qui commence à 188).
-    GAME:MoveCamera(720, 688, 190, false)
+    -- Cadrage Clamp maximal : trio à y=688 et duo à y=716. Avec un
+    -- centre à 672, leurs pieds tombent aux ordonnées écran 136 et 164,
+    -- donc entre les portraits et entièrement au-dessus de la boîte.
+    GAME:MoveCamera(720, 672, 190, false)
   end)
   TASK:JoinCoroutines({ entree_adagio, entree_mawhile, entree_lopunny, suivi_entree })
   cinematique.RegarderGroupe({
@@ -513,14 +565,21 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   cinematique.Respirer(10)
   hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Joyous', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
-  -- Aria relâche sa pose pour chercher Sonata du regard et partager sa
-  -- pique, puis Sonata rit au sol (glowing sans SFX) avant de répondre.
+  -- Cascade de moquerie : Aria (glowing) rit derrière sa main, Adagio
+  -- (glowing) approuve 6 frames plus tard, puis à +20 frames Aria se
+  -- tourne vers Sonata pendant que celle-ci éclate en happy. Aucun SFX.
   cinematique.Respirer(10)
-  finir_moquerie_dazzling(Aria)
-  GROUND:CharTurnToCharAnimated(Aria, sonata, 4)
-  cinematique.Respirer(10)
-  cinematique.Emote(sonata, 'glowing')
-  cinematique.Respirer(20)
+  cascade_moquerie_Aria_adagio(adagio, Aria)
+  GAME:WaitFrames(14)
+  local relache_Aria = TASK:BranchCoroutine(function()
+    finir_moquerie_dazzling(Aria)
+    GROUND:CharTurnToCharAnimated(Aria, sonata, 4)
+  end)
+  local rire_sonata = TASK:BranchCoroutine(function()
+    cinematique.Emote(sonata, 'happy')
+  end)
+  TASK:JoinCoroutines({relache_Aria, rire_sonata})
+  GAME:WaitFrames(20)
   hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Moi, je trouve ça mignon : ils font presque équipe d’explorateurs.", 'droite')
   finir_moquerie_dazzling(sonata)
@@ -553,57 +612,50 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   lancer_combat_dazzling()
 end
 
--- Issue canonique après la défaite : le trio reste en formation, de front
--- comme au face-à-face, fonce vers le sud en bousculant le duo — le héros
--- projeté à l’ouest du chemin, le partenaire à l’est — l’humilie, puis
--- repart vite vers Réverie Town ; Sonata part encore en dernière.
+-- Issue canonique après la défaite : le trio reste en formation, avance
+-- de front de y=688 à y=704, bouscule le duo vers (668/764, 728), traverse
+-- jusqu’à y=716, l’humilie dans le cadre Clamp fixe (720, 672), puis repart
+-- vers Réverie Town ; Sonata conclut par le gag commun, en toute dernière.
 function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, Aria)
-  local sud = MRKR('Dazzling_Entry_South')
-
   -- Le trio descend de front, sans se mettre en file indienne, jusqu’au
   -- contact avec le duo qui lui barre encore le chemin.
   local avance_Aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, 688, 716, false, 1)
+    GROUND:MoveToPosition(Aria, 688, 704, false, 1)
   end)
   local avance_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, 712, 716, false, 1)
+    GROUND:MoveToPosition(adagio, 712, 704, false, 1)
   end)
   local avance_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 736, 716, false, 1)
+    GROUND:MoveToPosition(sonata, 736, 704, false, 1)
   end)
   TASK:JoinCoroutines({avance_Aria, avance_adagio, avance_sonata})
 
   SOUND:PlayBattleSE('DUN_Hit_Neutral')
   -- La bousculade : le héros est projeté à l’ouest du chemin (exclaim), le
   -- partenaire à l’est (shock), pendant que le trio traverse en formation
-  -- l’espace qu’ils occupaient et s’arrête juste au sud du face-à-face.
+  -- l’espace qu’ils occupaient et s’arrête à y=716. La caméra reste fixe
+  -- à (720, 672), le centre sud maximal réel en Clamp.
   local pousse_heros = TASK:BranchCoroutine(function()
     GROUND:CharSetEmote(hero, 'exclaim', 1)
-    GROUND:AnimateToPosition(hero, 'Hurt', Direction.Up, 668, 744, 1, 4, 0)
+    GROUND:AnimateToPosition(hero, 'Hurt', Direction.Up, 668, 728, 1, 4, 0)
     GROUND:CharEndAnim(hero)
   end)
   local pousse_partenaire = TASK:BranchCoroutine(function()
     GROUND:CharSetEmote(partner, 'shock', 1)
-    GROUND:AnimateToPosition(partner, 'Hurt', Direction.Up, 764, 744, 1, 4, 0)
+    GROUND:AnimateToPosition(partner, 'Hurt', Direction.Up, 764, 728, 1, 4, 0)
     GROUND:CharEndAnim(partner)
   end)
   local traversee_Aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, 688, 728, false, 1)
+    GROUND:MoveToPosition(Aria, 688, 716, false, 1)
   end)
   local traversee_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, 712, 728, false, 1)
+    GROUND:MoveToPosition(adagio, 712, 716, false, 1)
   end)
   local traversee_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 736, 728, false, 1)
-  end)
-  -- Pendant la bousculade, descendre le centre de caméra à 712 : le trio
-  -- (y=728) et le duo projeté (y=744) auront leurs pieds aux ordonnées
-  -- écran 136 et 152 pendant l'humiliation, loin de la boîte de texte.
-  local recadrage_humiliation = TASK:BranchCoroutine(function()
-    GAME:MoveCamera(720, 712, 60, false)
+    GROUND:MoveToPosition(sonata, 736, 716, false, 1)
   end)
   TASK:JoinCoroutines({pousse_heros, pousse_partenaire, traversee_Aria,
-    traversee_adagio, traversee_sonata, recadrage_humiliation})
+    traversee_adagio, traversee_sonata})
   cinematique.Respirer(15)
 
   -- Après la bousculade, Adagio humilie le duo écarté des deux côtés du
@@ -627,6 +679,10 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   say(sonata, 'Joyous', "C’est clair !", 'droite')
   hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Joyous', "Bande de losers !", 'droite')
+  -- Reprise limitée de la cascade : Aria puis Adagio en glowing
+  -- silencieux ; Sonata garde son grand moment pour le départ.
+  cascade_moquerie_Aria_adagio(adagio, Aria)
+  GAME:WaitFrames(20)
   hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Normal', "Retenez cette leçon, les microbes : on ne barre pas la route à la [color=#FF9FD8]Team Dazzling[color].", 'droite')
   hero_regarde_locuteur(hero, sonata)
@@ -634,20 +690,21 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   finir_moquerie_trio(adagio, Aria, sonata)
   cinematique.Respirer(10)
 
-  -- Départ rapide, toujours de front : Aria et Adagio filent au sud
-  -- entre le héros et le partenaire écartés ; Sonata traîne encore.
+  -- Départs dans l’ordre validé : Adagio d’abord, Aria 12 frames plus
+  -- tard, Sonata reste seule en (736, 716) pour le gag commun.
   cinematique.TournerGroupe({
     {adagio, Direction.Down, 0, 4},
     {Aria, Direction.Down, 3, 4},
     {sonata, Direction.Down, 6, 4},
   })
-  local sortie_Aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 2)
-    GROUND:Hide('Aria')
-  end)
   local sortie_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, sud.Position.X + 5, sud.Position.Y + 38, false, 2)
+    GROUND:MoveToPosition(adagio, 736, 800, false, 2)
     GROUND:Hide('Adagio')
+  end)
+  local sortie_Aria = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(12)
+    GROUND:MoveToPosition(Aria, 712, 800, false, 2)
+    GROUND:Hide('Aria')
   end)
   local regard_partenaire = TASK:BranchCoroutine(function()
     GAME:WaitFrames(30)
@@ -657,33 +714,19 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
     GAME:WaitFrames(35)
     GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
   end)
-  local suivi_sortie = TASK:BranchCoroutine(function()
-    -- Garder le cadre de l'humiliation : Sonata (y=728) et le duo (y=744)
-    -- restent visibles pendant son « Mais attendez ! ».
-    GAME:MoveCamera(720, 712, 140, false)
-  end)
-  TASK:JoinCoroutines({sortie_Aria, sortie_adagio,
-    regard_partenaire, regard_heros, suivi_sortie})
+  TASK:JoinCoroutines({sortie_adagio, sortie_Aria,
+    regard_partenaire, regard_heros})
 
-  -- Sonata, laissée toute seule, regarde vers les filles déjà parties au sud
-  -- avant de détaler à son tour, en courant, en toute dernière.
-  GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
-  cinematique.Emote(sonata, 'sweating')
-  cinematique.Respirer(10)
-  hero_regarde_locuteur(hero, sonata)
-  say(sonata, 'Worried', "Mais attendez !", 'droite')
-  SOUND:FadeOutBGM(60)
-  GROUND:MoveToPosition(sonata, sud.Position.X + 29, sud.Position.Y + 38, false, 2.5)
-  GROUND:Hide('Sonata')
+  gag_depart_sonata(hero, partner, sonata, false)
 
   SV.Destiny.TeamDazzlingRencontree = true
 
   SOUND:PlayBGM('Cliff Camp.ogg', true)
-  GAME:MoveCamera(680, 744, 60, false)
+  -- Caméra toujours fixe à (720, 672) : aucun recadrage après le gag.
   hero_regarde_locuteur(hero, partner)
   say(partner, 'Angry', "Non mais je rêve ! Elles nous ont bousculés comme si le chemin leur appartenait !", 'standard')
   -- Le partenaire, projeté à l’est du chemin, revient près du héros.
-  GROUND:MoveToPosition(partner, 692, 744, false, 1.5)
+  GROUND:MoveToPosition(partner, 692, 728, false, 1.5)
   cinematique.RegarderGroupe({
     {partner, hero, 0, 4},
     {hero, partner, 5, 4},
@@ -692,14 +735,12 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   say(partner, 'Worried', "La [color=#FF9FD8]Team Dazzling[color]… Brillantes, peut-être. Aimables, sûrement pas.", 'droite')
 end
 
-
 -- Reprise au retour du segment de combat. Les cinq acteurs sont replacés sur
--- les pixels exacts du face-à-face bas : Aria (688,700), Adagio (712,700)
--- et Sonata (736,700) au nord ; héros (712,732) et partenaire (736,732)
--- au sud, comme sur la .rsmap (tuiles (28-30,29) contre (29-30,30)).
+-- le face-à-face Clamp : Aria (688,688), Adagio (712,688) et Sonata
+-- (736,688) au nord ; héros (712,716) et partenaire (736,716) au sud.
 function cliffdaytest.ApresCombatTeamDazzling()
   local hero = CH('PLAYER')
-  local partner = equipe_scene.Partenaire(736, 732, Direction.Up)
+  local partner = equipe_scene.Partenaire(736, 716, Direction.Up)
   local adagio = personnage_dazzling('Adagio')
   local sonata = personnage_dazzling('Sonata')
   local Aria = personnage_dazzling('Aria')
@@ -716,18 +757,17 @@ function cliffdaytest.ApresCombatTeamDazzling()
   end
 
   GAME:CutsceneMode(true)
-  autoriser_camera_cinematique_sud()
   UI:ResetSpeaker()
   AI:DisableCharacterAI(partner)
   hero.CollisionDisabled = true
-  GROUND:TeleportTo(hero, 712, 732, Direction.Up)
-  GROUND:TeleportTo(partner, 736, 732, Direction.Up)
-  GROUND:TeleportTo(adagio, 712, 700, Direction.Down)
-  GROUND:TeleportTo(Aria, 688, 700, Direction.Down)
-  GROUND:TeleportTo(sonata, 736, 700, Direction.Down)
-  -- Même cadre de dialogue que la rencontre : pieds écran 132 (trio) et
+  GROUND:TeleportTo(hero, 712, 716, Direction.Up)
+  GROUND:TeleportTo(partner, 736, 716, Direction.Up)
+  GROUND:TeleportTo(adagio, 712, 688, Direction.Down)
+  GROUND:TeleportTo(Aria, 688, 688, Direction.Down)
+  GROUND:TeleportTo(sonata, 736, 688, Direction.Down)
+  -- Même cadre Clamp que la rencontre : pieds écran 136 (trio) et
   -- 164 (duo), au-dessus de la boîte de texte.
-  GAME:MoveCamera(720, 688, 1, false)
+  GAME:MoveCamera(720, 672, 1, false)
   SOUND:PlayBGM(MUSIQUE_DAZZLING_SOCIALE, true)
   GAME:FadeIn(30)
   cinematique.Respirer(20)
@@ -738,7 +778,7 @@ function cliffdaytest.ApresCombatTeamDazzling()
     GROUND:CharSetEmote(Aria, 'sweating', 1)
     cinematique.Respirer(20)
     hero_regarde_locuteur(hero, sonata)
-    say(sonata, 'Shock', "Aïe… Non mais… on a perdu ?!", 'droite')
+    say(sonata, 'Surprised', "Aïe… Non mais… on a perdu ?!", 'droite')
     hero_regarde_locuteur(hero, Aria)
     say(Aria, 'Worried', "Contre eux ? C’est ridicule…", 'droite')
     GROUND:CharSetEmote(adagio, 'shock', 1)
@@ -753,10 +793,10 @@ function cliffdaytest.ApresCombatTeamDazzling()
 
     -- Le duo libère le chemin de lui-même, sans être poussé.
     local pas_partenaire = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(partner, 764, 736, false, 1)
+      GROUND:MoveToPosition(partner, 764, 720, false, 1)
     end)
     local pas_heros = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(hero, 684, 736, false, 1)
+      GROUND:MoveToPosition(hero, 684, 720, false, 1)
     end)
     TASK:JoinCoroutines({pas_partenaire, pas_heros})
     cinematique.RegarderGroupe({
@@ -776,35 +816,33 @@ function cliffdaytest.ApresCombatTeamDazzling()
       if sud ~= nil then return sud.Position.X + dx, sud.Position.Y + 38 end
       return point.Position.X + 23 + dx, point.Position.Y + 42
     end
-    -- Sortie en couloirs parallèles, comme après une défaite : chacune
-    -- descend dans sa propre colonne jusqu'à y=716, puis file au sud.
-    -- L'ancien tracé de victoire faisait converger Aria et Adagio vers
-    -- x=736 avant de se croiser, pendant que Sonata reculait au nord dans
-    -- la même colonne : les actrices se bloquaient entre elles et la
-    -- cinématique pouvait rester figée après une victoire.
+    -- Sortie en couloirs parallèles, dans l’ordre Adagio -> Aria ->
+    -- Sonata : les deux premières descendent d’abord à y=704, puis filent
+    -- au sud dans leurs propres couloirs. Sonata avance seulement à y=704
+    -- et reste pour le gag commun.
     partner.CollisionDisabled = true
     adagio.CollisionDisabled = true
     Aria.CollisionDisabled = true
     sonata.CollisionDisabled = true
-    local depart_Aria = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(Aria, 688, 716, false, 2)
-      local x, y = sortie_sud(-19)
-      GROUND:MoveToPosition(Aria, x, y, false, 2)
-      Aria.CollisionDisabled = false
-      GROUND:Hide('Aria')
-    end)
     local depart_adagio = TASK:BranchCoroutine(function()
-      GAME:WaitFrames(8)
-      GROUND:MoveToPosition(adagio, 712, 716, false, 2)
+      GROUND:MoveToPosition(adagio, 712, 704, false, 2)
       local x, y = sortie_sud(5)
       GROUND:MoveToPosition(adagio, x, y, false, 2)
       adagio.CollisionDisabled = false
       GROUND:Hide('Adagio')
     end)
+    local depart_Aria = TASK:BranchCoroutine(function()
+      GAME:WaitFrames(12)
+      GROUND:MoveToPosition(Aria, 688, 704, false, 2)
+      local x, y = sortie_sud(-19)
+      GROUND:MoveToPosition(Aria, x, y, false, 2)
+      Aria.CollisionDisabled = false
+      GROUND:Hide('Aria')
+    end)
     -- Sonata avance d'un pas dans sa colonne puis s'arrête : laissée
-    -- derrière, elle ne détalera qu'après sa réplique, en toute dernière.
+    -- derrière, elle ne détalera qu'après le gag commun, en toute dernière.
     local attente_sonata = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(sonata, 736, 716, false, 1)
+      GROUND:MoveToPosition(sonata, 736, 704, false, 1)
     end)
     local regard_partenaire = TASK:BranchCoroutine(function()
       GAME:WaitFrames(45)
@@ -814,31 +852,16 @@ function cliffdaytest.ApresCombatTeamDazzling()
       GAME:WaitFrames(50)
       GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
     end)
-    local suivi_sortie = TASK:BranchCoroutine(function()
-      -- Sonata s'arrête à y=716 et le duo écarté à y=736 : centre 700 =>
-      -- pieds écran 136 et 156 pendant sa réplique.
-      GAME:MoveCamera(720, 700, 140, false)
-    end)
-    TASK:JoinCoroutines({depart_Aria, depart_adagio, attente_sonata,
-      regard_partenaire, regard_heros, suivi_sortie})
+    TASK:JoinCoroutines({depart_adagio, depart_Aria, attente_sonata,
+      regard_partenaire, regard_heros})
 
-    -- Laissée derrière, Sonata appelle les filles vers le sud, puis détale
-    -- en courant, en toute dernière.
-    GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
-    cinematique.Emote(sonata, 'sweating')
-    cinematique.Respirer(10)
-    hero_regarde_locuteur(hero, sonata)
-    say(sonata, 'Shock', "Eh ! Attendez-moi, les filles ! Aaanh !", 'droite')
-    SOUND:FadeOutBGM(60)
-    local x_sonata, y_sonata = sortie_sud(29)
-    GROUND:MoveToPosition(sonata, x_sonata, y_sonata, false, 2.5)
+    gag_depart_sonata(hero, partner, sonata, true)
     sonata.CollisionDisabled = false
     partner.CollisionDisabled = false
-    GROUND:Hide('Sonata')
 
     SV.Destiny.TeamDazzlingRencontree = true
     SOUND:PlayBGM('Cliff Camp.ogg', true)
-    GAME:MoveCamera(696, 736, 60, false)
+    -- La conclusion reste dans le même cadre fixe (720, 672).
     se_faire_face(partner, hero)
     cinematique.Respirer(20)
     say(partner, 'Joyous', "On l’a fait… On a vraiment tenu tête à la [color=#FF9FD8]Team Dazzling[color] !", 'standard')
@@ -917,7 +940,6 @@ function cliffdaytest.SceneArriveeDestiny()
   end
 
   GAME:CutsceneMode(true)
-  autoriser_camera_cinematique_sud()
   UI:ResetSpeaker()
   -- Réinitialiser les actrices si une tentative précédente de la scène a
   -- été interrompue : leurs spawners les recréeront au chemin est.
@@ -1128,11 +1150,10 @@ function cliffdaytest.SceneArriveeDestiny()
   say(partner, 'Happy', "D’ailleurs, en parlant de [color=#F5D27A]Réverie Town[color]… suis-moi !\nVers le sud, en longeant les cascades, je t’y emmènerai.", 'droite')
   say(partner, 'Joyous', "C’est un lieu super chouette : des boutiques, des ponts, des Pokémon célèbres et des voyageurs itinérants.\nUn peu la capitale mondiale des explorateurs, quoi !", 'droite')
 
-  -- Le partenaire prend plusieurs pas d’avance et descend jusqu’au warp
-  -- sud ; le héros s’arrête un instant en (712, 732) pour réfléchir.
-  local sud = MRKR('Dazzling_Entry_South')
-  local sud_x = sud ~= nil and sud.Position.X or 731
-  local sud_y = sud ~= nil and sud.Position.Y or 762
+  -- Le partenaire prend plusieurs pas d’avance, mais la pensée et le
+  -- « Bon, on y va ! » se jouent au nord du warp, dans le seul cadre
+  -- Clamp réellement visible : partenaire (736, 716), héros d’abord en
+  -- (712, 692) puis en (712, 716), caméra (720, 672).
   local descente_sud = {
     { 660, 480 }, { 677, 489 }, { 665, 510 }, { 666, 544 },
     { 681, 572 }, { 695, 593 }, { 713, 634 }, { 713, 676 },
@@ -1144,20 +1165,15 @@ function cliffdaytest.SceneArriveeDestiny()
   end
   local descente_partenaire = TASK:BranchCoroutine(function()
     marcher_descente_sud(partner)
-    GROUND:MoveToPosition(partner, 734, 737, false, 1.5)
-    GROUND:MoveToPosition(partner, sud_x, sud_y, false, 1.5)
+    GROUND:MoveToPosition(partner, 736, 716, false, 1.5)
   end)
   local descente_heros = TASK:BranchCoroutine(function()
     GAME:WaitFrames(45)
     marcher_descente_sud(hero)
-    GROUND:MoveToPosition(hero, 712, 732, false, 1.5)
+    GROUND:MoveToPosition(hero, 712, 692, false, 1.5)
   end)
   local descente_camera = TASK:BranchCoroutine(function()
-    -- Le partenaire finit au warp sud (y=762) et le héros à y=732 : un
-    -- centre à 720 place leurs pieds aux ordonnées écran 162 et 132.
-    -- Ils restent donc visibles pendant la pensée du héros, le « Bon, on
-    -- y va ! » et les voix hors champ qui ouvrent la rencontre Dazzling.
-    GAME:MoveCamera(724, 720, 300, false)
+    GAME:MoveCamera(720, 672, 300, false)
   end)
   TASK:JoinCoroutines({ descente_partenaire, descente_heros, descente_camera })
 
@@ -1167,9 +1183,9 @@ function cliffdaytest.SceneArriveeDestiny()
   pense_heros(hero, 'Worried', "Je me demande dans quoi je me suis embarqué…")
   GROUND:CharEndAnim(hero)
 
-  -- Le héros rejoint le partenaire au sud, face à face, puis les deux se
-  -- tournent vers la sortie.
-  GROUND:MoveToPosition(hero, sud_x - 24, sud_y, false, 1)
+  -- Le héros rejoint le partenaire sur la ligne du face-à-face, puis les
+  -- deux se tournent vers la sortie.
+  GROUND:MoveToPosition(hero, 712, 716, false, 1)
   se_faire_face(partner, hero)
   say(partner, 'Joyous', "Bon, on y va !", 'droite')
   cinematique.TournerGroupe({

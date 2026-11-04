@@ -18302,7 +18302,7 @@
   ],
   "AssetName": "intro_halo",
   "Music": "Welcome to the World of Pokémon!.ogg",
-  "EdgeView": 0,
+  "EdgeView": 1,
   "NoSwitching": true,
   "ViewCenter": null,
   "ViewOffset": {

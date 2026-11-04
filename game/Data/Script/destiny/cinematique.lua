@@ -17,6 +17,20 @@ local function portrait(placement)
   return PORTRAITS[placement or 'standard'] or PORTRAITS.standard
 end
 
+-- « Shock » existe comme animation/émote au sol, mais pas dans la liste
+-- des émotions de portrait du moteur. SetSpeakerEmotion('Shock') y
+-- produirait l'index -1 et ferait échouer SpeakerPortrait.Draw à chaque
+-- frame. L'équivalent portrait canonique est « Surprised ».
+local EMOTIONS_PORTRAIT = {
+  Shock = 'Surprised',
+  shock = 'Surprised',
+}
+
+local function emotion_portrait(emotion)
+  if emotion == nil or emotion == '' then return 'Normal' end
+  return EMOTIONS_PORTRAIT[emotion] or emotion
+end
+
 function cinematique.PlacerPortrait(placement)
   local p = portrait(placement)
   UI:SetSpeakerLoc(p[1], p[2])
@@ -26,7 +40,7 @@ end
 function cinematique.Dire(personnage, emotion, texte, placement)
   UI:SetSpeaker(personnage)
   local reverse = cinematique.PlacerPortrait(placement)
-  UI:SetSpeakerEmotion(emotion, reverse)
+  UI:SetSpeakerEmotion(emotion_portrait(emotion), reverse)
   UI:WaitShowDialogue(texte)
 end
 
@@ -134,8 +148,10 @@ local function couleur_reference(reference)
   return nil
 end
 
--- Colore un prénom (héros, partenaire ou PNJ) selon le type principal :
--- reference peut être un membre d'équipe ou un identifiant d'espèce.
+-- Colore un prénom fixe de PNJ selon le type principal de son espèce.
+-- Les surnoms choisis par le joueur pour le héros et le partenaire ne
+-- doivent pas passer par cette fonction : dans les dialogues, ils restent
+-- blancs. reference peut être un membre d'équipe ou un identifiant d'espèce.
 function cinematique.NomColore(nom, reference)
   if nom == nil or nom == '' then return nom end
   local hex = couleur_reference(reference)

@@ -168,18 +168,18 @@ end
 -- sur le rendu de la carte, à confirmer au runtime). Chaque porte mène à
 -- l'intérieur correspondant et mémorise le point de retour devant la façade.
 local portes_batiments = {
-  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 60, y = 468, retour_x = 92, retour_y = 516, interieur = 'post_office', marqueur = 'entrance_south'},
-  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 400, y = 436, retour_x = 412, retour_y = 468, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1028, y = 472, retour_x = 1076, retour_y = 500, interieur = 'metano_water_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 60, y = 468, retour_x = 92, retour_y = 516, interieur = 'reverie_post_office', marqueur = 'entrance_south'},
+  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 400, y = 436, retour_x = 412, retour_y = 468, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1028, y = 472, retour_x = 1076, retour_y = 500, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteMaisonEquipe', titre = 'Maison de l\'équipe', x = 660, y = 524, retour_x = 676, retour_y = 548, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 384, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
-  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'metano_electric_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'metano_inn', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'reverie_electric_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonArcanine', titre = 'Maison d\'Arcanine', x = 140, y = 2552, retour_x = 172, retour_y = 2596, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 378, y = 2376, retour_x = 444, retour_y = 2396, interieur = 'metano_rock_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 580, y = 2492, retour_x = 612, retour_y = 2540, interieur = 'metano_grass_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 748, y = 2552, retour_x = 780, retour_y = 2596, interieur = 'metano_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonArcanine', titre = 'Maison d\'Arcanine', x = 140, y = 2552, retour_x = 172, retour_y = 2596, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 378, y = 2376, retour_x = 444, retour_y = 2396, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 580, y = 2492, retour_x = 612, retour_y = 2540, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 748, y = 2552, retour_x = 780, retour_y = 2596, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
 }
 
 local function installer_une_porte(map, nom, x, y)

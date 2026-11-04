@@ -44,6 +44,8 @@ jobs:
         run: python tools/tests/test_payload_ville.py
       - name: Check Waterfall Village town02 map and dependencies
         run: python tools/tests/test_waterfall_town02.py
+      - name: Check Reverie building interiors
+        run: python tools/test_batiments_interieurs.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

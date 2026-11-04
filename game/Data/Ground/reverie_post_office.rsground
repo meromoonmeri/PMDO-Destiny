@@ -4,7 +4,7 @@
 "$type": "RogueEssence.Ground.GroundMap, RogueEssence",
 "TexSize": 3,
 "Name": {
-"DefaultText": "Pelipper Post Office",
+"DefaultText": "Reverie Post Office",
 "LocalTexts": {
 "es": "Mensajeros Pelipper"
 }
@@ -17011,7 +17011,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 0
@@ -17030,7 +17030,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 1
@@ -17049,7 +17049,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 2
@@ -17068,7 +17068,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 3
@@ -17087,7 +17087,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 4
@@ -17106,7 +17106,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 5
@@ -17125,7 +17125,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 6
@@ -17144,7 +17144,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 7
@@ -17163,7 +17163,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 8
@@ -17182,7 +17182,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 9
@@ -17201,7 +17201,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 10
@@ -17220,7 +17220,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 11
@@ -17239,7 +17239,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 0,
 "Y": 12
@@ -17260,7 +17260,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 0
@@ -17279,7 +17279,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 1
@@ -17298,7 +17298,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 2
@@ -17317,7 +17317,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 3
@@ -17336,7 +17336,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 4
@@ -17355,7 +17355,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 5
@@ -17374,7 +17374,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 6
@@ -17393,7 +17393,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 7
@@ -17412,7 +17412,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 8
@@ -17431,7 +17431,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 9
@@ -17450,7 +17450,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 10
@@ -17469,7 +17469,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 11
@@ -17488,7 +17488,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 1,
 "Y": 12
@@ -17509,7 +17509,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 0
@@ -17528,7 +17528,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 1
@@ -17547,7 +17547,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 2
@@ -17566,7 +17566,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 3
@@ -17585,7 +17585,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 4
@@ -17604,7 +17604,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 5
@@ -17623,7 +17623,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 6
@@ -17642,7 +17642,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 7
@@ -17661,7 +17661,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 8
@@ -17680,7 +17680,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 9
@@ -17699,7 +17699,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 10
@@ -17718,7 +17718,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 11
@@ -17737,7 +17737,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 2,
 "Y": 12
@@ -17758,7 +17758,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 0
@@ -17777,7 +17777,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 1
@@ -17796,7 +17796,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 2
@@ -17815,7 +17815,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 3
@@ -17834,7 +17834,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 4
@@ -17853,7 +17853,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 5
@@ -17872,7 +17872,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 6
@@ -17891,7 +17891,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 7
@@ -17910,7 +17910,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 8
@@ -17929,7 +17929,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 9
@@ -17948,7 +17948,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 10
@@ -17967,7 +17967,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 11
@@ -17986,7 +17986,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 3,
 "Y": 12
@@ -18007,7 +18007,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 0
@@ -18026,7 +18026,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 1
@@ -18045,7 +18045,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 2
@@ -18064,7 +18064,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 3
@@ -18083,7 +18083,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 4
@@ -18102,7 +18102,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 5
@@ -18121,7 +18121,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 6
@@ -18140,7 +18140,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 7
@@ -18159,7 +18159,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 8
@@ -18178,7 +18178,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 9
@@ -18197,7 +18197,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 10
@@ -18216,7 +18216,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 11
@@ -18235,7 +18235,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 4,
 "Y": 12
@@ -18256,7 +18256,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 0
@@ -18275,7 +18275,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 1
@@ -18294,7 +18294,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 2
@@ -18313,7 +18313,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 3
@@ -18332,7 +18332,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 4
@@ -18351,7 +18351,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 5
@@ -18370,7 +18370,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 6
@@ -18389,7 +18389,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 7
@@ -18408,7 +18408,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 8
@@ -18427,7 +18427,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 9
@@ -18446,7 +18446,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 10
@@ -18465,7 +18465,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 11
@@ -18484,7 +18484,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 5,
 "Y": 12
@@ -18505,7 +18505,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 0
@@ -18524,7 +18524,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 1
@@ -18543,7 +18543,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 2
@@ -18562,7 +18562,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 3
@@ -18581,7 +18581,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 4
@@ -18600,7 +18600,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 5
@@ -18619,7 +18619,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 6
@@ -18638,7 +18638,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 7
@@ -18657,7 +18657,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 8
@@ -18676,7 +18676,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 9
@@ -18695,7 +18695,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 10
@@ -18714,7 +18714,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 11
@@ -18733,7 +18733,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 6,
 "Y": 12
@@ -18754,7 +18754,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 0
@@ -18773,7 +18773,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 1
@@ -18792,7 +18792,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 2
@@ -18811,7 +18811,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 3
@@ -18830,7 +18830,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 4
@@ -18849,7 +18849,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 5
@@ -18868,7 +18868,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 6
@@ -18887,7 +18887,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 7
@@ -18906,7 +18906,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 8
@@ -18925,7 +18925,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 9
@@ -18944,7 +18944,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 10
@@ -18963,7 +18963,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 11
@@ -18982,7 +18982,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 7,
 "Y": 12
@@ -19003,7 +19003,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 0
@@ -19022,7 +19022,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 1
@@ -19041,7 +19041,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 2
@@ -19060,7 +19060,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 3
@@ -19079,7 +19079,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 4
@@ -19098,7 +19098,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 5
@@ -19117,7 +19117,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 6
@@ -19136,7 +19136,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 7
@@ -19155,7 +19155,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 8
@@ -19174,7 +19174,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 9
@@ -19193,7 +19193,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 10
@@ -19212,7 +19212,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 11
@@ -19231,7 +19231,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 8,
 "Y": 12
@@ -19252,7 +19252,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 0
@@ -19271,7 +19271,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 1
@@ -19290,7 +19290,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 2
@@ -19309,7 +19309,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 3
@@ -19328,7 +19328,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 4
@@ -19347,7 +19347,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 5
@@ -19366,7 +19366,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 6
@@ -19385,7 +19385,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 7
@@ -19404,7 +19404,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 8
@@ -19423,7 +19423,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 9
@@ -19442,7 +19442,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 10
@@ -19461,7 +19461,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 11
@@ -19480,7 +19480,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 9,
 "Y": 12
@@ -19501,7 +19501,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 0
@@ -19520,7 +19520,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 1
@@ -19539,7 +19539,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 2
@@ -19558,7 +19558,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 3
@@ -19577,7 +19577,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 4
@@ -19596,7 +19596,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 5
@@ -19615,7 +19615,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 6
@@ -19634,7 +19634,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 7
@@ -19653,7 +19653,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 8
@@ -19672,7 +19672,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 9
@@ -19691,7 +19691,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 10
@@ -19710,7 +19710,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 11
@@ -19729,7 +19729,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 10,
 "Y": 12
@@ -19750,7 +19750,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 0
@@ -19769,7 +19769,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 1
@@ -19788,7 +19788,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 2
@@ -19807,7 +19807,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 3
@@ -19826,7 +19826,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 4
@@ -19845,7 +19845,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 5
@@ -19864,7 +19864,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 6
@@ -19883,7 +19883,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 7
@@ -19902,7 +19902,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 8
@@ -19921,7 +19921,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 9
@@ -19940,7 +19940,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 10
@@ -19959,7 +19959,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 11
@@ -19978,7 +19978,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 11,
 "Y": 12
@@ -19999,7 +19999,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 0
@@ -20018,7 +20018,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 1
@@ -20037,7 +20037,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 2
@@ -20056,7 +20056,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 3
@@ -20075,7 +20075,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 4
@@ -20094,7 +20094,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 5
@@ -20113,7 +20113,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 6
@@ -20132,7 +20132,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 7
@@ -20151,7 +20151,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 8
@@ -20170,7 +20170,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 9
@@ -20189,7 +20189,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 10
@@ -20208,7 +20208,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 11
@@ -20227,7 +20227,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 12,
 "Y": 12
@@ -20248,7 +20248,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 0
@@ -20267,7 +20267,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 1
@@ -20286,7 +20286,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 2
@@ -20305,7 +20305,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 3
@@ -20324,7 +20324,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 4
@@ -20343,7 +20343,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 5
@@ -20362,7 +20362,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 6
@@ -20381,7 +20381,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 7
@@ -20400,7 +20400,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 8
@@ -20419,7 +20419,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 9
@@ -20438,7 +20438,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 10
@@ -20457,7 +20457,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 11
@@ -20476,7 +20476,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 13,
 "Y": 12
@@ -20497,7 +20497,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 0
@@ -20516,7 +20516,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 1
@@ -20535,7 +20535,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 2
@@ -20554,7 +20554,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 3
@@ -20573,7 +20573,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 4
@@ -20592,7 +20592,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 5
@@ -20611,7 +20611,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 6
@@ -20630,7 +20630,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 7
@@ -20649,7 +20649,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 8
@@ -20668,7 +20668,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 9
@@ -20687,7 +20687,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 10
@@ -20706,7 +20706,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 11
@@ -20725,7 +20725,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 14,
 "Y": 12
@@ -20746,7 +20746,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 0
@@ -20765,7 +20765,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 1
@@ -20784,7 +20784,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 2
@@ -20803,7 +20803,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 3
@@ -20822,7 +20822,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 4
@@ -20841,7 +20841,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 5
@@ -20860,7 +20860,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 6
@@ -20879,7 +20879,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 7
@@ -20898,7 +20898,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 8
@@ -20917,7 +20917,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 9
@@ -20936,7 +20936,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 10
@@ -20955,7 +20955,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 11
@@ -20974,7 +20974,7 @@
 {
 "Frames": [
 {
-"Sheet": "PostOffice",
+"Sheet": "Reverie_Post_Office",
 "TexLoc": {
 "X": 15,
 "Y": 12
@@ -20990,9 +20990,9 @@
 ]
 }
 ],
-"AssetName": "post_office",
+"AssetName": "reverie_post_office",
 "Music": "Treasure Town.ogg",
-"EdgeView": 0,
+"EdgeView": 1,
 "NoSwitching": false,
 "ViewCenter": null,
 "ViewOffset": {
@@ -21012,204 +21012,7 @@
 {
 "Name": "New EntLayer",
 "Visible": true,
-"MapChars": [
-{
-"Direction": 0,
-"IsInteracting": false,
-"AIEnabled": true,
-"EntName": "Connect_Owner",
-"EntEnabled": true,
-"EntOrder": 0,
-"InteractOrder": 0,
-"serializationLoc": {
-"X": 168,
-"Y": 157
-},
-"serializationHeight": 0,
-"serializationDir": 0,
-"triggerType": 1,
-"<AI>k__BackingField": null,
-"Data": {
-"Nickname": "Anlin",
-"OriginalUUID": "",
-"OriginalTeam": "",
-"BaseForm": {
-"Species": "pelipper",
-"Form": 0,
-"Skin": "normal",
-"Gender": 1
-},
-"Level": 0,
-"EXP": 0,
-"MaxHPBonus": 0,
-"AtkBonus": 0,
-"DefBonus": 0,
-"MAtkBonus": 0,
-"MDefBonus": 0,
-"SpeedBonus": 0,
-"BaseSkills": [
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-}
-],
-"BaseIntrinsics": [
-"none"
-],
-"FormIntrinsicSlot": -1,
-"Relearnables": {},
-"Discriminator": 0,
-"MetAt": "",
-"MetLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"DefeatAt": "",
-"DefeatLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"IsFounder": false,
-"IsPartner": false,
-"NameLocked": false,
-"IsFavorite": false,
-"Unrecruitable": false,
-"ActionEvents": [],
-"ScriptVars": {
-"Table": []
-}
-},
-"CollisionDisabled": false,
-"Collider": {
-"X": 168,
-"Y": 158,
-"Width": 16,
-"Height": 16
-}
-},
-{
-"Direction": 0,
-"IsInteracting": false,
-"AIEnabled": true,
-"EntName": "Rescue_Owner",
-"EntEnabled": true,
-"EntOrder": 0,
-"InteractOrder": 0,
-"serializationLoc": {
-"X": 224,
-"Y": 158
-},
-"serializationHeight": 0,
-"serializationDir": 0,
-"triggerType": 1,
-"<AI>k__BackingField": null,
-"Data": {
-"Nickname": "Mael",
-"OriginalUUID": "",
-"OriginalTeam": "",
-"BaseForm": {
-"Species": "pelipper",
-"Form": 0,
-"Skin": "normal",
-"Gender": 1
-},
-"Level": 0,
-"EXP": 0,
-"MaxHPBonus": 0,
-"AtkBonus": 0,
-"DefBonus": 0,
-"MAtkBonus": 0,
-"MDefBonus": 0,
-"SpeedBonus": 0,
-"BaseSkills": [
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-},
-{
-"SkillNum": "",
-"Charges": 0,
-"CanForget": true
-}
-],
-"BaseIntrinsics": [
-"none"
-],
-"FormIntrinsicSlot": -1,
-"Relearnables": {},
-"Discriminator": 0,
-"MetAt": "",
-"MetLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"DefeatAt": "",
-"DefeatLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"IsFounder": false,
-"IsPartner": false,
-"NameLocked": false,
-"IsFavorite": false,
-"Unrecruitable": false,
-"ActionEvents": [],
-"ScriptVars": {
-"Table": []
-}
-},
-"CollisionDisabled": false,
-"Collider": {
-"X": 224,
-"Y": 158,
-"Width": 16,
-"Height": 16
-}
-}
-],
+"MapChars": [],
 "GroundObjects": [
 {
 "EntName": "South_Exit",
@@ -21252,92 +21055,6 @@
 "Y": 300,
 "Width": 384,
 "Height": 4
-}
-},
-{
-"EntName": "Main_Desk",
-"Direction": 0,
-"EntEnabled": true,
-"EntOrder": 0,
-"InteractOrder": 0,
-"triggerType": 1,
-"ObjectAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "",
-"FrameTime": 0,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"Passable": false,
-"CurrentAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "",
-"FrameTime": 1,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": 0,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"AnimTime": {
-"Ticks": 0
-},
-"Cycles": 0,
-"DrawOffset": {
-"X": 0,
-"Y": 0
-},
-"Collider": {
-"X": 160,
-"Y": 176,
-"Width": 32,
-"Height": 24
-}
-},
-{
-"EntName": "Side_Desk",
-"Direction": 0,
-"EntEnabled": true,
-"EntOrder": 0,
-"InteractOrder": 0,
-"triggerType": 1,
-"ObjectAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "",
-"FrameTime": 0,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"Passable": false,
-"CurrentAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "",
-"FrameTime": 1,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": 0,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"AnimTime": {
-"Ticks": 0
-},
-"Cycles": 0,
-"DrawOffset": {
-"X": 0,
-"Y": 0
-},
-"Collider": {
-"X": 216,
-"Y": 176,
-"Width": 32,
-"Height": 24
 }
 }
 ],
