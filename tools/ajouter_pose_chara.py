@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Ajoute l'animation Pose au payload normal d'un .chara PMDO.
+"""Ajoute une animation SpriteCollab au payload normal d'un .chara PMDO.
+
+Par défaut, l'outil conserve son comportement historique : ajouter Pose.
+Il peut aussi ajouter la Moquerie Destiny sous l'action libre Special0.
 
 Attention aux deux indices distincts : dans le .chara, la clé du groupe est
-le FrameType global du moteur (Pose = 50 dans GFXParams.xml), tandis que
-l'<Index> SpriteCollab (13 pour les sources Dazzling) est seulement
-l'InternalIndex conservé dans le groupe.
+le FrameType global du moteur (Pose = 50 et Special0 = 82 dans
+GFXParams.xml), tandis que l'<Index> SpriteCollab (13 pour Pose, 14 pour
+Moquerie) est seulement l'InternalIndex conservé dans le groupe.
 
 Le conteneur et toutes ses autres formes/animations sont conservés.  La
 méthode suit RogueEssence.Content.CharSheet.Import pour AnimData.xml :
@@ -27,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fusionner_conteneurs_pmd import load_container, node_at, read_node, walk, write_container, write_node
 
 POSE_FRAME_TYPE = 50  # GraphicsManager.GetAnimIndex('Pose') dans GFXParams.xml
+MOQUERIE_FRAME_TYPE = 82  # GraphicsManager.GetAnimIndex('Special0')
 ANCIEN_MAUVAIS_FRAME_TYPE = 13  # Slice : ancienne Pose rangée sous la mauvaise clé
 
 
@@ -141,33 +145,37 @@ def marker_offsets(offset_cell, bounds_center):
     return tuple(c for point in points for c in (point[0] - bounds_center[0], point[1] - bounds_center[1]))
 
 
-def add_pose(blob, sprite_dir):
+def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE):
     data = parse_blob(blob)
-    if (POSE_FRAME_TYPE in data['groups']
-            and data['groups'][POSE_FRAME_TYPE]['copy'] <= -1
-            and data['groups'][POSE_FRAME_TYPE]['seqs']):
-        raise ValueError('une vraie animation Pose existe déjà dans ce payload')
+    if (frame_type in data['groups']
+            and data['groups'][frame_type]['copy'] <= -1
+            and data['groups'][frame_type]['seqs']):
+        raise ValueError(
+            f'une vraie animation existe déjà sous le FrameType {frame_type}')
 
     root = ET.parse(sprite_dir / 'AnimData.xml').getroot()
-    pose_node = None
+    anim_node = None
     for anim in root.findall('./Anims/Anim'):
-        if anim.findtext('Name') == 'Pose':
-            pose_node = anim
+        if anim.findtext('Name') == anim_name:
+            anim_node = anim
             break
-    if pose_node is None:
-        raise ValueError('AnimData.xml sans Pose')
-    fw = int(pose_node.findtext('FrameWidth'))
-    fh = int(pose_node.findtext('FrameHeight'))
-    durations = [int(x.text) for x in pose_node.findall('./Durations/Duration')]
-    internal = int(pose_node.findtext('Index', '13'))
+    if anim_node is None:
+        raise ValueError(f'AnimData.xml sans {anim_name}')
+    fw = int(anim_node.findtext('FrameWidth'))
+    fh = int(anim_node.findtext('FrameHeight'))
+    durations = [int(x.text) for x in anim_node.findall('./Durations/Duration')]
+    internal = int(anim_node.findtext('Index', '13'))
+    if any(group['internal'] == internal and key != frame_type
+           for key, group in data['groups'].items()):
+        raise ValueError(f'InternalIndex {internal} déjà utilisé dans ce payload')
 
-    anim_sheet = Image.open(sprite_dir / 'Pose-Anim.png').convert('RGBA')
-    shadow_sheet = Image.open(sprite_dir / 'Pose-Shadow.png').convert('RGBA')
-    offset_sheet = Image.open(sprite_dir / 'Pose-Offsets.png').convert('RGBA')
+    anim_sheet = Image.open(sprite_dir / f'{anim_name}-Anim.png').convert('RGBA')
+    shadow_sheet = Image.open(sprite_dir / f'{anim_name}-Shadow.png').convert('RGBA')
+    offset_sheet = Image.open(sprite_dir / f'{anim_name}-Offsets.png').convert('RGBA')
     cols = anim_sheet.width // fw
     rows = anim_sheet.height // fh
     if cols != len(durations) or rows != 8:
-        raise ValueError(f'Pose inattendue: {cols} colonnes, {rows} lignes')
+        raise ValueError(f'{anim_name} inattendue: {cols} colonnes, {rows} lignes')
 
     atlas = data['image']
     atlas_cols = atlas.width // data['tw']
@@ -193,7 +201,7 @@ def add_pose(blob, sprite_dir):
                 bbox = (fw // 2, fh // 2, fw // 2 + 1, fh // 2 + 1)
             crop = anim_cell.crop(bbox)
             if crop.width > data['tw'] or crop.height > data['th']:
-                raise ValueError(f'frame Pose {crop.size} plus grande que la tuile atlas {(data["tw"], data["th"])}')
+                raise ValueError(f'frame {anim_name} {crop.size} plus grande que la tuile atlas {(data["tw"], data["th"])}')
             bounds_center = ((bbox[0] + bbox[2]) // 2, (bbox[1] + bbox[3]) // 2)
             offdata = marker_offsets(offset_cell, bounds_center)
             crop = premultiply(crop.copy())
@@ -228,12 +236,19 @@ def add_pose(blob, sprite_dir):
         atlas.alpha_composite(crop, (tx, ty))
         data['offsets'][tile_index] = offdata
     data['image'] = atlas
-    data['groups'][POSE_FRAME_TYPE] = {
+    data['groups'][frame_type] = {
         'internal': internal, 'copy': -1, 'rush': -1, 'hit': -1,
         'return': -1, 'seqs': sequences}
-    return serialize_blob(data), {'frames': cols * 8, 'tuiles_ajoutees': len(additions),
-                                   'atlas': atlas.size, 'tuile': (data['tw'], data['th'])}
+    return serialize_blob(data), {'animation': anim_name, 'frame_type': frame_type,
+                                   'frames': cols * 8,
+                                   'tuiles_ajoutees': len(additions),
+                                   'atlas': atlas.size,
+                                   'tuile': (data['tw'], data['th'])}
 
+
+def add_pose(blob, sprite_dir):
+    """Compatibilité avec les anciens appels : ajouter Pose (FrameType 50)."""
+    return add_animation(blob, sprite_dir, 'Pose', POSE_FRAME_TYPE)
 
 
 def migrate_pose(blob):
@@ -261,6 +276,10 @@ def main():
     ap.add_argument('--sprites', type=Path)
     ap.add_argument('--migrer', action='store_true',
                     help='déplacer une ancienne Pose de la clé 13 vers la clé 50')
+    ap.add_argument('--anim', default='Pose',
+                    help="nom SpriteCollab à ajouter (Pose par défaut, ou Moquerie)")
+    ap.add_argument('--frame-type', type=int, default=POSE_FRAME_TYPE,
+                    help='FrameType moteur cible (50 pour Pose, 82 pour Special0/Moquerie)')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
 
@@ -273,14 +292,16 @@ def main():
     else:
         if args.sprites is None:
             ap.error('--sprites est requis sans --migrer')
-        new_payload, info = add_pose(container.payload, args.sprites)
+        new_payload, info = add_animation(
+            container.payload, args.sprites, args.anim, args.frame_type)
     container.payload = new_payload
     args.out.parent.mkdir(parents=True, exist_ok=True)
     write_container(args.out, container)
     reloaded = load_container(args.out, 'Chara')
     parsed = parse_blob(reloaded.payload)
-    assert POSE_FRAME_TYPE in parsed['groups']
-    assert len(parsed['groups'][POSE_FRAME_TYPE]['seqs']) == 8
+    frame_type_attendu = POSE_FRAME_TYPE if args.migrer else args.frame_type
+    assert frame_type_attendu in parsed['groups']
+    assert len(parsed['groups'][frame_type_attendu]['seqs']) == 8
     print(args.out, info, 'groupes', sorted(parsed['groups']))
 
 

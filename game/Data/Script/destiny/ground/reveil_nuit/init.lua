@@ -43,8 +43,9 @@ local function points_scene()
     -- du cadre. Sur cette carte de 768 × 576, le centre (384, 136) montre
     -- Y 16..256 : lune, sommet, mer et héros tout en bas. Le panorama à
     -- Y=152 garde le sommet tout en laissant davantage de prairie ; le
-    -- cadre de dialogue à Y=184 ne conserve qu'une partie de la montagne,
-    -- mais place les acteurs juste au-dessus de la boîte de texte.
+    -- cadre de dialogue à Y=200 ne conserve qu'une partie de la montagne,
+    -- mais place les pieds des acteurs à l'ordonnée écran 160, donc avec
+    -- une vraie marge au-dessus de la boîte de texte (qui commence à 188).
     return {
       zrv = true,
       reveil_x = point_reveil.Position.X,
@@ -52,7 +53,7 @@ local function points_scene()
       vue_x = point_reveil.Position.X,
       vue_y = point_reveil.Position.Y,
       camera_x = point_reveil.Position.X + 8,
-      camera_y = point_reveil.Position.Y - 56,
+      camera_y = point_reveil.Position.Y - 40,
       camera_ouverture_x = point_reveil.Position.X - 8,
       camera_ouverture_y = point_reveil.Position.Y - 104,
       camera_panorama_x = point_reveil.Position.X + 8,
@@ -62,7 +63,7 @@ local function points_scene()
       entree_x = entree.Position.X,
       entree_y = entree.Position.Y,
       camera_entree_x = entree.Position.X + 8,
-      camera_entree_y = entree.Position.Y - 104,
+      camera_entree_y = entree.Position.Y - 48,
       palier_x = point_reveil.Position.X,
       palier_y = point_reveil.Position.Y + 160,
       approche_x = point_reveil.Position.X,
@@ -107,6 +108,17 @@ end
 
 local function attendre_camera(tache)
   if tache ~= nil then TASK:JoinCoroutines({tache}) end
+end
+
+-- L'entrée ZRV2 est à 16 px du bord sud (carte 576 px, entrée y=560).
+-- Son EdgeView Clamp limiterait le centre de caméra à 456 et placerait
+-- les pieds du partenaire à l'ordonnée écran 224, sous la boîte de
+-- dialogue. Blank n'est donc autorisé que pour son arrivée et le
+-- travelling qui remonte vers le héros ; Clamp revient dès que le centre
+-- est de nouveau dans la carte, sans saut de cadre.
+local function regler_bord_camera(mode)
+  local carte = _ZONE.CurrentGround
+  if carte ~= nil then carte.EdgeView = mode end
 end
 
 -- Les feuilles SpriteCollab livrées avec Destiny ne contiennent pas toutes
@@ -584,6 +596,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   GROUND:CharSetAnim(hero, 'Laying', true)
   GROUND:TeleportTo(hero, reveil_x, reveil_y, Direction.Right)
   if points.zrv then
+    regler_bord_camera(RogueEssence.Dungeon.BaseMap.ScrollEdge.Blank)
     GROUND:TeleportTo(partner, points.entree_x, points.entree_y, Direction.Up)
     GAME:MoveCamera(points.camera_entree_x, points.camera_entree_y, 1, false)
     UI:WaitShowTitle('Champs des Rêves', 20)
@@ -631,6 +644,8 @@ function reveil_nuit.CinematiqueRetrouvailles()
     local travelling = lancer_camera(points.camera_approche_x,
       points.camera_approche_y, 224)
     TASK:JoinCoroutines({marche_partenaire, travelling})
+    -- Centre revenu à y=288 : le clamp normal peut reprendre sans saut.
+    regler_bord_camera(RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp)
     dire("Normal", "C’est calme, ici. On entend la mer…")
   else
     dire("Happy", "Ouf… je suis sorti des [color=#69D98C]Bois Perdus[color].")
@@ -752,6 +767,12 @@ function reveil_nuit.CinematiqueRetrouvailles()
     {hero, Direction.Up, 5, 4},
   })
   cinematique.Respirer(30)
+  -- Le panorama pur placerait les pieds du duo à l'ordonnée écran 208 :
+  -- avant les pensées, descendre le centre de 40 px (pieds à 168) tout en
+  -- gardant la montagne et la mer dans le haut du cadre.
+  if points.zrv then
+    GAME:MoveCamera(points.camera_panorama_x, points.camera_panorama_y + 40, 45, false)
+  end
 
   -- Le héros aperçoit son reflet dans l’eau : il réalise en pensée qu’il
   -- est un humain devenu Pokémon (nom d’espèce et accord depuis le choix
