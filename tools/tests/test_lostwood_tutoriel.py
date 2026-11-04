@@ -121,9 +121,16 @@ assert "MRKR('reveil')" in reveil and "MRKR('entrance')" in reveil
 assert 'points_scene()' in reveil and 'Un jour, je ferai la carte de cette montagne !' in reveil
 # Viewport 320×240 : ouverture Y=136 et panorama Y=152 pour garder lune,
 # sommet et mer dans le cadre, avec des travelings rejoints explicitement.
+# Les dialogues utilisent Y=200 (pieds écran 160) ; l'entrée sud passe
+# temporairement en Blank pour placer le partenaire à 168 au lieu de 224,
+# puis le panorama descend de 40 px avant les pensées face au reflet.
 assert 'camera_ouverture_y = point_reveil.Position.Y - 104' in reveil
 assert 'camera_panorama_y = point_reveil.Position.Y - 88' in reveil
 assert 'camera_approche_y = point_reveil.Position.Y + 48' in reveil
+assert 'camera_y = point_reveil.Position.Y - 40' in reveil
+assert 'camera_entree_y = entree.Position.Y - 48' in reveil
+assert 'ScrollEdge.Blank' in reveil and 'ScrollEdge.Clamp' in reveil
+assert 'points.camera_panorama_y + 40' in reveil
 assert 'TASK:BranchCoroutine' in reveil and 'TASK:JoinCoroutines' in reveil
 assert "require 'destiny.cinematique'" in reveil
 assert "cinematique.Dire(partner, emotion, texte, 'droite')" in reveil
@@ -170,12 +177,19 @@ assert 'mais dans l’autre sens.' not in cliff_jour
 # pose sur la boîte aux lettres, salue le partenaire et son « nouvel ami »,
 # puis repart vers l’ouest ; la lettre déclenche les explications guildes.
 assert 'facteur_bekipan()' in cliff_jour and 'Bekipan, le facteur' in cliff_jour
-assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left)' in cliff_jour
-assert 'GROUND:MoveToPosition(bekipan, 659, 444, false, 2)' in cliff_jour
-# Bec dans la fente : deux coups de bec (Attack, élan vers le bas) ; saut
-# d’atterrissage et de décollage (Hop) ; en vol, battements d’ailes (Walk).
-assert cliff_jour.count("anim(bekipan, 'Attack', false)") == 2
+assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)' in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)" in cliff_jour
+# Dépôt de face façon PMD Red : un cycle Walk complet (44 ticks) baisse le
+# bec vers la fente, un Attack pousse la lettre et le « Clunk » tombe dans
+# la boîte ; Hop marque l'atterrissage et le décollage. Le départ monte
+# presque à la verticale dans l'axe x=659, puis file vers l'ouest.
+assert "anim(bekipan, 'Walk', true)" in cliff_jour and 'cinematique.Respirer(44)' in cliff_jour
+assert cliff_jour.count("anim(bekipan, 'Attack', false)") == 1
 assert cliff_jour.count("anim(bekipan, 'Hop', false)") == 2
+assert "UI:WaitShowDialogue('Clunk')" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 424, 1, 1, 48)" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 340, 1, 2, 72)" in cliff_jour
+assert 'GROUND:MoveToPosition(bekipan, 420, 340, false, 2)' in cliff_jour
 assert "GROUND:Hide('Bekipan')" in cliff_jour
 assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour
 assert 'partout dans le monde' in cliff_jour and 'poste Bekipan' in cliff_jour
@@ -205,7 +219,15 @@ assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
 assert "require 'destiny.cinematique'" in cliff_jour
 assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
 assert 'GAME:MoveCamera(800, 468, 80, false)' in cliff_jour
-assert 'GAME:MoveCamera(720, 672, 190, false)' in cliff_jour
+# Cadrages de dialogue au bord sud : Blank pendant les cinématiques, puis
+# centres 688/700/712/720 pour garder tous les pieds au-dessus du texte.
+assert 'ScrollEdge.Blank' in cliff_jour and 'ScrollEdge.Clamp' in cliff_jour
+assert 'GAME:MoveCamera(720, 688, 190, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 688, 1, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 712, 60, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 700, 140, false)' in cliff_jour
+assert 'GAME:MoveCamera(724, 720, 300, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672' not in cliff_jour
 assert 'GROUND:MoveToPosition(sonata, 736, 700, false, 1.5)' in cliff_jour
 assert 'poser_dazzling(sonata, false)' in cliff_jour
 assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
@@ -240,12 +262,15 @@ assert cliff_jour.index('Bande de losers !') < cliff_jour.index('Mais attendez !
 assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
 assert cliff_jour.count("GROUND:Hide('Sonata')") == 2
 # Aria n’utilise que des portraits canoniques : quand elle se moque
-# du héros et du partenaire, c’est Joyous. Aucune émotion Special0 (14)
+# du héros et du partenaire, c’est Joyous. Aucune émotion de portrait 14
 # ne subsiste dans le payload racine de 303.portrait, et le portrait
-# personnalisé a été retiré du dépôt.
+# personnalisé a été retiré du dépôt. Au sol, en revanche, l'action libre
+# Special0 (FrameType 82) porte désormais la pose Moquerie du trio.
 assert "say(Aria, 'Joyous', \"Deux fois ?" in cliff_jour
 assert "say(Aria, 'Joyous', \"Bande de losers !\"" in cliff_jour
-assert "Special0" not in cliff_jour
+assert "GetAnimIndex('Special0')" in cliff_jour
+assert 'moquer_trio(adagio, Aria, sonata)' in cliff_jour
+assert 'finir_moquerie_trio(adagio, Aria, sonata)' in cliff_jour
 sys.path.insert(0, str(ROOT / 'tools'))
 from fusionner_conteneurs_pmd import load_container as _charger_conteneur
 from fusionner_conteneurs_pmd import read as _lire_binaire
@@ -264,7 +289,7 @@ assert not (ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').exists()
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
 for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',
-                    '684, 736', '708, 736', '668, 744', '764, 744', '692, 744',
+                    '684, 736', '764, 736', '668, 744', '764, 744', '692, 744',
                     '713, 676', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
@@ -288,8 +313,9 @@ assert b'LOOPLENGTH=003135999' in musique_dazzling
 # payload normal des trois .chara ; l’InternalIndex SpriteCollab reste 13.
 # Huit directions et durées SpriteCollab attendues.
 sys.path.insert(0, str(ROOT / 'tools'))
-from ajouter_pose_chara import POSE_FRAME_TYPE, parse_blob
+from ajouter_pose_chara import MOQUERIE_FRAME_TYPE, POSE_FRAME_TYPE, parse_blob
 assert POSE_FRAME_TYPE == 50
+assert MOQUERIE_FRAME_TYPE == 82
 from fusionner_conteneurs_pmd import load_container, read_node
 index_chara, _ = read_node((GAME / 'Content/Chara/index.idx').read_bytes())
 assert {303, 428, 763} <= set(index_chara.kids)
@@ -306,6 +332,13 @@ for dex, durees in durees_pose.items():
     assert groupe_pose['internal'] == 13
     assert groupe_pose['copy'] == -1 and len(groupe_pose['seqs']) == 8
     assert all([frame[2] for frame in seq] == durees for seq in groupe_pose['seqs'])
+    # Moquerie Destiny : action libre Special0 (82), InternalIndex
+    # SpriteCollab 14, une frame fixe de 30 ticks dans les 8 directions.
+    assert MOQUERIE_FRAME_TYPE in groupes
+    groupe_moquerie = groupes[MOQUERIE_FRAME_TYPE]
+    assert groupe_moquerie['internal'] == 14
+    assert groupe_moquerie['copy'] == -1 and len(groupe_moquerie['seqs']) == 8
+    assert all([frame[2] for frame in seq] == [30] for seq in groupe_moquerie['seqs'])
 assert "CH('Pichu')" not in cliff_jour and 'PichuDazzling' not in cliff_jour
 assert 'GarderCheminSud' in scene
 assert 'Je ne vais pas me dégonfler' in scene and 'Il faut que je sois courageux' in scene
