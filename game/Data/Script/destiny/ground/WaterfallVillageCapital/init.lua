@@ -440,7 +440,7 @@ function ville.Visite()
 
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(616, 925, 90, false)
-  parler_guide('Normal', 'Là-bas, c’est la boutique de Kecleon. On peut y acheter des provisions pour les expéditions.')
+  parler_guide('Normal', 'Là-bas, c’est la boutique de ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. '. On peut y acheter des provisions pour les expéditions.')
   if kecleon ~= nil then
     GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
     parler(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
@@ -450,13 +450,13 @@ function ville.Visite()
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(936, 940, 100, false)
-  parler_guide('Normal', 'Et voici Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
+  parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. '. Elle garde les objets que nous préférons laisser en sécurité.')
   if kangourex ~= nil then
     GROUND:CharAnimateTurnTo(kangourex, Direction.Down, 4)
     parler(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.')
   end
   geste_heros(hero, 'question', partenaire)
-  parler_guide('Normal', 'Exactement : ce que nous laissons à tatie Kangourex n’a pas à traverser le donjon avec nous.')
+  parler_guide('Normal', 'Exactement : ce que nous laissons à tatie ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' n’a pas à traverser le donjon avec nous.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(1100, 950, 75, false)
@@ -746,7 +746,7 @@ function ville.NewObject_3_Action(personnage, activator)
   UI:WaitForChoice()
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Votre trésor est compté. Kangourex garde les objets ; moi, je veille sur les Poké.')
+  UI:WaitShowDialogue('Votre trésor est compté. ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' garde les objets ; moi, je veille sur les Poké.')
   UI:ResetSpeaker()
   terminer_dialogue(personnage, 'NewObject_3')
 end
@@ -1018,7 +1018,7 @@ local dialogues_habitants = {
   },
   NewObject_12 = {
     {{'Normal', 'Je porte les caisses du marché le matin. L’après-midi, je laisse mes bras raconter qu’ils ont bien travaillé.'}},
-    {{'Worried', 'Deux livraisons pour les Kecleon, une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
+    {{'Worried', 'Deux livraisons pour les ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. ', une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
     {{'Happy', 'Une caisse bien portée ne casse jamais. C’est ma devise. Bon, sauf celle de la semaine dernière. Une seule !'}},
   },
   NewObject_13 = {
@@ -1027,7 +1027,7 @@ local dialogues_habitants = {
     {{'Normal', 'Aujourd’hui, je compte les équipes qui partent. Demain, je compterai celles qui reviennent. C’est mon rituel.'}},
   },
   NewObject_14 = {
-    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Kangourex et les Kecleon existent pour une raison.'}},
+    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' et les ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. ' existent pour une raison.'}},
     {{'Normal', 'Un sac vérifié le matin vaut deux jambes reposées. Notez-le quelque part, ça vous servira en donjon.'}},
     {{'Worried', 'On prévoit du vent sur les hauteurs. Les équipes sages attendront demain, les autres… apprendront vite.'}},
   },

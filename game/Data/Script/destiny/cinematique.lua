@@ -77,4 +77,78 @@ function cinematique.Emote(personnage, emote, son)
   GROUND:CharSetEmote(personnage, emote, 1)
 end
 
+-- Prénoms en couleur selon le type principal du Pokémon, comme les noms
+-- d'espèces colorés du moteur. La teinte est lue dans le nom coloré
+-- renvoyé par _DATA (GetColoredName), avec une table de repli par type.
+local COULEURS_TYPES = {
+  normal = '#A8A77A', fire = '#EE8130', water = '#6390F0',
+  electric = '#F7D02C', grass = '#7AC74C', ice = '#96D9D6',
+  fighting = '#C22E28', poison = '#A33EA1', ground = '#E2BF65',
+  flying = '#A98FF3', psychic = '#F95587', bug = '#A6B91A',
+  rock = '#B6A136', ghost = '#735797', dragon = '#6F35FC',
+  dark = '#705746', steel = '#B7B7CE', fairy = '#D685AD',
+}
+local cache_couleurs_especes = {}
+
+local function hex_depuis_nom_colore(texte)
+  if texte == nil then return nil end
+  local ok, hex = pcall(function() return tostring(texte):match('%[color=(#%x+)') end)
+  if ok then return hex end
+  return nil
+end
+
+local function couleur_espece(espece)
+  if espece == nil or espece == '' then return nil end
+  -- Les identifiants d'espèces PMDO sont canoniques en minuscules.
+  espece = tostring(espece):lower()
+  local en_cache = cache_couleurs_especes[espece]
+  if en_cache ~= nil then return en_cache ~= false and en_cache or nil end
+  local hex = nil
+  local ok, nom = pcall(function() return _DATA:GetMonster(espece):GetColoredName() end)
+  if ok then hex = hex_depuis_nom_colore(nom) end
+  if hex == nil then
+    local ok2, element = pcall(function() return _DATA:GetMonster(espece).Forms[0].Element1 end)
+    if ok2 and element ~= nil then hex = COULEURS_TYPES[tostring(element):lower()] end
+  end
+  cache_couleurs_especes[espece] = hex or false
+  return hex
+end
+
+local function couleur_reference(reference)
+  if type(reference) == 'string' then return couleur_espece(reference) end
+  if reference == nil then return nil end
+  local ok, espece = pcall(function() return reference.BaseForm.Species end)
+  if ok and espece ~= nil then
+    local hex = couleur_espece(tostring(espece))
+    if hex ~= nil then return hex end
+  end
+  local ok2, element = pcall(function() return reference.Element1 end)
+  if ok2 and element ~= nil then
+    local ok3, nom_element = pcall(function() return _DATA:GetElement(element):GetColoredName() end)
+    if ok3 then
+      local hex = hex_depuis_nom_colore(nom_element)
+      if hex ~= nil then return hex end
+    end
+    return COULEURS_TYPES[tostring(element):lower()]
+  end
+  return nil
+end
+
+-- Colore un prénom (héros, partenaire ou PNJ) selon le type principal :
+-- reference peut être un membre d'équipe ou un identifiant d'espèce.
+function cinematique.NomColore(nom, reference)
+  if nom == nil or nom == '' then return nom end
+  local hex = couleur_reference(reference)
+  if hex ~= nil then return '[color=' .. hex .. ']' .. nom .. '[color]' end
+  return nom
+end
+
+-- Nom d'espèce localisé déjà coloré par le moteur (ex. Kangourex, Bekipan).
+function cinematique.NomEspece(espece, repli)
+  espece = tostring(espece):lower()
+  local ok, nom = pcall(function() return _DATA:GetMonster(espece):GetColoredName() end)
+  if ok and nom ~= nil and tostring(nom) ~= '' then return tostring(nom) end
+  return cinematique.NomColore(repli or espece, espece)
+end
+
 return cinematique

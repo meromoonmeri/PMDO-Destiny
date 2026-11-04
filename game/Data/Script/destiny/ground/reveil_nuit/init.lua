@@ -684,7 +684,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   local nom_partenaire = membre_partenaire.Nickname
   local nom_heros = membre_heros.Nickname
   dire("Happy", "Au fait, on ne s’est même pas présentés !")
-  dire("Happy", "Je m’appelle " .. nom_partenaire .. " !")
+  dire("Happy", "Je m’appelle " .. cinematique.NomColore(nom_partenaire, membre_partenaire) .. " !")
   geste('idle')
   dire("Normal", "Et toi, comment tu t’appelles ?")
   UI:ResetSpeaker()
@@ -695,6 +695,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     nom_heros = _DATA:GetMonster(membre_heros.BaseForm.Species).Name:ToLocal()
   end
   GAME:SetCharacterNickname(membre_heros, nom_heros)
+  nom_heros = cinematique.NomColore(nom_heros, membre_heros)
   dire("Happy", "« " .. nom_heros .. " »… ! C’est un joli prénom !")
   geste_partenaire('joie')
   dire("Happy", "Enchanté, " .. nom_heros .. " !")

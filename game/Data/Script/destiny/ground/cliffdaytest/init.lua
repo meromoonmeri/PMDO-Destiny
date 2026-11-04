@@ -163,7 +163,7 @@ end
 local function nom_heros()
   local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(0) end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
-    return membre.Nickname
+    return cinematique.NomColore(membre.Nickname, membre)
   end
   return 'toi'
 end
@@ -171,7 +171,7 @@ end
 local function nom_partenaire()
   local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(1) end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
-    return membre.Nickname
+    return cinematique.NomColore(membre.Nickname, membre)
   end
   return 'toi'
 end
@@ -327,7 +327,7 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   SOUND:FadeOutBGM(15)
   cinematique.Respirer(15)
   voix_dazzling("Hilarant.")
-  voix_dazzling("Je ne vois pas ce qu’il y a de drôle, Sonata. C’est gênant.")
+  voix_dazzling("Je ne vois pas ce qu’il y a de drôle, " .. cinematique.NomColore('Sonata', 'lopunny') .. ". C’est gênant.")
   voix_dazzling("Les filles, assez. Faisons notre super entrée.")
 
   -- Réaction du duo vers les voix (au nord), puis face à face : c’est
@@ -431,11 +431,11 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   poser_trio(adagio, Aria, sonata)
   cinematique.Respirer(20)
   hero_regarde_locuteur(hero, adagio)
-  say(adagio, 'Happy', "Adagio, cheffe de la [color=#FF9FD8]Team Dazzling[color].", 'droite')
+  say(adagio, 'Happy', cinematique.NomColore('Adagio', 'tsareena') .. ", cheffe de la [color=#FF9FD8]Team Dazzling[color].", 'droite')
   hero_regarde_locuteur(hero, Aria)
-  say(Aria, 'Happy', "Aria. Retenez le nom : vous l’entendrez souvent.", 'droite')
+  say(Aria, 'Happy', cinematique.NomColore('Aria', 'mawile') .. ". Retenez le nom : vous l’entendrez souvent.", 'droite')
   hero_regarde_locuteur(hero, sonata)
-  say(sonata, 'Joyous', "Et moi, Sonata ! La plus éblouissante des trois !", 'droite')
+  say(sonata, 'Joyous', "Et moi, " .. cinematique.NomColore('Sonata', 'lopunny') .. " ! La plus éblouissante des trois !", 'droite')
   hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Normal', "La plus bruyante, surtout.", 'droite')
   cinematique.Respirer(20)
@@ -677,7 +677,7 @@ function cliffdaytest.ApresCombatTeamDazzling()
 
     -- Le duo libère le chemin de lui-même, sans être poussé.
     local pas_partenaire = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(partner, 708, 736, false, 1)
+      GROUND:MoveToPosition(partner, 764, 736, false, 1)
     end)
     local pas_heros = TASK:BranchCoroutine(function()
       GROUND:MoveToPosition(hero, 684, 736, false, 1)
@@ -696,21 +696,39 @@ function cliffdaytest.ApresCombatTeamDazzling()
       {sonata, Direction.Down, 6, 4},
     })
     local sud = MRKR('Dazzling_Entry_South')
-    local depart_adagio = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(adagio, 736, 716, false, 2)
-      GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 2)
-      GROUND:Hide('Adagio')
-    end)
-    local depart_mawhile = TASK:BranchCoroutine(function()
-      GAME:WaitFrames(8)
-      GROUND:MoveToPosition(Aria, 736, 692, false, 2)
-      GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 2)
+    local function sortie_sud(dx)
+      if sud ~= nil then return sud.Position.X + dx, sud.Position.Y + 38 end
+      return point.Position.X + 23 + dx, point.Position.Y + 42
+    end
+    -- Sortie en couloirs parallèles, comme après une défaite : chacune
+    -- descend dans sa propre colonne jusqu'à y=716, puis file au sud.
+    -- L'ancien tracé de victoire faisait converger Aria et Adagio vers
+    -- x=736 avant de se croiser, pendant que Sonata reculait au nord dans
+    -- la même colonne : les actrices se bloquaient entre elles et la
+    -- cinématique pouvait rester figée après une victoire.
+    partner.CollisionDisabled = true
+    adagio.CollisionDisabled = true
+    Aria.CollisionDisabled = true
+    sonata.CollisionDisabled = true
+    local depart_Aria = TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(Aria, 688, 716, false, 2)
+      local x, y = sortie_sud(-19)
+      GROUND:MoveToPosition(Aria, x, y, false, 2)
+      Aria.CollisionDisabled = false
       GROUND:Hide('Aria')
     end)
-    -- Sonata recule d’un pas pour libérer la colonne, mais elle ne part pas
-    -- encore : elle doit rester la dernière.
-    local recul_sonata = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(sonata, 736, 676, false, 1)
+    local depart_adagio = TASK:BranchCoroutine(function()
+      GAME:WaitFrames(8)
+      GROUND:MoveToPosition(adagio, 712, 716, false, 2)
+      local x, y = sortie_sud(5)
+      GROUND:MoveToPosition(adagio, x, y, false, 2)
+      adagio.CollisionDisabled = false
+      GROUND:Hide('Adagio')
+    end)
+    -- Sonata avance d'un pas dans sa colonne puis s'arrête : laissée
+    -- derrière, elle ne détalera qu'après sa réplique, en toute dernière.
+    local attente_sonata = TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(sonata, 736, 716, false, 1)
     end)
     local regard_partenaire = TASK:BranchCoroutine(function()
       GAME:WaitFrames(45)
@@ -723,7 +741,7 @@ function cliffdaytest.ApresCombatTeamDazzling()
     local suivi_sortie = TASK:BranchCoroutine(function()
       GAME:MoveCamera(720, 672, 140, false)
     end)
-    TASK:JoinCoroutines({depart_adagio, depart_mawhile, recul_sonata,
+    TASK:JoinCoroutines({depart_Aria, depart_adagio, attente_sonata,
       regard_partenaire, regard_heros, suivi_sortie})
 
     -- Laissée derrière, Sonata appelle les filles vers le sud, puis détale
@@ -734,8 +752,10 @@ function cliffdaytest.ApresCombatTeamDazzling()
     hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Shock', "Eh ! Attendez-moi, les filles ! Aaanh !", 'droite')
     SOUND:FadeOutBGM(60)
-    GROUND:MoveToPosition(sonata, 736, 716, false, 2.5)
-    GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 2.5)
+    local x_sonata, y_sonata = sortie_sud(29)
+    GROUND:MoveToPosition(sonata, x_sonata, y_sonata, false, 2.5)
+    sonata.CollisionDisabled = false
+    partner.CollisionDisabled = false
     GROUND:Hide('Sonata')
 
     SV.Destiny.TeamDazzlingRencontree = true
@@ -773,7 +793,7 @@ function cliffdaytest.ConclureArriveeDestiny(hero, partner, point)
   geste_heros(hero, 'determine', partner)
   se_faire_face(partner, hero)
   say(partner, 'Happy', "Tu as raison. On n’a pas traversé les [color=#69D98C]Bois Perdus[color] pour demander la permission d’exister.", 'droite')
-  say(partner, 'Normal', "Alors viens. Je vais te présenter [color=#F5D27A]Réverie Town[color].\nNous passerons dire bonjour à tatie Kangourex, puis nous déciderons ensemble de notre prochaine étape.", 'droite')
+  say(partner, 'Normal', "Alors viens. Je vais te présenter [color=#F5D27A]Réverie Town[color].\nNous passerons dire bonjour à tatie " .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ", puis nous déciderons ensemble de notre prochaine étape.", 'droite')
 
   UI:ResetSpeaker()
   GROUND:CharEndAnim(hero)
@@ -894,7 +914,7 @@ function cliffdaytest.SceneArriveeDestiny()
   say(partner, 'Worried', "Je ne t’ai pas encore parlé de moi. Je n’ai pas connu mes parents ; je suis " .. orphelin .. ".", 'droite')
   geste_heros(hero, 'inquiet', partner)
   se_faire_face(partner, hero)
-  say(partner, 'Normal', "C’est tatie Kangourex qui m’a recueilli quand j’étais tout petit.\nTout le monde l’appelle comme ça, même ceux qui ne sont pas de sa famille.", 'droite')
+  say(partner, 'Normal', "C’est tatie " .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. " qui m’a recueilli quand j’étais tout petit.\nTout le monde l’appelle comme ça, même ceux qui ne sont pas de sa famille.", 'droite')
   say(partner, 'Happy', "Elle s’occupe de moi depuis toujours :\nun repas chaud, un conseil avant de partir, un endroit où déposer ce qui compte. Sans elle, cette maison serait bien vide.", 'droite')
 
   -- Le facteur Bekipan arrive en vol, de profil, depuis l’est. Il se pose
@@ -903,16 +923,21 @@ function cliffdaytest.SceneArriveeDestiny()
   -- le partenaire, puis repart en s’envolant dans l’autre sens, vers la mer.
   local bekipan = facteur_bekipan()
   if bekipan ~= nil then
-    GROUND:TeleportTo(bekipan, 790, 372, Direction.Left)
+    -- Comme dans PMD Red, Bekipan traverse d’abord le ciel en hauteur :
+    -- le 5e argument de TeleportTo est son LocHeight (48 px au-dessus du
+    -- sol). MoveToPosition conserve cette hauteur sur le premier trajet,
+    -- puis AnimateToPosition le fait descendre progressivement jusqu’à 0
+    -- pendant que ses ailes battent en animation Walk.
+    GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)
     cinematique.Emote(partner, 'exclaim', 'EVT_Emote_Exclaim_2')
     cinematique.TournerGroupe({
       { partner, Direction.UpRight, 0, 4 },
       { hero, Direction.UpRight, 5, 4 },
     })
     cinematique.Respirer(10)
-    say(partner, 'Surprised', "Oh ! C’est Bekipan, le facteur !", 'droite')
+    say(partner, 'Surprised', "Oh ! C’est " .. cinematique.NomEspece('pelipper', 'Bekipan') .. ", le facteur !", 'droite')
     GROUND:MoveToPosition(bekipan, 712, 408, false, 2)
-    GROUND:MoveToPosition(bekipan, 659, 444, false, 2)
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)
     -- Petit saut d’atterrissage sur le couvercle, ailes battantes.
     anim(bekipan, 'Hop', false)
     cinematique.Respirer(24)
@@ -921,14 +946,22 @@ function cliffdaytest.SceneArriveeDestiny()
       { partner, bekipan, 0, 4 },
       { hero, bekipan, 5, 4 },
     })
-    -- Perché sur la boîte, il glisse son bec dans la fente : deux coups
-    -- de bec vers le bas pour y déposer la lettre.
+    -- Perché sur la boîte et tourné de face, comme sur la référence PMD
+    -- Red fournie : l’animation Walk Down native de Pelipper enchaîne
+    -- ailes basses, ailes ouvertes puis ailes relevées pendant qu’il
+    -- baisse le bec vers la fente. Un cycle complet dure 44 ticks.
+    -- Le petit Attack final pousse la lettre au fond de la boîte.
     GROUND:CharAnimateTurnTo(bekipan, Direction.Down, 4)
-    anim(bekipan, 'Attack', false)
-    cinematique.Respirer(28)
+    anim(bekipan, 'Walk', true)
+    cinematique.Respirer(44)
     anim(bekipan, 'Attack', false)
     cinematique.Respirer(28)
     GROUND:CharEndAnim(bekipan)
+    -- Le courrier tombe dans la boîte métallique : le « Clunk » de PMD Red,
+    -- en narration sans portrait, avec le bruit sourd déjà utilisé en jeu.
+    SOUND:PlayBattleSE('DUN_Hit_Neutral')
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue('Clunk')
     cinematique.Respirer(10)
 
     -- Bekipan remarque le héros aux côtés du partenaire.
@@ -936,9 +969,9 @@ function cliffdaytest.SceneArriveeDestiny()
     hero_regarde_locuteur(hero, bekipan)
     say(bekipan, 'Happy', "Oh tiens, " .. nom_partenaire() .. " !\nTu t’es fait un nouvel ami, à ce que je vois !", 'droite')
     hero_regarde_locuteur(hero, partner)
-    say(partner, 'Joyous', "Bekipan ! Oui ! Je te présente " .. nom_heros() .. " !\nOn vient de retraverser les [color=#69D98C]Bois Perdus[color] ensemble !", 'droite')
+    say(partner, 'Joyous', cinematique.NomEspece('pelipper', 'Bekipan') .. " ! Oui ! Je te présente " .. nom_heros() .. " !\nOn vient de retraverser les [color=#69D98C]Bois Perdus[color] ensemble !", 'droite')
     se_faire_face(partner, hero)
-    say(partner, 'Happy', "Bekipan distribue le courrier partout dans le monde :\nsa société, la poste Bekipan, porte les lettres des équipes par-delà les mers !", 'droite')
+    say(partner, 'Happy', cinematique.NomEspece('pelipper', 'Bekipan') .. " distribue le courrier partout dans le monde :\nsa société, la poste Bekipan, porte les lettres des équipes par-delà les mers !", 'droite')
     cinematique.RegarderGroupe({
       { partner, bekipan, 0, 4 },
       { hero, bekipan, 5, 4 },
@@ -946,14 +979,24 @@ function cliffdaytest.SceneArriveeDestiny()
     hero_regarde_locuteur(hero, bekipan)
     say(bekipan, 'Joyous', "Hé hé ! Enchanté, " .. nom_heros() .. " !\nAllez, je file : d’autres lettres m’attendent. Au revoir, et bonne chance pour la suite !", 'droite')
     cinematique.Respirer(10)
-    -- Il s’élance d’un saut battant des ailes, puis s’envole dans l’autre
-    -- sens, vers la mer ; en vol, ses ailes battent (animation de marche).
-    GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
+    -- Départ dessiné par l’utilisateur (ligne verte) : Bekipan prend
+    -- d’abord de l’altitude presque à la verticale au-dessus de la
+    -- boîte, dans l’axe x=659 juste à l’est de la maison, puis
+    -- traverse le ciel vers l’ouest au-dessus de la mer. Il ne part
+    -- plus en diagonale au sol et ne traverse ni le toit ni les
+    -- décors hauts.
+    GROUND:CharAnimateTurnTo(bekipan, Direction.Up, 4)
     anim(bekipan, 'Hop', false)
     cinematique.Respirer(24)
     GROUND:CharEndAnim(bekipan)
-    GROUND:MoveToPosition(bekipan, 545, 390, false, 2)
-    GROUND:MoveToPosition(bekipan, 430, 320, false, 2)
+    -- Montée raide initiale : 20 px au sol, mais déjà 48 px d’altitude.
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 424, 1, 1, 48)
+    -- Suite de la montée verticale jusqu’à 72 px, au-dessus de la côte.
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 340, 1, 2, 72)
+    -- Vol horizontal vers l’ouest, à altitude constante au-dessus de
+    -- la mer (MoveToPosition conserve le LocHeight).
+    GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
+    GROUND:MoveToPosition(bekipan, 420, 340, false, 2)
     GROUND:Hide('Bekipan')
     cinematique.Respirer(10)
 
