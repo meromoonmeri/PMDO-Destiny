@@ -27,7 +27,7 @@ function ledian_dojo.Sensei_Action(chara, activator)
 end
 function ledian_dojo.Gible_Action(chara, activator)
   UI:SetSpeaker(chara); UI:SetSpeakerEmotion('Happy')
-  UI:WaitShowDialogue('Je m’entraîne tous les jours ! Un jour, je traverserai Lost Wood sans trembler.')
+  UI:WaitShowDialogue('Je m’entraîne tous les jours ! Un jour, je traverserai les Bois Perdus sans trembler.')
   UI:ResetSpeaker()
 end
 function ledian_dojo.Dungeon_Entrance_Touch(obj, activator) end

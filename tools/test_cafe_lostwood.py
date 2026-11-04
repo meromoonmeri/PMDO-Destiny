@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Contrôles de non-régression pour la mise à jour café Spinda / Réverie Town /
-reprises Lost Wood (novembre 2026).
+reprises Bois Perdus (novembre 2026).
 
 Ces contrôles sont statiques : ils ne remplacent pas un test du runtime PMDO.
 Ils vérifient les empreintes des cartes café corrigées, l'appartenance des
 salles à la zone de la ville, la présence des ressources town02 réellement
 absentes de game/ et base/, ainsi que les invariants des scripts Lua
-(dialogues de reprise Lost Wood, Kangourex sans banque, menus natifs).
+(dialogues de reprise Bois Perdus, Kangourex sans banque, menus natifs).
 """
 
 from __future__ import annotations
@@ -109,9 +109,9 @@ def main() -> int:
     ville = lire(SCRIPT / "ground/WaterfallVillageCapital/init.lua")
     accueil = lire(SCRIPT / "ground/caféspindaaccueil/init.lua")
 
-    # Lost Wood : aucune relance sans le dialogue de choix, à l'aller (solo)
+    # Bois Perdus : aucune relance sans le dialogue de choix, à l'aller (solo)
     # comme au retour (en duo).
-    question = "Souhaitez-vous retourner dans Lost Wood ?"
+    question = "Souhaitez-vous retourner dans les Bois Perdus ?"
     assert cliff.count(question) == 1 and reveil.count(question) == 1
     assert "LostWoodTrip = 'pause_aller'" in cliff
     assert "LostWoodTrip = 'pause_retour'" in reveil
@@ -119,7 +119,8 @@ def main() -> int:
     assert "Repartir dans la forêt maintenant ?" not in cliff
 
     # Pensées du réveil : voix intérieure sur fond noir, jamais de locuteur.
-    for pensee in ("Où suis-je ?", "Qui suis-je ?", "J’ai sommeil…"):
+    for pensee in ("Où suis-je ?", "Tout est flou… Je ne me souviens de rien.",
+                   "Sauf d’une chose.", "Mon prénom…"):
         assert pensee in reveil
     assert "PenseesReveilVues = true" in reveil
 
@@ -153,7 +154,7 @@ def main() -> int:
         texte = lire(fichier)
         assert "Halcyon" not in texte and "Remixed" not in texte
 
-    print("Contrôles café / Réverie Town / Lost Wood : OK")
+    print("Contrôles café / Réverie Town / Bois Perdus : OK")
     return 0
 
 

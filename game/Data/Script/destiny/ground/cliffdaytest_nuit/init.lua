@@ -3,7 +3,7 @@
      dans la prairie ZRV2 (zrv2_zone_reveil_nuit) → cette map, la nuit.
      Le partenaire (celui choisi et
      nommé dans le quiz) sort de sa maison, dépasse le croisement et hésite
-     sur le chemin de l'est, devant l'entrée de Lost Wood, puis part seul.
+     sur le chemin de l'est, devant l'entrée des Bois Perdus, puis part seul.
      Après les retrouvailles, le retour inverse en duo aboutit sur
      cliffdaytest au jour. Le héros reste allongé jusqu'à la rencontre.
      Dialogues originaux Destiny. Réveil solo, retrouvailles et retour
@@ -58,7 +58,7 @@ function cliffdaytest_nuit.GarderCheminSud(joueur)
   UI:ResetSpeaker()
   GROUND:CharAnimateTurnTo(joueur, Direction.Up, 4)
   cinematique.Dire(joueur, 'Worried', 'Non. Je ne vais pas me dégonfler.', 'standard')
-  cinematique.Dire(joueur, 'Determined', 'Il faut que je sois courageux. Je dois traverser [color=#69D98C]Lost Wood[color].', 'standard')
+  cinematique.Dire(joueur, 'Determined', 'Il faut que je sois courageux. Je dois traverser les [color=#69D98C]Bois Perdus[color].', 'standard')
   cinematique.Dire(joueur, 'Normal', 'Je peux souffler un instant, d’accord… mais pas fuir par le chemin du sud. L’entrée est à l’est.', 'standard')
   UI:ResetSpeaker()
   -- Le partenaire remonte de lui-même vers le croisement nord-sud.
@@ -143,8 +143,8 @@ function cliffdaytest_nuit.DemanderRetourAller()
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
   GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
-  cinematique.Dire(partenaire, 'Normal', 'Voici l’entrée de [color=#69D98C]Lost Wood[color].', 'standard')
-  UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans Lost Wood ?', true)
+  cinematique.Dire(partenaire, 'Normal', 'Voici l’entrée des [color=#69D98C]Bois Perdus[color].', 'standard')
+  UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans les Bois Perdus ?', true)
   UI:WaitForChoice()
   if UI:ChoiceResult() then
     cinematique.Dire(partenaire, 'Determined', 'Allez… on y retourne. Cette fois, je vais jusqu’au bout !', 'standard')
@@ -174,10 +174,10 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
   GAME:FadeIn(30)
   GAME:WaitFrames(30)
   if SV.Destiny.LostWoodCause == 'ko' then
-    cinematique.Dire(partenaire, 'Worried', 'Aïe… Je suis devant l’entrée de [color=#69D98C]Lost Wood[color]…', 'standard')
+    cinematique.Dire(partenaire, 'Worried', 'Aïe… Je suis devant l’entrée des [color=#69D98C]Bois Perdus[color]…', 'standard')
     cinematique.Dire(partenaire, 'Worried', 'J’ai perdu connaissance dans la forêt. Il faut que je reprenne mon souffle.', 'standard')
   else
-    cinematique.Dire(partenaire, 'Worried', 'Me voilà de retour devant [color=#69D98C]Lost Wood[color]. J’ai bien fait de rebrousser chemin.', 'standard')
+    cinematique.Dire(partenaire, 'Worried', 'Me voilà de retour devant les [color=#69D98C]Bois Perdus[color]. J’ai bien fait de rebrousser chemin.', 'standard')
     cinematique.Dire(partenaire, 'Worried', 'Renoncer pour se protéger, ce n’est pas la fin de l’aventure.', 'standard')
   end
   GROUND:CharSetAnim(partenaire, 'Wake', false)
@@ -228,7 +228,7 @@ function cliffdaytest_nuit.ScenePartenaire()
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
   -- La carte joue Cliff Camp et le ressac ; Tiny Woods prendra le relais
-  -- lorsque le partenaire entrera dans Lost Wood.
+  -- lorsque le partenaire entrera dans les Bois Perdus.
 
   -- Le héros est inconscient ailleurs : seul le partenaire choisi au quiz
   -- doit apparaître dans cette scène.
@@ -296,7 +296,7 @@ function cliffdaytest_nuit.ScenePartenaire()
   if avant_plan ~= nil then avant_plan.Layer = ordre_avant_plan end
   GAME:WaitFrames(20)
 
-  cinematique.Dire(partenaire, 'Worried', "Bon... voilà le chemin de l’est.\nAu bout, c’est l’entrée du donjon le plus proche : [color=#69D98C]Lost Wood[color].", 'standard')
+  cinematique.Dire(partenaire, 'Worried', "Bon... voilà le chemin de l’est.\nAu bout, c’est l’entrée du donjon le plus proche : les [color=#69D98C]Bois Perdus[color].", 'standard')
   cinematique.Dire(partenaire, 'Worried', "Devenir explorateur...\nest-ce que je suis vraiment prêt pour ça ?", 'standard')
   cinematique.Dire(partenaire, 'Normal', "Si j'y vais seul et que ça tourne mal...\npersonne ne saura même que je suis parti.", 'standard')
   cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
@@ -305,9 +305,9 @@ function cliffdaytest_nuit.ScenePartenaire()
 
   cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim_2')
   cinematique.Respirer(20)
-  cinematique.Dire(partenaire, 'Happy', "C'est décidé ! Je traverserai [color=#69D98C]Lost Wood[color] —\net je sortirai de là en vrai explorateur !", 'standard')
+  cinematique.Dire(partenaire, 'Happy', "C'est décidé ! Je traverserai les [color=#69D98C]Bois Perdus[color] —\net je sortirai de là en vrai explorateur !", 'standard')
 
-  -- Les conseils sont maintenant présentés dans Lost Wood, étage par étage.
+  -- Les conseils sont maintenant présentés dans les Bois Perdus, étage par étage.
   SV.Destiny = SV.Destiny or {}
   cinematique.Dire(partenaire, 'Happy', "En route ! La nuit est à moi !", 'standard')
 

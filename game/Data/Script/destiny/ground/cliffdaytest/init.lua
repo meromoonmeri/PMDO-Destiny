@@ -338,7 +338,7 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   cinematique.Respirer(10)
 
   say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.", 'droite')
-  say(partner, 'Determined', "On a traversé [color=#69D98C]Lost Wood[color]. Deux fois.", 'standard')
+  say(partner, 'Determined', "On a traversé les [color=#69D98C]Bois Perdus[color]. Deux fois.", 'standard')
   say(Aria, 'Happy', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
   -- Aria cherche Sonata du regard pour partager sa pique, puis Sonata rit
   -- au sol (glowing sans SFX) avant de répondre au duo.
@@ -594,7 +594,7 @@ end
 -- termine par le combat ou par le repli de secours sans spawner Dazzling.
 function cliffdaytest.ConclureArriveeDestiny(hero, partner, point)
   geste_heros(hero, 'determine')
-  say(partner, 'Happy', "Tu as raison. On n’a pas traversé [color=#69D98C]Lost Wood[color] pour demander la permission d’exister.", 'droite')
+  say(partner, 'Happy', "Tu as raison. On n’a pas traversé les [color=#69D98C]Bois Perdus[color] pour demander la permission d’exister.", 'droite')
   say(partner, 'Normal', "Alors viens. Je vais te présenter [color=#F5D27A]Réverie Town[color].\nNous passerons dire bonjour à tatie Kangourex, puis nous déciderons ensemble de notre prochaine étape.", 'droite')
 
   UI:ResetSpeaker()
@@ -668,7 +668,7 @@ function cliffdaytest.SceneArriveeDestiny()
   end)
   if ok_feminin and feminin then orphelin = 'orpheline' end
 
-  say(partner, 'Happy', "On est ressortis… et regarde : le jour s’est levé pendant que nous retraversions [color=#69D98C]Lost Wood[color].", 'droite')
+  say(partner, 'Happy', "On est ressortis… et regarde : le jour s’est levé pendant que nous retraversions les [color=#69D98C]Bois Perdus[color].", 'droite')
   geste_heros(hero, 'autour')
   say(partner, 'Normal', "C’est la même falaise que cette nuit, mais dans l’autre sens.\nLe chemin de l’est nous a ramenés chez moi.", 'droite')
   GAME:MoveCamera(porte.Position.X + 20, porte.Position.Y + 20, 75, false)

@@ -1,4 +1,4 @@
--- Lost Wood : segment 0 pour l'aller seul, segment 1 pour le retour inverse
+-- Bois Perdus (id lost_wood) : segment 0 pour l'aller seul, segment 1 pour le retour inverse
 -- en équipe. Un échec de l'aller ne réintroduit jamais le héros dans la
 -- scène du partenaire ; le succès de l'aller et l'échec du retour arrivent
 -- dans la prairie du réveil, tandis que le succès du retour arrive sur la

@@ -142,7 +142,7 @@ function caféspindaaccueil.NewObject_13_Action(personnage, activator)
 end
 
 function caféspindaaccueil.Pompot_Action(personnage, activator)
-  dire(personnage, 'Normal', 'Après Lost Wood, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
+  dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
   UI:ResetSpeaker()
 end
 

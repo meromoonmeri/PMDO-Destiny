@@ -1,4 +1,4 @@
--- Variante Forêt aux lucioles de Lost Wood.
+-- Variante Forêt aux lucioles des Bois Perdus.
 -- La géométrie des deux rives reprend le principe du donjon de rivière ;
 -- les décors de ruines sont placés séparément par le générateur natif.
 -- Les lucioles sont des animations sans collision. Les passages restent du
@@ -95,7 +95,7 @@ function FLOOR_GEN_SCRIPT.DestinyLostWoodRiviereEtLucioles(map, args)
       end
     end
   end
-  map.Map:AddLayer('Sentiers de Lost Wood')
+  map.Map:AddLayer('Sentiers des Bois Perdus')
   local coucheSentier = map.Map.Layers[map.Map.Layers.Count - 1]
   coucheSentier.Layer = RogueEssence.Content.DrawLayer.Bottom
   for y = 1, map.Height - 2 do

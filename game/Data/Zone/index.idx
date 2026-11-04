@@ -59,7 +59,7 @@
     }
    },
    "Released": true,
-   "Comment": "Zone intro + quiz + retrouvailles nocturnes — StartMap = intro_halo ; reveil_nuit est atteint après l’aller solo de Lost Wood et lance le retour en duo.",
+   "Comment": "Zone intro + quiz + retrouvailles nocturnes — StartMap = intro_halo ; reveil_nuit est atteint après l’aller solo dans les Bois Perdus et lance le retour en duo.",
    "SortOrder": 10
   },
   "destiny_cliff_tests": {
@@ -92,7 +92,7 @@
     }
    },
    "Released": true,
-   "Comment": "Zone conteneur des maps du lot destiny_cliff_tests — 8 maps de falaises + cliffdaytest_nuit (version nuit de cliffdaytest : scène du partenaire qui hésite à devenir explorateur, avant Lost Wood). Retour du trajet duo de Lost Wood : cliffdaytest_nuit, ground 8.",
+   "Comment": "Zone conteneur des maps du lot destiny_cliff_tests — 8 maps de falaises + cliffdaytest_nuit (version nuit de cliffdaytest : scène du partenaire qui hésite à devenir explorateur, avant les Bois Perdus). Retour du trajet duo des Bois Perdus : cliffdaytest_nuit, ground 8.",
    "SortOrder": 20
   },
   "lost_wood": {
@@ -108,7 +108,7 @@
    "KeepTreasure": false,
    "BagSize": -1,
    "Rescues": 2,
-   "CountedFloors": 7,
+   "CountedFloors": 14,
    "Rogue": 1,
    "Grounds": [],
    "Maps": [
@@ -120,16 +120,25 @@
      4,
      5,
      6
+    ],
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
     ]
    ],
    "Name": {
-    "DefaultText": "Lost Wood",
+    "DefaultText": "Bois Perdus",
     "LocalTexts": {
-     "fr": "Lost Wood"
+     "fr": "Bois Perdus"
     }
    },
    "Released": true,
-   "Comment": "Lost Wood — 7 étages traversés deux fois : aller solitaire du partenaire, puis retour en duo après la scène nocturne du réveil. Le succès du premier trajet conduit à reveil_nuit ; celui du retour ramène au croisement nocturne.",
+   "Comment": "Bois Perdus — deux segments de sept étages : segment 0 pour l’aller solitaire du partenaire (générateurs 1 → 7, étages 1F → 7F, escaliers montants), segment 1 pour le retour en duo (générateurs 7 → 1, étages négatifs B1F → B7F, escaliers descendants). Le succès de l’aller conduit à zrv2_zone_reveil_nuit ; celui du retour ramène à cliffdaytest au jour.",
    "SortOrder": 30
   },
   "dazzling_fight": {

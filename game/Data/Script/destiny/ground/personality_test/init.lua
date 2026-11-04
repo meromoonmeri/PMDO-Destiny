@@ -13,7 +13,7 @@
        différente du héros) → sexe + talent du partenaire → NOM du
        partenaire (NameMenu + confirmation) → la faille du rêve : héros
        endormi dans la prairie du réveil (zrv2_zone_reveil_nuit), puis scène
-       du partenaire sur cliffdaytest (version nuit) → donjon Lost Wood
+       du partenaire sur cliffdaytest (version nuit) → donjon Bois Perdus
        (7 étages) → retrouvailles dans la même prairie.
      Données : questions et recommandations dans quiz_data.lua ; 85 choix
      source dans starters_source.lua, plus les choix Destiny sans doublon.

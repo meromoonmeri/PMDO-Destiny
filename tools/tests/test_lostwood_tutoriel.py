@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vérifie les raccordements de Lost Wood et les ressources de la statue."""
+"""Vérifie les raccordements de Bois Perdus et les ressources de la statue."""
 from pathlib import Path
 import json
 import struct
@@ -61,7 +61,7 @@ for segment in segments:
     name_steps = _find_steps(segment['ZoneSteps'], 'FloorNameDropZoneStep')
     assert len(name_steps) == 1
     floor_names.append(name_steps[0]['Name']['DefaultText'])
-assert floor_names == ['Lost Wood\n{0}F', 'Lost Wood\nB{0}F']
+assert floor_names == ['Bois Perdus\n{0}F', 'Bois Perdus\nB{0}F']
 for segment, expected_stairs in ((segments[0], 'stairs_go_up'), (segments[1], 'stairs_go_down')):
     stairs_steps = _find_steps(segment['Floors'], 'FloorStairsStep')
     assert len(stairs_steps) == 7
@@ -109,8 +109,8 @@ assert "EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')" in quiz
 reverie = json.loads((GAME / 'Data/Zone/reverie.json').read_text(encoding='utf-8-sig'))['Object']
 assert reverie['GroundMaps'][10] == 'zrv2_zone_reveil_nuit'
 reveil = (GAME / 'Data/Script/destiny/ground/reveil_nuit/init.lua').read_text(encoding='utf-8')
-for phrase in ('…Où suis-je ?', 'Il fait noir…',
-               'Je ne me souviens de rien…', 'J’ai sommeil…'):
+for phrase in ('…Où suis-je ?', 'Tout est flou… Je ne me souviens de rien.',
+               '…Sauf d’une chose.', 'Mon prénom…'):
     assert phrase in reveil
 # Pensées blanches sur le noir : phrases courtes, sans balise [i], avec le
 # fondu d'entrée/sortie des voix-off PMDO (SetAutoFinish), puis retour au

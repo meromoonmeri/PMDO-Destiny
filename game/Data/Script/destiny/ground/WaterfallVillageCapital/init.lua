@@ -1,4 +1,4 @@
--- Réverie Town : arrivée après Lost Wood et présentation des lieux existants.
+-- Réverie Town : arrivée après les Bois Perdus et présentation des lieux existants.
 -- La version town02 étendue contient ses habitants, objets et marqueurs ;
 -- Kecleon et Kangourex sérialisés sont réutilisés, avec création en repli
 -- uniquement si une ancienne sauvegarde/carte ne les fournit pas.
@@ -873,7 +873,7 @@ end
 
 local dialogues_lux = {
   {
-    {1, 'Worried', 'Dis… Lost Wood fait vraiment aussi peur qu’on le raconte ?'},
+    {1, 'Worried', 'Dis… les Bois Perdus font vraiment aussi peur qu’on le raconte ?'},
     {2, 'Normal', 'Il demande du respect, pas de la peur. On y entre préparé, et jamais en se croyant invincible.'},
     {1, 'Happy', 'Alors je m’entraînerai encore. Un jour, je traverserai à tes côtés.'},
   },
@@ -970,8 +970,8 @@ local dialogues_habitants = {
     {{'Happy', 'Les petits m’utilisent comme point de repère. « Au troisième Arcanin, tournez à gauche », disent-ils. Il n’y en a qu’un…'}},
   },
   NewObject_22 = {
-    {{'Normal', 'On dit que les ombres de Lost Wood se déplacent. Moi, je dis surtout de garder une Baie Lum à portée de patte.'}},
-    {{'Normal', 'Près de ma grotte, l’air change selon les jours. Quand il sent la mousse froide, Lost Wood s’agite. Restez prudents.'}},
+    {{'Normal', 'On dit que les ombres des Bois Perdus se déplacent. Moi, je dis surtout de garder une Baie Lum à portée de patte.'}},
+    {{'Normal', 'Près de ma grotte, l’air change selon les jours. Quand il sent la mousse froide, les Bois Perdus s’agitent. Restez prudents.'}},
     {{'Worried', 'Les filaments de la rivière fuient vers le sud, comme s’ils évitaient la forêt. Intéressant… non ?'}},
   },
   NewObject_23 = {

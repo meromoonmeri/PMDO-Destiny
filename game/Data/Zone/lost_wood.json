@@ -3,13 +3,13 @@
   "Object": {
     "$type": "RogueEssence.Data.ZoneData, RogueEssence",
     "Name": {
-      "DefaultText": "Lost Wood",
+      "DefaultText": "Bois Perdus",
       "LocalTexts": {
-        "fr": "Lost Wood"
+        "fr": "Bois Perdus"
       }
     },
     "Released": true,
-    "Comment": "Lost Wood — deux segments de sept étages : segment 0 pour l’aller solitaire du partenaire (générateurs 1 → 7, étages 1F → 7F, escaliers montants), segment 1 pour le retour en duo (générateurs 7 → 1, étages négatifs B1F → B7F, escaliers descendants). Le succès de l’aller conduit à zrv2_zone_reveil_nuit ; celui du retour ramène à cliffdaytest au jour.",
+    "Comment": "Bois Perdus — deux segments de sept étages : segment 0 pour l’aller solitaire du partenaire (générateurs 1 → 7, étages 1F → 7F, escaliers montants), segment 1 pour le retour en duo (générateurs 7 → 1, étages négatifs B1F → B7F, escaliers descendants). Le succès de l’aller conduit à zrv2_zone_reveil_nuit ; celui du retour ramène à cliffdaytest au jour.",
     "NoEXP": false,
     "ExpPercent": 100,
     "Level": 10,
@@ -5451,9 +5451,9 @@
               ]
             },
             "Name": {
-              "DefaultText": "Lost Wood\n{0}F",
+              "DefaultText": "Bois Perdus\n{0}F",
               "LocalTexts": {
-                "fr": "Lost Wood\n{0}F"
+                "fr": "Bois Perdus\n{0}F"
               }
             },
             "Priority": {
@@ -6585,7 +6585,7 @@
           }
         ],
         "IsRelevant": true,
-        "Comment": "Lost Wood — aller : sept générateurs distincts, étages 1F → 7F et escaliers montants, vers la prairie du réveil."
+        "Comment": "Bois Perdus — aller : sept générateurs distincts, étages 1F → 7F et escaliers montants, vers la prairie du réveil."
       },
       {
         "$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
@@ -12013,9 +12013,9 @@
               ]
             },
             "Name": {
-              "DefaultText": "Lost Wood\nB{0}F",
+              "DefaultText": "Bois Perdus\nB{0}F",
               "LocalTexts": {
-                "fr": "Lost Wood\nB{0}F"
+                "fr": "Bois Perdus\nB{0}F"
               }
             },
             "Priority": {
@@ -13147,7 +13147,7 @@
           }
         ],
         "IsRelevant": true,
-        "Comment": "Lost Wood — retour inverse : les mêmes sept générateurs parcourus 7 → 1, affichés en étages négatifs B1F → B7F avec escaliers descendants, vers la falaise au jour."
+        "Comment": "Bois Perdus — retour inverse : les mêmes sept générateurs parcourus 7 → 1, affichés en étages négatifs B1F → B7F avec escaliers descendants, vers la falaise au jour."
       }
     ],
     "GroundMaps": []
