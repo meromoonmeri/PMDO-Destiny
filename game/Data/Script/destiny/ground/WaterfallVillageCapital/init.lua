@@ -173,9 +173,6 @@ local portes_batiments = {
   {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1028, y = 472, retour_x = 1076, retour_y = 500, interieur = 'metano_water_home', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteMaisonEquipe', titre = 'Maison de l\'équipe', x = 660, y = 524, retour_x = 676, retour_y = 548, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 384, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
-  {nom = 'PorteMaisonAlakazam', titre = 'Maison d\'Alakazam', x = 344, y = 1112, retour_x = 372, retour_y = 1156, interieur = 'metano_normal_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteReserveKangourex', titre = 'Réserve Kangourex', x = 932, y = 968, retour_x = 964, retour_y = 1012, interieur = 'guild_storage_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteForgeTinkaton', titre = 'Atelier de Tinkaton', x = 1080, y = 1008, retour_x = 1108, retour_y = 1052, interieur = 'dojo_ossatueur', marqueur = 'MarowakDojoExitMarker'},
   {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'metano_electric_home', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'metano_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
@@ -202,11 +199,64 @@ local function installer_portes(map)
   end
 end
 
+-- Comptoirs des boutiques, façon Metano Town : chaque marchand se tient
+-- dans sa boutique, derrière son comptoir, et le joueur lui parle en
+-- interagissant devant le comptoir. Le comptoir est un objet invisible
+-- infranchissable posé sur la devanture (déjà bloquée par les collisions
+-- town02, sauf la terrasse de la forge) ; le poste est l’alcôve fermée de
+-- la boutique relevée dans ces mêmes collisions. Les deux Kecleon sont
+-- déjà sérialisés derrière leur comptoir : aucun poste à corriger pour
+-- eux. Les seuils d’Alakazam, de Kangourex et de la forge deviennent des
+-- comptoirs : leurs anciennes portes d’intérieur sont donc retirées.
+local comptoirs = {
+  {nom = 'ComptoirKecleon', marchand = 'Kecleon', x = 584, y = 936, w = 32, h = 16},
+  {nom = 'ComptoirKecleonViolet', marchand = 'Kecleon_Violet', x = 616, y = 936, w = 32, h = 16},
+  {nom = 'ComptoirBanqueMordudor', marchand = 'NewObject_3', x = 480, y = 1072, w = 64, h = 16, poste_x = 504, poste_y = 1040},
+  {nom = 'ComptoirAlakazam', marchand = 'NewObject_4', x = 352, y = 1120, w = 32, h = 16, poste_x = 360, poste_y = 1100},
+  {nom = 'ComptoirKangourex', marchand = 'Kangourex', x = 928, y = 952, w = 40, h = 16, poste_x = 940, poste_y = 930},
+  {nom = 'ComptoirForgeTinkaton', marchand = 'NewObject_24', x = 1080, y = 1008, w = 64, h = 16, poste_x = 1104, poste_y = 972},
+}
+
+local function installer_comptoirs(map)
+  if map == nil then return end
+  for _, comptoir_def in ipairs(comptoirs) do
+    if not map:FindObject(comptoir_def.nom) then
+      local comptoir = RogueEssence.Ground.GroundObject()
+      comptoir.EntName = comptoir_def.nom
+      comptoir.Collider = RogueElements.Rect(comptoir_def.x, comptoir_def.y, comptoir_def.w, comptoir_def.h)
+      pcall(function()
+        comptoir.Passable = false
+        comptoir:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Action)
+      end)
+      comptoir:OnMapInit()
+      map:AddObject(comptoir)
+    end
+  end
+end
+
+-- Chaque marchand prend son poste derrière son comptoir, face à la rue
+-- (sud). Le poste devient sa position de repos mémorisée : après un
+-- dialogue, il reprend cette orientation sans jamais quitter la boutique.
+local function placer_marchands_aux_comptoirs()
+  for _, comptoir_def in ipairs(comptoirs) do
+    if comptoir_def.poste_x ~= nil then
+      local marchand = CH(comptoir_def.marchand)
+      if marchand ~= nil then
+        GROUND:TeleportTo(marchand, comptoir_def.poste_x, comptoir_def.poste_y, Direction.Down)
+        positions_habitants[comptoir_def.marchand] = {
+          x = comptoir_def.poste_x, y = comptoir_def.poste_y, dir = Direction.Down,
+        }
+      end
+    end
+  end
+end
+
 function ville.Init(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
-  habitant('Kecleon', 'kecleon', Gender.Male, 616, 948)
-  habitant('Kangourex', 'kangaskhan', Gender.Female, 932, 1004)
+  installer_comptoirs(map)
+  habitant('Kecleon', 'kecleon', Gender.Male, 599, 922)
+  habitant('Kangourex', 'kangaskhan', Gender.Female, 940, 930)
   -- Habitants ajoutés (ville vivante) : créés s'ils ne sont pas sérialisés
   -- dans la carte (positions relevées sur le rendu, à confirmer au runtime).
   habitant('Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
@@ -225,6 +275,7 @@ function ville.Init(map)
       Direction.Left)
     GROUND:EntTurn(luxio, Direction.Right)
   end
+  placer_marchands_aux_comptoirs()
   positions_habitants = {}
   for _, nom in ipairs(habitants_vivants) do
     local acteur = CH(nom)
@@ -463,7 +514,7 @@ local function entrer()
 end
 
 function ville.Enter(map) entrer() end
-function ville.GameLoad(map) installer_portes(map) entrer() end
+function ville.GameLoad(map) installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer() end
 function ville.Exit(map) end
 function ville.Update(map, time) tic_ambiance() end
 
@@ -539,6 +590,17 @@ for _, porte_def in ipairs(portes_batiments) do
       GAME:FadeOut(false, 20)
       GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)
     end
+  end
+end
+
+-- Interagir devant un comptoir revient à s’adresser au marchand posté
+-- derrière : même dialogue et même service que l’Action du personnage.
+for _, comptoir_def in ipairs(comptoirs) do
+  local comptoir = comptoir_def
+  ville[comptoir.nom .. '_Action'] = function(obj, activator)
+    local marchand = CH(comptoir.marchand)
+    local action = ville[comptoir.marchand .. '_Action']
+    if marchand ~= nil and action ~= nil then action(marchand, activator) end
   end
 end
 
@@ -673,7 +735,7 @@ function ville.Kecleon_Violet_Action(personnage, activator)
   terminer_dialogue(personnage, 'Kecleon_Violet')
 end
 
--- Gimmighoul ambulant : seule banque de Réverie Town.
+-- Banque de Réverie Town : Mordudor sert les clients à son comptoir.
 function ville.NewObject_3_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
   UI:SetSpeaker(personnage)

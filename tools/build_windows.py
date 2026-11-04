@@ -93,9 +93,17 @@ def main() -> None:
         if destination.exists():
             shutil.rmtree(destination)
         shutil.copytree(merged / name, destination)
-    # The final game no longer needs a MODS directory or a quest selector.
+    # The final game no longer needs a quest selector, but it ships the
+    # optional UI theme mods: PMDO lists them in the title-screen Mods menu,
+    # where the player enables at most one theme (defaults to the original
+    # green interface when none is active).
     if (publish_dir / 'MODS').exists():
         shutil.rmtree(publish_dir / 'MODS')
+    mods_ui = ROOT / 'mods_ui'
+    if mods_ui.is_dir():
+        for mod in sorted(mods_ui.iterdir()):
+            if (mod / 'Mod.xml').is_file():
+                shutil.copytree(mod, publish_dir / 'MODS' / mod.name)
     if (publish_dir / 'BUILD').exists():
         shutil.rmtree(publish_dir / 'BUILD')
 

@@ -147,4 +147,31 @@ for name in town02_objects:
     assert (GAME / 'Content/Object' / f'{name}.dir').is_file(), name
 assert len(list((GAME / 'Content/Objects').glob('*.png'))) == 74
 
-print('OK : Waterfall Village étendue, 44 Tilesheets, habitants, objets et décorations town02.')
+# Comptoirs des boutiques (façon Metano Town) : les six marchands servent
+# depuis l’alcôve fermée de leur boutique, derrière un objet-comptoir posé
+# sur la devanture, et l’interaction devant le comptoir ouvre leur service.
+ville_lua = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
+comptoirs_attendus = {
+    'ComptoirKecleon': 'Kecleon',
+    'ComptoirKecleonViolet': 'Kecleon_Violet',
+    'ComptoirBanqueMordudor': 'NewObject_3',
+    'ComptoirAlakazam': 'NewObject_4',
+    'ComptoirKangourex': 'Kangourex',
+    'ComptoirForgeTinkaton': 'NewObject_24',
+}
+for nom_comptoir, marchand in comptoirs_attendus.items():
+    assert f"nom = '{nom_comptoir}', marchand = '{marchand}'" in ville_lua, nom_comptoir
+for poste in ('poste_x = 504, poste_y = 1040', 'poste_x = 360, poste_y = 1100',
+              'poste_x = 940, poste_y = 930', 'poste_x = 1104, poste_y = 972'):
+    assert poste in ville_lua, poste
+assert ville_lua.count('installer_comptoirs(map)') >= 3  # définition, Init, GameLoad
+assert ville_lua.count('placer_marchands_aux_comptoirs()') >= 3
+assert 'placer_marchands_aux_comptoirs()\n  positions_habitants = {}' in ville_lua
+assert "ville[comptoir.nom .. '_Action']" in ville_lua
+assert "habitant('Kecleon', 'kecleon', Gender.Male, 599, 922)" in ville_lua
+assert "habitant('Kangourex', 'kangaskhan', Gender.Female, 940, 930)" in ville_lua
+# Les seuils devenus comptoirs n’ouvrent plus sur un intérieur.
+for porte_retiree in ('PorteMaisonAlakazam', 'PorteReserveKangourex', 'PorteForgeTinkaton'):
+    assert porte_retiree not in ville_lua, porte_retiree
+
+print('OK : Waterfall Village étendue, 44 Tilesheets, habitants, objets, décorations town02 et comptoirs des marchands.')

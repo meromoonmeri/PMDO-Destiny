@@ -1,0 +1,26 @@
+<Header>
+  <Name>Destiny UI — Violet</Name>
+  <Author>meromoonmeri</Author>
+  <Description>Thème d’interface pour Pokémon Mystery Dungeon: Destiny. Dans le menu Mods de l’écran titre, activez UN seul thème Destiny UI à la fois ; sans thème actif, l’interface garde son vert d’origine.</Description>
+  <Namespace>destiny_ui_violet</Namespace>
+  <UUID>263DB6AA-B0D2-5FE5-BD61-5ACC46EF9F8F</UUID>
+  <Version>1.0.0</Version>
+  <ModType>Mod</ModType>
+  <Relationships>
+    <RelatedMod>
+      <UUID>0C4C4EE0-F410-5516-A19E-2853EFCD73D8</UUID>
+      <Namespace>destiny_ui_jaune_pastel</Namespace>
+      <Relationship>Incompatible</Relationship>
+    </RelatedMod>
+    <RelatedMod>
+      <UUID>EC65D1F5-EC52-5B96-994B-CA9DDBFF6CCE</UUID>
+      <Namespace>destiny_ui_bleu</Namespace>
+      <Relationship>Incompatible</Relationship>
+    </RelatedMod>
+    <RelatedMod>
+      <UUID>D40C3E7B-A5A3-527A-A3AF-614CDA7FBF71</UUID>
+      <Namespace>destiny_ui_rose_pastel</Namespace>
+      <Relationship>Incompatible</Relationship>
+    </RelatedMod>
+  </Relationships>
+</Header>

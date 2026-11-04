@@ -453,9 +453,9 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.", 'droite')
   hero_regarde_locuteur(hero, partner)
   say(partner, 'Determined', "On a traversé les [color=#69D98C]Bois Perdus[color]. Deux fois.", 'standard')
-  -- Special0 : le portrait personnalisé de Aria, regard sournois de côté.
+  -- Aria se moque du duo : portrait Joyous canonique.
   hero_regarde_locuteur(hero, Aria)
-  say(Aria, 'Special0', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
+  say(Aria, 'Joyous', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
   -- Aria cherche Sonata du regard pour partager sa pique, puis Sonata rit
   -- au sol (glowing sans SFX) avant de répondre au duo.
   cinematique.Respirer(10)
@@ -493,62 +493,60 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   lancer_combat_dazzling()
 end
 
--- Issue canonique après la défaite : les Dazzling reprennent leur colonne,
--- poussent physiquement le duo hors du chemin sud, l’humilient, puis filent
--- vers Réverie Town en laissant Sonata partir en courant en dernière.
+-- Issue canonique après la défaite : le trio reste en formation, de front
+-- comme au face-à-face, fonce vers le sud en bousculant le duo — le héros
+-- projeté à l’ouest du chemin, le partenaire à l’est — l’humilie, puis
+-- repart vite vers Réverie Town ; Sonata part encore en dernière.
 function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, Aria)
   local sud = MRKR('Dazzling_Entry_South')
 
-  -- Aria et Sonata se replacent derrière Adagio, au nord, dans la
-  -- colonne basse x = 736 ; Adagio gagne la tête de colonne.
-  local colonne_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, 736, 700, false, 1)
+  -- Le trio descend de front, sans se mettre en file indienne, jusqu’au
+  -- contact avec le duo qui lui barre encore le chemin.
+  local avance_Aria = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(Aria, 688, 716, false, 1)
   end)
-  local colonne_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 736, 676, false, 1)
+  local avance_adagio = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(adagio, 712, 716, false, 1)
   end)
-  local colonne_aria = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(2)
-    GROUND:MoveToPosition(Aria, 688, 652, false, 1)
-    GROUND:MoveToPosition(Aria, 736, 652, false, 1)
+  local avance_sonata = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 736, 716, false, 1)
   end)
-  TASK:JoinCoroutines({colonne_adagio, colonne_sonata, colonne_aria})
-
-  local contact_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, 736, 716, false, 1)
-  end)
-  local contact_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 736, 692, false, 1)
-  end)
-  local contact_aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, 736, 668, false, 1)
-  end)
-  TASK:JoinCoroutines({contact_adagio, contact_sonata, contact_aria})
+  TASK:JoinCoroutines({avance_Aria, avance_adagio, avance_sonata})
 
   SOUND:PlayBattleSE('DUN_Hit_Neutral')
-  -- Réaction physique simultanée : le partenaire encaisse directement le
-  -- passage d’Adagio (shock), le héros est entraîné dans le même mouvement
-  -- avec exclaim. Partir ensemble évite aussi que le partenaire, poussé
-  -- vers l’ouest, traverse l’espace encore occupé par le héros.
-  local pousse_partenaire = TASK:BranchCoroutine(function()
-    GROUND:CharSetEmote(partner, 'shock', 1)
-    GROUND:AnimateToPosition(partner, 'Hurt', Direction.Up, 708, 736, 1, 4, 0)
-    GROUND:CharEndAnim(partner)
-  end)
+  -- La bousculade : le héros est projeté à l’ouest du chemin (exclaim), le
+  -- partenaire à l’est (shock), pendant que le trio traverse en formation
+  -- l’espace qu’ils occupaient et s’arrête juste au sud du face-à-face.
   local pousse_heros = TASK:BranchCoroutine(function()
     GROUND:CharSetEmote(hero, 'exclaim', 1)
-    GROUND:AnimateToPosition(hero, 'Hurt', Direction.Up, 684, 736, 1, 4, 0)
+    GROUND:AnimateToPosition(hero, 'Hurt', Direction.Up, 668, 744, 1, 4, 0)
     GROUND:CharEndAnim(hero)
   end)
-  TASK:JoinCoroutines({pousse_heros, pousse_partenaire})
+  local pousse_partenaire = TASK:BranchCoroutine(function()
+    GROUND:CharSetEmote(partner, 'shock', 1)
+    GROUND:AnimateToPosition(partner, 'Hurt', Direction.Up, 764, 744, 1, 4, 0)
+    GROUND:CharEndAnim(partner)
+  end)
+  local traversee_Aria = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(Aria, 688, 728, false, 1)
+  end)
+  local traversee_adagio = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(adagio, 712, 728, false, 1)
+  end)
+  local traversee_sonata = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 736, 728, false, 1)
+  end)
+  TASK:JoinCoroutines({pousse_heros, pousse_partenaire, traversee_Aria,
+    traversee_adagio, traversee_sonata})
   cinematique.Respirer(15)
 
-  -- Après la poussée, Adagio humilie le duo ; Sonata approuve chacune de ses
-  -- phrases, et Aria enfonce le clou. Tous se font face pendant l’échange.
+  -- Après la bousculade, Adagio humilie le duo écarté des deux côtés du
+  -- chemin ; Sonata approuve chacune de ses phrases, et Aria enfonce
+  -- le clou. Tous se font face pendant l’échange.
   cinematique.RegarderGroupe({
     {adagio, partner, 0, 4},
-    {Aria, partner, 3, 4},
-    {sonata, hero, 6, 4},
+    {Aria, hero, 3, 4},
+    {sonata, partner, 6, 4},
     {partner, adagio, 9, 4},
     {hero, adagio, 12, 4},
   })
@@ -558,64 +556,61 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "C’est clair !", 'droite')
   hero_regarde_locuteur(hero, Aria)
-  say(Aria, 'Happy', "Bande de losers !", 'droite')
+  say(Aria, 'Joyous', "Bande de losers !", 'droite')
   hero_regarde_locuteur(hero, adagio)
   say(adagio, 'Normal', "Retenez cette leçon, les microbes : on ne barre pas la route à la [color=#FF9FD8]Team Dazzling[color].", 'droite')
   hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Ouais, aanh !", 'droite')
   cinematique.Respirer(10)
 
-  -- Adagio et Aria détalent vers le sud ; Sonata s’écarte pour laisser passer
-  -- Aria, sans encore les suivre.
+  -- Départ rapide, toujours de front : Aria et Adagio filent au sud
+  -- entre le héros et le partenaire écartés ; Sonata traîne encore.
   cinematique.TournerGroupe({
     {adagio, Direction.Down, 0, 4},
     {Aria, Direction.Down, 3, 4},
     {sonata, Direction.Down, 6, 4},
   })
-  local sortie_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.5)
-    GROUND:Hide('Adagio')
-  end)
-  local ecart_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, 760, 692, false, 1)
-  end)
-  local sortie_aria = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(6)
-    GROUND:MoveToPosition(Aria, 736, 716, false, 1.5)
-    GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.5)
+  local sortie_Aria = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 2)
     GROUND:Hide('Aria')
   end)
+  local sortie_adagio = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(adagio, sud.Position.X + 5, sud.Position.Y + 38, false, 2)
+    GROUND:Hide('Adagio')
+  end)
   local regard_partenaire = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(45)
+    GAME:WaitFrames(30)
     GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
   end)
   local regard_heros = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(50)
+    GAME:WaitFrames(35)
     GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
   end)
   local suivi_sortie = TASK:BranchCoroutine(function()
     GAME:MoveCamera(720, 672, 140, false)
   end)
-  TASK:JoinCoroutines({sortie_adagio, ecart_sonata, sortie_aria,
+  TASK:JoinCoroutines({sortie_Aria, sortie_adagio,
     regard_partenaire, regard_heros, suivi_sortie})
 
   -- Sonata, laissée toute seule, regarde vers les filles déjà parties au sud
-  -- avant de détaler à son tour, en dernière.
+  -- avant de détaler à son tour, en courant, en toute dernière.
   GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
   cinematique.Emote(sonata, 'sweating')
   cinematique.Respirer(10)
   hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Worried', "Mais attendez !", 'droite')
   SOUND:FadeOutBGM(60)
-  GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
-  GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.5)
+  GROUND:MoveToPosition(sonata, sud.Position.X + 29, sud.Position.Y + 38, false, 2.5)
   GROUND:Hide('Sonata')
 
   SV.Destiny.TeamDazzlingRencontree = true
 
   SOUND:PlayBGM('Cliff Camp.ogg', true)
-  GAME:MoveCamera(696, 736, 60, false)
+  GAME:MoveCamera(680, 744, 60, false)
+  hero_regarde_locuteur(hero, partner)
   say(partner, 'Angry', "Non mais je rêve ! Elles nous ont bousculés comme si le chemin leur appartenait !", 'standard')
+  -- Le partenaire, projeté à l’est du chemin, revient près du héros.
+  GROUND:MoveToPosition(partner, 692, 744, false, 1.5)
   cinematique.RegarderGroupe({
     {partner, hero, 0, 4},
     {hero, partner, 5, 4},
@@ -702,14 +697,14 @@ function cliffdaytest.ApresCombatTeamDazzling()
     })
     local sud = MRKR('Dazzling_Entry_South')
     local depart_adagio = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(adagio, 736, 716, false, 1.5)
-      GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.5)
+      GROUND:MoveToPosition(adagio, 736, 716, false, 2)
+      GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 2)
       GROUND:Hide('Adagio')
     end)
     local depart_mawhile = TASK:BranchCoroutine(function()
       GAME:WaitFrames(8)
-      GROUND:MoveToPosition(Aria, 736, 692, false, 1.5)
-      GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.5)
+      GROUND:MoveToPosition(Aria, 736, 692, false, 2)
+      GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 2)
       GROUND:Hide('Aria')
     end)
     -- Sonata recule d’un pas pour libérer la colonne, mais elle ne part pas
@@ -739,8 +734,8 @@ function cliffdaytest.ApresCombatTeamDazzling()
     hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Shock', "Eh ! Attendez-moi, les filles ! Aaanh !", 'droite')
     SOUND:FadeOutBGM(60)
-    GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
-    GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.5)
+    GROUND:MoveToPosition(sonata, 736, 716, false, 2.5)
+    GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 2.5)
     GROUND:Hide('Sonata')
 
     SV.Destiny.TeamDazzlingRencontree = true
@@ -918,14 +913,21 @@ function cliffdaytest.SceneArriveeDestiny()
     say(partner, 'Surprised', "Oh ! C’est Bekipan, le facteur !", 'droite')
     GROUND:MoveToPosition(bekipan, 712, 408, false, 2)
     GROUND:MoveToPosition(bekipan, 659, 444, false, 2)
+    -- Petit saut d’atterrissage sur le couvercle, ailes battantes.
+    anim(bekipan, 'Hop', false)
+    cinematique.Respirer(24)
+    GROUND:CharEndAnim(bekipan)
     cinematique.RegarderGroupe({
       { partner, bekipan, 0, 4 },
       { hero, bekipan, 5, 4 },
     })
-    -- Perché sur la boîte, il penche son bec dans la fente.
+    -- Perché sur la boîte, il glisse son bec dans la fente : deux coups
+    -- de bec vers le bas pour y déposer la lettre.
     GROUND:CharAnimateTurnTo(bekipan, Direction.Down, 4)
-    anim(bekipan, 'Hop', false)
-    cinematique.Respirer(20)
+    anim(bekipan, 'Attack', false)
+    cinematique.Respirer(28)
+    anim(bekipan, 'Attack', false)
+    cinematique.Respirer(28)
     GROUND:CharEndAnim(bekipan)
     cinematique.Respirer(10)
 
@@ -944,7 +946,12 @@ function cliffdaytest.SceneArriveeDestiny()
     hero_regarde_locuteur(hero, bekipan)
     say(bekipan, 'Joyous', "Hé hé ! Enchanté, " .. nom_heros() .. " !\nAllez, je file : d’autres lettres m’attendent. Au revoir, et bonne chance pour la suite !", 'droite')
     cinematique.Respirer(10)
+    -- Il s’élance d’un saut battant des ailes, puis s’envole dans l’autre
+    -- sens, vers la mer ; en vol, ses ailes battent (animation de marche).
     GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
+    anim(bekipan, 'Hop', false)
+    cinematique.Respirer(24)
+    GROUND:CharEndAnim(bekipan)
     GROUND:MoveToPosition(bekipan, 545, 390, false, 2)
     GROUND:MoveToPosition(bekipan, 430, 320, false, 2)
     GROUND:Hide('Bekipan')

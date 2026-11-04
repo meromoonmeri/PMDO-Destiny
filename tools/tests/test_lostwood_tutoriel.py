@@ -172,6 +172,10 @@ assert 'mais dans l’autre sens.' not in cliff_jour
 assert 'facteur_bekipan()' in cliff_jour and 'Bekipan, le facteur' in cliff_jour
 assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left)' in cliff_jour
 assert 'GROUND:MoveToPosition(bekipan, 659, 444, false, 2)' in cliff_jour
+# Bec dans la fente : deux coups de bec (Attack, élan vers le bas) ; saut
+# d’atterrissage et de décollage (Hop) ; en vol, battements d’ailes (Walk).
+assert cliff_jour.count("anim(bekipan, 'Attack', false)") == 2
+assert cliff_jour.count("anim(bekipan, 'Hop', false)") == 2
 assert "GROUND:Hide('Bekipan')" in cliff_jour
 assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour
 assert 'partout dans le monde' in cliff_jour and 'poste Bekipan' in cliff_jour
@@ -212,7 +216,8 @@ assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 # Le héros ne fixe plus le partenaire pendant l’altercation : avant chaque
 # réplique d’une Dazzling, il se tourne vers celle qui parle. Il ne revient
 # vers le partenaire que pour ses réponses (5 dans l’échange Dazzling,
-# plus celle au facteur Bekipan devant la maison).
+# plus celle au facteur Bekipan devant la maison, plus sa colère après la
+# bousculade de la sortie en défaite).
 lignes_cliff_jour = cliff_jour.splitlines()
 regards_vers_dazzling = 0
 for numero, ligne in enumerate(lignes_cliff_jour):
@@ -222,7 +227,7 @@ for numero, ligne in enumerate(lignes_cliff_jour):
             assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
             regards_vers_dazzling += 1
 assert regards_vers_dazzling == 26
-assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 6
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 7
 assert '{hero, sonata' not in cliff_jour and '{ hero, sonata' not in cliff_jour
 # Issues du combat : en victoire, le trio détale en évitant le duo et Sonata
 # court en dernière ; en défaite, Tsareena humilie le duo après la poussée,
@@ -234,19 +239,19 @@ assert 'Mais attendez !' in cliff_jour
 assert cliff_jour.index('Bande de losers !') < cliff_jour.index('Mais attendez !')
 assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
 assert cliff_jour.count("GROUND:Hide('Sonata')") == 2
-# Portrait personnalisé de Aria (regard sournois, fond Determined) rangé
-# dans l’émotion Special0 (14) du payload racine de 303.portrait, cellule 17,
-# et utilisé pour sa pique sur les Bois Perdus traversés « deux fois ».
-assert "say(Aria, 'Special0', \"Deux fois ?" in cliff_jour
-import io as _io
-from PIL import Image as _ImagePIL
+# Aria n’utilise que des portraits canoniques : quand elle se moque
+# du héros et du partenaire, c’est Joyous. Aucune émotion Special0 (14)
+# ne subsiste dans le payload racine de 303.portrait, et le portrait
+# personnalisé a été retiré du dépôt.
+assert "say(Aria, 'Joyous', \"Deux fois ?" in cliff_jour
+assert "say(Aria, 'Joyous', \"Bande de losers !\"" in cliff_jour
+assert "Special0" not in cliff_jour
 sys.path.insert(0, str(ROOT / 'tools'))
 from fusionner_conteneurs_pmd import load_container as _charger_conteneur
 from fusionner_conteneurs_pmd import read as _lire_binaire
 portrait_mawhile = _charger_conteneur(GAME / 'Content/Portrait/303.portrait', 'Portrait')
 _blob = portrait_mawhile.payload
 _png_len, _pos = _lire_binaire('<q', _blob, 0)
-_atlas = _ImagePIL.open(_io.BytesIO(_blob[_pos:_pos + _png_len])).convert('RGBA')
 _pos += _png_len
 (_, _), _pos = _lire_binaire('<ii', _blob, _pos)
 _nb, _pos = _lire_binaire('<i', _blob, _pos)
@@ -254,17 +259,24 @@ _frames = []
 for _ in range(_nb):
     _v, _pos = _lire_binaire('<ii?', _blob, _pos)
     _frames.append(_v)
-assert (14, 17, False) in _frames
-_cellule = _atlas.crop((80, 120, 120, 160))
-_source_portrait = _ImagePIL.open(ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').convert('RGBA')
-assert list(_cellule.getdata()) == list(_source_portrait.getdata())
+assert all(_emotion != 14 for _emotion, _cell, _flip in _frames)
+assert not (ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').exists()
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
 for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',
-                    '684, 736', '708, 736', '713, 676', 'sud.Position.X'):
+                    '684, 736', '708, 736', '668, 744', '764, 744', '692, 744',
+                    '713, 676', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
 assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
+sortie_defaite = cliff_jour[cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite'):cliff_jour.index('function cliffdaytest.ApresCombatTeamDazzling')]
+assert 'colonne' not in sortie_defaite
+for avance in ('GROUND:MoveToPosition(Aria, 688, 716, false, 1)',
+               'GROUND:MoveToPosition(adagio, 712, 716, false, 1)',
+               'GROUND:MoveToPosition(sonata, 736, 716, false, 1)',
+               'sud.Position.Y + 38, false, 2)',
+               'sud.Position.Y + 38, false, 2.5)'):
+    assert avance in sortie_defaite
 for nom in ('Adagio', 'Sonata', 'Aria'):
     assert f"GROUND:Hide('{nom}')" in cliff_jour
 musique_dazzling = (GAME / 'Content/Music/Team Dazzling Social.ogg').read_bytes()
@@ -387,3 +399,31 @@ woosh_dazzling = (GAME / 'Content/BG/Pre_Battle_Dazzling_Etoiles.dir').read_byte
 assert struct.unpack_from('<q', woosh_dazzling)[0] > 0
 
 print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling (social + combat), tutoriel et statue.')
+
+# Thèmes d’interface sélectionnables au menu Mods de l’écran titre : quatre
+# mods PMDO (mods_ui/), mutuellement incompatibles, livrés par le build
+# dans MODS/. Sans thème actif, l’UI garde son vert d’origine. Chaque thème
+# ne remplace que les bordures, aux dimensions exactes des originaux.
+import xml.etree.ElementTree as _ET
+from PIL import Image as _ImageThemes
+_themes = {}
+for _dossier in sorted((ROOT / 'mods_ui').iterdir()):
+    _header = _ET.parse(_dossier / 'Mod.xml').getroot()
+    assert _header.findtext('ModType') == 'Mod'
+    _themes[_header.findtext('Namespace')] = _header.findtext('UUID')
+    for _fichier, _taille in (('MenuBorder.png', (120, 72)),
+                               ('PortraitBorder.png', (60, 36)),
+                               ('Strip.png', (16, 16))):
+        assert _ImageThemes.open(_dossier / 'Content/UI' / _fichier).size == _taille
+    _incompatibles = {_r.findtext('Namespace') for _r in _header.iter('RelatedMod')
+                      if _r.findtext('Relationship') == 'Incompatible'}
+    assert _incompatibles  # vérifié contre les autres thèmes ci-dessous
+assert set(_themes) == {'destiny_ui_jaune_pastel', 'destiny_ui_violet',
+                        'destiny_ui_bleu', 'destiny_ui_rose_pastel'}
+assert len(set(_themes.values())) == 4
+for _dossier in sorted((ROOT / 'mods_ui').iterdir()):
+    _header = _ET.parse(_dossier / 'Mod.xml').getroot()
+    _incompatibles = {_r.findtext('Namespace') for _r in _header.iter('RelatedMod')
+                      if _r.findtext('Relationship') == 'Incompatible'}
+    assert _incompatibles == set(_themes) - {_header.findtext('Namespace')}
+assert "mods_ui" in (ROOT / 'tools/build_windows.py').read_text(encoding='utf-8')

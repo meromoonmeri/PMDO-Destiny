@@ -20,6 +20,12 @@ Pour lancer les outils de développement, essayer dev.bat. Leur fonctionnement e
 SON
 Si le son grésille, utiliser JOUER_A_DESTINY_WASAPI.bat.
 
+THÈMES D’INTERFACE
+À l’écran-titre, le menu Mods permet de choisir la couleur des bordures de
+menus et de portraits : Jaune pastel, Violet, Bleu ou Rose pastel. Activez
+un seul thème « Destiny UI » à la fois ; sans thème actif, l’interface
+garde son vert d’origine. Le choix est conservé d’une partie à l’autre.
+
 CONTRÔLES PRINCIPAUX
 - Flèches : déplacement
 - X : confirmer / attaquer
