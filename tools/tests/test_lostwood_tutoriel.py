@@ -140,18 +140,26 @@ assert "GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)" in zone_script
 cliff_jour = (GAME / 'Data/Script/destiny/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
 assert 'SceneArriveeDestiny' in cliff_jour
 assert 'tatie Kangourex' in cliff_jour and 'guildes' in cliff_jour
+# Retour des Bois Perdus : prénom dynamique, partenaire devant, maison,
+# pensée du héros en italique et gestuelle face à face.
+assert 'nom_heros()' in cliff_jour and 'On est arrivés !' in cliff_jour
+assert 'tu ne te débrouilles pas trop mal' in cliff_jour
+assert "C’est ici que j’habite" in cliff_jour and 'capitale mondiale des explorateurs' in cliff_jour
+assert 'Je me demande dans quoi je me suis embarqué…' in cliff_jour
+assert 'se_faire_face(partner, hero)' in cliff_jour and "geste_heros(hero, 'idle', partner)" in cliff_jour
 assert 'RencontreTeamDazzling' in cliff_jour and 'TeamDazzlingRencontree' in cliff_jour
 # Voix hors champ sans portrait, thème social, vraie Pose tenue et petites
 # étoiles PMDO autour des trois membres.
-assert "UI:SetSpeaker('???'" in cliff_jour and 'petits morveux' in cliff_jour
+assert "UI:SetSpeaker('???'" in cliff_jour and 'Hilarant.' in cliff_jour and 'super entrée' in cliff_jour
+assert 'Ne me dis pas que…' in cliff_jour
 assert 'Team Dazzling Social.ogg' in cliff_jour
 assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jour
 assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
 assert "require 'destiny.cinematique'" in cliff_jour
 assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
 assert 'GAME:MoveCamera(800, 468, 80, false)' in cliff_jour
-assert 'GAME:MoveCamera(692, 544, 210, false)' in cliff_jour
-assert 'GROUND:MoveToPosition(sonata, 716, 484, false, 1)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672, 190, false)' in cliff_jour
+assert 'GROUND:MoveToPosition(sonata, 736, 700, false, 1.5)' in cliff_jour
 assert 'poser_dazzling(sonata, false)' in cliff_jour
 assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
 assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
@@ -160,8 +168,8 @@ assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jou
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
-for coordonnees in ('660, 528', '684, 528', '708, 528', '684, 560', '708, 560',
-                    '656, 564', '680, 564', '716, 650', 'sud.Position.X'):
+for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',
+                    '684, 736', '708, 736', '713, 676', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
 assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
@@ -209,6 +217,7 @@ assert "montrez-moi ce que vous avez dans le ventre" in cliff_jour
 assert "Dazzling Fight.ogg" in cliff_jour and "Pre_Battle_Dazzling_Etoiles" in cliff_jour
 assert "SOUND:PlayBGM(MUSIQUE_DAZZLING_COMBAT, false)" in cliff_jour
 assert "jouer_woosh_dazzling()" in cliff_jour
+assert 'GAME:FadeOut(true, 0)' in cliff_jour
 assert "GAME:EnterDungeon('dazzling_fight', 0, 0, 0" in cliff_jour
 assert "ApresCombatTeamDazzling" in cliff_jour and "TeamDazzlingVictoire" in cliff_jour
 zone_dazzling = json.loads((GAME / 'Data/Zone/dazzling_fight.json').read_text(encoding='utf-8-sig'))['Object']
@@ -225,12 +234,12 @@ assert "CombatDazzling = 'defaite'" in script_zone_dazzling
 combat_map = json.loads((GAME / 'Data/Map/cliffdaytest.rsmap').read_text(encoding='utf-8-sig'))['Object']
 assert combat_map['AssetName'] == 'cliffdaytest' and combat_map['EdgeView'] == 1
 assert len(combat_map['Tiles']) == 41 and len(combat_map['Tiles'][0]) == 33
-assert combat_map['EntryPoints'] == [{'Loc': {'X': 28, 'Y': 23}, 'Dir': 4}]
+assert combat_map['EntryPoints'] == [{'Loc': {'X': 29, 'Y': 30}, 'Dir': 4}]
 equipe_dazzling = combat_map['MapTeams'][0]['Players']
 assert [(p['Nickname'], p['CurrentForm']['Species'], p['Level'], p['serializationLoc'], p['serializationDir']) for p in equipe_dazzling] == [
-    ('Adagio', 'tsareena', 32, {'X': 28, 'Y': 22}, 0),
-    ('Sonata', 'lopunny', 31, {'X': 29, 'Y': 22}, 0),
-    ('Aria', 'mawile', 30, {'X': 27, 'Y': 22}, 0),
+    ('Adagio', 'tsareena', 32, {'X': 29, 'Y': 29}, 0),
+    ('Sonata', 'lopunny', 31, {'X': 30, 'Y': 29}, 0),
+    ('Aria', 'mawile', 30, {'X': 28, 'Y': 29}, 0),
 ]
 assert "Dazzling_Exit_East" in cliff_jour and "Réverie Town[color] nous attend" in cliff_jour
 effets_combat = [e['Value']['$type'] for e in combat_map['MapEffect']['OnMapStarts']]
