@@ -216,12 +216,21 @@ assert 'mais dans l’autre sens.' not in cliff_jour
 assert 'facteur_bekipan()' in cliff_jour and "cinematique.NomEspece('pelipper', 'Bekipan') .. \", le facteur !\"" in cliff_jour
 assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)' in cliff_jour
 assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)" in cliff_jour
-# Dépôt de face façon PMD Red : un cycle Walk complet (44 ticks) baisse le
-# bec vers la fente, un Attack pousse la lettre et le « Clunk » tombe dans
-# la boîte ; Hop marque l'atterrissage et le décollage. Le départ monte
-# presque à la verticale dans l'axe x=659, puis file vers l'ouest.
-assert "anim(bekipan, 'Walk', true)" in cliff_jour and 'cinematique.Respirer(44)' in cliff_jour
-assert cliff_jour.count("anim(bekipan, 'Attack', false)") == 1
+# Dépôt de face : la vraie Special0 SpriteCollab de distribution du courrier
+# (68 ticks) remplace l'ancien détournement Walk/Attack. Le son sourd part
+# à mi-animation, pendant la frame bec dans la fente (ticks 27 à 41), puis
+# le « Clunk » suit la fin du geste. Hop marque l'atterrissage et le
+# décollage ; le départ monte dans l'axe x=659, puis file vers l'ouest.
+_scene_bekipan = cliff_jour[cliff_jour.index('local bekipan = facteur_bekipan()'):
+                            cliff_jour.index("GROUND:Hide('Bekipan')")]
+assert "anim(bekipan, 'Special0', false)" in _scene_bekipan
+assert "anim(bekipan, 'Walk', true)" not in _scene_bekipan
+assert "anim(bekipan, 'Attack', false)" not in _scene_bekipan
+assert _scene_bekipan.index("anim(bekipan, 'Special0', false)") \
+    < _scene_bekipan.index('cinematique.Respirer(34)') \
+    < _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')") \
+    < _scene_bekipan.index('cinematique.Respirer(34)', _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')")) \
+    < _scene_bekipan.index("UI:WaitShowDialogue('Clunk')")
 assert cliff_jour.count("anim(bekipan, 'Hop', false)") == 2
 assert "UI:WaitShowDialogue('Clunk')" in cliff_jour
 assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 424, 1, 1, 48)" in cliff_jour
@@ -394,7 +403,9 @@ assert POSE_FRAME_TYPE == 50
 assert MOQUERIE_FRAME_TYPE == 82
 from fusionner_conteneurs_pmd import load_container, read_node
 index_chara, _ = read_node((GAME / 'Content/Chara/index.idx').read_bytes())
-assert {303, 428, 763} <= set(index_chara.kids)
+assert {279, 303, 428, 763} <= set(index_chara.kids)
+assert index_chara.kids[279].pos == 44
+assert index_chara.kids[279].kids[0].kids[1].pos == 43358
 durees_pose = {
     303: [4, 1, 2, 4, 2, 1, 2],
     428: [4, 3, 3, 6],
@@ -415,6 +426,20 @@ for dex, durees in durees_pose.items():
     assert groupe_moquerie['internal'] == 14
     assert groupe_moquerie['copy'] == -1 and len(groupe_moquerie['seqs']) == 8
     assert all([frame[2] for frame in seq] == [30] for seq in groupe_moquerie['seqs'])
+# Bekipan facteur : même clé moteur Special0 (82), mais vraie animation
+# SpriteCollab 0279/0001 — InternalIndex 13, 9 frames/68 ticks, huit lignes
+# identiques (animation pensée de face). Les sources restent versionnées.
+_conteneur_bekipan = load_container(GAME / 'Content/Chara/279.chara', 'Chara')
+_groupes_bekipan = parse_blob(_conteneur_bekipan.payload)['groups']
+_groupe_courrier = _groupes_bekipan[MOQUERIE_FRAME_TYPE]
+assert _groupe_courrier['internal'] == 13
+assert _groupe_courrier['copy'] == -1 and len(_groupe_courrier['seqs']) == 8
+assert all([frame[2] for frame in seq] == [20, 3, 1, 3, 14, 3, 1, 3, 20]
+           for seq in _groupe_courrier['seqs'])
+assert len({repr(_seq) for _seq in _groupe_courrier['seqs']}) == 1
+for _source in ('AnimData.xml', 'Special0-Anim.png', 'Special0-Offsets.png',
+                'Special0-Shadow.png', 'credits.txt'):
+    assert (ROOT / 'art/sprites/pelipper_courrier/0279_Pelipper' / _source).is_file(), _source
 assert "CH('Pichu')" not in cliff_jour and 'PichuDazzling' not in cliff_jour
 assert 'GarderCheminSud' in scene
 assert 'Je ne vais pas me dégonfler' in scene and 'Il faut que je sois courageux' in scene
@@ -516,30 +541,51 @@ for _lua_path in sorted((GAME / 'Data/Script/destiny').rglob('*.lua')):
 
 print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling (social + combat), tutoriel et statue.')
 
-# Thèmes d’interface sélectionnables au menu Mods de l’écran titre : quatre
-# mods PMDO (mods_ui/), mutuellement incompatibles, livrés par le build
-# dans MODS/. Sans thème actif, l’UI garde son vert d’origine. Chaque thème
-# ne remplace que les bordures, aux dimensions exactes des originaux.
+# couleur de l’interface : réglage natif et persistant du menu Options,
+# sans aucun mod séparé. Le vert reste le thème par défaut (feuilles de
+# base) ; les quatre autres coloris vivent en contenu Destiny sous
+# Content/UI/Themes/<NomEnum>/, aux dimensions exactes des originaux.
 import xml.etree.ElementTree as _ET
 from PIL import Image as _ImageThemes
-_themes = {}
-for _dossier in sorted((ROOT / 'mods_ui').iterdir()):
-    _header = _ET.parse(_dossier / 'Mod.xml').getroot()
-    assert _header.findtext('ModType') == 'Mod'
-    _themes[_header.findtext('Namespace')] = _header.findtext('UUID')
-    for _fichier, _taille in (('MenuBorder.png', (120, 72)),
-                               ('PortraitBorder.png', (60, 36)),
-                               ('Strip.png', (16, 16))):
-        assert _ImageThemes.open(_dossier / 'Content/UI' / _fichier).size == _taille
-    _incompatibles = {_r.findtext('Namespace') for _r in _header.iter('RelatedMod')
-                      if _r.findtext('Relationship') == 'Incompatible'}
-    assert _incompatibles  # vérifié contre les autres thèmes ci-dessous
-assert set(_themes) == {'destiny_ui_jaune_pastel', 'destiny_ui_violet',
-                        'destiny_ui_bleu', 'destiny_ui_rose_pastel'}
-assert len(set(_themes.values())) == 4
-for _dossier in sorted((ROOT / 'mods_ui').iterdir()):
-    _header = _ET.parse(_dossier / 'Mod.xml').getroot()
-    _incompatibles = {_r.findtext('Namespace') for _r in _header.iter('RelatedMod')
-                      if _r.findtext('Relationship') == 'Incompatible'}
-    assert _incompatibles == set(_themes) - {_header.findtext('Namespace')}
-assert "mods_ui" in (ROOT / 'tools/build_windows.py').read_text(encoding='utf-8')
+assert not (ROOT / 'mods_ui').exists()
+_tailles_ui = (('MenuBorder.png', (120, 72)),
+               ('PortraitBorder.png', (60, 36)),
+               ('Strip.png', (16, 16)))
+for _dossier in ('Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    for _fichier, _taille in _tailles_ui:
+        assert _ImageThemes.open(GAME / 'Content/UI/Themes' / _dossier / _fichier).size == _taille
+for _fichier, _taille in _tailles_ui:
+    assert _ImageThemes.open(ROOT / 'base/Content/UI' / _fichier).size == _taille
+_settings_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Settings.cs').read_text(encoding='utf-8-sig')
+for _valeur in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    assert _valeur in _settings_cs
+assert 'public enum UIColorTheme' in _settings_cs
+assert 'public UIColorTheme UITheme;' in _settings_cs
+assert 'UITheme = UIColorTheme.Green;' in _settings_cs
+_diag_cs = (ROOT / 'engine/RogueEssence/RogueEssence/DiagManager.cs').read_text(encoding='utf-8-sig')
+assert 'SelectSingleNode("Config/UITheme")' in _diag_cs
+assert 'Enum.TryParse(uiThemeNode.InnerText, out uiTheme)' in _diag_cs
+assert '"UITheme", settings.UITheme.ToString()' in _diag_cs
+_graphics_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Content/GraphicsManager.cs').read_text(encoding='utf-8-sig')
+assert 'public static void ApplyUITheme(Settings.UIColorTheme theme)' in _graphics_cs
+assert '"Themes/" + theme.ToString()' in _graphics_cs
+assert 'ApplyUITheme(DiagManager.Instance.CurSettings.UITheme)' in _graphics_cs
+_menu_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Menu/Settings/SettingsTitleMenu.cs').read_text(encoding='utf-8-sig')
+assert 'MENU_SETTINGS_UI_THEME' in _menu_cs
+assert 'GraphicsManager.ApplyUITheme((Settings.UIColorTheme)setting.CurrentChoice)' in _menu_cs
+assert _menu_cs.count('origin.GlobalSaveAction = OriginGlobalSaveAction;') == 1
+_build_py = (ROOT / 'tools/build_windows.py').read_text(encoding='utf-8')
+assert 'mods_ui' not in _build_py
+for _dossier in ('Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    assert f'Content/UI/Themes/{_dossier}/MenuBorder.png' in _build_py
+_lisezmoi = (ROOT / 'docs/LISEZ_MOI_WINDOWS.txt').read_text(encoding='utf-8')
+assert 'menu Options du jeu' in _lisezmoi and 'menu Mods permet de choisir' not in _lisezmoi
+def _resx(_chemin):
+    return {_d.get('name'): _d.findtext('value') for _d in _ET.parse(_chemin).getroot().findall('data')}
+_en = _resx(ROOT / 'base/Strings/strings.resx')
+_fr = _resx(ROOT / 'base/Strings/strings.fr.resx')
+assert _en['MENU_SETTINGS_UI_THEME'] == 'UI Color'
+assert _fr['MENU_SETTINGS_UI_THEME'] == "Couleur d'interface"
+assert [_en['_ENUM_UIColorTheme_' + _v] for _v in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow')] == ['Green', 'Blue', 'Violet', 'Pastel pink', 'Pastel yellow']
+assert [_fr['_ENUM_UIColorTheme_' + _v] for _v in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow')] == ['Vert', 'Bleu', 'Violet', 'Rose pastel', 'Jaune pastel']
+print('OK : couleur d’interface native (5 thèmes, aucun mod UI).')

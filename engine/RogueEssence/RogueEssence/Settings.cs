@@ -49,6 +49,14 @@ namespace RogueEssence
             Black,
             Blue
         }
+        public enum UIColorTheme
+        {
+            Green,
+            Blue,
+            Violet,
+            PastelPink,
+            PastelYellow
+        }
 
         public int BGMBalance;
         public int SEBalance;
@@ -58,6 +66,7 @@ namespace RogueEssence
         public SkillDefault DefaultSkills;
         public int Minimap;
         public MinimapStyle MinimapColor;
+        public UIColorTheme UITheme;
 
         private double textSpeed;
         public double TextSpeed
@@ -232,6 +241,7 @@ namespace RogueEssence
             Language = "";
 
             Minimap = 100;
+            UITheme = UIColorTheme.Green;
             Window = 2;
 
             DirKeys = new Keys[4];

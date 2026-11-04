@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Compile PMDO, merge the Destiny quest, and package a standalone Windows build."""
 from __future__ import annotations
 
@@ -93,17 +93,11 @@ def main() -> None:
         if destination.exists():
             shutil.rmtree(destination)
         shutil.copytree(merged / name, destination)
-    # The final game no longer needs a quest selector, but it ships the
-    # optional UI theme mods: PMDO lists them in the title-screen Mods menu,
-    # where the player enables at most one theme (defaults to the original
-    # green interface when none is active).
+    # The final game no longer needs a quest selector. The UI color themes
+    # are native content under Content/UI/Themes/, selected from the game's
+    # own settings menu; no separate UI mods are shipped.
     if (publish_dir / 'MODS').exists():
         shutil.rmtree(publish_dir / 'MODS')
-    mods_ui = ROOT / 'mods_ui'
-    if mods_ui.is_dir():
-        for mod in sorted(mods_ui.iterdir()):
-            if (mod / 'Mod.xml').is_file():
-                shutil.copytree(mod, publish_dir / 'MODS' / mod.name)
     if (publish_dir / 'BUILD').exists():
         shutil.rmtree(publish_dir / 'BUILD')
 
@@ -148,6 +142,10 @@ def main() -> None:
     # Structural checks on the actual package.
     required = [
         'Destiny.exe', 'Base/PathParams.xml', 'Content/UI/Title.png',
+        'Content/UI/Themes/Blue/MenuBorder.png',
+        'Content/UI/Themes/Violet/MenuBorder.png',
+        'Content/UI/Themes/PastelPink/MenuBorder.png',
+        'Content/UI/Themes/PastelYellow/MenuBorder.png',
         'Data/Ground/destiny_hub.rsground', 'Data/Zone/destiny_hub.json',
         'Data/Script/destiny/ground/destiny_hub/init.lua', 'Data/StartParams.xml',
         'Data/Misc/Index.json', 'Data/Misc/MonsterFeature.json', 'Data/Misc/Rarity.json',

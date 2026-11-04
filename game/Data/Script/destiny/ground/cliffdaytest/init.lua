@@ -1047,20 +1047,21 @@ function cliffdaytest.SceneArriveeDestiny()
       { partner, bekipan, 0, 4 },
       { hero, bekipan, 5, 4 },
     })
-    -- Perché sur la boîte et tourné de face, comme sur la référence PMD
-    -- Red fournie : l’animation Walk Down native de Pelipper enchaîne
-    -- ailes basses, ailes ouvertes puis ailes relevées pendant qu’il
-    -- baisse le bec vers la fente. Un cycle complet dure 44 ticks.
-    -- Le petit Attack final pousse la lettre au fond de la boîte.
+    -- Perché sur la boîte et tourné de face, Bekipan joue la vraie
+    -- animation historique de distribution du courrier : Special0
+    -- SpriteCollab de Pelipper (9 frames, 68 ticks), injectée dans
+    -- l’override Destiny du .chara 279 sous le FrameType moteur 82.
+    -- Il s’accroupit, relève les ailes, enfonce le bec dans la fente
+    -- (frame tenue des ticks 27 à 41, celle de la capture fournie),
+    -- puis se relève. Le bruit sourd tombe pendant que le bec est
+    -- encore dans la boîte ; le « Clunk » en narration suit la fin
+    -- du geste, sans portrait.
     GROUND:CharAnimateTurnTo(bekipan, Direction.Down, 4)
-    anim(bekipan, 'Walk', true)
-    cinematique.Respirer(44)
-    anim(bekipan, 'Attack', false)
-    cinematique.Respirer(28)
-    GROUND:CharEndAnim(bekipan)
-    -- Le courrier tombe dans la boîte métallique : le « Clunk » de PMD Red,
-    -- en narration sans portrait, avec le bruit sourd déjà utilisé en jeu.
+    anim(bekipan, 'Special0', false)
+    cinematique.Respirer(34)
     SOUND:PlayBattleSE('DUN_Hit_Neutral')
+    cinematique.Respirer(34)
+    GROUND:CharEndAnim(bekipan)
     UI:ResetSpeaker()
     UI:WaitShowDialogue('Clunk')
     cinematique.Respirer(10)

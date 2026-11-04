@@ -306,6 +306,21 @@
   <data name="_ENUM_MinimapStyle_White" xml:space="preserve">
     <value></value>
     <comment></comment>  </data>
+  <data name="_ENUM_UIColorTheme_Green" xml:space="preserve">
+    <value>Green</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_UIColorTheme_Blue" xml:space="preserve">
+    <value>Blue</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_UIColorTheme_Violet" xml:space="preserve">
+    <value>Violet</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_UIColorTheme_PastelPink" xml:space="preserve">
+    <value>Pastel pink</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_UIColorTheme_PastelYellow" xml:space="preserve">
+    <value>Pastel yellow</value>
+    <comment></comment>  </data>
   <data name="_ENUM_NetCloseReason_AlreadyConnected_msg" xml:space="preserve">
     <value>You are already connected from another application.</value>
     <comment></comment>  </data>
@@ -1362,6 +1377,9 @@
   <data name="MENU_SETTINGS_TITLE" xml:space="preserve">
     <value>Settings</value>
     <comment>Title of Settings menu</comment>  </data>
+  <data name="MENU_SETTINGS_UI_THEME" xml:space="preserve">
+    <value>UI Color</value>
+    <comment>Color theme of the game interface</comment>  </data>
   <data name="MENU_SETTINGS_WINDOW_SIZE" xml:space="preserve">
     <value>Window Size</value>
     <comment>Label for the window size in the Settings menu</comment>  </data>

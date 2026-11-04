@@ -164,7 +164,7 @@ comptoirs_attendus = {
 for nom_comptoir, marchand in comptoirs_attendus.items():
     assert f"nom = '{nom_comptoir}', marchand = '{marchand}'" in ville_lua, nom_comptoir
 for poste in ('poste_x = 504, poste_y = 1040', 'poste_x = 360, poste_y = 1100',
-              'poste_x = 940, poste_y = 930', 'poste_x = 1104, poste_y = 972'):
+              'poste_x = 940, poste_y = 930', 'poste_x = 1104, poste_y = 992'):
     assert poste in ville_lua, poste
 assert ville_lua.count('installer_comptoirs(map)') >= 3  # définition, Init, GameLoad
 assert ville_lua.count('placer_marchands_aux_comptoirs()') >= 3
@@ -175,5 +175,33 @@ assert "habitant('Kangourex', 'kangaskhan', Gender.Female, 940, 930)" in ville_l
 # Les seuils devenus comptoirs n’ouvrent plus sur un intérieur.
 for porte_retiree in ('PorteMaisonAlakazam', 'PorteReserveKangourex', 'PorteForgeTinkaton'):
     assert porte_retiree not in ville_lua, porte_retiree
+
+# Tinkaton reste à son échoppe extérieure : à l’ouverture payée, elle se
+# retourne vers le nord, abat son Attack, et l’explosion + le tremblement
+# d’écran natif partent sur la frame d’impact, avant de revenir au sud.
+_frappe = ville_lua[ville_lua.index('local function frapper_boites_forgelina'):
+                    ville_lua.index('function ville.NewObject_24_Action')]
+assert _frappe.index('Direction.Up, 4') \
+    < _frappe.index("GROUND:CharSetAnim(personnage, 'Attack', false)") \
+    < _frappe.index('GAME:WaitFrames(16)') \
+    < _frappe.index('RogueEssence.Content.ScreenMover(0, 12, 30)') \
+    < _frappe.index("SOUND:PlayBattleSE('DUN_Explosion')") \
+    < _frappe.index('GAME:WaitFrames(20)') \
+    < _frappe.index('GROUND:CharEndAnim(personnage)') \
+    < _frappe.index('Direction.Down, 4')
+_service_forgelina = ville_lua[ville_lua.index('function ville.NewObject_24_Action'):
+                               ville_lua.index('local dialogues_lombre_ludicolo')]
+assert _service_forgelina.index('Reculez un peu… et voilà le travail !') \
+    < _service_forgelina.index('frapper_boites_forgelina(personnage)') \
+    < _service_forgelina.index("SOUND:PlayFanfare('Fanfare/Treasure')") \
+    < _service_forgelina.index('UI:SpoilsMenu(tresor)')
+from fusionner_conteneurs_pmd import load_container as _load_chara
+from ajouter_pose_chara import parse_blob as _parse_chara
+_tinkaton_path = next(p for p in (GAME / 'Content/Chara/959.chara', BASE / 'Content/Chara/959.chara') if p.is_file())
+_tinkaton_groups = _parse_chara(_load_chara(_tinkaton_path, 'Chara').payload)['groups']
+_attack = _tinkaton_groups[5]  # FrameType moteur Attack
+_durs_nord = [f[2] for f in _attack['seqs'][4]]  # Dir8.Up = index 4
+assert _attack['hit'] == 3 and sum(_durs_nord) == 36
+assert sum(_durs_nord[:_attack['hit']]) == 16
 
 print('OK : Waterfall Village étendue, 44 Tilesheets, habitants, objets, décorations town02 et comptoirs des marchands.')

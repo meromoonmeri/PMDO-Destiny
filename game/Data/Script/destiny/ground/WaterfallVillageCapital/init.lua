@@ -214,7 +214,7 @@ local comptoirs = {
   {nom = 'ComptoirBanqueMordudor', marchand = 'NewObject_3', x = 480, y = 1072, w = 64, h = 16, poste_x = 504, poste_y = 1040},
   {nom = 'ComptoirAlakazam', marchand = 'NewObject_4', x = 352, y = 1120, w = 32, h = 16, poste_x = 360, poste_y = 1100},
   {nom = 'ComptoirKangourex', marchand = 'Kangourex', x = 928, y = 952, w = 40, h = 16, poste_x = 940, poste_y = 930},
-  {nom = 'ComptoirForgeTinkaton', marchand = 'NewObject_24', x = 1080, y = 1008, w = 64, h = 16, poste_x = 1104, poste_y = 972},
+  {nom = 'ComptoirForgeTinkaton', marchand = 'NewObject_24', x = 1080, y = 1008, w = 64, h = 16, poste_x = 1104, poste_y = 992},
 }
 
 local function installer_comptoirs(map)
@@ -863,6 +863,24 @@ function ville.NewObject_4_Action(personnage, activator)
   terminer_dialogue(personnage, 'NewObject_4')
 end
 
+-- Ouverture façon Tinkaton : elle se retourne vers le fond de son échoppe
+-- extérieure, abat son marteau sur les boîtes, puis revient face au client.
+-- Son Attack dure 36 ticks et sa frame d'impact (HitFrame 3) commence au
+-- tick 16 : l'explosion et le tremblement d'écran natif PMDO (amplitude 12,
+-- 30 ticks, celle de l'expertise de base) partent exactement à cet instant.
+local function frapper_boites_forgelina(personnage)
+  if personnage == nil then return end
+  UI:ResetSpeaker()
+  GROUND:CharAnimateTurnTo(personnage, Direction.Up, 4)
+  GROUND:CharSetAnim(personnage, 'Attack', false)
+  GAME:WaitFrames(16)
+  GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 12, 30))
+  SOUND:PlayBattleSE('DUN_Explosion')
+  GAME:WaitFrames(20)
+  GROUND:CharEndAnim(personnage)
+  GROUND:CharAnimateTurnTo(personnage, Direction.Down, 4)
+end
+
 -- Tinkaton : ouvrir les boîtes au trésor (150 Poké par boîte), avec le menu
 -- natif d'expertise de PMDO.
 function ville.NewObject_24_Action(personnage, activator)
@@ -927,6 +945,7 @@ function ville.NewObject_24_Action(personnage, activator)
               UI:SetSpeaker(personnage)
               UI:SetSpeakerEmotion('Happy')
               UI:WaitShowDialogue('Reculez un peu… et voilà le travail !')
+              frapper_boites_forgelina(personnage)
               SOUND:PlayFanfare('Fanfare/Treasure')
               UI:SpoilsMenu(tresor)
               UI:WaitForChoice()

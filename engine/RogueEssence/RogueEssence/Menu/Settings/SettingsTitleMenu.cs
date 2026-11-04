@@ -146,6 +146,14 @@ namespace RogueEssence.Menu
                 borderChoices.Add(ii.ToString());
             origin.AddSetting(Text.FormatKey("MENU_SETTINGS_BORDER_STYLE"), borderChoices, DiagManager.Instance.CurSettings.Border, setting => DiagManager.Instance.CurSettings.Border = setting.CurrentChoice, setting => MenuBase.BorderStyle = setting.CurrentChoice);
 
+            List<string> uiThemeChoices = new List<string>();
+            for (int ii = 0; ii <= (int)Settings.UIColorTheme.PastelYellow; ii++)
+                uiThemeChoices.Add(((Settings.UIColorTheme)ii).ToLocal());
+            origin.AddSetting(Text.FormatKey("MENU_SETTINGS_UI_THEME"), uiThemeChoices, (int)DiagManager.Instance.CurSettings.UITheme, setting =>
+            {
+                DiagManager.Instance.CurSettings.UITheme = (Settings.UIColorTheme)setting.CurrentChoice;
+                GraphicsManager.ApplyUITheme(DiagManager.Instance.CurSettings.UITheme);
+            }, setting => GraphicsManager.ApplyUITheme((Settings.UIColorTheme)setting.CurrentChoice));
 
             List<string> windowChoices = new List<string>();
             windowChoices.Add(Text.FormatKey("MENU_SETTINGS_FULL_SCREEN"));
@@ -176,8 +184,8 @@ namespace RogueEssence.Menu
                     Text.SetCultureCode(DiagManager.Instance.CurSettings.Language);
                 });
 
-                origin.GlobalSaveAction = OriginGlobalSaveAction;
             }
+            origin.GlobalSaveAction = OriginGlobalSaveAction;
         }
 
         public void OriginGlobalSaveAction()
