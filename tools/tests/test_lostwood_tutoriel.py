@@ -176,7 +176,7 @@ assert 'mais dans l’autre sens.' not in cliff_jour
 # Devant la maison, le facteur Bekipan arrive de profil depuis l’est, se
 # pose sur la boîte aux lettres, salue le partenaire et son « nouvel ami »,
 # puis repart vers l’ouest ; la lettre déclenche les explications guildes.
-assert 'facteur_bekipan()' in cliff_jour and 'Bekipan, le facteur' in cliff_jour
+assert 'facteur_bekipan()' in cliff_jour and "cinematique.NomEspece('pelipper', 'Bekipan') .. \", le facteur !\"" in cliff_jour
 assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)' in cliff_jour
 assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)" in cliff_jour
 # Dépôt de face façon PMD Red : un cycle Walk complet (44 ticks) baisse le
