@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
-"""Reconstitue les fichiers volumineux depuis payload/*.gz, sans écraser une édition.
+"""Reconstitue les fichiers volumineux non versionnés, sans écraser une édition.
 
 WaterfallVillageCapital.rsground est la carte de Réverie Town (base town02, rivières animées 0.3.7, collisions et PNJ corrigés 0.3.8) :
 263 169 765 octets reconstitués depuis l'archive Git. Son SHA-256 est vérifié.
+
+L'index des planches (`game/Content/Tile/index.idx`) dépasse lui aussi la
+limite GitHub des fichiers ordinaires, mais il est entièrement dérivé des
+en-têtes des fichiers `.tile` versionnés : il est donc régénéré par
+`tools/build_tile_index.py` plutôt que stocké dans `payload/`.
 """
 import gzip
 import hashlib
 import shutil
+import subprocess
 import sys
 import zlib
 from pathlib import Path
@@ -17,6 +23,8 @@ PAYLOADS = {
         'game/Data/Ground/WaterfallVillageCapital.rsground',
         '1bbfa39f1bc3fecb902f4b610657aeb31facb49f75d0d42e1ee8c48c2996f50b', 263169765),
 }
+TILE_INDEX = 'game/Content/Tile/index.idx'
+BUILD_TILE_INDEX = 'tools/build_tile_index.py'
 
 
 def sha256(path):
@@ -25,6 +33,33 @@ def sha256(path):
         for chunk in iter(lambda: f.read(1 << 20), b''):
             h.update(chunk)
     return h.hexdigest()
+
+
+def ensure_tile_index() -> bool:
+    """Régénère l'index des planches s'il est absent, sans écraser un index divergent."""
+    index_p = ROOT / TILE_INDEX
+    script_p = ROOT / BUILD_TILE_INDEX
+    tile_dir = index_p.parent
+    # Les tests unitaires du payload travaillent dans un arbre temporaire sans
+    # planches ni constructeur d'index : ne rien y générer.
+    if not tile_dir.is_dir() or not script_p.is_file():
+        return True
+    if not any(tile_dir.glob('*.tile')):
+        return True
+    args = [sys.executable, str(script_p)]
+    if index_p.is_file():
+        args.append('--check')
+    result = subprocess.run(args, cwd=ROOT, check=False)
+    if result.returncode == 0:
+        state = 'déjà présent' if '--check' in args else 'régénéré'
+        print(f'OK ({state}) {TILE_INDEX}')
+        return True
+    if index_p.is_file():
+        print(f'ERREUR {TILE_INDEX} existe mais diffère des en-têtes .tile : aucun écrasement. '
+              'Relancez tools/build_tile_index.py après vérification des planches.')
+    else:
+        print(f'ERREUR impossible de régénérer {TILE_INDEX}')
+    return False
 
 
 def main():
@@ -58,6 +93,7 @@ def main():
                 dst_p.unlink(missing_ok=True)
             print(f'ERREUR {dst}: {exc}')
             ok = False
+    ok = ensure_tile_index() and ok
     return 0 if ok else 1
 
 

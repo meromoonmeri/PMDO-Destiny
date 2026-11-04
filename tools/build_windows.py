@@ -20,7 +20,7 @@ def run(command: list[str], cwd: Path) -> None:
 
 
 def unpack_payload() -> None:
-    # Reconstitue game/Data/Ground/WaterfallVillageCapital.rsground (305 Mo) depuis payload/.
+    # Reconstitue la ville depuis payload/ et l'index des planches depuis les .tile.
     run([sys.executable, str(ROOT / 'tools' / 'unpack_payload.py')], ROOT)
 
 

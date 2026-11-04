@@ -10,11 +10,13 @@ Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symb
 > correctifs et fichiers introuvables : [`docs/UNIFICATION_DESTINY.md`](docs/UNIFICATION_DESTINY.md).
 > `game/Data/Ground/WaterfallVillageCapital.rsground` (305 Mo > limite GitHub, budget LFS du compte
 > épuisé) est livrée compressée dans `payload/` : lancer `python3 tools/unpack_payload.py` après le
-> clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`).
+> clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`). Le même script
+> régénère `game/Content/Tile/index.idx` : cet index dépasse lui aussi 100 Mio, mais il est entièrement
+> dérivé des en-têtes des planches `.tile` versionnées et reste donc ignoré par Git.
 > Phase 2 (planches des cartes falaises restaurées à l'identique) et phase 3 (les 33 cartes « générées »
 > de l'atelier `projet-creation-pmdo` reconstruites par leurs `build.py` et intégrées : 28 identiques à
 > l'inventaire, 5 reconstructions déclarées) : §11 et §12 du même rapport ; `tools/build_tile_index.py`
-> regénère `game/Content/Tile/index.idx` après tout ajout de planche.
+> regénère l'index après tout ajout ou toute modification de planche.
 
 ## Jouer sous Windows
 

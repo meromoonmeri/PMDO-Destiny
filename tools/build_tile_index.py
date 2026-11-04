@@ -68,7 +68,7 @@ def main() -> int:
     target.write_bytes(data)
     print(f'index.idx écrit : {len(data)} octets, {struct.unpack_from("<i", data)[0]} planches')
     if len(data) > 100 * 1024 * 1024:
-        print('ATTENTION : > 100 Mio, GitHub refusera le fichier en blob ordinaire (prévoir payload/ gz)')
+        print('ATTENTION : > 100 Mio — fichier généré ignoré par Git, à ne pas versionner en blob ordinaire')
     return 0
 
 

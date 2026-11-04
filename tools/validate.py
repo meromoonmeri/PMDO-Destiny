@@ -31,8 +31,13 @@ def main() -> None:
             errors.append(f'Symlink forbidden: {rel}')
         if path.name == '.gitmodules':
             errors.append(f'Submodule metadata remains: {rel}')
-        if path.is_file() and path.stat().st_size > GITHUB_LIMIT and str(rel) != 'game/Data/Ground/WaterfallVillageCapital.rsground':
-            # (WaterfallVillageCapital est ignorée par git et reconstituée depuis payload/)
+        generated_large = {
+            'game/Data/Ground/WaterfallVillageCapital.rsground',
+            'game/Content/Tile/index.idx',
+        }
+        if path.is_file() and path.stat().st_size > GITHUB_LIMIT and str(rel) not in generated_large:
+            # (Ces deux fichiers sont ignorés par git et reconstitués localement :
+            # la ville depuis payload/, l'index depuis les en-têtes des .tile.)
             errors.append(f'File exceeds GitHub limit: {rel} ({path.stat().st_size} bytes)')
 
     for path in files:
@@ -127,10 +132,15 @@ def main() -> None:
             raise ValueError(f'tile guide size mismatch in {path}')
         return nodes
 
-    # WaterfallVillageCapital (305 Mo) est livrée compressée dans payload/ : reconstitution si absente.
+    # Fichiers volumineux non versionnés : la ville est livrée compressée dans
+    # payload/ et l'index des planches est régénéré depuis les .tile.
     try:
         import subprocess as _sp
-        if not (ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground').is_file() and (ROOT / 'tools/unpack_payload.py').is_file():
+        generated_missing = [
+            ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground',
+            ROOT / 'game/Content/Tile/index.idx',
+        ]
+        if any(not path.is_file() for path in generated_missing) and (ROOT / 'tools/unpack_payload.py').is_file():
             _sp.run([sys.executable, str(ROOT / 'tools/unpack_payload.py')], check=False)
     except Exception as exc:
         errors.append(f'unpack_payload failed: {exc}')
