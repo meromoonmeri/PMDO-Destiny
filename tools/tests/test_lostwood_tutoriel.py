@@ -179,6 +179,16 @@ assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
 assert 'EVT_Emote_Complain' in cliff_jour
 assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jour
 assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
+# Issues du combat : en victoire, le trio détale en évitant le duo et Sonata
+# court en dernière ; en défaite, Tsareena humilie le duo après la poussée,
+# Sonata approuve, Aria lâche son insulte, puis Sonata part encore en dernière.
+assert 'Eh ! Attendez-moi, les filles ! Aaanh !' in cliff_jour
+assert 'Bande de losers !' in cliff_jour
+assert 'C’est clair !' in cliff_jour and 'Ouais, aanh !' in cliff_jour
+assert 'Mais attendez !' in cliff_jour
+assert cliff_jour.index('Bande de losers !') < cliff_jour.index('Mais attendez !')
+assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
+assert cliff_jour.count("GROUND:Hide('Sonata')") == 2
 assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
 for coordonnees in ('688, 700', '712, 700', '736, 700', '712, 732', '736, 732',

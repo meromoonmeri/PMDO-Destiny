@@ -449,8 +449,8 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
 end
 
 -- Issue canonique après la défaite : les Dazzling reprennent leur colonne,
--- poussent physiquement le duo hors du chemin sud et descendent vers
--- Réverie Town.
+-- poussent physiquement le duo hors du chemin sud, l’humilient, puis filent
+-- vers Réverie Town en laissant Sonata partir en courant en dernière.
 function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, Aria)
   local sud = MRKR('Dazzling_Entry_South')
 
@@ -495,14 +495,45 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
     GROUND:AnimateToPosition(hero, 'Hurt', Direction.Up, 684, 736, 1, 4, 0)
     GROUND:CharEndAnim(hero)
   end)
+  TASK:JoinCoroutines({pousse_heros, pousse_partenaire})
+  cinematique.Respirer(15)
+
+  -- Après la poussée, Adagio humilie le duo ; Sonata approuve chacune de ses
+  -- phrases, et Aria enfonce le clou. Tous se font face pendant l’échange.
+  cinematique.RegarderGroupe({
+    {adagio, partner, 0, 4},
+    {Aria, partner, 3, 4},
+    {sonata, hero, 6, 4},
+    {partner, adagio, 9, 4},
+    {hero, sonata, 12, 4},
+  })
+  cinematique.Respirer(10)
+  say(adagio, 'Happy', "Des amateurs jusqu’au bout. Même votre chute manquait de style.", 'droite')
+  say(sonata, 'Joyous', "C’est clair !", 'droite')
+  say(Aria, 'Happy', "Bande de losers !", 'droite')
+  say(adagio, 'Normal', "Retenez cette leçon, les microbes : on ne barre pas la route à la [color=#FF9FD8]Team Dazzling[color].", 'droite')
+  say(sonata, 'Joyous', "Ouais, aanh !", 'droite')
+  cinematique.Respirer(10)
+
+  -- Adagio et Aria détalent vers le sud ; Sonata s’écarte pour laisser passer
+  -- Aria, sans encore les suivre.
+  cinematique.TournerGroupe({
+    {adagio, Direction.Down, 0, 4},
+    {Aria, Direction.Down, 3, 4},
+    {sonata, Direction.Down, 6, 4},
+  })
   local sortie_adagio = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.25)
+    GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.5)
+    GROUND:Hide('Adagio')
   end)
-  local sortie_sonata = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.25)
+  local ecart_sonata = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 760, 692, false, 1)
   end)
   local sortie_aria = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.25)
+    GAME:WaitFrames(6)
+    GROUND:MoveToPosition(Aria, 736, 716, false, 1.5)
+    GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.5)
+    GROUND:Hide('Aria')
   end)
   local regard_partenaire = TASK:BranchCoroutine(function()
     GAME:WaitFrames(45)
@@ -514,15 +545,21 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   end)
   local suivi_sortie = TASK:BranchCoroutine(function()
     GAME:MoveCamera(720, 672, 140, false)
-    GAME:WaitFrames(55)
-    SOUND:FadeOutBGM(60)
   end)
-  TASK:JoinCoroutines({pousse_heros, pousse_partenaire, sortie_adagio,
-    sortie_sonata, sortie_aria, regard_partenaire, regard_heros, suivi_sortie})
+  TASK:JoinCoroutines({sortie_adagio, ecart_sonata, sortie_aria,
+    regard_partenaire, regard_heros, suivi_sortie})
 
-  GROUND:Hide('Adagio')
+  -- Sonata, laissée toute seule, regarde vers les filles déjà parties au sud
+  -- avant de détaler à son tour, en dernière.
+  GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
+  cinematique.Emote(sonata, 'sweating')
+  cinematique.Respirer(10)
+  say(sonata, 'Worried', "Mais attendez !", 'droite')
+  SOUND:FadeOutBGM(60)
+  GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
+  GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.5)
   GROUND:Hide('Sonata')
-  GROUND:Hide('Aria')
+
   SV.Destiny.TeamDazzlingRencontree = true
 
   SOUND:PlayBGM('Cliff Camp.ogg', true)
@@ -600,22 +637,29 @@ function cliffdaytest.ApresCombatTeamDazzling()
       {hero, adagio, 5, 4},
     })
 
+    -- Le trio regarde la direction qu’il va prendre — le sud, vers
+    -- Réverie Town — puis détale en évitant le duo, déjà écarté à l’ouest.
+    cinematique.TournerGroupe({
+      {adagio, Direction.Down, 0, 4},
+      {Aria, Direction.Down, 3, 4},
+      {sonata, Direction.Down, 6, 4},
+    })
     local sud = MRKR('Dazzling_Entry_South')
-    local colonne_sonata = TASK:BranchCoroutine(function()
-      GAME:WaitFrames(20)
-      GROUND:MoveToPosition(sonata, 736, 692, false, 1)
-      GAME:WaitFrames(20)
-      GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.25)
-    end)
-    local colonne_aria = TASK:BranchCoroutine(function()
-      GAME:WaitFrames(6)
-      GROUND:MoveToPosition(Aria, 736, 668, false, 1)
-      GAME:WaitFrames(40)
-      GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.25)
-    end)
     local depart_adagio = TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(adagio, 736, 716, false, 1)
-      GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.25)
+      GROUND:MoveToPosition(adagio, 736, 716, false, 1.5)
+      GROUND:MoveToPosition(adagio, sud.Position.X + 29, sud.Position.Y + 38, false, 1.5)
+      GROUND:Hide('Adagio')
+    end)
+    local depart_mawhile = TASK:BranchCoroutine(function()
+      GAME:WaitFrames(8)
+      GROUND:MoveToPosition(Aria, 736, 692, false, 1.5)
+      GROUND:MoveToPosition(Aria, sud.Position.X - 19, sud.Position.Y + 38, false, 1.5)
+      GROUND:Hide('Aria')
+    end)
+    -- Sonata recule d’un pas pour libérer la colonne, mais elle ne part pas
+    -- encore : elle doit rester la dernière.
+    local recul_sonata = TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(sonata, 736, 676, false, 1)
     end)
     local regard_partenaire = TASK:BranchCoroutine(function()
       GAME:WaitFrames(45)
@@ -627,15 +671,21 @@ function cliffdaytest.ApresCombatTeamDazzling()
     end)
     local suivi_sortie = TASK:BranchCoroutine(function()
       GAME:MoveCamera(720, 672, 140, false)
-      GAME:WaitFrames(55)
-      SOUND:FadeOutBGM(60)
     end)
-    TASK:JoinCoroutines({depart_adagio, colonne_sonata, colonne_aria,
+    TASK:JoinCoroutines({depart_adagio, depart_mawhile, recul_sonata,
       regard_partenaire, regard_heros, suivi_sortie})
 
-    GROUND:Hide('Adagio')
+    -- Laissée derrière, Sonata appelle les filles vers le sud, puis détale
+    -- en courant, en toute dernière.
+    GROUND:CharAnimateTurnTo(sonata, Direction.Down, 4)
+    cinematique.Emote(sonata, 'sweating')
+    cinematique.Respirer(10)
+    say(sonata, 'Shock', "Eh ! Attendez-moi, les filles ! Aaanh !", 'droite')
+    SOUND:FadeOutBGM(60)
+    GROUND:MoveToPosition(sonata, 736, 716, false, 1.5)
+    GROUND:MoveToPosition(sonata, sud.Position.X + 5, sud.Position.Y + 38, false, 1.5)
     GROUND:Hide('Sonata')
-    GROUND:Hide('Aria')
+
     SV.Destiny.TeamDazzlingRencontree = true
     SOUND:PlayBGM('Cliff Camp.ogg', true)
     GAME:MoveCamera(696, 736, 60, false)
