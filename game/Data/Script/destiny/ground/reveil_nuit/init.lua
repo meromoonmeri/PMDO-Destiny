@@ -799,6 +799,11 @@ function reveil_nuit.CinematiqueRetrouvailles()
   geste('question')
   dire("Normal", "Pourquoi ? Pour trouver les chemins où personne ne va.")
   dire("Normal", "Et si un Pokémon se perd là-haut, je veux pouvoir aller le chercher.")
+  -- Son rêve rejoint le mystère du héros : explorer, c’est aussi chercher
+  -- des réponses — extase (Joyous) sur les mystères du monde.
+  dire("Joyous", "Et puis… ce monde est plein de mystères !")
+  dire("Joyous", "Qui sait ? À force d’explorer, on découvrira peut-être pourquoi tu es devenu un Pokémon.")
+  dire("Happy", "Et peut-être même comment te rendre ta mémoire !")
   geste('surpris')
   dire("Happy", "Ça te surprend ?")
   geste('non')
