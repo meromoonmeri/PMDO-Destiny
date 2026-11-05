@@ -343,7 +343,21 @@ local function geste_heros(hero, geste, partner)
   end
 end
 
+-- Sortie sud libre après la première visite, sans remplacer la transition
+-- scénarisée initiale vers la ville ni toucher aux collisions de la falaise.
+local function installer_sortie_carrefour(map)
+  if map == nil or map:FindObject('SortieCarrefour') then return end
+  local sortie = RogueEssence.Ground.GroundObject()
+  sortie.EntName = 'SortieCarrefour'
+  sortie.Collider = RogueElements.Rect(688, 784, 104, 8)
+  sortie.Passable = true
+  sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  sortie:OnMapInit()
+  map:AddObject(sortie)
+end
+
 function cliffdaytest.Init(map)
+  installer_sortie_carrefour(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   DEBUG.EnableDbgCoro()
   local retour_destiny = retour_destiny_en_attente()
@@ -391,6 +405,12 @@ function cliffdaytest.GameSave(map) end
 function cliffdaytest.GameLoad(map)
   cliffdaytest.PlotScripting()
 end
+function cliffdaytest.SortieCarrefour_Touch(obj, activator)
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_falaise')
+end
+
 function cliffdaytest.AllerEnVille()
   SOUND:FadeOutBGM(45)
   arreter_mer()

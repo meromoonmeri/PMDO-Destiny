@@ -46,6 +46,8 @@ jobs:
         run: python tools/tests/test_waterfall_town02.py
       - name: Check Reverie building interiors
         run: python tools/test_batiments_interieurs.py
+      - name: Check Reverie crossroads and connections
+        run: python tools/tests/test_carrefour_reverie.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

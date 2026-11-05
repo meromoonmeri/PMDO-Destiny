@@ -191,7 +191,20 @@ local function installer_une_porte(map, nom, x, y)
   map:AddObject(porte)
 end
 
+local function installer_sortie_carrefour(map)
+  if map == nil or map:FindObject('SortieCarrefour') then return end
+  local sortie = RogueEssence.Ground.GroundObject()
+  sortie.EntName = 'SortieCarrefour'
+  -- Bord ouest du chemin existant, face au marqueur d'entrée de la ville.
+  sortie.Collider = RogueElements.Rect(8, 1544, 8, 48)
+  sortie.Passable = true
+  sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  sortie:OnMapInit()
+  map:AddObject(sortie)
+end
+
 local function installer_portes(map)
+  installer_sortie_carrefour(map)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
   installer_une_porte(map, 'PorteCafeSpinda', 1020, 1344)
   for _, porte in ipairs(portes_batiments) do
@@ -564,6 +577,13 @@ local function tic_ambiance()
   if horloge_ambiance % 900 == 0 then
     discussion_ambiance(math.floor(horloge_ambiance / 900))
   end
+end
+
+function ville.SortieCarrefour_Touch(obj, activator)
+  -- Le premier trajet scénarisé et la visite guidée restent inchangés.
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_ville')
 end
 
 function ville.PorteCafeSpinda_Action(obj, activator)

@@ -1,327 +1,328 @@
 {
- "Version": "0.8.12.0",
- "Object": {
-  "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
-  "destiny_hub": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "destiny_hub"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Destiny Clearing",
-    "LocalTexts": {
-     "fr": "Clairière du Destin"
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+    "destiny_hub": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "destiny_hub"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Destiny Clearing",
+        "LocalTexts": {
+          "fr": "Clairière du Destin"
+        }
+      },
+      "Released": true,
+      "Comment": "Zone de départ technique de PROJET Destiny.",
+      "SortOrder": -1000
+    },
+    "personality_test": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "personality_test",
+        "intro_halo",
+        "reveil_nuit"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Personality Test (quiz)",
+        "LocalTexts": {
+          "fr": "Personality Test (quiz)"
+        }
+      },
+      "Released": true,
+      "Comment": "Zone intro + quiz + retrouvailles nocturnes — StartMap = intro_halo ; reveil_nuit est atteint après l’aller solo dans les Bois Perdus et lance le retour en duo.",
+      "SortOrder": 10
+    },
+    "destiny_cliff_tests": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "cliffdaytest",
+        "cliffdaytest_source",
+        "cliffnordouesttest1",
+        "cliffnordouesttest1_nuit",
+        "cliffdaytest_nuit"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Destiny — falaises Cliff (tests)",
+        "LocalTexts": {
+          "fr": "Destiny — falaises Cliff (tests)"
+        }
+      },
+      "Released": true,
+      "Comment": "Zone conteneur des maps du lot destiny_cliff_tests — 8 maps de falaises + cliffdaytest_nuit (version nuit de cliffdaytest : scène du partenaire qui hésite à devenir explorateur, avant les Bois Perdus). Retour du trajet duo des Bois Perdus : cliffdaytest_nuit, ground 8.",
+      "SortOrder": 20
+    },
+    "lost_wood": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": 10,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 2,
+      "CountedFloors": 14,
+      "Rogue": 1,
+      "Grounds": [],
+      "Maps": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "Name": {
+        "DefaultText": "Bois Perdus",
+        "LocalTexts": {
+          "fr": "Bois Perdus"
+        }
+      },
+      "Released": true,
+      "Comment": "Bois Perdus — deux segments de sept étages : segment 0 pour l’aller solitaire du partenaire (générateurs 1 → 7, étages 1F → 7F, escaliers montants), segment 1 pour le retour en duo (générateurs 7 → 1, étages négatifs B1F → B7F, escaliers descendants). Le succès de l’aller conduit à zrv2_zone_reveil_nuit ; celui du retour ramène à cliffdaytest au jour.",
+      "SortOrder": 30
+    },
+    "dazzling_fight": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 0,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 1,
+      "Rogue": 0,
+      "Grounds": [],
+      "Maps": [
+        [
+          0
+        ]
+      ],
+      "Name": {
+        "DefaultText": "Falaise — Team Dazzling",
+        "LocalTexts": {
+          "fr": "Falaise — Team Dazzling"
+        }
+      },
+      "Released": false,
+      "Comment": "Zone technique du premier combat contre la Team Dazzling. Un seul segment fixe charge cliffdaytest.rsmap ; la défaite comme la victoire renvoient à cliffdaytest pour la reprise de la scène.",
+      "SortOrder": 35
+    },
+    "town02_waterfallvillage": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "WaterfallVillageCapital",
+        "waterfall_cave_1",
+        "caféspindaaccueil",
+        "spindacaféétage1",
+        "spindacaféétage1salle2",
+        "reverie_post_office",
+        "reverie_fire_home",
+        "reverie_water_home",
+        "reverie_electric_home",
+        "reverie_grass_home",
+        "reverie_rock_home",
+        "reverie_normal_home",
+        "reverie_inn",
+        "guild_storage_room",
+        "guild_heros_room",
+        "ledian_dojo",
+        "dojo_ossatueur",
+        "dojo_kingambit"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Waterfall Village (town02)",
+        "LocalTexts": {
+          "fr": "Waterfall Village (town02)"
+        }
+      },
+      "Released": true,
+      "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT).",
+      "SortOrder": 40
+    },
+    "reverie": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "clairiere",
+        "guild_path",
+        "pmd_petal_clearing",
+        "rvt2_ne_jour",
+        "rvt2_ne_nuit",
+        "rvt2_no_jour",
+        "rvt2_no_nuit",
+        "zrv2_zone_reveil_aube",
+        "zrv2_zone_reveil_crepuscule",
+        "zrv2_zone_reveil_jour",
+        "zrv2_zone_reveil_nuit",
+        "crossroadreverietown2"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Reverie Town and the Guild",
+        "LocalTexts": {
+          "fr": "Reverie Town, la guilde et la clairière"
+        }
+      },
+      "Released": true,
+      "Comment": "Quartiers de Reverie Town, sentier de la guilde, clairières et zone de réveil (import guilde-treehouse-pmd).",
+      "SortOrder": 200
+    },
+    "chapitres_destiny": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "destiny_bourg_ecume_port",
+        "destiny_passe_rocheuse_ecumes",
+        "destiny_grotte_maree_entree",
+        "destiny_grotte_maree_boss",
+        "destiny_gorge_basaltique_magma_entree",
+        "destiny_caldeira_coeur_solaire_boss",
+        "destiny_sous_bois_mycelien",
+        "destiny_clairiere_source_lumineuse",
+        "destiny_source_irisee"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Destiny Chapters",
+        "LocalTexts": {
+          "fr": "Chapitres de Destiny"
+        }
+      },
+      "Released": true,
+      "Comment": "Lieux des Chapitres I et II de PMD : Destiny (import projet-creation-pmdo). Cartes reconstruites depuis leurs pipelines d'atelier ; raccordements, rencontres et cinématiques à écrire.",
+      "SortOrder": 50
+    },
+    "vitrines_menu": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "pmd_destiny_menu_jour"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Title-screen showcase maps",
+        "LocalTexts": {
+          "fr": "Cartes vitrines du menu-titre"
+        }
+      },
+      "Released": true,
+      "Comment": "Carte vitrine pmd_destiny_menu_jour (lot pmd_destiny_fangame_v1 de projet-creation-pmdo), reconstruite à l'identique (SHA-256 d'inventaire). Décor animé du menu-titre, pas une carte jouable.",
+      "SortOrder": 301
     }
-   },
-   "Released": true,
-   "Comment": "Zone de départ technique de PROJET Destiny.",
-   "SortOrder": -1000
-  },
-  "personality_test": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "personality_test",
-    "intro_halo",
-    "reveil_nuit"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Personality Test (quiz)",
-    "LocalTexts": {
-     "fr": "Personality Test (quiz)"
-    }
-   },
-   "Released": true,
-   "Comment": "Zone intro + quiz + retrouvailles nocturnes — StartMap = intro_halo ; reveil_nuit est atteint après l’aller solo dans les Bois Perdus et lance le retour en duo.",
-   "SortOrder": 10
-  },
-  "destiny_cliff_tests": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "cliffdaytest",
-    "cliffdaytest_source",
-    "cliffnordouesttest1",
-    "cliffnordouesttest1_nuit",
-    "cliffdaytest_nuit"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Destiny — falaises Cliff (tests)",
-    "LocalTexts": {
-     "fr": "Destiny — falaises Cliff (tests)"
-    }
-   },
-   "Released": true,
-   "Comment": "Zone conteneur des maps du lot destiny_cliff_tests — 8 maps de falaises + cliffdaytest_nuit (version nuit de cliffdaytest : scène du partenaire qui hésite à devenir explorateur, avant les Bois Perdus). Retour du trajet duo des Bois Perdus : cliffdaytest_nuit, ground 8.",
-   "SortOrder": 20
-  },
-  "lost_wood": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": 10,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 2,
-   "CountedFloors": 14,
-   "Rogue": 1,
-   "Grounds": [],
-   "Maps": [
-    [
-     0,
-     1,
-     2,
-     3,
-     4,
-     5,
-     6
-    ],
-    [
-     0,
-     1,
-     2,
-     3,
-     4,
-     5,
-     6
-    ]
-   ],
-   "Name": {
-    "DefaultText": "Bois Perdus",
-    "LocalTexts": {
-     "fr": "Bois Perdus"
-    }
-   },
-   "Released": true,
-   "Comment": "Bois Perdus — deux segments de sept étages : segment 0 pour l’aller solitaire du partenaire (générateurs 1 → 7, étages 1F → 7F, escaliers montants), segment 1 pour le retour en duo (générateurs 7 → 1, étages négatifs B1F → B7F, escaliers descendants). Le succès de l’aller conduit à zrv2_zone_reveil_nuit ; celui du retour ramène à cliffdaytest au jour.",
-   "SortOrder": 30
-  },
-  "dazzling_fight": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 0,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 1,
-   "Rogue": 0,
-   "Grounds": [],
-   "Maps": [
-    [
-     0
-    ]
-   ],
-   "Name": {
-    "DefaultText": "Falaise — Team Dazzling",
-    "LocalTexts": {
-     "fr": "Falaise — Team Dazzling"
-    }
-   },
-   "Released": false,
-   "Comment": "Zone technique du premier combat contre la Team Dazzling. Un seul segment fixe charge cliffdaytest.rsmap ; la défaite comme la victoire renvoient à cliffdaytest pour la reprise de la scène.",
-   "SortOrder": 35
-  },
-  "town02_waterfallvillage": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "WaterfallVillageCapital",
-    "waterfall_cave_1",
-    "caféspindaaccueil",
-    "spindacaféétage1",
-    "spindacaféétage1salle2",
-    "reverie_post_office",
-    "reverie_fire_home",
-    "reverie_water_home",
-    "reverie_electric_home",
-    "reverie_grass_home",
-    "reverie_rock_home",
-    "reverie_normal_home",
-    "reverie_inn",
-    "guild_storage_room",
-    "guild_heros_room",
-    "ledian_dojo",
-    "dojo_ossatueur",
-    "dojo_kingambit"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Waterfall Village (town02)",
-    "LocalTexts": {
-     "fr": "Waterfall Village (town02)"
-    }
-   },
-   "Released": true,
-   "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT).",
-   "SortOrder": 40
-  },
-  "reverie": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "clairiere",
-    "guild_path",
-    "pmd_petal_clearing",
-    "rvt2_ne_jour",
-    "rvt2_ne_nuit",
-    "rvt2_no_jour",
-    "rvt2_no_nuit",
-    "zrv2_zone_reveil_aube",
-    "zrv2_zone_reveil_crepuscule",
-    "zrv2_zone_reveil_jour",
-    "zrv2_zone_reveil_nuit"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Reverie Town and the Guild",
-    "LocalTexts": {
-     "fr": "Reverie Town, la guilde et la clairière"
-    }
-   },
-   "Released": true,
-   "Comment": "Quartiers de Reverie Town, sentier de la guilde, clairières et zone de réveil (import guilde-treehouse-pmd).",
-   "SortOrder": 200
-  },
-  "chapitres_destiny": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "destiny_bourg_ecume_port",
-    "destiny_passe_rocheuse_ecumes",
-    "destiny_grotte_maree_entree",
-    "destiny_grotte_maree_boss",
-    "destiny_gorge_basaltique_magma_entree",
-    "destiny_caldeira_coeur_solaire_boss",
-    "destiny_sous_bois_mycelien",
-    "destiny_clairiere_source_lumineuse",
-    "destiny_source_irisee"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Destiny Chapters",
-    "LocalTexts": {
-     "fr": "Chapitres de Destiny"
-    }
-   },
-   "Released": true,
-   "Comment": "Lieux des Chapitres I et II de PMD : Destiny (import projet-creation-pmdo). Cartes reconstruites depuis leurs pipelines d'atelier ; raccordements, rencontres et cinématiques à écrire.",
-   "SortOrder": 50
-  },
-  "vitrines_menu": {
-   "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-   "ExpPercent": 100,
-   "Level": -1,
-   "LevelCap": false,
-   "KeepSkills": false,
-   "TeamRestrict": false,
-   "TeamSize": -1,
-   "MoneyRestrict": false,
-   "BagRestrict": -1,
-   "KeepTreasure": false,
-   "BagSize": -1,
-   "Rescues": 0,
-   "CountedFloors": 0,
-   "Rogue": 0,
-   "Grounds": [
-    "pmd_destiny_menu_jour"
-   ],
-   "Maps": [],
-   "Name": {
-    "DefaultText": "Title-screen showcase maps",
-    "LocalTexts": {
-     "fr": "Cartes vitrines du menu-titre"
-    }
-   },
-   "Released": true,
-   "Comment": "Carte vitrine pmd_destiny_menu_jour (lot pmd_destiny_fangame_v1 de projet-creation-pmdo), reconstruite à l'identique (SHA-256 d'inventaire). Décor animé du menu-titre, pas une carte jouable.",
-   "SortOrder": 301
   }
- }
 }
