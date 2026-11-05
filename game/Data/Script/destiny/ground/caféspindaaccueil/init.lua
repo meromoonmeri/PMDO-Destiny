@@ -1,7 +1,9 @@
 -- Accueil du café Spinda : habitants sérialisés de la carte town02.
--- Les dialogues sont originaux Destiny ; les services avancés du café
--- restent à brancher sur les menus natifs dans une tranche ultérieure.
+-- Les dialogues sont originaux Destiny ; le bar à jus de Spinda est branché
+-- sur les menus natifs du moteur (destiny.cafe_spinda), et l'atelier de
+-- recyclage se tient au premier étage.
 require 'origin.common'
+local cafe = require 'destiny.cafe_spinda'
 
 local caféspindaaccueil = {}
 
@@ -85,15 +87,20 @@ function caféspindaaccueil.Spinda_Action(personnage, activator)
   dire(personnage, 'Happy', 'Bienvenue au café Spinda ! Ici, les explorateurs reprennent des forces entre deux récits de mission.')
   dire(CH('MrMimeJunior'), 'Happy', 'Je prépare les verres sans dire un mot. Le spectacle commence dès le comptoir !')
   dire(CH('Kirlia'), 'Normal', 'Et moi, j’écoute les équipes. Certaines histoires commencent par une simple boisson partagée.')
-  dire(personnage, 'Normal', 'Installez-vous. L’étage est plus calme, et la salle voisine accueille nos petits spectacles.')
+  dire(personnage, 'Normal', 'Installez-vous. L’étage est plus calme, la salle voisine accueille nos petits spectacles, et mon bar presse les ingrédients que vous rapportez.')
   UI:SetSpeaker(personnage)
-  UI:BeginChoiceMenu('Souhaitez-vous que je vous guide, ou faire une sieste jusqu’à demain ?', {
-    'Monter à l’étage', 'Aller à la salle de spectacle', 'Faire une sieste', 'Rester à l’accueil',
-  }, 1, 4)
+  UI:BeginChoiceMenu('Que souhaitez-vous ?', {
+    'Monter à l’étage', 'Aller à la salle de spectacle', 'Commander un jus de Spinda',
+    'Faire une sieste', 'Rester à l’accueil',
+  }, 1, 5)
   UI:WaitForChoice()
   local choix = UI:ChoiceResult()
   if choix == 3 then
-    UI:WaitShowDialogue('Installez-vous dans un coin tranquille. Demain, les Kecleon auront renouvelé leurs étals.')
+    cafe.servir_le_jus(personnage)
+    return
+  end
+  if choix == 4 then
+    UI:WaitShowDialogue('Installez-vous dans un coin tranquille. Demain, les Kecleon auront renouvelé leurs étals et la réserve de l’atelier changera aussi.')
     UI:ResetSpeaker()
     GAME:FadeOut(false, 60)
     GAME:WaitFrames(90)
@@ -124,7 +131,7 @@ end
 local function dialogue_recyclage(okéoké, qulbutoqué)
   dire(okéoké, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
   dire(qulbutoqué, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
-  dire(okéoké, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
+  dire(okéoké, 'Normal', 'L’atelier est monté, là-haut, au premier étage. Montez nous voir : on estime votre dépôt et vous repartez avec une trouvaille du jour.')
   UI:ResetSpeaker()
 end
 

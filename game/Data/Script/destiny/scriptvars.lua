@@ -17,6 +17,10 @@ SV.Destiny = SV.Destiny or {
   LostWoodRetry = nil, LostWoodCause = nil,
   LostWoodEchecsAller = 0, LostWoodEchecsRetour = 0,
   PenseesReveilVues = false, JourneeVille = 0, StocksKecleon = {},
+  -- Café Spinda (destiny.cafe_spinda) : bar à jus et atelier de recyclage.
+  -- TourneeOfferte passe à true dès la première tournée offerte par la maison.
+  JusDecouvert = false, JusServis = 0, TourneeOfferte = false,
+  AtelierDecouvert = false, RecyclageDons = 0,
   -- Recrutement et Noigrumes restent indisponibles jusqu’à l’Assemblée /
   -- la boutique des Zones d’Accueil (voir destiny.recrutement).
   RecrutementDebloque = false,

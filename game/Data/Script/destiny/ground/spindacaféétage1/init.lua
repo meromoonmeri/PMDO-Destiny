@@ -1,5 +1,7 @@
--- Étage du café Spinda : coin calme et atelier de recyclage en préparation.
+-- Étage du café Spinda : coin calme et atelier de recyclage (Okéoké et
+-- Qulbutoké, branché sur destiny.cafe_spinda).
 require 'origin.common'
+local cafe = require 'destiny.cafe_spinda'
 
 local spindacaféétage1 = {}
 
@@ -80,19 +82,15 @@ function spindacaféétage1.NewObject_Action(personnage, activator)
   elseif choix == 2 then aller_a(4) end
 end
 
-local function dialogue_atelier(okéoké, qulbutoqué)
-  dire(okéoké, 'Happy', 'Ici, nous rangeons les caisses du recyclage : rubans, graines, éclats et petits objets oubliés.')
-  dire(qulbutoqué, 'Normal', 'Chaque équipe laisse quelque chose derrière elle. Notre travail est de lui trouver une seconde vie.')
-  dire(okéoké, 'Normal', 'Encore quelques étagères à monter, et l’atelier pourra recevoir les explorateurs.')
-  UI:ResetSpeaker()
-end
-
+-- Atelier de recyclage : le dépôt, l'estimation et la trouvaille du jour
+-- passent par destiny.cafe_spinda. Les deux jumeaux tiennent le même
+-- comptoir, l'un annonce, l'autre commente.
 function spindacaféétage1.NewObject_1_Action(personnage, activator)
-  dialogue_atelier(personnage, CH('NewObject_2'))
+  cafe.ouvrir_atelier(personnage, CH('NewObject_2'))
 end
 
 function spindacaféétage1.NewObject_2_Action(personnage, activator)
-  dialogue_atelier(CH('NewObject_1'), personnage)
+  cafe.ouvrir_atelier(CH('NewObject_1'), personnage)
 end
 
 return spindacaféétage1
