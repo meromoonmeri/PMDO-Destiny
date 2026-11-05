@@ -182,6 +182,7 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
     cinematique.Dire(partenaire, 'Worried', 'Me voilà de retour devant les [color=#69D98C]Bois Perdus[color]. J’ai bien fait de rebrousser chemin.', 'standard')
     cinematique.Dire(partenaire, 'Worried', 'Renoncer pour se protéger, ce n’est pas la fin de l’aventure.', 'standard')
   end
+  cinematique.Respirer(20)
   GROUND:CharSetAnim(partenaire, 'Wake', false)
   GAME:WaitFrames(35)
   -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.

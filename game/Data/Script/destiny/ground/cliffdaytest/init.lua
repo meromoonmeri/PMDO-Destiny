@@ -130,19 +130,19 @@ local function finir_moquerie_dazzling(ch)
   if ch ~= nil then GROUND:CharEndAnim(ch) end
 end
 local function moquer_trio(adagio, Aria, sonata)
-  moquer_dazzling(adagio)
+  -- Seule Sonata conserve la pose Moquerie ; les réinitialisations de
+  -- portrait et les huit frames préservent le rythme original de l'échange.
+  UI:ResetSpeaker()
   GAME:WaitFrames(4)
-  moquer_dazzling(Aria)
+  UI:ResetSpeaker()
   GAME:WaitFrames(4)
   moquer_dazzling(sonata)
 end
 local function finir_moquerie_trio(adagio, Aria, sonata)
-  finir_moquerie_dazzling(adagio)
-  finir_moquerie_dazzling(Aria)
   finir_moquerie_dazzling(sonata)
 end
--- Début de la cascade de ricanements : Aria rit derrière sa main, puis
--- Adagio approuve 6 frames plus tard. Les deux glowing restent silencieux.
+-- Début de la cascade de ricanements : Aria réagit, puis Adagio approuve
+-- 6 frames plus tard. Les deux glowing restent silencieux.
 local function cascade_moquerie_Aria_adagio(adagio, Aria)
   cinematique.Emote(Aria, 'glowing')
   GAME:WaitFrames(6)
@@ -484,9 +484,9 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
       GROUND:MoveToPosition(fille, etape[1], etape[2], false, 1.5)
     end
   end
-  -- Après le point commun (713, 634), chaque fille bifurque dans son
-  -- propre couloir : Adagio au centre, Aria à l’ouest, Sonata à l’est.
-  -- Elles ne convergent donc plus toutes en (713, 676) avant l’éventail.
+  -- Après le point commun (713, 634), les filles se répartissent en
+  -- couloirs : Adagio au centre, Aria à l’ouest, Sonata à l’est. Aria
+  -- s'arrête à 32 pixels d'Adagio pour ne pas la coller en fin d'entrée.
   local entree_adagio = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(adagio, 852, 452, false, 1.5)
     marcher_route_verte(adagio)
@@ -494,16 +494,18 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
     GROUND:MoveToPosition(adagio, 712, 688, false, 1.5)
   end)
   local entree_mawhile = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(6)
+    -- Aria laisse une vraie distance à Adagio avant de suivre la file.
+    GAME:WaitFrames(24)
     marcher_route_verte(Aria)
-    GROUND:MoveToPosition(Aria, 700, 668, false, 1.5)
-    GROUND:MoveToPosition(Aria, 688, 688, false, 1.5)
+    GROUND:MoveToPosition(Aria, 680, 654, false, 1.5)
+    GROUND:MoveToPosition(Aria, 680, 688, false, 1.5)
   end)
   local entree_lopunny = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(24)
-    GROUND:MoveToPosition(sonata, 884, 452, false, 1.5)
+    -- Sonata rejoint la route en diagonale et garde ses distances avec Aria.
+    GAME:WaitFrames(48)
+    GROUND:MoveToPosition(sonata, 860, 452, false, 1.5)
     marcher_route_verte(sonata)
-    GROUND:MoveToPosition(sonata, 726, 668, false, 1.5)
+    GROUND:MoveToPosition(sonata, 736, 654, false, 1.5)
     GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)
   end)
   -- La caméra redescend le long du chemin puis se pose sur le face-à-face.
@@ -559,26 +561,24 @@ function cliffdaytest.RencontreTeamDazzling(hero, partner, point)
   say(adagio, 'Happy', "Une équipe célèbre ne perd pas son temps avec deux enfants couverts de poussière.", 'droite')
   hero_regarde_locuteur(hero, partner)
   say(partner, 'Determined', "On a traversé les [color=#69D98C]Bois Perdus[color]. Deux fois.", 'standard')
-  -- Le trio se moque du duo : portraits Joyous canoniques et, au sol, la
-  -- pose Moquerie tenue pendant l'échange (Aria main devant la bouche).
+  -- Le trio se moque du duo par ses répliques ; seule Sonata prend la
+  -- pose Moquerie au sol pendant l'échange.
   moquer_trio(adagio, Aria, sonata)
   cinematique.Respirer(10)
   hero_regarde_locuteur(hero, Aria)
   say(Aria, 'Joyous', "Deux fois ? Ce n’est pas un exploit, c’est un problème d’orientation.", 'droite')
-  -- Cascade de moquerie : Aria (glowing) rit derrière sa main, Adagio
-  -- (glowing) approuve 6 frames plus tard, puis à +20 frames Aria se
-  -- tourne vers Sonata pendant que celle-ci éclate en happy. Aucun SFX.
+  -- Cascade de réactions : Aria (glowing), puis Adagio (glowing) 6 frames
+  -- plus tard ; Aria se tourne ensuite vers Sonata, qui éclate en happy.
   cinematique.Respirer(10)
   cascade_moquerie_Aria_adagio(adagio, Aria)
   GAME:WaitFrames(14)
-  local relache_Aria = TASK:BranchCoroutine(function()
-    finir_moquerie_dazzling(Aria)
+  local tourne_Aria = TASK:BranchCoroutine(function()
     GROUND:CharTurnToCharAnimated(Aria, sonata, 4)
   end)
   local rire_sonata = TASK:BranchCoroutine(function()
     cinematique.Emote(sonata, 'happy')
   end)
-  TASK:JoinCoroutines({relache_Aria, rire_sonata})
+  TASK:JoinCoroutines({tourne_Aria, rire_sonata})
   GAME:WaitFrames(20)
   hero_regarde_locuteur(hero, sonata)
   say(sonata, 'Joyous', "Moi, je trouve ça mignon : ils font presque équipe d’explorateurs.", 'droite')
@@ -657,6 +657,9 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   TASK:JoinCoroutines({pousse_heros, pousse_partenaire, traversee_Aria,
     traversee_adagio, traversee_sonata})
   cinematique.Respirer(15)
+  hero_regarde_locuteur(hero, partner)
+  say(partner, 'Angry', "Mais ça va pas la tête ?!", 'standard')
+  cinematique.Respirer(10)
 
   -- Après la bousculade, Adagio humilie le duo écarté des deux côtés du
   -- chemin ; Sonata approuve chacune de ses phrases, et Aria enfonce
@@ -669,8 +672,8 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
     {hero, adagio, 12, 4},
   })
   cinematique.Respirer(10)
-  -- L'humiliation se joue aussi au sol : le trio tient sa Moquerie pendant
-  -- tout l'échange, puis la relâche avant de se retourner pour partir.
+  -- Sonata tient sa pose Moquerie pendant l'échange, puis la relâche
+  -- avant de se retourner pour partir.
   moquer_trio(adagio, Aria, sonata)
   cinematique.Respirer(10)
   hero_regarde_locuteur(hero, adagio)
@@ -733,6 +736,16 @@ function cliffdaytest.SortieDazzlingApresDefaite(hero, partner, adagio, sonata, 
   })
   cinematique.Respirer(20)
   say(partner, 'Worried', "La [color=#FF9FD8]Team Dazzling[color]… Brillantes, peut-être. Aimables, sûrement pas.", 'droite')
+  local desole = 'désolé'
+  local genre_connu, feminin = pcall(function() return partner.BaseForm.Gender == Gender.Female end)
+  if genre_connu and feminin then desole = 'désolée' end
+  say(partner, 'Worried', "Oh… Je suis " .. desole .. ". Ça ne te donne pas une superbe image des équipes d’exploration…", 'droite')
+  say(partner, 'Normal', "Mais je te promets qu’elles ne sont pas toutes comme elles !", 'droite')
+  say(partner, 'Worried', "La [color=#FF9FD8]Team Dazzling[color] a beau être brillante… Elles sont… comment dire…", 'droite')
+  cinematique.Respirer(10)
+  cinematique.Emote(partner, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+  cinematique.Respirer(20)
+  say(partner, 'Normal', "Ouais, bon… pas important !", 'droite')
 end
 
 -- Reprise au retour du segment de combat. Les cinq acteurs sont replacés sur
@@ -969,6 +982,7 @@ function cliffdaytest.SceneArriveeDestiny()
   se_faire_face(partner, hero)
   cinematique.Respirer(10)
   say(partner, 'Joyous', "Ohh, " .. nom_heros() .. " ! On est arrivés !", 'droite')
+  cinematique.Respirer(20)
 
   -- Tout content, le partenaire revient vers le héros.
   GROUND:MoveToPosition(partner, entree.Position.X - 76, entree.Position.Y + 8, false, 1.5)
