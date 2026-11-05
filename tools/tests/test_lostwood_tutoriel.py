@@ -280,11 +280,20 @@ for ancien_centre in ('GAME:MoveCamera(720, 688', 'GAME:MoveCamera(720, 700',
                       'GAME:MoveCamera(720, 712', 'GAME:MoveCamera(724, 720',
                       'GAME:MoveCamera(696, 736', 'GAME:MoveCamera(680, 744'):
     assert ancien_centre not in cliff_jour
-# Bifurcation après le point commun (713, 634), sans convergence du trio.
+# Entrée en file : Aria garde ses distances avec Adagio, Sonata rejoint la
+# route en diagonale, puis chacune bifurque vers son propre couloir.
 assert 'GROUND:MoveToPosition(adagio, 713, 676, false, 1.5)' in cliff_jour
-assert 'GROUND:MoveToPosition(Aria, 700, 668, false, 1.5)' in cliff_jour
-assert 'GROUND:MoveToPosition(sonata, 726, 668, false, 1.5)' in cliff_jour
-assert 'GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)' in cliff_jour
+_entree_aria = cliff_jour[cliff_jour.index('local entree_mawhile = TASK:BranchCoroutine'):
+                          cliff_jour.index('local entree_lopunny = TASK:BranchCoroutine')]
+_entree_sonata = cliff_jour[cliff_jour.index('local entree_lopunny = TASK:BranchCoroutine'):
+                            cliff_jour.index('local suivi_entree = TASK:BranchCoroutine')]
+assert _entree_aria.index('GAME:WaitFrames(24)') < _entree_aria.index('marcher_route_verte(Aria)')
+assert 'GROUND:MoveToPosition(Aria, 680, 654, false, 1.5)' in _entree_aria
+assert 'GROUND:MoveToPosition(Aria, 680, 688, false, 1.5)' in _entree_aria
+assert _entree_sonata.index('GAME:WaitFrames(48)') < _entree_sonata.index('marcher_route_verte(sonata)')
+assert 'GROUND:MoveToPosition(sonata, 860, 452, false, 1.5)' in _entree_sonata
+assert 'GROUND:MoveToPosition(sonata, 736, 654, false, 1.5)' in _entree_sonata
+assert 'GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)' in _entree_sonata
 # Surnoms dynamiques blancs ; seuls les prénoms fixes Dazzling sont colorés.
 assert 'return membre.Nickname' in cliff_jour
 assert 'cinematique.NomColore(membre.Nickname' not in cliff_jour
@@ -309,7 +318,7 @@ for numero, ligne in enumerate(lignes_cliff_jour):
             assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
             regards_vers_dazzling += 1
 assert regards_vers_dazzling == 27
-assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 9
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 10
 assert '{hero, sonata, 5, 4}' in cliff_jour
 # Issues du combat : Adagio part, Aria suit à +12 frames, puis Sonata
 # joue le même gag dans les deux branches avec des répliques adaptées.
@@ -334,14 +343,24 @@ assert cliff_jour.count("GROUND:Hide('Sonata')") == 1
 # Aria n’utilise que des portraits canoniques : quand elle se moque
 # du héros et du partenaire, c’est Joyous. Aucune émotion de portrait 14
 # ne subsiste dans le payload racine de 303.portrait, et le portrait
-# personnalisé a été retiré du dépôt. Au sol, en revanche, l'action libre
-# Special0 (FrameType 82) porte désormais la pose Moquerie du trio.
+# personnalisé a été retiré du dépôt. Au sol, seule Sonata conserve la
+# pose Moquerie Special0 ; les glowing d'Aria et d'Adagio sont conservés.
 assert "say(Aria, 'Joyous', \"Deux fois ?" in cliff_jour
 assert "say(Aria, 'Joyous', \"Bande de losers !\"" in cliff_jour
 assert "GetAnimIndex('Special0')" in cliff_jour
 assert 'moquer_trio(adagio, Aria, sonata)' in cliff_jour
 assert 'finir_moquerie_trio(adagio, Aria, sonata)' in cliff_jour
 assert 'local function cascade_moquerie_Aria_adagio' in cliff_jour
+_moquerie = cliff_jour[cliff_jour.index('local function moquer_trio('):
+                       cliff_jour.index('local function finir_moquerie_trio(')]
+assert 'moquer_dazzling(sonata)' in _moquerie
+assert 'moquer_dazzling(adagio)' not in _moquerie
+assert 'moquer_dazzling(Aria)' not in _moquerie
+assert _moquerie.count('GAME:WaitFrames(4)') == 2
+_cascade = cliff_jour[cliff_jour.index('local function cascade_moquerie_Aria_adagio('):
+                      cliff_jour.index('-- Fight Woosh étoilé Team Dazzling')]
+assert "cinematique.Emote(Aria, 'glowing')" in _cascade
+assert "cinematique.Emote(adagio, 'glowing')" in _cascade
 _rencontre = cliff_jour[cliff_jour.index('function cliffdaytest.RencontreTeamDazzling'):
                         cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite')]
 assert _rencontre.index('problème d’orientation') \
@@ -367,7 +386,7 @@ assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jou
 # Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
 for coordonnees in ('688, 688', '712, 688', '736, 688', '712, 716', '736, 716',
                     '684, 720', '764, 720', '668, 728', '764, 728', '692, 728',
-                    '700, 668', '726, 668', '713, 676', 'sud.Position.X'):
+                    '680, 654', '736, 654', '713, 676', 'sud.Position.X'):
     assert coordonnees in cliff_jour
 assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
 assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
@@ -387,6 +406,17 @@ assert sortie_defaite.index('Bande de losers !') \
     < sortie_defaite.index('cascade_moquerie_Aria_adagio(adagio, Aria)') \
     < sortie_defaite.index('Retenez cette leçon')
 assert "cinematique.Emote(sonata, 'happy')" not in sortie_defaite
+# La réaction suit la bousculade ; l'excuse et la goutte de sueur suivent
+# le départ de Sonata, avant que la scène reprenne sa conclusion commune.
+assert sortie_defaite.index('TASK:JoinCoroutines({pousse_heros, pousse_partenaire') \
+    < sortie_defaite.index('Mais ça va pas la tête ?!') \
+    < sortie_defaite.index('Des amateurs jusqu’au bout')
+assert sortie_defaite.index('gag_depart_sonata(hero, partner, sonata, false)') \
+    < sortie_defaite.index('Ça ne te donne pas une superbe image') \
+    < sortie_defaite.index('comment dire…') \
+    < sortie_defaite.index("cinematique.Emote(partner, 'sweatdrop', 'EVT_Emote_Sweatdrop')") \
+    < sortie_defaite.index('pas important !')
+assert "if genre_connu and feminin then desole = 'désolée' end" in sortie_defaite
 for nom in ('Adagio', 'Sonata', 'Aria'):
     assert f"GROUND:Hide('{nom}')" in cliff_jour
 musique_dazzling = (GAME / 'Content/Music/Team Dazzling Social.ogg').read_bytes()
