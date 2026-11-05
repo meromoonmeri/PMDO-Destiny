@@ -20,10 +20,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "game/Data/Script/destiny"
 
+# Empreintes des salles du café telles que livrées. L'accueil et la salle de
+# spectacle ont été retouchés après l'écriture de ce contrôle (musique du café
+# « Spinda's Cafe.ogg » et EdgeView natif) : les fenêtres restent bel et bien
+# supprimées, ce que vérifie aussi tools/retirer_fenetres_cafe.py --check.
 CAFE_MAPS = {
-    "caféspindaaccueil.rsground": "182e0a465947db903fb48fd00d70538c",
+    "caféspindaaccueil.rsground": "c7c8c65e47e4e4ac2da470837e6fddb1",
     "spindacaféétage1.rsground": "4f5c87686530257bb70ce110e2a050fa",
-    "spindacaféétage1salle2.rsground": "5830da67d6329f6e228a23985bccb72d",
+    "spindacaféétage1salle2.rsground": "6d9178508dd263f4624335fe15dd2fc1",
 }
 
 RESSOURCES = [
@@ -83,9 +87,13 @@ def main() -> int:
     zone = json.loads(lire(ROOT / "game/Data/Zone/town02_waterfallvillage.json"))
     grounds = zone["Object"]["GroundMaps"]
     assert grounds[2:5] == ["caféspindaaccueil", "spindacaféétage1", "spindacaféétage1salle2"]
-    archives = json.loads(lire(ROOT / "game/Data/Zone/archives.json"))["Object"]["GroundMaps"]
-    for salle in grounds[2:5]:
-        assert salle not in archives
+    # La zone `archives` n'existe plus dans l'arbre consolidé : le contrôle ne
+    # s'applique que si elle est présente.
+    chemin_archives = ROOT / "game/Data/Zone/archives.json"
+    if chemin_archives.is_file():
+        archives = json.loads(lire(chemin_archives))["Object"]["GroundMaps"]
+        for salle in grounds[2:5]:
+            assert salle not in archives
     index = json.loads(lire(ROOT / "game/Data/Zone/index.idx"))
     assert index["Object"]["town02_waterfallvillage"]["Grounds"] == grounds
 

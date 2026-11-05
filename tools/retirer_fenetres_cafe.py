@@ -62,6 +62,29 @@ def corriger(doc: dict, blocs: list[tuple[int, int]]) -> int:
     return changements
 
 
+def fenetres_retirees(doc: dict, blocs: list[tuple[int, int]]) -> bool:
+    """Vrai si chaque bloc de fenêtre pointe désormais vers le bloc de mur voisin.
+
+    Sert de repli quand la carte a été retouchée par une autre tranche (musique,
+    EdgeView, collisions) : l'empreinte change, mais le correctif des fenêtres
+    doit rester vérifiable.
+    """
+    tiles = doc["Object"]["Layers"][0]["Tiles"]
+    for x_dest, x_source in blocs:
+        delta = x_source - x_dest
+        for x in range(x_dest, x_dest + TAILLE_BLOC):
+            for y in range(Y_DEPART, Y_DEPART + TAILLE_BLOC):
+                reference = tiles[x + delta][y].get("Layers", [])
+                if not reference:
+                    return False
+                ref = reference[0]["Frames"][0]["TexLoc"]
+                for calque in tiles[x][y].get("Layers", []):
+                    for frame in calque.get("Frames", []):
+                        if frame["TexLoc"] != ref:
+                            return False
+    return True
+
+
 def traiter(nom: str, source_md5: str, attendu_md5: str,
             blocs: list[tuple[int, int]], check: bool) -> None:
     chemin = GROUND / f"{nom}.rsground"
@@ -71,6 +94,9 @@ def traiter(nom: str, source_md5: str, attendu_md5: str,
         print(f"OK déjà corrigé : {nom} ({actuel})")
         return
     if actuel != source_md5:
+        if check and fenetres_retirees(json.loads(brut.decode("utf-8-sig")), blocs):
+            print(f"OK corrigé, carte retouchée depuis cette empreinte : {nom} ({actuel})")
+            return
         raise SystemExit(
             f"{nom} : MD5 inattendu {actuel}; source Drive {source_md5} "
             f"ou version corrigée {attendu_md5} attendue. Aucun fichier modifié."
