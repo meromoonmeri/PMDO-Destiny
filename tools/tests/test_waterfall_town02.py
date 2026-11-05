@@ -37,22 +37,22 @@ def md5(path: Path) -> str:
 assert unpack_payload.PAYLOADS == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f',
-        263169912,
+        '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03',
+        263249095,
     )
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 263169912
-assert sha256(MAP) == 'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f'
+assert MAP.stat().st_size == 263249095
+assert sha256(MAP) == '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 263169912
-assert h.hexdigest() == 'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f'
+assert size == 263249095
+assert h.hexdigest() == '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -81,7 +81,7 @@ assert {
     'FORGE',
     'Ledian_Dojo_Objects',
     'Reverie_Inn_Floor_Decor',
-    'Metano_Town_Animated',
+    'Reverie_Town_Animated',
     'Reverie_Town_Normal_Home_Objects',
     'kioskspinda',
     'tile_0021',
@@ -149,7 +149,7 @@ for name in town02_objects:
     assert (GAME / 'Content/Object' / f'{name}.dir').is_file(), name
 assert len(list((GAME / 'Content/Objects').glob('*.png'))) == 74
 
-# Comptoirs des boutiques (façon Metano Town) : les six marchands servent
+# Comptoirs des boutiques (façon Reverie Town) : les six marchands servent
 # depuis l’alcôve fermée de leur boutique, derrière un objet-comptoir posé
 # sur la devanture, et l’interaction devant le comptoir ouvre leur service.
 ville_lua = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')

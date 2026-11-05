@@ -20,6 +20,8 @@ markers = {v['EntName']: v for v in entities['Markers']}
 for name, x, y in (('entree_falaise', 480, 48), ('entree_ville', 880, 416)):
     assert markers[name]['Collider']['X'] == x and markers[name]['Collider']['Y'] == y
 assert 'NewObject_6' in markers
+assert markers['entree_falaise']['Direction'] == 0  # Down : vers l'interieur
+assert markers['entree_ville']['Direction'] == 2  # Left : vers l'interieur
 zone = read(GAME / 'Data/Zone/reverie.json')['Object']['GroundMaps']
 index = read(GAME / 'Data/Zone/index.idx')['Object']['reverie']['Grounds']
 assert zone == index and zone.count('crossroadreverietown2') == 1

@@ -2,7 +2,7 @@
 """Reconstitue les fichiers volumineux non versionnés, sans écraser une édition.
 
 WaterfallVillageCapital.rsground est la carte de Réverie Town (base town02, rivières animées 0.3.7, collisions et PNJ corrigés 0.3.8) :
-263 169 912 octets reconstitués depuis l'archive Git. Son SHA-256 est vérifié.
+263 249 095 octets reconstitués depuis l'archive Git. Son SHA-256 est vérifié.
 
 L'index des planches (`game/Content/Tile/index.idx`) dépasse lui aussi la
 limite GitHub des fichiers ordinaires, mais il est entièrement dérivé des
@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAYLOADS = {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'ca7a46970782b98435f5a075a1cf727f3f9e04977484b29b48477183f828e13f', 263169912),
+        '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03', 263249095),
 }
 TILE_INDEX = 'game/Content/Tile/index.idx'
 BUILD_TILE_INDEX = 'tools/build_tile_index.py'

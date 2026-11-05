@@ -212,7 +212,7 @@ local function installer_portes(map)
   end
 end
 
--- Comptoirs des boutiques, façon Metano Town : chaque marchand se tient
+-- Comptoirs des boutiques, façon Reverie Town : chaque marchand se tient
 -- dans sa boutique, derrière son comptoir, et le joueur lui parle en
 -- interagissant devant le comptoir. Le comptoir est un objet invisible
 -- infranchissable posé sur la devanture (déjà bloquée par les collisions

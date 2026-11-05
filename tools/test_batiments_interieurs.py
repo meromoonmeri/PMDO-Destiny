@@ -82,7 +82,7 @@ def main() -> int:
             doc = json.loads(carte.read_text(encoding="utf-8-sig"))["Object"]
             assert doc["AssetName"] == nom
             assert doc["EdgeView"] == 1
-            assert not any(f.startswith("Metano_") for f in feuilles(carte)), nom
+            assert not (feuilles(carte) & {'Reverie_Town_Base', 'Reverie_Town_Fringe', 'Reverie_Town_Animated', 'Reverie_Town_River_Animation_1', 'Reverie_Town_River', 'Reverie_Town_Cliffs_Night', 'Reverie_Town_Objects_Under', 'Reverie_Altere_Transition_Base', 'Reverie_Town_Objects_Under_Night', 'Reverie_Town_Objects', 'Reverie_Town_Animation_Tileset_Night', 'Reverie_Town_Animated_Night', 'Reverie_Town_Cafe', 'Reverie_Town_Cafe_Base', 'Reverie_Town_River_Animation_2', 'Reverie_Town_Cave_Base', 'Reverie_Town_River_Animation_3_Night', 'Reverie_Town_Objects_Over', 'Reverie_Altere_Transition_Objects', 'Reverie_Town_River_Animation_4', 'Reverie_Town_Objects_Over_Night', 'Reverie_Town_River_Animation_3', 'Reverie_Town_Trimmed', 'Reverie_Town_Base_Night', 'Reverie_Town_Cliffs', 'Reverie_Town_Cafe_Objects', 'Reverie_Town_Objects_Night', 'Reverie_Town_Animation_Tileset'}), nom
             assert not any(f.endswith(("_Objects", "_Objects_Over")) for f in feuilles(carte)), nom
             if nom == "reverie_inn":
                 assert "Reverie_Inn_Shadows" not in feuilles(carte)
