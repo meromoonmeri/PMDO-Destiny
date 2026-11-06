@@ -3,7 +3,7 @@
 -- restent à brancher sur les menus natifs dans une tranche ultérieure.
 require 'origin.common'
 
-local caféspindaaccueil = {}
+local cafespindaaccueil = {}
 
 local function activer(nom, rayon)
   local acteur = CH(nom)
@@ -43,7 +43,7 @@ local function nommer(nom, affiche)
   if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
 end
 
-function caféspindaaccueil.Init(map)
+function cafespindaaccueil.Init(map)
   nommer('NewObject_13', 'Goinfrex')
   nommer('Pompot', 'Pohm')
   nommer('Qulbutoqué', 'Qulbutoké')
@@ -58,16 +58,16 @@ function caféspindaaccueil.Init(map)
   activer('Okéoké', 28)
 end
 
-function caféspindaaccueil.Enter(map)
+function cafespindaaccueil.Enter(map)
   GAME:FadeIn(30)
 end
 
-function caféspindaaccueil.GameLoad(map)
+function cafespindaaccueil.GameLoad(map)
   installer_sortie(map)
   GAME:FadeIn(30)
 end
 
-function caféspindaaccueil.PorteSortieCafe_Action(obj, activator)
+function cafespindaaccueil.PorteSortieCafe_Action(obj, activator)
   UI:ResetSpeaker()
   UI:ChoiceMenuYesNo('Sortir du café et revenir à Réverie Town ?', true)
   UI:WaitForChoice()
@@ -78,10 +78,10 @@ function caféspindaaccueil.PorteSortieCafe_Action(obj, activator)
   end
 end
 
-function caféspindaaccueil.Update(map, time)
+function cafespindaaccueil.Update(map, time)
 end
 
-function caféspindaaccueil.Spinda_Action(personnage, activator)
+function cafespindaaccueil.Spinda_Action(personnage, activator)
   dire(personnage, 'Happy', 'Bienvenue au café Spinda ! Ici, les explorateurs reprennent des forces entre deux récits de mission.')
   dire(CH('MrMimeJunior'), 'Happy', 'Je prépare les verres sans dire un mot. Le spectacle commence dès le comptoir !')
   dire(CH('Kirlia'), 'Normal', 'Et moi, j’écoute les équipes. Certaines histoires commencent par une simple boisson partagée.')
@@ -110,40 +110,40 @@ function caféspindaaccueil.Spinda_Action(personnage, activator)
   elseif choix == 2 then aller_a(4) end
 end
 
-function caféspindaaccueil.MrMimeJunior_Action(personnage, activator)
+function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
   dire(personnage, 'Happy', 'Je mime le verseur parfait : pas une goutte imaginaire ne tombe à côté.')
   dire(CH('Spinda'), 'Happy', 'Et pendant ce temps, je sers les vraies boissons. Nous formons une belle équipe !')
   UI:ResetSpeaker()
 end
 
-function caféspindaaccueil.Kirlia_Action(personnage, activator)
+function cafespindaaccueil.Kirlia_Action(personnage, activator)
   dire(personnage, 'Normal', 'Les voyageurs laissent parfois une émotion derrière eux. Je la transforme en conseil pour l’équipe suivante.')
   UI:ResetSpeaker()
 end
 
-local function dialogue_recyclage(okéoké, qulbutoqué)
-  dire(okéoké, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
-  dire(qulbutoqué, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
-  dire(okéoké, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
+local function dialogue_recyclage(okeoke, qulbutoque)
+  dire(okeoke, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
+  dire(qulbutoque, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
+  dire(okeoke, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
   UI:ResetSpeaker()
 end
 
-caféspindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
+cafespindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
   dialogue_recyclage(CH('Okéoké'), personnage)
 end
 
-caféspindaaccueil['Okéoké_Action'] = function(personnage, activator)
+cafespindaaccueil['Okéoké_Action'] = function(personnage, activator)
   dialogue_recyclage(personnage, CH('Qulbutoqué'))
 end
 
-function caféspindaaccueil.NewObject_13_Action(personnage, activator)
+function cafespindaaccueil.NewObject_13_Action(personnage, activator)
   dire(personnage, 'Happy', 'Je goûte chaque nouveauté du comptoir. Pour le travail, évidemment. Uniquement pour le travail.')
   UI:ResetSpeaker()
 end
 
-function caféspindaaccueil.Pompot_Action(personnage, activator)
+function cafespindaaccueil.Pompot_Action(personnage, activator)
   dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
   UI:ResetSpeaker()
 end
 
-return caféspindaaccueil
+return cafespindaaccueil

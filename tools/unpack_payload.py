@@ -21,10 +21,10 @@ ROOT = Path(__file__).resolve().parents[1]
 PAYLOADS = {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910', 37759552),
+        'ebe637b7f528fef9b368ffa7fd639c218b4d9dd513cf1684ef7eaf948979b26b', 37759504),
     'payload/WaterfallVillageCapital_Dev.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        '7c1e76c25b8eb6d98ca2b4a7fc0743388a7d8a1b53f90d91993ccab3c2135eb4', 46199840),
+        'bbf5c2f6fbc214752a7b9119defbefa38eedfcd64cd76ef5abad5d260ec958e0', 46199792),
 }
 TILE_INDEX = 'game/Content/Tile/index.idx'
 BUILD_TILE_INDEX = 'tools/build_tile_index.py'

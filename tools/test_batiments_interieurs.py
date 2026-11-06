@@ -31,8 +31,8 @@ COQUES_REVERIE = INTERIEURS[:8]
 
 PORTES = [
     "PortePosteBekipan", "PorteCitrouilleNordOuest", "PorteHutteNordEst",
-    "PorteMaisonEquipe", "PorteDojoKingambit", "PorteHutteSud",
-    "PorteTenteCentre", "PorteTenteEst", "PorteMaisonArcanine",
+    "PorteDojoKingambit", "PorteHutteSud",
+    "PorteTenteCentre", "PorteTenteEst",
     "PorteMaisonPierre", "PorteMaisonPlanteSud", "PorteCitrouilleSud",
 ]
 
@@ -103,6 +103,8 @@ def main() -> int:
     ville = lire(ROOT / "game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua")
     for porte in PORTES:
         assert porte in ville, f"porte absente : {porte}"
+    for porte in ("PorteMaisonEquipe", "PorteMaisonArcanine"):
+        assert porte not in ville, f"porte interdite encore active : {porte}"
     assert "GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)" in ville
     assert "ArriveeVille == 'batiment'" in ville and "RetourBatimentX" in ville
 

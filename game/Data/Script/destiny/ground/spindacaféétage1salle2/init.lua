@@ -1,7 +1,7 @@
 -- Salle de spectacle du café Spinda : artistes et habitués sérialisés.
 require 'origin.common'
 
-local spindacaféétage1salle2 = {}
+local spindacafeetage1salle2 = {}
 
 local function activer(nom, rayon)
   local acteur = CH(nom)
@@ -38,7 +38,7 @@ local function nommer(nom, affiche)
   if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
 end
 
-function spindacaféétage1salle2.Init(map)
+function spindacafeetage1salle2.Init(map)
   nommer('NewObject', 'Mime Jr.')
   nommer('NewObject_1', 'Rondoudou')
   nommer('NewObject_2', 'Négapi')
@@ -57,26 +57,26 @@ function spindacaféétage1salle2.Init(map)
   end
 end
 
-function spindacaféétage1salle2.Enter(map)
+function spindacafeetage1salle2.Enter(map)
   GAME:FadeIn(30)
 end
 
-function spindacaféétage1salle2.GameLoad(map)
+function spindacafeetage1salle2.GameLoad(map)
   installer_porte(map)
   GAME:FadeIn(30)
 end
 
-function spindacaféétage1salle2.PorteSalleCafe_Action(obj, activator)
+function spindacafeetage1salle2.PorteSalleCafe_Action(obj, activator)
   UI:ResetSpeaker()
   UI:ChoiceMenuYesNo('Retourner à l’accueil du café ?', true)
   UI:WaitForChoice()
   if UI:ChoiceResult() then aller_a(2) end
 end
 
-function spindacaféétage1salle2.Update(map, time)
+function spindacafeetage1salle2.Update(map, time)
 end
 
-function spindacaféétage1salle2.NewObject_Action(personnage, activator)
+function spindacafeetage1salle2.NewObject_Action(personnage, activator)
   dire(personnage, 'Happy', 'Je répète mon numéro de mime. Le mur invisible est juste là… ne le traversez pas trop vite.')
   dire(CH('NewObject_1'), 'Happy', 'Et quand je chanterai, toute la salle devra rester éveillée jusqu’au dernier refrain !')
   UI:SetSpeaker(personnage)
@@ -90,7 +90,7 @@ function spindacaféétage1salle2.NewObject_Action(personnage, activator)
   elseif choix == 2 then aller_a(3) end
 end
 
-function spindacaféétage1salle2.NewObject_1_Action(personnage, activator)
+function spindacafeetage1salle2.NewObject_1_Action(personnage, activator)
   dire(personnage, 'Happy', 'Une chanson douce peut reposer une équipe entière. Enfin… si personne ne s’endort avant la fin.')
   dire(CH('NewObject'), 'Normal', 'Je tiendrai le rideau. Invisible, bien entendu.')
   UI:ResetSpeaker()
@@ -109,10 +109,10 @@ local dialogues = {
 }
 for nom, texte in pairs(dialogues) do
   local replique = texte
-  spindacaféétage1salle2[nom .. '_Action'] = function(personnage, activator)
+  spindacafeetage1salle2[nom .. '_Action'] = function(personnage, activator)
     dire(personnage, 'Normal', replique)
     UI:ResetSpeaker()
   end
 end
 
-return spindacaféétage1salle2
+return spindacafeetage1salle2

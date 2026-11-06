@@ -168,25 +168,23 @@ end
 -- sur le rendu de la carte, à confirmer au runtime). Chaque porte mène à
 -- l'intérieur correspondant et mémorise le point de retour devant la façade.
 local portes_batiments = {
-  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 60, y = 468, retour_x = 92, retour_y = 516, interieur = 'reverie_post_office', marqueur = 'entrance_south'},
-  {nom = 'PorteCitrouilleNordOuest', titre = 'Maison citrouille', x = 400, y = 436, retour_x = 412, retour_y = 468, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1028, y = 472, retour_x = 1076, retour_y = 500, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonEquipe', titre = 'Maison de l\'équipe', x = 660, y = 524, retour_x = 676, retour_y = 548, interieur = 'guild_heros_room', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 384, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
+  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 56, y = 464, largeur = 32, hauteur = 40, retour_x = 80, retour_y = 520, interieur = 'reverie_post_office', marqueur = 'entrance_south'},
+  {nom = 'PorteCitrouilleNordOuest', titre = 'Auberge', x = 400, y = 544, largeur = 48, hauteur = 48, retour_x = 432, retour_y = 608, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1048, y = 592, largeur = 32, hauteur = 56, retour_x = 1064, retour_y = 664, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 344, largeur = 48, hauteur = 48, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
   {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'reverie_electric_home', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonArcanine', titre = 'Maison d\'Arcanine', x = 140, y = 2552, retour_x = 172, retour_y = 2596, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 378, y = 2376, retour_x = 444, retour_y = 2396, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 580, y = 2492, retour_x = 612, retour_y = 2540, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 748, y = 2552, retour_x = 780, retour_y = 2596, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 440, y = 2296, largeur = 40, hauteur = 40, retour_x = 480, retour_y = 2336, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 568, y = 2472, largeur = 32, hauteur = 72, retour_x = 592, retour_y = 2560, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 756, y = 2496, largeur = 48, hauteur = 32, retour_x = 780, retour_y = 2544, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
 }
 
-local function installer_une_porte(map, nom, x, y)
+local function installer_une_porte(map, nom, x, y, largeur, hauteur)
   if map == nil or map:FindObject(nom) then return end
   local porte = RogueEssence.Ground.GroundObject()
   porte.EntName = nom
-  porte.Collider = RogueElements.Rect(x, y, 56, 20)
+  porte.Collider = RogueElements.Rect(x, y, largeur or 56, hauteur or 20)
   porte:OnMapInit()
   map:AddObject(porte)
 end
@@ -206,9 +204,9 @@ end
 local function installer_portes(map)
   installer_sortie_carrefour(map)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
-  installer_une_porte(map, 'PorteCafeSpinda', 1020, 1344)
+  installer_une_porte(map, 'PorteCafeSpinda', 1056, 1320, 32, 24)
   for _, porte in ipairs(portes_batiments) do
-    installer_une_porte(map, porte.nom, porte.x, porte.y)
+    installer_une_porte(map, porte.nom, porte.x, porte.y, porte.largeur, porte.hauteur)
   end
 end
 
@@ -512,7 +510,7 @@ local function entrer()
   local partenaire = partenaire_pour(hero)
   if SV.Destiny.ArriveeVille == 'cafe' or SV.Destiny.ArriveeVille == 'batiment' then
     -- Retour d'un intérieur : réapparaître devant la façade utilisée.
-    local arrivee_x, arrivee_y = 1188, 1652
+    local arrivee_x, arrivee_y = 1080, 1360
     if SV.Destiny.ArriveeVille == 'batiment' then
       arrivee_x = SV.Destiny.RetourBatimentX or PLACE_X
       arrivee_y = SV.Destiny.RetourBatimentY or PLACE_Y

@@ -17,8 +17,8 @@ local function sortir()
 end
 
 function dojo_kingambit.Init(map) end
-function dojo_kingambit.Enter(map) GAME:FadeIn(20) end
-function dojo_kingambit.GameLoad(map) GAME:FadeIn(20) end
+function dojo_kingambit.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function dojo_kingambit.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function dojo_kingambit.Update(map, time) end
 function dojo_kingambit.MarowakDojoExit_Touch(obj, activator) sortir() end
 

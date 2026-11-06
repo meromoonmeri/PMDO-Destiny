@@ -52,6 +52,8 @@ jobs:
         run: python tools/tests/test_renommage_reverie.py
       - name: Check Reverie editing map and compiled map
         run: python tools/tests/test_reverie_architecture.py
+      - name: Check Reverie WIP interiors and thresholds
+        run: python tools/tests/test_reverie_wip.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP
