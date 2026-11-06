@@ -14,11 +14,13 @@ UI={ResetSpeaker=function()end,WaitShowDialogue=function(_,t)s.dialogue=t end,De
 SOUND={FadeOutBGM=function()end}
 GAME={DungeonUnlocked=function(_,id)assert(id=='lost_wood');return s.unlocked end,UnlockDungeon=function(_,id)assert(id=='lost_wood');s.unlocked=true end,FadeOut=function()end,EnterDungeon=function(_,...)s.enter={...}end,SetRescueAllowed=function()end,EndDungeonRun=function(_,...)s.ended={...}end,EnterZone=function(_,...)s.zone={...}end}
 local root=(arg[1] or '.')..'/game/Data/Script/destiny/'
+package.preload['destiny.missions_reverie']=function() return assert(loadfile(root..'missions_reverie.lua'))() end
 local ville=assert(loadfile(root..'ground/WaterfallVillageCapital/init.lua'))()
 ville.SortieExplorationE2_Touch(nil,{EntName='Teammate1'});assert(not s.dialogue and not s.menu)
 ville.SortieExplorationE2_Touch(nil,{EntName='PLAYER'});assert(not s.unlocked and s.dialogue and not s.menu and not s.enter)
 s.dialogue=nil;s.asked=false;SV.Destiny.RetourAccompli=true;SV.TakenBoard={{Zone='lost_wood',Taken=true}};s.choice=nil
 ville.SortieExplorationE2_Touch();assert(s.unlocked and #s.menu==1 and string.find(s.menu[1].Name,'E10F',1,true) and not s.enter)
+SV.TakenBoard=nil;SV.Destiny.MissionReverie={Zone='lost_wood',Etat='en_cours'};s.asked=false;s.choice=nil;ville.SortieExplorationE2_Touch();assert(string.find(s.menu[1].Name,'E10F',1,true))
 s.asked=false;s.choice=1;s.confirm=true;SV.Destiny.DonjonHistoireCourant='lost_wood';ville.SortieExplorationE2_Touch();assert(string.find(s.menu[1].Name,'E111',1,true));assert(s.enter[1]=='lost_wood' and s.enter[2]==0 and s.enter[5]=='Risk' and s.enter[6]==true and s.enter[7]==false and SV.Destiny.ExplorationReverie==true)
 local zone=assert(loadfile(root..'zone/lost_wood/init.lua'))()
 for _,result in ipairs({'Cleared','Downed','Failed'}) do

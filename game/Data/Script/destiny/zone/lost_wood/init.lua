@@ -5,6 +5,7 @@
 -- falaise au jour.
 require 'origin.common'
 local recrutement = require 'destiny.recrutement'
+local missions_reverie = require 'destiny.missions_reverie'
 
 local lost_wood = {}
 function lost_wood.Init(zone)
@@ -28,6 +29,7 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   GAME:SetRescueAllowed(false)
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.ExplorationReverie then
+    missions_reverie.Completer('lost_wood', result == RogueEssence.Data.GameProgress.ResultType.Cleared)
     -- Une visite libre ne relance pas les branches ni les drapeaux de l'histoire.
     SV.Destiny.ExplorationReverie = nil
     SV.Destiny.ArriveeVille = 'batiment'

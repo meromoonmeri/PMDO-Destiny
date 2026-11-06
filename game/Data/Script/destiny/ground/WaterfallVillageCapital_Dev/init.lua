@@ -7,6 +7,7 @@ require 'origin.menu.skill.SkillSelectMenu'
 require 'origin.menu.team.AssemblySelectMenu'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local missions_reverie = require 'destiny.missions_reverie'
 
 local ville = {}
 local ENTREE_X, ENTREE_Y = 800, 1320
@@ -215,6 +216,9 @@ end
 local function installer_portes(map)
   installer_sortie_carrefour(map)
   installer_sortie_e2(map)
+  -- Les deux tableaux existants proposent missions et gazette.
+  installer_une_porte(map, 'TableauReverieNord', 144, 400, 56, 48)
+  installer_une_porte(map, 'TableauReverieCentre', 400, 1512, 48, 56)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
   installer_une_porte(map, 'PorteCafeSpinda', 1056, 1320, 32, 24)
   for _, porte in ipairs(portes_batiments) do
@@ -610,6 +614,8 @@ local function missions_par_donjon()
       end
     end
   end
+  local mission = missions_reverie.Actuelle()
+  if mission ~= nil and mission.Etat == 'en_cours' then dests[mission.Zone] = true end
   return dests
 end
 
@@ -657,6 +663,9 @@ function ville.SortieExplorationE2_Touch(obj, activator)
   GAME:FadeOut(false, 20)
   GAME:EnterDungeon(destination.Id, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 end
+
+function ville.TableauReverieNord_Action(obj, activator) missions_reverie.OuvrirTableau() end
+function ville.TableauReverieCentre_Action(obj, activator) missions_reverie.OuvrirTableau() end
 
 function ville.PorteCafeSpinda_Action(obj, activator)
   UI:ResetSpeaker()
