@@ -4,7 +4,7 @@
 Les objets AutoTile entièrement vides sont sérialisés sous la forme {} : le
 constructeur PMDO 0.8.12 leur redonne exactement leurs quatre valeurs par
 défaut. Toutes les autres données, dimensions, couches et références restent
-inchangées. L'entrée doit être la carte livrée vérifiée (payload corrigé 0.3.8 : collisions reconstruites, PNJ replacés), pas une carte éditée.
+inchangées. L'entrée doit être la carte livrée vérifiée (carte à 11 calques issue du système Réverie, déjà compacte), pas une carte éditée.
 """
 from __future__ import annotations
 
@@ -13,11 +13,11 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 263249095
-ORIGINAL_SHA256 = '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03'
-COMPACT_SHA256 = '355df337d87bd35f6a31fa1575495d7627bd4703345d4499bbadfa8b16a4557c'
+ORIGINAL_SIZE = 37759552
+ORIGINAL_SHA256 = '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910'
+COMPACT_SHA256 = '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910'
 EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
-EMPTY_COUNT = 3522952
+EMPTY_COUNT = 0
 
 
 def sha256(data: bytes) -> str:

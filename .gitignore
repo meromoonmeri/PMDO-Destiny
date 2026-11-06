@@ -31,6 +31,8 @@ Thumbs.db
 # Carte town02 de 233 Mo : non versionnée telle quelle (limite GitHub, budget LFS du compte épuisé).
 # Reconstituée depuis payload/WaterfallVillageCapital.rsground.gz par tools/unpack_payload.py
 game/Data/Ground/WaterfallVillageCapital.rsground
+# Copie d’édition reconstituée depuis son payload ; ne pas versionner le fichier expansé.
+game/Data/Ground/WaterfallVillageCapital_Dev.rsground
 
 # Index des planches : plus de 100 Mio, mais entièrement dérivé des en-têtes
 # des fichiers .tile versionnés. Régénéré par tools/unpack_payload.py (qui

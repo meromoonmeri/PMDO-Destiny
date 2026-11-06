@@ -37,22 +37,27 @@ def md5(path: Path) -> str:
 assert unpack_payload.PAYLOADS == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03',
-        263249095,
+        '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910',
+        37759552,
+    ),
+    'payload/WaterfallVillageCapital_Dev.rsground.gz': (
+        'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
+        '7c1e76c25b8eb6d98ca2b4a7fc0743388a7d8a1b53f90d91993ccab3c2135eb4',
+        46199840,
     )
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 263249095
-assert sha256(MAP) == '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03'
+assert MAP.stat().st_size == 37759552
+assert sha256(MAP) == '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 263249095
-assert h.hexdigest() == '5672b5789b1c3b0037d2426b63373afae80daec11a811ed899a997af2ccecd03'
+assert size == 37759552
+assert h.hexdigest() == '792d7e361a992b2d8f7e22495e8202a532512ac9af46cefa6a9686d4015b7910'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -65,7 +70,7 @@ with MAP.open('rb') as f:
         def count_mm(pattern: bytes) -> int:
             return len(re.findall(pattern, mm))
 
-        assert count_mm(rb'"Tiles":\s*\[') == 37
+        assert count_mm(rb'"Tiles":\s*\[') == 11
         assert count_mm(rb'"EdgeView":1') == 1
         assert count_mm(rb'"EdgeView":0') == 0
         assert count_mm(rb'"AssetName":\s*"WaterfallVillageCapital"') == 1
@@ -75,17 +80,8 @@ with MAP.open('rb') as f:
     finally:
         mm.close()
 
-assert len(sheets) == 44, sorted(sheets)
-assert {
-    'Destiny_River_Filaments',
-    'FORGE',
-    'Ledian_Dojo_Objects',
-    'Reverie_Inn_Floor_Decor',
-    'Reverie_Town_Animated',
-    'Reverie_Town_Normal_Home_Objects',
-    'kioskspinda',
-    'tile_0021',
-} <= sheets
+assert len(sheets) == 14, sorted(sheets)
+assert {'Reverie_WV_14_Trimmed_Decor', 'Reverie_WV_08_Water_Animations', 'Reverie_WV_11_Objects_Animated'} <= sheets
 for sheet in sheets:
     assert (GAME / 'Content/Tile' / f'{sheet}.tile').is_file() or (
         BASE / 'Content/Tile' / f'{sheet}.tile'
@@ -204,4 +200,4 @@ _durs_nord = [f[2] for f in _attack['seqs'][4]]  # Dir8.Up = index 4
 assert _attack['hit'] == 3 and sum(_durs_nord) == 36
 assert sum(_durs_nord[:_attack['hit']]) == 16
 
-print('OK : Waterfall Village étendue, 44 Tilesheets, habitants, objets, décorations town02 et comptoirs des marchands.')
+print('OK : Waterfall Village étendue, 14 banques Réverie autonomes, habitants, objets, décorations town02 et comptoirs des marchands.')

@@ -138,6 +138,7 @@ def main() -> None:
         import subprocess as _sp
         generated_missing = [
             ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground',
+            ROOT / 'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
             ROOT / 'game/Content/Tile/index.idx',
         ]
         if any(not path.is_file() for path in generated_missing) and (ROOT / 'tools/unpack_payload.py').is_file():
@@ -160,9 +161,13 @@ def main() -> None:
                 declared[g] = zone_path.stem
                 if g not in grounds_on_disk:
                     errors.append(f'Zone {zone_path.stem} declares missing ground: {g}')
+        # Une seule copie d’édition, volontairement absente des zones jouables.
+        editor_only_grounds = {'WaterfallVillageCapital_Dev'}
         for stem in grounds_on_disk:
-            if stem not in declared:
+            if stem not in declared and stem not in editor_only_grounds:
                 errors.append(f'Undeclared ground on disk: {stem}')
+        for stem in editor_only_grounds & declared.keys():
+            errors.append(f'Editor-only ground declared in playable zone: {stem}')
         zindex = json.loads((zone_dir / 'index.idx').read_text(encoding='utf-8-sig'))['Object']
         for zid, zone in zone_docs.items():
             if zid not in zindex:
