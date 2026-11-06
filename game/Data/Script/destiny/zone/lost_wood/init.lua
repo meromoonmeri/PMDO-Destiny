@@ -27,6 +27,16 @@ end
 function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
   GAME:SetRescueAllowed(false)
   SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.ExplorationReverie then
+    -- Une visite libre ne relance pas les branches ni les drapeaux de l'histoire.
+    SV.Destiny.ExplorationReverie = nil
+    SV.Destiny.ArriveeVille = 'batiment'
+    SV.Destiny.RetourBatimentX = 1552
+    SV.Destiny.RetourBatimentY = 1600
+    terminer(result, 'town02_waterfallvillage', 0)
+    GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
+    return
+  end
   local reussi = result == RogueEssence.Data.GameProgress.ResultType.Cleared
   local trajet = SV.Destiny.LostWoodTrip or 'aller'
   -- Le segment 1 est sans ambiguïté le chemin inverse. Conserver aussi

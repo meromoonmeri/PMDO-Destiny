@@ -56,6 +56,8 @@ jobs:
         run: python tools/tests/test_reverie_wip.py
       - name: Check animated water hut and doorway
         run: python tools/tests/test_hutte_aquatique.py
+      - name: Check E2 destination and exploration return
+        run: python tools/tests/test_e2_reverie.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

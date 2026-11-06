@@ -201,8 +201,20 @@ local function installer_sortie_carrefour(map)
   map:AddObject(sortie)
 end
 
+local function installer_sortie_e2(map)
+  if map == nil or map:FindObject('SortieExplorationE2') then return end
+  local sortie = RogueEssence.Ground.GroundObject()
+  sortie.EntName = 'SortieExplorationE2'
+  sortie.Collider = RogueElements.Rect(1584, 1584, 16, 32)
+  sortie.Passable = false
+  sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  sortie:OnMapInit()
+  map:AddObject(sortie)
+end
+
 local function installer_portes(map)
   installer_sortie_carrefour(map)
+  installer_sortie_e2(map)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
   installer_une_porte(map, 'PorteCafeSpinda', 1056, 1320, 32, 24)
   for _, porte in ipairs(portes_batiments) do
@@ -582,6 +594,68 @@ function ville.SortieCarrefour_Touch(obj, activator)
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_ville')
+end
+
+-- La seule zone de donjon publiée et raccordée par Destiny à ce jour.
+-- Ne pas intégrer ici les combats narratifs, les cartes de test ou Halcyon.
+local destinations_reverie = {'lost_wood'}
+
+local function missions_par_donjon()
+  local dests = {}
+  if SV.TakenBoard ~= nil then
+    for i = 1, 8 do
+      local mission = SV.TakenBoard[i]
+      if mission ~= nil and mission.Taken and mission.Zone ~= nil and mission.Zone ~= '' then
+        dests[mission.Zone] = true
+      end
+    end
+  end
+  return dests
+end
+
+function ville.SortieExplorationE2_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  SV.Destiny = SV.Destiny or {}
+  -- Le retour des Bois Perdus a déjà été accompli dans l'histoire.
+  if SV.Destiny.RetourAccompli and not GAME:DungeonUnlocked('lost_wood') then
+    GAME:UnlockDungeon('lost_wood')
+  end
+  local missions = missions_par_donjon()
+  local histoire = SV.Destiny.DonjonHistoireCourant
+  if histoire == nil and SV.ChapterProgression ~= nil then
+    histoire = SV.ChapterProgression.CurrentStoryDungeon
+  end
+  local destinations = {}
+  for _, id in ipairs(destinations_reverie) do
+    if GAME:DungeonUnlocked(id) then
+      local resume = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(id)
+      local titre = resume:GetColoredName()
+      local libelle = titre
+      if id == histoire then
+        libelle = STRINGS:Format('\\uE111 ') .. titre
+      elseif missions[id] then
+        libelle = STRINGS:Format('\\uE10F ') .. titre
+      end
+      table.insert(destinations, {Name=libelle, Title=titre, Dest=RogueEssence.Dungeon.ZoneLoc(id, 0, 0, 0), Id=id})
+    end
+  end
+  UI:ResetSpeaker()
+  if #destinations == 0 then
+    UI:WaitShowDialogue('Aucun donjon accessible pour le moment.')
+    return
+  end
+  UI:DestinationMenu(destinations, 1)
+  UI:WaitForChoice()
+  local choix = UI:ChoiceResult()
+  if choix == nil or destinations[choix] == nil then return end
+  local destination = destinations[choix]
+  UI:ChoiceMenuYesNo('Partir vers ' .. destination.Title .. ' ?', true)
+  UI:WaitForChoice()
+  if not UI:ChoiceResult() then return end
+  SV.Destiny.ExplorationReverie = true
+  SOUND:FadeOutBGM(20)
+  GAME:FadeOut(false, 20)
+  GAME:EnterDungeon(destination.Id, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 end
 
 function ville.PorteCafeSpinda_Action(obj, activator)
