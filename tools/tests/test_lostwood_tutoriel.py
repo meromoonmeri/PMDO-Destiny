@@ -493,7 +493,11 @@ assert "require 'destiny.cinematique'" in ville_script
 assert "cinematique.Dire(partenaire, emotion, texte, 'droite')" in ville_script
 assert ville_script.count('se_faire_face_ville(partenaire, hero)') == 2
 assert 'regarder_lieu_ville(hero, partenaire, Direction.UpLeft)' in ville_script
-assert 'regarder_lieu_ville(hero, partenaire, Direction.DownLeft)' in ville_script
+# La visite reste au centre : les commerces et le marché sont montrés,
+# mais les panoramas des autres quartiers ne font plus partie de la scène.
+assert 'regarder_lieu_ville(hero, partenaire, Direction.UpRight)' in ville_script
+for panorama in ('530, 2350', '800, 530', '1425, 320'):
+    assert panorama not in ville_script
 assert 'Direction.Up, 8' not in ville_script and 'Direction.Right, 6' not in ville_script
 assert "geste_heros(hero, 'question', partenaire)" in ville_script
 # Reprise au lieu du réveil : montrer l’entrée au sud avant le choix,
