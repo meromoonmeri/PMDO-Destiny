@@ -139,6 +139,10 @@ def main() -> None:
         generated_missing = [
             ROOT / 'game/Data/Ground/WaterfallVillageCapital.rsground',
             ROOT / 'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
+            ROOT / 'game/Data/Ground/reverie_centre.rsground',
+            ROOT / 'game/Data/Ground/reverie_nord.rsground',
+            ROOT / 'game/Data/Ground/reverie_residentiel.rsground',
+            ROOT / 'game/Data/Ground/reverie_etang.rsground',
             ROOT / 'game/Content/Tile/index.idx',
         ]
         if any(not path.is_file() for path in generated_missing) and (ROOT / 'tools/unpack_payload.py').is_file():

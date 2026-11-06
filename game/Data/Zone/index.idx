@@ -206,7 +206,11 @@
         "ledian_dojo",
         "dojo_ossatueur",
         "dojo_kingambit",
-        "reverie_hutte_aquatique"
+        "reverie_hutte_aquatique",
+        "reverie_centre",
+        "reverie_nord",
+        "reverie_residentiel",
+        "reverie_etang"
       ],
       "Maps": [],
       "Name": {

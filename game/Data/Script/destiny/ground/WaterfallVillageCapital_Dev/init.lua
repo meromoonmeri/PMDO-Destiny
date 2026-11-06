@@ -190,6 +190,95 @@ local function installer_une_porte(map, nom, x, y, largeur, hauteur)
   map:AddObject(porte)
 end
 
+-- Cinq liaisons confirmées : N1, N2 et N3 nord-centre, S et P au sud.
+-- Chaque sens conserve les coordonnées du paysage et une place au partenaire.
+local liaisons_quartiers = {
+  {nom='EscalierN1VersNord', carte='reverie_centre', x=104,y=928,w=48,h=8, destination='reverie_nord', ax=120,ay=888,px=120,py=864,dir='Up'},
+  {nom='EscalierN1VersCentre', carte='reverie_nord', x=104,y=904,w=48,h=8, destination='reverie_centre', ax=120,ay=952,px=120,py=976,dir='Down'},
+  {nom='EscalierN2VersNord', carte='reverie_centre', x=760,y=848,w=48,h=8, destination='reverie_nord', ax=776,ay=808,px=776,py=784,dir='Up'},
+  {nom='EscalierN2VersCentre', carte='reverie_nord', x=760,y=824,w=48,h=8, destination='reverie_centre', ax=776,ay=872,px=776,py=896,dir='Down'},
+  {nom='EscalierN3VersNord', carte='reverie_centre', x=1184,y=848,w=48,h=8, destination='reverie_nord', ax=1200,ay=808,px=1200,py=784,dir='Up'},
+  {nom='EscalierN3VersCentre', carte='reverie_nord', x=1184,y=824,w=48,h=8, destination='reverie_centre', ax=1200,ay=872,px=1200,py=896,dir='Down'},
+  {nom='EscalierSVersCentre', carte='reverie_residentiel', x=688,y=1952,w=40,h=8, destination='reverie_centre', ax=700,ay=1904,px=700,py=1880,dir='Up'},
+  {nom='EscalierSVersResidentiel', carte='reverie_centre', x=688,y=1920,w=40,h=8, destination='reverie_residentiel', ax=700,ay=1976,px=700,py=2000,dir='Down'},
+  {nom='EscalierPVersEtang', carte='reverie_residentiel', x=1104,y=2400,w=48,h=8, destination='reverie_etang', ax=1120,ay=2352,px=1120,py=2328,dir='Up'},
+  {nom='EscalierPVersResidentiel', carte='reverie_etang', x=1104,y=2376,w=48,h=8, destination='reverie_residentiel', ax=1120,ay=2432,px=1120,py=2456,dir='Down'},
+}
+local changement_quartier = false
+
+local function interpoler(x, points)
+  for i = 2, #points do
+    local a, b = points[i-1], points[i]
+    if x <= b[1] then return a[2] + (b[2]-a[2]) * (x-a[1]) / (b[1]-a[1]) end
+  end
+  return points[#points][2]
+end
+
+local function quartier_pour(x, y)
+  local limite_nord = interpoler(x, {{0,920},{135,920},{400,880},{785,840},{1213,840},{1600,730}})
+  if y < limite_nord then return 'reverie_nord' end
+  if x < 840 then return y < 1944 and 'reverie_centre' or 'reverie_residentiel' end
+  if y < 1872 then return 'reverie_centre' end
+  local limite_etang = interpoler(x, {{840,2392},{1128,2392},{1250,2360},{1600,2220}})
+  return y < limite_etang and 'reverie_etang' or 'reverie_residentiel'
+end
+
+local function case_libre(map, x, y)
+  if x < 0 or y < 0 or x+16 > map.Width*8 or y+16 > map.Height*8 then return false end
+  for cx=math.floor(x/8),math.floor((x+15)/8) do
+    for cy=math.floor(y/8),math.floor((y+15)/8) do
+      if map:GetObstacle(cx,cy) ~= 0 then return false end
+    end
+  end
+  return true
+end
+
+local function case_proche(map, x, y)
+  if case_libre(map,x,y) then return x,y end
+  for rayon=8,32,8 do
+    for dx=-rayon,rayon,8 do
+      for dy=-rayon,rayon,8 do
+        if math.max(math.abs(dx),math.abs(dy)) == rayon and case_libre(map,x+dx,y+dy) then
+          return x+dx,y+dy
+        end
+      end
+    end
+  end
+  return x,y
+end
+
+local function demander_quartier(destination, x, y, px, py, dir)
+  if changement_quartier then return end
+  changement_quartier = true
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.PassageQuartier = {x=x,y=y,px=px,py=py,dir=dir}
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('town02_waterfallvillage', destination, 'entrance', true)
+end
+
+local function installer_liaisons_quartiers(map)
+  if map == nil then return end
+  for _, def in ipairs(liaisons_quartiers) do
+    if map.AssetName == def.carte and not map:FindObject(def.nom) then
+      local sortie = RogueEssence.Ground.GroundObject()
+      sortie.EntName = def.nom
+      sortie.Collider = RogueElements.Rect(def.x,def.y,def.w,def.h)
+      sortie.Passable = false
+      sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+      sortie:OnMapInit()
+      map:AddObject(sortie)
+    end
+  end
+end
+
+for _, voie_def in ipairs(liaisons_quartiers) do
+  local voie = voie_def
+  ville[voie.nom .. '_Touch'] = function(obj, activator)
+    if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+    demander_quartier(voie.destination, voie.ax, voie.ay, voie.px, voie.py, voie.dir)
+  end
+end
+
 local function installer_sortie_carrefour(map)
   if map == nil or map:FindObject('SortieCarrefour') then return end
   local sortie = RogueEssence.Ground.GroundObject()
@@ -216,6 +305,7 @@ end
 local function installer_portes(map)
   installer_sortie_carrefour(map)
   installer_sortie_e2(map)
+  installer_liaisons_quartiers(map)
   -- Les deux tableaux existants proposent missions et gazette.
   installer_une_porte(map, 'TableauReverieNord', 144, 400, 56, 48)
   installer_une_porte(map, 'TableauReverieCentre', 400, 1512, 48, 56)
@@ -279,6 +369,7 @@ local function placer_marchands_aux_comptoirs()
 end
 
 function ville.Init(map)
+  changement_quartier = false
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
   installer_comptoirs(map)
@@ -512,36 +603,80 @@ function ville.Visite()
   retour_au_joueur(hero, partenaire)
 end
 
-local function entrer()
+local function rediriger_ancienne_ville(map, hero, partenaire)
+  if map == nil or map.AssetName ~= 'WaterfallVillageCapital' or hero == nil then return false end
+  if changement_quartier then return true end
+  local x,y = hero.Position.X, hero.Position.Y
+  local px,py = x-28,y
+  if partenaire ~= nil then px,py = partenaire.Position.X,partenaire.Position.Y end
+  if SV.Destiny.ArriveeVille == 'cafe' then
+    x,y,px,py = 1080,1360,1052,1360
+  elseif SV.Destiny.ArriveeVille == 'batiment' then
+    x,y = SV.Destiny.RetourBatimentX or PLACE_X, SV.Destiny.RetourBatimentY or PLACE_Y
+    px,py = x-28,y
+  elseif x == 0 and y == 0 then
+    x,y,px,py = PLACE_X,PLACE_Y,PLACE_X-28,PLACE_Y
+  end
+  -- Ne pas déplacer une ancienne sauvegarde depuis une position déjà bloquée.
+  if not case_libre(map,x,y) then return false end
+  local destination = quartier_pour(x+8,y+8)
+  -- Une ancienne sauvegarde à cheval sur une frontière reste sur la carte
+  -- historique : ne jamais déplacer son héros à travers la rivière.
+  for cx=math.floor(x/8),math.floor((x+15)/8) do
+    for cy=math.floor(y/8),math.floor((y+15)/8) do
+      if quartier_pour(cx*8+4,cy*8+4) ~= destination then return false end
+    end
+  end
+  SV.Destiny.ArriveeVille = nil
+  demander_quartier(destination,x,y,px,py,'Down')
+  return true
+end
+
+local function entrer(map)
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.VisiteVille == 'en_route' then
     ville.Visite()
+    if SV.Destiny.VisiteVille == 'terminee' then
+      local hero = CH('PLAYER')
+      rediriger_ancienne_ville(map, hero, partenaire_pour(hero))
+    end
     return
   end
   local hero = CH('PLAYER')
-  if hero ~= nil and hero.Position.X == 0 and hero.Position.Y == 0 then
-    -- Le ground natif ne contient pas de marqueur d'entrée.
+  local partenaire = partenaire_pour(hero)
+  if rediriger_ancienne_ville(map,hero,partenaire) then return end
+  local passage = SV.Destiny.PassageQuartier
+  if passage ~= nil then
+    SV.Destiny.PassageQuartier = nil
+    local dir = passage.dir == 'Up' and Direction.Up or Direction.Down
+    if hero ~= nil then
+      local x,y = case_proche(map, passage.x, passage.y)
+      GROUND:TeleportTo(hero,x,y,dir)
+    end
+    if partenaire ~= nil then
+      local x,y = case_proche(map, passage.px, passage.py)
+      GROUND:TeleportTo(partenaire,x,y,dir)
+    end
+  elseif hero ~= nil and hero.Position.X == 0 and hero.Position.Y == 0 then
     GROUND:TeleportTo(hero, PLACE_X, PLACE_Y, Direction.Up)
   end
-  local partenaire = partenaire_pour(hero)
   if SV.Destiny.ArriveeVille == 'cafe' or SV.Destiny.ArriveeVille == 'batiment' then
-    -- Retour d'un intérieur : réapparaître devant la façade utilisée.
-    local arrivee_x, arrivee_y = 1080, 1360
+    local arrivee_x, arrivee_y = 1080,1360
     if SV.Destiny.ArriveeVille == 'batiment' then
       arrivee_x = SV.Destiny.RetourBatimentX or PLACE_X
       arrivee_y = SV.Destiny.RetourBatimentY or PLACE_Y
     end
     SV.Destiny.ArriveeVille = nil
     if hero ~= nil then GROUND:TeleportTo(hero, arrivee_x, arrivee_y, Direction.Down) end
-    if partenaire ~= nil then GROUND:TeleportTo(partenaire, arrivee_x - 28, arrivee_y, Direction.Down) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, arrivee_x-28, arrivee_y, Direction.Down) end
   end
   SOUND:PlayBGM('Base Town.ogg', true)
   GAME:FadeIn(20)
   retour_au_joueur(hero, partenaire)
 end
 
-function ville.Enter(map) entrer() end
-function ville.GameLoad(map) installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer() end
+function ville.Enter(map) entrer(map) end
+function ville.GameLoad(map) installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer(map) end
 function ville.Exit(map) end
 function ville.Update(map, time) tic_ambiance() end
 

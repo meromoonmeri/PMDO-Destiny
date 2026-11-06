@@ -27,3 +27,10 @@ Les quatre zones séparées et leurs passages ; migration et essais des sauvegar
 La version et les tags 0.4.11 et 0.4.12 précédents restent intacts. Sauvegarder les parties avant tout test.
 
 La carte de hutte a été désérialisée par PMDO 0.8.12 et contrôlée statiquement, sans test visuel ni de franchissement ; sa première image est identique à la référence fournie.
+
+
+## Découpage technique des quatre quartiers
+
+La carte historique conserve son indice et la copie d’édition 37 calques reste inchangée. Quatre cartes de jeu sont ajoutées en fin de liste : centre, nord, résidentiel et étang. Elles gardent l’ensemble des onze calques graphiques, les coordonnées d’origine, les décors et leurs animations ; leurs obstacles limitent la marche au quartier, sans retirer aucun obstacle existant. Les cinq escaliers sont équipés de déclencheurs bidirectionnels ; chaque arrivée dispose d’une position distincte pour le héros et son partenaire. Le script de ville reste partagé et les retours d’intérieurs, d’exploration et de sauvegardes historiques sont réacheminés sans changer la narration. Une sauvegarde ancienne positionnée sur une frontière reste sur la carte historique pour éviter un déplacement forcé.
+
+Les empreintes, les obstacles, les dix directions d’escalier et les arrivées sont vérifiés automatiquement ; les interactions Lua ont été exercées avec des doublures. PMDO 0.8.12 a également désérialisé séparément les quatre cartes et chargé leurs callbacks. Conformément à la décision de conserver le décor, aucun pont ni passage artificiel n’a été ajouté dans l’eau : la zone du poste et de l’auberge reste séparée de la place par la rivière dans le graphe de collisions d’origine. Ce découpage doit encore être confirmé en partie graphique et avec de vraies anciennes sauvegardes avant d’être considéré comme une intégration finale jouable.

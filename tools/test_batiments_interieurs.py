@@ -60,7 +60,7 @@ def main() -> int:
     zone = json.loads(lire(ROOT / "game/Data/Zone/town02_waterfallvillage.json"))
     grounds = zone["Object"]["GroundMaps"]
     assert grounds[5:18] == INTERIEURS, grounds
-    assert grounds[18:] == ["reverie_hutte_aquatique"], grounds
+    assert grounds[18:] == ["reverie_hutte_aquatique", "reverie_centre", "reverie_nord", "reverie_residentiel", "reverie_etang"], grounds
     index = json.loads(lire(ROOT / "game/Data/Zone/index.idx"))
     assert index["Object"]["town02_waterfallvillage"]["Grounds"] == grounds
 

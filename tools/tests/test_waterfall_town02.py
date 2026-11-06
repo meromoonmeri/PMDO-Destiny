@@ -34,7 +34,7 @@ def md5(path: Path) -> str:
 
 
 # La carte reconstituée doit être exactement celle du payload vérifié.
-assert unpack_payload.PAYLOADS == {
+assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
         'ebe637b7f528fef9b368ffa7fd639c218b4d9dd513cf1684ef7eaf948979b26b',
@@ -45,6 +45,11 @@ assert unpack_payload.PAYLOADS == {
         'bbf5c2f6fbc214752a7b9119defbefa38eedfcd64cd76ef5abad5d260ec958e0',
         46199792,
     )
+}
+assert set(unpack_payload.PAYLOADS) == {
+    'payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz',
+    'payload/reverie_centre.rsground.gz', 'payload/reverie_nord.rsground.gz',
+    'payload/reverie_residentiel.rsground.gz', 'payload/reverie_etang.rsground.gz',
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
