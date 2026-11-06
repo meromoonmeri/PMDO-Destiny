@@ -143,6 +143,10 @@ def main() -> None:
             ROOT / 'game/Data/Ground/reverie_nord.rsground',
             ROOT / 'game/Data/Ground/reverie_residentiel.rsground',
             ROOT / 'game/Data/Ground/reverie_etang.rsground',
+            ROOT / 'game/Data/Ground/reverie_centre_Dev.rsground',
+            ROOT / 'game/Data/Ground/reverie_nord_Dev.rsground',
+            ROOT / 'game/Data/Ground/reverie_residentiel_Dev.rsground',
+            ROOT / 'game/Data/Ground/reverie_etang_Dev.rsground',
             ROOT / 'game/Content/Tile/index.idx',
         ]
         if any(not path.is_file() for path in generated_missing) and (ROOT / 'tools/unpack_payload.py').is_file():
@@ -166,7 +170,7 @@ def main() -> None:
                 if g not in grounds_on_disk:
                     errors.append(f'Zone {zone_path.stem} declares missing ground: {g}')
         # Une seule copie d’édition, volontairement absente des zones jouables.
-        editor_only_grounds = {'WaterfallVillageCapital_Dev'}
+        editor_only_grounds = {'WaterfallVillageCapital_Dev', 'reverie_centre_Dev', 'reverie_nord_Dev', 'reverie_residentiel_Dev', 'reverie_etang_Dev'}
         for stem in grounds_on_disk:
             if stem not in declared and stem not in editor_only_grounds:
                 errors.append(f'Undeclared ground on disk: {stem}')

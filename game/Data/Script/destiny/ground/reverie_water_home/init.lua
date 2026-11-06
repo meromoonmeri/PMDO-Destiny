@@ -15,8 +15,8 @@ local function sortir()
 end
 
 function reverie_water_home.Init(map) end
-function reverie_water_home.Enter(map) GAME:FadeIn(20) end
-function reverie_water_home.GameLoad(map) GAME:FadeIn(20) end
+function reverie_water_home.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function reverie_water_home.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function reverie_water_home.Update(map, time) end
 function reverie_water_home.Water_Home_Entrance_Touch(obj, activator) sortir() end
 

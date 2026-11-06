@@ -15,8 +15,8 @@ local function sortir()
 end
 
 function reverie_post_office.Init(map) end
-function reverie_post_office.Enter(map) GAME:FadeIn(20) end
-function reverie_post_office.GameLoad(map) GAME:FadeIn(20) end
+function reverie_post_office.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function reverie_post_office.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function reverie_post_office.Update(map, time) end
 function reverie_post_office.South_Exit_Touch(obj, activator) sortir() end
 

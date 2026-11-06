@@ -125,6 +125,7 @@ def main() -> None:
     # Le dev.bat de la base vise PMDO.exe, mais l'exécutable s'appelle Destiny.exe ici.
     create_launcher('dev.bat', ' -dev')
     shutil.copy2(ROOT / 'docs' / 'LISEZ_MOI_WINDOWS.txt', publish_dir / 'LISEZ_MOI.txt')
+    shutil.copy2(ROOT / 'docs' / 'reverie-cartes-edition.md', publish_dir / 'CALQUES_REVERIE.md')
 
     # Vérifier la présence dans le build de toutes les cartes de la Quest et en
     # donner la liste : le build contient aussi des cartes de base du moteur.

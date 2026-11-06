@@ -169,16 +169,16 @@ end
 -- sur le rendu de la carte, à confirmer au runtime). Chaque porte mène à
 -- l'intérieur correspondant et mémorise le point de retour devant la façade.
 local portes_batiments = {
-  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 56, y = 464, largeur = 32, hauteur = 40, retour_x = 80, retour_y = 520, interieur = 'reverie_post_office', marqueur = 'entrance_south'},
-  {nom = 'PorteCitrouilleNordOuest', titre = 'Auberge', x = 400, y = 544, largeur = 48, hauteur = 48, retour_x = 432, retour_y = 608, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1048, y = 592, largeur = 32, hauteur = 56, retour_x = 1064, retour_y = 664, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 344, largeur = 48, hauteur = 48, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
-  {nom = 'PorteHutteSud', titre = 'Hutte aquatique', x = 608, y = 1680, largeur = 72, hauteur = 40, retour_x = 708, retour_y = 1728, interieur = 'reverie_hutte_aquatique', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PortePosteBekipan', titre = 'Poste Bekipan', x = 56, y = 464, largeur = 32, hauteur = 40, retour_x = 80, retour_y = 528, interieur = 'reverie_post_office', marqueur = 'entrance_south', contact_x = 56, contact_y = 504, contact_w = 32, contact_h = 8, partenaire_x = 56, partenaire_y = 528},
+  {nom = 'PorteCitrouilleNordOuest', titre = 'Auberge', x = 400, y = 544, largeur = 48, hauteur = 48, retour_x = 432, retour_y = 616, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker', contact_x = 400, contact_y = 592, contact_w = 48, contact_h = 8, partenaire_x = 408, partenaire_y = 616},
+  {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1048, y = 592, largeur = 32, hauteur = 56, retour_x = 1064, retour_y = 680, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker', contact_x = 1048, contact_y = 648, contact_w = 32, contact_h = 8, partenaire_x = 1040, partenaire_y = 680},
+  {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 344, largeur = 48, hauteur = 48, retour_x = 1460, retour_y = 416, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker', contact_x = 1440, contact_y = 392, contact_w = 48, contact_h = 8, partenaire_x = 1436, partenaire_y = 416},
+  {nom = 'PorteHutteSud', titre = 'Hutte aquatique', x = 608, y = 1680, largeur = 72, hauteur = 40, retour_x = 656, retour_y = 1744, interieur = 'reverie_hutte_aquatique', marqueur = 'Main_Entrance_Marker', contact_x = 648, contact_y = 1720, contact_w = 32, contact_h = 8, partenaire_x = 680, partenaire_y = 1744},
   {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 440, y = 2296, largeur = 40, hauteur = 40, retour_x = 480, retour_y = 2336, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 568, y = 2472, largeur = 32, hauteur = 72, retour_x = 592, retour_y = 2560, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 756, y = 2496, largeur = 48, hauteur = 32, retour_x = 780, retour_y = 2544, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 440, y = 2296, largeur = 40, hauteur = 40, retour_x = 456, retour_y = 2360, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker', contact_x = 448, contact_y = 2336, contact_w = 32, contact_h = 8, partenaire_x = 472, partenaire_y = 2344},
+  {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 568, y = 2472, largeur = 32, hauteur = 72, retour_x = 584, retour_y = 2568, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker', contact_x = 576, contact_y = 2544, contact_w = 24, contact_h = 8, partenaire_x = 560, partenaire_y = 2568},
+  {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 756, y = 2496, largeur = 48, hauteur = 32, retour_x = 776, retour_y = 2552, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker', contact_x = 760, contact_y = 2528, contact_w = 40, contact_h = 8, partenaire_x = 752, partenaire_y = 2552},
 }
 
 local quartier_pour, objet_dans_quartier
@@ -193,6 +193,22 @@ local function installer_une_porte(map, nom, x, y, largeur, hauteur)
   local porte = RogueEssence.Ground.GroundObject()
   porte.EntName = nom
   porte.Collider = RogueElements.Rect(x, y, largeur or 56, hauteur or 20)
+  porte:OnMapInit()
+  map:AddObject(porte)
+end
+
+-- Remplacer aussi les anciens objets Action conservés dans une sauvegarde.
+-- L'objet reste invisible : seule la bande libre juste devant le seuil détecte
+-- le contact, sans toucher aux collisions ni aux graphismes du bâtiment.
+local function installer_contact_porte(map, nom, x, y, largeur, hauteur)
+  if map == nil then return end
+  if map:FindObject(nom) then GROUND:RemoveObject(nom) end
+  if not objet_dans_quartier(map, x + largeur/2, y + hauteur/2) then return end
+  local porte = RogueEssence.Ground.GroundObject()
+  porte.EntName = nom
+  porte.Collider = RogueElements.Rect(x, y, largeur, hauteur)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
   porte:OnMapInit()
   map:AddObject(porte)
 end
@@ -212,6 +228,7 @@ local liaisons_quartiers = {
   {nom='EscalierPVersResidentiel', carte='reverie_etang', x=1104,y=2376,w=48,h=8, destination='reverie_residentiel', ax=1120,ay=2432,px=1120,py=2456,dir='Down'},
 }
 local changement_quartier = false
+local entree_batiment_en_cours = false
 
 local function interpoler(x, points)
   for i = 2, #points do
@@ -406,9 +423,14 @@ local function installer_portes(map)
   installer_une_porte(map, 'TableauReverieNord', 144, 400, 56, 48)
   installer_une_porte(map, 'TableauReverieCentre', 400, 1512, 48, 56)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
-  installer_une_porte(map, 'PorteCafeSpinda', 1056, 1320, 32, 24)
+  installer_contact_porte(map, 'PorteCafeSpinda', 1056, 1344, 32, 8)
   for _, porte in ipairs(portes_batiments) do
-    installer_une_porte(map, porte.nom, porte.x, porte.y, porte.largeur, porte.hauteur)
+    if porte.contact_x ~= nil then
+      installer_contact_porte(map, porte.nom, porte.contact_x, porte.contact_y, porte.contact_w, porte.contact_h)
+    else
+      -- Les tentes n'ont pas encore de correspondance extérieure/intérieure confirmée.
+      installer_une_porte(map, porte.nom, porte.x, porte.y, porte.largeur, porte.hauteur)
+    end
   end
 end
 
@@ -468,6 +490,7 @@ end
 
 function ville.Init(map)
   changement_quartier = false
+  entree_batiment_en_cours = false
   preparer_habitants_quartier(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
@@ -623,6 +646,7 @@ function ville.Visite()
     return
   end
   local kecleon, kangourex = CH('Kecleon'), CH('Kangourex')
+  local alakazam, mordudor, forgelina = CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')
   local function parler_guide(emotion, texte)
     cinematique.Dire(partenaire, emotion, texte, 'droite')
   end
@@ -678,9 +702,27 @@ function ville.Visite()
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(1100, 950, 75, false)
   parler_guide('Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
+  if forgelina ~= nil then
+    GAME:MoveCamera(1104, 992, 45, false)
+    parler_guide('Normal', 'Voici aussi ' .. cinematique.NomEspece('tinkaton', 'Forgelina') .. '. Elle ouvre les boîtes trouvées en exploration.')
+    GROUND:CharAnimateTurnTo(forgelina, Direction.Down, 4)
+    parler(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
+  end
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(500, 1010, 110, false)
   parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
+  if alakazam ~= nil then
+    GAME:MoveCamera(360, 1100, 65, false)
+    parler_guide('Normal', 'Ici, ' .. cinematique.NomEspece('alakazam', 'Alakazam') .. ' peut nous aider à retrouver une capacité oubliée.')
+    GROUND:CharAnimateTurnTo(alakazam, Direction.Down, 4)
+    parler(alakazam, 'Normal', 'Un souvenir peut toujours revenir. Venez me voir si vous souhaitez retrouver une capacité.')
+  end
+  if mordudor ~= nil then
+    GAME:MoveCamera(504, 1040, 50, false)
+    parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('gimmighoul', 'Mordudor') .. ', qui veille sur notre argent à la banque.')
+    GROUND:CharAnimateTurnTo(mordudor, Direction.Down, 4)
+    parler(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
+  end
   -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
   geste_heros(hero, 'autour', partenaire)
@@ -694,6 +736,12 @@ function ville.Visite()
   retour_au_joueur(hero, partenaire)
 end
 
+local function position_partenaire_retour(x, y)
+  local p = SV.Destiny.RetourBatimentPartenaire
+  if p ~= nil and p.x == x and p.y == y then return p.px, p.py end
+  return x-28, y
+end
+
 local function rediriger_ancienne_ville(map, hero, partenaire)
   if map == nil or map.AssetName ~= 'WaterfallVillageCapital' or hero == nil then return false end
   if changement_quartier then return true end
@@ -704,7 +752,7 @@ local function rediriger_ancienne_ville(map, hero, partenaire)
     x,y,px,py = 1080,1360,1052,1360
   elseif SV.Destiny.ArriveeVille == 'batiment' then
     x,y = SV.Destiny.RetourBatimentX or PLACE_X, SV.Destiny.RetourBatimentY or PLACE_Y
-    px,py = x-28,y
+    px,py = position_partenaire_retour(x,y)
   elseif x == 0 and y == 0 then
     x,y,px,py = PLACE_X,PLACE_Y,PLACE_X-28,PLACE_Y
   end
@@ -719,6 +767,7 @@ local function rediriger_ancienne_ville(map, hero, partenaire)
     end
   end
   SV.Destiny.ArriveeVille = nil
+  SV.Destiny.RetourBatimentPartenaire = nil
   demander_quartier(destination,x,y,px,py,'Down')
   return true
 end
@@ -757,9 +806,15 @@ local function entrer(map)
       arrivee_x = SV.Destiny.RetourBatimentX or PLACE_X
       arrivee_y = SV.Destiny.RetourBatimentY or PLACE_Y
     end
+    local retour_batiment = SV.Destiny.ArriveeVille == 'batiment'
     SV.Destiny.ArriveeVille = nil
     if hero ~= nil then GROUND:TeleportTo(hero, arrivee_x, arrivee_y, Direction.Down) end
-    if partenaire ~= nil then GROUND:TeleportTo(partenaire, arrivee_x-28, arrivee_y, Direction.Down) end
+    if partenaire ~= nil then
+      local px,py = position_partenaire_retour(arrivee_x,arrivee_y)
+      if not retour_batiment then px,py = arrivee_x-28,arrivee_y end
+      GROUND:TeleportTo(partenaire, px, py, Direction.Down)
+    end
+    SV.Destiny.RetourBatimentPartenaire = nil
   end
   SOUND:PlayBGM('Base Town.ogg', true)
   GAME:FadeIn(20)
@@ -767,7 +822,7 @@ local function entrer(map)
 end
 
 function ville.Enter(map) entrer(map) end
-function ville.GameLoad(map) installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer(map) end
+function ville.GameLoad(map) entree_batiment_en_cours = false; installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer(map) end
 function ville.Exit(map) end
 function ville.Update(map, time) tic_ambiance() end
 
@@ -893,29 +948,39 @@ end
 function ville.TableauReverieNord_Action(obj, activator) missions_reverie.OuvrirTableau() end
 function ville.TableauReverieCentre_Action(obj, activator) missions_reverie.OuvrirTableau() end
 
-function ville.PorteCafeSpinda_Action(obj, activator)
-  UI:ResetSpeaker()
-  UI:WaitShowDialogue('[color=#FF9E5E]Café Spinda[color]\nUne douce odeur de baies s’échappe de la porte.')
-  UI:ChoiceMenuYesNo('Entrer au café Spinda ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() then
-    GAME:FadeOut(false, 20)
-    GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
-  end
+function ville.PorteCafeSpinda_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if entree_batiment_en_cours then return end
+  entree_batiment_en_cours = true
+  GAME:FadeOut(false, 20)
+  GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
 end
 
 for _, porte_def in ipairs(portes_batiments) do
   local porte = porte_def
-  ville[porte.nom .. '_Action'] = function(obj, activator)
-    UI:ResetSpeaker()
-    UI:ChoiceMenuYesNo('Entrer : ' .. porte.titre .. ' ?', true)
-    UI:WaitForChoice()
-    if UI:ChoiceResult() then
-      SV.Destiny = SV.Destiny or {}
-      SV.Destiny.RetourBatimentX = porte.retour_x
-      SV.Destiny.RetourBatimentY = porte.retour_y
-      GAME:FadeOut(false, 20)
-      GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)
+  local function entrer_batiment()
+    if entree_batiment_en_cours then return end
+    entree_batiment_en_cours = true
+    SV.Destiny = SV.Destiny or {}
+    SV.Destiny.RetourBatimentX = porte.retour_x
+    SV.Destiny.RetourBatimentY = porte.retour_y
+    SV.Destiny.RetourBatimentPartenaire = {x=porte.retour_x, y=porte.retour_y, px=porte.partenaire_x or porte.retour_x-28, py=porte.partenaire_y or porte.retour_y}
+    GAME:FadeOut(false, 20)
+    GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)
+  end
+  if porte.contact_x ~= nil then
+    ville[porte.nom .. '_Touch'] = function(obj, activator)
+      if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+      entrer_batiment()
+    end
+  else
+    -- Les deux associations des tentes sont conservées à titre historique,
+    -- sans les rendre automatiques avant confirmation de leur destination.
+    ville[porte.nom .. '_Action'] = function(obj, activator)
+      UI:ResetSpeaker()
+      UI:ChoiceMenuYesNo('Entrer : ' .. porte.titre .. ' ?', true)
+      UI:WaitForChoice()
+      if UI:ChoiceResult() then entrer_batiment() end
     end
   end
 end

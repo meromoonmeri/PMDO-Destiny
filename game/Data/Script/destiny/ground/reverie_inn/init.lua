@@ -15,8 +15,8 @@ local function sortir()
 end
 
 function reverie_inn.Init(map) end
-function reverie_inn.Enter(map) GAME:FadeIn(20) end
-function reverie_inn.GameLoad(map) GAME:FadeIn(20) end
+function reverie_inn.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function reverie_inn.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function reverie_inn.Update(map, time) end
 function reverie_inn.Inn_Entrance_Touch(obj, activator) sortir() end
 

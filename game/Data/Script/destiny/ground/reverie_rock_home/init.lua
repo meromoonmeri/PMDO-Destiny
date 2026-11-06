@@ -15,8 +15,8 @@ local function sortir()
 end
 
 function reverie_rock_home.Init(map) end
-function reverie_rock_home.Enter(map) GAME:FadeIn(20) end
-function reverie_rock_home.GameLoad(map) GAME:FadeIn(20) end
+function reverie_rock_home.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function reverie_rock_home.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function reverie_rock_home.Update(map, time) end
 function reverie_rock_home.Rock_Home_Entrance_Touch(obj, activator) sortir() end
 

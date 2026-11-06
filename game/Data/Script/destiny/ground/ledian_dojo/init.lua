@@ -15,8 +15,8 @@ local function sortir()
 end
 
 function ledian_dojo.Init(map) end
-function ledian_dojo.Enter(map) GAME:FadeIn(20) end
-function ledian_dojo.GameLoad(map) GAME:FadeIn(20) end
+function ledian_dojo.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function ledian_dojo.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
 function ledian_dojo.Update(map, time) end
 function ledian_dojo.Dojo_Exit_Touch(obj, activator) sortir() end
 

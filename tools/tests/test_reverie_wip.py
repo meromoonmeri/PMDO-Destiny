@@ -50,7 +50,7 @@ dev = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua')
 assert city == dev
 assert 'PorteMaisonEquipe' not in city and 'PorteMaisonArcanine' not in city
 assert "titre = 'Auberge'" in city and "interieur = 'reverie_inn'" in city
-assert "PorteCafeSpinda', 1056, 1320, 32, 24" in city
+assert "PorteCafeSpinda', 1056, 1344, 32, 8" in city
 assert "interieur = 'dojo_kingambit'" in city
 assert len(list(TILES.glob('Reverie_Cafe_*.tile'))) == 10
 print('Intérieurs WIP : 18 400 références de tuiles et associations statiques vérifiées.')

@@ -43,3 +43,12 @@ Le joueur a signalé que les personnages des quatre secteurs se retrouvaient dan
 Chaque quartier possède des données de calques indépendantes. Les éléments graphiques distants sont retirés, mais une marge de 1 408 pixels autour du secteur conserve les éléments vus de part et d’autre des frontières, y compris au zoom le plus éloigné du moteur PMDO 0.8.12 avec la résolution 320 × 240 du projet. Les onze calques et les animations dans cette zone de visibilité restent identiques à l’original ; les cinq escaliers, coordonnées et obstacles ne changent pas. La carte complète historique et sa carte d’édition à 37 calques restent disponibles.
 
 La visite existante conserve l’arrivée, la place, les boutiques, le marché et les échanges narratifs de fin ; les trois déplacements de caméra vers le résidentiel, le nord et le grand bâtiment ont été retirés. Les tests vérifient tous les PNJ, les 11 calques, la continuité dans la marge, les cinq escaliers et des chargements simulés d’états anciens. Ces vérifications ne remplacent pas une partie graphique ou un essai avec d’anciennes sauvegardes réelles.
+
+
+## Correction préparée : entrées au contact
+
+Les huit seuils confirmés et l’entrée/sortie du café utilisent des capteurs au contact, directement devant les bâtiments, sans question ni modification des collisions. Chaque entrée garde son intérieur et un retour joueur/partenaire vérifié sur la grille. Les deux tentes conservent leur interaction historique, leurs destinations n’étant pas confirmées. Les intérieurs de guilde, Arcanine et la fausse maison d’équipe restent exclus. Le poste et l’auberge restent isolés de la place par les collisions de la rivière ; aucun pont ni passage n’a été créé. Les événements ont été raccordés sur des objets PMDO 0.8.12 natifs et testés avec services simulés ; les transitions graphiques et anciennes sauvegardes réelles restent à vérifier.
+
+## Réponses des commerçants pendant la visite
+
+Forgelina, Alakazam et Mordudor répondent brièvement depuis leurs comptoirs pendant la visite déjà existante. Les échanges précédents et les dialogues de conclusion sont conservés ; la scène est testée avec doublures et non dans une partie graphique. Les exports PNG des ressources sont des documents d’édition séparés, et ne remplacent pas les formats natifs du jeu.

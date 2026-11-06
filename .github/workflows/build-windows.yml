@@ -66,6 +66,12 @@ jobs:
         run: python tools/tests/test_quartiers_reverie.py
       - name: Check local NPCs, independent layers and centre visit
         run: python tools/tests/test_habitants_quartiers.py
+      - name: Check Reverie guided tour merchant replies
+        run: python tools/tests/test_visite_marchands.py
+      - name: Check automatic Reverie building entrances
+        run: python tools/tests/test_entrees_reverie.py
+      - name: Check editable district layers
+        run: python tools/tests/test_cartes_edition_reverie.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

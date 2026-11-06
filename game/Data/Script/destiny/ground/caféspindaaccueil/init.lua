@@ -4,6 +4,7 @@
 require 'origin.common'
 
 local cafespindaaccueil = {}
+local sortie_cafe_en_cours = false
 
 local function activer(nom, rayon)
   local acteur = CH(nom)
@@ -18,10 +19,13 @@ end
 -- sert de porte vers Réverie Town, et le personnel guide vers les autres
 -- salles en attendant des portes sérialisées dans la carte.
 local function installer_sortie(map)
-  if map == nil or map:FindObject('PorteSortieCafe') then return end
+  if map == nil then return end
+  if map:FindObject('PorteSortieCafe') then GROUND:RemoveObject('PorteSortieCafe') end
   local porte = RogueEssence.Ground.GroundObject()
   porte.EntName = 'PorteSortieCafe'
   porte.Collider = RogueElements.Rect(268, 374, 64, 16)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
   porte:OnMapInit()
   map:AddObject(porte)
 end
@@ -59,23 +63,23 @@ function cafespindaaccueil.Init(map)
 end
 
 function cafespindaaccueil.Enter(map)
+  sortie_cafe_en_cours = false
   GAME:FadeIn(30)
 end
 
 function cafespindaaccueil.GameLoad(map)
+  sortie_cafe_en_cours = false
   installer_sortie(map)
   GAME:FadeIn(30)
 end
 
-function cafespindaaccueil.PorteSortieCafe_Action(obj, activator)
-  UI:ResetSpeaker()
-  UI:ChoiceMenuYesNo('Sortir du café et revenir à Réverie Town ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() then
-    SV.Destiny = SV.Destiny or {}
-    SV.Destiny.ArriveeVille = 'cafe'
-    aller_a(0)
-  end
+function cafespindaaccueil.PorteSortieCafe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_cafe_en_cours then return end
+  sortie_cafe_en_cours = true
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.ArriveeVille = 'cafe'
+  aller_a(0)
 end
 
 function cafespindaaccueil.Update(map, time)
