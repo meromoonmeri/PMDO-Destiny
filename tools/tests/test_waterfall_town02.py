@@ -50,6 +50,8 @@ assert set(unpack_payload.PAYLOADS) == {
     'payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz',
     'payload/reverie_centre.rsground.gz', 'payload/reverie_nord.rsground.gz',
     'payload/reverie_residentiel.rsground.gz', 'payload/reverie_etang.rsground.gz',
+    'payload/reverie_centre_Dev.rsground.gz', 'payload/reverie_nord_Dev.rsground.gz',
+    'payload/reverie_residentiel_Dev.rsground.gz', 'payload/reverie_etang_Dev.rsground.gz',
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
