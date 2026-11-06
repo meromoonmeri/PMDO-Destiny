@@ -596,6 +596,13 @@ end
 function reveil_nuit.CinematiqueRetrouvailles()
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
+  local membre_heros, index_heros = equipe_scene.Membre('Hero')
+  local membre_partenaire, index_partenaire = equipe_scene.Membre('Partner')
+  if hero == nil or partner == nil or membre_heros == nil or membre_partenaire == nil
+     or index_heros == index_partenaire or index_heros ~= GAME:GetTeamLeaderIndex() then
+    print('[Destiny] Retrouvailles suspendues : identité du duo absente ou ambiguë.')
+    return
+  end
   local points = points_scene()
   local reveil_x, reveil_y = points.reveil_x, points.reveil_y
 
@@ -780,6 +787,9 @@ function reveil_nuit.CinematiqueRetrouvailles()
     GROUND:CharEndAnim(hero)
     GAME:WaitFrames(20)
   end
+  -- Laisser le réveil se lire avant le balayage du regard ; le geste
+  -- ajoute ensuite sa propre respiration de 20 frames.
+  GAME:WaitFrames(15)
   geste('autour')
   geste('question', false)
   dire("Sigh", "Ah ! Enfin réveillé.")
@@ -795,12 +805,11 @@ function reveil_nuit.CinematiqueRetrouvailles()
   -- dans le quiz), puis demande celui du héros : c’est la seule chose dont
   -- le héros se souvienne, et le joueur le saisit alors au clavier (même
   -- NameMenu et même secours que le NOM du partenaire dans le quiz).
-  local membre_heros = GAME:GetPlayerPartyMember(0)
-  local membre_partenaire = GAME:GetPlayerPartyMember(1)
   local nom_partenaire = membre_partenaire.Nickname
   local nom_heros = membre_heros.Nickname
   dire("Happy", "Au fait, on ne s’est même pas présentés !")
   dire("Happy", "Je m’appelle " .. nom_partenaire .. " !")
+  cinematique.Respirer(20)
   dire("Normal", "Et toi, comment tu t’appelles ?")
   UI:ResetSpeaker()
   UI:NameMenu("Quel est ton prénom ?", "C’est tout ce dont tu te souviens.", 60)
@@ -884,6 +893,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   penser("Surprised", "Je… je suis un Pokémon ?!")
   penser("Worried", "Mais moi, je suis un humain !")
   penser("Surprised", "Pourquoi je me suis " .. transforme .. " en " .. espece_heros .. " ?!")
+  cinematique.Respirer(30) -- laisser la révélation marquer un temps
   dire("Worried", "Eh ! Qu’est-ce qui te prend, tout d’un coup ?")
   montrer_reflet()
   dire("Normal", "Ton reflet… ?")
@@ -898,6 +908,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   dire("Normal", "…Mais tout à l’heure, devant ton reflet, tu as sursauté pour de vrai.")
   dire("Normal", "Et tu as l’air tellement sérieux.")
   dire("Happy", "D’accord, " .. nom_heros .. ". Je te crois.")
+  cinematique.Respirer(20)
   dire("Happy", "De toute façon, humain ou Pokémon… pour moi, tu es " .. nom_heros .. " !")
   geste('remerciement')
   dire("Normal", "Allez, relève la tête.")

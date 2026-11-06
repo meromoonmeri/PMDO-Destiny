@@ -2,6 +2,44 @@
 -- Les cartes du panorama ne possèdent pas les spawners TEAMMATE_1 de COMMON.
 local equipe_scene = {}
 
+-- Les indices peuvent changer lorsque le héros revient de la réserve :
+-- le partenaire est alors en 0 et le héros en 1. Les marqueurs d'identité
+-- appartiennent aux Character, contrairement à leur position dans l'équipe.
+function equipe_scene.Membre(role)
+  if role ~= 'Hero' and role ~= 'Partner' then return nil, nil end
+  local compte = GAME:GetPlayerPartyCount()
+  local trouve, index, autre_role, autre_index = nil, nil, nil, nil
+  local autre_nom = role == 'Hero' and 'Partner' or 'Hero'
+  local marques = 0
+  for i = 0, compte - 1 do
+    local membre = GAME:GetPlayerPartyMember(i)
+    local donnees = LTBL(membre)
+    local importance = donnees and donnees.Importance or nil
+    if importance == role then
+      if trouve ~= nil then return nil, nil end -- identité ambiguë
+      trouve, index = membre, i
+    elseif importance == autre_nom then
+      if autre_role ~= nil then return nil, nil end
+      autre_role, autre_index = membre, i
+    elseif importance ~= nil and importance ~= '' then
+      marques = marques + 1 -- un rôle inconnu interdit les replis
+    end
+  end
+  if trouve ~= nil then return trouve, index end
+  -- Repli pour une vieille sauvegarde : exactement deux membres, pas de
+  -- rôle contradictoire. Si un seul rôle est marqué, prendre l'autre.
+  if compte ~= 2 or marques ~= 0 then return nil, nil end
+  if autre_role ~= nil then
+    index = 1 - autre_index
+  else
+    -- Au moment des retrouvailles et après, le héros restauré est leader.
+    local leader = GAME:GetTeamLeaderIndex()
+    if leader ~= 0 and leader ~= 1 then return nil, nil end
+    index = role == 'Hero' and leader or 1 - leader
+  end
+  return GAME:GetPlayerPartyMember(index), index
+end
+
 function equipe_scene.RestaurerHeros()
   -- Si une sauvegarde a été faite après la réunion, ne pas dupliquer le héros.
   for i = 0, GAME:GetPlayerPartyCount() - 1 do

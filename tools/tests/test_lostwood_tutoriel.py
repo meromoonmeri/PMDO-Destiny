@@ -215,12 +215,12 @@ assert 'mais dans l’autre sens.' not in cliff_jour
 # puis repart vers l’ouest ; la lettre déclenche les explications guildes.
 assert 'facteur_bekipan()' in cliff_jour and "cinematique.NomEspece('pelipper', 'Bekipan') .. \", le facteur !\"" in cliff_jour
 assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)' in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 656, 444, 1, 2, 0)" in cliff_jour
 # Dépôt de face : la vraie Special0 SpriteCollab de distribution du courrier
 # (68 ticks) remplace l'ancien détournement Walk/Attack. Le son sourd part
 # à mi-animation, pendant la frame bec dans la fente (ticks 27 à 41), puis
 # le « Clunk » suit la fin du geste. Hop marque l'atterrissage et le
-# décollage ; le départ monte dans l'axe x=659, puis file vers l'ouest.
+# décollage ; le départ monte dans l'axe x=656, puis file vers l'ouest.
 _scene_bekipan = cliff_jour[cliff_jour.index('local bekipan = facteur_bekipan()'):
                             cliff_jour.index("GROUND:Hide('Bekipan')")]
 assert "anim(bekipan, 'Special0', false)" in _scene_bekipan
@@ -233,8 +233,8 @@ assert _scene_bekipan.index("anim(bekipan, 'Special0', false)") \
     < _scene_bekipan.index("UI:WaitShowDialogue('Clunk')")
 assert cliff_jour.count("anim(bekipan, 'Hop', false)") == 2
 assert "UI:WaitShowDialogue('Clunk')" in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 424, 1, 1, 48)" in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 340, 1, 2, 72)" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 424, 1, 1, 48)" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 340, 1, 2, 72)" in cliff_jour
 assert 'GROUND:MoveToPosition(bekipan, 420, 340, false, 2)' in cliff_jour
 assert "GROUND:Hide('Bekipan')" in cliff_jour
 assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour

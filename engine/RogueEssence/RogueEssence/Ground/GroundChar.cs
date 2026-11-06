@@ -72,6 +72,12 @@ namespace RogueEssence.Ground
 
         public bool CollisionDisabled;
 
+        // Scene-local rendering override, never persisted in a map or save.
+        // False by default, so all existing characters retain their shadows.
+        [NonSerialized]
+        [JsonIgnore]
+        public bool HideShadow;
+
         private Loc drawOffset { get { return currentCharAction.DrawOffset; } }
         public override Loc MapLoc
         {
@@ -361,6 +367,9 @@ namespace RogueEssence.Ground
 
         public void DrawShadow(SpriteBatch spriteBatch, Loc offset)
         {
+            if (HideShadow)
+                return;
+
             CharSheet sheet = GraphicsManager.GetChara(CurrentForm.ToCharID());
 
             Loc shadowType = new Loc(0, 2 + sheet.ShadowSize * 3);

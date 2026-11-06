@@ -44,6 +44,8 @@ local function facteur_bekipan()
   local ch = CH('Bekipan')
   if ch == nil then ch = GROUND:SpawnerDoSpawn('Bekipan') end
   if ch ~= nil then
+    -- Aucun flash d'ombre avant la téléportation en vol.
+    ch.HideShadow = true
     GROUND:Unhide('Bekipan')
     AI:DisableCharacterAI(ch)
   end
@@ -260,7 +262,7 @@ end
 -- Les surnoms choisis par le joueur restent blancs dans les phrases :
 -- seuls les prénoms fixes de PNJ (Adagio, Aria, Sonata…) sont colorés.
 local function nom_heros()
-  local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(0) end)
+  local ok, membre = pcall(function() return equipe_scene.Membre('Hero') end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
     return membre.Nickname
   end
@@ -268,7 +270,7 @@ local function nom_heros()
 end
 
 local function nom_partenaire()
-  local ok, membre = pcall(function() return GAME:GetPlayerPartyMember(1) end)
+  local ok, membre = pcall(function() return equipe_scene.Membre('Partner') end)
   if ok and membre ~= nil and membre.Nickname ~= nil and membre.Nickname ~= '' then
     return membre.Nickname
   end
@@ -1072,7 +1074,10 @@ function cliffdaytest.SceneArriveeDestiny()
     cinematique.Respirer(10)
     say(partner, 'Surprised', "Oh ! C’est " .. cinematique.NomEspece('pelipper', 'Bekipan') .. ", le facteur !", 'droite')
     GROUND:MoveToPosition(bekipan, 712, 408, false, 2)
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 659, 444, 1, 2, 0)
+    -- La hitbox est large de 16 px : x=656 centre son dessin sur
+    -- x=664, au milieu du couvercle de la boîte (x=656..671).
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 656, 444, 1, 2, 0)
+    bekipan.HideShadow = false
     -- Petit saut d’atterrissage sur le couvercle, ailes battantes.
     anim(bekipan, 'Hop', false)
     cinematique.Respirer(24)
@@ -1117,23 +1122,25 @@ function cliffdaytest.SceneArriveeDestiny()
     cinematique.Respirer(10)
     -- Départ dessiné par l’utilisateur (ligne verte) : Bekipan prend
     -- d’abord de l’altitude presque à la verticale au-dessus de la
-    -- boîte, dans l’axe x=659 juste à l’est de la maison, puis
+    -- boîte, dans l’axe x=656 juste à l’est de la maison, puis
     -- traverse le ciel vers l’ouest au-dessus de la mer. Il ne part
     -- plus en diagonale au sol et ne traverse ni le toit ni les
     -- décors hauts.
+    bekipan.HideShadow = true
     GROUND:CharAnimateTurnTo(bekipan, Direction.Up, 4)
     anim(bekipan, 'Hop', false)
     cinematique.Respirer(24)
     GROUND:CharEndAnim(bekipan)
     -- Montée raide initiale : 20 px au sol, mais déjà 48 px d’altitude.
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 424, 1, 1, 48)
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 424, 1, 1, 48)
     -- Suite de la montée verticale jusqu’à 72 px, au-dessus de la côte.
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 659, 340, 1, 2, 72)
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 340, 1, 2, 72)
     -- Vol horizontal vers l’ouest, à altitude constante au-dessus de
     -- la mer (MoveToPosition conserve le LocHeight).
     GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
     GROUND:MoveToPosition(bekipan, 420, 340, false, 2)
     GROUND:Hide('Bekipan')
+    bekipan.HideShadow = false -- réinitialiser avant une éventuelle réutilisation
     cinematique.Respirer(10)
 
     -- Le partenaire va chercher la lettre dans la boîte, puis revient la
