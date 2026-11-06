@@ -59,11 +59,12 @@ def feuilles(carte: Path) -> set[str]:
 def main() -> int:
     zone = json.loads(lire(ROOT / "game/Data/Zone/town02_waterfallvillage.json"))
     grounds = zone["Object"]["GroundMaps"]
-    assert grounds[5:] == INTERIEURS, grounds
+    assert grounds[5:18] == INTERIEURS, grounds
+    assert grounds[18:] == ["reverie_hutte_aquatique"], grounds
     index = json.loads(lire(ROOT / "game/Data/Zone/index.idx"))
     assert index["Object"]["town02_waterfallvillage"]["Grounds"] == grounds
 
-    for nom in INTERIEURS:
+    for nom in INTERIEURS + ["reverie_hutte_aquatique"]:
         carte = ROOT / "game/Data/Ground" / f"{nom}.rsground"
         assert carte.is_file(), f"intérieur absent : {nom}"
         brut = carte.read_bytes().lower()
@@ -113,7 +114,7 @@ def main() -> int:
 
         charger = LuaRuntime().eval("load")
         fichiers = [ROOT / "game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua"]
-        fichiers += [ROOT / "game/Data/Script/destiny/ground" / n / "init.lua" for n in INTERIEURS]
+        fichiers += [ROOT / "game/Data/Script/destiny/ground" / n / "init.lua" for n in INTERIEURS + ["reverie_hutte_aquatique"]]
         for fichier in fichiers:
             assert charger(lire(fichier)) is not None, f"Lua invalide : {fichier}"
     except ImportError:

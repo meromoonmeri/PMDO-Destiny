@@ -172,7 +172,7 @@ local portes_batiments = {
   {nom = 'PorteCitrouilleNordOuest', titre = 'Auberge', x = 400, y = 544, largeur = 48, hauteur = 48, retour_x = 432, retour_y = 608, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteHutteNordEst', titre = 'Hutte du nord-est', x = 1048, y = 592, largeur = 32, hauteur = 56, retour_x = 1064, retour_y = 664, interieur = 'reverie_water_home', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 344, largeur = 48, hauteur = 48, retour_x = 1468, retour_y = 428, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker'},
-  {nom = 'PorteHutteSud', titre = 'Hutte du sud', x = 588, y = 1740, retour_x = 652, retour_y = 1756, interieur = 'reverie_electric_home', marqueur = 'Main_Entrance_Marker'},
+  {nom = 'PorteHutteSud', titre = 'Hutte aquatique', x = 608, y = 1680, largeur = 72, hauteur = 40, retour_x = 708, retour_y = 1728, interieur = 'reverie_hutte_aquatique', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 440, y = 2296, largeur = 40, hauteur = 40, retour_x = 480, retour_y = 2336, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker'},
