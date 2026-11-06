@@ -36,6 +36,10 @@ jobs:
         run: python tools/tests/test_lost_wood_raccords.py
       - name: Check Lost Wood reconstruction
         run: python tools/tests/test_lost_wood_reproduction.py
+      - name: Check PMUniverse tiles
+        run: python tools/tests/test_banques_pmu.py
+      - name: Check hero and partner knockout rule
+        run: python tools/tests/test_regle_ko.py
       - name: Check reunion naming and Pelipper flight
         run: python tools/tests/test_retrouvailles_roles.py
       - name: Check Lost Wood tutorial and statue assets
