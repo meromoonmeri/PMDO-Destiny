@@ -10,6 +10,7 @@ Cette branche contient de vraies modifications aux fichiers du jeu, mais **elle 
 - Deux accès erronés Arcanine et maison d'équipe retirés ; seuils confirmés repositionnés et auberge nord associée à `reverie_inn`. Le café revient à sa façade ; les retours et collisions doivent encore être testés en jeu.
 - Hutte aquatique sud ajoutée comme carte distincte, porte d’accès et retour prévus ; animation native quatre phases de la fontaine selon la référence fournie. Les collisions sont reconstituées et les interactions restent à tester en jeu. Source visuelle : image fournie, identifiée comme rip de Pokémon Mystery Dungeon Red Rescue Team ; droits de redistribution à confirmer.
 - Sortie E2 avec menu natif des donjons débloqués, indicateurs d’histoire et de missions lorsque ces données existent, et parcours libre des Bois Perdus séparé des branches de scénario ; tests de logique avec doublures, sans validation en jeu.
+- Les deux intérieurs de guilde et leurs banques dédiées sont retirés. Des espaces techniques vides gardent leurs indices et marqueurs historiques et redirigent les anciennes parties vers Réverie ; le chargement des sauvegardes réelles reste à tester. La banque Guild_First_Floor, partagée avec une autre carte, est conservée.
 - Les scripts de la carte jeu et de la carte développeur restent identiques. L'index est dérivé globalement par le processus de build, et non remplacé par un index limité aux nouvelles banques.
 
 ## Vérifications connues et limites
@@ -20,7 +21,7 @@ Le test statique des collisions montre deux composantes : le poste et l'auberge 
 
 ## À terminer avant release complète
 
-Les quatre zones séparées et leurs passages ; migration et essais des sauvegardes ; validation en jeu de la hutte aquatique animée ; tableaux quotidiens et gazette ; validation du menu E2 et de ses indications en jeu ; réseau souterrain et casino avec raccords confirmés ; suppression sûre des intérieurs de guilde ; vérification des retours, du scénario et des interactions en jeu. E1 et les sorties de carrefour non précisées ne doivent pas recevoir de destination inventée.
+Les quatre zones séparées et leurs passages ; migration et essais des sauvegardes ; validation en jeu de la hutte aquatique animée ; tableaux quotidiens et gazette ; validation du menu E2 et de ses indications en jeu ; réseau souterrain et casino avec raccords confirmés ; essai de la récupération des anciennes sauvegardes ; vérification des retours, du scénario et des interactions en jeu. E1 et les sorties de carrefour non précisées ne doivent pas recevoir de destination inventée.
 
 La version et les tags 0.4.11 et 0.4.12 précédents restent intacts. Sauvegarder les parties avant tout test.
 
