@@ -181,8 +181,15 @@ local portes_batiments = {
   {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 756, y = 2496, largeur = 48, hauteur = 32, retour_x = 780, retour_y = 2544, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker'},
 }
 
+local quartier_pour, objet_dans_quartier
+
 local function installer_une_porte(map, nom, x, y, largeur, hauteur)
-  if map == nil or map:FindObject(nom) then return end
+  if map == nil then return end
+  if not objet_dans_quartier(map, x + (largeur or 56)/2, y + (hauteur or 20)/2) then
+    if map:FindObject(nom) then GROUND:RemoveObject(nom) end
+    return
+  end
+  if map:FindObject(nom) then return end
   local porte = RogueEssence.Ground.GroundObject()
   porte.EntName = nom
   porte.Collider = RogueElements.Rect(x, y, largeur or 56, hauteur or 20)
@@ -214,13 +221,94 @@ local function interpoler(x, points)
   return points[#points][2]
 end
 
-local function quartier_pour(x, y)
+quartier_pour = function(x, y)
   local limite_nord = interpoler(x, {{0,920},{135,920},{400,880},{785,840},{1213,840},{1600,730}})
   if y < limite_nord then return 'reverie_nord' end
   if x < 840 then return y < 1944 and 'reverie_centre' or 'reverie_residentiel' end
   if y < 1872 then return 'reverie_centre' end
   local limite_etang = interpoler(x, {{840,2392},{1128,2392},{1250,2360},{1600,2220}})
   return y < limite_etang and 'reverie_etang' or 'reverie_residentiel'
+end
+
+local quartiers_reverie = {
+  reverie_centre=true, reverie_nord=true, reverie_residentiel=true, reverie_etang=true,
+}
+objet_dans_quartier = function(map, x, y)
+  if map == nil or not quartiers_reverie[map.AssetName] then return true end
+  return quartier_pour(x,y) == map.AssetName
+end
+
+-- Liste exhaustive des personnages de la carte historique et des six ajouts
+-- du script. Leur appartenance est déterminée depuis leur position d'origine.
+local habitants_par_quartier = {
+  {nom="Kecleon", secteur="reverie_centre", x=599, y=922},
+  {nom="Kecleon_Violet", secteur="reverie_centre", x=625, y=922},
+  {nom="NewObject_3", secteur="reverie_centre", x=516, y=1092},
+  {nom="NewObject_4", secteur="reverie_centre", x=372, y=1172},
+  {nom="Kangourex", secteur="reverie_centre", x=932, y=1004},
+  {nom="NewObject_6", secteur="reverie_nord", x=404, y=652},
+  {nom="NewObject_7", secteur="reverie_centre", x=808, y=1116},
+  {nom="NewObject_8", secteur="reverie_centre", x=782, y=1104},
+  {nom="NewObject_9", secteur="reverie_residentiel", x=718, y=2527},
+  {nom="NewObject_10", secteur="reverie_residentiel", x=709, y=2391},
+  {nom="NewObject_12", secteur="reverie_centre", x=691, y=1098},
+  {nom="NewObject_13", secteur="reverie_centre", x=652, y=1724},
+  {nom="NewObject_14", secteur="reverie_centre", x=857, y=1179},
+  {nom="Doyen", secteur="reverie_nord", x=1068, y=308},
+  {nom="", secteur="reverie_nord", x=956, y=279},
+  {nom="Drifloon", secteur="reverie_nord", x=1084, y=308},
+  {nom="NewObject_16", secteur="reverie_centre", x=827, y=1178},
+  {nom="NewObject_11", secteur="reverie_residentiel", x=449, y=2378},
+  {nom="NewObject_18", secteur="reverie_centre", x=1125, y=1802},
+  {nom="NewObject_20", secteur="reverie_residentiel", x=528, y=2372},
+  {nom="NewObject_21", secteur="reverie_centre", x=1097, y=1398},
+  {nom="NewObject_15", secteur="reverie_centre", x=724, y=1095},
+  {nom="NewObject_17", secteur="reverie_residentiel", x=172, y=2616},
+  {nom="NewObject_22", secteur="reverie_centre", x=542, y=1373},
+  {nom="NewObject_23", secteur="reverie_centre", x=1071, y=1444},
+  {nom="NewObject_24", secteur="reverie_centre", x=1103, y=994},
+  {nom="Pijako_Livreur", secteur="reverie_nord", x=116, y=508},
+  {nom="Cradopaud_Pecheur", secteur="reverie_centre", x=186, y=1496},
+  {nom="Roserade_Fleuriste", secteur="reverie_centre", x=748, y=1112},
+  {nom="Magneton_Garde", secteur="reverie_residentiel", x=760, y=2052},
+  {nom="Babimanta_Enfant", secteur="reverie_centre", x=1112, y=1668},
+  {nom="Goinfrex_Voyageur", secteur="reverie_centre", x=1012, y=1404},
+}
+local proprietaire_habitant = {}
+for _, h in ipairs(habitants_par_quartier) do proprietaire_habitant[h.nom] = h end
+
+local function preparer_habitants_quartier(map)
+  if map == nil or not quartiers_reverie[map.AssetName] then return end
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.PlacementHabitantsReverie = SV.Destiny.PlacementHabitantsReverie or {}
+  local premiere_correction = not SV.Destiny.PlacementHabitantsReverie[map.AssetName]
+  for _, h in ipairs(habitants_par_quartier) do
+    local acteur = map:GetMapChar(h.nom)
+    if h.secteur ~= map.AssetName then
+      -- Nettoie aussi les PNJ résiduels des sauvegardes de la 0.4.14.
+      -- Le joueur et son partenaire ne figurent jamais dans cette liste.
+      local garde = 0
+      while acteur ~= nil and garde < 32 do
+        pcall(function() AI:DisableCharacterAI(acteur) end)
+        if not GROUND:RemoveCharacter(h.nom) then break end
+        garde = garde + 1
+        acteur = map:GetMapChar(h.nom)
+      end
+    elseif acteur ~= nil then
+      local position = acteur.Position
+      if premiere_correction or quartier_pour(position.X+8, position.Y+8) ~= map.AssetName then
+        GROUND:TeleportTo(acteur, h.x, h.y, acteur.Direction)
+      end
+    end
+  end
+  SV.Destiny.PlacementHabitantsReverie[map.AssetName] = true
+end
+
+local function habitant_du_quartier(map, nom, espece, genre, x, y)
+  local h = proprietaire_habitant[nom]
+  if map ~= nil and quartiers_reverie[map.AssetName] and (h == nil or h.secteur ~= map.AssetName) then return nil end
+  if h ~= nil and map ~= nil and quartiers_reverie[map.AssetName] then x,y=h.x,h.y end
+  return habitant(nom, espece, genre, x, y)
 end
 
 local function case_libre(map, x, y)
@@ -280,6 +368,10 @@ for _, voie_def in ipairs(liaisons_quartiers) do
 end
 
 local function installer_sortie_carrefour(map)
+  if map ~= nil and not objet_dans_quartier(map, 40, 1589) then
+    if map:FindObject('SortieCarrefour') then GROUND:RemoveObject('SortieCarrefour') end
+    return
+  end
   if map == nil or map:FindObject('SortieCarrefour') then return end
   local sortie = RogueEssence.Ground.GroundObject()
   sortie.EntName = 'SortieCarrefour'
@@ -292,6 +384,10 @@ local function installer_sortie_carrefour(map)
 end
 
 local function installer_sortie_e2(map)
+  if map ~= nil and not objet_dans_quartier(map, 1592, 1600) then
+    if map:FindObject('SortieExplorationE2') then GROUND:RemoveObject('SortieExplorationE2') end
+    return
+  end
   if map == nil or map:FindObject('SortieExplorationE2') then return end
   local sortie = RogueEssence.Ground.GroundObject()
   sortie.EntName = 'SortieExplorationE2'
@@ -337,7 +433,9 @@ local comptoirs = {
 local function installer_comptoirs(map)
   if map == nil then return end
   for _, comptoir_def in ipairs(comptoirs) do
-    if not map:FindObject(comptoir_def.nom) then
+    if not objet_dans_quartier(map, comptoir_def.x + comptoir_def.w/2, comptoir_def.y + comptoir_def.h/2) then
+      if map:FindObject(comptoir_def.nom) then GROUND:RemoveObject(comptoir_def.nom) end
+    elseif not map:FindObject(comptoir_def.nom) then
       local comptoir = RogueEssence.Ground.GroundObject()
       comptoir.EntName = comptoir_def.nom
       comptoir.Collider = RogueElements.Rect(comptoir_def.x, comptoir_def.y, comptoir_def.w, comptoir_def.h)
@@ -370,19 +468,20 @@ end
 
 function ville.Init(map)
   changement_quartier = false
+  preparer_habitants_quartier(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
   installer_comptoirs(map)
-  habitant('Kecleon', 'kecleon', Gender.Male, 599, 922)
-  habitant('Kangourex', 'kangaskhan', Gender.Female, 940, 930)
+  habitant_du_quartier(map, 'Kecleon', 'kecleon', Gender.Male, 599, 922)
+  habitant_du_quartier(map, 'Kangourex', 'kangaskhan', Gender.Female, 940, 930)
   -- Habitants ajoutés (ville vivante) : créés s'ils ne sont pas sérialisés
   -- dans la carte (positions relevées sur le rendu, à confirmer au runtime).
-  habitant('Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
-  habitant('Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
-  habitant('Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
-  habitant('Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
-  habitant('Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
-  habitant('Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
+  habitant_du_quartier(map, 'Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
+  habitant_du_quartier(map, 'Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
+  habitant_du_quartier(map, 'Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
+  habitant_du_quartier(map, 'Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
+  habitant_du_quartier(map, 'Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
+  habitant_du_quartier(map, 'Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
   -- Luxio et Luxray partagent un vrai dialogue, mais la carte les place à
   -- 136 px l'un de l'autre, de part et d'autre de la maison citrouille sud.
   -- Luxray est donc posé juste à l'est de Luxio, sur l'herbe libre au nord
@@ -582,15 +681,7 @@ function ville.Visite()
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(500, 1010, 110, false)
   parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
-  regarder_lieu_ville(hero, partenaire, Direction.DownLeft)
-  GAME:MoveCamera(530, 2350, 200, false)
-  parler_guide('Happy', 'Plus au sud, les chemins passent devant les maisons. C’est un coin tranquille, entouré d’arbres.')
-  regarder_lieu_ville(hero, partenaire, Direction.Up)
-  GAME:MoveCamera(800, 530, 240, false)
-  parler_guide('Normal', 'Regarde les ponts et les cascades : ils relient les différents quartiers de la ville.')
-  regarder_lieu_ville(hero, partenaire, Direction.UpRight)
-  GAME:MoveCamera(1425, 320, 135, false)
-  parler_guide('Happy', 'Et ce grand bâtiment, là-haut… un jour, nous irons voir ce qui nous attend de ce côté !')
+  -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
   geste_heros(hero, 'autour', partenaire)
   se_faire_face_ville(partenaire, hero)

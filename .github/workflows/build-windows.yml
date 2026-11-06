@@ -64,6 +64,8 @@ jobs:
         run: python tools/tests/test_tableaux_reverie.py
       - name: Check four Reverie districts and five stairs
         run: python tools/tests/test_quartiers_reverie.py
+      - name: Check local NPCs, independent layers and centre visit
+        run: python tools/tests/test_habitants_quartiers.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

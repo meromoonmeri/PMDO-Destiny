@@ -171,8 +171,8 @@ assert ville_lua.count('installer_comptoirs(map)') >= 3  # définition, Init, Ga
 assert ville_lua.count('placer_marchands_aux_comptoirs()') >= 3
 assert 'placer_marchands_aux_comptoirs()\n  positions_habitants = {}' in ville_lua
 assert "ville[comptoir.nom .. '_Action']" in ville_lua
-assert "habitant('Kecleon', 'kecleon', Gender.Male, 599, 922)" in ville_lua
-assert "habitant('Kangourex', 'kangaskhan', Gender.Female, 940, 930)" in ville_lua
+assert "habitant_du_quartier(map, 'Kecleon', 'kecleon', Gender.Male, 599, 922)" in ville_lua
+assert "habitant_du_quartier(map, 'Kangourex', 'kangaskhan', Gender.Female, 940, 930)" in ville_lua
 # Les seuils devenus comptoirs n’ouvrent plus sur un intérieur.
 for porte_retiree in ('PorteMaisonAlakazam', 'PorteReserveKangourex', 'PorteForgeTinkaton'):
     assert porte_retiree not in ville_lua, porte_retiree
