@@ -16,7 +16,7 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
  if not source.is_file() or not tile_dir.is_dir():raise ValueError('Carte source ou dossier de planches absent.')
  if destination==source or destination.exists():raise ValueError('Destination existante ou identique à la source : aucun écrasement.')
  banks={}
- for p in tile_dir.glob('Reverie_WV_*.tile'):
+ for p in tile_dir.glob('Reverie_Geo_*.tile'):
   with p.open('rb') as f:
    hdr=f.read(8)
    if len(hdr)!=8:raise ValueError('Planche tronquée : '+p.name)
@@ -25,7 +25,7 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
    raw=f.read(16*n)
    if len(raw)!=16*n:raise ValueError('Index tronqué : '+p.name)
    banks[p.stem]={struct.unpack_from('<ii',raw,16*i) for i in range(n)}
- if len(banks)!=14:raise ValueError('Il faut exactement les 14 banques Reverie_WV_ autonomes.')
+ if len(banks)!=14:raise ValueError('Il faut exactement les 14 banques Reverie_Geo_ autonomes.')
  raw=source.read_bytes();starts=list(re.finditer(rb'"Layers"\s*:\s*\[\s*\{\s*"Name"\s*:',raw))
  if len(starts)!=1:raise ValueError('Structure des couches non reconnue : arrêt sans écrasement.')
  start=raw.find(b'[',starts[0].start());matches=list(re.finditer(rb'\]\s*,\s*"AssetName"\s*:',raw[start:]))

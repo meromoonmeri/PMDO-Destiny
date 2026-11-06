@@ -126,6 +126,8 @@ def main() -> None:
     create_launcher('dev.bat', ' -dev')
     shutil.copy2(ROOT / 'docs' / 'LISEZ_MOI_WINDOWS.txt', publish_dir / 'LISEZ_MOI.txt')
     shutil.copy2(ROOT / 'docs' / 'reverie-cartes-edition.md', publish_dir / 'CALQUES_REVERIE.md')
+    shutil.copy2(ROOT / 'docs' / 'reverie-planches-propres.md', publish_dir / 'PLANCHES_REVERIE.md')
+    shutil.copytree(ROOT / 'art' / 'reverie' / 'tilesheets', publish_dir / 'Sources_Reverie' / 'Planches_PNG')
 
     # Vérifier la présence dans le build de toutes les cartes de la Quest et en
     # donner la liste : le build contient aussi des cartes de base du moteur.

@@ -72,6 +72,8 @@ jobs:
         run: python tools/tests/test_entrees_reverie.py
       - name: Check editable district layers
         run: python tools/tests/test_cartes_edition_reverie.py
+      - name: Check independent Reverie tilesheets
+        run: python tools/tests/test_tilessheets_reverie.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

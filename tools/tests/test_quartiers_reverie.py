@@ -7,10 +7,10 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'game/Data/Ground/WaterfallVillageCapital.rsground'
 NAMES=['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang']
 EXPECTED={
-'reverie_centre':('4018ab9979376645ea5a9d919655afd7fa6c3b34b1f2287304138721b19b98ef',34695748),
-'reverie_nord':('ebca4e8a6e0b8b1e404d44b4fe399cd7a9c3397bb086ee44805602c5bc80b261',27612765),
-'reverie_residentiel':('b1c0b3a851986899b079c8efbaf7b89f3c0a1b3c24bfde71b53729e95b607250',33005930),
-'reverie_etang':('caec4f389aa9deb2dbe5977fa0a62640a704728143ded15eafa1fedfadd4bd02',32662308)}
+'reverie_centre':('571462d40da934f1dcf2640c1119dc27a245d44b93c554f1bc7a0ea3fb24557b',34956112),
+'reverie_nord':('c386308c7957a4bbe795618e49aa0ef3009b3d65ddec819b23fa49d54455d75b',27801859),
+'reverie_residentiel':('75f27960a4b79ddb70e0f05beb8688b9d2dc3f2617b4e1ca64103e5896c1367c',33247344),
+'reverie_etang':('fb275dfd6723c62f4e1bd47f18991c47411bb8f9608d3bb4ad8788d1bd4297ab',32912839)}
 # Axe joueur 16x16, du bas vers le haut si dir=Up.
 GATES=[
  ('reverie_centre',104,928,48,8,'Up','reverie_nord',120,888,120,864),('reverie_nord',104,904,48,8,'Down','reverie_centre',120,952,120,976),
@@ -45,7 +45,7 @@ for parsed,expected in zip(found,GATES):
  _,src,x,y,w,h,dst,ax,ay,px,py,direction=parsed
  actual=(src,int(x),int(y),int(w),int(h),direction,dst,int(ax),int(ay),int(px),int(py))
  assert actual==expected,(actual,expected)
-source=BASE.read_bytes();i,j,old=extract(source);assert len(source)==37759504 and hashlib.sha256(source).hexdigest()=='ebe637b7f528fef9b368ffa7fd639c218b4d9dd513cf1684ef7eaf948979b26b'
+source=BASE.read_bytes();i,j,old=extract(source);assert len(source)==38012912 and hashlib.sha256(source).hexdigest()=='d954caf4ab769688ac573749d5f003b415c789b297b1c2fdc36deae0576f65a3'
 asset=b'"AssetName":"WaterfallVillageCapital"';grids={}
 for name in NAMES:
  data=gzip.decompress((ROOT/'payload'/f'{name}.rsground.gz').read_bytes());assert (hashlib.sha256(data).hexdigest(),len(data))==EXPECTED[name]

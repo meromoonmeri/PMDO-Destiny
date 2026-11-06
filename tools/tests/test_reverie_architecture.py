@@ -6,8 +6,7 @@ ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'tools'))
 import compiler_carte_reverie as compiler
 GAME=ROOT/'game';dev=GAME/'Data/Ground/WaterfallVillageCapital_Dev.rsground';jeu=GAME/'Data/Ground/WaterfallVillageCapital.rsground';tiles=GAME/'Content/Tile';manifest=json.loads((ROOT/'tools/reverie_tiles_manifest.json').read_text(encoding='utf-8'))
 assert dev.is_file() and jeu.is_file();assert (GAME/'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_bytes()==(GAME/'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_bytes()
-expected=manifest['tile_mapping']['Reverie_Town_Animation_Tileset'];assert expected['dest']=='Reverie_WV_11_Objects_Animated';dx,dy=expected['offset_x'],expected['offset_y']
-assert len(manifest['banks'])==14 and len(manifest['tile_mapping'])==44
+assert len(list(tiles.glob('Reverie_Geo_*.tile')))==14
 water=0;layers=0;names=[];allframes=0
 with dev.open('rb') as f:
  if f.read(3)!=b'\xef\xbb\xbf':f.seek(0)
@@ -17,7 +16,7 @@ with dev.open('rb') as f:
    for tile in column:
     for anim in tile.get('Layers',[]):
      frames=anim['Frames'];allframes+=sum(1 for t in frames if t['Sheet'])
-     subset=[fr for fr in frames if fr['Sheet']==expected['dest'] and dx<=fr['TexLoc']['X']<dx+36 and dy+62<=fr['TexLoc']['Y']<=dy+76]
+     subset=[fr for fr in frames if fr['Sheet']=='Reverie_Geo_11_Cascades_frames']
      if subset:
       assert all(not fr['Sheet'] or fr in subset for fr in frames);assert len(frames)==4 and anim['FrameLength']==10;water+=1
 assert layers==37 and 'WaterfallVillage-base' in names and 'cascade' in names
