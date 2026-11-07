@@ -3,9 +3,10 @@ package.path = 'game/Data/Script/?.lua;game/Data/Script/?/init.lua;' .. package.
 package.preload['origin.common'] = function() return {} end
 package.preload['destiny.recrutement'] = function() return {synchroniser=function() end} end
 local dialogues, frames = {}, {}
+local speaker = nil
 package.preload['destiny.cinematique'] = function()
   return {
-    Dire=function(actor, emotion, text) table.insert(dialogues, {actor=actor, text=text}) end,
+    Dire=function(actor, emotion, text) speaker=actor; table.insert(dialogues, {actor=actor, text=text}) end,
     Respirer=function(n) GAME:WaitFrames(n or 20) end,
     TournerGroupe=function() end, RegarderGroupe=function() end,
     Emote=function() end, NomEspece=function(_,fallback) return fallback end,
@@ -44,7 +45,13 @@ GROUND = setmetatable({
 }, {__index=function() return noop end})
 UI = setmetatable({
  NameMenu=function() menu='name' end,
- ChoiceMenuYesNo=function() menu='yesno' end,
+ ResetSpeaker=function() speaker=nil end,
+ ChoiceMenuYesNo=function(_,question)
+  if question == 'Souhaitez-vous retourner dans les Bois Perdus ?' or question == 'Le suivre jusqu’à Réverie Town ?' then
+   assert(speaker==nil, 'une question système a hérité d’un portrait')
+  end
+  menu='yesno'
+ end,
  ChoiceResult=function() if menu=='name' then return input end return true end,
 }, {__index=function() return noop end})
 SOUND = setmetatable({}, {__index=function() return noop end})
@@ -131,10 +138,12 @@ end
 local cliff=require 'destiny.ground.cliffdaytest.init'
 cliff.RencontreTeamDazzling=function() SV.Destiny.CombatDazzling='en_cours' end
 cliff.SceneArriveeDestiny()
-assert(#flight==6)
+assert(#flight==4)
 for _,event in ipairs(flight) do assert(event[4]==true, 'ombre visible pendant le vol') end
-assert(flight[3][2]==656 and flight[3][3]==444)
-assert(flight[4][2]==656 and flight[5][2]==656)
+assert(flight[1][1]=='teleport' and flight[1][2]==656 and flight[1][3]==340)
+assert(flight[2][1]=='animate' and flight[2][2]==656 and flight[2][3]==444)
+assert(flight[3][1]=='animate' and flight[3][2]==656 and flight[3][3]==390)
+assert(flight[4][1]=='move' and flight[4][2]==420 and flight[4][3]==390)
 assert(actors.Bekipan.hidden and actors.Bekipan.HideShadow==false)
 local salut, presentation_hero = false, false
 for _,d in ipairs(dialogues) do

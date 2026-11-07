@@ -1,6 +1,7 @@
 -- Intérieur town02 raccordé à Réverie Town (Destiny).
 -- La sortie sérialisée de la carte ramène devant le bâtiment utilisé.
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local ledian_dojo = {}
 local sortie_en_cours = false
@@ -15,10 +16,13 @@ local function sortir()
 end
 
 function ledian_dojo.Init(map) end
-function ledian_dojo.Enter(map) sortie_en_cours = false; GAME:FadeIn(20) end
-function ledian_dojo.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function ledian_dojo.Enter(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function ledian_dojo.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function ledian_dojo.Update(map, time) end
-function ledian_dojo.Dojo_Exit_Touch(obj, activator) sortir() end
+function ledian_dojo.Dojo_Exit_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  sortir()
+end
 
 function ledian_dojo.Sensei_Action(chara, activator)
   UI:SetSpeaker(chara); UI:SetSpeakerEmotion('Normal')

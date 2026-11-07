@@ -207,20 +207,17 @@ assert 'Je me demande dans quoi je me suis embarqué…' in cliff_jour
 # pas dans le moteur (Text.MsgTags) et s’affichait en toutes lettres.
 assert '"[i](' not in cliff_jour and '"[i](' not in reveil
 assert '"(" .. contenu .. ")"' in cliff_jour and '"(" .. texte .. ")"' in reveil
-# Retour à la falaise : la même falaise, un simple demi-tour, le jour levé.
-assert 'juste fait demi-tour' in cliff_jour
+# Retour à la falaise : le héros n'y était pas cette nuit.
+assert 'juste fait demi-tour' not in cliff_jour
 assert 'mais dans l’autre sens.' not in cliff_jour
-# Devant la maison, le facteur Bekipan arrive de profil depuis l’est, se
-# pose sur la boîte aux lettres, salue le partenaire et son « nouvel ami »,
-# puis repart vers l’ouest ; la lettre déclenche les explications guildes.
+# Devant la maison, le facteur arrive et repart par le haut, lentement.
 assert 'facteur_bekipan()' in cliff_jour and "cinematique.NomEspece('pelipper', 'Bekipan') .. \", le facteur !\"" in cliff_jour
-assert 'GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)' in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 656, 444, 1, 2, 0)" in cliff_jour
+assert 'GROUND:TeleportTo(bekipan, 656, 340, Direction.Down, 32)' in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Down, 656, 444, 1, 1, 0)" in cliff_jour
 # Dépôt de face : la vraie Special0 SpriteCollab de distribution du courrier
 # (68 ticks) remplace l'ancien détournement Walk/Attack. Le son sourd part
 # à mi-animation, pendant la frame bec dans la fente (ticks 27 à 41), puis
-# le « Clunk » suit la fin du geste. Hop marque l'atterrissage et le
-# décollage ; le départ monte dans l'axe x=656, puis file vers l'ouest.
+# le « Clunk » suit la fin du geste. Le vol se fait sans Hop.
 _scene_bekipan = cliff_jour[cliff_jour.index('local bekipan = facteur_bekipan()'):
                             cliff_jour.index("GROUND:Hide('Bekipan')")]
 assert "anim(bekipan, 'Special0', false)" in _scene_bekipan
@@ -231,11 +228,10 @@ assert _scene_bekipan.index("anim(bekipan, 'Special0', false)") \
     < _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')") \
     < _scene_bekipan.index('cinematique.Respirer(34)', _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')")) \
     < _scene_bekipan.index("UI:WaitShowDialogue('Clunk')")
-assert cliff_jour.count("anim(bekipan, 'Hop', false)") == 2
+assert "anim(bekipan, 'Hop', false)" not in _scene_bekipan
 assert "UI:WaitShowDialogue('Clunk')" in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 424, 1, 1, 48)" in cliff_jour
-assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 340, 1, 2, 72)" in cliff_jour
-assert 'GROUND:MoveToPosition(bekipan, 420, 340, false, 2)' in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 390, 1, 1, 24)" in cliff_jour
+assert 'GROUND:MoveToPosition(bekipan, 420, 390, false, 1.5)' in cliff_jour
 assert "GROUND:Hide('Bekipan')" in cliff_jour
 assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour
 assert 'partout dans le monde' in cliff_jour and 'poste Bekipan' in cliff_jour

@@ -2,6 +2,7 @@
 -- Les dialogues sont originaux Destiny ; les services avancés du café
 -- restent à brancher sur les menus natifs dans une tranche ultérieure.
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local cafespindaaccueil = {}
 local sortie_cafe_en_cours = false
@@ -30,6 +31,19 @@ local function installer_sortie(map)
   map:AddObject(porte)
 end
 
+-- L’escalier nord mène à l’étage du café, au contact comme la sortie sud.
+local function installer_escalier_nord(map)
+  if map == nil then return end
+  if map:FindObject('EscalierNordCafe') then GROUND:RemoveObject('EscalierNordCafe') end
+  local porte = RogueEssence.Ground.GroundObject()
+  porte.EntName = 'EscalierNordCafe'
+  porte.Collider = RogueElements.Rect(272, 120, 48, 8)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  porte:OnMapInit()
+  map:AddObject(porte)
+end
+
 local function aller_a(index_carte)
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
@@ -47,15 +61,32 @@ local function nommer(nom, affiche)
   if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
 end
 
+local function nommer_personnel()
+  nommer('Spinda', '')
+  nommer('MrMimeJunior', 'Pipo')
+  nommer('Kirlia', 'Alizé')
+  nommer('NewObject_13', 'Noisette')
+  nommer('Pompot', 'Pompon')
+  nommer('Qulbutoqué', 'Balou')
+  nommer('Okéoké', 'Bulle')
+end
+
+local function placer_personnel()
+  -- Dégager les trois employés de l’escalier nord sans changer la carte.
+  for _, poste in ipairs({{'Spinda',224,160}, {'MrMimeJunior',352,160}, {'Kirlia',224,184}}) do
+    local acteur = CH(poste[1])
+    if acteur ~= nil then
+      GROUND:TeleportTo(acteur, poste[2], poste[3], Direction.Down)
+      AI:DisableCharacterAI(acteur)
+    end
+  end
+end
+
 function cafespindaaccueil.Init(map)
-  nommer('NewObject_13', 'Goinfrex')
-  nommer('Pompot', 'Pohm')
-  nommer('Qulbutoqué', 'Qulbutoké')
-  nommer('Okéoké', 'Okéoké')
+  nommer_personnel()
   installer_sortie(map)
-  activer('Spinda', 20)
-  activer('MrMimeJunior', 20)
-  activer('Kirlia', 20)
+  installer_escalier_nord(map)
+  placer_personnel()
   activer('NewObject_13', 36)
   activer('Pompot', 36)
   activer('Qulbutoqué', 28)
@@ -64,13 +95,29 @@ end
 
 function cafespindaaccueil.Enter(map)
   sortie_cafe_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.RetourCafeAccueil == 'escalier' then
+    SV.Destiny.RetourCafeAccueil = nil
+    local hero, partenaire = CH('PLAYER'), CH('Teammate1')
+    if hero ~= nil then GROUND:TeleportTo(hero, 288, 152, Direction.Down) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 312, 160, Direction.Down) end
+  end
+  suivi_interieurs.Activer(map)
   GAME:FadeIn(30)
 end
 
-function cafespindaaccueil.GameLoad(map)
+function cafespindaaccueil.GameLoad(map) nommer_personnel(); placer_personnel(); suivi_interieurs.Activer(map);
   sortie_cafe_en_cours = false
   installer_sortie(map)
+  installer_escalier_nord(map)
   GAME:FadeIn(30)
+end
+
+function cafespindaaccueil.EscalierNordCafe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_cafe_en_cours then return end
+  sortie_cafe_en_cours = true
+  aller_a(3)
 end
 
 function cafespindaaccueil.PorteSortieCafe_Touch(obj, activator)
@@ -90,14 +137,14 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
   dire(CH('MrMimeJunior'), 'Happy', 'Je prépare les verres sans dire un mot. Le spectacle commence dès le comptoir !')
   dire(CH('Kirlia'), 'Normal', 'Et moi, j’écoute les équipes. Certaines histoires commencent par une simple boisson partagée.')
   dire(personnage, 'Normal', 'Installez-vous. L’étage est plus calme, et la salle voisine accueille nos petits spectacles.')
-  UI:SetSpeaker(personnage)
+  UI:ResetSpeaker()
   UI:BeginChoiceMenu('Souhaitez-vous que je vous guide, ou faire une sieste jusqu’à demain ?', {
     'Monter à l’étage', 'Aller à la salle de spectacle', 'Faire une sieste', 'Rester à l’accueil',
   }, 1, 4)
   UI:WaitForChoice()
   local choix = UI:ChoiceResult()
   if choix == 3 then
-    UI:WaitShowDialogue('Installez-vous dans un coin tranquille. Demain, les Kecleon auront renouvelé leurs étals.')
+    dire(personnage, 'Normal', 'Installez-vous dans un coin tranquille. Demain, Basil et Félix auront renouvelé leurs étals.')
     UI:ResetSpeaker()
     GAME:FadeOut(false, 60)
     GAME:WaitFrames(90)
@@ -111,7 +158,10 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
   end
   UI:ResetSpeaker()
   if choix == 1 then aller_a(3)
-  elseif choix == 2 then aller_a(4) end
+  elseif choix == 2 then
+    SV.Destiny = SV.Destiny or {}; SV.Destiny.ArriveeSalleCafe = true
+    aller_a(4)
+  end
 end
 
 function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)

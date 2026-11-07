@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[2]
 city=(ROOT/'game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf8')
 dev=(ROOT/'game/Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_text(encoding='utf8')
 assert city==dev
-scene=city[city.index('function ville.Visite()'):city.index('local function position_partenaire_retour')]
+scene=city[city.index('function ville.Visite(map)'):city.index('local function position_partenaire_retour')]
 assert "CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')" in scene
 for name in ['kecleon','kangourex','alakazam','mordudor','forgelina']:
  assert f'if {name} ~= nil then' in scene and f'parler_accueil({name},' in scene,name

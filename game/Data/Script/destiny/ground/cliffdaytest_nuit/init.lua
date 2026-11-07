@@ -146,6 +146,7 @@ function cliffdaytest_nuit.DemanderRetourAller()
   UI:ResetSpeaker()
   GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)
   cinematique.Dire(partenaire, 'Normal', 'Voici l’entrée des [color=#69D98C]Bois Perdus[color].', 'standard')
+  UI:ResetSpeaker() -- question système, pas une réplique
   UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans les Bois Perdus ?', true)
   UI:WaitForChoice()
   if UI:ChoiceResult() then

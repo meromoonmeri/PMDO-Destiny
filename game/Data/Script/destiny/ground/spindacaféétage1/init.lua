@@ -1,7 +1,9 @@
 -- Étage du café Spinda : coin calme et atelier de recyclage en préparation.
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local spindacafeetage1 = {}
+local transition_cafe_en_cours = false
 
 local function activer(nom, rayon)
   local acteur = CH(nom)
@@ -12,16 +14,30 @@ local function activer(nom, rayon)
   AI:EnableCharacterAI(acteur)
 end
 
+local function contact(map, nom, x, y, w, h)
+  if map == nil then return end
+  if map:FindObject(nom) then GROUND:RemoveObject(nom) end
+  local porte = RogueEssence.Ground.GroundObject()
+  porte.EntName = nom
+  porte.Collider = RogueElements.Rect(x,y,w,h)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  porte:OnMapInit()
+  map:AddObject(porte)
+end
+
 local function installer_escalier(map)
-  if map == nil or map:FindObject('EscalierCafe') then return end
-  local escalier = RogueEssence.Ground.GroundObject()
-  escalier.EntName = 'EscalierCafe'
-  escalier.Collider = RogueElements.Rect(268, 398, 64, 16)
-  escalier:OnMapInit()
-  map:AddObject(escalier)
+  -- À la limite praticable du tapis, et non sur les cases bloquées à y=398.
+  contact(map, 'EscalierCafe', 268, 368, 64, 8)
+  contact(map, 'PassageSalleCafe', 560, 216, 8, 24)
 end
 
 local function aller_a(index_carte)
+  if transition_cafe_en_cours then return end
+  transition_cafe_en_cours = true
+  SV.Destiny = SV.Destiny or {}
+  if index_carte == 2 then SV.Destiny.RetourCafeAccueil = 'escalier' end
+  if index_carte == 4 then SV.Destiny.ArriveeSalleCafe = true end
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
 end
@@ -38,10 +54,14 @@ local function nommer(nom, affiche)
   if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
 end
 
+local function nommer_personnel()
+  nommer('NewObject', '')
+  nommer('NewObject_1', 'Bulle')
+  nommer('NewObject_2', 'Balou')
+end
+
 function spindacafeetage1.Init(map)
-  nommer('NewObject', 'Spinda')
-  nommer('NewObject_1', 'Okéoké')
-  nommer('NewObject_2', 'Qulbutoké')
+  nommer_personnel()
   installer_escalier(map)
   activer('NewObject', 32)
   activer('NewObject_1', 28)
@@ -49,19 +69,31 @@ function spindacafeetage1.Init(map)
 end
 
 function spindacafeetage1.Enter(map)
+  transition_cafe_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.RetourCafeEtage == 'spectacle' then
+    SV.Destiny.RetourCafeEtage = nil
+    local hero, partenaire = CH('PLAYER'), CH('Teammate1')
+    if hero ~= nil then GROUND:TeleportTo(hero, 528, 216, Direction.Left) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 504, 216, Direction.Left) end
+  end
+  suivi_interieurs.Activer(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1.GameLoad(map)
+function spindacafeetage1.GameLoad(map) nommer_personnel(); suivi_interieurs.Activer(map);
+  transition_cafe_en_cours = false
   installer_escalier(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1.EscalierCafe_Action(obj, activator)
-  UI:ResetSpeaker()
-  UI:ChoiceMenuYesNo('Redescendre à l’accueil du café ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() then aller_a(2) end
+function spindacafeetage1.EscalierCafe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  aller_a(2)
+end
+function spindacafeetage1.PassageSalleCafe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  aller_a(4)
 end
 
 function spindacafeetage1.Update(map, time)
@@ -69,7 +101,7 @@ end
 
 function spindacafeetage1.NewObject_Action(personnage, activator)
   dire(personnage, 'Happy', 'Cet étage est notre refuge quand l’accueil devient trop animé. On y prépare les réserves et les surprises.')
-  UI:SetSpeaker(personnage)
+  UI:ResetSpeaker()
   UI:BeginChoiceMenu('Souhaitez-vous que je vous guide ?', {
     'Redescendre à l’accueil', 'Aller à la salle de spectacle', 'Rester à l’étage',
   }, 1, 3)

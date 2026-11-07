@@ -1,7 +1,9 @@
 -- Salle de spectacle du café Spinda : artistes et habitués sérialisés.
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local spindacafeetage1salle2 = {}
+local transition_cafe_en_cours = false
 
 local function activer(nom, rayon)
   local acteur = CH(nom)
@@ -13,15 +15,22 @@ local function activer(nom, rayon)
 end
 
 local function installer_porte(map)
-  if map == nil or map:FindObject('PorteSalleCafe') then return end
+  if map == nil then return end
+  if map:FindObject('PorteSalleCafe') then GROUND:RemoveObject('PorteSalleCafe') end
   local porte = RogueEssence.Ground.GroundObject()
   porte.EntName = 'PorteSalleCafe'
-  porte.Collider = RogueElements.Rect(24, 204, 16, 32)
+  porte.Collider = RogueElements.Rect(8, 216, 8, 24)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
   porte:OnMapInit()
   map:AddObject(porte)
 end
 
 local function aller_a(index_carte)
+  if transition_cafe_en_cours then return end
+  transition_cafe_en_cours = true
+  SV.Destiny = SV.Destiny or {}
+  if index_carte == 3 then SV.Destiny.RetourCafeEtage = 'spectacle' end
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
 end
@@ -38,18 +47,22 @@ local function nommer(nom, affiche)
   if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = affiche end
 end
 
+local function nommer_personnel()
+  nommer('NewObject', 'Pipo')
+  nommer('NewObject_1', 'Asa')
+  nommer('NewObject_2', 'Mina')
+  nommer('NewObject_3', 'Mirabelle')
+  nommer('NewObject_4', 'Nox')
+  nommer('NewObject_5', 'Lila')
+  nommer('NewObject_6', 'Rémi')
+  nommer('NewObject_7', 'Mimi')
+  nommer('NewObject_8', 'Pistache')
+  nommer('NewObject_9', 'Pico')
+  nommer('NewObject_10', 'Brume')
+end
+
 function spindacafeetage1salle2.Init(map)
-  nommer('NewObject', 'Mime Jr.')
-  nommer('NewObject_1', 'Rondoudou')
-  nommer('NewObject_2', 'Négapi')
-  nommer('NewObject_3', 'Magirêve')
-  nommer('NewObject_4', 'Goupilou')
-  nommer('NewObject_5', 'Nidoran♀')
-  nommer('NewObject_6', 'Nidoran♂')
-  nommer('NewObject_7', 'Mimiqui')
-  nommer('NewObject_8', 'Pachirisu')
-  nommer('NewObject_9', 'Posipi')
-  nommer('NewObject_10', 'Branette')
+  nommer_personnel()
   installer_porte(map)
   for i = 0, 10 do
     local nom = i == 0 and 'NewObject' or ('NewObject_' .. i)
@@ -58,19 +71,27 @@ function spindacafeetage1salle2.Init(map)
 end
 
 function spindacafeetage1salle2.Enter(map)
+  transition_cafe_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.ArriveeSalleCafe then
+    SV.Destiny.ArriveeSalleCafe = nil
+    local hero, partenaire = CH('PLAYER'), CH('Teammate1')
+    if hero ~= nil then GROUND:TeleportTo(hero, 32, 216, Direction.Right) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 56, 216, Direction.Right) end
+  end
+  suivi_interieurs.Activer(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1salle2.GameLoad(map)
+function spindacafeetage1salle2.GameLoad(map) nommer_personnel(); suivi_interieurs.Activer(map);
+  transition_cafe_en_cours = false
   installer_porte(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1salle2.PorteSalleCafe_Action(obj, activator)
-  UI:ResetSpeaker()
-  UI:ChoiceMenuYesNo('Retourner à l’accueil du café ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() then aller_a(2) end
+function spindacafeetage1salle2.PorteSalleCafe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  aller_a(3)
 end
 
 function spindacafeetage1salle2.Update(map, time)
@@ -79,7 +100,7 @@ end
 function spindacafeetage1salle2.NewObject_Action(personnage, activator)
   dire(personnage, 'Happy', 'Je répète mon numéro de mime. Le mur invisible est juste là… ne le traversez pas trop vite.')
   dire(CH('NewObject_1'), 'Happy', 'Et quand je chanterai, toute la salle devra rester éveillée jusqu’au dernier refrain !')
-  UI:SetSpeaker(personnage)
+  UI:ResetSpeaker()
   UI:BeginChoiceMenu('Le rideau invisible peut aussi vous montrer la sortie…', {
     'Retourner à l’accueil', 'Monter à l’étage', 'Rester dans la salle',
   }, 1, 3)
@@ -97,14 +118,14 @@ function spindacafeetage1salle2.NewObject_1_Action(personnage, activator)
 end
 
 local dialogues = {
-  NewObject_2 = 'Plusle et moi préparons un numéro d’étincelles synchronisées. Réverie Town va briller !',
+  NewObject_2 = 'Pico et moi préparons un numéro d’étincelles synchronisées. Réverie Town va briller !',
   NewObject_3 = 'Les récits de donjon prennent une autre couleur sous les lumières de cette salle.',
   NewObject_4 = 'Je cherche un accessoire disparu avant le spectacle. Dans un café, même les ombres ont des cachettes.',
   NewObject_5 = 'Nous venons écouter les histoires des explorateurs. Certaines valent tous les trésors.',
   NewObject_6 = 'Je garde nos places pendant qu’elle choisit les boissons. Le spectacle commence toujours trop tôt pour les retardataires.',
   NewObject_7 = 'Mon déguisement est prêt. J’espère que le public aimera autant le mystère que les chansons.',
   NewObject_8 = 'Je répète mes applaudissements. Les artistes donnent le meilleur quand la salle répond.',
-  NewObject_9 = 'Minun compte les temps, je lance la première étincelle. Ne clignez pas des yeux !',
+  NewObject_9 = 'Mina compte les temps, je lance la première étincelle. Ne clignez pas des yeux !',
   NewObject_10 = 'Je prépare les ombres de scène. Un bon spectacle a besoin d’un peu de nuit pour faire briller la lumière.',
 }
 for nom, texte in pairs(dialogues) do

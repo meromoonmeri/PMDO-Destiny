@@ -18,6 +18,8 @@ local current
 function CH(n)if n=='PLAYER' then return hero elseif n=='Teammate1' then return mate else return current.characters[n] end end
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 GROUND={
+ Unhide=function(_,n)if current.characters[n] then current.characters[n].EntEnabled=true end end,
+ Hide=function(_,n)if current.characters[n] then current.characters[n].EntEnabled=false end end,
  RemoveCharacter=function(_,name)if current.characters[name] then current.characters[name]=nil;return true end;return false end,
  RemoveObject=function(_,name)if current.objects[name] then current.objects[name]=nil;return true end;return false end,
  TeleportTo=function(_,a,x,y,dir)a.Position={X=x,Y=y};a.Direction=dir end,
@@ -86,3 +88,15 @@ end
 SV={Destiny={}};local legacy=newmap('WaterfallVillageCapital',true);init(legacy)
 for _,e in ipairs(all)do assert(legacy.characters[e[1]],'PNJ perdu de la carte historique') end
 print('PASS carte historique préservée ; équipe conservée')
+
+SV={Destiny={AlerteShinx='a_secourir',LuxrayAttente='place'}}
+local centre=newmap('reverie_centre',true); local ville=init(centre)
+local lux=centre.characters.Luxray_Alerte
+assert(lux and lux.Position.X==800 and lux.Position.Y==1224 and lux.Data.Nickname=='Lyra' and not centre.characters.NewObject_9)
+ville.Init(centre);assert(centre.characters.Luxray_Alerte==lux)
+SV.Destiny.LuxrayAttente='sortie';ville.Init(centre);assert(lux.Position.X==1504 and lux.Position.Y==1584 and lux.Data.Nickname=='Lyra')
+local residentiel=newmap('reverie_residentiel',true);current=residentiel;ville.Init(residentiel)
+assert(not residentiel.characters.Luxray_Alerte and residentiel.characters.NewObject_9.EntEnabled==false and residentiel.characters.NewObject_9.Data.Nickname=='Lyra' and residentiel.characters.NewObject_10.Data.Nickname=='Léo')
+SV.Destiny.AlerteShinx='termine';ville.Init(residentiel);assert(residentiel.characters.NewObject_9.EntEnabled==true)
+current=centre;ville.Init(centre);assert(not centre.characters.Luxray_Alerte)
+print('PASS attente de Lyra : états persistants, réentrée, doublons et quartier résidentiel')

@@ -130,19 +130,43 @@ end
 -- génériques (NewObject_*) : on leur donne leur vrai nom affiché en
 -- dialogue, sans toucher à la carte.
 local noms_habitants = {
-  Kecleon = 'Kecleon', Kecleon_Violet = 'Kecleon violet',
-  NewObject_3 = 'Mordudor', NewObject_4 = 'Alakazam', Kangourex = 'Kangourex',
-  NewObject_6 = 'Altaria', NewObject_7 = 'Lombre', NewObject_8 = 'Ludicolo',
-  NewObject_9 = 'Luxray', NewObject_10 = 'Luxio', NewObject_12 = 'Mackogneur',
-  NewObject_13 = 'Marill', NewObject_14 = 'Tyranocif', Doyen = 'Doyen Grodrive',
-  Drifloon = 'Baudrive', NewObject_16 = 'Dracaufeu', NewObject_11 = 'Carchacrok',
-  NewObject_18 = 'Ronflex', NewObject_20 = 'Drattak', NewObject_21 = 'Cupcanaille',
-  NewObject_15 = 'Écrémeuh', NewObject_17 = 'Arcanin', NewObject_22 = 'Arbok',
-  NewObject_23 = 'Charmilly', NewObject_24 = 'Forgelina',
-  Pijako_Livreur = 'Pijako', Cradopaud_Pecheur = 'Cradopaud',
-  Roserade_Fleuriste = 'Roserade', Magneton_Garde = 'Magnéton',
-  Babimanta_Enfant = 'Babimanta', Goinfrex_Voyageur = 'Goinfrex',
+  Kecleon = 'Basil', Kecleon_Violet = 'Félix',
+  NewObject_3 = 'Écu', NewObject_4 = '', Kangourex = 'Mado',
+  NewObject_6 = 'Céleste', NewObject_7 = 'Nino', NewObject_8 = 'Marcel',
+  NewObject_9 = 'Lyra', NewObject_10 = 'Léo', NewObject_12 = 'Hector',
+  NewObject_13 = 'Azur', NewObject_14 = '', Doyen = 'Aurèle',
+  Drifloon = 'Plume', NewObject_16 = '', NewObject_11 = 'Sillage',
+  NewObject_18 = 'Gaston', NewObject_20 = 'Atlas', NewObject_21 = 'Suzie',
+  NewObject_15 = 'Margot', NewObject_17 = 'Gustave', NewObject_22 = 'Ophélie',
+  NewObject_23 = 'Capucine', NewObject_24 = 'Iris',
+  Pijako_Livreur = 'Pip', Cradopaud_Pecheur = 'Marius',
+  Roserade_Fleuriste = 'Rose', Magneton_Garde = 'Volt',
+  Babimanta_Enfant = 'Ondine', Goinfrex_Voyageur = 'Moka',
 }
+
+-- Une Baudrive de la carte publiée n’a pas d’identifiant d’entité. Lui
+-- donner un prénom sans changer son identité technique ni ses événements.
+local function nommer_baudrive_sans_identifiant(map)
+  if map == nil or map.Entities == nil then return end
+  for couche in luanet.each(map.Entities) do
+    for acteur in luanet.each(couche.MapChars) do
+      if acteur.EntName == '' and acteur.Data ~= nil and acteur.Data.BaseForm ~= nil
+        and acteur.Data.BaseForm.Species == 'drifloon' then
+        acteur.Data.Nickname = 'Nuage'
+      end
+    end
+  end
+end
+
+local function nommer_habitants(map)
+  for nom, prenom in pairs(noms_habitants) do
+    local acteur = CH(nom)
+    if acteur ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = prenom end
+  end
+  local mere = CH('Luxray_Alerte')
+  if mere ~= nil and mere.Data ~= nil then mere.Data.Nickname = 'Lyra' end
+  nommer_baudrive_sans_identifiant(map)
+end
 
 local function habitant(nom, espece, genre, x, y)
   local acteur = CH(nom)
@@ -177,7 +201,6 @@ local portes_batiments = {
   {nom = 'PorteDojoKingambit', titre = 'Dojo Kingambit', x = 1440, y = 344, largeur = 48, hauteur = 48, retour_x = 1460, retour_y = 416, interieur = 'dojo_kingambit', marqueur = 'MarowakDojoExitMarker', contact_x = 1440, contact_y = 392, contact_w = 48, contact_h = 8, partenaire_x = 1436, partenaire_y = 416},
   {nom = 'PorteHutteSud', titre = 'Hutte aquatique', x = 608, y = 1680, largeur = 72, hauteur = 40, retour_x = 656, retour_y = 1744, interieur = 'reverie_hutte_aquatique', marqueur = 'Main_Entrance_Marker', contact_x = 648, contact_y = 1720, contact_w = 32, contact_h = 8, partenaire_x = 680, partenaire_y = 1744},
   {nom = 'PorteTenteCentre', titre = 'Campement des explorateurs', x = 788, y = 1688, retour_x = 812, retour_y = 1740, interieur = 'reverie_inn', marqueur = 'Main_Entrance_Marker'},
-  {nom = 'PorteTenteEst', titre = 'Dojo de l\'est (Ledian)', x = 1172, y = 1808, retour_x = 1180, retour_y = 1884, interieur = 'ledian_dojo', marqueur = 'Main_Entrance_Marker'},
   {nom = 'PorteMaisonPierre', titre = 'Maison de Pierre', x = 440, y = 2296, largeur = 40, hauteur = 40, retour_x = 456, retour_y = 2360, interieur = 'reverie_rock_home', marqueur = 'Main_Entrance_Marker', contact_x = 448, contact_y = 2336, contact_w = 32, contact_h = 8, partenaire_x = 472, partenaire_y = 2344},
   {nom = 'PorteMaisonPlanteSud', titre = 'Maison plante', x = 568, y = 2472, largeur = 32, hauteur = 72, retour_x = 584, retour_y = 2568, interieur = 'reverie_grass_home', marqueur = 'Main_Entrance_Marker', contact_x = 576, contact_y = 2544, contact_w = 24, contact_h = 8, partenaire_x = 560, partenaire_y = 2568},
   {nom = 'PorteCitrouilleSud', titre = 'Maison citrouille du sud', x = 756, y = 2496, largeur = 48, hauteur = 32, retour_x = 776, retour_y = 2552, interieur = 'reverie_fire_home', marqueur = 'Main_Entrance_Marker', contact_x = 760, contact_y = 2528, contact_w = 40, contact_h = 8, partenaire_x = 752, partenaire_y = 2552},
@@ -325,6 +348,30 @@ local function habitant_du_quartier(map, nom, espece, genre, x, y)
   return habitant(nom, espece, genre, x, y)
 end
 
+-- Une instance distincte garde son poste sur le centre pendant l’alerte.
+-- L’originale du quartier résidentiel reste conservée, mais cachée.
+local function installer_luxray_attente(map)
+  if map == nil then return end
+  SV.Destiny = SV.Destiny or {}
+  local attente = SV.Destiny.AlerteShinx == 'a_secourir'
+  if map.AssetName == 'reverie_residentiel' then
+    if CH('NewObject_9') ~= nil then
+      if attente then GROUND:Hide('NewObject_9') else GROUND:Unhide('NewObject_9') end
+    end
+    return
+  end
+  if map.AssetName ~= 'reverie_centre' then return end
+  if not attente then
+    if CH('Luxray_Alerte') ~= nil then GROUND:RemoveCharacter('Luxray_Alerte') end
+    return
+  end
+  local x, y = 800, 1224
+  if SV.Destiny.LuxrayAttente == 'sortie' then x,y=1504,1584 end
+  local acteur = habitant('Luxray_Alerte', 'luxray', Gender.Female, x, y)
+  if acteur.Data ~= nil then acteur.Data.Nickname = 'Lyra' end
+  GROUND:TeleportTo(acteur, x, y, Direction.Up)
+end
+
 local function case_libre(map, x, y)
   if x < 0 or y < 0 or x+16 > map.Width*8 or y+16 > map.Height*8 then return false end
   for cx=math.floor(x/8),math.floor((x+15)/8) do
@@ -419,6 +466,9 @@ local function installer_sortie_e2(map)
 end
 
 local function installer_portes(map)
+  -- Ancien raccord non confirmé vers un dojo extérieur au projet : retirer
+  -- uniquement le capteur résiduel, sans effacer la carte ni ses sauvegardes.
+  if map ~= nil and map:FindObject('PorteTenteEst') then GROUND:RemoveObject('PorteTenteEst') end
   installer_sortie_carrefour(map)
   installer_sortie_e2(map)
   installer_liaisons_quartiers(map)
@@ -495,6 +545,7 @@ function ville.Init(map)
   changement_quartier = false
   entree_batiment_en_cours = false
   preparer_habitants_quartier(map)
+  installer_luxray_attente(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   installer_portes(map)
   installer_comptoirs(map)
@@ -519,6 +570,8 @@ function ville.Init(map)
     GROUND:EntTurn(luxio, Direction.Right)
   end
   placer_marchands_aux_comptoirs()
+  -- Rétablit le marchand si une précédente scène a été interrompue.
+  if CH('NewObject_4') ~= nil then GROUND:Unhide('NewObject_4') end
   positions_habitants = {}
   for _, nom in ipairs(habitants_vivants) do
     local acteur = CH(nom)
@@ -526,11 +579,10 @@ function ville.Init(map)
       positions_habitants[nom] = {
         x = acteur.Position.X, y = acteur.Position.Y, dir = acteur.Direction,
       }
-      local nom_affiche = noms_habitants[nom]
-      if nom_affiche ~= nil and acteur.Data ~= nil then acteur.Data.Nickname = nom_affiche end
       if est_fixe(nom) then figer_habitant(nom, acteur) end
     end
   end
+  nommer_habitants(map)
   vie_ville_activee = false
   partenaire_pour(CH('PLAYER'))
   -- Ombres de nuages sur toute la ville : même statut natif que la ville de base PMDO.
@@ -649,7 +701,58 @@ local function retour_au_joueur(hero, partenaire)
   GAME:CutsceneMode(false)
 end
 
-function ville.Visite()
+-- Réactions en vagues : pas seulement les habitants nommés à l'avance.
+-- Les personnages réellement cachés et les protagonistes sont traités ailleurs.
+local function temoins_de_la_visite(map, hero, partenaire, alakazam)
+  local liste, vus = {}, {}
+  local function ajouter(a)
+    if a == nil or a == hero or a == partenaire or a == alakazam then return end
+    local nom = a.EntName
+    if nom == 'PLAYER' or nom == 'Teammate1' or nom == 'NewObject_4' or nom == 'NewObject_9' or nom == 'Luxray_Alerte' then return end
+    if a.EntEnabled == false or vus[a] then return end
+    vus[a] = true
+    table.insert(liste, a)
+  end
+  if map ~= nil and map.Entities ~= nil then
+    for couche in luanet.each(map.Entities) do
+      if couche.Visible ~= false then
+        for acteur in luanet.each(couche.MapChars) do ajouter(acteur) end
+        for acteur in luanet.each(couche.TemporaryChars) do ajouter(acteur) end
+      end
+    end
+  else
+    -- Utilisé uniquement si l'appelant n'a pas fourni de carte (doublures).
+    for _, nom in ipairs(habitants_vivants) do ajouter(CH(nom)) end
+    ajouter(CH(''))
+  end
+  return liste
+end
+
+local function reagir_ville(temoins, hero, partenaire, phase)
+  UI:ResetSpeaker()
+  SOUND:PlayBattleSE(phase == 'cri' and 'EVT_Emote_Exclaim_2' or 'EVT_Emote_Shock')
+  -- Le partenaire réagit en premier ; le héros lui répond visuellement.
+  GROUND:CharSetEmote(partenaire, phase == 'cri' and 'exclaim' or 'shock', 1)
+  GAME:WaitFrames(5)
+  -- Le héros manifeste une surprise plus contenue que le partenaire.
+  GROUND:CharSetEmote(hero, 'exclaim', 1)
+  -- Quatre vagues éparpillées : chaque témoin actif a une réaction, mais
+  -- tous ne font pas exactement le même geste au même instant.
+  for vague = 1, 4 do
+    for index, acteur in ipairs(temoins) do
+      if (index - 1) % 4 == vague - 1 then
+        local emote
+        if phase == 'cri' then emote = (index % 3 == 0) and 'question' or 'exclaim'
+        else emote = (index % 3 == 0) and 'sweatdrop' or 'shock' end
+        GROUND:CharSetEmote(acteur, emote, 1)
+      end
+    end
+    if vague < 4 then GAME:WaitFrames(5) end
+  end
+  GAME:WaitFrames(22)
+end
+
+function ville.Visite(map)
   local hero = CH('PLAYER')
   local partenaire = partenaire_pour(hero)
   if hero == nil or partenaire == nil then
@@ -661,16 +764,27 @@ function ville.Visite()
   local kecleon, kangourex = CH('Kecleon'), CH('Kangourex')
   local alakazam, mordudor, forgelina = CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')
   local dracaufeu, lombre, ludicolo = CH('NewObject_16'), CH('NewObject_7'), CH('NewObject_8')
+  local guide_hors_champ = false
   local function parler_guide(emotion, texte)
-    cinematique.Dire(partenaire, emotion, texte, 'droite')
+    if guide_hors_champ then
+      -- Même nom dynamique que SetSpeaker(GroundChar), mais sans portrait
+      -- lorsque la caméra montre un comptoir loin du duo.
+      UI:ResetSpeaker()
+      UI:SetSpeaker(partenaire:GetDisplayName(), true, '', -1, '', RogueEssence.Data.Gender.Unknown)
+      UI:WaitShowDialogue(texte)
+    else
+      cinematique.Dire(partenaire, emotion, texte, 'droite')
+    end
   end
   GAME:CutsceneMode(true)
+  -- Son comptoir reste vide pendant la visite ; on conserve son instance.
+  if alakazam ~= nil then GROUND:Hide('NewObject_4') end
   hero.CollisionDisabled = true
   AI:DisableCharacterAI(partenaire)
   GROUND:TeleportTo(hero, ENTREE_X - 8, ENTREE_Y, Direction.Up)
   GROUND:TeleportTo(partenaire, ENTREE_X + 12, ENTREE_Y - 20, Direction.Up)
   GAME:MoveCamera(ENTREE_X, ENTREE_Y - 30, 1, false)
-  SOUND:PlayBGM('Base Town.ogg', true)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
   GAME:FadeIn(45)
   GAME:WaitFrames(20) -- laisser apparaître la place avant le premier échange
 
@@ -680,34 +794,51 @@ function ville.Visite()
   geste_heros(hero, 'oui', partenaire)
   parler_guide('Happy', 'Après cette nuit, tu n’arrives pas ici tout seul. On avance ensemble.')
 
-  -- Dracaufeu libère la place avant le passage de l'équipe. La trajectoire
-  -- reste sur des cases libres et évite le poste de Tyranocif.
-  if dracaufeu ~= nil then
-    AI:DisableCharacterAI(dracaufeu)
-    GROUND:MoveToPosition(dracaufeu, 827, 1214, false, 1.5)
-    GROUND:MoveToPosition(dracaufeu, 900, 1214, false, 1.5)
-    -- Une action interrompue ne doit pas laisser Dracaufeu sur le trajet du
-    -- partenaire : repli à l'écart avant toute avancée du groupe.
-    if dracaufeu.Position.X ~= 900 or dracaufeu.Position.Y ~= 1214 then
-      GROUND:TeleportTo(dracaufeu, 900, 1214, Direction.Down)
+  -- Les deux habitants restent à leur place. Le partenaire quitte l’axe
+  -- de Dracaufeu avant de monter ; le héros le suit à distance.
+  local tyranocif_accueil = CH('NewObject_14')
+  local function chevauche_trajet(acteur)
+    if acteur == nil then return false end
+    local x, y = acteur.Position.X, acteur.Position.Y
+    local function sur_segment(x1,y1,x2,y2)
+      return x < math.max(x1,x2)+16 and x+16 > math.min(x1,x2)
+         and y < math.max(y1,y2)+16 and y+16 > math.min(y1,y2)
     end
-    positions_habitants['NewObject_16'] = {x=900, y=1214, dir=Direction.Down}
-    GROUND:CharAnimateTurnTo(dracaufeu, Direction.Down, 4)
-    parler_accueil(dracaufeu, 'Happy', 'Bienvenue à Réverie Town ! Je vous laisse le passage.')
+    return sur_segment(812,1300,812,1224) or sur_segment(812,1224,784,1224)
+      or sur_segment(784,1224,784,1152) or sur_segment(792,1320,792,1176)
+      or sur_segment(792,1176,760,1176)
   end
-
-  -- Le partenaire guide le héros vers la place, tous deux à pied ; la caméra
-  -- les accompagne plutôt que de téléporter les personnages au milieu du plan.
+  if chevauche_trajet(dracaufeu) or chevauche_trajet(tyranocif_accueil) then
+    if alakazam ~= nil then GROUND:Unhide('NewObject_4') end
+    UI:ResetSpeaker()
+    retour_au_joueur(hero, partenaire)
+    print('[Destiny] Visite suspendue : un habitant occupe le trajet.')
+    return
+  end
+  if tyranocif_accueil ~= nil then AI:DisableCharacterAI(tyranocif_accueil) end
+  if dracaufeu ~= nil then
+    GAME:MoveCamera(800, 1240, 45, false)
+    AI:DisableCharacterAI(dracaufeu)
+    GROUND:CharAnimateTurnTo(dracaufeu, Direction.Down, 4)
+  end
   local avance_partenaire = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(partenaire, PLACE_X + 12, PLACE_Y - 8, false, 1.5)
+    GROUND:MoveToPosition(partenaire, 812, 1224, false, 1.5)
+    GROUND:MoveToPosition(partenaire, 784, 1224, false, 1.5)
+    GROUND:MoveToPosition(partenaire, 784, 1152, false, 1.5)
   end)
   local avance_hero = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(12)
-    GROUND:MoveToPosition(hero, PLACE_X - 8, PLACE_Y + 12, false, 1.5)
+    GAME:WaitFrames(25)
+    GROUND:MoveToPosition(hero, 792, 1176, false, 1.5)
+    GROUND:MoveToPosition(hero, 760, 1176, false, 1.5)
   end)
   local suivi = TASK:BranchCoroutine(function() GAME:MoveCamera(PLACE_X, PLACE_Y + 20, 100, false) end)
   TASK:JoinCoroutines({avance_partenaire, avance_hero, suivi})
   GAME:WaitFrames(16) -- le duo finit sa marche avant de découvrir la place
+  if dracaufeu ~= nil then
+    GROUND:CharTurnToCharAnimated(dracaufeu, partenaire, 4)
+    parler_accueil(dracaufeu, 'Happy', 'Bienvenue à Réverie Town ! Vous arrivez au bon moment : la ville se réveille tout juste.', 'droite')
+    GAME:WaitFrames(18)
+  end
   regarder_lieu_ville(hero, partenaire, Direction.Up)
   parler_guide('Happy', 'Voici la place. Les chemins, les ponts et les boutiques se rejoignent ici.')
   if lombre ~= nil then
@@ -728,31 +859,32 @@ function ville.Visite()
   end
 
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
+  guide_hors_champ = true
   GAME:MoveCamera(616, 925, 90, false)
-  parler_guide('Normal', 'Là-bas, c’est la boutique de ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. '. On peut y acheter des provisions pour les expéditions.')
+  parler_guide('Normal', 'Là-bas, c’est la boutique de Basil et Félix. Ces deux frères Kecleon vendent des provisions pour les expéditions.')
   if kecleon ~= nil then
     GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
     parler_accueil(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
   end
-  geste_heros(hero, 'oui', partenaire)
+  GAME:WaitFrames(12) -- le duo est hors champ : aucun geste invisible
   parler_guide('Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(936, 940, 100, false)
-  parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. '. Elle garde les objets que nous préférons laisser en sécurité.')
+  parler_guide('Normal', 'Et voici Mado, la Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
   if kangourex ~= nil then
     GROUND:CharAnimateTurnTo(kangourex, Direction.Down, 4)
     parler_accueil(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.')
   end
-  geste_heros(hero, 'question', partenaire)
-  parler_guide('Normal', 'Exactement : ce que nous laissons à tatie ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' n’a pas à traverser le donjon avec nous.')
+  GAME:WaitFrames(12) -- ne pas animer le héros hors champ
+  parler_guide('Normal', 'Exactement : ce que nous laissons à tatie Mado n’a pas à traverser le donjon avec nous.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
   GAME:MoveCamera(1100, 950, 75, false)
   parler_guide('Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
   if forgelina ~= nil then
     GAME:MoveCamera(1104, 992, 45, false)
-    parler_guide('Normal', 'Voici aussi ' .. cinematique.NomEspece('tinkaton', 'Forgelina') .. '. Elle ouvre les boîtes trouvées en exploration.')
+    parler_guide('Normal', 'Voici aussi Iris. Cette Forgelina ouvre les boîtes trouvées en exploration.')
     GROUND:CharAnimateTurnTo(forgelina, Direction.Down, 4)
     parler_accueil(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
   end
@@ -761,25 +893,155 @@ function ville.Visite()
   parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
   if alakazam ~= nil then
     GAME:MoveCamera(360, 1100, 65, false)
-    parler_guide('Normal', 'Ici, ' .. cinematique.NomEspece('alakazam', 'Alakazam') .. ' peut nous aider à retrouver une capacité oubliée.')
-    GROUND:CharAnimateTurnTo(alakazam, Direction.Down, 4)
-    parler_accueil(alakazam, 'Normal', 'Un souvenir peut toujours revenir. Venez me voir si vous souhaitez retrouver une capacité.')
+    parler_guide('Normal', 'Ici, Alakazam aide les Pokémon à retrouver des capacités oubliées.')
+    GAME:WaitFrames(20)
+    parler_guide('Worried', 'Tiens… il n’est pas à son comptoir. C’est étrange, il est pourtant toujours là à cette heure-ci.')
   end
   if mordudor ~= nil then
     GAME:MoveCamera(504, 1040, 50, false)
-    parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('gimmighoul', 'Mordudor') .. ', qui veille sur notre argent à la banque.')
+    parler_guide('Normal', 'Et voici Écu, le Mordudor qui veille sur notre argent à la banque.')
     GROUND:CharAnimateTurnTo(mordudor, Direction.Down, 4)
     parler_accueil(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
   end
   -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
+  guide_hors_champ = false
   geste_heros(hero, 'autour', partenaire)
   se_faire_face_ville(partenaire, hero)
   parler_guide('Normal', 'Tu ne te souviens toujours pas de ton passé, mais tu commences à trouver tes repères. Ça se voit.')
   parler_guide('Happy', 'Tu n’as pas besoin de tout retenir d’un coup. On explorera la ville et les alentours à notre rythme.')
   parler_guide('Normal', 'Pour l’instant, reposons-nous. Notre prochaine aventure commencera quand nous serons prêts.')
 
+  -- La ville entend un cri avant d'en voir l'origine.
+  GAME:WaitFrames(30)
+  GAME:MoveCamera(832, 1208, 50, false)
+  local temoins = temoins_de_la_visite(map, hero, partenaire, alakazam)
+  SOUND:FadeOutBGM(25)
+  GAME:WaitFrames(25)
+  UI:SetSpeaker('???', true, '', -1, '', RogueEssence.Data.Gender.Unknown)
+  UI:WaitShowDialogue('À l’aide ! Quelqu’un… au secours !')
+  GAME:WaitFrames(10)
+  SOUND:PlayBGM('Threat.ogg', true)
+  reagir_ville(temoins, hero, partenaire, 'cri')
+  regarder_lieu_ville(hero, partenaire, Direction.Down)
+  parler_guide('Worried', 'Vous avez entendu ? D’où ça venait ?')
+  GAME:WaitFrames(16)
+  if lombre ~= nil then
+    GROUND:CharAnimateTurnTo(lombre, Direction.Down, 4)
+    parler_accueil(lombre, 'Worried', 'Cette voix… On dirait Lyra, la Luxray !')
+  end
+  if ludicolo ~= nil then
+    GROUND:CharAnimateTurnTo(ludicolo, Direction.Down, 4)
+    parler_accueil(ludicolo, 'Worried', 'Ça venait du sud !')
+  end
+  GAME:WaitFrames(20)
+  local luxray = CH('NewObject_9')
+  local luxray_temporaire = luxray == nil
+  local luxray_depart = nil
+  if luxray ~= nil then
+    luxray_depart = {x=luxray.Position.X, y=luxray.Position.Y, dir=luxray.Direction}
+    AI:DisableCharacterAI(luxray)
+    GROUND:TeleportTo(luxray, 800, 1328, Direction.Up)
+  else
+    luxray = habitant('Luxray_Alerte', 'luxray', Gender.Female, 800, 1328)
+    if luxray.Data ~= nil then luxray.Data.Nickname = 'Lyra' end
+  end
+  -- La course commence hors du cadre et s'arrête avant le groupe.
+  GROUND:MoveToPosition(luxray, 800, 1224, true, 2)
+  GROUND:CharAnimateTurnTo(luxray, Direction.Up, 4)
+  GROUND:CharSetEmote(luxray, 'sweating', 2)
+  GAME:WaitFrames(30)
+  parler_accueil(luxray, 'Worried', 'Hah… Hah… S’il vous plaît… Mon petit !')
+  GAME:WaitFrames(20)
+  parler_guide('Worried', 'Lyra ? Qu’est-ce qui s’est passé ?')
+  GAME:WaitFrames(16)
+  parler_accueil(luxray, 'Worried', 'Nous étions ensemble… Il a glissé avant que je puisse le retenir !')
+  parler_accueil(luxray, 'Sad', 'Mon petit Nilo est tombé dans un fossé. Je l’entends, mais je n’arrive pas à descendre jusqu’à lui…')
+  GAME:WaitFrames(20)
+  reagir_ville(temoins, hero, partenaire, 'shinx')
+  GAME:WaitFrames(10)
+  parler_accueil(luxray, 'Worried', 'La guilde… Je vous en prie, demandez à la guilde de venir nous aider !')
+  GAME:WaitFrames(22)
+  if lombre ~= nil then
+    GROUND:CharTurnToCharAnimated(lombre, luxray, 4)
+    parler_accueil(lombre, 'Worried', 'Les membres de la guilde sont partis en expédition… Ils ne sont pas encore revenus.')
+  end
+  if ludicolo ~= nil then
+    GROUND:CharTurnToCharAnimated(ludicolo, luxray, 4)
+    parler_accueil(ludicolo, 'Worried', 'On ne peut pas attendre leur retour…')
+  end
+  GAME:WaitFrames(20)
+  local tyranocif = CH('NewObject_14')
+  if tyranocif ~= nil then
+    GROUND:CharTurnToCharAnimated(tyranocif, luxray, 4)
+    parler_accueil(tyranocif, 'Worried', 'Où est-ce que Nilo est tombé, Lyra ?', 'droite')
+  end
+  if dracaufeu ~= nil then
+    GROUND:CharTurnToCharAnimated(dracaufeu, luxray, 4)
+    parler_accueil(dracaufeu, 'Normal', 'Est-ce que tu peux nous montrer le chemin ?', 'droite')
+  end
+  parler_accueil(luxray, 'Worried', 'Oui ! Je vous indiquerai le chemin… Mais faites vite, je vous en prie !')
+  GAME:WaitFrames(20)
+  GROUND:CharTurnToCharAnimated(partenaire, luxray, 4)
+  parler_guide('Determined', 'On va l’aider ! Nous pouvons y aller, nous aussi !')
+  geste_heros(hero, 'oui', partenaire)
+  GAME:WaitFrames(16)
+  if tyranocif ~= nil then
+    GROUND:CharTurnToCharAnimated(tyranocif, dracaufeu or partenaire, 4)
+    parler_accueil(tyranocif, 'Normal', 'Dracaufeu… On pourrait reformer notre ancienne équipe, avec Alakazam.', 'droite')
+  end
+  if dracaufeu ~= nil then
+    GROUND:CharTurnToCharAnimated(dracaufeu, tyranocif or partenaire, 4)
+    parler_accueil(dracaufeu, 'Normal', 'Oui. Tous les trois, nous avons déjà affronté bien des dangers.', 'droite')
+  end
+  GAME:WaitFrames(24)
+  if alakazam ~= nil then
+    -- Position hors cadre à gauche, puis marche dans l'axe de la place.
+    GROUND:TeleportTo(alakazam, 648, 1152, Direction.Right)
+    GROUND:Unhide('NewObject_4')
+    GROUND:MoveToPosition(alakazam, 720, 1152, false, 1.5)
+    GROUND:CharAnimateTurnTo(alakazam, Direction.Right, 4)
+    cinematique.RegarderGroupe({{tyranocif, alakazam, 0, 4}, {dracaufeu, alakazam, 5, 4}, {partenaire, alakazam, 8, 4}, {hero, alakazam, 11, 4}})
+    GAME:WaitFrames(20)
+    parler_accueil(alakazam, 'Normal', 'Laisse donc ces jeunes y aller, mon vieil ami.')
+    GAME:WaitFrames(20)
+    SOUND:FadeOutBGM(30)
+    GAME:WaitFrames(30)
+    SOUND:PlayBGM('A Successful Rescue.ogg', true)
+    parler_accueil(alakazam, 'Normal', 'Ils ont entendu Lyra et se sont proposés sans hésiter. Laissons-leur cette chance.')
+    GAME:WaitFrames(16)
+    parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
+    GAME:WaitFrames(20)
+    parler_accueil(luxray, 'Sad', 'Merci… Je vous en prie, ramenez mon petit.')
+    GAME:WaitFrames(20)
+    parler_accueil(alakazam, 'Normal', 'Préparez-vous bien et écoutez les indications de Lyra. Nous resterons ici si vous avez besoin de nous.')
+  else
+    SOUND:FadeOutBGM(30)
+    GAME:WaitFrames(30)
+    SOUND:PlayBGM('A Successful Rescue.ogg', true)
+    parler_accueil(luxray, 'Sad', 'Merci… Je vous en prie, ramenez mon petit.')
+    parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
+  end
+  GAME:WaitFrames(30)
+  -- La caméra s'éloigne avant la remise en place hors champ. Le joueur
+  -- retrouve ensuite caméra, IA et musique habituelle de la ville.
+  GAME:MoveCamera(1000, 1160, 70, false)
+  if alakazam ~= nil then
+    GROUND:Hide('NewObject_4')
+    GROUND:TeleportTo(alakazam, 360, 1100, Direction.Down)
+    GROUND:Unhide('NewObject_4')
+  end
+  if not luxray_temporaire and luxray_depart ~= nil then
+    GROUND:TeleportTo(luxray, luxray_depart.x, luxray_depart.y, luxray_depart.dir)
+  end
+  SOUND:FadeOutBGM(30)
+  GAME:WaitFrames(30)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
+  -- Ce drapeau ne crée pas de mission ni de donjon automatiquement.
+  SV.Destiny.AlerteShinx = 'a_secourir'
+  SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
+  parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
   UI:ResetSpeaker()
   retour_au_joueur(hero, partenaire)
 end
@@ -838,7 +1100,7 @@ end
 local function entrer(map)
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.VisiteVille == 'en_route' then
-    ville.Visite()
+    ville.Visite(map)
     if SV.Destiny.VisiteVille == 'terminee' then
       local hero = CH('PLAYER')
       rediriger_ancienne_ville(map, hero, partenaire_pour(hero))
@@ -879,7 +1141,7 @@ local function entrer(map)
     end
     SV.Destiny.RetourBatimentPartenaire = nil
   end
-  SOUND:PlayBGM('Base Town.ogg', true)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
   GAME:FadeIn(20)
   retour_au_joueur(hero, partenaire)
 end
@@ -915,7 +1177,10 @@ function ville.GameLoad(map)
   end
   installer_portes(map)
   installer_comptoirs(map)
+  installer_luxray_attente(map)
+  nommer_habitants(map)
   placer_marchands_aux_comptoirs()
+  if CH('NewObject_4') ~= nil then GROUND:Unhide('NewObject_4') end
   entrer(map)
 end
 function ville.Exit(map) end
@@ -1003,6 +1268,22 @@ function ville.SortieExplorationE2_Touch(obj, activator)
   -- Le retour des Bois Perdus a déjà été accompli dans l'histoire.
   if SV.Destiny.RetourAccompli and not GAME:DungeonUnlocked('lost_wood') then
     GAME:UnlockDungeon('lost_wood')
+  end
+  -- Sans zone Grotte Verdoyante, ne pas fabriquer un ZoneLoc inexistant.
+  if SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.DepartShinxAccepte then
+    UI:ResetSpeaker()
+    UI:BeginChoiceMenu('Choisir une destination', {
+      STRINGS:Format('\\uE111 ') .. 'Grotte Verdoyante', 'Autres donjons', 'Retour',
+    }, 1, 3)
+    UI:WaitForChoice()
+    local selection = UI:ChoiceResult()
+    if selection == 1 then
+      UI:ResetSpeaker()
+      UI:WaitShowDialogue('La Grotte Verdoyante n’est pas encore disponible dans cette version.')
+      return
+    elseif selection ~= 2 then
+      return
+    end
   end
   local missions = missions_par_donjon()
   local histoire = SV.Destiny.DonjonHistoireCourant
@@ -1235,7 +1516,7 @@ function ville.NewObject_3_Action(personnage, activator)
   UI:WaitForChoice()
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue('Votre trésor est compté. ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' garde les objets ; moi, je veille sur les Poké.')
+  UI:WaitShowDialogue('Votre trésor est compté. Mado garde les objets ; moi, je veille sur les Poké.')
   UI:ResetSpeaker()
   terminer_dialogue(personnage, 'NewObject_3')
 end
@@ -1516,6 +1797,71 @@ local dialogues_lux = {
 local function dialogue_lux(second, premier)
   conversation({second, premier}, repliques_du_jour(dialogues_lux))
 end
+-- Après les préparatifs, un oui lance une courte marche visible. Le fondu
+-- représente le trajet entre l’escalier sud et la sortie est déjà raccordée.
+function ville.Luxray_Alerte_Action(personnage, activator)
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.AlerteShinx ~= 'a_secourir' then return end
+  local hero = CH('PLAYER') or activator
+  local partenaire = partenaire_pour(hero)
+  if hero == nil or partenaire == nil then return end
+  commencer_dialogue(personnage, activator)
+  parler_accueil(personnage, 'Worried', 'Mon petit Nilo est toujours là-bas… Est-ce que vous êtes prêts à partir ?')
+  UI:ResetSpeaker()
+  UI:BeginChoiceMenu('Prêts à partir ?', {
+    'Oui, carrément, totalement prêts !',
+    'Pas encore, je dois vérifier quelques trucs avant de partir.',
+  }, 1, 2)
+  UI:WaitForChoice()
+  local choix = UI:ChoiceResult()
+  if choix ~= 1 then
+    parler_accueil(personnage, 'Worried', 'D’accord… Préparez-vous, je vous attends ici. Mais s’il vous plaît, ne tardez pas trop.')
+    UI:ResetSpeaker()
+    terminer_dialogue(personnage, 'Luxray_Alerte')
+    return
+  end
+  parler_accueil(personnage, 'Worried', 'Merci ! Venez, je vais vous montrer la route.')
+  cinematique.Dire(partenaire, 'Determined', 'On y va ! Tiens bon, Nilo, on arrive !', 'droite')
+  UI:ResetSpeaker()
+  SV.Destiny.DepartShinxAccepte = true
+  GAME:CutsceneMode(true)
+  AI:DisableCharacterAI(partenaire)
+  hero.CollisionDisabled = true
+  GAME:FadeOut(false, 20)
+  GROUND:TeleportTo(personnage, 800, 1272, Direction.Down)
+  GROUND:TeleportTo(partenaire, 800, 1248, Direction.Down)
+  GROUND:TeleportTo(hero, 800, 1224, Direction.Down)
+  GAME:MoveCamera(800, 1284, 1, false)
+  GAME:FadeIn(20)
+  GAME:WaitFrames(12)
+  local mere = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(personnage, 800, 1352, false, 1)
+  end)
+  local guide = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(4)
+    GROUND:MoveToPosition(partenaire, 800, 1328, false, 1)
+  end)
+  local joueur = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(8)
+    GROUND:MoveToPosition(hero, 800, 1304, false, 1)
+  end)
+  local camera = TASK:BranchCoroutine(function() GAME:MoveCamera(800, 1320, 80, false) end)
+  TASK:JoinCoroutines({mere, guide, joueur, camera})
+  GAME:WaitFrames(12)
+  GAME:FadeOut(false, 20)
+  GROUND:TeleportTo(personnage, 1504, 1584, Direction.Right)
+  GROUND:TeleportTo(partenaire, 1528, 1592, Direction.Right)
+  GROUND:TeleportTo(hero, 1552, 1592, Direction.Right)
+  SV.Destiny.LuxrayAttente = 'sortie'
+  GAME:MoveCamera(1544, 1592, 1, false)
+  GAME:FadeIn(20)
+  cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Grotte Verdoyante.', 'droite')
+  -- Une destination existante peut changer de scène sans reprise de coroutine.
+  UI:ResetSpeaker()
+  retour_au_joueur(hero, partenaire)
+  ville.SortieExplorationE2_Touch(nil, hero)
+end
+
 function ville.NewObject_9_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
   dialogue_lux(CH('NewObject_10'), personnage)
@@ -1523,6 +1869,12 @@ function ville.NewObject_9_Action(personnage, activator)
 end
 function ville.NewObject_10_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
+    parler_accueil(personnage, 'Worried', 'Lyra est partie chercher de l’aide pour Nilo… J’espère qu’il va bien.')
+    UI:ResetSpeaker()
+    terminer_dialogue(personnage, 'NewObject_10')
+    return
+  end
   dialogue_lux(personnage, CH('NewObject_9'))
   terminer_dialogue(personnage, 'NewObject_10')
 end
@@ -1535,7 +1887,7 @@ local dialogues_habitants = {
   },
   NewObject_12 = {
     {{'Normal', 'Je porte les caisses du marché le matin. L’après-midi, je laisse mes bras raconter qu’ils ont bien travaillé.'}},
-    {{'Worried', 'Deux livraisons pour les ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. ', une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
+    {{'Worried', 'Deux livraisons pour Basil et Félix, une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
     {{'Happy', 'Une caisse bien portée ne casse jamais. C’est ma devise. Bon, sauf celle de la semaine dernière. Une seule !'}},
   },
   NewObject_13 = {
@@ -1544,7 +1896,7 @@ local dialogues_habitants = {
     {{'Normal', 'Aujourd’hui, je compte les équipes qui partent. Demain, je compterai celles qui reviennent. C’est mon rituel.'}},
   },
   NewObject_14 = {
-    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' et les ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. ' existent pour une raison.'}},
+    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Mado, Basil et Félix peuvent les aider à bien se préparer.'}},
     {{'Normal', 'Un sac vérifié le matin vaut deux jambes reposées. Notez-le quelque part, ça vous servira en donjon.'}},
     {{'Worried', 'On prévoit du vent sur les hauteurs. Les équipes sages attendront demain, les autres… apprendront vite.'}},
   },

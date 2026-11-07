@@ -1046,7 +1046,6 @@ function cliffdaytest.SceneArriveeDestiny()
   say(partner, 'Happy', "On est ressortis… et regarde : le jour s’est levé\npendant que nous retraversions les [color=#69D98C]Bois Perdus[color].", 'droite')
   geste_heros(hero, 'autour', partner)
   se_faire_face(partner, hero)
-  say(partner, 'Happy', "C’est la même falaise que cette nuit !\nOn a juste fait demi-tour dans l’autre sens, et nous voilà chez moi.", 'droite')
 
   -- Direction la maison : les deux regardent d’abord vers l’ouest.
   cinematique.TournerGroupe({
@@ -1093,12 +1092,9 @@ function cliffdaytest.SceneArriveeDestiny()
   -- le partenaire, puis repart en s’envolant dans l’autre sens, vers la mer.
   local bekipan = facteur_bekipan()
   if bekipan ~= nil then
-    -- Comme dans PMD Red, Bekipan traverse d’abord le ciel en hauteur :
-    -- le 5e argument de TeleportTo est son LocHeight (48 px au-dessus du
-    -- sol). MoveToPosition conserve cette hauteur sur le premier trajet,
-    -- puis AnimateToPosition le fait descendre progressivement jusqu’à 0
-    -- pendant que ses ailes battent en animation Walk.
-    GROUND:TeleportTo(bekipan, 790, 372, Direction.Left, 48)
+    -- Départ au-dessus du cadre, dans l'axe de la boîte. La descente
+    -- conjugue déplacement et perte d'altitude, sans saut d'atterrissage.
+    GROUND:TeleportTo(bekipan, 656, 340, Direction.Down, 32)
     cinematique.Emote(partner, 'exclaim', 'EVT_Emote_Exclaim_2')
     cinematique.TournerGroupe({
       { partner, Direction.UpRight, 0, 4 },
@@ -1106,15 +1102,11 @@ function cliffdaytest.SceneArriveeDestiny()
     })
     cinematique.Respirer(10)
     say(partner, 'Surprised', "Oh ! C’est " .. cinematique.NomEspece('pelipper', 'Bekipan') .. ", le facteur !", 'droite')
-    GROUND:MoveToPosition(bekipan, 712, 408, false, 2)
-    -- La hitbox est large de 16 px : x=656 centre son dessin sur
-    -- x=664, au milieu du couvercle de la boîte (x=656..671).
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.DownLeft, 656, 444, 1, 2, 0)
-    bekipan.HideShadow = false
-    -- Petit saut d’atterrissage sur le couvercle, ailes battantes.
-    anim(bekipan, 'Hop', false)
-    cinematique.Respirer(24)
+    -- x=656 centre la hitbox sur le couvercle ; vitesse 1 au lieu de 2.
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Down, 656, 444, 1, 1, 0)
     GROUND:CharEndAnim(bekipan)
+    bekipan.HideShadow = false
+    cinematique.Respirer(18)
     cinematique.RegarderGroupe({
       { partner, bekipan, 0, 4 },
       { hero, bekipan, 5, 4 },
@@ -1153,25 +1145,13 @@ function cliffdaytest.SceneArriveeDestiny()
     hero_regarde_locuteur(hero, bekipan)
     say(bekipan, 'Joyous', "Hé hé ! Enchanté, " .. nom_heros() .. " !\nAllez, je file : d’autres lettres m’attendent. Au revoir, et bonne chance pour la suite !", 'droite')
     cinematique.Respirer(10)
-    -- Départ dessiné par l’utilisateur (ligne verte) : Bekipan prend
-    -- d’abord de l’altitude presque à la verticale au-dessus de la
-    -- boîte, dans l’axe x=656 juste à l’est de la maison, puis
-    -- traverse le ciel vers l’ouest au-dessus de la mer. Il ne part
-    -- plus en diagonale au sol et ne traverse ni le toit ni les
-    -- décors hauts.
+    -- Remonter, puis reprendre sa route vers l'ouest : le vol reste
+    -- visible sous le bord supérieur du cadre et ne comporte aucun bond.
     bekipan.HideShadow = true
     GROUND:CharAnimateTurnTo(bekipan, Direction.Up, 4)
-    anim(bekipan, 'Hop', false)
-    cinematique.Respirer(24)
-    GROUND:CharEndAnim(bekipan)
-    -- Montée raide initiale : 20 px au sol, mais déjà 48 px d’altitude.
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 424, 1, 1, 48)
-    -- Suite de la montée verticale jusqu’à 72 px, au-dessus de la côte.
-    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 340, 1, 2, 72)
-    -- Vol horizontal vers l’ouest, à altitude constante au-dessus de
-    -- la mer (MoveToPosition conserve le LocHeight).
+    GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 390, 1, 1, 24)
     GROUND:CharAnimateTurnTo(bekipan, Direction.Left, 4)
-    GROUND:MoveToPosition(bekipan, 420, 340, false, 2)
+    GROUND:MoveToPosition(bekipan, 420, 390, false, 1.5)
     GROUND:Hide('Bekipan')
     bekipan.HideShadow = false -- réinitialiser avant une éventuelle réutilisation
     cinematique.Respirer(10)

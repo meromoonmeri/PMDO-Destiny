@@ -1,19 +1,16 @@
 -- Maison de l'équipe sur cliffdaytest. Coque issue du PMDO de base (InsideHut).
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 local equipe_scene = require 'destiny.equipe_scene'
 local maison = {}
 local sortie_en_cours = false
 
 function maison.Init(map)
   sortie_en_cours = false
-  local hero = CH('PLAYER')
-  if hero ~= nil and GAME:GetPlayerPartyCount() > 1 then
-    local partenaire = equipe_scene.Partenaire(hero.Position.X + 24, hero.Position.Y, Direction.Up)
-    if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
-  end
+
 end
-function maison.Enter(map) GAME:FadeIn(20) end
-function maison.GameLoad(map) sortie_en_cours = false; GAME:FadeIn(20) end
+function maison.Enter(map) suivi_interieurs.Activer(map); GAME:FadeIn(20) end
+function maison.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function maison.Exit(map) end
 function maison.Update(map, time) end
 function maison.GameSave(map) end

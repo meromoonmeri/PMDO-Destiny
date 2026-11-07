@@ -1,5 +1,6 @@
 -- Régressions avec doublures ; ne remplace pas une partie réelle.
 package.preload['origin.common']=function()return {} end
+package.preload['destiny.suivi_interieurs']=function()return {Activer=function()end} end
 package.preload['origin.menu.skill.SkillSelectMenu']=function()return {} end
 package.preload['origin.menu.team.AssemblySelectMenu']=function()return {} end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function()end} end
@@ -18,6 +19,7 @@ local current
 function CH(n)if n=='PLAYER' then return hero elseif n=='Teammate1' then return mate else return current.characters[n] end end
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 GROUND={
+ Unhide=function()end,
  RemoveCharacter=function(_,name)if current.characters[name] then current.characters[name]=nil;return true end;return false end,
  RemoveObject=function(_,name)if current.objects[name] then current.objects[name]=nil;return true end;return false end,
  TeleportTo=function(_,a,x,y,dir)a.Position={X=x,Y=y};a.Direction=dir end,
@@ -143,3 +145,52 @@ for _,e in ipairs({{'reverie_post_office','South_Exit'},{'reverie_inn','Inn_Entr
  t.Enter({});t[e[2]..'_Touch']();assert(call.zone,'sortie non réinitialisée '..e[1])
 end
 print('PASS garde, états anciens, café et sorties répétées (doublures)')
+
+-- Les prénoms s'appliquent aux PNJ sans toucher aux identifiants ni au joueur.
+luanet={each=function(list)local i=0;return function()i=i+1;return list[i]end end}
+SV={Destiny={VisiteVille='terminee'}};local named=newmap('reverie_centre',true)
+named.characters[''].Data.BaseForm={Species='drifloon'}
+named.Entities={{MapChars={named.characters['']}}};ville=init(named)
+assert(named.characters[''].Data.Nickname=='Nuage')
+assert(named.characters.Kecleon.Data.Nickname=='Basil' and named.characters.Kecleon_Violet.Data.Nickname=='Félix')
+assert(named.characters.NewObject_4.Data.Nickname=='' and named.characters.NewObject_16.Data.Nickname=='')
+assert(named.characters.NewObject_14.Data.Nickname=='' and named.characters.Kangourex.Data.Nickname=='Mado')
+assert(hero.EntName=='PLAYER' and mate.EntName=='Teammate1')
+print('PASS prénoms sur habitants, Baudrive anonyme et équipe inchangée')
+
+-- Dans les trois salles, les vrais accès se déclenchent en présence du héros
+-- et une transition en cours ne peut pas être lancée deux fois.
+local function salle(name,characters)
+ local m=newmap(name,false);m.characters={}
+ for _,n in ipairs(characters) do m.characters[n]={EntName=n,Position={X=100,Y=100},Direction=Direction.Down,Data={},ReloadEvents=function()end} end
+ return m
+end
+local entree=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()
+local etage=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/spindacaféétage1/init.lua'))()
+local spectacle=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/spindacaféétage1salle2/init.lua'))()
+SV={Destiny={}};local c=salle('caféspindaaccueil',{'Spinda','MrMimeJunior','Kirlia','Qulbutoqué','Okéoké','NewObject_13','Pompot'});current=c;entree.Init(c)
+assert(c.characters.Spinda.Data.Nickname=='' and c.characters.MrMimeJunior.Data.Nickname=='Pipo' and c.characters.Kirlia.Data.Nickname=='Alizé')
+assert(c.characters.Spinda.Position.X==224 and c.characters.MrMimeJunior.Position.X==352 and c.characters.Kirlia.Position.Y==184)
+assert(c.objects.EscalierNordCafe.TriggerType=='Touch' and c.objects.EscalierNordCafe.Collider.y==120)
+call.zone=nil;entree.EscalierNordCafe_Touch(nil,mate);assert(not call.zone)
+entree.EscalierNordCafe_Touch(nil,hero);assert(call.zone[3]==3);call.zone=nil;entree.EscalierNordCafe_Touch(nil,hero);assert(not call.zone)
+local e=salle('spindacaféétage1',{'NewObject','NewObject_1','NewObject_2'});current=e;etage.Init(e);etage.Enter(e)
+assert(e.characters.NewObject.Data.Nickname=='' and e.characters.NewObject_1.Data.Nickname=='Bulle' and e.characters.NewObject_2.Data.Nickname=='Balou')
+assert(e.objects.EscalierCafe.TriggerType=='Touch' and e.objects.EscalierCafe.Collider.y==368 and e.objects.PassageSalleCafe.TriggerType=='Touch')
+call.zone=nil;etage.PassageSalleCafe_Touch(nil,mate);assert(not call.zone)
+etage.PassageSalleCafe_Touch(nil,hero);assert(call.zone[3]==4 and SV.Destiny.ArriveeSalleCafe)
+local sp=salle('spindacaféétage1salle2',{'NewObject','NewObject_1','NewObject_2','NewObject_3','NewObject_4','NewObject_5','NewObject_6','NewObject_7','NewObject_8','NewObject_9','NewObject_10'});current=sp;spectacle.Init(sp);spectacle.Enter(sp)
+assert(sp.characters.NewObject.Data.Nickname=='Pipo' and sp.characters.NewObject_1.Data.Nickname=='Asa' and sp.characters.NewObject_2.Data.Nickname=='Mina' and sp.characters.NewObject_9.Data.Nickname=='Pico')
+assert(hero.Position.X==32 and mate.Position.X==56 and not SV.Destiny.ArriveeSalleCafe)
+assert(sp.objects.PorteSalleCafe.TriggerType=='Touch')
+call.zone=nil;spectacle.PorteSalleCafe_Touch(nil,hero);assert(call.zone[3]==3 and SV.Destiny.RetourCafeEtage=='spectacle')
+current=e;etage.Enter(e);assert(hero.Position.X==528 and mate.Position.X==504 and not SV.Destiny.RetourCafeEtage)
+call.zone=nil;etage.EscalierCafe_Touch(nil,hero);assert(call.zone[3]==2 and SV.Destiny.RetourCafeAccueil=='escalier')
+current=c;entree.Enter(c);assert(hero.Position.X==288 and mate.Position.X==312 and not SV.Destiny.RetourCafeAccueil)
+call.zone=nil;entree.PorteSortieCafe_Touch(nil,hero);assert(call.zone[3]==0 and SV.Destiny.ArriveeVille=='cafe')
+print('PASS café : noms cohérents, circulation, retours distincts et gardes répétées (doublures)')
+
+-- Le capteur de la tente Ledian est retiré, sans toucher au dojo Kingambit.
+SV={Destiny={}};local tmp=newmap('reverie_centre',false);tmp.objects.PorteTenteEst={EntName='PorteTenteEst'}
+local ville=init(tmp);assert(not tmp.objects.PorteTenteEst and not ville.PorteTenteEst_Action and tmp.objects.PorteDojoKingambit)
+print('PASS ancien raccord Ledian désactivé, dojo Kingambit intact')

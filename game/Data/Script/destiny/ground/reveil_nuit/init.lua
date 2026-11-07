@@ -496,6 +496,7 @@ function reveil_nuit.DemanderRepriseRetour()
   })
   cinematique.Respirer(10)
   cinematique.Dire(partner, 'Normal', "Voici le chemin du retour, par les [color=#69D98C]Bois Perdus[color]…", 'standard')
+  UI:ResetSpeaker() -- question système, pas une réplique
   UI:ChoiceMenuYesNo('Souhaitez-vous retourner dans les Bois Perdus ?', true)
   UI:WaitForChoice()
   -- La réponse s’adresse ensuite au héros : face à face, portrait droite.
@@ -856,10 +857,12 @@ function reveil_nuit.CinematiqueRetrouvailles()
   end
   local marche_vue_heros = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
   end)
   local marche_vue_partenaire = TASK:BranchCoroutine(function()
     GAME:WaitFrames(5)
     GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
+    GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
   end)
   TASK:JoinCoroutines({marche_vue_heros, marche_vue_partenaire})
   if points.zrv then
@@ -867,12 +870,8 @@ function reveil_nuit.CinematiqueRetrouvailles()
   else
     GAME:MoveCamera(points.camera_x, points.camera_y, 45, false)
   end
-  GAME:WaitFrames(45)
-  cinematique.TournerGroupe({
-    {partner, Direction.Up, 0, 4},
-    {hero, Direction.Up, 5, 4},
-  })
-  cinematique.Respirer(30)
+  -- Tous deux regardent déjà la montagne pendant la fin du travelling.
+  cinematique.Respirer(15)
   -- Le panorama pur placerait les pieds du duo à l'ordonnée écran 208 :
   -- avant les pensées, descendre le centre de 40 px (pieds à 168) tout en
   -- gardant la montagne et la mer dans le haut du cadre.
@@ -903,10 +902,11 @@ function reveil_nuit.CinematiqueRetrouvailles()
   dire("Worried", "…tu serais un humain ?!")
   geste('determine')
   dire("Worried", "Un humain devenu Pokémon… ?")
-  dire("Normal", nom_heros .. ", tu es sûr ? C’est… difficile à croire.")
+  dire("Worried", nom_heros .. ", tu en es sûr ? Je n’avais jamais entendu une chose pareille…")
   geste('oui_inquiet')
   dire("Normal", "…Mais tout à l’heure, devant ton reflet, tu as sursauté pour de vrai.")
-  dire("Normal", "Et tu as l’air tellement sérieux.")
+  dire("Normal", "Et tu as l’air tellement perdu… Je ne pense pas que tu plaisantes.")
+  dire("Normal", "Pardon d’avoir douté. Je ne comprends pas ce qui t’est arrivé, mais je veux t’aider.")
   dire("Happy", "D’accord, " .. nom_heros .. ". Je te crois.")
   cinematique.Respirer(20)
   dire("Happy", "De toute façon, humain ou Pokémon… pour moi, tu es " .. nom_heros .. " !")
@@ -1000,6 +1000,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   dire("Normal", "Alors… tu viens avec moi ?")
   local accepte, refus = false, 0
   while not accepte do
+    UI:ResetSpeaker() -- choix du joueur, sans portrait
     UI:ChoiceMenuYesNo("Le suivre jusqu’à Réverie Town ?", true)
     UI:WaitForChoice()
     accepte = UI:ChoiceResult()

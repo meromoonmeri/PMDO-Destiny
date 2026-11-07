@@ -16,9 +16,9 @@ assert re.search(r'void DrawShadow\([^\)]*\)\s*\{\s*if \(HideShadow\)\s*return;'
 spawn=c[c.index('local function facteur_bekipan()'):c.index('local MUSIQUE_DAZZLING_SOCIALE')]
 assert spawn.index('ch.HideShadow = true') < spawn.index("GROUND:Unhide('Bekipan')")
 scene=c[c.index('local bekipan = facteur_bekipan()'):c.index('-- Le partenaire va chercher la lettre')]
-assert scene.index('GROUND:TeleportTo(bekipan') < scene.index("Direction.DownLeft, 656, 444") < scene.index('bekipan.HideShadow = false')
-assert scene.index('bekipan.HideShadow = false') < scene.index('bekipan.HideShadow = true') < scene.index("Direction.Up, 656, 424")
-assert scene.index("Direction.Up, 656, 340") < scene.index("GROUND:Hide('Bekipan')") < scene.rindex('bekipan.HideShadow = false')
+assert scene.index('GROUND:TeleportTo(bekipan') < scene.index("Direction.Down, 656, 444") < scene.index('bekipan.HideShadow = false')
+assert scene.index('bekipan.HideShadow = false') < scene.index('bekipan.HideShadow = true') < scene.index("Direction.Up, 656, 390")
+assert scene.index("Direction.Up, 656, 390") < scene.index("GROUND:Hide('Bekipan')") < scene.rindex('bekipan.HideShadow = false')
 # Origine de dessin = coin supérieur gauche de la hitbox + 8 ; boîte x 656..671.
 assert 656 + 8 == 664
 assert 'GAME:WaitFrames(15)' in r and 'cinematique.Respirer(30) -- laisser la révélation' in r

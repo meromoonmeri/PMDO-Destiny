@@ -13,7 +13,8 @@ local partner={EntName='Teammate1',Position={X=772,Y=1160}}
 function CH(id) if id=='PLAYER' then return player elseif id=='Teammate1' then return partner end end
 local call={}
 GAME={FadeOut=function()end,FadeIn=function()end,MoveCamera=function()end,CutsceneMode=function()end,GetPlayerPartyCount=function()return 2 end,EnterGroundMap=function(_,...)call.transition={...} end}
-GROUND={TeleportTo=function(_,who,x,y,dir)who.Position.X=x;who.Position.Y=y;who.direction=dir end}
+GROUND={
+ Unhide=function()end,TeleportTo=function(_,who,x,y,dir)who.Position.X=x;who.Position.Y=y;who.direction=dir end}
 SOUND={PlayBGM=function()end}
 local root=(arg[1] or '.')..'/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'
 local function load()return assert(loadfile(root))() end
