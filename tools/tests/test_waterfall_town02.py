@@ -37,13 +37,13 @@ def md5(path: Path) -> str:
 assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'bcf9adab238c55d35ff0ea7d909b62a0c88b1e2431cde2d7bd65189ae37c0626',
-        36634434,
+        'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061',
+        36648654,
     ),
     'payload/WaterfallVillageCapital_Dev.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        '28107d4a100a2a4c8b6318687368299b33e30079324bc00f65639da6f4655396',
-        36634438,
+        'd16596bda4a803893bdfe9b8d4591bc6ba8820372dbae12a9898221cb1094743',
+        36648658,
     )
 }
 assert set(unpack_payload.PAYLOADS) == {
@@ -55,16 +55,16 @@ assert set(unpack_payload.PAYLOADS) == {
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 36634434
-assert sha256(MAP) == 'bcf9adab238c55d35ff0ea7d909b62a0c88b1e2431cde2d7bd65189ae37c0626'
+assert MAP.stat().st_size == 36648654
+assert sha256(MAP) == 'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 36634434
-assert h.hexdigest() == 'bcf9adab238c55d35ff0ea7d909b62a0c88b1e2431cde2d7bd65189ae37c0626'
+assert size == 36648654
+assert h.hexdigest() == 'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -87,7 +87,7 @@ with MAP.open('rb') as f:
     finally:
         mm.close()
 
-assert len(sheets) == 15 and 'Reverie_Corrections_Audit' in sheets, sorted(sheets)
+assert len(sheets) == 16 and {'Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050'} <= sheets, sorted(sheets)
 assert {'Reverie_Geo_14_Paysages_composites', 'Reverie_Geo_12_Eaux_frames', 'Reverie_Geo_11_Cascades_frames'} <= sheets
 for sheet in sheets:
     assert (GAME / 'Content/Tile' / f'{sheet}.tile').is_file() or (
@@ -171,7 +171,7 @@ for poste in ('poste_x = 504, poste_y = 1040', 'poste_x = 360, poste_y = 1100',
     assert poste in ville_lua, poste
 assert ville_lua.count('installer_comptoirs(map)') >= 3  # définition, Init, GameLoad
 assert ville_lua.count('placer_marchands_aux_comptoirs()') >= 3
-assert 'placer_marchands_aux_comptoirs()\n  positions_habitants = {}' in ville_lua
+assert ville_lua.index('  placer_marchands_aux_comptoirs()', ville_lua.index('function ville.Init(map)')) < ville_lua.index('  positions_habitants = {}', ville_lua.index('function ville.Init(map)'))
 assert "ville[comptoir.nom .. '_Action']" in ville_lua
 assert "habitant_du_quartier(map, 'Kecleon', 'kecleon', Gender.Male, 599, 922)" in ville_lua
 assert "habitant_du_quartier(map, 'Kangourex', 'kangaskhan', Gender.Female, 940, 930)" in ville_lua

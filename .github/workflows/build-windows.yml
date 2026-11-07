@@ -29,61 +29,61 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install Pillow ijson lupa
       - name: Validate source tree
-        run: python tools/validate.py
+        run: python tools/run_ci_check.py tools/validate.py
       - name: Check Lost Wood DTEF
-        run: python tools/tests/test_lost_wood_dtef.py
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_dtef.py
       - name: Check Lost Wood autotile edges
-        run: python tools/tests/test_lost_wood_raccords.py
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_raccords.py
       - name: Check Lost Wood reconstruction
-        run: python tools/tests/test_lost_wood_reproduction.py
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_reproduction.py
       - name: Check PMUniverse tiles
-        run: python tools/tests/test_banques_pmu.py
+        run: python tools/run_ci_check.py tools/tests/test_banques_pmu.py
       - name: Check hero and partner knockout rule
-        run: python tools/tests/test_regle_ko.py
+        run: python tools/run_ci_check.py tools/tests/test_regle_ko.py
       - name: Check reunion naming and Pelipper flight
-        run: python tools/tests/test_retrouvailles_roles.py
+        run: python tools/run_ci_check.py tools/tests/test_retrouvailles_roles.py
       - name: Check Lost Wood tutorial and statue assets
-        run: python tools/tests/test_lostwood_tutoriel.py
+        run: python tools/run_ci_check.py tools/tests/test_lostwood_tutoriel.py
       - name: Check Lost Wood river, paths and new ruins
-        run: python tools/tests/test_lost_wood_refonte.py
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_refonte.py
       - name: Check safe native city payload and compact copy
-        run: python tools/tests/test_payload_ville.py
+        run: python tools/run_ci_check.py tools/tests/test_payload_ville.py
       - name: Check Waterfall Village town02 map and dependencies
-        run: python tools/tests/test_waterfall_town02.py
+        run: python tools/run_ci_check.py tools/tests/test_waterfall_town02.py
       - name: Check Reverie building interiors
-        run: python tools/test_batiments_interieurs.py
+        run: python tools/run_ci_check.py tools/test_batiments_interieurs.py
       - name: Check Reverie crossroads and connections
-        run: python tools/tests/test_carrefour_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_carrefour_reverie.py
       - name: Check renamed Reverie resources
-        run: python tools/tests/test_renommage_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_renommage_reverie.py
       - name: Check Reverie editing map and compiled map
-        run: python tools/tests/test_reverie_architecture.py
+        run: python tools/run_ci_check.py tools/tests/test_reverie_architecture.py
       - name: Check Reverie WIP interiors and thresholds
-        run: python tools/tests/test_reverie_wip.py
+        run: python tools/run_ci_check.py tools/tests/test_reverie_wip.py
       - name: Check animated water hut and doorway
-        run: python tools/tests/test_hutte_aquatique.py
+        run: python tools/run_ci_check.py tools/tests/test_hutte_aquatique.py
       - name: Check E2 destination and exploration return
-        run: python tools/tests/test_e2_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_e2_reverie.py
       - name: Check retired guild interiors and recovery maps
-        run: python tools/tests/test_retrait_guilde.py
+        run: python tools/run_ci_check.py tools/tests/test_retrait_guilde.py
       - name: Check daily missions and Reverie boards
-        run: python tools/tests/test_tableaux_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_tableaux_reverie.py
       - name: Check four Reverie districts and five stairs
-        run: python tools/tests/test_quartiers_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_quartiers_reverie.py
       - name: Check local NPCs, independent layers and centre visit
-        run: python tools/tests/test_habitants_quartiers.py
+        run: python tools/run_ci_check.py tools/tests/test_habitants_quartiers.py
       - name: Check Reverie guided tour merchant replies
-        run: python tools/tests/test_visite_marchands.py
+        run: python tools/run_ci_check.py tools/tests/test_visite_marchands.py
       - name: Check automatic Reverie building entrances
-        run: python tools/tests/test_entrees_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_entrees_reverie.py
       - name: Check editable district layers
-        run: python tools/tests/test_cartes_edition_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_cartes_edition_reverie.py
       - name: Check independent Reverie tilesheets
-        run: python tools/tests/test_tilessheets_reverie.py
+        run: python tools/run_ci_check.py tools/tests/test_tilessheets_reverie.py
       - name: Check partner follow inside buildings
-        run: python tools/tests/test_suivi_interieurs.py
+        run: python tools/run_ci_check.py tools/tests/test_suivi_interieurs.py
       - name: Check PMU object sheets
-        run: python tools/tests/test_objets_pmu_natifs.py
+        run: python tools/run_ci_check.py tools/tests/test_objets_pmu_natifs.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

@@ -495,7 +495,7 @@ assert 'regarder_lieu_ville(hero, partenaire, Direction.UpRight)' in ville_scrip
 for panorama in ('530, 2350', '800, 530', '1425, 320'):
     assert panorama not in ville_script
 assert 'Direction.Up, 8' not in ville_script and 'Direction.Right, 6' not in ville_script
-assert "geste_heros(hero, 'question', partenaire)" in ville_script
+assert "geste_heros(hero, 'autour', partenaire)" in ville_script
 # Reprise au lieu du réveil : montrer l’entrée au sud avant le choix,
 # puis se faire face pour la réponse.
 assert reveil.index('{partner, Direction.Down, 0, 4}') < reveil.index('Voici le chemin du retour')

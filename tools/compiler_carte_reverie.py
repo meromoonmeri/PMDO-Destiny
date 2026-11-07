@@ -26,12 +26,13 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
    if len(raw)!=16*n:raise ValueError('Index tronqué : '+p.name)
    banks[p.stem]={struct.unpack_from('<ii',raw,16*i) for i in range(n)}
  if len(banks)!=14:raise ValueError('Il faut exactement les 14 banques Reverie_Geo_ autonomes.')
- extra=tile_dir/'Reverie_Corrections_Audit.tile'
- if extra.exists():
-  with extra.open('rb') as f:
-   hdr=f.read(8);size,n=struct.unpack('<ii',hdr);assert size==8 and n>=0
-   data=f.read(n*16);assert len(data)==n*16
-   banks[extra.stem]={struct.unpack_from('<ii',data,16*i) for i in range(n)}
+ for extra_name in ('Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050'):
+  extra=tile_dir/(extra_name+'.tile')
+  if extra.exists():
+   with extra.open('rb') as f:
+    hdr=f.read(8);size,n=struct.unpack('<ii',hdr);assert size==8 and n>=0
+    data=f.read(n*16);assert len(data)==n*16
+    banks[extra.stem]={struct.unpack_from('<ii',data,16*i) for i in range(n)}
  raw=source.read_bytes();starts=list(re.finditer(rb'"Layers"\s*:\s*\[\s*\{\s*"Name"\s*:',raw))
  if len(starts)!=1:raise ValueError('Structure des couches non reconnue : arrêt sans écrasement.')
  start=raw.find(b'[',starts[0].start());matches=list(re.finditer(rb'\]\s*,\s*"AssetName"\s*:',raw[start:]))
