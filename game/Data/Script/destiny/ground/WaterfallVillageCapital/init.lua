@@ -851,6 +851,52 @@ function ville.Visite(map)
   local suivi = TASK:BranchCoroutine(function() GAME:MoveCamera(PLACE_X, PLACE_Y + 20, 100, false) end)
   TASK:JoinCoroutines({avance_partenaire, avance_hero, suivi})
   GAME:WaitFrames(16) -- le duo finit sa marche avant de découvrir la place
+  -- Ces deux habitants sont déjà sur la place. On ne déplace ni Dracaufeu
+  -- ni Tyranocif. Les coordonnées ne sont utilisées que depuis leur place
+  -- connue et après contrôle des personnages présents sur chaque segment.
+  local avances = {}
+  local function passage_libre(acteur, points)
+    if map == nil or map.Entities == nil or acteur == nil or acteur.EntEnabled == false then return false end
+    local function croise(autre)
+      if autre == nil or autre == acteur or autre.EntEnabled == false or autre.Position == nil then return false end
+      local x, y = autre.Position.X, autre.Position.Y
+      for i = 1, #points - 1 do
+        local a, b = points[i], points[i + 1]
+        if x < math.max(a[1], b[1]) + 16 and x + 16 > math.min(a[1], b[1])
+          and y < math.max(a[2], b[2]) + 16 and y + 16 > math.min(a[2], b[2]) then return true end
+      end
+      return false
+    end
+    if croise(hero) or croise(partenaire) then return false end
+    -- En cas d'API de carte indisponible, ne pas risquer un déplacement forcé.
+    local ok, libre = pcall(function()
+      for couche in luanet.each(map.Entities) do
+        if couche.Visible then
+          for autre in luanet.each(couche.MapChars) do if croise(autre) then return false end end
+          for autre in luanet.each(couche.TemporaryChars) do if croise(autre) then return false end end
+        end
+      end
+      return true
+    end)
+    return ok and libre
+  end
+  local function approcher(acteur, origine_x, origine_y, points)
+    if acteur == nil or acteur.EntEnabled == false or acteur.Position == nil
+      or acteur.Position.X ~= origine_x or acteur.Position.Y ~= origine_y
+      or not passage_libre(acteur, points) then return end
+    local depart = {acteur=acteur, x=origine_x, y=origine_y, dir=acteur.Direction, points=points}
+    AI:DisableCharacterAI(acteur)
+    for i = 2, #points do
+      if not passage_libre(acteur, {points[i-1], points[i]}) then break end
+      GROUND:MoveToPosition(acteur, points[i][1], points[i][2], false, 1)
+    end
+    table.insert(avances, depart)
+  end
+  -- Départs légèrement décalés, et non une marche rigide en formation.
+  approcher(lombre, 808, 1116, {{808,1116},{808,1136}})
+  GAME:WaitFrames(10)
+  approcher(ludicolo, 782, 1104, {{782,1104},{752,1104},{752,1128}})
+  GAME:WaitFrames(12)
   if dracaufeu ~= nil then
     ecouter_scene(dracaufeu, partenaire, hero, tyranocif_accueil)
     GROUND:CharTurnToCharAnimated(dracaufeu, partenaire, 4)
@@ -879,12 +925,19 @@ function ville.Visite(map)
     GAME:WaitFrames(12)
     GROUND:CharTurnToCharAnimated(hote_guilde, partenaire, 4)
     parler_accueil(hote_guilde, 'Normal', 'La guilde se trouve en haut de l’escalier nord.\nElle est encore fermée : vous êtes en avance ! Elle ouvrira plus tard dans la journée.')
+    GAME:WaitFrames(16)
+    parler_guide('Normal', 'Les membres de la guilde sont déjà partis ?')
+    if ludicolo ~= nil and ludicolo ~= hote_guilde then
+      ecouter_scene(ludicolo, partenaire, hero, hote_guilde)
+      parler_accueil(ludicolo, 'Normal', 'Oui, ils sont en expédition. La place sera plus animée quand ils rentreront.')
+    end
+    parler_guide('Happy', 'Alors nous reviendrons les rencontrer plus tard. En attendant, je vais te montrer la ville !')
     GAME:WaitFrames(20)
   end
 
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   guide_hors_champ = true
-  GAME:MoveCamera(616, 925, 90, false)
+  GAME:MoveCamera(616, 925, 160, false)
   parler_guide('Normal', 'Là-bas, c’est la boutique de Basil et Félix. Ces deux frères Kecleon vendent des provisions pour les expéditions.')
   if kecleon ~= nil then
     GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
@@ -894,7 +947,7 @@ function ville.Visite(map)
   parler_guide('Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
-  GAME:MoveCamera(936, 940, 100, false)
+  GAME:MoveCamera(936, 940, 180, false)
   parler_guide('Normal', 'Et voici Mado, la Kangourex. Elle garde les objets que nous préférons laisser en sécurité.')
   if kangourex ~= nil then
     GROUND:CharAnimateTurnTo(kangourex, Direction.Down, 4)
@@ -904,7 +957,7 @@ function ville.Visite(map)
   parler_guide('Normal', 'Exactement : ce que nous laissons à tatie Mado n’a pas à traverser le donjon avec nous.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
-  GAME:MoveCamera(1100, 950, 75, false)
+  GAME:MoveCamera(1100, 950, 90, false)
   parler_guide('Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
   if forgelina ~= nil then
     GAME:MoveCamera(1104, 992, 45, false)
@@ -913,22 +966,22 @@ function ville.Visite(map)
     parler_accueil(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
   end
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
-  GAME:MoveCamera(500, 1010, 110, false)
+  GAME:MoveCamera(500, 1010, 300, false)
   parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
   if alakazam ~= nil then
-    GAME:MoveCamera(360, 1100, 65, false)
+    GAME:MoveCamera(360, 1100, 90, false)
     parler_guide('Normal', 'Ici, Alakazam aide les Pokémon à retrouver des capacités oubliées.')
     GAME:WaitFrames(20)
     parler_guide('Worried', 'Tiens… il n’est pas à son comptoir. C’est étrange, il est pourtant toujours là à cette heure-ci.')
   end
   if mordudor ~= nil then
-    GAME:MoveCamera(504, 1040, 50, false)
+    GAME:MoveCamera(504, 1040, 80, false)
     parler_guide('Normal', 'Et voici Écu, le Mordudor qui veille sur notre argent à la banque.')
     GROUND:CharAnimateTurnTo(mordudor, Direction.Down, 4)
     parler_accueil(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
   end
   -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
-  GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
+  GAME:MoveCamera(PLACE_X, PLACE_Y, 175, false)
   guide_hors_champ = false
   geste_heros(hero, 'autour', partenaire)
   se_faire_face_ville(partenaire, hero)
@@ -984,7 +1037,9 @@ function ville.Visite(map)
   GAME:WaitFrames(16)
   GROUND:CharTurnToCharAnimated(luxray, partenaire, 4)
   parler_accueil(luxray, 'Worried', 'Nous étions ensemble… Il a glissé avant que je puisse le retenir !')
-  parler_accueil(luxray, 'Sad', 'Mon petit Nilo est tombé dans un fossé. Je l’entends, mais je n’arrive pas à descendre jusqu’à lui…')
+  parler_accueil(luxray, 'Sad', 'Mon petit Nilo est tombé dans un fossé. Je l’entends encore en bas…')
+  GAME:WaitFrames(16)
+  parler_accueil(luxray, 'Worried', 'J’ai essayé de descendre le rejoindre, mais le passage est trop dangereux. Je n’arrive pas jusqu’à lui…')
   GAME:WaitFrames(20)
   reagir_ville(temoins, hero, partenaire, 'shinx')
   GAME:WaitFrames(10)
@@ -1074,6 +1129,22 @@ function ville.Visite(map)
   -- La caméra s'éloigne avant la remise en place hors champ. Le joueur
   -- retrouve ensuite caméra, IA et musique habituelle de la ville.
   GAME:MoveCamera(1000, 1160, 70, false)
+  -- Les habitants repartent hors champ. Contrôler à nouveau chaque segment :
+  -- un obstacle apparu entre-temps ne doit jamais bloquer la cinématique.
+  for _, depart in ipairs(avances) do
+    local acteur, points = depart.acteur, depart.points
+    if acteur ~= nil and acteur.EntEnabled ~= false then
+      for i = #points, 2, -1 do
+        if acteur.Position.X == points[i][1] and acteur.Position.Y == points[i][2]
+          and passage_libre(acteur, {points[i], points[i-1]}) then
+          GROUND:MoveToPosition(acteur, points[i-1][1], points[i-1][2], false, 1)
+        end
+      end
+      if acteur.Position.X == depart.x and acteur.Position.Y == depart.y then
+        GROUND:EntTurn(acteur, depart.dir)
+      end
+    end
+  end
   if alakazam ~= nil then
     GROUND:Hide('NewObject_4')
     GROUND:TeleportTo(alakazam, 360, 1100, Direction.Down)
@@ -1422,11 +1493,42 @@ for _, comptoir_def in ipairs(comptoirs) do
   end
 end
 
+-- Actualité tant que Nilo attend du secours. Le départ accepté ne signifie
+-- pas que le donjon a été parcouru ou que le sauvetage est terminé.
+local nouvelles_nilo = {
+  Kangourex = 'Lyra m’a parlé de Nilo. Je peux garder ce qui vous encombre pendant que vous vous préparez.',
+  Kecleon = 'Pour rejoindre Nilo, vérifiez vos provisions. Mes baies et mes pommes sont là si besoin.',
+  Kecleon_Violet = 'Lyra attend de vos nouvelles. Regardez mes articles avant de partir, si cela peut vous aider.',
+  NewObject_3 = 'Pour Nilo, préparez-vous d’abord ! Je garde vos Poké en sécurité si vous en avez besoin.',
+  NewObject_4 = 'Lyra compte sur vous. Gardez la tête froide et écoutez ses indications sur le chemin.',
+  NewObject_24 = 'Je pense à Nilo. Si vos préparatifs vous amènent à la forge, je suis là.',
+  NewObject_6 = 'J’ai entendu le cri de Lyra depuis la place… J’espère que Nilo tient bon.',
+  NewObject_12 = 'Si Lyra a besoin de matériel pour Nilo, je peux aider à porter les caisses.',
+  NewObject_13 = 'Je regarderai la route. J’espère voir bientôt Lyra et Nilo revenir ensemble.',
+  NewObject_14 = 'Alakazam vous fait confiance. Vérifiez votre sac, puis suivez Lyra jusqu’à Nilo.',
+  NewObject_16 = 'Je reste ici avec les autres. Soyez prudents en allant chercher Nilo.',
+  NewObject_15 = 'Pauvre Lyra… J’espère que Nilo l’entend quand elle l’appelle.',
+  NewObject_22 = 'Un passage dangereux ? Restez ensemble et écoutez bien Lyra.',
+  NewObject_23 = 'Je garde mes décorations pour plus tard. Pour l’instant, je pense à Nilo.',
+  Pijako_Livreur = 'Si des nouvelles de Nilo arrivent, je les porterai aussi vite que possible.',
+  Goinfrex_Voyageur = 'Même moi, je pense à autre chose qu’au goûter. J’espère que Nilo va bien.',
+}
+local function reaction_actualite(personnage, nom)
+  if SV.Destiny == nil or SV.Destiny.AlerteShinx ~= 'a_secourir' or personnage == nil then return false end
+  local phrase = nouvelles_nilo[nom] or 'Tout le monde pense à Lyra et à Nilo. Soyez prudents sur le chemin.'
+  UI:SetSpeaker(personnage)
+  UI:SetSpeakerEmotion('Worried')
+  UI:WaitShowDialogue(phrase)
+  UI:ResetSpeaker()
+  return true
+end
+
 -- Les habitants sont visibles pendant la visite et restent utilisables après.
 -- Kangourex ne garde que les objets : dépôt et retrait, jamais l'argent.
 -- La banque est assurée par Gimmighoul (NewObject_3), plus bas.
 function ville.Kangourex_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'Kangourex')
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Bienvenue, mes petits. Je garde vos objets bien au sec, loin des donjons.')
@@ -1541,6 +1643,7 @@ end
 
 function ville.Kecleon_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'Kecleon')
   ouvrir_boutique(personnage, 'vert', assortiments_kecleon_vert, 0,
     'Bienvenue à la boutique Kecleon ! Des provisions simples, mais qui ont sauvé plus d’une expédition.')
   terminer_dialogue(personnage, 'Kecleon')
@@ -1548,6 +1651,7 @@ end
 
 function ville.Kecleon_Violet_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'Kecleon_Violet')
   ouvrir_boutique(personnage, 'violet', assortiments_kecleon_violet, 1,
     'Mon étal violet garde les articles précieux. Ils coûtent plus cher, mais ils peuvent changer une traversée.')
   terminer_dialogue(personnage, 'Kecleon_Violet')
@@ -1556,6 +1660,7 @@ end
 -- Banque de Réverie Town : Mordudor sert les clients à son comptoir.
 function ville.NewObject_3_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'NewObject_3')
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Des pièces, des pièces ! Je peux garder votre argent dans mon coffre et vous le rendre au Poké près.')
@@ -1675,6 +1780,7 @@ end
 
 function ville.NewObject_4_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'NewObject_4')
   dialogue_simple(personnage, {
     {'Normal', 'Une capacité oubliée n’est pas effacée : elle dort dans la mémoire du corps, en attendant un déclic.'},
   })
@@ -1712,6 +1818,7 @@ end
 -- natif d'expertise de PMDO.
 function ville.NewObject_24_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  reaction_actualite(personnage, 'NewObject_24')
   local prix = 150
   UI:SetSpeaker(personnage)
   UI:SetSpeakerEmotion('Happy')
@@ -1811,7 +1918,14 @@ local dialogues_lombre_ludicolo = {
   },
 }
 local function dialogue_lombre_ludicolo(premier, second)
-  conversation({premier, second}, repliques_du_jour(dialogues_lombre_ludicolo))
+  if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
+    conversation({premier, second}, {
+      {1, 'Worried', 'Nilo est encore dans ce fossé… J’espère que Lyra pourra le retrouver bientôt.'},
+      {2, 'Normal', 'Les jeunes ont promis de l’aider. Laissons-les se préparer, puis suivons les nouvelles.'},
+    })
+  else
+    conversation({premier, second}, repliques_du_jour(dialogues_lombre_ludicolo))
+  end
 end
 function ville.NewObject_7_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
@@ -1820,7 +1934,7 @@ function ville.NewObject_7_Action(personnage, activator)
 end
 function ville.NewObject_8_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  dialogue_lombre_ludicolo(personnage, CH('NewObject_7'))
+  dialogue_lombre_ludicolo(CH('NewObject_7'), personnage)
   terminer_dialogue(personnage, 'NewObject_8')
 end
 
@@ -1912,7 +2026,12 @@ end
 
 function ville.NewObject_9_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  dialogue_lux(CH('NewObject_10'), personnage)
+  if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
+    parler_accueil(personnage, 'Worried', 'Mon petit Nilo attend toujours là-bas… Je vous en prie, ne tardez pas trop.')
+    UI:ResetSpeaker()
+  else
+    dialogue_lux(CH('NewObject_10'), personnage)
+  end
   terminer_dialogue(personnage, 'NewObject_9')
 end
 function ville.NewObject_10_Action(personnage, activator)
@@ -2038,7 +2157,9 @@ for nom, variantes in pairs(dialogues_habitants) do
   local nom_action, choix = nom, variantes
   ville[nom .. '_Action'] = function(personnage, activator)
     commencer_dialogue(personnage, activator)
-    dialogue_simple(personnage, repliques_du_jour(choix))
+    if not reaction_actualite(personnage, nom_action) then
+      dialogue_simple(personnage, repliques_du_jour(choix))
+    end
     terminer_dialogue(personnage, nom_action)
   end
 end

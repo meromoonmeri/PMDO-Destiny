@@ -168,7 +168,7 @@ end
 local entree=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()
 local etage=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/spindacaféétage1/init.lua'))()
 local spectacle=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/spindacaféétage1salle2/init.lua'))()
-SV={Destiny={}};local c=salle('caféspindaaccueil',{'Spinda','MrMimeJunior','Kirlia','Qulbutoqué','Okéoké','NewObject_13','Pompot'});current=c;entree.Init(c)
+SV={Destiny={CafeRenovationTerminee=true}};local c=salle('caféspindaaccueil',{'Spinda','MrMimeJunior','Kirlia','Qulbutoqué','Okéoké','NewObject_13','Pompot'});current=c;entree.Init(c)
 assert(c.characters.Spinda.Data.Nickname=='' and c.characters.MrMimeJunior.Data.Nickname=='Pipo' and c.characters.Kirlia.Data.Nickname=='Alizé')
 assert(c.characters.Spinda.Position.X==224 and c.characters.MrMimeJunior.Position.X==352 and c.characters.Kirlia.Position.Y==184)
 assert(c.objects.EscalierNordCafe.TriggerType=='Touch' and c.objects.EscalierNordCafe.Collider.y==120)

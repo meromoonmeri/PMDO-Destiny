@@ -22,3 +22,6 @@ assert all(s not in scene for s in ['530, 2350','800, 530','1425, 320'])
 from executer_lua import run
 run(ROOT/'tools/tests/test_visite_marchands.lua', ROOT)
 print('PASS visite au centre, cinq commerçants et dialogue d’origine préservé')
+
+# Introduction du café et reprises sur doublures ; pas de rendu moteur.
+run(ROOT/'tools/tests/test_intro_cafe.lua', ROOT)

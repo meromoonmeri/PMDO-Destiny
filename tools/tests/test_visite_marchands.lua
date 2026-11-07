@@ -40,6 +40,7 @@ GROUND={
   end
   a.Position={X=x,Y=y};event('marcher',a.EntName,x..','..y)
  end,
+ EntTurn=function(_,a,dir)assert(a);a.Direction=dir end,
  CharAnimateTurnTo=function(_,a,dir)assert(a);event('orientation',a.EntName,dir)end,CharTurnToCharAnimated=function(_,a,b)assert(a and b);event('tourne_vers',a.EntName,b.EntName)end,
  CharSetEmote=function(_,a,emote)assert(a);event('emote',a.EntName,emote)end,
  CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true end,CharEndAnim=function(_,a)a.idle=false end,
@@ -61,15 +62,16 @@ end
 local function count(name,e)
  local n=0;for _,v in ipairs(events)do if v[1]=='emote' and v[2]==name and (not e or v[3]==e)then n=n+1 end end;return n
 end
-local function scenario(species,legacy,missing)
+local function scenario(species,legacy,missing,obstacle)
  actors={};events={};SV={Destiny={VisiteVille='en_route'}}
  new('PLAYER');new('Teammate1',800,1160,species)
  local names={'Kecleon','Kecleon_Violet','Kangourex','NewObject_3','NewObject_4','NewObject_6','NewObject_7','NewObject_8','NewObject_12','NewObject_13','NewObject_14','Doyen','','Drifloon','NewObject_16','NewObject_18','NewObject_21','NewObject_15','NewObject_22','NewObject_23','NewObject_24','Pijako_Livreur','Cradopaud_Pecheur','Roserade_Fleuriste','Babimanta_Enfant','Goinfrex_Voyageur','PNJ_Supplementaire'}
  local list={};for _,n in ipairs(names)do if n~=missing then list[#list+1]=new(n)end end
+ if actors.NewObject_7 then actors.NewObject_7.Position={X=808,Y=1116} end;if actors.NewObject_8 then actors.NewObject_8.Position={X=782,Y=1104} end
  if actors.NewObject_16 then actors.NewObject_16.Position={X=827,Y=1178} end;if actors.NewObject_14 then actors.NewObject_14.Position={X=857,Y=1179} end;interrompu=false
  if legacy then list[#list+1]=new('NewObject_9',718,2527)end
  local hidden=new('PNJ_Cache');hidden.EntEnabled=false;list[#list+1]=hidden
- local extra=new('PNJ_Temporaire');local map={Entities={{Visible=true,MapChars=list,TemporaryChars={extra,actors.Teammate1}}}}
+ local extra=new('PNJ_Temporaire');if obstacle then extra.Position={X=808,Y=1140} end;local map={Entities={{Visible=true,MapChars=list,TemporaryChars={extra,actors.Teammate1}}}}
  ville.Visite(map)
  assert(SV.Destiny.VisiteVille=='terminee' and SV.Destiny.AlerteShinx=='a_secourir' and not actors.PLAYER.CollisionDisabled)
  assert(actors.Teammate1.Data.Species==species,'le partenaire choisi a été modifié')
@@ -81,11 +83,19 @@ local function scenario(species,legacy,missing)
  assert(count('PLAYER')>=2 and count('Teammate1')>=2)
  assert(count('PLAYER','shock')==0 and count('Teammate1','shock')>=1,'réactions du duo insuffisamment nuancées')
  if actors.NewObject_14 then assert(actors.NewObject_14.Position.X==857)end;if actors.NewObject_16 then assert(actors.NewObject_16.Position.X==827)end
+ local avance_lombre,avance_ludicolo=false,false
+ for _,v in ipairs(events) do
+  if v[1]=='marcher' and v[2]=='NewObject_7' and v[3]=='808,1136' then avance_lombre=true end
+  if v[1]=='marcher' and v[2]=='NewObject_8' and v[3]=='752,1128' then avance_ludicolo=true end
+ end
+ assert(avance_lombre==(not obstacle and missing~='NewObject_7') and avance_ludicolo==(missing~='NewObject_8'), 'approche ou garde dynamique incorrecte')
+ if actors.NewObject_7 then assert(actors.NewObject_7.Position.X==808 and actors.NewObject_7.Position.Y==1116) end
+ if actors.NewObject_8 then assert(actors.NewObject_8.Position.X==782 and actors.NewObject_8.Position.Y==1104) end
  local hors=0;local portraits=0
  for _,v in ipairs(events)do if v[1]=='hors_champ' then hors=hors+1 end;if v[1]=='portrait' and v[2]=='NewObject_16' then assert(v[3]=='droite');portraits=portraits+1 end end
  assert(hors>=(missing=='NewObject_4' and 8 or 10) and (missing=='NewObject_16' or portraits>=3),'portrait ou locuteur hors champ incorrect')
- local a=find('voix','À l’aide');local b=find('dialogue','Vous avez entendu');local c=find('dialogue','On dirait Lyra');local d=find('marcher','800,1224');local e=find('dialogue','Hah… Hah');local f=find('dialogue','tombé dans un fossé');local g=find('dialogue','en expédition');local h=find('dialogue','Nous pouvons y aller');local i=missing=='NewObject_4' and #events or find('dialogue','Laisse donc ces jeunes')
- assert(a<b and b<c and c<d and d<e and e<f and f<g and g<h and h<i,'ordre de la scène incorrect')
+ local a=find('voix','À l’aide');local b=find('dialogue','Vous avez entendu');local c=missing=='NewObject_7' and b or find('dialogue','On dirait Lyra');local d=find('marcher','800,1224');local e=find('dialogue','Hah… Hah');local f=find('dialogue','tombé dans un fossé');local g=missing=='NewObject_7' and find('dialogue','On ne peut pas attendre leur retour') or find('dialogue','Les membres de la guilde sont partis en expédition');local h=find('dialogue','Nous pouvons y aller');local i=missing=='NewObject_4' and #events or find('dialogue','Laisse donc ces jeunes')
+ assert(a<b and b<=c and c<d and d<e and e<f and f<g and g<h and h<i,'ordre de la scène incorrect')
  local musique={};for _,v in ipairs(events)do if v[1]=='music' then musique[#musique+1]=v[2] end end
  assert( #musique==3 and musique[1]=='Treasure Town.ogg' and musique[2]=='Threat.ogg' and musique[3]=='Treasure Town.ogg')
  if missing~='NewObject_4' then assert(find('placer','648,1152')<find('marcher','720,1152')) end
@@ -105,7 +115,7 @@ local function scenario(species,legacy,missing)
  for _,v in ipairs(events)do if v[1]=='dialogue' then assert(not v[3]:find('je vous laisse le passage',1,true))end end
  print('PASS partenaire '..species..', carte '..(legacy and 'historique' or 'centrale')..', témoins nommés, anonyme, temporaire et caché')
 end
-scenario('riolu',false);scenario('eevee',false);scenario('vulpix',true);scenario('pikachu',false,'NewObject_4');scenario('skitty',false,'NewObject_14')
+scenario('riolu',false);scenario('eevee',false);scenario('vulpix',true);scenario('pikachu',false,'NewObject_4');scenario('skitty',false,'NewObject_14');scenario('eevee',false,nil,true);scenario('riolu',false,'NewObject_7');scenario('eevee',true,'NewObject_8')
 -- Absence du partenaire : scène suspendue sans cacher Alakazam.
 actors={};events={};new('PLAYER');new('NewObject_4');SV={Destiny={VisiteVille='en_route'}};GAME.GetPlayerPartyCount=function()return 1 end
 ville.Visite({Entities={}});assert(SV.Destiny.VisiteVille=='en_route' and actors.NewObject_4.EntEnabled and not SV.Destiny.AlerteShinx)
@@ -139,3 +149,20 @@ SV={Destiny={VisiteVille='en_route'}};GAME.GetPlayerPartyCount=function()return 
 ville.Visite({Entities={}})
 assert(SV.Destiny.VisiteVille=='en_route' and not SV.Destiny.AlerteShinx and not actors.PLAYER.CollisionDisabled and actors.NewObject_4.EntEnabled)
 print('PASS placement inattendu : visite suspendue sans traverser un habitant')
+-- Paroles à l'extérieur des cinématiques : état réel de l'alerte, puis services.
+UI.SetSpeaker=function(_,a)assert(a)end
+UI.SetSpeakerEmotion=function()end
+UI.WaitShowDialogue=function(_,t)event('dialogue_normal',nil,t)end
+UI.BeginChoiceMenu=function()end
+UI.WaitForChoice=function()end
+UI.ChoiceResult=function()return 3 end
+UI.BankMenu=function()event('banque')end
+actors={};events={};new('PLAYER');local d=new('NewObject_16',827,1178)
+SV={Destiny={}};ville.NewObject_16_Action(d,actors.PLAYER)
+assert(find('dialogue_normal','Je surveille les chemins'))
+events={};SV.Destiny.AlerteShinx='a_secourir';ville.NewObject_16_Action(d,actors.PLAYER)
+assert(find('dialogue_normal','Nilo'))
+events={};local m=new('NewObject_3',400,400);ville.NewObject_3_Action(m,actors.PLAYER)
+assert(find('dialogue_normal','Nilo'));local bank=false;for _,v in ipairs(events) do if v[1]=='banque' then bank=true end end;assert(bank)
+SV.Destiny.DepartShinxAccepte=true;events={};ville.NewObject_16_Action(d,actors.PLAYER);assert(find('dialogue_normal','Nilo'))
+print('PASS dialogues après alerte / départ, banque préservée et variantes quotidiennes avant alerte')
