@@ -41,7 +41,6 @@ for name,seeds in starts.items():
   assert all(not (a<x+w and a+16>x and b<y+h and b+16>y) for a,b in ((rx,ry),(px,py))),(n,'retour dans le capteur')
   assert any((a,y+h) in seen and a<x+w and a+16>x for a in range((x//4-4)*4,x+w,4)),(n,'contact inaccessible dans le quartier')
  print('PASS',name,'contacts et retours sur grille statique')
-if shutil.which('lua5.4'):
- subprocess.run(['lua5.4',str(ROOT/'tools/tests/test_entrees_reverie.lua'),str(ROOT)],check=True)
-else:print('Lua 5.4 absent : tests avec doublures à lancer séparément.')
+from executer_lua import run
+run(ROOT/'tools/tests/test_entrees_reverie.lua', ROOT)
 print('PASS destinations, marqueurs, seuils, retours ; gameplay non testé')

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Indépendance des nouvelles planches et conservation de toute la ville.
+"""Indépendance des planches et réversibilité des références historiques 0.4.19.
 Tests structurels et pixel-identiques, pas un test de gameplay/éditeur.
 """
 from pathlib import Path
@@ -14,7 +14,7 @@ reverse={addr(e['nouvelle']):addr(e['source']) for e in trans}
 assert len(reverse)==len({addr(e['source']) for e in trans})==len(trans)
 pattern=re.compile(rb'"Sheet":"Reverie_Geo_[A-Za-z0-9_]+","TexLoc":\{"X":-?\d+,"Y":-?\d+\}')
 for name,d in manifest['cartes'].items():
- raw=(ROOT/'game/Data/Ground'/f'{name}.rsground').read_bytes();assert len(raw)==d['size'] and hashlib.sha256(raw).hexdigest()==d['sha256'];assert b'Reverie_WV_' not in raw and b'Metano_Town' not in raw
+ raw=gzip.decompress((ROOT/'tools/reverie_reference_0.4.19'/f'{name}.rsground.gz').read_bytes());assert len(raw)==d['size'] and hashlib.sha256(raw).hexdigest()==d['sha256'];assert b'Reverie_WV_' not in raw and b'Metano_Town' not in raw
  count=0
  def replace(m):
   global count

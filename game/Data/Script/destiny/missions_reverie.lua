@@ -56,24 +56,7 @@ end
 
 function missions.EtudierTableau()
   missions.ActualiserDeblocages()
-  local m = missions.Actuelle()
-  if m ~= nil and m.Etat == 'reussie' then
-    UI:WaitShowDialogue('Mission accomplie : traverser les Bois Perdus.\nRécompense : 300 Poké déposés à la banque.')
-    missions.Reclamer()
-    return
-  end
-  if m ~= nil then
-    UI:WaitShowDialogue('Mission en cours : traverser les Bois Perdus.\nRetournez au tableau après avoir terminé l’exploration.')
-    return
-  end
-  if not missions.OffreDisponible() then
-    UI:WaitShowDialogue('Aucune nouvelle mission disponible aujourd’hui.')
-    return
-  end
-  UI:WaitShowDialogue('Mission du jour : traverser les Bois Perdus.\nRécompense : 300 Poké à la banque.')
-  UI:ChoiceMenuYesNo('Accepter cette mission ?', true)
-  UI:WaitForChoice()
-  if UI:ChoiceResult() and missions.Accepter() then UI:WaitShowDialogue('Mission acceptée !') end
+  require('destiny.interface_tableau_reverie').Ouvrir(missions)
 end
 
 function missions.LireGazette()

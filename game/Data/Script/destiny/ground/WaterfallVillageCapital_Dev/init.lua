@@ -103,9 +103,11 @@ end
 local function commencer_dialogue(personnage, activator)
   local joueur = CH('PLAYER') or activator
   tourner_vers(personnage, joueur)
+  if personnage ~= nil then GROUND:CharSetAnim(personnage, 'Idle', true) end
 end
 
 local function terminer_dialogue(personnage, nom)
+  if personnage ~= nil then GROUND:CharEndAnim(personnage) end
   restaurer_orientation(nom, personnage)
 end
 
@@ -216,12 +218,6 @@ end
 -- Cinq liaisons confirmées : N1, N2 et N3 nord-centre, S et P au sud.
 -- Chaque sens conserve les coordonnées du paysage et une place au partenaire.
 local liaisons_quartiers = {
-  {nom='EscalierN1VersNord', carte='reverie_centre', x=104,y=928,w=48,h=8, destination='reverie_nord', ax=120,ay=888,px=120,py=864,dir='Up'},
-  {nom='EscalierN1VersCentre', carte='reverie_nord', x=104,y=904,w=48,h=8, destination='reverie_centre', ax=120,ay=952,px=120,py=976,dir='Down'},
-  {nom='EscalierN2VersNord', carte='reverie_centre', x=760,y=848,w=48,h=8, destination='reverie_nord', ax=776,ay=808,px=776,py=784,dir='Up'},
-  {nom='EscalierN2VersCentre', carte='reverie_nord', x=760,y=824,w=48,h=8, destination='reverie_centre', ax=776,ay=872,px=776,py=896,dir='Down'},
-  {nom='EscalierN3VersNord', carte='reverie_centre', x=1184,y=848,w=48,h=8, destination='reverie_nord', ax=1200,ay=808,px=1200,py=784,dir='Up'},
-  {nom='EscalierN3VersCentre', carte='reverie_nord', x=1184,y=824,w=48,h=8, destination='reverie_centre', ax=1200,ay=872,px=1200,py=896,dir='Down'},
   {nom='EscalierSVersCentre', carte='reverie_residentiel', x=688,y=1952,w=40,h=8, destination='reverie_centre', ax=700,ay=1904,px=700,py=1880,dir='Up'},
   {nom='EscalierSVersResidentiel', carte='reverie_centre', x=688,y=1920,w=40,h=8, destination='reverie_residentiel', ax=700,ay=1976,px=700,py=2000,dir='Down'},
   {nom='EscalierPVersEtang', carte='reverie_residentiel', x=1104,y=2400,w=48,h=8, destination='reverie_etang', ax=1120,ay=2352,px=1120,py=2328,dir='Up'},
@@ -239,8 +235,6 @@ local function interpoler(x, points)
 end
 
 quartier_pour = function(x, y)
-  local limite_nord = interpoler(x, {{0,920},{135,920},{400,880},{785,840},{1213,840},{1600,730}})
-  if y < limite_nord then return 'reverie_nord' end
   if x < 840 then return y < 1944 and 'reverie_centre' or 'reverie_residentiel' end
   if y < 1872 then return 'reverie_centre' end
   local limite_etang = interpoler(x, {{840,2392},{1128,2392},{1250,2360},{1600,2220}})
@@ -250,9 +244,12 @@ end
 local quartiers_reverie = {
   reverie_centre=true, reverie_nord=true, reverie_residentiel=true, reverie_etang=true,
 }
+local function secteur_fusion(nom)
+  return nom == 'reverie_nord' and 'reverie_centre' or nom
+end
 objet_dans_quartier = function(map, x, y)
   if map == nil or not quartiers_reverie[map.AssetName] then return true end
-  return quartier_pour(x,y) == map.AssetName
+  return quartier_pour(x,y) == secteur_fusion(map.AssetName)
 end
 
 -- Liste exhaustive des personnages de la carte historique et des six ajouts
@@ -301,7 +298,7 @@ local function preparer_habitants_quartier(map)
   local premiere_correction = not SV.Destiny.PlacementHabitantsReverie[map.AssetName]
   for _, h in ipairs(habitants_par_quartier) do
     local acteur = map:GetMapChar(h.nom)
-    if h.secteur ~= map.AssetName then
+    if secteur_fusion(h.secteur) ~= secteur_fusion(map.AssetName) then
       -- Nettoie aussi les PNJ résiduels des sauvegardes de la 0.4.14.
       -- Le joueur et son partenaire ne figurent jamais dans cette liste.
       local garde = 0
@@ -313,7 +310,7 @@ local function preparer_habitants_quartier(map)
       end
     elseif acteur ~= nil then
       local position = acteur.Position
-      if premiere_correction or quartier_pour(position.X+8, position.Y+8) ~= map.AssetName then
+      if premiere_correction or quartier_pour(position.X+8, position.Y+8) ~= secteur_fusion(map.AssetName) then
         GROUND:TeleportTo(acteur, h.x, h.y, acteur.Direction)
       end
     end
@@ -323,7 +320,7 @@ end
 
 local function habitant_du_quartier(map, nom, espece, genre, x, y)
   local h = proprietaire_habitant[nom]
-  if map ~= nil and quartiers_reverie[map.AssetName] and (h == nil or h.secteur ~= map.AssetName) then return nil end
+  if map ~= nil and quartiers_reverie[map.AssetName] and (h == nil or secteur_fusion(h.secteur) ~= secteur_fusion(map.AssetName)) then return nil end
   if h ~= nil and map ~= nil and quartiers_reverie[map.AssetName] then x,y=h.x,h.y end
   return habitant(nom, espece, genre, x, y)
 end
@@ -363,6 +360,12 @@ end
 
 local function installer_liaisons_quartiers(map)
   if map == nil then return end
+  -- Retirer les anciens capteurs internes encore présents dans une sauvegarde.
+  if map.AssetName == 'reverie_centre' or map.AssetName == 'reverie_nord' then
+    for _, nom in ipairs({'EscalierN1VersNord','EscalierN1VersCentre','EscalierN2VersNord','EscalierN2VersCentre','EscalierN3VersNord','EscalierN3VersCentre'}) do
+      if map:FindObject(nom) then GROUND:RemoveObject(nom) end
+    end
+  end
   for _, def in ipairs(liaisons_quartiers) do
     if map.AssetName == def.carte and not map:FindObject(def.nom) then
       local sortie = RogueEssence.Ground.GroundObject()
@@ -539,6 +542,16 @@ local function parler(personnage, emotion, texte, placement)
   cinematique.Dire(personnage, emotion, texte, placement or 'standard')
 end
 
+-- Pour les accueils de la visite : aucun déplacement pendant la réplique ;
+-- l'Idle explicite est la préférence demandée pour ces PNJ de la place.
+local function parler_accueil(personnage, emotion, texte, placement)
+  if personnage == nil then return end
+  AI:DisableCharacterAI(personnage)
+  GROUND:CharSetAnim(personnage, 'Idle', true)
+  parler(personnage, emotion, texte, placement)
+  GROUND:CharEndAnim(personnage)
+end
+
 -- Le héros ne parle pas pendant la visite : le partenaire lit ses gestes.
 -- Les rotations restent à la vitesse 4 des cinématiques Destiny, et un
 -- geste adressé au partenaire se termine en le regardant.
@@ -647,6 +660,7 @@ function ville.Visite()
   end
   local kecleon, kangourex = CH('Kecleon'), CH('Kangourex')
   local alakazam, mordudor, forgelina = CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')
+  local dracaufeu, lombre, ludicolo = CH('NewObject_16'), CH('NewObject_7'), CH('NewObject_8')
   local function parler_guide(emotion, texte)
     cinematique.Dire(partenaire, emotion, texte, 'droite')
   end
@@ -658,12 +672,29 @@ function ville.Visite()
   GAME:MoveCamera(ENTREE_X, ENTREE_Y - 30, 1, false)
   SOUND:PlayBGM('Base Town.ogg', true)
   GAME:FadeIn(45)
+  GAME:WaitFrames(20) -- laisser apparaître la place avant le premier échange
 
   se_faire_face_ville(partenaire, hero)
   parler_guide('Happy', 'Nous y voilà ! Bienvenue à [color=#F5D27A]Réverie Town[color].')
   parler_guide('Normal', 'Le jour se lève. Reste avec moi : je vais te montrer les endroits importants.')
   geste_heros(hero, 'oui', partenaire)
   parler_guide('Happy', 'Après cette nuit, tu n’arrives pas ici tout seul. On avance ensemble.')
+
+  -- Dracaufeu libère la place avant le passage de l'équipe. La trajectoire
+  -- reste sur des cases libres et évite le poste de Tyranocif.
+  if dracaufeu ~= nil then
+    AI:DisableCharacterAI(dracaufeu)
+    GROUND:MoveToPosition(dracaufeu, 827, 1214, false, 1.5)
+    GROUND:MoveToPosition(dracaufeu, 900, 1214, false, 1.5)
+    -- Une action interrompue ne doit pas laisser Dracaufeu sur le trajet du
+    -- partenaire : repli à l'écart avant toute avancée du groupe.
+    if dracaufeu.Position.X ~= 900 or dracaufeu.Position.Y ~= 1214 then
+      GROUND:TeleportTo(dracaufeu, 900, 1214, Direction.Down)
+    end
+    positions_habitants['NewObject_16'] = {x=900, y=1214, dir=Direction.Down}
+    GROUND:CharAnimateTurnTo(dracaufeu, Direction.Down, 4)
+    parler_accueil(dracaufeu, 'Happy', 'Bienvenue à Réverie Town ! Je vous laisse le passage.')
+  end
 
   -- Le partenaire guide le héros vers la place, tous deux à pied ; la caméra
   -- les accompagne plutôt que de téléporter les personnages au milieu du plan.
@@ -676,15 +707,32 @@ function ville.Visite()
   end)
   local suivi = TASK:BranchCoroutine(function() GAME:MoveCamera(PLACE_X, PLACE_Y + 20, 100, false) end)
   TASK:JoinCoroutines({avance_partenaire, avance_hero, suivi})
+  GAME:WaitFrames(16) -- le duo finit sa marche avant de découvrir la place
   regarder_lieu_ville(hero, partenaire, Direction.Up)
   parler_guide('Happy', 'Voici la place. Les chemins, les ponts et les boutiques se rejoignent ici.')
+  if lombre ~= nil then
+    GROUND:CharAnimateTurnTo(lombre, Direction.Down, 4)
+    parler_accueil(lombre, 'Happy', 'Bienvenue ! C’est un plaisir de vous voir à Réverie.')
+  end
+  if ludicolo ~= nil then
+    GROUND:CharAnimateTurnTo(ludicolo, Direction.Down, 4)
+    parler_accueil(ludicolo, 'Happy', 'Prenez votre temps, vous êtes ici chez vous !')
+  end
+  -- Le duo est arrivé tôt : information, pas ouverture de guilde inventée.
+  local hote_guilde = lombre or ludicolo or dracaufeu
+  if hote_guilde ~= nil then
+    GAME:WaitFrames(20)
+    GROUND:CharAnimateTurnTo(hote_guilde, Direction.Down, 4)
+    parler_accueil(hote_guilde, 'Normal', 'La guilde se trouve en haut de l’escalier nord.\nElle est encore fermée : vous êtes en avance ! Elle ouvrira plus tard dans la journée.')
+    GAME:WaitFrames(20)
+  end
 
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(616, 925, 90, false)
   parler_guide('Normal', 'Là-bas, c’est la boutique de ' .. cinematique.NomEspece('kecleon', 'Kecleon') .. '. On peut y acheter des provisions pour les expéditions.')
   if kecleon ~= nil then
     GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
-    parler(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
+    parler_accueil(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
   end
   geste_heros(hero, 'oui', partenaire)
   parler_guide('Happy', 'C’est ça : on vérifiera notre sac avant chaque départ.')
@@ -694,7 +742,7 @@ function ville.Visite()
   parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. '. Elle garde les objets que nous préférons laisser en sécurité.')
   if kangourex ~= nil then
     GROUND:CharAnimateTurnTo(kangourex, Direction.Down, 4)
-    parler(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.')
+    parler_accueil(kangourex, 'Happy', 'Confiez-moi vos affaires et revenez les chercher quand vous voudrez.')
   end
   geste_heros(hero, 'question', partenaire)
   parler_guide('Normal', 'Exactement : ce que nous laissons à tatie ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' n’a pas à traverser le donjon avec nous.')
@@ -706,7 +754,7 @@ function ville.Visite()
     GAME:MoveCamera(1104, 992, 45, false)
     parler_guide('Normal', 'Voici aussi ' .. cinematique.NomEspece('tinkaton', 'Forgelina') .. '. Elle ouvre les boîtes trouvées en exploration.')
     GROUND:CharAnimateTurnTo(forgelina, Direction.Down, 4)
-    parler(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
+    parler_accueil(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
   end
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
   GAME:MoveCamera(500, 1010, 110, false)
@@ -715,13 +763,13 @@ function ville.Visite()
     GAME:MoveCamera(360, 1100, 65, false)
     parler_guide('Normal', 'Ici, ' .. cinematique.NomEspece('alakazam', 'Alakazam') .. ' peut nous aider à retrouver une capacité oubliée.')
     GROUND:CharAnimateTurnTo(alakazam, Direction.Down, 4)
-    parler(alakazam, 'Normal', 'Un souvenir peut toujours revenir. Venez me voir si vous souhaitez retrouver une capacité.')
+    parler_accueil(alakazam, 'Normal', 'Un souvenir peut toujours revenir. Venez me voir si vous souhaitez retrouver une capacité.')
   end
   if mordudor ~= nil then
     GAME:MoveCamera(504, 1040, 50, false)
     parler_guide('Normal', 'Et voici ' .. cinematique.NomEspece('gimmighoul', 'Mordudor') .. ', qui veille sur notre argent à la banque.')
     GROUND:CharAnimateTurnTo(mordudor, Direction.Down, 4)
-    parler(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
+    parler_accueil(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
   end
   -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
   GAME:MoveCamera(PLACE_X, PLACE_Y, 135, false)
@@ -743,8 +791,23 @@ local function position_partenaire_retour(x, y)
 end
 
 local function rediriger_ancienne_ville(map, hero, partenaire)
-  if map == nil or map.AssetName ~= 'WaterfallVillageCapital' or hero == nil then return false end
+  if map == nil or hero == nil then return false end
   if changement_quartier then return true end
+  -- Ancienne carte nord : rejoindre la carte fusionnée sans perdre la position.
+  if map.AssetName == 'reverie_nord' then
+    local x,y = hero.Position.X,hero.Position.Y
+    local px,py = x-28,y
+    local dir = 'Down'
+    if partenaire ~= nil then px,py = partenaire.Position.X,partenaire.Position.Y end
+    local ancien_passage = SV.Destiny.PassageQuartier
+    if ancien_passage ~= nil then
+      x,y,px,py,dir = ancien_passage.x,ancien_passage.y,ancien_passage.px,ancien_passage.py,ancien_passage.dir or 'Down'
+    end
+    if not case_libre(map,x,y) then return false end
+    demander_quartier('reverie_centre',x,y,px,py,dir)
+    return true
+  end
+  if map.AssetName ~= 'WaterfallVillageCapital' then return false end
   local x,y = hero.Position.X, hero.Position.Y
   local px,py = x-28,y
   if partenaire ~= nil then px,py = partenaire.Position.X,partenaire.Position.Y end
@@ -822,7 +885,39 @@ local function entrer(map)
 end
 
 function ville.Enter(map) entrer(map) end
-function ville.GameLoad(map) entree_batiment_en_cours = false; installer_portes(map) installer_comptoirs(map) placer_marchands_aux_comptoirs() entrer(map) end
+function ville.GameLoad(map)
+  entree_batiment_en_cours = false
+  -- Une ancienne sauvegarde peut contenir l'ancienne instance du centre :
+  -- le moteur initialise l'instance sauvegardée avant cet événement. Une
+  -- entrée normale recharge la carte publiée et ses personnages d'origine.
+  -- Cette migration ne s'applique qu'au chargement, jamais aux visites normales.
+  if map ~= nil and map.AssetName == 'reverie_centre' then
+    local ancien_masque = map:GetObstacle(15,101) ~= 0
+    local habitants_manquants = map:GetMapChar('NewObject_6') == nil
+      or map:GetMapChar('Doyen') == nil or map:GetMapChar('Drifloon') == nil
+    if ancien_masque or habitants_manquants then
+      SV.Destiny = SV.Destiny or {}
+      local hero = CH('PLAYER')
+      if hero ~= nil then
+        local partenaire = partenaire_pour(hero)
+        local x,y = hero.Position.X,hero.Position.Y
+        local px,py = x-28,y
+        if partenaire ~= nil then px,py = partenaire.Position.X,partenaire.Position.Y end
+        local dir = hero.Direction == Direction.Up and 'Up' or 'Down'
+        local passage = SV.Destiny.PassageQuartier
+        if passage ~= nil then
+          x,y,px,py,dir = passage.x,passage.y,passage.px,passage.py,passage.dir or 'Down'
+        end
+        demander_quartier('reverie_centre',x,y,px,py,dir)
+        return
+      end
+    end
+  end
+  installer_portes(map)
+  installer_comptoirs(map)
+  placer_marchands_aux_comptoirs()
+  entrer(map)
+end
 function ville.Exit(map) end
 function ville.Update(map, time) tic_ambiance() end
 
@@ -847,6 +942,8 @@ local function discussion_ambiance(cycle)
   -- Ne jamais détourner du joueur un PNJ déjà en interaction.
   if a1.IsInteracting or a2.IsInteracting then return end
   orienter_discussion(paire[1])
+  GROUND:CharSetAnim(a1, 'Idle', true)
+  GROUND:CharSetAnim(a2, 'Idle', true)
   if cycle % 2 == 0 then
     geste_ambiance(paire[1], 'question')
     geste_ambiance(paire[2], 'happy')
@@ -1153,6 +1250,11 @@ local function dialogue_simple(personnage, repliques)
 end
 
 local function conversation(acteurs, repliques)
+  -- Les deux partenaires de discussion restent animés même lorsqu'un seul parle.
+  for i = 1, 2 do
+    local acteur = acteurs[i]
+    if acteur ~= nil then GROUND:CharSetAnim(acteur, 'Idle', true) end
+  end
   for _, replique in ipairs(repliques) do
     local acteur = acteurs[replique[1]]
     if acteur ~= nil then
@@ -1162,6 +1264,10 @@ local function conversation(acteurs, repliques)
     end
   end
   UI:ResetSpeaker()
+  for i = 1, 2 do
+    local acteur = acteurs[i]
+    if acteur ~= nil then GROUND:CharEndAnim(acteur) end
+  end
 end
 
 -- Alakazam : réapprendre une capacité oubliée (250 Poké) ou en oublier une

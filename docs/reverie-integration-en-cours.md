@@ -52,3 +52,14 @@ Les huit seuils confirmés et l’entrée/sortie du café utilisent des capteurs
 ## Réponses des commerçants pendant la visite
 
 Forgelina, Alakazam et Mordudor répondent brièvement depuis leurs comptoirs pendant la visite déjà existante. Les échanges précédents et les dialogues de conclusion sont conservés ; la scène est testée avec doublures et non dans une partie graphique. Les exports PNG des ressources sont des documents d’édition séparés, et ne remplacent pas les formats natifs du jeu.
+
+
+## Essai 0.4.20 : carte nord-centre fusionnée
+
+Le nord et le centre partagent la carte `reverie_centre` : leurs obstacles ont été réunis sans ouvrir d’obstacle existant et les 21 PNJ natifs des deux parties sont conservés. L’ancien identifiant `reverie_nord` reste chargé comme alias de compatibilité et redirige vers le centre lorsque la position est libre. Les trois liaisons internes n’utilisent plus de transition ; résidentiel et étang restent séparés. Visite : Dracaufeu dégage la place avant le passage, Lombre et Ludicolo accueillent l’équipe. Les anciennes répliques sont préservées.
+
+Les dix cartes et leurs copies Dev sont à onze calques expérimentaux avec les corrections visuelles locales. La classification des tuiles composites est approximative et quatre couches restent vides ; aucun test graphique ou partie réelle n’est revendiqué. Les cartes historiques 0.4.19 sous `tools/reverie_reference_0.4.19/` servent uniquement à la vérification et ne sont pas installées.
+
+## Version 0.5.0 : accueil, tableau et maison
+
+Les habitants concernés jouent explicitement Idle pendant l'accueil et les échanges ; Lombre indique que la guilde au nord est actuellement fermée et ouvrira plus tard, l'équipe étant en avance. La place et la scène d'origine sont conservées. Le tableau présente liste et fiche inspirées d'Halcyon sur la seule mission d'exploration effectivement gérée, sans port fictif des missions de sauvetage. La maison de la falaise est une nouvelle carte de la zone `destiny_cliff_tests`, ajoutée après les cinq entrées antérieures ; deux lits proposent la sauvegarde native. La coque utilise InsideHut du PMDO de base et non un intérieur de guilde Halcyon. Entrée/sortie, sauvegarde/reprise, interface et scènes restent à vérifier en jeu.

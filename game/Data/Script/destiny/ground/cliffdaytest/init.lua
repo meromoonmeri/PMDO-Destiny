@@ -358,8 +358,22 @@ local function installer_sortie_carrefour(map)
   map:AddObject(sortie)
 end
 
+local function installer_porte_maison(map)
+  -- Aucun obstacle supplémentaire pendant la scène de première arrivée.
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  if map == nil or map:FindObject('PorteMaisonEquipe') then return end
+  local porte = RogueEssence.Ground.GroundObject()
+  porte.EntName = 'PorteMaisonEquipe'
+  porte.Collider = RogueElements.Rect(592, 464, 40, 8)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  porte:OnMapInit()
+  map:AddObject(porte)
+end
+
 function cliffdaytest.Init(map)
   installer_sortie_carrefour(map)
+  installer_porte_maison(map)
   map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   DEBUG.EnableDbgCoro()
   local retour_destiny = retour_destiny_en_attente()
@@ -376,6 +390,16 @@ end
 function cliffdaytest.PlotScripting()
   SV.Destiny = SV.Destiny or {}
   demarrer_mer()
+  if SV.Destiny.RetourMaisonEquipe then
+    SV.Destiny.RetourMaisonEquipe = nil
+    local hero = CH('PLAYER')
+    local partenaire = CH('Teammate1')
+    if hero ~= nil then GROUND:TeleportTo(hero, 600, 476, Direction.Down) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 624, 476, Direction.Down) end
+    GAME:FadeIn(20)
+    if hero ~= nil and partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+    return
+  end
   if SV.Destiny.CombatDazzling == 'victoire'
       or SV.Destiny.CombatDazzling == 'defaite' then
     cliffdaytest.ApresCombatTeamDazzling()
@@ -405,8 +429,17 @@ end
 function cliffdaytest.Update(map) end
 function cliffdaytest.GameSave(map) end
 function cliffdaytest.GameLoad(map)
+  installer_porte_maison(map)
   cliffdaytest.PlotScripting()
 end
+function cliffdaytest.PorteMaisonEquipe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  -- Pas d'accès parasite pendant les cinématiques ou avant la visite.
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('destiny_cliff_tests', 'maison_equipe_falaise', 'entree', true)
+end
+
 function cliffdaytest.SortieCarrefour_Touch(obj, activator)
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
   GAME:FadeOut(false, 20)

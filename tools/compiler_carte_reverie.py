@@ -26,6 +26,12 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
    if len(raw)!=16*n:raise ValueError('Index tronqué : '+p.name)
    banks[p.stem]={struct.unpack_from('<ii',raw,16*i) for i in range(n)}
  if len(banks)!=14:raise ValueError('Il faut exactement les 14 banques Reverie_Geo_ autonomes.')
+ extra=tile_dir/'Reverie_Corrections_Audit.tile'
+ if extra.exists():
+  with extra.open('rb') as f:
+   hdr=f.read(8);size,n=struct.unpack('<ii',hdr);assert size==8 and n>=0
+   data=f.read(n*16);assert len(data)==n*16
+   banks[extra.stem]={struct.unpack_from('<ii',data,16*i) for i in range(n)}
  raw=source.read_bytes();starts=list(re.finditer(rb'"Layers"\s*:\s*\[\s*\{\s*"Name"\s*:',raw))
  if len(starts)!=1:raise ValueError('Structure des couches non reconnue : arrêt sans écrasement.')
  start=raw.find(b'[',starts[0].start());matches=list(re.finditer(rb'\]\s*,\s*"AssetName"\s*:',raw[start:]))
@@ -33,6 +39,35 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
  end=start+matches[0].start()+1;prefix=raw[:start];suffix=raw[end:]
  pattern=rb'("AssetName"\s*:\s*)"WaterfallVillageCapital_Dev"';suffix,n=re.subn(pattern,rb'\1"WaterfallVillageCapital"',suffix)
  if n!=1:raise ValueError('La source doit être la carte WaterfallVillageCapital_Dev.')
+ # Nouvelle source d'édition native à onze catégories : aucune fusion destructive.
+ with source.open('rb') as probe:
+  if probe.read(3)!=b'\xef\xbb\xbf':probe.seek(0)
+  layers=[]
+  for layer in ijson.items(probe,'Object.Layers.item'):
+   layers.append(layer)
+   if len(layers)>11:break
+ if len(layers)==11:
+  expected=['Base','Cliffs','River','Layer 4','Objects Under','Objects Under Anim','Objects','Objects Anim','Objects Over','Objects Over Anim','Fringe']
+  for i,l in enumerate(layers):
+   if l['Name']!=expected[i] or l['Layer']!=(4 if i==10 else 0) or l['Visible'] is not True:raise ValueError('Calques incompatibles : '+str(i))
+   for col in l['Tiles']:
+    for cell in col:
+     for anim in cell.get('Layers',[]):
+      if not isinstance(anim['FrameLength'],int) or anim['FrameLength']<=0:raise ValueError('Durée invalide')
+      for frame in anim.get('Frames',[]):
+       name=frame['Sheet'];loc=frame['TexLoc'];xy=(loc['X'],loc['Y'])
+       if name and (name not in banks or xy not in banks[name]):raise ValueError(f'Tuile absente : {name} {xy}')
+  destination.parent.mkdir(parents=True,exist_ok=True)
+  created=False
+  try:
+   handle=destination.open('xb');created=True
+   with handle as out:out.write(prefix+raw[start:end]+suffix)
+  except Exception:
+   if created:destination.unlink(missing_ok=True)
+   raise
+  print('Copie 11 calques validée et créée sans fusion.')
+  return
+ del layers
  width=height=None;frame_count=0;records=0
  destination.parent.mkdir(parents=True,exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='reverie-compiler-') as tmp:

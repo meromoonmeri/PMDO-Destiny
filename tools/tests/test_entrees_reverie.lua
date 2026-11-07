@@ -60,7 +60,7 @@ for _,sector in ipairs({'centre','nord','residentiel','etang'}) do
   local count=0
   for _,e in ipairs(all) do
    local a=m.characters[e[1]]
-   if e[2]==sector then assert(a,'PNJ local manquant : '..sector..' '..e[1]);count=count+1
+   if e[2]==sector or ((sector=='centre' or sector=='nord') and (e[2]=='centre' or e[2]=='nord')) then assert(a,'PNJ local manquant : '..sector..' '..e[1]);count=count+1
    else assert(not a,'PNJ étranger conservé : '..sector..' '..e[1])end
   end
   for a,aa in pairs(m.characters) do
@@ -78,12 +78,8 @@ for _,sector in ipairs({'centre','nord','residentiel','etang'}) do
   if wander then wander.Position.X=wander.Position.X+8 end
   local oldx=wander and wander.Position.X;ville.Init(m);if wander then assert(wander.Position.X==oldx,'flâneur réinitialisé à chaque entrée')end
   local total=0;for _ in pairs(m.characters) do total=total+1 end;assert(total==count)
-  if sector=='centre' then
-   assert(m.objects.SortieCarrefour and m.objects.SortieExplorationE2 and m.objects.TableauReverieCentre)
-   assert(not m.objects.TableauReverieNord and not m.objects.PortePosteBekipan)
-  elseif sector=='nord' then
-   assert(not m.objects.SortieCarrefour and not m.objects.SortieExplorationE2 and m.objects.TableauReverieNord and m.objects.PortePosteBekipan)
-   assert(not m.objects.TableauReverieCentre)
+  if sector=='centre' or sector=='nord' then
+   assert(m.objects.SortieCarrefour and m.objects.SortieExplorationE2 and m.objects.TableauReverieCentre and m.objects.TableauReverieNord and m.objects.PortePosteBekipan)
   else assert(not m.objects.SortieCarrefour and not m.objects.SortieExplorationE2) end
   print('PASS '..sector..' : '..count..' habitants locaux ; état '..(fullsave and 'ancienne sauvegarde' or 'carte native'))
  end
@@ -121,9 +117,10 @@ for _,d in ipairs(doors) do
  ville[d[1]..'_Touch'](obj,hero);assert(call.transition==nil,'double déclenchement')
  -- Sortie de l'intérieur : la carte historique redirige dans le bon quartier.
  SV.Destiny.ArriveeVille='batiment';local old=newmap('WaterfallVillageCapital',true);current=old
- ville.Enter(old);assert(call.transition and call.transition[2]==d[2]);local passage=SV.Destiny.PassageQuartier
+ local destination = d[2]=='reverie_nord' and 'reverie_centre' or d[2]
+ ville.Enter(old);assert(call.transition and call.transition[2]==destination);local passage=SV.Destiny.PassageQuartier
  assert(passage.x==d[9] and passage.y==d[10] and passage.px==d[11] and passage.py==d[12],d[1]..' retour')
- local dst=newmap(d[2],false);ville=init(dst);ville.Enter(dst)
+ local dst=newmap(destination,false);ville=init(dst);ville.Enter(dst)
  assert(hero.Position.X==d[9] and hero.Position.Y==d[10] and mate.Position.X==d[11] and mate.Position.Y==d[12],d[1]..' équipe')
  print('PASS entrée et retour simulés '..d[1])
 end
