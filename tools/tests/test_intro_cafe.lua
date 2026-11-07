@@ -9,6 +9,9 @@ package.preload['destiny.suivi_interieurs']=function()return {Activer=function()
  if not actors.Teammate1 then new('Teammate1',314,354) end
 end}end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function(a,h) assert(a and h);log('reprendre_suivi')end}end
+package.preload['destiny.cinematique']=function()return {RegarderGroupe=function(actions)
+ for i,a in ipairs(actions) do assert(a[1] and a[2] and a[1]~=a[2] and a[1].EntEnabled~=false and a[2].EntEnabled~=false and a[3]==(i-1)*4 and a[4]==4);log('regard',a[1].EntName,a[2].EntName) end
+end}end
 luanet={each=function(list)local i=0;return function()i=i+1;return list[i]end end}
 Direction={Up=0,Down=1,Left=2,Right=3}
 RogueEssence={Ground={GroundObject=function()return {OnMapInit=function()end,SetTriggerType=function()end}end,GroundEntity={EEntityTriggerTypes={Touch=0}}}}
@@ -16,7 +19,7 @@ RogueElements={Rect=function(x,y,w,h)return {x,y,w,h} end}
 GROUND={
  RemoveObject=function()end,TeleportTo=function(_,a,x,y,d)a.Position={X=x,Y=y};a.Direction=d end,
  MoveToPosition=function(_,a,x,y,run,speed)a.Position={X=x,Y=y};log('marche',a.EntName,x..','..y)end,
- CharTurnToCharAnimated=function(_,a,b)assert(a and b)end,EntTurn=function(_,a,d)a.Direction=d end,
+ CharTurnToCharAnimated=function(_,a,b)assert(a and b);log('tourne',a.EntName,b.EntName)end,CharSetEmote=function(_,a,e)assert(a);log('emote',a.EntName,e)end,CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true;log('idle_debut',a.EntName)end,CharEndAnim=function(_,a)a.idle=false;log('idle_fin',a.EntName)end,EntTurn=function(_,a,d)a.Direction=d;log('restaure',a.EntName,d)end,
 }
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 TASK={BranchCoroutine=function(_,f)f();return 1 end,JoinCoroutines=function()end}
@@ -26,7 +29,11 @@ local cafe=assert(loadfile(arg[1]..'/game/Data/Script/destiny/ground/caféspinda
 local function reset(missing,bloc)
  actors={};events={};fail_suivi=false;choice=2;SV={Destiny={AlerteShinx='a_secourir'}}
  new('PLAYER',290,354);if missing~='Spinda' then new('Spinda',224,160)end;if missing~='Kirlia' then new('Kirlia',224,184)end
- local list={actors.Spinda,actors.Kirlia}; if bloc then list[#list+1]=new('bloc',256,200)end
+ if missing~='Pipo' then new('MrMimeJunior',352,160) end
+ local list={};for _,n in ipairs({'Spinda','Kirlia','MrMimeJunior'}) do if actors[n] then list[#list+1]=actors[n] end end
+ local client=new('Client_Cafe',350,230);list[#list+1]=client
+ local cache=new('Client_Cache',340,230);cache.EntEnabled=false;list[#list+1]=cache
+ if bloc then list[#list+1]=new('bloc',256,200)end
  map={Entities={{Visible=true,MapChars=list,TemporaryChars={}}}}
 end
 local function find(t,sub)
@@ -39,6 +46,11 @@ assert(find('fade_in')<find('suivi') and find('suivi')<find('dialogue','Bienvenu
 assert(find('marche','272,248') and actors.Spinda.Position.X==224 and actors.Spinda.Position.Y==160)
 assert(find('dialogue','président de la Fédération') and find('dialogue','sacré personnage') and find('dialogue','rénovation') and find('dialogue','Nilo'))
 assert(find('reprendre_suivi') and events[#events][1]=='cutscene' and events[#events][3]==false)
+local function regard(a,c) for _,v in ipairs(events) do if v[1]=='regard' and v[2]==a and v[3]==c then return true end end return false end
+assert(regard('MrMimeJunior','Spinda') and regard('MrMimeJunior','Kirlia') and regard('Spinda','Kirlia'))
+assert(find('emote','question') and find('emote','exclaim'))
+local idle,fin,cache,restaure=false,false,false,false;for _,v in ipairs(events)do if v[1]=='idle_debut' and v[2]=='Client_Cafe' then idle=true end;if v[1]=='idle_fin' and v[2]=='Client_Cafe' then fin=true end;if v[1]=='idle_debut' and v[2]=='Client_Cache' then cache=true end;if v[1]=='restaure' and v[2]=='MrMimeJunior' and v[3]==1 then restaure=true end end
+assert(idle and fin and not actors.Client_Cafe.idle and not cache and restaure,'animation ou retour du personnel incorrect')
 local n=#events;cafe.Enter(map);for i=n+1,#events do assert(not (events[i][1]=='dialogue' and tostring(events[i][3]):find('président',1,true)))end
 print('PASS première entrée, introduction unique, suivi, actualité et retour Spinda')
 reset('Kirlia');cafe.Enter(map);assert(not SV.Destiny.VisiteCafeSpinda and find('fade_in'));print('PASS employé absent : écran visible et scène différée')
@@ -48,3 +60,5 @@ reset();SV.Destiny.RetourCafeAccueil='escalier';cafe.Enter(map);assert(not SV.De
 reset();cafe.EscalierNordCafe_Touch(nil,actors.PLAYER);assert(find('dialogue','fermé pendant les travaux') and not find('zone'));print('PASS escalier fermé pendant rénovation')
 reset();SV.Destiny.CafeRenovationTerminee=true;cafe.EscalierNordCafe_Touch(nil,actors.PLAYER);assert(find('zone') and events[#events][3]==3);print('PASS escalier préservé pour une réouverture future')
 reset();cafe.Spinda_Action(actors.Spinda,actors.PLAYER);assert(find('menu') and not find('zone'));print('PASS accueil pendant rénovation, pas de téléportation vers salles fermées')
+
+reset('Pipo');cafe.Enter(map);assert(SV.Destiny.VisiteCafeSpinda=='terminee' and find('reprendre_suivi'));print('PASS Pipo absent : scène et suivi conservés')

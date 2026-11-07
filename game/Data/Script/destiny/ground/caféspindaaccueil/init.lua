@@ -4,6 +4,7 @@
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 local equipe_scene = require 'destiny.equipe_scene'
+local cinematique = require 'destiny.cinematique'
 
 local cafespindaaccueil = {}
 local sortie_cafe_en_cours = false
@@ -122,9 +123,44 @@ local function passage_libre(map, acteur, points, hero, partenaire)
 end
 
 local function premiere_visite(map, hero, partenaire)
-  local spinda, kirlia = CH('Spinda'), CH('Kirlia')
+  local spinda, kirlia, pipo = CH('Spinda'), CH('Kirlia'), CH('MrMimeJunior')
   if hero == nil or partenaire == nil or spinda == nil or kirlia == nil then return false end
+  -- Pipo reste à son poste ; il peut écouter la conversation sans trajet
+  -- supplémentaire. Les regards sont limités aux participants présents.
+  local function ecouter_cafe(locuteur, ...)
+    if locuteur == nil or locuteur.EntEnabled == false then return end
+    local regards, vus = {}, {}
+    for i=1,select('#', ...) do
+      local a = select(i, ...)
+      if a ~= nil and a ~= locuteur and a.EntEnabled ~= false and not vus[a]
+        and (a ~= pipo or (a.Position ~= nil and math.abs(a.Position.X-280) <= 160
+          and math.abs(a.Position.Y-250) <= 120)) then
+        vus[a] = true
+        table.insert(regards, {a, locuteur, #regards * 4, 4})
+      end
+    end
+    if #regards > 0 then cinematique.RegarderGroupe(regards) end
+  end
   GAME:CutsceneMode(true)
+  local direction_pipo = pipo ~= nil and pipo.Direction or nil
+  local fond_cafe, vus_fond = {}, {}
+  local function ajouter_fond_cafe(a)
+    if a == nil or a == hero or a == partenaire or a == spinda or a == kirlia
+      or a == pipo or a.EntEnabled == false or a.Position == nil or vus_fond[a]
+      or math.abs(a.Position.X-280) > 160 or math.abs(a.Position.Y-250) > 120 then return end
+    vus_fond[a] = true
+    local ok = pcall(function() GROUND:CharSetAnim(a, 'Idle', true) end)
+    if ok then table.insert(fond_cafe, a) end
+  end
+  pcall(function()
+    if map == nil or map.Entities == nil then return end
+    for couche in luanet.each(map.Entities) do
+      if couche.Visible ~= false then
+        for a in luanet.each(couche.MapChars) do ajouter_fond_cafe(a) end
+        for a in luanet.each(couche.TemporaryChars) do ajouter_fond_cafe(a) end
+      end
+    end
+  end)
   AI:DisableCharacterAI(partenaire)
   AI:DisableCharacterAI(spinda)
   -- L'entrée est cadrée avant toute prise de parole ; déplacements uniquement
@@ -150,16 +186,30 @@ local function premiere_visite(map, hero, partenaire)
     end
   end
   GROUND:CharTurnToCharAnimated(spinda, hero, 4)
-  GROUND:CharTurnToCharAnimated(partenaire, spinda, 4)
-  GROUND:CharTurnToCharAnimated(hero, spinda, 4)
+  ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
+  GAME:WaitFrames(8)
   dire(spinda, 'Happy', 'Bienvenue, bienvenue ! Vous tombez bien : il reste juste assez de place pour deux nouvelles histoires !')
   dire(spinda, 'Happy', 'Moi, c’est Spinda ! Entrez donc, même si mes murs ont encore besoin d’un petit coup de neuf !')
+  UI:ResetSpeaker()
+  GROUND:CharSetEmote(partenaire, 'question', 1)
+  GAME:WaitFrames(10)
+  ecouter_cafe(partenaire, spinda, hero, kirlia, pipo)
   dire(partenaire, 'Normal', 'Oh ! Bonjour… Vous êtes un employé comme les autres ?')
   GROUND:CharTurnToCharAnimated(kirlia, partenaire, 4)
+  ecouter_cafe(kirlia, partenaire, hero, spinda, pipo)
   dire(kirlia, 'Happy', 'Vous ne l’avez pas reconnu ? C’est Spinda, le président de la Fédération des Explorateurs !')
   dire(kirlia, 'Normal', 'Et le grand patron des cafés Spinda. Ils accueillent secouristes et explorateurs de toutes les guildes, partout dans le monde.')
+  GROUND:CharTurnToCharAnimated(spinda, partenaire, 4)
+  ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
   dire(spinda, 'Happy', 'Des récits, des rencontres et des boissons ! Enfin… surtout des récits et des rencontres, pour le moment !')
+  UI:ResetSpeaker()
+  GROUND:CharSetEmote(hero, 'exclaim', 1)
+  GAME:WaitFrames(10)
+  -- Le partenaire remarque la réaction du héros ; les autres ne peuvent
+  -- pas entendre sa pensée intérieure.
+  GROUND:CharTurnToCharAnimated(partenaire, hero, 4)
   dire(hero, 'Surprised', '(Bah dis donc… quel sacré personnage !)')
+  ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
   dire(spinda, 'Normal', 'Le café est fermé pour rénovation. En attendant, notre accueil reste ici ; passez nous voir, nous vous renseignerons !')
   if SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(spinda, 'Worried', 'Kirlia m’a parlé de Nilo. Préparez-vous bien avant de rejoindre Lyra ; nous pensons à lui.')
@@ -174,6 +224,8 @@ local function premiere_visite(map, hero, partenaire)
     end
   end
   if spinda.Position.X == depart.x and spinda.Position.Y == depart.y then GROUND:EntTurn(spinda, depart.dir) end
+  for _, a in ipairs(fond_cafe) do pcall(function() GROUND:CharEndAnim(a) end) end
+  if pipo ~= nil and pipo.EntEnabled ~= false and direction_pipo ~= nil then GROUND:EntTurn(pipo, direction_pipo) end
   SV.Destiny.VisiteCafeSpinda = 'terminee'
   GAME:MoveCamera(0,0,45,true)
   equipe_scene.Suivre(partenaire,hero)

@@ -15,7 +15,7 @@ package.preload['destiny.cinematique']=function()return {
    assert(not vus[a[1]] and a[3]==(i-1)*5 and a[4]==4,'regards non désynchronisés')
    vus[a[1]]=true;event('regard',a[1].EntName,a[2].EntName)
   end
- end,Respirer=function()end,TournerGroupe=function()end,
+ end,Respirer=function()end,TournerGroupe=function(actions) for _,a in ipairs(actions) do assert(a[1] and a[1].EntEnabled~=false);event('orientation_groupe',a[1].EntName,a[2]) end end,
 }end
 Direction={Up=0,Down=1,Left=2,Right=3,UpLeft=4,UpRight=5,DownLeft=6};Gender={Male=0,Female=1,Genderless=2}
 RogueEssence={Data={Gender={Unknown='Unknown'}},Dungeon={CharData=function()return {}end,MonsterID=function(s)return s end,Character=function(d)return {Data=d}end}}
@@ -43,7 +43,7 @@ GROUND={
  EntTurn=function(_,a,dir)assert(a);a.Direction=dir end,
  CharAnimateTurnTo=function(_,a,dir)assert(a);event('orientation',a.EntName,dir)end,CharTurnToCharAnimated=function(_,a,b)assert(a and b);event('tourne_vers',a.EntName,b.EntName)end,
  CharSetEmote=function(_,a,emote)assert(a);event('emote',a.EntName,emote)end,
- CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true end,CharEndAnim=function(_,a)a.idle=false end,
+ CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true;event('idle_debut',a.EntName) end,CharEndAnim=function(_,a)a.idle=false;event('idle_fin',a.EntName) end,
 }
 GAME={GetPlayerPartyCount=function()return 2 end,CutsceneMode=function(_,v)event('mode',nil,v)end,WaitFrames=function(_,n)event('attente',nil,n)end,FadeIn=function()end,MoveCamera=function(_,x,y,t,r)event('camera',x,y)end}
 TASK={BranchCoroutine=function(_,f)f();return true end,JoinCoroutines=function()end}
@@ -62,16 +62,17 @@ end
 local function count(name,e)
  local n=0;for _,v in ipairs(events)do if v[1]=='emote' and v[2]==name and (not e or v[3]==e)then n=n+1 end end;return n
 end
-local function scenario(species,legacy,missing,obstacle)
+local function scenario(species,legacy,missing,obstacle,rose_loin,bloc_ludicolo)
  actors={};events={};SV={Destiny={VisiteVille='en_route'}}
  new('PLAYER');new('Teammate1',800,1160,species)
  local names={'Kecleon','Kecleon_Violet','Kangourex','NewObject_3','NewObject_4','NewObject_6','NewObject_7','NewObject_8','NewObject_12','NewObject_13','NewObject_14','Doyen','','Drifloon','NewObject_16','NewObject_18','NewObject_21','NewObject_15','NewObject_22','NewObject_23','NewObject_24','Pijako_Livreur','Cradopaud_Pecheur','Roserade_Fleuriste','Babimanta_Enfant','Goinfrex_Voyageur','PNJ_Supplementaire'}
  local list={};for _,n in ipairs(names)do if n~=missing then list[#list+1]=new(n)end end
  if actors.NewObject_7 then actors.NewObject_7.Position={X=808,Y=1116} end;if actors.NewObject_8 then actors.NewObject_8.Position={X=782,Y=1104} end
+ if actors.Roserade_Fleuriste then actors.Roserade_Fleuriste.Position=rose_loin and {X=400,Y=900} or {X=748,Y=1112} end
  if actors.NewObject_16 then actors.NewObject_16.Position={X=827,Y=1178} end;if actors.NewObject_14 then actors.NewObject_14.Position={X=857,Y=1179} end;interrompu=false
  if legacy then list[#list+1]=new('NewObject_9',718,2527)end
  local hidden=new('PNJ_Cache');hidden.EntEnabled=false;list[#list+1]=hidden
- local extra=new('PNJ_Temporaire');if obstacle then extra.Position={X=808,Y=1140} end;local map={Entities={{Visible=true,MapChars=list,TemporaryChars={extra,actors.Teammate1}}}}
+ local extra=new('PNJ_Temporaire');if obstacle then extra.Position={X=808,Y=1140} elseif bloc_ludicolo then extra.Position={X=782,Y=1130} end;local map={Entities={{Visible=true,MapChars=list,TemporaryChars={extra,actors.Teammate1}}}}
  ville.Visite(map)
  assert(SV.Destiny.VisiteVille=='terminee' and SV.Destiny.AlerteShinx=='a_secourir' and not actors.PLAYER.CollisionDisabled)
  assert(actors.Teammate1.Data.Species==species,'le partenaire choisi a été modifié')
@@ -86,9 +87,9 @@ local function scenario(species,legacy,missing,obstacle)
  local avance_lombre,avance_ludicolo=false,false
  for _,v in ipairs(events) do
   if v[1]=='marcher' and v[2]=='NewObject_7' and v[3]=='808,1136' then avance_lombre=true end
-  if v[1]=='marcher' and v[2]=='NewObject_8' and v[3]=='752,1128' then avance_ludicolo=true end
+  if v[1]=='marcher' and v[2]=='NewObject_8' and v[3]=='782,1128' then avance_ludicolo=true end
  end
- assert(avance_lombre==(not obstacle and missing~='NewObject_7') and avance_ludicolo==(missing~='NewObject_8'), 'approche ou garde dynamique incorrecte')
+ assert(avance_lombre==(not obstacle and missing~='NewObject_7') and avance_ludicolo==(missing~='NewObject_8' and not bloc_ludicolo), 'approche ou garde dynamique incorrecte')
  if actors.NewObject_7 then assert(actors.NewObject_7.Position.X==808 and actors.NewObject_7.Position.Y==1116) end
  if actors.NewObject_8 then assert(actors.NewObject_8.Position.X==782 and actors.NewObject_8.Position.Y==1104) end
  local hors=0;local portraits=0
@@ -108,14 +109,37 @@ local function scenario(species,legacy,missing,obstacle)
  regard_entre(d,e,'Teammate1',lyra);regard_entre(d,e,'PLAYER',lyra)
  if missing~='NewObject_4' then
   local entree=find('marcher','720,1152');regard_entre(entree,i,'Teammate1','NewObject_4');regard_entre(entree,i,lyra,'NewObject_4')
+  if missing~='NewObject_7' then regard_entre(entree,i,'NewObject_7','NewObject_4') end
+  if missing~='NewObject_8' then regard_entre(entree,i,'NewObject_8','NewObject_4') end
+  if missing~='Roserade_Fleuriste' and not rose_loin then regard_entre(entree,i,'Roserade_Fleuriste','NewObject_4') end
   local confiance=find('dialogue','Nous ferons de notre mieux');regard_entre(i,confiance,'NewObject_4','Teammate1')
  end
  local camera=false;for _,v in ipairs(events)do if v[1]=='camera' and v[2]==840 and v[3]==1208 then camera=true end end
  assert(camera,'cadrage arrivée Alakazam absent')
+ assert(not actors.PNJ_Supplementaire.idle and not actors.PNJ_Temporaire.idle, 'idle de fond persistant')
+ local fond,cache,temp=false,false,false
+ for _,v in ipairs(events) do
+  if v[1]=='idle_debut' and v[2]=='PNJ_Supplementaire' then fond=true end
+  if v[1]=='idle_debut' and v[2]=='PNJ_Temporaire' then temp=true end
+  if v[1]=='idle_debut' and v[2]=='PNJ_Cache' then cache=true end
+ end
+ assert(fond and temp and not cache, 'fond ou acteur caché incorrect')
+ if missing~='NewObject_7' then assert(find('dialogue','Courage, Lyra. Nous pensons tous à Nilo.')) end
+ if missing~='Roserade_Fleuriste' and not rose_loin and missing~='NewObject_7' then
+  local rose=find('dialogue','J’ai terminé les guirlandes');local lombre=find('dialogue','la place leur fera une belle surprise')
+  assert(rose<lombre,'conversation initiale Rose / Lombre dans le mauvais ordre')
+  if missing~='NewObject_8' then
+   local ld=find('dialogue','Oh, vous voilà !');assert(lombre<ld,'Ludicolo doit remarquer le duo après leur échange')
+   local emote=false;for k=lombre+1,ld-1 do local v=events[k];if v[1]=='emote' and v[2]=='NewObject_8' and v[3]=='exclaim' then emote=true end end
+   assert(emote,'Ludicolo ne remarque pas le duo')
+  end
+  assert(actors.Roserade_Fleuriste.Position.X==748 and actors.Roserade_Fleuriste.Position.Y==1112,'Rose déplacée')
+ end
+
  for _,v in ipairs(events)do if v[1]=='dialogue' then assert(not v[3]:find('je vous laisse le passage',1,true))end end
  print('PASS partenaire '..species..', carte '..(legacy and 'historique' or 'centrale')..', témoins nommés, anonyme, temporaire et caché')
 end
-scenario('riolu',false);scenario('eevee',false);scenario('vulpix',true);scenario('pikachu',false,'NewObject_4');scenario('skitty',false,'NewObject_14');scenario('eevee',false,nil,true);scenario('riolu',false,'NewObject_7');scenario('eevee',true,'NewObject_8')
+scenario('riolu',false);scenario('eevee',false);scenario('vulpix',true);scenario('pikachu',false,'NewObject_4');scenario('skitty',false,'NewObject_14');scenario('eevee',false,nil,true);scenario('riolu',false,'NewObject_7');scenario('eevee',true,'NewObject_8');scenario('riolu',false,'Roserade_Fleuriste');scenario('eevee',false,nil,false,true);scenario('riolu',false,nil,false,false,true)
 -- Absence du partenaire : scène suspendue sans cacher Alakazam.
 actors={};events={};new('PLAYER');new('NewObject_4');SV={Destiny={VisiteVille='en_route'}};GAME.GetPlayerPartyCount=function()return 1 end
 ville.Visite({Entities={}});assert(SV.Destiny.VisiteVille=='en_route' and actors.NewObject_4.EntEnabled and not SV.Destiny.AlerteShinx)
