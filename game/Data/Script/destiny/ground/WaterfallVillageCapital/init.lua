@@ -916,12 +916,13 @@ function ville.Visite(map)
   GAME:WaitFrames(30)
   GAME:MoveCamera(832, 1208, 50, false)
   local temoins = temoins_de_la_visite(map, hero, partenaire, alakazam)
-  SOUND:FadeOutBGM(25)
-  GAME:WaitFrames(25)
+  -- Laisser le thème de ville se terminer avant le cri, sans remplacer brutalement un morceau.
+  SOUND:FadeOutBGM(45)
+  GAME:WaitFrames(55)
   UI:SetSpeaker('???', true, '', -1, '', RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue('À l’aide ! Quelqu’un… au secours !')
-  GAME:WaitFrames(10)
-  SOUND:PlayBGM('Threat.ogg', true)
+  GAME:WaitFrames(20)
+  SOUND:PlayBGM('Threat.ogg', false)
   reagir_ville(temoins, hero, partenaire, 'cri')
   regarder_lieu_ville(hero, partenaire, Direction.Down)
   parler_guide('Worried', 'Vous avez entendu ? D’où ça venait ?')
@@ -980,6 +981,7 @@ function ville.Visite(map)
     GROUND:CharTurnToCharAnimated(dracaufeu, luxray, 4)
     parler_accueil(dracaufeu, 'Normal', 'Est-ce que tu peux nous montrer le chemin ?', 'droite')
   end
+  GAME:WaitFrames(16)
   parler_accueil(luxray, 'Worried', 'Oui ! Je vous indiquerai le chemin… Mais faites vite, je vous en prie !')
   GAME:WaitFrames(20)
   GROUND:CharTurnToCharAnimated(partenaire, luxray, 4)
@@ -994,20 +996,20 @@ function ville.Visite(map)
     GROUND:CharTurnToCharAnimated(dracaufeu, tyranocif or partenaire, 4)
     parler_accueil(dracaufeu, 'Normal', 'Oui. Tous les trois, nous avons déjà affronté bien des dangers.', 'droite')
   end
-  GAME:WaitFrames(24)
+  -- Recentrer le groupe avant de préparer une entrée par la gauche.
+  GAME:WaitFrames(30)
+  GAME:MoveCamera(880, 1208, 45, false)
+  GAME:WaitFrames(15)
   if alakazam ~= nil then
-    -- Position hors cadre à gauche, puis marche dans l'axe de la place.
+    -- Position préparée masquée, puis marche dans l'axe de la place.
     GROUND:TeleportTo(alakazam, 648, 1152, Direction.Right)
     GROUND:Unhide('NewObject_4')
     GROUND:MoveToPosition(alakazam, 720, 1152, false, 1.5)
     GROUND:CharAnimateTurnTo(alakazam, Direction.Right, 4)
     cinematique.RegarderGroupe({{tyranocif, alakazam, 0, 4}, {dracaufeu, alakazam, 5, 4}, {partenaire, alakazam, 8, 4}, {hero, alakazam, 11, 4}})
-    GAME:WaitFrames(20)
-    parler_accueil(alakazam, 'Normal', 'Laisse donc ces jeunes y aller, mon vieil ami.')
-    GAME:WaitFrames(20)
-    SOUND:FadeOutBGM(30)
     GAME:WaitFrames(30)
-    SOUND:PlayBGM('A Successful Rescue.ogg', true)
+    parler_accueil(alakazam, 'Normal', 'Laisse donc ces jeunes y aller, mon vieil ami.')
+    GAME:WaitFrames(30)
     parler_accueil(alakazam, 'Normal', 'Ils ont entendu Lyra et se sont proposés sans hésiter. Laissons-leur cette chance.')
     GAME:WaitFrames(16)
     parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
@@ -1016,13 +1018,14 @@ function ville.Visite(map)
     GAME:WaitFrames(20)
     parler_accueil(alakazam, 'Normal', 'Préparez-vous bien et écoutez les indications de Lyra. Nous resterons ici si vous avez besoin de nous.')
   else
-    SOUND:FadeOutBGM(30)
-    GAME:WaitFrames(30)
-    SOUND:PlayBGM('A Successful Rescue.ogg', true)
+    GAME:WaitFrames(20)
     parler_accueil(luxray, 'Sad', 'Merci… Je vous en prie, ramenez mon petit.')
     parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
   end
   GAME:WaitFrames(30)
+  -- Fin progressive de la tension ; aucune musique de victoire avant le sauvetage.
+  SOUND:FadeOutBGM(90)
+  GAME:WaitFrames(100)
   -- La caméra s'éloigne avant la remise en place hors champ. Le joueur
   -- retrouve ensuite caméra, IA et musique habituelle de la ville.
   GAME:MoveCamera(1000, 1160, 70, false)
@@ -1034,9 +1037,9 @@ function ville.Visite(map)
   if not luxray_temporaire and luxray_depart ~= nil then
     GROUND:TeleportTo(luxray, luxray_depart.x, luxray_depart.y, luxray_depart.dir)
   end
-  SOUND:FadeOutBGM(30)
+  -- Après un temps de silence, revenir au thème du quartier, sans superposition.
   GAME:WaitFrames(30)
-  SOUND:PlayBGM('Treasure Town.ogg', true)
+  SOUND:PlayBGM('Treasure Town.ogg', false)
   -- Ce drapeau ne crée pas de mission ni de donjon automatiquement.
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'

@@ -80,7 +80,7 @@ local function scenario(species,legacy)
  local a=find('voix','À l’aide');local b=find('dialogue','Vous avez entendu');local c=find('dialogue','On dirait Lyra');local d=find('marcher','800,1224');local e=find('dialogue','Hah… Hah');local f=find('dialogue','tombé dans un fossé');local g=find('dialogue','en expédition');local h=find('dialogue','Nous pouvons y aller');local i=find('dialogue','Laisse donc ces jeunes')
  assert(a<b and b<c and c<d and d<e and e<f and f<g and g<h and h<i,'ordre de la scène incorrect')
  local musique={};for _,v in ipairs(events)do if v[1]=='music' then musique[#musique+1]=v[2] end end
- assert(musique[1]=='Treasure Town.ogg' and musique[2]=='Threat.ogg' and musique[3]=='A Successful Rescue.ogg' and musique[4]=='Treasure Town.ogg')
+ assert( #musique==3 and musique[1]=='Treasure Town.ogg' and musique[2]=='Threat.ogg' and musique[3]=='Treasure Town.ogg')
  assert(find('placer','648,1152')<find('marcher','720,1152'))
  assert(not find('dialogue','Bienvenue à Réverie Town !')==false)
  for _,v in ipairs(events)do if v[1]=='dialogue' then assert(not v[3]:find('je vous laisse le passage',1,true))end end

@@ -26,7 +26,7 @@ def compile_map(source: Path,tile_dir: Path,destination: Path):
    if len(raw)!=16*n:raise ValueError('Index tronqué : '+p.name)
    banks[p.stem]={struct.unpack_from('<ii',raw,16*i) for i in range(n)}
  if len(banks)!=14:raise ValueError('Il faut exactement les 14 banques Reverie_Geo_ autonomes.')
- for extra_name in ('Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050', 'Reverie_Herbe_Vagues_051', 'Reverie_Rives_Sable_051'):
+ for extra_name in ('Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050', 'Reverie_Herbe_Vagues_051', 'Reverie_Rives_Sable_051', 'Reverie_Berges_053'):
   extra=tile_dir/(extra_name+'.tile')
   if extra.exists():
    with extra.open('rb') as f:

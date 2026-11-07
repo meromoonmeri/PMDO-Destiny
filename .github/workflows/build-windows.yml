@@ -105,6 +105,8 @@ jobs:
         run: python tools/run_ci_check.py tools/tests/test_objets_pmu_natifs.py
       - name: Check Reverie visual repairs
         run: python tools/run_ci_check.py tools/tests/test_reverie_raccords_052.py
+      - name: Validate animated shorelines and cutscene 0.5.3
+        run: python tools/run_ci_check.py tools/tests/test_reverie_berges_053.py
       - name: Build and package Destiny
         run: python tools/build_windows.py
       - name: Upload Windows ZIP

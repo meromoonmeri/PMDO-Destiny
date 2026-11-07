@@ -13,9 +13,9 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 36659853
-ORIGINAL_SHA256 = '4d27bc5ca812b4cbe39b6a22344ec4edad893203eb0acdea46fd987930a6bfb6'
-COMPACT_SHA256 = '4d27bc5ca812b4cbe39b6a22344ec4edad893203eb0acdea46fd987930a6bfb6'
+ORIGINAL_SIZE = 36669146
+ORIGINAL_SHA256 = 'f39592885ab192ac93e9eeb44e81784ea306e9075fbdbb78392f6f5bc646dbb1'
+COMPACT_SHA256 = 'f39592885ab192ac93e9eeb44e81784ea306e9075fbdbb78392f6f5bc646dbb1'
 EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
 EMPTY_COUNT = 0
 
