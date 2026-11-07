@@ -1,3 +1,4 @@
+package.preload['destiny.meteo_reverie']=function()return assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Tests ciblés avec doublures. Ce fichier ne prétend pas simuler le moteur.
 package.preload['origin.common']=function() return {} end
 package.preload['origin.menu.skill.SkillSelectMenu']=function() return {} end
@@ -14,6 +15,7 @@ function CH(id) if id=='PLAYER' then return player elseif id=='Teammate1' then r
 local call={}
 GAME={FadeOut=function()end,FadeIn=function()end,MoveCamera=function()end,CutsceneMode=function()end,GetPlayerPartyCount=function()return 2 end,EnterGroundMap=function(_,...)call.transition={...} end}
 GROUND={
+ AddMapStatus=function()end,RemoveMapStatus=function()end,
  Unhide=function()end,TeleportTo=function(_,who,x,y,dir)who.Position.X=x;who.Position.Y=y;who.direction=dir end}
 SOUND={PlayBGM=function()end}
 local root=(arg[1] or '.')..'/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'

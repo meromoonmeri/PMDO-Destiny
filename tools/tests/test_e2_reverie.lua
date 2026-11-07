@@ -1,3 +1,4 @@
+package.preload['destiny.meteo_reverie']=function()return assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Tests de logique ciblés avec doubles d'API, pas un test en jeu.
 package.preload['origin.common']=function() return {} end
 package.preload['origin.menu.skill.SkillSelectMenu']=function() return {} end
