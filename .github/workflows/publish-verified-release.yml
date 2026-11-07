@@ -1,0 +1,76 @@
+name: Publish verified Windows release
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Build Windows workflow run ID
+        required: true
+        type: string
+      target_sha:
+        description: Exact commit built by that run
+        required: true
+        type: string
+      tag:
+        description: New version tag, for example v0.5.1
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate run and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$TARGET" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          data=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}")
+          [ "$(jq -r '.status' <<<"$data")" = completed ]
+          [ "$(jq -r '.conclusion' <<<"$data")" = success ]
+          [ "$(jq -r '.head_sha' <<<"$data")" = "$TARGET" ]
+          [ "$(jq -r '.name' <<<"$data")" = 'Build Windows' ]
+          [ "$(jq -r '.head_branch' <<<"$data")" = 'wip/reverie-integration-kingambit-cafe' ]
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then echo 'Tag déjà existant : arrêt' >&2; exit 1; fi
+      - name: Checkout verified commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_sha }}
+          sparse-checkout: docs/REVERIE_051.md
+          sparse-checkout-cone-mode: false
+          lfs: false
+          submodules: false
+      - name: Download the verified Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: PMDO-Destiny-Windows-x64
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: release-artifact
+      - name: Verify and publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+          RUN_ID: ${{ inputs.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f release-artifact/PMDO-Destiny-Windows-x64.zip
+          mv release-artifact/PMDO-Destiny-Windows-x64.zip "release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
+          asset="release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
+          unzip -tq "$asset" > /dev/null
+          sha256sum "$asset" > "${asset}.sha256"
+          { cat docs/REVERIE_051.md; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
+          gh release create "$TAG" "$asset" "${asset}.sha256" --target "$TARGET" --title "Destiny ${TAG#v} — Réverie et café" --notes-file release-notes.md --prerelease
