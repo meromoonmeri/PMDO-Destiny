@@ -1,3 +1,4 @@
+package.preload['destiny.meteo_reverie']=function()return assert(loadfile(arg[1]..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Test du scénario café avec doublures (pas de rendu ou moteur PMDO).
 package.preload['origin.common']=function()return {CreateWalkArea=function()end}end
 local actors, events, fail_suivi, choice, map
@@ -24,7 +25,7 @@ GROUND={
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 TASK={BranchCoroutine=function(_,f)f();return 1 end,JoinCoroutines=function()end}
 GAME={MoveCamera=function(_,x,y,t,follow)log('camera',x,y)end,FadeIn=function()log('fade_in')end,FadeOut=function()log('fade_out')end,WaitFrames=function()end,CutsceneMode=function(_,v)log('cutscene',nil,v)end,EnterZone=function(_,zone,seg,idx,entry)log('zone',zone,idx)end}
-UI={SetSpeaker=function(_,a)assert(a);log('speaker',a.EntName)end,SetSpeakerEmotion=function()end,WaitShowDialogue=function(_,t)log('dialogue',nil,t)end,ResetSpeaker=function()end,BeginChoiceMenu=function(_,prompt,options)log('menu',prompt,#options)end,WaitForChoice=function()end,ChoiceResult=function()return choice end}
+UI={SetSpeaker=function(_,a)assert(a);log('speaker',a.EntName)end,SetSpeakerEmotion=function()end,WaitShowDialogue=function(_,t)log('dialogue',nil,t)end,ResetSpeaker=function()log('reset_speaker')end,BeginChoiceMenu=function(_,prompt,options)log('menu',prompt,#options)end,WaitForChoice=function()end,ChoiceResult=function()return choice end}
 local cafe=assert(loadfile(arg[1]..'/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()
 local function reset(missing,bloc)
  actors={};events={};fail_suivi=false;choice=2;SV={Destiny={AlerteShinx='a_secourir'}}
@@ -62,3 +63,9 @@ reset();SV.Destiny.CafeRenovationTerminee=true;cafe.EscalierNordCafe_Touch(nil,a
 reset();cafe.Spinda_Action(actors.Spinda,actors.PLAYER);assert(find('menu') and not find('zone'));print('PASS accueil pendant rénovation, pas de téléportation vers salles fermées')
 
 reset('Pipo');cafe.Enter(map);assert(SV.Destiny.VisiteCafeSpinda=='terminee' and find('reprendre_suivi'));print('PASS Pipo absent : scène et suivi conservés')
+
+-- La sieste avance le même compteur que les étals et annonce la météo sans portrait.
+reset();choice=1;local avant=SV.Destiny.JourneeVille or 0;cafe.Spinda_Action(actors.Spinda,actors.PLAYER)
+assert(SV.Destiny.JourneeVille==avant+1 and SV.Destiny.MeteoReverie.jour==avant+1)
+assert(find('dialogue','Une nouvelle journée commence') and find('reset_speaker'))
+assert(not find('statut_meteo'));print('PASS sieste : nouveau jour et annonce sans effet intérieur')

@@ -1,3 +1,4 @@
+package.preload['destiny.meteo_reverie']=function()return assert(loadfile(arg[1]..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Test de la cinématique par doublures ; ne teste pas le moteur graphique.
 package.preload['origin.common']=function()return {}end
 package.preload['origin.menu.skill.SkillSelectMenu']=function()return {}end

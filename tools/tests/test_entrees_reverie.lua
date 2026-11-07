@@ -1,3 +1,4 @@
+package.preload['destiny.meteo_reverie']=function()return assert(loadfile(arg[1]..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Régressions avec doublures ; ne remplace pas une partie réelle.
 package.preload['origin.common']=function()return {} end
 package.preload['destiny.suivi_interieurs']=function()return {Activer=function()end} end
@@ -23,7 +24,7 @@ GROUND={
  RemoveCharacter=function(_,name)if current.characters[name] then current.characters[name]=nil;return true end;return false end,
  RemoveObject=function(_,name)if current.objects[name] then current.objects[name]=nil;return true end;return false end,
  TeleportTo=function(_,a,x,y,dir)a.Position={X=x,Y=y};a.Direction=dir end,
- EntTurn=function(_,a,dir)a.Direction=dir end,CharEndAnim=function()end,CharTurnToChar=function()end,AddMapStatus=function()end,
+ EntTurn=function(_,a,dir)a.Direction=dir end,CharEndAnim=function()end,CharTurnToChar=function()end,AddMapStatus=function()end,RemoveMapStatus=function()end,
  CreateCharacterFromCharData=function(_,name,data,x,y,dir)
   assert(not current.characters[name]);local c={EntName=name,Position={X=x,Y=y},Direction=dir,Data=data,ReloadEvents=function()end};current.characters[name]=c;return c
  end,

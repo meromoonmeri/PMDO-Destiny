@@ -7,6 +7,7 @@ require 'origin.menu.skill.SkillSelectMenu'
 require 'origin.menu.team.AssemblySelectMenu'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local meteo_reverie = require 'destiny.meteo_reverie'
 local missions_reverie = require 'destiny.missions_reverie'
 
 local ville = {}
@@ -585,8 +586,8 @@ function ville.Init(map)
   nommer_habitants(map)
   vie_ville_activee = false
   partenaire_pour(CH('PLAYER'))
-  -- Ombres de nuages sur toute la ville : même statut natif que la ville de base PMDO.
-  GROUND:AddMapStatus('clouds_overhead')
+  -- Même météo dans les quartiers, avec les ombres de nuages existantes.
+  meteo_reverie.Appliquer(map)
 end
 
 local function parler(personnage, emotion, texte, placement)
@@ -1383,6 +1384,7 @@ end
 
 function ville.Enter(map) entrer(map) end
 function ville.GameLoad(map)
+  meteo_reverie.Appliquer(map)
   entree_batiment_en_cours = false
   -- Une ancienne sauvegarde peut contenir l'ancienne instance du centre :
   -- le moteur initialise l'instance sauvegardée avant cet événement. Une

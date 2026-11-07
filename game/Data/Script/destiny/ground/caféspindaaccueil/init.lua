@@ -5,6 +5,7 @@ require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local meteo_reverie = require 'destiny.meteo_reverie'
 
 local cafespindaaccueil = {}
 local sortie_cafe_en_cours = false
@@ -328,7 +329,7 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
     SV.Destiny.StocksKecleon = {}
     GAME:FadeIn(60)
     UI:ResetSpeaker()
-    UI:WaitShowDialogue('Une nouvelle journée commence à Réverie Town…')
+    UI:WaitShowDialogue('Une nouvelle journée commence à Réverie Town… ' .. meteo_reverie.Description())
     return
   end
   UI:ResetSpeaker()

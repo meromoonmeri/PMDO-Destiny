@@ -3,6 +3,7 @@
 -- de raccordement futur ; aucune destination n'est supposée pour ceux-ci.
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
+local meteo_reverie = require 'destiny.meteo_reverie'
 local crossroadreverietown2 = {}
 local sortie_en_cours = false
 
@@ -18,6 +19,7 @@ local function installer_sortie(map, nom, x, y, largeur, hauteur)
 end
 
 function crossroadreverietown2.Init(map)
+  meteo_reverie.Appliquer(map)
   sortie_en_cours = false
   installer_sortie(map, 'SortieFalaise', 456, 8, 56, 8)
   installer_sortie(map, 'SortieVille', 940, 400, 8, 48)
@@ -33,7 +35,7 @@ local function entrer()
   GAME:FadeIn(20)
 end
 function crossroadreverietown2.Enter(map) entrer() end
-function crossroadreverietown2.GameLoad(map) entrer() end
+function crossroadreverietown2.GameLoad(map) meteo_reverie.Appliquer(map); entrer() end
 function crossroadreverietown2.Update(map, time) end
 
 local function aller(zone, ground, marqueur)

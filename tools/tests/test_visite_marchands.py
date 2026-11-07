@@ -25,3 +25,4 @@ print('PASS visite au centre, cinq commerçants et dialogue d’origine préserv
 
 # Introduction du café et reprises sur doublures ; pas de rendu moteur.
 run(ROOT/'tools/tests/test_intro_cafe.lua', ROOT)
+run(ROOT/'tools/tests/test_meteo_reverie.lua', ROOT)
