@@ -32,6 +32,9 @@ def attend_refus(fonction):
 
 
 def main():
+    # Le compacteur et la carte publiée doivent toujours viser le même payload.
+    _, attendu, taille = payload.PAYLOADS['payload/WaterfallVillageCapital.rsground.gz']
+    assert compacter.ORIGINAL_SHA256 == attendu and compacter.ORIGINAL_SIZE == taille
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         contenu = b'carte native de test'
