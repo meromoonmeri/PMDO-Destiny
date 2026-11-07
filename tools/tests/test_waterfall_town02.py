@@ -37,13 +37,13 @@ def md5(path: Path) -> str:
 assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061',
-        36648654,
+        '4d27bc5ca812b4cbe39b6a22344ec4edad893203eb0acdea46fd987930a6bfb6',
+        36659853,
     ),
     'payload/WaterfallVillageCapital_Dev.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        'd16596bda4a803893bdfe9b8d4591bc6ba8820372dbae12a9898221cb1094743',
-        36648658,
+        '1453333cd3d31026ead385fdf7cb48d1567f73363f8259d0148e2dd5065bdc96',
+        36659857,
     )
 }
 assert set(unpack_payload.PAYLOADS) == {
@@ -55,16 +55,16 @@ assert set(unpack_payload.PAYLOADS) == {
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 36648654
-assert sha256(MAP) == 'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061'
+assert MAP.stat().st_size == 36659853
+assert sha256(MAP) == '4d27bc5ca812b4cbe39b6a22344ec4edad893203eb0acdea46fd987930a6bfb6'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 36648654
-assert h.hexdigest() == 'eb5ddb4aa944d9f33b63bf0547cb7826f120ae27f255f158f76df630d0582061'
+assert size == 36659853
+assert h.hexdigest() == '4d27bc5ca812b4cbe39b6a22344ec4edad893203eb0acdea46fd987930a6bfb6'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -87,7 +87,7 @@ with MAP.open('rb') as f:
     finally:
         mm.close()
 
-assert len(sheets) == 16 and {'Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050'} <= sheets, sorted(sheets)
+assert len(sheets) == 18 and {'Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050', 'Reverie_Herbe_Vagues_051', 'Reverie_Rives_Sable_051'} <= sheets, sorted(sheets)
 assert {'Reverie_Geo_14_Paysages_composites', 'Reverie_Geo_12_Eaux_frames', 'Reverie_Geo_11_Cascades_frames'} <= sheets
 for sheet in sheets:
     assert (GAME / 'Content/Tile' / f'{sheet}.tile').is_file() or (
