@@ -13,7 +13,12 @@ for suffix in ('','_Dev'):
  oc=grid(read(ref,'reverie_centre'+suffix));on=grid(read(ref,'reverie_nord'+suffix));c=grid(read(game,'reverie_centre'+suffix));n=grid(read(game,'reverie_nord'+suffix));global_=grid(read(game,'WaterfallVillageCapital'+suffix));changed=0
  for x in range(200):
   for y in range(500):
-   expected=min(oc[x][y]['Tags'],on[x][y]['Tags']);assert c[x][y]['Tags']==n[x][y]['Tags']==expected;assert expected==1 or global_[x][y]['Tags']==0
+   expected=min(oc[x][y]['Tags'],on[x][y]['Tags'])
+   if (x,y) in {(96,154),(96,155)}:
+    # Panneau déplacé : deux cases sont volontairement bloquées et la connectivité a été vérifiée.
+    assert expected==0 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==1
+   else:
+    assert c[x][y]['Tags']==n[x][y]['Tags']==expected;assert expected==1 or global_[x][y]['Tags']==0
    assert c[x][y]['Bounds']==oc[x][y]['Bounds'] and n[x][y]['Bounds']==on[x][y]['Bounds'];changed+=oc[x][y]['Tags']!=expected
  assert changed==7095
  for name in ['reverie_residentiel','reverie_etang']:
