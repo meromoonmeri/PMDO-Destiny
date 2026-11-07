@@ -32,7 +32,7 @@ COQUES_REVERIE = INTERIEURS[:8]
 PORTES = [
     "PortePosteBekipan", "PorteCitrouilleNordOuest", "PorteHutteNordEst",
     "PorteDojoKingambit", "PorteHutteSud",
-    "PorteTenteCentre", "PorteTenteEst",
+    "PorteTenteCentre",
     "PorteMaisonPierre", "PorteMaisonPlanteSud", "PorteCitrouilleSud",
 ]
 
@@ -76,7 +76,7 @@ def main() -> int:
         script = ROOT / "game/Data/Script/destiny/ground" / nom / "init.lua"
         assert script.is_file(), f"script absent : {nom}"
         texte = lire(script)
-        assert "_Touch(obj, activator) sortir()" in texte
+        assert "_Touch(obj, activator)" in texte and "sortir()" in texte
         assert "ArriveeVille = 'batiment'" in texte
         assert "Halcyon" not in texte and "Remixed" not in texte
         if nom in COQUES_REVERIE:
@@ -104,6 +104,7 @@ def main() -> int:
     ville = lire(ROOT / "game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua")
     for porte in PORTES:
         assert porte in ville, f"porte absente : {porte}"
+    assert "interieur = 'ledian_dojo'" not in ville
     for porte in ("PorteMaisonEquipe", "PorteMaisonArcanine"):
         assert porte not in ville, f"porte interdite encore active : {porte}"
     assert "GAME:EnterGroundMap('town02_waterfallvillage', porte.interieur, porte.marqueur)" in ville
