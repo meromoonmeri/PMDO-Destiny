@@ -1,0 +1,10 @@
+{
+  "alpha_et_silhouette_identiques": true,
+  "escalier_inchange": true,
+  "pixels_modifies": 1727,
+  "zone_diff_union_anciens_et_nouveaux_raccords": true,
+  "source_pixels": "rendu Réverie bande y19–29, x contigus",
+  "methode": "colonnes natives décalées en hauteur selon contour, sans interpolation ni changement de couleur",
+  "limite": "assemblage pixel par pixel, modules d’origine non tous préservés ; contrôle esthétique et import PMDO nécessaires",
+  "moteur": false
+}
