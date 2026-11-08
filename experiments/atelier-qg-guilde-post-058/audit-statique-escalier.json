@@ -1,0 +1,110 @@
+{
+  "reverie_centre": {
+    "dimensions_cases": [
+      200,
+      500
+    ],
+    "taille_case_pixels": 8,
+    "collision_personnage": [
+      16,
+      16
+    ],
+    "cases_accessibles_depuis_retour_760_32": 12227,
+    "positions": {
+      "760,32": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "784,32": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "736,0": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "752,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "768,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "784,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "800,8": {
+        "libre": false,
+        "accessible_depuis_retour_760_32": false
+      },
+      "760,160": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "760,400": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "800,1160": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      }
+    }
+  },
+  "reverie_nord": {
+    "dimensions_cases": [
+      200,
+      500
+    ],
+    "taille_case_pixels": 8,
+    "collision_personnage": [
+      16,
+      16
+    ],
+    "cases_accessibles_depuis_retour_760_32": 12227,
+    "positions": {
+      "760,32": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "784,32": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "736,0": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "752,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "768,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "784,8": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "800,8": {
+        "libre": false,
+        "accessible_depuis_retour_760_32": false
+      },
+      "760,160": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "760,400": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      },
+      "800,1160": {
+        "libre": true,
+        "accessible_depuis_retour_760_32": true
+      }
+    }
+  }
+}
