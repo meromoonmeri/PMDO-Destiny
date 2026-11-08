@@ -1,0 +1,9 @@
+# Avant intervention — Lost Wood fleuri
+
+Demande actuelle : garder le Lost Wood existant de Destiny et remplacer les ruines par des fleurs ; abandonner les essais DTEF Relict/Amapola comme remplacements du donjon. Rechercher aussi les grottes citées dans les dépôts et dans Drive.
+
+Base de travail : version publique v0.5.7, commit `ee39156a24f350b67e81740478be8505f4ff1a05`. La zone compte deux segments de sept étages. Le générateur place six modèles de ruines via un `LoadBlobStep` sur chaque étage ; ces modèles créent des obstacles `unbreakable`.
+
+Plan en copie : sauvegarder et vérifier les originaux ; désactiver uniquement les quatorze étapes de placement de ces ruines et ajouter des fleurs non bloquantes avec les objets natifs déjà présents dans Destiny. Préserver l’autotile actif, la rivière, les sentiers, les galets, les lucioles, le scénario, les PNJ, les rencontres, les sorties, les musiques et les anciens fichiers de ruines afin de ne pas casser d’autres références. Actualiser les tests existants qui exigent expressément les anciennes ruines, puis comparer la zone et le script d’origine pour vérifier le périmètre. Utiliser un calcul de positionnement sans tirage aléatoire supplémentaire afin de ne pas modifier l’état RNG dans le script ; le retrait du `LoadBlobStep` changera néanmoins la consommation RNG antérieure et donc potentiellement les étages générés.
+
+Risques : un décor peut chevaucher visuellement une future apparition d’objet ou un escalier ; une ancienne partie peut conserver une carte déjà générée ; les tests de doublure ne prouvent pas le rendu ou la compatibilité des sauvegardes réelles. Pas de modification, installation ou publication avant ces contrôles. La sauvegarde complète `../chantier-lostwood-amapola/sauvegarde-lostwood-057.zip` contient 69 fichiers originaux contrôlés par blob Git et CRC.

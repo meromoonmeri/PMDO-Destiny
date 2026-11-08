@@ -1,0 +1,28 @@
+{
+  "source_ciels": "PMDO-Destiny ee39156a24f350b67e81740478be8505f4ff1a05 zrv2_zone_reveil_jour et nuit, calques 01 ciel, 02 etoiles et 03 astre",
+  "source_mer_jour": "https://projectpokemon.org/home/gallery/image/77604-v24p02apng/",
+  "source_mer_et_nuages_nuit": "https://projectpokemon.org/home/gallery/image/77603-v24p01apng/",
+  "source_nuages_jour": "https://projectpokemon.org/home/gallery/image/77526-v24p08apng/",
+  "nuages_jour_boxes": [
+    [
+      169,
+      41,
+      278,
+      80
+    ],
+    [
+      16,
+      100,
+      131,
+      144
+    ]
+  ],
+  "etoiles_nocturnes": "calque original Réveil 24 phases sur recadrage central, 5 ticks/phase",
+  "mer": "mer haute native 12 phases, deuxième ligne de vagues masquée, fond bas prolongé de couleur native et deux vagues isolées extraites des phases correspondantes",
+  "période_secondes": 16,
+  "égalité_phase_0_120_avant_encodage": {
+    "nuit": true
+  },
+  "rendu": "simulation hors moteur",
+  "mer_sharpedo": "identification exacte non établie"
+}

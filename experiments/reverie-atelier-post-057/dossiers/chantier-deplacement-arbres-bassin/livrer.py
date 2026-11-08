@@ -1,0 +1,12 @@
+from pathlib import Path
+import zipfile,base64,hashlib
+R=Path('/home/user/chantier-deplacement-arbres-bassin')
+def data(n):return base64.b64encode((R/n).read_bytes()).decode()
+html='''<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Réverie — arbres déplacés</title><style>body{margin:0;background:#f2f1e8;color:#213429;font:16px/1.5 system-ui}header{padding:26px max(5vw,20px);background:#244735;color:white}main{max-width:1500px;margin:auto;padding:20px}section{background:white;border:1px solid #d7ddd2;border-radius:12px;padding:18px;margin:16px 0}h1{margin:0}img{max-width:100%;height:auto;image-rendering:pixelated}.note{padding:14px;background:#fff4d9;border-radius:8px}</style><header><h1>Bassin de Réverie</h1><p>Déplacement des arbres près des falaises · comparaison statique</p></header><main><div class="note">Candidat local non publié. Les arbres sont réellement déplacés, et non masqués par un raccord de falaise. Les collisions ouest et le rendu doivent encore être vérifiés en jeu.</div><section><h2>À l’ouest</h2><p>Trois arbres décalés vers le haut et la gauche ; la touffe de fleurs animée voisine est décalée à gauche pour éviter un chevauchement.</p><img src="data:image/png;base64,'''+data('avant-apres-ouest.png')+'''" alt="Falaise ouest avant et après"></section><section><h2>À l’est</h2><p>L’arbre est remonté et les traits de sol découverts sous son ancien emplacement ont été repris.</p><img src="data:image/png;base64,'''+data('avant-apres-est.png')+'''" alt="Falaise est avant et après"></section><p>Les images montrent une phase statique et ne constituent pas une validation dans le moteur.</p></main></html>'''
+(R/'apercu-deplacement-arbres.html').write_text(html)
+paths=['ETAT-DEPLACEMENT.md','RAPPORT-PREALABLE.md','journal-deplacement.json','apercu-deplacement-arbres.html','candidat/payload/reverie_etang.rsground.gz','candidat/payload/reverie_etang_Dev.rsground.gz','banques/Reverie_Correction_Herbe_55.tile','banques/Reverie_Correction_Deplacement_Bassin.tile','sauvegardes/candidat-corrections-bassin-55.zip']
+z=R/'candidat-deplacement-arbres-bassin.zip'
+with zipfile.ZipFile(z,'w',zipfile.ZIP_DEFLATED,compresslevel=8) as f:
+ for p in paths:f.write(R/p,p)
+with zipfile.ZipFile(z) as f:assert f.testzip() is None
+print('CRC PASS ; archive',z.stat().st_size,hashlib.sha256(z.read_bytes()).hexdigest())

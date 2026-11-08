@@ -1,0 +1,7 @@
+# Reprise demandée — escalier 51 et rive 52
+
+Base du projet : v0.5.7, commit `ee39156a24f350b67e81740478be8505f4ff1a05`. Le premier raccord de la capture 51 a été expressément rejeté : il raccordait seulement le milieu de l’escalier. Il n’a pas été publié et ne sera pas réutilisé comme résultat final. L’objectif est un chemin partant des deux extrémités de la dernière marche puis rejoignant naturellement le chemin existant.
+
+Sur la capture 52, la ligne verte trop droite de la rive doit devenir irrégulière, sans aplat artificiel. La zone contient des images d’eau à quatre phases dans `River`, avec de l’eau opaque superposée dans `Objects` : repeindre la rive sur une image plate ou coller une bande au-dessus des personnages risquerait de couper l’animation ou de masquer les personnages. Toute retouche doit respecter les couches, les séquences et durées natives ; contrôler les quatre phases, les raccords aux deux extrémités, les objets, les collisions et les dix variantes.
+
+Les dix cartes et les 27 banques de tuiles de référence ont été téléchargées depuis le commit exact, vérifiées par blob Git et sauvegardées dans `sauvegarde-057-avant.zip` (CRC valide). Sauvegarde du raccord précédent : `sauvegarde-raccord51-local.zip` ; elle est conservée pour traçabilité, pas comme patch à installer. Les autres captures 46–50 et les ressources PMU restent dans le périmètre non terminé ; aucune release complète n’a été publiée. L’éditeur et le jeu réel ne sont pas disponibles pour valider visuellement ou tester une sauvegarde.

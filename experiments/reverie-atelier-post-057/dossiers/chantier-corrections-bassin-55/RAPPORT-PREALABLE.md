@@ -1,0 +1,5 @@
+# Rapport préalable — capture 55
+
+Base de travail : cartes jeu et Dev du candidat local des captures 53–54, elles-mêmes issues de Destiny v0.5.7 (`ee39156a24f350b67e81740478be8505f4ff1a05`). Les originaux vérifiés et le journal 53–54 sont conservés. Vérifier à nouveau la branche distante avant publication et ne pas écraser les corrections locales précédentes.
+
+Inspecter chacun des sept cercles : arbres et bord de falaise à l’ouest, souche, rebord sous arbre à l’est, herbe près des fleurs et du passage, arbre et ombre au sud-ouest. Le trait rouge de la capture ne fournit pas à lui seul l’élément précis : comparer le rendu aux calques et à des motifs intacts ; ne pas enlever une souche ou un personnage, ni réinventer les chemins. Corrections locales minimales dans des copies, avec journal avant/après ; ne toucher ni collisions, ni événements, ni animations, ni sauvegardes. Préserver les 11 calques, les deux variantes et leurs séquences d’animation. Pas de publication sans essais et autorisation.
