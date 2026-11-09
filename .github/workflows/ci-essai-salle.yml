@@ -41,13 +41,26 @@ jobs:
           set -o pipefail
           mkdir -p "$RUNNER_TEMP/pmdo/MODS"
           cp -a game "$RUNNER_TEMP/pmdo/MODS/Destiny"
-          cd "$RUNNER_TEMP/pmdo"
-          timeout 150s xvfb-run -a -s '-screen 0 1024x768x24' ./PMDC -quest Destiny -lang en 2>&1 | tee "$GITHUB_WORKSPACE/ci-test-salle/journal-moteur.txt" || true
-          cp capture-pmdo-*.png capture-pmdo-*.txt "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
-          cp -a LOG "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
-          find . -maxdepth 4 -type f \( -iname '*error*' -o -iname '*log*.txt' \) -size -5M -exec cp --parents '{}' "$GITHUB_WORKSPACE/ci-test-salle/" \; || true
-          test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-salle.png"
-          test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-preuve.txt"
+          for view in jour-sud jour-nord jour-gauche jour-droite nuit-sud; do
+            case "$view" in
+              jour-sud) export CI_SPAWN_X=280 CI_SPAWN_Y=280 CI_ROOM_IMAGE=ci-test-salle/salle-jour-572x464.png;;
+              jour-nord) export CI_SPAWN_X=280 CI_SPAWN_Y=170 CI_ROOM_IMAGE=ci-test-salle/salle-jour-572x464.png;;
+              jour-gauche) export CI_SPAWN_X=100 CI_SPAWN_Y=210 CI_ROOM_IMAGE=ci-test-salle/salle-jour-572x464.png;;
+              jour-droite) export CI_SPAWN_X=464 CI_SPAWN_Y=210 CI_ROOM_IMAGE=ci-test-salle/salle-jour-572x464.png;;
+              nuit-sud) export CI_SPAWN_X=280 CI_SPAWN_Y=280 CI_ROOM_IMAGE=ci-test-salle/salle-nuit-572x464.png;;
+            esac
+            echo "CI view=$view spawn=$CI_SPAWN_X,$CI_SPAWN_Y"
+            python ci-test-salle/preparer_salle.py
+            python tools/build_tile_index.py
+            cp game/Data/Ground/destiny_hub.rsground "$RUNNER_TEMP/pmdo/MODS/Destiny/Data/Ground/"
+            cp game/Content/Tile/CI_SallePrincipaleSpacieuse.tile game/Content/Tile/index.idx "$RUNNER_TEMP/pmdo/MODS/Destiny/Content/Tile/"
+            (cd "$RUNNER_TEMP/pmdo" && rm -f capture-pmdo-salle.png capture-pmdo-preuve.txt && timeout 150s xvfb-run -a -s '-screen 0 1024x768x24' ./PMDC -quest Destiny -lang en 2>&1) | tee "$GITHUB_WORKSPACE/ci-test-salle/journal-$view.txt" || true
+            test -s "$RUNNER_TEMP/pmdo/capture-pmdo-salle.png"
+            test -s "$RUNNER_TEMP/pmdo/capture-pmdo-preuve.txt"
+            cp "$RUNNER_TEMP/pmdo/capture-pmdo-salle.png" "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-$view.png"
+            cp "$RUNNER_TEMP/pmdo/capture-pmdo-preuve.txt" "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-$view.txt"
+          done
+          cp -a "$RUNNER_TEMP/pmdo/LOG" "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
       - name: Conserver capture ou diagnostic
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,6 +69,6 @@ jobs:
           path: |
             ci-test-salle/capture-pmdo-*.png
             ci-test-salle/capture-pmdo-*.txt
-            ci-test-salle/journal-moteur.txt
+            ci-test-salle/journal-*.txt
             ci-test-salle/LOG/**
           if-no-files-found: warn

@@ -5,7 +5,7 @@ import io, json, copy, struct, os
 root=Path('.')
 name='CI_SallePrincipaleSpacieuse'
 # La réduction 572x464 est une hypothèse, pas la taille finale du projet.
-im=Image.open('ci-test-salle/salle-jour-572x464.png').convert('RGBA')
+im=Image.open(os.environ.get('CI_ROOM_IMAGE','ci-test-salle/salle-jour-572x464.png')).convert('RGBA')
 assert im.size==(572,464)
 canvas=Image.new('RGBA',(576,464));canvas.alpha_composite(im,(2,0))
 w,h=canvas.size;tw,th=w//8,h//8
@@ -38,7 +38,7 @@ o['obstacles']=[[{'Bounds':{'X':x*8,'Y':y*8,'Width':8,'Height':8},'Tags':0} for 
 o['Comment']='CI seul: photographie candidate convertie en tuiles ; collisions non valides.'
 o['Decorations']=[{'Name':'New Deco','Layer':0,'Visible':True,'Anims':[]}]
 e=o['Entities'][0];e['GroundObjects']=[];e['MapChars']=[];e['Spawners']=[]
-e['Markers'][0]['Collider'].update(X=280,Y=280,Width=16,Height=16)
+e['Markers'][0]['Collider'].update(X=int(os.environ.get('CI_SPAWN_X','280')),Y=int(os.environ.get('CI_SPAWN_Y','280')),Width=16,Height=16)
 p.write_text(json.dumps(doc,ensure_ascii=False,separators=(',',':')),encoding='utf8')
 p=root/'game/Data/Script/destiny/ground/destiny_hub/init.lua'
 p.write_text("require 'origin.common'\nlocal destiny_hub = {}\nfunction destiny_hub.Init(map) end\nfunction destiny_hub.Enter(map) GAME:FadeIn(20) end\nfunction destiny_hub.GameLoad(map) GAME:FadeIn(20) end\nfunction destiny_hub.Update(map,time) end\nreturn destiny_hub\n",encoding='utf8')
