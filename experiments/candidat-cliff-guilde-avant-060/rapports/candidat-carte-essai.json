@@ -1,0 +1,43 @@
+{
+  "carte": "guilde_cliff_essai_jour",
+  "dimensions_pixels": [
+    480,
+    520
+  ],
+  "dimensions_cases": [
+    60,
+    65
+  ],
+  "calques": [
+    "00_Scene_Jour_Fixe",
+    "01_QG_Porte_Ouverte",
+    "02_Porte_Fermee"
+  ],
+  "tileset": "Destiny_GuildeCliff_Essai_Jour_059",
+  "tuiles_uniques": 1140,
+  "cellules_par_couche": [
+    3900,
+    647,
+    34
+  ],
+  "spawn_heros": [
+    224,
+    472
+  ],
+  "spawn_partenaire": [
+    248,
+    472
+  ],
+  "seuil_porte": [
+    224,
+    344
+  ],
+  "bfs_pas_8_px_cases": 327,
+  "bfs_porte_atteignable": true,
+  "validation_jeu": false,
+  "sprite_door_declenchement": false,
+  "eau_etoiles_nuages_animes": false,
+  "raccord_reverie": false,
+  "reproducible_art_pixels_sans_interpolation_au_decoupage": true,
+  "statut": "candidat isole incomplet, non installable tel quel"
+}
