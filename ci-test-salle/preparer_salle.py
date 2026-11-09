@@ -31,6 +31,7 @@ for x in range(tw):
   if i is not None:cell['Layers']=[{'Frames':[{'Sheet':name,'TexLoc':{'X':i%32,'Y':i//32}}],'FrameLength':60}]
   col.append(cell)
  cols.append(col)
+o['TexSize']=1  # une case de calque = une texture 8x8 ; le gabarit était en cases de 24x24
 o['Layers']=[{'Name':'CI-image-plate-test-echelle','Layer':0,'Visible':True,'Tiles':cols}]
 # Ouvert pour le test visuel uniquement : ne représente pas les collisions définitives.
 o['obstacles']=[[{'Bounds':{'X':x*8,'Y':y*8,'Width':8,'Height':8},'Tags':0} for y in range(th)] for x in range(tw)]
