@@ -1,0 +1,724 @@
+{
+  "base_commit": "0f52bc8c9200e52b1134d1c300d951c01743c964",
+  "format": "PMDO TileIndexNode : int32 taille, int32 nb, puis coordonnées int32 x/y et offset int64, suivis de BaseSheet natifs.",
+  "nb_source": 44,
+  "nb_banques": 14,
+  "indexed_tiles": 194126,
+  "tile_mapping": {
+    "Reverie_Town_Base": {
+      "source": "Reverie_Town_Base",
+      "dest": "Reverie_WV_01_Base",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        189,
+        189
+      ],
+      "source_sha256": "305a732461d128707640c76d92f7539e4d2fd5359461f30c718c50a2d2ae4d64",
+      "indexed_tiles": 35646
+    },
+    "Altere_Pond_Base": {
+      "source": "Altere_Pond_Base",
+      "dest": "Reverie_WV_01_Base",
+      "offset_x": 189,
+      "offset_y": 0,
+      "reserved_tiles": [
+        116,
+        96
+      ],
+      "source_sha256": "c78a5e1c6bc1c9ce60c54057e3a5399bed5667a6b834ce739cc6604cb6a17e90",
+      "indexed_tiles": 11044
+    },
+    "Reverie_Altere_Transition_Base": {
+      "source": "Reverie_Altere_Transition_Base",
+      "dest": "Reverie_WV_01_Base",
+      "offset_x": 305,
+      "offset_y": 0,
+      "reserved_tiles": [
+        64,
+        38
+      ],
+      "source_sha256": "9be6b93ad79a175bd86fdae844e8b75d851f2f67e457d9a2939c719219a6dc67",
+      "indexed_tiles": 2248
+    },
+    "Illuminant_Riverbed_Base": {
+      "source": "Illuminant_Riverbed_Base",
+      "dest": "Reverie_WV_01_Base",
+      "offset_x": 369,
+      "offset_y": 0,
+      "reserved_tiles": [
+        40,
+        30
+      ],
+      "source_sha256": "54e35a0cb291028b6a2d1d9e8e4a575a945103e0f1a41dff07396e29a97ec15f",
+      "indexed_tiles": 1002
+    },
+    "Altere_Pond_Cliffs": {
+      "source": "Altere_Pond_Cliffs",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        116,
+        57
+      ],
+      "source_sha256": "bd4a34b1e9e7da9bc3420ec99ec8031bfa630b443185b3ad2710c4dfb0c1858c",
+      "indexed_tiles": 1840
+    },
+    "CanyonCamp": {
+      "source": "CanyonCamp",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 116,
+      "offset_y": 0,
+      "reserved_tiles": [
+        144,
+        81
+      ],
+      "source_sha256": "c308f5a58872d974d1232449521a073d21805f096291708507c99351a2761a12",
+      "indexed_tiles": 11248
+    },
+    "CLIFF MIROR-Photoroom": {
+      "source": "CLIFF MIROR-Photoroom",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 260,
+      "offset_y": 0,
+      "reserved_tiles": [
+        85,
+        68
+      ],
+      "source_sha256": "930e5707290b37808377ac8831c465a91586a497556fb51cf5e0121004cc3aea",
+      "indexed_tiles": 1647
+    },
+    "INVERSEPATHWAY": {
+      "source": "INVERSEPATHWAY",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 345,
+      "offset_y": 0,
+      "reserved_tiles": [
+        140,
+        97
+      ],
+      "source_sha256": "9502f90f07103042b38ea56884e3636d1532922b63e7c3d00719766832a70a53",
+      "indexed_tiles": 13580
+    },
+    "Reverie_Town_Cliffs": {
+      "source": "Reverie_Town_Cliffs",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 0,
+      "offset_y": 97,
+      "reserved_tiles": [
+        189,
+        68
+      ],
+      "source_sha256": "ffbe51fdb7da066ca9c9bb0ff9fd13fe0bd60017b01278056aacdddeb69efd34",
+      "indexed_tiles": 2169
+    },
+    "CLIFF MIROR": {
+      "source": "CLIFF MIROR",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 189,
+      "offset_y": 97,
+      "reserved_tiles": [
+        140,
+        99
+      ],
+      "source_sha256": "f3770e92a41b57f621e7969356d0d1919b80b9f2d5b72f446ce6f30ce89672a5",
+      "indexed_tiles": 13860
+    },
+    "patwhay": {
+      "source": "patwhay",
+      "dest": "Reverie_WV_02_Cliffs_Paths",
+      "offset_x": 329,
+      "offset_y": 97,
+      "reserved_tiles": [
+        54,
+        37
+      ],
+      "source_sha256": "4b3f686f2f85189b8366bb515076b5cb0215cd685368a4369b16a668059c7260",
+      "indexed_tiles": 1998
+    },
+    "Altere_Pond_River": {
+      "source": "Altere_Pond_River",
+      "dest": "Reverie_WV_03_River",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        85,
+        60
+      ],
+      "source_sha256": "da5288f41077657c330072cce3d6034b792e204c7f436a98ba528cb2fb8e7cd9",
+      "indexed_tiles": 1036
+    },
+    "Reverie_Town_River": {
+      "source": "Reverie_Town_River",
+      "dest": "Reverie_WV_03_River",
+      "offset_x": 85,
+      "offset_y": 0,
+      "reserved_tiles": [
+        142,
+        189
+      ],
+      "source_sha256": "e1c284b767a2f1195dc291756f44994fe904ad315c92e6d40cefc3a7ab8f9d81",
+      "indexed_tiles": 3204
+    },
+    "Reverie_Town_River_Animation_1": {
+      "source": "Reverie_Town_River_Animation_1",
+      "dest": "Reverie_WV_04_River_Frame1",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        142,
+        189
+      ],
+      "source_sha256": "e1c284b767a2f1195dc291756f44994fe904ad315c92e6d40cefc3a7ab8f9d81",
+      "indexed_tiles": 3204
+    },
+    "Reverie_Town_River_Animation_2": {
+      "source": "Reverie_Town_River_Animation_2",
+      "dest": "Reverie_WV_05_River_Frame2",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        142,
+        189
+      ],
+      "source_sha256": "4ebf844d4e3ed7b21ff57dd8b29f715b9494090f5417e763a754981add10a230",
+      "indexed_tiles": 3204
+    },
+    "Reverie_Town_River_Animation_3": {
+      "source": "Reverie_Town_River_Animation_3",
+      "dest": "Reverie_WV_06_River_Frame3",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        142,
+        189
+      ],
+      "source_sha256": "f712122bcc59e589150b4f3fb8bf689ac595ea96464f54e455f45967d9500e22",
+      "indexed_tiles": 3204
+    },
+    "Reverie_Town_River_Animation_4": {
+      "source": "Reverie_Town_River_Animation_4",
+      "dest": "Reverie_WV_07_River_Frame4",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        142,
+        189
+      ],
+      "source_sha256": "e6d8ff874ea3d687fb2039927700547703e19821881491b52ca43918dbf3704d",
+      "indexed_tiles": 3204
+    },
+    "Destiny_River_Filaments": {
+      "source": "Destiny_River_Filaments",
+      "dest": "Reverie_WV_08_Water_Animations",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        256,
+        11
+      ],
+      "source_sha256": "e02e40559f20f92f7a4af7cea6dc8cc0013ff08ad2f4678620d0482ea7c2cb1c",
+      "indexed_tiles": 2800
+    },
+    "Illuminant_Riverbed_River_Animations": {
+      "source": "Illuminant_Riverbed_River_Animations",
+      "dest": "Reverie_WV_08_Water_Animations",
+      "offset_x": 256,
+      "offset_y": 0,
+      "reserved_tiles": [
+        158,
+        30
+      ],
+      "source_sha256": "ee8e87c53df6b55c8882d2dc5d638ddd98c025dc32cc9bb6329bfbeecc41151e",
+      "indexed_tiles": 1248
+    },
+    "Altere_Pond_River_Animations": {
+      "source": "Altere_Pond_River_Animations",
+      "dest": "Reverie_WV_08_Water_Animations",
+      "offset_x": 0,
+      "offset_y": 30,
+      "reserved_tiles": [
+        171,
+        60
+      ],
+      "source_sha256": "1325be9449e1fa8de4af658b669c240cd2f7c7379bf468f49646af4ed26a841f",
+      "indexed_tiles": 4236
+    },
+    "Reverie_Town_Objects_Under": {
+      "source": "Reverie_Town_Objects_Under",
+      "dest": "Reverie_WV_09_Objects_Under",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        185,
+        186
+      ],
+      "source_sha256": "d0d28814d7face4f48f289964fe06fe5354aca2379404eb76cd27c444f2b9382",
+      "indexed_tiles": 1076
+    },
+    "Reverie_Town_Objects": {
+      "source": "Reverie_Town_Objects",
+      "dest": "Reverie_WV_10_Objects",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        189,
+        189
+      ],
+      "source_sha256": "3ef3fb3e33df245f7ef483d8e219f2e3cbbf8878395552703644fc2019e4992a",
+      "indexed_tiles": 16766
+    },
+    "Reverie_Altere_Transition_Objects": {
+      "source": "Reverie_Altere_Transition_Objects",
+      "dest": "Reverie_WV_10_Objects",
+      "offset_x": 189,
+      "offset_y": 0,
+      "reserved_tiles": [
+        64,
+        38
+      ],
+      "source_sha256": "5590eb9e7b1145323bddcd56f9effa94ec02709c074d0659e2e6b1a4cdb975bb",
+      "indexed_tiles": 1115
+    },
+    "Altere_Pond_Objects": {
+      "source": "Altere_Pond_Objects",
+      "dest": "Reverie_WV_10_Objects",
+      "offset_x": 253,
+      "offset_y": 0,
+      "reserved_tiles": [
+        116,
+        96
+      ],
+      "source_sha256": "0e59f85d809417d9c00fabb445fce76263578fa675c38e9484092982dd64db35",
+      "indexed_tiles": 4601
+    },
+    "Reverie_Town_Animation_Tileset": {
+      "source": "Reverie_Town_Animation_Tileset",
+      "dest": "Reverie_WV_11_Objects_Animated",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        64,
+        176
+      ],
+      "source_sha256": "51ee6afbd9da3747e060bf9c1f3dd3d9305853fbcb7cbf582b51b6fbea81e8d0",
+      "indexed_tiles": 4367
+    },
+    "Reverie_Town_Animated": {
+      "source": "Reverie_Town_Animated",
+      "dest": "Reverie_WV_11_Objects_Animated",
+      "offset_x": 64,
+      "offset_y": 0,
+      "reserved_tiles": [
+        189,
+        189
+      ],
+      "source_sha256": "3c94bfee6efe412b70d9222743f5ef8a114abc1cdd1c1614167fb79170c95c23",
+      "indexed_tiles": 2198
+    },
+    "Reverie_Town_Objects_Over": {
+      "source": "Reverie_Town_Objects_Over",
+      "dest": "Reverie_WV_12_Objects_Over",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        173,
+        166
+      ],
+      "source_sha256": "a7cb25978a034b0c1b71a3a574667c2557108fc6801f14d8def88f6c3a1cc1b1",
+      "indexed_tiles": 233
+    },
+    "Altere_Pond_Objects_Over": {
+      "source": "Altere_Pond_Objects_Over",
+      "dest": "Reverie_WV_12_Objects_Over",
+      "offset_x": 173,
+      "offset_y": 0,
+      "reserved_tiles": [
+        74,
+        37
+      ],
+      "source_sha256": "7027f6fd57c3a0f988c94637f595a5ea6140c82d4c51013375036f5d40e44525",
+      "indexed_tiles": 144
+    },
+    "Reverie_Town_Fringe": {
+      "source": "Reverie_Town_Fringe",
+      "dest": "Reverie_WV_13_Fringe_Trees",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        133,
+        143
+      ],
+      "source_sha256": "3d44e2a5277c29a461e583c51e4e67eefaa871af434ce97452f4d6dd2e58178c",
+      "indexed_tiles": 135
+    },
+    "PMD_TREES": {
+      "source": "PMD_TREES",
+      "dest": "Reverie_WV_13_Fringe_Trees",
+      "offset_x": 133,
+      "offset_y": 0,
+      "reserved_tiles": [
+        62,
+        61
+      ],
+      "source_sha256": "dd8e9e36f5df6f3b3b7db02fab924926a487ff499cfa25362d3cc8a703c2e78f",
+      "indexed_tiles": 2058
+    },
+    "Reverie_Town_Trimmed": {
+      "source": "Reverie_Town_Trimmed",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 0,
+      "offset_y": 0,
+      "reserved_tiles": [
+        189,
+        189
+      ],
+      "source_sha256": "0e43e675efef0678dd2f4feefa27d669f50bc479b3c34089c7519c62f6f287ec",
+      "indexed_tiles": 35721
+    },
+    "alakazam_redimensionne": {
+      "source": "alakazam_redimensionne",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 189,
+      "offset_y": 0,
+      "reserved_tiles": [
+        41,
+        32
+      ],
+      "source_sha256": "37cd7be55bac6caac4c25bb41fda70ed393d531a4da108c0a1c4686893b8ce12",
+      "indexed_tiles": 541
+    },
+    "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII": {
+      "source": "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 230,
+      "offset_y": 0,
+      "reserved_tiles": [
+        41,
+        32
+      ],
+      "source_sha256": "6889ba54ce889fb58895bc71a7367e538f8ddcc62df2dc4bea48f1eb8143b439",
+      "indexed_tiles": 601
+    },
+    "charmina_hut": {
+      "source": "charmina_hut",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 271,
+      "offset_y": 0,
+      "reserved_tiles": [
+        41,
+        32
+      ],
+      "source_sha256": "c41c820c757adff48daccbd4539d8d9b8805a635a6c1427703713eec8be0a1ac",
+      "indexed_tiles": 535
+    },
+    "tiles8_0058": {
+      "source": "tiles8_0058",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 312,
+      "offset_y": 0,
+      "reserved_tiles": [
+        14,
+        8
+      ],
+      "source_sha256": "4a7930f1e47415abf85edbc58f047d9a50f11d6b1384bfec125b4d8c17953a8f",
+      "indexed_tiles": 70
+    },
+    "drifblim_balloon_wip_by_geoisevil-d5re7m4": {
+      "source": "drifblim_balloon_wip_by_geoisevil-d5re7m4",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 326,
+      "offset_y": 0,
+      "reserved_tiles": [
+        12,
+        13
+      ],
+      "source_sha256": "3cce1f4b1341460d021005abfac6e321e19846d9b163f837ebd227dc8a4744e1",
+      "indexed_tiles": 115
+    },
+    "arcanine_hut_tileset_by_geoisevil-d5pujgf (2)": {
+      "source": "arcanine_hut_tileset_by_geoisevil-d5pujgf (2)",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 338,
+      "offset_y": 0,
+      "reserved_tiles": [
+        41,
+        32
+      ],
+      "source_sha256": "67152757a08a944762666d1877071ddac1013e632be3369e1389310275bd9760",
+      "indexed_tiles": 533
+    },
+    "KINGAMBIT DOJO": {
+      "source": "KINGAMBIT DOJO",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 379,
+      "offset_y": 0,
+      "reserved_tiles": [
+        30,
+        33
+      ],
+      "source_sha256": "1873c35de90fd2701a5d25b2853ae25f2bddf7b512b2ab875ac6c1f4d84f0551",
+      "indexed_tiles": 656
+    },
+    "tile_0021": {
+      "source": "tile_0021",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 409,
+      "offset_y": 0,
+      "reserved_tiles": [
+        2,
+        4
+      ],
+      "source_sha256": "d71a9bbdc1c27491bec91eee94eb15d7a07fd6fa7362e4ce98e5e42cf751ac0e",
+      "indexed_tiles": 4
+    },
+    "Ledian_Dojo_Objects": {
+      "source": "Ledian_Dojo_Objects",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 411,
+      "offset_y": 0,
+      "reserved_tiles": [
+        40,
+        39
+      ],
+      "source_sha256": "dbb0ea79e2aa2a039da4cb326ee0e13766ea7889916a20505ffc6b180d4b4e78",
+      "indexed_tiles": 179
+    },
+    "Reverie_Inn_Floor_Decor": {
+      "source": "Reverie_Inn_Floor_Decor",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 451,
+      "offset_y": 0,
+      "reserved_tiles": [
+        43,
+        39
+      ],
+      "source_sha256": "9410eb94edae0adb6a2f1d997d862ea1aba33cd953b0a992e8b90dcfc80d2df2",
+      "indexed_tiles": 167
+    },
+    "Reverie_Town_Normal_Home_Objects": {
+      "source": "Reverie_Town_Normal_Home_Objects",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 0,
+      "offset_y": 189,
+      "reserved_tiles": [
+        37,
+        26
+      ],
+      "source_sha256": "09d654f49eced37e9ee2fea5d649239761dcc5f0ff0d391c775338a78dcce930",
+      "indexed_tiles": 98
+    },
+    "kioskspinda": {
+      "source": "kioskspinda",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 37,
+      "offset_y": 189,
+      "reserved_tiles": [
+        28,
+        15
+      ],
+      "source_sha256": "fcdb42b6f6e2ff605e4eab7bd22175490c5db1ebb1c326f2313d801efba1e48b",
+      "indexed_tiles": 329
+    },
+    "FORGE": {
+      "source": "FORGE",
+      "dest": "Reverie_WV_14_Trimmed_Decor",
+      "offset_x": 65,
+      "offset_y": 189,
+      "reserved_tiles": [
+        18,
+        18
+      ],
+      "source_sha256": "9bb7ea6a7230f2574f5c3725129c0c1789fbe1bde58420d3f021025abc4b6f07",
+      "indexed_tiles": 262
+    }
+  },
+  "banks": [
+    {
+      "bank": "Reverie_WV_01_Base",
+      "indexed_tiles": 49940,
+      "size": 1783794,
+      "width_tiles": 409,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_Base",
+        "Altere_Pond_Base",
+        "Reverie_Altere_Transition_Base",
+        "Illuminant_Riverbed_Base"
+      ],
+      "sha256": "d88fd2c38988d6dd6ad5643524c93f24ec47d1f3120dce53b263ab63f119adef"
+    },
+    {
+      "bank": "Reverie_WV_02_Cliffs_Paths",
+      "indexed_tiles": 46342,
+      "size": 2107192,
+      "width_tiles": 485,
+      "height_tiles": 196,
+      "sources": [
+        "Altere_Pond_Cliffs",
+        "CanyonCamp",
+        "CLIFF MIROR-Photoroom",
+        "INVERSEPATHWAY",
+        "Reverie_Town_Cliffs",
+        "CLIFF MIROR",
+        "patwhay"
+      ],
+      "sha256": "aac861bce51a85578c5d43076dc8404bbeeaab433d362bfd271523f1405b8f4c"
+    },
+    {
+      "bank": "Reverie_WV_03_River",
+      "indexed_tiles": 4240,
+      "size": 231494,
+      "width_tiles": 227,
+      "height_tiles": 189,
+      "sources": [
+        "Altere_Pond_River",
+        "Reverie_Town_River"
+      ],
+      "sha256": "37e15be0b9e4afede1a806b6361ccc58c7d65c8d805600e9394dff551414298f"
+    },
+    {
+      "bank": "Reverie_WV_04_River_Frame1",
+      "indexed_tiles": 3204,
+      "size": 164077,
+      "width_tiles": 142,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_River_Animation_1"
+      ],
+      "sha256": "e1c284b767a2f1195dc291756f44994fe904ad315c92e6d40cefc3a7ab8f9d81"
+    },
+    {
+      "bank": "Reverie_WV_05_River_Frame2",
+      "indexed_tiles": 3204,
+      "size": 167796,
+      "width_tiles": 142,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_River_Animation_2"
+      ],
+      "sha256": "4ebf844d4e3ed7b21ff57dd8b29f715b9494090f5417e763a754981add10a230"
+    },
+    {
+      "bank": "Reverie_WV_06_River_Frame3",
+      "indexed_tiles": 3204,
+      "size": 167934,
+      "width_tiles": 142,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_River_Animation_3"
+      ],
+      "sha256": "f712122bcc59e589150b4f3fb8bf689ac595ea96464f54e455f45967d9500e22"
+    },
+    {
+      "bank": "Reverie_WV_07_River_Frame4",
+      "indexed_tiles": 3204,
+      "size": 167361,
+      "width_tiles": 142,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_River_Animation_4"
+      ],
+      "sha256": "e6d8ff874ea3d687fb2039927700547703e19821881491b52ca43918dbf3704d"
+    },
+    {
+      "bank": "Reverie_WV_08_Water_Animations",
+      "indexed_tiles": 8284,
+      "size": 869018,
+      "width_tiles": 414,
+      "height_tiles": 90,
+      "sources": [
+        "Destiny_River_Filaments",
+        "Illuminant_Riverbed_River_Animations",
+        "Altere_Pond_River_Animations"
+      ],
+      "sha256": "dd7a3cfbec7a3b88e178dfc46b2cde21a0fb392b2509cbde376545f7956917c1"
+    },
+    {
+      "bank": "Reverie_WV_09_Objects_Under",
+      "indexed_tiles": 1076,
+      "size": 94390,
+      "width_tiles": 185,
+      "height_tiles": 186,
+      "sources": [
+        "Reverie_Town_Objects_Under"
+      ],
+      "sha256": "d0d28814d7face4f48f289964fe06fe5354aca2379404eb76cd27c444f2b9382"
+    },
+    {
+      "bank": "Reverie_WV_10_Objects",
+      "indexed_tiles": 22482,
+      "size": 1399888,
+      "width_tiles": 369,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_Objects",
+        "Reverie_Altere_Transition_Objects",
+        "Altere_Pond_Objects"
+      ],
+      "sha256": "6062d9ee3ade9ceec181fa3f6b383410df1fa6bd591a5fa10212ff6a2e20283b"
+    },
+    {
+      "bank": "Reverie_WV_11_Objects_Animated",
+      "indexed_tiles": 6565,
+      "size": 527674,
+      "width_tiles": 253,
+      "height_tiles": 189,
+      "sources": [
+        "Reverie_Town_Animation_Tileset",
+        "Reverie_Town_Animated"
+      ],
+      "sha256": "56f57ec3e5282a06748588d5372a6e4d8270c847d1e95e464703fb4299f16115"
+    },
+    {
+      "bank": "Reverie_WV_12_Objects_Over",
+      "indexed_tiles": 377,
+      "size": 69242,
+      "width_tiles": 247,
+      "height_tiles": 166,
+      "sources": [
+        "Reverie_Town_Objects_Over",
+        "Altere_Pond_Objects_Over"
+      ],
+      "sha256": "2356332fc2cd03c338a21838c9a235ac105dd9b460f0604d98512b9996b70517"
+    },
+    {
+      "bank": "Reverie_WV_13_Fringe_Trees",
+      "indexed_tiles": 2193,
+      "size": 408033,
+      "width_tiles": 195,
+      "height_tiles": 143,
+      "sources": [
+        "Reverie_Town_Fringe",
+        "PMD_TREES"
+      ],
+      "sha256": "4156aa867c03af464c7373c3ef1065babe48fe3f4b14550136719159969ca967"
+    },
+    {
+      "bank": "Reverie_WV_14_Trimmed_Decor",
+      "indexed_tiles": 39811,
+      "size": 8051078,
+      "width_tiles": 494,
+      "height_tiles": 215,
+      "sources": [
+        "Reverie_Town_Trimmed",
+        "alakazam_redimensionne",
+        "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII",
+        "charmina_hut",
+        "tiles8_0058",
+        "drifblim_balloon_wip_by_geoisevil-d5re7m4",
+        "arcanine_hut_tileset_by_geoisevil-d5pujgf (2)",
+        "KINGAMBIT DOJO",
+        "tile_0021",
+        "Ledian_Dojo_Objects",
+        "Reverie_Inn_Floor_Decor",
+        "Reverie_Town_Normal_Home_Objects",
+        "kioskspinda",
+        "FORGE"
+      ],
+      "sha256": "a20c6adc0804392cd22c347305baaa6cd36bedc236ac364b0c111104cc0b9a68"
+    }
+  ],
+  "note": "Les 44 banques sources sont regroupées en 14 banques natives ; les octets de chaque tuile sont préservés. Les cascades de la carte passent de 60 à 10 par choix utilisateur ; la cadence de cascade Métano n’est pas démontrée."
+}

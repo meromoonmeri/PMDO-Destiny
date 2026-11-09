@@ -1,0 +1,45 @@
+AUDIT_GLACIER_ENTREE	1728	1296
+AUDIT_GLACIER_TELEPORTATION_TEST
+[2026/10/31 19:47:48.914] Index was outside the bounds of the array.
+Exception Depth: 0
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at RogueEssence.Ground.GroundMap.findWalls(Int32 x, Int32 y, Int32 w, Int32 h)+MoveNext()
+   at RogueEssence.Ground.GroundMap.FindPossible(Int32 x, Int32 y, Int32 w, Int32 h)+MoveNext()
+   at System.Linq.Enumerable.ExceptIterator[TSource](IEnumerable`1 first, IEnumerable`1 second, IEqualityComparer`1 comparer)+MoveNext()
+   at RogueEssence.Ground.GroundMap.Hit(Rect origin, Rect destination, IEnumerable`1 ignoring)
+   at RogueEssence.Ground.GroundMap.Simulate(List`1 hits, List`1 ignoring, IBox box, Rect origin, Rect destination, Func`2 filter)
+   at RogueEssence.Ground.GroundChar.Collide()
+   at RogueEssence.Ground.GroundScene.Update(FrameTick elapsedTime)
+   at RogueEssence.GameManager.Update(FrameTick elapsedTime)
+   at RogueEssence.GameManager.Update()
+   at RogueEssence.GameBase.Update(GameTime gameTime)
+
+
+Lua Trace:
+stack traceback:
+
+Coroutine Trace:
+
+[2026/10/31 19:47:48.936] Index was outside the bounds of the array.
+Exception Depth: 0
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at RogueEssence.Ground.GroundMap.findWalls(Int32 x, Int32 y, Int32 w, Int32 h)+MoveNext()
+   at RogueEssence.Ground.GroundMap.FindPossible(Int32 x, Int32 y, Int32 w, Int32 h)+MoveNext()
+   at System.Linq.Enumerable.ExceptIterator[TSource](IEnumerable`1 first, IEnumerable`1 second, IEqualityComparer`1 comparer)+MoveNext()
+   at RogueEssence.Ground.GroundMap.Hit(Rect origin, Rect destination, IEnumerable`1 ignoring)
+   at RogueEssence.Ground.GroundMap.Simulate(List`1 hits, List`1 ignoring, IBox box, Rect origin, Rect destination, Func`2 filter)
+   at RogueEssence.Ground.GroundChar.Collide()
+   at RogueEssence.Ground.GroundScene.Update(FrameTick elapsedTime)
+   at RogueEssence.GameManager.Update(FrameTick elapsedTime)
+   at RogueEssence.GameManager.Update()
+   at RogueEssence.GameBase.Update(GameTime gameTime)
+
+
+Lua Trace:
+stack traceback:
+
+Coroutine Trace:
+
+[2026/10/31 19:47:48.945] Index was outside the bounds of the array.
+Exception Depth: 0
+System.IndexOutOfRangeException: Index was outside the bounds of the array.

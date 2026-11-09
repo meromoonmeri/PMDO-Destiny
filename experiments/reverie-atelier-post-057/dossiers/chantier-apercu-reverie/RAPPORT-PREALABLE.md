@@ -1,0 +1,7 @@
+# Rapport préalable — deux sections, intérieurs et scène ACT
+
+Base publiée : v0.5.7. Les reprises de chemins, du café et de la cinématique de Lyra sont locales et ne sont pas publiées. L'utilisateur demande d'abord un aperçu de la division de la ville et du retrait du terrain au sud : ne pas redimensionner ou remplacer les cartes avant validation de cet aperçu. La ligne de séparation devra respecter la cascade, les ponts, les collisions, les PNJ, les entrées, les sauvegardes et les coordonnées de retour ; les anciennes cartes et références doivent être sauvegardées.
+
+Replacer la discussion ACT après la marche visible et le départ de Lyra avec le héros et son partenaire. Préserver les personnages, le contrôle et le menu d'exploration. Vérifier ordre, états, retours et scénarios sur doublures, sans prétendre à un test en jeu.
+
+Pour les intérieurs, examiner toutes les entrées et sorties, le suivi existant, les points de retour et le code moteur de musique avant toute modification ; préserver la musique continue entre extérieur et intérieur quand c'est la même piste, sans interrompre les musiques propres aux lieux concernés par erreur. Les retours doivent retrouver les deux personnages aux positions adéquates, sans collision ni coordonnées obsolètes. Ne pas supposer que le suivi déjà présent fonctionne en jeu ni qu'une correction isolée couvre tous les intérieurs. Sauvegardes et tests nécessaires avant intégration.

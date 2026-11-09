@@ -4,6 +4,20 @@ Base autonome du fangame **Pokémon Mystery Dungeon: Destiny**, construite avec 
 
 Ce dépôt est volontairement **sans Git LFS, sans sous-module et sans lien symbolique**. Le moteur, les ressources de base et le mod Destiny sont de vrais fichiers présents dans le dépôt.
 
+> **Branche `destiny-unifiee`** : Quest unique rassemblant tout le travail existant (scénario,
+> cinématique Pichu × Team Dazzling, falaises nord centre, paquets d'atelier, archives des anciennes
+> versions, `WaterfallVillageCapital` de town02). État des lieux, provenance de chaque carte,
+> correctifs et fichiers introuvables : [`docs/UNIFICATION_DESTINY.md`](docs/UNIFICATION_DESTINY.md).
+> `game/Data/Ground/WaterfallVillageCapital.rsground` (305 Mo > limite GitHub, budget LFS du compte
+> épuisé) est livrée compressée dans `payload/` : lancer `python3 tools/unpack_payload.py` après le
+> clone (fait automatiquement par `tools/validate.py` et `tools/build_windows.py`). Le même script
+> régénère `game/Content/Tile/index.idx` : cet index dépasse lui aussi 100 Mio, mais il est entièrement
+> dérivé des en-têtes des planches `.tile` versionnées et reste donc ignoré par Git.
+> Phase 2 (planches des cartes falaises restaurées à l'identique) et phase 3 (les 33 cartes « générées »
+> de l'atelier `projet-creation-pmdo` reconstruites par leurs `build.py` et intégrées : 28 identiques à
+> l'inventaire, 5 reconstructions déclarées) : §11 et §12 du même rapport ; `tools/build_tile_index.py`
+> regénère l'index après tout ajout ou toute modification de planche.
+
 ## Jouer sous Windows
 
 1. Télécharger `PMDO-Destiny-Windows-x64.zip` dans la section Releases.
@@ -16,7 +30,7 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
 ## Contenu actuel
 
-- écran-titre Destiny avec nuages et mer ;
+- écran-titre animé Destiny : mer et ciel JOUR/NUIT selon l'heure (24 poses), blason Œuf Ailé animé à l'ouverture du menu — voir [`docs/MENU_TITRE.md`](docs/MENU_TITRE.md) ;
 - moteur PMDO compilable et inclu dans `engine/` ;
 - données et ressources PMDO dans `base/` ;
 - quest autonome `destiny` dans `game/`, fusionnée au moteur dans le ZIP ;
@@ -76,9 +90,19 @@ Le contrôle vérifie notamment :
 - cohérence de la map, de la zone, de l'index et des paramètres de départ ;
 - dimensions de l'écran-titre interne PMDO.
 
-## Maps de PROJET-PMD
+## Maps importées de l'atelier guilde-treehouse-pmd
 
-Les maps de l'ancien dépôt peuvent être importées sélectivement dans `game/Data/Ground/`. Elles ne sont pas copiées massivement : certaines ressources de PROJET-PMD dépassent 100 Mio et devront être optimisées ou reconstruites pour conserver ce nouveau dépôt sans LFS.
+Le 26 octobre 2026, les créations de l'atelier
+[`guilde-treehouse-pmd`](https://github.com/meromoonmeri/guilde-treehouse-pmd)
+ont été importées (228 cartes au sol + 1 carte de donjon, 1 023 banques de
+tuiles, 102 fonds/objets), après audit de provenance et déduplication par
+lieu (dernière version de chaque lieu). Elles sont rangées dans trois zones
+dédiées — `cotes_metano`, `ateliers_donjons`, `reverie` — en plus de
+`destiny_hub`, avec des scripts squelettes ; les raccordements, collisions et
+cinématiques viendront ensuite. Rapport complet :
+[`docs/IMPORT_GUILDE_TREEHOUSE.md`](docs/IMPORT_GUILDE_TREEHOUSE.md) ;
+provenance et crédits : [`CREDITS.md`](CREDITS.md) ; état du projet :
+[`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md).
 
 ## Moteur et statut
 

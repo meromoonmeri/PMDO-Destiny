@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueEssence.Data;
 using RogueElements;
@@ -71,6 +71,12 @@ namespace RogueEssence.Ground
         private Emote currentEmote;
 
         public bool CollisionDisabled;
+
+        // Scene-local rendering override, never persisted in a map or save.
+        // False by default, so all existing characters retain their shadows.
+        [NonSerialized]
+        [JsonIgnore]
+        public bool HideShadow;
 
         private Loc drawOffset { get { return currentCharAction.DrawOffset; } }
         public override Loc MapLoc
@@ -361,6 +367,9 @@ namespace RogueEssence.Ground
 
         public void DrawShadow(SpriteBatch spriteBatch, Loc offset)
         {
+            if (HideShadow)
+                return;
+
             CharSheet sheet = GraphicsManager.GetChara(CurrentForm.ToCharID());
 
             Loc shadowType = new Loc(0, 2 + sheet.ShadowSize * 3);
@@ -407,6 +416,8 @@ namespace RogueEssence.Ground
         public override void Draw(SpriteBatch spriteBatch, Loc offset)
         {
             CharSheet sheet = GraphicsManager.GetChara(CurrentForm.ToCharID());
+            if (Map is GroundMap ground && ground.FilterNightCharacters)
+                sheet = sheet.GetDestinyNightCopy();
             currentCharAction.Draw(spriteBatch, offset, sheet);
 
             if (currentEmote != null)

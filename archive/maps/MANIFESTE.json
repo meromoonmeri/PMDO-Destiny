@@ -1,0 +1,4870 @@
+{
+  "date": "2026-11-04",
+  "commit_avant_operation": "46d38a6a143f1966177facddb87459043ec0d20b",
+  "perimetre_actif": "scénario actuel + Chapitres/Source + donjons actifs + hub technique + menu",
+  "zones_actives": {
+    "personality_test": [
+      "personality_test",
+      "intro_halo",
+      "reveil_nuit"
+    ],
+    "reverie": [
+      "clairiere",
+      "guild_path",
+      "pmd_petal_clearing",
+      "rvt2_ne_jour",
+      "rvt2_ne_nuit",
+      "rvt2_no_jour",
+      "rvt2_no_nuit",
+      "zrv2_zone_reveil_aube",
+      "zrv2_zone_reveil_crepuscule",
+      "zrv2_zone_reveil_jour",
+      "zrv2_zone_reveil_nuit"
+    ],
+    "town02_waterfallvillage": [
+      "WaterfallVillageCapital",
+      "waterfall_cave_1",
+      "caféspindaaccueil",
+      "spindacaféétage1",
+      "spindacaféétage1salle2",
+      "post_office",
+      "metano_fire_home",
+      "metano_water_home",
+      "metano_electric_home",
+      "metano_grass_home",
+      "metano_rock_home",
+      "metano_normal_home",
+      "metano_inn",
+      "guild_storage_room",
+      "guild_heros_room",
+      "ledian_dojo",
+      "dojo_ossatueur",
+      "dojo_kingambit"
+    ],
+    "destiny_cliff_tests": [
+      "cliffdaytest",
+      "cliffdaytest_source",
+      "cliffnordouesttest1",
+      "cliffnordouesttest1_nuit",
+      "cliffdaytest_nuit"
+    ],
+    "lost_wood": [],
+    "dazzling_fight": [],
+    "destiny_hub": [
+      "destiny_hub"
+    ],
+    "vitrines_menu": [
+      "pmd_destiny_menu_jour"
+    ],
+    "chapitres_destiny": [
+      "destiny_bourg_ecume_port",
+      "destiny_passe_rocheuse_ecumes",
+      "destiny_grotte_maree_entree",
+      "destiny_grotte_maree_boss",
+      "destiny_gorge_basaltique_magma_entree",
+      "destiny_caldeira_coeur_solaire_boss",
+      "destiny_sous_bois_mycelien",
+      "destiny_clairiere_source_lumineuse",
+      "destiny_source_irisee"
+    ]
+  },
+  "zones_archivees": {
+    "archives": [
+      "cote_v2_promontoire",
+      "cote_v2_terrasse",
+      "v30812_01_cap_large_jour",
+      "v30812_01_cap_large_nuit",
+      "v30812_02_terrasse_croissant_jour",
+      "v30812_02_terrasse_croissant_nuit",
+      "v30812_03_double_belvedere_jour",
+      "v30812_03_double_belvedere_nuit",
+      "v30812_04_pointe_sinueuse_jour",
+      "v30812_04_pointe_sinueuse_nuit",
+      "v30812_05_grande_mesa_jour",
+      "v30812_05_grande_mesa_nuit",
+      "v30812_06_crique_profonde_jour",
+      "v30812_06_crique_profonde_nuit",
+      "v30812_07_balcon_haut_jour",
+      "v30812_07_balcon_haut_nuit",
+      "v30812_08_terrasses_decalees_jour",
+      "v30812_08_terrasses_decalees_nuit",
+      "v30812_09_cap_eventail_jour",
+      "v30812_09_cap_eventail_nuit",
+      "v30812_10_esplanade_arrondie_jour",
+      "v30812_10_esplanade_arrondie_nuit",
+      "spindacafetest",
+      "rvt_ne_jour",
+      "rvt_ne_nuit",
+      "rvt_no_jour",
+      "rvt_no_nuit",
+      "v50812_beach_cave_entrance_v2",
+      "forest_render_v1",
+      "forest_magenta_v1",
+      "etc1_tour_celeste",
+      "cliffdaytest_nuit_v1_nord_nuit",
+      "cliffdaytest_nuit_v2_animee",
+      "cliffdaytest_nuit_v3_compat_town02",
+      "cliffnordouesttest1_nuit_v1_nord_nuit",
+      "cliffnordouesttest1_nuit_v2_animee",
+      "cliffnordouesttest1_compat_town02"
+    ],
+    "ateliers_donjons": [
+      "agm3_arene_groudon_magma",
+      "atf1_arene_terapagos_fleurie",
+      "atp1_arene_terapagos",
+      "bzf1_belvedere_zone_zero_fleuri",
+      "canon1_JC1_entree_jour",
+      "canon1_JC1_entree_nuit",
+      "canon1_JC1_finale_jour",
+      "canon1_JC1_finale_nuit",
+      "canon1_TC1_entree_jour",
+      "canon1_TC1_entree_nuit",
+      "canon1_TC1_finale_jour",
+      "canon1_TC1_finale_nuit",
+      "clr1_colonnes_lances",
+      "dn1_brulees_entree",
+      "dn1_brulees_entree_nuit",
+      "dn1_brulees_fin",
+      "dn1_brulees_fin_nuit",
+      "dn1_desert_entree",
+      "dn1_desert_entree_nuit",
+      "dn1_desert_fin",
+      "dn1_desert_fin_nuit",
+      "dn1_discipline_entree",
+      "dn1_discipline_entree_nuit",
+      "dn1_discipline_fin",
+      "dn1_discipline_fin_nuit",
+      "dn1_foret_entree",
+      "dn1_foret_entree_nuit",
+      "dn1_foret_fin",
+      "dn1_foret_fin_nuit",
+      "dn1_ile_entree",
+      "dn1_ile_entree_nuit",
+      "dn1_ile_fin",
+      "dn1_ile_fin_nuit",
+      "dn1_jungle_entree",
+      "dn1_jungle_entree_nuit",
+      "dn1_jungle_fin",
+      "dn1_jungle_fin_nuit",
+      "dn1_lisiere_entree",
+      "dn1_lisiere_entree_nuit",
+      "dn1_lisiere_fin",
+      "dn1_lisiere_fin_nuit",
+      "dn1_marin_entree",
+      "dn1_marin_entree_nuit",
+      "dn1_marin_fin",
+      "dn1_marin_fin_nuit",
+      "dn1_plaines_entree",
+      "dn1_plaines_entree_nuit",
+      "dn1_plaines_fin",
+      "dn1_plaines_fin_nuit",
+      "dn1_secrete_entree",
+      "dn1_secrete_entree_nuit",
+      "dn1_secrete_fin",
+      "dn1_secrete_fin_nuit",
+      "dn1_volcan_entree",
+      "dn1_volcan_entree_nuit",
+      "dn1_volcan_fin",
+      "dn1_volcan_fin_nuit",
+      "eaf1_entree_zone_zero_fleurie",
+      "ebn1_entree_bristle",
+      "ecc1_entree_crystal_cave",
+      "ecc2_grotte_cristal_groudon",
+      "ecf1_entree_cratere_fosse",
+      "ecm1_entree_cratere_magma",
+      "ecn1_entree_cratere",
+      "ecn2_entree_cascade",
+      "ecv1_entree_couloir_violet",
+      "edp1_entree_dark_crater_pit",
+      "eff1_entree_foggy_forest",
+      "eff2_entree_foggy_forest_sans_tentes",
+      "egc1_entree_grotte_cascade",
+      "egn1_entree_givre",
+      "ehn1_entree_horn",
+      "ejn1_entree_jungle",
+      "ejs1_entree_jardin_secret",
+      "ejs2_entree_jardin_secret_temple",
+      "ejt1_entree_sentier_jungle",
+      "emb9_entree_mt_blaze",
+      "emf1_entree_mystifying_forest",
+      "emt1_entree_mt_thunder",
+      "entree_apple_woods_s2aw1",
+      "eqs1_entree_sables_mouvants",
+      "ern1_entree_ruine",
+      "esc1_entree_star_cave",
+      "esj1_entree_southern_jungle",
+      "esn2_entree_vapeur_jour",
+      "esp2_entree_sky_peak",
+      "esr1_entree_sealed_ruin",
+      "etc1_entree_clairiere_tropicale",
+      "eul1_entree_underground_lake",
+      "ewc3_entree_waterfall_cave",
+      "ewl1_entree_waterfall_ledge",
+      "ewn1_entree_waterfall",
+      "fbs1_fin_bristle_sommet",
+      "fcf1_fin_cratere_fosse",
+      "fgg2_fin_givre_aurore",
+      "fjs1_fin_jungle_sud",
+      "fmb9_fin_mt_blaze",
+      "fmf1_clairiere_mystifying",
+      "fmf2_enceinte_mystifying",
+      "foc1_fin_ocean_kyogre",
+      "forest_cave_render_v1",
+      "frp1_fin_ruine_puits",
+      "fsm1_fin_sables_mouvants",
+      "fst1_fin_star_cave",
+      "ful1_rive_underground_lake",
+      "fvs1_fin_vapeur_sommet",
+      "fwc1_fin_waterfall_cave",
+      "glacier_cliff_aurora_v1",
+      "plage_bc1_grande_jour",
+      "plage_cv2_anse",
+      "plage_cv2_crique",
+      "raf1_levre_cratere_fleurie",
+      "raf2_terrasses_fleuries",
+      "raf3_fond_fleuri",
+      "rzd1_ruines_zarbi",
+      "s2ap1_entree_amp_plains",
+      "sn4_arid_dungeon_entrance_jour",
+      "sn4_arid_dungeon_entrance_nuit",
+      "sn4_violet_underground_road_jour",
+      "sn4_violet_underground_road_nuit",
+      "sn_v3_blue_rock_cave",
+      "sn_v3_forest_cave",
+      "tma3_thunder_meadow_arene3",
+      "v50812_beach_cave_anse_des_marees",
+      "v50812_beach_cave_entrance_v3",
+      "v50812_beach_reference_multilayer_v1",
+      "vp1_fa1_energetic_forest_jour",
+      "vp1_fa1_energetic_forest_nuit",
+      "vp1_fa1_mushroom_forest_jour",
+      "vp1_fa1_mushroom_forest_nuit",
+      "vp1_gb1_grotte_brumeuse_jour",
+      "vp1_gb1_grotte_brumeuse_nuit",
+      "vp1_ia3_arene_glace_boreale",
+      "ece1_entree_crevasse_enneigee",
+      "egv1_entree_grotte_vasques",
+      "fgv1_fin_grotte_vasques",
+      "etx1_entree_traversee_cristalline",
+      "ftx1_fin_traversee_cristalline",
+      "mont_brasier_entree",
+      "mont_brasier_sommet",
+      "mont_foudre_entree",
+      "mont_foudre_sommet",
+      "mont_lointain_entree",
+      "mont_lointain_sommet",
+      "mine_magma_entree",
+      "mine_magma_arene",
+      "faille_spatiale_entree",
+      "faille_spatiale_sanctuaire",
+      "foret_givree_entree",
+      "foret_givree_sanctuaire",
+      "tour_celeste_entree",
+      "entree_falaise_trempee_sud_nord_v1",
+      "fin_falaise_trempee_source_v1",
+      "entree_promontoire_nuages_sud_nord_v1",
+      "fin_promontoire_nuages_clairiere_v1",
+      "entree_tourbiere_piliers_sud_nord_v1",
+      "agm1_arene_groudon_magma",
+      "agm2_arene_groudon_magma",
+      "esn1_entree_vapeur_jour",
+      "ewc1_entree_waterfall_cave",
+      "ewc2_entree_waterfall_cave",
+      "eaz1_entree_zone_zero",
+      "fgg1_fin_givre_grotte",
+      "raz1_levre_cratere",
+      "raz2_terrasses_cascades",
+      "raz3_fond_cristallin",
+      "stc1_tour_celeste",
+      "rtc1_tour_celeste",
+      "ekr1_entree_caverne_cristal",
+      "eoc1_entree_old_castle",
+      "faille_spatiale_sanctuaire_avant_portail",
+      "fkr1_fin_caverne_cristal",
+      "fct1_fin_clairiere_tropicale",
+      "fvc1_fin_couloir_violet",
+      "fse1_fin_jardin_secret",
+      "fth1_fin_mt_thunder",
+      "fmy1_fin_mystifying_forest",
+      "flu1_fin_underground_lake",
+      "fosse_argent_entree",
+      "fosse_argent_sanctuaire_lugia",
+      "great_canyon_entree",
+      "great_canyon_fin",
+      "grotte_ouest_entree",
+      "grotte_ouest_sanctuaire_mewtwo",
+      "kyurem_cratere_entree",
+      "kyurem_sanctuaire_glace",
+      "reshiram_montagne_entree",
+      "reshiram_sommet_flamme",
+      "ruines_enfouies_entree",
+      "ruines_enfouies_sanctuaire_mew",
+      "silent_chasm_entree",
+      "silent_chasm_fin",
+      "sinister_woods_entree_nuit",
+      "sinister_woods_entree",
+      "sinister_woods_fin_nuit",
+      "sinister_woods_fin",
+      "tiny_woods_entree",
+      "tiny_woods_fin",
+      "zekrom_montagne_entree",
+      "zekrom_sommet_tornade"
+    ],
+    "cotes_metano": [
+      "cote10_01_long_cap_jour",
+      "cote10_01_long_cap_nuit",
+      "cote10_02_mesa_jour",
+      "cote10_02_mesa_nuit",
+      "cote10_03_detroit_jour",
+      "cote10_03_detroit_nuit",
+      "cote10_04_deux_paliers_jour",
+      "cote10_04_deux_paliers_nuit",
+      "cote10_05_crique_jour",
+      "cote10_05_crique_nuit",
+      "cote10_06_cap_est_jour",
+      "cote10_06_cap_est_nuit",
+      "cote10_07_cap_ouest_jour",
+      "cote10_07_cap_ouest_nuit",
+      "cote10_08_corniche_jour",
+      "cote10_08_corniche_nuit",
+      "cote10_09_archipel_jour",
+      "cote10_09_archipel_nuit",
+      "cote10_10_trois_terrasses_jour",
+      "cote10_10_trois_terrasses_nuit",
+      "cote10_v2_promontoire_jour",
+      "cote10_v2_promontoire_nuit",
+      "cote10_v2_terrasse_jour",
+      "cote10_v2_terrasse_nuit",
+      "cote20_11_anses_jumelles_jour",
+      "cote20_11_anses_jumelles_nuit",
+      "cote20_12_balcon_asymetrique_jour",
+      "cote20_12_balcon_asymetrique_nuit",
+      "cote20_13_chapelet_jour",
+      "cote20_13_chapelet_nuit",
+      "cote20_14_corniches_paralleles_jour",
+      "cote20_14_corniches_paralleles_nuit",
+      "cote20_15_mesas_decalees_jour",
+      "cote20_15_mesas_decalees_nuit",
+      "cote20_16_couronne_jour",
+      "cote20_16_couronne_nuit",
+      "cote20_17_chenal_jour",
+      "cote20_17_chenal_nuit",
+      "cote20_18_esplanade_jour",
+      "cote20_18_esplanade_nuit",
+      "cote20_19_eperon_jour",
+      "cote20_19_eperon_nuit",
+      "cote20_20_marches_levant_jour",
+      "cote20_20_marches_levant_nuit",
+      "v40812_01_cap_large_jour",
+      "v40812_01_cap_large_nuit",
+      "v40812_02_terrasse_croissant_jour",
+      "v40812_02_terrasse_croissant_nuit",
+      "v40812_03_double_belvedere_jour",
+      "v40812_03_double_belvedere_nuit",
+      "v40812_04_pointe_sinueuse_jour",
+      "v40812_04_pointe_sinueuse_nuit",
+      "v40812_05_grande_mesa_jour",
+      "v40812_05_grande_mesa_nuit",
+      "v40812_06_crique_profonde_jour",
+      "v40812_06_crique_profonde_nuit",
+      "v40812_07_balcon_haut_jour",
+      "v40812_07_balcon_haut_nuit",
+      "v40812_08_terrasses_decalees_jour",
+      "v40812_08_terrasses_decalees_nuit",
+      "v40812_09_cap_eventail_jour",
+      "v40812_09_cap_eventail_nuit",
+      "v40812_10_esplanade_arrondie_jour",
+      "v40812_10_esplanade_arrondie_nuit",
+      "v50812_01_crete_sillage_jour",
+      "v50812_01_crete_sillage_nuit",
+      "v50812_02_caps_relies_jour",
+      "v50812_02_caps_relies_nuit",
+      "v50812_03_eventail_strates_jour",
+      "v50812_03_eventail_strates_nuit",
+      "v50812_04_lagune_occident_jour",
+      "v50812_04_lagune_occident_nuit",
+      "v50812_05_cote_quatre_pointes_jour",
+      "v50812_05_cote_quatre_pointes_nuit",
+      "v50812_06_sommet_balcon_jour",
+      "v50812_06_sommet_balcon_nuit",
+      "v50812_07_cap_chenal_jour",
+      "v50812_07_cap_chenal_nuit",
+      "v50812_08_antre_crochu_jour",
+      "v50812_08_antre_crochu_nuit",
+      "v50812_09_grotte_marees_jour",
+      "v50812_09_grotte_marees_nuit",
+      "v50812_10_defile_brume_jour",
+      "v50812_10_defile_brume_nuit"
+    ],
+    "falaises_nord_centre": [
+      "cliff_centre_01_grand_cap_panoramique_jour",
+      "cliff_centre_01_grand_cap_panoramique_nuit",
+      "cliff_centre_02_eperon_nord_effile_jour",
+      "cliff_centre_02_eperon_nord_effile_nuit",
+      "cliff_centre_03_double_terrasse_centrale_jour",
+      "cliff_centre_03_double_terrasse_centrale_nuit",
+      "cliff_centre_04_grande_esplanade_royale_jour",
+      "cliff_centre_04_grande_esplanade_royale_nuit",
+      "cliff_centre_05_cap_anse_jumelle_jour",
+      "cliff_centre_05_cap_anse_jumelle_nuit",
+      "cliff_centre_06_presquile_isthme_etroit_jour",
+      "cliff_centre_06_presquile_isthme_etroit_nuit",
+      "cliff_centre_07_cap_asymetrique_ouest_jour",
+      "cliff_centre_07_cap_asymetrique_ouest_nuit",
+      "cliff_centre_08_cap_asymetrique_est_jour",
+      "cliff_centre_08_cap_asymetrique_est_nuit",
+      "cliff_centre_09_trois_paliers_sacres_jour",
+      "cliff_centre_09_trois_paliers_sacres_nuit",
+      "cliff_centre_10_bastion_circulaire_jour",
+      "cliff_centre_10_bastion_circulaire_nuit"
+    ]
+  },
+  "grounds_actifs": [
+    {
+      "ground": "WaterfallVillageCapital",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 0,
+      "fichier": "payload/WaterfallVillageCapital.rsground.gz",
+      "octets_ground": null
+    },
+    {
+      "ground": "caféspindaaccueil",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 2,
+      "fichier": "game/Data/Ground/caféspindaaccueil.rsground",
+      "octets_ground": 2259906
+    },
+    {
+      "ground": "clairiere",
+      "zone": "reverie",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/clairiere.rsground",
+      "octets_ground": 2550369
+    },
+    {
+      "ground": "cliffdaytest",
+      "zone": "destiny_cliff_tests",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/cliffdaytest.rsground",
+      "octets_ground": 15421814
+    },
+    {
+      "ground": "cliffdaytest_nuit",
+      "zone": "destiny_cliff_tests",
+      "index_zone": 4,
+      "fichier": "game/Data/Ground/cliffdaytest_nuit.rsground",
+      "octets_ground": 13899672
+    },
+    {
+      "ground": "cliffdaytest_source",
+      "zone": "destiny_cliff_tests",
+      "index_zone": 1,
+      "fichier": "game/Data/Ground/cliffdaytest_source.rsground",
+      "octets_ground": 10042774
+    },
+    {
+      "ground": "cliffnordouesttest1",
+      "zone": "destiny_cliff_tests",
+      "index_zone": 2,
+      "fichier": "game/Data/Ground/cliffnordouesttest1.rsground",
+      "octets_ground": 7812806
+    },
+    {
+      "ground": "cliffnordouesttest1_nuit",
+      "zone": "destiny_cliff_tests",
+      "index_zone": 3,
+      "fichier": "game/Data/Ground/cliffnordouesttest1_nuit.rsground",
+      "octets_ground": 5473377
+    },
+    {
+      "ground": "destiny_bourg_ecume_port",
+      "zone": "chapitres_destiny",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/destiny_bourg_ecume_port.rsground",
+      "octets_ground": 7964072
+    },
+    {
+      "ground": "destiny_caldeira_coeur_solaire_boss",
+      "zone": "chapitres_destiny",
+      "index_zone": 5,
+      "fichier": "game/Data/Ground/destiny_caldeira_coeur_solaire_boss.rsground",
+      "octets_ground": 8873880
+    },
+    {
+      "ground": "destiny_clairiere_source_lumineuse",
+      "zone": "chapitres_destiny",
+      "index_zone": 7,
+      "fichier": "game/Data/Ground/destiny_clairiere_source_lumineuse.rsground",
+      "octets_ground": 8425220
+    },
+    {
+      "ground": "destiny_gorge_basaltique_magma_entree",
+      "zone": "chapitres_destiny",
+      "index_zone": 4,
+      "fichier": "game/Data/Ground/destiny_gorge_basaltique_magma_entree.rsground",
+      "octets_ground": 9624490
+    },
+    {
+      "ground": "destiny_grotte_maree_boss",
+      "zone": "chapitres_destiny",
+      "index_zone": 3,
+      "fichier": "game/Data/Ground/destiny_grotte_maree_boss.rsground",
+      "octets_ground": 8620906
+    },
+    {
+      "ground": "destiny_grotte_maree_entree",
+      "zone": "chapitres_destiny",
+      "index_zone": 2,
+      "fichier": "game/Data/Ground/destiny_grotte_maree_entree.rsground",
+      "octets_ground": 7888077
+    },
+    {
+      "ground": "destiny_hub",
+      "zone": "destiny_hub",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/destiny_hub.rsground",
+      "octets_ground": 428513
+    },
+    {
+      "ground": "destiny_passe_rocheuse_ecumes",
+      "zone": "chapitres_destiny",
+      "index_zone": 1,
+      "fichier": "game/Data/Ground/destiny_passe_rocheuse_ecumes.rsground",
+      "octets_ground": 7727386
+    },
+    {
+      "ground": "destiny_source_irisee",
+      "zone": "chapitres_destiny",
+      "index_zone": 8,
+      "fichier": "game/Data/Ground/destiny_source_irisee.rsground",
+      "octets_ground": 671823
+    },
+    {
+      "ground": "destiny_sous_bois_mycelien",
+      "zone": "chapitres_destiny",
+      "index_zone": 6,
+      "fichier": "game/Data/Ground/destiny_sous_bois_mycelien.rsground",
+      "octets_ground": 7828605
+    },
+    {
+      "ground": "dojo_kingambit",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 17,
+      "fichier": "game/Data/Ground/dojo_kingambit.rsground",
+      "octets_ground": 753603
+    },
+    {
+      "ground": "dojo_ossatueur",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 16,
+      "fichier": "game/Data/Ground/dojo_ossatueur.rsground",
+      "octets_ground": 750426
+    },
+    {
+      "ground": "guild_heros_room",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 14,
+      "fichier": "game/Data/Ground/guild_heros_room.rsground",
+      "octets_ground": 1446461
+    },
+    {
+      "ground": "guild_path",
+      "zone": "reverie",
+      "index_zone": 1,
+      "fichier": "game/Data/Ground/guild_path.rsground",
+      "octets_ground": 1074843
+    },
+    {
+      "ground": "guild_storage_room",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 13,
+      "fichier": "game/Data/Ground/guild_storage_room.rsground",
+      "octets_ground": 1774429
+    },
+    {
+      "ground": "intro_halo",
+      "zone": "personality_test",
+      "index_zone": 1,
+      "fichier": "game/Data/Ground/intro_halo.rsground",
+      "octets_ground": 286572
+    },
+    {
+      "ground": "ledian_dojo",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 15,
+      "fichier": "game/Data/Ground/ledian_dojo.rsground",
+      "octets_ground": 1332926
+    },
+    {
+      "ground": "metano_electric_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 8,
+      "fichier": "game/Data/Ground/metano_electric_home.rsground",
+      "octets_ground": 511233
+    },
+    {
+      "ground": "metano_fire_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 6,
+      "fichier": "game/Data/Ground/metano_fire_home.rsground",
+      "octets_ground": 540878
+    },
+    {
+      "ground": "metano_grass_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 9,
+      "fichier": "game/Data/Ground/metano_grass_home.rsground",
+      "octets_ground": 554729
+    },
+    {
+      "ground": "metano_inn",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 12,
+      "fichier": "game/Data/Ground/metano_inn.rsground",
+      "octets_ground": 1435566
+    },
+    {
+      "ground": "metano_normal_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 11,
+      "fichier": "game/Data/Ground/metano_normal_home.rsground",
+      "octets_ground": 615723
+    },
+    {
+      "ground": "metano_rock_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 10,
+      "fichier": "game/Data/Ground/metano_rock_home.rsground",
+      "octets_ground": 514315
+    },
+    {
+      "ground": "metano_water_home",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 7,
+      "fichier": "game/Data/Ground/metano_water_home.rsground",
+      "octets_ground": 2021548
+    },
+    {
+      "ground": "personality_test",
+      "zone": "personality_test",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/personality_test.rsground",
+      "octets_ground": 180870
+    },
+    {
+      "ground": "pmd_destiny_menu_jour",
+      "zone": "vitrines_menu",
+      "index_zone": 0,
+      "fichier": "game/Data/Ground/pmd_destiny_menu_jour.rsground",
+      "octets_ground": 12037250
+    },
+    {
+      "ground": "pmd_petal_clearing",
+      "zone": "reverie",
+      "index_zone": 2,
+      "fichier": "game/Data/Ground/pmd_petal_clearing.rsground",
+      "octets_ground": 2451773
+    },
+    {
+      "ground": "post_office",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 5,
+      "fichier": "game/Data/Ground/post_office.rsground",
+      "octets_ground": 180573
+    },
+    {
+      "ground": "reveil_nuit",
+      "zone": "personality_test",
+      "index_zone": 2,
+      "fichier": "game/Data/Ground/reveil_nuit.rsground",
+      "octets_ground": 13897402
+    },
+    {
+      "ground": "rvt2_ne_jour",
+      "zone": "reverie",
+      "index_zone": 3,
+      "fichier": "game/Data/Ground/rvt2_ne_jour.rsground",
+      "octets_ground": 5360020
+    },
+    {
+      "ground": "rvt2_ne_nuit",
+      "zone": "reverie",
+      "index_zone": 4,
+      "fichier": "game/Data/Ground/rvt2_ne_nuit.rsground",
+      "octets_ground": 5426274
+    },
+    {
+      "ground": "rvt2_no_jour",
+      "zone": "reverie",
+      "index_zone": 5,
+      "fichier": "game/Data/Ground/rvt2_no_jour.rsground",
+      "octets_ground": 5334069
+    },
+    {
+      "ground": "rvt2_no_nuit",
+      "zone": "reverie",
+      "index_zone": 6,
+      "fichier": "game/Data/Ground/rvt2_no_nuit.rsground",
+      "octets_ground": 5400473
+    },
+    {
+      "ground": "spindacaféétage1",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 3,
+      "fichier": "game/Data/Ground/spindacaféétage1.rsground",
+      "octets_ground": 1604932
+    },
+    {
+      "ground": "spindacaféétage1salle2",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 4,
+      "fichier": "game/Data/Ground/spindacaféétage1salle2.rsground",
+      "octets_ground": 2269156
+    },
+    {
+      "ground": "waterfall_cave_1",
+      "zone": "town02_waterfallvillage",
+      "index_zone": 1,
+      "fichier": "game/Data/Ground/waterfall_cave_1.rsground",
+      "octets_ground": 1817738
+    },
+    {
+      "ground": "zrv2_zone_reveil_aube",
+      "zone": "reverie",
+      "index_zone": 7,
+      "fichier": "game/Data/Ground/zrv2_zone_reveil_aube.rsground",
+      "octets_ground": 26728023
+    },
+    {
+      "ground": "zrv2_zone_reveil_crepuscule",
+      "zone": "reverie",
+      "index_zone": 8,
+      "fichier": "game/Data/Ground/zrv2_zone_reveil_crepuscule.rsground",
+      "octets_ground": 26743063
+    },
+    {
+      "ground": "zrv2_zone_reveil_jour",
+      "zone": "reverie",
+      "index_zone": 9,
+      "fichier": "game/Data/Ground/zrv2_zone_reveil_jour.rsground",
+      "octets_ground": 25744419
+    },
+    {
+      "ground": "zrv2_zone_reveil_nuit",
+      "zone": "reverie",
+      "index_zone": 10,
+      "fichier": "game/Data/Ground/zrv2_zone_reveil_nuit.rsground",
+      "octets_ground": 27938577
+    }
+  ],
+  "grounds_archives": [
+    {
+      "ground": "agm1_arene_groudon_magma",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 156,
+      "octets_ground": 12866579,
+      "script": {
+        "fichiers": 1,
+        "octets": 481
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/agm1_arene_groudon_magma.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/agm1_arene_groudon_magma/"
+    },
+    {
+      "ground": "agm2_arene_groudon_magma",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 157,
+      "octets_ground": 16878809,
+      "script": {
+        "fichiers": 1,
+        "octets": 481
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/agm2_arene_groudon_magma.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/agm2_arene_groudon_magma/"
+    },
+    {
+      "ground": "agm3_arene_groudon_magma",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 0,
+      "octets_ground": 16926920,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/agm3_arene_groudon_magma.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/agm3_arene_groudon_magma/"
+    },
+    {
+      "ground": "atf1_arene_terapagos_fleurie",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 1,
+      "octets_ground": 15846573,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/atf1_arene_terapagos_fleurie.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/atf1_arene_terapagos_fleurie/"
+    },
+    {
+      "ground": "atp1_arene_terapagos",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 2,
+      "octets_ground": 15116984,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/atp1_arene_terapagos.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/atp1_arene_terapagos/"
+    },
+    {
+      "ground": "bzf1_belvedere_zone_zero_fleuri",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 3,
+      "octets_ground": 13404100,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/bzf1_belvedere_zone_zero_fleuri.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/bzf1_belvedere_zone_zero_fleuri/"
+    },
+    {
+      "ground": "canon1_JC1_entree_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 4,
+      "octets_ground": 2403254,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_JC1_entree_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_JC1_entree_jour/"
+    },
+    {
+      "ground": "canon1_JC1_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 5,
+      "octets_ground": 2403254,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_JC1_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_JC1_entree_nuit/"
+    },
+    {
+      "ground": "canon1_JC1_finale_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 6,
+      "octets_ground": 2848676,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_JC1_finale_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_JC1_finale_jour/"
+    },
+    {
+      "ground": "canon1_JC1_finale_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 7,
+      "octets_ground": 2848676,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_JC1_finale_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_JC1_finale_nuit/"
+    },
+    {
+      "ground": "canon1_TC1_entree_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 8,
+      "octets_ground": 2352131,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_TC1_entree_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_TC1_entree_jour/"
+    },
+    {
+      "ground": "canon1_TC1_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 9,
+      "octets_ground": 2352131,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_TC1_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_TC1_entree_nuit/"
+    },
+    {
+      "ground": "canon1_TC1_finale_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 10,
+      "octets_ground": 2587911,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_TC1_finale_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_TC1_finale_jour/"
+    },
+    {
+      "ground": "canon1_TC1_finale_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 11,
+      "octets_ground": 2587911,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/canon1_TC1_finale_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/canon1_TC1_finale_nuit/"
+    },
+    {
+      "ground": "cliff_centre_01_grand_cap_panoramique_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 0,
+      "octets_ground": 5456645,
+      "script": {
+        "fichiers": 1,
+        "octets": 333
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_01_grand_cap_panoramique_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_01_grand_cap_panoramique_jour/"
+    },
+    {
+      "ground": "cliff_centre_01_grand_cap_panoramique_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 1,
+      "octets_ground": 5456930,
+      "script": {
+        "fichiers": 1,
+        "octets": 333
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_01_grand_cap_panoramique_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_01_grand_cap_panoramique_nuit/"
+    },
+    {
+      "ground": "cliff_centre_02_eperon_nord_effile_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 2,
+      "octets_ground": 5349789,
+      "script": {
+        "fichiers": 1,
+        "octets": 321
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_02_eperon_nord_effile_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_02_eperon_nord_effile_jour/"
+    },
+    {
+      "ground": "cliff_centre_02_eperon_nord_effile_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 3,
+      "octets_ground": 5350074,
+      "script": {
+        "fichiers": 1,
+        "octets": 321
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_02_eperon_nord_effile_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_02_eperon_nord_effile_nuit/"
+    },
+    {
+      "ground": "cliff_centre_03_double_terrasse_centrale_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 4,
+      "octets_ground": 5415107,
+      "script": {
+        "fichiers": 1,
+        "octets": 345
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_03_double_terrasse_centrale_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_03_double_terrasse_centrale_jour/"
+    },
+    {
+      "ground": "cliff_centre_03_double_terrasse_centrale_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 5,
+      "octets_ground": 5415392,
+      "script": {
+        "fichiers": 1,
+        "octets": 345
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_03_double_terrasse_centrale_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_03_double_terrasse_centrale_nuit/"
+    },
+    {
+      "ground": "cliff_centre_04_grande_esplanade_royale_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 6,
+      "octets_ground": 5478766,
+      "script": {
+        "fichiers": 1,
+        "octets": 341
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_04_grande_esplanade_royale_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_04_grande_esplanade_royale_jour/"
+    },
+    {
+      "ground": "cliff_centre_04_grande_esplanade_royale_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 7,
+      "octets_ground": 5479051,
+      "script": {
+        "fichiers": 1,
+        "octets": 341
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_04_grande_esplanade_royale_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_04_grande_esplanade_royale_nuit/"
+    },
+    {
+      "ground": "cliff_centre_05_cap_anse_jumelle_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 8,
+      "octets_ground": 5445235,
+      "script": {
+        "fichiers": 1,
+        "octets": 313
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_05_cap_anse_jumelle_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_05_cap_anse_jumelle_jour/"
+    },
+    {
+      "ground": "cliff_centre_05_cap_anse_jumelle_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 9,
+      "octets_ground": 5445520,
+      "script": {
+        "fichiers": 1,
+        "octets": 313
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_05_cap_anse_jumelle_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_05_cap_anse_jumelle_nuit/"
+    },
+    {
+      "ground": "cliff_centre_06_presquile_isthme_etroit_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 10,
+      "octets_ground": 5468949,
+      "script": {
+        "fichiers": 1,
+        "octets": 341
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_06_presquile_isthme_etroit_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_06_presquile_isthme_etroit_jour/"
+    },
+    {
+      "ground": "cliff_centre_06_presquile_isthme_etroit_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 11,
+      "octets_ground": 5469234,
+      "script": {
+        "fichiers": 1,
+        "octets": 341
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_06_presquile_isthme_etroit_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_06_presquile_isthme_etroit_nuit/"
+    },
+    {
+      "ground": "cliff_centre_07_cap_asymetrique_ouest_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 12,
+      "octets_ground": 5511036,
+      "script": {
+        "fichiers": 1,
+        "octets": 333
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_07_cap_asymetrique_ouest_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_07_cap_asymetrique_ouest_jour/"
+    },
+    {
+      "ground": "cliff_centre_07_cap_asymetrique_ouest_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 13,
+      "octets_ground": 5511321,
+      "script": {
+        "fichiers": 1,
+        "octets": 333
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_07_cap_asymetrique_ouest_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_07_cap_asymetrique_ouest_nuit/"
+    },
+    {
+      "ground": "cliff_centre_08_cap_asymetrique_est_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 14,
+      "octets_ground": 5443522,
+      "script": {
+        "fichiers": 1,
+        "octets": 325
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_08_cap_asymetrique_est_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_08_cap_asymetrique_est_jour/"
+    },
+    {
+      "ground": "cliff_centre_08_cap_asymetrique_est_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 15,
+      "octets_ground": 5443807,
+      "script": {
+        "fichiers": 1,
+        "octets": 325
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_08_cap_asymetrique_est_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_08_cap_asymetrique_est_nuit/"
+    },
+    {
+      "ground": "cliff_centre_09_trois_paliers_sacres_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 16,
+      "octets_ground": 5470620,
+      "script": {
+        "fichiers": 1,
+        "octets": 329
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_09_trois_paliers_sacres_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_09_trois_paliers_sacres_jour/"
+    },
+    {
+      "ground": "cliff_centre_09_trois_paliers_sacres_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 17,
+      "octets_ground": 5470905,
+      "script": {
+        "fichiers": 1,
+        "octets": 329
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_09_trois_paliers_sacres_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_09_trois_paliers_sacres_nuit/"
+    },
+    {
+      "ground": "cliff_centre_10_bastion_circulaire_jour",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 18,
+      "octets_ground": 5293471,
+      "script": {
+        "fichiers": 1,
+        "octets": 321
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_10_bastion_circulaire_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_10_bastion_circulaire_jour/"
+    },
+    {
+      "ground": "cliff_centre_10_bastion_circulaire_nuit",
+      "zone_origine": "falaises_nord_centre",
+      "index_zone_origine": 19,
+      "octets_ground": 5293756,
+      "script": {
+        "fichiers": 1,
+        "octets": 321
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliff_centre_10_bastion_circulaire_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliff_centre_10_bastion_circulaire_nuit/"
+    },
+    {
+      "ground": "cliffdaytest_nuit_v1_nord_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 31,
+      "octets_ground": 9139580,
+      "script": {
+        "fichiers": 1,
+        "octets": 517
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffdaytest_nuit_v1_nord_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffdaytest_nuit_v1_nord_nuit/"
+    },
+    {
+      "ground": "cliffdaytest_nuit_v2_animee",
+      "zone_origine": "archives",
+      "index_zone_origine": 32,
+      "octets_ground": 9301047,
+      "script": {
+        "fichiers": 1,
+        "octets": 499
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffdaytest_nuit_v2_animee.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffdaytest_nuit_v2_animee/"
+    },
+    {
+      "ground": "cliffdaytest_nuit_v3_compat_town02",
+      "zone_origine": "archives",
+      "index_zone_origine": 33,
+      "octets_ground": 4939378,
+      "script": {
+        "fichiers": 1,
+        "octets": 541
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffdaytest_nuit_v3_compat_town02.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffdaytest_nuit_v3_compat_town02/"
+    },
+    {
+      "ground": "cliffnordouesttest1_compat_town02",
+      "zone_origine": "archives",
+      "index_zone_origine": 36,
+      "octets_ground": 5463330,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffnordouesttest1_compat_town02.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffnordouesttest1_compat_town02/"
+    },
+    {
+      "ground": "cliffnordouesttest1_nuit_v1_nord_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 34,
+      "octets_ground": 7373912,
+      "script": {
+        "fichiers": 1,
+        "octets": 559
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffnordouesttest1_nuit_v1_nord_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffnordouesttest1_nuit_v1_nord_nuit/"
+    },
+    {
+      "ground": "cliffnordouesttest1_nuit_v2_animee",
+      "zone_origine": "archives",
+      "index_zone_origine": 35,
+      "octets_ground": 7385725,
+      "script": {
+        "fichiers": 1,
+        "octets": 541
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cliffnordouesttest1_nuit_v2_animee.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cliffnordouesttest1_nuit_v2_animee/"
+    },
+    {
+      "ground": "clr1_colonnes_lances",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 12,
+      "octets_ground": 16319615,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/clr1_colonnes_lances.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/clr1_colonnes_lances/"
+    },
+    {
+      "ground": "cote10_01_long_cap_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 0,
+      "octets_ground": 17842527,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_01_long_cap_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_01_long_cap_jour/"
+    },
+    {
+      "ground": "cote10_01_long_cap_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 1,
+      "octets_ground": 17842163,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_01_long_cap_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_01_long_cap_nuit/"
+    },
+    {
+      "ground": "cote10_02_mesa_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 2,
+      "octets_ground": 17731417,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_02_mesa_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_02_mesa_jour/"
+    },
+    {
+      "ground": "cote10_02_mesa_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 3,
+      "octets_ground": 17731106,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_02_mesa_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_02_mesa_nuit/"
+    },
+    {
+      "ground": "cote10_03_detroit_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 4,
+      "octets_ground": 20357854,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_03_detroit_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_03_detroit_jour/"
+    },
+    {
+      "ground": "cote10_03_detroit_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 5,
+      "octets_ground": 20357621,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_03_detroit_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_03_detroit_nuit/"
+    },
+    {
+      "ground": "cote10_04_deux_paliers_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 6,
+      "octets_ground": 20961780,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_04_deux_paliers_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_04_deux_paliers_jour/"
+    },
+    {
+      "ground": "cote10_04_deux_paliers_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 7,
+      "octets_ground": 20961221,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_04_deux_paliers_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_04_deux_paliers_nuit/"
+    },
+    {
+      "ground": "cote10_05_crique_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 8,
+      "octets_ground": 23474409,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_05_crique_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_05_crique_jour/"
+    },
+    {
+      "ground": "cote10_05_crique_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 9,
+      "octets_ground": 23474102,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_05_crique_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_05_crique_nuit/"
+    },
+    {
+      "ground": "cote10_06_cap_est_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 10,
+      "octets_ground": 17686951,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_06_cap_est_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_06_cap_est_jour/"
+    },
+    {
+      "ground": "cote10_06_cap_est_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 11,
+      "octets_ground": 17686515,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_06_cap_est_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_06_cap_est_nuit/"
+    },
+    {
+      "ground": "cote10_07_cap_ouest_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 12,
+      "octets_ground": 17614449,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_07_cap_ouest_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_07_cap_ouest_jour/"
+    },
+    {
+      "ground": "cote10_07_cap_ouest_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 13,
+      "octets_ground": 17614190,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_07_cap_ouest_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_07_cap_ouest_nuit/"
+    },
+    {
+      "ground": "cote10_08_corniche_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 14,
+      "octets_ground": 17854247,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_08_corniche_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_08_corniche_jour/"
+    },
+    {
+      "ground": "cote10_08_corniche_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 15,
+      "octets_ground": 17853557,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_08_corniche_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_08_corniche_nuit/"
+    },
+    {
+      "ground": "cote10_09_archipel_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 16,
+      "octets_ground": 23303558,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_09_archipel_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_09_archipel_jour/"
+    },
+    {
+      "ground": "cote10_09_archipel_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 17,
+      "octets_ground": 23303242,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_09_archipel_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_09_archipel_nuit/"
+    },
+    {
+      "ground": "cote10_10_trois_terrasses_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 18,
+      "octets_ground": 23988263,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_10_trois_terrasses_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_10_trois_terrasses_jour/"
+    },
+    {
+      "ground": "cote10_10_trois_terrasses_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 19,
+      "octets_ground": 23987508,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_10_trois_terrasses_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_10_trois_terrasses_nuit/"
+    },
+    {
+      "ground": "cote10_v2_promontoire_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 20,
+      "octets_ground": 12740857,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_v2_promontoire_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_v2_promontoire_jour/"
+    },
+    {
+      "ground": "cote10_v2_promontoire_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 21,
+      "octets_ground": 12740833,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_v2_promontoire_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_v2_promontoire_nuit/"
+    },
+    {
+      "ground": "cote10_v2_terrasse_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 22,
+      "octets_ground": 13243233,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_v2_terrasse_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_v2_terrasse_jour/"
+    },
+    {
+      "ground": "cote10_v2_terrasse_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 23,
+      "octets_ground": 13243225,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote10_v2_terrasse_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote10_v2_terrasse_nuit/"
+    },
+    {
+      "ground": "cote20_11_anses_jumelles_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 24,
+      "octets_ground": 23771681,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_11_anses_jumelles_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_11_anses_jumelles_jour/"
+    },
+    {
+      "ground": "cote20_11_anses_jumelles_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 25,
+      "octets_ground": 23770664,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_11_anses_jumelles_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_11_anses_jumelles_nuit/"
+    },
+    {
+      "ground": "cote20_12_balcon_asymetrique_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 26,
+      "octets_ground": 20744316,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_12_balcon_asymetrique_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_12_balcon_asymetrique_jour/"
+    },
+    {
+      "ground": "cote20_12_balcon_asymetrique_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 27,
+      "octets_ground": 20743322,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_12_balcon_asymetrique_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_12_balcon_asymetrique_nuit/"
+    },
+    {
+      "ground": "cote20_13_chapelet_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 28,
+      "octets_ground": 23069190,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_13_chapelet_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_13_chapelet_jour/"
+    },
+    {
+      "ground": "cote20_13_chapelet_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 29,
+      "octets_ground": 23068834,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_13_chapelet_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_13_chapelet_nuit/"
+    },
+    {
+      "ground": "cote20_14_corniches_paralleles_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 30,
+      "octets_ground": 20795149,
+      "script": {
+        "fichiers": 1,
+        "octets": 658
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_14_corniches_paralleles_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_14_corniches_paralleles_jour/"
+    },
+    {
+      "ground": "cote20_14_corniches_paralleles_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 31,
+      "octets_ground": 20793795,
+      "script": {
+        "fichiers": 1,
+        "octets": 658
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_14_corniches_paralleles_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_14_corniches_paralleles_nuit/"
+    },
+    {
+      "ground": "cote20_15_mesas_decalees_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 32,
+      "octets_ground": 20507579,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_15_mesas_decalees_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_15_mesas_decalees_jour/"
+    },
+    {
+      "ground": "cote20_15_mesas_decalees_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 33,
+      "octets_ground": 20506876,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_15_mesas_decalees_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_15_mesas_decalees_nuit/"
+    },
+    {
+      "ground": "cote20_16_couronne_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 34,
+      "octets_ground": 23353173,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_16_couronne_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_16_couronne_jour/"
+    },
+    {
+      "ground": "cote20_16_couronne_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 35,
+      "octets_ground": 23352439,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_16_couronne_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_16_couronne_nuit/"
+    },
+    {
+      "ground": "cote20_17_chenal_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 36,
+      "octets_ground": 20577569,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_17_chenal_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_17_chenal_jour/"
+    },
+    {
+      "ground": "cote20_17_chenal_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 37,
+      "octets_ground": 20576763,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_17_chenal_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_17_chenal_nuit/"
+    },
+    {
+      "ground": "cote20_18_esplanade_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 38,
+      "octets_ground": 20754352,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_18_esplanade_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_18_esplanade_jour/"
+    },
+    {
+      "ground": "cote20_18_esplanade_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 39,
+      "octets_ground": 20753411,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_18_esplanade_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_18_esplanade_nuit/"
+    },
+    {
+      "ground": "cote20_19_eperon_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 40,
+      "octets_ground": 20499917,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_19_eperon_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_19_eperon_jour/"
+    },
+    {
+      "ground": "cote20_19_eperon_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 41,
+      "octets_ground": 20499226,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_19_eperon_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_19_eperon_nuit/"
+    },
+    {
+      "ground": "cote20_20_marches_levant_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 42,
+      "octets_ground": 23479482,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_20_marches_levant_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_20_marches_levant_jour/"
+    },
+    {
+      "ground": "cote20_20_marches_levant_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 43,
+      "octets_ground": 23478628,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote20_20_marches_levant_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote20_20_marches_levant_nuit/"
+    },
+    {
+      "ground": "cote_v2_promontoire",
+      "zone_origine": "archives",
+      "index_zone_origine": 0,
+      "octets_ground": 11527028,
+      "script": {
+        "fichiers": 1,
+        "octets": 451
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote_v2_promontoire.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote_v2_promontoire/"
+    },
+    {
+      "ground": "cote_v2_terrasse",
+      "zone_origine": "archives",
+      "index_zone_origine": 1,
+      "octets_ground": 12260594,
+      "script": {
+        "fichiers": 1,
+        "octets": 433
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/cote_v2_terrasse.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/cote_v2_terrasse/"
+    },
+    {
+      "ground": "dn1_brulees_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 13,
+      "octets_ground": 1397725,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_brulees_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_brulees_entree/"
+    },
+    {
+      "ground": "dn1_brulees_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 14,
+      "octets_ground": 1384403,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_brulees_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_brulees_entree_nuit/"
+    },
+    {
+      "ground": "dn1_brulees_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 15,
+      "octets_ground": 1388338,
+      "script": {
+        "fichiers": 1,
+        "octets": 538
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_brulees_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_brulees_fin/"
+    },
+    {
+      "ground": "dn1_brulees_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 16,
+      "octets_ground": 1375832,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_brulees_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_brulees_fin_nuit/"
+    },
+    {
+      "ground": "dn1_desert_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 17,
+      "octets_ground": 1968812,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_desert_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_desert_entree/"
+    },
+    {
+      "ground": "dn1_desert_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 18,
+      "octets_ground": 1788848,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_desert_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_desert_entree_nuit/"
+    },
+    {
+      "ground": "dn1_desert_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 19,
+      "octets_ground": 1734970,
+      "script": {
+        "fichiers": 1,
+        "octets": 532
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_desert_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_desert_fin/"
+    },
+    {
+      "ground": "dn1_desert_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 20,
+      "octets_ground": 1553828,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_desert_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_desert_fin_nuit/"
+    },
+    {
+      "ground": "dn1_discipline_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 21,
+      "octets_ground": 1684394,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_discipline_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_discipline_entree/"
+    },
+    {
+      "ground": "dn1_discipline_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 22,
+      "octets_ground": 1710410,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_discipline_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_discipline_entree_nuit/"
+    },
+    {
+      "ground": "dn1_discipline_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 23,
+      "octets_ground": 1790082,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_discipline_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_discipline_fin/"
+    },
+    {
+      "ground": "dn1_discipline_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 24,
+      "octets_ground": 1821827,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_discipline_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_discipline_fin_nuit/"
+    },
+    {
+      "ground": "dn1_foret_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 25,
+      "octets_ground": 2072864,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_foret_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_foret_entree/"
+    },
+    {
+      "ground": "dn1_foret_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 26,
+      "octets_ground": 1855446,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_foret_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_foret_entree_nuit/"
+    },
+    {
+      "ground": "dn1_foret_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 27,
+      "octets_ground": 1849806,
+      "script": {
+        "fichiers": 1,
+        "octets": 526
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_foret_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_foret_fin/"
+    },
+    {
+      "ground": "dn1_foret_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 28,
+      "octets_ground": 1633046,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_foret_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_foret_fin_nuit/"
+    },
+    {
+      "ground": "dn1_ile_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 29,
+      "octets_ground": 1910694,
+      "script": {
+        "fichiers": 1,
+        "octets": 532
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_ile_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_ile_entree/"
+    },
+    {
+      "ground": "dn1_ile_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 30,
+      "octets_ground": 1854545,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_ile_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_ile_entree_nuit/"
+    },
+    {
+      "ground": "dn1_ile_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 31,
+      "octets_ground": 1879368,
+      "script": {
+        "fichiers": 1,
+        "octets": 514
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_ile_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_ile_fin/"
+    },
+    {
+      "ground": "dn1_ile_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 32,
+      "octets_ground": 1854514,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_ile_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_ile_fin_nuit/"
+    },
+    {
+      "ground": "dn1_jungle_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 33,
+      "octets_ground": 1719771,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_jungle_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_jungle_entree/"
+    },
+    {
+      "ground": "dn1_jungle_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 34,
+      "octets_ground": 1754564,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_jungle_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_jungle_entree_nuit/"
+    },
+    {
+      "ground": "dn1_jungle_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 35,
+      "octets_ground": 1797071,
+      "script": {
+        "fichiers": 1,
+        "octets": 532
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_jungle_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_jungle_fin/"
+    },
+    {
+      "ground": "dn1_jungle_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 36,
+      "octets_ground": 1839663,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_jungle_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_jungle_fin_nuit/"
+    },
+    {
+      "ground": "dn1_lisiere_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 37,
+      "octets_ground": 2425428,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_lisiere_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_lisiere_entree/"
+    },
+    {
+      "ground": "dn1_lisiere_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 38,
+      "octets_ground": 2223170,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_lisiere_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_lisiere_entree_nuit/"
+    },
+    {
+      "ground": "dn1_lisiere_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 39,
+      "octets_ground": 2402045,
+      "script": {
+        "fichiers": 1,
+        "octets": 538
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_lisiere_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_lisiere_fin/"
+    },
+    {
+      "ground": "dn1_lisiere_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 40,
+      "octets_ground": 2201458,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_lisiere_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_lisiere_fin_nuit/"
+    },
+    {
+      "ground": "dn1_marin_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 41,
+      "octets_ground": 2749301,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_marin_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_marin_entree/"
+    },
+    {
+      "ground": "dn1_marin_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 42,
+      "octets_ground": 1433472,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_marin_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_marin_entree_nuit/"
+    },
+    {
+      "ground": "dn1_marin_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 43,
+      "octets_ground": 2725961,
+      "script": {
+        "fichiers": 1,
+        "octets": 526
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_marin_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_marin_fin/"
+    },
+    {
+      "ground": "dn1_marin_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 44,
+      "octets_ground": 1462284,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_marin_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_marin_fin_nuit/"
+    },
+    {
+      "ground": "dn1_plaines_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 45,
+      "octets_ground": 1589666,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_plaines_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_plaines_entree/"
+    },
+    {
+      "ground": "dn1_plaines_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 46,
+      "octets_ground": 1517505,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_plaines_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_plaines_entree_nuit/"
+    },
+    {
+      "ground": "dn1_plaines_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 47,
+      "octets_ground": 1555246,
+      "script": {
+        "fichiers": 1,
+        "octets": 538
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_plaines_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_plaines_fin/"
+    },
+    {
+      "ground": "dn1_plaines_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 48,
+      "octets_ground": 1485849,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_plaines_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_plaines_fin_nuit/"
+    },
+    {
+      "ground": "dn1_secrete_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 49,
+      "octets_ground": 1525551,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_secrete_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_secrete_entree/"
+    },
+    {
+      "ground": "dn1_secrete_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 50,
+      "octets_ground": 1547261,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_secrete_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_secrete_entree_nuit/"
+    },
+    {
+      "ground": "dn1_secrete_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 51,
+      "octets_ground": 1491367,
+      "script": {
+        "fichiers": 1,
+        "octets": 538
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_secrete_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_secrete_fin/"
+    },
+    {
+      "ground": "dn1_secrete_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 52,
+      "octets_ground": 1512036,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_secrete_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_secrete_fin_nuit/"
+    },
+    {
+      "ground": "dn1_volcan_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 53,
+      "octets_ground": 2408382,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_volcan_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_volcan_entree/"
+    },
+    {
+      "ground": "dn1_volcan_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 54,
+      "octets_ground": 2482356,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_volcan_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_volcan_entree_nuit/"
+    },
+    {
+      "ground": "dn1_volcan_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 55,
+      "octets_ground": 2332361,
+      "script": {
+        "fichiers": 1,
+        "octets": 532
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_volcan_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_volcan_fin/"
+    },
+    {
+      "ground": "dn1_volcan_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 56,
+      "octets_ground": 2404754,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/dn1_volcan_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/dn1_volcan_fin_nuit/"
+    },
+    {
+      "ground": "eaf1_entree_zone_zero_fleurie",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 57,
+      "octets_ground": 14469889,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eaf1_entree_zone_zero_fleurie.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eaf1_entree_zone_zero_fleurie/"
+    },
+    {
+      "ground": "eaz1_entree_zone_zero",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 161,
+      "octets_ground": 6923803,
+      "script": {
+        "fichiers": 1,
+        "octets": 463
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eaz1_entree_zone_zero.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eaz1_entree_zone_zero/"
+    },
+    {
+      "ground": "ebn1_entree_bristle",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 58,
+      "octets_ground": 3721217,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ebn1_entree_bristle.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ebn1_entree_bristle/"
+    },
+    {
+      "ground": "ecc1_entree_crystal_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 59,
+      "octets_ground": 7673704,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecc1_entree_crystal_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecc1_entree_crystal_cave/"
+    },
+    {
+      "ground": "ecc2_grotte_cristal_groudon",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 60,
+      "octets_ground": 28711432,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecc2_grotte_cristal_groudon.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecc2_grotte_cristal_groudon/"
+    },
+    {
+      "ground": "ece1_entree_crevasse_enneigee",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 133,
+      "octets_ground": 7988088,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ece1_entree_crevasse_enneigee.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ece1_entree_crevasse_enneigee/"
+    },
+    {
+      "ground": "ecf1_entree_cratere_fosse",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 61,
+      "octets_ground": 7896038,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecf1_entree_cratere_fosse.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecf1_entree_cratere_fosse/"
+    },
+    {
+      "ground": "ecm1_entree_cratere_magma",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 62,
+      "octets_ground": 10993131,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecm1_entree_cratere_magma.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecm1_entree_cratere_magma/"
+    },
+    {
+      "ground": "ecn1_entree_cratere",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 63,
+      "octets_ground": 3828007,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecn1_entree_cratere.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecn1_entree_cratere/"
+    },
+    {
+      "ground": "ecn2_entree_cascade",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 64,
+      "octets_ground": 6154474,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecn2_entree_cascade.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecn2_entree_cascade/"
+    },
+    {
+      "ground": "ecv1_entree_couloir_violet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 65,
+      "octets_ground": 7130971,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ecv1_entree_couloir_violet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ecv1_entree_couloir_violet/"
+    },
+    {
+      "ground": "edp1_entree_dark_crater_pit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 66,
+      "octets_ground": 7908358,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/edp1_entree_dark_crater_pit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/edp1_entree_dark_crater_pit/"
+    },
+    {
+      "ground": "eff1_entree_foggy_forest",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 67,
+      "octets_ground": 7551077,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eff1_entree_foggy_forest.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eff1_entree_foggy_forest/"
+    },
+    {
+      "ground": "eff2_entree_foggy_forest_sans_tentes",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 68,
+      "octets_ground": 10496374,
+      "script": {
+        "fichiers": 1,
+        "octets": 664
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eff2_entree_foggy_forest_sans_tentes.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eff2_entree_foggy_forest_sans_tentes/"
+    },
+    {
+      "ground": "egc1_entree_grotte_cascade",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 69,
+      "octets_ground": 4494215,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/egc1_entree_grotte_cascade.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/egc1_entree_grotte_cascade/"
+    },
+    {
+      "ground": "egn1_entree_givre",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 70,
+      "octets_ground": 6313171,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/egn1_entree_givre.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/egn1_entree_givre/"
+    },
+    {
+      "ground": "egv1_entree_grotte_vasques",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 134,
+      "octets_ground": 7682250,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/egv1_entree_grotte_vasques.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/egv1_entree_grotte_vasques/"
+    },
+    {
+      "ground": "ehn1_entree_horn",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 71,
+      "octets_ground": 6457980,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ehn1_entree_horn.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ehn1_entree_horn/"
+    },
+    {
+      "ground": "ejn1_entree_jungle",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 72,
+      "octets_ground": 10227464,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ejn1_entree_jungle.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ejn1_entree_jungle/"
+    },
+    {
+      "ground": "ejs1_entree_jardin_secret",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 73,
+      "octets_ground": 8774432,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ejs1_entree_jardin_secret.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ejs1_entree_jardin_secret/"
+    },
+    {
+      "ground": "ejs2_entree_jardin_secret_temple",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 74,
+      "octets_ground": 9643841,
+      "script": {
+        "fichiers": 1,
+        "octets": 640
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ejs2_entree_jardin_secret_temple.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ejs2_entree_jardin_secret_temple/"
+    },
+    {
+      "ground": "ejt1_entree_sentier_jungle",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 75,
+      "octets_ground": 11627996,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ejt1_entree_sentier_jungle.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ejt1_entree_sentier_jungle/"
+    },
+    {
+      "ground": "ekr1_entree_caverne_cristal",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 168,
+      "octets_ground": 7020541,
+      "script": {
+        "fichiers": 1,
+        "octets": 774
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ekr1_entree_caverne_cristal.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ekr1_entree_caverne_cristal/"
+    },
+    {
+      "ground": "emb9_entree_mt_blaze",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 76,
+      "octets_ground": 17077155,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/emb9_entree_mt_blaze.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/emb9_entree_mt_blaze/"
+    },
+    {
+      "ground": "emf1_entree_mystifying_forest",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 77,
+      "octets_ground": 7811228,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/emf1_entree_mystifying_forest.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/emf1_entree_mystifying_forest/"
+    },
+    {
+      "ground": "emt1_entree_mt_thunder",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 78,
+      "octets_ground": 7878327,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/emt1_entree_mt_thunder.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/emt1_entree_mt_thunder/"
+    },
+    {
+      "ground": "entree_apple_woods_s2aw1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 79,
+      "octets_ground": 11174257,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/entree_apple_woods_s2aw1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/entree_apple_woods_s2aw1/"
+    },
+    {
+      "ground": "entree_falaise_trempee_sud_nord_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 151,
+      "octets_ground": 4556547,
+      "script": {
+        "fichiers": 1,
+        "octets": 824
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/entree_falaise_trempee_sud_nord_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/entree_falaise_trempee_sud_nord_v1/"
+    },
+    {
+      "ground": "entree_promontoire_nuages_sud_nord_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 153,
+      "octets_ground": 7473058,
+      "script": {
+        "fichiers": 1,
+        "octets": 842
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/entree_promontoire_nuages_sud_nord_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/entree_promontoire_nuages_sud_nord_v1/"
+    },
+    {
+      "ground": "entree_tourbiere_piliers_sud_nord_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 155,
+      "octets_ground": 6777615,
+      "script": {
+        "fichiers": 1,
+        "octets": 836
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/entree_tourbiere_piliers_sud_nord_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/entree_tourbiere_piliers_sud_nord_v1/"
+    },
+    {
+      "ground": "eoc1_entree_old_castle",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 169,
+      "octets_ground": 6725785,
+      "script": {
+        "fichiers": 1,
+        "octets": 739
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eoc1_entree_old_castle.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eoc1_entree_old_castle/"
+    },
+    {
+      "ground": "eqs1_entree_sables_mouvants",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 80,
+      "octets_ground": 7997867,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eqs1_entree_sables_mouvants.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eqs1_entree_sables_mouvants/"
+    },
+    {
+      "ground": "ern1_entree_ruine",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 81,
+      "octets_ground": 4119798,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ern1_entree_ruine.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ern1_entree_ruine/"
+    },
+    {
+      "ground": "esc1_entree_star_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 82,
+      "octets_ground": 8804804,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esc1_entree_star_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esc1_entree_star_cave/"
+    },
+    {
+      "ground": "esj1_entree_southern_jungle",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 83,
+      "octets_ground": 7845141,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esj1_entree_southern_jungle.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esj1_entree_southern_jungle/"
+    },
+    {
+      "ground": "esn1_entree_vapeur_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 158,
+      "octets_ground": 4401146,
+      "script": {
+        "fichiers": 1,
+        "octets": 475
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esn1_entree_vapeur_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esn1_entree_vapeur_jour/"
+    },
+    {
+      "ground": "esn2_entree_vapeur_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 84,
+      "octets_ground": 4201463,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esn2_entree_vapeur_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esn2_entree_vapeur_jour/"
+    },
+    {
+      "ground": "esp2_entree_sky_peak",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 85,
+      "octets_ground": 7648191,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esp2_entree_sky_peak.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esp2_entree_sky_peak/"
+    },
+    {
+      "ground": "esr1_entree_sealed_ruin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 86,
+      "octets_ground": 5064122,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/esr1_entree_sealed_ruin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/esr1_entree_sealed_ruin/"
+    },
+    {
+      "ground": "etc1_entree_clairiere_tropicale",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 87,
+      "octets_ground": 10478330,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/etc1_entree_clairiere_tropicale.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/etc1_entree_clairiere_tropicale/"
+    },
+    {
+      "ground": "etc1_tour_celeste",
+      "zone_origine": "archives",
+      "index_zone_origine": 30,
+      "octets_ground": 36812741,
+      "script": {
+        "fichiers": 1,
+        "octets": 439
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/etc1_tour_celeste.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/etc1_tour_celeste/"
+    },
+    {
+      "ground": "etx1_entree_traversee_cristalline",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 136,
+      "octets_ground": 7640980,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/etx1_entree_traversee_cristalline.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/etx1_entree_traversee_cristalline/"
+    },
+    {
+      "ground": "eul1_entree_underground_lake",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 88,
+      "octets_ground": 7443184,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/eul1_entree_underground_lake.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/eul1_entree_underground_lake/"
+    },
+    {
+      "ground": "ewc1_entree_waterfall_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 159,
+      "octets_ground": 9200477,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ewc1_entree_waterfall_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ewc1_entree_waterfall_cave/"
+    },
+    {
+      "ground": "ewc2_entree_waterfall_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 160,
+      "octets_ground": 11878957,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ewc2_entree_waterfall_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ewc2_entree_waterfall_cave/"
+    },
+    {
+      "ground": "ewc3_entree_waterfall_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 89,
+      "octets_ground": 12350093,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ewc3_entree_waterfall_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ewc3_entree_waterfall_cave/"
+    },
+    {
+      "ground": "ewl1_entree_waterfall_ledge",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 90,
+      "octets_ground": 4524253,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ewl1_entree_waterfall_ledge.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ewl1_entree_waterfall_ledge/"
+    },
+    {
+      "ground": "ewn1_entree_waterfall",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 91,
+      "octets_ground": 6324608,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ewn1_entree_waterfall.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ewn1_entree_waterfall/"
+    },
+    {
+      "ground": "faille_spatiale_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 146,
+      "octets_ground": 29991366,
+      "script": {
+        "fichiers": 1,
+        "octets": 681
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/faille_spatiale_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/faille_spatiale_entree/"
+    },
+    {
+      "ground": "faille_spatiale_sanctuaire",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 147,
+      "octets_ground": 15746978,
+      "script": {
+        "fichiers": 1,
+        "octets": 705
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/faille_spatiale_sanctuaire.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/faille_spatiale_sanctuaire/"
+    },
+    {
+      "ground": "faille_spatiale_sanctuaire_avant_portail",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 170,
+      "octets_ground": 16347257,
+      "script": {
+        "fichiers": 1,
+        "octets": 861
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/faille_spatiale_sanctuaire_avant_portail.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/faille_spatiale_sanctuaire_avant_portail/"
+    },
+    {
+      "ground": "fbs1_fin_bristle_sommet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 92,
+      "octets_ground": 5422152,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fbs1_fin_bristle_sommet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fbs1_fin_bristle_sommet/"
+    },
+    {
+      "ground": "fcf1_fin_cratere_fosse",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 93,
+      "octets_ground": 6145382,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fcf1_fin_cratere_fosse.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fcf1_fin_cratere_fosse/"
+    },
+    {
+      "ground": "fct1_fin_clairiere_tropicale",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 172,
+      "octets_ground": 9997256,
+      "script": {
+        "fichiers": 1,
+        "octets": 772
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fct1_fin_clairiere_tropicale.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fct1_fin_clairiere_tropicale/"
+    },
+    {
+      "ground": "fgg1_fin_givre_grotte",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 162,
+      "octets_ground": 8258010,
+      "script": {
+        "fichiers": 1,
+        "octets": 463
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fgg1_fin_givre_grotte.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fgg1_fin_givre_grotte/"
+    },
+    {
+      "ground": "fgg2_fin_givre_aurore",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 94,
+      "octets_ground": 9383363,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fgg2_fin_givre_aurore.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fgg2_fin_givre_aurore/"
+    },
+    {
+      "ground": "fgv1_fin_grotte_vasques",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 135,
+      "octets_ground": 6612741,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fgv1_fin_grotte_vasques.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/"
+    },
+    {
+      "ground": "fin_falaise_trempee_source_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 152,
+      "octets_ground": 5145998,
+      "script": {
+        "fichiers": 1,
+        "octets": 794
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fin_falaise_trempee_source_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fin_falaise_trempee_source_v1/"
+    },
+    {
+      "ground": "fin_promontoire_nuages_clairiere_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 154,
+      "octets_ground": 7612896,
+      "script": {
+        "fichiers": 1,
+        "octets": 830
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fin_promontoire_nuages_clairiere_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fin_promontoire_nuages_clairiere_v1/"
+    },
+    {
+      "ground": "fjs1_fin_jungle_sud",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 95,
+      "octets_ground": 8817611,
+      "script": {
+        "fichiers": 1,
+        "octets": 562
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fjs1_fin_jungle_sud.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fjs1_fin_jungle_sud/"
+    },
+    {
+      "ground": "fkr1_fin_caverne_cristal",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 171,
+      "octets_ground": 8061432,
+      "script": {
+        "fichiers": 1,
+        "octets": 744
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fkr1_fin_caverne_cristal.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fkr1_fin_caverne_cristal/"
+    },
+    {
+      "ground": "flu1_fin_underground_lake",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 177,
+      "octets_ground": 6983197,
+      "script": {
+        "fichiers": 1,
+        "octets": 751
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/flu1_fin_underground_lake.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/flu1_fin_underground_lake/"
+    },
+    {
+      "ground": "fmb9_fin_mt_blaze",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 96,
+      "octets_ground": 16592121,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fmb9_fin_mt_blaze.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fmb9_fin_mt_blaze/"
+    },
+    {
+      "ground": "fmf1_clairiere_mystifying",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 97,
+      "octets_ground": 2899532,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fmf1_clairiere_mystifying.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fmf1_clairiere_mystifying/"
+    },
+    {
+      "ground": "fmf2_enceinte_mystifying",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 98,
+      "octets_ground": 2686271,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fmf2_enceinte_mystifying.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fmf2_enceinte_mystifying/"
+    },
+    {
+      "ground": "fmy1_fin_mystifying_forest",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 176,
+      "octets_ground": 7318095,
+      "script": {
+        "fichiers": 1,
+        "octets": 758
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fmy1_fin_mystifying_forest.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fmy1_fin_mystifying_forest/"
+    },
+    {
+      "ground": "foc1_fin_ocean_kyogre",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 99,
+      "octets_ground": 11760505,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/foc1_fin_ocean_kyogre.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/foc1_fin_ocean_kyogre/"
+    },
+    {
+      "ground": "forest_cave_render_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 100,
+      "octets_ground": 2742583,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/forest_cave_render_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/forest_cave_render_v1/"
+    },
+    {
+      "ground": "forest_magenta_v1",
+      "zone_origine": "archives",
+      "index_zone_origine": 29,
+      "octets_ground": 2687988,
+      "script": {
+        "fichiers": 1,
+        "octets": 439
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/forest_magenta_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/forest_magenta_v1/"
+    },
+    {
+      "ground": "forest_render_v1",
+      "zone_origine": "archives",
+      "index_zone_origine": 28,
+      "octets_ground": 2665640,
+      "script": {
+        "fichiers": 1,
+        "octets": 433
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/forest_render_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/forest_render_v1/"
+    },
+    {
+      "ground": "foret_givree_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 148,
+      "octets_ground": 11493211,
+      "script": {
+        "fichiers": 1,
+        "octets": 663
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/foret_givree_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/foret_givree_entree/"
+    },
+    {
+      "ground": "foret_givree_sanctuaire",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 149,
+      "octets_ground": 11682279,
+      "script": {
+        "fichiers": 1,
+        "octets": 687
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/foret_givree_sanctuaire.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/foret_givree_sanctuaire/"
+    },
+    {
+      "ground": "fosse_argent_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 178,
+      "octets_ground": 8404465,
+      "script": {
+        "fichiers": 1,
+        "octets": 714
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fosse_argent_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fosse_argent_entree/"
+    },
+    {
+      "ground": "fosse_argent_sanctuaire_lugia",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 179,
+      "octets_ground": 10111663,
+      "script": {
+        "fichiers": 1,
+        "octets": 778
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fosse_argent_sanctuaire_lugia.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fosse_argent_sanctuaire_lugia/"
+    },
+    {
+      "ground": "frp1_fin_ruine_puits",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 101,
+      "octets_ground": 5503176,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/frp1_fin_ruine_puits.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/frp1_fin_ruine_puits/"
+    },
+    {
+      "ground": "fse1_fin_jardin_secret",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 174,
+      "octets_ground": 8768999,
+      "script": {
+        "fichiers": 1,
+        "octets": 730
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fse1_fin_jardin_secret.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fse1_fin_jardin_secret/"
+    },
+    {
+      "ground": "fsm1_fin_sables_mouvants",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 102,
+      "octets_ground": 6579569,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fsm1_fin_sables_mouvants.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fsm1_fin_sables_mouvants/"
+    },
+    {
+      "ground": "fst1_fin_star_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 103,
+      "octets_ground": 10050118,
+      "script": {
+        "fichiers": 1,
+        "octets": 556
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fst1_fin_star_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fst1_fin_star_cave/"
+    },
+    {
+      "ground": "fth1_fin_mt_thunder",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 175,
+      "octets_ground": 7019156,
+      "script": {
+        "fichiers": 1,
+        "octets": 709
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fth1_fin_mt_thunder.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fth1_fin_mt_thunder/"
+    },
+    {
+      "ground": "ftx1_fin_traversee_cristalline",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 137,
+      "octets_ground": 9560849,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ftx1_fin_traversee_cristalline.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ftx1_fin_traversee_cristalline/"
+    },
+    {
+      "ground": "ful1_rive_underground_lake",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 104,
+      "octets_ground": 4017864,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ful1_rive_underground_lake.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ful1_rive_underground_lake/"
+    },
+    {
+      "ground": "fvc1_fin_couloir_violet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 173,
+      "octets_ground": 6638002,
+      "script": {
+        "fichiers": 1,
+        "octets": 737
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fvc1_fin_couloir_violet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fvc1_fin_couloir_violet/"
+    },
+    {
+      "ground": "fvs1_fin_vapeur_sommet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 105,
+      "octets_ground": 5975318,
+      "script": {
+        "fichiers": 1,
+        "octets": 580
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fvs1_fin_vapeur_sommet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fvs1_fin_vapeur_sommet/"
+    },
+    {
+      "ground": "fwc1_fin_waterfall_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 106,
+      "octets_ground": 6944934,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/fwc1_fin_waterfall_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/fwc1_fin_waterfall_cave/"
+    },
+    {
+      "ground": "glacier_cliff_aurora_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 107,
+      "octets_ground": 1645068,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/glacier_cliff_aurora_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/glacier_cliff_aurora_v1/"
+    },
+    {
+      "ground": "great_canyon_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 180,
+      "octets_ground": 15645475,
+      "script": {
+        "fichiers": 1,
+        "octets": 714
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/great_canyon_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/great_canyon_entree/"
+    },
+    {
+      "ground": "great_canyon_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 181,
+      "octets_ground": 12044233,
+      "script": {
+        "fichiers": 1,
+        "octets": 693
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/great_canyon_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/great_canyon_fin/"
+    },
+    {
+      "ground": "grotte_ouest_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 182,
+      "octets_ground": 9010776,
+      "script": {
+        "fichiers": 1,
+        "octets": 714
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/grotte_ouest_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/grotte_ouest_entree/"
+    },
+    {
+      "ground": "grotte_ouest_sanctuaire_mewtwo",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 183,
+      "octets_ground": 10833104,
+      "script": {
+        "fichiers": 1,
+        "octets": 784
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/grotte_ouest_sanctuaire_mewtwo.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/grotte_ouest_sanctuaire_mewtwo/"
+    },
+    {
+      "ground": "kyurem_cratere_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 184,
+      "octets_ground": 22169908,
+      "script": {
+        "fichiers": 1,
+        "octets": 728
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/kyurem_cratere_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/kyurem_cratere_entree/"
+    },
+    {
+      "ground": "kyurem_sanctuaire_glace",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 185,
+      "octets_ground": 19669563,
+      "script": {
+        "fichiers": 1,
+        "octets": 742
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/kyurem_sanctuaire_glace.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/kyurem_sanctuaire_glace/"
+    },
+    {
+      "ground": "mine_magma_arene",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 145,
+      "octets_ground": 17190961,
+      "script": {
+        "fichiers": 1,
+        "octets": 645
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mine_magma_arene.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mine_magma_arene/"
+    },
+    {
+      "ground": "mine_magma_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 144,
+      "octets_ground": 14339278,
+      "script": {
+        "fichiers": 1,
+        "octets": 651
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mine_magma_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mine_magma_entree/"
+    },
+    {
+      "ground": "mont_brasier_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 138,
+      "octets_ground": 8340738,
+      "script": {
+        "fichiers": 1,
+        "octets": 663
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_brasier_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_brasier_entree/"
+    },
+    {
+      "ground": "mont_brasier_sommet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 139,
+      "octets_ground": 9690301,
+      "script": {
+        "fichiers": 1,
+        "octets": 663
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_brasier_sommet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_brasier_sommet/"
+    },
+    {
+      "ground": "mont_foudre_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 140,
+      "octets_ground": 9934603,
+      "script": {
+        "fichiers": 1,
+        "octets": 657
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_foudre_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_foudre_entree/"
+    },
+    {
+      "ground": "mont_foudre_sommet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 141,
+      "octets_ground": 8745645,
+      "script": {
+        "fichiers": 1,
+        "octets": 657
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_foudre_sommet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_foudre_sommet/"
+    },
+    {
+      "ground": "mont_lointain_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 142,
+      "octets_ground": 8523509,
+      "script": {
+        "fichiers": 1,
+        "octets": 669
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_lointain_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_lointain_entree/"
+    },
+    {
+      "ground": "mont_lointain_sommet",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 143,
+      "octets_ground": 7592858,
+      "script": {
+        "fichiers": 1,
+        "octets": 669
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/mont_lointain_sommet.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/mont_lointain_sommet/"
+    },
+    {
+      "ground": "plage_bc1_grande_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 108,
+      "octets_ground": 3455792,
+      "script": {
+        "fichiers": 1,
+        "octets": 574
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/plage_bc1_grande_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/plage_bc1_grande_jour/"
+    },
+    {
+      "ground": "plage_cv2_anse",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 109,
+      "octets_ground": 4590020,
+      "script": {
+        "fichiers": 1,
+        "octets": 532
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/plage_cv2_anse.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/plage_cv2_anse/"
+    },
+    {
+      "ground": "plage_cv2_crique",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 110,
+      "octets_ground": 3736469,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/plage_cv2_crique.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/plage_cv2_crique/"
+    },
+    {
+      "ground": "raf1_levre_cratere_fleurie",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 111,
+      "octets_ground": 11729392,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raf1_levre_cratere_fleurie.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raf1_levre_cratere_fleurie/"
+    },
+    {
+      "ground": "raf2_terrasses_fleuries",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 112,
+      "octets_ground": 13603405,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raf2_terrasses_fleuries.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raf2_terrasses_fleuries/"
+    },
+    {
+      "ground": "raf3_fond_fleuri",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 113,
+      "octets_ground": 15455657,
+      "script": {
+        "fichiers": 1,
+        "octets": 544
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raf3_fond_fleuri.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raf3_fond_fleuri/"
+    },
+    {
+      "ground": "raz1_levre_cratere",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 163,
+      "octets_ground": 6963271,
+      "script": {
+        "fichiers": 1,
+        "octets": 445
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raz1_levre_cratere.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raz1_levre_cratere/"
+    },
+    {
+      "ground": "raz2_terrasses_cascades",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 164,
+      "octets_ground": 8024982,
+      "script": {
+        "fichiers": 1,
+        "octets": 475
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raz2_terrasses_cascades.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raz2_terrasses_cascades/"
+    },
+    {
+      "ground": "raz3_fond_cristallin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 165,
+      "octets_ground": 6576799,
+      "script": {
+        "fichiers": 1,
+        "octets": 457
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/raz3_fond_cristallin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/raz3_fond_cristallin/"
+    },
+    {
+      "ground": "reshiram_montagne_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 186,
+      "octets_ground": 7954463,
+      "script": {
+        "fichiers": 1,
+        "octets": 749
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/reshiram_montagne_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/reshiram_montagne_entree/"
+    },
+    {
+      "ground": "reshiram_sommet_flamme",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 187,
+      "octets_ground": 25965584,
+      "script": {
+        "fichiers": 1,
+        "octets": 735
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/reshiram_sommet_flamme.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/reshiram_sommet_flamme/"
+    },
+    {
+      "ground": "rtc1_tour_celeste",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 167,
+      "octets_ground": 36899159,
+      "script": {
+        "fichiers": 1,
+        "octets": 54
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rtc1_tour_celeste.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rtc1_tour_celeste/"
+    },
+    {
+      "ground": "ruines_enfouies_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 188,
+      "octets_ground": 7869734,
+      "script": {
+        "fichiers": 1,
+        "octets": 735
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ruines_enfouies_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ruines_enfouies_entree/"
+    },
+    {
+      "ground": "ruines_enfouies_sanctuaire_mew",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 189,
+      "octets_ground": 9795504,
+      "script": {
+        "fichiers": 1,
+        "octets": 787
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/ruines_enfouies_sanctuaire_mew.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/ruines_enfouies_sanctuaire_mew/"
+    },
+    {
+      "ground": "rvt_ne_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 23,
+      "octets_ground": 5411560,
+      "script": {
+        "fichiers": 1,
+        "octets": 403
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rvt_ne_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rvt_ne_jour/"
+    },
+    {
+      "ground": "rvt_ne_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 24,
+      "octets_ground": 5468967,
+      "script": {
+        "fichiers": 1,
+        "octets": 403
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rvt_ne_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rvt_ne_nuit/"
+    },
+    {
+      "ground": "rvt_no_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 25,
+      "octets_ground": 5361920,
+      "script": {
+        "fichiers": 1,
+        "octets": 403
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rvt_no_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rvt_no_jour/"
+    },
+    {
+      "ground": "rvt_no_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 26,
+      "octets_ground": 5426499,
+      "script": {
+        "fichiers": 1,
+        "octets": 403
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rvt_no_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rvt_no_nuit/"
+    },
+    {
+      "ground": "rzd1_ruines_zarbi",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 114,
+      "octets_ground": 10070787,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/rzd1_ruines_zarbi.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/rzd1_ruines_zarbi/"
+    },
+    {
+      "ground": "s2ap1_entree_amp_plains",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 115,
+      "octets_ground": 9898110,
+      "script": {
+        "fichiers": 1,
+        "octets": 586
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/s2ap1_entree_amp_plains.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/s2ap1_entree_amp_plains/"
+    },
+    {
+      "ground": "silent_chasm_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 190,
+      "octets_ground": 11828705,
+      "script": {
+        "fichiers": 1,
+        "octets": 714
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/silent_chasm_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/silent_chasm_entree/"
+    },
+    {
+      "ground": "silent_chasm_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 191,
+      "octets_ground": 11193913,
+      "script": {
+        "fichiers": 1,
+        "octets": 693
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/silent_chasm_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/silent_chasm_fin/"
+    },
+    {
+      "ground": "sinister_woods_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 193,
+      "octets_ground": 16308898,
+      "script": {
+        "fichiers": 1,
+        "octets": 728
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sinister_woods_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sinister_woods_entree/"
+    },
+    {
+      "ground": "sinister_woods_entree_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 192,
+      "octets_ground": 16053934,
+      "script": {
+        "fichiers": 1,
+        "octets": 763
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sinister_woods_entree_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sinister_woods_entree_nuit/"
+    },
+    {
+      "ground": "sinister_woods_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 195,
+      "octets_ground": 16833093,
+      "script": {
+        "fichiers": 1,
+        "octets": 707
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sinister_woods_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sinister_woods_fin/"
+    },
+    {
+      "ground": "sinister_woods_fin_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 194,
+      "octets_ground": 16648893,
+      "script": {
+        "fichiers": 1,
+        "octets": 742
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sinister_woods_fin_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sinister_woods_fin_nuit/"
+    },
+    {
+      "ground": "sn4_arid_dungeon_entrance_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 116,
+      "octets_ground": 1369564,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn4_arid_dungeon_entrance_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn4_arid_dungeon_entrance_jour/"
+    },
+    {
+      "ground": "sn4_arid_dungeon_entrance_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 117,
+      "octets_ground": 1369564,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn4_arid_dungeon_entrance_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn4_arid_dungeon_entrance_nuit/"
+    },
+    {
+      "ground": "sn4_violet_underground_road_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 118,
+      "octets_ground": 1606088,
+      "script": {
+        "fichiers": 1,
+        "octets": 640
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn4_violet_underground_road_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn4_violet_underground_road_jour/"
+    },
+    {
+      "ground": "sn4_violet_underground_road_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 119,
+      "octets_ground": 1606088,
+      "script": {
+        "fichiers": 1,
+        "octets": 640
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn4_violet_underground_road_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn4_violet_underground_road_nuit/"
+    },
+    {
+      "ground": "sn_v3_blue_rock_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 120,
+      "octets_ground": 2421458,
+      "script": {
+        "fichiers": 1,
+        "octets": 568
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn_v3_blue_rock_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn_v3_blue_rock_cave/"
+    },
+    {
+      "ground": "sn_v3_forest_cave",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 121,
+      "octets_ground": 4143854,
+      "script": {
+        "fichiers": 1,
+        "octets": 550
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/sn_v3_forest_cave.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/sn_v3_forest_cave/"
+    },
+    {
+      "ground": "spindacafetest",
+      "zone_origine": "archives",
+      "index_zone_origine": 22,
+      "octets_ground": 962590,
+      "script": {
+        "fichiers": 1,
+        "octets": 421
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/spindacafetest.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/spindacafetest/"
+    },
+    {
+      "ground": "stc1_tour_celeste",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 166,
+      "octets_ground": 7345783,
+      "script": {
+        "fichiers": 1,
+        "octets": 54
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/stc1_tour_celeste.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/stc1_tour_celeste/"
+    },
+    {
+      "ground": "tiny_woods_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 196,
+      "octets_ground": 8461400,
+      "script": {
+        "fichiers": 1,
+        "octets": 700
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/tiny_woods_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/tiny_woods_entree/"
+    },
+    {
+      "ground": "tiny_woods_fin",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 197,
+      "octets_ground": 8135993,
+      "script": {
+        "fichiers": 1,
+        "octets": 679
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/tiny_woods_fin.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/tiny_woods_fin/"
+    },
+    {
+      "ground": "tma3_thunder_meadow_arene3",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 122,
+      "octets_ground": 23736116,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/tma3_thunder_meadow_arene3.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/tma3_thunder_meadow_arene3/"
+    },
+    {
+      "ground": "tour_celeste_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 150,
+      "octets_ground": 28208524,
+      "script": {
+        "fichiers": 1,
+        "octets": 663
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/tour_celeste_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/tour_celeste_entree/"
+    },
+    {
+      "ground": "v30812_01_cap_large_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 2,
+      "octets_ground": 16992966,
+      "script": {
+        "fichiers": 1,
+        "octets": 481
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_01_cap_large_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_01_cap_large_jour/"
+    },
+    {
+      "ground": "v30812_01_cap_large_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 3,
+      "octets_ground": 16993852,
+      "script": {
+        "fichiers": 1,
+        "octets": 481
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_01_cap_large_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_01_cap_large_nuit/"
+    },
+    {
+      "ground": "v30812_02_terrasse_croissant_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 4,
+      "octets_ground": 17075998,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_02_terrasse_croissant_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_02_terrasse_croissant_jour/"
+    },
+    {
+      "ground": "v30812_02_terrasse_croissant_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 5,
+      "octets_ground": 17076742,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_02_terrasse_croissant_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_02_terrasse_croissant_nuit/"
+    },
+    {
+      "ground": "v30812_03_double_belvedere_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 6,
+      "octets_ground": 17637226,
+      "script": {
+        "fichiers": 1,
+        "octets": 523
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_03_double_belvedere_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_03_double_belvedere_jour/"
+    },
+    {
+      "ground": "v30812_03_double_belvedere_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 7,
+      "octets_ground": 17635899,
+      "script": {
+        "fichiers": 1,
+        "octets": 523
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_03_double_belvedere_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_03_double_belvedere_nuit/"
+    },
+    {
+      "ground": "v30812_04_pointe_sinueuse_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 8,
+      "octets_ground": 17047316,
+      "script": {
+        "fichiers": 1,
+        "octets": 517
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_04_pointe_sinueuse_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_04_pointe_sinueuse_jour/"
+    },
+    {
+      "ground": "v30812_04_pointe_sinueuse_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 9,
+      "octets_ground": 17048006,
+      "script": {
+        "fichiers": 1,
+        "octets": 517
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_04_pointe_sinueuse_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_04_pointe_sinueuse_nuit/"
+    },
+    {
+      "ground": "v30812_05_grande_mesa_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 10,
+      "octets_ground": 17134679,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_05_grande_mesa_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_05_grande_mesa_jour/"
+    },
+    {
+      "ground": "v30812_05_grande_mesa_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 11,
+      "octets_ground": 17135465,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_05_grande_mesa_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_05_grande_mesa_nuit/"
+    },
+    {
+      "ground": "v30812_06_crique_profonde_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 12,
+      "octets_ground": 16791706,
+      "script": {
+        "fichiers": 1,
+        "octets": 517
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_06_crique_profonde_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_06_crique_profonde_jour/"
+    },
+    {
+      "ground": "v30812_06_crique_profonde_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 13,
+      "octets_ground": 16792197,
+      "script": {
+        "fichiers": 1,
+        "octets": 517
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_06_crique_profonde_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_06_crique_profonde_nuit/"
+    },
+    {
+      "ground": "v30812_07_balcon_haut_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 14,
+      "octets_ground": 16709036,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_07_balcon_haut_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_07_balcon_haut_jour/"
+    },
+    {
+      "ground": "v30812_07_balcon_haut_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 15,
+      "octets_ground": 16709673,
+      "script": {
+        "fichiers": 1,
+        "octets": 493
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_07_balcon_haut_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_07_balcon_haut_nuit/"
+    },
+    {
+      "ground": "v30812_08_terrasses_decalees_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 16,
+      "octets_ground": 17598534,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_08_terrasses_decalees_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_08_terrasses_decalees_jour/"
+    },
+    {
+      "ground": "v30812_08_terrasses_decalees_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 17,
+      "octets_ground": 17599298,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_08_terrasses_decalees_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_08_terrasses_decalees_nuit/"
+    },
+    {
+      "ground": "v30812_09_cap_eventail_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 18,
+      "octets_ground": 16629957,
+      "script": {
+        "fichiers": 1,
+        "octets": 499
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_09_cap_eventail_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_09_cap_eventail_jour/"
+    },
+    {
+      "ground": "v30812_09_cap_eventail_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 19,
+      "octets_ground": 16630441,
+      "script": {
+        "fichiers": 1,
+        "octets": 499
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_09_cap_eventail_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_09_cap_eventail_nuit/"
+    },
+    {
+      "ground": "v30812_10_esplanade_arrondie_jour",
+      "zone_origine": "archives",
+      "index_zone_origine": 20,
+      "octets_ground": 17183073,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_10_esplanade_arrondie_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_10_esplanade_arrondie_jour/"
+    },
+    {
+      "ground": "v30812_10_esplanade_arrondie_nuit",
+      "zone_origine": "archives",
+      "index_zone_origine": 21,
+      "octets_ground": 17183701,
+      "script": {
+        "fichiers": 1,
+        "octets": 535
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v30812_10_esplanade_arrondie_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v30812_10_esplanade_arrondie_nuit/"
+    },
+    {
+      "ground": "v40812_01_cap_large_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 44,
+      "octets_ground": 17455270,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_01_cap_large_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_01_cap_large_jour/"
+    },
+    {
+      "ground": "v40812_01_cap_large_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 45,
+      "octets_ground": 17455270,
+      "script": {
+        "fichiers": 1,
+        "octets": 592
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_01_cap_large_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_01_cap_large_nuit/"
+    },
+    {
+      "ground": "v40812_02_terrasse_croissant_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 46,
+      "octets_ground": 17814667,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_02_terrasse_croissant_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_02_terrasse_croissant_jour/"
+    },
+    {
+      "ground": "v40812_02_terrasse_croissant_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 47,
+      "octets_ground": 17814667,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_02_terrasse_croissant_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_02_terrasse_croissant_nuit/"
+    },
+    {
+      "ground": "v40812_03_double_belvedere_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 48,
+      "octets_ground": 18373733,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_03_double_belvedere_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_03_double_belvedere_jour/"
+    },
+    {
+      "ground": "v40812_03_double_belvedere_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 49,
+      "octets_ground": 18373733,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_03_double_belvedere_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_03_double_belvedere_nuit/"
+    },
+    {
+      "ground": "v40812_04_pointe_sinueuse_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 50,
+      "octets_ground": 17706902,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_04_pointe_sinueuse_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_04_pointe_sinueuse_jour/"
+    },
+    {
+      "ground": "v40812_04_pointe_sinueuse_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 51,
+      "octets_ground": 17706902,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_04_pointe_sinueuse_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_04_pointe_sinueuse_nuit/"
+    },
+    {
+      "ground": "v40812_05_grande_mesa_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 52,
+      "octets_ground": 17707126,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_05_grande_mesa_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_05_grande_mesa_jour/"
+    },
+    {
+      "ground": "v40812_05_grande_mesa_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 53,
+      "octets_ground": 17707126,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_05_grande_mesa_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_05_grande_mesa_nuit/"
+    },
+    {
+      "ground": "v40812_06_crique_profonde_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 54,
+      "octets_ground": 17565280,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_06_crique_profonde_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_06_crique_profonde_jour/"
+    },
+    {
+      "ground": "v40812_06_crique_profonde_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 55,
+      "octets_ground": 17565280,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_06_crique_profonde_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_06_crique_profonde_nuit/"
+    },
+    {
+      "ground": "v40812_07_balcon_haut_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 56,
+      "octets_ground": 17093609,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_07_balcon_haut_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_07_balcon_haut_jour/"
+    },
+    {
+      "ground": "v40812_07_balcon_haut_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 57,
+      "octets_ground": 17093609,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_07_balcon_haut_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_07_balcon_haut_nuit/"
+    },
+    {
+      "ground": "v40812_08_terrasses_decalees_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 58,
+      "octets_ground": 18192336,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_08_terrasses_decalees_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_08_terrasses_decalees_jour/"
+    },
+    {
+      "ground": "v40812_08_terrasses_decalees_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 59,
+      "octets_ground": 18192335,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_08_terrasses_decalees_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_08_terrasses_decalees_nuit/"
+    },
+    {
+      "ground": "v40812_09_cap_eventail_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 60,
+      "octets_ground": 17382406,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_09_cap_eventail_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_09_cap_eventail_jour/"
+    },
+    {
+      "ground": "v40812_09_cap_eventail_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 61,
+      "octets_ground": 17382406,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_09_cap_eventail_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_09_cap_eventail_nuit/"
+    },
+    {
+      "ground": "v40812_10_esplanade_arrondie_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 62,
+      "octets_ground": 17808266,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_10_esplanade_arrondie_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_10_esplanade_arrondie_jour/"
+    },
+    {
+      "ground": "v40812_10_esplanade_arrondie_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 63,
+      "octets_ground": 17808266,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v40812_10_esplanade_arrondie_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v40812_10_esplanade_arrondie_nuit/"
+    },
+    {
+      "ground": "v50812_01_crete_sillage_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 64,
+      "octets_ground": 19345809,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_01_crete_sillage_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_01_crete_sillage_jour/"
+    },
+    {
+      "ground": "v50812_01_crete_sillage_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 65,
+      "octets_ground": 19345809,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_01_crete_sillage_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_01_crete_sillage_nuit/"
+    },
+    {
+      "ground": "v50812_02_caps_relies_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 66,
+      "octets_ground": 19299694,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_02_caps_relies_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_02_caps_relies_jour/"
+    },
+    {
+      "ground": "v50812_02_caps_relies_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 67,
+      "octets_ground": 19299694,
+      "script": {
+        "fichiers": 1,
+        "octets": 604
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_02_caps_relies_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_02_caps_relies_nuit/"
+    },
+    {
+      "ground": "v50812_03_eventail_strates_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 68,
+      "octets_ground": 19517201,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_03_eventail_strates_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_03_eventail_strates_jour/"
+    },
+    {
+      "ground": "v50812_03_eventail_strates_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 69,
+      "octets_ground": 19517201,
+      "script": {
+        "fichiers": 1,
+        "octets": 634
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_03_eventail_strates_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_03_eventail_strates_nuit/"
+    },
+    {
+      "ground": "v50812_04_lagune_occident_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 70,
+      "octets_ground": 19325954,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_04_lagune_occident_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_04_lagune_occident_jour/"
+    },
+    {
+      "ground": "v50812_04_lagune_occident_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 71,
+      "octets_ground": 19325954,
+      "script": {
+        "fichiers": 1,
+        "octets": 628
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_04_lagune_occident_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_04_lagune_occident_nuit/"
+    },
+    {
+      "ground": "v50812_05_cote_quatre_pointes_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 72,
+      "octets_ground": 19441666,
+      "script": {
+        "fichiers": 1,
+        "octets": 652
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_05_cote_quatre_pointes_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_05_cote_quatre_pointes_jour/"
+    },
+    {
+      "ground": "v50812_05_cote_quatre_pointes_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 73,
+      "octets_ground": 19441666,
+      "script": {
+        "fichiers": 1,
+        "octets": 652
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_05_cote_quatre_pointes_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_05_cote_quatre_pointes_nuit/"
+    },
+    {
+      "ground": "v50812_06_sommet_balcon_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 74,
+      "octets_ground": 19410760,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_06_sommet_balcon_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_06_sommet_balcon_jour/"
+    },
+    {
+      "ground": "v50812_06_sommet_balcon_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 75,
+      "octets_ground": 19410760,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_06_sommet_balcon_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_06_sommet_balcon_nuit/"
+    },
+    {
+      "ground": "v50812_07_cap_chenal_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 76,
+      "octets_ground": 19354953,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_07_cap_chenal_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_07_cap_chenal_jour/"
+    },
+    {
+      "ground": "v50812_07_cap_chenal_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 77,
+      "octets_ground": 19354953,
+      "script": {
+        "fichiers": 1,
+        "octets": 598
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_07_cap_chenal_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_07_cap_chenal_nuit/"
+    },
+    {
+      "ground": "v50812_08_antre_crochu_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 78,
+      "octets_ground": 19426527,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_08_antre_crochu_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_08_antre_crochu_jour/"
+    },
+    {
+      "ground": "v50812_08_antre_crochu_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 79,
+      "octets_ground": 19426527,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_08_antre_crochu_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_08_antre_crochu_nuit/"
+    },
+    {
+      "ground": "v50812_09_grotte_marees_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 80,
+      "octets_ground": 19424832,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_09_grotte_marees_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_09_grotte_marees_jour/"
+    },
+    {
+      "ground": "v50812_09_grotte_marees_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 81,
+      "octets_ground": 19424832,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_09_grotte_marees_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_09_grotte_marees_nuit/"
+    },
+    {
+      "ground": "v50812_10_defile_brume_jour",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 82,
+      "octets_ground": 19479038,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_10_defile_brume_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_10_defile_brume_jour/"
+    },
+    {
+      "ground": "v50812_10_defile_brume_nuit",
+      "zone_origine": "cotes_metano",
+      "index_zone_origine": 83,
+      "octets_ground": 19479038,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_10_defile_brume_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_10_defile_brume_nuit/"
+    },
+    {
+      "ground": "v50812_beach_cave_anse_des_marees",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 123,
+      "octets_ground": 676237,
+      "script": {
+        "fichiers": 1,
+        "octets": 646
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_beach_cave_anse_des_marees.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_beach_cave_anse_des_marees/"
+    },
+    {
+      "ground": "v50812_beach_cave_entrance_v2",
+      "zone_origine": "archives",
+      "index_zone_origine": 27,
+      "octets_ground": 782070,
+      "script": {
+        "fichiers": 1,
+        "octets": 511
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_beach_cave_entrance_v2.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_beach_cave_entrance_v2/"
+    },
+    {
+      "ground": "v50812_beach_cave_entrance_v3",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 124,
+      "octets_ground": 1008880,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_beach_cave_entrance_v3.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_beach_cave_entrance_v3/"
+    },
+    {
+      "ground": "v50812_beach_reference_multilayer_v1",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 125,
+      "octets_ground": 663564,
+      "script": {
+        "fichiers": 1,
+        "octets": 664
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/v50812_beach_reference_multilayer_v1.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/v50812_beach_reference_multilayer_v1/"
+    },
+    {
+      "ground": "vp1_fa1_energetic_forest_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 126,
+      "octets_ground": 1859329,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_fa1_energetic_forest_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_fa1_energetic_forest_jour/"
+    },
+    {
+      "ground": "vp1_fa1_energetic_forest_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 127,
+      "octets_ground": 1859329,
+      "script": {
+        "fichiers": 1,
+        "octets": 622
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_fa1_energetic_forest_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_fa1_energetic_forest_nuit/"
+    },
+    {
+      "ground": "vp1_fa1_mushroom_forest_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 128,
+      "octets_ground": 1746404,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_fa1_mushroom_forest_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_fa1_mushroom_forest_jour/"
+    },
+    {
+      "ground": "vp1_fa1_mushroom_forest_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 129,
+      "octets_ground": 1746404,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_fa1_mushroom_forest_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_fa1_mushroom_forest_nuit/"
+    },
+    {
+      "ground": "vp1_gb1_grotte_brumeuse_jour",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 130,
+      "octets_ground": 2119853,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_gb1_grotte_brumeuse_jour.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_gb1_grotte_brumeuse_jour/"
+    },
+    {
+      "ground": "vp1_gb1_grotte_brumeuse_nuit",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 131,
+      "octets_ground": 2119853,
+      "script": {
+        "fichiers": 1,
+        "octets": 616
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_gb1_grotte_brumeuse_nuit.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_gb1_grotte_brumeuse_nuit/"
+    },
+    {
+      "ground": "vp1_ia3_arene_glace_boreale",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 132,
+      "octets_ground": 6279510,
+      "script": {
+        "fichiers": 1,
+        "octets": 610
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/vp1_ia3_arene_glace_boreale.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/vp1_ia3_arene_glace_boreale/"
+    },
+    {
+      "ground": "zekrom_montagne_entree",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 198,
+      "octets_ground": 8261277,
+      "script": {
+        "fichiers": 1,
+        "octets": 735
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/zekrom_montagne_entree.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/zekrom_montagne_entree/"
+    },
+    {
+      "ground": "zekrom_sommet_tornade",
+      "zone_origine": "ateliers_donjons",
+      "index_zone_origine": 199,
+      "octets_ground": 24744395,
+      "script": {
+        "fichiers": 1,
+        "octets": 728
+      },
+      "chemin_archive": "archive/maps/game/Data/Ground/zekrom_sommet_tornade.rsground",
+      "chemin_script_archive": "archive/maps/game/Data/Script/destiny/ground/zekrom_sommet_tornade/"
+    }
+  ],
+  "maps_rsmap_archivees": [
+    "frozen_crucible"
+  ],
+  "tilesets": {
+    "conversion_appliquee_partout": true,
+    "planches_converties": 1600,
+    "grounds_touches_par_conversion": 198,
+    "emplacement": "game/Content/Tile (conservés dans le jeu, y compris pour les maps archivées)",
+    "index": "game/Content/Tile/index.idx"
+  },
+  "totaux": {
+    "grounds_actifs_declares": 48,
+    "grounds_actifs_physiques_hors_payload": 47,
+    "grounds_archives": 341,
+    "octets_grounds_archives": 3705710752
+  }
+}

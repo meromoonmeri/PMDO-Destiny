@@ -1,0 +1,621 @@
+#!/usr/bin/env python3
+"""Vérifie les raccordements de Bois Perdus et les ressources de la statue."""
+from pathlib import Path
+import json
+import struct
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+GAME = ROOT / 'game'
+zone = json.loads((GAME / 'Data/Zone/lost_wood.json').read_text(encoding='utf-8-sig'))['Object']
+segments = zone['Segments']
+assert len(segments) == 2
+floors = segments[0]['Floors']
+assert len(floors) == 7
+for n, floor in enumerate(floors, 1):
+    assert floor['$type'].startswith('RogueEssence.LevelGen.GridFloorGen')
+    steps = floor['GenSteps']
+    data = [s['Value'] for s in steps if s['Value']['$type'].startswith('PMDC.LevelGen.MapDataStep')]
+    assert len(data) == 1 and data[0]['Music'] == 'Tiny Woods.ogg', n
+    events = [s['Value'] for s in steps if s['Value']['$type'].startswith('RogueEssence.LevelGen.MapEffectStep')]
+    assert len(events) == 1 and 'MapGenContext' in events[0]['$type'], n
+    starts = events[0]['Effect']['OnMapStarts']
+    assert len(starts) == 1 and starts[0]['Value']['Script'] == 'DestinyLostWoodLesson'
+    assert starts[0]['Value']['ArgTable'] == '{ Etage = %d }' % n
+    assert all(not v for k, v in events[0]['Effect'].items() if k != 'OnMapStarts')
+
+# Le segment 1 est le chemin du retour : mêmes générateurs, ordre inverse.
+reverse_floors = segments[1]['Floors']
+assert len(reverse_floors) == 7
+for n, floor in enumerate(reverse_floors, 1):
+    events = [s['Value'] for s in floor['GenSteps']
+              if s['Value']['$type'].startswith('RogueEssence.LevelGen.MapEffectStep')]
+    starts = events[0]['Effect']['OnMapStarts']
+    assert starts[0]['Value']['ArgTable'] == '{ Etage = %d }' % (8 - n)
+
+# Convention PMDO : l'aller monte en 1F→7F avec stairs_go_up,
+# le retour descend en étages négatifs B1F→B7F avec stairs_go_down.
+def _find_steps(node, needle):
+    found = []
+    if isinstance(node, dict):
+        if needle in node.get('$type', ''):
+            found.append(node)
+        for value in node.values():
+            found.extend(_find_steps(value, needle))
+    elif isinstance(node, list):
+        for value in node:
+            found.extend(_find_steps(value, needle))
+    return found
+
+def _count_strings(node, expected):
+    if node == expected:
+        return 1
+    if isinstance(node, dict):
+        return sum(_count_strings(value, expected) for value in node.values())
+    if isinstance(node, list):
+        return sum(_count_strings(value, expected) for value in node)
+    return 0
+
+floor_names = []
+for segment in segments:
+    name_steps = _find_steps(segment['ZoneSteps'], 'FloorNameDropZoneStep')
+    assert len(name_steps) == 1
+    floor_names.append(name_steps[0]['Name']['DefaultText'])
+assert floor_names == ['Bois Perdus\n{0}F', 'Bois Perdus\nB{0}F']
+for segment, expected_stairs in ((segments[0], 'stairs_go_up'), (segments[1], 'stairs_go_down')):
+    stairs_steps = _find_steps(segment['Floors'], 'FloorStairsStep')
+    assert len(stairs_steps) == 7
+    assert [step['Exits'][0]['Tile']['ID'] for step in stairs_steps] == [expected_stairs] * 7
+assert _count_strings(segments[0]['Floors'], 'stairs_secret_up') == 2
+assert _count_strings(segments[1]['Floors'], 'stairs_secret_down') == 2
+assert _count_strings(segments[1]['Floors'], 'stairs_secret_up') == 0
+
+song = (GAME / 'Content/Music/Tiny Woods.ogg').read_bytes()
+assert song.startswith(b'OggS') and b'vorbis' in song
+assert b'LOOPSTART=176400' in song and b'LOOPLENGTH=1882031' in song
+binary = (GAME / 'Content/Object/Statue_Kangourex.dir').read_bytes()
+length = struct.unpack_from('<q', binary)[0]
+assert binary[8:16] == b'\x89PNG\r\n\x1a\n'
+assert struct.unpack_from('<iiii', binary, 8 + length) == (32, 32, 0, 1)
+assert len(binary) == 8 + length + 16
+assert "require 'destiny.services.statue_kangourex'" in (GAME / 'Data/Script/destiny/main.lua').read_text(encoding='utf-8')
+event = (GAME / 'Data/Script/destiny/event.lua').read_text(encoding='utf-8')
+assert "require 'destiny.event_battle'" in event  # garder les événements préexistants
+assert 'function SINGLE_CHAR_SCRIPT.DestinyLostWoodLesson' in event
+assert 'BATTLE_SCRIPT = {}' not in event and 'SINGLE_CHAR_SCRIPT = {}' not in event
+cinematique = (GAME / 'Data/Script/destiny/cinematique.lua').read_text(encoding='utf-8')
+# Conventions partagées du PMD Cutscene Guide : portraits bas gauche/droite
+# en miroir, respiration de 20 frames et rotations de groupe désynchronisées.
+assert 'UI:SetSpeakerLoc(p[1], p[2])' in cinematique
+assert 'standard = {8, 132, false}' in cinematique
+assert 'droite = {256, 132, true}' in cinematique
+assert 'function cinematique.TournerGroupe' in cinematique
+assert 'function cinematique.RegarderGroupe' in cinematique
+assert 'GAME:WaitFrames(frames or 20)' in cinematique
+# « Shock » n'existe pas dans les émotions de portrait PMDO : sans cet
+# alias, SetSpeakerEmotion produit l'index -1 et SpeakerPortrait.Draw
+# échoue à chaque frame. L'équivalent canonique est « Surprised ».
+assert "Shock = 'Surprised'" in cinematique
+assert 'UI:SetSpeakerEmotion(emotion_portrait(emotion), reverse)' in cinematique
+scene = (GAME / 'Data/Script/destiny/ground/cliffdaytest_nuit/init.lua').read_text(encoding='utf-8')
+assert 'SOUND:PlayBGM' not in scene
+assert 'GROUND:MoveToPosition(partenaire' in scene
+assert 'Pichu_Home_Door' in scene and 'Pichu_Crossroads' in scene
+assert 'Dazzling_Exit_East' in scene and 'chemin de l’est' in scene
+assert 'LostWoodTutorialDone' not in scene
+assert "require 'destiny.cinematique'" in scene
+assert 'GAME:MoveCamera(raccord_est_x, route_est_y + 12, 92, false)' in scene
+assert 'GAME:MoveCamera(entree.Position.X - 40, route_est_y + 12, 220, false)' in scene
+assert '\\n Au bout' not in scene and '\\n personne' not in scene
+quiz = (GAME / 'Data/Script/destiny/ground/personality_test/init.lua').read_text(encoding='utf-8')
+assert quiz.index('SOUND:FadeOutBGM(60)') < quiz.index("Une faille s'ouvre dans le rêve")
+assert "PrologueHeros = 'a_voir'" in quiz
+assert "EnterGroundMap('reverie', 'zrv2_zone_reveil_nuit', 'reveil')" in quiz
+reverie = json.loads((GAME / 'Data/Zone/reverie.json').read_text(encoding='utf-8-sig'))['Object']
+assert reverie['GroundMaps'][10] == 'zrv2_zone_reveil_nuit'
+reveil = (GAME / 'Data/Script/destiny/ground/reveil_nuit/init.lua').read_text(encoding='utf-8')
+for phrase in ('…Où suis-je ?', 'Tout est flou… Je ne me souviens de rien.',
+               '…Sauf d’une chose.', 'Mon prénom…'):
+    assert phrase in reveil
+# Pensées blanches sur le noir : phrases courtes, sans balise [i], avec le
+# fondu d'entrée/sortie des voix-off PMDO (SetAutoFinish), puis retour au
+# comportement normal pour les dialogues suivants.
+assert 'UI:SetAutoFinish(true)' in reveil and 'UI:SetAutoFinish(false)' in reveil
+assert 'WaitShowVoiceOver("[i]' not in reveil
+assert "MRKR('reveil')" in reveil and "MRKR('entrance')" in reveil
+assert 'points_scene()' in reveil and 'Un jour, je ferai la carte de cette montagne !' in reveil
+# Viewport 320×240 : ouverture Y=136 et panorama Y=152 pour garder lune,
+# sommet et mer dans le cadre, avec des travelings rejoints explicitement.
+# Les dialogues utilisent Y=200 (pieds écran 160). La prairie reste en
+# Clamp : entrée silencieuse jusqu’à y=504 dans le cadre sud maximal
+# (392, 456), souffle sans respiration artificielle, puis travelling de
+# 168 frames vers (384, 288).
+assert 'camera_ouverture_y = point_reveil.Position.Y - 104' in reveil
+assert 'camera_panorama_y = point_reveil.Position.Y - 88' in reveil
+assert 'camera_approche_y = point_reveil.Position.Y + 48' in reveil
+assert 'camera_y = point_reveil.Position.Y - 40' in reveil
+assert 'camera_entree_y = 456' in reveil
+assert 'entree_dialogue_y = entree.Position.Y - 56' in reveil
+assert 'ScrollEdge.Blank' not in reveil and 'ScrollEdge.Clamp' in reveil
+assert 'regler_bord_camera' not in reveil
+assert reveil.count('map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp') == 2
+assert 'points.camera_approche_y, 168' in reveil
+assert "geste_partenaire('souffle', false)" in reveil
+assert reveil.index('points.entree_dialogue_y') < reveil.index("geste_partenaire('souffle', false)") \
+    < reveil.index('Ouf… je suis sorti')
+assert 'penser("Shock"' not in reveil
+assert 'penser("Surprised", "Je… je suis un Pokémon ?!")' in reveil
+# Respiration paramétrable, oui/non à 45°, balayage fluide, notice et
+# gestes combinés : aucun des anciens temps morts ciblés ne subsiste.
+assert 'local function hero_geste(hero, geste, respirer)' in reveil
+assert 'local function partenaire_geste(partenaire, geste, respirer)' in reveil
+assert reveil.count('if respirer ~= false then cinematique.Respirer(20) end') == 2
+assert 'Direction.UpRight' in reveil and 'Direction.DownRight' in reveil
+assert "geste('question', false)" in reveil
+assert "geste('idle')" not in reveil and "geste('surpris')" not in reveil
+assert reveil.count("geste('oui_inquiet')") == 2
+assert reveil.count("geste('notice')") == 2
+assert "GROUND:CharSetAnim(hero, 'Wake', false)" not in reveil
+assert 'local function decouvrir_reflet()' in reveil
+assert 'local function montrer_reflet()' in reveil
+assert 'local function regarder_montagne_ensemble()' in reveil
+assert 'local function acceptation_parallele()' in reveil
+assert 'cinematique.NomColore(nom_partenaire' not in reveil
+assert 'cinematique.NomColore(nom_heros' not in reveil
+assert '"Je m’appelle " .. nom_partenaire .. " !"' in reveil
+assert 'points.vue_x - 12' not in reveil
+_pose = reveil[reveil.index('local pose_tenue = commencer_pose(partner)'):]
+assert _pose.index('Un jour, je ferai la carte de cette montagne !') \
+    < _pose.index('Je veux devenir explorateur.') < _pose.index('terminer_pose(partner)')
+assert 'points.camera_panorama_y + 40' in reveil
+assert 'TASK:BranchCoroutine' in reveil and 'TASK:JoinCoroutines' in reveil
+assert "require 'destiny.cinematique'" in reveil
+assert "cinematique.Dire(partner, emotion, texte, 'droite')" in reveil
+assert 'EVT_Emote_Shock' in reveil and 'EVT_Emote_Exclaim_2' in reveil
+assert 'cinematique.TournerGroupe' in reveil
+assert reveil.count('lancer_camera(') >= 8 and 'attendre_camera(travelling_final)' in reveil
+zrv2_script = (GAME / 'Data/Script/destiny/ground/zrv2_zone_reveil_nuit/init.lua').read_text(encoding='utf-8')
+assert "require 'destiny.ground.reveil_nuit.init'" in zrv2_script
+assert "EnterDungeon('lost_wood', 1, 0, 0" in reveil
+zone_script = (GAME / 'Data/Script/destiny/zone/lost_wood/init.lua').read_text(encoding='utf-8')
+assert 'segmentID == 1' in zone_script
+assert zone_script.count("GAME:EnterZone('reverie', -1, 10, 0)") == 2
+assert "GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)" in zone_script
+# Recrutement et Noigrumes : indisponibles tant que la future Assemblée /
+# boutique des Zones d’Accueil n’est pas débloquée. Le module centralise le
+# verrou natif PMDO, et la zone des Bois Perdus ne génère aucun Noigrume.
+assert 'apricorn_' not in (GAME / 'Data/Zone/lost_wood.json').read_text(encoding='utf-8')
+scriptvars = (GAME / 'Data/Script/destiny/scriptvars.lua').read_text(encoding='utf-8')
+recrutement = (GAME / 'Data/Script/destiny/recrutement.lua').read_text(encoding='utf-8')
+assert 'RecrutementDebloque = false' in scriptvars
+assert 'GAME:SetCanRecruit(autorise)' in recrutement
+assert 'RecrutementDebloque = false' in quiz and 'recrutement.synchroniser()' in quiz
+assert 'recrutement.synchroniser()' in scene
+assert 'recrutement.synchroniser()' in reveil
+assert 'recrutement.synchroniser()' in zone_script
+assert 'recrutement.debloquer()' not in quiz + scene + reveil + zone_script
+cliff_jour = (GAME / 'Data/Script/destiny/ground/cliffdaytest/init.lua').read_text(encoding='utf-8')
+assert 'SceneArriveeDestiny' in cliff_jour
+assert 'tatie Kangourex' in cliff_jour and 'guildes' in cliff_jour
+# Retour des Bois Perdus : prénom dynamique, partenaire devant, maison,
+# pensée du héros en italique et gestuelle face à face.
+assert 'nom_heros()' in cliff_jour and 'On est arrivés !' in cliff_jour
+assert 'tu ne te débrouilles pas trop mal' in cliff_jour
+assert "C’est ici que j’habite" in cliff_jour and 'capitale mondiale des explorateurs' in cliff_jour
+assert 'Je me demande dans quoi je me suis embarqué…' in cliff_jour
+# Pensées du héros : simplement entre parenthèses. La balise [i] n’existe
+# pas dans le moteur (Text.MsgTags) et s’affichait en toutes lettres.
+assert '"[i](' not in cliff_jour and '"[i](' not in reveil
+assert '"(" .. contenu .. ")"' in cliff_jour and '"(" .. texte .. ")"' in reveil
+# Retour à la falaise : le héros n'y était pas cette nuit.
+assert 'juste fait demi-tour' not in cliff_jour
+assert 'mais dans l’autre sens.' not in cliff_jour
+# Devant la maison, le facteur arrive et repart par le haut, lentement.
+assert 'facteur_bekipan()' in cliff_jour and "cinematique.NomEspece('pelipper', 'Bekipan') .. \", le facteur !\"" in cliff_jour
+assert 'GROUND:TeleportTo(bekipan, 656, 340, Direction.Down, 32)' in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Down, 656, 444, 1, 1, 0)" in cliff_jour
+# Dépôt de face : la vraie Special0 SpriteCollab de distribution du courrier
+# (68 ticks) remplace l'ancien détournement Walk/Attack. Le son sourd part
+# à mi-animation, pendant la frame bec dans la fente (ticks 27 à 41), puis
+# le « Clunk » suit la fin du geste. Le vol se fait sans Hop.
+_scene_bekipan = cliff_jour[cliff_jour.index('local bekipan = facteur_bekipan()'):
+                            cliff_jour.index("GROUND:Hide('Bekipan')")]
+assert "anim(bekipan, 'Special0', false)" in _scene_bekipan
+assert "anim(bekipan, 'Walk', true)" not in _scene_bekipan
+assert "anim(bekipan, 'Attack', false)" not in _scene_bekipan
+assert _scene_bekipan.index("anim(bekipan, 'Special0', false)") \
+    < _scene_bekipan.index('cinematique.Respirer(34)') \
+    < _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')") \
+    < _scene_bekipan.index('cinematique.Respirer(34)', _scene_bekipan.index("SOUND:PlayBattleSE('DUN_Hit_Neutral')")) \
+    < _scene_bekipan.index("UI:WaitShowDialogue('Clunk')")
+assert "anim(bekipan, 'Hop', false)" not in _scene_bekipan
+assert "UI:WaitShowDialogue('Clunk')" in cliff_jour
+assert "GROUND:AnimateToPosition(bekipan, 'Walk', Direction.Up, 656, 390, 1, 1, 24)" in cliff_jour
+assert 'GROUND:MoveToPosition(bekipan, 420, 390, false, 1.5)' in cliff_jour
+assert "GROUND:Hide('Bekipan')" in cliff_jour
+assert 'nouvel ami' in cliff_jour and 'nom_partenaire()' in cliff_jour
+assert 'partout dans le monde' in cliff_jour and 'poste Bekipan' in cliff_jour
+assert 'bonne chance pour la suite' in cliff_jour
+assert 'Grande Guilde des Explorateurs' in cliff_jour
+assert 'ouvre ses portes' in cliff_jour and 'les inscriptions sont ouvertes' in cliff_jour
+assert 'ce rêve n’a jamais été aussi proche' in cliff_jour
+assert cliff_jour.index('nouvel ami') < cliff_jour.index('bonne chance pour la suite') \
+    < cliff_jour.index('ouvre ses portes') \
+    < cliff_jour.index('tu te demandes ce que c’est, une guilde')
+assert 'se_faire_face(partner, hero)' in cliff_jour and "geste_heros(hero, 'idle', partner)" in cliff_jour
+assert 'RencontreTeamDazzling' in cliff_jour and 'TeamDazzlingRencontree' in cliff_jour
+# Voix hors champ sans portrait, thème social, vraie Pose tenue et petites
+# étoiles PMDO autour des trois membres.
+assert "UI:SetSpeaker('???'" in cliff_jour and 'Hilarant.' in cliff_jour and 'super entrée' in cliff_jour
+# La réplique appartient au partenaire : il réagit avec « ! » avant le
+# héros (« ? » en léger différé), puis dit lui-même « Ne me dis pas que… ».
+assert "say(partner, 'Worried', \"Ne me dis pas que…\", 'standard')" in cliff_jour
+rencontre_dazzling = cliff_jour[cliff_jour.index('function cliffdaytest.RencontreTeamDazzling'):]
+reaction_partenaire = rencontre_dazzling.index("GROUND:CharSetEmote(partner, 'exclaim', 1)")
+reaction_heros = rencontre_dazzling.index("GROUND:CharSetEmote(hero, 'question', 1)")
+assert reaction_partenaire < reaction_heros < rencontre_dazzling.index('Ne me dis pas que…')
+assert rencontre_dazzling.index("SOUND:PlayBattleSE('EVT_Emote_Exclaim')") < reaction_partenaire
+assert 'Team Dazzling Social.ogg' in cliff_jour
+assert 'Lucky_Chant_Star_Yellow' in cliff_jour and 'Sparkle_RSE' not in cliff_jour
+assert 'PoseGroundAction' in cliff_jour and "GetAnimIndex('Pose')" in cliff_jour
+assert "require 'destiny.cinematique'" in cliff_jour
+assert "'droite'" in cliff_jour and "'standard'" in cliff_jour
+assert 'GAME:MoveCamera(800, 468, 80, false)' in cliff_jour
+# Cadrage de dialogue permanent en Clamp : centre sud réel (720, 672),
+# trio à y=688 et duo à y=716, donc pieds écran 136/164 au-dessus du texte.
+assert 'ScrollEdge.Blank' not in cliff_jour and 'ScrollEdge.Clamp' in cliff_jour
+assert 'map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp' in cliff_jour
+assert 'autoriser_camera_cinematique_sud' not in cliff_jour
+assert 'retablir_camera_carte' not in cliff_jour
+assert "say(sonata, 'Shock'" not in cliff_jour
+assert cliff_jour.count("say(sonata, 'Surprised'") == 2
+assert 'GAME:MoveCamera(720, 672, 190, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672, 1, false)' in cliff_jour
+assert 'GAME:MoveCamera(720, 672, 300, false)' in cliff_jour
+for ancien_centre in ('GAME:MoveCamera(720, 688', 'GAME:MoveCamera(720, 700',
+                      'GAME:MoveCamera(720, 712', 'GAME:MoveCamera(724, 720',
+                      'GAME:MoveCamera(696, 736', 'GAME:MoveCamera(680, 744'):
+    assert ancien_centre not in cliff_jour
+# Entrée en file : Aria garde ses distances avec Adagio, Sonata rejoint la
+# route en diagonale, puis chacune bifurque vers son propre couloir.
+assert 'GROUND:MoveToPosition(adagio, 713, 676, false, 1.5)' in cliff_jour
+_entree_aria = cliff_jour[cliff_jour.index('local entree_mawhile = TASK:BranchCoroutine'):
+                          cliff_jour.index('local entree_lopunny = TASK:BranchCoroutine')]
+_entree_sonata = cliff_jour[cliff_jour.index('local entree_lopunny = TASK:BranchCoroutine'):
+                            cliff_jour.index('local suivi_entree = TASK:BranchCoroutine')]
+assert _entree_aria.index('GAME:WaitFrames(24)') < _entree_aria.index('marcher_route_verte(Aria)')
+assert 'GROUND:MoveToPosition(Aria, 680, 654, false, 1.5)' in _entree_aria
+assert 'GROUND:MoveToPosition(Aria, 680, 688, false, 1.5)' in _entree_aria
+assert _entree_sonata.index('GAME:WaitFrames(48)') < _entree_sonata.index('marcher_route_verte(sonata)')
+assert 'GROUND:MoveToPosition(sonata, 860, 452, false, 1.5)' in _entree_sonata
+assert 'GROUND:MoveToPosition(sonata, 736, 654, false, 1.5)' in _entree_sonata
+assert 'GROUND:MoveToPosition(sonata, 736, 688, false, 1.5)' in _entree_sonata
+# Surnoms dynamiques blancs ; seuls les prénoms fixes Dazzling sont colorés.
+assert 'return membre.Nickname' in cliff_jour
+assert 'cinematique.NomColore(membre.Nickname' not in cliff_jour
+for prenom, espece in (('Adagio', 'tsareena'), ('Aria', 'mawile'), ('Sonata', 'lopunny')):
+    assert f"cinematique.NomColore('{prenom}', '{espece}')" in cliff_jour
+assert 'poser_dazzling(sonata, false)' in cliff_jour
+assert "GROUND:CharSetEmote(partner, 'shock', 1)" in cliff_jour
+assert "GROUND:CharSetEmote(hero, 'exclaim', 1)" in cliff_jour
+assert 'EVT_Emote_Complain' in cliff_jour
+assert 'Réverie Town[color] n’est pas un lieu pour des amateurs' in cliff_jour
+assert 'Mais pour qui vous vous prenez ?!' in cliff_jour
+# Le héros ne fixe plus le partenaire pendant l’altercation : avant chaque
+# réplique d’une Dazzling, il se tourne vers celle qui parle. Il ne revient
+# vers le partenaire que pour ses réponses (échange Dazzling, facteur
+# Bekipan, gag commun des deux branches et colère après la bousculade).
+lignes_cliff_jour = cliff_jour.splitlines()
+regards_vers_dazzling = 0
+for numero, ligne in enumerate(lignes_cliff_jour):
+    texte_ligne = ligne.strip()
+    for locutrice in ('adagio', 'Aria', 'sonata'):
+        if texte_ligne.startswith(f'say({locutrice},'):
+            assert lignes_cliff_jour[numero - 1].strip() == f'hero_regarde_locuteur(hero, {locutrice})'
+            regards_vers_dazzling += 1
+assert regards_vers_dazzling == 27
+assert cliff_jour.count('hero_regarde_locuteur(hero, partner)') == 10
+assert '{hero, sonata, 5, 4}' in cliff_jour
+# Issues du combat : Adagio part, Aria suit à +12 frames, puis Sonata
+# joue le même gag dans les deux branches avec des répliques adaptées.
+assert 'Eh ! Attendez-moi, les filles ! Aaanh !' not in cliff_jour
+assert 'Mais attendez !' not in cliff_jour
+assert 'Ouaiiiiiis… bande de veinards !' in cliff_jour
+assert 'Ouaiiiiiis les looser !' in cliff_jour
+assert 'ANNNNNNNNNNH ATTENDEZ MOI LES FILLES' in cliff_jour
+assert 'Bande de losers !' in cliff_jour
+assert 'C’est clair !' in cliff_jour and 'Ouais, aanh !' in cliff_jour
+assert cliff_jour.index('C’est clair !') < cliff_jour.index('Ouais, aanh !')
+_gag = cliff_jour[cliff_jour.index('local function gag_depart_sonata'):
+                  cliff_jour.index('-- Les surnoms choisis par le joueur')]
+assert _gag.count("anim(sonata, 'Hop', false)") == 2
+assert _gag.count("SOUND:PlayBattleSE('EVT_Emote_Sweatdrop')") == 1
+assert _gag.count("GROUND:CharSetEmote(hero, 'sweatdrop', 1)") == 1
+assert _gag.count("GROUND:CharSetEmote(partner, 'sweatdrop', 1)") == 1
+assert 'EVT_Emote_Startled' in _gag
+assert cliff_jour.count('gag_depart_sonata(hero, partner, sonata, true)') == 1
+assert cliff_jour.count('gag_depart_sonata(hero, partner, sonata, false)') == 1
+assert cliff_jour.count("GROUND:Hide('Sonata')") == 1
+# Aria n’utilise que des portraits canoniques : quand elle se moque
+# du héros et du partenaire, c’est Joyous. Aucune émotion de portrait 14
+# ne subsiste dans le payload racine de 303.portrait, et le portrait
+# personnalisé a été retiré du dépôt. Au sol, seule Sonata conserve la
+# pose Moquerie Special0 ; les glowing d'Aria et d'Adagio sont conservés.
+assert "say(Aria, 'Joyous', \"Deux fois ?" in cliff_jour
+assert "say(Aria, 'Joyous', \"Bande de losers !\"" in cliff_jour
+assert "GetAnimIndex('Special0')" in cliff_jour
+assert 'moquer_trio(adagio, Aria, sonata)' in cliff_jour
+assert 'finir_moquerie_trio(adagio, Aria, sonata)' in cliff_jour
+assert 'local function cascade_moquerie_Aria_adagio' in cliff_jour
+_moquerie = cliff_jour[cliff_jour.index('local function moquer_trio('):
+                       cliff_jour.index('local function finir_moquerie_trio(')]
+assert 'moquer_dazzling(sonata)' in _moquerie
+assert 'moquer_dazzling(adagio)' not in _moquerie
+assert 'moquer_dazzling(Aria)' not in _moquerie
+assert _moquerie.count('GAME:WaitFrames(4)') == 2
+_cascade = cliff_jour[cliff_jour.index('local function cascade_moquerie_Aria_adagio('):
+                      cliff_jour.index('-- Fight Woosh étoilé Team Dazzling')]
+assert "cinematique.Emote(Aria, 'glowing')" in _cascade
+assert "cinematique.Emote(adagio, 'glowing')" in _cascade
+_rencontre = cliff_jour[cliff_jour.index('function cliffdaytest.RencontreTeamDazzling'):
+                        cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite')]
+assert _rencontre.index('problème d’orientation') \
+    < _rencontre.index('cascade_moquerie_Aria_adagio(adagio, Aria)') \
+    < _rencontre.index("cinematique.Emote(sonata, 'happy')") \
+    < _rencontre.index('Moi, je trouve ça mignon')
+sys.path.insert(0, str(ROOT / 'tools'))
+from fusionner_conteneurs_pmd import load_container as _charger_conteneur
+from fusionner_conteneurs_pmd import read as _lire_binaire
+portrait_mawhile = _charger_conteneur(GAME / 'Content/Portrait/303.portrait', 'Portrait')
+_blob = portrait_mawhile.payload
+_png_len, _pos = _lire_binaire('<q', _blob, 0)
+_pos += _png_len
+(_, _), _pos = _lire_binaire('<ii', _blob, _pos)
+_nb, _pos = _lire_binaire('<i', _blob, _pos)
+_frames = []
+for _ in range(_nb):
+    _v, _pos = _lire_binaire('<ii?', _blob, _pos)
+    _frames.append(_v)
+assert all(_emotion != 14 for _emotion, _cell, _flip in _frames)
+assert not (ROOT / 'art/portraits/Mawile_regard_sournois_40x40.png').exists()
+assert 'saluer l’affiche' not in cliff_jour and 'héros muet' not in cliff_jour
+# Face-à-face et poussée sur les chemins, puis Hide seulement hors champ.
+for coordonnees in ('688, 688', '712, 688', '736, 688', '712, 716', '736, 716',
+                    '684, 720', '764, 720', '668, 728', '764, 728', '692, 728',
+                    '680, 654', '736, 654', '713, 676', 'sud.Position.X'):
+    assert coordonnees in cliff_jour
+assert "AnimateToPosition(hero, 'Hurt'" in cliff_jour
+assert "AnimateToPosition(partner, 'Hurt'" in cliff_jour
+sortie_defaite = cliff_jour[cliff_jour.index('function cliffdaytest.SortieDazzlingApresDefaite'):cliff_jour.index('function cliffdaytest.ApresCombatTeamDazzling')]
+assert 'colonne' not in sortie_defaite
+for avance in ('GROUND:MoveToPosition(Aria, 688, 704, false, 1)',
+               'GROUND:MoveToPosition(adagio, 712, 704, false, 1)',
+               'GROUND:MoveToPosition(sonata, 736, 704, false, 1)',
+               'GROUND:MoveToPosition(Aria, 688, 716, false, 1)',
+               'GROUND:MoveToPosition(adagio, 712, 716, false, 1)',
+               'GROUND:MoveToPosition(sonata, 736, 716, false, 1)',
+               'GROUND:MoveToPosition(adagio, 736, 800, false, 2)',
+               'GROUND:MoveToPosition(Aria, 712, 800, false, 2)',
+               'gag_depart_sonata(hero, partner, sonata, false)'):
+    assert avance in sortie_defaite
+assert sortie_defaite.index('Bande de losers !') \
+    < sortie_defaite.index('cascade_moquerie_Aria_adagio(adagio, Aria)') \
+    < sortie_defaite.index('Retenez cette leçon')
+assert "cinematique.Emote(sonata, 'happy')" not in sortie_defaite
+# La réaction suit la bousculade ; l'excuse et la goutte de sueur suivent
+# le départ de Sonata, avant que la scène reprenne sa conclusion commune.
+assert sortie_defaite.index('TASK:JoinCoroutines({pousse_heros, pousse_partenaire') \
+    < sortie_defaite.index('Mais ça va pas la tête ?!') \
+    < sortie_defaite.index('Des amateurs jusqu’au bout')
+assert sortie_defaite.index('gag_depart_sonata(hero, partner, sonata, false)') \
+    < sortie_defaite.index('Ça ne te donne pas une superbe image') \
+    < sortie_defaite.index('comment dire…') \
+    < sortie_defaite.index("cinematique.Emote(partner, 'sweatdrop', 'EVT_Emote_Sweatdrop')") \
+    < sortie_defaite.index('pas important !')
+assert "if genre_connu and feminin then desole = 'désolée' end" in sortie_defaite
+for nom in ('Adagio', 'Sonata', 'Aria'):
+    assert f"GROUND:Hide('{nom}')" in cliff_jour
+musique_dazzling = (GAME / 'Content/Music/Team Dazzling Social.ogg').read_bytes()
+assert musique_dazzling.startswith(b'OggS') and b'vorbis' in musique_dazzling
+assert b'Encounter! Jacinthe' in musique_dazzling
+assert b'LOOPSTART=003079417' in musique_dazzling
+assert b'LOOPLENGTH=003135999' in musique_dazzling
+# La Pose V2 est rangée sous la clé 50 (FrameType moteur Pose) dans le
+# payload normal des trois .chara ; l’InternalIndex SpriteCollab reste 13.
+# Huit directions et durées SpriteCollab attendues.
+sys.path.insert(0, str(ROOT / 'tools'))
+from ajouter_pose_chara import MOQUERIE_FRAME_TYPE, POSE_FRAME_TYPE, parse_blob
+assert POSE_FRAME_TYPE == 50
+assert MOQUERIE_FRAME_TYPE == 82
+from fusionner_conteneurs_pmd import load_container, read_node
+index_chara, _ = read_node((GAME / 'Content/Chara/index.idx').read_bytes())
+assert {279, 303, 428, 763} <= set(index_chara.kids)
+assert index_chara.kids[279].pos == 44
+assert index_chara.kids[279].kids[0].kids[1].pos == 43358
+durees_pose = {
+    303: [4, 1, 2, 4, 2, 1, 2],
+    428: [4, 3, 3, 6],
+    763: [4, 4, 6],
+}
+for dex, durees in durees_pose.items():
+    conteneur = load_container(GAME / f'Content/Chara/{dex}.chara', 'Chara')
+    groupes = parse_blob(conteneur.payload)['groups']
+    assert POSE_FRAME_TYPE in groupes
+    groupe_pose = groupes[POSE_FRAME_TYPE]
+    assert groupe_pose['internal'] == 13
+    assert groupe_pose['copy'] == -1 and len(groupe_pose['seqs']) == 8
+    assert all([frame[2] for frame in seq] == durees for seq in groupe_pose['seqs'])
+    # Moquerie Destiny : action libre Special0 (82), InternalIndex
+    # SpriteCollab 14, une frame fixe de 30 ticks dans les 8 directions.
+    assert MOQUERIE_FRAME_TYPE in groupes
+    groupe_moquerie = groupes[MOQUERIE_FRAME_TYPE]
+    assert groupe_moquerie['internal'] == 14
+    assert groupe_moquerie['copy'] == -1 and len(groupe_moquerie['seqs']) == 8
+    assert all([frame[2] for frame in seq] == [30] for seq in groupe_moquerie['seqs'])
+# Bekipan facteur : même clé moteur Special0 (82), mais vraie animation
+# SpriteCollab 0279/0001 — InternalIndex 13, 9 frames/68 ticks, huit lignes
+# identiques (animation pensée de face). Les sources restent versionnées.
+_conteneur_bekipan = load_container(GAME / 'Content/Chara/279.chara', 'Chara')
+_groupes_bekipan = parse_blob(_conteneur_bekipan.payload)['groups']
+_groupe_courrier = _groupes_bekipan[MOQUERIE_FRAME_TYPE]
+assert _groupe_courrier['internal'] == 13
+assert _groupe_courrier['copy'] == -1 and len(_groupe_courrier['seqs']) == 8
+assert all([frame[2] for frame in seq] == [20, 3, 1, 3, 14, 3, 1, 3, 20]
+           for seq in _groupe_courrier['seqs'])
+assert len({repr(_seq) for _seq in _groupe_courrier['seqs']}) == 1
+for _source in ('AnimData.xml', 'Special0-Anim.png', 'Special0-Offsets.png',
+                'Special0-Shadow.png', 'credits.txt'):
+    assert (ROOT / 'art/sprites/pelipper_courrier/0279_Pelipper' / _source).is_file(), _source
+assert "CH('Pichu')" not in cliff_jour and 'PichuDazzling' not in cliff_jour
+assert 'GarderCheminSud' in scene
+assert 'Je ne vais pas me dégonfler' in scene and 'Il faut que je sois courageux' in scene
+for ground_name in ('cliffdaytest', 'cliffdaytest_nuit'):
+    ground = json.loads((GAME / f'Data/Ground/{ground_name}.rsground').read_text(encoding='utf-8-sig'))['Object']
+    entities = ground['Entities'][0]
+    assert ground['Music'] == 'Cliff Camp.ogg'
+    assert entities['MapChars'] == []
+    spawners_attendus = [('Adagio', 'tsareena'), ('Sonata', 'lopunny'), ('Aria', 'mawile')]
+    if ground_name == 'cliffdaytest':
+        # Le facteur Bekipan ne sert que dans la scène d’arrivée au jour.
+        spawners_attendus.append(('Bekipan', 'pelipper'))
+    assert [(s['EntName'], s['NPCChar']['BaseForm']['Species']) for s in entities['Spawners']] == spawners_attendus
+mer = (GAME / 'Content/Sound/Battle/Destiny_Falaise_Mer.ogg').read_bytes()
+assert mer.startswith(b'OggS') and b'vorbis' in mer
+ville_script = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
+assert "parler(hero" not in ville_script
+# Audit de la visite : guide en portrait de droite, face à face à
+# l’accueil et à la fin, regards vers les lieux montrés, rotations à 4.
+assert "require 'destiny.cinematique'" in ville_script
+assert "cinematique.Dire(partenaire, emotion, texte, 'droite')" in ville_script
+assert ville_script.count('se_faire_face_ville(partenaire, hero)') == 2
+assert 'regarder_lieu_ville(hero, partenaire, Direction.UpLeft)' in ville_script
+# La visite reste au centre : les commerces et le marché sont montrés,
+# mais les panoramas des autres quartiers ne font plus partie de la scène.
+assert 'regarder_lieu_ville(hero, partenaire, Direction.UpRight)' in ville_script
+for panorama in ('530, 2350', '800, 530', '1425, 320'):
+    assert panorama not in ville_script
+assert 'Direction.Up, 8' not in ville_script and 'Direction.Right, 6' not in ville_script
+assert "geste_heros(hero, 'autour', partenaire)" in ville_script
+# Reprise au lieu du réveil : montrer l’entrée au sud avant le choix,
+# puis se faire face pour la réponse.
+assert reveil.index('{partner, Direction.Down, 0, 4}') < reveil.index('Voici le chemin du retour')
+assert reveil.index('Souhaitez-vous retourner dans les Bois Perdus ?') < reveil.index('{partner, hero, 0, 4}')
+# Reprise solo de falaise : regarder à l’est avant de nommer l’entrée.
+assert scene.index('Direction.Right, 4') < scene.index('Quand je me rapprocherai de l’entrée, à l’est')
+
+# Premier combat jouable : Pose relevée, Woosh étoilé et musique au même
+# instant, segment donjon sur la version .rsmap de la même falaise.
+assert "montrez-moi ce que vous avez dans le ventre" in cliff_jour
+assert "Dazzling Fight.ogg" in cliff_jour and "Pre_Battle_Dazzling_Etoiles" in cliff_jour
+assert "SOUND:PlayBGM(MUSIQUE_DAZZLING_COMBAT, false)" in cliff_jour
+assert "jouer_woosh_dazzling()" in cliff_jour
+assert 'GAME:FadeOut(true, 0)' in cliff_jour
+assert "GAME:EnterDungeon('dazzling_fight', 0, 0, 0" in cliff_jour
+assert "ApresCombatTeamDazzling" in cliff_jour and "TeamDazzlingVictoire" in cliff_jour
+zone_dazzling = json.loads((GAME / 'Data/Zone/dazzling_fight.json').read_text(encoding='utf-8-sig'))['Object']
+assert zone_dazzling['NoEXP'] is True and len(zone_dazzling['Segments']) == 1
+index_zones = json.loads((GAME / 'Data/Zone/index.idx').read_text(encoding='utf-8-sig'))['Object']
+assert index_zones['dazzling_fight']['Grounds'] == []
+assert index_zones['dazzling_fight']['Maps'] == [[0]]
+assert index_zones['dazzling_fight']['CountedFloors'] == 1
+segment_dazzling = zone_dazzling['Segments'][0]
+assert segment_dazzling['Floors'][0]['GenSteps'][0]['Value']['MapID'] == 'cliffdaytest'
+script_zone_dazzling = (GAME / 'Data/Script/destiny/zone/dazzling_fight/init.lua').read_text(encoding='utf-8')
+assert "CombatDazzling = 'victoire'" in script_zone_dazzling
+assert "CombatDazzling = 'defaite'" in script_zone_dazzling
+combat_map = json.loads((GAME / 'Data/Map/cliffdaytest.rsmap').read_text(encoding='utf-8-sig'))['Object']
+assert combat_map['AssetName'] == 'cliffdaytest' and combat_map['EdgeView'] == 1
+assert len(combat_map['Tiles']) == 41 and len(combat_map['Tiles'][0]) == 33
+# CategorySpawnChooser.Spawns est un SpawnDict côté moteur : sa forme native
+# est un objet spawns/spawnTotal. Un [] fait échouer GetMap puis génère le
+# NullReferenceException de FinishGen qui retombait sur une map vide.
+assert combat_map['ItemSpawns'] == {'Spawns': {'spawns': {}, 'spawnTotal': 0}}
+assert combat_map['EntryPoints'] == [{'Loc': {'X': 29, 'Y': 30}, 'Dir': 4}]
+equipe_dazzling = combat_map['MapTeams'][0]['Players']
+assert [(p['Nickname'], p['CurrentForm']['Species'], p['Level'], p['serializationLoc'], p['serializationDir']) for p in equipe_dazzling] == [
+    ('Adagio', 'tsareena', 32, {'X': 29, 'Y': 29}, 0),
+    ('Sonata', 'lopunny', 31, {'X': 30, 'Y': 29}, 0),
+    ('Aria', 'mawile', 30, {'X': 28, 'Y': 29}, 0),
+]
+assert "Dazzling_Exit_East" in cliff_jour and "Réverie Town[color] nous attend" in cliff_jour
+effets_combat = [e['Value']['$type'] for e in combat_map['MapEffect']['OnMapStarts']]
+assert any('BattlePositionEvent' in t for t in effets_combat)
+assert any('BeginBattleEvent' in t for t in effets_combat)
+for sheet_name in ('CLIFFDAYTEST_BATTLE_BASE_24', 'CLIFFDAYTEST_BATTLE_FRONT_24'):
+    sheet = (GAME / f'Content/Tile/{sheet_name}.tile').read_bytes()
+    assert struct.unpack_from('<i', sheet)[0] == 24
+# Toute coordonnée référencée par la map doit exister dans sa planche :
+# sinon PMDO dessine sa texture d'erreur à la place du ciel.
+tile_locs = {}
+for sheet_name in ('CLIFFDAYTEST_BATTLE_BASE_24', 'CLIFFDAYTEST_BATTLE_FRONT_24'):
+    sheet = (GAME / f'Content/Tile/{sheet_name}.tile').read_bytes()
+    _ts, _count = struct.unpack_from('<ii', sheet)
+    tile_locs[sheet_name] = {struct.unpack_from('<ii', sheet, 8 + i * 16) for i in range(_count)}
+for layer in combat_map['Layers']:
+    for col in layer['Tiles']:
+        for cell in col:
+            for sub in cell['Layers']:
+                for fr in sub['Frames']:
+                    assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in tile_locs[fr['Sheet']]
+musique_combat = (GAME / 'Content/Music/Dazzling Fight.ogg').read_bytes()
+assert musique_combat.startswith(b'OggS') and b'vorbis' in musique_combat
+woosh_dazzling = (GAME / 'Content/BG/Pre_Battle_Dazzling_Etoiles.dir').read_bytes()
+assert struct.unpack_from('<q', woosh_dazzling)[0] > 0
+
+for _ground_path in sorted((GAME / 'Data/Ground').glob('*.rsground')):
+    _raw = _ground_path.read_bytes()
+    assert _raw.count(b'"EdgeView"') == 1, _ground_path
+    assert b'"EdgeView":0' not in _raw and b'"EdgeView": 0' not in _raw, _ground_path
+for _lua_path in sorted((GAME / 'Data/Script/destiny').rglob('*.lua')):
+    assert 'ScrollEdge.Blank' not in _lua_path.read_text(encoding='utf-8'), _lua_path
+
+print('OK : prologue, aller, retour inverse 7→1, arrivée au jour, Team Dazzling (social + combat), tutoriel et statue.')
+
+# couleur de l’interface : réglage natif et persistant du menu Options,
+# sans aucun mod séparé. Le vert reste le thème par défaut (feuilles de
+# base) ; les quatre autres coloris vivent en contenu Destiny sous
+# Content/UI/Themes/<NomEnum>/, aux dimensions exactes des originaux.
+import xml.etree.ElementTree as _ET
+from PIL import Image as _ImageThemes
+assert not (ROOT / 'mods_ui').exists()
+_tailles_ui = (('MenuBorder.png', (120, 72)),
+               ('PortraitBorder.png', (60, 36)),
+               ('Strip.png', (16, 16)))
+for _dossier in ('Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    for _fichier, _taille in _tailles_ui:
+        assert _ImageThemes.open(GAME / 'Content/UI/Themes' / _dossier / _fichier).size == _taille
+for _fichier, _taille in _tailles_ui:
+    assert _ImageThemes.open(ROOT / 'base/Content/UI' / _fichier).size == _taille
+_settings_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Settings.cs').read_text(encoding='utf-8-sig')
+for _valeur in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    assert _valeur in _settings_cs
+assert 'public enum UIColorTheme' in _settings_cs
+assert 'public UIColorTheme UITheme;' in _settings_cs
+assert 'UITheme = UIColorTheme.Green;' in _settings_cs
+_diag_cs = (ROOT / 'engine/RogueEssence/RogueEssence/DiagManager.cs').read_text(encoding='utf-8-sig')
+assert 'SelectSingleNode("Config/UITheme")' in _diag_cs
+assert 'Enum.TryParse(uiThemeNode.InnerText, out uiTheme)' in _diag_cs
+assert '"UITheme", settings.UITheme.ToString()' in _diag_cs
+_graphics_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Content/GraphicsManager.cs').read_text(encoding='utf-8-sig')
+assert 'public static void ApplyUITheme(Settings.UIColorTheme theme)' in _graphics_cs
+assert '"Themes/" + theme.ToString()' in _graphics_cs
+assert 'ApplyUITheme(DiagManager.Instance.CurSettings.UITheme)' in _graphics_cs
+_menu_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Menu/Settings/SettingsTitleMenu.cs').read_text(encoding='utf-8-sig')
+assert 'MENU_SETTINGS_UI_THEME' in _menu_cs
+assert 'GraphicsManager.ApplyUITheme((Settings.UIColorTheme)setting.CurrentChoice)' in _menu_cs
+assert _menu_cs.count('origin.GlobalSaveAction = OriginGlobalSaveAction;') == 1
+_build_py = (ROOT / 'tools/build_windows.py').read_text(encoding='utf-8')
+assert 'mods_ui' not in _build_py
+for _dossier in ('Blue', 'Violet', 'PastelPink', 'PastelYellow'):
+    assert f'Content/UI/Themes/{_dossier}/MenuBorder.png' in _build_py
+_lisezmoi = (ROOT / 'docs/LISEZ_MOI_WINDOWS.txt').read_text(encoding='utf-8')
+assert 'menu Options du jeu' in _lisezmoi and 'menu Mods permet de choisir' not in _lisezmoi
+def _resx(_chemin):
+    return {_d.get('name'): _d.findtext('value') for _d in _ET.parse(_chemin).getroot().findall('data')}
+_en = _resx(ROOT / 'base/Strings/strings.resx')
+_fr = _resx(ROOT / 'base/Strings/strings.fr.resx')
+assert _en['MENU_SETTINGS_UI_THEME'] == 'UI Color'
+assert _fr['MENU_SETTINGS_UI_THEME'] == "Couleur d'interface"
+assert [_en['_ENUM_UIColorTheme_' + _v] for _v in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow')] == ['Green', 'Blue', 'Violet', 'Pastel pink', 'Pastel yellow']
+assert [_fr['_ENUM_UIColorTheme_' + _v] for _v in ('Green', 'Blue', 'Violet', 'PastelPink', 'PastelYellow')] == ['Vert', 'Bleu', 'Violet', 'Rose pastel', 'Jaune pastel']
+print('OK : couleur d’interface native (5 thèmes, aucun mod UI).')

@@ -1,0 +1,1501 @@
+{
+ "Version": "0.8.12.0",
+ "Object": {
+  "$type": "RogueEssence.Data.DataType, RogueEssence",
+  "Comment": "Quiz de personnalité PMD Destiny — 20 questions originales dans l'esprit des quiz PMD, réponses de 2 à 5 choix sans compteur visible, 16 natures, pool starters gen 1-9 + extras, mapping nature → starter, talents et méga-évolution. La révélation finale forme une étoile pixel art colorée selon le type principal du starter pendant le maintien du clic droit.",
+  "Questions": [
+   {
+    "Texte": "Le soleil se lève sur une journée libre. Tu commences par…",
+    "Choix": [
+     {
+      "Texte": "Préparer mon sac et tracer mon plan.",
+      "Points": {
+       "hardy": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Sortir avant même d’avoir fini de manger.",
+      "Points": {
+       "hasty": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Regarder le ciel un moment, sans me presser.",
+      "Points": {
+       "relaxed": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "Suivre la première idée qui me traverse l’esprit.",
+      "Points": {
+       "rash": 3,
+       "impish": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "On te dit souvent que tu parles trop vite ?",
+    "Choix": [
+     {
+      "Texte": "Oui… mes idées déboulent avant mes mots.",
+      "Points": {
+       "hasty": 2,
+       "rash": 1
+      }
+     },
+     {
+      "Texte": "Non, je prends le temps de choisir mes mots.",
+      "Points": {
+       "quiet": 2,
+       "hardy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Ton ami trébuche de façon spectaculaire devant tout le monde.",
+    "Choix": [
+     {
+      "Texte": "Je l’aide à se relever tout de suite.",
+      "Points": {
+       "brave": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "j'éclate de rire, puis je lui tends la main.",
+      "Points": {
+       "impish": 3,
+       "naive": 1
+      }
+     },
+     {
+      "Texte": "Je vérifie d’abord s’il s’est fait mal.",
+      "Points": {
+       "timid": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Je lance une blague pour détendre l’ambiance.",
+      "Points": {
+       "naive": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je fais semblant de trébucher aussi.",
+      "Points": {
+       "rash": 3,
+       "impish": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Demain, un examen très important t’attend.",
+    "Choix": [
+     {
+      "Texte": "Je révise sérieusement, étape par étape.",
+      "Points": {
+       "hardy": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Je bachote au dernier moment.",
+      "Points": {
+       "hasty": 3,
+       "rash": 1
+      }
+     },
+     {
+      "Texte": "Je me couche tôt : tête reposée, esprit clair.",
+      "Points": {
+       "calm": 3,
+       "relaxed": 1
+      }
+     },
+     {
+      "Texte": "Je compte sur mon intuition.",
+      "Points": {
+       "naive": 3,
+       "quirky": 1
+      }
+     },
+     {
+      "Texte": "Je prépare une excuse très convaincante…",
+      "Points": {
+       "sassy": 3,
+       "impish": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Un coffre cabossé dépasse du sable.",
+    "Choix": [
+     {
+      "Texte": "Je l’ouvre, évidemment !",
+      "Points": {
+       "brave": 3,
+       "rash": 1
+      }
+     },
+     {
+      "Texte": "J’inspecte les alentours et je cherche un piège.",
+      "Points": {
+       "quiet": 3,
+       "timid": 1
+      }
+     },
+     {
+      "Texte": "Je le secoue pour écouter ce qu’il contient.",
+      "Points": {
+       "naive": 3,
+       "hasty": 1
+      }
+     },
+     {
+      "Texte": "J’appelle mes amis pour l’ouvrir ensemble.",
+      "Points": {
+       "jolly": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je le laisse : il appartient peut-être à quelqu’un.",
+      "Points": {
+       "docile": 3,
+       "calm": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "As-tu déjà rêvé qu’un trésor dormait juste sous tes pieds ?",
+    "Choix": [
+     {
+      "Texte": "Oui, et j’ai même eu envie de creuser !",
+      "Points": {
+       "naive": 2,
+       "quirky": 1
+      }
+     },
+     {
+      "Texte": "Non, je préfère les choses que je peux voir.",
+      "Points": {
+       "relaxed": 2,
+       "hardy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Dans un donjon, ton équipe arrive à une bifurcation.",
+    "Choix": [
+     {
+      "Texte": "Je propose un cap et je passe devant.",
+      "Points": {
+       "bold": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Je demande l’avis de chacun.",
+      "Points": {
+       "docile": 3,
+       "jolly": 1
+      }
+     },
+     {
+      "Texte": "Je choisis le passage le plus étroit et mystérieux.",
+      "Points": {
+       "impish": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "J’écoute, j’observe, puis je décide.",
+      "Points": {
+       "quiet": 3,
+       "timid": 1
+      }
+     },
+     {
+      "Texte": "Pile ou face. Le destin choisira !",
+      "Points": {
+       "quirky": 3,
+       "rash": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Alors que tu rêvassais, un ami t’asperge d’eau par surprise.",
+    "Choix": [
+     {
+      "Texte": "Bataille d’eau générale !",
+      "Points": {
+       "jolly": 3,
+       "impish": 1
+      }
+     },
+     {
+      "Texte": "Je prépare ma revanche en secret.",
+      "Points": {
+       "sassy": 3,
+       "impish": 1
+      }
+     },
+     {
+      "Texte": "J’éclate de rire. Bien joué !",
+      "Points": {
+       "naive": 3,
+       "jolly": 1
+      }
+     },
+     {
+      "Texte": "Je vais me sécher, tranquillement.",
+      "Points": {
+       "relaxed": 3,
+       "calm": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Un Pokémon plus grand embête un plus petit dans la rue.",
+    "Choix": [
+     {
+      "Texte": "Je m’interpose immédiatement.",
+      "Points": {
+       "brave": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je vais chercher quelqu’un de plus fort.",
+      "Points": {
+       "timid": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Je détourne son attention avec une ruse.",
+      "Points": {
+       "impish": 3,
+       "sassy": 1
+      }
+     },
+     {
+      "Texte": "J’essaie de calmer la situation par la parole.",
+      "Points": {
+       "calm": 3,
+       "brave": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "On te remet un énorme sac-cadeau.",
+    "Choix": [
+     {
+      "Texte": "Je l’ouvre sur-le-champ !",
+      "Points": {
+       "rash": 3,
+       "naive": 1
+      }
+     },
+     {
+      "Texte": "Je le secoue doucement pour deviner.",
+      "Points": {
+       "hasty": 3,
+       "quirky": 1
+      }
+     },
+     {
+      "Texte": "J’attends d’être chez moi pour l’ouvrir.",
+      "Points": {
+       "calm": 3,
+       "hardy": 1
+      }
+     },
+     {
+      "Texte": "Je me demande pourquoi le mien semble différent.",
+      "Points": {
+       "lonely": 3,
+       "quiet": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Quand tu es seul un moment, le silence te pèse ?",
+    "Choix": [
+     {
+      "Texte": "Oui, je cherche vite de la compagnie.",
+      "Points": {
+       "lonely": 3,
+       "timid": 1
+      }
+     },
+     {
+      "Texte": "Non, j’aime vraiment ce calme.",
+      "Points": {
+       "quiet": 3,
+       "relaxed": 1
+      }
+     },
+     {
+      "Texte": "Seulement quand je m’ennuie.",
+      "Points": {
+       "hasty": 3,
+       "jolly": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Une après-midi entière s’offre à toi. Tu choisis…",
+    "Choix": [
+     {
+      "Texte": "Une grande sortie avec tous mes amis.",
+      "Points": {
+       "jolly": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Terminer un projet qui me tient à cœur.",
+      "Points": {
+       "hardy": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "Ne rien faire, et le faire lentement.",
+      "Points": {
+       "relaxed": 3,
+       "calm": 1
+      }
+     },
+     {
+      "Texte": "Explorer un endroit inconnu, seul.",
+      "Points": {
+       "lonely": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Inventer une activité complètement improbable.",
+      "Points": {
+       "quirky": 3,
+       "impish": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Ton ami a beaucoup de retard au rendez-vous.",
+    "Choix": [
+     {
+      "Texte": "j'attends en profitant du paysage.",
+      "Points": {
+       "relaxed": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Je regarde l’heure toutes les minutes.",
+      "Points": {
+       "hasty": 3,
+       "timid": 1
+      }
+     },
+     {
+      "Texte": "Je pars. Mon temps compte aussi.",
+      "Points": {
+       "bold": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Je m’inquiète et je vais à sa rencontre.",
+      "Points": {
+       "timid": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Je lui prépare une arrivée triomphale.",
+      "Points": {
+       "impish": 3,
+       "sassy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "On te dit : « Tu es bizarre, mais vraiment drôle. »",
+    "Choix": [
+     {
+      "Texte": "Parfait, c’est exactement moi !",
+      "Points": {
+       "quirky": 3,
+       "naive": 1
+      }
+     },
+     {
+      "Texte": "Évidemment. Je le savais déjà.",
+      "Points": {
+       "sassy": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je ne sais pas trop comment le prendre…",
+      "Points": {
+       "timid": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "Je ris, puis je passe à autre chose.",
+      "Points": {
+       "jolly": 3,
+       "relaxed": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "On a une bonne et une mauvaise nouvelle pour toi.",
+    "Choix": [
+     {
+      "Texte": "La mauvaise d’abord. Allons droit au but.",
+      "Points": {
+       "bold": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "La bonne d’abord, pour garder le moral.",
+      "Points": {
+       "naive": 3,
+       "relaxed": 1
+      }
+     },
+     {
+      "Texte": "Une par une, calmement.",
+      "Points": {
+       "calm": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "Surprends-moi : choisis pour moi !",
+      "Points": {
+       "rash": 3,
+       "sassy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Une fois que tu as décidé quelque chose, tu vas jusqu’au bout ?",
+    "Choix": [
+     {
+      "Texte": "Oui. Quand je m’engage, je tiens bon.",
+      "Points": {
+       "hardy": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Non, si une meilleure idée surgit, je change.",
+      "Points": {
+       "quirky": 3,
+       "hasty": 1
+      }
+     },
+     {
+      "Texte": "Cela dépend de ce que ressent mon équipe.",
+      "Points": {
+       "docile": 3,
+       "brave": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "La fête du village bat son plein.",
+    "Choix": [
+     {
+      "Texte": "Je suis au centre de la piste !",
+      "Points": {
+       "jolly": 3,
+       "hasty": 1
+      }
+     },
+     {
+      "Texte": "Je discute avec un petit groupe.",
+      "Points": {
+       "docile": 3,
+       "timid": 1
+      }
+     },
+     {
+      "Texte": "J’observe la fête depuis un coin tranquille.",
+      "Points": {
+       "lonely": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "Je lance une farce pour briser la glace.",
+      "Points": {
+       "impish": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je propose un toast devant tout le monde.",
+      "Points": {
+       "bold": 3,
+       "sassy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Tu découvres une fleur rare au bord du chemin.",
+    "Choix": [
+     {
+      "Texte": "Je la cueille pour l’offrir à quelqu’un.",
+      "Points": {
+       "docile": 3,
+       "jolly": 1
+      }
+     },
+     {
+      "Texte": "Je la laisse grandir là où elle est.",
+      "Points": {
+       "calm": 3,
+       "hardy": 1
+      }
+     },
+     {
+      "Texte": "Je reviens la voir en secret, juste pour moi.",
+      "Points": {
+       "lonely": 3,
+       "quiet": 1
+      }
+     },
+     {
+      "Texte": "J’appelle tout le monde : regardez ça !",
+      "Points": {
+       "bold": 3,
+       "naive": 1
+      }
+     },
+     {
+      "Texte": "Je dessine sa forme pour ne pas l’oublier.",
+      "Points": {
+       "quirky": 3,
+       "lonely": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Tu fais une énorme erreur devant toute ton équipe.",
+    "Choix": [
+     {
+      "Texte": "Je l’assume et je répare ce que je peux.",
+      "Points": {
+       "hardy": 3,
+       "brave": 1
+      }
+     },
+     {
+      "Texte": "Je trouve une excuse… très créative.",
+      "Points": {
+       "sassy": 3,
+       "impish": 1
+      }
+     },
+     {
+      "Texte": "J’ai besoin d’un moment loin des regards.",
+      "Points": {
+       "timid": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Je rebondis immédiatement, encore plus fort.",
+      "Points": {
+       "rash": 3,
+       "bold": 1
+      }
+     },
+     {
+      "Texte": "Je respire et j’analyse ce qui s’est passé.",
+      "Points": {
+       "calm": 3,
+       "hardy": 1
+      }
+     }
+    ]
+   },
+   {
+    "Texte": "Pour toi, une belle aventure, c’est surtout…",
+    "Choix": [
+     {
+      "Texte": "Des amis avec qui rire jusqu’au bout.",
+      "Points": {
+       "jolly": 3,
+       "docile": 1
+      }
+     },
+     {
+      "Texte": "Rester pleinement moi-même, sans me cacher.",
+      "Points": {
+       "sassy": 3,
+       "lonely": 1
+      }
+     },
+     {
+      "Texte": "Avancer même quand le cœur tremble.",
+      "Points": {
+       "brave": 3,
+       "hardy": 1
+      }
+     },
+     {
+      "Texte": "Aller à mon rythme, libre comme le vent.",
+      "Points": {
+       "relaxed": 3,
+       "quirky": 1
+      }
+     },
+     {
+      "Texte": "Trouver les lieux que personne ne remarque.",
+      "Points": {
+       "lonely": 3,
+       "impish": 1
+      }
+     }
+    ]
+   }
+  ],
+  "Starters": [
+   {
+    "Espece": "bulbasaur",
+    "NomFR": "Bulbizarre",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Plante",
+     "Poison"
+    ],
+    "Talents": [
+     "Engrais",
+     "Chlorophylle"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Bulbizarre",
+    "Id": "bulbasaur",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B",
+     "#C77DFF"
+    ]
+   },
+   {
+    "Espece": "charmander",
+    "NomFR": "Reptincel",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Reptincel",
+    "Id": "charmander",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "squirtle",
+    "NomFR": "Carapuce",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Cuvette"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Carapuce",
+    "Id": "squirtle",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "pikachu",
+    "NomFR": "Pikachu",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Électrik"
+    ],
+    "Talents": [
+     "Statik",
+     "Paratonnerre"
+    ],
+    "Mega": false,
+    "Id": "pikachu",
+    "EtoileType": "Electrik",
+    "CouleurType": "#FFD83D",
+    "CouleursTypes": [
+     "#FFD83D"
+    ]
+   },
+   {
+    "Espece": "eevee",
+    "NomFR": "Évoli",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Normal"
+    ],
+    "Talents": [
+     "Adaptabilité",
+     "Anticipation",
+     "Cœur Noble"
+    ],
+    "Mega": false,
+    "Id": "eevee",
+    "EtoileType": "Normal",
+    "CouleurType": "#DDD6C8",
+    "CouleursTypes": [
+     "#DDD6C8"
+    ]
+   },
+   {
+    "Espece": "meowth",
+    "NomFR": "Miaouss",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Normal"
+    ],
+    "Talents": [
+     "Ramassage",
+     "Technicien",
+     "Tension"
+    ],
+    "Mega": false,
+    "Id": "meowth",
+    "EtoileType": "Normal",
+    "CouleurType": "#DDD6C8",
+    "CouleursTypes": [
+     "#DDD6C8"
+    ]
+   },
+   {
+    "Espece": "vulpix",
+    "NomFR": "Goupix",
+    "Gen": 1,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Torche",
+     "Sécheresse"
+    ],
+    "Mega": false,
+    "Id": "goupix",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "vulpix",
+    "NomFR": "Goupix d'Alola",
+    "Gen": 7,
+    "Forme": 1,
+    "Types": [
+     "Glace"
+    ],
+    "Talents": [
+     "Voile Neige"
+    ],
+    "Mega": false,
+    "Id": "goupix_alola",
+    "EtoileType": "Glace",
+    "CouleurType": "#79E6F2",
+    "CouleursTypes": [
+     "#79E6F2"
+    ]
+   },
+   {
+    "Espece": "chikorita",
+    "NomFR": "Germignon",
+    "Gen": 2,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Feuille Magique"
+    ],
+    "Mega": false,
+    "Id": "chikorita",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "cyndaquil",
+    "NomFR": "Héricendre",
+    "Gen": 2,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Turbo"
+    ],
+    "Mega": false,
+    "Id": "cyndaquil",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "totodile",
+    "NomFR": "Kaiminus",
+    "Gen": 2,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Agitation"
+    ],
+    "Mega": false,
+    "Id": "totodile",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "treecko",
+    "NomFR": "Arcko",
+    "Gen": 3,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Glissade"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Arcko",
+    "Id": "treecko",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "torchic",
+    "NomFR": "Poussifeu",
+    "Gen": 3,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Turbo"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Poussifeu",
+    "Id": "torchic",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "mudkip",
+    "NomFR": "Gobou",
+    "Gen": 3,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Glissade"
+    ],
+    "Mega": true,
+    "MegaNom": "Méga-Gobou",
+    "Id": "mudkip",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "skitty",
+    "NomFR": "Skitty",
+    "Gen": 3,
+    "Forme": 0,
+    "Types": [
+     "Normal"
+    ],
+    "Talents": [
+     "Jolie Grâce",
+     "Normalise",
+     "Peau Miracle"
+    ],
+    "Mega": false,
+    "Id": "skitty",
+    "EtoileType": "Normal",
+    "CouleurType": "#DDD6C8",
+    "CouleursTypes": [
+     "#DDD6C8"
+    ]
+   },
+   {
+    "Espece": "turtwig",
+    "NomFR": "Tortipouss",
+    "Gen": 4,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Coque Armure"
+    ],
+    "Mega": false,
+    "Id": "turtwig",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "chimchar",
+    "NomFR": "Ouisticram",
+    "Gen": 4,
+    "Forme": 0,
+    "Types": [
+     "Feu",
+     "Combat"
+    ],
+    "Talents": [
+     "Brasier",
+     "Poing de Fer"
+    ],
+    "Mega": false,
+    "Id": "chimchar",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45",
+     "#FF5C5C"
+    ]
+   },
+   {
+    "Espece": "piplup",
+    "NomFR": "Tiplouf",
+    "Gen": 4,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Acharné"
+    ],
+    "Mega": false,
+    "Id": "piplup",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "snivy",
+    "NomFR": "Vipélierre",
+    "Gen": 5,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Contestation"
+    ],
+    "Mega": false,
+    "Id": "snivy",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "tepig",
+    "NomFR": "Gruikui",
+    "Gen": 5,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Isograisse"
+    ],
+    "Mega": false,
+    "Id": "tepig",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "oshawott",
+    "NomFR": "Moustillon",
+    "Gen": 5,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Coque Armure"
+    ],
+    "Mega": false,
+    "Id": "oshawott",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "zorua",
+    "NomFR": "Zorua",
+    "Gen": 5,
+    "Forme": 0,
+    "Types": [
+     "Ténèbres"
+    ],
+    "Talents": [
+     "Illusion"
+    ],
+    "Mega": false,
+    "Id": "zorua",
+    "EtoileType": "Tenebres",
+    "CouleurType": "#A99AC2",
+    "CouleursTypes": [
+     "#A99AC2"
+    ]
+   },
+   {
+    "Espece": "chespin",
+    "NomFR": "Marisson",
+    "Gen": 6,
+    "Forme": 0,
+    "Types": [
+     "Plante",
+     "Combat"
+    ],
+    "Talents": [
+     "Engrais",
+     "Poing de Fer"
+    ],
+    "Mega": false,
+    "Id": "chespin",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B",
+     "#FF5C5C"
+    ]
+   },
+   {
+    "Espece": "fennekin",
+    "NomFR": "Feunnec",
+    "Gen": 6,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Magicien"
+    ],
+    "Mega": false,
+    "Id": "fennekin",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "froakie",
+    "NomFR": "Grenousse",
+    "Gen": 6,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Protéen"
+    ],
+    "Mega": false,
+    "Id": "froakie",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "rowlet",
+    "NomFR": "Brindibou",
+    "Gen": 7,
+    "Forme": 0,
+    "Types": [
+     "Plante",
+     "Vol"
+    ],
+    "Talents": [
+     "Engrais",
+     "Impassible"
+    ],
+    "Mega": false,
+    "Id": "rowlet",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B",
+     "#A9C7FF"
+    ]
+   },
+   {
+    "Espece": "litten",
+    "NomFR": "Flamiaou",
+    "Gen": 7,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Tension"
+    ],
+    "Mega": false,
+    "Id": "litten",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "popplio",
+    "NomFR": "Otaquin",
+    "Gen": 7,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Hydratation"
+    ],
+    "Mega": false,
+    "Id": "popplio",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "zorua",
+    "NomFR": "Zorua de Hisui",
+    "Gen": 8,
+    "Forme": 1,
+    "Types": [
+     "Normal",
+     "Spectre"
+    ],
+    "Talents": [
+     "Ruse"
+    ],
+    "Mega": false,
+    "Id": "zorua_hisui",
+    "EtoileType": "Normal",
+    "CouleurType": "#DDD6C8",
+    "CouleursTypes": [
+     "#DDD6C8",
+     "#9A86E8"
+    ]
+   },
+   {
+    "Espece": "grookey",
+    "NomFR": "Ouistempo",
+    "Gen": 8,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Agitation"
+    ],
+    "Mega": false,
+    "Id": "grookey",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "scorbunny",
+    "NomFR": "Flambino",
+    "Gen": 8,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Turbo"
+    ],
+    "Mega": false,
+    "Id": "scorbunny",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "sobble",
+    "NomFR": "Larméléon",
+    "Gen": 8,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Sniper"
+    ],
+    "Mega": false,
+    "Id": "sobble",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "sprigatito",
+    "NomFR": "Poussacha",
+    "Gen": 9,
+    "Forme": 0,
+    "Types": [
+     "Plante"
+    ],
+    "Talents": [
+     "Engrais",
+     "Progné"
+    ],
+    "Mega": false,
+    "Id": "sprigatito",
+    "EtoileType": "Plante",
+    "CouleurType": "#58C96B",
+    "CouleursTypes": [
+     "#58C96B"
+    ]
+   },
+   {
+    "Espece": "fuecoco",
+    "NomFR": "Chochodile",
+    "Gen": 9,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Brasier",
+     "Inconscient"
+    ],
+    "Mega": false,
+    "Id": "fuecoco",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   },
+   {
+    "Espece": "quaxly",
+    "NomFR": "Coiffeton",
+    "Gen": 9,
+    "Forme": 0,
+    "Types": [
+     "Eau"
+    ],
+    "Talents": [
+     "Torrent",
+     "Tension"
+    ],
+    "Mega": false,
+    "Id": "quaxly",
+    "EtoileType": "Eau",
+    "CouleurType": "#4AA8FF",
+    "CouleursTypes": [
+     "#4AA8FF"
+    ]
+   },
+   {
+    "Espece": "charcadet",
+    "NomFR": "Charbamm",
+    "Gen": 9,
+    "Forme": 0,
+    "Types": [
+     "Feu"
+    ],
+    "Talents": [
+     "Armure de Feu",
+     "Flash Fire"
+    ],
+    "Mega": false,
+    "Id": "charcadet",
+    "EtoileType": "Feu",
+    "CouleurType": "#FF7A45",
+    "CouleursTypes": [
+     "#FF7A45"
+    ]
+   }
+  ],
+  "Mapping": [
+   {
+    "Nature": "hardy",
+    "Starter": "pikachu"
+   },
+   {
+    "Nature": "docile",
+    "Starter": "eevee"
+   },
+   {
+    "Nature": "brave",
+    "Starter": "charcadet"
+   },
+   {
+    "Nature": "jolly",
+    "Starter": "goupix"
+   },
+   {
+    "Nature": "impish",
+    "Starter": "zorua"
+   },
+   {
+    "Nature": "naive",
+    "Starter": "skitty"
+   },
+   {
+    "Nature": "timid",
+    "Starter": "goupix_alola"
+   },
+   {
+    "Nature": "hasty",
+    "Starter": "charmander"
+   },
+   {
+    "Nature": "sassy",
+    "Starter": "zorua_hisui"
+   },
+   {
+    "Nature": "calm",
+    "Starter": "bulbasaur"
+   },
+   {
+    "Nature": "relaxed",
+    "Starter": "squirtle"
+   },
+   {
+    "Nature": "lonely",
+    "Starter": "mudkip"
+   },
+   {
+    "Nature": "quirky",
+    "Starter": "meowth"
+   },
+   {
+    "Nature": "quiet",
+    "Starter": "rowlet"
+   },
+   {
+    "Nature": "rash",
+    "Starter": "chespin"
+   },
+   {
+    "Nature": "bold",
+    "Starter": "piplup"
+   }
+  ],
+  "MegaTexteFR": "MÉGA-ÉVOLUTION"
+ }
+}

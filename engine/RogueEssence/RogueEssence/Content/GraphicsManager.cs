@@ -277,6 +277,82 @@ namespace RogueEssence.Content
         public static TileSheet MenuBG { get; private set; }
         public static TileSheet MenuBorder { get; private set; }
         public static TileSheet PicBorder { get; private set; }
+
+        private static TileSheet defaultMenuBorder;
+        private static TileSheet defaultPicBorder;
+        private static TileSheet defaultStrip;
+        private static Settings.UIColorTheme? currentUITheme;
+
+        private static string GetUIThemePath(Settings.UIColorTheme theme, string fileName)
+        {
+            if (theme == Settings.UIColorTheme.Green)
+                return Text.ModLangPath(PathMod.ModPath(UI_PATH + fileName));
+            return Text.ModLangPath(PathMod.ModPath(UI_PATH + "Themes/" + theme.ToString() + "/" + fileName));
+        }
+
+        public static void ApplyUITheme(Settings.UIColorTheme theme)
+        {
+            if (defaultMenuBorder == null || defaultPicBorder == null || defaultStrip == null)
+                return;
+            if (currentUITheme.HasValue && currentUITheme.Value == theme)
+                return;
+
+            TileSheet newMenuBorder = defaultMenuBorder;
+            TileSheet newPicBorder = defaultPicBorder;
+            TileSheet newStrip = defaultStrip;
+            Settings.UIColorTheme appliedTheme = theme;
+
+            if (theme != Settings.UIColorTheme.Green)
+            {
+                TileSheet loadedMenuBorder = null;
+                TileSheet loadedPicBorder = null;
+                TileSheet loadedStrip = null;
+                try
+                {
+                    string menuBorderPath = GetUIThemePath(theme, "MenuBorder.png");
+                    string picBorderPath = GetUIThemePath(theme, "PortraitBorder.png");
+                    string stripPath = GetUIThemePath(theme, "Strip.png");
+                    if (!File.Exists(menuBorderPath) || !File.Exists(picBorderPath) || !File.Exists(stripPath))
+                        throw new FileNotFoundException("Missing UI theme file(s) for " + theme.ToString());
+
+                    loadedMenuBorder = TileSheet.Import(menuBorderPath, 8, 8);
+                    loadedPicBorder = TileSheet.Import(picBorderPath, 4, 4);
+                    loadedStrip = TileSheet.Import(stripPath, 8, 8);
+                    newMenuBorder = loadedMenuBorder;
+                    newPicBorder = loadedPicBorder;
+                    newStrip = loadedStrip;
+                }
+                catch (Exception ex)
+                {
+                    DiagManager.Instance.LogError(new Exception("Could not load UI theme " + theme.ToString() + "; keeping the green interface.\n", ex));
+                    if (loadedMenuBorder != null)
+                        loadedMenuBorder.Dispose();
+                    if (loadedPicBorder != null)
+                        loadedPicBorder.Dispose();
+                    if (loadedStrip != null)
+                        loadedStrip.Dispose();
+                    newMenuBorder = defaultMenuBorder;
+                    newPicBorder = defaultPicBorder;
+                    newStrip = defaultStrip;
+                    appliedTheme = Settings.UIColorTheme.Green;
+                }
+            }
+
+            TileSheet oldMenuBorder = MenuBorder;
+            TileSheet oldPicBorder = PicBorder;
+            TileSheet oldStrip = Strip;
+            MenuBorder = newMenuBorder;
+            PicBorder = newPicBorder;
+            Strip = newStrip;
+            currentUITheme = appliedTheme;
+
+            if (oldMenuBorder != null && oldMenuBorder != defaultMenuBorder && oldMenuBorder != newMenuBorder)
+                oldMenuBorder.Dispose();
+            if (oldPicBorder != null && oldPicBorder != defaultPicBorder && oldPicBorder != newPicBorder)
+                oldPicBorder.Dispose();
+            if (oldStrip != null && oldStrip != defaultStrip && oldStrip != newStrip)
+                oldStrip.Dispose();
+        }
         public static TileSheet Arrows { get; private set; }
         public static TileSheet Cursor { get; private set; }
         public static TileSheet BattleFactors { get; private set; }
@@ -504,6 +580,13 @@ namespace RogueEssence.Content
             Title = BaseSheet.Import(Text.ModLangPath(PathMod.ModPath(UI_PATH + "Title.png")));
             Subtitle = BaseSheet.Import(Text.ModLangPath(PathMod.ModPath(UI_PATH + "Enter.png")));
 
+            defaultMenuBorder = MenuBorder;
+            defaultPicBorder = PicBorder;
+            defaultStrip = Strip;
+            currentUITheme = Settings.UIColorTheme.Green;
+            if (DiagManager.Instance.CurSettings != null)
+                ApplyUITheme(DiagManager.Instance.CurSettings.UITheme);
+
             ZoomChanged -= graphicsZoomChanged;
 
             DiagManager.Instance.LoadMsg = "Loading Font";
@@ -590,10 +673,20 @@ namespace RogueEssence.Content
             Darkness.Dispose();
             BattleFactors.Dispose();
             Strip.Dispose();
+            if (defaultStrip != null && defaultStrip != Strip)
+                defaultStrip.Dispose();
             Cursor.Dispose();
             Arrows.Dispose();
             PicBorder.Dispose();
+            if (defaultPicBorder != null && defaultPicBorder != PicBorder)
+                defaultPicBorder.Dispose();
             MenuBorder.Dispose();
+            if (defaultMenuBorder != null && defaultMenuBorder != MenuBorder)
+                defaultMenuBorder.Dispose();
+            defaultMenuBorder = null;
+            defaultPicBorder = null;
+            defaultStrip = null;
+            currentUITheme = null;
             MenuBG.Dispose();
             MenuAlpha.Dispose();
         }

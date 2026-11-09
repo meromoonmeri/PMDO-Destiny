@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueElements;
 using RogueEssence.Content;
@@ -96,6 +96,30 @@ namespace RogueEssence.Ground
         public EntrySummary GenerateEntrySummary() { return new EntrySummary(Name, Released, Comment); }
 
         public string Music;
+
+        /// <summary>For night scenes whose asset name has no night suffix.</summary>
+        public bool NightCharacterFilter;
+
+        /// <summary>
+        /// Apply the filename convention only to the Destiny quest (or its
+        /// standalone build, where Destiny is a base script namespace). Other
+        /// quests may opt in explicitly via NightCharacterFilter.
+        /// </summary>
+        [JsonIgnore]
+        public bool FilterNightCharacters => NightCharacterFilter ||
+            (IsDestinyContext() && !String.IsNullOrEmpty(AssetName) &&
+             (AssetName.IndexOf("_nuit", StringComparison.OrdinalIgnoreCase) >= 0 ||
+              AssetName.IndexOf("_night", StringComparison.OrdinalIgnoreCase) >= 0));
+
+        private static bool IsDestinyContext()
+        {
+            if (PathMod.Quest.IsValid())
+                return String.Equals(PathMod.Quest.Namespace, "destiny", StringComparison.OrdinalIgnoreCase);
+            return String.Equals(PathMod.BaseNamespace, "destiny", StringComparison.OrdinalIgnoreCase) ||
+                (PathMod.BaseScriptNamespaces != null && PathMod.BaseScriptNamespaces.Any(
+                    ns => String.Equals(ns, "destiny", StringComparison.OrdinalIgnoreCase)));
+        }
+
         public Map.ScrollEdge EdgeView;
         public bool NoSwitching;
 

@@ -1,17 +1,31 @@
 POKÉMON MYSTERY DUNGEON: DESTINY
-Base technique autonome — Windows x64
+Version de développement unifiée — Windows x64
 
 LANCER LE JEU
-1. Extraire entièrement le ZIP.
-2. Double-cliquer sur JOUER_A_DESTINY.bat.
+1. Extraire entièrement le ZIP dans un dossier où vous pouvez écrire, par exemple Documents ou le Bureau.
+2. Ouvrir le dossier PMDO-Destiny et double-cliquer sur JOUER_A_DESTINY.bat.
 3. À l'écran-titre, appuyer sur une touche puis choisir Nouvelle partie.
 
-Aucune installation séparée de PMDO n'est nécessaire.
-Destiny est déjà fusionné avec son moteur : il n'y a pas de quest à sélectionner.
-Ne pas déplacer Destiny.exe seul : les dossiers Base, Content, Data, Strings et les bibliothèques natives sont nécessaires.
+Aucune installation séparée de PMDO n'est nécessaire. Le moteur et les données de Destiny sont réunis dans ce dossier. Ne pas déplacer Destiny.exe tout seul.
+
+LES CARTES
+Cette version réunit 375 cartes Destiny au format .rsground, plus les cartes de base du moteur. La liste des 375 cartes Destiny se trouve dans LISTE_CARTES_DESTINY.txt ; les fichiers sont dans Data/Ground.
+
+Les cartes des ateliers et des archives sont incluses mais ne sont pas toutes reliées au scénario ni forcément jouables sans outils de développement. La campagne est encore en cours de création.
+
+33 cartes ont été reconstruites depuis les sources : 28 sont identiques aux empreintes de l'inventaire ; 5 sont des reconstructions déclarées dont les empreintes diffèrent. Neuf références à des cartes tierces ont été exclues et cinq cartes treasure_gen_* restent absentes faute de planches retrouvées.
+
+Pour lancer les outils de développement, essayer dev.bat. Leur fonctionnement et le chargement de toutes les cartes restent à vérifier sous Windows.
 
 SON
 Si le son grésille, utiliser JOUER_A_DESTINY_WASAPI.bat.
+
+COULEUR DE L’INTERFACE
+Dans le menu Options du jeu, le réglage « Couleur d’interface » permet de
+choisir les bordures des menus et des portraits : Vert, Bleu, Violet,
+Rose pastel ou Jaune pastel. L’aperçu est immédiat et le choix est conservé
+d’une partie à l’autre. Aucun mod séparé n’est nécessaire ; les anciens
+thèmes « Destiny UI » du menu Mods ne sont plus utilisés.
 
 CONTRÔLES PRINCIPAUX
 - Flèches : déplacement
@@ -24,11 +38,8 @@ CONTRÔLES PRINCIPAUX
 
 Les contrôles complets et les crédits PMDO sont dans README.txt.
 
-CONTENU ACTUEL
-Cette version est un socle de développement : écran-titre Destiny, sélection du héros et clairière technique. Elle ne contient pas encore de campagne complète.
-
 SAUVEGARDES
-Le jeu fonctionne de façon portable dans son dossier. Extraire le jeu dans un emplacement où Windows autorise l'écriture, par exemple Documents ou le Bureau, plutôt que Program Files.
+Le jeu fonctionne de façon portable dans son dossier. Éviter Program Files, qui peut interdire l'écriture des sauvegardes.
 
 MOTEUR
 PMDO / PMDC / RogueEssence. Notices du moteur disponibles dans Licenses.

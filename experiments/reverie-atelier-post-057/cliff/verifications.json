@@ -1,0 +1,26 @@
+{
+  "source": "Grand Cap historique jour 9bac5c1, masque L03 et rendu 1×",
+  "taille_px": [
+    480,
+    416
+  ],
+  "grille_import_px": 8,
+  "tuiles_choisies": 80,
+  "front": "raccord natif de Réverie réadapté sur une courbe arrondie",
+  "pixels_masque_plateau_modifies": 86,
+  "variation_verticale_max_px": 3,
+  "limites": "choix par fenêtres de 8×8 guidé par masque, découpes en bord ; jonctions visuellement à vérifier",
+  "bord_exterieur_test_proximite_2px": {
+    "pixels_contour": 689,
+    "pixels_proches_bordure": 689
+  },
+  "plateau": "ajusté localement sur la courbe avant",
+  "paroi_et_escalier_inchanges": true,
+  "integration_moteur": false,
+  "calques_dimensions_coherentes": true,
+  "loops_apng": {
+    "jour": true,
+    "crepuscule": true,
+    "nuit": true
+  }
+}

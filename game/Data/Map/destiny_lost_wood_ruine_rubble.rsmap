@@ -1,0 +1,74 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Dungeon.Map, RogueEssence",
+    "AssetName": "destiny_lost_wood_ruine_rubble",
+    "Comment": "Fragment original de ruines moussues pour Lost Wood.",
+    "Element": "none",
+    "DiscoveryArray": [
+      [
+        0
+      ]
+    ],
+    "Layers": [
+      {
+        "Name": "Ruines moussues",
+        "Layer": 0,
+        "Visible": true,
+        "Tiles": [
+          [
+            {
+              "AutoTileset": "",
+              "Associates": [],
+              "Layers": [
+                {
+                  "Frames": [
+                    {
+                      "Sheet": "DestinyRuinesMousse_Debris",
+                      "TexLoc": {
+                        "X": 0,
+                        "Y": 0
+                      }
+                    }
+                  ],
+                  "FrameLength": 60
+                }
+              ],
+              "NeighborCode": -1
+            }
+          ]
+        ]
+      }
+    ],
+    "Tiles": [
+      [
+        {
+          "Data": {
+            "ID": "unbreakable",
+            "TileTex": {
+              "AutoTileset": "lost_wood_floor",
+              "Associates": [],
+              "Layers": [],
+              "NeighborCode": 511
+            },
+            "StableTex": true
+          },
+          "Effect": {
+            "TileLoc": {
+              "X": 0,
+              "Y": 0
+            },
+            "ID": "",
+            "Revealed": false,
+            "Owner": 0,
+            "TileStates": []
+          }
+        }
+      ]
+    ],
+    "Items": [],
+    "MapTeams": [],
+    "AllyTeams": [],
+    "EntryPoints": []
+  }
+}

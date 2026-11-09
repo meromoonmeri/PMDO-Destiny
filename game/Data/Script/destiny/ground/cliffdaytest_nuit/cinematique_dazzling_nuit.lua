@@ -1,0 +1,114 @@
+-- Variante nocturne originale de la cinématique « Pichu × Team Dazzling »
+-- (MOD_CUTSCENE_PICHU_DAZZLING_PMDO.zip, branche arena/e39626d2). Conservée intacte ;
+-- la carte cliffdaytest_nuit est pilotée par init.lua (scénario arena/64113588).
+-- Pour la rejouer : remplacer init.lua par ce fichier (et require 'origin.common').
+require 'common'
+local cliffdaytest_nuit = {}
+local function anim(ch, name, looped)
+  if ch ~= nil then GROUND:CharSetAnim(ch, name, looped) end
+end
+local function say(ch, emotion, text)
+  UI:SetSpeaker(ch)
+  UI:SetSpeakerEmotion(emotion)
+  UI:WaitShowDialogue(text)
+end
+function cliffdaytest_nuit.Init(map)
+  DEBUG.EnableDbgCoro()
+  COMMON.RespawnAllies()
+end
+function cliffdaytest_nuit.Enter(map)
+  SV.PichuDazzlingNuit = SV.PichuDazzlingNuit or {}
+  if not SV.PichuDazzlingNuit.Seen then cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling() else GAME:FadeIn(20) end
+end
+function cliffdaytest_nuit.Exit(map) end
+function cliffdaytest_nuit.Update(map) end
+function cliffdaytest_nuit.GameSave(map) end
+function cliffdaytest_nuit.GameLoad(map) GAME:FadeIn(20) end
+function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
+  local pichu = CH('Pichu')
+  local adagio = CH('Adagio')
+  local sonata = CH('Sonata')
+  local aria = CH('Aria')
+  GAME:CutsceneMode(true)
+  if pichu ~= nil then AI:DisableCharacterAI(pichu); anim(pichu, 'Idle', true) end
+  if adagio ~= nil then AI:DisableCharacterAI(adagio) end
+  if sonata ~= nil then AI:DisableCharacterAI(sonata) end
+  if aria ~= nil then AI:DisableCharacterAI(aria) end
+  GAME:MoveCamera(608, 476, 1, true)
+  GAME:FadeIn(30)
+  GROUND:MoveToPosition(pichu, 608, 476, false, 1)
+  anim(pichu, 'Idle', true)
+  say(pichu, 'Happy', 'Ouah… Quel bon vent marin ce matin !')
+  say(pichu, 'Joyous', 'On entend les vagues jusque devant la porte !')
+  GROUND:MoveToPosition(pichu, 556, 476, false, 1)
+  GROUND:CharSetAnim(pichu, 'Idle', true)
+  say(pichu, 'Inspired', 'Un jour, je partirai explorer des endroits dont personne ne connaît encore le nom.')
+  GROUND:MoveToPosition(pichu, 612, 476, false, 1)
+  GROUND:MoveToPosition(pichu, 640, 526, false, 1)
+  GAME:MoveCamera(640, 526, 30, true)
+  say(pichu, 'Determined', 'La Guilde… C’est là que commencent les grandes aventures !')
+  say(pichu, 'Determined', 'Je vais leur montrer que moi aussi, je peux devenir explorateur !')
+  GAME:MoveCamera(700, 600, 30, true)
+  local a = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(adagio, 716, 650, false, 1)
+    GROUND:MoveToPosition(adagio, 708, 560, false, 1)
+    GROUND:MoveToPosition(adagio, 674, 524, false, 1)
+  end)
+  local b = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(sonata, 704, 668, false, 1)
+    GROUND:MoveToPosition(sonata, 702, 574, false, 1)
+    GROUND:MoveToPosition(sonata, 692, 506, false, 1)
+  end)
+  local c = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(aria, 728, 664, false, 1)
+    GROUND:MoveToPosition(aria, 718, 578, false, 1)
+    GROUND:MoveToPosition(aria, 694, 542, false, 1)
+  end)
+  TASK:JoinCoroutines({a, b, c})
+  GAME:MoveCamera(660, 526, 24, true)
+  GROUND:CharTurnToCharAnimated(sonata, pichu, 4)
+  say(sonata, 'Happy', 'Ohhh, regardez-moi ce tout petit bout de chou ! Tu t’es perdu loin de ton nid, bonhomme ?')
+  GROUND:CharTurnToCharAnimated(pichu, sonata, 4)
+  anim(pichu, 'Hop', false)
+  say(pichu, 'Shouting', 'Je ne suis pas un bébé ! Je vais rejoindre la Guilde et devenir explorateur !')
+  anim(aria, 'Attack', false)
+  say(aria, 'Happy', 'Au premier coup de vent dans un donjon, tu risques de t’envoler avant le premier étage !')
+  anim(sonata, 'Appeal', false)
+  say(sonata, 'Joyous', 'Et tes joues, elles crépitent toujours quand tu te donnes de grands airs ?')
+  anim(pichu, 'Charge', false)
+  say(pichu, 'Determined', 'Je peux me débrouiller ! Regardez bien !')
+  anim(pichu, 'Shock', false)
+  GAME:WaitFrames(18)
+  anim(pichu, 'Pain', false)
+  say(pichu, 'Pain', 'Bzzzt ! Aïe… mes joues !')
+  anim(adagio, 'Kick', false)
+  say(adagio, 'Angry', 'La Guilde, ce n’est pas une garderie pour bébés Pokémon en quête d’histoires !')
+  anim(aria, 'Rotate', false)
+  say(aria, 'Happy', 'Commence par maîtriser tes étincelles avant de rêver aux donjons !')
+  anim(pichu, 'Hurt', false)
+  say(pichu, 'Worried', 'Je… je vais m’entraîner. Je ne laisserai pas ça m’arrêter.')
+  GROUND:CharSetAnim(adagio, 'Walk', true)
+  GROUND:CharSetAnim(sonata, 'Walk', true)
+  GROUND:CharSetAnim(aria, 'Walk', true)
+  say(adagio, 'Happy', 'Allez, les filles. On n’a pas toute la journée.')
+  local d = TASK:BranchCoroutine(function() GROUND:MoveToPosition(adagio, 696, 468, false, 1); GROUND:MoveToPosition(adagio, 968, 468, false, 1) end)
+  local e = TASK:BranchCoroutine(function() GROUND:MoveToPosition(sonata, 704, 468, false, 1); GROUND:MoveToPosition(sonata, 960, 468, false, 1) end)
+  local f = TASK:BranchCoroutine(function() GROUND:MoveToPosition(aria, 712, 468, false, 1); GROUND:MoveToPosition(aria, 952, 468, false, 1) end)
+  TASK:JoinCoroutines({d, e, f})
+  GAME:MoveCamera(640, 526, 24, true)
+  anim(pichu, 'Sit', true)
+  say(pichu, 'Teary-Eyed', 'Peut-être qu’elles ont raison… Je n’ai même pas réussi à lancer une étincelle.')
+  anim(pichu, 'DeepBreath', false)
+  say(pichu, 'Determined', 'Non. Leur rire ne décidera pas de ce que je vaux.')
+  anim(pichu, 'Pose', false)
+  say(pichu, 'Shouting', 'Je rejoindrai la Guilde. Et je deviendrai explorateur, quoi qu’il arrive !')
+  anim(pichu, 'Walk', true)
+  GROUND:MoveToPosition(pichu, 708, 556, false, 1)
+  GROUND:MoveToPosition(pichu, 716, 650, false, 1)
+  GAME:MoveCamera(716, 650, 30, true)
+  GROUND:MoveToPosition(pichu, 736, 770, false, 1)
+  GAME:WaitFrames(30)
+  SV.PichuDazzlingNuit.Seen = true
+  GAME:CutsceneMode(false)
+end
+return cliffdaytest_nuit

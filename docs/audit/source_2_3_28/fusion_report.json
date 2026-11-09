@@ -1,0 +1,1869 @@
+{
+  "base_inchangee": true,
+  "conteneurs": [
+    {
+      "type": "Chara",
+      "dex": 1,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bf66f9966a37f4de257091c6f46dcd9d29cfe8192ce1acd67a2203dc48ea1b4f"
+    },
+    {
+      "type": "Chara",
+      "dex": 3,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6e613366c43da0745ba72f53830488bea9fd179350b44d5897a985e2fec72cad"
+    },
+    {
+      "type": "Chara",
+      "dex": 4,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6c3bcc62521866f487219b14fda6ef406d9c8ffbaf4f0a1245ccddf0a1ebf6b7"
+    },
+    {
+      "type": "Chara",
+      "dex": 6,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e63b2b097f79af148489b1eef0bdb5ec8da3eaa4feda0ba502841e49d417957d"
+    },
+    {
+      "type": "Chara",
+      "dex": 7,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "dbd9f0ef2e41706f14c94121d41d5251d4ed28c118042564eec9c2afdf239802"
+    },
+    {
+      "type": "Chara",
+      "dex": 9,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e92c4161bdd2a18232f62fe8a134fdc4ef0f0f51e1d3ab8fb4aa47f6fca01b93"
+    },
+    {
+      "type": "Chara",
+      "dex": 15,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b2870a6343ed78ec3de297c667659ebdf48e1fdadd3ac8108ded031a1b96a31b"
+    },
+    {
+      "type": "Chara",
+      "dex": 25,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "6f99b10efa300f03c6f5968ee5d2a2d6424d36af04fe167fd19c1851345baf88"
+    },
+    {
+      "type": "Chara",
+      "dex": 26,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "315c73b89cd4d51308ed2849cdc91435a971249171271bdb644d1ec2fdebb10a"
+    },
+    {
+      "type": "Chara",
+      "dex": 37,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "eca01bf9399708f1c614cc33e1eddba19702449fb90c0bdc1b5b0c9f759b5417"
+    },
+    {
+      "type": "Chara",
+      "dex": 58,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "90aea055df7d5993fbfc08c51e756b0faab436f9871382f44e58976b62385099"
+    },
+    {
+      "type": "Chara",
+      "dex": 94,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ae0afa7bd0d9e6f127e5fa9208f4c620075ce2ae235d762108cbc3879eb6062c"
+    },
+    {
+      "type": "Chara",
+      "dex": 130,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0d8787e3a52efcf05a5d2e9a32bba8f705671352022325983aff40f59495eab3"
+    },
+    {
+      "type": "Chara",
+      "dex": 133,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "3948cda650cd7f3f86550bdaa2912f50cb71ca0aa086caa7a531ecc4ed5ecc1c"
+    },
+    {
+      "type": "Chara",
+      "dex": 134,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6eaab05803850fab43cfc125881dadb4c64027f925622aed6c10885058a98315"
+    },
+    {
+      "type": "Chara",
+      "dex": 135,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b54f90844f35fcb1d39d5796db1b5e01ca3b7b628a7808eba9d7c8961ce2bf9a"
+    },
+    {
+      "type": "Chara",
+      "dex": 136,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "58aaf6baa477ee8626a481ad4df0a76b79fa2521f075f6027b1548afef26dbbb"
+    },
+    {
+      "type": "Chara",
+      "dex": 142,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1cb1d58f164a44eb020ea96272be7269908ff256cf5ff3c9a3ced0cc31e3d740"
+    },
+    {
+      "type": "Chara",
+      "dex": 147,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "67c1c6a55c06545e05bc6cdbf7db107d00cfdf585ea970b931beaeddbaaed2c9"
+    },
+    {
+      "type": "Chara",
+      "dex": 149,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e06b08dd9bc894caa853eac9f6c217940b89980ab1b6c04e4a15750674a8bb44"
+    },
+    {
+      "type": "Chara",
+      "dex": 152,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1f8317289218232c3ed74a1d976e98153757f41341a931bdc86a79c7022e5838"
+    },
+    {
+      "type": "Chara",
+      "dex": 154,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a8536b093510a99f0d992bf3d7ef552f49b34c9ab40db5886bcb3b9828665498"
+    },
+    {
+      "type": "Chara",
+      "dex": 155,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5fc42726a279cdff5e80589fd1389f19f492e70fa96645b3fe2dcc1906178e1d"
+    },
+    {
+      "type": "Chara",
+      "dex": 158,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b6fc2f7ef0ab2db0c2584bc4ecd5ce1326617fa0a86528c8e9bc257fa0fb3045"
+    },
+    {
+      "type": "Chara",
+      "dex": 160,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5985228a1f90885c7b62b3733ce0ec0d29b11cce5e2c384e7ec45e9368bb450b"
+    },
+    {
+      "type": "Chara",
+      "dex": 175,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0189b5cc90f0962c210f7f893ffae966e870eca653adaf936155b16259b86c16"
+    },
+    {
+      "type": "Chara",
+      "dex": 179,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "aa87d12754463a45fd2cba05446aed26cc57e37866f3f3817b6579c01ddb835b"
+    },
+    {
+      "type": "Chara",
+      "dex": 194,
+      "anciens_noeuds_preserves": 5,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "5ac6483151470a9812a3253445391946f18e3da4fddeb7f79da526257288ef5e"
+    },
+    {
+      "type": "Chara",
+      "dex": 196,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "fc5498a38b1e52296f82b99b86134acb6ae62f7e2c7ede231dc58f24e32f783e"
+    },
+    {
+      "type": "Chara",
+      "dex": 197,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8959e13b84035822a2282c7496cf817599007aa70fab68e8cfe04501b52be600"
+    },
+    {
+      "type": "Chara",
+      "dex": 198,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c9489b1693e7ab27b63926706c4277ba9f1d33b72a2356c74583a0d242b3d71a"
+    },
+    {
+      "type": "Chara",
+      "dex": 208,
+      "anciens_noeuds_preserves": 5,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b0d61eac52751c726f0580ab0fcf12378808ecb8389091b79f10f243aaff5935"
+    },
+    {
+      "type": "Chara",
+      "dex": 212,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a28c46dcc1c3fc8f3f55c07f16761277ca04082a2cea16ba542b967fefe643de"
+    },
+    {
+      "type": "Chara",
+      "dex": 214,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "17085c4d67b72d3bf524ed40cc11331ae5aad98282e6eec0d2571676fd7524bb"
+    },
+    {
+      "type": "Chara",
+      "dex": 215,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4af3a54e3da0d1f1eed75116b02bb2e580ff2d53a9c08797971836ebeff10bde"
+    },
+    {
+      "type": "Chara",
+      "dex": 227,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c73a344a78eb0296ca92245220609c4a3dafc7521472fc7413501a00e4596611"
+    },
+    {
+      "type": "Chara",
+      "dex": 229,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "76fde7adacd4020dc23adcbdc3ebb3895c3ca6ce22a432e2ade0d3bc31ef206c"
+    },
+    {
+      "type": "Chara",
+      "dex": 231,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1fdf973ce261d3d0fa8bf53ca8d80d18d4ea2692d0d5b239c2e52815ffb2047f"
+    },
+    {
+      "type": "Chara",
+      "dex": 246,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0a98205de62cbea207b7a78a284d97028984bcb4cbf243b1934dbb06100469a5"
+    },
+    {
+      "type": "Chara",
+      "dex": 252,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8972a0fd7d6ce9fc9020bbac9518e6aea2e433b998b05b6c03646c5d1cb8c0a5"
+    },
+    {
+      "type": "Chara",
+      "dex": 254,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0494a969c9e98afe2ca8d12b44e75474e5d58a52878c518ca325622a3151b4ca"
+    },
+    {
+      "type": "Chara",
+      "dex": 255,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "cfffad469d142f412c5355051235d19c4a39327388f0df06ae17a80fe3d70398"
+    },
+    {
+      "type": "Chara",
+      "dex": 257,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "43b5036e5762b345aeed7c2d62fb4fd589ffac64f7da5da046d4dc2d44572d21"
+    },
+    {
+      "type": "Chara",
+      "dex": 258,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6c7cd327b7ec914b9dce6eb749ec1e90c62231a11d8ca7947d201d6e07e9c965"
+    },
+    {
+      "type": "Chara",
+      "dex": 260,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "230142c6c5679cdf172dbe8ddd71d9a5ed67d4d08e3b28fc1d8481b6ac4cef3c"
+    },
+    {
+      "type": "Chara",
+      "dex": 280,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ec34363cebd88ecaf68dccfc9a55718183298377535e85a995da8b411d7b0fd2"
+    },
+    {
+      "type": "Chara",
+      "dex": 282,
+      "anciens_noeuds_preserves": 5,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "010e495b41b5203944b2cfb991f8cba1d6da8e827b0d272ff294d16d6ec23a03"
+    },
+    {
+      "type": "Chara",
+      "dex": 300,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "221c3bf9aeebe99328c16b8d6d38e8b58727a4b12dead72a31b86d75cfc4b842"
+    },
+    {
+      "type": "Chara",
+      "dex": 302,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bdc3cc6b35387f8a1de7da351a1032830f979d631f41a3fd78ffa13c99ec7a4f"
+    },
+    {
+      "type": "Chara",
+      "dex": 303,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6e04442392338361aa39d6f3a50ca2937bf4a1e2223e994a96b80dc8f666c45a"
+    },
+    {
+      "type": "Chara",
+      "dex": 310,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "19f20744b78a8d0d4e2375dc8d06211dffd0321a34c96053a0c1824f1216d1dc"
+    },
+    {
+      "type": "Chara",
+      "dex": 319,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "940b0a01aa5a3b56e59daa1029c59522742196f3a321783b6033cb459cfdd117"
+    },
+    {
+      "type": "Chara",
+      "dex": 323,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7a3598af49a0e0487770bfcc9161ed5ba359734296674a46578b98478d8a1289"
+    },
+    {
+      "type": "Chara",
+      "dex": 333,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "cec08cca5d0a6404725d88a9c7401c4c123c97a1d8018f52468f11c9404f20a3"
+    },
+    {
+      "type": "Chara",
+      "dex": 334,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d772c5d733e63f4b1c1b8ef5cc8f32d254ae1f4a3268f69f708ba052f1c93e7e"
+    },
+    {
+      "type": "Chara",
+      "dex": 354,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "43946f49a26bc3bf5173986025fcfac9362cef7df53579272fd45e8fa20e578c"
+    },
+    {
+      "type": "Chara",
+      "dex": 359,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "78e1eaba2b41d68fc555fa62ba40531c8cb847a3ede391e5e80b5fcfd588927d"
+    },
+    {
+      "type": "Chara",
+      "dex": 361,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8c8163af76ad339873332b64e01c4a3c884e4ac5cdf13f972e805b0c4386263f"
+    },
+    {
+      "type": "Chara",
+      "dex": 362,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4af127e4fba592e1597201c224781668051aeaecc4f571f6bbae277b09e4f511"
+    },
+    {
+      "type": "Chara",
+      "dex": 374,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "023ec9ada13bbbd205271133b6df056e6548d0bacf969267682070b25162340d"
+    },
+    {
+      "type": "Chara",
+      "dex": 376,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "15cfd30b02c7b75591e74f3be1b7c73a31b192b045a84058672101e76823ad93"
+    },
+    {
+      "type": "Chara",
+      "dex": 384,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e238a0441a457d2c3f17c099fb2e133077867e8d8ceef78d150b26968b11c881"
+    },
+    {
+      "type": "Chara",
+      "dex": 387,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1e2bf7fd521d981f6773c2641ec9b3cb2ecb051237922f2ed9bd1f7721efb610"
+    },
+    {
+      "type": "Chara",
+      "dex": 390,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "063aa8258243856bc9c53acb1c31a789268461a0dd96fbd4ebe29f2304cd8b40"
+    },
+    {
+      "type": "Chara",
+      "dex": 393,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "29f4b391d6b7b54ffbac5438d743a970b8ef702aba3dd697ffefb6cca7dec387"
+    },
+    {
+      "type": "Chara",
+      "dex": 403,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "b73ac0948d7e33df12408847dc5b29c85d2bf810b615c1719d1017028d720de9"
+    },
+    {
+      "type": "Chara",
+      "dex": 406,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "3332b453252cee713dee82a9f23f62ccd6b8b09b095acf8682b14fb838b14cb9"
+    },
+    {
+      "type": "Chara",
+      "dex": 427,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c0eb0a4a8a3c9db3600c1b4dafecb02fabd0f7718088c3b3ad3b6dd242db02d0"
+    },
+    {
+      "type": "Chara",
+      "dex": 428,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4b308416a278cc7e44d5525582c864c2e8ff9417d6197c0166c0fcb2dd571a5a"
+    },
+    {
+      "type": "Chara",
+      "dex": 443,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "577261c0ec2da6c26b058cb2af3c3a5336eab85dadc6386fd102eea8389733aa"
+    },
+    {
+      "type": "Chara",
+      "dex": 447,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "cb1bd5cbb7fbb04ee030b13b5c701def0059f4f797da5dbef3793d9345ba3ba3"
+    },
+    {
+      "type": "Chara",
+      "dex": 448,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "aa0c82228180f079250903a744f185e84750614ffd499eef6137eec37e537538"
+    },
+    {
+      "type": "Chara",
+      "dex": 470,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a013f106f01c3c2d2e1c6a8187fef069234f008552281f13c4b7e6dec24909b9"
+    },
+    {
+      "type": "Chara",
+      "dex": 471,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "885813dc627c06905a8bf992cdcabfaa9c45b77079cbc1eb9e64964076ad68dd"
+    },
+    {
+      "type": "Chara",
+      "dex": 475,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "922890671e30b085a4f9530b922cd34966fb31a4d6ff0fba5c9afee156349a33"
+    },
+    {
+      "type": "Chara",
+      "dex": 478,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5ada278856983b846ac15fa02f24e6aa7d5bda13b23a6446234c290980c58e9b"
+    },
+    {
+      "type": "Chara",
+      "dex": 491,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "06d4ec0f411ef8d3dc71e8ad756c746b02e69395916b6af460a8bff8ff3d79b1"
+    },
+    {
+      "type": "Chara",
+      "dex": 495,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "03e3981e54d4892f65abb8f776783f06bc87153027dd8a7be9e691216577f82b"
+    },
+    {
+      "type": "Chara",
+      "dex": 498,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1ec26bc4c6878f1e23bd6ba99c93f801cf5e0761a821b31fe9784dcc2e054872"
+    },
+    {
+      "type": "Chara",
+      "dex": 500,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c094320d748fd40e531927d9684b5dd5a5dc18ea325b3e472abe2f463a28d6c0"
+    },
+    {
+      "type": "Chara",
+      "dex": 501,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5c655be7d3cbd093cac17a582ea019cb50229a042026783c8b60a7ce438f2119"
+    },
+    {
+      "type": "Chara",
+      "dex": 551,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1ac935ddb39a22c26a13100edad9f988aaba30ff99577587b2925c7771d57d5c"
+    },
+    {
+      "type": "Chara",
+      "dex": 570,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6308736bc88c334231395a4280c0971f07f642bcbfe3061b096d2942d2f00230"
+    },
+    {
+      "type": "Chara",
+      "dex": 572,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8698fae95eb03386e930d5d2bb22634172dfccad6e4d746a6716b2479e89d77b"
+    },
+    {
+      "type": "Chara",
+      "dex": 595,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "90659f179285be58cda7fda7578db92e1a25627bcf8839a2f12508be8b9c3cc5"
+    },
+    {
+      "type": "Chara",
+      "dex": 607,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5ae6fd01b397b2aa9d361b6b5a160cde1488a8e2d73e857ad9d7972c81104f81"
+    },
+    {
+      "type": "Chara",
+      "dex": 609,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e5b88b1a1e551f78530cb53e6f5096f5a23930b631e0ee812ad4b4845f910625"
+    },
+    {
+      "type": "Chara",
+      "dex": 610,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "50d33570c6abc0cfdb896705b33da915918eb5dab6e7cea44354ace6ca6e44b2"
+    },
+    {
+      "type": "Chara",
+      "dex": 622,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bfa20f19d7b7d417c17258b2ae87c93e13f8b36ce08ee5a925848e026c695666"
+    },
+    {
+      "type": "Chara",
+      "dex": 623,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "629bfa49b5fa5f74d91d68d639d5e8cdc351b5fa22e5f565428f3d5c188314dc"
+    },
+    {
+      "type": "Chara",
+      "dex": 624,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "22fff650571866259d839956e32247587024ca0aff0e7034ec3ace8970c4273b"
+    },
+    {
+      "type": "Chara",
+      "dex": 636,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bdb326386628f9a72610cc767b5c3c9c976113de42e5ebb68486cbf2426410ff"
+    },
+    {
+      "type": "Chara",
+      "dex": 650,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f86b4363fd2d241be46c279ad112a5c246b9e8eb0c0b9c750357de76a9ea8565"
+    },
+    {
+      "type": "Chara",
+      "dex": 652,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ef4d5ae75e07702a31c4a93b4b3a8dcb545459a27c34cd43c54b1d9dacf39ba7"
+    },
+    {
+      "type": "Chara",
+      "dex": 653,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "09c17b32e8e174f57e4f546b01328cd23d45eb39f88d272156d50c521e79a9e4"
+    },
+    {
+      "type": "Chara",
+      "dex": 655,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ffc5ea4a778250de155a37004375ef533eb654d3f4e0c1145aff562c97e311a1"
+    },
+    {
+      "type": "Chara",
+      "dex": 656,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0b218c52d6055da03371204a56e18fbc7b1b286d55e215fc68e281f587903df3"
+    },
+    {
+      "type": "Chara",
+      "dex": 658,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ccfa9b7729d491f0a01be6b29d3b8c76270601b32e1461f2708a592f79ca31a3"
+    },
+    {
+      "type": "Chara",
+      "dex": 674,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "946ff3de0aa2a8a9e552cac2ae5f30f2bf6ff85bfca659aebfa8353fbd9cdf51"
+    },
+    {
+      "type": "Chara",
+      "dex": 677,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "28b0d53b22362863fd9a4ffd029c212e5b3091d53631b3baa0a026207b399ce0"
+    },
+    {
+      "type": "Chara",
+      "dex": 678,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5428e1f09e6e78692f6399b5b3e6f433224c9dfae0cfd6cd355ac525ff7b3084"
+    },
+    {
+      "type": "Chara",
+      "dex": 700,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a17d71b2e01d46131c4947ab30fdec005942052628088f23a54a2d6c4582638b"
+    },
+    {
+      "type": "Chara",
+      "dex": 704,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6e972d0a00e558aaa135f09b05b6aaaec08b1c2926b3af2fc1bb177c5070179b"
+    },
+    {
+      "type": "Chara",
+      "dex": 708,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "70a041e0a5b8e6cd65cb19698fe4f7617f3b853937d85e60642ac214197b181f"
+    },
+    {
+      "type": "Chara",
+      "dex": 710,
+      "anciens_noeuds_preserves": 8,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0f71fb1f307ef0223d95e19a896e0c66507ba4ad34ff0248e77436a1e203a61d"
+    },
+    {
+      "type": "Chara",
+      "dex": 714,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2cbb6a0c0dc9d72b851550ede29e673c54992f2dd097d13957fa4c6d23dcedb5"
+    },
+    {
+      "type": "Chara",
+      "dex": 722,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9a6dc391c7833024ebf427ece830debb25edb851318e50241ff4dd5d7664c81b"
+    },
+    {
+      "type": "Chara",
+      "dex": 725,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "769d03b136a8f024ef2687f9be44e4e3a9de2be781655a51cd071f9cd808d707"
+    },
+    {
+      "type": "Chara",
+      "dex": 728,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "69cfefc28da5ff678fccb6b45922d397694e3a07e71600bfabfdb4a316ea1b68"
+    },
+    {
+      "type": "Chara",
+      "dex": 744,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9d77449743b58cd694a104e438b665f14dd7feccd8e55bedd71ae3a0f675b688"
+    },
+    {
+      "type": "Chara",
+      "dex": 757,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "47579752f5dba4b4ec5e1fa820b1bc0e1f6e33d3e8d7feedbb52dd0df1671a82"
+    },
+    {
+      "type": "Chara",
+      "dex": 759,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "6c6695456bc2903962936e95b81366779f16810979b78e4e081b18821558f322"
+    },
+    {
+      "type": "Chara",
+      "dex": 767,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4014bfa2010e009b52c4a5e97bef43c25af320bf968b3ea3f7f8dfa8f437e75c"
+    },
+    {
+      "type": "Chara",
+      "dex": 768,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8b447e1a3c06d846a41204793fa3434af4c4f017278188eae3e17230ec34f92d"
+    },
+    {
+      "type": "Chara",
+      "dex": 782,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0059fd0850bdd0f66da0376d9d432e9588a5ddde4ec30dbe684dc2bdee6f6002"
+    },
+    {
+      "type": "Chara",
+      "dex": 789,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f3c98d741f46e4520ce62097fc541319605f183d5a72177dd5d0a277e391219a"
+    },
+    {
+      "type": "Chara",
+      "dex": 807,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "051f2555288f5c459be55797d5e79925151d9430669f9b0772f4ea6e3a0a1cfe"
+    },
+    {
+      "type": "Chara",
+      "dex": 810,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "54cd461ab9850cacbac7faa691acc1ee5e82aab7532e83f331560d0e21271677"
+    },
+    {
+      "type": "Chara",
+      "dex": 813,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d4becc7d688c900384951ebce1cbf68e2920c6fbd035cdeebfb0b78b3ab5b72c"
+    },
+    {
+      "type": "Chara",
+      "dex": 816,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "dc71559ce647875ec55dd16d2d390af38c79ca5aeb59d3ee61381b9484e0f099"
+    },
+    {
+      "type": "Chara",
+      "dex": 821,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c092f4d5b25f05bc52a6b700d40524219104fdf60888966ee65ad9cdc187bf2e"
+    },
+    {
+      "type": "Chara",
+      "dex": 827,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "61416c7c699c4b59faee573728697b4ec60d0e4a41fbf65aecd6f16b209ce971"
+    },
+    {
+      "type": "Chara",
+      "dex": 840,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e73eb5d3635768c86dcd33db5b6ae641804f20ee1f35975595c61f3b5792df30"
+    },
+    {
+      "type": "Chara",
+      "dex": 856,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "fbdcdc18bc06118e3e840de454c47140ee2ad5bc3056bb64f267a4bd836d28ea"
+    },
+    {
+      "type": "Chara",
+      "dex": 872,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c5165abe967b42126ad2157f6d84acd88af281b74c32854f74a55742642282cd"
+    },
+    {
+      "type": "Chara",
+      "dex": 885,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9f16a2dda860e1a06dc781ab6b360ca500a423830ab53a8ad6f6ae6b7cdaa8a3"
+    },
+    {
+      "type": "Chara",
+      "dex": 906,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "905bac42d0f652e490a39d91565ed1975dc36449c32ad655d70d0a1c2a594e74"
+    },
+    {
+      "type": "Chara",
+      "dex": 909,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "57b0f061b4e20012ee910665651c7e879e252f38bb3e0a51e4371cb6b45a2aff"
+    },
+    {
+      "type": "Chara",
+      "dex": 912,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c99d31c72ccdf5b197fbf75f2e393608d52e747f4d61f02cf30fdf03225f562c"
+    },
+    {
+      "type": "Chara",
+      "dex": 921,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7611b6012e7d0f7513a2951f3ebfb406837c2ef79e16be7e2e76ba09b8b11bfe"
+    },
+    {
+      "type": "Chara",
+      "dex": 926,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "56daa5dd8b8506971a35109b678ac2855d571356abed2f820966c4ef2235887b"
+    },
+    {
+      "type": "Chara",
+      "dex": 935,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ba0cc97e2f7e36dd53608d5f4d1214d258a0e615ecb9ac8d935774d530cfef44"
+    },
+    {
+      "type": "Chara",
+      "dex": 957,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4499b6ee15ec42258c3c66c25fbe6892f17558259a83fb7a499e46d104947356"
+    },
+    {
+      "type": "Portrait",
+      "dex": 1,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "859a0f8d437da93a986b794b72d64f474ab758ca77bd0c22a5dd4e645b494e12"
+    },
+    {
+      "type": "Portrait",
+      "dex": 3,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "459cd552883d7a6552299644e41d81fd110aae30bd98ba50da9d200dee5c5fac"
+    },
+    {
+      "type": "Portrait",
+      "dex": 4,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "03f6aa19c5c2f54ec32d255001e6c4dbed03dfe5fe4e63f0d99f97be2cbabcc9"
+    },
+    {
+      "type": "Portrait",
+      "dex": 6,
+      "anciens_noeuds_preserves": 8,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a4a6682a5e8bdf4c016d47966bf98ced7be4c833331703108c54c617d3caee51"
+    },
+    {
+      "type": "Portrait",
+      "dex": 7,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e3abe5a983fb909cd5d17ad374cefdc187eae60629cb439b76979462eda9a43d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 9,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "3f5f3bce9e14a392728d64761412938bd57e64af9a5c139541dd32892b50a9b2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 15,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2da045418760c6b21fb4d4051e33d2089d0eecce8c1a370aa6a77ff0403b1e01"
+    },
+    {
+      "type": "Portrait",
+      "dex": 25,
+      "anciens_noeuds_preserves": 7,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "64231af4ed21fc4103e7902203bfbf9d1196bc8871df11e2540be17d73749f75"
+    },
+    {
+      "type": "Portrait",
+      "dex": 26,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "be2945076c8623d5c196767afe2162a01b4a32dd8b97b8e9a6e932a687fdb4ce"
+    },
+    {
+      "type": "Portrait",
+      "dex": 37,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e90fb5e4bceaff86491a91458059b5c31dead004d6338bbfb60a7d7b1d7663c1"
+    },
+    {
+      "type": "Portrait",
+      "dex": 58,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2294cb98ade845b227a184560d50c1eee9272de9e5e7b83f63debb788c8c0853"
+    },
+    {
+      "type": "Portrait",
+      "dex": 94,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f4ba8b75d9e197b70af5d885a1868bd0972e383315342093b49d2b63715ce296"
+    },
+    {
+      "type": "Portrait",
+      "dex": 130,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ffaf99aa66a432bbb161397ff0ddac4e21bfa468b57a3d49011a05fe52bc5fd0"
+    },
+    {
+      "type": "Portrait",
+      "dex": 133,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2e6200144a20f4b80d0d610e39333632ca9dabe3e13c3ced07f1da26b36868d5"
+    },
+    {
+      "type": "Portrait",
+      "dex": 134,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "570a94f838df5e3635206d2ac9988582082b71a2184a4a674bfc6935705a3a50"
+    },
+    {
+      "type": "Portrait",
+      "dex": 135,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f8bbcb8aff812f378be3f576986ff781420b0331e22d7b1d833c295b9ea327fe"
+    },
+    {
+      "type": "Portrait",
+      "dex": 136,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "effe80c53a04eb187320e32ebbd59c786bd59cb2c10ccca29f66a8b7339b02e4"
+    },
+    {
+      "type": "Portrait",
+      "dex": 142,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9280268b5661142262a5f08ec1386ee73951356c448ba3b4e8a190530f6f3772"
+    },
+    {
+      "type": "Portrait",
+      "dex": 147,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "187e0df91e9c9973af6706fbf180783bcd7b40fc17f88bd76ebb08439918dac1"
+    },
+    {
+      "type": "Portrait",
+      "dex": 149,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "01483e303f9a96529c3bca2b0ed5c2b87962f7924fdc5b9427345b8dcb22bf9b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 152,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "39b0bac90ecaa97226afced77338f1063465ad93fcf10a441aeb683dfca410bc"
+    },
+    {
+      "type": "Portrait",
+      "dex": 154,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "420a6e6d373c5151a7355ba90d8673d10e03aefdd8aac1d80b7b4b972e5047c2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 155,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8222deeed199c00c7e480cf66abde8fdeefdad5305b9b64df859ae676baaa2cf"
+    },
+    {
+      "type": "Portrait",
+      "dex": 158,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "41138933ae0e330949096bb44783ab40e2eea119ecb0cc71c09d867f1837a1fa"
+    },
+    {
+      "type": "Portrait",
+      "dex": 160,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7a4074fc8e44779c8b79a4c96fc7582a6ea9f052f1bed30c2d742b8707cd8acc"
+    },
+    {
+      "type": "Portrait",
+      "dex": 175,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5d1731f73575ba16abddc6c61f011fc57e197584d7973187c01da6f345712f3c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 179,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e31682504b4364864eef3370d7a02298b4a13086e237235fa87f9de82ef1c28c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 194,
+      "anciens_noeuds_preserves": 5,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "9c7fbbe0928e7ad325df2f8c5c2b3f1421c7b9529d771d4918d0c03dbb9d0c92"
+    },
+    {
+      "type": "Portrait",
+      "dex": 196,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "cdd95da89564ce49c8507691d005349e2e3d051c4d4eb9d7624116e14765c583"
+    },
+    {
+      "type": "Portrait",
+      "dex": 197,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ca47aa66c154f539e5dc4244303a986c12c250118ec649be4b8b54e9252f5d6a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 198,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "763646db87584420da1a88d94d6966787c3eae112249358c9665c8155bfb34fe"
+    },
+    {
+      "type": "Portrait",
+      "dex": 208,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "de6448a861b441207bbbd69397a356d9877d91f1b722d499bf137bc876a2ac06"
+    },
+    {
+      "type": "Portrait",
+      "dex": 212,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2c2ff04074cc547c6900d5cd3f6981898137d696c3a0d41bf19cca66c6795d9d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 214,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9f26f1e8d2edbe8a267cc8a2c649b8a6f20fdc32ae61388522a5a194aa5cd726"
+    },
+    {
+      "type": "Portrait",
+      "dex": 215,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 2,
+      "sortie_sha256": "b8348242abb4d33ea0c04cb426a6c914c9e0f832cdd270b8aea5953ebb83dec0"
+    },
+    {
+      "type": "Portrait",
+      "dex": 227,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "96f07e530b90593a8c10004729c305fbb1d9f2a2728ab39e12cf339b39eae46c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 229,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5f6ac8577d5b79fbd035ae5370ac43766ad1e97352af0b2bd8e464b3e1a07ec8"
+    },
+    {
+      "type": "Portrait",
+      "dex": 231,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ef88122c88df12cfc593727e96f7a37cb100991c2e305696c95ddce753701f24"
+    },
+    {
+      "type": "Portrait",
+      "dex": 246,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "3aeba76e8b9a6bf71694e99b84bb52fb9ce03e2b44d91a5530d99a94425c224c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 252,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "aa0d23fa26d6d86dd846e462b3476bee3293c8f6f3c0fc63dc8bc2c14f7cbe2c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 254,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c09211c5674e557293f75c1281e79458bfe10d08afa1f292739dfe219c37c7aa"
+    },
+    {
+      "type": "Portrait",
+      "dex": 255,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "da883e864dda0c747d3f42310cffda8cd1ea3be2c0b0abf7c5a91bfb43de0585"
+    },
+    {
+      "type": "Portrait",
+      "dex": 257,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8fa1a8b4b5306eb9b2fca2d22c35ba7e3677083a056ae5fe55624797bafaccf8"
+    },
+    {
+      "type": "Portrait",
+      "dex": 258,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "963072ee877b316f1f5cef7f93c455fe44416b71082a4a6fe4d1073f141a2115"
+    },
+    {
+      "type": "Portrait",
+      "dex": 260,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bd844ab7e1260cf70a13e28d87e588ea3ea306c3c098f5c6f14854e5b46e84ed"
+    },
+    {
+      "type": "Portrait",
+      "dex": 280,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2a70f9ff286fb15916d70c0a5e1e2d45ee5e420ff074c6e068946c606dcd9d25"
+    },
+    {
+      "type": "Portrait",
+      "dex": 282,
+      "anciens_noeuds_preserves": 5,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8e5cfef5a5da7933a0d97d3a0b138d36245789a6ef4b3694bb4a5eb25ec554c5"
+    },
+    {
+      "type": "Portrait",
+      "dex": 300,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "cc007e4910c4d50ddab837a9d89deb34b5b989f18993a603e61f61252aa80c77"
+    },
+    {
+      "type": "Portrait",
+      "dex": 302,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "bbbe392afea4eb1a1bf39f29f6776a16156b21318937bd3965e25e0b0ed3da7c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 303,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9b0d7b852e08384702bad5d32816e90c777817a52b8ca064b77e6fa1f32f7528"
+    },
+    {
+      "type": "Portrait",
+      "dex": 310,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b0aa4c89f9d3a662ebf5ead60dc60878d80cb05b6ecc4a0037d849332d647edf"
+    },
+    {
+      "type": "Portrait",
+      "dex": 319,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "aa621194c4782b79f527207f334057e51319cf15db308b837f63397eaa625468"
+    },
+    {
+      "type": "Portrait",
+      "dex": 323,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "95f2e2ab24098de66bf5f65961c547eb3715b78b8577e8a3ed5dc447b22e2847"
+    },
+    {
+      "type": "Portrait",
+      "dex": 333,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9a17b98ddc00683369c29359d15614f06144a395adc4f93bba044e4db53e07cb"
+    },
+    {
+      "type": "Portrait",
+      "dex": 334,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "47c5ffb4393b751fdcf7831f4928b6d4ee15bdcd6b1182ea01280c059d53b1a5"
+    },
+    {
+      "type": "Portrait",
+      "dex": 354,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5b4e9b46d71ff601492e1bc4c3a161e08efaeb364e22b78c07e69ccd13cac974"
+    },
+    {
+      "type": "Portrait",
+      "dex": 359,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0850764a8a9fdf75fd84d7273d4645a5c5667225fc0fefcac469707ee2111a6d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 361,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "1489fa8a2e1961a5fa6b558e0f46877eaac62e157e570118ff990543a769c7a3"
+    },
+    {
+      "type": "Portrait",
+      "dex": 362,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4cd1e03e44910ef1eee0c5924dd5436aa3bcb91ec9b415a40d5d48f8388cae4d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 374,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "23b32c1579ffd61d690e4956949a0a5c0f008c4517b1f2251525ba9643fe5bb3"
+    },
+    {
+      "type": "Portrait",
+      "dex": 376,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4b9156d79fb043495e1ba2a953d928e79ccb90957bd0c4ad8242937095a0d447"
+    },
+    {
+      "type": "Portrait",
+      "dex": 384,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "3436a07b2df9ea404043457a6773e051220cdac9f895980dc40bca13a41b93d2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 387,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2aae3027d1d0ba070b840c67377fc481866e6252efa77a14ba9c24d47767a0d0"
+    },
+    {
+      "type": "Portrait",
+      "dex": 390,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2d7909802dd23508e57018aa37196ca0c9529bb7e52c5667192696bb0ae21657"
+    },
+    {
+      "type": "Portrait",
+      "dex": 393,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "00455343819f4bb702f58af2cf02051068d21f043c322a6fb33b072cb8f7e9d6"
+    },
+    {
+      "type": "Portrait",
+      "dex": 403,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "1c6e96b4ec98d64d523a6e16598efb72f715662361f171cdadfcb65306a03180"
+    },
+    {
+      "type": "Portrait",
+      "dex": 406,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ed7efcee81652892f07b3d34cff73058b567672a125ecc84e93109039ceff1bd"
+    },
+    {
+      "type": "Portrait",
+      "dex": 427,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "053054541c6cf138bc52983da256e189a9ca70382bc5d82c712f5439fb51b7b2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 428,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e15373945df0ea028d8a7438fd75077ee26b6af20d08c60fd9d7e7c24ff0e722"
+    },
+    {
+      "type": "Portrait",
+      "dex": 443,
+      "anciens_noeuds_preserves": 3,
+      "noeuds_cibles_remplaces": 1,
+      "sortie_sha256": "71bfc2eca94e7104d4a4be2a0df6635cb5d8786a319eccde44c63fe99335b82b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 447,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f5af20ace35830e8beb0f30938d52ea1aa3262540c26c1316367a4ed9d19416f"
+    },
+    {
+      "type": "Portrait",
+      "dex": 448,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d4f7281b017bce929390c7e042647fdc1c47f47f27c9ffe91bdbf3af3c375b3a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 470,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7d29fc325c09e29345423bc684f7fa4a23b73e5e349c04e60d099e8e35af3cc2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 471,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "469d7de8466ac2829ea3408acb77f11a582d998d0e5e599d386def997bb306db"
+    },
+    {
+      "type": "Portrait",
+      "dex": 475,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "82f9861a6b3f5f38062577b04162f4aa4872851f7b9b351a2a5a92e15450ac66"
+    },
+    {
+      "type": "Portrait",
+      "dex": 478,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7192e6d7ea63c0b2648eaa351f7c88115c5e92a8a9cd888a4b860a198278ec3d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 491,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "18ea165f661851fc7c2886c6325c2d8d7013eb6aa70c57bdada1f7338433dbe2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 495,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e93d093d9fe27a51c6b0b5d1028c012e8f83b7106a8cc62139dc7cbac7da269c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 498,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "a89811cbc98ef028e4106865c62b2a088c29f530bf29661fb8869dc720f83801"
+    },
+    {
+      "type": "Portrait",
+      "dex": 500,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ec3f706f816b04ba7799120011140697035826315b6545b5dc3e3b57a9f983af"
+    },
+    {
+      "type": "Portrait",
+      "dex": 501,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "78055ec165c481959849e46c234735b20c7425592a57214492e295a3975e979d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 551,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "44f1987969568c85302e75278572692474fedef9c9e45b62a0dac397b11b6189"
+    },
+    {
+      "type": "Portrait",
+      "dex": 570,
+      "anciens_noeuds_preserves": 4,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "449149955ec73c1915e9cce44cbb477712218e5f2c32482641b5ca18bffcb9cd"
+    },
+    {
+      "type": "Portrait",
+      "dex": 572,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "366e762403ed38340f3d7c4c37c32ab91d49ea4129390cdde517c11bb5620006"
+    },
+    {
+      "type": "Portrait",
+      "dex": 595,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5ce20c8f445687d23f6d0435a90b3e6c2a2b92b6e6aa9f42c0ae7401924c913a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 607,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "fb78b13bad1724e9437a415d6fdb8fb801ce26d053815ff2a051e9cbfff24f37"
+    },
+    {
+      "type": "Portrait",
+      "dex": 609,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "765a5ee320676e0cc21134fc5a11f268bccc07528a636b92f1f822f3776fbb17"
+    },
+    {
+      "type": "Portrait",
+      "dex": 610,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d451a75007e7e5119ce15cbf3866b0a8d769632416a8ec14d7d8a172baab0c93"
+    },
+    {
+      "type": "Portrait",
+      "dex": 622,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "098506c6205f155a87f8851c605152627360f609687067cc02e25ca976d3333d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 623,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "05bf7669be01b2a9328cd2b45998961dfa47712e95dc52bf01da9c670e4bb618"
+    },
+    {
+      "type": "Portrait",
+      "dex": 624,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "128cff913346578d5331a3d0ca8710a667a7b5748df182e45348ee4d3b99c3b4"
+    },
+    {
+      "type": "Portrait",
+      "dex": 636,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5d7757d98422a8423900941d6d67a455f3e1b2d2d382fd0336ec41b36ebe1218"
+    },
+    {
+      "type": "Portrait",
+      "dex": 650,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d328d31608fd2e7441ba0a9bc2467e0e279be17d59e0dd6216eda903a8614c12"
+    },
+    {
+      "type": "Portrait",
+      "dex": 652,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4ad6516f5b501b51dac723f80971407037b464a769ca9c0100ed7ec3ac9ab724"
+    },
+    {
+      "type": "Portrait",
+      "dex": 653,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f8c3ebd0d69f152a26d565ba98e49a7e111d07729ff9529c34255eef7e77651b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 655,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "055c355269f71b3d988750ec3b66bdb5e0cd0eaaae4d90083e7dd64fa28794b7"
+    },
+    {
+      "type": "Portrait",
+      "dex": 656,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "d213012e9136245c4aa8c0f16360fc62ec66675c1eabb292381a5c2012c2d535"
+    },
+    {
+      "type": "Portrait",
+      "dex": 658,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "c4b9dfdedcc016c016a015f64de0afed518f635fc33f6b6d3be805ddb71fe9a9"
+    },
+    {
+      "type": "Portrait",
+      "dex": 674,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "96ee584dcf4497fdf9cf3f2ab0d9b3e35dac694fd40ef4540c2ebb4b1fc3c493"
+    },
+    {
+      "type": "Portrait",
+      "dex": 677,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f3b31bebbf529aaf9039e0d0f1e3393d3620630d8e45b30ed2116e4f41d46b19"
+    },
+    {
+      "type": "Portrait",
+      "dex": 678,
+      "anciens_noeuds_preserves": 6,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "78a73d1f039c186accc450565eab81f6e589e86a0a33c37a62e332a718604b4b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 700,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b37cfe9232e81f21a11222cc1224f7700598c5c65f0f218a18f3c76b190f58f8"
+    },
+    {
+      "type": "Portrait",
+      "dex": 704,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ac5c26cc9a2ba17f08e894dcdeccc422721cc54464935e38622150f378f6381d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 708,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2c4c5d6bc9df2b70b3c6038848a9f8f124e8360ade9c86d7234df868056e580b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 710,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "402d7165531ef392db028b09c3f4220f7220e27b1c1f5d8e9192df11781f428a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 714,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "8841ca3d75a5a5090447251f20f6d8d38f62f8cca6e4e5e2f9a83c4e9a86f1f2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 722,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4a0b14ad634f19c085d39faa21899514fb9649280675b32a245064fc35037a78"
+    },
+    {
+      "type": "Portrait",
+      "dex": 725,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "059f91d9dc17e22036f2c75dc07ea6a9c811611bb5b8926c055917ee4690397d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 728,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "672b70ad8da5153e1d514229b0fef326944cefc4debe01f7d5c1c6d9e462b9ba"
+    },
+    {
+      "type": "Portrait",
+      "dex": 744,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "3de2dca374cb65cb91549dc82538049af968d87c6849a440b2b7281d810997da"
+    },
+    {
+      "type": "Portrait",
+      "dex": 757,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "791465ad41d9d7665b6be287993ec95f9d16f91bb66b58bcf594520cca20d0fe"
+    },
+    {
+      "type": "Portrait",
+      "dex": 759,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b26f3af720c8e64ef9763443e3d9f972a1cff4d6731416322adba774cba45912"
+    },
+    {
+      "type": "Portrait",
+      "dex": 767,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "7fcfa378a7f1a3ac484afad69b0fd35ecfbc874384ee1de45a75f367f4345b63"
+    },
+    {
+      "type": "Portrait",
+      "dex": 768,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "74e061dbb901071f9aaa144b45c2921a58121f495fb078de22ccec238b3bb04a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 782,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "0e7e4d3c7dcd4eb934ef56de8de4d07578686462e6f043bce9a1c279f4a0c28c"
+    },
+    {
+      "type": "Portrait",
+      "dex": 789,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "2605656c581877afed4198d4d4f85ce3011a260773a235b951e3955f0d8f17b5"
+    },
+    {
+      "type": "Portrait",
+      "dex": 807,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "75606530fb9c614f85d9b8c3ef2041ce4b5babb80d029dbe57665a72dc3db51d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 810,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "63fee4849d498415903b8f862db14b3e2c51fa80467b89e7d5aeb8c6ffe35f7d"
+    },
+    {
+      "type": "Portrait",
+      "dex": 813,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "4da80911792b646be2608c7b1eb569777efbccf3a8d19012956ff625d4f1c678"
+    },
+    {
+      "type": "Portrait",
+      "dex": 816,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "eebee93f20dbcb831b8add4ce57eb44b889d3d928c21103ea374d8f0a13aa8bf"
+    },
+    {
+      "type": "Portrait",
+      "dex": 821,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "9c490bca9c24fac71f4be496289d901fb7a334551f1986378fe7bf131d9d8d84"
+    },
+    {
+      "type": "Portrait",
+      "dex": 827,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "b0dd4ef0be7f90623b49a1f65aec9a7ab07b4d119c6e7dfafaf7b0c81f9dd0ff"
+    },
+    {
+      "type": "Portrait",
+      "dex": 840,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "274bfbd551572d503007d6457d32321927e643e8e6c5380d26a50d31d3d9b90b"
+    },
+    {
+      "type": "Portrait",
+      "dex": 856,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "20ebe92b860f462484baaa610f69e7a7202cf02226b812cc877111e46baeef4a"
+    },
+    {
+      "type": "Portrait",
+      "dex": 872,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5d65c66db8263a37cef8270a45ca9f4833e72c0d8effe054e60288a80a2a25f9"
+    },
+    {
+      "type": "Portrait",
+      "dex": 885,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ebcebaf255ad07ca693a4e8c1f08f328ab75bce2943972b7e4f76cfeabce9962"
+    },
+    {
+      "type": "Portrait",
+      "dex": 906,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "f5ab0cb0a74f2fcabf7e99016a9482fcd565e7b92e579616f3e03af223ac062f"
+    },
+    {
+      "type": "Portrait",
+      "dex": 909,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "e8b85fd84eec80cda906d965235bf303aaa5b646a4b2791cf8ee16ef271d6c94"
+    },
+    {
+      "type": "Portrait",
+      "dex": 912,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "064920e5cf43b2cd09fd451c7bebb6e9c59a70c0efbeaf33ee2e1302ad31c6e2"
+    },
+    {
+      "type": "Portrait",
+      "dex": 921,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ba057e1fe8e697271c71c8b173e599db3174e96f1a0d8e290792faba846c9ea9"
+    },
+    {
+      "type": "Portrait",
+      "dex": 926,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "ecf3f3adea45d4cd7f79fc71d5aee784ee2d1371aec764aa11c84a239cb094a0"
+    },
+    {
+      "type": "Portrait",
+      "dex": 935,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "536c0366db4ada00dca7711cd73ba8d2e1533fb6f7e3ceaf47de7554a9f18a00"
+    },
+    {
+      "type": "Portrait",
+      "dex": 957,
+      "anciens_noeuds_preserves": 2,
+      "noeuds_cibles_remplaces": 0,
+      "sortie_sha256": "5b9f3f1393db86759b2a7d7a7dfe0143b226a7359040f126c0dc6fac7f00a327"
+    }
+  ],
+  "cibles": 141,
+  "remarque": "Les fiches remplacées restent dans base ; les formes, skins et nœuds non ciblés sont conservés dans la Quest."
+}

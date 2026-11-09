@@ -1,0 +1,54 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Waterfall Village (town02)",
+      "LocalTexts": {
+        "fr": "Waterfall Village (town02)"
+      }
+    },
+    "Released": true,
+    "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT).",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "WaterfallVillageCapital",
+      "waterfall_cave_1",
+      "caféspindaaccueil",
+      "spindacaféétage1",
+      "spindacaféétage1salle2",
+      "reverie_post_office",
+      "reverie_fire_home",
+      "reverie_water_home",
+      "reverie_electric_home",
+      "reverie_grass_home",
+      "reverie_rock_home",
+      "reverie_normal_home",
+      "reverie_inn",
+      "guild_storage_room",
+      "guild_heros_room",
+      "ledian_dojo",
+      "dojo_ossatueur",
+      "dojo_kingambit",
+      "reverie_hutte_aquatique",
+      "reverie_centre",
+      "reverie_nord",
+      "reverie_residentiel",
+      "reverie_etang"
+    ]
+  }
+}

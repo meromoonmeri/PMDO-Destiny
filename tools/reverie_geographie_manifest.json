@@ -1,0 +1,219 @@
+{
+  "base": "0.4.16",
+  "cartes": {
+    "WaterfallVillageCapital_Dev": {
+      "sha256": "5028283fed93c49ee2c0c1ce766082362e00b4a50d76698747d589fa32d8ded0",
+      "size": 46453200,
+      "nombre_calques": 37,
+      "references_converties": 201661,
+      "sha256_avant": "bbf5c2f6fbc214752a7b9119defbefa38eedfcd64cd76ef5abad5d260ec958e0"
+    },
+    "reverie_centre_Dev": {
+      "sha256": "03d1cb37f29cf08651944c1ff26f7aabd91d928bc5f1b647f8c51df9285fa42c",
+      "size": 43396400,
+      "nombre_calques": 37,
+      "references_converties": 181983,
+      "sha256_avant": "7d17e080efe175f3a076097de49740bcaab679484e74fac1716022f9432d01da"
+    },
+    "reverie_nord_Dev": {
+      "sha256": "12c31094ec9b28be92b06c1e228d68c352a5d85b751347a0cc3481921edbc538",
+      "size": 36143754,
+      "nombre_calques": 37,
+      "references_converties": 133703,
+      "sha256_avant": "8a851c6d85f75108bf61d9f49b219f58959a178bc5f394b0252c9dde5f5ebbc4"
+    },
+    "reverie_residentiel_Dev": {
+      "sha256": "4a43b7d2cc378e59e1eb5797fac00e979b2b691babcd78fafdc647f24bd40ef7",
+      "size": 41608820,
+      "nombre_calques": 37,
+      "references_converties": 166923,
+      "sha256_avant": "5a192ab2cf50e16379f7a077b8c40deb78a98f440208d2a3151e4c0ca1ae3ada"
+    },
+    "reverie_etang_Dev": {
+      "sha256": "c92878fd42886d1f145cd008a40aeb6df00d4f6b66fa634d9fe01cab310b912f",
+      "size": 41284075,
+      "nombre_calques": 37,
+      "references_converties": 165133,
+      "sha256_avant": "fd2644470062943b7ef391eb0bcfbe933c20556400a4542672860373fc63924e"
+    },
+    "WaterfallVillageCapital": {
+      "sha256": "d954caf4ab769688ac573749d5f003b415c789b297b1c2fdc36deae0576f65a3",
+      "size": 38012912,
+      "nombre_calques": 11,
+      "references_converties": 201661,
+      "sha256_avant": "ebe637b7f528fef9b368ffa7fd639c218b4d9dd513cf1684ef7eaf948979b26b"
+    },
+    "reverie_centre": {
+      "sha256": "571462d40da934f1dcf2640c1119dc27a245d44b93c554f1bc7a0ea3fb24557b",
+      "size": 34956112,
+      "nombre_calques": 11,
+      "references_converties": 181983,
+      "sha256_avant": "4018ab9979376645ea5a9d919655afd7fa6c3b34b1f2287304138721b19b98ef"
+    },
+    "reverie_nord": {
+      "sha256": "c386308c7957a4bbe795618e49aa0ef3009b3d65ddec819b23fa49d54455d75b",
+      "size": 27801859,
+      "nombre_calques": 11,
+      "references_converties": 133703,
+      "sha256_avant": "ebca4e8a6e0b8b1e404d44b4fe399cd7a9c3397bb086ee44805602c5bc80b261"
+    },
+    "reverie_residentiel": {
+      "sha256": "75f27960a4b79ddb70e0f05beb8688b9d2dc3f2617b4e1ca64103e5896c1367c",
+      "size": 33247344,
+      "nombre_calques": 11,
+      "references_converties": 166923,
+      "sha256_avant": "b1c0b3a851986899b079c8efbaf7b89f3c0a1b3c24bfde71b53729e95b607250"
+    },
+    "reverie_etang": {
+      "sha256": "fb275dfd6723c62f4e1bd47f18991c47411bb8f9608d3bb4ad8788d1bd4297ab",
+      "size": 32912839,
+      "nombre_calques": 11,
+      "references_converties": 165133,
+      "sha256_avant": "caec4f389aa9deb2dbe5977fa0a62640a704728143ded15eafa1fedfadd4bd02"
+    }
+  },
+  "planches": [
+    {
+      "banque": "Reverie_Geo_01_Sol_herbe",
+      "tuiles": 7431,
+      "fragments": 11,
+      "taille_png": [
+        3952,
+        1920
+      ],
+      "sha256_tile": "eb3918cdb24ae05f92c119401bbd85b02b62fe32a8139e01ca9499c3352b3036"
+    },
+    {
+      "banque": "Reverie_Geo_02_Chemins_sable",
+      "tuiles": 3914,
+      "fragments": 10,
+      "taille_png": [
+        3520,
+        1520
+      ],
+      "sha256_tile": "92a6730139e9447e61d2dc048e437fbfa1fbfbc48101b4918cce16196d75a4af"
+    },
+    {
+      "banque": "Reverie_Geo_03_Rivieres_eau",
+      "tuiles": 3294,
+      "fragments": 7,
+      "taille_png": [
+        3240,
+        1464
+      ],
+      "sha256_tile": "c3e1cbe60b163002da7dbd2490f6bf8dcac37b218e8af1d59b305ad521ebdbb4"
+    },
+    {
+      "banque": "Reverie_Geo_04_Rives_et_transitions",
+      "tuiles": 447,
+      "fragments": 4,
+      "taille_png": [
+        2168,
+        1400
+      ],
+      "sha256_tile": "d2d98a9aaa78ab36f57823a2d32de947ab8d24e3eb8fedb6a3a6018dcb04eeb2"
+    },
+    {
+      "banque": "Reverie_Geo_05_Falaises",
+      "tuiles": 3343,
+      "fragments": 8,
+      "taille_png": [
+        3664,
+        632
+      ],
+      "sha256_tile": "276aba9262c09cc62fe250c4e6ac65264b368d10ef47c34629a679f5cdd21766"
+    },
+    {
+      "banque": "Reverie_Geo_06_Franges_arbres",
+      "tuiles": 189,
+      "fragments": 2,
+      "taille_png": [
+        520,
+        400
+      ],
+      "sha256_tile": "c067ac58d0f1e52573526e635743b413fd95ba82022d5f0a67acaa0239a1e74b"
+    },
+    {
+      "banque": "Reverie_Geo_07_Terrains_mixtes",
+      "tuiles": 3870,
+      "fragments": 10,
+      "taille_png": [
+        3440,
+        1920
+      ],
+      "sha256_tile": "cf5b4936d223550391ef06780bfc16dda53951388b349d1fa4a5310b7e4c2419"
+    },
+    {
+      "banque": "Reverie_Geo_08_Batiments_objets",
+      "tuiles": 7437,
+      "fragments": 17,
+      "taille_png": [
+        4072,
+        1536
+      ],
+      "sha256_tile": "80a773d49ec673baa6aae5f8d0aace9753dd5cc7327620ff2ffa886874ce071d"
+    },
+    {
+      "banque": "Reverie_Geo_09_Decors_sous",
+      "tuiles": 205,
+      "fragments": 1,
+      "taille_png": [
+        824,
+        1120
+      ],
+      "sha256_tile": "36d3293c02122498632b410166ddcf08230a9ce4b6e5b3b52989ad7bed1c442f"
+    },
+    {
+      "banque": "Reverie_Geo_10_Decors_dessus",
+      "tuiles": 147,
+      "fragments": 2,
+      "taille_png": [
+        680,
+        480
+      ],
+      "sha256_tile": "bb2f9f04690c266865d753f6ad56e09698dd7e55b869208fdabc747a3d7a6bdf"
+    },
+    {
+      "banque": "Reverie_Geo_11_Cascades_frames",
+      "tuiles": 360,
+      "fragments": 1,
+      "taille_png": [
+        208,
+        120
+      ],
+      "sha256_tile": "d043415489d9a86210aa26613f2af46bac6babe2f21de2d8d575a0ae04d6fe94"
+    },
+    {
+      "banque": "Reverie_Geo_12_Eaux_frames",
+      "tuiles": 3871,
+      "fragments": 7,
+      "taille_png": [
+        2720,
+        1272
+      ],
+      "sha256_tile": "a6fce8eaf24dec427c6afa2e02b70191d18b41aa68f095edf634b2402a6d5e43"
+    },
+    {
+      "banque": "Reverie_Geo_13_Objets_frames",
+      "tuiles": 2620,
+      "fragments": 2,
+      "taille_png": [
+        496,
+        1288
+      ],
+      "sha256_tile": "a0ffc324166dde3affae204b6ea1e743fb61b8078db7473fede86a31fca99dae"
+    },
+    {
+      "banque": "Reverie_Geo_14_Paysages_composites",
+      "tuiles": 1963,
+      "fragments": 1,
+      "taille_png": [
+        1328,
+        1376
+      ],
+      "sha256_tile": "e12caac4a9b25e2535c79951bceb95449a44aa2cbb41d605ed415f5d957b93cc"
+    }
+  ],
+  "tuiles_distinctes": 39091,
+  "references": 1698806
+}

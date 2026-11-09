@@ -1,0 +1,193 @@
+[2026/10/31 18:20:31.894] =========================================
+
+[2026/10/31 18:20:31.902] SESSION STARTED: 2026/10/31 18:20:31
+
+[2026/10/31 18:20:31.903] Version: 0.8.12.0
+
+[2026/10/31 18:20:31.903] .NET 8.0.33
+
+[2026/10/31 18:20:31.903] =========================================
+
+[2026/10/31 18:20:31.923] -----------------------------------------
+
+[2026/10/31 18:20:31.923] -----------------------------------------
+
+[2026/10/31 18:20:32.152] FNA3D Driver: OpenGL
+
+[2026/10/31 18:20:32.152] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+
+[2026/10/31 18:20:32.152] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+
+[2026/10/31 18:20:32.152] OpenGL Vendor: Mesa
+
+[2026/10/31 18:20:32.153] MojoShader Profile: glsl120
+
+[2026/10/31 18:20:32.181] [SE]:Initialized Lua 5.4
+
+[2026/10/31 18:20:32.181] [SE]:Importing .NET packages..
+
+[2026/10/31 18:20:32.187] [SE]: **- Lua engine started! -**
+
+[2026/10/31 18:20:36.048] [SE]:Exposing game engine components instances..
+
+[2026/10/31 18:20:36.066] [SE]:Exposing script interface..
+
+[2026/10/31 18:20:36.069] [SE]:Setting up lua globals..
+
+[2026/10/31 18:20:36.070] [SE]:Setting up lua paths..
+
+[2026/10/31 18:20:36.073] [SE]:Setting up lua functions...
+
+[2026/10/31 18:20:36.073] [SE]:Setting up debug functions...
+
+[2026/10/31 18:20:36.075] [SE]:Setting up default script vars...
+
+[2026/10/31 18:20:36.079] [SE]:Caching common lib...
+
+[2026/10/31 18:20:36.096] [SE]:Loading events...
+
+[2026/10/31 18:20:36.104] [SE]:Installing game interface functions..
+
+[2026/10/31 18:20:36.110] [SE]:DebugTools:initialize()
+
+[2026/10/31 18:20:36.113] [SE]:Registered service DebugTools!
+
+[2026/10/31 18:20:36.114] [SE]:UpgradeTools:initialize()
+
+[2026/10/31 18:20:36.114] [SE]:Registered service UpgradeTools!
+
+[2026/10/31 18:20:36.115] [SE]:MenuTools:initialize()
+
+[2026/10/31 18:20:36.115] [SE]:Registered service MenuTools!
+
+[2026/10/31 18:20:36.116] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+
+[2026/10/31 18:20:36.116] [SE]:Registered service DestinyTitleAnim!
+
+[2026/10/31 18:20:36.116] [SE]: **- Lua engine ready! -**
+
+[2026/10/31 18:20:36.116] [SE]:
+<!> ExampleSvc: Init..
+
+[2026/10/31 18:21:05.818] LuaEngine.OnMusicChange()..
+
+[2026/10/31 18:21:07.661] LuaEngine.LoadSavedData()..
+
+[2026/10/31 18:21:07.662] LuaEngine.LoadSavedData()..
+
+[2026/10/31 18:21:10.347] LuaEngine.LoadSavedData()..
+
+[2026/10/31 18:21:10.412] Zone Seed: 9467828530176708097
+
+[2026/10/31 18:21:10.414] Zone.OnInit(): Initializing the zone..
+
+[2026/10/31 18:21:10.417] Loading rsground file: destiny_source_irisee
+
+[2026/10/31 18:21:10.680] Completed file load.
+
+[2026/10/31 18:21:10.682] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 18:21:10.690] GroundMap.LoadScriptEvents(): Added event Init to map destiny_source_irisee!
+
+[2026/10/31 18:21:10.691] GroundMap.LoadScriptEvents(): Added event Enter to map destiny_source_irisee!
+
+[2026/10/31 18:21:10.691] GroundMap.LoadScriptEvents(): Added event Update to map destiny_source_irisee!
+
+[2026/10/31 18:21:10.691] GroundMap.LoadScriptEvents(): Added event GameLoad to map destiny_source_irisee!
+
+[2026/10/31 18:21:10.694] GroundEntity.ReloadEvents(): Added event Touch to entity South_Exit!
+
+[2026/10/31 18:21:10.694] GroundEntity.ReloadEvents(): Added event Touch to entity Spring!
+
+[2026/10/31 18:21:10.695] GroundEntity.ReloadEvents(): Added event Action to entity Assembly!
+
+[2026/10/31 18:21:10.695] GroundEntity.ReloadEvents(): Added event Action to entity Storage!
+
+[2026/10/31 18:21:10.801] [SE]:DESTINY_QA_EVOLUTIONS_OK: 16, 36, Mygavolt, Protecteur et Tissu Fauche
+
+[2026/10/31 18:21:10.803] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 18:21:11.180] LuaEngine.OnGroundMapEnter()..
+
+[2026/10/31 18:22:02.365] LuaEngine.OnGroundMapExit()..
+
+[2026/10/31 18:22:02.366] GroundMap.~GroundMap(): Finalizing destiny_source_irisee..
+
+[2026/10/31 18:22:02.367] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+
+[2026/10/31 18:22:02.367] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+
+[2026/10/31 18:22:02.367] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+
+[2026/10/31 18:22:02.367] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+
+[2026/10/31 18:22:02.368] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.South_Exit_Touch!
+
+[2026/10/31 18:22:02.368] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Spring_Touch!
+
+[2026/10/31 18:22:02.368] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Assembly_Action!
+
+[2026/10/31 18:22:02.368] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Storage_Action!
+
+[2026/10/31 18:22:02.371] Loading rsground file: destiny_clairiere_source_lumineuse
+
+[2026/10/31 18:22:02.740] Completed file load.
+
+[2026/10/31 18:22:02.741] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 18:22:02.742] GroundMap.LoadScriptEvents(): Added event Init to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 18:22:02.742] GroundMap.LoadScriptEvents(): Added event Enter to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 18:22:02.742] GroundMap.LoadScriptEvents(): Added event Update to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 18:22:02.742] GroundMap.LoadScriptEvents(): Added event GameLoad to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 18:22:02.743] GroundEntity.ReloadEvents(): Added event Action to entity SourceMega!
+
+[2026/10/31 18:22:02.743] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 18:22:03.743] LuaEngine.OnGroundMapEnter()..
+
+[2026/10/31 18:22:51.632] LuaEngine.OnGroundMapExit()..
+
+[2026/10/31 18:22:51.632] GroundMap.~GroundMap(): Finalizing destiny_clairiere_source_lumineuse..
+
+[2026/10/31 18:22:51.632] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+
+[2026/10/31 18:22:51.632] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+
+[2026/10/31 18:22:51.632] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+
+[2026/10/31 18:22:51.632] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+
+[2026/10/31 18:22:51.632] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.SourceMega_Action!
+
+[2026/10/31 18:22:51.635] Loading rsground file: destiny_source_irisee
+
+[2026/10/31 18:22:51.655] Completed file load.
+
+[2026/10/31 18:22:51.655] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 18:22:51.658] GroundMap.LoadScriptEvents(): Added event Init to map destiny_source_irisee!
+
+[2026/10/31 18:22:51.658] GroundMap.LoadScriptEvents(): Added event Enter to map destiny_source_irisee!
+
+[2026/10/31 18:22:51.658] GroundMap.LoadScriptEvents(): Added event Update to map destiny_source_irisee!
+
+[2026/10/31 18:22:51.658] GroundMap.LoadScriptEvents(): Added event GameLoad to map destiny_source_irisee!
+
+[2026/10/31 18:22:51.658] GroundEntity.ReloadEvents(): Added event Touch to entity South_Exit!
+
+[2026/10/31 18:22:51.659] GroundEntity.ReloadEvents(): Added event Touch to entity Spring!
+
+[2026/10/31 18:22:51.659] GroundEntity.ReloadEvents(): Added event Action to entity Assembly!
+
+[2026/10/31 18:22:51.659] GroundEntity.ReloadEvents(): Added event Action to entity Storage!
+
+[2026/10/31 18:22:51.660] [SE]:DESTINY_QA_EVOLUTIONS_OK: 16, 36, Mygavolt, Protecteur et Tissu Fauche
+
+[2026/10/31 18:22:51.661] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 18:22:51.978] LuaEngine.OnGroundMapEnter()..
+

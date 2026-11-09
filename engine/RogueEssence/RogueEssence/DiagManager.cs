@@ -407,6 +407,10 @@ namespace RogueEssence
 
                     settings.TextSpeed = Double.Parse(xmldoc.SelectSingleNode("Config/TextSpeed").InnerText);
                     settings.Border = Int32.Parse(xmldoc.SelectSingleNode("Config/Border").InnerText);
+                    XmlNode uiThemeNode = xmldoc.SelectSingleNode("Config/UITheme");
+                    Settings.UIColorTheme uiTheme;
+                    if (uiThemeNode != null && Enum.TryParse(uiThemeNode.InnerText, out uiTheme) && Enum.IsDefined(typeof(Settings.UIColorTheme), uiTheme))
+                        settings.UITheme = uiTheme;
                     settings.Window = Int32.Parse(xmldoc.SelectSingleNode("Config/Window").InnerText);
                     settings.Language = xmldoc.SelectSingleNode("Config/Language").InnerText;
                     settings.InactiveInput = Boolean.Parse(xmldoc.SelectSingleNode("Config/InactiveInput").InnerText);
@@ -550,6 +554,7 @@ namespace RogueEssence
 
                 docNode.AppendInnerTextChild(xmldoc, "TextSpeed", settings.TextSpeed.ToString());
                 docNode.AppendInnerTextChild(xmldoc, "Border", settings.Border.ToString());
+                docNode.AppendInnerTextChild(xmldoc, "UITheme", settings.UITheme.ToString());
                 docNode.AppendInnerTextChild(xmldoc, "Window", settings.Window.ToString());
                 docNode.AppendInnerTextChild(xmldoc, "Language", settings.Language.ToString());
                 docNode.AppendInnerTextChild(xmldoc, "InactiveInput", settings.InactiveInput.ToString());

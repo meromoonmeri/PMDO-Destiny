@@ -1,63 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <root>
-  <StartChars>
-    <StartChar>
-      <Species>bulbasaur</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>charmander</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>squirtle</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>chikorita</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>cyndaquil</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>totodile</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-    <StartChar>
-      <Species>pikachu</Species>
-      <Form>0</Form>
-      <Skin>normal</Skin>
-      <Gender>Unknown</Gender>
-      <Name>
-      </Name>
-    </StartChar>
-  </StartChars>
+  <!-- L’introduction et le quiz choisissent le héros. Le moteur crée d’abord
+       le Pokémon par défaut, ensuite remplacé par le quiz. -->
+  <StartChars />
   <StartTeams>
     <StartTeam>Team Go-Getters</StartTeam>
     <StartTeam>Team Poképals</StartTeam>
@@ -207,7 +152,7 @@
   <StartLevel>5</StartLevel>
   <MaxLevel>100</MaxLevel>
   <StartPersonality>5</StartPersonality>
-  <DefaultZone>destiny_hub</DefaultZone>
+  <DefaultZone>personality_test</DefaultZone>
   <DefaultRank>none</DefaultRank>
   <DefaultSkin>normal</DefaultSkin>
   <DefaultAI>stick_together</DefaultAI>
@@ -218,9 +163,9 @@
   <DefaultSkill>attack</DefaultSkill>
   <DefaultMonster>missingno</DefaultMonster>
   <StartMap>
-    <Zone>destiny_hub</Zone>
+    <Zone>personality_test</Zone>
     <Segment>-1</Segment>
-    <ID>0</ID>
+    <ID>1</ID>
     <Entry>0</Entry>
   </StartMap>
   <GenFloor>floor</GenFloor>
