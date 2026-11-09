@@ -1,4 +1,4 @@
-﻿#region Using Statements
+#region Using Statements
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,6 +40,8 @@ namespace RogueEssence
         private bool drawTurn;
         private bool backgroundLoaded;
         private bool firstUpdate;
+        private int ciGroundFrames;
+        private bool ciCaptured;
 
         public GameBase()
             : base()
@@ -159,7 +161,9 @@ namespace RogueEssence
                     splashFrames++;
                     if (backgroundLoaded)
                     {
-                        if (DiagManager.Instance.DevMode)
+                        if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1")
+                            CurrentPhase = LoadPhase.Ready;
+                        else if (DiagManager.Instance.DevMode)
                         {
                             try
                             {
@@ -290,6 +294,25 @@ namespace RogueEssence
                     try
                     {
                         GameManager.Instance.Draw(spriteBatch, gameTime.ElapsedGameTime.TotalSeconds);
+                        // Instrumentation temporaire CI : capture seulement la Ground réellement chargée.
+                        if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1" && !ciCaptured &&
+                            GameManager.Instance.CurrentScene == RogueEssence.Ground.GroundScene.Instance &&
+                            RogueEssence.Dungeon.ZoneManager.Instance.CurrentGround != null &&
+                            RogueEssence.Dungeon.ZoneManager.Instance.CurrentGround.AssetName == "destiny_hub" &&
+                            RogueEssence.Dungeon.ZoneManager.Instance.CurrentGround.ActiveChar != null)
+                        {
+                            ciGroundFrames++;
+                            if (ciGroundFrames == 180)
+                            {
+                                var screen = GameManager.Instance.GameScreen;
+                                using (var file = System.IO.File.Create("capture-pmdo-salle.png"))
+                                    screen.SaveAsPng(file, screen.Width, screen.Height);
+                                System.IO.File.WriteAllText("capture-pmdo-preuve.txt", "Ground=destiny_hub; ActiveChar=true; actual framebuffer=" + screen.Width + "x" + screen.Height + "; logical viewport=" + GraphicsManager.ScreenWidth + "x" + GraphicsManager.ScreenHeight + "; frame=180");
+                                ciCaptured = true;
+                                Exit();
+                            }
+                        }
+
 
                     }
                     catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using RogueElements;
@@ -500,6 +500,8 @@ namespace RogueEssence
 
             //coroutines.Clear();
             MoveToScene(new SplashScene());
+            if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1")
+                SceneOutcome = DebugWarp(new ZoneLoc(DataManager.Instance.DefaultZone, new SegLoc(-1, 0), 0), 0);
             CoroutineManager.Instance.StartCoroutine(ScreenMainCoroutine()); //Create our main context
         }
 

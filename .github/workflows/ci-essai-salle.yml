@@ -1,0 +1,60 @@
+name: CI essai visuel salle principale (branche isolée)
+on:
+  push:
+    branches: [ci/essai-salle-principale-viewport]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture-pmdo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          submodules: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installer Pillow et environnement graphique logiciel
+        run: |
+          python -m pip install Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xauth libgl1-mesa-dri libgl1 libopenal1
+      - name: Reconstituer ressources et produire une carte temporaire
+        run: |
+          python tools/unpack_payload.py
+          python ci-test-salle/preparer_salle.py
+          python tools/build_tile_index.py
+      - name: Compiler PMDO Linux
+        run: dotnet publish engine/PMDC/PMDC.csproj -c Release -r linux-x64 --self-contained true -o "$RUNNER_TEMP/pmdo"
+      - name: Lancer le moteur et capturer son framebuffer
+        env:
+          ARENA_CI_GUILDE: '1'
+          SDL_AUDIODRIVER: dummy
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/pmdo/MODS"
+          cp -a game "$RUNNER_TEMP/pmdo/MODS/Destiny"
+          cd "$RUNNER_TEMP/pmdo"
+          timeout 360s xvfb-run -a -s '-screen 0 1024x768x24' ./PMDC -quest Destiny -lang en 2>&1 | tee "$GITHUB_WORKSPACE/ci-test-salle/journal-moteur.txt" || true
+          cp capture-pmdo-*.png capture-pmdo-*.txt "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
+          find . -maxdepth 4 -type f \( -iname '*error*' -o -iname '*log*.txt' \) -size -5M -exec cp --parents '{}' "$GITHUB_WORKSPACE/ci-test-salle/" \; || true
+          test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-salle.png"
+          test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-preuve.txt"
+      - name: Conserver capture ou diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: essai-salle-pmdo-diagnostic
+          path: |
+            ci-test-salle/capture-pmdo-*.png
+            ci-test-salle/capture-pmdo-*.txt
+            ci-test-salle/journal-moteur.txt
+            ci-test-salle/Logs/**
+          if-no-files-found: warn
