@@ -1,0 +1,13 @@
+{
+  "animation": "grille-levante-essai.png",
+  "taille": [
+    590,
+    456
+  ],
+  "phases_demandees": 41,
+  "pas_vertical_px_original": 10,
+  "fond": "cavité reconstituée par dégradé sombre",
+  "grille": "détourée de la proposition générée, non native",
+  "interaction": false,
+  "moteur": "non intégré"
+}
