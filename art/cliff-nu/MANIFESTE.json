@@ -1,0 +1,55 @@
+{
+  "contenu": "Quatre vues Cliff nues, deux variantes de falaise seule",
+  "statut": "Ressources graphiques aplaties, aucune carte PMDO jouable, mer fixe",
+  "date": "2026-11-09",
+  "fichiers": [
+    {
+      "fichier": "ambiances/aube.png",
+      "largeur": 480,
+      "hauteur": 520,
+      "mode": "RGB",
+      "octets": 44507,
+      "sha256": "e081061227d5fb1336a3df23eed7401c14e8423f4516696c4ff397c51d4159a4"
+    },
+    {
+      "fichier": "ambiances/crepuscule.png",
+      "largeur": 480,
+      "hauteur": 520,
+      "mode": "RGB",
+      "octets": 43433,
+      "sha256": "f903bb82aca84c18a7b69ca0e0b8075595aeca2ff4c5bd1e9fc6483cf3f9afe2"
+    },
+    {
+      "fichier": "ambiances/jour.png",
+      "largeur": 480,
+      "hauteur": 520,
+      "mode": "RGB",
+      "octets": 45589,
+      "sha256": "0f2f2ab8da392a978ebc2d18a18990b8205f100c6c41b1e6ccb49e3a295fe35a"
+    },
+    {
+      "fichier": "ambiances/nuit.png",
+      "largeur": 480,
+      "hauteur": 520,
+      "mode": "RGB",
+      "octets": 61478,
+      "sha256": "59f119cdcfb0d87ebf5a777fa5b327086c0206123f0aed0c1578087d4f1f54f9"
+    },
+    {
+      "fichier": "falaise-seule/falaise-seule-magenta.png",
+      "largeur": 480,
+      "hauteur": 416,
+      "mode": "RGB",
+      "octets": 38359,
+      "sha256": "7bb986e8a9279a86ed61d7af86f9625aa578c33683d1e8a40310e5f5aa10e1b0"
+    },
+    {
+      "fichier": "falaise-seule/falaise-seule-transparente.png",
+      "largeur": 480,
+      "hauteur": 416,
+      "mode": "RGBA",
+      "octets": 42008,
+      "sha256": "1cca33c8fe4af7719cd0c7acc5abeb13bedcaef12287079c121a9d9cd4d4928b"
+    }
+  ]
+}
