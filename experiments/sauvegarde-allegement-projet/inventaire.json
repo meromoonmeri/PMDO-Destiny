@@ -1,0 +1,139 @@
+{
+  "archive_sha256": "e4d4ea8a592dac45851dc546c5fd087dd04184cbf0335e988e49e6434883bef7",
+  "archive_taille": 74879046,
+  "fichiers": [
+    {
+      "chemin": "Destiny-sources-renommage-Reverie-en-attente-de-CI.zip",
+      "taille": 18869543,
+      "sha256": "327d36c2db8a5012ab640a792a323f9a88a99d69a89ae175e0751667509124e8"
+    },
+    {
+      "chemin": "sauvegarde-avant-renommage-reverie-049.zip",
+      "taille": 18746173,
+      "sha256": "27873b5e71c5c6d9d92680c062676705760a7f598ef59fd66cfdc25af922b10d"
+    },
+    {
+      "chemin": "Reverie-systeme-11-jeu-37-edition-EXPERIMENTAL.zip",
+      "taille": 10659616,
+      "sha256": "9b0260edcac7583d3d1e0b292c59a0ea00be71e2c681604eb04c3bc8182d7ef8"
+    },
+    {
+      "chemin": "Reverie-prototype-banques-et-calques.zip",
+      "taille": 9489753,
+      "sha256": "01617ef375a69847430f8db1ddcb054558349b37bf2a9c5777c8a4bea717bb5b"
+    },
+    {
+      "chemin": "sauvegarde-audit-architecture-reverie-0410.zip",
+      "taille": 8610347,
+      "sha256": "0c2ee837f7ac9798b96ebd28c4a9cb8f4026592538129b6dd790efebab7afe13"
+    },
+    {
+      "chemin": "Sauvegarde-avant-retrait-tapis-dojo.zip",
+      "taille": 4734192,
+      "sha256": "d759c288f99f06dc2bf8cc385444c064d9d8d78b7b048223a123a6ed262e1049"
+    },
+    {
+      "chemin": "zone-pmdo-tree.json",
+      "taille": 9721017,
+      "sha256": "91f3a2e207cdd0767479570b279df598533b43a1735b4db2af39e10ea66941d4"
+    },
+    {
+      "chemin": "destiny-head-049-tree.json",
+      "taille": 4966323,
+      "sha256": "5880477f95a7cb72e9c0c45b38398c273e203f9b2c813ade4e216a3e1105cefa"
+    },
+    {
+      "chemin": "destiny-head-0410-tree.json",
+      "taille": 4966663,
+      "sha256": "a4325d97f8335d5985ba83f8bc88e5f6d7f4bf996c79db8a1f006ef50b27febc"
+    },
+    {
+      "chemin": "destiny-tree.json",
+      "taille": 4924236,
+      "sha256": "bbe2f5098c892d75b58ff7f93a9edd9bcc83b7aa92e957941de3b32ffa038007"
+    },
+    {
+      "chemin": "guilde-treehouse-pmd-tree.json",
+      "taille": 4294198,
+      "sha256": "9c22d3681ff18d02f24b2af3cc5205f82ce72610ab4e909e833e305d24bedde0"
+    }
+  ],
+  "parties": [
+    {
+      "nom": "archives-projet.zip.part001",
+      "octets": 5242880,
+      "sha256": "bd59c448aee691b9b54039f8ff6dea6f951fd0ed65543bfaa1792f1eea6a7a78"
+    },
+    {
+      "nom": "archives-projet.zip.part002",
+      "octets": 5242880,
+      "sha256": "5c528e331936fa1346590d5487cb98f5f1a1ec4b0fe4b17c84ab60c8b2d9a2df"
+    },
+    {
+      "nom": "archives-projet.zip.part003",
+      "octets": 5242880,
+      "sha256": "dc4061a555fc4f383e9d8d5b36e1728fb09c7515573c8a58c7e67cba60fa5964"
+    },
+    {
+      "nom": "archives-projet.zip.part004",
+      "octets": 5242880,
+      "sha256": "bdd2f7245badbde746adf7f3e12a584d5bb0bb49085b5d302a69e85f6b015424"
+    },
+    {
+      "nom": "archives-projet.zip.part005",
+      "octets": 5242880,
+      "sha256": "19a0fc5848518cd67d4ae3185f4b7baab530a511e09cfdba05b68d4be5fbe9df"
+    },
+    {
+      "nom": "archives-projet.zip.part006",
+      "octets": 5242880,
+      "sha256": "b000bbae24e8e842d0333d7845c0e67b17bea027c8d350eb06f760fdb8a1ebb6"
+    },
+    {
+      "nom": "archives-projet.zip.part007",
+      "octets": 5242880,
+      "sha256": "a7605a31a85a209e9a6330e4af56936b243f0c6255a336fb18ef83b112a30c75"
+    },
+    {
+      "nom": "archives-projet.zip.part008",
+      "octets": 5242880,
+      "sha256": "44230bdb973798cec250b17e9e060915b4661bd0609f69e751351602afa0632a"
+    },
+    {
+      "nom": "archives-projet.zip.part009",
+      "octets": 5242880,
+      "sha256": "c1f81fab01ba7b50285191e40438270672e4a6c6a0cc9564d5f2906be5a0ccf4"
+    },
+    {
+      "nom": "archives-projet.zip.part010",
+      "octets": 5242880,
+      "sha256": "bfa58f317c4b6ee7c0792d689043e92abcc0769ab2c2ee14c79f92746876834c"
+    },
+    {
+      "nom": "archives-projet.zip.part011",
+      "octets": 5242880,
+      "sha256": "aea79037542b82a0c30b2475d1b1cf4e2423ec20687575e8634cab3202adc353"
+    },
+    {
+      "nom": "archives-projet.zip.part012",
+      "octets": 5242880,
+      "sha256": "089b93e549bf0e92f0948ca41a1bfa5414d740456e6f58685fcba54980d4ee8c"
+    },
+    {
+      "nom": "archives-projet.zip.part013",
+      "octets": 5242880,
+      "sha256": "d9bcc61a70da41814e5bda143a2f56a9d6723fa5e78ba13708442852b2d05d98"
+    },
+    {
+      "nom": "archives-projet.zip.part014",
+      "octets": 5242880,
+      "sha256": "f00f0207e834fc60df82a2daa8f4fc8a24f6406a517b3d4a5e9b5cf355811862"
+    },
+    {
+      "nom": "archives-projet.zip.part015",
+      "octets": 1478726,
+      "sha256": "e65a84dff1b4a9cf74b220453399ee6f1bcda2b95414fc8c5e49d69f545b9d59"
+    }
+  ],
+  "portee": "anciens livrables et index explicitement listés ; pas les uploads, Google Drive ni les autres projets"
+}
