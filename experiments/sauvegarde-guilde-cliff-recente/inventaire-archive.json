@@ -1,0 +1,46 @@
+{
+  "portee": "ateliers guilde et cliff présents, pas tous les travaux de la sandbox",
+  "fichiers": 1184,
+  "archive_octets": 33605387,
+  "archive_sha256": "bd430b6b592ad7ddb1257949405b2a4dba78951b0603b05a9e62557ff0c594a1",
+  "parties": [
+    {
+      "nom": "travaux-guilde-cliff.zip.part001",
+      "octets": 5242880,
+      "sha256": "da3b3db5f0a197bf48b7f29a89ccface8bb9bf5349c682f7bde8f42278df0da7"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part002",
+      "octets": 5242880,
+      "sha256": "d1c554b0d2467f22562a41709e8192ceaf8a2c8c290b16e033bf00f98106470e"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part003",
+      "octets": 5242880,
+      "sha256": "4a2453ca18904e9e26fc67a6e0b3146db635df0bfc8426fcfd760bdcb9a4a035"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part004",
+      "octets": 5242880,
+      "sha256": "582a777784e5cc968ecfb9105e7d64edb0f74af77a5061d27ada5e28d91d5d79"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part005",
+      "octets": 5242880,
+      "sha256": "8746939398fef891a914f3fcfce7be65bb8d8008e469888d96c0a364fc34138f"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part006",
+      "octets": 5242880,
+      "sha256": "5bfde1db6f229b8a1d7aa34a9fda765cfffd465a31c8f93c6893178ae291ce84"
+    },
+    {
+      "nom": "travaux-guilde-cliff.zip.part007",
+      "octets": 2148107,
+      "sha256": "20485b1eda2dda0b47e93cd19daf4a8c9dff092c6333c1e4d031a62d1f45d441"
+    }
+  ],
+  "crc": "OK",
+  "fichiers_absents": "PNG générés haute résolution des salles et kit Tiled détaillé (déjà absents après snapshot)",
+  "dossier_destinataire": "experiments/sauvegarde-guilde-cliff-recente/"
+}
