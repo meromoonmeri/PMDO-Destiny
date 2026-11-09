@@ -40,6 +40,7 @@ namespace RogueEssence
         private bool drawTurn;
         private bool backgroundLoaded;
         private bool firstUpdate;
+        private int ciTicks;
         private int ciGroundFrames;
         private bool ciCaptured;
 
@@ -107,6 +108,7 @@ namespace RogueEssence
                 //Notify script engine
                 LuaEngine.Instance.OnDataLoad();
                 GameManager.Instance.Begin();
+                if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1") Console.WriteLine("CI: Background initialization completed");
 
           
             }
@@ -197,6 +199,14 @@ namespace RogueEssence
 
                 if (CurrentPhase == LoadPhase.Ready)
                 {
+                    if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1")
+                    {
+                        ciTicks++;
+                        if (ciTicks % 300 == 0)
+                        {
+                            Console.WriteLine("CI ticks=" + ciTicks + " scene=" + GameManager.Instance.CurrentScene?.GetType().Name + " Ground=" + RogueEssence.Dungeon.ZoneManager.Instance.CurrentGround?.AssetName + " ActiveChar=" + (RogueEssence.Dungeon.ZoneManager.Instance.CurrentGround?.ActiveChar != null));
+                        }
+                    }
                     try
                     {
                         DiagManager.Instance.DevEditor.Update(gameTime);

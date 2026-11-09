@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -245,6 +245,7 @@ namespace RogueEssence
         /// <param name="signal">Triggers On-Error code if true.  Logs silently if not.</param>
         public void LogError(Exception exception, bool signal)
         {
+            if (Environment.GetEnvironmentVariable("ARENA_CI_GUILDE") == "1") Console.Error.WriteLine("CI EXCEPTION " + exception.ToString());
             lock (lockObj)
             {
                 if (inError)

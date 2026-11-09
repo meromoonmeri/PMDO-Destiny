@@ -42,8 +42,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/pmdo/MODS"
           cp -a game "$RUNNER_TEMP/pmdo/MODS/Destiny"
           cd "$RUNNER_TEMP/pmdo"
-          timeout 360s xvfb-run -a -s '-screen 0 1024x768x24' ./PMDC -quest Destiny -lang en 2>&1 | tee "$GITHUB_WORKSPACE/ci-test-salle/journal-moteur.txt" || true
+          timeout 150s xvfb-run -a -s '-screen 0 1024x768x24' ./PMDC -quest Destiny -lang en 2>&1 | tee "$GITHUB_WORKSPACE/ci-test-salle/journal-moteur.txt" || true
           cp capture-pmdo-*.png capture-pmdo-*.txt "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
+          cp -a LOG "$GITHUB_WORKSPACE/ci-test-salle/" 2>/dev/null || true
           find . -maxdepth 4 -type f \( -iname '*error*' -o -iname '*log*.txt' \) -size -5M -exec cp --parents '{}' "$GITHUB_WORKSPACE/ci-test-salle/" \; || true
           test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-salle.png"
           test -s "$GITHUB_WORKSPACE/ci-test-salle/capture-pmdo-preuve.txt"
@@ -56,5 +57,5 @@ jobs:
             ci-test-salle/capture-pmdo-*.png
             ci-test-salle/capture-pmdo-*.txt
             ci-test-salle/journal-moteur.txt
-            ci-test-salle/Logs/**
+            ci-test-salle/LOG/**
           if-no-files-found: warn
