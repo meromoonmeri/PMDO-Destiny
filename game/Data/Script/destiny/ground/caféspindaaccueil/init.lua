@@ -9,27 +9,23 @@ local meteo_reverie = require 'destiny.meteo_reverie'
 
 local cafespindaaccueil = {}
 local sortie_cafe_en_cours = false
+local horloge_spinda = 0
 
-local function activer(nom, rayon)
-  local acteur = CH(nom)
-  if acteur == nil then return end
-  COMMON.CreateWalkArea(nom,
-    math.max(0, acteur.Position.X - rayon),
-    math.max(0, acteur.Position.Y - rayon), rayon * 2, rayon * 2)
-  AI:EnableCharacterAI(acteur)
-end
-
--- La carte ne sérialise aucune sortie : un objet invisible sur le tapis sud
--- sert de porte vers Réverie Town, et le personnel guide vers les autres
--- salles en attendant des portes sérialisées dans la carte.
--- Une étape qui échoue ne doit pas empêcher la carte de s'ouvrir : chaque
--- pose d'objet et chaque réglage est isolé et seulement signalé.
 local function protege(etape, fonction)
   local ok, err = pcall(fonction)
   if not ok then
     print('[Destiny] café Spinda : étape ignorée (' .. tostring(etape) .. ') : ' .. tostring(err))
   end
   return ok
+end
+
+local function tourner_dir(acteur, dir)
+  if acteur == nil or dir == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(acteur, dir, 4) end)
+  elseif GROUND.EntTurn ~= nil then
+    pcall(function() GROUND:EntTurn(acteur, dir) end)
+  end
 end
 
 local function installer_sortie(map)
@@ -98,15 +94,58 @@ local function nommer_personnel()
   nommer('Okéoké', 'Bulle')
 end
 
+-- Le personnel est installé ensemble en haut de la salle, sans bloquer
+-- l'escalier nord et sans placer Kirlia sur la trajectoire de Spinda.
 local function placer_personnel()
-  -- Dégager les trois employés de l’escalier nord sans changer la carte.
-  for _, poste in ipairs({{'Spinda',224,160}, {'MrMimeJunior',352,160}, {'Kirlia',224,184}}) do
+  for _, poste in ipairs({
+    {'Spinda', 224, 160, Direction.Down},
+    {'Kirlia', 200, 164, Direction.Down},
+    {'MrMimeJunior', 352, 160, Direction.Down},
+  }) do
     local acteur = CH(poste[1])
     if acteur ~= nil then
-      GROUND:TeleportTo(acteur, poste[2], poste[3], Direction.Down)
+      GROUND:TeleportTo(acteur, poste[2], poste[3], poste[4])
       AI:DisableCharacterAI(acteur)
     end
   end
+end
+
+-- Les clients attablés restent assis à leur table, face à leur compagnon,
+-- au lieu de quitter leurs tabourets ou de s'éloigner les uns des autres.
+local function fixer_clients_attables()
+  local bas_gauche = Direction.DownLeft or Direction.Down
+  local haut_droite = Direction.UpRight or Direction.Right
+  for _, siege in ipairs({
+    {'NewObject_13', bas_gauche},
+    {'Pompot', haut_droite},
+    {'Okéoké', Direction.Right},
+    {'Qulbutoqué', Direction.Left},
+  }) do
+    local acteur = CH(siege[1])
+    if acteur ~= nil then
+      AI:DisableCharacterAI(acteur)
+      pcall(function() GROUND:EntTurn(acteur, siege[2]) end)
+    end
+  end
+  local a, b = CH('Okéoké'), CH('Qulbutoqué')
+  if a ~= nil and b ~= nil then
+    pcall(function() GROUND:EntTurn(a, Direction.Right); GROUND:EntTurn(b, Direction.Left) end)
+  end
+  local g, p = CH('NewObject_13'), CH('Pompot')
+  if g ~= nil and p ~= nil then
+    pcall(function() GROUND:EntTurn(g, bas_gauche); GROUND:EntTurn(p, haut_droite) end)
+  end
+end
+
+local function pas_spinda_etourdi(spinda)
+  if spinda == nil then return end
+  pcall(function()
+    GROUND:CharSetEmote(spinda, 'happy', 1)
+    GROUND:CharAnimateTurnTo(spinda, Direction.Left, 2)
+    GROUND:CharAnimateTurnTo(spinda, Direction.Up, 2)
+    GROUND:CharAnimateTurnTo(spinda, Direction.Right, 2)
+    GROUND:CharAnimateTurnTo(spinda, Direction.Down, 2)
+  end)
 end
 
 function cafespindaaccueil.Init(map)
@@ -115,10 +154,7 @@ function cafespindaaccueil.Init(map)
   installer_sortie(map)
   installer_escalier_nord(map)
   protege('placement du personnel', placer_personnel)
-  protege('ronde de NewObject_13', function() activer('NewObject_13', 36) end)
-  protege('ronde de Pompot', function() activer('Pompot', 36) end)
-  protege('ronde de Qulbutoqué', function() activer('Qulbutoqué', 28) end)
-  protege('ronde de Okéoké', function() activer('Okéoké', 28) end)
+  protege('clients attablés', fixer_clients_attables)
 end
 
 -- Tests d'occupation prudents : on ne force pas un trajet si les personnages
@@ -151,8 +187,6 @@ end
 local function premiere_visite(map, hero, partenaire)
   local spinda, kirlia, pipo = CH('Spinda'), CH('Kirlia'), CH('MrMimeJunior')
   if hero == nil or partenaire == nil or spinda == nil or kirlia == nil then return false end
-  -- Pipo reste à son poste ; il peut écouter la conversation sans trajet
-  -- supplémentaire. Les regards sont limités aux participants présents.
   local function ecouter_cafe(locuteur, ...)
     if locuteur == nil or locuteur.EntEnabled == false then return end
     local regards, vus = {}, {}
@@ -189,8 +223,6 @@ local function premiere_visite(map, hero, partenaire)
   end)
   AI:DisableCharacterAI(partenaire)
   AI:DisableCharacterAI(spinda)
-  -- L'entrée est cadrée avant toute prise de parole ; déplacements uniquement
-  -- depuis des positions connues, sans téléportation à travers les occupants.
   local h = {{hero.Position.X,hero.Position.Y},{hero.Position.X,280}}
   local p = {{partenaire.Position.X,partenaire.Position.Y},{partenaire.Position.X,280}}
   if hero.Position.X >= 280 and hero.Position.X <= 296 and hero.Position.Y >= 328 and hero.Position.Y <= 360
@@ -203,13 +235,20 @@ local function premiere_visite(map, hero, partenaire)
   end
   GAME:MoveCamera(280, 250, 55, false)
   GAME:WaitFrames(12)
-  local parcours = {{224,160},{256,160},{256,248},{272,248}}
+  -- Démarche titubante caractéristique de Spinda : quelques pas en zigzags
+  -- joyeux puis petite pirouette devant le duo (sans traverser Kirlia).
+  local parcours = {{224,160},{248,168},{248,200},{264,216},{252,232},{272,248}}
   local depart = {x=spinda.Position.X,y=spinda.Position.Y,dir=spinda.Direction}
   if depart.x == 224 and depart.y == 160 and passage_libre(map,spinda,parcours,hero,partenaire) then
+    pcall(function() GROUND:CharSetEmote(spinda, 'exclaim', 1) end)
     for i=2,#parcours do
       if not passage_libre(map,spinda,{parcours[i-1],parcours[i]},hero,partenaire) then break end
       GROUND:MoveToPosition(spinda,parcours[i][1],parcours[i][2],false,1)
+      if i == 3 or i == 5 then
+        pcall(function() GROUND:CharSetEmote(spinda, 'happy', 1) end)
+      end
     end
+    pas_spinda_etourdi(spinda)
   end
   GROUND:CharTurnToCharAnimated(spinda, hero, 4)
   ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
@@ -231,8 +270,6 @@ local function premiere_visite(map, hero, partenaire)
   UI:ResetSpeaker()
   GROUND:CharSetEmote(hero, 'exclaim', 1)
   GAME:WaitFrames(10)
-  -- Le partenaire remarque la réaction du héros ; les autres ne peuvent
-  -- pas entendre sa pensée intérieure.
   GROUND:CharTurnToCharAnimated(partenaire, hero, 4)
   dire(hero, 'Surprised', '(Bah dis donc… quel sacré personnage !)')
   ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
@@ -242,25 +279,23 @@ local function premiere_visite(map, hero, partenaire)
   end
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
-  -- Revenir à son poste si le trajet est toujours dégagé ; sinon rester en place.
-  for i=#parcours,2,-1 do
-    if spinda.Position.X == parcours[i][1] and spinda.Position.Y == parcours[i][2]
-      and passage_libre(map,spinda,{parcours[i],parcours[i-1]},hero,partenaire) then
-      GROUND:MoveToPosition(spinda,parcours[i-1][1],parcours[i-1][2],false,1)
-    end
-  end
-  if spinda.Position.X == depart.x and spinda.Position.Y == depart.y then GROUND:EntTurn(spinda, depart.dir) end
+  -- Fondu de fin de cinématique : Spinda rejoint son poste derrière l'écran noir.
+  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 20) end
+  GROUND:TeleportTo(spinda, depart.x, depart.y, depart.dir)
+  if kirlia ~= nil then GROUND:EntTurn(kirlia, Direction.Down) end
   for _, a in ipairs(fond_cafe) do pcall(function() GROUND:CharEndAnim(a) end) end
   if pipo ~= nil and pipo.EntEnabled ~= false and direction_pipo ~= nil then GROUND:EntTurn(pipo, direction_pipo) end
   SV.Destiny.VisiteCafeSpinda = 'terminee'
-  GAME:MoveCamera(0,0,45,true)
-  equipe_scene.Suivre(partenaire,hero)
+  GAME:MoveCamera(0, 0, 1, true)
+  equipe_scene.Suivre(partenaire, hero)
+  GAME:FadeIn(20)
   GAME:CutsceneMode(false)
   return true
 end
 
 function cafespindaaccueil.Enter(map)
   sortie_cafe_en_cours = false
+  horloge_spinda = 0
   SV.Destiny = SV.Destiny or {}
   local retour_escalier = SV.Destiny.RetourCafeAccueil == 'escalier'
   if retour_escalier then
@@ -269,7 +304,6 @@ function cafespindaaccueil.Enter(map)
     if hero ~= nil then GROUND:TeleportTo(hero, 288, 152, Direction.Down) end
     if partenaire ~= nil then GROUND:TeleportTo(partenaire, 312, 160, Direction.Down) end
   end
-  -- Ne jamais garder l'écran noir pendant l'initialisation facultative du suivi.
   GAME:MoveCamera(0,0,1,true)
   GAME:FadeIn(30)
   local ok, err = pcall(suivi_interieurs.Activer, map)
@@ -283,7 +317,9 @@ function cafespindaaccueil.GameLoad(map)
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   protege('noms au chargement', nommer_personnel)
   protege('placement au chargement', placer_personnel)
+  protege('clients au chargement', fixer_clients_attables)
   sortie_cafe_en_cours = false
+  horloge_spinda = 0
   installer_sortie(map)
   installer_escalier_nord(map)
   GAME:MoveCamera(0,0,1,true)
@@ -314,12 +350,35 @@ function cafespindaaccueil.PorteSortieCafe_Touch(obj, activator)
   aller_a(0)
 end
 
+-- Animation d'ambiance non bloquante : Spinda se dandine doucement à son
+-- poste aux côtés de Kirlia sans quitter sa place ni gêner le passage.
 function cafespindaaccueil.Update(map, time)
+  if sortie_cafe_en_cours then return end
+  if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteCafeSpinda ~= 'terminee' then return end
+  horloge_spinda = horloge_spinda + 1
+  if horloge_spinda % 64 ~= 0 then return end
+  local spinda = CH('Spinda')
+  if spinda == nil or spinda.EntEnabled == false then return end
+  pcall(function()
+    if spinda.IsInteracting then return end
+    local cycle = math.floor(horloge_spinda / 64) % 4
+    local dirs = {
+      Direction.DownLeft or Direction.Left,
+      Direction.Down,
+      Direction.DownRight or Direction.Right,
+      Direction.Down,
+    }
+    GROUND:EntTurn(spinda, dirs[cycle + 1])
+    if cycle == 2 and (math.floor(horloge_spinda / 256) % 2 == 0) then
+      GROUND:CharSetEmote(spinda, 'happy', 1)
+    end
+  end)
 end
 
 function cafespindaaccueil.Spinda_Action(personnage, activator)
   local joueur = activator or CH('PLAYER')
   tourner_vers(personnage, joueur)
+  pas_spinda_etourdi(personnage)
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(personnage, 'Worried', 'Je pense à Nilo et à Lyra. Préparez-vous bien, et ne perdez pas courage.')
   end
@@ -363,9 +422,15 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
     GAME:FadeIn(60)
     UI:ResetSpeaker()
     UI:WaitShowDialogue('Une nouvelle journée commence à Réverie Town… ' .. meteo_reverie.Description())
+    tourner_dir(personnage, Direction.Down)
+    tourner_dir(kirlia, Direction.Down)
+    tourner_dir(pipo, Direction.Down)
     return
   end
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
+  tourner_dir(kirlia, Direction.Down)
+  tourner_dir(pipo, Direction.Down)
   if choix == 1 then aller_a(3)
   elseif choix == 2 then
     SV.Destiny = SV.Destiny or {}; SV.Destiny.ArriveeSalleCafe = true
@@ -376,22 +441,89 @@ end
 function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
   local joueur = activator or CH('PLAYER')
   tourner_vers(personnage, joueur)
+  pcall(function() GROUND:CharSetEmote(personnage, 'music', 1) end)
   dire(personnage, 'Happy', 'Je mime le verseur parfait : pas une goutte imaginaire ne tombe à côté.')
+  local kirlia = CH('Kirlia')
+  if kirlia ~= nil then
+    tourner_vers(kirlia, personnage)
+    dire(kirlia, 'Happy', 'Pipo s’entraîne déjà à servir le Jus Spécial sans renverser une seule baie invisible.')
+    tourner_vers(personnage, kirlia)
+  end
   local spinda = CH('Spinda')
   tourner_vers(spinda, joueur)
   dire(spinda, 'Happy', 'Et pendant les travaux, nous accueillons les visiteurs ensemble !')
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
+  tourner_dir(kirlia, Direction.Down)
+  tourner_dir(spinda, Direction.Down)
 end
 
+local conseils_kirlia = {
+  'Avant une expédition, passez voir Mado pour déposer vos objets précieux et Écu pour mettre vos Poké à l’abri.',
+  'Les étals de Basil et Félix changent après chaque sieste ici au café : jetez un œil à leurs réserves quand le jour se lève.',
+  'Alakazam aide les équipes à retrouver une capacité oubliée, tandis qu’Iris ouvre les coffres ramenés des donjons.',
+}
+
 function cafespindaaccueil.Kirlia_Action(personnage, activator)
-  tourner_vers(personnage, activator or CH('PLAYER'))
+  local joueur = activator or CH('PLAYER')
+  local spinda = CH('Spinda')
+  local pipo = CH('MrMimeJunior')
+  tourner_vers(personnage, joueur)
+  pcall(function() GROUND:CharSetEmote(personnage, 'happy', 1) end)
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
-    dire(personnage, 'Worried', 'Lyra doit être si inquiète pour Nilo… J’espère qu’il tient bon.')
-    UI:ResetSpeaker()
-    return
+    dire(personnage, 'Worried', 'Lyra doit être si inquiète pour Nilo… Je sens toute son angoisse jusqu’ici.')
+    if spinda ~= nil then
+      tourner_vers(spinda, joueur)
+      dire(spinda, 'Normal', 'Prenez le temps de souffler ou de faire vos réserves. Quand Nilo sera rentré, sa place sera prête ici.')
+      tourner_vers(personnage, joueur)
+    end
+  else
+    dire(personnage, 'Normal', 'Bonjour ! Je perçois les émotions des voyageurs et j’aide Spinda à veiller sur le café.')
   end
-  dire(personnage, 'Normal', 'Les voyageurs laissent parfois une émotion derrière eux. Je la transforme en conseil pour l’équipe suivante.')
+  while true do
+    UI:ResetSpeaker()
+    UI:BeginChoiceMenu('Souhaitez-vous discuter d’autre chose ?', {
+      'Conseils pour les préparatifs',
+      'Parler de Spinda et du café',
+      'Ressentir l’ambiance du jour',
+      'Rien pour le moment',
+    }, 1, 4)
+    UI:WaitForChoice()
+    local choix = UI:ChoiceResult()
+    if choix == 1 then
+      local jour = (SV.Destiny and SV.Destiny.JourneeVille) or 0
+      dire(personnage, 'Happy', conseils_kirlia[(jour % #conseils_kirlia) + 1])
+      if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
+        dire(personnage, 'Normal', 'Si vous manquez de baies avant de retrouver Lyra, une petite sieste auprès de Spinda renouvellera aussi les étals.')
+      end
+    elseif choix == 2 then
+      tourner_vers(personnage, spinda or joueur)
+      dire(personnage, 'Happy', 'Spinda a beau tournoyer sans arrêt, il garde toujours une attention incroyable pour chaque équipe.')
+      if spinda ~= nil then
+        tourner_vers(spinda, personnage)
+        pas_spinda_etourdi(spinda)
+        dire(spinda, 'Happy', 'Héhé ! Sans Alizé pour me remettre d’aplomb, j’aurais déjà servi deux fois le même jus à l’envers !')
+        tourner_vers(spinda, Direction.Down)
+      end
+      if pipo ~= nil then
+        tourner_vers(personnage, pipo)
+        tourner_vers(pipo, personnage)
+        pcall(function() GROUND:CharSetEmote(pipo, 'happy', 1) end)
+        dire(personnage, 'Normal', 'Quant à Pipo, ses mimes mettent tout le monde de bonne humeur. Bulle et Balou préparent aussi l’atelier de recyclage.')
+      end
+      tourner_vers(personnage, joueur)
+    elseif choix == 3 then
+      dire(personnage, 'Normal', 'Dehors, le temps est ainsi : ' .. meteo_reverie.Description())
+      dire(personnage, 'Happy', 'Ici, l’air est doux et plein d’élan. J’espère qu’il portera chance à votre équipe !')
+    else
+      break
+    end
+  end
+  dire(personnage, 'Normal', 'Prenez soin de vous sur les chemins. Mon regard vous accompagne toujours un peu.')
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
+  tourner_dir(spinda, Direction.Down)
+  tourner_dir(pipo, Direction.Down)
 end
 
 local function dialogue_recyclage(okeoke, qulbutoque, activator)
@@ -400,10 +532,13 @@ local function dialogue_recyclage(okeoke, qulbutoque, activator)
   tourner_vers(qulbutoque, joueur)
   dire(okeoke, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
   tourner_vers(qulbutoque, okeoke)
+  tourner_vers(okeoke, qulbutoque)
   dire(qulbutoque, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
   tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
   UI:ResetSpeaker()
+  tourner_dir(okeoke, Direction.Right)
+  tourner_dir(qulbutoque, Direction.Left)
 end
 
 cafespindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
@@ -414,16 +549,46 @@ cafespindaaccueil['Okéoké_Action'] = function(personnage, activator)
   dialogue_recyclage(personnage, CH('Qulbutoqué'), activator)
 end
 
-function cafespindaaccueil.NewObject_13_Action(personnage, activator)
-  tourner_vers(personnage, activator or CH('PLAYER'))
-  dire(personnage, 'Happy', 'Je goûte chaque nouveauté du comptoir. Pour le travail, évidemment. Uniquement pour le travail.')
+local function dialogue_table_gauche(noisette, pompon, activator)
+  local joueur = activator or CH('PLAYER')
+  local bas_gauche = Direction.DownLeft or Direction.Down
+  local haut_droite = Direction.UpRight or Direction.Right
+  tourner_vers(noisette, joueur)
+  tourner_vers(pompon, joueur)
+  dire(noisette, 'Happy', 'Je goûte chaque nouveauté du comptoir. Pour le travail, évidemment. Uniquement pour le travail.')
+  if pompon ~= nil then
+    tourner_vers(pompon, noisette)
+    tourner_vers(noisette, pompon)
+    dire(pompon, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Et Noisette surveille déjà la cuisine !')
+  end
   UI:ResetSpeaker()
+  tourner_dir(noisette, bas_gauche)
+  tourner_dir(pompon, haut_droite)
+end
+
+function cafespindaaccueil.NewObject_13_Action(personnage, activator)
+  dialogue_table_gauche(personnage, CH('Pompot'), activator)
 end
 
 function cafespindaaccueil.Pompot_Action(personnage, activator)
-  tourner_vers(personnage, activator or CH('PLAYER'))
-  dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
-  UI:ResetSpeaker()
+  local noisette = CH('NewObject_13')
+  if noisette ~= nil then
+    local joueur = activator or CH('PLAYER')
+    local bas_gauche = Direction.DownLeft or Direction.Down
+    local haut_droite = Direction.UpRight or Direction.Right
+    tourner_vers(personnage, joueur)
+    tourner_vers(noisette, joueur)
+    dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
+    tourner_vers(noisette, personnage)
+    dire(noisette, 'Happy', 'Et dès que le service ouvrira, je te garde une place au premier rang pour le goûter !')
+    UI:ResetSpeaker()
+    tourner_dir(noisette, bas_gauche)
+    tourner_dir(personnage, haut_droite)
+  else
+    tourner_vers(personnage, activator or CH('PLAYER'))
+    dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
+    UI:ResetSpeaker()
+  end
 end
 
 return cafespindaaccueil

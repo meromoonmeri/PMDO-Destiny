@@ -46,7 +46,7 @@ GROUND={
  CharSetEmote=function(_,a,emote)assert(a);event('emote',a.EntName,emote)end,
  CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true;event('idle_debut',a.EntName) end,CharEndAnim=function(_,a)a.idle=false;event('idle_fin',a.EntName) end,
 }
-GAME={GetPlayerPartyCount=function()return 2 end,CutsceneMode=function(_,v)event('mode',nil,v)end,WaitFrames=function(_,n)event('attente',nil,n)end,FadeIn=function()end,MoveCamera=function(_,x,y,t,r)event('camera',x,y)end}
+GAME={GetPlayerPartyCount=function()return 2 end,CutsceneMode=function(_,v)event('mode',nil,v)end,WaitFrames=function(_,n)event('attente',nil,n)end,FadeIn=function()event('fade_in')end,FadeOut=function()event('fade_out')end,MoveCamera=function(_,x,y,t,r)event('camera',x,y)end}
 TASK={BranchCoroutine=function(_,f)f();return true end,JoinCoroutines=function()end}
 SOUND={PlayBGM=function(_,n)event('music',n)end,FadeOutBGM=function()end,PlayBattleSE=function(_,n)event('son',n)end}
 UI={ResetSpeaker=function()speaker=nil end,SetSpeaker=function(_,n,keysound,skin,form,texture,genre)
@@ -104,9 +104,17 @@ local function scenario(species,legacy,missing,obstacle,rose_loin,bloc_ludicolo)
  if missing~='NewObject_4' then
   local entree_a=find('marcher','720,1152')
   assert(find('placer','648,1152')<entree_a)
-  local retour_ouest=nil
-  for k=entree_a+1,#events do local v=events[k];if v[1]=='marcher' and v[2]=='NewObject_4' and v[3]=='648,1152' then retour_ouest=k;break end end
-  assert(retour_ouest and retour_ouest<find('placer','360,1100'),'Alakazam doit repartir à pied vers l’ouest')
+  local debut_fin=find('fade_out','')
+  assert(debut_fin>i and debut_fin<find('placer','360,1100'),'fin de cinématique sans fondu avant repositionnement')
+  local retour_fade_in=nil
+  for k=debut_fin+1,#events do if events[k][1]=='fade_in' then retour_fade_in=k;break end end
+  assert(retour_fade_in and find('placer','360,1100')<retour_fade_in,'Alakazam replacé hors fondu')
+ end
+ if missing~='NewObject_7' and not obstacle then
+  local fin_fondu=find('fade_out','')
+  local repos_lombre=nil
+  for k=fin_fondu+1,#events do if events[k][1]=='placer' and events[k][2]=='NewObject_7' and events[k][3]=='808,1116' then repos_lombre=k;break end end
+  assert(repos_lombre and repos_lombre<find('dialogue','On peut passer chez Basil'),'Lombre replacé après le fondu')
  end
  assert(not find('dialogue','Bienvenue à Réverie Town !')==false)
  local function regard_entre(debut,fin,nom,cible)
@@ -160,7 +168,7 @@ UI.BeginChoiceMenu=function(_,prompt,options,default,cancel) assert(speaker==nil
 UI.WaitForChoice=function()end
 UI.ChoiceResult=function()return table.remove(choix_restants,1)end
 UI.WaitShowDialogue=function(_,t)messages[#messages+1]=t end
-GAME.FadeOut=function()end
+GAME.FadeOut=function()event('fade_out')end
 GAME.DungeonUnlocked=function()return false end
 local function suite(choices)
  actors={};events={};messages={};menus={};choix_restants=choices
@@ -172,6 +180,8 @@ local hero,lux=suite({2})
 assert(not SV.Destiny.DepartShinxAccepte and hero.Position.X==760 and lux.Position.X==800 and find('dialogue','Nilo'))
 assert(find('dialogue','je vous attends ici') and not hero.CollisionDisabled)
 hero,lux=suite({1,1})
+local nb_fades=0;for _,v in ipairs(events) do if v[1]=='fade_out' then nb_fades=nb_fades+1 end end
+assert(nb_fades==1,'départ Lyra : un seul fondu attendu')
 assert(SV.Destiny.DepartShinxAccepte and SV.Destiny.LuxrayAttente=='sortie' and hero.Position.X==1552 and not hero.CollisionDisabled)
 assert(#menus==2 and menus[2].options[1]:find('Grotte Verdoyante',1,true) and messages[1]:find('pas encore disponible',1,true))
 hero,lux=suite({1,3});assert(not hero.CollisionDisabled and #messages==0 and SV.Destiny.DepartShinxAccepte)

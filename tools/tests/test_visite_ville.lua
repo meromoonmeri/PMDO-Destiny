@@ -39,6 +39,7 @@ GAME = {
   CutsceneMode=function() end,
   WaitFrames=function() end,
   FadeIn=function() end,
+  FadeOut=function() end,
   MoveCamera=function(_, x, y, frames, relative) camera[#camera+1]={x,y,relative} end,
   GetPlayerMoney=function() return money end,
   GetPlayerBagCount=function() return bag end,
@@ -50,7 +51,7 @@ TASK = {
   BranchCoroutine=function(_, f) f(); return true end,
   JoinCoroutines=function() end,
 }
-SOUND = { PlayBGM=function(_, name) assert(name=='Treasure Town.ogg' or name=='Base Town.ogg') end, PlayBattleSE=function() end }
+SOUND = { PlayBGM=function(_, name) assert(name=='Treasure Town.ogg' or name=='Base Town.ogg') end, FadeOutBGM=function() end, PlayBattleSE=function() end }
 UI = {
   SetSpeaker=function() end, SetSpeakerEmotion=function() end, ResetSpeaker=function() end,
   WaitShowDialogue=function(_, text) dialogues[#dialogues+1]=text end,

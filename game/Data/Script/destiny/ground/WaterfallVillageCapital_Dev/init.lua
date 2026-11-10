@@ -41,16 +41,26 @@ local marchands_fixes = {
   NewObject_24 = true,     -- Forgelina, ouverture des boîtes
 }
 
+-- Habitants en poste fixe (garde, pêcheur, dormeur, voisinage immédiat) :
+-- ne quittent pas leur emplacement ni leur petit groupe.
+local postes_fixes = {
+  Roserade_Fleuriste = true, -- Rose sur la place, avec Margot/Nino/Marcel
+  NewObject_18 = true,       -- Gaston (Ronflex) endormi sur sa place
+  Magneton_Garde = true,     -- Volt en faction devant le pont sud
+  Cradopaud_Pecheur = true,  -- Marius au bord de l'eau
+  Goinfrex_Voyageur = true,  -- Moka devant le café Spinda avec Suzie/Capucine
+}
+
 -- Discussions réelles : dialogues partagés (Lombre/Ludicolo, Luxio/Luxray)
--- ou duo déjà placé côte à côte (Doyen/Baudrive). Les anciennes paires
--- d'ambiance séparées par plusieurs centaines de pixels ne font plus
--- semblant de discuter à travers la ville.
+-- ou duos placés côte à côte qui se font face sans s'éloigner.
 local paires_discussion = {
   {'NewObject_7', 'NewObject_8'},   -- Lombre et Ludicolo
   {'NewObject_10', 'NewObject_9'},  -- Luxio et Luxray
   {'Doyen', 'Drifloon'},            -- le Doyen et Baudrive
   {'NewObject_12', 'NewObject_15'}, -- Mackogneur et Écrémeuh sur la place
   {'NewObject_16', 'NewObject_14'}, -- Dracaufeu et Tyranocif à l'entrée
+  {'NewObject_11', 'NewObject_20'}, -- Sillage (Carchacrok) et Atlas (Drattak)
+  {'NewObject_21', 'NewObject_23'}, -- Suzie (Cupcanaille) et Capucine (Charmilly)
 }
 local partenaires_discussion = {}
 for _, paire in ipairs(paires_discussion) do
@@ -59,7 +69,7 @@ for _, paire in ipairs(paires_discussion) do
 end
 
 local function est_fixe(nom)
-  return marchands_fixes[nom] == true or partenaires_discussion[nom] ~= nil
+  return marchands_fixes[nom] == true or postes_fixes[nom] == true or partenaires_discussion[nom] ~= nil
 end
 
 local function tourner_vers(acteur, cible)
@@ -86,7 +96,7 @@ local function restaurer_orientation(nom, acteur)
     orienter_discussion(nom)
     return
   end
-  if marchands_fixes[nom] then
+  if marchands_fixes[nom] or postes_fixes[nom] then
     local depart = positions_habitants[nom]
     if depart ~= nil and depart.dir ~= nil then
       if GROUND.CharAnimateTurnTo ~= nil then
@@ -597,12 +607,18 @@ function ville.Init(map)
   -- dans la carte (positions relevées sur le rendu, à confirmer au runtime).
   habitant_du_quartier(map, 'Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
   habitant_du_quartier(map, 'Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
+  local crado = CH('Cradopaud_Pecheur')
+  if crado ~= nil then pcall(function() GROUND:EntTurn(crado, Direction.Left) end) end
   habitant_du_quartier(map, 'Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
   local rose = CH('Roserade_Fleuriste')
   if rose ~= nil then pcall(function() GROUND:EntTurn(rose, Direction.Right) end) end
   habitant_du_quartier(map, 'Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
+  local magneton = CH('Magneton_Garde')
+  if magneton ~= nil then pcall(function() GROUND:EntTurn(magneton, Direction.Down) end) end
   habitant_du_quartier(map, 'Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
   habitant_du_quartier(map, 'Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
+  local goinfrex = CH('Goinfrex_Voyageur')
+  if goinfrex ~= nil then pcall(function() GROUND:EntTurn(goinfrex, Direction.Right) end) end
   -- Luxio et Luxray partagent un vrai dialogue, mais la carte les place à
   -- 136 px l'un de l'autre, de part et d'autre de la maison citrouille sud.
   -- Luxray est donc posé juste à l'est de Luxio, sur l'herbe libre au nord
@@ -716,13 +732,16 @@ local function activer_vie_ville()
         -- marche, IA coupée, idle par défaut et orientation de repos.
         figer_habitant(nom, acteur)
       else
-        local rayon = 56
+        local rayons_locaux = {
+          NewObject_13 = 32,
+          NewObject_22 = 36,
+          Babimanta_Enfant = 32,
+        }
+        local rayon = rayons_locaux[nom] or 56
         local cx, cy = depart.x, depart.y
-        -- Chaque jour, quelques flâneurs changent de quartier de déambulation.
+        -- Chaque jour, le facteur flâne légèrement d'un côté ou de l'autre de la poste.
         local vagabonds = {
           Pijako_Livreur = {{0, 0}, {72, 0}, {-72, 0}},
-          Cradopaud_Pecheur = {{0, 0}, {0, 72}, {0, -72}},
-          Goinfrex_Voyageur = {{0, 0}, {72, 0}, {-72, 0}},
         }
         local decalages = vagabonds[nom]
         if decalages ~= nil then
@@ -1305,26 +1324,18 @@ function ville.Visite(map)
   end
   GAME:WaitFrames(30)
   -- Fin progressive de la tension ; aucune musique de victoire avant le sauvetage.
-  SOUND:FadeOutBGM(90)
-  GAME:WaitFrames(100)
-  -- Les habitants reprennent leur place et Alakazam s'éloigne à pied vers
-  -- son comptoir à l'ouest avant le retour du joueur.
+  if SOUND.FadeOutBGM ~= nil then SOUND:FadeOutBGM(90) end
+  GAME:WaitFrames(65)
+  -- Fondu de fin de cinématique : on ne voit jamais les habitants ni Alakazam
+  -- ni Lyra repartir à reculons ou se téléporter à découvert.
+  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 25) end
   for _, depart in ipairs(avances) do
-    local acteur, points = depart.acteur, depart.points
+    local acteur = depart.acteur
     if acteur ~= nil and acteur.EntEnabled ~= false then
-      for i = #points, 2, -1 do
-        if acteur.Position.X == points[i][1] and acteur.Position.Y == points[i][2]
-          and passage_libre(acteur, {points[i], points[i-1]}) then
-          GROUND:MoveToPosition(acteur, points[i-1][1], points[i-1][2], false, 1)
-        end
-      end
-      if acteur.Position.X == depart.x and acteur.Position.Y == depart.y then
-        GROUND:CharAnimateTurnTo(acteur, depart.dir, 4)
-      end
+      GROUND:TeleportTo(acteur, depart.x, depart.y, depart.dir)
     end
   end
   if alakazam ~= nil then
-    GROUND:MoveToPosition(alakazam, 648, 1152, false, 1.5)
     GROUND:Hide('NewObject_4')
     GROUND:TeleportTo(alakazam, 360, 1100, Direction.Down)
     GROUND:Unhide('NewObject_4')
@@ -1332,13 +1343,18 @@ function ville.Visite(map)
   if not luxray_temporaire and luxray_depart ~= nil then
     GROUND:TeleportTo(luxray, luxray_depart.x, luxray_depart.y, luxray_depart.dir)
   end
+  -- Recentrage caméra et face-à-face silencieux sous le fondu avant réouverture.
+  GAME:MoveCamera(0, 0, 1, true)
+  pcall(function() GROUND:CharTurnToChar(partenaire, hero) end)
+  pcall(function() GROUND:CharTurnToChar(hero, partenaire) end)
   -- Après un temps de silence, revenir au thème du quartier, sans superposition.
-  GAME:WaitFrames(30)
+  GAME:WaitFrames(15)
   SOUND:PlayBGM('Treasure Town.ogg', false)
   -- Ce drapeau ne crée pas de mission ni de donjon automatiquement.
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
+  GAME:FadeIn(25)
   se_faire_face_ville(partenaire, hero)
   parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
   UI:ResetSpeaker()
@@ -2175,8 +2191,8 @@ local dialogues_lux = {
 local function dialogue_lux(second, premier)
   conversation({second, premier}, repliques_du_jour(dialogues_lux))
 end
--- Après les préparatifs, un oui lance une courte marche visible. Le fondu
--- représente le trajet entre l’escalier sud et la sortie est déjà raccordée.
+-- Après les préparatifs, un oui amène directement le trio devant la sortie est
+-- en un seul fondu, prêt à choisir le donjon.
 function ville.Luxray_Alerte_Action(personnage, activator)
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.AlerteShinx ~= 'a_secourir' then return end
@@ -2207,27 +2223,6 @@ function ville.Luxray_Alerte_Action(personnage, activator)
   GAME:CutsceneMode(true)
   AI:DisableCharacterAI(partenaire)
   hero.CollisionDisabled = true
-  GAME:FadeOut(false, 20)
-  GROUND:TeleportTo(personnage, 800, 1272, Direction.Down)
-  GROUND:TeleportTo(partenaire, 800, 1248, Direction.Down)
-  GROUND:TeleportTo(hero, 800, 1224, Direction.Down)
-  GAME:MoveCamera(800, 1284, 1, false)
-  GAME:FadeIn(20)
-  GAME:WaitFrames(12)
-  local mere = TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(personnage, 800, 1352, false, 1)
-  end)
-  local guide = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(4)
-    GROUND:MoveToPosition(partenaire, 800, 1328, false, 1)
-  end)
-  local joueur = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(8)
-    GROUND:MoveToPosition(hero, 800, 1304, false, 1)
-  end)
-  local camera = TASK:BranchCoroutine(function() GAME:MoveCamera(800, 1320, 80, false) end)
-  TASK:JoinCoroutines({mere, guide, joueur, camera})
-  GAME:WaitFrames(12)
   GAME:FadeOut(false, 20)
   GROUND:TeleportTo(personnage, 1504, 1584, Direction.Right)
   GROUND:TeleportTo(partenaire, 1528, 1592, Direction.Right)
@@ -2371,12 +2366,73 @@ local dialogues_habitants = {
     {{'Normal', 'Je devais repartir ce matin… puis Cupcanaille a parlé de tarte. Je reste un jour de plus. Pour la science, toujours.'}},
   },
 }
+local function dialogue_atlas_sillage(sillage, atlas, activator)
+  if sillage == nil or atlas == nil then return false end
+  if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then return false end
+  local jour = jour_actuel() % 3
+  if jour == 0 then
+    conversation({sillage, atlas}, {
+      {1, 'Normal', 'Mon équipe se repose. Savoir s’arrêter à Réverie Town fait aussi partie du métier d’explorateur.'},
+      {2, 'Normal', 'De mon temps, on partait avec une carte griffonnée sur une écorce. Profitez de cette pause, les jeunes.'},
+      {1, 'Happy', 'Avec un vieux briscard comme toi pour veiller sur le quartier, on dort sur nos deux oreilles.'},
+    })
+  elseif jour == 1 then
+    conversation({sillage, atlas}, {
+      {1, 'Happy', 'Hier, les grottes ; aujourd’hui, la place et un vrai repas. Demain ? On verra le tableau des missions.'},
+      {2, 'Happy', 'Je vois passer les équipes chaque jour. Chacune repart un peu plus grande qu’à l’arrivée.'},
+    })
+  else
+    conversation({sillage, atlas}, {
+      {2, 'Normal', 'Les jeunes équipes regardent toujours l’horizon. C’est bon signe : la ville a besoin de rêves neufs.'},
+      {1, 'Normal', 'Je révise nos cartes au bord de l’eau. Tu gardes un œil sur les nouveaux pendant ce temps, Atlas ?'},
+      {2, 'Happy', 'Toujours, Sillage. Toujours.'},
+    })
+  end
+  return true
+end
+
+local function dialogue_suzie_capucine(suzie, capucine, activator)
+  if suzie == nil or capucine == nil then return false end
+  if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then return false end
+  local jour = jour_actuel() % 3
+  if jour == 0 then
+    conversation({suzie, capucine}, {
+      {1, 'Happy', 'Le parfum des baies du marché me donne des idées de desserts pour tout le quartier !'},
+      {2, 'Happy', 'Si tu prépares une tarte, je m’occupe des rubans de crème pour décorer la place !'},
+      {1, 'Happy', 'Marché conclu, Capucine ! Moka attend déjà la première part juste à côté.'},
+    })
+  elseif jour == 1 then
+    conversation({suzie, capucine}, {
+      {1, 'Happy', 'Aujourd’hui : tarte aux Baies Pecha. Demain… tarte aux Baies Pecha aussi. On ne change pas un succès !'},
+      {2, 'Happy', 'Programme du jour : un ruban de crème sur la fontaine, deux sur le pont. Réverie mérite sa douceur quotidienne !'},
+    })
+  else
+    conversation({suzie, capucine}, {
+      {1, 'Worried', 'Mes réserves de baies fondent plus vite que prévu. Quelqu’un fait des réserves dans MON garde-manger ?'},
+      {2, 'Normal', 'Écrémeuh me garde sa meilleure crème pour demain. Tiens bon jusqu’au marché du matin !'},
+    })
+  end
+  return true
+end
+
 for nom, variantes in pairs(dialogues_habitants) do
   local nom_action, choix = nom, variantes
   ville[nom .. '_Action'] = function(personnage, activator)
     commencer_dialogue(personnage, activator)
     if not reaction_actualite(personnage, nom_action) then
-      dialogue_simple(personnage, repliques_du_jour(choix))
+      local gere = false
+      if nom_action == 'NewObject_11' then
+        gere = dialogue_atlas_sillage(personnage, CH('NewObject_20'), activator)
+      elseif nom_action == 'NewObject_20' then
+        gere = dialogue_atlas_sillage(CH('NewObject_11'), personnage, activator)
+      elseif nom_action == 'NewObject_21' then
+        gere = dialogue_suzie_capucine(personnage, CH('NewObject_23'), activator)
+      elseif nom_action == 'NewObject_23' then
+        gere = dialogue_suzie_capucine(CH('NewObject_21'), personnage, activator)
+      end
+      if not gere then
+        dialogue_simple(personnage, repliques_du_jour(choix))
+      end
     end
     terminer_dialogue(personnage, nom_action)
   end

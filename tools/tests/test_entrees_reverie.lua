@@ -171,7 +171,7 @@ local etage=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/s
 local spectacle=assert(loadfile((arg[1] or '.')..'/game/Data/Script/destiny/ground/spindacaféétage1salle2/init.lua'))()
 SV={Destiny={CafeRenovationTerminee=true}};local c=salle('caféspindaaccueil',{'Spinda','MrMimeJunior','Kirlia','Qulbutoqué','Okéoké','NewObject_13','Pompot'});current=c;entree.Init(c)
 assert(c.characters.Spinda.Data.Nickname=='' and c.characters.MrMimeJunior.Data.Nickname=='Pipo' and c.characters.Kirlia.Data.Nickname=='Alizé')
-assert(c.characters.Spinda.Position.X==224 and c.characters.MrMimeJunior.Position.X==352 and c.characters.Kirlia.Position.Y==184)
+assert(c.characters.Spinda.Position.X==224 and c.characters.MrMimeJunior.Position.X==352 and c.characters.Kirlia.Position.X==200 and c.characters.Kirlia.Position.Y==164)
 assert(c.objects.EscalierNordCafe.TriggerType=='Touch' and c.objects.EscalierNordCafe.Collider.y==120)
 call.zone=nil;entree.EscalierNordCafe_Touch(nil,mate);assert(not call.zone)
 entree.EscalierNordCafe_Touch(nil,hero);assert(call.zone[3]==3);call.zone=nil;entree.EscalierNordCafe_Touch(nil,hero);assert(not call.zone)

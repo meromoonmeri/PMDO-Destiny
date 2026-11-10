@@ -1,17 +1,17 @@
--- Salle de spectacle du café Spinda : artistes et habitués sérialisés.
+-- Salle de spectacle du café Spinda : artistes sur scène et habitués attablés.
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local spindacafeetage1salle2 = {}
 local transition_cafe_en_cours = false
 
-local function activer(nom, rayon)
+local function fixer_poste(nom, dir)
   local acteur = CH(nom)
   if acteur == nil then return end
-  COMMON.CreateWalkArea(nom,
-    math.max(0, acteur.Position.X - rayon),
-    math.max(0, acteur.Position.Y - rayon), rayon * 2, rayon * 2)
-  AI:EnableCharacterAI(acteur)
+  AI:DisableCharacterAI(acteur)
+  if dir ~= nil then
+    pcall(function() GROUND:EntTurn(acteur, dir) end)
+  end
 end
 
 local function installer_porte(map)
@@ -40,6 +40,15 @@ local function tourner_vers(acteur, cible)
     pcall(function() GROUND:CharTurnToCharAnimated(acteur, cible, 4) end)
   elseif GROUND.CharTurnToChar ~= nil then
     pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  end
+end
+
+local function tourner_dir(acteur, dir)
+  if acteur == nil or dir == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(acteur, dir, 4) end)
+  elseif GROUND.EntTurn ~= nil then
+    pcall(function() GROUND:EntTurn(acteur, dir) end)
   end
 end
 
@@ -79,14 +88,33 @@ local function nommer_personnel()
   nommer('NewObject_10', 'Brume')
 end
 
+local orientations_fixes = {
+  NewObject = Direction.Down,                      -- Pipo sur scène
+  NewObject_1 = Direction.Down,                    -- Asa sur scène
+  NewObject_2 = Direction.DownRight or Direction.Down, -- Mina, table gauche
+  NewObject_9 = Direction.UpLeft or Direction.Left,    -- Pico, table gauche
+  NewObject_8 = Direction.UpRight or Direction.Right,  -- Pistache, table gauche
+  NewObject_3 = Direction.Down,                    -- Mirabelle, table basse
+  NewObject_7 = Direction.Right,                   -- Mimi, table basse
+  NewObject_10 = Direction.Left,                   -- Brume, table basse
+  NewObject_4 = Direction.Down,                    -- Nox, table droite
+  NewObject_6 = Direction.Right,                   -- Rémi, table droite
+  NewObject_5 = Direction.Left,                    -- Lila, table droite
+}
+
+-- Les artistes restent sur scène et tous les habitués restent assis côte à
+-- côte à leurs tables, sans vagabonder au milieu des tabourets.
+local function placer_salle()
+  for nom, dir in pairs(orientations_fixes) do
+    fixer_poste(nom, dir)
+  end
+end
+
 function spindacafeetage1salle2.Init(map)
   synchroniser_zone()
   nommer_personnel()
   installer_porte(map)
-  for i = 0, 10 do
-    local nom = i == 0 and 'NewObject' or ('NewObject_' .. i)
-    activer(nom, 36)
-  end
+  placer_salle()
 end
 
 function spindacafeetage1salle2.Enter(map)
@@ -102,7 +130,11 @@ function spindacafeetage1salle2.Enter(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1salle2.GameLoad(map) synchroniser_zone(); nommer_personnel(); suivi_interieurs.Activer(map);
+function spindacafeetage1salle2.GameLoad(map)
+  synchroniser_zone()
+  nommer_personnel()
+  placer_salle()
+  suivi_interieurs.Activer(map)
   transition_cafe_en_cours = false
   installer_porte(map)
   GAME:FadeIn(30)
@@ -131,6 +163,8 @@ function spindacafeetage1salle2.NewObject_Action(personnage, activator)
   UI:WaitForChoice()
   local choix = UI:ChoiceResult()
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
+  tourner_dir(asa, Direction.Down)
   if choix == 1 then aller_a(2)
   elseif choix == 2 then aller_a(3) end
 end
@@ -143,25 +177,80 @@ function spindacafeetage1salle2.NewObject_1_Action(personnage, activator)
   tourner_vers(pipo, joueur)
   dire(pipo, 'Normal', 'Je tiendrai le rideau. Invisible, bien entendu.')
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
+  tourner_dir(pipo, Direction.Down)
+end
+
+local function dialogue_plusle_minun(mina, pico, premier_mina, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(mina, joueur)
+  tourner_vers(pico, joueur)
+  if premier_mina then
+    dire(mina, 'Happy', 'Pico et moi préparons un numéro d’étincelles synchronisées. Réverie Town va briller !')
+    tourner_vers(pico, mina)
+    tourner_vers(mina, pico)
+    dire(pico, 'Happy', 'Dès que tu donnes le signal, je lance la première étincelle !')
+  else
+    dire(pico, 'Happy', 'Mina compte les temps, je lance la première étincelle. Ne clignez pas des yeux !')
+    tourner_vers(mina, pico)
+    tourner_vers(pico, mina)
+    dire(mina, 'Happy', 'Et Pistache donne le rythme des applaudissements juste à côté !')
+  end
+  UI:ResetSpeaker()
+  tourner_dir(mina, orientations_fixes.NewObject_2)
+  tourner_dir(pico, orientations_fixes.NewObject_9)
+end
+
+function spindacafeetage1salle2.NewObject_2_Action(personnage, activator)
+  dialogue_plusle_minun(personnage, CH('NewObject_9'), true, activator)
+end
+
+function spindacafeetage1salle2.NewObject_9_Action(personnage, activator)
+  dialogue_plusle_minun(CH('NewObject_2'), personnage, false, activator)
+end
+
+local function dialogue_nidoran(lila, remi, premier_lila, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(lila, joueur)
+  tourner_vers(remi, joueur)
+  if premier_lila then
+    dire(lila, 'Happy', 'Nous venons écouter les histoires des explorateurs. Certaines valent tous les trésors.')
+    tourner_vers(remi, lila)
+    tourner_vers(lila, remi)
+    dire(remi, 'Normal', 'Et je garde bien nos deux places jusqu’au lever du rideau !')
+  else
+    dire(remi, 'Normal', 'Je garde nos places pendant qu’elle choisit les boissons. Le spectacle commence toujours trop tôt pour les retardataires.')
+    tourner_vers(lila, remi)
+    tourner_vers(remi, lila)
+    dire(lila, 'Happy', 'Merci, Rémi ! Promis, je ne tarde pas dès que le service rouvre.')
+  end
+  UI:ResetSpeaker()
+  tourner_dir(lila, orientations_fixes.NewObject_5)
+  tourner_dir(remi, orientations_fixes.NewObject_6)
+end
+
+function spindacafeetage1salle2.NewObject_5_Action(personnage, activator)
+  dialogue_nidoran(personnage, CH('NewObject_6'), true, activator)
+end
+
+function spindacafeetage1salle2.NewObject_6_Action(personnage, activator)
+  dialogue_nidoran(CH('NewObject_5'), personnage, false, activator)
 end
 
 local dialogues = {
-  NewObject_2 = 'Pico et moi préparons un numéro d’étincelles synchronisées. Réverie Town va briller !',
   NewObject_3 = 'Les récits de donjon prennent une autre couleur sous les lumières de cette salle.',
   NewObject_4 = 'Je cherche un accessoire disparu avant le spectacle. Dans un café, même les ombres ont des cachettes.',
-  NewObject_5 = 'Nous venons écouter les histoires des explorateurs. Certaines valent tous les trésors.',
-  NewObject_6 = 'Je garde nos places pendant qu’elle choisit les boissons. Le spectacle commence toujours trop tôt pour les retardataires.',
   NewObject_7 = 'Mon déguisement est prêt. J’espère que le public aimera autant le mystère que les chansons.',
-  NewObject_8 = 'Je répète mes applaudissements. Les artistes donnent le meilleur quand la salle répond.',
-  NewObject_9 = 'Mina compte les temps, je lance la première étincelle. Ne clignez pas des yeux !',
+  NewObject_8 = 'Je répète mes applaudissements avec Mina et Pico. Les artistes donnent le meilleur quand la table suit la cadence.',
   NewObject_10 = 'Je prépare les ombres de scène. Un bon spectacle a besoin d’un peu de nuit pour faire briller la lumière.',
 }
 for nom, texte in pairs(dialogues) do
-  local replique = texte
+  local nom_ent, replique = nom, texte
   spindacafeetage1salle2[nom .. '_Action'] = function(personnage, activator)
     tourner_vers(personnage, activator or CH('PLAYER'))
     dire(personnage, 'Normal', replique)
     UI:ResetSpeaker()
+    tourner_dir(personnage, orientations_fixes[nom_ent])
   end
 end
 

@@ -1,6 +1,7 @@
 package.preload['destiny.meteo_reverie']=function()return assert(loadfile(arg[1]..'/game/Data/Script/destiny/meteo_reverie.lua'))()end
 -- Test du scénario café avec doublures (pas de rendu ou moteur PMDO).
-package.preload['origin.common']=function()return {CreateWalkArea=function()end}end
+local walk_calls = 0
+package.preload['origin.common']=function()return {CreateWalkArea=function() walk_calls = walk_calls + 1 end}end
 local actors, events, fail_suivi, choice, map
 local function log(t,n,v)events[#events+1]={t,n,v}end
 local function new(n,x,y) local a={EntName=n,Position={X=x,Y=y},Direction=1,EntEnabled=true,Data={Nickname=n}};actors[n]=a;return a end
@@ -20,7 +21,7 @@ RogueElements={Rect=function(x,y,w,h)return {x,y,w,h} end}
 GROUND={
  RemoveObject=function()end,TeleportTo=function(_,a,x,y,d)a.Position={X=x,Y=y};a.Direction=d end,
  MoveToPosition=function(_,a,x,y,run,speed)a.Position={X=x,Y=y};log('marche',a.EntName,x..','..y)end,
- CharTurnToCharAnimated=function(_,a,b)assert(a and b);log('tourne',a.EntName,b.EntName)end,CharSetEmote=function(_,a,e)assert(a);log('emote',a.EntName,e)end,CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true;log('idle_debut',a.EntName)end,CharEndAnim=function(_,a)a.idle=false;log('idle_fin',a.EntName)end,EntTurn=function(_,a,d)a.Direction=d;log('restaure',a.EntName,d)end,
+ CharTurnToCharAnimated=function(_,a,b)assert(a and b);log('tourne',a.EntName,b.EntName)end,CharSetEmote=function(_,a,e)assert(a);log('emote',a.EntName,e)end,CharSetAnim=function(_,a,anim,loop)assert(anim=='Idle' and loop);a.idle=true;log('idle_debut',a.EntName)end,CharEndAnim=function(_,a)a.idle=false;log('idle_fin',a.EntName)end,EntTurn=function(_,a,d)a.Direction=d;log('restaure',a.EntName,d)end,CharAnimateTurnTo=function(_,a,d)a.Direction=d end,
 }
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 TASK={BranchCoroutine=function(_,f)f();return 1 end,JoinCoroutines=function()end}
@@ -29,7 +30,7 @@ UI={SetSpeaker=function(_,a)assert(a);log('speaker',a.EntName)end,SetSpeakerEmot
 local cafe=assert(loadfile(arg[1]..'/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()
 local function reset(missing,bloc)
  actors={};events={};fail_suivi=false;choice=2;SV={Destiny={AlerteShinx='a_secourir'}}
- new('PLAYER',290,354);if missing~='Spinda' then new('Spinda',224,160)end;if missing~='Kirlia' then new('Kirlia',224,184)end
+ new('PLAYER',290,354);if missing~='Spinda' then new('Spinda',224,160)end;if missing~='Kirlia' then new('Kirlia',200,164)end
  if missing~='Pipo' then new('MrMimeJunior',352,160) end
  local list={};for _,n in ipairs({'Spinda','Kirlia','MrMimeJunior'}) do if actors[n] then list[#list+1]=actors[n] end end
  local client=new('Client_Cafe',350,230);list[#list+1]=client
@@ -44,7 +45,7 @@ end
 reset();cafe.Enter(map)
 assert(SV.Destiny.VisiteCafeSpinda=='terminee')
 assert(find('fade_in')<find('suivi') and find('suivi')<find('dialogue','Bienvenue'))
-assert(find('marche','272,248') and actors.Spinda.Position.X==224 and actors.Spinda.Position.Y==160)
+assert(find('marche','272,248') and actors.Spinda.Position.X==224 and actors.Spinda.Position.Y==160 and find('fade_out'))
 assert(find('dialogue','président de la Fédération') and find('dialogue','sacré personnage') and find('dialogue','rénovation') and find('dialogue','Nilo'))
 assert(find('reprendre_suivi') and events[#events][1]=='cutscene' and events[#events][3]==false)
 local function regard(a,c) for _,v in ipairs(events) do if v[1]=='regard' and v[2]==a and v[3]==c then return true end end return false end
@@ -69,3 +70,17 @@ reset();choice=1;local avant=SV.Destiny.JourneeVille or 0;cafe.Spinda_Action(act
 assert(SV.Destiny.JourneeVille==avant+1 and SV.Destiny.MeteoReverie.jour==avant+1)
 assert(find('dialogue','Une nouvelle journée commence') and find('reset_speaker'))
 assert(not find('statut_meteo'));print('PASS sieste : nouveau jour et annonce sans effet intérieur')
+
+-- Placement côte à côte de Kirlia et Spinda, clients attablés fixes, pas de CreateWalkArea.
+reset();walk_calls=0;new('Okéoké',381,227);new('Qulbutoqué',453,227);new('NewObject_13',187,205);new('Pompot',125,244)
+cafe.Init(map)
+assert(walk_calls==0 and actors.Kirlia.Position.X==200 and actors.Spinda.Position.X==224)
+assert(actors['Okéoké'].Direction==Direction.Right and actors['Qulbutoqué'].Direction==Direction.Left)
+-- Menu interactif enrichi de Kirlia (choix 2 puis 4 pour quitter).
+local seq={2,4}; local idx=0; UI.ChoiceResult=function() idx=idx+1; return seq[idx] or 4 end
+events={}; cafe.Kirlia_Action(actors.Kirlia,actors.PLAYER)
+assert(find('dialogue','Spinda a beau tournoyer') and find('dialogue','Prenez soin de vous'))
+-- Balancement non bloquant de Spinda en Update.
+SV.Destiny.VisiteCafeSpinda='terminee'; for _=1,128 do cafe.Update(map, nil) end
+assert(actors.Spinda.Direction==Direction.Right)
+print('PASS Kirlia côte à côte, clients fixes, dialogue Kirlia et balancement Spinda')

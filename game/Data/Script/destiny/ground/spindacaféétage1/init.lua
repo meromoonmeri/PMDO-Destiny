@@ -5,13 +5,13 @@ local suivi_interieurs = require 'destiny.suivi_interieurs'
 local spindacafeetage1 = {}
 local transition_cafe_en_cours = false
 
-local function activer(nom, rayon)
+local function fixer_poste(nom, dir)
   local acteur = CH(nom)
   if acteur == nil then return end
-  COMMON.CreateWalkArea(nom,
-    math.max(0, acteur.Position.X - rayon),
-    math.max(0, acteur.Position.Y - rayon), rayon * 2, rayon * 2)
-  AI:EnableCharacterAI(acteur)
+  AI:DisableCharacterAI(acteur)
+  if dir ~= nil then
+    pcall(function() GROUND:EntTurn(acteur, dir) end)
+  end
 end
 
 local function contact(map, nom, x, y, w, h)
@@ -49,6 +49,15 @@ local function tourner_vers(acteur, cible)
   end
 end
 
+local function tourner_dir(acteur, dir)
+  if acteur == nil or dir == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(acteur, dir, 4) end)
+  elseif GROUND.EntTurn ~= nil then
+    pcall(function() GROUND:EntTurn(acteur, dir) end)
+  end
+end
+
 local function aller_a(index_carte)
   if transition_cafe_en_cours then return end
   transition_cafe_en_cours = true
@@ -78,13 +87,19 @@ local function nommer_personnel()
   nommer('NewObject_2', 'Balou')
 end
 
+-- Spinda reste derrière le comptoir à jus gauche ; Bulle et Balou restent
+-- côte à côte derrière le comptoir de recyclage à droite.
+local function placer_comptoirs()
+  fixer_poste('NewObject', Direction.Down)
+  fixer_poste('NewObject_1', Direction.Down)
+  fixer_poste('NewObject_2', Direction.Down)
+end
+
 function spindacafeetage1.Init(map)
   synchroniser_zone()
   nommer_personnel()
   installer_escalier(map)
-  activer('NewObject', 32)
-  activer('NewObject_1', 28)
-  activer('NewObject_2', 28)
+  placer_comptoirs()
 end
 
 function spindacafeetage1.Enter(map)
@@ -100,7 +115,11 @@ function spindacafeetage1.Enter(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1.GameLoad(map) synchroniser_zone(); nommer_personnel(); suivi_interieurs.Activer(map);
+function spindacafeetage1.GameLoad(map)
+  synchroniser_zone()
+  nommer_personnel()
+  placer_comptoirs()
+  suivi_interieurs.Activer(map)
   transition_cafe_en_cours = false
   installer_escalier(map)
   GAME:FadeIn(30)
@@ -120,7 +139,7 @@ end
 
 function spindacafeetage1.NewObject_Action(personnage, activator)
   tourner_vers(personnage, activator or CH('PLAYER'))
-  dire(personnage, 'Happy', 'Cet étage est notre refuge quand l’accueil devient trop animé. On y prépare les réserves et les surprises.')
+  dire(personnage, 'Happy', 'Cet étage est notre refuge quand l’accueil devient trop animé. Ici, on prépare nos futurs jus de baies et les surprises.')
   UI:ResetSpeaker()
   UI:BeginChoiceMenu('Souhaitez-vous que je vous guide ?', {
     'Redescendre à l’accueil', 'Aller à la salle de spectacle', 'Rester à l’étage',
@@ -128,6 +147,7 @@ function spindacafeetage1.NewObject_Action(personnage, activator)
   UI:WaitForChoice()
   local choix = UI:ChoiceResult()
   UI:ResetSpeaker()
+  tourner_dir(personnage, Direction.Down)
   if choix == 1 then aller_a(2)
   elseif choix == 2 then aller_a(4) end
 end
@@ -138,10 +158,13 @@ local function dialogue_atelier(okeoke, qulbutoque, activator)
   tourner_vers(qulbutoque, joueur)
   dire(okeoke, 'Happy', 'Ici, nous rangeons les caisses du recyclage : rubans, graines, éclats et petits objets oubliés.')
   tourner_vers(qulbutoque, okeoke)
+  tourner_vers(okeoke, qulbutoque)
   dire(qulbutoque, 'Normal', 'Chaque équipe laisse quelque chose derrière elle. Notre travail est de lui trouver une seconde vie.')
   tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Encore quelques étagères à monter, et l’atelier pourra recevoir les explorateurs.')
   UI:ResetSpeaker()
+  tourner_dir(okeoke, Direction.Down)
+  tourner_dir(qulbutoque, Direction.Down)
 end
 
 function spindacafeetage1.NewObject_1_Action(personnage, activator)
