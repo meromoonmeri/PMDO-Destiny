@@ -52,7 +52,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.target_sha }}
-          sparse-checkout: docs/REVERIE_051.md
+          sparse-checkout: |
+            docs/REVERIE_051.md
+            tools/build_update_zip.py
           sparse-checkout-cone-mode: false
           lfs: false
           submodules: false
@@ -63,6 +65,41 @@ jobs:
           run-id: ${{ inputs.run_id }}
           github-token: ${{ github.token }}
           path: release-artifact
+      - name: Build incremental update ZIP (from previous release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          new_ver="${TAG#v}"
+          mv release-artifact/PMDO-Destiny-Windows-x64.zip "release-artifact/PMDO-Destiny-Windows-x64-${new_ver}.zip"
+          asset="release-artifact/PMDO-Destiny-Windows-x64-${new_ver}.zip"
+          unzip -tq "$asset" > /dev/null
+          sha256sum "$asset" > "${asset}.sha256"
+
+          prev_info=$(gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=20"             --jq "[.[] | select(.draft == false and .tag_name != \"${TAG}\") | {tag: .tag_name, url: ([.assets[] | select(.name | test(\"^PMDO-Destiny-Windows-x64-.*\\\\.zip$\")) | .browser_download_url][0] // \"\")} | select(.url != \"\")][0] // empty")
+          prev_tag=$(jq -r '.tag // ""' <<<"$prev_info")
+          prev_url=$(jq -r '.url // ""' <<<"$prev_info")
+
+          if [ -n "$prev_tag" ] && [ -n "$prev_url" ]; then
+            prev_ver="${prev_tag#v}"
+            engine_flag=""
+            if ! cmp_json=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${prev_tag}...${TARGET}" 2>/dev/null) || [ "$(jq '.files | length' <<<"$cmp_json")" -ge 300 ] || jq -e '.files[] | select(.filename | startswith("engine/"))' <<<"$cmp_json" >/dev/null; then
+              engine_flag="--include-engine"
+            fi
+            update_asset="release-artifact/PMDO-Destiny-Update-${prev_ver}-to-${new_ver}.zip"
+            if ! python3 tools/build_update_zip.py --new-zip "$asset" --prev-url "$prev_url" --prev-version "$prev_ver" --new-version "$new_ver" --output "$update_asset" --summary-file release-artifact/update-summary.json $engine_flag; then
+              mkdir -p /tmp/prev_release
+              gh release download "$prev_tag" -p "PMDO-Destiny-Windows-x64-*.zip" -D /tmp/prev_release
+              prev_local=$(find /tmp/prev_release -maxdepth 1 -name 'PMDO-Destiny-Windows-x64-*.zip' | head -n1)
+              python3 tools/build_update_zip.py --new-zip "$asset" --prev-zip "$prev_local" --prev-version "$prev_ver" --new-version "$new_ver" --output "$update_asset" --summary-file release-artifact/update-summary.json $engine_flag
+              rm -rf /tmp/prev_release
+            fi
+            unzip -tq "$update_asset" > /dev/null
+            sha256sum "$update_asset" > "${update_asset}.sha256"
+          fi
       - name: Verify and publish release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -72,10 +109,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f release-artifact/PMDO-Destiny-Windows-x64.zip
-          mv release-artifact/PMDO-Destiny-Windows-x64.zip "release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
           asset="release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
-          unzip -tq "$asset" > /dev/null
-          sha256sum "$asset" > "${asset}.sha256"
-          { cat docs/REVERIE_051.md; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
-          gh release create "$TAG" "$asset" "${asset}.sha256" --target "$TARGET" --title "Destiny ${TAG#v} — Réverie et café" --notes-file release-notes.md --prerelease
+          test -f "$asset"
+          test -f "${asset}.sha256"
+          { cat docs/REVERIE_051.md; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 (complète) : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
+          files=("$asset" "${asset}.sha256")
+          if [ -f release-artifact/update-summary.json ]; then
+            update_asset=$(jq -r '.output' release-artifact/update-summary.json)
+            prev_ver=$(jq -r '.prev_version' release-artifact/update-summary.json)
+            update_sha=$(cut -d' ' -f1 "${update_asset}.sha256")
+            printf '\n\nMise à jour seule (%s -> %s) : `%s`\nSHA-256 (mise à jour) : %s\n'               "$prev_ver" "${TAG#v}" "$(basename "$update_asset")" "$update_sha" >> release-notes.md
+            files+=("$update_asset" "${update_asset}.sha256")
+          fi
+          gh release create "$TAG" "${files[@]}" --target "$TARGET" --title "Destiny ${TAG#v} — Réverie et café" --notes-file release-notes.md --prerelease

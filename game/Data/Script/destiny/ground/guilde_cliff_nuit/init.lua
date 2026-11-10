@@ -28,6 +28,7 @@ local function installer_retour_ville(map)
 end
 
 local function synchroniser_ambiance(avec_fondu)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CarteGuilde()
   if attendu == CARTE then return false end
   if sortie_en_cours then return true end
@@ -65,6 +66,7 @@ local function restaurer_passage()
 end
 
 function guilde_cliff_nuit.Init(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   sortie_en_cours = false
   if map ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
@@ -87,6 +89,7 @@ function guilde_cliff_nuit.Enter(map)
 end
 
 function guilde_cliff_nuit.GameLoad(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   sortie_en_cours = false
   if map ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp

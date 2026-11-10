@@ -26,9 +26,27 @@ local function installer_porte(map)
   map:AddObject(porte)
 end
 
+local function synchroniser_zone()
+  pcall(function()
+    if _ZONE ~= nil and _ZONE.CurrentZone ~= nil and _ZONE.CurrentZone.SyncGroundMaps ~= nil then
+      _ZONE.CurrentZone:SyncGroundMaps()
+    end
+  end)
+end
+
+local function tourner_vers(acteur, cible)
+  if acteur == nil or cible == nil or acteur == cible then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(acteur, cible, 4) end)
+  elseif GROUND.CharTurnToChar ~= nil then
+    pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  end
+end
+
 local function aller_a(index_carte)
   if transition_cafe_en_cours then return end
   transition_cafe_en_cours = true
+  synchroniser_zone()
   SV.Destiny = SV.Destiny or {}
   if index_carte == 3 then SV.Destiny.RetourCafeEtage = 'spectacle' end
   GAME:FadeOut(false, 20)
@@ -62,6 +80,7 @@ local function nommer_personnel()
 end
 
 function spindacafeetage1salle2.Init(map)
+  synchroniser_zone()
   nommer_personnel()
   installer_porte(map)
   for i = 0, 10 do
@@ -83,7 +102,7 @@ function spindacafeetage1salle2.Enter(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1salle2.GameLoad(map) nommer_personnel(); suivi_interieurs.Activer(map);
+function spindacafeetage1salle2.GameLoad(map) synchroniser_zone(); nommer_personnel(); suivi_interieurs.Activer(map);
   transition_cafe_en_cours = false
   installer_porte(map)
   GAME:FadeIn(30)
@@ -98,8 +117,13 @@ function spindacafeetage1salle2.Update(map, time)
 end
 
 function spindacafeetage1salle2.NewObject_Action(personnage, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(personnage, joueur)
   dire(personnage, 'Happy', 'Je répète mon numéro de mime. Le mur invisible est juste là… ne le traversez pas trop vite.')
-  dire(CH('NewObject_1'), 'Happy', 'Et quand je chanterai, toute la salle devra rester éveillée jusqu’au dernier refrain !')
+  local asa = CH('NewObject_1')
+  tourner_vers(asa, joueur)
+  dire(asa, 'Happy', 'Et quand je chanterai, toute la salle devra rester éveillée jusqu’au dernier refrain !')
+  tourner_vers(personnage, joueur)
   UI:ResetSpeaker()
   UI:BeginChoiceMenu('Le rideau invisible peut aussi vous montrer la sortie…', {
     'Retourner à l’accueil', 'Monter à l’étage', 'Rester dans la salle',
@@ -112,8 +136,12 @@ function spindacafeetage1salle2.NewObject_Action(personnage, activator)
 end
 
 function spindacafeetage1salle2.NewObject_1_Action(personnage, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(personnage, joueur)
   dire(personnage, 'Happy', 'Une chanson douce peut reposer une équipe entière. Enfin… si personne ne s’endort avant la fin.')
-  dire(CH('NewObject'), 'Normal', 'Je tiendrai le rideau. Invisible, bien entendu.')
+  local pipo = CH('NewObject')
+  tourner_vers(pipo, joueur)
+  dire(pipo, 'Normal', 'Je tiendrai le rideau. Invisible, bien entendu.')
   UI:ResetSpeaker()
 end
 
@@ -131,6 +159,7 @@ local dialogues = {
 for nom, texte in pairs(dialogues) do
   local replique = texte
   spindacafeetage1salle2[nom .. '_Action'] = function(personnage, activator)
+    tourner_vers(personnage, activator or CH('PLAYER'))
     dire(personnage, 'Normal', replique)
     UI:ResetSpeaker()
   end

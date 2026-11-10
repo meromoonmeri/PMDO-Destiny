@@ -145,9 +145,21 @@ function meteo.Description()
   return descriptions[meteo.Temps()]
 end
 
+function meteo.SynchroniserZone()
+  local ok, err = pcall(function()
+    if _ZONE ~= nil and _ZONE.CurrentZone ~= nil and _ZONE.CurrentZone.SyncGroundMaps ~= nil then
+      _ZONE.CurrentZone:SyncGroundMaps()
+    end
+  end)
+  if not ok then
+    print('[Destiny] Synchronisation zone ignorée : '..tostring(err))
+  end
+end
+
 -- Ne touche ni aux intérieurs, ni aux donjons, ni aux cartes de cinématique
 -- fixes. Les autres effets de carte, notamment clouds_overhead, sont préservés.
 function meteo.Appliquer(map)
+  meteo.SynchroniserZone()
   if map == nil or not exterieurs[map.AssetName] then return false end
   local temps = meteo.Temps()
   local moment = meteo.Moment()

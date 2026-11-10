@@ -548,28 +548,76 @@ function reveil_nuit.PlotScripting()
       end
       local points = points_scene()
       GAME:CutsceneMode(true)
-      GROUND:TeleportTo(hero, points.vue_x - 20, points.vue_y, Direction.Up)
-      GROUND:TeleportTo(partner, points.vue_x, points.vue_y, Direction.Up)
-      if points.zrv then
-        -- Même courte reprise, même respiration : ouvrir sur la montagne,
-        -- puis descendre vers le duo avant les deux répliques.
-        GAME:MoveCamera(points.camera_panorama_x, points.camera_panorama_y, 1, false)
-        GAME:FadeIn(30)
-        GAME:MoveCamera(points.camera_x, points.camera_y, 90, false)
-      else
-        GAME:MoveCamera(points.camera_x, points.camera_y, 1, false)
-        GAME:FadeIn(30)
-      end
-      -- Après l’ouverture sur la montagne, le duo se parle face à face.
-      cinematique.RegarderGroupe({
-        {partner, hero, 0, 4},
-        {hero, partner, 5, 4},
-      })
-      cinematique.Respirer(10)
+      UI:ResetSpeaker()
       if SV.Destiny.LostWoodCause == 'abandon' then
-        cinematique.Dire(partner, 'Worried', "Nous avons rebroussé chemin à temps.\nOn reprend notre souffle… puis on décidera ensemble de la suite.", 'droite')
+        -- Abandon volontaire : le duo revient debout depuis le sentier sud
+        -- et reprend son souffle après avoir battu en retraite.
+        GROUND:TeleportTo(hero, points.vue_x - 20, points.vue_y + 36, Direction.Up)
+        GROUND:TeleportTo(partner, points.vue_x, points.vue_y + 36, Direction.Up)
+        if points.zrv then
+          GAME:MoveCamera(points.camera_x, points.camera_approche_y, 1, false)
+        else
+          GAME:MoveCamera(points.camera_x, points.camera_y, 1, false)
+        end
+        GAME:FadeIn(30)
+        local retour_heros = TASK:BranchCoroutine(function()
+          GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
+          GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
+        end)
+        local retour_partenaire = TASK:BranchCoroutine(function()
+          GAME:WaitFrames(4)
+          GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
+          GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
+        end)
+        local retour_cam = nil
+        if points.zrv then
+          retour_cam = lancer_camera(points.camera_x, points.camera_y, 48)
+        end
+        TASK:JoinCoroutines({retour_heros, retour_partenaire})
+        attendre_camera(retour_cam)
+        partenaire_geste(partner, 'souffle', false)
+        cinematique.RegarderGroupe({
+          {partner, hero, 0, 4},
+          {hero, partner, 5, 4},
+        })
+        cinematique.Respirer(10)
+        cinematique.Dire(partner, 'Worried', "Ouf… on a réussi à ressortir des [color=#69D98C]Bois Perdus[color] avant d’être submergés.", 'droite')
+        cinematique.Dire(partner, 'Normal', "On a bien fait de battre en retraite ensemble.\nOn reprend notre souffle… puis on décidera de la suite.", 'droite')
       else
-        cinematique.Dire(partner, 'Worried', "Le sentier nous a repoussés cette fois.\nOn reprend notre souffle… puis on repartira ensemble, quand tu seras prêt.", 'droite')
+        -- K.O. en donjon : les deux partenaires reprennent connaissance au point
+        -- de réveil ; le partenaire se relève d’abord et réveille le héros.
+        GROUND:TeleportTo(hero, points.vue_x - 20, points.vue_y, Direction.Right)
+        GROUND:TeleportTo(partner, points.vue_x + 4, points.vue_y, Direction.Left)
+        GROUND:CharSetAnim(hero, 'Laying', true)
+        GROUND:CharSetAnim(partner, 'Laying', true)
+        if points.zrv then
+          GAME:MoveCamera(points.camera_panorama_x, points.camera_panorama_y, 1, false)
+          GAME:FadeIn(30)
+          GAME:MoveCamera(points.camera_x, points.camera_y, 60, false)
+        else
+          GAME:MoveCamera(points.camera_x, points.camera_y, 1, false)
+          GAME:FadeIn(30)
+        end
+        if not jouer_animation(partner, 'Wake', 42) then
+          GROUND:CharEndAnim(partner)
+          GAME:WaitFrames(20)
+        end
+        GROUND:CharSetEmote(partner, 'sweating', 1)
+        GAME:WaitFrames(18)
+        SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
+        GROUND:CharSetEmote(partner, 'exclaim', 1)
+        GAME:WaitFrames(16)
+        GROUND:MoveToPosition(partner, points.vue_x, points.vue_y, false, 1)
+        GROUND:CharAnimateTurnTo(partner, Direction.Left, 4)
+        cinematique.Dire(partner, 'Worried', "Hé ! Tu m’entends… ? Réveille-toi !", 'droite')
+        if not jouer_animation(hero, 'Wake', 42) then
+          GROUND:CharEndAnim(hero)
+          GAME:WaitFrames(20)
+        end
+        GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+        cinematique.Respirer(12)
+        cinematique.Dire(partner, 'Worried', "Ouf… tu ouvres enfin les yeux !", 'droite')
+        cinematique.Dire(partner, 'Worried', "On a tous les deux perdu connaissance dans les [color=#69D98C]Bois Perdus[color] et on s’est retrouvés ici…\nOn reprend notre souffle, puis on repartira ensemble quand tu seras prêt.", 'droite')
       end
       cinematique.Dire(partner, 'Happy', "Nous savons maintenant comment nous aider. Les [color=#69D98C]Bois Perdus[color] ne nous sépareront pas.", 'droite')
       cinematique.Dire(partner, 'Happy', "Rapproche-toi de l'entrée de la forêt quand tu voudras décider de notre départ.", 'droite')
@@ -845,15 +893,15 @@ function reveil_nuit.CinematiqueRetrouvailles()
   dire("Normal", "Et me prouver que j’étais capable de venir jusqu’ici tout seul.")
   geste('ecoute')
 
-  -- Déplacement lent vers le point de vue. Le héros se décale d'abord vers
+  -- Déplacement vers le point de vue. Le héros se décale d'abord vers
   -- l'ouest : sur la ZRV2, le partenaire ne marche ainsi jamais sur sa case
-  -- avant de prendre la sienne. Sur la prairie ZRV2, la caméra bascule en
-  -- même temps vers le panorama : lune, sommet et mer dominent le cadre
-  -- pendant que le duo se place tout en bas, face au nord.
+  -- avant de prendre la sienne. La caméra rejoint directement le cadrage
+  -- du reflet (camera_panorama_y + 40, soit Y=192) pendant leur courte marche
+  -- afin d'éviter toute attente immobile des personnages.
   local travelling_panorama = nil
   if points.zrv then
     travelling_panorama = lancer_camera(points.camera_panorama_x,
-      points.camera_panorama_y, 180)
+      points.camera_panorama_y + 40, 42)
   end
   local marche_vue_heros = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(hero, points.vue_x - 20, points.vue_y, false, 1)
@@ -868,15 +916,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   if points.zrv then
     attendre_camera(travelling_panorama)
   else
-    GAME:MoveCamera(points.camera_x, points.camera_y, 45, false)
-  end
-  -- Tous deux regardent déjà la montagne pendant la fin du travelling.
-  cinematique.Respirer(15)
-  -- Le panorama pur placerait les pieds du duo à l'ordonnée écran 208 :
-  -- avant les pensées, descendre le centre de 40 px (pieds à 168) tout en
-  -- gardant la montagne et la mer dans le haut du cadre.
-  if points.zrv then
-    GAME:MoveCamera(points.camera_panorama_x, points.camera_panorama_y + 40, 45, false)
+    GAME:MoveCamera(points.camera_x, points.camera_y, 30, false)
   end
 
   -- Le héros aperçoit son reflet dans l’eau : il réalise en pensée qu’il
@@ -1023,26 +1063,40 @@ function reveil_nuit.CinematiqueRetrouvailles()
   dire("Happy", "Allez, en route pour Réverie Town !")
   dire("Normal", "Et un jour, quand on sera devenus de vrais explorateurs… on ira voir ce qu’il y a derrière cette montagne. Promis ?")
 
-  -- Dernier regard vers la montagne, puis seconde traversée à deux. La
-  -- caméra remonte une dernière fois vers le panorama et y reste pendant
-  -- le fondu de départ : la nuit, la lune et la crête ferment la scène.
+  -- Dernier regard vers la montagne, puis le duo se tourne vers le sud
+  -- et descend ensemble le sentier vers la sortie de la prairie pendant
+  -- que la caméra accompagne son départ vers les Bois Perdus.
   local travelling_final = nil
   if points.zrv then
     travelling_final = lancer_camera(points.camera_panorama_x - 8,
-      points.camera_panorama_y, 180)
+      points.camera_panorama_y + 24, 48)
   end
   cinematique.TournerGroupe({
     {partner, Direction.Up, 0, 4},
     {hero, Direction.Up, 5, 4},
   })
-  GAME:WaitFrames(60)
+  GAME:WaitFrames(35)
   attendre_camera(travelling_final)
-  if points.zrv then GAME:WaitFrames(45) end
   cinematique.TournerGroupe({
     {partner, Direction.Down, 0, 4},
     {hero, Direction.Down, 5, 4},
   })
-  cinematique.Respirer(30)
+  GAME:WaitFrames(10)
+  local cible_sortie_y = points.zrv and (points.approche_y + 32) or (points.vue_y + 48)
+  local travelling_sortie = nil
+  if points.zrv then
+    travelling_sortie = lancer_camera(points.camera_entree_x,
+      points.camera_approche_y + 48, 128)
+  end
+  local marche_sortie_heros = TASK:BranchCoroutine(function()
+    GROUND:MoveToPosition(hero, points.vue_x - 20, cible_sortie_y, false, 1)
+  end)
+  local marche_sortie_partenaire = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(4)
+    GROUND:MoveToPosition(partner, points.vue_x, cible_sortie_y, false, 1)
+  end)
+  TASK:JoinCoroutines({marche_sortie_heros, marche_sortie_partenaire})
+  attendre_camera(travelling_sortie)
 
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.RetrouvaillesFaites = true

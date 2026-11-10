@@ -82,6 +82,7 @@ local function synchroniser_ambiance(avec_fondu)
   if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
     return false
   end
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CarteCliff()
   SV.Destiny.FalaiseAmbiance = attendu
   if attendu == CARTE_CLIFF then return false end
@@ -177,6 +178,7 @@ function cliffdaytest_nuit.GameSave(map)
 end
 
 function cliffdaytest_nuit.GameLoad(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   sortie_en_cours = false
   if map ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
@@ -290,29 +292,59 @@ function cliffdaytest_nuit.DemanderRetourAller()
   invite_retour_aller_en_cours = false
 end
 
+local function jouer_animation_sure(personnage, nom, duree_secours)
+  if personnage == nil then return false end
+  local ok, duree = pcall(function()
+    local gestionnaire = RogueEssence.Content.GraphicsManager
+    local index = gestionnaire.GetAnimIndex(nom)
+    if index == nil or index < 0 then return 0 end
+    local feuille = gestionnaire.GetChara(personnage.CurrentForm:ToCharID())
+    if feuille:GetReferencedAnimIndex(index) ~= index then return 0 end
+    return feuille:GetTotalTime(index, personnage.Direction)
+  end)
+  local temps = ok and tonumber(duree) or duree_secours
+  if temps == nil or temps <= 0 then return false end
+  GROUND:CharSetAnim(personnage, nom, false)
+  GAME:WaitFrames(math.max(1, math.floor(temps)))
+  GROUND:CharEndAnim(personnage)
+  return true
+end
+
 function cliffdaytest_nuit.SceneEchecPartenaire()
   -- Le seuil oriental est le marqueur de sortie du chemin existant ; aucune
   -- carte n'est recréée. Le héros reste dans la réserve, donc hors du plan.
   local partenaire, entree = CH('PLAYER'), MRKR('Dazzling_Exit_East')
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
-  GROUND:TeleportTo(partenaire, entree.Position.X - 40, entree.Position.Y, Direction.Left)
-  GROUND:CharSetAnim(partenaire, 'Laying', true)
-  GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 1, false)
-  GAME:FadeIn(30)
-  GAME:WaitFrames(30)
-  if SV.Destiny.LostWoodCause == 'ko' then
-    cinematique.Dire(partenaire, 'Worried', 'Aïe… Je suis devant l’entrée des [color=#69D98C]Bois Perdus[color]…', 'standard')
-    cinematique.Dire(partenaire, 'Worried', 'J’ai perdu connaissance dans la forêt. Il faut que je reprenne mon souffle.', 'standard')
+  if SV.Destiny.LostWoodCause == 'abandon' then
+    -- Abandon volontaire : le partenaire ressort debout du sentier oriental et
+    -- reprend son souffle avant de décider de la suite.
+    GROUND:TeleportTo(partenaire, entree.Position.X - 18, entree.Position.Y, Direction.Left)
+    GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 1, false)
+    GAME:FadeIn(30)
+    GROUND:MoveToPosition(partenaire, entree.Position.X - 40, entree.Position.Y, false, 1)
+    if not jouer_animation_sure(partenaire, 'DeepBreath', 45) then
+      GAME:WaitFrames(20)
+    end
+    cinematique.Dire(partenaire, 'Worried', 'Ouf… me voilà ressorti des [color=#69D98C]Bois Perdus[color] à temps.', 'standard')
+    cinematique.Dire(partenaire, 'Normal', 'J’ai bien fait de rebrousser chemin avant de me laisser dépasser. Renoncer pour se protéger, ce n’est pas la fin de l’aventure.', 'standard')
   else
-    cinematique.Dire(partenaire, 'Worried', 'Me voilà de retour devant les [color=#69D98C]Bois Perdus[color]. J’ai bien fait de rebrousser chemin.', 'standard')
-    cinematique.Dire(partenaire, 'Worried', 'Renoncer pour se protéger, ce n’est pas la fin de l’aventure.', 'standard')
+    -- K.O. en donjon : le partenaire reprend connaissance allongé devant
+    -- l’entrée et se relève péniblement.
+    GROUND:TeleportTo(partenaire, entree.Position.X - 40, entree.Position.Y, Direction.Left)
+    GROUND:CharSetAnim(partenaire, 'Laying', true)
+    GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 1, false)
+    GAME:FadeIn(30)
+    GAME:WaitFrames(25)
+    GROUND:CharSetEmote(partenaire, 'sweating', 1)
+    cinematique.Dire(partenaire, 'Worried', 'Aïe… ma tête… Je suis revenu devant l’entrée des [color=#69D98C]Bois Perdus[color]…', 'standard')
+    cinematique.Dire(partenaire, 'Worried', 'J’ai perdu connaissance dans la forêt. Il faut que je reprenne des forces.', 'standard')
+    cinematique.Respirer(20)
+    GROUND:CharSetAnim(partenaire, 'Wake', false)
+    GAME:WaitFrames(35)
+    -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.
+    GROUND:CharEndAnim(partenaire)
   end
-  cinematique.Respirer(20)
-  GROUND:CharSetAnim(partenaire, 'Wake', false)
-  GAME:WaitFrames(35)
-  -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.
-  GROUND:CharEndAnim(partenaire)
   cinematique.Dire(partenaire, 'Normal', 'Je peux me reposer ici, puis essayer encore quand je serai prêt.', 'standard')
   -- Il regarde dans la direction qu’il nomme : l’entrée, à l’est.
   GROUND:CharAnimateTurnTo(partenaire, Direction.Right, 4)

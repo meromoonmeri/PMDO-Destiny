@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -33,6 +33,8 @@ namespace RogueEssence.Dungeon
         public static void LoadFromState(ZoneManager state)
         {
             instance = state;
+            if (instance != null && instance.CurrentZone != null)
+                instance.CurrentZone.SyncGroundMaps();
             instance.LoadLua();
         }
         public static void LoadToState(BinaryReader reader, GameState state)

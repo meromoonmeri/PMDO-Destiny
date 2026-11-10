@@ -29,8 +29,9 @@ local recrutement = require 'destiny.recrutement'
 local personality_test = {}
 
 -- Entrées FrameInput.InputType de RogueEssence (PMDC 0.8.12) :
--- 0 = Confirm, 30 = RightMouse. IsInputDown lit l'état de la frame courante.
+-- 0 = Confirm, 29 = LeftMouse, 30 = RightMouse. IsInputDown lit l'état de la frame courante.
 local INPUT_CONFIRM = 0
+local INPUT_LEFT_MOUSE = 29
 local INPUT_RIGHT_MOUSE = 30
 local CHARGE_MAX = 150 -- secours sans VFX : environ 2,5 s à 60 images/s
 
@@ -129,9 +130,10 @@ local function entree_maintenue(id)
 end
 
 local function geste_etoile_maintenu()
-  -- Le geste demandé au joueur est le maintien du clic droit. Confirm est
-  -- seulement un secours discret pour les configurations sans souris.
-  return entree_maintenue(INPUT_RIGHT_MOUSE) or entree_maintenue(INPUT_CONFIRM)
+  -- Souris (clic gauche ou droit) ou Confirm pour les configurations clavier.
+  return entree_maintenue(INPUT_RIGHT_MOUSE)
+    or entree_maintenue(INPUT_LEFT_MOUSE)
+    or entree_maintenue(INPUT_CONFIRM)
 end
 
 local function borner(valeur, minimum, maximum)
@@ -142,7 +144,8 @@ end
 
 -- Position de la souris dans l'écran interne 320×240.
 -- MouseLoc est exprimé en pixels de fenêtre : on retire le zoom de PMDO.
--- En cas d'échec, on renvoie le centre historique de l'étoile.
+-- Tant que la souris est à (0, 0) ou hors cadre, on renvoie le centre
+-- de l'étoile avec souris_ok = false pour éviter de tirer vers le coin.
 local function souris_ecran()
   local ok, x, y = pcall(function()
     local loc = _GAME.MetaInputManager.MouseLoc
@@ -150,7 +153,8 @@ local function souris_ecran()
     if type(zoom) ~= "number" or zoom < 1 then zoom = 1 end
     return loc.X / zoom, loc.Y / zoom
   end)
-  if ok and type(x) == "number" and type(y) == "number" then
+  if ok and type(x) == "number" and type(y) == "number"
+     and x > 0 and y > 0 and x < 320 and y < 240 then
     return borner(x, 8, 312), borner(y, 8, 232), true
   end
   return 160, 104, false
@@ -213,21 +217,30 @@ end
 -- sur le point de la souris ne soit pas coupé par la zone du menu.
 local function former_etoile_fluide(starter, options)
   options = options or {}
-  -- Phase « incolore » : l'étoile est déjà formée avec les assets « Normal »
-  -- (blancs, sans couleur) ; un clic du joueur la referme et déclenche ensuite
-  -- l'animation de couleur (phase « auto », au point cliqué).
+  -- Phase « incolore » : l'étoile sans couleur (assets « Normal ») apparaît
+  -- d'abord au centre du rêve. Chaque clic ou maintien du joueur envoie des
+  -- ondes et éclats en répercussion avant de déclencher la couleur (phase « auto »).
   local type_slug = starter.etoile_type or 'Normal'
   if options.incolore then type_slug = 'Normal' end
   local etat = {
-    progression = options.incolore and 1 or 0,
+    progression = options.incolore and (FLUIDE_CONVERGENCE + 0.01) or 0,
+    aura_resonance = 0,
+    repercussion = 0,
+    clic_ondes_frame = -1,
+    maintien_ondes_cd = 0,
+    climax_frames = 0,
     temps = 0,
     frames = 0,
     final_frames = 0,
     ancre_x = 160,
-    ancre_y = 104,
+    ancre_y = 102,
+    clic_x = 160,
+    clic_y = 102,
     ancre_prete = false,
     clic_droit_precedent = false,
+    clic_gauche_precedent = false,
     clic_arme = false,
+    clic_gauche_arme = false,
     confirmer_precedent = false,
     confirmer_arme = false,
     phase_incolore = options.incolore == true,
@@ -240,12 +253,16 @@ local function former_etoile_fluide(starter, options)
     erreur = false,
     pose_halo = -1,
     pose_etoile = -1,
+    pose_clic_ondes = -1,
     ondes_anim = nil,
     ondes_element = nil,
+    clic_ondes_anim = nil,
+    clic_ondes_element = nil,
     halo_anim = nil,
     halo_element = nil,
     etoile_anim = nil,
     etoile_element = nil,
+    indice_element = nil,
   }
 
   -- Particules déterministes : chaque type garde la même constellation
@@ -288,6 +305,14 @@ local function former_etoile_fluide(starter, options)
   local function placer_elements()
     if etat.ondes_element == nil or etat.halo_element == nil or etat.etoile_element == nil then return end
     local cx, cy = etat.ancre_x, etat.ancre_y
+    if etat.phase_incolore then
+      -- Flottement doux façon ruban d'aura + léger sursaut à chaque clic.
+      cy = 102 + math.sin(etat.temps * 2.4) * 2.5
+      if etat.repercussion > 0 then
+        cy = cy - 2.2 * math.sin(etat.repercussion * math.pi)
+      end
+    end
+
     etat.ondes_element.Loc = RogueElements.Loc(
       math.floor(cx - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5),
       math.floor(cy - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5))
@@ -298,10 +323,30 @@ local function former_etoile_fluide(starter, options)
       math.floor(cx - FLUIDE_ETOILE_L / 2 + 16 + 0.5),
       math.floor(cy - FLUIDE_ETOILE_H / 2 + 16 + 0.5))
 
-    -- Halo : une pose par frame de progression, avec une légère pulsation
-    -- une fois l'étoile complètement formée.
+    if etat.clic_ondes_element ~= nil and etat.clic_ondes_anim ~= nil then
+      if etat.clic_ondes_frame >= 0 and etat.clic_ondes_frame < FLUIDE_ONDES_POSES then
+        local pose_clic = math.floor(etat.clic_ondes_frame)
+        if pose_clic ~= etat.pose_clic_ondes then
+          etat.clic_ondes_anim.StartFrame = pose_clic
+          etat.clic_ondes_anim.EndFrame = pose_clic
+          etat.pose_clic_ondes = pose_clic
+        end
+        etat.clic_ondes_element.Loc = RogueElements.Loc(
+          math.floor(etat.clic_x - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5),
+          math.floor(etat.clic_y - FLUIDE_ONDES_TAILLE / 2 + 16 + 0.5))
+      else
+        etat.clic_ondes_element.Loc = RogueElements.Loc(-500, -500)
+      end
+    end
+
+    -- Halo : une pose par frame de progression, avec un sursaut lumineux à
+    -- chaque répercussion de clic pendant la phase incolore.
     local halo_t
-    if etat.final_frames > 0 then
+    if etat.phase_incolore then
+      halo_t = 0.22 + 0.34 * etat.aura_resonance + 0.44 * etat.repercussion
+        + 0.05 * math.sin(etat.temps * 3.0)
+      halo_t = borner(halo_t, 0.08, 1.0)
+    elseif etat.final_frames > 0 then
       halo_t = 0.82 + 0.12 * math.sin(etat.final_frames * 0.16)
     else
       halo_t = 0.08 + 0.92 * etat.progression
@@ -318,7 +363,12 @@ local function former_etoile_fluide(starter, options)
     -- Les poses 1 à 56 la matérialisent ; les poses 57 à 72 forment ensuite
     -- une courte boucle de scintillement pendant le maintien final.
     local pose_etoile = 0
-    if etat.final_frames > 0 then
+    if etat.phase_incolore and etat.progression >= 1 then
+      local poses_finales = FLUIDE_ETOILE_POSES - FLUIDE_ETOILE_MATERISATION_FIN - 1
+      local pas = etat.repercussion > 0 and 2 or 4
+      pose_etoile = FLUIDE_ETOILE_MATERISATION_FIN + 1 +
+        (math.floor(etat.frames / pas) % poses_finales)
+    elseif etat.final_frames > 0 then
       local poses_finales = FLUIDE_ETOILE_POSES - FLUIDE_ETOILE_MATERISATION_FIN - 1
       pose_etoile = FLUIDE_ETOILE_MATERISATION_FIN + 1 +
         (math.floor(etat.final_frames / 3) % poses_finales)
@@ -334,31 +384,56 @@ local function former_etoile_fluide(starter, options)
 
     for _, p in ipairs(particules) do
       if p.element ~= nil then
-        local locale = 0
-        if etat.progression > p.depart then
-          locale = math.min(1, (etat.progression - p.depart) / (p.arrivee - p.depart))
-        end
-        -- Smoothstep : les particules restent réparties au début, puis
-        -- accélèrent et ralentissent juste avant le point de convergence.
-        local ease = locale * locale * (3 - 2 * locale)
-        local rayon = p.rayon * (1 - ease)
-        local angle = p.angle + p.rotation * ease + etat.temps * p.orbite * (1 - ease)
+        local px, py
+        if etat.phase_incolore then
+          -- Orbite calme autour de l'étoile vierge + onde de répercussion
+          -- radiale qui projette les éclats à chaque clic du joueur.
+          local bt = math.min(1, etat.frames / 28)
+          local onde_choc = etat.repercussion > 0 and (28 * math.sin(etat.repercussion * math.pi)) or 0
+          local resserrement = etat.climax_frames > 0 and math.max(0.15, 1 - (etat.climax_frames / 18) * 0.85) or 1
+          local rayon = (p.anneau * (0.45 + 0.55 * bt) + onde_choc) * resserrement
+          local angle = p.angle + p.rotation + etat.temps * (0.45 + p.orbite + etat.aura_resonance * 0.8)
+          local centre_x = cx + (etat.clic_x - cx) * etat.repercussion * 0.25
+          local centre_y = cy + (etat.clic_y - cy) * etat.repercussion * 0.25
+          px = centre_x + math.cos(angle) * rayon
+          py = centre_y + math.sin(angle) * rayon * 0.78
+        else
+          local locale = 0
+          if etat.progression > p.depart then
+            locale = math.min(1, (etat.progression - p.depart) / (p.arrivee - p.depart))
+          end
+          -- Smoothstep : les particules restent réparties au début, puis
+          -- accélèrent et ralentissent juste avant le point de convergence.
+          local ease = locale * locale * (3 - 2 * locale)
+          local rayon = p.rayon * (1 - ease)
+          local angle = p.angle + p.rotation * ease + etat.temps * p.orbite * (1 - ease)
 
-        if etat.final_frames > 0 then
-          -- Après la formation, les étincelles ressortent en douceur et
-          -- tournent en anneau autour de l'étoile au lieu de disparaître.
-          local ft = math.min(1, etat.final_frames / 50)
-          local fe = 1 - (1 - ft) ^ 3
-          rayon = p.anneau * fe
-          angle = p.angle + p.rotation + etat.final_frames * 0.012 * (0.6 + p.orbite)
-        end
+          if etat.final_frames > 0 then
+            -- Après la formation, les étincelles ressortent en douceur et
+            -- tournent en anneau autour de l'étoile au lieu de disparaître.
+            local ft = math.min(1, etat.final_frames / 50)
+            local fe = 1 - (1 - ft) ^ 3
+            rayon = p.anneau * fe
+            angle = p.angle + p.rotation + etat.final_frames * 0.012 * (0.6 + p.orbite)
+          end
 
-        local px = cx + math.cos(angle) * rayon
-        local py = cy + math.sin(angle) * rayon * 0.76
+          px = cx + math.cos(angle) * rayon
+          py = cy + math.sin(angle) * rayon * 0.76
+        end
         p.element.Loc = RogueElements.Loc(
           math.floor(px - FLUIDE_PARTICULE_TAILLE / 2 + 16 + 0.5),
           math.floor(py - FLUIDE_PARTICULE_TAILLE / 2 + 16 + 0.5))
       end
+    end
+  end
+
+  local function declencher_repercussion(rx, ry, sonore)
+    etat.clic_x = borner(rx or 160, 24, 296)
+    etat.clic_y = borner(ry or 102, 24, 200)
+    etat.repercussion = 1.0
+    etat.clic_ondes_frame = 0
+    if sonore then
+      pcall(function() SOUND:PlaySE('Menu/Skip') end)
     end
   end
 
@@ -370,36 +445,108 @@ local function former_etoile_fluide(starter, options)
 
     local mx, my, souris_ok = souris_ecran()
     local clic_droit = entree_maintenue(INPUT_RIGHT_MOUSE)
+    local clic_gauche = entree_maintenue(INPUT_LEFT_MOUSE)
     local confirmer_brut = entree_maintenue(INPUT_CONFIRM)
-    -- Confirm ne sert qu'en secours : on exige de le voir relâché une fois
-    -- après la voice-over pour ne pas compter la pression qui l'a fermée.
+    -- Exiger un relâchement préalable après la voice-over précédente pour
+    -- ne pas consommer le clic/Confirm qui vient de fermer le texte.
     if not confirmer_brut then etat.confirmer_arme = true end
     if not clic_droit then etat.clic_arme = true end
+    if not clic_gauche then etat.clic_gauche_arme = true end
     local confirmer = confirmer_brut and etat.confirmer_arme
+    local droit_actif = clic_droit and etat.clic_arme
+    local gauche_actif = clic_gauche and etat.clic_gauche_arme
 
-    if clic_droit or confirmer then etat.entree_vue = true end
+    if droit_actif or gauche_actif or confirmer then etat.entree_vue = true end
     if etat.frames >= 2700 and not etat.entree_vue then etat.mode_secours = true end
-    local maintenu = clic_droit or confirmer or etat.mode_secours or etat.auto_couleur
+    local maintenu = droit_actif or gauche_actif or confirmer or etat.mode_secours or etat.auto_couleur
 
-    -- Phase incolore : l'étoile blanche attend le clic du joueur (appui franc,
-    -- entrées préalablement relâchées) pour laisser jaillir sa couleur.
+    -- Phase incolore : l'étoile vierge se matérialise d'abord au centre, puis
+    -- chaque clic (gauche/droit/Confirm) produit une onde de répercussion et
+    -- charge l'aura avant de libérer la couleur du starter.
     if etat.phase_incolore then
-      local appui_clic = clic_droit and not etat.clic_droit_precedent and etat.clic_arme
-      local appui_conf = confirmer and not etat.confirmer_precedent
-      if appui_clic or appui_conf or etat.mode_secours then
-        etat.termine = true
+      if etat.progression < 1 then
+        etat.progression = math.min(1, etat.progression + ((1 - FLUIDE_CONVERGENCE) / 26))
+      end
+
+      if etat.repercussion > 0 then
+        etat.repercussion = math.max(0, etat.repercussion - (1 / 28))
+      end
+      if etat.clic_ondes_frame >= 0 then
+        etat.clic_ondes_frame = etat.clic_ondes_frame + 1.35
+        if etat.clic_ondes_frame >= FLUIDE_ONDES_POSES then
+          etat.clic_ondes_frame = -1
+        end
+      end
+
+      if etat.climax_frames > 0 then
+        etat.climax_frames = etat.climax_frames + 1
+        if etat.climax_frames >= 18 then
+          etat.ancre_x, etat.ancre_y = etat.clic_x, etat.clic_y
+          etat.termine = true
+          placer_elements()
+          fermer()
+          return
+        end
         placer_elements()
-        fermer()
         return
       end
+
+      local appui_droit = clic_droit and not etat.clic_droit_precedent and etat.clic_arme
+      local appui_gauche = clic_gauche and not etat.clic_gauche_precedent and etat.clic_gauche_arme
+      local appui_conf = confirmer and not etat.confirmer_precedent
+      etat.clic_droit_precedent = clic_droit
+      etat.clic_gauche_precedent = clic_gauche
+      etat.confirmer_precedent = confirmer
+
+      local rx, ry = 160, 102
+      if souris_ok and (droit_actif or gauche_actif) then
+        rx, ry = mx, my
+      end
+
+      if appui_droit or appui_gauche or appui_conf then
+        etat.aura_resonance = math.min(1, etat.aura_resonance + 0.34)
+        declencher_repercussion(rx, ry, etat.aura_resonance < 1)
+        etat.maintien_ondes_cd = 22
+      elseif droit_actif or gauche_actif or confirmer then
+        etat.aura_resonance = math.min(1, etat.aura_resonance + (1 / 120))
+        etat.maintien_ondes_cd = etat.maintien_ondes_cd - 1
+        if etat.maintien_ondes_cd <= 0 then
+          declencher_repercussion(rx, ry, etat.aura_resonance < 1)
+          etat.maintien_ondes_cd = 22
+        end
+      elseif etat.mode_secours then
+        etat.aura_resonance = math.min(1, etat.aura_resonance + (1 / 90))
+        if etat.frames % 28 == 0 then
+          declencher_repercussion(160, 102, false)
+        end
+      else
+        etat.aura_resonance = math.max(0, etat.aura_resonance - (0.08 / 120))
+      end
+
+      if etat.aura_resonance >= 1 then
+        etat.climax_frames = 1
+        declencher_repercussion(etat.clic_x, etat.clic_y, false)
+        if etat.indice_element ~= nil then
+          pcall(function() etat.indice_element:SetText('') end)
+        end
+        pcall(function() SOUND:PlaySE('Menu/Confirm') end)
+      end
+
+      placer_elements()
+      return
     end
     etat.confirmer_precedent = confirmer
 
     if etat.auto_couleur then
-      -- Phase couleur : l'ancre reste le point du clic qui l'a déclenchée.
+      -- Phase couleur : part du dernier point cliqué et glisse en douceur vers
+      -- le centre (160, 104) pour garder toute l'étoile bien cadrée.
       if not etat.ancre_prete then
-        etat.ancre_x, etat.ancre_y = options.ancre_x or mx, options.ancre_y or my
+        etat.ancre_x = borner(options.ancre_x or 160, 48, 272)
+        etat.ancre_y = borner(options.ancre_y or 104, 48, 176)
         etat.ancre_prete = true
+      else
+        etat.ancre_x = etat.ancre_x + (160 - etat.ancre_x) * 0.06
+        etat.ancre_y = etat.ancre_y + (104 - etat.ancre_y) * 0.06
       end
     -- Le point où le clic droit commence devient immédiatement l'ancre.
     -- Pendant le maintien, les particules suivent ensuite la souris avec un
@@ -422,6 +569,7 @@ local function former_etoile_fluide(starter, options)
       etat.ancre_y = etat.ancre_y + (cible_y - etat.ancre_y) * suivi
     end
     etat.clic_droit_precedent = clic_droit
+    etat.clic_gauche_precedent = clic_gauche
 
     if etat.progression >= 1 then
       etat.final_frames = etat.final_frames + 1
@@ -464,6 +612,10 @@ local function former_etoile_fluide(starter, options)
     local menu = RogueEssence.Menu.ScriptableMenu('DESTINY_QUIZ_ETOILE', 400, 400, 16, 16, maj_menu)
     local overlay = RogueEssence.Menu.SummaryMenu('DESTINY_QUIZ_ETOILE_OVERLAY',
       RogueElements.Rect.FromPoints(RogueElements.Loc(-16, -16), RogueElements.Loc(336, 256)))
+    pcall(function()
+      menu.Borderless = true
+      overlay.Borderless = true
+    end)
 
     local tex = RogueEssence.Menu.MenuDirTex.TexType
     local type_objet = tex.Object or tex.OBJ
@@ -475,14 +627,23 @@ local function former_etoile_fluide(starter, options)
     etat.ondes_anim.StartFrame = 0
     etat.ondes_anim.EndFrame = FLUIDE_ONDES_POSES - 1
     etat.ondes_element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_ONDES',
-      RogueElements.Loc(64, 24), 0, type_objet, etat.ondes_anim)
+      RogueElements.Loc(64, 24), type_objet, etat.ondes_anim)
     overlay.Elements:Add(etat.ondes_element)
+
+    if etat.phase_incolore then
+      etat.clic_ondes_anim = RogueEssence.Content.AnimData('Quiz_Etoile_Ondes_' .. type_slug, 999)
+      etat.clic_ondes_anim.StartFrame = 0
+      etat.clic_ondes_anim.EndFrame = 0
+      etat.clic_ondes_element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_CLIC_ONDES',
+        RogueElements.Loc(-500, -500), type_objet, etat.clic_ondes_anim)
+      overlay.Elements:Add(etat.clic_ondes_element)
+    end
 
     etat.halo_anim = RogueEssence.Content.AnimData('Quiz_Etoile_Halo_' .. type_slug, 999)
     etat.halo_anim.StartFrame = 0
     etat.halo_anim.EndFrame = 0
     etat.halo_element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_HALO',
-      RogueElements.Loc(96, 40), 0, type_objet, etat.halo_anim)
+      RogueElements.Loc(96, 40), type_objet, etat.halo_anim)
     overlay.Elements:Add(etat.halo_element)
 
     local particule_index = 'Quiz_Etoile_Particule_' .. type_slug
@@ -491,7 +652,7 @@ local function former_etoile_fluide(starter, options)
       anim.StartFrame = p.phase
       anim.EndFrame = p.phase + 7
       p.element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_PARTICULE_' .. i,
-        RogueElements.Loc(16, 16), 0, type_particule, anim)
+        RogueElements.Loc(16, 16), type_particule, anim)
       overlay.Elements:Add(p.element)
     end
 
@@ -499,8 +660,15 @@ local function former_etoile_fluide(starter, options)
     etat.etoile_anim.StartFrame = 0
     etat.etoile_anim.EndFrame = 0
     etat.etoile_element = RogueEssence.Menu.MenuDirTex('DESTINY_QUIZ_ETOILE',
-      RogueElements.Loc(96, 28), 0, type_objet, etat.etoile_anim)
+      RogueElements.Loc(96, 28), type_objet, etat.etoile_anim)
     overlay.Elements:Add(etat.etoile_element)
+
+    if etat.phase_incolore then
+      etat.indice_element = RogueEssence.Menu.MenuText('DESTINY_QUIZ_INDICE',
+        "[color=#FFE16A]Clique[color] ou [color=#FFE16A]maintiens[color] pour faire vibrer ton aura",
+        RogueElements.Loc(176, 224), RogueElements.DirH.None)
+      overlay.Elements:Add(etat.indice_element)
+    end
 
     -- LowerSummaryMenus est l'emplacement déjà utilisé par le service du
     -- titre Destiny pour ses overlays plein écran.
@@ -510,9 +678,12 @@ local function former_etoile_fluide(starter, options)
 
   if not ok_construction or hote == nil then return false end
 
-  etat.ancre_x, etat.ancre_y = souris_ecran()
-  if options.ancre_x ~= nil and options.ancre_y ~= nil then
-    etat.ancre_x, etat.ancre_y = options.ancre_x, options.ancre_y
+  if not etat.phase_incolore then
+    etat.ancre_x, etat.ancre_y = souris_ecran()
+    if options.ancre_x ~= nil and options.ancre_y ~= nil then
+      etat.ancre_x = borner(options.ancre_x, 48, 272)
+      etat.ancre_y = borner(options.ancre_y, 48, 176)
+    end
   end
   etat.ancre_prete = true
   local ok_premier_placement = pcall(placer_elements)
@@ -528,19 +699,17 @@ local function former_etoile_fluide(starter, options)
   return etat.termine and not etat.erreur, etat.ancre_x, etat.ancre_y
 end
 
--- Révélation interactive : les particules convergent vers le point du clic
--- droit puis l'étoile se matérialise au même endroit. Aucun pourcentage
--- n'est affiché : seule la lumière raconte la progression.
+-- Révélation interactive : l'étoile sans couleur apparaît d'abord au centre,
+-- réagit aux clics par des ondes en répercussion, puis laisse jaillir la
+-- couleur du starter avant de se matérialiser au cœur du rêve.
 local function reveler_starter(nature, starter)
   UI:ResetSpeaker()
   UI:WaitShowVoiceOver("L'analyse est terminée...", -1)
-  UI:WaitShowVoiceOver("Une étoile sans couleur s'est déjà formée au-dessus de toi...\nElle attend la teinte de ton aura.", -1)
-  UI:WaitShowVoiceOver("Quand tu seras prêt, [color=#FFE16A]clique[color] (clic droit) :\nla couleur de ton étoile jaillira.", -1)
+  UI:WaitShowVoiceOver("Une étoile sans couleur apparaît au cœur de ton rêve...\nElle attend la teinte de ton aura.", -1)
+  UI:WaitShowVoiceOver("Touche l'étoile ou clique ([color=#FFE16A]clic droit[color] sans le relâcher, ou clic gauche)\npour libérer sa couleur !", -1)
 
-  -- Phase 1 : l'étoile est déjà visible, blanche et scintillante (assets
-  -- « Normal »). Le clic du joueur referme cette attente et déclenche la
-  -- phase 2 : la même animation, mais colorée selon le type du starter et
-  -- jouée automatiquement au point cliqué.
+  -- Phase 1 : l'étoile vierge se forme (assets « Normal ») et répond à chaque
+  -- clic par des ondes et éclats en répercussion avant d'éveiller la couleur.
   local ok_incolore, ancre_x, ancre_y = former_etoile_fluide(starter, { incolore = true })
   if not ok_incolore then ancre_x, ancre_y = nil, nil end
 

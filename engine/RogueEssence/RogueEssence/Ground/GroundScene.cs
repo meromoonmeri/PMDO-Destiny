@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueEssence.Content;
 using RogueElements;
@@ -98,7 +98,7 @@ namespace RogueEssence.Ground
                 GameManager.Instance.SE("Menu/Confirm");
                 if (FreeCamCenter.HasValue)
                     FreeCamCenter = null;
-                else
+                else if (FocusedCharacter != null)
                     FreeCamCenter = FocusedCharacter.Bounds.Center;
             }
 
@@ -132,7 +132,7 @@ namespace RogueEssence.Ground
             {
                 Loc coords = ScreenCoordsToGroundCoords(input.MouseLoc);
                 //DataManager.Instance.Save.ViewCenter = coords * GraphicsManager.TILE_SIZE;
-                if (ZoneManager.Instance.CurrentGround.GetLocInGroundBounds(ref coords))
+                if (ZoneManager.Instance.CurrentGround != null && ZoneManager.Instance.CurrentGround.GetLocInGroundBounds(ref coords) && FocusedCharacter != null)
                 {
                     FocusedCharacter.SetMapLoc(coords);
                     FocusedCharacter.UpdateFrame();
@@ -155,11 +155,18 @@ namespace RogueEssence.Ground
                 yield return CoroutineManager.Instance.StartCoroutine(PendingDevEvent);
                 PendingDevEvent = null;
             }
-            
+
+            if (ZoneManager.Instance.CurrentGround == null)
+            {
+                if (!GameManager.Instance.FrameProcessed)
+                    yield return new WaitForFrames(1);
+                yield break;
+            }
+
             // Unlike dungeon scene, processinput must be processed every frame including when pending leader action or dev events occur
             yield return CoroutineManager.Instance.StartCoroutine(ProcessInput(GameManager.Instance.InputManager));
 
-            if (GameManager.Instance.SceneOutcome == null)
+            if (GameManager.Instance.SceneOutcome == null && ZoneManager.Instance.CurrentGround != null)
             {
                 //psy's notes: put everything related to the check events in the ground map, so its more encapsulated.
                 yield return CoroutineManager.Instance.StartCoroutine(ZoneManager.Instance.CurrentGround.OnCheck());

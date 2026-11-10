@@ -46,9 +46,11 @@ local marchands_fixes = {
 -- d'ambiance séparées par plusieurs centaines de pixels ne font plus
 -- semblant de discuter à travers la ville.
 local paires_discussion = {
-  {'NewObject_7', 'NewObject_8'},  -- Lombre et Ludicolo
-  {'NewObject_10', 'NewObject_9'}, -- Luxio et Luxray
-  {'Doyen', 'Drifloon'},           -- le Doyen et Baudrive
+  {'NewObject_7', 'NewObject_8'},   -- Lombre et Ludicolo
+  {'NewObject_10', 'NewObject_9'},  -- Luxio et Luxray
+  {'Doyen', 'Drifloon'},            -- le Doyen et Baudrive
+  {'NewObject_12', 'NewObject_15'}, -- Mackogneur et Écrémeuh sur la place
+  {'NewObject_16', 'NewObject_14'}, -- Dracaufeu et Tyranocif à l'entrée
 }
 local partenaires_discussion = {}
 for _, paire in ipairs(paires_discussion) do
@@ -62,7 +64,11 @@ end
 
 local function tourner_vers(acteur, cible)
   if acteur == nil or cible == nil or acteur == cible then return end
-  pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(acteur, cible, 4) end)
+  elseif GROUND.CharTurnToChar ~= nil then
+    pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  end
 end
 
 local function orienter_discussion(nom)
@@ -83,7 +89,11 @@ local function restaurer_orientation(nom, acteur)
   if marchands_fixes[nom] then
     local depart = positions_habitants[nom]
     if depart ~= nil and depart.dir ~= nil then
-      pcall(function() GROUND:EntTurn(acteur, depart.dir) end)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(acteur, depart.dir, 4) end)
+      else
+        pcall(function() GROUND:EntTurn(acteur, depart.dir) end)
+      end
     end
   end
 end
@@ -415,6 +425,7 @@ end
 local function demander_quartier(destination, x, y, px, py, dir)
   if changement_quartier then return end
   changement_quartier = true
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.PassageQuartier = {x=x,y=y,px=px,py=py,dir=dir}
   GAME:FadeOut(false, 20)
@@ -559,6 +570,19 @@ local function placer_marchands_aux_comptoirs()
   end
 end
 
+local function placer_duo_entree_ville()
+  local dracaufeu = CH('NewObject_16')
+  if dracaufeu ~= nil and dracaufeu.Position ~= nil
+    and dracaufeu.Position.X == 827 and dracaufeu.Position.Y == 1178 then
+    GROUND:TeleportTo(dracaufeu, 856, 1148, Direction.DownRight or Direction.Down)
+  end
+  local tyranocif = CH('NewObject_14')
+  if tyranocif ~= nil and tyranocif.Position ~= nil
+    and tyranocif.Position.X == 857 and tyranocif.Position.Y == 1179 then
+    GROUND:TeleportTo(tyranocif, 892, 1184, Direction.UpLeft)
+  end
+end
+
 function ville.Init(map)
   changement_quartier = false
   entree_batiment_en_cours = false
@@ -574,6 +598,8 @@ function ville.Init(map)
   habitant_du_quartier(map, 'Pijako_Livreur', 'chatot', Gender.Male, 116, 508)
   habitant_du_quartier(map, 'Cradopaud_Pecheur', 'croagunk', Gender.Male, 186, 1496)
   habitant_du_quartier(map, 'Roserade_Fleuriste', 'roserade', Gender.Female, 748, 1112)
+  local rose = CH('Roserade_Fleuriste')
+  if rose ~= nil then pcall(function() GROUND:EntTurn(rose, Direction.Right) end) end
   habitant_du_quartier(map, 'Magneton_Garde', 'magneton', Gender.Genderless, 772, 2052)
   habitant_du_quartier(map, 'Babimanta_Enfant', 'mantyke', Gender.Female, 1112, 1668)
   habitant_du_quartier(map, 'Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
@@ -587,6 +613,7 @@ function ville.Init(map)
       Direction.Left)
     GROUND:EntTurn(luxio, Direction.Right)
   end
+  placer_duo_entree_ville()
   placer_marchands_aux_comptoirs()
   -- Rétablit le marchand si une précédente scène a été interrompue.
   if CH('NewObject_4') ~= nil then GROUND:Unhide('NewObject_4') end
@@ -779,9 +806,10 @@ function ville.Visite(map)
     print('[Destiny] Visite de la ville suspendue : partenaire absent de l’équipe.')
     return
   end
-  local kecleon, kangourex = CH('Kecleon'), CH('Kangourex')
+  local kecleon, kecleon_violet, kangourex = CH('Kecleon'), CH('Kecleon_Violet'), CH('Kangourex')
   local alakazam, mordudor, forgelina = CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')
   local dracaufeu, lombre, ludicolo = CH('NewObject_16'), CH('NewObject_7'), CH('NewObject_8')
+  local machamp, miltank = CH('NewObject_12'), CH('NewObject_15')
   local roserade = CH('Roserade_Fleuriste')
   -- Une ancienne sauvegarde peut placer Rose ailleurs : ne pas l'appeler ni
   -- la téléporter depuis l'autre côté de la ville.
@@ -864,7 +892,14 @@ function ville.Visite(map)
       if acteur.Position ~= nil and acteur.EntEnabled ~= false
         and math.abs(acteur.Position.X-832) <= 160
         and math.abs(acteur.Position.Y-1208) <= 120 then
-        table.insert(regards, {acteur, Direction.Down, ((#regards % 4) * 4), 4})
+        local dx = 800 - acteur.Position.X
+        local dir = Direction.Down
+        if dx > 24 then
+          dir = Direction.DownRight or Direction.Down
+        elseif dx < -24 then
+          dir = Direction.DownLeft
+        end
+        table.insert(regards, {acteur, dir, ((#regards % 4) * 4), 4})
       end
     end
     if #regards > 0 then cinematique.TournerGroupe(regards) end
@@ -874,6 +909,7 @@ function ville.Visite(map)
   if alakazam ~= nil then GROUND:Hide('NewObject_4') end
   hero.CollisionDisabled = true
   AI:DisableCharacterAI(partenaire)
+  placer_duo_entree_ville()
   GROUND:TeleportTo(hero, ENTREE_X - 8, ENTREE_Y, Direction.Up)
   GROUND:TeleportTo(partenaire, ENTREE_X + 12, ENTREE_Y - 20, Direction.Up)
   GAME:MoveCamera(ENTREE_X, ENTREE_Y - 30, 1, false)
@@ -912,7 +948,7 @@ function ville.Visite(map)
   if dracaufeu ~= nil then
     GAME:MoveCamera(800, 1240, 45, false)
     AI:DisableCharacterAI(dracaufeu)
-    GROUND:CharAnimateTurnTo(dracaufeu, Direction.Down, 4)
+    GROUND:CharAnimateTurnTo(dracaufeu, Direction.DownLeft, 4)
   end
   local avance_partenaire = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(partenaire, 812, 1224, false, 1.5)
@@ -1001,13 +1037,13 @@ function ville.Visite(map)
   approcher(ludicolo, 782, 1104, {{782,1104},{782,1128}})
   GAME:WaitFrames(12)
   if ludicolo ~= nil and ludicolo.EntEnabled ~= false then
-    ecouter_scene(ludicolo, partenaire, hero, roserade, lombre, dracaufeu, tyranocif_accueil)
+    ecouter_scene(ludicolo, partenaire, hero, roserade, lombre, dracaufeu, tyranocif_accueil, machamp, miltank)
     GROUND:CharTurnToCharAnimated(ludicolo, partenaire, 4)
     parler_accueil(ludicolo, 'Happy', 'Oh, vous voilà ! Prenez votre temps, vous êtes ici chez vous !')
     GAME:WaitFrames(14)
   end
   if dracaufeu ~= nil then
-    ecouter_scene(dracaufeu, partenaire, hero, tyranocif_accueil, lombre, ludicolo, roserade)
+    ecouter_scene(dracaufeu, partenaire, hero, tyranocif_accueil, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(dracaufeu, partenaire, 4)
     parler_accueil(dracaufeu, 'Happy', 'Bienvenue à Réverie Town ! Vous arrivez au bon moment : la ville se réveille tout juste.', 'droite')
     GAME:WaitFrames(18)
@@ -1015,17 +1051,17 @@ function ville.Visite(map)
   regarder_lieu_ville(hero, partenaire, Direction.Up)
   parler_guide('Happy', 'Voici la place. Les chemins, les ponts et les boutiques se rejoignent ici.')
   if lombre ~= nil then
-    ecouter_scene(lombre, partenaire, hero, ludicolo, roserade, dracaufeu, tyranocif_accueil)
+    ecouter_scene(lombre, partenaire, hero, ludicolo, roserade, dracaufeu, tyranocif_accueil, machamp, miltank)
     GROUND:CharTurnToCharAnimated(lombre, partenaire, 4)
     parler_accueil(lombre, 'Happy', 'Bienvenue ! C’est un plaisir de vous voir à Réverie.')
   end
   if roserade ~= nil then
-    ecouter_scene(roserade, partenaire, hero, lombre, ludicolo, dracaufeu, tyranocif_accueil)
+    ecouter_scene(roserade, partenaire, hero, lombre, ludicolo, dracaufeu, tyranocif_accueil, machamp, miltank)
     GROUND:CharTurnToCharAnimated(roserade, partenaire, 4)
     parler_accueil(roserade, 'Happy', 'Bienvenue ! Si vous cherchez votre chemin, nous serons ravis de vous aider.')
   end
   if tyranocif_accueil ~= nil then
-    ecouter_scene(tyranocif_accueil, partenaire, hero, roserade, lombre, ludicolo, dracaufeu)
+    ecouter_scene(tyranocif_accueil, partenaire, hero, roserade, lombre, ludicolo, dracaufeu, machamp, miltank)
     GROUND:CharTurnToCharAnimated(tyranocif_accueil, partenaire, 4)
     parler_accueil(tyranocif_accueil, 'Normal', 'Prenez le temps de découvrir la ville. Vous y trouverez toujours quelqu’un à qui parler.', 'droite')
   end
@@ -1033,19 +1069,23 @@ function ville.Visite(map)
   local hote_guilde = lombre or ludicolo or dracaufeu
   if hote_guilde ~= nil then
     GAME:WaitFrames(20)
-    ecouter_scene(hote_guilde, partenaire, hero, roserade, lombre, ludicolo, dracaufeu, tyranocif_accueil)
+    ecouter_scene(hote_guilde, partenaire, hero, roserade, lombre, ludicolo, dracaufeu, tyranocif_accueil, machamp, miltank)
     -- L'hôte indique le nord, puis revient à ses interlocuteurs.
     GROUND:CharAnimateTurnTo(hote_guilde, Direction.Up, 4)
     GAME:WaitFrames(12)
     GROUND:CharTurnToCharAnimated(hote_guilde, partenaire, 4)
     parler_accueil(hote_guilde, 'Normal', 'La guilde se trouve en haut de l’escalier nord.\nElle est encore fermée : vous êtes en avance ! Elle ouvrira plus tard dans la journée.')
     GAME:WaitFrames(16)
-    ecouter_scene(partenaire, hero, hote_guilde, roserade, lombre, ludicolo, dracaufeu, tyranocif_accueil)
+    GROUND:CharTurnToCharAnimated(partenaire, hote_guilde, 4)
+    ecouter_scene(partenaire, hero, hote_guilde, roserade, lombre, ludicolo, dracaufeu, tyranocif_accueil, machamp, miltank)
     parler_guide('Normal', 'Les membres de la guilde sont déjà partis ?')
     if ludicolo ~= nil and ludicolo ~= hote_guilde then
-      ecouter_scene(ludicolo, partenaire, hero, hote_guilde, roserade, dracaufeu, tyranocif_accueil)
+      ecouter_scene(ludicolo, partenaire, hero, hote_guilde, roserade, dracaufeu, tyranocif_accueil, machamp, miltank)
+      GROUND:CharTurnToCharAnimated(ludicolo, partenaire, 4)
       parler_accueil(ludicolo, 'Normal', 'Oui, ils sont en expédition. La place sera plus animée quand ils rentreront.')
     end
+    ecouter_scene(partenaire, hero, lombre, ludicolo, roserade, dracaufeu, tyranocif_accueil, machamp, miltank)
+    GROUND:CharTurnToCharAnimated(partenaire, hero, 4)
     parler_guide('Happy', 'Alors nous reviendrons les rencontrer plus tard. En attendant, je vais te montrer la ville !')
     GAME:WaitFrames(20)
   end
@@ -1055,6 +1095,9 @@ function ville.Visite(map)
   animer_fond(616, 925)
   GAME:MoveCamera(616, 925, 160, false)
   parler_guide('Normal', 'Là-bas, c’est la boutique de Basil et Félix. Ces deux frères Kecleon vendent des provisions pour les expéditions.')
+  if kecleon_violet ~= nil then
+    GROUND:CharAnimateTurnTo(kecleon_violet, Direction.Down, 4)
+  end
   if kecleon ~= nil then
     GROUND:CharAnimateTurnTo(kecleon, Direction.Down, 4)
     parler_accueil(kecleon, 'Happy', 'Bienvenue ! Une pomme ou une baie peut toujours être utile en chemin.')
@@ -1074,36 +1117,31 @@ function ville.Visite(map)
   parler_guide('Normal', 'Exactement : ce que nous laissons à tatie Mado n’a pas à traverser le donjon avec nous.')
 
   regarder_lieu_ville(hero, partenaire, Direction.UpRight)
-  animer_fond(1100, 950)
-  GAME:MoveCamera(1100, 950, 90, false)
-  parler_guide('Happy', 'Juste à côté, il y a aussi cet étal aux couleurs vives. Le quartier du marché est plein de surprises !')
   if forgelina ~= nil then
-    GAME:MoveCamera(1104, 992, 45, false)
+    animer_fond(1104, 992)
+    GAME:MoveCamera(1104, 992, 110, false)
     parler_guide('Normal', 'Voici aussi Iris. Cette Forgelina ouvre les boîtes trouvées en exploration.')
     GROUND:CharAnimateTurnTo(forgelina, Direction.Down, 4)
     parler_accueil(forgelina, 'Happy', 'Rapportez-moi vos boîtes ! Mon marteau et moi, on s’occupera des serrures.')
   end
   regarder_lieu_ville(hero, partenaire, Direction.UpLeft)
-  animer_fond(500, 1010)
-  GAME:MoveCamera(500, 1010, 300, false)
-  parler_guide('Normal', 'Et de l’autre côté de la place, d’autres comptoirs nous attendent. Nous aurons le temps de les découvrir ensemble.')
-  if alakazam ~= nil then
-    animer_fond(360, 1100)
-    GAME:MoveCamera(360, 1100, 90, false)
-    parler_guide('Normal', 'Ici, Alakazam aide les Pokémon à retrouver des capacités oubliées.')
-    GAME:WaitFrames(20)
-    parler_guide('Worried', 'Tiens… il n’est pas à son comptoir. C’est étrange, il est pourtant toujours là à cette heure-ci.')
-  end
   if mordudor ~= nil then
     animer_fond(504, 1040)
-    GAME:MoveCamera(504, 1040, 80, false)
-    parler_guide('Normal', 'Et voici Écu, le Mordudor qui veille sur notre argent à la banque.')
+    GAME:MoveCamera(504, 1040, 260, false)
+    parler_guide('Normal', 'De l’autre côté de la place, voici Écu, le Mordudor qui veille sur notre argent à la banque.')
     GROUND:CharAnimateTurnTo(mordudor, Direction.Down, 4)
     parler_accueil(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
   end
+  if alakazam ~= nil then
+    animer_fond(360, 1100)
+    GAME:MoveCamera(360, 1100, 95, false)
+    parler_guide('Normal', 'Et tout au bout de la place, Alakazam aide les Pokémon à retrouver des capacités oubliées.')
+    GAME:WaitFrames(20)
+    parler_guide('Worried', 'Tiens… il n’est pas à son comptoir. C’est étrange, il est pourtant toujours là à cette heure-ci.')
+  end
   -- La visite reste dans le centre : les autres quartiers seront découverts plus tard.
   animer_fond(PLACE_X, PLACE_Y)
-  GAME:MoveCamera(PLACE_X, PLACE_Y, 175, false)
+  GAME:MoveCamera(PLACE_X, PLACE_Y, 185, false)
   guide_hors_champ = false
   geste_heros(hero, 'autour', partenaire)
   se_faire_face_ville(partenaire, hero)
@@ -1156,12 +1194,15 @@ function ville.Visite(map)
   GROUND:CharAnimateTurnTo(luxray, Direction.Up, 4)
   GROUND:CharSetEmote(luxray, 'sweating', 2)
   -- À l'arrivée, les proches cherchent Lyra du regard, en décalé.
-  ecouter_scene(luxray, partenaire, hero, lombre, ludicolo, roserade, tyranocif_accueil, dracaufeu)
+  ecouter_scene(luxray, partenaire, hero, lombre, ludicolo, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
   GAME:WaitFrames(20)
   parler_accueil(luxray, 'Worried', 'Hah… Hah… S’il vous plaît… Mon petit !')
   GAME:WaitFrames(20)
+  GROUND:CharTurnToCharAnimated(partenaire, luxray, 4)
+  ecouter_scene(partenaire, luxray, hero, lombre, ludicolo, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
   parler_guide('Worried', 'Lyra ? Qu’est-ce qui s’est passé ?')
   GAME:WaitFrames(16)
+  ecouter_scene(luxray, partenaire, hero, lombre, ludicolo, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
   GROUND:CharTurnToCharAnimated(luxray, partenaire, 4)
   parler_accueil(luxray, 'Worried', 'Nous étions ensemble… Il a glissé avant que je puisse le retenir !')
   parler_accueil(luxray, 'Sad', 'Mon petit Nilo est tombé dans un fossé. Je l’entends encore en bas…')
@@ -1173,39 +1214,44 @@ function ville.Visite(map)
   parler_accueil(luxray, 'Worried', 'La guilde… Je vous en prie, demandez à la guilde de venir nous aider !')
   GAME:WaitFrames(22)
   if lombre ~= nil then
-    ecouter_scene(lombre, luxray, partenaire, hero, ludicolo, roserade, tyranocif_accueil, dracaufeu)
+    ecouter_scene(lombre, luxray, partenaire, hero, ludicolo, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
     GROUND:CharTurnToCharAnimated(lombre, luxray, 4)
     parler_accueil(lombre, 'Worried', 'Les membres de la guilde sont partis en expédition… Ils ne sont pas encore revenus.')
   end
   if ludicolo ~= nil then
-    ecouter_scene(ludicolo, luxray, partenaire, hero, lombre, roserade, tyranocif_accueil, dracaufeu)
+    ecouter_scene(ludicolo, luxray, partenaire, hero, lombre, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
     GROUND:CharTurnToCharAnimated(ludicolo, luxray, 4)
     parler_accueil(ludicolo, 'Worried', 'On ne peut pas attendre leur retour…')
   end
   GAME:WaitFrames(20)
   local tyranocif = CH('NewObject_14')
   if tyranocif ~= nil then
+    ecouter_scene(tyranocif, luxray, partenaire, hero, lombre, ludicolo, roserade, dracaufeu, machamp, miltank)
     GROUND:CharTurnToCharAnimated(tyranocif, luxray, 4)
     parler_accueil(tyranocif, 'Worried', 'Où est-ce que Nilo est tombé, Lyra ?', 'droite')
   end
   if dracaufeu ~= nil then
+    ecouter_scene(dracaufeu, luxray, partenaire, hero, tyranocif, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(dracaufeu, luxray, 4)
     parler_accueil(dracaufeu, 'Normal', 'Est-ce que tu peux nous montrer le chemin ?', 'droite')
   end
   GAME:WaitFrames(16)
+  ecouter_scene(luxray, partenaire, hero, tyranocif, dracaufeu, lombre, ludicolo, roserade, machamp, miltank)
+  GROUND:CharTurnToCharAnimated(luxray, tyranocif or dracaufeu or partenaire, 4)
   parler_accueil(luxray, 'Worried', 'Oui ! Je vous indiquerai le chemin… Mais faites vite, je vous en prie !')
   GAME:WaitFrames(20)
   GROUND:CharTurnToCharAnimated(partenaire, luxray, 4)
-  ecouter_scene(partenaire, luxray, hero, lombre, ludicolo, roserade, tyranocif, dracaufeu)
+  ecouter_scene(partenaire, luxray, hero, lombre, ludicolo, roserade, tyranocif, dracaufeu, machamp, miltank)
   parler_guide('Determined', 'On va l’aider ! Nous pouvons y aller, nous aussi !')
   geste_heros(hero, 'oui', partenaire)
   GAME:WaitFrames(16)
   if tyranocif ~= nil then
-    ecouter_scene(tyranocif, dracaufeu, partenaire, hero, luxray, lombre, ludicolo)
+    ecouter_scene(tyranocif, dracaufeu, partenaire, hero, luxray, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(tyranocif, dracaufeu or partenaire, 4)
     parler_accueil(tyranocif, 'Normal', 'Dracaufeu… On pourrait reformer notre ancienne équipe, avec Alakazam.', 'droite')
   end
   if dracaufeu ~= nil then
+    ecouter_scene(dracaufeu, tyranocif, partenaire, hero, luxray, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(dracaufeu, tyranocif or partenaire, 4)
     parler_accueil(dracaufeu, 'Normal', 'Oui. Tous les trois, nous avons déjà affronté bien des dangers.', 'droite')
   end
@@ -1221,39 +1267,39 @@ function ville.Visite(map)
     GROUND:Unhide('NewObject_4')
     GROUND:MoveToPosition(alakazam, 720, 1152, false, 1.5)
     GROUND:CharAnimateTurnTo(alakazam, Direction.Right, 4)
-    ecouter_scene(alakazam, tyranocif, dracaufeu, partenaire, hero, luxray, lombre, ludicolo, roserade)
+    ecouter_scene(alakazam, tyranocif, dracaufeu, partenaire, hero, luxray, lombre, ludicolo, roserade, machamp, miltank)
     GAME:WaitFrames(30)
     parler_accueil(alakazam, 'Normal', 'Laisse donc ces jeunes y aller, mon vieil ami.')
     GAME:WaitFrames(30)
     parler_accueil(alakazam, 'Normal', 'Ils ont entendu Lyra et se sont proposés sans hésiter. Laissons-leur cette chance.')
     GAME:WaitFrames(16)
-    ecouter_scene(partenaire, alakazam, hero, luxray, tyranocif, dracaufeu, lombre, ludicolo, roserade)
+    ecouter_scene(partenaire, alakazam, hero, luxray, tyranocif, dracaufeu, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(partenaire, alakazam, 4)
     parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
     GAME:WaitFrames(20)
     -- Lyra baisse un instant les yeux avant de remercier l'équipe.
     GROUND:CharAnimateTurnTo(luxray, Direction.Down, 4)
     GAME:WaitFrames(16)
-    ecouter_scene(luxray, partenaire, hero, alakazam, lombre, ludicolo)
+    ecouter_scene(luxray, partenaire, hero, alakazam, lombre, ludicolo, roserade, tyranocif, dracaufeu, machamp, miltank)
     GROUND:CharTurnToCharAnimated(luxray, partenaire, 4)
     parler_accueil(luxray, 'Sad', 'Merci… Je vous en prie, ramenez mon petit.')
     GAME:WaitFrames(20)
-    ecouter_scene(alakazam, partenaire, hero, luxray)
+    ecouter_scene(alakazam, partenaire, hero, luxray, tyranocif, dracaufeu, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(alakazam, partenaire, 4)
     parler_accueil(alakazam, 'Normal', 'Préparez-vous bien et écoutez les indications de Lyra. Nous resterons ici si vous avez besoin de nous.')
   else
     GAME:WaitFrames(20)
-    ecouter_scene(luxray, partenaire, hero, tyranocif, dracaufeu)
+    ecouter_scene(luxray, partenaire, hero, tyranocif, dracaufeu, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(luxray, partenaire, 4)
     parler_accueil(luxray, 'Sad', 'Merci… Je vous en prie, ramenez mon petit.')
-    ecouter_scene(partenaire, luxray, hero, tyranocif, dracaufeu)
+    ecouter_scene(partenaire, luxray, hero, tyranocif, dracaufeu, lombre, ludicolo, roserade, machamp, miltank)
     GROUND:CharTurnToCharAnimated(partenaire, luxray, 4)
     parler_guide('Determined', 'Nous ferons de notre mieux. Nilo ne restera pas seul !')
   end
   -- Lombre ne disparaît pas de l'échange une fois les aînés intervenus.
   if lombre ~= nil and lombre.EntEnabled ~= false then
     GAME:WaitFrames(12)
-    ecouter_scene(lombre, luxray, partenaire, hero, ludicolo)
+    ecouter_scene(lombre, luxray, partenaire, hero, ludicolo, roserade, tyranocif, dracaufeu, alakazam, machamp, miltank)
     GROUND:CharTurnToCharAnimated(lombre, luxray, 4)
     parler_accueil(lombre, 'Worried', 'Courage, Lyra. Nous pensons tous à Nilo.')
   end
@@ -1261,11 +1307,8 @@ function ville.Visite(map)
   -- Fin progressive de la tension ; aucune musique de victoire avant le sauvetage.
   SOUND:FadeOutBGM(90)
   GAME:WaitFrames(100)
-  -- La caméra s'éloigne avant la remise en place hors champ. Le joueur
-  -- retrouve ensuite caméra, IA et musique habituelle de la ville.
-  GAME:MoveCamera(1000, 1160, 70, false)
-  -- Les habitants repartent hors champ. Contrôler à nouveau chaque segment :
-  -- un obstacle apparu entre-temps ne doit jamais bloquer la cinématique.
+  -- Les habitants reprennent leur place et Alakazam s'éloigne à pied vers
+  -- son comptoir à l'ouest avant le retour du joueur.
   for _, depart in ipairs(avances) do
     local acteur, points = depart.acteur, depart.points
     if acteur ~= nil and acteur.EntEnabled ~= false then
@@ -1276,11 +1319,12 @@ function ville.Visite(map)
         end
       end
       if acteur.Position.X == depart.x and acteur.Position.Y == depart.y then
-        GROUND:EntTurn(acteur, depart.dir)
+        GROUND:CharAnimateTurnTo(acteur, depart.dir, 4)
       end
     end
   end
   if alakazam ~= nil then
+    GROUND:MoveToPosition(alakazam, 648, 1152, false, 1.5)
     GROUND:Hide('NewObject_4')
     GROUND:TeleportTo(alakazam, 360, 1100, Direction.Down)
     GROUND:Unhide('NewObject_4')
@@ -1295,6 +1339,7 @@ function ville.Visite(map)
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
+  se_faire_face_ville(partenaire, hero)
   parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
   UI:ResetSpeaker()
   retour_au_joueur(hero, partenaire)
@@ -1434,6 +1479,9 @@ function ville.GameLoad(map)
   installer_comptoirs(map)
   installer_luxray_attente(map)
   nommer_habitants(map)
+  if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
+    placer_duo_entree_ville()
+  end
   placer_marchands_aux_comptoirs()
   if CH('NewObject_4') ~= nil then GROUND:Unhide('NewObject_4') end
   entrer(map)
@@ -1502,6 +1550,7 @@ function ville.SortieCarrefour_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   -- Le premier trajet scénarisé et la visite guidée restent inchangés.
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_ville')
 end
@@ -1593,6 +1642,7 @@ function ville.PorteCafeSpinda_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if entree_batiment_en_cours then return end
   entree_batiment_en_cours = true
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
 end
@@ -1603,6 +1653,7 @@ function ville.PorteGuildeNord_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if entree_batiment_en_cours then return end
   SV.Destiny = SV.Destiny or {}
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local index = meteo_reverie.IndexGuilde()
   entree_batiment_en_cours = true
   SV.Destiny.RetourBatimentX = 776
@@ -1617,6 +1668,7 @@ for _, porte_def in ipairs(portes_batiments) do
   local function entrer_batiment()
     if entree_batiment_en_cours then return end
     entree_batiment_en_cours = true
+    if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
     SV.Destiny = SV.Destiny or {}
     SV.Destiny.RetourBatimentX = porte.retour_x
     SV.Destiny.RetourBatimentY = porte.retour_y
@@ -1843,14 +1895,19 @@ local function dialogue_simple(personnage, repliques)
 end
 
 local function conversation(acteurs, repliques)
-  -- Les deux partenaires de discussion restent animés même lorsqu'un seul parle.
+  -- Les deux partenaires de discussion restent animés même lorsqu'un seul parle,
+  -- et se regardent mutuellement à chaque prise de parole.
   for i = 1, 2 do
     local acteur = acteurs[i]
     if acteur ~= nil then GROUND:CharSetAnim(acteur, 'Idle', true) end
   end
   for _, replique in ipairs(repliques) do
-    local acteur = acteurs[replique[1]]
+    local idx = replique[1]
+    local acteur = acteurs[idx]
+    local autre = acteurs[3 - idx]
     if acteur ~= nil then
+      tourner_vers(autre, acteur)
+      tourner_vers(acteur, autre)
       UI:SetSpeaker(acteur)
       UI:SetSpeakerEmotion(replique[2])
       UI:WaitShowDialogue(replique[3])
@@ -2142,6 +2199,8 @@ function ville.Luxray_Alerte_Action(personnage, activator)
     return
   end
   parler_accueil(personnage, 'Worried', 'Merci ! Venez, je vais vous montrer la route.')
+  tourner_vers(partenaire, personnage)
+  tourner_vers(personnage, partenaire)
   cinematique.Dire(partenaire, 'Determined', 'On y va ! Tiens bon, Nilo, on arrive !', 'droite')
   UI:ResetSpeaker()
   SV.Destiny.DepartShinxAccepte = true

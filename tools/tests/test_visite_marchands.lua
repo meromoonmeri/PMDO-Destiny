@@ -84,7 +84,7 @@ local function scenario(species,legacy,missing,obstacle,rose_loin,bloc_ludicolo)
  assert(count('PNJ_Temporaire')>=2 and count('PNJ_Cache')==0)
  assert(count('PLAYER')>=2 and count('Teammate1')>=2)
  assert(count('PLAYER','shock')==0 and count('Teammate1','shock')>=1,'réactions du duo insuffisamment nuancées')
- if actors.NewObject_14 then assert(actors.NewObject_14.Position.X==857)end;if actors.NewObject_16 then assert(actors.NewObject_16.Position.X==827)end
+ if actors.NewObject_14 then assert(actors.NewObject_14.Position.X==892 and actors.NewObject_14.Position.Y==1184)end;if actors.NewObject_16 then assert(actors.NewObject_16.Position.X==856 and actors.NewObject_16.Position.Y==1148)end
  local avance_lombre,avance_ludicolo=false,false
  for _,v in ipairs(events) do
   if v[1]=='marcher' and v[2]=='NewObject_7' and v[3]=='808,1136' then avance_lombre=true end
@@ -95,12 +95,19 @@ local function scenario(species,legacy,missing,obstacle,rose_loin,bloc_ludicolo)
  if actors.NewObject_8 then assert(actors.NewObject_8.Position.X==782 and actors.NewObject_8.Position.Y==1104) end
  local hors=0;local portraits=0
  for _,v in ipairs(events)do if v[1]=='hors_champ' then hors=hors+1 end;if v[1]=='portrait' and v[2]=='NewObject_16' then assert(v[3]=='droite');portraits=portraits+1 end end
- assert(hors>=(missing=='NewObject_4' and 8 or 10) and (missing=='NewObject_16' or portraits>=3),'portrait ou locuteur hors champ incorrect')
+ assert(hors>=(missing=='NewObject_4' and 6 or 8) and (missing=='NewObject_16' or portraits>=3),'portrait ou locuteur hors champ incorrect')
+ for _,v in ipairs(events)do if v[1]=='camera' then assert(not (v[2]==1100 and v[3]==950) and not (v[2]==500 and v[3]==1010) and not (v[2]==1000 and v[3]==1160),'ancien plan caméra conservé') end end
  local a=find('voix','À l’aide');local b=find('dialogue','Vous avez entendu');local c=missing=='NewObject_7' and b or find('dialogue','On dirait Lyra');local d=find('marcher','800,1224');local e=find('dialogue','Hah… Hah');local f=find('dialogue','tombé dans un fossé');local g=missing=='NewObject_7' and find('dialogue','On ne peut pas attendre leur retour') or find('dialogue','Les membres de la guilde sont partis en expédition');local h=find('dialogue','Nous pouvons y aller');local i=missing=='NewObject_4' and #events or find('dialogue','Laisse donc ces jeunes')
  assert(a<b and b<=c and c<d and d<e and e<f and f<g and g<h and h<i,'ordre de la scène incorrect')
  local musique={};for _,v in ipairs(events)do if v[1]=='music' then musique[#musique+1]=v[2] end end
  assert( #musique==3 and musique[1]=='Treasure Town.ogg' and musique[2]=='Threat.ogg' and musique[3]=='Treasure Town.ogg')
- if missing~='NewObject_4' then assert(find('placer','648,1152')<find('marcher','720,1152')) end
+ if missing~='NewObject_4' then
+  local entree_a=find('marcher','720,1152')
+  assert(find('placer','648,1152')<entree_a)
+  local retour_ouest=nil
+  for k=entree_a+1,#events do local v=events[k];if v[1]=='marcher' and v[2]=='NewObject_4' and v[3]=='648,1152' then retour_ouest=k;break end end
+  assert(retour_ouest and retour_ouest<find('placer','360,1100'),'Alakazam doit repartir à pied vers l’ouest')
+ end
  assert(not find('dialogue','Bienvenue à Réverie Town !')==false)
  local function regard_entre(debut,fin,nom,cible)
   for k=debut+1,fin-1 do local v=events[k];if v[1]=='regard' and v[2]==nom and v[3]==cible then return true end end

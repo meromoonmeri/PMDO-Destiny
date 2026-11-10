@@ -62,8 +62,18 @@ local function installer_escalier_nord(map)
 end
 
 local function aller_a(index_carte)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
+end
+
+local function tourner_vers(acteur, cible)
+  if acteur == nil or cible == nil or acteur == cible then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(acteur, cible, 4) end)
+  elseif GROUND.CharTurnToChar ~= nil then
+    pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  end
 end
 
 local function dire(acteur, emotion, texte)
@@ -100,6 +110,7 @@ local function placer_personnel()
 end
 
 function cafespindaaccueil.Init(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   protege('noms du personnel', nommer_personnel)
   installer_sortie(map)
   installer_escalier_nord(map)
@@ -269,6 +280,7 @@ function cafespindaaccueil.Enter(map)
 end
 
 function cafespindaaccueil.GameLoad(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   protege('noms au chargement', nommer_personnel)
   protege('placement au chargement', placer_personnel)
   sortie_cafe_en_cours = false
@@ -306,12 +318,19 @@ function cafespindaaccueil.Update(map, time)
 end
 
 function cafespindaaccueil.Spinda_Action(personnage, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(personnage, joueur)
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(personnage, 'Worried', 'Je pense à Nilo et à Lyra. Préparez-vous bien, et ne perdez pas courage.')
   end
   dire(personnage, 'Happy', 'Bienvenue à l’accueil du café Spinda ! Ici, les explorateurs partagent leurs récits de mission.')
-  dire(CH('MrMimeJunior'), 'Happy', 'Je prépare les verres sans dire un mot. Le spectacle commence dès le comptoir !')
-  dire(CH('Kirlia'), 'Normal', 'Et moi, j’écoute les équipes. Certaines histoires commencent par une simple boisson partagée.')
+  local pipo = CH('MrMimeJunior')
+  tourner_vers(pipo, joueur)
+  dire(pipo, 'Happy', 'Je prépare les verres sans dire un mot. Le spectacle commence dès le comptoir !')
+  local kirlia = CH('Kirlia')
+  tourner_vers(kirlia, joueur)
+  dire(kirlia, 'Normal', 'Et moi, j’écoute les équipes. Certaines histoires commencent par une simple boisson partagée.')
+  tourner_vers(personnage, joueur)
   if SV.Destiny ~= nil and SV.Destiny.CafeRenovationTerminee == true then
     dire(personnage, 'Normal', 'Installez-vous. L’étage est plus calme, et la salle voisine accueille nos petits spectacles.')
   else
@@ -355,12 +374,17 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
 end
 
 function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(personnage, joueur)
   dire(personnage, 'Happy', 'Je mime le verseur parfait : pas une goutte imaginaire ne tombe à côté.')
-  dire(CH('Spinda'), 'Happy', 'Et pendant les travaux, nous accueillons les visiteurs ensemble !')
+  local spinda = CH('Spinda')
+  tourner_vers(spinda, joueur)
+  dire(spinda, 'Happy', 'Et pendant les travaux, nous accueillons les visiteurs ensemble !')
   UI:ResetSpeaker()
 end
 
 function cafespindaaccueil.Kirlia_Action(personnage, activator)
+  tourner_vers(personnage, activator or CH('PLAYER'))
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(personnage, 'Worried', 'Lyra doit être si inquiète pour Nilo… J’espère qu’il tient bon.')
     UI:ResetSpeaker()
@@ -370,27 +394,34 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
   UI:ResetSpeaker()
 end
 
-local function dialogue_recyclage(okeoke, qulbutoque)
+local function dialogue_recyclage(okeoke, qulbutoque, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(okeoke, joueur)
+  tourner_vers(qulbutoque, joueur)
   dire(okeoke, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
+  tourner_vers(qulbutoque, okeoke)
   dire(qulbutoque, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
+  tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
   UI:ResetSpeaker()
 end
 
 cafespindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
-  dialogue_recyclage(CH('Okéoké'), personnage)
+  dialogue_recyclage(CH('Okéoké'), personnage, activator)
 end
 
 cafespindaaccueil['Okéoké_Action'] = function(personnage, activator)
-  dialogue_recyclage(personnage, CH('Qulbutoqué'))
+  dialogue_recyclage(personnage, CH('Qulbutoqué'), activator)
 end
 
 function cafespindaaccueil.NewObject_13_Action(personnage, activator)
+  tourner_vers(personnage, activator or CH('PLAYER'))
   dire(personnage, 'Happy', 'Je goûte chaque nouveauté du comptoir. Pour le travail, évidemment. Uniquement pour le travail.')
   UI:ResetSpeaker()
 end
 
 function cafespindaaccueil.Pompot_Action(personnage, activator)
+  tourner_vers(personnage, activator or CH('PLAYER'))
   dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
   UI:ResetSpeaker()
 end

@@ -11,7 +11,7 @@ function maison.Init(map)
 
 end
 function maison.Enter(map) suivi_interieurs.Activer(map); GAME:FadeIn(20) end
-function maison.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function maison.GameLoad(map) if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end; suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function maison.Exit(map) end
 function maison.Update(map, time) end
 function maison.GameSave(map) end
@@ -20,6 +20,7 @@ function maison.SortieMaison_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if sortie_en_cours then return end
   sortie_en_cours = true
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.RetourMaisonEquipe = true
   local retour_falaise = meteo_reverie.CarteCliff()

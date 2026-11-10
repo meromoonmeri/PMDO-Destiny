@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using RogueElements;
@@ -673,7 +673,8 @@ namespace RogueEssence
                 //switch location
                 if (sameZone && !forceNewZone)
                 {
-                    //don't need to do anything
+                    if (ZoneManager.Instance.CurrentZone != null)
+                        ZoneManager.Instance.CurrentZone.SyncGroundMaps();
                 }
                 else
                 {
@@ -688,6 +689,13 @@ namespace RogueEssence
                 }
 
                 ZoneManager.Instance.CurrentZone.SetCurrentMap(destId.StructID);
+
+                if (newGround && ZoneManager.Instance.CurrentGround == null)
+                {
+                    DiagManager.Instance.LogError(new Exception(String.Format("Failed to load ground map {0} in zone {1}.", destId.StructID, ZoneManager.Instance.CurrentZoneID)));
+                    SceneOutcome = RestartToTitle();
+                    yield break;
+                }
 
                 yield return CoroutineManager.Instance.StartCoroutine(moveToZoneInit(destId.EntryPoint, newGround, newSegment, preserveMusic));
             }
@@ -729,10 +737,20 @@ namespace RogueEssence
                 ZoneManager.Instance.MoveToZone(zone, unchecked(DataManager.Instance.Save.Rand.FirstSeed + (ulong)zone.GetHashCode()));//NOTE: there are better ways to seed a multi-dungeon adventure
                 yield return CoroutineManager.Instance.StartCoroutine(ZoneManager.Instance.CurrentZone.OnInit());
             }
+            else if (ZoneManager.Instance.CurrentZone != null)
+            {
+                ZoneManager.Instance.CurrentZone.SyncGroundMaps();
+            }
 
-            int mapId = ZoneManager.Instance.CurrentZone.GroundMaps.FindIndex((str) => (str == mapname));
+            int mapId = ZoneManager.Instance.CurrentZone.GroundMaps != null
+                ? ZoneManager.Instance.CurrentZone.GroundMaps.FindIndex((str) => (str == mapname))
+                : -1;
             if (mapId == -1)
-                throw new Exception(String.Format("Cannot find ground map of name {0} in zone {1}.", mapname, ZoneManager.Instance.CurrentZone.ID));
+            {
+                DiagManager.Instance.LogError(new Exception(String.Format("Cannot find ground map of name {0} in zone {1}.", mapname, ZoneManager.Instance.CurrentZone.ID)));
+                SceneOutcome = RestartToTitle();
+                yield break;
+            }
 
             SegLoc destSegLoc = new SegLoc(-1, mapId);
 
@@ -743,6 +761,13 @@ namespace RogueEssence
             }
 
             ZoneManager.Instance.CurrentZone.SetCurrentMap(destSegLoc);
+
+            if (ZoneManager.Instance.CurrentGround == null)
+            {
+                DiagManager.Instance.LogError(new Exception(String.Format("Failed to load ground map '{0}' in zone '{1}'.", mapname, ZoneManager.Instance.CurrentZone.ID)));
+                SceneOutcome = RestartToTitle();
+                yield break;
+            }
 
             int entryIdx = ZoneManager.Instance.CurrentGround.GetEntryPointIdx(entrypoint);
             yield return CoroutineManager.Instance.StartCoroutine(moveToZoneInit(entryIdx, true, newSegment, preserveMusic));

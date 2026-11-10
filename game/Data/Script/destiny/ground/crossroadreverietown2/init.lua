@@ -47,6 +47,7 @@ end
 local function aller(zone, ground, marqueur)
   if sortie_en_cours then return end
   sortie_en_cours = true
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap(zone, ground, marqueur)
 end

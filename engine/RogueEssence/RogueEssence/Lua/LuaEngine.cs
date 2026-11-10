@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RogueEssence.Menu;
@@ -622,6 +622,49 @@ namespace RogueEssence.Script
             return null;
         }
 
+        private static byte[] ReadUtf8ScriptBytes(string path)
+        {
+            byte[] bytes = File.ReadAllBytes(path);
+            if (bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF)
+            {
+                byte[] trimmed = new byte[bytes.Length - 3];
+                Buffer.BlockCopy(bytes, 3, trimmed, 0, trimmed.Length);
+                return trimmed;
+            }
+            return bytes;
+        }
+
+        private object[] LoadLuaModule(string modulePath, string packageKey)
+        {
+            LuaFunction getLoaded = RunString("return function(k) return package.loaded[k] end").First() as LuaFunction;
+            object existing = getLoaded.Call(packageKey).FirstOrDefault();
+            if (existing != null)
+                return new object[] { existing };
+
+            byte[] source = ReadUtf8ScriptBytes(modulePath);
+            LuaFunction chunk = LuaState.LoadString(source, "@" + modulePath);
+            object[] ret = chunk.Call(packageKey);
+            object val = (ret != null && ret.Length > 0 && ret[0] != null) ? ret[0] : true;
+            LuaFunction setLoaded = RunString("return function(k, v) package.loaded[k] = v end").First() as LuaFunction;
+            setLoaded.Call(packageKey, val);
+            return new object[] { val };
+        }
+
+        private void UnloadPackageModules(string assetName)
+        {
+            LuaFunction clearLoaded = RunString(@"return function(name)
+                package.loaded[name] = nil
+                local esc = string.gsub(name, '([%%%^%$%(%)%.%[%]%*%+%-%?])', '%%%1')
+                for k, _ in pairs(package.loaded) do
+                    if type(k) == 'string' and (string.match(k, '%.' .. esc .. '$') or string.match(k, '%.' .. esc .. '%.init$')) then
+                        package.loaded[k] = nil
+                    end
+                end
+            end").First() as LuaFunction;
+            if (clearLoaded != null)
+                clearLoaded.Call(assetName);
+        }
+
         private void ModRequireFile(string moduleName)
         {
             foreach (ModHeader mod in PathMod.FallforthScriptMods(SCRIPT_PATH))
@@ -629,8 +672,7 @@ namespace RogueEssence.Script
                 string modulePath = GetModulePath(PathMod.HardMod(mod.Path, SCRIPT_PATH), Path.Join(mod.Namespace, moduleName));
                 if (modulePath != null)
                 {
-                    LuaState.LoadFile(modulePath);
-                    RunString(String.Format("require('{0}.{1}')", mod.Namespace, moduleName));
+                    LoadLuaModule(modulePath, String.Format("{0}.{1}", mod.Namespace, moduleName.Replace('/', '.').Replace('\\', '.')));
                 }
             }
         }
@@ -642,8 +684,7 @@ namespace RogueEssence.Script
                 string modulePath = GetModulePath(PathMod.HardMod(mod.Path, SCRIPT_PATH), Path.Join(mod.Namespace, moduleName));
                 if (modulePath != null)
                 {
-                    LuaState.DoFile(modulePath);
-                    //RunString(String.Format("require('{0}.{1}')", mod.Namespace, moduleName));
+                    LuaState.DoString(ReadUtf8ScriptBytes(modulePath), "@" + modulePath);
                 }
             }
         }
@@ -678,9 +719,8 @@ namespace RogueEssence.Script
                 string modulePath = GetModulePath(PathMod.HardMod(mod.Path, SCRIPT_PATH), Path.Join(mod.Namespace, loadPath));
                 if (modulePath != null)
                 {
-                    LuaState.LoadFile(modulePath);
-                    object[] ret = RunString(String.Format("return require('{0}.{1}')", mod.Namespace, importpath));
-                    if (ret[0] is not LuaTable)
+                    object[] ret = LoadLuaModule(modulePath, String.Format("{0}.{1}", mod.Namespace, importpath));
+                    if (ret.Length == 0 || ret[0] is not LuaTable)
                         throw new InvalidDataException(String.Format("Script did not load a table at mod '{0}'", modulePath));
                     LuaTable tbl2 = (LuaTable)ret[0];
                     addmeta.Call(tbl, tbl2);
@@ -931,7 +971,9 @@ namespace RogueEssence.Script
             DiagManager.Instance.LogInfo("[SE]:Setting up debug functions...");
             try
             {
-                LuaState.DoFile(PathMod.NoMod(String.Format("{0}{1}", SCRIPT_PATH, SCRIPT_DEBUG + ".lua")));
+                string debugScriptPath = PathMod.NoMod(String.Format("{0}{1}", SCRIPT_PATH, SCRIPT_DEBUG + ".lua"));
+                if (File.Exists(debugScriptPath))
+                    LuaState.DoString(ReadUtf8ScriptBytes(debugScriptPath), "@" + debugScriptPath);
             }
             catch (Exception ex)
             {
@@ -1257,13 +1299,13 @@ namespace RogueEssence.Script
 
             RunString(
                     String.Format(@"
-                        if {1} and {2} then
-                            xpcall( {2}, PrintStack)
+                        if {0} and {1} then
+                            xpcall( {1}, PrintStack)
                         end
-                        package.loaded.{0} = nil
-                        {1} = nil
-                        collectgarbage()", zoneassetname, ZoneCurrentScriptSym, String.Format(ZoneCleanupFun, ZoneCurrentScriptSym)),
+                        {0} = nil", ZoneCurrentScriptSym, String.Format(ZoneCleanupFun, ZoneCurrentScriptSym)),
                       "CleanZoneScript");
+            UnloadPackageModules(zoneassetname);
+            RunString("collectgarbage()", "CleanZoneScript");
 
             RunString(@"
                 local tbllen = 0
@@ -1326,13 +1368,13 @@ namespace RogueEssence.Script
 
             RunString(
                     String.Format(@"
-                        if {1} and {2} then
-                            xpcall( {2}, PrintStack)
+                        if {0} and {1} then
+                            xpcall( {1}, PrintStack)
                         end
-                        package.loaded.{0} = nil
-                        {1} = nil
-                        collectgarbage()", mapassetname, DungeonMapCurrentScriptSym, String.Format(DungeonMapCleanupFun, DungeonMapCurrentScriptSym)),
+                        {0} = nil", DungeonMapCurrentScriptSym, String.Format(DungeonMapCleanupFun, DungeonMapCurrentScriptSym)),
                       "CleanDungeonMapScript");
+            UnloadPackageModules(mapassetname);
+            RunString("collectgarbage()", "CleanDungeonMapScript");
 
             RunString(@"
                 local tbllen = 0
@@ -1378,7 +1420,8 @@ namespace RogueEssence.Script
             catch (Exception e)
             {
                 DiagManager.Instance.LogInfo("[SE]:LuaEngine.RunMapScript(): Error running map script!:\n" + e.Message + "\npath:\n" + relpath);
-                LuaState[mapassetname] = null;
+                DiagManager.Instance.LogError(e, false);
+                UnloadPackageModules(mapassetname);
             }
         }
 
@@ -1405,13 +1448,13 @@ namespace RogueEssence.Script
 
             RunString(
                     String.Format(@"
-                        if {1} and {2} then
-                            xpcall( {2}, PrintStack)
+                        if {0} and {1} then
+                            xpcall( {1}, PrintStack)
                         end
-                        package.loaded.{0} = nil
-                        {1} = nil
-                        collectgarbage()", mapassetname, MapCurrentScriptSym, String.Format(MapCleanupFun, MapCurrentScriptSym)),
+                        {0} = nil", MapCurrentScriptSym, String.Format(MapCleanupFun, MapCurrentScriptSym)),
                       "CleanMapScript");
+            UnloadPackageModules(mapassetname);
+            RunString("collectgarbage()", "CleanMapScript");
 
             RunString(@"
                 local tbllen = 0

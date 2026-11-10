@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using RogueElements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,9 +27,11 @@ namespace RogueEssence.Menu
         public Rect Bounds;
 
         public bool Visible { get; set; }
+        public bool Borderless { get; set; }
         public static bool Transparent;
         public static int BorderStyle;
         public static int BorderFlash;
+        private static BlendState borderlessBlend;
 
         public bool HasLabel()
         {
@@ -71,6 +73,21 @@ namespace RogueEssence.Menu
             spriteBatch.End();
             float scale = GraphicsManager.WindowZoom;
             Matrix zoomMatrix = Matrix.CreateScale(new Vector3(scale, scale, 1));
+            if (Borderless)
+            {
+                borderlessBlend ??= new BlendState { ColorWriteChannels = ColorWriteChannels.None };
+                spriteBatch.Begin(SpriteSortMode.Deferred, borderlessBlend, SamplerState.PointWrap, GraphicsManager.MenuPreStencil, null, GraphicsManager.MenuAlpha);
+                GraphicsManager.Pixel.Draw(spriteBatch, new Rectangle(Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height), null, Color.White);
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, GraphicsManager.MenuPostStencil, null, null, zoomMatrix);
+
+                foreach (IMenuElement element in GetDrawElements())
+                    element.Draw(spriteBatch, Bounds.Start);
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, zoomMatrix);
+                return;
+            }
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, GraphicsManager.MenuPreStencil, null, GraphicsManager.MenuAlpha);
 
             TileSheet menuBack = GraphicsManager.MenuBG;

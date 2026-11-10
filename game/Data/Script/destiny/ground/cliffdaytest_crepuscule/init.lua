@@ -50,6 +50,7 @@ local function synchroniser_ambiance(avec_fondu)
   if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
     return false
   end
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CarteCliff()
   SV.Destiny.FalaiseAmbiance = attendu
   if attendu == CARTE_CLIFF then return false end
@@ -127,6 +128,7 @@ function cliffdaytest_crepuscule.Enter(map)
 end
 
 function cliffdaytest_crepuscule.GameLoad(map)
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   entrer(map)
 end
 

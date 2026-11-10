@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueElements;
 using RogueEssence.LevelGen;
@@ -142,6 +142,21 @@ namespace RogueEssence.Dungeon
             CurrentGround = null;
         }
 
+        public void SyncGroundMaps()
+        {
+            if (String.IsNullOrEmpty(ID))
+                return;
+            if (DataManager.Instance == null || DataManager.Instance.DataIndices == null)
+                return;
+            if (!DataManager.Instance.DataIndices.ContainsKey(DataManager.DataType.Zone))
+                return;
+            if (!DataManager.Instance.DataIndices[DataManager.DataType.Zone].ContainsKey(ID))
+                return;
+            ZoneData latest = DataManager.Instance.GetZone(ID);
+            if (latest != null && latest.GroundMaps != null)
+                GroundMaps = new List<string>(latest.GroundMaps);
+        }
+
         public void SetCurrentMap(SegLoc map)
         {
             exitMap();
@@ -162,14 +177,19 @@ namespace RogueEssence.Dungeon
         /// <param name="mapname"></param>
         public void SetCurrentGround(string mapname)
         {
+            int index = GroundMaps != null ? GroundMaps.FindIndex((str) => (str == mapname)) : -1;
+            if (index == -1)
+            {
+                SyncGroundMaps();
+                index = GroundMaps != null ? GroundMaps.FindIndex((str) => (str == mapname)) : -1;
+            }
+
+            if (index <= -1)
+                throw new Exception(String.Format("Cannot find ground map of name {0} in {1}.", mapname, Name.DefaultText));
+
             exitMap();
 
-            int index = GroundMaps.FindIndex((str) => (str == mapname));
-
-            if (index > -1)
-                CurrentGround = GetGround(new SegLoc(-1, index));
-            else
-                throw new Exception(String.Format("Cannot find ground map of name {0} in {1}.", mapname, Name.DefaultText));
+            CurrentGround = GetGround(new SegLoc(-1, index));
 
             CurrentMapID = new SegLoc(-1, index);
         }
@@ -316,6 +336,10 @@ namespace RogueEssence.Dungeon
 
         public GroundMap GetGround(SegLoc id)
         {
+            if (GroundMaps == null || id.ID < 0 || id.ID >= GroundMaps.Count)
+                SyncGroundMaps();
+            if (GroundMaps == null || id.ID < 0 || id.ID >= GroundMaps.Count)
+                return null;
             return DataManager.Instance.GetGround(GroundMaps[id.ID]);
         }
 

@@ -32,9 +32,27 @@ local function installer_escalier(map)
   contact(map, 'PassageSalleCafe', 560, 216, 8, 24)
 end
 
+local function synchroniser_zone()
+  pcall(function()
+    if _ZONE ~= nil and _ZONE.CurrentZone ~= nil and _ZONE.CurrentZone.SyncGroundMaps ~= nil then
+      _ZONE.CurrentZone:SyncGroundMaps()
+    end
+  end)
+end
+
+local function tourner_vers(acteur, cible)
+  if acteur == nil or cible == nil or acteur == cible then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(acteur, cible, 4) end)
+  elseif GROUND.CharTurnToChar ~= nil then
+    pcall(function() GROUND:CharTurnToChar(acteur, cible) end)
+  end
+end
+
 local function aller_a(index_carte)
   if transition_cafe_en_cours then return end
   transition_cafe_en_cours = true
+  synchroniser_zone()
   SV.Destiny = SV.Destiny or {}
   if index_carte == 2 then SV.Destiny.RetourCafeAccueil = 'escalier' end
   if index_carte == 4 then SV.Destiny.ArriveeSalleCafe = true end
@@ -61,6 +79,7 @@ local function nommer_personnel()
 end
 
 function spindacafeetage1.Init(map)
+  synchroniser_zone()
   nommer_personnel()
   installer_escalier(map)
   activer('NewObject', 32)
@@ -81,7 +100,7 @@ function spindacafeetage1.Enter(map)
   GAME:FadeIn(30)
 end
 
-function spindacafeetage1.GameLoad(map) nommer_personnel(); suivi_interieurs.Activer(map);
+function spindacafeetage1.GameLoad(map) synchroniser_zone(); nommer_personnel(); suivi_interieurs.Activer(map);
   transition_cafe_en_cours = false
   installer_escalier(map)
   GAME:FadeIn(30)
@@ -100,6 +119,7 @@ function spindacafeetage1.Update(map, time)
 end
 
 function spindacafeetage1.NewObject_Action(personnage, activator)
+  tourner_vers(personnage, activator or CH('PLAYER'))
   dire(personnage, 'Happy', 'Cet étage est notre refuge quand l’accueil devient trop animé. On y prépare les réserves et les surprises.')
   UI:ResetSpeaker()
   UI:BeginChoiceMenu('Souhaitez-vous que je vous guide ?', {
@@ -112,19 +132,24 @@ function spindacafeetage1.NewObject_Action(personnage, activator)
   elseif choix == 2 then aller_a(4) end
 end
 
-local function dialogue_atelier(okeoke, qulbutoque)
+local function dialogue_atelier(okeoke, qulbutoque, activator)
+  local joueur = activator or CH('PLAYER')
+  tourner_vers(okeoke, joueur)
+  tourner_vers(qulbutoque, joueur)
   dire(okeoke, 'Happy', 'Ici, nous rangeons les caisses du recyclage : rubans, graines, éclats et petits objets oubliés.')
+  tourner_vers(qulbutoque, okeoke)
   dire(qulbutoque, 'Normal', 'Chaque équipe laisse quelque chose derrière elle. Notre travail est de lui trouver une seconde vie.')
+  tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Encore quelques étagères à monter, et l’atelier pourra recevoir les explorateurs.')
   UI:ResetSpeaker()
 end
 
 function spindacafeetage1.NewObject_1_Action(personnage, activator)
-  dialogue_atelier(personnage, CH('NewObject_2'))
+  dialogue_atelier(personnage, CH('NewObject_2'), activator)
 end
 
 function spindacafeetage1.NewObject_2_Action(personnage, activator)
-  dialogue_atelier(CH('NewObject_1'), personnage)
+  dialogue_atelier(CH('NewObject_1'), personnage, activator)
 end
 
 return spindacafeetage1
