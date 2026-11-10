@@ -79,11 +79,17 @@
       "Rogue": 0,
       "Grounds": [
         "cliffdaytest",
+        "cliffdaytest_nuit",
         "cliffdaytest_source",
         "cliffnordouesttest1",
         "cliffnordouesttest1_nuit",
-        "cliffdaytest_nuit",
-        "maison_equipe_falaise"
+        "guilde_cliff_jour",
+        "guilde_cliff_aube",
+        "guilde_cliff_crepuscule",
+        "guilde_cliff_nuit",
+        "maison_equipe_falaise",
+        "cliffdaytest_aube",
+        "cliffdaytest_crepuscule"
       ],
       "Maps": [],
       "Name": {

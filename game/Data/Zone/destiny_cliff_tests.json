@@ -2,9 +2,28 @@
   "Version": "0.8.12.0",
   "Object": {
     "$type": "RogueEssence.Data.ZoneData, RogueEssence",
-    "Name": "Destiny Cliff Tests",
+    "Name": {
+      "DefaultText": "Destiny Cliff Tests",
+      "LocalTexts": {
+        "fr": "Destiny — falaises Cliff (tests)"
+      }
+    },
     "Released": true,
-    "Comment": "Tests falaise : cliffdaytest + guilde_cliff v5.9 (WebP guild cliff 480x520, mer animée).",
-    "Segments": [{"Name": "Cliff Tests", "Maps": ["cliffdaytest", "cliffdaytest_nuit", "cliffdaytest_source", "cliffnordouesttest1", "cliffnordouesttest1_nuit", "guilde_cliff_jour", "guilde_cliff_aube", "guilde_cliff_crepuscule", "guilde_cliff_nuit"]}]
+    "Comment": "Tests falaise : cliffdaytest (jour), cliffdaytest_aube et cliffdaytest_crepuscule (mêmes reliefs, filtres aube et crépuscule), cliffdaytest_nuit (falaise du jour + filtre nuit), guilde_cliff v5.9 (WebP guild cliff 480x520, mer animée). GroundMaps remis : le validateur et le moteur lisent ce champ, pas Segments.",
+    "Segments": [],
+    "GroundMaps": [
+      "cliffdaytest",
+      "cliffdaytest_nuit",
+      "cliffdaytest_source",
+      "cliffnordouesttest1",
+      "cliffnordouesttest1_nuit",
+      "guilde_cliff_jour",
+      "guilde_cliff_aube",
+      "guilde_cliff_crepuscule",
+      "guilde_cliff_nuit",
+      "maison_equipe_falaise",
+      "cliffdaytest_aube",
+      "cliffdaytest_crepuscule"
+    ]
   }
 }
