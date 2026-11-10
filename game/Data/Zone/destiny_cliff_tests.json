@@ -2,38 +2,9 @@
   "Version": "0.8.12.0",
   "Object": {
     "$type": "RogueEssence.Data.ZoneData, RogueEssence",
-    "Name": {
-      "DefaultText": "Destiny — falaises Cliff (tests)",
-      "LocalTexts": {
-        "fr": "Destiny — falaises Cliff (tests)"
-      }
-    },
+    "Name": "Destiny Cliff Tests",
     "Released": true,
-    "Comment": "Zone conteneur des maps du lot destiny_cliff_tests — cliffdaytest (jour), cliffdaytest_aube et cliffdaytest_crepuscule (mêmes reliefs, filtres aube et crépuscule), cliffdaytest_nuit (falaise du jour avec filtre nuit), cliffnordouesttest1, maison_equipe_falaise.",
-    "NoEXP": false,
-    "ExpPercent": 100,
-    "Level": -1,
-    "LevelCap": false,
-    "KeepSkills": false,
-    "TeamRestrict": false,
-    "TeamSize": -1,
-    "MoneyRestrict": false,
-    "BagRestrict": -1,
-    "KeepTreasure": false,
-    "BagSize": -1,
-    "Persistent": false,
-    "Rescues": 0,
-    "Rogue": 0,
-    "Segments": [],
-    "GroundMaps": [
-      "cliffdaytest",
-      "cliffdaytest_source",
-      "cliffnordouesttest1",
-      "cliffnordouesttest1_nuit",
-      "cliffdaytest_nuit",
-      "maison_equipe_falaise",
-      "cliffdaytest_aube",
-      "cliffdaytest_crepuscule"
-    ]
+    "Comment": "Tests falaise : cliffdaytest + guilde_cliff v5.9 (WebP guild cliff 480x520, mer animée).",
+    "Segments": [{"Name": "Cliff Tests", "Maps": ["cliffdaytest", "cliffdaytest_nuit", "cliffdaytest_source", "cliffnordouesttest1", "cliffnordouesttest1_nuit", "guilde_cliff_jour", "guilde_cliff_aube", "guilde_cliff_crepuscule", "guilde_cliff_nuit"]}]
   }
 }
