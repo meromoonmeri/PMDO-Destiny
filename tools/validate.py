@@ -190,6 +190,18 @@ def main() -> None:
             for req_key in ('BlankBG', 'rand', 'Background', 'Layers', 'Decorations', 'Entities', 'obstacles', 'Status'):
                 if obj.get(req_key) is None:
                     errors.append(f'Ground {stem} missing or null required field: {req_key}')
+            bad_fl = 0
+            for layer in obj.get('Layers', []):
+                for col in layer.get('Tiles', []):
+                    for cell in col:
+                        for tl in cell.get('Layers', []):
+                            if tl.get('Frames') and (not isinstance(tl.get('FrameLength'), int) or tl['FrameLength'] <= 0):
+                                bad_fl += 1
+            for tl in obj.get('BlankBG', {}).get('Layers', []):
+                if tl.get('Frames') and (not isinstance(tl.get('FrameLength'), int) or tl['FrameLength'] <= 0):
+                    bad_fl += 1
+            if bad_fl:
+                errors.append(f'Ground {stem} has {bad_fl} TileLayer(s) with non-positive FrameLength')
             script = ROOT / 'game/Data/Script/destiny/ground' / stem / 'init.lua'
             if not script.is_file():
                 errors.append(f'Missing ground script: game/Data/Script/destiny/ground/{stem}/init.lua')

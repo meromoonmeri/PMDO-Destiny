@@ -61,7 +61,9 @@ namespace RogueEssence.Dungeon
         {
             if (Frames.Count > 0)
             {
-                int currentFrame = (int)(totalTick / (ulong)FrameTick.FrameToTick(FrameLength) % (ulong)Frames.Count);
+                int currentFrame = (Frames.Count == 1 || FrameLength <= 0)
+                    ? 0
+                    : (int)(totalTick / (ulong)FrameTick.FrameToTick(FrameLength) % (ulong)Frames.Count);
                 TileFrame frame = Frames[currentFrame];
                 if (frame != TileFrame.Empty)
                 {

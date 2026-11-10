@@ -28,6 +28,13 @@ def main() -> None:
         rs = ROOT / 'game/Data/Ground' / f'{stem}.rsground'
         doc = json.loads(rs.read_text(encoding='utf-8-sig'))['Object']
         assert doc['AssetName'] == stem and doc['EdgeView'] == 1 and doc['Decorations'] == []
+        assert doc.get('BlankBG') is not None
+        for layer in doc['Layers']:
+            for col in layer['Tiles']:
+                for cell in col:
+                    for tl in cell.get('Layers', []):
+                        if tl.get('Frames'):
+                            assert isinstance(tl.get('FrameLength'), int) and tl['FrameLength'] > 0, (stem, tl)
         obs = [[c['Tags'] for c in col] for col in doc['obstacles']]
         assert len(obs) == 80 and len(obs[0]) == 64
         # Entrée (24,292) et bord retour ouest (0..7, 272..312) libres
@@ -60,6 +67,9 @@ def main() -> None:
                 seen.add((nx, ny))
                 q.append((nx, ny))
     assert (1576, 2056) in seen
+
+    tile_layer_cs = (ROOT / 'engine/RogueEssence/RogueEssence/Dungeon/Tiles/TileLayer.cs').read_text(encoding='utf-8')
+    assert 'FrameLength <= 0' in tile_layer_cs, 'TileLayer.cs missing FrameLength <= 0 guard'
 
     # 4. Simulation Lua aller-retour et synchronisation 4 ambiances
     run(ROOT / 'tools/tests/test_falaise_promontoire_integration.lua', ROOT)
