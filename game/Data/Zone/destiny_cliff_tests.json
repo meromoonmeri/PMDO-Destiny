@@ -9,7 +9,7 @@
       }
     },
     "Released": true,
-    "Comment": "Tests falaise : cliffdaytest (jour), cliffdaytest_aube et cliffdaytest_crepuscule (mêmes reliefs, filtres aube et crépuscule), cliffdaytest_nuit (falaise du jour + filtre nuit), guilde_cliff v5.9 (WebP guild cliff 480x520, mer animée). GroundMaps remis : le validateur et le moteur lisent ce champ, pas Segments.",
+    "Comment": "Tests falaise : cliffdaytest (jour), cliffdaytest_aube et cliffdaytest_crepuscule (mêmes reliefs, filtres aube et crépuscule), cliffdaytest_nuit (falaise du jour + filtre nuit). Les cartes guilde_cliff v5.9 sont désormais dans la zone ville (town02_waterfallvillage), accessibles depuis le grand escalier nord. GroundMaps remis : le validateur et le moteur lisent ce champ, pas Segments.",
     "Segments": [],
     "GroundMaps": [
       "cliffdaytest",
@@ -17,10 +17,6 @@
       "cliffdaytest_source",
       "cliffnordouesttest1",
       "cliffnordouesttest1_nuit",
-      "guilde_cliff_jour",
-      "guilde_cliff_aube",
-      "guilde_cliff_crepuscule",
-      "guilde_cliff_nuit",
       "maison_equipe_falaise",
       "cliffdaytest_aube",
       "cliffdaytest_crepuscule"
