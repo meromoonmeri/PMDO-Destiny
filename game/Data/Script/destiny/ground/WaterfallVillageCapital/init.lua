@@ -1423,6 +1423,7 @@ function ville.GameLoad(map)
   entrer(map)
 end
 function ville.Exit(map) end
+local tic_ambiance -- déclaration anticipée (défini plus bas, ambiance vivante)
 function ville.Update(map, time) tic_ambiance() end
 
 
@@ -1456,7 +1457,7 @@ local function discussion_ambiance(cycle)
     geste_ambiance(paire[2], 'glowing')
   end
 end
-local function tic_ambiance()
+tic_ambiance = function()
   if not vie_ville_activee then return end
   horloge_ambiance = horloge_ambiance + 1
   if horloge_ambiance % 540 == 0 then
