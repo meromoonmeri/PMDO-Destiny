@@ -894,7 +894,10 @@ namespace RogueEssence.Ground
 
         public void DrawDefaultTile(SpriteBatch spriteBatch, Loc drawPos, Loc mapPos)
         {
-            INoise noise = new ReNoise(rand.FirstSeed);
+            if (BlankBG == null)
+                return;
+            ulong seed = rand != null ? rand.FirstSeed : 0;
+            INoise noise = new ReNoise(seed);
             BlankBG.DrawBlank(spriteBatch, drawPos, noise.Get2DUInt64((ulong)mapPos.X, (ulong)mapPos.Y));
         }
 
@@ -1186,6 +1189,21 @@ namespace RogueEssence.Ground
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context)
         {
+            if (rand == null)
+                rand = new ReRandom(0);
+            if (BlankBG == null)
+                BlankBG = new AutoTile();
+            if (Background == null)
+                Background = new MapBG();
+            if (Status == null)
+                Status = new Dictionary<string, MapStatus>();
+            if (Layers == null)
+                Layers = new List<MapLayer>();
+            if (Decorations == null)
+                Decorations = new List<AnimLayer>();
+            if (Entities == null)
+                Entities = new List<EntityLayer>();
+
             //recompute the grid
             grid = new AABB.Grid(MathUtils.DivUp(GroundWidth, GraphicsManager.TileSize), MathUtils.DivUp(GroundHeight, GraphicsManager.TileSize), GraphicsManager.TileSize);
 
@@ -1195,7 +1213,8 @@ namespace RogueEssence.Ground
                 signCharToMap(ActiveChar);
             }
 
-            ReloadEntLayer(0);
+            if (Entities.Count > 0)
+                ReloadEntLayer(0);
 
             scriptEvents = new Dictionary<LuaEngine.EMapCallbacks, ScriptEvent>();
         }

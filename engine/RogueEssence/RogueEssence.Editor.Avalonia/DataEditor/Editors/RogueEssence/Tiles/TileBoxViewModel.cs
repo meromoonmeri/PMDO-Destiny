@@ -49,6 +49,11 @@ namespace RogueEssence.Dev.ViewModels
 
         private void updatePreview()
         {
+            if (Tile == null)
+            {
+                Preview = TileFrame.Empty;
+                return;
+            }
             //TODO: draw all layers, and draw the animations too
             if (!String.IsNullOrEmpty(Tile.AutoTileset))
             {

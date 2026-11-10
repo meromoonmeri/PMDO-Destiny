@@ -184,8 +184,12 @@ def main() -> None:
                 errors.append(f'Zone index Grounds mismatch: {zid}')
         for stem, path in sorted(grounds_on_disk.items()):
             doc = json.loads(path.read_text(encoding='utf-8-sig'))
-            if doc.get('Object', {}).get('AssetName') != stem:
+            obj = doc.get('Object', {})
+            if obj.get('AssetName') != stem:
                 errors.append(f'Ground AssetName mismatch: {stem}')
+            for req_key in ('BlankBG', 'rand', 'Background', 'Layers', 'Decorations', 'Entities', 'obstacles', 'Status'):
+                if obj.get(req_key) is None:
+                    errors.append(f'Ground {stem} missing or null required field: {req_key}')
             script = ROOT / 'game/Data/Script/destiny/ground' / stem / 'init.lua'
             if not script.is_file():
                 errors.append(f'Missing ground script: game/Data/Script/destiny/ground/{stem}/init.lua')
