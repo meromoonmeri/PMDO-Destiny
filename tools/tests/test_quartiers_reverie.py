@@ -34,7 +34,7 @@ for start,target in [((120,952),(120,888)),((776,872),(776,808)),((1200,872),(12
   for p in ((x+4,y),(x-4,y),(x,y+4),(x,y-4)):
    if p not in seen and free(*p):seen.add(p);q.append(p)
  assert target in seen,(start,target);print('PASS passage',start,target)
-z=json.loads((R/'game/Data/Zone/town02_waterfallvillage.json').read_text(encoding='utf-8-sig'))['Object']['GroundMaps'];idx=json.loads((R/'game/Data/Zone/index.idx').read_text(encoding='utf-8-sig'))['Object']['town02_waterfallvillage']['Grounds'];assert z==idx and z[19:]==['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang']
+z=json.loads((R/'game/Data/Zone/town02_waterfallvillage.json').read_text(encoding='utf-8-sig'))['Object']['GroundMaps'];idx=json.loads((R/'game/Data/Zone/index.idx').read_text(encoding='utf-8-sig'))['Object']['town02_waterfallvillage']['Grounds'];assert z==idx and z[19:]==['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang','guilde_cliff_jour','guilde_cliff_aube','guilde_cliff_crepuscule','guilde_cliff_nuit']
 for name in ['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang']:
  s=(R/'game/Data/Script/destiny/ground'/name/'init.lua').read_text(encoding='utf8');assert "require 'destiny.ground.WaterfallVillageCapital.init'" in s
 print('PASS zone, alias et liaisons existantes ; partie réelle nécessaire')
