@@ -484,10 +484,10 @@ assert mer.startswith(b'OggS') and b'vorbis' in mer
 ville_script = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
 assert "parler(hero" not in ville_script
 # Audit de la visite : guide en portrait de droite, face à face à
-# l’accueil et à la fin, regards vers les lieux montrés, rotations à 4.
+# l’accueil, en fin de tour et après le départ de Lyra, regards vers les lieux montrés, rotations à 4.
 assert "require 'destiny.cinematique'" in ville_script
 assert "cinematique.Dire(partenaire, emotion, texte, 'droite')" in ville_script
-assert ville_script.count('se_faire_face_ville(partenaire, hero)') == 2
+assert ville_script.count('se_faire_face_ville(partenaire, hero)') == 3
 assert 'regarder_lieu_ville(hero, partenaire, Direction.UpLeft)' in ville_script
 # La visite reste au centre : les commerces et le marché sont montrés,
 # mais les panoramas des autres quartiers ne font plus partie de la scène.
