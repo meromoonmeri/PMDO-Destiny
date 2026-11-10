@@ -3,7 +3,7 @@
 from pathlib import Path
 import json,collections
 R=Path(__file__).resolve().parents[2];G=R/'game';load=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))['Object']
-z=load(G/'Data/Zone/destiny_cliff_tests.json')['GroundMaps'];i=load(G/'Data/Zone/index.idx')['destiny_cliff_tests']['Grounds'];assert z==i==['cliffdaytest','cliffdaytest_source','cliffnordouesttest1','cliffnordouesttest1_nuit','cliffdaytest_nuit','maison_equipe_falaise']
+z=load(G/'Data/Zone/destiny_cliff_tests.json')['GroundMaps'];i=load(G/'Data/Zone/index.idx')['destiny_cliff_tests']['Grounds'];assert z==i==['cliffdaytest','cliffdaytest_nuit','cliffdaytest_source','cliffnordouesttest1','cliffnordouesttest1_nuit','maison_equipe_falaise','cliffdaytest_aube','cliffdaytest_crepuscule']
 m=load(G/'Data/Ground/maison_equipe_falaise.rsground');assert m['AssetName']=='maison_equipe_falaise';e=m['Entities'][0];assert not e['MapChars'] and not e['Spawners'];assert any(x['EntName']=='entree' for x in e['Markers'])
 objs={o['EntName']:o for o in e['GroundObjects']};assert set(objs)=={'SortieMaison','LitEquipe','LitPartenaire'} and objs['SortieMaison']['triggerType']==2
 for name in ('LitEquipe','LitPartenaire'):assert objs[name]['ObjectAnim']['AnimIndex']=='Hay_Bed' and objs[name]['triggerType']==1 and not objs[name]['Passable']
