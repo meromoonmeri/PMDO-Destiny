@@ -83,10 +83,6 @@
         "cliffdaytest_source",
         "cliffnordouesttest1",
         "cliffnordouesttest1_nuit",
-        "guilde_cliff_jour",
-        "guilde_cliff_aube",
-        "guilde_cliff_crepuscule",
-        "guilde_cliff_nuit",
         "maison_equipe_falaise",
         "cliffdaytest_aube",
         "cliffdaytest_crepuscule"
@@ -217,7 +213,11 @@
         "reverie_centre",
         "reverie_nord",
         "reverie_residentiel",
-        "reverie_etang"
+        "reverie_etang",
+        "guilde_cliff_jour",
+        "guilde_cliff_aube",
+        "guilde_cliff_crepuscule",
+        "guilde_cliff_nuit"
       ],
       "Maps": [],
       "Name": {
