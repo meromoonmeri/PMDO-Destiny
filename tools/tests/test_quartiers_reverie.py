@@ -10,19 +10,31 @@ def part(data,key,end):
 def grid(data):return part(data,'obstacles',b',"rand":')
 # La fusion ne peut pas introduire un chemin inexistant sur la ville globale.
 PASSAGE_ETANG={(147,272),(148,272)}|{(x,y) for x in range(178,188) for y in range(256,262)}|{(x,y) for x in range(192,200) for y in range(256,262)}
+# Audit visuel/obstacles : bosses fantômes dégagées (49,202 + diagonale 155..157,263..267),
+# fente falaise est du Café (160..184,170) et poche eau cascade (146,249) refermées.
+AUDIT_CLEAR={(49,202),(155,263),(155,264),(156,265),(156,266),(157,267)}
+AUDIT_BLOCK_CLIFF={(x,170) for x in range(160,185)}
 for suffix in ('','_Dev'):
  oc=grid(read(ref,'reverie_centre'+suffix));on=grid(read(ref,'reverie_nord'+suffix));c=grid(read(game,'reverie_centre'+suffix));n=grid(read(game,'reverie_nord'+suffix));global_=grid(read(game,'WaterfallVillageCapital'+suffix));changed=0
  for x in range(200):
   for y in range(500):
    expected=min(oc[x][y]['Tags'],on[x][y]['Tags'])
-   if (x,y) in {(96,154),(96,155)}:
-    # Panneau déplacé : deux cases sont volontairement bloquées et la connectivité a été vérifiée.
+   if (x,y) in {(96,154),(96,155)}|AUDIT_BLOCK_CLIFF:
+    # Panneau déplacé (96,154..155) et mur de falaise est du Café (160..184,170) bloqués.
     assert expected==0 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==1
+   elif (x,y) in AUDIT_CLEAR:
+    assert expected==1 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==0
    else:
     assert c[x][y]['Tags']==n[x][y]['Tags']==expected;assert expected==1 or global_[x][y]['Tags']==0
    assert c[x][y]['Bounds']==oc[x][y]['Bounds'] and n[x][y]['Bounds']==on[x][y]['Bounds'];changed+=oc[x][y]['Tags']!=expected
  assert changed==7095
- original=grid(read(ref,'reverie_residentiel'+suffix));current=grid(read(game,'reverie_residentiel'+suffix));assert original==current,'reverie_residentiel'
+ original=grid(read(ref,'reverie_residentiel'+suffix));current=grid(read(game,'reverie_residentiel'+suffix))
+ for x in range(200):
+  for y in range(500):
+   if (x,y) in AUDIT_CLEAR:
+    assert original[x][y]['Tags']==1 and current[x][y]['Tags']==0 and current[x][y]['Bounds']==original[x][y]['Bounds']
+   else:
+    assert current[x][y]==original[x][y],('reverie_residentiel',x,y)
  orig_etang=grid(read(ref,'reverie_etang'+suffix));cur_etang=grid(read(game,'reverie_etang'+suffix));etang_cleared=0
  for x in range(200):
   for y in range(500):
@@ -30,6 +42,10 @@ for suffix in ('','_Dev'):
     # Coin du bassin (147..148,272) et deux arbres du chemin est dégagés vers falaise_promontoire.
     assert cur_etang[x][y]['Tags']==0 and global_[x][y]['Tags']==0 and cur_etang[x][y]['Bounds']==orig_etang[x][y]['Bounds']
     etang_cleared+=1
+   elif (x,y) in AUDIT_CLEAR:
+    assert orig_etang[x][y]['Tags']==1 and cur_etang[x][y]['Tags']==0 and global_[x][y]['Tags']==0 and cur_etang[x][y]['Bounds']==orig_etang[x][y]['Bounds']
+   elif (x,y)==(146,249):
+    assert orig_etang[x][y]['Tags']==0 and cur_etang[x][y]['Tags']==1 and global_[x][y]['Tags']==1 and cur_etang[x][y]['Bounds']==orig_etang[x][y]['Bounds']
    else:
     assert cur_etang[x][y]==orig_etang[x][y],('reverie_etang',x,y)
  assert etang_cleared==107,etang_cleared
