@@ -33,6 +33,13 @@ local cartes_guilde = {
   crepuscule = 'guilde_cliff_crepuscule',
   nuit = 'guilde_cliff_nuit',
 }
+local index_promontoire = {jour = 0, aube = 1, crepuscule = 2, nuit = 3}
+local cartes_promontoire = {
+  jour = 'falaise_promontoire_jour',
+  aube = 'falaise_promontoire_aube',
+  crepuscule = 'falaise_promontoire_crepuscule',
+  nuit = 'falaise_promontoire_nuit',
+}
 local cartes_reveil = {
   jour = 'zrv2_zone_reveil_jour',
   aube = 'zrv2_zone_reveil_aube',
@@ -94,6 +101,14 @@ end
 
 function meteo.CarteGuilde()
   return cartes_guilde[meteo.Moment()] or 'guilde_cliff_jour'
+end
+
+function meteo.IndexPromontoire()
+  return index_promontoire[meteo.Moment()] or 0
+end
+
+function meteo.CartePromontoire()
+  return cartes_promontoire[meteo.Moment()] or 'falaise_promontoire_jour'
 end
 
 function meteo.CarteReveil()

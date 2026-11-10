@@ -502,12 +502,28 @@ local function installer_sortie_e2(map)
   map:AddObject(sortie)
 end
 
+local function installer_sortie_promontoire(map)
+  if map ~= nil and not objet_dans_quartier(map, 1592, 2064) then
+    if map:FindObject('SortieFalaisePromontoire') then GROUND:RemoveObject('SortieFalaisePromontoire') end
+    return
+  end
+  if map == nil or map:FindObject('SortieFalaisePromontoire') then return end
+  local sortie = RogueEssence.Ground.GroundObject()
+  sortie.EntName = 'SortieFalaisePromontoire'
+  sortie.Collider = RogueElements.Rect(1584, 2024, 16, 72)
+  sortie.Passable = false
+  sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  sortie:OnMapInit()
+  map:AddObject(sortie)
+end
+
 local function installer_portes(map)
   -- Ancien raccord non confirmé vers un dojo extérieur au projet : retirer
   -- uniquement le capteur résiduel, sans effacer la carte ni ses sauvegardes.
   if map ~= nil and map:FindObject('PorteTenteEst') then GROUND:RemoveObject('PorteTenteEst') end
   installer_sortie_carrefour(map)
   installer_sortie_e2(map)
+  installer_sortie_promontoire(map)
   installer_liaisons_quartiers(map)
   -- Les deux tableaux existants proposent missions et gazette.
   installer_une_porte(map, 'TableauReverieNord', 144, 400, 56, 48)
@@ -1428,7 +1444,13 @@ local function entrer(map)
   local passage = SV.Destiny.PassageQuartier
   if passage ~= nil then
     SV.Destiny.PassageQuartier = nil
-    local dir = passage.dir == 'Up' and Direction.Up or Direction.Down
+    local directions = {
+      Up = Direction.Up,
+      Down = Direction.Down,
+      Left = Direction.Left or Direction.Down,
+      Right = Direction.Right or Direction.Down,
+    }
+    local dir = directions[passage.dir] or Direction.Down
     if hero ~= nil then
       local x,y = case_proche(map, passage.x, passage.y)
       GROUND:TeleportTo(hero,x,y,dir)
@@ -1677,6 +1699,18 @@ function ville.PorteGuildeNord_Touch(obj, activator)
   SV.Destiny.RetourBatimentPartenaire = {x=776, y=48, px=748, py=48}
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, index, 0)
+end
+
+-- Falaise du Promontoire : depuis le chemin est après le grand bassin
+-- (reverie_etang), rejoint la variante synchronisée avec le moment de Réverie.
+function ville.SortieFalaisePromontoire_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if entree_batiment_en_cours then return end
+  entree_batiment_en_cours = true
+  if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
+  SV.Destiny = SV.Destiny or {}
+  GAME:FadeOut(false, 20)
+  GAME:EnterZone('falaise_promontoire', -1, meteo_reverie.IndexPromontoire(), 0)
 end
 
 for _, porte_def in ipairs(portes_batiments) do

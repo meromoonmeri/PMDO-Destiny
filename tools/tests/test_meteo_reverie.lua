@@ -57,17 +57,17 @@ print('PASS carrefour Init et GameLoad, sorties intactes')
 
 -- Synchronisation scénario 4 ambiances (jour, aube, crépuscule, nuit) et statut dark natif.
 SV={Destiny={JourneeVille=5,MeteoReverie={jour=5,temps='clair'}}}
-assert(m.Moment()=='jour' and not m.EstNuit() and m.CarteCliff()=='cliffdaytest' and m.IndexGuilde()==23)
+assert(m.Moment()=='jour' and not m.EstNuit() and m.CarteCliff()=='cliffdaytest' and m.IndexGuilde()==23 and m.IndexPromontoire()==0 and m.CartePromontoire()=='falaise_promontoire_jour')
 SV.Destiny.VisiteVille='terminee'
 for _,cas in ipairs({
-  {'jour',       false, 'cliffdaytest',            23, 'guilde_cliff_jour'},
-  {'aube',       false, 'cliffdaytest_aube',       24, 'guilde_cliff_aube'},
-  {'crepuscule', false, 'cliffdaytest_crepuscule', 25, 'guilde_cliff_crepuscule'},
-  {'nuit',       true,  'cliffdaytest_nuit',       26, 'guilde_cliff_nuit'},
+  {'jour',       false, 'cliffdaytest',            23, 'guilde_cliff_jour',       0, 'falaise_promontoire_jour'},
+  {'aube',       false, 'cliffdaytest_aube',       24, 'guilde_cliff_aube',       1, 'falaise_promontoire_aube'},
+  {'crepuscule', false, 'cliffdaytest_crepuscule', 25, 'guilde_cliff_crepuscule', 2, 'falaise_promontoire_crepuscule'},
+  {'nuit',       true,  'cliffdaytest_nuit',       26, 'guilde_cliff_nuit',       3, 'falaise_promontoire_nuit'},
 }) do
-  local nom,nuit,cliff,idx,guilde=cas[1],cas[2],cas[3],cas[4],cas[5]
+  local nom,nuit,cliff,idx,guilde,pidx,prom=cas[1],cas[2],cas[3],cas[4],cas[5],cas[6],cas[7]
   m.DefinirMomentScenario(nom)
-  assert(m.Moment()==nom and m.EstNuit()==nuit and m.CarteCliff()==cliff and m.IndexGuilde()==idx and m.CarteGuilde()==guilde)
+  assert(m.Moment()==nom and m.EstNuit()==nuit and m.CarteCliff()==cliff and m.IndexGuilde()==idx and m.CarteGuilde()==guilde and m.IndexPromontoire()==pidx and m.CartePromontoire()==prom)
   statuses={dark=not nuit}
   assert(m.Appliquer({AssetName='WaterfallVillageCapital'}))
   assert((statuses.dark==true)==nuit and SV.Destiny.MomentReverie==nom)
@@ -79,7 +79,7 @@ end
 m.EffacerMomentScenario()
 assert(m.Moment()=='jour' and not m.EstNuit())
 _ZONE={CurrentGround={AssetName='reverie_centre',Status={ContainsKey=function(_,k) return k=='dark' end}}}
-assert(m.Moment()=='nuit' and m.CarteCliff()=='cliffdaytest_nuit' and m.IndexGuilde()==26)
+assert(m.Moment()=='nuit' and m.CarteCliff()=='cliffdaytest_nuit' and m.IndexGuilde()==26 and m.IndexPromontoire()==3 and m.CartePromontoire()=='falaise_promontoire_nuit')
 _ZONE=nil
 m.DefinirMomentScenario('nuit')
 -- Routage direct de SortieFalaise sans menu de choix en mode nuit.
