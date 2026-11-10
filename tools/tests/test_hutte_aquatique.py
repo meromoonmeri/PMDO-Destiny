@@ -5,7 +5,7 @@ import json,struct,io
 from collections import deque
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[2];game=ROOT/'game';name='reverie_hutte_aquatique';sheet='Reverie_Hutte_Aquatique'
-z=json.loads((game/'Data/Zone/town02_waterfallvillage.json').read_text(encoding='utf8'))['Object']['GroundMaps'];i=json.loads((game/'Data/Zone/index.idx').read_text(encoding='utf8'))['Object']['town02_waterfallvillage']['Grounds'];assert z==i and len(z)==23 and z[18]==name and z[17]=='dojo_kingambit' and z[19:]==['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang']
+z=json.loads((game/'Data/Zone/town02_waterfallvillage.json').read_text(encoding='utf8'))['Object']['GroundMaps'];i=json.loads((game/'Data/Zone/index.idx').read_text(encoding='utf8'))['Object']['town02_waterfallvillage']['Grounds'];assert z==i and len(z)==27 and z[18]==name and z[17]=='dojo_kingambit' and z[19:]==['reverie_centre','reverie_nord','reverie_residentiel','reverie_etang','guilde_cliff_jour','guilde_cliff_aube','guilde_cliff_crepuscule','guilde_cliff_nuit']
 g=json.loads((game/'Data/Ground'/f'{name}.rsground').read_text(encoding='utf-8-sig'))['Object'];assert g['AssetName']==name and g['TexSize']==1 and len(g['Layers'])==1
 arr=g['Layers'][0]['Tiles'];assert len(arr)==49 and all(len(c)==36 for c in arr)
 b=(game/'Content/Tile'/f'{sheet}.tile').read_bytes();size,count=struct.unpack_from('<ii',b);assert size==8 and count==1785
