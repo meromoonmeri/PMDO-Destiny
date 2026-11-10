@@ -404,7 +404,7 @@ local function former_etoile_fluide(starter, options)
     -- Le point où le clic droit commence devient immédiatement l'ancre.
     -- Pendant le maintien, les particules suivent ensuite la souris avec un
     -- léger amortissement pour éviter tout tremblement.
-    if not etat.ancre_prete then
+    elseif not etat.ancre_prete then
       etat.ancre_x, etat.ancre_y = mx, my
       etat.ancre_prete = true
     elseif clic_droit and not etat.clic_droit_precedent and souris_ok then
@@ -420,7 +420,6 @@ local function former_etoile_fluide(starter, options)
       local suivi = maintenu and 0.20 or 0.38
       etat.ancre_x = etat.ancre_x + (cible_x - etat.ancre_x) * suivi
       etat.ancre_y = etat.ancre_y + (cible_y - etat.ancre_y) * suivi
-    end
     end
     etat.clic_droit_precedent = clic_droit
 
@@ -599,6 +598,7 @@ local function reveler_starter(nature, starter)
   -- Le fond Dream de la carte n'a jamais été remplacé : il reste donc tel
   -- quel derrière le portrait natif du starter. Le nom vide évite le
   -- préfixe « Nom : » ; la phrase porte le nom coloré selon le type.
+  UI:ResetSpeaker()
   UI:SetSpeaker('', false, starter.espece, starter.forme, 'normal', Gender.Genderless)
   UI:SetSpeakerEmotion('Happy')
   UI:WaitShowDialogue('Quelqu’un comme toi serait ' .. nom_colore_type(starter) .. ' !')

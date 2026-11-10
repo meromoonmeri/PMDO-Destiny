@@ -57,7 +57,7 @@ for _,res in ipairs({'failed','downed'}) do fight.ExitSegment(nil,res,false,0,0)
 fight.ExitSegment(nil,'cleared',false,0,0);assert(SV.Destiny.CombatDazzling=='victoire')
 local lost=assert(loadfile(zones..'/lost_wood/init.lua'))()
 for _,res in ipairs({'failed','downed'}) do
- SV.Destiny={LostWoodTrip='aller'};lost.ExitSegment(nil,res,false,0,0);assert(SV.Destiny.LostWoodCause=='ko' and enter[1]=='destiny_cliff_tests' and enter[3]==4)
+ SV.Destiny={LostWoodTrip='aller'};lost.ExitSegment(nil,res,false,0,0);assert(SV.Destiny.LostWoodCause=='ko' and enter[1]=='destiny_cliff_tests' and enter[3]==1)
  SV.Destiny={LostWoodTrip='retour'};lost.ExitSegment(nil,res,false,1,0);assert(SV.Destiny.LostWoodCause=='ko' and enter[1]=='reverie' and enter[3]==10)
  SV.Destiny={ExplorationReverie=true};lost.ExitSegment(nil,res,false,0,0);assert(SV.Destiny.ExplorationReverie==nil and enter[1]=='town02_waterfallvillage')
 end

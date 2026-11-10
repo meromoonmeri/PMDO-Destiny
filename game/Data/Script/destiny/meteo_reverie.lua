@@ -1,5 +1,7 @@
--- Météo quotidienne de Réverie, indépendante de l'horloge réelle.
--- Les effets PMDO de Ground sont visuels : aucune règle de donjon modifiée.
+-- Météo quotidienne et ambiance (jour/aube/crépuscule/nuit) de Réverie Town
+-- et des cartes à 4 variantes d'ambiance. Pilotée par le scénario
+-- (SV.Destiny.MomentScenario), indépendante de l'horloge réelle. Les effets
+-- PMDO de Ground sont visuels : aucune règle de donjon modifiée.
 local meteo = {}
 local descriptions = {
   clair = 'Le temps est clair à Réverie aujourd’hui.',
@@ -16,6 +18,109 @@ local exterieurs = {
   reverie_residentiel=true, reverie_residentiel_Dev=true,
   crossroadreverietown2=true,
 }
+
+local moments_valides = {jour=true, aube=true, crepuscule=true, nuit=true}
+local cartes_cliff = {
+  jour = 'cliffdaytest',
+  aube = 'cliffdaytest_aube',
+  crepuscule = 'cliffdaytest_crepuscule',
+  nuit = 'cliffdaytest_nuit',
+}
+local index_guilde = {jour = 23, aube = 24, crepuscule = 25, nuit = 26}
+local cartes_guilde = {
+  jour = 'guilde_cliff_jour',
+  aube = 'guilde_cliff_aube',
+  crepuscule = 'guilde_cliff_crepuscule',
+  nuit = 'guilde_cliff_nuit',
+}
+local cartes_reveil = {
+  jour = 'zrv2_zone_reveil_jour',
+  aube = 'zrv2_zone_reveil_aube',
+  crepuscule = 'zrv2_zone_reveil_crepuscule',
+  nuit = 'zrv2_zone_reveil_nuit',
+}
+
+local carte_appliquee = nil
+local dernier_moment_applique = nil
+
+local function dark_actif_sur_carte()
+  if _ZONE == nil or _ZONE.CurrentGround == nil then return false end
+  if not exterieurs[_ZONE.CurrentGround.AssetName] then return false end
+  local ok, actif = pcall(function()
+    local st = _ZONE.CurrentGround.Status
+    return st ~= nil and st:ContainsKey('dark') == true
+  end)
+  return ok and actif == true
+end
+
+-- Le moment de Réverie Town dépend du scénario :
+-- 1) Surcharge explicite de chapitre/scène : SV.Destiny.MomentScenario
+-- 2) Avant la fin de la première visite en ville : 'jour' (« Le jour se lève »)
+-- 3) Statut moteur natif 'dark' sur la carte extérieure active -> 'nuit'
+-- 4) Dernier moment synchronisé (SV.Destiny.MomentReverie), sinon 'jour'.
+function meteo.Moment()
+  local d = SV ~= nil and SV.Destiny or nil
+  if d ~= nil and moments_valides[d.MomentScenario] then
+    return d.MomentScenario
+  end
+  if d == nil or d.VisiteVille ~= 'terminee' then
+    return 'jour'
+  end
+  if dark_actif_sur_carte() then
+    d.MomentReverie = 'nuit'
+    return 'nuit'
+  end
+  if _ZONE ~= nil and _ZONE.CurrentGround ~= nil and carte_appliquee == _ZONE.CurrentGround and dernier_moment_applique == 'nuit' then
+    d.MomentReverie = 'jour'
+    return 'jour'
+  end
+  if moments_valides[d.MomentReverie] then
+    return d.MomentReverie
+  end
+  return 'jour'
+end
+
+function meteo.EstNuit()
+  return meteo.Moment() == 'nuit'
+end
+
+function meteo.CarteCliff()
+  return cartes_cliff[meteo.Moment()] or 'cliffdaytest'
+end
+
+function meteo.IndexGuilde()
+  return index_guilde[meteo.Moment()] or 23
+end
+
+function meteo.CarteGuilde()
+  return cartes_guilde[meteo.Moment()] or 'guilde_cliff_jour'
+end
+
+function meteo.CarteReveil()
+  return cartes_reveil[meteo.Moment()] or 'zrv2_zone_reveil_jour'
+end
+
+function meteo.DefinirMomentScenario(moment)
+  SV.Destiny = SV.Destiny or {}
+  if moments_valides[moment] then
+    SV.Destiny.MomentScenario = moment
+    SV.Destiny.MomentReverie = moment
+  else
+    SV.Destiny.MomentScenario = nil
+    SV.Destiny.MomentReverie = nil
+    carte_appliquee = nil
+    dernier_moment_applique = nil
+    pcall(function() GROUND:RemoveMapStatus('dark') end)
+  end
+  if _ZONE ~= nil and _ZONE.CurrentGround ~= nil and exterieurs[_ZONE.CurrentGround.AssetName] then
+    meteo.Appliquer(_ZONE.CurrentGround)
+  end
+  return meteo.Moment()
+end
+
+function meteo.EffacerMomentScenario()
+  return meteo.DefinirMomentScenario(nil)
+end
 
 -- Le tirage n'a lieu qu'une fois par journée de jeu et reste dans la
 -- sauvegarde. Une ancienne partie sans ce champ est initialisée à la volée.
@@ -45,6 +150,9 @@ end
 function meteo.Appliquer(map)
   if map == nil or not exterieurs[map.AssetName] then return false end
   local temps = meteo.Temps()
+  local moment = meteo.Moment()
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.MomentReverie = moment
   local ok, err = pcall(function()
     -- La ville possédait déjà ces ombres de nuage : les garder intactes.
     if map.AssetName ~= 'crossroadreverietown2' then
@@ -54,8 +162,18 @@ function meteo.Appliquer(map)
       GROUND:RemoveMapStatus(statut)
     end
     if effets[temps] ~= nil then GROUND:AddMapStatus(effets[temps]) end
+    if moment == 'nuit' then
+      GROUND:AddMapStatus('dark')
+    else
+      GROUND:RemoveMapStatus('dark')
+    end
   end)
-  if not ok then print('[Destiny] Météo extérieure indisponible : '..tostring(err)) end
+  if ok then
+    carte_appliquee = map
+    dernier_moment_applique = moment
+  else
+    print('[Destiny] Météo extérieure indisponible : '..tostring(err))
+  end
   return ok
 end
 

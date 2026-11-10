@@ -31,12 +31,18 @@ function crossroadreverietown2.Init(map)
 end
 
 local function entrer()
+  sortie_en_cours = false
   SOUND:PlayBGM("Wigglytuff's Guild.ogg", true)
   GAME:FadeIn(20)
 end
 function crossroadreverietown2.Enter(map) entrer() end
 function crossroadreverietown2.GameLoad(map) meteo_reverie.Appliquer(map); entrer() end
-function crossroadreverietown2.Update(map, time) end
+function crossroadreverietown2.Update(map, time)
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.MomentScenario ~= nil
+      and SV.Destiny.MomentScenario ~= SV.Destiny.MomentReverie then
+    meteo_reverie.Appliquer(map)
+  end
+end
 
 local function aller(zone, ground, marqueur)
   if sortie_en_cours then return end
@@ -46,9 +52,18 @@ local function aller(zone, ground, marqueur)
 end
 
 function crossroadreverietown2.SortieFalaise_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_en_cours then return end
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.VisiteVille == 'terminee' then
+    local ground = meteo_reverie.CarteCliff()
+    SV.Destiny.FalaiseAmbiance = ground
+    aller('destiny_cliff_tests', ground, 'Dazzling_Entry_South')
+    return
+  end
   aller('destiny_cliff_tests', 'cliffdaytest', 'Dazzling_Entry_South')
 end
 function crossroadreverietown2.SortieVille_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   aller('town02_waterfallvillage', 'WaterfallVillageCapital', 'entrance')
 end
 

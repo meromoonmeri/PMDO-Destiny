@@ -1,7 +1,9 @@
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local meteo_reverie = require 'destiny.meteo_reverie'
 local cliffdaytest = {}
+local CARTE_CLIFF = 'cliffdaytest'
 local function anim(ch, name, looped)
   if ch ~= nil then GROUND:CharSetAnim(ch, name, looped) end
 end
@@ -387,6 +389,45 @@ function cliffdaytest.Init(map)
   -- Adagio, Sonata et Aria restent définies par leurs spawners, mais elles
   -- n'entrent en scène que pendant la rencontre Destiny du retour inverse.
 end
+local function synchroniser_ambiance(avec_fondu)
+  if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
+    return false
+  end
+  local attendu = meteo_reverie.CarteCliff()
+  SV.Destiny.FalaiseAmbiance = attendu
+  if attendu == CARTE_CLIFF then return false end
+  if not SV.Destiny.RetourMaisonEquipe then
+    local hero = CH('PLAYER')
+    if hero ~= nil then
+      SV.Destiny.PassageAmbiance = {
+        carte = attendu,
+        x = hero.Position.X,
+        y = hero.Position.Y,
+        dir = hero.Direction,
+      }
+    end
+  end
+  arreter_mer()
+  if avec_fondu then GAME:FadeOut(false, 20) end
+  GAME:EnterGroundMap('destiny_cliff_tests', attendu, 'Dazzling_Entry_South')
+  return true
+end
+
+local function restaurer_passage()
+  local passage = SV ~= nil and SV.Destiny ~= nil and SV.Destiny.PassageAmbiance or nil
+  if passage ~= nil and passage.carte == CARTE_CLIFF then
+    SV.Destiny.PassageAmbiance = nil
+    local hero = CH('PLAYER')
+    if hero ~= nil and passage.x ~= nil and passage.y ~= nil then
+      GROUND:TeleportTo(hero, passage.x, passage.y, passage.dir or hero.Direction)
+      local partenaire = CH('Teammate1')
+      if partenaire ~= nil then
+        GROUND:TeleportTo(partenaire, math.min(passage.x + 24, 1560), passage.y, passage.dir or hero.Direction)
+      end
+    end
+  end
+end
+
 function cliffdaytest.PlotScripting()
   SV.Destiny = SV.Destiny or {}
   demarrer_mer()
@@ -399,6 +440,9 @@ function cliffdaytest.PlotScripting()
     GAME:FadeIn(20)
     if hero ~= nil and partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
     return
+  end
+  if SV.Destiny.VisiteVille == 'terminee' then
+    restaurer_passage()
   end
   if SV.Destiny.CombatDazzling == 'victoire'
       or SV.Destiny.CombatDazzling == 'defaite' then
@@ -416,6 +460,7 @@ function cliffdaytest.PlotScripting()
   GAME:FadeIn(20)
 end
 function cliffdaytest.Enter(map)
+  if synchroniser_ambiance(false) then return end
   cliffdaytest.PlotScripting()
 end
 function cliffdaytest.Exit(map)
@@ -426,21 +471,29 @@ function cliffdaytest.Exit(map)
   end
   arreter_mer()
 end
-function cliffdaytest.Update(map) end
+function cliffdaytest.Update(map)
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.VisiteVille == 'terminee'
+      and SV.Destiny.MomentScenario ~= nil and meteo_reverie.CarteCliff() ~= CARTE_CLIFF then
+    synchroniser_ambiance(true)
+  end
+end
 function cliffdaytest.GameSave(map) end
 function cliffdaytest.GameLoad(map)
   installer_porte_maison(map)
+  if synchroniser_ambiance(false) then return end
   cliffdaytest.PlotScripting()
 end
 function cliffdaytest.PorteMaisonEquipe_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   -- Pas d'accès parasite pendant les cinématiques ou avant la visite.
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  SV.Destiny.FalaiseAmbiance = meteo_reverie.CarteCliff()
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap('destiny_cliff_tests', 'maison_equipe_falaise', 'entree', true)
 end
 
 function cliffdaytest.SortieCarrefour_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_falaise')
@@ -932,7 +985,7 @@ function cliffdaytest.ApresCombatTeamDazzling()
     -- La conclusion reste dans le même cadre fixe (720, 672).
     se_faire_face(partner, hero)
     cinematique.Respirer(20)
-    say(partner, 'Joyous', "On l’a fait… On a vraiment tenu tête à la [color=#FF9FD8]Team Dazzling[color] !", 'standard')
+    say(partner, 'Joyous', "On l’a fait… On a vraiment tenu tête à la [color=#FF9FD8]Team Dazzling[color] !", 'droite')
     say(partner, 'Happy', "Brillantes, peut-être. Invincibles, sûrement pas.", 'droite')
   else
     GROUND:CharSetEmote(partner, 'sweating', 1)

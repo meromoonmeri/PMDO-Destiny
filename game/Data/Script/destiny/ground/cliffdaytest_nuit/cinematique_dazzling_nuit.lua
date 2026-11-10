@@ -1,15 +1,16 @@
 -- Variante nocturne originale de la cinématique « Pichu × Team Dazzling »
 -- (MOD_CUTSCENE_PICHU_DAZZLING_PMDO.zip, branche arena/e39626d2). Conservée intacte ;
 -- la carte cliffdaytest_nuit est pilotée par init.lua (scénario arena/64113588).
--- Pour la rejouer : remplacer init.lua par ce fichier (et require 'origin.common').
-require 'common'
+-- Pour la rejouer : remplacer init.lua par ce fichier.
+require 'origin.common'
 local cliffdaytest_nuit = {}
 local function anim(ch, name, looped)
   if ch ~= nil then GROUND:CharSetAnim(ch, name, looped) end
 end
 local function say(ch, emotion, text)
+  UI:SetSpeakerLoc(8, 132)
   UI:SetSpeaker(ch)
-  UI:SetSpeakerEmotion(emotion)
+  UI:SetSpeakerEmotion(emotion, false)
   UI:WaitShowDialogue(text)
 end
 function cliffdaytest_nuit.Init(map)
@@ -30,11 +31,12 @@ function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
   local sonata = CH('Sonata')
   local aria = CH('Aria')
   GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
   if pichu ~= nil then AI:DisableCharacterAI(pichu); anim(pichu, 'Idle', true) end
   if adagio ~= nil then AI:DisableCharacterAI(adagio) end
   if sonata ~= nil then AI:DisableCharacterAI(sonata) end
   if aria ~= nil then AI:DisableCharacterAI(aria) end
-  GAME:MoveCamera(608, 476, 1, true)
+  GAME:MoveCamera(608, 476, 1, false)
   GAME:FadeIn(30)
   GROUND:MoveToPosition(pichu, 608, 476, false, 1)
   anim(pichu, 'Idle', true)
@@ -45,10 +47,10 @@ function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
   say(pichu, 'Inspired', 'Un jour, je partirai explorer des endroits dont personne ne connaît encore le nom.')
   GROUND:MoveToPosition(pichu, 612, 476, false, 1)
   GROUND:MoveToPosition(pichu, 640, 526, false, 1)
-  GAME:MoveCamera(640, 526, 30, true)
+  GAME:MoveCamera(640, 526, 30, false)
   say(pichu, 'Determined', 'La Guilde… C’est là que commencent les grandes aventures !')
   say(pichu, 'Determined', 'Je vais leur montrer que moi aussi, je peux devenir explorateur !')
-  GAME:MoveCamera(700, 600, 30, true)
+  GAME:MoveCamera(700, 600, 30, false)
   local a = TASK:BranchCoroutine(function()
     GROUND:MoveToPosition(adagio, 716, 650, false, 1)
     GROUND:MoveToPosition(adagio, 708, 560, false, 1)
@@ -65,7 +67,7 @@ function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
     GROUND:MoveToPosition(aria, 694, 542, false, 1)
   end)
   TASK:JoinCoroutines({a, b, c})
-  GAME:MoveCamera(660, 526, 24, true)
+  GAME:MoveCamera(660, 526, 24, false)
   GROUND:CharTurnToCharAnimated(sonata, pichu, 4)
   say(sonata, 'Happy', 'Ohhh, regardez-moi ce tout petit bout de chou ! Tu t’es perdu loin de ton nid, bonhomme ?')
   GROUND:CharTurnToCharAnimated(pichu, sonata, 4)
@@ -95,7 +97,7 @@ function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
   local e = TASK:BranchCoroutine(function() GROUND:MoveToPosition(sonata, 704, 468, false, 1); GROUND:MoveToPosition(sonata, 960, 468, false, 1) end)
   local f = TASK:BranchCoroutine(function() GROUND:MoveToPosition(aria, 712, 468, false, 1); GROUND:MoveToPosition(aria, 952, 468, false, 1) end)
   TASK:JoinCoroutines({d, e, f})
-  GAME:MoveCamera(640, 526, 24, true)
+  GAME:MoveCamera(640, 526, 24, false)
   anim(pichu, 'Sit', true)
   say(pichu, 'Teary-Eyed', 'Peut-être qu’elles ont raison… Je n’ai même pas réussi à lancer une étincelle.')
   anim(pichu, 'DeepBreath', false)
@@ -105,10 +107,12 @@ function cliffdaytest_nuit.Cinematique_Rencontre_Team_Dazzling()
   anim(pichu, 'Walk', true)
   GROUND:MoveToPosition(pichu, 708, 556, false, 1)
   GROUND:MoveToPosition(pichu, 716, 650, false, 1)
-  GAME:MoveCamera(716, 650, 30, true)
+  GAME:MoveCamera(716, 650, 30, false)
   GROUND:MoveToPosition(pichu, 736, 770, false, 1)
   GAME:WaitFrames(30)
+  UI:ResetSpeaker()
   SV.PichuDazzlingNuit.Seen = true
+  GAME:MoveCamera(0, 0, 30, true)
   GAME:CutsceneMode(false)
 end
 return cliffdaytest_nuit

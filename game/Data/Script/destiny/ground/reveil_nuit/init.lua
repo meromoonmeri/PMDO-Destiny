@@ -414,7 +414,7 @@ function reveil_nuit.PrologueHerosEndormi()
   SV.Destiny.PrologueHeros = 'en_cours'
   local points = points_scene()
 
-  SOUND:StopBGM()
+  SOUND:FadeOutBGM(30)
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
   if CH('Teammate1') ~= nil then GROUND:Hide('Teammate1') end
@@ -607,7 +607,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
   local points = points_scene()
   local reveil_x, reveil_y = points.reveil_x, points.reveil_y
 
-  SOUND:StopBGM()
+  SOUND:FadeOutBGM(30)
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
   AI:DisableCharacterAI(partner)

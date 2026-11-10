@@ -93,7 +93,7 @@ for _,case in ipairs({{R.Downed,'ko'},{R.Failed,'ko'},{R.GaveUp,'abandon'},{R.Es
  setup_solo();zone.ExitSegment(nil,case[1],false,0,0)
  assert(#party==1 and party[1]==partner and assembly[1]==hero)
  assert(SV.Destiny.LostWoodTrip=='echec_aller' and SV.Destiny.LostWoodCause==case[2])
- assert(events[#events][1]=='enter' and events[#events][2]=='destiny_cliff_tests' and events[#events][3]==4)
+ assert(events[#events][1]=='enter' and events[#events][2]=='destiny_cliff_tests' and events[#events][3]==1)
  choice=false;cliff.SceneEchecPartenaire()
  assert(actors.PLAYER.Data==partner and actors.Teammate1==nil and assembly[1]==hero)
  assert(actors.PLAYER.Position.X==920 and actors.PLAYER.Position.Y==460)

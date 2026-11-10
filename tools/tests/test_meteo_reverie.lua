@@ -54,3 +54,40 @@ cross.Init(map);assert(statuses.rain and not statuses.clouds_overhead)
 statuses={sunny=true};cross.GameLoad(map);assert(statuses.rain and not statuses.sunny)
 assert(map.objects.SortieFalaise and map.objects.SortieVille)
 print('PASS carrefour Init et GameLoad, sorties intactes')
+
+-- Synchronisation scénario 4 ambiances (jour, aube, crépuscule, nuit) et statut dark natif.
+SV={Destiny={JourneeVille=5,MeteoReverie={jour=5,temps='clair'}}}
+assert(m.Moment()=='jour' and not m.EstNuit() and m.CarteCliff()=='cliffdaytest' and m.IndexGuilde()==23)
+SV.Destiny.VisiteVille='terminee'
+for _,cas in ipairs({
+  {'jour',       false, 'cliffdaytest',            23, 'guilde_cliff_jour'},
+  {'aube',       false, 'cliffdaytest_aube',       24, 'guilde_cliff_aube'},
+  {'crepuscule', false, 'cliffdaytest_crepuscule', 25, 'guilde_cliff_crepuscule'},
+  {'nuit',       true,  'cliffdaytest_nuit',       26, 'guilde_cliff_nuit'},
+}) do
+  local nom,nuit,cliff,idx,guilde=cas[1],cas[2],cas[3],cas[4],cas[5]
+  m.DefinirMomentScenario(nom)
+  assert(m.Moment()==nom and m.EstNuit()==nuit and m.CarteCliff()==cliff and m.IndexGuilde()==idx and m.CarteGuilde()==guilde)
+  statuses={dark=not nuit}
+  assert(m.Appliquer({AssetName='WaterfallVillageCapital'}))
+  assert((statuses.dark==true)==nuit and SV.Destiny.MomentReverie==nom)
+  statuses={dark=not nuit}
+  assert(m.Appliquer({AssetName='crossroadreverietown2'}))
+  assert((statuses.dark==true)==nuit)
+end
+-- Détection d'une carte Réverie déjà passée en statut moteur natif 'dark'.
+m.EffacerMomentScenario()
+assert(m.Moment()=='jour' and not m.EstNuit())
+_ZONE={CurrentGround={AssetName='reverie_centre',Status={ContainsKey=function(_,k) return k=='dark' end}}}
+assert(m.Moment()=='nuit' and m.CarteCliff()=='cliffdaytest_nuit' and m.IndexGuilde()==26)
+_ZONE=nil
+m.DefinirMomentScenario('nuit')
+-- Routage direct de SortieFalaise sans menu de choix en mode nuit.
+local voyages={}
+GAME.FadeOut=function()end
+GAME.EnterGroundMap=function(_,z,g,mk) voyages[#voyages+1]={z,g,mk} end
+UI={BeginChoiceMenu=function() error('aucun menu de choix attendu') end}
+cross.Init(map)
+cross.SortieFalaise_Touch(nil,{EntName='PLAYER'})
+assert(#voyages==1 and voyages[1][1]=='destiny_cliff_tests' and voyages[1][2]=='cliffdaytest_nuit' and voyages[1][3]=='Dazzling_Entry_South')
+print('PASS synchronisation 4 ambiances, statut dark et routage auto carrefour')

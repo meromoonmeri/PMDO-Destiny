@@ -17,6 +17,7 @@ SV.Destiny = SV.Destiny or {
   LostWoodRetry = nil, LostWoodCause = nil,
   LostWoodEchecsAller = 0, LostWoodEchecsRetour = 0,
   PenseesReveilVues = false, JourneeVille = 0, StocksKecleon = {},
+  MomentScenario = nil, MomentReverie = nil,
   -- Recrutement et Noigrumes restent indisponibles jusqu’à l’Assemblée /
   -- la boutique des Zones d’Accueil (voir destiny.recrutement).
   RecrutementDebloque = false,

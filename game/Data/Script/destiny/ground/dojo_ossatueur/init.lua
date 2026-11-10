@@ -1,6 +1,7 @@
 -- Intérieur town02 raccordé à Réverie Town (Destiny).
 -- La sortie sérialisée de la carte ramène devant le bâtiment utilisé.
 require 'origin.common'
+local suivi_interieurs = require 'destiny.suivi_interieurs'
 
 local dojo_ossatueur = {}
 local sortie_en_cours = false
@@ -15,10 +16,13 @@ local function sortir()
 end
 
 function dojo_ossatueur.Init(map) end
-function dojo_ossatueur.Enter(map) GAME:FadeIn(20) end
-function dojo_ossatueur.GameLoad(map) GAME:FadeIn(20) end
+function dojo_ossatueur.Enter(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function dojo_ossatueur.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function dojo_ossatueur.Update(map, time) end
-function dojo_ossatueur.MarowakDojoExit_Touch(obj, activator) sortir() end
+function dojo_ossatueur.MarowakDojoExit_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  sortir()
+end
 
 function dojo_ossatueur.Marowak_Action(chara, activator)
   UI:SetSpeaker(chara); UI:SetSpeakerEmotion('Normal')

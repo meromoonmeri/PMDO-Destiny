@@ -16,5 +16,8 @@ function guild_heros_room.Init(map) end
 function guild_heros_room.Enter(map) sortir() end
 function guild_heros_room.GameLoad(map) sortir() end
 function guild_heros_room.Update(map, time) end
-function guild_heros_room.Bedroom_Exit_Touch(obj, activator) sortir() end
+function guild_heros_room.Bedroom_Exit_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  sortir()
+end
 return guild_heros_room

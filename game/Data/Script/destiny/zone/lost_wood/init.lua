@@ -85,8 +85,8 @@ function lost_wood.ExitSegment(zone, result, rescue, segmentID, mapID)
     SV.Destiny.LostWoodRetry = 'aller'
     SV.Destiny.LostWoodCause = cause_echec(result)
     SV.Destiny.LostWoodEchecsAller = (SV.Destiny.LostWoodEchecsAller or 0) + 1
-    terminer(result, 'destiny_cliff_tests', 4)
-    GAME:EnterZone('destiny_cliff_tests', -1, 4, 0)
+    terminer(result, 'destiny_cliff_tests', 1)
+    GAME:EnterZone('destiny_cliff_tests', -1, 1, 0)
   end
 end
 

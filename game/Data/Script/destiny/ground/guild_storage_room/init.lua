@@ -16,5 +16,8 @@ function guild_storage_room.Init(map) end
 function guild_storage_room.Enter(map) sortir() end
 function guild_storage_room.GameLoad(map) sortir() end
 function guild_storage_room.Update(map, time) end
-function guild_storage_room.Left_Exit_Touch(obj, activator) sortir() end
+function guild_storage_room.Left_Exit_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  sortir()
+end
 return guild_storage_room

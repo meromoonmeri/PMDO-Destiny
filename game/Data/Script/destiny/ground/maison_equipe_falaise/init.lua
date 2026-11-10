@@ -2,6 +2,7 @@
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 local equipe_scene = require 'destiny.equipe_scene'
+local meteo_reverie = require 'destiny.meteo_reverie'
 local maison = {}
 local sortie_en_cours = false
 
@@ -21,8 +22,10 @@ function maison.SortieMaison_Touch(obj, activator)
   sortie_en_cours = true
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.RetourMaisonEquipe = true
+  local retour_falaise = meteo_reverie.CarteCliff()
+  SV.Destiny.FalaiseAmbiance = retour_falaise
   GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap('destiny_cliff_tests', 'cliffdaytest', 'Pichu_Home_Door', true)
+  GAME:EnterGroundMap('destiny_cliff_tests', retour_falaise, 'Pichu_Home_Door', true)
 end
 
 local function sauvegarder(activator)

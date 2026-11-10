@@ -15,11 +15,14 @@ require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
 local recrutement = require 'destiny.recrutement'
+local meteo_reverie = require 'destiny.meteo_reverie'
 
+local CARTE_CLIFF = 'cliffdaytest_nuit'
 local cliffdaytest_nuit = {}
 local SON_MER = 'Destiny_Falaise_Mer'
 local garde_chemin_sud_en_cours = false
 local invite_retour_aller_en_cours = false
+local sortie_en_cours = false
 
 local function demarrer_mer()
   -- La BGM « Cliff Camp.ogg » est portée par la carte ; cette boucle ajoute
@@ -32,23 +35,99 @@ local function arreter_mer()
   SOUND:FadeOutBattleSE(SON_MER, 45)
 end
 
+local function installer_sortie_carrefour(map)
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  if map == nil or map:FindObject('SortieCarrefour') then return end
+  local sortie = RogueEssence.Ground.GroundObject()
+  sortie.EntName = 'SortieCarrefour'
+  sortie.Collider = RogueElements.Rect(688, 784, 104, 8)
+  sortie.Passable = true
+  sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  sortie:OnMapInit()
+  map:AddObject(sortie)
+end
+
+local function installer_porte_maison(map)
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  if map == nil or map:FindObject('PorteMaisonEquipe') then return end
+  local porte = RogueEssence.Ground.GroundObject()
+  porte.EntName = 'PorteMaisonEquipe'
+  porte.Collider = RogueElements.Rect(592, 464, 40, 8)
+  porte.Passable = false
+  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  porte:OnMapInit()
+  map:AddObject(porte)
+end
+
 -- ------------------------------------------------------------- map callbacks
 
 function cliffdaytest_nuit.Init(map)
   -- Empêcher le cadre de déborder dans le vide aux limites de cette carte.
-  map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
-  if SV.Destiny and SV.Destiny.FinaleDestiny then
+  sortie_en_cours = false
+  if map ~= nil then
+    map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
+  end
+  installer_sortie_carrefour(map)
+  installer_porte_maison(map)
+  if SV.Destiny and (SV.Destiny.FinaleDestiny or SV.Destiny.VisiteVille == 'terminee') then
     local hero = CH('PLAYER')
-    local partner = equipe_scene.Partenaire(hero.Position.X + 24, hero.Position.Y, Direction.Down)
-    equipe_scene.Suivre(partner, hero)
+    if hero ~= nil and GAME:GetPlayerPartyCount() > 1 then
+      local partner = equipe_scene.Partenaire(hero.Position.X + 24, hero.Position.Y, Direction.Down)
+      equipe_scene.Suivre(partner, hero)
+    end
+  end
+end
+
+local function synchroniser_ambiance(avec_fondu)
+  if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
+    return false
+  end
+  local attendu = meteo_reverie.CarteCliff()
+  SV.Destiny.FalaiseAmbiance = attendu
+  if attendu == CARTE_CLIFF then return false end
+  if sortie_en_cours then return true end
+  sortie_en_cours = true
+  if not SV.Destiny.RetourMaisonEquipe then
+    local hero = CH('PLAYER')
+    if hero ~= nil then
+      SV.Destiny.PassageAmbiance = {
+        carte = attendu,
+        x = hero.Position.X,
+        y = hero.Position.Y,
+        dir = hero.Direction,
+      }
+    end
+  end
+  arreter_mer()
+  if avec_fondu then GAME:FadeOut(false, 20) end
+  GAME:EnterGroundMap('destiny_cliff_tests', attendu, 'Dazzling_Entry_South')
+  return true
+end
+
+local function restaurer_passage()
+  local passage = SV ~= nil and SV.Destiny ~= nil and SV.Destiny.PassageAmbiance or nil
+  if passage ~= nil and passage.carte == CARTE_CLIFF then
+    SV.Destiny.PassageAmbiance = nil
+    local hero = CH('PLAYER')
+    if hero ~= nil and passage.x ~= nil and passage.y ~= nil then
+      GROUND:TeleportTo(hero, passage.x, passage.y, passage.dir or hero.Direction)
+      local partenaire = CH('Teammate1')
+      if partenaire ~= nil then
+        GROUND:TeleportTo(partenaire, math.min(passage.x + 24, 1560), passage.y, passage.dir or hero.Direction)
+      end
+    end
   end
 end
 
 function cliffdaytest_nuit.Enter(map)
+  if synchroniser_ambiance(false) then return end
   cliffdaytest_nuit.PlotScripting()
 end
 
 function cliffdaytest_nuit.Exit(map)
+  if map ~= nil then
+    map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
+  end
   arreter_mer()
 end
 
@@ -88,18 +167,64 @@ function cliffdaytest_nuit.Update(map)
       cliffdaytest_nuit.GarderCheminSud(joueur)
     end
   end
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.VisiteVille == 'terminee'
+      and SV.Destiny.MomentScenario ~= nil and meteo_reverie.CarteCliff() ~= CARTE_CLIFF then
+    synchroniser_ambiance(true)
+  end
 end
 
 function cliffdaytest_nuit.GameSave(map)
 end
 
 function cliffdaytest_nuit.GameLoad(map)
+  sortie_en_cours = false
+  if map ~= nil then
+    map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
+  end
+  installer_sortie_carrefour(map)
+  installer_porte_maison(map)
+  if synchroniser_ambiance(false) then return end
   cliffdaytest_nuit.PlotScripting()
+end
+
+function cliffdaytest_nuit.PorteMaisonEquipe_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_en_cours then return end
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  sortie_en_cours = true
+  SV.Destiny.FalaiseAmbiance = meteo_reverie.CarteCliff()
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('destiny_cliff_tests', 'maison_equipe_falaise', 'entree', true)
+end
+
+function cliffdaytest_nuit.SortieCarrefour_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_en_cours then return end
+  if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
+  sortie_en_cours = true
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_falaise')
 end
 
 function cliffdaytest_nuit.PlotScripting()
   SV.Destiny = SV.Destiny or {}
+  sortie_en_cours = false
   demarrer_mer()
+  if SV.Destiny.RetourMaisonEquipe and SV.Destiny.VisiteVille == 'terminee' then
+    SV.Destiny.RetourMaisonEquipe = nil
+    local hero = CH('PLAYER')
+    local partenaire = CH('Teammate1')
+    if hero ~= nil then GROUND:TeleportTo(hero, 600, 476, Direction.Down) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 624, 476, Direction.Down) end
+    GAME:FadeIn(20)
+    if hero ~= nil and partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+    return
+  end
+  if SV.Destiny.VisiteVille == 'terminee' then
+    restaurer_passage()
+    GAME:FadeIn(20)
+    return
+  end
   if SV.Destiny.RetourAccompli then
     if not SV.Destiny.FinaleDestiny then
       cliffdaytest_nuit.SceneRetour()
@@ -317,6 +442,7 @@ function cliffdaytest_nuit.ScenePartenaire()
   -- Les conseils sont maintenant présentés dans les Bois Perdus, étage par étage.
   SV.Destiny = SV.Destiny or {}
   cinematique.Dire(partenaire, 'Happy', "En route ! La nuit est à moi !", 'standard')
+  UI:ResetSpeaker()
 
   -- le partenaire part seul : le héros est gardé hors de l'équipe jusqu'au réveil
   local heros = GAME:GetPlayerPartyMember(0)

@@ -25,6 +25,7 @@ function destiny_source_irisee.Update(map, time)
 end
 
 function destiny_source_irisee.Spring_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   GAME:CutsceneMode(true)
   -- Montrer la colonne irisée avant le choix, comme dans le rituel natif.
   GAME:MoveCamera(300, 152, 45, false)
@@ -40,13 +41,14 @@ function destiny_source_irisee.Spring_Touch(obj, activator)
   elseif resultat == 2 then
     source_menu.action(nil)
   end
-  -- Le rituel natif remet la caméra à zéro ; retrouver le cadrage de la Source.
+  -- Toujours replacer la caméra sur le joueur en fin d'interaction.
   GAME:CutsceneMode(true)
-  GAME:MoveCamera(0, -64, 30, true)
+  GAME:MoveCamera(0, 0, 30, true)
   GAME:CutsceneMode(false)
 end
 
 function destiny_source_irisee.South_Exit_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap('chapitres_destiny', 'destiny_clairiere_source_lumineuse', 'entrance')
 end

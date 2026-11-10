@@ -16,8 +16,8 @@ local function sortir()
 end
 
 function reverie_normal_home.Init(map) end
-function reverie_normal_home.Enter(map) suivi_interieurs.Activer(map); GAME:FadeIn(20) end
-function reverie_normal_home.GameLoad(map) suivi_interieurs.Activer(map); GAME:FadeIn(20) end
+function reverie_normal_home.Enter(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function reverie_normal_home.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function reverie_normal_home.Update(map, time) end
 function reverie_normal_home.Normal_Home_Entrance_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end

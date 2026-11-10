@@ -1121,6 +1121,7 @@ function ville.Visite(map)
   -- Laisser le thème de ville se terminer avant le cri, sans remplacer brutalement un morceau.
   SOUND:FadeOutBGM(45)
   GAME:WaitFrames(55)
+  UI:ResetSpeaker()
   UI:SetSpeaker('???', true, '', -1, '', RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue('À l’aide ! Quelqu’un… au secours !')
   GAME:WaitFrames(20)
@@ -1438,8 +1439,14 @@ function ville.GameLoad(map)
   entrer(map)
 end
 function ville.Exit(map) end
-local tic_ambiance -- déclaration anticipée (défini plus bas, ambiance vivante)
-function ville.Update(map, time) tic_ambiance() end
+local tic_ambiance
+function ville.Update(map, time)
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.MomentScenario ~= nil
+      and SV.Destiny.MomentScenario ~= SV.Destiny.MomentReverie then
+    meteo_reverie.Appliquer(map)
+  end
+  tic_ambiance()
+end
 
 
 -- Ambiance vivante (non bloquante) : les marchands s'animent comme dans la
@@ -1492,6 +1499,7 @@ tic_ambiance = function()
 end
 
 function ville.SortieCarrefour_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   -- Le premier trajet scénarisé et la visite guidée restent inchangés.
   if SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then return end
   GAME:FadeOut(false, 20)
@@ -1589,13 +1597,19 @@ function ville.PorteCafeSpinda_Touch(obj, activator)
   GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
 end
 
--- Guilde Cliff v5.9 : depuis le grand escalier nord vers guilde_cliff_jour (index 23).
+-- Guilde Cliff v5.9 : depuis le grand escalier nord, rejoint directement la
+-- variante guilde_cliff_* synchronisée avec le moment de Réverie Town.
 function ville.PorteGuildeNord_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if entree_batiment_en_cours then return end
+  SV.Destiny = SV.Destiny or {}
+  local index = meteo_reverie.IndexGuilde()
   entree_batiment_en_cours = true
+  SV.Destiny.RetourBatimentX = 776
+  SV.Destiny.RetourBatimentY = 48
+  SV.Destiny.RetourBatimentPartenaire = {x=776, y=48, px=748, py=48}
   GAME:FadeOut(false, 20)
-  GAME:EnterZone('town02_waterfallvillage', -1, 23, 0)
+  GAME:EnterZone('town02_waterfallvillage', -1, index, 0)
 end
 
 for _, porte_def in ipairs(portes_batiments) do
@@ -2160,9 +2174,9 @@ function ville.Luxray_Alerte_Action(personnage, activator)
   GROUND:TeleportTo(partenaire, 1528, 1592, Direction.Right)
   GROUND:TeleportTo(hero, 1552, 1592, Direction.Right)
   SV.Destiny.LuxrayAttente = 'sortie'
-  GAME:MoveCamera(1544, 1592, 1, false)
+  GAME:MoveCamera(1440, 1592, 1, false)
   GAME:FadeIn(20)
-  cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Grotte Verdoyante.', 'droite')
+  cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Grotte Verdoyante.', 'standard')
   -- Une destination existante peut changer de scène sans reprise de coroutine.
   UI:ResetSpeaker()
   retour_au_joueur(hero, partenaire)
