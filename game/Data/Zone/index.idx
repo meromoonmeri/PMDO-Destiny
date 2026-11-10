@@ -335,6 +335,38 @@
       "Released": true,
       "Comment": "Carte vitrine pmd_destiny_menu_jour (lot pmd_destiny_fangame_v1 de projet-creation-pmdo), reconstruite à l'identique (SHA-256 d'inventaire). Décor animé du menu-titre, pas une carte jouable.",
       "SortOrder": 301
+    },
+    "falaise_promontoire": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "falaise_promontoire_jour",
+        "falaise_promontoire_aube",
+        "falaise_promontoire_crepuscule",
+        "falaise_promontoire_nuit"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Promontory Cliff (Metano / Reverie)",
+        "LocalTexts": {
+          "fr": "Falaise du Promontoire (Réverie)"
+        }
+      },
+      "Released": false,
+      "Comment": "Ensemble dédié 4 ambiances de falaise côtière nue sans ombre ni objet (chemin seul), calque d'ombre fourni séparément (Falaise_Promontoire_Ombres_Nuages).",
+      "SortOrder": 25
     }
   }
 }
