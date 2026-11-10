@@ -209,6 +209,17 @@ local portes_batiments = {
 
 local quartier_pour, objet_dans_quartier
 
+-- Une porte qui échoue ne doit pas emporter les suivantes : chaque pose est
+-- isolée. Un plantage moteur sur une porte est signalé, la carte reste
+-- jouable et les autres seuils sont posés normalement.
+local function poser_porte(description, fonction)
+  local ok, err = pcall(fonction)
+  if not ok then
+    print('[Destiny] porte non posée (' .. tostring(description) .. ') : ' .. tostring(err))
+  end
+  return ok
+end
+
 local function installer_une_porte(map, nom, x, y, largeur, hauteur)
   if map == nil then return end
   if not objet_dans_quartier(map, x + (largeur or 56)/2, y + (hauteur or 20)/2) then
@@ -216,11 +227,13 @@ local function installer_une_porte(map, nom, x, y, largeur, hauteur)
     return
   end
   if map:FindObject(nom) then return end
-  local porte = RogueEssence.Ground.GroundObject()
-  porte.EntName = nom
-  porte.Collider = RogueElements.Rect(x, y, largeur or 56, hauteur or 20)
-  porte:OnMapInit()
-  map:AddObject(porte)
+  poser_porte(nom, function()
+    local porte = RogueEssence.Ground.GroundObject()
+    porte.EntName = nom
+    porte.Collider = RogueElements.Rect(x, y, largeur or 56, hauteur or 20)
+    porte:OnMapInit()
+    map:AddObject(porte)
+  end)
 end
 
 -- Remplacer aussi les anciens objets Action conservés dans une sauvegarde.
@@ -230,13 +243,15 @@ local function installer_contact_porte(map, nom, x, y, largeur, hauteur)
   if map == nil then return end
   if map:FindObject(nom) then GROUND:RemoveObject(nom) end
   if not objet_dans_quartier(map, x + largeur/2, y + hauteur/2) then return end
-  local porte = RogueEssence.Ground.GroundObject()
-  porte.EntName = nom
-  porte.Collider = RogueElements.Rect(x, y, largeur, hauteur)
-  porte.Passable = false
-  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
-  porte:OnMapInit()
-  map:AddObject(porte)
+  poser_porte(nom, function()
+    local porte = RogueEssence.Ground.GroundObject()
+    porte.EntName = nom
+    porte.Collider = RogueElements.Rect(x, y, largeur, hauteur)
+    porte.Passable = false
+    porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+    porte:OnMapInit()
+    map:AddObject(porte)
+  end)
 end
 
 -- Cinq liaisons confirmées : N1, N2 et N3 nord-centre, S et P au sud.

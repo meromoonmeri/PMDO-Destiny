@@ -22,29 +22,43 @@ end
 -- La carte ne sérialise aucune sortie : un objet invisible sur le tapis sud
 -- sert de porte vers Réverie Town, et le personnel guide vers les autres
 -- salles en attendant des portes sérialisées dans la carte.
+-- Une étape qui échoue ne doit pas empêcher la carte de s'ouvrir : chaque
+-- pose d'objet et chaque réglage est isolé et seulement signalé.
+local function protege(etape, fonction)
+  local ok, err = pcall(fonction)
+  if not ok then
+    print('[Destiny] café Spinda : étape ignorée (' .. tostring(etape) .. ') : ' .. tostring(err))
+  end
+  return ok
+end
+
 local function installer_sortie(map)
   if map == nil then return end
-  if map:FindObject('PorteSortieCafe') then GROUND:RemoveObject('PorteSortieCafe') end
-  local porte = RogueEssence.Ground.GroundObject()
-  porte.EntName = 'PorteSortieCafe'
-  porte.Collider = RogueElements.Rect(268, 374, 64, 16)
-  porte.Passable = false
-  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
-  porte:OnMapInit()
-  map:AddObject(porte)
+  protege('sortie sud', function()
+    if map:FindObject('PorteSortieCafe') then GROUND:RemoveObject('PorteSortieCafe') end
+    local porte = RogueEssence.Ground.GroundObject()
+    porte.EntName = 'PorteSortieCafe'
+    porte.Collider = RogueElements.Rect(268, 374, 64, 16)
+    porte.Passable = false
+    porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+    porte:OnMapInit()
+    map:AddObject(porte)
+  end)
 end
 
 -- L’escalier nord mène à l’étage du café, au contact comme la sortie sud.
 local function installer_escalier_nord(map)
   if map == nil then return end
-  if map:FindObject('EscalierNordCafe') then GROUND:RemoveObject('EscalierNordCafe') end
-  local porte = RogueEssence.Ground.GroundObject()
-  porte.EntName = 'EscalierNordCafe'
-  porte.Collider = RogueElements.Rect(272, 120, 48, 8)
-  porte.Passable = false
-  porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
-  porte:OnMapInit()
-  map:AddObject(porte)
+  protege('escalier nord', function()
+    if map:FindObject('EscalierNordCafe') then GROUND:RemoveObject('EscalierNordCafe') end
+    local porte = RogueEssence.Ground.GroundObject()
+    porte.EntName = 'EscalierNordCafe'
+    porte.Collider = RogueElements.Rect(272, 120, 48, 8)
+    porte.Passable = false
+    porte:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+    porte:OnMapInit()
+    map:AddObject(porte)
+  end)
 end
 
 local function aller_a(index_carte)
@@ -86,14 +100,14 @@ local function placer_personnel()
 end
 
 function cafespindaaccueil.Init(map)
-  nommer_personnel()
+  protege('noms du personnel', nommer_personnel)
   installer_sortie(map)
   installer_escalier_nord(map)
-  placer_personnel()
-  activer('NewObject_13', 36)
-  activer('Pompot', 36)
-  activer('Qulbutoqué', 28)
-  activer('Okéoké', 28)
+  protege('placement du personnel', placer_personnel)
+  protege('ronde de NewObject_13', function() activer('NewObject_13', 36) end)
+  protege('ronde de Pompot', function() activer('Pompot', 36) end)
+  protege('ronde de Qulbutoqué', function() activer('Qulbutoqué', 28) end)
+  protege('ronde de Okéoké', function() activer('Okéoké', 28) end)
 end
 
 -- Tests d'occupation prudents : on ne force pas un trajet si les personnages
@@ -255,8 +269,8 @@ function cafespindaaccueil.Enter(map)
 end
 
 function cafespindaaccueil.GameLoad(map)
-  nommer_personnel()
-  placer_personnel()
+  protege('noms au chargement', nommer_personnel)
+  protege('placement au chargement', placer_personnel)
   sortie_cafe_en_cours = false
   installer_sortie(map)
   installer_escalier_nord(map)
