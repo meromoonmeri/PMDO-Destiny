@@ -478,6 +478,8 @@ local function installer_portes(map)
   installer_une_porte(map, 'TableauReverieCentre', 400, 1512, 48, 56)
   -- Café Spinda : tapis rouge de l'annexe (centre x≈1188, y≈1605).
   installer_contact_porte(map, 'PorteCafeSpinda', 1056, 1344, 32, 8)
+  -- Guilde Cliff v5.9 : grand escalier nord (x=768, y=24), vers guilde_cliff_jour.
+  installer_contact_porte(map, 'PorteGuildeNord', 768, 24, 32, 8)
   for _, porte in ipairs(portes_batiments) do
     if porte.contact_x ~= nil then
       installer_contact_porte(map, porte.nom, porte.contact_x, porte.contact_y, porte.contact_w, porte.contact_h)
@@ -1569,6 +1571,15 @@ function ville.PorteCafeSpinda_Touch(obj, activator)
   entree_batiment_en_cours = true
   GAME:FadeOut(false, 20)
   GAME:EnterZone('town02_waterfallvillage', -1, 2, 0)
+end
+
+-- Guilde Cliff v5.9 : depuis le grand escalier nord vers guilde_cliff_jour (index 23).
+function ville.PorteGuildeNord_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if entree_batiment_en_cours then return end
+  entree_batiment_en_cours = true
+  GAME:FadeOut(false, 20)
+  GAME:EnterZone('town02_waterfallvillage', -1, 23, 0)
 end
 
 for _, porte_def in ipairs(portes_batiments) do
