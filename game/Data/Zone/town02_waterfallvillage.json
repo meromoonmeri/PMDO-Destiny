@@ -9,7 +9,7 @@
       }
     },
     "Released": true,
-    "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT).",
+    "Comment": "Zone conteneur des maps WaterfallVillage de meromoonmeri/town02 — WaterfallVillageCapital = « Reverie Town » (création de l'utilisateur, attestée), version étendue town02-main_BACKUP intégrée : 37 calques, 43 Tilesheets, habitants/objets/marqueurs sérialisés et décorations associées. WaterfallVillageCapital.rsground (305 Mo) est livrée compressée dans payload/ et restaurée par tools/unpack_payload.py. waterfall_cave_1 récupéré sans LFS (copie sha256 identique via PMD-SKY-PMDO-PORT). Guilde Cliff v5.9 : 4 cartes guilde_cliff (indices 23-26), accessibles depuis le grand escalier nord.",
     "NoEXP": false,
     "ExpPercent": 100,
     "Level": -1,
@@ -48,7 +48,11 @@
       "reverie_centre",
       "reverie_nord",
       "reverie_residentiel",
-      "reverie_etang"
+      "reverie_etang",
+      "guilde_cliff_jour",
+      "guilde_cliff_aube",
+      "guilde_cliff_crepuscule",
+      "guilde_cliff_nuit"
     ]
   }
 }
