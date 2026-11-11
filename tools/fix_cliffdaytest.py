@@ -15,11 +15,14 @@ Corrige :
 3. Cloture arriere (67..83, 47..49) : cailloux parasites (67,49)/(77,49) retires,
    demi-poteau (73,47..48) et rail flottant (77,47..48) nettoyes symetriquement contre
    la maison citrouille, 24 pixels semi-transparents supprimes.
-4. Panneau Est deplace de (118..120, 50..53) (qui couvrait les virevents animes) vers
-   (117..119, 60..63) sur CANOPY + L4 (Top).
+4. Panneau Est maintenu a sa position d'origine (118..120, 50..53) sur CANOPY + L4 (Top),
+   et fleur (120..122, 51..52) remise propre avec une fleur 2x2 complete animee en (121..122, 51..52).
 5. Pied droit de la tente Est (107, 69) complete depuis Reverie_Town_Objects(107, 70) ;
    feuille parasite (92, 75..76) retiree de la table-souche ; 5 trainees de terre
-   INVERSEPATHWAY nettoyees ; patchs de sol/route/touffes descendus de CANOPY -> TERRAIN ;
+   INVERSEPATHWAY nettoyees ; 6 touffes de terre/herbe sur le chemin sableux retirees
+   (L5 Reverie_Town_Trimmed 39..40,120..121 + tuiles INVERSEPATHWAY propres) ;
+   Rocher 1 W complet (APO 6..9,24..27) en (12..15, 87..90) ; residu sous arbre W (6..10, 97..98)
+   nettoye ; patchs de sol/route/touffes descendus de CANOPY -> TERRAIN ;
    bords d'herbe detoures autour des 3 tas de bois et de la boite aux lettres.
 6. Harmonisation complete des obstacles sur les 5 .rsground + resynchronisation
    de cliffdaytest.rsmap et CLIFFDAYTEST_BATTLE_{BASE,FRONT}_24.tile (L0 ciel conserve).
@@ -65,11 +68,23 @@ MEADOW_TUFT_COLORS = FLAT_GRASS_COLORS | {
     (224, 224, 104),
 }
 SMEAR_COLORS = {
-    (240, 208, 120),
+    (184, 192, 80),
+    (224, 168, 104),
     (232, 152, 104),
+    (232, 176, 112),
     (240, 168, 104),
     (240, 184, 104),
+    (240, 192, 120),
+    (240, 208, 120),
 }
+ROAD_TUFT_CELLS = [
+    (72, 68), (72, 69), (73, 68), (73, 69),
+    (86, 61), (86, 62), (87, 61), (87, 62),
+    (88, 77), (89, 77),
+    (90, 98), (91, 98),
+    (98, 56), (99, 56),
+    (100, 98), (101, 98),
+]
 
 
 def unpremultiply(arr: np.ndarray) -> np.ndarray:
@@ -409,6 +424,7 @@ def main() -> None:
     _, anim = load_tile_sheet("Reverie_Town_Animation_Tileset")
     _, av_bg = load_tile_sheet("13_avancee_basse_gauche_terrain")
     _, cliffs = load_tile_sheet("Reverie_Town_Cliffs")
+    _, inv_path = load_tile_sheet("INVERSEPATHWAY")
 
     # 1. Construction des 3 LUTs exactes depuis les tuiles d'origine avant edition
     luts = {
@@ -451,7 +467,8 @@ def main() -> None:
         (74, 90, 77, 93),   # Boulder 3
         (88, 61, 93, 68),   # Mid Signpost
         (92, 70, 97, 79),   # StumpTable
-        (117, 60, 119, 63), # Panneau Est (apres deplacement, pour idempotence)
+        (117, 60, 119, 63), # Ancien Panneau Est deplace (a supprimer proprement en etape 7)
+        (118, 50, 120, 53), # Panneau Est a sa position d'origine
     ]
 
     def touches_keep_prop(xs: np.ndarray, ys: np.ndarray) -> bool:
@@ -510,9 +527,24 @@ def main() -> None:
     smear_px += clean_smear_box(ter, grass_tile, 114, 63, 114, 63)
     print(f"Pixels de trainee INVERSEPATHWAY nettoyes : {smear_px}")
 
-    # 4. Correction du moulin (2..7, 78..84) sur les 4 phases de TERRAIN
+    # 3b. Nettoyage des 6 touffes/terre foncee sur le chemin sableux (tuiles L2 INVERSEPATHWAY propres)
     src_data = load_json_bom(GROUND_DIR / "cliffdaytest_source.rsground")
     src_obj = src_data["Object"]
+    road_tuft_fixed = 0
+    for tx, ty in ROAD_TUFT_CELLS:
+        src_obj["Layers"][5]["Tiles"][tx][ty] = {"Layers": []}
+        for sub in src_obj["Layers"][2]["Tiles"][tx][ty].get("Layers", []):
+            fr = sub["Frames"][0]
+            if fr["Sheet"] == "INVERSEPATHWAY":
+                loc = (fr["TexLoc"]["X"], fr["TexLoc"]["Y"])
+                if loc in inv_path:
+                    clean_sand = inv_path[loc].copy()
+                    for p in range(4):
+                        ter[(tx, ty + MAP_H * p)] = clean_sand.copy()
+                    road_tuft_fixed += 1
+    print(f"Tuiles chemin sableux nettoyees (touffes foncees retirees) : {road_tuft_fixed}")
+
+    # 4. Correction du moulin (2..7, 78..84) sur les 4 phases de TERRAIN
     wm_bg = Image.new("RGBA", (6 * 8, 7 * 8), (0, 0, 0, 0))
     for dx in range(6):
         for dy in range(7):
@@ -618,17 +650,25 @@ def main() -> None:
     if (107, 70) in rto:
         stamp_rect_terrain(ter, rto[(107, 70)].copy(), 107, 69)
 
-    # 7. Deplacement du Panneau Est : effacer (118..120, 50..53), placer RTO(24..26, 29..32) en (117..119, 60..63)
-    for tx in range(118, 121):
-        for ty in range(50, 54):
+    # 7. Retablissement du Panneau Est a sa place d'origine (118..120, 50..53)
+    #    et remplacement de la fleur coupee (120..122, 51..52) par une fleur 2x2 intacte animee (121..122, 51..52).
+    for tx in range(117, 120):
+        for ty in range(60, 64):
             can.pop((tx, ty), None)
     e_sign = grab_rect(rto, 24, 29, 3, 4)
-    write_rect_canopy(can, e_sign, 117, 60)
+    write_rect_canopy(can, e_sign, 118, 50)
+
+    fill_grass_rect(ter, grass_tile, 120, 51, 122, 52)
+    flower_phase_x = (1, 5, 9, 9)
+    for p, fx in enumerate(flower_phase_x):
+        fl_sp = grab_rect(anim, fx, 1, 2, 2)
+        stamp_rect_terrain(ter, fl_sp, 121, 51, phases=range(p, p + 1))
 
     # 8. Nettoyage des 5 arbres coupes + rocher W + souches, et recomposition propre
     # Effacement propre dans TERRAIN
-    # - Coin W : vieux arbre (0..6, 88..96) + vieux rocher (9..12, 87..90) + vieille souche (8..10, 92..94)
+    # - Coin W : vieux arbre (0..6, 88..96) + residu feuille (6..10, 97..98) + vieux rocher (9..12, 87..90) + vieille souche (8..10, 92..94)
     fill_grass_rect(ter, grass_tile, 0, 87, 15, 96)
+    fill_grass_rect(ter, grass_tile, 6, 97, 10, 98)
     # - Bas 1 : (14..23, 96..98)
     fill_grass_rect(ter, grass_tile, 14, 96, 23, 98)
     # - Bas 2 + souche (51..53, 95..97) : ATTENTION a preserver l'arbre entier (45..54, 85..95) !
@@ -641,11 +681,11 @@ def main() -> None:
     # - Bas-Est : (111..122, 90..98)
     fill_grass_rect(ter, grass_tile, 111, 90, 122, 98)
 
-    # Ancien Rocher 1 dans CANOPY (9..12, 87..90) -> efface, puis APO(5..8, 24..27) en (12..15, 87..90)
+    # Ancien Rocher 1 dans CANOPY (9..12, 87..90) -> efface, puis APO(6..9, 24..27) complet en (12..15, 87..90)
     for tx in range(9, 13):
         for ty in range(87, 91):
             can.pop((tx, ty), None)
-    boulder_sp = grab_rect(apo, 5, 24, 4, 4)
+    boulder_sp = grab_rect(apo, 6, 24, 4, 4)
     boulder_cells = write_rect_canopy(can, boulder_sp, 12, 87)
 
     # Sprites intacts pour TERRAIN :
@@ -728,9 +768,11 @@ def main() -> None:
         set_box(67, 46, 83, 46, 1)  # bord de falaise derriere cloture
         set_box(67, 47, 72, 49, 1)  # cloture arriere gauche
         set_box(78, 47, 83, 49, 1)  # cloture arriere droite
-        # Cloture virevents Est (y=52 est herbe ouverte devant les virevents) :
+        # Cloture virevents Est + Panneau Est retabli en (118..120, 50..53) :
+        # on preserve la marchabilite d'origine autour du panneau (y=52..53 libres, (117..119, 60..63) liberes)
         set_box(103, 46, 122, 51, 1)
-        set_box(103, 52, 122, 52, 0)
+        set_box(103, 52, 122, 53, 0)
+        set_box(117, 60, 119, 63, 0)
         # Tonneaux (63..66, 51..52) + (64..66, 53)
         set_box(63, 51, 66, 52, 1)
         set_box(64, 53, 66, 53, 1)
@@ -758,9 +800,6 @@ def main() -> None:
         set_box(18, 95, 20, 97, 1)
         set_box(42, 95, 44, 97, 1)
         set_box(79, 95, 81, 97, 1)
-        # Nouveau Panneau Est : y=60 (haut du panneau) reste traversable (Top layer), pied/corps (61..63) bloque
-        set_box(117, 60, 119, 60, 0)
-        set_box(117, 61, 119, 63, 1)
         # Verification finale : couloirs scriptes Dazzling / Pichu / sortie Est garantis libres
         for cx0, cy0, cx1, cy1 in [(75, 58, 81, 59), (85, 81, 95, 98), (106, 55, 121, 59)]:
             set_box(cx0, cy0, cx1, cy1, 0)
@@ -797,12 +836,12 @@ def main() -> None:
         for tx, ty in boulder_cells:
             gobj["Layers"][l_can]["Tiles"][tx][ty] = make_single_frame_tile(can_sheet_name, tx, ty, 1)
 
-        # Deplacer E Signpost sur L_TOP : effacer (118..120, 50..53), ecrire (117..119, 60..63)
-        for tx in range(118, 121):
-            for ty in range(50, 54):
-                gobj["Layers"][l_top]["Tiles"][tx][ty] = {"Layers": []}
+        # Panneau Est retabli sur L_TOP en (118..120, 50..53), et ancien deplacement (117..119, 60..63) efface
         for tx in range(117, 120):
             for ty in range(60, 64):
+                gobj["Layers"][l_top]["Tiles"][tx][ty] = {"Layers": []}
+        for tx in range(118, 121):
+            for ty in range(50, 54):
                 gobj["Layers"][l_top]["Tiles"][tx][ty] = make_single_frame_tile(can_sheet_name, tx, ty, 1)
                 gobj["Layers"][l_can]["Tiles"][tx][ty] = {"Layers": []}
 
@@ -831,16 +870,23 @@ def main() -> None:
     src_obj["Layers"][3]["Tiles"][73][49] = {"Layers": []}
     src_obj["Layers"][3]["Tiles"][77][47] = {"Layers": []}
     src_obj["Layers"][3]["Tiles"][77][48] = {"Layers": []}
-    # Nettoyer le panneau Est ancien en L4 source + poser le nouveau en (117..119, 60..63)
-    for tx in range(118, 121):
-        for ty in range(50, 54):
+    # Retablir le panneau Est en L5 source (118..120, 50..53) + nettoyer ancien (117..119, 60..63)
+    # et poser la fleur 2x2 complete en (121..122, 51..52) sur L4 source
+    for tx in range(117, 120):
+        for ty in range(60, 64):
             src_obj["Layers"][4]["Tiles"][tx][ty] = {"Layers": []}
+            src_obj["Layers"][5]["Tiles"][tx][ty] = {"Layers": []}
     for dx in range(3):
         for dy in range(4):
-            src_obj["Layers"][4]["Tiles"][117 + dx][60 + dy] = make_single_frame_tile(
+            src_obj["Layers"][5]["Tiles"][118 + dx][50 + dy] = make_single_frame_tile(
                 "Reverie_Town_Objects", 24 + dx, 29 + dy, 1
             )
-    # Synchroniser les arbres/buissons/souches/rocher/trainees/table-souche corriges sur cliffdaytest_source
+    for dx in range(2):
+        for dy in range(2):
+            src_obj["Layers"][4]["Tiles"][121 + dx][51 + dy] = make_single_frame_tile(
+                "Reverie_Town_Animation_Tileset", 1 + dx, 1 + dy, 10
+            )
+    # Synchroniser les arbres/buissons/souches/rocher/trainees/touffes/table-souche corriges sur cliffdaytest_source
     # via les tuiles propres PICHU_CLIFF_DAY_{TERRAIN,CANOPY} (sans alterer les tilesets Reverie partages).
     smear_boxes_src = [
         (64, 72, 66, 75),
@@ -849,6 +895,7 @@ def main() -> None:
         (107, 62, 110, 65),
         (114, 63, 114, 63),
     ]
+    road_tuft_set = set(ROAD_TUFT_CELLS)
     for tx in range(MAP_W):
         for ty in range(MAP_H):
             in_recomp = (
@@ -858,6 +905,7 @@ def main() -> None:
                 or (74 <= tx <= 83 and 95 <= ty <= 98)
                 or (111 <= tx <= 122 and 90 <= ty <= 98)
                 or (tx == 107 and ty == 69)
+                or (tx, ty) in road_tuft_set
                 or any(sx0 <= tx <= sx1 and sy0 <= ty <= sy1 for sx0, sy0, sx1, sy1 in smear_boxes_src)
             )
             if in_recomp:
@@ -867,15 +915,15 @@ def main() -> None:
                     src_obj["Layers"][3]["Tiles"][tx][ty] = {"Layers": []}
     for tx, ty in [(92, 75), (92, 76)]:
         src_obj["Layers"][4]["Tiles"][tx][ty] = make_single_frame_tile("PICHU_CLIFF_DAY_CANOPY", tx, ty, 1)
-    # Nettoyer ancien Rocher 1 et poser le nouveau en (12..15, 87..90) sur L3 source
+    # Nettoyer ancien Rocher 1 et poser le nouveau complet APO(6..9, 24..27) en (12..15, 87..90) sur L3 source
     for tx in range(9, 13):
         for ty in range(87, 91):
             src_obj["Layers"][3]["Tiles"][tx][ty] = {"Layers": []}
     for dx in range(4):
         for dy in range(4):
-            if (5 + dx, 24 + dy) in apo:
+            if (6 + dx, 24 + dy) in apo:
                 src_obj["Layers"][3]["Tiles"][12 + dx][87 + dy] = make_single_frame_tile(
-                    "Altere_Pond_Objects", 5 + dx, 24 + dy, 1
+                    "Altere_Pond_Objects", 6 + dx, 24 + dy, 1
                 )
     apply_harmonized_obstacles(src_obj["obstacles"])
     save_json_bom(GROUND_DIR / "cliffdaytest_source.rsground", src_data)

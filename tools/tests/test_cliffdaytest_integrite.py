@@ -18,11 +18,23 @@ MAP_W, MAP_H = 123, 99
 MAP24_W, MAP24_H = 41, 33
 
 SMEAR_COLORS = {
-    (240, 208, 120),
+    (184, 192, 80),
+    (224, 168, 104),
     (232, 152, 104),
+    (232, 176, 112),
     (240, 168, 104),
     (240, 184, 104),
+    (240, 192, 120),
+    (240, 208, 120),
 }
+ROAD_TUFT_CELLS = [
+    (72, 68), (72, 69), (73, 68), (73, 69),
+    (86, 61), (86, 62), (87, 61), (87, 62),
+    (88, 77), (89, 77),
+    (90, 98), (91, 98),
+    (98, 56), (99, 56),
+    (100, 98), (101, 98),
+]
 
 
 def load_tile_sheet(name: str) -> tuple[int, dict[tuple[int, int], Image.Image]]:
@@ -139,19 +151,36 @@ def main() -> None:
         for ty in range(58, 71):
             assert (tx, ty) not in can, f'Route encore en CANOPY({tx},{ty})'
 
-    # Deplacement Panneau Est (118..120, 50..53) -> (117..119, 60..63) et Rocher 1 (12..15, 87..90)
-    for tx in range(118, 121):
-        for ty in range(50, 54):
-            assert (tx, ty) not in can, f'Ancien panneau Est encore en CANOPY({tx},{ty})'
+    # Retablissement Panneau Est (118..120, 50..53), fleur 2x2 intacte (121..122, 51..52),
+    # touffes chemin sableux retirees et Rocher 1 complet (12..15, 87..90)
     for tx in range(117, 120):
         for ty in range(60, 64):
-            assert (tx, ty) in can, f'Nouveau panneau Est absent de CANOPY({tx},{ty})'
+            assert (tx, ty) not in can, f'Ancien panneau deplace encore en CANOPY({tx},{ty})'
+            assert not grounds['cliffdaytest']['Layers'][4]['Tiles'][tx][ty].get('Layers'), f'Ancien panneau encore en L4 ({tx},{ty})'
+    for tx in range(118, 121):
+        for ty in range(50, 54):
+            assert (tx, ty) in can, f'Panneau Est absent de CANOPY({tx},{ty})'
             assert grounds['cliffdaytest']['Layers'][4]['Tiles'][tx][ty].get('Layers'), f'Panneau Est absent L4 ({tx},{ty})'
+    # Fleur (121..122, 51..52) : 0 residu coupe en (120, 52), et fleur 2x2 animee complete
+    _, grass_px = ter[(55, 76)].getpixel((0, 0)), {ter[(55, 76)].getpixel((x, y))[:3] for x in range(8) for y in range(8)}
+    for py in range(8):
+        for px in range(8):
+            assert ter[(120, 52)].getpixel((px, py))[:3] in grass_px, f'Residu fleur coupee en (120,52) px=({px},{py})'
+    for tx, ty in [(6, 97), (7, 97), (8, 97), (9, 97), (10, 97), (7, 98), (8, 98), (9, 98)]:
+        for py in range(8):
+            for px in range(8):
+                assert ter[(tx, ty)].getpixel((px, py))[:3] in grass_px, f'Residu feuille sous arbre W en ({tx},{ty})'
+    # 0 touffe verte foncee sur les 6 anciennes taches du chemin sableux
+    for tx, ty in ROAD_TUFT_CELLS:
+        px = ter[(tx, ty)].tobytes()
+        for k in range(0, len(px), 4):
+            r, g, b = px[k], px[k + 1], px[k + 2]
+            assert r >= 220 and b >= 90, f'Touffe foncee encore presente sur chemin sableux ({tx},{ty}) rgb={(r,g,b)}'
     for tx in range(9, 12):
         for ty in range(87, 91):
             assert (tx, ty) not in can, f'Ancien Rocher 1 encore en CANOPY({tx},{ty})'
-    for tx in range(13, 16):
-        assert (tx, 88) in can and (tx, 89) in can, f'Nouveau Rocher 1 absent de CANOPY({tx})'
+    for tx in range(12, 16):
+        assert (tx, 88) in can and (tx, 89) in can, f'Nouveau Rocher 1 complet absent de CANOPY({tx})'
 
     # 4. Obstacles harmonises : props solides bloques, fleurs fantomes et couloirs scriptes ouverts
     must_block = [
@@ -165,7 +194,6 @@ def main() -> None:
         (12, 93, 14, 95), (43, 75, 45, 77), (51, 95, 53, 97),  # souches
         (1, 88, 10, 96), (111, 90, 120, 98),                   # arbres bordure sauves
         (18, 95, 20, 97), (42, 95, 44, 97), (79, 95, 81, 97),  # buissons 3x3
-        (117, 61, 119, 63),                                    # nouveau panneau Est (base)
     ]
     for x0, y0, x1, y1 in must_block:
         for tx in range(x0, x1 + 1):
@@ -176,7 +204,7 @@ def main() -> None:
         (54, 78, 56, 79), (70, 94, 71, 95), (96, 65, 98, 66),
         (105, 88, 106, 89), (113, 61, 115, 62), (118, 64, 120, 65),
         (50, 74, 51, 75), (75, 58, 81, 59), (85, 81, 95, 98), (106, 55, 121, 59),
-        (117, 60, 119, 60),
+        (117, 60, 119, 63), (118, 52, 120, 53),
     ]
     for x0, y0, x1, y1 in must_open:
         for tx in range(x0, x1 + 1):
@@ -211,8 +239,9 @@ def main() -> None:
         if rsmap['Layers'][1]['Tiles'][rx][ry].get('Layers')
     }
     assert l1_non_empty == set(front24.keys()), (l1_non_empty ^ set(front24.keys()))
-    assert (39, 20) in l1_non_empty and (39, 21) in l1_non_empty
-    assert (39, 16) not in l1_non_empty and (40, 16) not in l1_non_empty
+    assert (39, 16) in l1_non_empty and (40, 16) in l1_non_empty
+    assert (39, 17) in l1_non_empty and (40, 17) in l1_non_empty
+    assert (39, 20) not in l1_non_empty and (39, 21) not in l1_non_empty
 
     # Verification pixel exacte de BASE_24 sur les 4 phases du terrain
     day_obj = grounds['cliffdaytest']
