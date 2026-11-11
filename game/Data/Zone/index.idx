@@ -367,6 +367,50 @@
       "Released": true,
       "Comment": "Ensemble dédié 4 ambiances de falaise côtière nue sans ombre ni objet (chemin seul), calque d'ombre fourni séparément (Falaise_Promontoire_Ombres_Nuages).",
       "SortOrder": 25
+    },
+    "grotte_verdoyante": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": 10,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 2,
+      "CountedFloors": 9,
+      "Rogue": 1,
+      "Grounds": [
+        "ewc3_entree_waterfall_cave",
+        "fgv1_fin_grotte_vasques"
+      ],
+      "Maps": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          0
+        ]
+      ],
+      "Name": {
+        "DefaultText": "Grotte Verdoyante",
+        "LocalTexts": {
+          "fr": "Grotte Verdoyante"
+        }
+      },
+      "Released": true,
+      "Comment": "Grotte Verdoyante (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F DTEF drenched_bluff/deep_limestone_cavern, 9F boss et sauvetage de Nilo sur fgv1_fin_grotte_vasques.",
+      "SortOrder": 32
     }
   }
 }

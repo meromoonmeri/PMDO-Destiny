@@ -161,17 +161,19 @@ actors={};events={};new('PLAYER');new('NewObject_4');SV={Destiny={VisiteVille='e
 ville.Visite({Entities={}});assert(SV.Destiny.VisiteVille=='en_route' and actors.NewObject_4.EntEnabled and not SV.Destiny.AlerteShinx)
 print('PASS partenaire absent : visite suspendue')
 
--- Préparation, choix, annulation et départ sans fausse destination.
+-- Préparation, choix, annulation et départ vers la Grotte Verdoyante.
 STRINGS={Format=function(_,s)return s end}
-local choix_restants, messages, menus
+local choix_restants, messages, menus, gv_unlocked, entered_zone
 UI.BeginChoiceMenu=function(_,prompt,options,default,cancel) assert(speaker==nil,'choix avec portrait');menus[#menus+1]={prompt=prompt,options=options} end
 UI.WaitForChoice=function()end
 UI.ChoiceResult=function()return table.remove(choix_restants,1)end
 UI.WaitShowDialogue=function(_,t)messages[#messages+1]=t end
 GAME.FadeOut=function()event('fade_out')end
-GAME.DungeonUnlocked=function()return false end
+GAME.DungeonUnlocked=function(_,id)return id=='grotte_verdoyante' and gv_unlocked end
+GAME.UnlockDungeon=function(_,id)if id=='grotte_verdoyante' then gv_unlocked=true end end
+GAME.EnterZone=function(_,...)entered_zone={...};event('enter_zone',...)end
 local function suite(choices)
- actors={};events={};messages={};menus={};choix_restants=choices
+ actors={};events={};messages={};menus={};gv_unlocked=false;entered_zone=nil;choix_restants=choices
  SV={Destiny={AlerteShinx='a_secourir',VisiteVille='terminee'}}
  local h=new('PLAYER',760,1176);new('Teammate1',784,1152,'eevee');local l=new('Luxray_Alerte',800,1224)
  ville.Luxray_Alerte_Action(l,h);return h,l
@@ -181,11 +183,12 @@ assert(not SV.Destiny.DepartShinxAccepte and hero.Position.X==760 and lux.Positi
 assert(find('dialogue','je vous attends ici') and not hero.CollisionDisabled)
 hero,lux=suite({1,1})
 local nb_fades=0;for _,v in ipairs(events) do if v[1]=='fade_out' then nb_fades=nb_fades+1 end end
-assert(nb_fades==1,'départ Lyra : un seul fondu attendu')
+assert(nb_fades==2,'départ Lyra + entrée Grotte Verdoyante : deux fondus attendus')
 assert(SV.Destiny.DepartShinxAccepte and SV.Destiny.LuxrayAttente=='sortie' and hero.Position.X==1552 and not hero.CollisionDisabled)
-assert(#menus==2 and menus[2].options[1]:find('Grotte Verdoyante',1,true) and messages[1]:find('pas encore disponible',1,true))
-hero,lux=suite({1,3});assert(not hero.CollisionDisabled and #messages==0 and SV.Destiny.DepartShinxAccepte)
-print('PASS suite Lyra / Nilo : choix, annulation, déplacement et destination non fabriquée')
+assert(#menus==2 and menus[2].options[1]:find('Grotte Verdoyante',1,true))
+assert(gv_unlocked and SV.Destiny.ExplorationReverie==true and entered_zone and entered_zone[1]=='grotte_verdoyante' and entered_zone[2]==-1 and entered_zone[3]==0)
+hero,lux=suite({1,3});assert(not hero.CollisionDisabled and #messages==0 and entered_zone==nil and SV.Destiny.DepartShinxAccepte)
+print('PASS suite Lyra / Nilo : choix, annulation, déplacement et entrée Grotte Verdoyante')
 actors={};events={};new('PLAYER');new('Teammate1');new('NewObject_4');new('NewObject_14',857,1179);new('NewObject_16',784,1200)
 SV={Destiny={VisiteVille='en_route'}};GAME.GetPlayerPartyCount=function()return 2 end
 ville.Visite({Entities={}})

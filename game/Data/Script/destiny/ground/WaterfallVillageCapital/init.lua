@@ -155,6 +155,7 @@ local noms_habitants = {
   NewObject_3 = 'Écu', NewObject_4 = '', Kangourex = 'Mado',
   NewObject_6 = 'Céleste', NewObject_7 = 'Nino', NewObject_8 = 'Marcel',
   NewObject_9 = 'Lyra', NewObject_10 = 'Léo', NewObject_12 = 'Hector',
+  Nilo_Shinx = 'Nilo',
   NewObject_13 = 'Azur', NewObject_14 = '', Doyen = 'Aurèle',
   Drifloon = 'Plume', NewObject_16 = '', NewObject_11 = 'Sillage',
   NewObject_18 = 'Gaston', NewObject_20 = 'Atlas', NewObject_21 = 'Suzie',
@@ -393,6 +394,16 @@ local function installer_luxray_attente(map)
   if map.AssetName == 'reverie_residentiel' then
     if CH('NewObject_9') ~= nil then
       if attente then GROUND:Hide('NewObject_9') else GROUND:Unhide('NewObject_9') end
+    end
+    if SV.Destiny.AlerteShinx == 'termine' then
+      local nilo = CH('Nilo_Shinx')
+      if nilo == nil then
+        nilo = habitant('Nilo_Shinx', 'shinx', Gender.Male, 721, 2412)
+        if nilo.Data ~= nil then nilo.Data.Nickname = 'Nilo' end
+        GROUND:TeleportTo(nilo, 721, 2412, Direction.Up)
+      end
+    elseif CH('Nilo_Shinx') ~= nil then
+      GROUND:RemoveCharacter('Nilo_Shinx')
     end
     return
   end
@@ -1593,9 +1604,8 @@ function ville.SortieCarrefour_Touch(obj, activator)
   GAME:EnterGroundMap('reverie', 'crossroadreverietown2', 'entree_ville')
 end
 
--- La seule zone de donjon publiée et raccordée par Destiny à ce jour.
--- Ne pas intégrer ici les combats narratifs, les cartes de test ou Halcyon.
-local destinations_reverie = {'lost_wood'}
+-- Zones de donjon publiées et raccordées par Destiny depuis Réverie Town.
+local destinations_reverie = {'lost_wood', 'grotte_verdoyante'}
 
 local function missions_par_donjon()
   local dests = {}
@@ -1619,7 +1629,9 @@ function ville.SortieExplorationE2_Touch(obj, activator)
   if SV.Destiny.RetourAccompli and not GAME:DungeonUnlocked('lost_wood') then
     GAME:UnlockDungeon('lost_wood')
   end
-  -- Sans zone Grotte Verdoyante, ne pas fabriquer un ZoneLoc inexistant.
+  if (SV.Destiny.GrotteVerdoyanteBossVaincu or SV.Destiny.AlerteShinx == 'termine') and not GAME:DungeonUnlocked('grotte_verdoyante') then
+    GAME:UnlockDungeon('grotte_verdoyante')
+  end
   if SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.DepartShinxAccepte then
     UI:ResetSpeaker()
     UI:BeginChoiceMenu('Choisir une destination', {
@@ -1628,8 +1640,13 @@ function ville.SortieExplorationE2_Touch(obj, activator)
     UI:WaitForChoice()
     local selection = UI:ChoiceResult()
     if selection == 1 then
-      UI:ResetSpeaker()
-      UI:WaitShowDialogue('La Grotte Verdoyante n’est pas encore disponible dans cette version.')
+      if not GAME:DungeonUnlocked('grotte_verdoyante') then
+        GAME:UnlockDungeon('grotte_verdoyante')
+      end
+      SV.Destiny.ExplorationReverie = true
+      SOUND:FadeOutBGM(20)
+      GAME:FadeOut(false, 20)
+      GAME:EnterZone('grotte_verdoyante', -1, 0, 0)
       return
     elseif selection ~= 2 then
       return
@@ -1670,7 +1687,11 @@ function ville.SortieExplorationE2_Touch(obj, activator)
   SV.Destiny.ExplorationReverie = true
   SOUND:FadeOutBGM(20)
   GAME:FadeOut(false, 20)
-  GAME:EnterDungeon(destination.Id, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+  if destination.Id == 'grotte_verdoyante' then
+    GAME:EnterZone('grotte_verdoyante', -1, 0, 0)
+  else
+    GAME:EnterDungeon(destination.Id, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+  end
 end
 
 function ville.TableauReverieNord_Action(obj, activator) missions_reverie.OuvrirTableau() end
@@ -2276,6 +2297,9 @@ function ville.NewObject_9_Action(personnage, activator)
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     parler_accueil(personnage, 'Worried', 'Mon petit Nilo attend toujours là-bas… Je vous en prie, ne tardez pas trop.')
     UI:ResetSpeaker()
+  elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
+    parler_accueil(personnage, 'Happy', 'Depuis que vous avez ramené Nilo de la Grotte Verdoyante, il ne lâche plus Léo d’une semelle. Merci encore !')
+    UI:ResetSpeaker()
   else
     dialogue_lux(CH('NewObject_10'), personnage)
   end
@@ -2288,9 +2312,20 @@ function ville.NewObject_10_Action(personnage, activator)
     UI:ResetSpeaker()
     terminer_dialogue(personnage, 'NewObject_10')
     return
+  elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
+    parler_accueil(personnage, 'Happy', 'Vous avez assuré dans la Grotte Verdoyante ! Nilo est rentré sain et sauf grâce à vous.')
+    UI:ResetSpeaker()
+    terminer_dialogue(personnage, 'NewObject_10')
+    return
   end
   dialogue_lux(personnage, CH('NewObject_9'))
   terminer_dialogue(personnage, 'NewObject_10')
+end
+function ville.Nilo_Shinx_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
+  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des griffes de Colhomard dans la Grotte Verdoyante ! Promis, je reste près de Maman et Léo maintenant !')
+  UI:ResetSpeaker()
+  terminer_dialogue(personnage, 'Nilo_Shinx')
 end
 
 local dialogues_habitants = {

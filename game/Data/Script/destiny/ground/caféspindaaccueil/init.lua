@@ -276,6 +276,8 @@ local function premiere_visite(map, hero, partenaire)
   dire(spinda, 'Normal', 'Le café est fermé pour rénovation. En attendant, notre accueil reste ici ; passez nous voir, nous vous renseignerons !')
   if SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(spinda, 'Worried', 'Kirlia m’a parlé de Nilo. Préparez-vous bien avant de rejoindre Lyra ; nous pensons à lui.')
+  elseif SV.Destiny.AlerteShinx == 'termine' then
+    dire(spinda, 'Happy', 'Tout le café se réjouit de savoir le petit Nilo sain et sauf aux côtés de Lyra !')
   end
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
@@ -381,6 +383,8 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
   pas_spinda_etourdi(personnage)
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     dire(personnage, 'Worried', 'Je pense à Nilo et à Lyra. Préparez-vous bien, et ne perdez pas courage.')
+  elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
+    dire(personnage, 'Happy', 'Savoir Nilo sain et sauf aux côtés de Lyra met du baume au cœur à tout le café !')
   end
   dire(personnage, 'Happy', 'Bienvenue à l’accueil du café Spinda ! Ici, les explorateurs partagent leurs récits de mission.')
   local pipo = CH('MrMimeJunior')
@@ -475,6 +479,13 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
     if spinda ~= nil then
       tourner_vers(spinda, joueur)
       dire(spinda, 'Normal', 'Prenez le temps de souffler ou de faire vos réserves. Quand Nilo sera rentré, sa place sera prête ici.')
+      tourner_vers(personnage, joueur)
+    end
+  elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
+    dire(personnage, 'Happy', 'Je ressens un immense soulagement depuis la place ! Nilo est rentré auprès de Lyra grâce à vous.')
+    if spinda ~= nil then
+      tourner_vers(spinda, joueur)
+      dire(spinda, 'Happy', 'Bravo pour la Grotte Verdoyante ! Venez souffler ici entre deux expéditions.')
       tourner_vers(personnage, joueur)
     end
   else
