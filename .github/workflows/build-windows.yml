@@ -57,6 +57,10 @@ jobs:
         run: python tools/run_ci_check.py tools/tests/test_lost_wood_reproduction.py
       - name: Check PMUniverse tiles
         run: python tools/run_ci_check.py tools/tests/test_banques_pmu.py
+      - name: Check HD Guild tilesets
+        run: python tools/run_ci_check.py tools/tests/test_guilde_hd_tiles.py
+      - name: Check cliffdaytest integrity (4 ambiances, source and 24px battle map)
+        run: python tools/run_ci_check.py tools/tests/test_cliffdaytest_integrite.py
       - name: Check hero and partner knockout rule
         run: python tools/run_ci_check.py tools/tests/test_regle_ko.py
       - name: Check reunion naming and Pelipper flight
