@@ -37,13 +37,13 @@ def md5(path: Path) -> str:
 assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c',
-        36696423,
+        '8a4d39115095bb2fa0483069908619d34254189b3a37887ce9d94c267b5b78bf',
+        36700814,
     ),
     'payload/WaterfallVillageCapital_Dev.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        'cb48b98351c903f1780f3afbd3afed98808546fe6e15a1539604b9432f126061',
-        36696427,
+        'a942e62b182d5f55904398c87e21664b2e75bddf9abcaeda067a55d8aaf48437',
+        36700818,
     )
 }
 assert set(unpack_payload.PAYLOADS) == {
@@ -55,16 +55,16 @@ assert set(unpack_payload.PAYLOADS) == {
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 36696423
-assert sha256(MAP) == '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c'
+assert MAP.stat().st_size == 36700814
+assert sha256(MAP) == '8a4d39115095bb2fa0483069908619d34254189b3a37887ce9d94c267b5b78bf'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 36696423
-assert h.hexdigest() == '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c'
+assert size == 36700814
+assert h.hexdigest() == '8a4d39115095bb2fa0483069908619d34254189b3a37887ce9d94c267b5b78bf'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -226,6 +226,13 @@ for _x in range(32, 48):
         if _sub and all(f['Sheet'] in _water_sheets for f in _sub[0].get('Frames', [])):
             _basin_cells.append((_x, _y))
 assert len(_basin_cells) == 54, len(_basin_cells)
+for _x in range(32, 48):
+    _edge_subs = _l2_tiles[_x][255].get('Layers', [])
+    assert len(_edge_subs) == 2, (_x, len(_edge_subs))
+    assert any(
+        f['Sheet'] in ('Reverie_Geo_04_Rives_et_transitions', 'Reverie_Geo_12_Eaux_frames')
+        for f in _edge_subs[1].get('Frames', [])
+    ), (_x, _edge_subs[1])
 assert not _l6_tiles[41][258].get('Layers') and not _l6_tiles[42][258].get('Layers')
 assert _l7_tiles[43][253].get('Layers')
 assert all(_wvc['obstacles'][_x][_y]['Tags'] == 1 for _x, _y in _basin_cells)
