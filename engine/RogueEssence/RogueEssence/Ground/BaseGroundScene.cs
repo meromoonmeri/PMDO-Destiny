@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueEssence.Content;
 using RogueElements;
@@ -205,6 +205,10 @@ namespace RogueEssence.Ground
 
         public virtual void DrawGame(SpriteBatch spriteBatch)
         {
+            GroundMap prevRenderMap = GroundMap.CurrentRenderMap;
+            GroundMap.CurrentRenderMap = ZoneManager.Instance.CurrentGround;
+            try
+            {
             bool wrapped = ZoneManager.Instance.CurrentGround.EdgeView == BaseMap.ScrollEdge.Wrap;
 
             //draw the background
@@ -329,6 +333,11 @@ namespace RogueEssence.Ground
             {
                 foregroundDraw[charIndex].sprite.Draw(spriteBatch, foregroundDraw[charIndex].viewOffset);
                 charIndex++;
+            }
+            }
+            finally
+            {
+                GroundMap.CurrentRenderMap = prevRenderMap;
             }
         }
 

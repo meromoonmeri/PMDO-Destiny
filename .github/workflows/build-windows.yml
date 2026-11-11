@@ -115,6 +115,8 @@ jobs:
         run: python tools/run_ci_check.py tools/tests/test_guilde_cliff_integrite.py
       - name: Check falaise_promontoire integration and pond path
         run: python tools/run_ci_check.py tools/tests/test_falaise_promontoire_integration.py
+      - name: Check Reverie Town and cutscene 4-ambiance LUT filters
+        run: python tools/run_ci_check.py tools/tests/test_ambiances_reverie_et_cinematiques.py
       - name: Check incremental update ZIP builder
         run: python tools/run_ci_check.py tools/tests/test_build_update_zip.py
       - name: Build and package Destiny

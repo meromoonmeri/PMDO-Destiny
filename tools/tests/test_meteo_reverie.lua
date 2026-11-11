@@ -55,7 +55,7 @@ statuses={sunny=true};cross.GameLoad(map);assert(statuses.rain and not statuses.
 assert(map.objects.SortieFalaise and map.objects.SortieVille)
 print('PASS carrefour Init et GameLoad, sorties intactes')
 
--- Synchronisation scénario 4 ambiances (jour, aube, crépuscule, nuit) et statut dark natif.
+-- Synchronisation scénario 4 ambiances (jour, aube, crépuscule, nuit) par LUT (remplace le voile dark).
 SV={Destiny={JourneeVille=5,MeteoReverie={jour=5,temps='clair'}}}
 assert(m.Moment()=='jour' and not m.EstNuit() and m.CarteCliff()=='cliffdaytest' and m.IndexGuilde()==23 and m.IndexPromontoire()==0 and m.CartePromontoire()=='falaise_promontoire_jour')
 SV.Destiny.VisiteVille='terminee'
@@ -68,14 +68,20 @@ for _,cas in ipairs({
   local nom,nuit,cliff,idx,guilde,pidx,prom=cas[1],cas[2],cas[3],cas[4],cas[5],cas[6],cas[7]
   m.DefinirMomentScenario(nom)
   assert(m.Moment()==nom and m.EstNuit()==nuit and m.CarteCliff()==cliff and m.IndexGuilde()==idx and m.CarteGuilde()==guilde and m.IndexPromontoire()==pidx and m.CartePromontoire()==prom)
-  statuses={dark=not nuit}
-  assert(m.Appliquer({AssetName='WaterfallVillageCapital'}))
-  assert((statuses.dark==true)==nuit and SV.Destiny.MomentReverie==nom)
-  statuses={dark=not nuit}
-  assert(m.Appliquer({AssetName='crossroadreverietown2'}))
-  assert((statuses.dark==true)==nuit)
+  for _,ext in ipairs({'WaterfallVillageCapital','reverie_centre','reverie_nord','reverie_etang','reverie_residentiel','crossroadreverietown2'}) do
+    statuses={dark=true}
+    local amb_rec, world_rec
+    local mstub={AssetName=ext, SetDestinyAmbiance=function(_, a, w) amb_rec=a; world_rec=w end}
+    assert(m.Appliquer(mstub))
+    assert(not statuses.dark and SV.Destiny.MomentReverie==nom)
+    assert(amb_rec==nom and world_rec==true, 'LUT attendue sur '..ext)
+  end
+  -- Vérifier que le moment reste stable après Appliquer même sans dark actif.
+  _ZONE={CurrentGround={AssetName='reverie_centre',Status={ContainsKey=function() return false end}}}
+  assert(m.Moment()==nom)
+  _ZONE=nil
 end
--- Détection d'une carte Réverie déjà passée en statut moteur natif 'dark'.
+-- Détection de compatibilité d'une ancienne sauvegarde ayant encore 'dark' actif.
 m.EffacerMomentScenario()
 assert(m.Moment()=='jour' and not m.EstNuit())
 _ZONE={CurrentGround={AssetName='reverie_centre',Status={ContainsKey=function(_,k) return k=='dark' end}}}
@@ -90,4 +96,4 @@ UI={BeginChoiceMenu=function() error('aucun menu de choix attendu') end}
 cross.Init(map)
 cross.SortieFalaise_Touch(nil,{EntName='PLAYER'})
 assert(#voyages==1 and voyages[1][1]=='destiny_cliff_tests' and voyages[1][2]=='cliffdaytest_nuit' and voyages[1][3]=='Dazzling_Entry_South')
-print('PASS synchronisation 4 ambiances, statut dark et routage auto carrefour')
+print('PASS synchronisation 4 ambiances LUT (sans dark) et routage auto carrefour')

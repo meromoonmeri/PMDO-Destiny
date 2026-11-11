@@ -77,10 +77,6 @@ function meteo.Moment()
     d.MomentReverie = 'nuit'
     return 'nuit'
   end
-  if _ZONE ~= nil and _ZONE.CurrentGround ~= nil and carte_appliquee == _ZONE.CurrentGround and dernier_moment_applique == 'nuit' then
-    d.MomentReverie = 'jour'
-    return 'jour'
-  end
   if moments_valides[d.MomentReverie] then
     return d.MomentReverie
   end
@@ -173,6 +169,8 @@ end
 
 -- Ne touche ni aux intérieurs, ni aux donjons, ni aux cartes de cinématique
 -- fixes. Les autres effets de carte, notamment clouds_overhead, sont préservés.
+-- Les 4 ambiances (jour, aube, crépuscule, nuit) remplacent le voile plat
+-- 'dark' par le filtrage LUT natif (monde + sprites) via SetDestinyAmbiance.
 function meteo.Appliquer(map)
   meteo.SynchroniserZone()
   if map == nil or not exterieurs[map.AssetName] then return false end
@@ -189,10 +187,9 @@ function meteo.Appliquer(map)
       GROUND:RemoveMapStatus(statut)
     end
     if effets[temps] ~= nil then GROUND:AddMapStatus(effets[temps]) end
-    if moment == 'nuit' then
-      GROUND:AddMapStatus('dark')
-    else
-      GROUND:RemoveMapStatus('dark')
+    GROUND:RemoveMapStatus('dark')
+    if map.SetDestinyAmbiance ~= nil then
+      map:SetDestinyAmbiance(moment, true)
     end
   end)
   if ok then

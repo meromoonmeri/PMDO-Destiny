@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueEssence.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -98,10 +98,15 @@ namespace RogueEssence.Ground
 
         public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
         {
+            Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
+        {
             Loc drawLoc = GetDrawLoc(offset, sheet);
             drawLoc.Y -= LocHeight;
             //draw sprite at current frame
-            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255));
+            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
         }
         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
         {
@@ -176,10 +181,15 @@ namespace RogueEssence.Ground
 
         public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
         {
+            Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
+        {
             Loc drawLoc = GetDrawLoc(offset, sheet);
             drawLoc.Y -= LocHeight;
             //draw sprite at current frame
-            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255));
+            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
         }
         public override Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
         {

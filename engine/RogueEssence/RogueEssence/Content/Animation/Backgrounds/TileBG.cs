@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using RogueElements;
 using RogueEssence.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using RogueEssence.Dev;
+using RogueEssence.Ground;
 
 /*
  * TileBG.cs
@@ -40,10 +41,11 @@ namespace RogueEssence.Dungeon
         public void DrawDebug(SpriteBatch spriteBatch, Loc offset) { }
         public void Draw(SpriteBatch spriteBatch, Loc offset)
         {
+            Color tint = GroundMap.CurrentRenderMap != null ? GroundMap.CurrentRenderMap.WorldAmbianceTint : Color.White;
             for (int x = -offset.X % GraphicsManager.TileSize - GraphicsManager.TileSize; x < GraphicsManager.ScreenWidth; x += GraphicsManager.TileSize)
             {
                 for (int y = -offset.Y % GraphicsManager.TileSize - GraphicsManager.TileSize; y < GraphicsManager.ScreenHeight; y += GraphicsManager.TileSize)
-                    Tile.DrawBlank(spriteBatch, new Loc(x, y), ulong.MaxValue);
+                    Tile.DrawBlank(spriteBatch, new Loc(x, y), ulong.MaxValue, tint);
             }
         }
 

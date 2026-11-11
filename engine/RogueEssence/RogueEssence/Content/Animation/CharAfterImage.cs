@@ -1,6 +1,7 @@
-﻿using RogueElements;
+using RogueElements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueEssence.Ground;
 
 namespace RogueEssence.Content
 {
@@ -49,7 +50,17 @@ namespace RogueEssence.Content
 
             Loc drawLoc = GetDrawLoc(offset);
             CharSheet sheet = GraphicsManager.GetChara(Appearance);
-            sheet.DrawCharFrame(spriteBatch, CurrentAnim, true, Direction, drawLoc.ToVector2(), Frame, Color.White * ((float)Alpha / 255));
+            Color tint = Color.White;
+            GroundMap ground = GroundMap.CurrentRenderMap;
+            if (ground != null)
+            {
+                DestinyAmbiance charAmbiance = ground.CharacterAmbiance;
+                if (charAmbiance == DestinyAmbiance.Nuit)
+                    sheet = sheet.GetDestinyNightCopy();
+                else
+                    tint = GroundMap.GetAmbianceTint(charAmbiance);
+            }
+            sheet.DrawCharFrame(spriteBatch, CurrentAnim, true, Direction, drawLoc.ToVector2(), Frame, tint * ((float)Alpha / 255));
         }
 
         public override Loc GetDrawLoc(Loc offset)

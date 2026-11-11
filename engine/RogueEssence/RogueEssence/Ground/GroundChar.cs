@@ -416,9 +416,17 @@ namespace RogueEssence.Ground
         public override void Draw(SpriteBatch spriteBatch, Loc offset)
         {
             CharSheet sheet = GraphicsManager.GetChara(CurrentForm.ToCharID());
-            if (Map is GroundMap ground && ground.FilterNightCharacters)
-                sheet = sheet.GetDestinyNightCopy();
-            currentCharAction.Draw(spriteBatch, offset, sheet);
+            Microsoft.Xna.Framework.Color tint = Microsoft.Xna.Framework.Color.White;
+            GroundMap ground = Map as GroundMap ?? GroundMap.CurrentRenderMap;
+            if (ground != null)
+            {
+                DestinyAmbiance charAmbiance = ground.CharacterAmbiance;
+                if (charAmbiance == DestinyAmbiance.Nuit)
+                    sheet = sheet.GetDestinyNightCopy();
+                else
+                    tint = GroundMap.GetAmbianceTint(charAmbiance);
+            }
+            currentCharAction.Draw(spriteBatch, offset, sheet, tint);
 
             if (currentEmote != null)
             {

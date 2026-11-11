@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RogueElements;
 using RogueEssence.Content;
 using Microsoft.Xna.Framework;
@@ -50,8 +50,9 @@ namespace RogueEssence.Ground
             {
                 Loc drawLoc = GetDrawLoc(offset);
 
+                Color tint = GroundMap.CurrentRenderMap != null ? GroundMap.CurrentRenderMap.WorldAmbianceTint : Color.White;
                 DirSheet sheet = GraphicsManager.GetDirSheet(ObjectAnim.AssetType, ObjectAnim.AnimIndex);
-                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), ObjectAnim.GetCurrentFrame(GraphicsManager.TotalFrameTick, sheet.TotalFrames), ObjectAnim.GetDrawDir(Dir8.None), Color.White * ((float)ObjectAnim.Alpha * alpha / 255), ObjectAnim.AnimFlip);
+                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), ObjectAnim.GetCurrentFrame(GraphicsManager.TotalFrameTick, sheet.TotalFrames), ObjectAnim.GetDrawDir(Dir8.None), tint * ((float)ObjectAnim.Alpha * alpha / 255), ObjectAnim.AnimFlip);
             }
         }
 

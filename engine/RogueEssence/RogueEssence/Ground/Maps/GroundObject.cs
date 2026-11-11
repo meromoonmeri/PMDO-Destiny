@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueElements;
 using RogueEssence.Content;
@@ -167,19 +167,20 @@ namespace RogueEssence.Ground
         }
         public override void DrawPreview(SpriteBatch spriteBatch, Loc offset, float alpha)
         {
+            Color tint = GroundMap.CurrentRenderMap != null ? GroundMap.CurrentRenderMap.WorldAmbianceTint : Color.White;
             if (CurrentAnim.AnimIndex != "")
             {
                 Loc drawLoc = GetDrawLoc(offset);
 
                 DirSheet sheet = GraphicsManager.GetDirSheet(CurrentAnim.AssetType, CurrentAnim.AnimIndex);
-                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), CurrentAnim.GetCurrentFrame(AnimTime, sheet.TotalFrames), CurrentAnim.GetDrawDir(Direction), Color.White * ((float)CurrentAnim.Alpha * alpha / 255), CurrentAnim.AnimFlip);
+                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), CurrentAnim.GetCurrentFrame(AnimTime, sheet.TotalFrames), CurrentAnim.GetDrawDir(Direction), tint * ((float)CurrentAnim.Alpha * alpha / 255), CurrentAnim.AnimFlip);
             }
             else if (ObjectAnim.AnimIndex != "")
             {
                 Loc drawLoc = GetDrawLoc(offset);
 
                 DirSheet sheet = GraphicsManager.GetDirSheet(ObjectAnim.AssetType, ObjectAnim.AnimIndex);
-                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), ObjectAnim.GetCurrentFrame(GraphicsManager.TotalFrameTick, sheet.TotalFrames), ObjectAnim.GetDrawDir(Direction), Color.White * ((float)ObjectAnim.Alpha * alpha / 255), ObjectAnim.AnimFlip);
+                sheet.DrawDir(spriteBatch, drawLoc.ToVector2(), ObjectAnim.GetCurrentFrame(GraphicsManager.TotalFrameTick, sheet.TotalFrames), ObjectAnim.GetDrawDir(Direction), tint * ((float)ObjectAnim.Alpha * alpha / 255), ObjectAnim.AnimFlip);
             }
         }
 

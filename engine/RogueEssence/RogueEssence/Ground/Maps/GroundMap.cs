@@ -15,6 +15,14 @@ using RogueEssence.Dev;
 
 namespace RogueEssence.Ground
 {
+    public enum DestinyAmbiance
+    {
+        Jour = 0,
+        Aube = 1,
+        Crepuscule = 2,
+        Nuit = 3
+    }
+
     [Serializable]
     public class GroundMap : IWorld, IEntryData
     {
@@ -100,16 +108,119 @@ namespace RogueEssence.Ground
         /// <summary>For night scenes whose asset name has no night suffix.</summary>
         public bool NightCharacterFilter;
 
+        [ThreadStatic]
+        public static GroundMap CurrentRenderMap;
+
+        public static readonly Color AubeTint = new Color(224, 203, 212);
+        public static readonly Color CrepusculeTint = new Color(179, 146, 173);
+        public static readonly Color NuitWorldTint = new Color(97, 118, 159);
+
+        [NonSerialized]
+        [JsonIgnore]
+        private DestinyAmbiance? runtimeCharacterAmbiance;
+
+        [NonSerialized]
+        [JsonIgnore]
+        private DestinyAmbiance? runtimeWorldAmbiance;
+
+        public static Color GetAmbianceTint(DestinyAmbiance ambiance)
+        {
+            switch (ambiance)
+            {
+                case DestinyAmbiance.Aube:
+                    return AubeTint;
+                case DestinyAmbiance.Crepuscule:
+                    return CrepusculeTint;
+                case DestinyAmbiance.Nuit:
+                    return NuitWorldTint;
+                default:
+                    return Color.White;
+            }
+        }
+
+        public static DestinyAmbiance ParseDestinyAmbiance(string ambiance)
+        {
+            if (String.IsNullOrWhiteSpace(ambiance))
+                return DestinyAmbiance.Jour;
+            string norm = ambiance.Trim().ToLowerInvariant();
+            if (norm == "nuit" || norm == "night")
+                return DestinyAmbiance.Nuit;
+            if (norm == "aube" || norm == "dawn")
+                return DestinyAmbiance.Aube;
+            if (norm == "crepuscule" || norm == "crépuscule" || norm == "dusk")
+                return DestinyAmbiance.Crepuscule;
+            return DestinyAmbiance.Jour;
+        }
+
+        [JsonIgnore]
+        public DestinyAmbiance DefaultAmbianceFromName
+        {
+            get
+            {
+                if (NightCharacterFilter)
+                    return DestinyAmbiance.Nuit;
+                if (IsDestinyContext() && !String.IsNullOrEmpty(AssetName))
+                {
+                    if (AssetName.IndexOf("_nuit", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        AssetName.IndexOf("_night", StringComparison.OrdinalIgnoreCase) >= 0)
+                        return DestinyAmbiance.Nuit;
+                    if (AssetName.IndexOf("_aube", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        AssetName.IndexOf("_dawn", StringComparison.OrdinalIgnoreCase) >= 0)
+                        return DestinyAmbiance.Aube;
+                    if (AssetName.IndexOf("_crepuscule", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        AssetName.IndexOf("_dusk", StringComparison.OrdinalIgnoreCase) >= 0)
+                        return DestinyAmbiance.Crepuscule;
+                }
+                return DestinyAmbiance.Jour;
+            }
+        }
+
+        [JsonIgnore]
+        public DestinyAmbiance CharacterAmbiance => runtimeCharacterAmbiance ?? DefaultAmbianceFromName;
+
+        [JsonIgnore]
+        public DestinyAmbiance WorldAmbiance => runtimeWorldAmbiance ?? DestinyAmbiance.Jour;
+
+        [JsonIgnore]
+        public Color WorldAmbianceTint => GetAmbianceTint(WorldAmbiance);
+
+        [JsonIgnore]
+        public Color CharacterAmbianceTint => GetAmbianceTint(CharacterAmbiance);
+
+        public void SetDestinyAmbiance(string ambiance)
+        {
+            SetDestinyAmbiance(ambiance, false);
+        }
+
+        public void SetDestinyAmbiance(string ambiance, bool applyToWorld)
+        {
+            SetDestinyAmbianceMode(ParseDestinyAmbiance(ambiance), applyToWorld);
+        }
+
+        public void SetDestinyAmbianceMode(DestinyAmbiance ambiance, bool applyToWorld = false)
+        {
+            runtimeCharacterAmbiance = ambiance;
+            runtimeWorldAmbiance = applyToWorld ? ambiance : DestinyAmbiance.Jour;
+        }
+
+        public void ClearDestinyAmbiance()
+        {
+            runtimeCharacterAmbiance = null;
+            runtimeWorldAmbiance = null;
+        }
+
+        public string GetDestinyAmbianceName()
+        {
+            return CharacterAmbiance.ToString().ToLowerInvariant();
+        }
+
         /// <summary>
         /// Apply the filename convention only to the Destiny quest (or its
         /// standalone build, where Destiny is a base script namespace). Other
         /// quests may opt in explicitly via NightCharacterFilter.
         /// </summary>
         [JsonIgnore]
-        public bool FilterNightCharacters => NightCharacterFilter ||
-            (IsDestinyContext() && !String.IsNullOrEmpty(AssetName) &&
-             (AssetName.IndexOf("_nuit", StringComparison.OrdinalIgnoreCase) >= 0 ||
-              AssetName.IndexOf("_night", StringComparison.OrdinalIgnoreCase) >= 0));
+        public bool FilterNightCharacters => CharacterAmbiance == DestinyAmbiance.Nuit;
 
         private static bool IsDestinyContext()
         {
@@ -898,16 +1009,17 @@ namespace RogueEssence.Ground
                 return;
             ulong seed = rand != null ? rand.FirstSeed : 0;
             INoise noise = new ReNoise(seed);
-            BlankBG.DrawBlank(spriteBatch, drawPos, noise.Get2DUInt64((ulong)mapPos.X, (ulong)mapPos.Y));
+            BlankBG.DrawBlank(spriteBatch, drawPos, noise.Get2DUInt64((ulong)mapPos.X, (ulong)mapPos.Y), WorldAmbianceTint);
         }
 
         public void DrawLoc(SpriteBatch spriteBatch, Loc drawPos, Loc loc, bool front)
         {
             loc = WrapLoc(loc);
+            Color tint = WorldAmbianceTint;
             foreach (MapLayer layer in Layers)
             {
                 if ((layer.Layer == DrawLayer.Top) == front && layer.Visible)
-                    layer.Tiles[loc.X][loc.Y].Draw(spriteBatch, drawPos);
+                    layer.Tiles[loc.X][loc.Y].Draw(spriteBatch, drawPos, tint);
             }
         }
 

@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using RogueElements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueEssence.Content;
 using RogueEssence.Data;
@@ -77,15 +78,25 @@ namespace RogueEssence.Dungeon
 
         public void Draw(SpriteBatch spriteBatch, Loc pos)
         {
-            draw(spriteBatch, pos, false, 0);
+            draw(spriteBatch, pos, false, 0, Color.White);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Loc pos, Color color)
+        {
+            draw(spriteBatch, pos, false, 0, color);
         }
 
         public void DrawBlank(SpriteBatch spriteBatch, Loc pos, ulong randCode)
         {
-            draw(spriteBatch, pos, true, randCode);
+            draw(spriteBatch, pos, true, randCode, Color.White);
         }
 
-        private void draw(SpriteBatch spriteBatch, Loc pos, bool neighborCodeOverride, ulong randCode)
+        public void DrawBlank(SpriteBatch spriteBatch, Loc pos, ulong randCode, Color color)
+        {
+            draw(spriteBatch, pos, true, randCode, color);
+        }
+
+        private void draw(SpriteBatch spriteBatch, Loc pos, bool neighborCodeOverride, ulong randCode, Color color)
         {
             List<TileLayer> layers;
             if (!String.IsNullOrEmpty(AutoTileset))
@@ -99,7 +110,7 @@ namespace RogueEssence.Dungeon
             else
                 layers = Layers;
             foreach (TileLayer anim in layers)
-                anim.Draw(spriteBatch, pos, GraphicsManager.TotalFrameTick);
+                anim.Draw(spriteBatch, pos, GraphicsManager.TotalFrameTick, color);
         }
 
         public bool IsEmpty()
