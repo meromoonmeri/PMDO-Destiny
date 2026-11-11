@@ -43,9 +43,9 @@ local function position_partenaire(map, hx, hy)
 end
 
 local function installer_retour_reverie(map)
-  if map == nil or map:FindObject('RetourEtangReverie') then return end
+  if map == nil or map:FindObject('RetourCentreReverie') then return end
   local retour = RogueEssence.Ground.GroundObject()
-  retour.EntName = 'RetourEtangReverie'
+  retour.EntName = 'RetourCentreReverie'
   retour.Collider = RogueElements.Rect(0, 176, 8, 256)
   retour.Passable = false
   retour:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
@@ -138,15 +138,15 @@ function falaise_promontoire_crepuscule.Update(map, time)
   end
 end
 
-function falaise_promontoire_crepuscule.RetourEtangReverie_Touch(obj, activator)
+function falaise_promontoire_crepuscule.RetourCentreReverie_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if sortie_en_cours then return end
   sortie_en_cours = true
   SV.Destiny = SV.Destiny or {}
-  SV.Destiny.PassageQuartier = {x = 1536, y = 2056, px = 1560, py = 2056, dir = 'Left'}
+  SV.Destiny.PassageQuartier = {x = 1536, y = 1152, px = 1560, py = 1152, dir = 'Left'}
   arreter_mer()
   GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap('town02_waterfallvillage', 'reverie_etang', 'entrance')
+  GAME:EnterGroundMap('town02_waterfallvillage', 'reverie_centre', 'entrance')
 end
 
 function falaise_promontoire_crepuscule.GameSave(map)

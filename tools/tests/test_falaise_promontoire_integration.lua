@@ -2,6 +2,7 @@ package.preload['destiny.meteo_reverie'] = function()
   return assert(loadfile((arg[1] or '.') .. '/game/Data/Script/destiny/meteo_reverie.lua'))()
 end
 package.preload['origin.common'] = function() return {} end
+COMMON = {CreateWalkArea = function() end}
 package.preload['origin.menu.skill.SkillSelectMenu'] = function() return {} end
 package.preload['origin.menu.team.AssemblySelectMenu'] = function() return {} end
 package.preload['destiny.equipe_scene'] = function()
@@ -101,8 +102,8 @@ local function new_cliff_map(name)
   return m
 end
 
--- 1. Only reverie_etang (not centre/nord/residentiel) installs SortieFalaisePromontoire
-for _, sec in ipairs({'reverie_centre', 'reverie_nord', 'reverie_residentiel'}) do
+-- 1. Only reverie_centre (secteur fusionné avec reverie_nord), not etang/residentiel, installs SortieFalaisePromontoire
+for _, sec in ipairs({'reverie_etang', 'reverie_residentiel'}) do
   SV = {Destiny = {VisiteVille = 'terminee'}}
   current_map = new_city_map(sec)
   local ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
@@ -110,7 +111,7 @@ for _, sec in ipairs({'reverie_centre', 'reverie_nord', 'reverie_residentiel'}) 
   assert(current_map.objects.SortieFalaisePromontoire == nil, sec .. ' should not have SortieFalaisePromontoire')
 end
 
--- 2. Round-trip across all 4 ambiances from reverie_etang -> falaise_promontoire_* -> reverie_etang
+-- 2. Round-trip across all 4 ambiances from reverie_centre -> falaise_promontoire_* -> reverie_centre
 local ambiances = {
   {'jour',       0, 'falaise_promontoire_jour'},
   {'aube',       1, 'falaise_promontoire_aube'},
@@ -121,12 +122,12 @@ for _, cas in ipairs(ambiances) do
   local amb, idx, carte = cas[1], cas[2], cas[3]
   SV = {Destiny = {VisiteVille = 'terminee', MomentScenario = amb, MomentReverie = amb}}
   calls.zone = {}; calls.ground = {}
-  current_map = new_city_map('reverie_etang')
+  current_map = new_city_map('reverie_centre')
   local ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
   ville.Init(current_map)
   local sortie = current_map.objects.SortieFalaisePromontoire
   assert(sortie ~= nil and sortie.Passable == false and sortie.TriggerType == 'Touch')
-  assert(sortie.Collider.x == 1584 and sortie.Collider.y == 2024 and sortie.Collider.w == 16 and sortie.Collider.h == 72)
+  assert(sortie.Collider.x == 1584 and sortie.Collider.y == 1120 and sortie.Collider.w == 16 and sortie.Collider.h == 72)
 
   -- Non-player touch ignored
   ville.SortieFalaisePromontoire_Touch(sortie, mate)
@@ -138,33 +139,33 @@ for _, cas in ipairs(ambiances) do
   ville.SortieFalaisePromontoire_Touch(sortie, player)
   assert(#calls.zone == 1)
 
-  -- Enter promontory and return west -> reverie_etang facing Left
+  -- Enter promontory and return west -> reverie_centre facing Left
   calls.zone = {}; calls.ground = {}
   player.Position = {X = 24, Y = 292}; player.Direction = Direction.Right
   current_map = new_cliff_map(carte)
   local prom = assert(loadfile(root .. '/game/Data/Script/destiny/ground/' .. carte .. '/init.lua'))()
   prom.Init(current_map)
   assert(current_map.EdgeView == 'Clamp')
-  local ret = current_map.objects.RetourEtangReverie
+  local ret = current_map.objects.RetourCentreReverie
   assert(ret ~= nil and ret.Passable == false and ret.TriggerType == 'Touch')
   assert(ret.Collider.x == 0 and ret.Collider.y == 176 and ret.Collider.w == 8 and ret.Collider.h == 256)
   prom.Enter(current_map)
-  prom.RetourEtangReverie_Touch(ret, mate)
+  prom.RetourCentreReverie_Touch(ret, mate)
   assert(#calls.ground == 0)
-  prom.RetourEtangReverie_Touch(ret, player)
-  assert(#calls.ground == 1 and calls.ground[1][1] == 'town02_waterfallvillage' and calls.ground[1][2] == 'reverie_etang' and calls.ground[1][3] == 'entrance')
-  prom.RetourEtangReverie_Touch(ret, player)
+  prom.RetourCentreReverie_Touch(ret, player)
+  assert(#calls.ground == 1 and calls.ground[1][1] == 'town02_waterfallvillage' and calls.ground[1][2] == 'reverie_centre' and calls.ground[1][3] == 'entrance')
+  prom.RetourCentreReverie_Touch(ret, player)
   assert(#calls.ground == 1)
   local pq = SV.Destiny.PassageQuartier
-  assert(pq and pq.x == 1536 and pq.y == 2056 and pq.px == 1560 and pq.py == 2056 and pq.dir == 'Left')
+  assert(pq and pq.x == 1536 and pq.y == 1152 and pq.px == 1560 and pq.py == 1152 and pq.dir == 'Left')
 
-  -- Arrive back on reverie_etang facing Left with safe margin from trigger
-  current_map = new_city_map('reverie_etang')
+  -- Arrive back on reverie_centre facing Left with safe margin from trigger
+  current_map = new_city_map('reverie_centre')
   ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
   ville.Init(current_map)
   ville.Enter(current_map)
-  assert(player.Position.X == 1536 and player.Position.Y == 2056 and player.Direction == 'Left')
-  assert(mate.Position.X == 1560 and mate.Position.Y == 2056 and mate.Direction == 'Left')
+  assert(player.Position.X == 1536 and player.Position.Y == 1152 and player.Direction == 'Left')
+  assert(mate.Position.X == 1560 and mate.Position.Y == 1152 and mate.Direction == 'Left')
   assert(SV.Destiny.PassageQuartier == nil)
 end
 
@@ -184,4 +185,4 @@ local prom_nuit = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fala
 prom_nuit.Init(current_map)
 prom_nuit.Enter(current_map)
 assert(player.Position.X == 240 and player.Position.Y == 280 and SV.Destiny.PassageAmbiancePromontoire == nil)
-print('PASS round-trip reverie_etang <-> falaise_promontoire (4 ambiances + synchro auto)')
+print('PASS round-trip reverie_centre <-> falaise_promontoire (4 ambiances + synchro auto)')

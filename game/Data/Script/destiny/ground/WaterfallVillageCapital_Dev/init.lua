@@ -503,14 +503,14 @@ local function installer_sortie_e2(map)
 end
 
 local function installer_sortie_promontoire(map)
-  if map ~= nil and not objet_dans_quartier(map, 1592, 2064) then
+  if map ~= nil and not objet_dans_quartier(map, 1592, 1158) then
     if map:FindObject('SortieFalaisePromontoire') then GROUND:RemoveObject('SortieFalaisePromontoire') end
     return
   end
   if map == nil or map:FindObject('SortieFalaisePromontoire') then return end
   local sortie = RogueEssence.Ground.GroundObject()
   sortie.EntName = 'SortieFalaisePromontoire'
-  sortie.Collider = RogueElements.Rect(1584, 2024, 16, 72)
+  sortie.Collider = RogueElements.Rect(1584, 1120, 16, 72)
   sortie.Passable = false
   sortie:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
   sortie:OnMapInit()
@@ -1701,8 +1701,8 @@ function ville.PorteGuildeNord_Touch(obj, activator)
   GAME:EnterZone('town02_waterfallvillage', -1, index, 0)
 end
 
--- Falaise du Promontoire : depuis le chemin est après le grand bassin
--- (reverie_etang), rejoint la variante synchronisée avec le moment de Réverie.
+-- Falaise du Promontoire : depuis le chemin est vers Forgelina
+-- (reverie_centre), rejoint la variante synchronisée avec le moment de Réverie.
 function ville.SortieFalaisePromontoire_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if entree_batiment_en_cours then return end
