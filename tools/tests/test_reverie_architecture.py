@@ -18,7 +18,7 @@ with dev.open('rb') as f:
      subset=[fr for fr in anim['Frames'] if fr['Sheet']=='Reverie_Geo_11_Cascades_frames']
      if subset:
       assert all(not fr['Sheet'] or fr in subset for fr in anim['Frames']);assert len(anim['Frames'])==4 and anim['FrameLength'] in (6,10);water+=1;durations[anim['FrameLength']]=durations.get(anim['FrameLength'],0)+1
-assert names==['Base','Cliffs','River','Layer 4','Objects Under','Objects Under Anim','Objects','Objects Anim','Objects Over','Objects Over Anim','Fringe'];assert water==736 and seq==177245 and durations=={10:704,6:32},(water,seq,durations)
+assert names==['Base','Cliffs','River','Layer 4','Objects Under','Objects Under Anim','Objects','Objects Anim','Objects Over','Objects Over Anim','Fringe'];assert water==736 and seq==177297 and durations=={10:704,6:32},(water,seq,durations)
 with gzip.open(ROOT/'tools/reverie_reference_0.4.19/WaterfallVillageCapital_Dev.rsground.gz','rb') as f:
  assert f.read(3)==b'\xef\xbb\xbf';assert sum(1 for _ in ijson.items(f,'Object.Layers.item'))==37
 with tempfile.TemporaryDirectory() as tmp:

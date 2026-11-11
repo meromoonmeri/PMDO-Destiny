@@ -37,13 +37,13 @@ def md5(path: Path) -> str:
 assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
     'payload/WaterfallVillageCapital.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital.rsground',
-        'd7ad3e979d37fd0d47a269ca492f1f7923718a0b9358113792c9db75d2b03af1',
-        36683258,
+        '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c',
+        36696423,
     ),
     'payload/WaterfallVillageCapital_Dev.rsground.gz': (
         'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        'fe9ffcce61256c96fc5598e338e05892a3cd335f112593070864c0936cee0eec',
-        36683262,
+        'cb48b98351c903f1780f3afbd3afed98808546fe6e15a1539604b9432f126061',
+        36696427,
     )
 }
 assert set(unpack_payload.PAYLOADS) == {
@@ -55,16 +55,16 @@ assert set(unpack_payload.PAYLOADS) == {
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 36683258
-assert sha256(MAP) == 'd7ad3e979d37fd0d47a269ca492f1f7923718a0b9358113792c9db75d2b03af1'
+assert MAP.stat().st_size == 36696423
+assert sha256(MAP) == '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c'
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 36683258
-assert h.hexdigest() == 'd7ad3e979d37fd0d47a269ca492f1f7923718a0b9358113792c9db75d2b03af1'
+assert size == 36696423
+assert h.hexdigest() == '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c'
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -206,5 +206,29 @@ _attack = _tinkaton_groups[5]  # FrameType moteur Attack
 _durs_nord = [f[2] for f in _attack['seqs'][4]]  # Dir8.Up = index 4
 assert _attack['hit'] == 3 and sum(_durs_nord) == 36
 assert sum(_durs_nord[:_attack['hit']]) == 16
+
+# Bassin logique sous la cascade isolee sud-ouest (wf_isol_36, 16x5t en x=32..47, y=255..259) :
+# 54 tuiles d'eau Reverie_Geo_03/04/12 en L2, mousse/ombre nettoyees en L6, rocher (43,253) en L7,
+# tous les 54 obstacles Tags=1 sous le bassin et bordure est (48..50) libre vers la maison Armulys.
+_wvc = json.loads(MAP.read_text(encoding='utf-8-sig'))['Object']
+_l2_tiles = _wvc['Layers'][2]['Tiles']
+_l6_tiles = _wvc['Layers'][6]['Tiles']
+_l7_tiles = _wvc['Layers'][7]['Tiles']
+_water_sheets = (
+    'Reverie_Geo_03_Rivieres_eau',
+    'Reverie_Geo_04_Rives_et_transitions',
+    'Reverie_Geo_12_Eaux_frames',
+)
+_basin_cells = []
+for _x in range(32, 48):
+    for _y in range(255, 260):
+        _sub = _l2_tiles[_x][_y].get('Layers', [])
+        if _sub and all(f['Sheet'] in _water_sheets for f in _sub[0].get('Frames', [])):
+            _basin_cells.append((_x, _y))
+assert len(_basin_cells) == 54, len(_basin_cells)
+assert not _l6_tiles[41][258].get('Layers') and not _l6_tiles[42][258].get('Layers')
+assert _l7_tiles[43][253].get('Layers')
+assert all(_wvc['obstacles'][_x][_y]['Tags'] == 1 for _x, _y in _basin_cells)
+assert all(_wvc['obstacles'][_x][_y]['Tags'] == 0 for _x in range(48, 51) for _y in range(254, 260))
 
 print('OK : Waterfall Village étendue, 14 banques Réverie autonomes, habitants, objets, décorations town02 et comptoirs des marchands.')

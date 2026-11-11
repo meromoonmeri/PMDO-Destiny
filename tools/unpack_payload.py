@@ -19,16 +19,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAYLOADS = {
-    'payload/reverie_centre.rsground.gz': ('game/Data/Ground/reverie_centre.rsground', '6dceae6de31f29bf405ca4b2befd2484002248d6f6d7e203cd511ed9fe9c03d2', 36677579),
-    'payload/reverie_nord.rsground.gz': ('game/Data/Ground/reverie_nord.rsground', '0f1cbc928ad7e0147502f4b60e9b45c8d78e5c0dabef4741ef1b08693f7233e7', 36677577),
-    'payload/WaterfallVillageCapital.rsground.gz': ('game/Data/Ground/WaterfallVillageCapital.rsground', 'd7ad3e979d37fd0d47a269ca492f1f7923718a0b9358113792c9db75d2b03af1', 36683258),
-    'payload/reverie_residentiel.rsground.gz': ('game/Data/Ground/reverie_residentiel.rsground', 'f6685f7b611e086cc1dc26d3e5e5654fd26af5500eca1a4c8af06050a7f9e9e7', 36655310),
-    'payload/reverie_etang.rsground.gz': ('game/Data/Ground/reverie_etang.rsground', 'a7bf78a6700daff7fce6882bc2830d0fbc30905810f9632d4952a948e4e09afd', 36649635),
-    'payload/reverie_centre_Dev.rsground.gz': ('game/Data/Ground/reverie_centre_Dev.rsground', '549d86fc068f4703e511c9b68f67234537fa1b6d9baa228d6390b0aae3dad3a6', 36677583),
-    'payload/reverie_nord_Dev.rsground.gz': ('game/Data/Ground/reverie_nord_Dev.rsground', 'cc863b7274c4395de666f61f7f577ec935bc111e3ee2bd7cfe8564ce0a48567e', 36677581),
-    'payload/WaterfallVillageCapital_Dev.rsground.gz': ('game/Data/Ground/WaterfallVillageCapital_Dev.rsground', 'fe9ffcce61256c96fc5598e338e05892a3cd335f112593070864c0936cee0eec', 36683262),
-    'payload/reverie_residentiel_Dev.rsground.gz': ('game/Data/Ground/reverie_residentiel_Dev.rsground', 'eb365b233564f725bb8aef9299b19b39924ac12004f6a395b8ec34d62d559482', 36655314),
-    'payload/reverie_etang_Dev.rsground.gz': ('game/Data/Ground/reverie_etang_Dev.rsground', 'aca36851bd8a0abec35679205200a0134e90fdecee3e3b5198670475007ed5e5', 36649639),
+    'payload/reverie_centre.rsground.gz': ('game/Data/Ground/reverie_centre.rsground', 'b88553335c1ef4aafd5399b444f8450ee29d1edaf127cd3885a4c1ab6ba00268', 36690744),
+    'payload/reverie_nord.rsground.gz': ('game/Data/Ground/reverie_nord.rsground', '0e38cd4efc82f4083b482e12852aea26064b8b786a08ca19b9706fe482882372', 36690742),
+    'payload/WaterfallVillageCapital.rsground.gz': ('game/Data/Ground/WaterfallVillageCapital.rsground', '5749bc59440a50a2a257920a923ef01f8e3de2d4a971fd634ffba90896ca2a9c', 36696423),
+    'payload/reverie_residentiel.rsground.gz': ('game/Data/Ground/reverie_residentiel.rsground', '2071c9447e17e0a1883cd21251192e408d44db01a73b24bc38020ce32d5262bb', 36668475),
+    'payload/reverie_etang.rsground.gz': ('game/Data/Ground/reverie_etang.rsground', '7d3665169ecc9e0e380c2a5a6de6779560ac589206a65370eab35a5f162643bb', 36662800),
+    'payload/reverie_centre_Dev.rsground.gz': ('game/Data/Ground/reverie_centre_Dev.rsground', '2c9dae56e2aa2d8f73400c1f02de83ec52ebcc7ade1acb31f18263dad2ccdb14', 36690748),
+    'payload/reverie_nord_Dev.rsground.gz': ('game/Data/Ground/reverie_nord_Dev.rsground', '9d2686ec8165395fb50c2f7df0c1aad35f3a59859b1f095427f51ab7ebb58e76', 36690746),
+    'payload/WaterfallVillageCapital_Dev.rsground.gz': ('game/Data/Ground/WaterfallVillageCapital_Dev.rsground', 'cb48b98351c903f1780f3afbd3afed98808546fe6e15a1539604b9432f126061', 36696427),
+    'payload/reverie_residentiel_Dev.rsground.gz': ('game/Data/Ground/reverie_residentiel_Dev.rsground', '72dd8e13e5c0b880935f691ba1a4600de2b48ffdb5a6f28c70fa5fcd475e9d3f', 36668479),
+    'payload/reverie_etang_Dev.rsground.gz': ('game/Data/Ground/reverie_etang_Dev.rsground', 'd39f452320434f4dc06878fcb6d3452fff47a0146357339ba206dcc9a41830b1', 36662804),
 }
 TILE_INDEX = 'game/Content/Tile/index.idx'
 BUILD_TILE_INDEX = 'tools/build_tile_index.py'

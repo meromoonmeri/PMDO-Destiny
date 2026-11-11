@@ -14,6 +14,7 @@ PASSAGE_ETANG={(147,272),(148,272)}|{(x,y) for x in range(178,188) for y in rang
 # fente falaise est du Café (160..184,170) et poche eau cascade (146,249) refermées.
 AUDIT_CLEAR={(49,202),(155,263),(155,264),(156,265),(156,266),(157,267)}
 AUDIT_BLOCK_CLIFF={(x,170) for x in range(160,185)}
+AUDIT_BLOCK_BASIN={(x,255) for x in range(32,48)}|{(x,256) for x in range(33,47)}|{(x,257) for x in range(34,46)}|{(x,258) for x in range(36,44)}|{(x,259) for x in range(38,42)}
 for suffix in ('','_Dev'):
  oc=grid(read(ref,'reverie_centre'+suffix));on=grid(read(ref,'reverie_nord'+suffix));c=grid(read(game,'reverie_centre'+suffix));n=grid(read(game,'reverie_nord'+suffix));global_=grid(read(game,'WaterfallVillageCapital'+suffix));changed=0
  for x in range(200):
@@ -24,6 +25,8 @@ for suffix in ('','_Dev'):
     assert expected==0 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==1
    elif (x,y) in AUDIT_CLEAR:
     assert expected==1 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==0
+   elif (x,y) in AUDIT_BLOCK_BASIN:
+    assert expected==1 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==1
    else:
     assert c[x][y]['Tags']==n[x][y]['Tags']==expected;assert expected==1 or global_[x][y]['Tags']==0
    assert c[x][y]['Bounds']==oc[x][y]['Bounds'] and n[x][y]['Bounds']==on[x][y]['Bounds'];changed+=oc[x][y]['Tags']!=expected
@@ -33,6 +36,8 @@ for suffix in ('','_Dev'):
   for y in range(500):
    if (x,y) in AUDIT_CLEAR:
     assert original[x][y]['Tags']==1 and current[x][y]['Tags']==0 and current[x][y]['Bounds']==original[x][y]['Bounds']
+   elif (x,y) in AUDIT_BLOCK_BASIN:
+    assert current[x][y]['Tags']==1 and current[x][y]['Bounds']==original[x][y]['Bounds']
    else:
     assert current[x][y]==original[x][y],('reverie_residentiel',x,y)
  orig_etang=grid(read(ref,'reverie_etang'+suffix));cur_etang=grid(read(game,'reverie_etang'+suffix));etang_cleared=0
