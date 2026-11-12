@@ -26,6 +26,7 @@ local habitants_vivants = {
   'NewObject_23', 'NewObject_24',
   'Pijako_Livreur', 'Cradopaud_Pecheur', 'Roserade_Fleuriste',
   'Magneton_Garde', 'Babimanta_Enfant', 'Goinfrex_Voyageur',
+  'Bellossom_Boutique',
 }
 local positions_habitants = {}
 local vie_ville_activee = false
@@ -39,6 +40,7 @@ local marchands_fixes = {
   NewObject_3 = true,      -- Mordudor, banque
   NewObject_4 = true,      -- Alakazam, souvenirs de capacités
   NewObject_24 = true,     -- Forgelina, ouverture des boîtes
+  Bellossom_Boutique = true, -- Joliflor, tente florale et gelées
 }
 
 -- Habitants en poste fixe (garde, pêcheur, dormeur, voisinage immédiat) :
@@ -164,6 +166,7 @@ local noms_habitants = {
   Pijako_Livreur = 'Pip', Cradopaud_Pecheur = 'Marius',
   Roserade_Fleuriste = 'Rose', Magneton_Garde = 'Volt',
   Babimanta_Enfant = 'Ondine', Goinfrex_Voyageur = 'Moka',
+  Bellossom_Boutique = 'Joliflor',
 }
 
 -- Une Baudrive de la carte publiée n’a pas d’identifiant d’entité. Lui
@@ -347,6 +350,7 @@ local habitants_par_quartier = {
   {nom="Magneton_Garde", secteur="reverie_residentiel", x=760, y=2052},
   {nom="Babimanta_Enfant", secteur="reverie_centre", x=1112, y=1668},
   {nom="Goinfrex_Voyageur", secteur="reverie_centre", x=1012, y=1404},
+  {nom="Bellossom_Boutique", secteur="reverie_centre", x=1236, y=1144},
 }
 local proprietaire_habitant = {}
 for _, h in ipairs(habitants_par_quartier) do proprietaire_habitant[h.nom] = h end
@@ -569,6 +573,7 @@ local comptoirs = {
   {nom = 'ComptoirAlakazam', marchand = 'NewObject_4', x = 352, y = 1120, w = 32, h = 16, poste_x = 360, poste_y = 1100},
   {nom = 'ComptoirKangourex', marchand = 'Kangourex', x = 928, y = 952, w = 40, h = 16, poste_x = 940, poste_y = 930},
   {nom = 'ComptoirForgeTinkaton', marchand = 'NewObject_24', x = 1080, y = 1008, w = 64, h = 16, poste_x = 1104, poste_y = 992},
+  {nom = 'ComptoirBellossom', marchand = 'Bellossom_Boutique', x = 1228, y = 1152, w = 32, h = 16, poste_x = 1236, poste_y = 1144},
 }
 
 local function installer_comptoirs(map)
@@ -646,6 +651,7 @@ function ville.Init(map)
   habitant_du_quartier(map, 'Goinfrex_Voyageur', 'munchlax', Gender.Male, 1012, 1404)
   local goinfrex = CH('Goinfrex_Voyageur')
   if goinfrex ~= nil then pcall(function() GROUND:EntTurn(goinfrex, Direction.Right) end) end
+  habitant_du_quartier(map, 'Bellossom_Boutique', 'bellossom', Gender.Female, 1236, 1144)
   -- Luxio et Luxray partagent un vrai dialogue, mais la carte les place à
   -- 136 px l'un de l'autre, de part et d'autre de la maison citrouille sud.
   -- Luxray est donc posé juste à l'est de Luxio, sur l'herbe libre au nord
@@ -1439,6 +1445,55 @@ local function rediriger_ancienne_ville(map, hero, partenaire)
   return true
 end
 
+local function jouer_celebration_nilo(map, hero, partenaire)
+  if map ~= nil and map.AssetName ~= 'WaterfallVillageCapital' and map.AssetName ~= 'reverie_centre' then
+    return false
+  end
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.CelebrationNilo ~= 'en_attente' then return false end
+  GAME:CutsceneMode(true)
+  if hero ~= nil then
+    hero.CollisionDisabled = true
+    GROUND:TeleportTo(hero, 800, 1280, Direction.Up)
+  end
+  if partenaire ~= nil then
+    AI:DisableCharacterAI(partenaire)
+    GROUND:TeleportTo(partenaire, 772, 1288, Direction.Up)
+  end
+  local lyra = habitant('Lyra_Celebration', 'luxray', Gender.Female, 800, 1236)
+  if lyra ~= nil then
+    if lyra.Data ~= nil then lyra.Data.Nickname = 'Lyra' end
+    GROUND:TeleportTo(lyra, 800, 1236, Direction.Down)
+  end
+  local nilo = habitant('Nilo_Celebration', 'shinx', Gender.Male, 824, 1244)
+  if nilo ~= nil then
+    if nilo.Data ~= nil then nilo.Data.Nickname = 'Nilo' end
+    GROUND:TeleportTo(nilo, 824, 1244, Direction.Down)
+  end
+  GAME:MoveCamera(0, 0, 1, true)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
+  GAME:FadeIn(20)
+  cinematique.Dire(lyra, 'Happy', 'Vous avez ramené Nilo sain et sauf… Merci du fond du cœur !', 'standard')
+  if nilo ~= nil then
+    pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
+    pcall(function() GROUND:CharSetAnim(nilo, 'Hop', false) end)
+  end
+  cinematique.Dire(nilo, 'Joyous', 'Ouais ! Vous êtes incroyables ! Quand je serai grand, j’explorerai les donjons comme vous !', 'droite')
+  if nilo ~= nil then pcall(function() GROUND:CharEndAnim(nilo) end) end
+  cinematique.Dire(lyra, 'Happy', 'Acceptez ceci de la part de toute notre famille. Et… si vous montez tout au nord vers la grande falaise, on dit que la Guilde s’intéresse aux jeunes équipes courageuses comme la vôtre !', 'standard')
+  UI:ResetSpeaker()
+  if hero ~= nil then
+    COMMON.GiftItem(hero, RogueEssence.Dungeon.InvItem('gummi_royal'))
+  end
+  SV.Destiny.CelebrationNilo = 'termine'
+  GAME:FadeOut(false, 12)
+  GROUND:RemoveCharacter('Lyra_Celebration')
+  GROUND:RemoveCharacter('Nilo_Celebration')
+  GAME:FadeIn(12)
+  retour_au_joueur(hero, partenaire)
+  return true
+end
+
 local function entrer(map)
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.VisiteVille == 'en_route' then
@@ -1452,6 +1507,7 @@ local function entrer(map)
   local hero = CH('PLAYER')
   local partenaire = partenaire_pour(hero)
   if rediriger_ancienne_ville(map,hero,partenaire) then return end
+  if jouer_celebration_nilo(map, hero, partenaire) then return end
   local passage = SV.Destiny.PassageQuartier
   if passage ~= nil then
     SV.Destiny.PassageQuartier = nil
@@ -1794,6 +1850,7 @@ local nouvelles_nilo = {
   NewObject_23 = 'Je garde mes décorations pour plus tard. Pour l’instant, je pense à Nilo.',
   Pijako_Livreur = 'Si des nouvelles de Nilo arrivent, je les porterai aussi vite que possible.',
   Goinfrex_Voyageur = 'Même moi, je pense à autre chose qu’au goûter. J’espère que Nilo va bien.',
+  Bellossom_Boutique = 'Lyra est si inquiète… Mes gelées et mes baies resteront prêtes pour votre retour avec Nilo.',
 }
 local function reaction_actualite(personnage, nom)
   if SV.Destiny == nil or SV.Destiny.AlerteShinx ~= 'a_secourir' or personnage == nil then return false end
@@ -1852,6 +1909,11 @@ local assortiments_kecleon_violet = {
   {{id = 'berry_sitrus', prix = 150}, {id = 'medicine_elixir', prix = 300}, {id = 'seed_reviver', prix = 800}},
   {{id = 'medicine_max_elixir', prix = 650}, {id = 'orb_escape', prix = 300}, {id = 'seed_joy', prix = 1200}},
   {{id = 'medicine_max_potion', prix = 500}, {id = 'orb_scanner', prix = 300}, {id = 'seed_pure', prix = 400}},
+}
+local assortiments_bellossom = {
+  {{id = 'gummi_green', prix = 350}, {id = 'gummi_blue', prix = 350}, {id = 'berry_sitrus', prix = 150}},
+  {{id = 'gummi_yellow', prix = 350}, {id = 'food_apple_big', prix = 100}, {id = 'seed_sleep', prix = 250}},
+  {{id = 'gummi_royal', prix = 750}, {id = 'seed_warp', prix = 250}, {id = 'food_apple_perfect', prix = 500}},
 }
 
 -- Stock du jour, persisté dans la sauvegarde : les achats épuisent l'étal,
@@ -1937,6 +1999,18 @@ function ville.Kecleon_Violet_Action(personnage, activator)
   ouvrir_boutique(personnage, 'violet', assortiments_kecleon_violet, 1,
     'Mon étal violet garde les articles précieux. Ils coûtent plus cher, mais ils peuvent changer une traversée.')
   terminer_dialogue(personnage, 'Kecleon_Violet')
+end
+
+function ville.Bellossom_Boutique_Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
+  if not reaction_actualite(personnage, 'Bellossom_Boutique') then
+    ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
+      'Bienvenue sous ma tente fleurie ! Mes gelées, baies et graines aromatiques vous donneront du cœur à l’aventure.')
+  else
+    ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
+      'Faites provision avant de partir vers la Grotte Verdoyante.')
+  end
+  terminer_dialogue(personnage, 'Bellossom_Boutique')
 end
 
 -- Banque de Réverie Town : Mordudor sert les clients à son comptoir.
@@ -2323,7 +2397,7 @@ function ville.NewObject_10_Action(personnage, activator)
 end
 function ville.Nilo_Shinx_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des griffes de Colhomard dans la Grotte Verdoyante ! Promis, je reste près de Maman et Léo maintenant !')
+  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des griffes de Carchacrok dans la Grotte Verdoyante ! Promis, je reste près de Maman et Léo maintenant !')
   UI:ResetSpeaker()
   terminer_dialogue(personnage, 'Nilo_Shinx')
 end

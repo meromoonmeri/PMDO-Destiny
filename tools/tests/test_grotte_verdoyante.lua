@@ -25,6 +25,8 @@ RogueEssence = {
   Content = {
     GraphicsManager = {TotalFrameTick = tick_val},
     ScreenMover = function(dx, dy, dur) return {dx=dx,dy=dy,dur=dur} end,
+    FlashEmitter = function() return {FadeInTime=0, HoldTime=0, FadeOutTime=0, Color=nil, Layer=nil, Anim=nil} end,
+    BGAnimData = function(name, fr) return {name=name, fr=fr} end,
   },
   Data = {
     GameProgress = {
@@ -37,6 +39,12 @@ RogueEssence = {
       local o = {OnMapInit=function()end, SetTriggerType=function()end}
       return o
     end,
+    GroundChar = function(data, loc, dir, name)
+      local a = {EntName=name, Position={X=loc.X, Y=loc.Y}, Direction=dir, EntEnabled=true, CollisionDisabled=false, Data=data}
+      function a:GetDisplayName() return self.EntName end
+      function a:ReloadEvents() self.reloaded = true end
+      return a
+    end,
     GroundEntity = {EEntityTriggerTypes={Touch=2, Action=1}},
   },
   Dungeon = {
@@ -47,6 +55,9 @@ RogueEssence = {
     InvItem = function(id, cursed, amt) return {ID=id, Cursed=cursed, Amount=amt, GetDisplayName=function() return id end} end,
   },
 }
+RogueElements.Loc = function(x, y) return {X=x, Y=y} end
+function Color(r, g, b, a) return {r=r, g=g, b=b, a=a} end
+DrawLayer = {Top='Top'}
 
 local actors = {}
 local function make_actor(n, x, y, sp)
@@ -71,6 +82,7 @@ GROUND = {
   CharEndAnim = function() end,
   CharSetEmote = function(_, a, em) ev('emote', a.EntName, em) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
+  PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y) end,
   Hide = function(_, n) if actors[n] then actors[n].EntEnabled = false end end,
   Unhide = function(_, n) if actors[n] then actors[n].EntEnabled = true end end,
 }
@@ -101,6 +113,7 @@ GAME = {
   GetTeamLeaderIndex=function() return 0 end,
   GetPlayerPartyMember=function(_, i) return {Importance=i==0 and 'Hero' or 'Partner', Data={}} end,
   GetCurrentGround=function() return {Name={ToLocal=function() return 'Grotte Verdoyante' end}} end,
+  GetCameraCenter=function() return {X=240, Y=180} end,
   DungeonUnlocked=function(_, id) return unlocked[id] == true end,
   UnlockDungeon=function(_, id) unlocked[id] = true; ev('unlock', id) end,
   SetRescueAllowed=function() end,
@@ -118,6 +131,7 @@ COMMON = {
     assert(type(item) == 'table' and type(item.GetDisplayName) == 'function', 'InvItem attendu pour GiftItem')
     ev('gift', item.ID)
   end,
+  CreateWalkArea=function() end,
   EndDungeonDay=function(res, z, s, m, e) ev('end_day', res, z, s, m, e) end,
 }
 function LTBL(m) return {Importance=m.Importance} end
@@ -168,35 +182,61 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 1 and SV.Destiny.AlerteShinx == 'a_se
 zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zone' and events[#events][4] == 1)
 
--- 3. fgv1 : PreBattle -> PostBattle (récompense InvItem gummi_royal + AlerteShinx='termine') -> EmptyReturn
+-- 3. fgv1 : PreBattle (réveil Nilo + double flash blanc + Carchacrok) -> PostBattle (CelebrationNilo + AlerteShinx='termine') -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
-actors = {}; make_actor('PLAYER', 384, 560)
+actors = {}; make_actor('PLAYER', 240, 344)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
+local vfx_count, flash_se_count, boss_bgm_ok, wake_dlg_ok = 0, 0, false, false
+for _, e in ipairs(events) do
+  if e[1] == 'vfx' and e[2] == 'White' then vfx_count = vfx_count + 1 end
+  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flash_se_count = flash_se_count + 1 end
+  if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('Maman', 1, true) then wake_dlg_ok = true end
+end
+assert(vfx_count == 2 and flash_se_count == 2 and boss_bgm_ok and wake_dlg_ok, 'réveil Nilo / double flash / Boss Battle 2 manquants')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
 
 SV.Destiny.GrotteVerdoyantePhase = 3
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
-assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
+assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
 assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
-local saw_gift = false
-for _, e in ipairs(events) do if e[1] == 'gift' and e[2] == 'gummi_royal' then saw_gift = true end end
-assert(saw_gift and events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
+assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
 
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
-assert(events[#events][1] == 'end_day' and not actors.Colhomard_Boss)
+assert(events[#events][1] == 'end_day' and not actors.Carchacrok_Boss)
 
--- 4. Réverie post-sauvetage : Nilo_Shinx apparaît en reverie_residentiel à (721, 2412) + mission Grotte Verdoyante jour impair
+-- 4. Réverie post-sauvetage : CelebrationNilo (cadeau gummi_royal), Nilo_Shinx + tente Bellossom
 local ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
+local centre = {
+  AssetName='reverie_centre', characters={}, objects={},
+  GetMapChar=function(self, n) return self.characters[n] end,
+  FindObject=function(self, n) return self.objects[n] end,
+  AddObject=function(self, o) self.objects[o.EntName] = o end,
+  GetObstacle=function() return 0 end,
+  Width=200, Height=500,
+}
+actors = {}; make_actor('PLAYER', 800, 1160); make_actor('Teammate1', 772, 1160)
+SV.Destiny = {AlerteShinx='termine', CelebrationNilo='en_attente', GrotteVerdoyanteBossVaincu=true, RetourAccompli=true, JourneeVille=1, VisiteVille='terminee', PlacementHabitantsReverie={reverie_centre=true}}
+events = {}
+ville.Init(centre)
+assert(actors.Bellossom_Boutique and centre.objects.ComptoirBellossom, 'Bellossom_Boutique ou ComptoirBellossom manquant')
+ville.Enter(centre)
+local saw_gift = false
+for _, e in ipairs(events) do if e[1] == 'gift' and e[2] == 'gummi_royal' then saw_gift = true end end
+assert(saw_gift and SV.Destiny.CelebrationNilo == 'termine', 'CelebrationNilo non jouée')
+
 local res = {
   AssetName='reverie_residentiel', characters={}, objects={},
   GetMapChar=function(self, n) return self.characters[n] end,
   FindObject=function(self, n) return self.objects[n] end,
   AddObject=function(self, o) self.objects[o.EntName] = o end,
+  GetObstacle=function() return 0 end,
+  Width=200, Height=500,
 }
 actors = {}; make_actor('PLAYER', 800, 1160); make_actor('Teammate1', 772, 1160)
 res.characters.NewObject_9 = make_actor('NewObject_9', 733, 2391)
@@ -207,7 +247,7 @@ assert(actors.Nilo_Shinx and actors.Nilo_Shinx.Position.X == 721 and actors.Nilo
 events = {}
 ville.Nilo_Shinx_Action(actors.Nilo_Shinx, actors.PLAYER)
 local saw_nilo_dlg = false
-for _, e in ipairs(events) do if e[1] == 'dlg' and tostring(e[2]):find('Colhomard', 1, true) then saw_nilo_dlg = true end end
+for _, e in ipairs(events) do if e[1] == 'dlg' and tostring(e[2]):find('Carchacrok', 1, true) then saw_nilo_dlg = true end end
 assert(saw_nilo_dlg)
 
 local cafe = assert(loadfile(root .. '/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()

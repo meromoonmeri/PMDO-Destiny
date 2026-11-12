@@ -88,7 +88,7 @@ def main() -> None:
     assert render_layer(12, 0) == render_layer(13, 0), 'Désaccord pixel L12[0] != L13[0]'
     assert render_layer(13, 23) == render_layer(14, 11), 'Désaccord pixel L13[23] != L14[11]'
 
-    # 2. Planche 24 px et carte de combat 9F end_grotte_verdoyante.rsmap
+    # 2. Planche 24 px et carte de combat 9F end_grotte_verdoyante.rsmap (20x15 = 480x360)
     raw_t24 = (GAME / 'Content/Tile/FGV1_VASQUES_BASE_24.tile').read_bytes()
     ts, cnt24 = struct.unpack_from('<ii', raw_t24, 0)
     assert ts == 24 and cnt24 > 700
@@ -97,32 +97,32 @@ def main() -> None:
     rsmap = json.loads((GAME / 'Data/Map/end_grotte_verdoyante.rsmap').read_text(encoding='utf-8-sig'))['Object']
     assert rsmap['AssetName'] == 'end_grotte_verdoyante' and rsmap['NoRescue'] is True
     assert rsmap['Music'] == 'Boss Battle 2.ogg'
-    assert rsmap['EntryPoints'] == [{'Loc': {'X': 16, 'Y': 18}, 'Dir': 4}]
-    for rx in range(32):
-        for ry in range(24):
+    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}]
+    for rx in range(20):
+        for ry in range(15):
             for sub in rsmap['Layers'][0]['Tiles'][rx][ry]['Layers']:
                 for fr in sub['Frames']:
                     assert fr['Sheet'] == 'FGV1_VASQUES_BASE_24'
                     assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
 
-    floors = {(x, y) for x in range(32) for y in range(24) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
-    q = deque([(16, 18)])
-    seen = {(16, 18)}
+    floors = {(x, y) for x in range(20) for y in range(15) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
+    q = deque([(10, 12)])
+    seen = {(10, 12)}
     while q:
         cx, cy = q.popleft()
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             if (cx + dx, cy + dy) in floors and (cx + dx, cy + dy) not in seen:
                 seen.add((cx + dx, cy + dy))
                 q.append((cx + dx, cy + dy))
-    assert floors == seen and len(floors) >= 100
-    for st in [(16, 18), (15, 18), (17, 18), (16, 19), (16, 13), (14, 14), (18, 14), (16, 11)]:
+    assert floors == seen and len(floors) == 36
+    for st in [(10, 12), (9, 12), (11, 12), (10, 8), (8, 9), (12, 9), (10, 7)]:
         assert st in floors, st
 
     starts = [e['Value']['$type'] for e in rsmap['MapEffect']['OnMapStarts']]
     assert any('BattlePositionEvent' in s for s in starts)
     assert any('BeginBattleEvent' in s for s in starts)
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
-    assert enemies == [('crawdaunt', 14), ('corphish', 10), ('corphish', 10), ('masquerain', 11)], enemies
+    assert enemies == [('garchomp', 14)], enemies
     for p in rsmap['MapTeams'][0]['Players']:
         assert (BASE / 'Data/Monster' / f"{p['BaseForm']['Species']}.json").is_file()
         for sk in p['Skills']:
@@ -139,8 +139,7 @@ def main() -> None:
     for i, fl in enumerate(zone['Segments'][0]['Floors']):
         tex_steps = [s['Value'] for s in fl['GenSteps'] if 'MapDictTextureStep' in s['Value']['$type']]
         assert len(tex_steps) == 1
-        expected_prefix = 'drenched_bluff' if i < 4 else 'deep_limestone_cavern'
-        assert tex_steps[0]['TextureMap']['floor'].startswith(expected_prefix)
+        assert tex_steps[0]['TextureMap']['floor'].startswith('deep_limestone_cavern')
         for at_id in tex_steps[0]['TextureMap'].values():
             assert (BASE / 'Data/AutoTile' / f'{at_id}.json').is_file(), at_id
 

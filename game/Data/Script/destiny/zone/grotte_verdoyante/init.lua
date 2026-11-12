@@ -57,7 +57,7 @@ function grotte_verdoyante.ExitSegment(zone, result, rescue, segmentID, mapID)
     -- Fin du 8e étage : arrivée dans la salle des vasques (GroundMap 1 = fgv1_fin_grotte_vasques).
     GAME:EnterZone('grotte_verdoyante', -1, 1, 0)
   elseif segmentID == 1 then
-    -- Victoire contre Colhomard et sa bande au 9e étage : scène de sauvetage sur fgv1_fin_grotte_vasques.
+    -- Victoire contre Carchacrok au 9e étage : scène de sauvetage sur fgv1_fin_grotte_vasques.
     SV.Destiny.GrotteVerdoyantePhase = 3
     GAME:EnterZone('grotte_verdoyante', -1, 1, 0)
   else

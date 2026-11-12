@@ -37,7 +37,7 @@ local all={
  {'NewObject_16','centre'},{'NewObject_11','residentiel'},{'NewObject_18','centre'},{'NewObject_20','residentiel'},{'NewObject_21','centre'},
  {'NewObject_15','centre'},{'NewObject_17','residentiel'},{'NewObject_22','centre'},{'NewObject_23','centre'},{'NewObject_24','centre'},
  {'Pijako_Livreur','nord'},{'Cradopaud_Pecheur','centre'},{'Roserade_Fleuriste','centre'},{'Magneton_Garde','residentiel'},
- {'Babimanta_Enfant','centre'},{'Goinfrex_Voyageur','centre'},
+ {'Babimanta_Enfant','centre'},{'Goinfrex_Voyageur','centre'},{'Bellossom_Boutique','centre'},
 }
 local function newmap(name, include_dynamic)
  local m={AssetName=name,characters={},objects={}}

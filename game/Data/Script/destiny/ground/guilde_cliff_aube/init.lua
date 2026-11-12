@@ -1,11 +1,13 @@
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local meteo_reverie = require 'destiny.meteo_reverie'
+local guilde_cliff_scene = require 'destiny.guilde_cliff_scene'
 
 local CARTE = 'guilde_cliff_aube'
 local guilde_cliff_aube = {}
 local SON_MER = 'Destiny_Falaise_Mer'
 local sortie_en_cours = false
+local carte_courante = nil
 
 local function demarrer_mer()
   SOUND:StopBattleSE(SON_MER)
@@ -66,12 +68,14 @@ local function restaurer_passage()
 end
 
 function guilde_cliff_aube.Init(map)
+  carte_courante = map
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   sortie_en_cours = false
   if map ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   end
   installer_retour_ville(map)
+  guilde_cliff_scene.Init(map)
   local hero = CH('PLAYER')
   if hero ~= nil and GAME:GetPlayerPartyCount() > 1 then
     local py = math.min(hero.Position.Y + 24, 472)
@@ -81,6 +85,7 @@ function guilde_cliff_aube.Init(map)
 end
 
 function guilde_cliff_aube.Enter(map)
+  carte_courante = map or carte_courante
   sortie_en_cours = false
   if synchroniser_ambiance(false) then return end
   restaurer_passage()
@@ -89,12 +94,14 @@ function guilde_cliff_aube.Enter(map)
 end
 
 function guilde_cliff_aube.GameLoad(map)
+  carte_courante = map or carte_courante
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   sortie_en_cours = false
   if map ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   end
   installer_retour_ville(map)
+  guilde_cliff_scene.Init(map)
   if synchroniser_ambiance(false) then return end
   restaurer_passage()
   demarrer_mer()
@@ -113,6 +120,14 @@ function guilde_cliff_aube.Update(map, time)
 end
 
 function guilde_cliff_aube.GameSave(map)
+end
+
+function guilde_cliff_aube.PorteGuilde_Touch(obj, activator)
+  guilde_cliff_scene.PorteGuilde_Touch(carte_courante or GAME:GetCurrentGround(), obj, activator)
+end
+
+function guilde_cliff_aube.ZoneAccueilGuilde_Touch(obj, activator)
+  guilde_cliff_scene.ZoneAccueilGuilde_Touch(carte_courante or GAME:GetCurrentGround(), obj, activator)
 end
 
 function guilde_cliff_aube.RetourVille_Touch(obj, activator)

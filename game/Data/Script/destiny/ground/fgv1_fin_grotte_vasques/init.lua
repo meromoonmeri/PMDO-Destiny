@@ -1,8 +1,8 @@
--- Salle des vasques (9e étage de la Grotte Verdoyante : fgv1_fin_grotte_vasques).
+-- Salle des vasques (9e étage de la Grotte Verdoyante : fgv1_fin_grotte_vasques, 480x360).
 -- Quatre phases selon l'avancement :
---   * PreBattle(false) : 1re arrivée face à la Bande des Vasques (Colhomard, 2 Écrapince, Maskadra) tenant Nilo en otage
+--   * PreBattle(false) : découverte de Nilo endormi, réveil, panique, double flash blanc et arrivée de Carchacrok
 --   * PreBattle(true)  : revanche abrégée après une défaite au 9F
---   * PostBattle()     : fuite des brigands, retrouvailles Nilo / Lyra, remise de Gelée Royale, AlerteShinx = 'termine'
+--   * PostBattle()     : défaite de Carchacrok, joie de Nilo, retour vers la célébration à Réverie Town
 --   * EmptyReturn()    : visites paisibles après le sauvetage
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
@@ -23,12 +23,22 @@ local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
   return ch
 end
 
-local function invoquer_bande()
-  local colhomard = creer_acteur('Colhomard_Boss', 'crawdaunt', Gender.Male, '', 384, 312, Direction.Down)
-  local ecr1 = creer_acteur('Ecrapince_1', 'corphish', Gender.Male, '', 336, 336, Direction.Down)
-  local ecr2 = creer_acteur('Ecrapince_2', 'corphish', Gender.Female, '', 432, 336, Direction.Down)
-  local maskadra = creer_acteur('Maskadra_Boss', 'masquerain', Gender.Female, '', 384, 276, Direction.Down)
-  return colhomard, ecr1, ecr2, maskadra
+local function flash_blanc()
+  local ok = pcall(function()
+    local center = GAME:GetCameraCenter()
+    local emitter = RogueEssence.Content.FlashEmitter()
+    emitter.FadeInTime = 2
+    emitter.HoldTime = 2
+    emitter.FadeOutTime = 2
+    emitter.StartColor = Color(0, 0, 0, 0)
+    emitter.Layer = DrawLayer.Top
+    emitter.Anim = RogueEssence.Content.BGAnimData('White', 0)
+    GROUND:PlayVFX(emitter, center.X, center.Y)
+  end)
+  if not ok then
+    pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 3, 6)) end)
+  end
+  SOUND:PlayBattleSE('EVT_Battle_Flash')
 end
 
 local function finir_vers_reverie()
@@ -48,19 +58,23 @@ end
 
 function fgv1.PreBattle(is_rematch)
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(360, 560, Direction.Up)
-  local lyra = creer_acteur('Lyra_Fin', 'luxray', Gender.Female, 'Lyra', 408, 560, Direction.Up)
-  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 424, 232, Direction.Down)
-  local colhomard, ecr1, ecr2, maskadra = invoquer_bande()
+  local partenaire = equipe_scene.Partenaire(216, 344, Direction.Up)
+  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 264, 152, Direction.Down)
+  GROUND:CharSetAnim(nilo, 'EventSleep', true)
 
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 384, 560, Direction.Up)
+    GROUND:TeleportTo(hero, 240, 344, Direction.Up)
+  end
+
+  local carchacrok = nil
+  if is_rematch then
+    carchacrok = creer_acteur('Carchacrok_Boss', 'garchomp', Gender.Male, '', 240, 196, Direction.Down)
   end
 
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
-  GAME:MoveCamera(384, 416, 1, false)
+  GAME:MoveCamera(240, 224, 1, false)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
@@ -69,52 +83,126 @@ function fgv1.PreBattle(is_rematch)
   local arrivee = {}
   if hero ~= nil then
     table.insert(arrivee, TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(hero, 384, 416, false, 2)
+      GROUND:MoveToPosition(hero, 240, 240, false, 2)
       GROUND:EntTurn(hero, Direction.Up)
     end))
   end
   if partenaire ~= nil then
     table.insert(arrivee, TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(partenaire, 360, 424, false, 2)
+      GROUND:MoveToPosition(partenaire, 216, 248, false, 2)
       GROUND:EntTurn(partenaire, Direction.Up)
     end))
   end
-  table.insert(arrivee, TASK:BranchCoroutine(function()
-    GROUND:MoveToPosition(lyra, 408, 424, false, 2)
-    GROUND:EntTurn(lyra, Direction.Up)
-  end))
-  TASK:JoinCoroutines(arrivee)
+  if #arrivee > 0 then TASK:JoinCoroutines(arrivee) end
 
-  GAME:MoveCamera(384, 320, 25, false)
+  GAME:MoveCamera(240, 180, 25, false)
 
   if not is_rematch then
-    cinematique.Emote(lyra, 'exclaim', 'EVT_Emote_Exclaim')
-    GAME:WaitFrames(10)
-    cinematique.Dire(lyra, 'Worried', cinematique.NomColore('Nilo', 'shinx') .. ' !! Tu es là !', 'droite')
-    cinematique.Emote(nilo, 'shock', 'EVT_Emote_Shock')
-    cinematique.Dire(nilo, 'Pain', 'Maman !! Au secours ! Ils m’empêchent de sortir !', 'standard')
-
-    SOUND:PlayBGM('Threat.ogg', true)
-    GAME:WaitFrames(10)
-    SOUND:PlayBattleSE('EVT_Roar')
-    GROUND:CharSetAnim(colhomard, 'Attack', false)
-    GAME:WaitFrames(15)
-    cinematique.Dire(colhomard, 'Normal', 'Héhéhé… Un louveteau curieux, et maintenant une escorte au complet !', 'standard')
-    cinematique.Dire(ecr1, 'Normal', 'Patron ' .. cinematique.NomEspece('crawdaunt', 'Colhomard') .. ', on garde les vasques pour nous tout seuls !', 'standard')
-    cinematique.Dire(maskadra, 'Normal', 'Personne ne quitte cette salle sans payer son passage… par une bonne correction !', 'droite')
-    cinematique.Dire(lyra, 'Determined', 'Laissez mon petit tranquille ! On ne cédera pas devant vous !', 'droite')
     if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Determined', 'Tiens bon, ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! On va les écarter tout de suite !', 'standard')
+      cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim')
+      GAME:WaitFrames(10)
+    end
+    local approche = {}
+    if hero ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 248, 196, false, 2)
+        GROUND:CharTurnToChar(hero, nilo)
+      end))
+    end
+    if partenaire ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(partenaire, 224, 204, false, 2)
+        GROUND:CharTurnToChar(partenaire, nilo)
+      end))
+    end
+    if #approche > 0 then TASK:JoinCoroutines(approche) end
+
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Worried', cinematique.NomColore('Nilo', 'shinx') .. ' ! Hé, ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! Réveille-toi !', 'standard')
+    end
+    UI:ResetSpeaker()
+
+    GROUND:CharSetAnim(nilo, 'Wake', false)
+    GAME:WaitFrames(36)
+    GROUND:CharSetAnim(nilo, 'Idle', true)
+    GAME:WaitFrames(10)
+
+    cinematique.Dire(nilo, 'Dizzy', 'Maman… grand frère…', 'droite')
+    GAME:WaitFrames(12)
+    cinematique.Emote(nilo, 'exclaim', 'EVT_Emote_Exclaim')
+    cinematique.Dire(nilo, 'Surprised', 'Hein ?! Vous… vous n’êtes pas Maman ni Léo… Qui êtes-vous ?!', 'droite')
+
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Happy', 'Ne t’inquiète pas, ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! On est une équipe de secours ! Ta maman, Lyra, nous a envoyés te chercher jusqu’ici !', 'standard')
+    end
+
+    cinematique.Emote(nilo, 'shock', 'EVT_Emote_Shock')
+    cinematique.Dire(nilo, 'Pain', 'Non… non !! Vous n’auriez pas dû venir… Partez tout de suite !!', 'droite')
+    if partenaire ~= nil then
+      cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
+      cinematique.Dire(partenaire, 'Surprised', 'Comment ça, « non » ?! Tu es enfin en sécurité ! Qu’est-ce qui se passe ?!', 'standard')
+    end
+    cinematique.Dire(nilo, 'Crying', 'Le sol tremble encore… Il arrive… ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' !!!', 'droite')
+    UI:ResetSpeaker()
+
+    -- Secousse puis double flash blanc révélant Carchacrok au centre des vasques
+    SOUND:FadeOutBGM(15)
+    SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
+    pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 4, 30)) end)
+    GAME:WaitFrames(18)
+
+    flash_blanc()
+    GAME:WaitFrames(16)
+    flash_blanc()
+    GAME:WaitFrames(4)
+
+    carchacrok = creer_acteur('Carchacrok_Boss', 'garchomp', Gender.Male, '', 240, 196, Direction.Down)
+    local recul = {}
+    if hero ~= nil then
+      table.insert(recul, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 240, 260, true, 3)
+        GROUND:EntTurn(hero, Direction.Up)
+      end))
+    end
+    if partenaire ~= nil then
+      table.insert(recul, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(partenaire, 216, 268, true, 3)
+        GROUND:EntTurn(partenaire, Direction.Up)
+      end))
+    end
+    table.insert(recul, TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(nilo, 264, 144, true, 3)
+      GROUND:EntTurn(nilo, Direction.Down)
+    end))
+    TASK:JoinCoroutines(recul)
+
+    SOUND:PlayBattleSE('EVT_Roar')
+    GROUND:CharSetAnim(carchacrok, 'Attack', false)
+    SOUND:PlayBGM('Threat.ogg', true)
+    GAME:WaitFrames(18)
+
+    if partenaire ~= nil then
+      cinematique.Emote(partenaire, 'shock', 'EVT_Emote_Shock')
+    end
+    cinematique.Dire(carchacrok, 'Angry', 'GRRRROOOAAARRR !! Qui ose encore troubler la paix de ma caverne ?!', 'standard')
+    cinematique.Dire(carchacrok, 'Angry', 'Ce petit Lixy m’a déjà réveillé en chutant dans mes vasques… Et voilà que d’autres intrus débarquent pour faire du vacarme !', 'standard')
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Determined', 'Nous sommes une équipe de secours ! Nous ne repartirons pas sans ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'standard')
     end
   else
     SOUND:PlayBGM('Threat.ogg', true)
-    cinematique.Dire(colhomard, 'Angry', 'Encore vous ?! Vous n’avez toujours pas compris qui commande dans ces vasques ?', 'standard')
-    cinematique.Dire(lyra, 'Determined', 'Cette fois, on ne se laissera pas surprendre ! Libérez ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+    SOUND:PlayBattleSE('EVT_Roar')
+    GROUND:CharSetAnim(carchacrok, 'Attack', false)
+    GAME:WaitFrames(15)
+    cinematique.Dire(carchacrok, 'Angry', 'Encore vous ?! Vous tenez vraiment à mesurer vos forces face au maître des vasques ?', 'standard')
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Determined', 'Cette fois, nous ne reculerons pas ! Nous ramènerons ' .. cinematique.NomColore('Nilo', 'shinx') .. ' à la maison !', 'standard')
+    end
   end
 
   SOUND:PlayBGM('Boss Battle 2.ogg', true)
   GAME:WaitFrames(15)
-  cinematique.Dire(colhomard, 'Angry', 'Bande des Vasques, à l’attaque !', 'standard')
+  cinematique.Dire(carchacrok, 'Angry', 'Assez parlé ! Montrez-moi ce que vous valez !', 'standard')
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
 
@@ -128,63 +216,40 @@ end
 
 function fgv1.PostBattle()
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(360, 424, Direction.Up)
-  local lyra = creer_acteur('Lyra_Fin', 'luxray', Gender.Female, 'Lyra', 408, 424, Direction.Up)
-  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 424, 232, Direction.Down)
-  local colhomard, ecr1, ecr2, maskadra = invoquer_bande()
+  local partenaire = equipe_scene.Partenaire(216, 268, Direction.Up)
+  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 264, 144, Direction.Down)
+  local carchacrok = creer_acteur('Carchacrok_Boss', 'garchomp', Gender.Male, '', 240, 196, Direction.Down)
 
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 384, 416, Direction.Up)
+    GROUND:TeleportTo(hero, 240, 260, Direction.Up)
   end
   SOUND:FadeOutBGM(10)
-  GAME:MoveCamera(384, 340, 1, false)
+  GAME:MoveCamera(240, 180, 1, false)
   GAME:FadeIn(20)
   GAME:WaitFrames(25)
 
-  cinematique.Emote(colhomard, 'sweatdrop', 'EVT_Emote_Sweatdrop')
-  cinematique.Dire(colhomard, 'Pain', 'Argh… Ces gamins cognent trop fort ! Bande des Vasques… repli !', 'standard')
+  cinematique.Emote(carchacrok, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+  cinematique.Dire(carchacrok, 'Pain', 'Grrr… Pas mal pour une jeune équipe de secours… Emportez ce petit Lixy et laissez-moi retrouver mon calme.', 'standard')
   UI:ResetSpeaker()
 
   SOUND:PlayBattleSE('EVT_CH03_Scurry')
-  local fuite = {}
-  table.insert(fuite, TASK:BranchCoroutine(function() GROUND:MoveToPosition(ecr1, 336, 560, true, 3) end))
-  table.insert(fuite, TASK:BranchCoroutine(function() GROUND:MoveToPosition(ecr2, 432, 560, true, 3) end))
-  table.insert(fuite, TASK:BranchCoroutine(function() GROUND:MoveToPosition(maskadra, 384, 560, true, 3) end))
-  table.insert(fuite, TASK:BranchCoroutine(function() GROUND:MoveToPosition(colhomard, 384, 560, true, 3) end))
-  TASK:JoinCoroutines(fuite)
-  for _, nom in ipairs({'Colhomard_Boss', 'Ecrapince_1', 'Ecrapince_2', 'Maskadra_Boss'}) do
-    if CH(nom) ~= nil then GROUND:RemoveCharacter(nom) end
-  end
+  GROUND:CharSetAnim(carchacrok, 'Hop', false)
+  GAME:WaitFrames(20)
+  GROUND:RemoveCharacter('Carchacrok_Boss')
 
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
-  GAME:MoveCamera(384, 384, 20, false)
-
-  GROUND:MoveToPosition(nilo, 408, 402, true, 3)
+  GROUND:MoveToPosition(nilo, 240, 224, true, 3)
   GROUND:EntTurn(nilo, Direction.Down)
-  GROUND:EntTurn(lyra, Direction.Up)
   cinematique.Emote(nilo, 'happy')
-  cinematique.Dire(nilo, 'Happy', 'Maman !!', 'standard')
-  cinematique.Emote(lyra, 'happy')
-  cinematique.Dire(lyra, 'Teary-Eyed', 'Mon petit ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! Tu n’as rien ? J’ai eu tellement peur !', 'droite')
-  cinematique.Dire(nilo, 'Happy', 'J’ai glissé dans le courant derrière la cascade, puis ces méchants m’ont bloqué ici… Mais vous m’avez retrouvé !', 'standard')
-
-  cinematique.RegarderGroupe({
-    {lyra, hero, 0, 4},
-    {nilo, hero, 5, 4},
-  })
-  cinematique.Dire(lyra, 'Happy', 'Merci du fond du cœur à tous les deux ! Sans votre courage, jamais je n’aurais pu sauver mon petit.', 'droite')
+  cinematique.Dire(nilo, 'Teary-Eyed', 'Vous… vous avez vraiment tenu tête à ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' pour me sauver !!', 'droite')
   if partenaire ~= nil then
-    cinematique.Dire(partenaire, 'Happy', 'Tout le monde à Réverie Town va être fou de joie de vous voir rentrer ensemble !', 'standard')
+    cinematique.Dire(partenaire, 'Happy', 'C’était moins une ! Vite, rentrons à Réverie Town rassurer Lyra et Léo — ils t’attendent tous !', 'standard')
   end
-  cinematique.Dire(lyra, 'Happy', 'Acceptez ceci en signe de gratitude, avant que nous rentrions à la maison !', 'droite')
+  cinematique.Dire(nilo, 'Happy', 'Oui !! Allons-y tout de suite !', 'droite')
   UI:ResetSpeaker()
-
-  if hero ~= nil then
-    COMMON.GiftItem(hero, RogueEssence.Dungeon.InvItem('gummi_royal', false, 1))
-  end
-  GAME:WaitFrames(20)
+  GAME:WaitFrames(15)
 
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.AlerteShinx = 'termine'
@@ -192,6 +257,7 @@ function fgv1.PostBattle()
   SV.Destiny.DepartShinxAccepte = nil
   SV.Destiny.GrotteVerdoyanteBossVaincu = true
   SV.Destiny.GrotteVerdoyantePhase = 4
+  SV.Destiny.CelebrationNilo = 'en_attente'
   SV.Destiny.JourneeVille = (SV.Destiny.JourneeVille or 0) + 1
   if not GAME:DungeonUnlocked('grotte_verdoyante') then
     GAME:UnlockDungeon('grotte_verdoyante')
@@ -206,16 +272,16 @@ end
 
 function fgv1.EmptyReturn()
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(360, 560, Direction.Up)
+  local partenaire = equipe_scene.Partenaire(216, 344, Direction.Up)
 
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 384, 560, Direction.Up)
+    GROUND:TeleportTo(hero, 240, 344, Direction.Up)
   end
 
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
-  GAME:MoveCamera(384, 384, 1, false)
+  GAME:MoveCamera(240, 224, 1, false)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
@@ -224,21 +290,22 @@ function fgv1.EmptyReturn()
   local taches = {}
   if hero ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(hero, 384, 416, false, 2)
+      GROUND:MoveToPosition(hero, 240, 240, false, 2)
       GROUND:EntTurn(hero, Direction.Up)
     end))
   end
   if partenaire ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(partenaire, 360, 424, false, 2)
+      GROUND:MoveToPosition(partenaire, 216, 248, false, 2)
       GROUND:EntTurn(partenaire, Direction.Up)
     end))
   end
   if #taches > 0 then TASK:JoinCoroutines(taches) end
 
-  GAME:WaitFrames(20)
+  GAME:MoveCamera(240, 180, 20, false)
+  GAME:WaitFrames(15)
   if partenaire ~= nil then
-    cinematique.Dire(partenaire, 'Happy', 'Les vasques sont si calmes depuis que la bande de Colhomard a déguerpi… Une belle traversée jusqu’au bout !', 'standard')
+    cinematique.Dire(partenaire, 'Happy', 'Les vasques sont si calmes depuis le combat face à Carchacrok… Une belle traversée jusqu’au bout !', 'standard')
   else
     UI:ResetSpeaker()
     UI:WaitShowDialogue('Les vasques scintillent paisiblement au bout de la Grotte Verdoyante.')

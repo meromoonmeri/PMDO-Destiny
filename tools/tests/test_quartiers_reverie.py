@@ -15,13 +15,19 @@ PASSAGE_ETANG={(147,272),(148,272)}|{(x,y) for x in range(178,188) for y in rang
 AUDIT_CLEAR={(49,202),(155,263),(155,264),(156,265),(156,266),(157,267)}
 AUDIT_BLOCK_CLIFF={(x,170) for x in range(160,185)}
 AUDIT_BLOCK_BASIN={(x,255) for x in range(32,48)}|{(x,256) for x in range(33,47)}|{(x,257) for x in range(34,46)}|{(x,258) for x in range(36,44)}|{(x,259) for x in range(38,42)}
+TENT_BELLOSSOM_OBS=(
+ {(x,139) for x in range(151,160)}|{(x,140) for x in range(150,161)}
+ |{(x,141) for x in (*range(150,155),*range(156,161))}
+ |{(x,142) for x in (*range(149,154),*range(157,162))}
+ |{(149,143),(150,143),(160,143),(161,143)}
+)
 for suffix in ('','_Dev'):
  oc=grid(read(ref,'reverie_centre'+suffix));on=grid(read(ref,'reverie_nord'+suffix));c=grid(read(game,'reverie_centre'+suffix));n=grid(read(game,'reverie_nord'+suffix));global_=grid(read(game,'WaterfallVillageCapital'+suffix));changed=0
  for x in range(200):
   for y in range(500):
    expected=min(oc[x][y]['Tags'],on[x][y]['Tags'])
-   if (x,y) in {(96,154),(96,155)}|AUDIT_BLOCK_CLIFF:
-    # Panneau déplacé (96,154..155) et mur de falaise est du Café (160..184,170) bloqués.
+   if (x,y) in {(96,154),(96,155)}|AUDIT_BLOCK_CLIFF|TENT_BELLOSSOM_OBS:
+    # Panneau déplacé (96,154..155), falaise est du Café (160..184,170) et tente Joliflor (44 cases) bloqués.
     assert expected==0 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==1
    elif (x,y) in AUDIT_CLEAR:
     assert expected==1 and c[x][y]['Tags']==n[x][y]['Tags']==global_[x][y]['Tags']==0
