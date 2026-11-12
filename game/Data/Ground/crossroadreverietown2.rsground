@@ -1,4 +1,4 @@
-﻿{
+{
 "Version": "0.8.12.0",
 "Object": {
 "$type": "RogueEssence.Ground.GroundMap, RogueEssence",
@@ -1006283,6 +1006283,22 @@
 "Collider": {
 "X": 491,
 "Y": 931,
+"Width": 16,
+"Height": 16
+}
+}
+,
+{
+"$type": "RogueEssence.Ground.GroundMarker, RogueEssence",
+"EntName": "entree_plage",
+"Direction": 4,
+"EntEnabled": true,
+"EntOrder": 0,
+"InteractOrder": 0,
+"triggerType": 0,
+"Collider": {
+"X": 488,
+"Y": 912,
 "Width": 16,
 "Height": 16
 }

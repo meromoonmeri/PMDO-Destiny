@@ -37,7 +37,11 @@
       "zrv2_zone_reveil_crepuscule",
       "zrv2_zone_reveil_jour",
       "zrv2_zone_reveil_nuit",
-      "crossroadreverietown2"
+      "crossroadreverietown2",
+      "etangdudoyen_jour",
+      "etangdudoyen_aube",
+      "etangdudoyen_crepuscule",
+      "etangdudoyen_nuit"
     ]
   }
 }

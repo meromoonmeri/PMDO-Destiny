@@ -257,7 +257,11 @@
         "zrv2_zone_reveil_crepuscule",
         "zrv2_zone_reveil_jour",
         "zrv2_zone_reveil_nuit",
-        "crossroadreverietown2"
+        "crossroadreverietown2",
+        "etangdudoyen_jour",
+        "etangdudoyen_aube",
+        "etangdudoyen_crepuscule",
+        "etangdudoyen_nuit"
       ],
       "Maps": [],
       "Name": {
@@ -411,6 +415,52 @@
       "Released": true,
       "Comment": "Grotte Verdoyante (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F deep_limestone_cavern, 9F boss Carchacrok et sauvetage de Nilo sur fgv1_fin_grotte_vasques (480x360).",
       "SortOrder": 32
+    },
+    "passage_aquatique": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": 12,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 2,
+      "CountedFloors": 10,
+      "Rogue": 1,
+      "Grounds": [
+        "plage_sablefin_jour",
+        "plage_sablefin_aube",
+        "plage_sablefin_crepuscule",
+        "plage_sablefin_nuit",
+        "passage_aquatique_fond"
+      ],
+      "Maps": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      ],
+      "Name": {
+        "DefaultText": "Passage Aquatique",
+        "LocalTexts": {
+          "fr": "Passage Aquatique"
+        }
+      },
+      "Released": true,
+      "Comment": "Plage Sablefin (jour/aube/crépuscule/nuit) + Passage Aquatique (10 étages) menant à passage_aquatique_fond.",
+      "SortOrder": 33
     }
   }
 }

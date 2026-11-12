@@ -46,6 +46,19 @@ local cartes_reveil = {
   crepuscule = 'zrv2_zone_reveil_crepuscule',
   nuit = 'zrv2_zone_reveil_nuit',
 }
+local cartes_etang_doyen = {
+  jour = 'etangdudoyen_jour',
+  aube = 'etangdudoyen_aube',
+  crepuscule = 'etangdudoyen_crepuscule',
+  nuit = 'etangdudoyen_nuit',
+}
+local index_plage_sablefin = {jour = 0, aube = 1, crepuscule = 2, nuit = 3}
+local cartes_plage_sablefin = {
+  jour = 'plage_sablefin_jour',
+  aube = 'plage_sablefin_aube',
+  crepuscule = 'plage_sablefin_crepuscule',
+  nuit = 'plage_sablefin_nuit',
+}
 
 local carte_appliquee = nil
 local dernier_moment_applique = nil
@@ -109,6 +122,18 @@ end
 
 function meteo.CarteReveil()
   return cartes_reveil[meteo.Moment()] or 'zrv2_zone_reveil_jour'
+end
+
+function meteo.CarteEtangDoyen()
+  return cartes_etang_doyen[meteo.Moment()] or 'etangdudoyen_jour'
+end
+
+function meteo.IndexPlageSablefin()
+  return index_plage_sablefin[meteo.Moment()] or 0
+end
+
+function meteo.CartePlageSablefin()
+  return cartes_plage_sablefin[meteo.Moment()] or 'plage_sablefin_jour'
 end
 
 function meteo.DefinirMomentScenario(moment)

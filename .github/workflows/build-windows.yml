@@ -121,6 +121,10 @@ jobs:
         run: python tools/run_ci_check.py tools/tests/test_falaise_promontoire_integration.py
       - name: Check Reverie Town and cutscene 4-ambiance LUT filters
         run: python tools/run_ci_check.py tools/tests/test_ambiances_reverie_et_cinematiques.py
+      - name: Check Etang du Doyen integration and swim ripples
+        run: python tools/run_ci_check.py tools/tests/test_etangdudoyen_integration.py
+      - name: Check Plage Sablefin and Passage Aquatique integration
+        run: python tools/run_ci_check.py tools/tests/test_plage_sablefin_integration.py
       - name: Check incremental update ZIP builder
         run: python tools/run_ci_check.py tools/tests/test_build_update_zip.py
       - name: Build and package Destiny

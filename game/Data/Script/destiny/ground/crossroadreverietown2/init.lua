@@ -23,6 +23,7 @@ function crossroadreverietown2.Init(map)
   sortie_en_cours = false
   installer_sortie(map, 'SortieFalaise', 456, 8, 56, 8)
   installer_sortie(map, 'SortieVille', 940, 400, 8, 48)
+  installer_sortie(map, 'SortiePlage', 424, 936, 136, 8)
   local hero = CH('PLAYER')
   if hero ~= nil and GAME:GetPlayerPartyCount() > 1 then
     local partenaire = equipe_scene.Partenaire(hero.Position.X - 24, hero.Position.Y, Direction.Down)
@@ -66,6 +67,10 @@ end
 function crossroadreverietown2.SortieVille_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   aller('town02_waterfallvillage', 'WaterfallVillageCapital', 'entrance')
+end
+function crossroadreverietown2.SortiePlage_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  aller('passage_aquatique', meteo_reverie.CartePlageSablefin(), 'entrance')
 end
 
 -- Le personnage sérialisé d'origine garde son placement ; aucune réplique ni
