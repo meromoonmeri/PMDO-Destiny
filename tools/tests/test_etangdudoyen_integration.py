@@ -85,7 +85,7 @@ def main() -> None:
         tile_p = ROOT / 'game/Content/Tile' / f'Destiny_Etang_Doyen_{suffix}.tile'
         assert tile_p.is_file()
         tiles = _decode_tiles(tile_p)
-        assert len(tiles) == 3609
+        assert len(tiles) == 3872
 
         for layer in doc['Layers']:
             for col in layer['Tiles']:
@@ -138,6 +138,22 @@ def main() -> None:
                     r, g, b, _ = px[x, y]
                     assert not (abs(r - g) <= 10 and abs(g - b) <= 10 and r < 180), f'Gravier gris détecté à ({x},{y})={(r,g,b)}'
                     assert not (g > r + 10 and g > b + 40), f'Herbe résiduelle dans le chemin sud à ({x},{y})={(r,g,b)}'
+            # Vérifie la présence effective de l'escalier en pierre (contraste marche éclairée / contremarche sombre)
+            stair_lums = [0.299 * px[384, y][0] + 0.587 * px[384, y][1] + 0.114 * px[384, y][2] for y in range(480, 568)]
+            assert max(stair_lums) - min(stair_lums) >= 75, 'Escalier sud absent ou sans relief de marches'
+            # Vérifie la courbure rocheuse violette/mauve sur les bastions encadrant la cascade centrale
+            for x0_flank, x1_flank in ((241, 272), (304, 335), (433, 464), (496, 527)):
+                mauve_cnt = sum(
+                    1
+                    for xf in range(x0_flank, x1_flank)
+                    for yf in range(45, 145)
+                    if px[xf, yf][0] >= 160 and 80 <= px[xf, yf][1] <= 135 and 90 <= px[xf, yf][2] <= 135 and px[xf, yf][0] > px[xf, yf][1] + 45
+                )
+                assert mauve_cnt >= 300, f'Texture rocheuse violette manquante sur le flanc ({x0_flank}..{x1_flank}) : {mauve_cnt}'
+            # Vérifie que l'écume PMU déborde bien par-dessus les falaises aux pieds des cascades
+            for fx, fy in ((328, 152), (440, 152), (186, 150), (582, 150)):
+                fr_c, fg_c, fb_c, _ = px[fx, fy]
+                assert fr_c >= 150 and fg_c >= 170 and fb_c >= 210, f'Écume non superposée à la falaise en ({fx},{fy})={(fr_c,fg_c,fb_c)}'
             for y in range(576):
                 for x in range(768):
                     r, g, b, _ = px[x, y]
