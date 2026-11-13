@@ -1451,52 +1451,223 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   end
   SV.Destiny = SV.Destiny or {}
   if SV.Destiny.CelebrationNilo ~= 'en_attente' then return false end
+
+  -- Nettoyer les drapeaux de routage transitoire afin qu'ils ne rejouent pas plus tard.
+  SV.Destiny.PassageQuartier = nil
+  SV.Destiny.ArriveeVille = nil
+  SV.Destiny.RetourBatimentPartenaire = nil
+
   GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+
+  -- Préparer les habitants présents sur la place centrale (x = 688..880, y = 1136..1216 libres d'obstacles)
+  -- en mémorisant leur état exact pour tout restaurer sous écran noir à la fin.
+  local sauvegardes_place = {}
+  local foule = {}
+  local comite = {
+    {nom = 'NewObject_7',        x = 768, y = 1148, dir = Direction.Down},
+    {nom = 'NewObject_8',        x = 800, y = 1144, dir = Direction.Down},
+    {nom = 'Roserade_Fleuriste', x = 736, y = 1160, dir = Direction.DownRight or Direction.Down},
+    {nom = 'NewObject_4',        x = 728, y = 1196, dir = Direction.Right or Direction.Down},
+    {nom = 'NewObject_16',       x = 848, y = 1164, dir = Direction.DownLeft or Direction.Down},
+    {nom = 'NewObject_14',       x = 864, y = 1196, dir = Direction.Left or Direction.Down},
+    {nom = 'NewObject_12',       x = 712, y = 1172, dir = Direction.DownRight or Direction.Down},
+    {nom = 'NewObject_15',       x = 832, y = 1148, dir = Direction.DownLeft or Direction.Down},
+  }
+  for _, spec in ipairs(comite) do
+    local act = CH(spec.nom)
+    if act ~= nil then
+      local etait_actif = (act.EntEnabled ~= false)
+      local ox = (act.Position and act.Position.X) or spec.x
+      local oy = (act.Position and act.Position.Y) or spec.y
+      local odir = act.Direction or Direction.Down
+      table.insert(sauvegardes_place, {acteur = act, nom = spec.nom, x = ox, y = oy, dir = odir, actif = etait_actif})
+      AI:DisableCharacterAI(act)
+      if not etait_actif then pcall(function() GROUND:Unhide(spec.nom) end) end
+      GROUND:TeleportTo(act, spec.x, spec.y, spec.dir)
+      table.insert(foule, act)
+    end
+  end
+
+  -- Famille réunie au centre de la place pour accueillir l'équipe.
+  local lyra = habitant('Lyra_Celebration', 'luxray', Gender.Female, 792, 1184)
+  if lyra ~= nil then
+    if lyra.Data ~= nil then lyra.Data.Nickname = 'Lyra' end
+    GROUND:TeleportTo(lyra, 792, 1184, Direction.Down)
+    table.insert(foule, lyra)
+  end
+  local leo = habitant('Leo_Celebration', 'luxio', Gender.Male, 764, 1188)
+  if leo ~= nil then
+    if leo.Data ~= nil then leo.Data.Nickname = 'Léo' end
+    GROUND:TeleportTo(leo, 764, 1188, Direction.Down)
+    table.insert(foule, leo)
+  end
+  local nilo = habitant('Nilo_Celebration', 'shinx', Gender.Male, 816, 1192)
+  if nilo ~= nil then
+    if nilo.Data ~= nil then nilo.Data.Nickname = 'Nilo' end
+    GROUND:TeleportTo(nilo, 816, 1192, Direction.Down)
+    table.insert(foule, nilo)
+  end
+
+  -- Le duo arrive par l'allée sud (x = 784..816 libre sur y = 1224..1296).
   if hero ~= nil then
     hero.CollisionDisabled = true
     GROUND:TeleportTo(hero, 800, 1280, Direction.Up)
   end
   if partenaire ~= nil then
     AI:DisableCharacterAI(partenaire)
-    GROUND:TeleportTo(partenaire, 772, 1288, Direction.Up)
+    GROUND:TeleportTo(partenaire, 784, 1288, Direction.Up)
   end
-  local lyra = habitant('Lyra_Celebration', 'luxray', Gender.Female, 800, 1236)
-  if lyra ~= nil then
-    if lyra.Data ~= nil then lyra.Data.Nickname = 'Lyra' end
-    GROUND:TeleportTo(lyra, 800, 1236, Direction.Down)
+
+  local function orienter_auditoire(locuteur)
+    if locuteur == nil then return end
+    local regards = {}
+    local cibles = {hero, partenaire, lyra, leo, nilo}
+    for _, a in ipairs(foule) do table.insert(cibles, a) end
+    local vus = {}
+    for _, auditeur in ipairs(cibles) do
+      if auditeur ~= nil and auditeur ~= locuteur and auditeur.EntEnabled ~= false and not vus[auditeur] then
+        vus[auditeur] = true
+        table.insert(regards, {auditeur, locuteur, (#regards % 5) * 4, 4})
+      end
+    end
+    if #regards > 0 then
+      UI:ResetSpeaker()
+      cinematique.RegarderGroupe(regards)
+    end
   end
-  local nilo = habitant('Nilo_Celebration', 'shinx', Gender.Male, 824, 1244)
-  if nilo ~= nil then
-    if nilo.Data ~= nil then nilo.Data.Nickname = 'Nilo' end
-    GROUND:TeleportTo(nilo, 824, 1244, Direction.Down)
-  end
-  GAME:MoveCamera(0, 0, 1, true)
-  GAME:FadeIn(30)
-  SOUND:PlayBGM('Treasure Town.ogg', true)
+
+  GAME:MoveCamera(800, 1200, 1, false)
+  GAME:FadeIn(35)
+  SOUND:PlayBGM('A Successful Rescue.ogg', true)
   GAME:WaitFrames(20)
-  if lyra ~= nil and hero ~= nil then tourner_vers(lyra, hero) end
-  cinematique.Dire(lyra, 'Happy', 'Vous avez ramené Nilo sain et sauf… Merci du fond du cœur !', 'standard')
+
+  -- Marche d'entrée verticale pure sur l'allée sud, légèrement désynchronisée.
+  local marche = {}
+  if hero ~= nil then
+    table.insert(marche, TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(hero, 800, 1224, false, 1.5)
+      GROUND:EntTurn(hero, Direction.Up)
+    end))
+  end
+  if partenaire ~= nil then
+    table.insert(marche, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(6)
+      GROUND:MoveToPosition(partenaire, 784, 1232, false, 1.5)
+      GROUND:EntTurn(partenaire, Direction.Up)
+    end))
+  end
+  if #marche > 0 then TASK:JoinCoroutines(marche) end
+  GAME:WaitFrames(15)
+
+  -- Vague d'enthousiasme désynchronisée des habitants sur la place.
+  SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
+  for idx, act in ipairs(foule) do
+    local em = (idx % 2 == 0) and 'glowing' or 'happy'
+    pcall(function() GROUND:CharSetEmote(act, em, 1) end)
+    if idx % 3 == 0 then GAME:WaitFrames(5) end
+  end
+  GAME:WaitFrames(25)
+
+  if leo ~= nil then
+    orienter_auditoire(leo)
+    cinematique.Dire(leo, 'Teary-Eyed', 'Nilo !! Lyra !! Vous voilà enfin rentrés tous ensemble !', 'standard')
+    cinematique.Respirer(15)
+  end
+
   if nilo ~= nil then
-    if hero ~= nil then tourner_vers(nilo, hero) end
+    orienter_auditoire(nilo)
     pcall(function() GROUND:CharSetAnim(nilo, 'Hop', false) end)
     GAME:WaitFrames(20)
     pcall(function() GROUND:CharEndAnim(nilo) end)
     pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
-    GAME:WaitFrames(25)
+    GAME:WaitFrames(20)
+    cinematique.Dire(nilo, 'Joyous', 'Papa ! Tout le monde ! Ils ont tenu tête à Carchacrok tout au fond de la grotte pour me ramener !', 'droite')
+    cinematique.Respirer(15)
   end
-  cinematique.Dire(nilo, 'Joyous', 'Ouais ! Vous êtes incroyables ! Quand je serai grand, j’explorerai les donjons comme vous !', 'droite')
-  GAME:WaitFrames(15)
-  cinematique.Dire(lyra, 'Happy', 'Acceptez ceci de la part de toute notre famille. Et… si vous montez tout au nord vers la grande falaise, on dit que la Guilde s’intéresse aux jeunes équipes courageuses comme la vôtre !', 'standard')
+
+  local lombre = CH('NewObject_7')
+  local ludicolo = CH('NewObject_8')
+  local roserade = CH('Roserade_Fleuriste')
+  local alakazam = CH('NewObject_4')
+  local dracaufeu = CH('NewObject_16')
+  local tyranocif = CH('NewObject_14')
+
+  if lombre ~= nil then
+    orienter_auditoire(lombre)
+    parler_accueil(lombre, 'Happy', 'Quel soulagement ! Toute la place retenait son souffle depuis votre départ !')
+    cinematique.Respirer(12)
+  end
+  if ludicolo ~= nil then
+    orienter_auditoire(ludicolo)
+    parler_accueil(ludicolo, 'Joyous', 'Repousser un Carchacrok au fond des vasques… Bravo, quelle équipe formidable !', 'droite')
+    cinematique.Respirer(12)
+  end
+  if roserade ~= nil then
+    orienter_auditoire(roserade)
+    parler_accueil(roserade, 'Happy', 'Revoir le sourire de Nilo illumine toute Réverie Town. Merci infiniment à vous deux !')
+    cinematique.Respirer(15)
+  end
+  if tyranocif ~= nil then
+    orienter_auditoire(tyranocif)
+    parler_accueil(tyranocif, 'Happy', 'Hé hé ! Vous n’avez pas froid aux yeux, les jeunes. Même notre ancienne équipe n’aurait pas fait mieux !', 'droite')
+    cinematique.Respirer(12)
+  end
+  if dracaufeu ~= nil then
+    orienter_auditoire(dracaufeu)
+    parler_accueil(dracaufeu, 'Happy', 'Vous avez agi avec un vrai cœur de secouristes.', 'droite')
+    cinematique.Respirer(12)
+  end
+  if alakazam ~= nil then
+    orienter_auditoire(alakazam)
+    parler_accueil(alakazam, 'Happy', 'Je savais qu’on pouvait vous faire confiance. Réverie Town peut être fière de vous compter parmi les siens.')
+    cinematique.Respirer(15)
+  end
+
+  if partenaire ~= nil then
+    orienter_auditoire(partenaire)
+    cinematique.Dire(partenaire, 'Happy', 'Merci à tous… On n’aurait jamais réussi sans se serrer les coudes jusqu’au bout !', 'standard')
+    cinematique.Respirer(15)
+  end
+
+  if lyra ~= nil then
+    orienter_auditoire(lyra)
+    cinematique.Dire(lyra, 'Happy', 'Vous avez ramené Nilo sain et sauf… Merci du fond du cœur !', 'standard')
+    cinematique.Respirer(15)
+  end
+  if nilo ~= nil then
+    orienter_auditoire(nilo)
+    cinematique.Dire(nilo, 'Joyous', 'Ouais ! Vous êtes incroyables ! Quand je serai grand, j’explorerai les donjons comme vous !', 'droite')
+    cinematique.Respirer(15)
+  end
+  if lyra ~= nil then
+    orienter_auditoire(lyra)
+    cinematique.Dire(lyra, 'Happy', 'Acceptez ceci de la part de toute notre famille et des habitants. Et… si vous montez tout au nord vers la grande falaise, on dit que la Guilde s’intéresse aux jeunes équipes courageuses comme la vôtre !', 'standard')
+  end
   UI:ResetSpeaker()
   if hero ~= nil then
     COMMON.GiftItem(hero, RogueEssence.Dungeon.InvItem('gummi_royal'))
   end
+
   SV.Destiny.CelebrationNilo = 'termine'
+  SOUND:FadeOutBGM(30)
   GAME:FadeOut(false, 30)
   GAME:WaitFrames(30)
+
+  -- Nettoyage et restauration invisibles sous écran noir (aucune téléportation à découvert).
   GROUND:RemoveCharacter('Lyra_Celebration')
+  GROUND:RemoveCharacter('Leo_Celebration')
   GROUND:RemoveCharacter('Nilo_Celebration')
+  for _, s in ipairs(sauvegardes_place) do
+    GROUND:TeleportTo(s.acteur, s.x, s.y, s.dir)
+    if not s.actif then pcall(function() GROUND:Hide(s.nom) end) end
+  end
+  if hero ~= nil then GROUND:TeleportTo(hero, 800, 1224, Direction.Down) end
+  if partenaire ~= nil then GROUND:TeleportTo(partenaire, 776, 1224, Direction.Down) end
+  GAME:MoveCamera(0, 0, 1, true)
+
   GAME:FadeIn(30)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
   retour_au_joueur(hero, partenaire)
   return true
 end

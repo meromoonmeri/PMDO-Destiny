@@ -268,12 +268,91 @@ function fgv1.PostBattle()
   cinematique.Emote(nilo, 'happy')
   GAME:WaitFrames(25)
   cinematique.Dire(nilo, 'Teary-Eyed', 'Vous… vous avez vraiment tenu tête à ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' pour me sauver !!', 'droite')
+
+  -- Arrivée de Lyra depuis le couloir sud (x = 256 entièrement libre de y = 344 à y = 200).
+  UI:ResetSpeaker()
+  UI:SetSpeaker('Lyra', true, '', -1, '', (RogueEssence.Data.Gender and RogueEssence.Data.Gender.Unknown) or Gender.Unknown)
+  UI:WaitShowDialogue(cinematique.NomColore('Nilo', 'shinx') .. ' !! Est-ce que tout le monde va bien ?!')
+  UI:ResetSpeaker()
+
+  SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+  cinematique.Emote(nilo, 'exclaim', false)
   if partenaire ~= nil then
-    cinematique.Dire(partenaire, 'Happy', 'C’était moins une ! Vite, rentrons à Réverie Town rassurer Lyra et Léo — ils t’attendent tous !', 'standard')
+    GAME:WaitFrames(5)
+    cinematique.Emote(partenaire, 'exclaim', false)
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4) end)
+    else
+      GROUND:EntTurn(partenaire, Direction.Down)
+    end
   end
-  cinematique.Dire(nilo, 'Happy', 'Oui !! Allons-y tout de suite !', 'droite')
+  if hero ~= nil then
+    GAME:WaitFrames(5)
+    cinematique.Emote(hero, 'exclaim', false)
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) end)
+    else
+      GROUND:EntTurn(hero, Direction.Down)
+    end
+  end
+  GAME:WaitFrames(20)
+
+  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', 256, 344, Direction.Up)
+  GROUND:MoveToPosition(lyra, 256, 240, true, 2)
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(lyra, nilo, 4) end)
+    pcall(function() GROUND:CharTurnToCharAnimated(nilo, lyra, 4) end)
+  else
+    GROUND:CharTurnToChar(lyra, nilo)
+    GROUND:CharTurnToChar(nilo, lyra)
+  end
+  if partenaire ~= nil then
+    if GROUND.CharTurnToCharAnimated ~= nil then
+      pcall(function() GROUND:CharTurnToCharAnimated(partenaire, lyra, 4) end)
+    else
+      GROUND:CharTurnToChar(partenaire, lyra)
+    end
+  end
+  if hero ~= nil then
+    GAME:WaitFrames(5)
+    if GROUND.CharTurnToCharAnimated ~= nil then
+      pcall(function() GROUND:CharTurnToCharAnimated(hero, lyra, 4) end)
+    else
+      GROUND:CharTurnToChar(hero, lyra)
+    end
+  end
+
+  GROUND:CharSetAnim(nilo, 'Hop', false)
+  GAME:WaitFrames(20)
+  GROUND:CharEndAnim(nilo)
+  cinematique.Emote(nilo, 'happy')
+  GAME:WaitFrames(20)
+  cinematique.Dire(nilo, 'Teary-Eyed', 'Maman !! Tu nous as rejoints jusqu’ici !', 'standard')
+  cinematique.Respirer(15)
+  cinematique.Dire(lyra, 'Teary-Eyed', 'Mon petit ' .. cinematique.NomColore('Nilo', 'shinx') .. '… Quand le rugissement s’est tu, je me suis précipitée dans la grotte ! Quel bonheur de te revoir sain et sauf…', 'droite')
+  cinematique.Respirer(15)
+
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(lyra, hero or partenaire, 4) end)
+  elseif hero ~= nil then
+    GROUND:CharTurnToChar(lyra, hero)
+  end
+  cinematique.Dire(lyra, 'Happy', 'Merci infiniment à tous les deux ! Sans votre bravoure, je n’ose même pas imaginer ce qui serait arrivé.', 'droite')
+  if partenaire ~= nil then
+    cinematique.Respirer(15)
+    cinematique.Dire(partenaire, 'Happy', 'L’essentiel, c’est que vous soyez réunis ! Vite, rentrons à Réverie Town annoncer la bonne nouvelle à Léo et aux habitants !', 'standard')
+  end
+  cinematique.Respirer(15)
+  cinematique.Dire(nilo, 'Happy', 'Oui !! Rentrons tous ensemble !', 'standard')
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
+
+  -- Fondu vers le noir, puis Journal de Victoire façon Halcyon avec sa musique dédiée avant de quitter le donjon.
+  SOUND:FadeOutBGM(30)
+  GAME:FadeOut(false, 30)
+  GAME:WaitFrames(35)
+  GROUND:RemoveCharacter('Lyra_Grotte')
+  GROUND:RemoveCharacter('Nilo_Grotte')
 
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.AlerteShinx = 'termine'
@@ -285,12 +364,28 @@ function fgv1.PostBattle()
   SV.Destiny.GrotteVerdoyantePhase = 4
   SV.Destiny.CelebrationNilo = 'en_attente'
   SV.Destiny.JourneeVille = (SV.Destiny.JourneeVille or 0) + 1
-  if not GAME:DungeonUnlocked('grotte_verdoyante') then
+  local deja_debloque = GAME:DungeonUnlocked('grotte_verdoyante')
+  if not deja_debloque then
     GAME:UnlockDungeon('grotte_verdoyante')
   end
   missions_reverie.Completer('grotte_verdoyante', true)
 
-  GAME:FadeOut(false, 25)
+  -- Journal de victoire (style Halcyon) : texte centré sur écran noir accompagné de "Job Clear!.ogg".
+  UI:ResetSpeaker(false)
+  if UI.SetCenter ~= nil then pcall(function() UI:SetCenter(true) end) end
+  SOUND:PlayBGM('Job Clear!.ogg', false)
+  GAME:WaitFrames(15)
+  UI:WaitShowDialogue('— Journal d’Exploration —\nMission de secours accomplie avec succès !')
+  UI:WaitShowDialogue(cinematique.NomColore('Nilo', 'shinx') .. ' et ' .. cinematique.NomColore('Lyra', 'luxray') .. ' ont retrouvé les leurs sains et saufs au terme de la traversée de la [color=#7FE092]Grotte Verdoyante[color].')
+  if not deja_debloque then
+    if SOUND.PlayFanfare ~= nil then pcall(function() SOUND:PlayFanfare('Fanfare/NewArea') end) end
+    UI:WaitShowDialogue('L’exploration libre de la [color=#7FE092]Grotte Verdoyante[color] est désormais ouverte depuis la sortie est de [color=#F5D27A]Réverie Town[color] !')
+  end
+  if UI.SetCenter ~= nil then pcall(function() UI:SetCenter(false) end) end
+  UI:ResetSpeaker()
+  SOUND:FadeOutBGM(30)
+  GAME:WaitFrames(30)
+
   if hero ~= nil then hero.CollisionDisabled = false end
   GAME:CutsceneMode(false)
   finir_vers_reverie()

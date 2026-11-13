@@ -88,10 +88,11 @@ GROUND = {
 }
 AI = {DisableCharacterAI=function()end, EnableCharacterAI=function()end, SetCharacterAI=function()end}
 TASK = {BranchCoroutine=function(_, f) f(); return true end, JoinCoroutines=function() end}
-SOUND = {PlayBGM=function(_, m) ev('bgm', m) end, FadeOutBGM=function() end, PlayBattleSE=function(_, s) ev('se', s) end}
+SOUND = {PlayBGM=function(_, m) ev('bgm', m) end, FadeOutBGM=function() end, PlayBattleSE=function(_, s) ev('se', s) end, PlayFanfare=function(_, f) ev('fanfare', f) end}
 local choice_ret = true
 UI = {
   SetSpeaker=function() end, SetSpeakerLoc=function() end, SetSpeakerEmotion=function() end,
+  SetCenter=function(_, b) ev('center', b) end,
   ResetSpeaker=function() end, WaitShowDialogue=function(_, t) ev('dlg', t) end,
   WaitShowTitle=function() end, WaitHideTitle=function() end,
   BeginChoiceMenu=function() end,
@@ -263,13 +264,23 @@ events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
 assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
+assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil, 'acteurs temporaires fgv1 doivent être retirés sous écran noir')
+local saw_lyra_reunion, saw_job_clear, saw_journal, saw_center_on, saw_center_off = false, false, false, false, false
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' and tostring(e[2]):find('précipitée dans la grotte', 1, true) then saw_lyra_reunion = true end
+  if e[1] == 'bgm' and e[2] == 'Job Clear!.ogg' then saw_job_clear = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true) then saw_journal = true end
+  if e[1] == 'center' and e[2] == true then saw_center_on = true end
+  if e[1] == 'center' and e[2] == false then saw_center_off = true end
+end
+assert(saw_lyra_reunion and saw_job_clear and saw_journal and saw_center_on and saw_center_off, 'retrouvailles Lyra ou Journal de Victoire Halcyon manquants')
 assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
 
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(events[#events][1] == 'end_day' and not actors.Carchacrok_Boss)
 
--- 4. Réverie post-sauvetage : CelebrationNilo (cadeau gummi_royal), Nilo_Shinx + tente Bellossom
+-- 4. Réverie post-sauvetage : CelebrationNilo (accueil des habitants, Léo/Lyra/Nilo, cadeau gummi_royal), Nilo_Shinx + tente Bellossom
 local ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
 local centre = {
   AssetName='reverie_centre', characters={}, objects={},
@@ -280,14 +291,30 @@ local centre = {
   Width=200, Height=500,
 }
 actors = {}; make_actor('PLAYER', 800, 1160); make_actor('Teammate1', 772, 1160)
-SV.Destiny = {AlerteShinx='termine', CelebrationNilo='en_attente', GrotteVerdoyanteBossVaincu=true, RetourAccompli=true, JourneeVille=1, VisiteVille='terminee', PlacementHabitantsReverie={reverie_centre=true}}
+centre.characters.NewObject_7 = make_actor('NewObject_7', 808, 1116, 'lombre')
+centre.characters.NewObject_8 = make_actor('NewObject_8', 782, 1104, 'ludicolo')
+centre.characters.Roserade_Fleuriste = make_actor('Roserade_Fleuriste', 748, 1112, 'roserade')
+centre.characters.NewObject_4 = make_actor('NewObject_4', 372, 1172, 'alakazam')
+centre.characters.NewObject_14 = make_actor('NewObject_14', 857, 1179, 'tyranitar')
+centre.characters.NewObject_16 = make_actor('NewObject_16', 827, 1178, 'charizard')
+SV.Destiny = {AlerteShinx='termine', CelebrationNilo='en_attente', GrotteVerdoyanteBossVaincu=true, RetourAccompli=true, JourneeVille=1, VisiteVille='terminee', PlacementHabitantsReverie={reverie_centre=true}, PassageQuartier={x=1552, y=1600, px=1524, py=1600, dir='Down'}}
 events = {}
 ville.Init(centre)
+local ax0, ay0 = actors.NewObject_4.Position.X, actors.NewObject_4.Position.Y
 assert(actors.Bellossom_Boutique and centre.objects.ComptoirBellossom, 'Bellossom_Boutique ou ComptoirBellossom manquant')
 ville.Enter(centre)
-local saw_gift = false
-for _, e in ipairs(events) do if e[1] == 'gift' and e[2] == 'gummi_royal' then saw_gift = true end end
-assert(saw_gift and SV.Destiny.CelebrationNilo == 'termine', 'CelebrationNilo non jouée')
+local saw_gift, saw_rescue_bgm, saw_town_bgm, saw_villagers_congrats, saw_leo = false, false, false, false, false
+for _, e in ipairs(events) do
+  if e[1] == 'gift' and e[2] == 'gummi_royal' then saw_gift = true end
+  if e[1] == 'bgm' and e[2] == 'A Successful Rescue.ogg' then saw_rescue_bgm = true end
+  if e[1] == 'bgm' and e[2] == 'Treasure Town.ogg' then saw_town_bgm = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('fière de vous compter', 1, true) then saw_villagers_congrats = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('rentrés tous ensemble', 1, true) then saw_leo = true end
+end
+assert(saw_gift and saw_rescue_bgm and saw_town_bgm and saw_villagers_congrats and saw_leo and SV.Destiny.CelebrationNilo == 'termine', 'CelebrationNilo enrichie non jouée complètement')
+assert(SV.Destiny.PassageQuartier == nil, 'PassageQuartier transitoire doit être nettoyé')
+assert(actors.Lyra_Celebration == nil and actors.Leo_Celebration == nil and actors.Nilo_Celebration == nil, 'acteurs de célébration non nettoyés')
+assert(actors.NewObject_4.Position.X == ax0 and actors.NewObject_4.Position.Y == ay0, 'Alakazam doit retrouver son comptoir après la célébration')
 
 local res = {
   AssetName='reverie_residentiel', characters={}, objects={},
