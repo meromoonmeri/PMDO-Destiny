@@ -78,8 +78,8 @@ GROUND = {
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
   CharTurnToCharAnimated = function() end,
   CharTurnToChar = function() end,
-  CharSetAnim = function() end,
-  CharEndAnim = function() end,
+  CharSetAnim = function(_, a, anim, loop) ev('anim', a and a.EntName or '?', anim, loop) end,
+  CharEndAnim = function(_, a) ev('end_anim', a and a.EntName or '?') end,
   CharSetEmote = function(_, a, em) ev('emote', a.EntName, em) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
   PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y) end,
@@ -165,19 +165,78 @@ assert(m_ewc3.Layers[14].Visible and not m_ewc3.Layers[12].Visible)
 ewc3.SortieRetourReverie_Touch(nil, actors.PLAYER)
 assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'town02_waterfallvillage' and SV.Destiny.ArriveeVille == 'batiment')
 
--- 2. zone/grotte_verdoyante : Seg 0 échec garde AlerteShinx ; Seg 0 succès -> fgv1 ; Seg 1 échec -> Phase=1 ; Seg 1 succès -> Phase=3
+-- 2. zone/grotte_verdoyante : Seg 0/1 échec -> respawn devant ewc3_entree_waterfall_cave (Laying -> Wake + réaction Lyra) ; Seg 0/1 succès -> fgv1
 local zone = assert(loadfile(root .. '/game/Data/Script/destiny/zone/grotte_verdoyante/init.lua'))()
 local zobj = {ID='grotte_verdoyante'}
-SV.Destiny = {AlerteShinx='a_secourir', ExplorationReverie=true}
+SV.Destiny = {AlerteShinx='a_secourir', ExplorationReverie=true, GrotteVerdoyanteOuverte=true}
 events = {}
 zone.ExitSegment(zobj, 'Downed', false, 0, 0)
-assert(SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.LuxrayAttente == 'sortie' and events[#events][1] == 'end_day')
+assert(SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.LuxrayAttente == 'sortie')
+assert(events[#events][1] == 'end_day' and events[#events][2] == 'Downed' and events[#events][3] == 'grotte_verdoyante')
+assert(SV.Destiny.GrotteVerdoyanteRetourEchec and SV.Destiny.GrotteVerdoyanteRetourEchec.cause == 'ko' and SV.Destiny.GrotteVerdoyanteRetourEchec.segment == 0)
+assert(SV.Destiny.GrotteVerdoyanteNbKO == 1 and SV.Destiny.GrotteVerdoyanteDernierKO == true)
+
+-- Cinématique de respawn K.O. sur ewc3 (étages 1F-8F, avec Lyra)
+actors = {}; make_actor('PLAYER', 384, 544); make_actor('Teammate1', 368, 544)
+events = {}
+ewc3.Init(m_ewc3)
+ewc3.Enter(m_ewc3)
+assert(SV.Destiny.GrotteVerdoyanteRetourEchec == nil, 'GrotteVerdoyanteRetourEchec doit être consommé')
+assert(actors.PLAYER.Position.X == 368 and actors.PLAYER.Position.Y == 248 and actors.PLAYER.CollisionDisabled == false)
+assert(actors.Teammate1.Position.X == 344 and actors.Teammate1.Position.Y == 256)
+assert(actors.Luxray_Ewc3 and actors.Luxray_Ewc3.Position.X == 400 and actors.Luxray_Ewc3.Position.Y == 260 and actors.Luxray_Ewc3.Direction == Direction.Up and actors.Luxray_Ewc3.CollisionDisabled == false)
+local lay_p, lay_t, wake_p, wake_t, end_p, end_t, lyra_ko_dlg, partner_ko_dlg = false, false, false, false, false, false, false, false
+for _, e in ipairs(events) do
+  if e[1] == 'anim' and e[2] == 'PLAYER' and e[3] == 'Laying' then lay_p = true end
+  if e[1] == 'anim' and e[2] == 'Teammate1' and e[3] == 'Laying' then lay_t = true end
+  if e[1] == 'anim' and e[2] == 'PLAYER' and e[3] == 'Wake' then wake_p = true end
+  if e[1] == 'anim' and e[2] == 'Teammate1' and e[3] == 'Wake' then wake_t = true end
+  if e[1] == 'end_anim' and e[2] == 'PLAYER' then end_p = true end
+  if e[1] == 'end_anim' and e[2] == 'Teammate1' then end_t = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('bout de forces', 1, true) then
+    assert(not wake_p and not wake_t, 'Lyra doit interpeller le duo avant leur réveil')
+    lyra_ko_dlg = true
+  end
+  if e[1] == 'dlg' and tostring(e[2]):find('Aïe', 1, true) then
+    assert(wake_p and wake_t and end_p and end_t, 'Aucun portrait/dialogue du duo avant Wake + CharEndAnim')
+    partner_ko_dlg = true
+  end
+end
+assert(lay_p and lay_t and wake_p and wake_t and end_p and end_t and lyra_ko_dlg and partner_ko_dlg, 'séquence K.O. -> Wake devant ewc3 incomplète')
+
+-- Dialogue post-K.O. de Lyra (Luxray_Ewc3_Action)
+events = {}
+ewc3.Luxray_Ewc3_Action(actors.Luxray_Ewc3, actors.PLAYER)
+local post_ko_action_ok = false
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' and tostring(e[2]):find('sonnés', 1, true) then post_ko_action_ok = true end
+end
+assert(post_ko_action_ok, 'dialogue post-K.O. de Lyra manquant')
 
 zone.ExitSegment(zobj, 'Cleared', false, 0, 0)
 assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'grotte_verdoyante' and events[#events][4] == 1)
 
 zone.ExitSegment(zobj, 'Failed', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 1 and SV.Destiny.AlerteShinx == 'a_secourir')
+assert(SV.Destiny.GrotteVerdoyanteRetourEchec and SV.Destiny.GrotteVerdoyanteRetourEchec.segment == 1)
+events = {}
+ewc3.Init(m_ewc3)
+ewc3.Enter(m_ewc3)
+local boss_ko_dlg = false
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' and tostring(e[2]):find('Carchacrok', 1, true) then boss_ko_dlg = true end
+end
+assert(boss_ko_dlg, 'variante K.O. 9F Carchacrok manquante sur ewc3')
+
+-- K.O. post-scénario (sans Lyra) : réveil du duo seul devant la cascade
+SV.Destiny.AlerteShinx = 'termine'
+zone.ExitSegment(zobj, 'Downed', false, 0, 0)
+actors = {}; make_actor('PLAYER', 384, 544); make_actor('Teammate1', 368, 544)
+events = {}
+ewc3.Init(m_ewc3)
+ewc3.Enter(m_ewc3)
+assert(actors.Luxray_Ewc3 == nil and actors.PLAYER.Position.Y == 248 and actors.Teammate1.Position.Y == 256)
+SV.Destiny.AlerteShinx = 'a_secourir'
 
 zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zone' and events[#events][4] == 1)

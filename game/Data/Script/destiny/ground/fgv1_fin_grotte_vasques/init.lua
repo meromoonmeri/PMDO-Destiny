@@ -279,6 +279,8 @@ function fgv1.PostBattle()
   SV.Destiny.AlerteShinx = 'termine'
   SV.Destiny.LuxrayAttente = nil
   SV.Destiny.DepartShinxAccepte = nil
+  SV.Destiny.GrotteVerdoyanteRetourEchec = nil
+  SV.Destiny.GrotteVerdoyanteDernierKO = nil
   SV.Destiny.GrotteVerdoyanteBossVaincu = true
   SV.Destiny.GrotteVerdoyantePhase = 4
   SV.Destiny.CelebrationNilo = 'en_attente'

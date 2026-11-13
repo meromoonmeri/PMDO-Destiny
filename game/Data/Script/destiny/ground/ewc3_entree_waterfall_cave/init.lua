@@ -257,6 +257,205 @@ local function cinematique_ouverture(map)
   GAME:CutsceneMode(false)
 end
 
+local function tourner_anime(ent, dir, frames_par_45)
+  if ent == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(ent, dir, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:EntTurn(ent, dir) end)
+  end
+end
+
+local function tourner_vers_cible(ent, cible, frames_par_45)
+  if ent == nil or cible == nil then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(ent, cible, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:CharTurnToChar(ent, cible) end)
+  end
+end
+
+local function se_regarder(a, b, frames_par_45)
+  if a == nil or b == nil then return end
+  local f = frames_par_45 or 4
+  tourner_vers_cible(a, b, f)
+  GAME:WaitFrames(5)
+  tourner_vers_cible(b, a, f)
+end
+
+local function cinematique_retour_echec(map, retour)
+  SV.Destiny = SV.Destiny or {}
+  local en_sauvetage = (SV.Destiny.AlerteShinx == 'a_secourir')
+  local cause = (type(retour) == 'table' and retour.cause) or 'ko'
+  local segment = (type(retour) == 'table' and retour.segment) or 0
+
+  local hero = CH('PLAYER')
+  local partenaire = equipe_scene.Partenaire(344, 256, Direction.Down)
+  local lyra = nil
+  if en_sauvetage then
+    lyra = CH('Luxray_Ewc3') or creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 224, Direction.Up)
+  end
+
+  GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+
+  if hero ~= nil then
+    hero.CollisionDisabled = true
+    GROUND:TeleportTo(hero, 368, 248, Direction.Down)
+  end
+  if partenaire ~= nil then
+    GROUND:TeleportTo(partenaire, 344, 256, Direction.Down)
+  end
+  if lyra ~= nil then
+    lyra.CollisionDisabled = true
+    GROUND:TeleportTo(lyra, 400, 224, Direction.Up)
+  end
+
+  if cause ~= 'ko' then
+    -- Repli volontaire : retour debout devant la cascade ouverte.
+    GAME:MoveCamera(376, 232, 1, false)
+    GAME:FadeIn(25)
+    SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+    GAME:WaitFrames(15)
+    if lyra ~= nil then
+      tourner_vers_cible(lyra, hero or partenaire, 4)
+      GAME:WaitFrames(10)
+      cinematique.Dire(lyra, 'Worried', 'Vous voilà ressortis ! Si le passage est trop périlleux sans provisions, n’hésitez pas à redescendre au sud vers Réverie Town avant d’y retourner.', 'droite')
+      UI:ResetSpeaker()
+      GROUND:MoveToPosition(lyra, 400, 260, false, 1)
+      tourner_anime(lyra, Direction.Up, 4)
+    elseif partenaire ~= nil then
+      tourner_vers_cible(partenaire, hero, 4)
+      cinematique.Dire(partenaire, 'Worried', 'Mieux valait battre en retraite à temps… Reprenons des forces avant de retourner dans la Grotte Verdoyante.', 'standard')
+      UI:ResetSpeaker()
+    end
+    GAME:MoveCamera(0, 0, 20, true)
+    if hero ~= nil then hero.CollisionDisabled = false end
+    if lyra ~= nil then lyra.CollisionDisabled = false end
+    if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+    GAME:CutsceneMode(false)
+    return
+  end
+
+  -- K.O. dans le donjon : le duo gît au bord du bassin devant la cascade ouverte (aucun portrait éveillé avant Wake).
+  if hero ~= nil then
+    GROUND:CharSetAnim(hero, 'Laying', true)
+  end
+  if partenaire ~= nil then
+    GROUND:CharSetAnim(partenaire, 'Laying', true)
+  end
+
+  GAME:MoveCamera(376, 228, 1, false)
+  GAME:FadeIn(30)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  GAME:WaitFrames(25)
+
+  if lyra ~= nil then
+    cinematique.Emote(lyra, 'exclaim', 'EVT_Emote_Exclaim')
+    tourner_vers_cible(lyra, hero or partenaire, 4)
+    GAME:WaitFrames(25)
+
+    -- Course verticale pure le long de x = 400 (32 px d'écart net avec le héros en Laying à x = 368).
+    GROUND:MoveToPosition(lyra, 400, 248, false, 2)
+    tourner_anime(lyra, Direction.Left, 4)
+    GAME:WaitFrames(10)
+
+    if segment == 1 then
+      cinematique.Dire(lyra, 'Worried', 'Non !! Vous avez été projetés jusqu’à l’entrée… Ce rugissement au fond des vasques, c’était terrible ! Réveillez-vous, je vous en prie !', 'droite')
+    else
+      cinematique.Dire(lyra, 'Worried', 'Oh non !! Vous voilà revenus à bout de forces devant la cascade… Hé ! Est-ce que vous m’entendez ?!', 'droite')
+    end
+    UI:ResetSpeaker()
+    GAME:WaitFrames(15)
+  end
+
+  -- Le duo reprend connaissance et se relève en léger décalage (5-6 frames).
+  SOUND:PlayBattleSE('EVT_Emote_Sweating')
+  if partenaire ~= nil then
+    cinematique.Emote(partenaire, 'sweating', false)
+  end
+  if hero ~= nil then
+    GAME:WaitFrames(5)
+    cinematique.Emote(hero, 'sweating', false)
+  end
+  GAME:WaitFrames(30)
+
+  if partenaire ~= nil then
+    GROUND:CharSetAnim(partenaire, 'Wake', false)
+  end
+  if hero ~= nil then
+    if partenaire ~= nil then GAME:WaitFrames(6) end
+    GROUND:CharSetAnim(hero, 'Wake', false)
+  end
+  GAME:WaitFrames(36)
+  if partenaire ~= nil then
+    GROUND:CharEndAnim(partenaire)
+    GROUND:EntTurn(partenaire, Direction.Down)
+  end
+  if hero ~= nil then
+    GROUND:CharEndAnim(hero)
+    GROUND:EntTurn(hero, Direction.Down)
+  end
+  GAME:WaitFrames(15)
+
+  if lyra ~= nil then
+    if partenaire ~= nil then
+      tourner_vers_cible(partenaire, lyra, 4)
+    end
+    if hero ~= nil then
+      if partenaire ~= nil then GAME:WaitFrames(5) end
+      tourner_vers_cible(hero, lyra, 4)
+    end
+    GAME:WaitFrames(10)
+
+    if partenaire ~= nil then
+      if segment == 1 then
+        cinematique.Dire(partenaire, 'Pain', 'Aïe… ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' est d’une force redoutable… Pardon, Lyra, on a dû céder si près de ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
+      else
+        cinematique.Dire(partenaire, 'Pain', 'Aïe… la grotte est plus rude qu’elle n’en a l’air… Désolé, Lyra, on s’est fait mettre K.O. avant d’atteindre ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
+      end
+      cinematique.Respirer(15)
+    end
+
+    cinematique.Dire(lyra, 'Worried', 'Ne vous excusez surtout pas ! Voir que vous êtes sains et saufs me soulage déjà tellement…', 'droite')
+    cinematique.Respirer(15)
+    cinematique.Dire(lyra, 'Determined', 'Reprenez votre souffle ici. Si vos réserves sont épuisées, redescendez au sud vers Réverie Town pour vous préparer avant de repartir chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+
+    if partenaire ~= nil then
+      cinematique.Respirer(15)
+      se_regarder(hero, partenaire, 4)
+      GAME:WaitFrames(10)
+      tourner_vers_cible(partenaire, lyra, 4)
+      if hero ~= nil then
+        GAME:WaitFrames(5)
+        tourner_vers_cible(hero, lyra, 4)
+      end
+      cinematique.Dire(partenaire, 'Determined', 'Merci, Lyra ! Pas question d’abandonner maintenant : dès qu’on sera prêts, on retournera jusqu’au fond de la Grotte Verdoyante !', 'standard')
+    end
+    UI:ResetSpeaker()
+    GAME:WaitFrames(10)
+
+    -- Lyra reprend son poste de garde devant la cascade ouverte (400, 260, Direction.Up).
+    GROUND:MoveToPosition(lyra, 400, 260, false, 1)
+    tourner_anime(lyra, Direction.Up, 4)
+  else
+    se_regarder(hero, partenaire, 4)
+    GAME:WaitFrames(10)
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Pain', 'Ouf… ma tête… On a fini K.O. dans la Grotte Verdoyante, mais on a réussi à ressortir jusqu’à la cascade.', 'standard')
+      cinematique.Respirer(15)
+      cinematique.Dire(partenaire, 'Determined', 'Vérifions notre sac avant d’y retourner, ou rentrons au sud vers Réverie Town faire le plein de provisions !', 'standard')
+      UI:ResetSpeaker()
+    end
+  end
+
+  GAME:MoveCamera(0, 0, 20, true)
+  if hero ~= nil then hero.CollisionDisabled = false end
+  if lyra ~= nil then lyra.CollisionDisabled = false end
+  if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+  GAME:CutsceneMode(false)
+end
+
 function ewc3.Init(map)
   sortie_en_cours = false
   SV.Destiny = SV.Destiny or {}
@@ -277,6 +476,12 @@ function ewc3.Enter(map)
   synchroniser_cascade(map)
   if not SV.Destiny.GrotteVerdoyanteOuverte then
     cinematique_ouverture(map)
+    return
+  end
+  if SV.Destiny.GrotteVerdoyanteRetourEchec ~= nil then
+    local retour = SV.Destiny.GrotteVerdoyanteRetourEchec
+    SV.Destiny.GrotteVerdoyanteRetourEchec = nil
+    cinematique_retour_echec(map, retour)
     return
   end
   local hero = CH('PLAYER')
@@ -307,7 +512,13 @@ function ewc3.Update(map, time) end
 function ewc3.Luxray_Ewc3_Action(personnage, activator)
   if personnage == nil then return end
   pcall(function() GROUND:CharTurnToCharAnimated(personnage, activator or CH('PLAYER'), 4) end)
-  cinematique.Dire(personnage, 'Determined', 'Le passage est grand ouvert. Entrons vite chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+  if SV.Destiny and SV.Destiny.GrotteVerdoyanteDernierKO then
+    cinematique.Dire(personnage, 'Worried', 'Ne forcez pas si vous êtes encore sonnés ! Le sentier au sud ramène à Réverie Town pour refaire le plein de provisions.', 'droite')
+    cinematique.Respirer(15)
+    cinematique.Dire(personnage, 'Determined', 'Dès que vous vous sentirez d’attaque, le passage derrière la cascade vous attend pour sauver ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+  else
+    cinematique.Dire(personnage, 'Determined', 'Le passage est grand ouvert. Entrons vite chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+  end
   UI:ResetSpeaker()
   if GROUND.CharAnimateTurnTo ~= nil then
     pcall(function() GROUND:CharAnimateTurnTo(personnage, Direction.Up, 4) end)
@@ -326,6 +537,7 @@ function ewc3.SeuilDonjon_Touch(obj, activator)
   sortie_en_cours = true
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.ExplorationReverie = true
+  SV.Destiny.GrotteVerdoyanteDernierKO = nil
   SOUND:FadeOutBGM(20)
   GAME:FadeOut(false, 20)
   GAME:EnterDungeon('grotte_verdoyante', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)

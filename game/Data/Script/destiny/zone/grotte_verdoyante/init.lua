@@ -32,6 +32,14 @@ local function retour_reverie_flags()
   SV.Destiny.RetourBatimentY = 1600
 end
 
+local function cause_echec_grotte(result)
+  local R = RogueEssence.Data.GameProgress.ResultType
+  if result == R.Downed or result == R.Failed or (R.TimedOut ~= nil and result == R.TimedOut) then
+    return 'ko'
+  end
+  return 'repli'
+end
+
 function grotte_verdoyante.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro()
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
@@ -45,11 +53,24 @@ function grotte_verdoyante.ExitSegment(zone, result, rescue, segmentID, mapID)
     if segmentID == 1 then
       SV.Destiny.GrotteVerdoyantePhase = 1
     end
-    retour_reverie_flags()
+    if SV.Destiny.AlerteShinx ~= 'a_secourir' then
+      missions_reverie.Completer('grotte_verdoyante', false)
+    end
+    local cause = cause_echec_grotte(result)
+    SV.Destiny.GrotteVerdoyanteOuverte = true
+    SV.Destiny.GrotteVerdoyanteRetourEchec = {
+      cause = cause,
+      segment = segmentID,
+    }
+    if cause == 'ko' then
+      SV.Destiny.GrotteVerdoyanteNbKO = (SV.Destiny.GrotteVerdoyanteNbKO or 0) + 1
+      SV.Destiny.GrotteVerdoyanteDernierKO = true
+    end
     if SV.Destiny.AlerteShinx == 'a_secourir' then
       SV.Destiny.LuxrayAttente = 'sortie'
     end
-    COMMON.EndDungeonDay(result, 'town02_waterfallvillage', -1, 0, 0)
+    -- Respawn directement devant l'entrée de la Grotte Verdoyante (GroundMap 0 = ewc3_entree_waterfall_cave).
+    COMMON.EndDungeonDay(result, 'grotte_verdoyante', -1, 0, 0)
     return
   end
 
