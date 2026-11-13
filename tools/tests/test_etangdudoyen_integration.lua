@@ -25,8 +25,8 @@ RogueEssence = {
   Dungeon = {BaseMap = {ScrollEdge = {Clamp = 'Clamp'}}},
 }
 
-local player = {EntName = 'PLAYER', Position = {X = 232, Y = 336}, Direction = Direction.Up}
-local mate = {EntName = 'Teammate1', Position = {X = 232, Y = 360}, Direction = Direction.Up}
+local player = {EntName = 'PLAYER', Position = {X = 376, Y = 536}, Direction = Direction.Up}
+local mate = {EntName = 'Teammate1', Position = {X = 376, Y = 560}, Direction = Direction.Up}
 local doyen = nil
 function CH(id)
   if id == 'PLAYER' then return player
@@ -57,10 +57,10 @@ SOUND = {
 local root = (arg[1] or '.')
 local meteo = require 'destiny.meteo_reverie'
 local function new_pond_map(name)
-  local anim = {MapLoc = {X = 172, Y = 174}, ObjectAnim = {AnimIndex = 'Etang_Nage_Ondes_Jour'}}
+  local anim = {MapLoc = {X = 240, Y = 276}, ObjectAnim = {AnimIndex = 'Etang_Nage_Ondes_Jour'}}
   local deco = {Name = 'Nage_Grand_Doyen', Visible = true, Anims = {anim}}
   local m = {
-    AssetName = name, Width = 60, Height = 45,
+    AssetName = name, Width = 96, Height = 72,
     Decorations = {deco},
   }
   function m:GetObstacle() return 0 end
@@ -86,27 +86,27 @@ local m_jour, deco_jour, anim_jour = new_pond_map('etangdudoyen_jour')
 doyen = {EntName = 'Grand_Doyen', Position = {X = 0, Y = 0}, Direction = Direction.Down, HideShadow = false}
 local mod_jour = assert(loadfile(root .. '/game/Data/Script/destiny/ground/etangdudoyen_jour/init.lua'))()
 mod_jour.Init(m_jour)
-mod_jour.PreparerNage(m_jour, doyen, 180, 170, Direction.UpRight)
-assert(doyen.Position.X == 180 and doyen.Position.Y == 170 and doyen.Direction == Direction.UpRight)
+mod_jour.PreparerNage(m_jour, doyen, 248, 272, Direction.UpRight)
+assert(doyen.Position.X == 248 and doyen.Position.Y == 272 and doyen.Direction == Direction.UpRight)
 assert(doyen.HideShadow == true)
 assert(deco_jour.Visible == true)
-assert(anim_jour.MapLoc.X == 172 and anim_jour.MapLoc.Y == 174)
+assert(anim_jour.MapLoc.X == 240 and anim_jour.MapLoc.Y == 276)
 mod_jour.Enter(m_jour)
 assert(calls.bgm[#calls.bgm] == 'Luminous Spring.ogg')
 
 SV = {Destiny = {MomentScenario = 'nuit'}}
 calls.ground = {}
-player.Position = {X = 232, Y = 290}; player.Direction = Direction.Up
+player.Position = {X = 376, Y = 460}; player.Direction = Direction.Up
 mod_jour.Update(m_jour, 0)
 assert(#calls.ground == 1 and calls.ground[1][1] == 'reverie' and calls.ground[1][2] == 'etangdudoyen_nuit')
 local pa = SV.Destiny.PassageAmbianceEtangDoyen
-assert(pa and pa.carte == 'etangdudoyen_nuit' and pa.x == 232 and pa.y == 290)
+assert(pa and pa.carte == 'etangdudoyen_nuit' and pa.x == 376 and pa.y == 460)
 
 package.loaded['destiny.etangdudoyen_scene'] = nil
 local m_nuit, deco_nuit, _ = new_pond_map('etangdudoyen_nuit')
 local mod_nuit = assert(loadfile(root .. '/game/Data/Script/destiny/ground/etangdudoyen_nuit/init.lua'))()
 mod_nuit.Init(m_nuit)
 mod_nuit.Enter(m_nuit)
-assert(player.Position.X == 232 and player.Position.Y == 290 and SV.Destiny.PassageAmbianceEtangDoyen == nil)
+assert(player.Position.X == 376 and player.Position.Y == 460 and SV.Destiny.PassageAmbianceEtangDoyen == nil)
 assert(deco_nuit.Visible == true and doyen.HideShadow == true)
 print('PASS etangdudoyen 4 ambiances + swim prep + HideShadow + AnimLayer alignment')
