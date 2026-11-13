@@ -60,12 +60,12 @@ def main() -> None:
         assert doc['Music'] == 'Luminous Spring.ogg'
         assert doc.get('BlankBG') is not None
         assert len(doc.get('rand', {}).get('s', [])) == 4
-        assert len(doc['obstacles']) == 60 and len(doc['obstacles'][0]) == 45
+        assert len(doc['obstacles']) == 96 and len(doc['obstacles'][0]) == 72
 
         markers = {m['EntName']: m for m in doc['Entities'][0]['Markers']}
-        assert 'entrance' in markers and 'grand_doyen' in markers
+        assert 'entrance' in markers and 'centre_pierre' in markers and 'grand_doyen' in markers
         gd = markers['grand_doyen']
-        assert gd['Collider']['X'] == 180 and gd['Collider']['Y'] == 170 and gd['Direction'] == 6
+        assert gd['Collider']['X'] == 248 and gd['Collider']['Y'] == 272 and gd['Direction'] == 6
 
         decos = {d['Name']: d for d in doc['Decorations']}
         assert 'Nage_Grand_Doyen' in decos
@@ -73,7 +73,7 @@ def main() -> None:
         assert deco['Visible'] is False and deco['Layer'] == 0
         assert len(deco['Anims']) == 1
         anim = deco['Anims'][0]
-        assert anim['MapLoc']['X'] == 172 and anim['MapLoc']['Y'] == 174
+        assert anim['MapLoc']['X'] == 240 and anim['MapLoc']['Y'] == 276
         oa = anim['ObjectAnim']
         assert oa['AnimIndex'] == f'Etang_Nage_Ondes_{suffix}' and oa['FrameTime'] == 10 and oa['AnimDir'] >= 0
 
@@ -85,7 +85,7 @@ def main() -> None:
         tile_p = ROOT / 'game/Content/Tile' / f'Destiny_Etang_Doyen_{suffix}.tile'
         assert tile_p.is_file()
         tiles = _decode_tiles(tile_p)
-        assert len(tiles) == 4229
+        assert len(tiles) == 3609
 
         for layer in doc['Layers']:
             for col in layer['Tiles']:
@@ -94,18 +94,24 @@ def main() -> None:
                         if tl.get('Frames'):
                             assert isinstance(tl.get('FrameLength'), int) and tl['FrameLength'] > 0
                             assert (len(tl['Frames']), tl['FrameLength']) in {(1, 1), (3, 10), (4, 10), (8, 5)}, tl
+                            for fr in tl['Frames']:
+                                if fr['Sheet']:
+                                    assert fr['Sheet'] == f'Destiny_Etang_Doyen_{suffix}'
+                                    assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in tiles
 
         if amb == 'jour':
             obs = [[c['Tags'] for c in col] for col in doc['obstacles']]
             def free16(px: int, py: int) -> bool:
-                return 0 <= px and 0 <= py and px + 16 <= 480 and py + 16 <= 360 and all(
+                return 0 <= px and 0 <= py and px + 16 <= 768 and py + 16 <= 576 and all(
                     obs[tx][ty] == 0
                     for tx in range(px // 8, (px + 15) // 8 + 1)
                     for ty in range(py // 8, (py + 15) // 8 + 1)
                 )
-            assert not free16(180, 170), 'grand_doyen (180,170) doit être placé sur l eau'
+            assert not free16(248, 272), 'grand_doyen (248,272) doit être placé sur l eau'
             ent_x, ent_y = markers['entrance']['Collider']['X'], markers['entrance']['Collider']['Y']
+            plat_x, plat_y = markers['centre_pierre']['Collider']['X'], markers['centre_pierre']['Collider']['Y']
             assert free16(ent_x, ent_y)
+            assert free16(plat_x, plat_y)
             q = deque([(ent_x, ent_y)])
             seen = {(ent_x, ent_y)}
             while q:
@@ -114,29 +120,28 @@ def main() -> None:
                     if (nx, ny) not in seen and free16(nx, ny):
                         seen.add((nx, ny))
                         q.append((nx, ny))
-            assert any(y >= 340 for _, y in seen)
-            assert any(224 <= x <= 256 and 236 <= y <= 264 for x, y in seen)
+            assert any(y >= 544 for _, y in seen)
+            assert (plat_x, plat_y) in seen
 
-            comp = Image.new('RGBA', (480, 360), (0, 0, 0, 255))
+            comp = Image.new('RGBA', (768, 576), (0, 0, 0, 255))
             for layer in doc['Layers']:
-                for tx in range(60):
-                    for ty in range(45):
+                for tx in range(96):
+                    for ty in range(72):
                         for tl in layer['Tiles'][tx][ty].get('Layers', []):
                             fr = tl['Frames'][0]
-                            img = tiles[(fr['TexLoc']['X'], fr['TexLoc']['Y'])]
-                            comp.alpha_composite(img, (tx * 8, ty * 8))
+                            if fr['Sheet']:
+                                img = tiles[(fr['TexLoc']['X'], fr['TexLoc']['Y'])]
+                                comp.alpha_composite(img, (tx * 8, ty * 8))
             px = comp.load()
-            for x in range(216, 264):
-                for y in range(304, 356):
+            for x in range(358, 410):
+                for y in range(472, 576):
                     r, g, b, _ = px[x, y]
                     assert not (abs(r - g) <= 10 and abs(g - b) <= 10 and r < 180), f'Gravier gris détecté à ({x},{y})={(r,g,b)}'
-            brown_pts = 0
-            for x in range(348, 362):
-                for y in range(202, 214):
+                    assert not (g > r + 10 and g > b + 40), f'Herbe résiduelle dans le chemin sud à ({x},{y})={(r,g,b)}'
+            for y in range(576):
+                for x in range(768):
                     r, g, b, _ = px[x, y]
-                    if r > b + 20 and g < 150:
-                        brown_pts += 1
-            assert brown_pts == 0, f'Pointe marron résiduelle à droite: {brown_pts} px'
+                    assert not (r > g * 1.45 and b > g * 1.32 and r > 135 and b > 125), f'Magenta détecté à ({x},{y})'
 
     run(ROOT / 'tools/tests/test_etangdudoyen_integration.lua', ROOT)
     print('PASS test_etangdudoyen_integration (4 ambiances + swim prep + pixel checks + Lua)')

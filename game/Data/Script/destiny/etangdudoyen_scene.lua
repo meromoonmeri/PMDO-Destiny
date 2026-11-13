@@ -28,7 +28,7 @@ end
 local function case_libre(map, x, y)
   if x < 0 or y < 0 then return false end
   if map == nil or map.Width == nil or map.Height == nil or map.GetObstacle == nil then
-    return x <= 464 and y <= 344
+    return x <= 752 and y <= 560
   end
   if x + 16 > map.Width * 8 or y + 16 > map.Height * 8 then return false end
   for cx = math.floor(x / 8), math.floor((x + 15) / 8) do
@@ -48,7 +48,8 @@ function scene.PositionPartenaire(map, hx, hy)
     local px, py = hx + d[1], hy + d[2]
     if case_libre(map, px, py) then return px, py end
   end
-  return hx, math.min(hy + 20, 336)
+  local max_y = (map ~= nil and map.Height ~= nil) and (map.Height * 8 - 24) or 552
+  return hx, math.min(hy + 20, max_y)
 end
 
 function scene.TrouverDoyen()
@@ -86,8 +87,8 @@ function scene.PreparerNage(map, personnage, x, y, dir)
     pcall(function() GROUND:EntTurn(personnage, dir) end)
   end
   pcall(function() personnage.HideShadow = true end)
-  local px = personnage.Position ~= nil and personnage.Position.X or (x or 180)
-  local py = personnage.Position ~= nil and personnage.Position.Y or (y or 170)
+  local px = personnage.Position ~= nil and personnage.Position.X or (x or 248)
+  local py = personnage.Position ~= nil and personnage.Position.Y or (y or 272)
   scene.AppliquerOndes(map, true, px, py)
   return personnage
 end
