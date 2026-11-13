@@ -137,7 +137,10 @@ local function jouer_enrolement(map, hero)
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
   GAME:WaitFrames(20)
   cinematique.Dire(chatot, 'Surprised', 'Oh ! Mais vous voilà enfin sur la falaise ! La nouvelle a déjà traversé tout Réverie Town !', 'standard')
-  cinematique.Dire(sunflora, 'Happy', 'Douce mère nature ! C’est bien la jeune équipe qui a sauvé le petit Nilo jusque dans la Grotte Verdoyante !', 'gauche')
+  -- Sunflora est à gauche du comité : le placement « standard » est déjà le
+  -- portrait de gauche, tourné vers le centre. « gauche » n'existe pas dans
+  -- cinematique.PORTRAITS et retombait silencieusement sur « standard ».
+  cinematique.Dire(sunflora, 'Happy', 'Douce mère nature ! C’est bien la jeune équipe qui a sauvé le petit Nilo jusque dans la Grotte Verdoyante !', 'standard')
   cinematique.Dire(loudred, 'Angry', 'MOUAIS ! Tenir tête à un Carchacrok, c’est pas mal pour des recrues… MAIS ICI ON FILE DROIT !', 'droite')
   cinematique.Dire(chatot, 'Normal', 'Un peu de tenue, Ramboum ! Maître Grodoudou a tenu à vous accueillir en personne.', 'standard')
 

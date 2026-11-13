@@ -1475,8 +1475,12 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   GAME:FadeIn(20)
   cinematique.Dire(lyra, 'Happy', 'Vous avez ramené Nilo sain et sauf… Merci du fond du cœur !', 'standard')
   if nilo ~= nil then
-    pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
+    -- Ordre du guide : le saut se termine avant l'émote (seul Shock
+    -- accompagne un saut de surprise). Hop dure 24 ticks ; l'émote de joie
+    -- arrive ensuite, pendant que Nilo reprend la parole.
     pcall(function() GROUND:CharSetAnim(nilo, 'Hop', false) end)
+    GAME:WaitFrames(24)
+    pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
   end
   cinematique.Dire(nilo, 'Joyous', 'Ouais ! Vous êtes incroyables ! Quand je serai grand, j’explorerai les donjons comme vous !', 'droite')
   if nilo ~= nil then pcall(function() GROUND:CharEndAnim(nilo) end) end

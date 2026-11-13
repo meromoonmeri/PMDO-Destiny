@@ -445,7 +445,11 @@ end
 function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
   local joueur = activator or CH('PLAYER')
   tourner_vers(personnage, joueur)
-  pcall(function() GROUND:CharSetEmote(personnage, 'music', 1) end)
+  -- « music » n'existe pas dans base/Data/Emote : GetEmote renvoie alors nil,
+  -- CharSetEmote lève une erreur avalée par le pcall et aucune émote ne
+  -- s'affiche. Les dix émotes disponibles sont angry, exclaim, glowing,
+  -- happy, notice, question, shock, sweatdrop et sweating.
+  pcall(function() GROUND:CharSetEmote(personnage, 'happy', 1) end)
   dire(personnage, 'Happy', 'Je mime le verseur parfait : pas une goutte imaginaire ne tombe à côté.')
   local kirlia = CH('Kirlia')
   if kirlia ~= nil then

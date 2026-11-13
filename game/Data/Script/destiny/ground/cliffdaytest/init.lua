@@ -237,9 +237,11 @@ local function gag_depart_sonata(hero, partner, sonata, victoire)
     GROUND:CharSetEmote(sonata, 'shock', 1)
   end)
   local sueur_duo = TASK:BranchCoroutine(function()
-    -- Une seule goutte sonore pour les deux réactions, déclenchées dans
-    -- la même frame au début des sautillements.
-    SOUND:PlayBattleSE('EVT_Emote_Sweatdrop')
+    -- Les deux réactions de gêne démarrent dans la même frame, sans son :
+    -- un seul SFX peut jouer à la fois, et celui du choc de Sonata
+    -- (EVT_Emote_Startled, 5 frames plus tôt) est l'émote la plus forte.
+    -- Les émotes sans son sont conformes au guide (Happy/Glowing/Notice et
+    -- les réactions multiples).
     GROUND:CharSetEmote(hero, 'sweatdrop', 1)
     GROUND:CharSetEmote(partner, 'sweatdrop', 1)
   end)
