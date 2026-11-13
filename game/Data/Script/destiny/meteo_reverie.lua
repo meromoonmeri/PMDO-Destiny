@@ -192,6 +192,26 @@ function meteo.SynchroniserZone()
   end
 end
 
+-- En mode Dev (panneau Travel -> Enter Ground ou Test Map dans l'éditeur),
+-- lorsqu'aucun MomentScenario forcé n'est défini, laisser la variante
+-- d'ambiance ouverte directement au lieu de rediriger automatiquement vers _jour.
+function meteo.AccesDirectDevSansScenario()
+  if _ZONE ~= nil then
+    local ok_z, in_dev = pcall(function() return _ZONE.InDevZone == true end)
+    if ok_z and in_dev then return true end
+  end
+  if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.MomentScenario ~= nil then
+    return false
+  end
+  local ok_d, dev = pcall(function()
+    return RogueEssence ~= nil
+      and RogueEssence.DiagManager ~= nil
+      and RogueEssence.DiagManager.Instance ~= nil
+      and RogueEssence.DiagManager.Instance.DevMode == true
+  end)
+  return ok_d and dev == true
+end
+
 -- Ne touche ni aux intérieurs, ni aux donjons, ni aux cartes de cinématique
 -- fixes. Les autres effets de carte, notamment clouds_overhead, sont préservés.
 -- Les 4 ambiances (jour, aube, crépuscule, nuit) remplacent le voile plat

@@ -965,8 +965,8 @@ function ville.Visite(map)
   GROUND:TeleportTo(hero, ENTREE_X - 8, ENTREE_Y, Direction.Up)
   GROUND:TeleportTo(partenaire, ENTREE_X + 12, ENTREE_Y - 20, Direction.Up)
   GAME:MoveCamera(ENTREE_X, ENTREE_Y - 30, 1, false)
-  SOUND:PlayBGM('Treasure Town.ogg', true)
   GAME:FadeIn(45)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
   GAME:WaitFrames(20) -- laisser apparaître la place avant le premier échange
 
   se_faire_face_ville(partenaire, hero)
@@ -1471,25 +1471,32 @@ local function jouer_celebration_nilo(map, hero, partenaire)
     GROUND:TeleportTo(nilo, 824, 1244, Direction.Down)
   end
   GAME:MoveCamera(0, 0, 1, true)
+  GAME:FadeIn(30)
   SOUND:PlayBGM('Treasure Town.ogg', true)
-  GAME:FadeIn(20)
+  GAME:WaitFrames(20)
+  if lyra ~= nil and hero ~= nil then tourner_vers(lyra, hero) end
   cinematique.Dire(lyra, 'Happy', 'Vous avez ramené Nilo sain et sauf… Merci du fond du cœur !', 'standard')
   if nilo ~= nil then
-    pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
+    if hero ~= nil then tourner_vers(nilo, hero) end
     pcall(function() GROUND:CharSetAnim(nilo, 'Hop', false) end)
+    GAME:WaitFrames(20)
+    pcall(function() GROUND:CharEndAnim(nilo) end)
+    pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
+    GAME:WaitFrames(25)
   end
   cinematique.Dire(nilo, 'Joyous', 'Ouais ! Vous êtes incroyables ! Quand je serai grand, j’explorerai les donjons comme vous !', 'droite')
-  if nilo ~= nil then pcall(function() GROUND:CharEndAnim(nilo) end) end
+  GAME:WaitFrames(15)
   cinematique.Dire(lyra, 'Happy', 'Acceptez ceci de la part de toute notre famille. Et… si vous montez tout au nord vers la grande falaise, on dit que la Guilde s’intéresse aux jeunes équipes courageuses comme la vôtre !', 'standard')
   UI:ResetSpeaker()
   if hero ~= nil then
     COMMON.GiftItem(hero, RogueEssence.Dungeon.InvItem('gummi_royal'))
   end
   SV.Destiny.CelebrationNilo = 'termine'
-  GAME:FadeOut(false, 12)
+  GAME:FadeOut(false, 30)
+  GAME:WaitFrames(30)
   GROUND:RemoveCharacter('Lyra_Celebration')
   GROUND:RemoveCharacter('Nilo_Celebration')
-  GAME:FadeIn(12)
+  GAME:FadeIn(30)
   retour_au_joueur(hero, partenaire)
   return true
 end
@@ -2352,13 +2359,15 @@ function ville.Luxray_Alerte_Action(personnage, activator)
   GAME:CutsceneMode(true)
   AI:DisableCharacterAI(partenaire)
   hero.CollisionDisabled = true
-  GAME:FadeOut(false, 20)
+  GAME:FadeOut(false, 30)
+  GAME:WaitFrames(30)
   GROUND:TeleportTo(personnage, 1504, 1584, Direction.Right)
   GROUND:TeleportTo(partenaire, 1528, 1592, Direction.Right)
   GROUND:TeleportTo(hero, 1552, 1592, Direction.Right)
   SV.Destiny.LuxrayAttente = 'sortie'
   GAME:MoveCamera(1440, 1592, 1, false)
-  GAME:FadeIn(20)
+  GAME:FadeIn(30)
+  GAME:WaitFrames(20)
   cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Grotte Verdoyante.', 'standard')
   -- Une destination existante peut changer de scène sans reprise de coroutine.
   UI:ResetSpeaker()

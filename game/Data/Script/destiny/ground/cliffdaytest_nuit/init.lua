@@ -336,14 +336,20 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
     GAME:MoveCamera(entree.Position.X - 40, entree.Position.Y, 1, false)
     GAME:FadeIn(30)
     GAME:WaitFrames(25)
+    if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+      SOUND:PlayBattleSE('EVT_Emote_Sweating')
+    end
     GROUND:CharSetEmote(partenaire, 'sweating', 1)
+    GAME:WaitFrames(30)
+    GROUND:CharSetAnim(partenaire, 'Wake', false)
+    GAME:WaitFrames(35)
+    -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle
+    -- avant d'afficher son portrait éveillé.
+    GROUND:CharEndAnim(partenaire)
+    cinematique.Respirer(15)
     cinematique.Dire(partenaire, 'Worried', 'Aïe… ma tête… Je suis revenu devant l’entrée des [color=#69D98C]Bois Perdus[color]…', 'standard')
     cinematique.Dire(partenaire, 'Worried', 'J’ai perdu connaissance dans la forêt. Il faut que je reprenne des forces.', 'standard')
     cinematique.Respirer(20)
-    GROUND:CharSetAnim(partenaire, 'Wake', false)
-    GAME:WaitFrames(35)
-    -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle.
-    GROUND:CharEndAnim(partenaire)
   end
   cinematique.Dire(partenaire, 'Normal', 'Je peux me reposer ici, puis essayer encore quand je serai prêt.', 'standard')
   -- Il regarde dans la direction qu’il nomme : l’entrée, à l’est.

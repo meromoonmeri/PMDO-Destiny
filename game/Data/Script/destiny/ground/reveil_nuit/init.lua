@@ -327,10 +327,11 @@ local function partenaire_geste(partenaire, geste, respirer)
       GAME:WaitFrames(20)
     end
   elseif geste == 'joie' then
-    GROUND:CharSetEmote(partenaire, 'happy', 1)
     if not jouer_animation(partenaire, 'Hop', 24) then
       GAME:WaitFrames(18)
     end
+    GROUND:CharSetEmote(partenaire, 'happy', 1)
+    GAME:WaitFrames(30)
   end
 end
 

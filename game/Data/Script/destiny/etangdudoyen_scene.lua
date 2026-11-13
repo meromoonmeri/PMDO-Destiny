@@ -121,6 +121,10 @@ function scene.InitCarte(map, amb, state)
 end
 
 function scene.SynchroniserAmbiance(carte, state, avec_fondu)
+  if not avec_fondu and meteo_reverie.AccesDirectDevSansScenario ~= nil
+      and meteo_reverie.AccesDirectDevSansScenario() then
+    return false
+  end
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CarteEtangDoyen()
   if attendu == carte then return false end
@@ -162,8 +166,8 @@ function scene.EnterCarte(map, carte, state)
   if scene.SynchroniserAmbiance(carte, state, false) then return end
   scene.RestaurerPassage(map, carte)
   scene.SynchroniserNageDoyen(map)
-  SOUND:PlayBGM('Luminous Spring.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Luminous Spring.ogg', true)
 end
 
 function scene.GameLoadCarte(map, amb, carte, state)
@@ -171,8 +175,8 @@ function scene.GameLoadCarte(map, amb, carte, state)
   if scene.SynchroniserAmbiance(carte, state, false) then return end
   scene.RestaurerPassage(map, carte)
   scene.SynchroniserNageDoyen(map)
-  SOUND:PlayBGM('Luminous Spring.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Luminous Spring.ogg', true)
 end
 
 function scene.UpdateCarte(carte, state)

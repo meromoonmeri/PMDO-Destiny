@@ -68,6 +68,10 @@ function scene.InitCarte(map, amb, state)
 end
 
 function scene.SynchroniserAmbiance(carte, state, avec_fondu)
+  if not avec_fondu and meteo_reverie.AccesDirectDevSansScenario ~= nil
+      and meteo_reverie.AccesDirectDevSansScenario() then
+    return false
+  end
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CartePlageSablefin()
   if attendu == carte then return false end
@@ -110,8 +114,8 @@ function scene.EnterCarte(map, amb, carte, state)
   if scene.SynchroniserAmbiance(carte, state, false) then return end
   scene.RestaurerPassage(map, carte)
   demarrer_mer()
-  SOUND:PlayBGM(MUSIQUES[amb] or 'Surrounded Sea.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM(MUSIQUES[amb] or 'Surrounded Sea.ogg', true)
 end
 
 function scene.GameLoadCarte(map, amb, carte, state)
@@ -119,8 +123,8 @@ function scene.GameLoadCarte(map, amb, carte, state)
   if scene.SynchroniserAmbiance(carte, state, false) then return end
   scene.RestaurerPassage(map, carte)
   demarrer_mer()
-  SOUND:PlayBGM(MUSIQUES[amb] or 'Surrounded Sea.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM(MUSIQUES[amb] or 'Surrounded Sea.ogg', true)
 end
 
 function scene.ExitCarte()

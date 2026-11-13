@@ -49,15 +49,15 @@ end
 function passage_aquatique_fond.Enter(map)
   sortie_en_cours = false
   demarrer_mer()
-  SOUND:PlayBGM('On the Beach at Dusk.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('On the Beach at Dusk.ogg', true)
 end
 
 function passage_aquatique_fond.GameLoad(map)
   passage_aquatique_fond.Init(map)
   demarrer_mer()
-  SOUND:PlayBGM('On the Beach at Dusk.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('On the Beach at Dusk.ogg', true)
 end
 
 function passage_aquatique_fond.Exit(map)

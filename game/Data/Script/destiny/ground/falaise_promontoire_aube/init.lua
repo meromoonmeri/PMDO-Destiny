@@ -54,6 +54,10 @@ local function installer_retour_reverie(map)
 end
 
 local function synchroniser_ambiance(avec_fondu)
+  if not avec_fondu and meteo_reverie.AccesDirectDevSansScenario ~= nil
+      and meteo_reverie.AccesDirectDevSansScenario() then
+    return false
+  end
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   local attendu = meteo_reverie.CartePromontoire()
   if attendu == CARTE then return false end

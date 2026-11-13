@@ -83,8 +83,8 @@ function intro_halo.Scene()
   GAME:FadeIn(60)
   UI:WaitShowVoiceOver("Bienvenue dans le monde des Pokémon !", -1)
 
-  UI:WaitShowVoiceOver("Devant toi s'étend un monde rempli d'aventures\n palpitantes et de mystères à découvrir !", -1)
-  UI:WaitShowVoiceOver("Avant de partir, tu dois prendre\n d'importantes décisions.", -1)
+  UI:WaitShowVoiceOver("Devant toi s'étend un monde rempli d'aventures\npalpitantes et de mystères à découvrir !", -1)
+  UI:WaitShowVoiceOver("Avant de partir, tu dois prendre\nd'importantes décisions.", -1)
 
   UI:WaitShowVoiceOver("Réfléchis bien avant de choisir !", -1)
   UI:WaitShowVoiceOver("À toi de faire tes choix !", -1)

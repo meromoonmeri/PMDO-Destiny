@@ -154,51 +154,63 @@ local function cinematique_ouverture(map)
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 392, 544, Direction.Up)
+    GROUND:TeleportTo(hero, 384, 544, Direction.Up)
   end
   if en_sauvetage then
-    lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 408, 544, Direction.Up)
+    lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 544, Direction.Up)
   end
 
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GAME:MoveCamera(0, 0, 1, true)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
-  GAME:FadeIn(20)
+  GAME:FadeIn(30)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+
+  local function tourner_direction_animee(acteur, dir)
+    if acteur == nil then return end
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(acteur, dir, 4) end)
+    else
+      GROUND:EntTurn(acteur, dir)
+    end
+  end
 
   local taches = {}
   if hero ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
       GROUND:MoveToPosition(hero, 384, 248, false, 2)
-      GROUND:EntTurn(hero, Direction.Up)
+      tourner_direction_animee(hero, Direction.Up)
     end))
   end
   if partenaire ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
       GROUND:MoveToPosition(partenaire, 368, 260, false, 2)
-      GROUND:EntTurn(partenaire, Direction.Up)
+      tourner_direction_animee(partenaire, Direction.Up)
     end))
   end
   if lyra ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(9)
       GROUND:MoveToPosition(lyra, 400, 260, false, 2)
-      GROUND:EntTurn(lyra, Direction.Up)
+      tourner_direction_animee(lyra, Direction.Up)
     end))
   end
   if #taches > 0 then TASK:JoinCoroutines(taches) end
 
   GAME:MoveCamera(384, 200, 25, false)
-  GAME:WaitFrames(15)
+  GAME:WaitFrames(20)
 
   if partenaire ~= nil then
     cinematique.Dire(partenaire, 'Worried', 'Voilà la cascade dont parlait tout le monde… Mais le mur d’eau bouche complètement la falaise !', 'standard')
   end
   if lyra ~= nil then
+    cinematique.Respirer(15)
     cinematique.Dire(lyra, 'Worried', 'Non… ' .. cinematique.NomColore('Nilo', 'shinx') .. ' a dû tomber juste derrière ce rideau d’eau ! Comment passer ?', 'droite')
   end
   UI:ResetSpeaker()
-  GAME:WaitFrames(15)
+  GAME:WaitFrames(20)
 
   -- Tremblement / déclic mystérieux devant la cascade.
   SOUND:PlayBattleSE('EVT_CH05_Waterfall_Gem_Click')
@@ -206,9 +218,15 @@ local function cinematique_ouverture(map)
   SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
   pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 3, 24)) end)
   if partenaire ~= nil then cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim') end
-  if lyra ~= nil then cinematique.Emote(lyra, 'exclaim') end
-  if hero ~= nil then cinematique.Emote(hero, 'exclaim') end
-  GAME:WaitFrames(15)
+  if lyra ~= nil then
+    GAME:WaitFrames(5)
+    cinematique.Emote(lyra, 'exclaim')
+  end
+  if hero ~= nil then
+    GAME:WaitFrames(4)
+    cinematique.Emote(hero, 'exclaim')
+  end
+  GAME:WaitFrames(25)
 
   if partenaire ~= nil then
     cinematique.Dire(partenaire, 'Surprised', 'Hein ?! Regardez l’eau… Elle commence à s’écarter !', 'standard')
@@ -223,9 +241,11 @@ local function cinematique_ouverture(map)
     cinematique.Dire(lyra, 'Surprised', 'Un passage caché s’ouvre derrière la chute ! ' .. cinematique.NomColore('Nilo', 'shinx') .. ' est sûrement là-dedans !', 'droite')
   end
   if partenaire ~= nil then
+    cinematique.Respirer(15)
     cinematique.Dire(partenaire, 'Determined', 'La voie est libre ! En avant dans la Grotte Verdoyante !', 'standard')
   end
   if lyra ~= nil then
+    cinematique.Respirer(15)
     cinematique.Dire(lyra, 'Determined', 'Passez devant, je couvre vos arrières !', 'droite')
   end
   UI:ResetSpeaker()
@@ -262,11 +282,11 @@ function ewc3.Enter(map)
   local hero = CH('PLAYER')
   local partenaire = equipe_scene.Partenaire(368, 544, Direction.Up)
   if hero ~= nil then
-    GROUND:TeleportTo(hero, 392, 544, Direction.Up)
+    GROUND:TeleportTo(hero, 384, 544, Direction.Up)
   end
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GAME:MoveCamera(0, 0, 1, true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   if partenaire ~= nil then
     equipe_scene.Suivre(partenaire, hero)
   end
@@ -277,9 +297,9 @@ function ewc3.GameLoad(map)
   SV.Destiny = SV.Destiny or {}
   installer_declencheurs(map)
   synchroniser_cascade(map)
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GAME:MoveCamera(0, 0, 1, true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 end
 
 function ewc3.Update(map, time) end
@@ -289,7 +309,11 @@ function ewc3.Luxray_Ewc3_Action(personnage, activator)
   pcall(function() GROUND:CharTurnToCharAnimated(personnage, activator or CH('PLAYER'), 4) end)
   cinematique.Dire(personnage, 'Determined', 'Le passage est grand ouvert. Entrons vite chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
   UI:ResetSpeaker()
-  pcall(function() GROUND:EntTurn(personnage, Direction.Up) end)
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(personnage, Direction.Up, 4) end)
+  else
+    pcall(function() GROUND:EntTurn(personnage, Direction.Up) end)
+  end
 end
 
 function ewc3.SeuilDonjon_Touch(obj, activator)

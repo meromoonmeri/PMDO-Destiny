@@ -72,9 +72,14 @@ local function tourner_vers(acteur, cible)
   end
 end
 
-local function dire(acteur, emotion, texte)
+local function dire(acteur, emotion, texte, cote)
   if acteur == nil then return end
   UI:SetSpeaker(acteur)
+  if cote == 'droite' then
+    if UI.SetSpeakerLoc ~= nil then UI:SetSpeakerLoc(264, 131, true) end
+  elseif UI.ResetSpeakerLoc ~= nil then
+    UI:ResetSpeakerLoc()
+  end
   UI:SetSpeakerEmotion(emotion)
   UI:WaitShowDialogue(texte)
 end
@@ -240,7 +245,11 @@ local function premiere_visite(map, hero, partenaire)
   local parcours = {{224,160},{248,168},{248,200},{264,216},{252,232},{272,248}}
   local depart = {x=spinda.Position.X,y=spinda.Position.Y,dir=spinda.Direction}
   if depart.x == 224 and depart.y == 160 and passage_libre(map,spinda,parcours,hero,partenaire) then
+    if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+      SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+    end
     pcall(function() GROUND:CharSetEmote(spinda, 'exclaim', 1) end)
+    GAME:WaitFrames(25)
     for i=2,#parcours do
       if not passage_libre(map,spinda,{parcours[i-1],parcours[i]},hero,partenaire) then break end
       GROUND:MoveToPosition(spinda,parcours[i][1],parcours[i][2],false,1)
@@ -252,14 +261,17 @@ local function premiere_visite(map, hero, partenaire)
   end
   GROUND:CharTurnToCharAnimated(spinda, hero, 4)
   ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
-  GAME:WaitFrames(8)
+  GAME:WaitFrames(15)
   dire(spinda, 'Happy', 'Bienvenue, bienvenue ! Vous tombez bien : il reste juste assez de place pour deux nouvelles histoires !')
   dire(spinda, 'Happy', 'Moi, c’est Spinda ! Entrez donc, même si mes murs ont encore besoin d’un petit coup de neuf !')
   UI:ResetSpeaker()
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Emote_Confused')
+  end
   GROUND:CharSetEmote(partenaire, 'question', 1)
-  GAME:WaitFrames(10)
+  GAME:WaitFrames(25)
   ecouter_cafe(partenaire, spinda, hero, kirlia, pipo)
-  dire(partenaire, 'Normal', 'Oh ! Bonjour… Vous êtes un employé comme les autres ?')
+  dire(partenaire, 'Normal', 'Oh ! Bonjour… Vous êtes un employé comme les autres ?', 'droite')
   GROUND:CharTurnToCharAnimated(kirlia, partenaire, 4)
   ecouter_cafe(kirlia, partenaire, hero, spinda, pipo)
   dire(kirlia, 'Happy', 'Vous ne l’avez pas reconnu ? C’est Spinda, le président de la Fédération des Explorateurs !')
@@ -268,21 +280,25 @@ local function premiere_visite(map, hero, partenaire)
   ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
   dire(spinda, 'Happy', 'Des récits, des rencontres et des boissons ! Enfin… surtout des récits et des rencontres, pour le moment !')
   UI:ResetSpeaker()
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+  end
   GROUND:CharSetEmote(hero, 'exclaim', 1)
-  GAME:WaitFrames(10)
+  GAME:WaitFrames(25)
   GROUND:CharTurnToCharAnimated(partenaire, hero, 4)
   dire(hero, 'Surprised', '(Bah dis donc… quel sacré personnage !)')
   ecouter_cafe(spinda, partenaire, hero, kirlia, pipo)
-  dire(spinda, 'Normal', 'Le café est fermé pour rénovation. En attendant, notre accueil reste ici ; passez nous voir, nous vous renseignerons !')
+  dire(spinda, 'Normal', 'Le café est fermé pour rénovation. En attendant, notre accueil reste ici ; passez nous voir, nous vous renseignerons !', 'droite')
   if SV.Destiny.AlerteShinx == 'a_secourir' then
-    dire(spinda, 'Worried', 'Kirlia m’a parlé de Nilo. Préparez-vous bien avant de rejoindre Lyra ; nous pensons à lui.')
+    dire(spinda, 'Worried', 'Kirlia m’a parlé de Nilo. Préparez-vous bien avant de rejoindre Lyra ; nous pensons à lui.', 'droite')
   elseif SV.Destiny.AlerteShinx == 'termine' then
-    dire(spinda, 'Happy', 'Tout le café se réjouit de savoir le petit Nilo sain et sauf aux côtés de Lyra !')
+    dire(spinda, 'Happy', 'Tout le café se réjouit de savoir le petit Nilo sain et sauf aux côtés de Lyra !', 'droite')
   end
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
   -- Fondu de fin de cinématique : Spinda rejoint son poste derrière l'écran noir.
-  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 20) end
+  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 30) end
+  GAME:WaitFrames(30)
   GROUND:TeleportTo(spinda, depart.x, depart.y, depart.dir)
   if kirlia ~= nil then GROUND:EntTurn(kirlia, Direction.Down) end
   for _, a in ipairs(fond_cafe) do pcall(function() GROUND:CharEndAnim(a) end) end
@@ -290,7 +306,7 @@ local function premiere_visite(map, hero, partenaire)
   SV.Destiny.VisiteCafeSpinda = 'terminee'
   GAME:MoveCamera(0, 0, 1, true)
   equipe_scene.Suivre(partenaire, hero)
-  GAME:FadeIn(20)
+  GAME:FadeIn(30)
   GAME:CutsceneMode(false)
   return true
 end
@@ -513,8 +529,8 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
       if spinda ~= nil then
         tourner_vers(spinda, personnage)
         pas_spinda_etourdi(spinda)
-        dire(spinda, 'Happy', 'Héhé ! Sans Alizé pour me remettre d’aplomb, j’aurais déjà servi deux fois le même jus à l’envers !')
-        tourner_vers(spinda, Direction.Down)
+        dire(spinda, 'Happy', 'Héhé ! Sans Alizé pour me remettre d’aplomb, j’aurais déjà servi deux fois le même jus à l’envers !', 'droite')
+        tourner_dir(spinda, Direction.Down)
       end
       if pipo ~= nil then
         tourner_vers(personnage, pipo)

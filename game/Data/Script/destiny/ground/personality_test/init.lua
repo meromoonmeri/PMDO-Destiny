@@ -876,8 +876,8 @@ function personality_test.Quiz()
   GROUND:Hide('PLAYER')
   UI:ResetSpeaker()
   -- arrivée depuis l'intro halo : le fondu blanc se lève sur le fond Dream
-  SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
   GAME:FadeIn(40)
+  SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
   GAME:WaitFrames(20)
 
   -- purge de l'équipe par défaut créée par la Nouvelle partie (missingno) :

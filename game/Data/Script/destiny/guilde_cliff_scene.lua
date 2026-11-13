@@ -131,34 +131,43 @@ local function jouer_enrolement(map, hero)
   if hero ~= nil then GROUND:TeleportTo(hero, 232, 344, Direction.Up) end
   if partenaire ~= nil then GROUND:TeleportTo(partenaire, 208, 352, Direction.Up) end
   GAME:MoveCamera(240, 296, 1, false)
-  GAME:WaitFrames(12)
-
-  pcall(function() GROUND:CharSetEmote(chatot, 'exclaim', 1) end)
-  SOUND:PlayBattleSE('EVT_Emote_Exclaim')
   GAME:WaitFrames(20)
+
+  SOUND:PlayBattleSE('EVT_Emote_Exclaim')
+  pcall(function() GROUND:CharSetEmote(chatot, 'exclaim', 1) end)
+  GAME:WaitFrames(30)
   cinematique.Dire(chatot, 'Surprised', 'Oh ! Mais vous voilà enfin sur la falaise ! La nouvelle a déjà traversé tout Réverie Town !', 'standard')
-  cinematique.Dire(sunflora, 'Happy', 'Douce mère nature ! C’est bien la jeune équipe qui a sauvé le petit Nilo jusque dans la Grotte Verdoyante !', 'gauche')
+  cinematique.Respirer(15)
+  cinematique.Dire(sunflora, 'Happy', 'Douce mère nature ! C’est bien la jeune équipe qui a sauvé le petit Nilo jusque dans la Grotte Verdoyante !', 'standard')
+  cinematique.Respirer(15)
   cinematique.Dire(loudred, 'Angry', 'MOUAIS ! Tenir tête à un Carchacrok, c’est pas mal pour des recrues… MAIS ICI ON FILE DROIT !', 'droite')
+  cinematique.Respirer(15)
   cinematique.Dire(chatot, 'Normal', 'Un peu de tenue, Ramboum ! Maître Grodoudou a tenu à vous accueillir en personne.', 'standard')
 
-  GAME:WaitFrames(10)
+  GAME:WaitFrames(15)
   ouvrir_porte(map)
-  GAME:WaitFrames(22)
+  GAME:WaitFrames(24)
 
   local wigglytuff = creer_figurant('Guilde_Wigglytuff', 'wigglytuff', Gender.Male, 'Grodoudou', 232, 260, Direction.Down)
   GROUND:MoveInDirection(wigglytuff, Direction.Down, 16, false, 1)
   pcall(function() GROUND:CharSetAnim(wigglytuff, 'Hop', false) end)
-  GAME:WaitFrames(18)
+  GAME:WaitFrames(22)
+  pcall(function() GROUND:CharEndAnim(wigglytuff) end)
 
   cinematique.Dire(wigglytuff, 'Happy', 'Yoom-tah ! Bienvenue à ma fabuleuse Guilde, les amis-amis !', 'standard')
   cinematique.Dire(wigglytuff, 'Normal', 'Vous avez écouté la détresse d’une maman, bravé une sombre caverne et protégé un tout petit cœur jusqu’au bout.', 'standard')
   cinematique.Dire(wigglytuff, 'Joyous', 'Je vous proclame officiellement ÉQUIPE APPRENTIE DE LA GRANDE GUILDE ! Hourra !', 'standard')
 
   pcall(function() GROUND:CharSetAnim(sunflora, 'Hop', false) end)
+  GAME:WaitFrames(5)
   pcall(function() GROUND:CharSetAnim(loudred, 'Hop', false) end)
+  GAME:WaitFrames(18)
+  pcall(function() GROUND:CharEndAnim(sunflora) end)
+  pcall(function() GROUND:CharEndAnim(loudred) end)
   pcall(function() GROUND:CharSetEmote(sunflora, 'happy', 1) end)
+  GAME:WaitFrames(5)
   pcall(function() GROUND:CharSetEmote(loudred, 'happy', 1) end)
-  GAME:WaitFrames(24)
+  GAME:WaitFrames(30)
 
   cinematique.Dire(wigglytuff, 'Happy', 'Et comme on n’explore jamais le ventre vide… acceptez mon trésor préféré ! Amis-amis !', 'standard')
   UI:ResetSpeaker()
@@ -166,12 +175,14 @@ local function jouer_enrolement(map, hero)
     COMMON.GiftItem(hero, RogueEssence.Dungeon.InvItem('food_apple_perfect'))
   end
 
-  cinematique.Dire(chatot, 'Sigh', 'Garde-manger mis à part… Nos dortoirs intérieurs sont encore en plein aménagement pour accueillir toutes les nouvelles recrues.', 'standard')
-  cinematique.Dire(chatot, 'Happy', 'En attendant leur ouverture complète, entraînez-vous librement à Réverie Town et revenez frapper à notre grande porte quand vous voudrez !', 'standard')
+  cinematique.Dire(chatot, 'Sigh', 'Garde-manger mis à part… Nos dortoirs intérieurs sont encore en plein aménagement pour accueillir toutes les nouvelles recrues.', 'droite')
+  cinematique.Dire(chatot, 'Happy', 'En attendant leur ouverture complète, entraînez-vous librement à Réverie Town et revenez frapper à notre grande porte quand vous voudrez !', 'droite')
+  cinematique.Respirer(15)
   cinematique.Dire(wigglytuff, 'Happy', 'À très bientôt sous notre grand arbre, jeunes explorateurs ! Yoom-tah !', 'standard')
 
   UI:ResetSpeaker()
-  GAME:FadeOut(false, 18)
+  GAME:FadeOut(false, 30)
+  GAME:WaitFrames(30)
   retirer_figurant('Guilde_Wigglytuff')
   retirer_figurant('Guilde_Chatot')
   retirer_figurant('Guilde_Sunflora')
@@ -182,7 +193,7 @@ local function jouer_enrolement(map, hero)
   end
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.EnrolementGuilde = 'termine'
-  GAME:FadeIn(18)
+  GAME:FadeIn(30)
   retour_au_joueur(hero, partenaire)
 end
 
@@ -209,16 +220,27 @@ function scene.PorteGuilde_Touch(map, obj, activator)
   local hero = CH('PLAYER') or activator
   local partenaire = partenaire_de(hero)
   GAME:CutsceneMode(true)
+  if partenaire ~= nil then AI:DisableCharacterAI(partenaire) end
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:EntTurn(hero, Direction.Up)
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+    else
+      GROUND:EntTurn(hero, Direction.Up)
+    end
   end
-  if partenaire ~= nil then AI:DisableCharacterAI(partenaire) end
+  if partenaire ~= nil then
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+    else
+      GROUND:EntTurn(partenaire, Direction.Up)
+    end
+  end
 
   ouvrir_porte(map)
-  GAME:WaitFrames(18)
+  GAME:WaitFrames(20)
   local chatot = creer_figurant('Guilde_Chatot', 'chatot', Gender.Male, 'Pijako', 232, 260, Direction.Down)
-  GAME:WaitFrames(10)
+  GAME:WaitFrames(15)
 
   if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.EnrolementGuilde == 'termine' then
     cinematique.Dire(chatot, 'Happy', 'Toujours prêts pour l’aventure, jeunes apprentis ! Nos salles intérieures achèvent encore leurs derniers travaux, mais le grand plateau reste votre repaire.', 'standard')

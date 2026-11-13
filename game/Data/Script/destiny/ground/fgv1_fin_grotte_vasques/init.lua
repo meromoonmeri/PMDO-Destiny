@@ -100,19 +100,28 @@ function fgv1.PreBattle(is_rematch)
   if not is_rematch then
     if partenaire ~= nil then
       cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim')
-      GAME:WaitFrames(10)
+      GAME:WaitFrames(25)
     end
     local approche = {}
     if hero ~= nil then
       table.insert(approche, TASK:BranchCoroutine(function()
         GROUND:MoveToPosition(hero, 248, 196, false, 2)
-        GROUND:CharTurnToChar(hero, nilo)
+        if GROUND.CharTurnToCharAnimated ~= nil then
+          pcall(function() GROUND:CharTurnToCharAnimated(hero, nilo, 4) end)
+        else
+          GROUND:CharTurnToChar(hero, nilo)
+        end
       end))
     end
     if partenaire ~= nil then
       table.insert(approche, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(5)
         GROUND:MoveToPosition(partenaire, 224, 204, false, 2)
-        GROUND:CharTurnToChar(partenaire, nilo)
+        if GROUND.CharTurnToCharAnimated ~= nil then
+          pcall(function() GROUND:CharTurnToCharAnimated(partenaire, nilo, 4) end)
+        else
+          GROUND:CharTurnToChar(partenaire, nilo)
+        end
       end))
     end
     if #approche > 0 then TASK:JoinCoroutines(approche) end
@@ -124,12 +133,15 @@ function fgv1.PreBattle(is_rematch)
 
     GROUND:CharSetAnim(nilo, 'Wake', false)
     GAME:WaitFrames(36)
-    GROUND:CharSetAnim(nilo, 'Idle', true)
-    GAME:WaitFrames(10)
+    if GROUND.CharEndAnim ~= nil then
+      GROUND:CharEndAnim(nilo)
+    end
+    GAME:WaitFrames(15)
 
     cinematique.Dire(nilo, 'Dizzy', 'Maman… grand frère…', 'droite')
-    GAME:WaitFrames(12)
+    GAME:WaitFrames(15)
     cinematique.Emote(nilo, 'exclaim', 'EVT_Emote_Exclaim')
+    GAME:WaitFrames(25)
     cinematique.Dire(nilo, 'Surprised', 'Hein ?! Vous… vous n’êtes pas Maman ni Léo… Qui êtes-vous ?!', 'droite')
 
     if partenaire ~= nil then
@@ -137,19 +149,21 @@ function fgv1.PreBattle(is_rematch)
     end
 
     cinematique.Emote(nilo, 'shock', 'EVT_Emote_Shock')
+    GAME:WaitFrames(25)
     cinematique.Dire(nilo, 'Pain', 'Non… non !! Vous n’auriez pas dû venir… Partez tout de suite !!', 'droite')
     if partenaire ~= nil then
       cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
+      GAME:WaitFrames(25)
       cinematique.Dire(partenaire, 'Surprised', 'Comment ça, « non » ?! Tu es enfin en sécurité ! Qu’est-ce qui se passe ?!', 'standard')
     end
     cinematique.Dire(nilo, 'Crying', 'Le sol tremble encore… Il arrive… ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' !!!', 'droite')
     UI:ResetSpeaker()
 
     -- Secousse puis double flash blanc révélant Carchacrok au centre des vasques
-    SOUND:FadeOutBGM(15)
+    SOUND:FadeOutBGM(20)
     SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
     pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 4, 30)) end)
-    GAME:WaitFrames(18)
+    GAME:WaitFrames(20)
 
     flash_blanc()
     GAME:WaitFrames(16)
@@ -166,6 +180,7 @@ function fgv1.PreBattle(is_rematch)
     end
     if partenaire ~= nil then
       table.insert(recul, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(5)
         GROUND:MoveToPosition(partenaire, 216, 268, true, 3)
         GROUND:EntTurn(partenaire, Direction.Up)
       end))
@@ -179,13 +194,14 @@ function fgv1.PreBattle(is_rematch)
     SOUND:PlayBattleSE('EVT_Roar')
     GROUND:CharSetAnim(carchacrok, 'Attack', false)
     SOUND:PlayBGM('Threat.ogg', true)
-    GAME:WaitFrames(18)
+    GAME:WaitFrames(20)
 
     if partenaire ~= nil then
       cinematique.Emote(partenaire, 'shock', 'EVT_Emote_Shock')
+      GAME:WaitFrames(25)
     end
-    cinematique.Dire(carchacrok, 'Angry', 'GRRRROOOAAARRR !! Qui ose encore troubler la paix de ma caverne ?!', 'standard')
-    cinematique.Dire(carchacrok, 'Angry', 'Ce petit Lixy m’a déjà réveillé en chutant dans mes vasques… Et voilà que d’autres intrus débarquent pour faire du vacarme !', 'standard')
+    cinematique.Dire(carchacrok, 'Angry', 'GRRRROOOAAARRR !! Qui ose encore troubler la paix de ma caverne ?!', 'droite')
+    cinematique.Dire(carchacrok, 'Angry', 'Ce petit Lixy m’a déjà réveillé en chutant dans mes vasques… Et voilà que d’autres intrus débarquent pour faire du vacarme !', 'droite')
     if partenaire ~= nil then
       cinematique.Dire(partenaire, 'Determined', 'Nous sommes une équipe de secours ! Nous ne repartirons pas sans ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'standard')
     end
@@ -193,16 +209,18 @@ function fgv1.PreBattle(is_rematch)
     SOUND:PlayBGM('Threat.ogg', true)
     SOUND:PlayBattleSE('EVT_Roar')
     GROUND:CharSetAnim(carchacrok, 'Attack', false)
-    GAME:WaitFrames(15)
-    cinematique.Dire(carchacrok, 'Angry', 'Encore vous ?! Vous tenez vraiment à mesurer vos forces face au maître des vasques ?', 'standard')
+    GAME:WaitFrames(20)
+    cinematique.Dire(carchacrok, 'Angry', 'Encore vous ?! Vous tenez vraiment à mesurer vos forces face au maître des vasques ?', 'droite')
     if partenaire ~= nil then
       cinematique.Dire(partenaire, 'Determined', 'Cette fois, nous ne reculerons pas ! Nous ramènerons ' .. cinematique.NomColore('Nilo', 'shinx') .. ' à la maison !', 'standard')
     end
   end
 
+  SOUND:FadeOutBGM(25)
+  GAME:WaitFrames(25)
   SOUND:PlayBGM('Boss Battle 2.ogg', true)
   GAME:WaitFrames(15)
-  cinematique.Dire(carchacrok, 'Angry', 'Assez parlé ! Montrez-moi ce que vous valez !', 'standard')
+  cinematique.Dire(carchacrok, 'Angry', 'Assez parlé ! Montrez-moi ce que vous valez !', 'droite')
   UI:ResetSpeaker()
   GAME:WaitFrames(20)
 
@@ -225,13 +243,14 @@ function fgv1.PostBattle()
     hero.CollisionDisabled = true
     GROUND:TeleportTo(hero, 240, 260, Direction.Up)
   end
-  SOUND:FadeOutBGM(10)
+  SOUND:FadeOutBGM(15)
   GAME:MoveCamera(240, 180, 1, false)
-  GAME:FadeIn(20)
+  GAME:FadeIn(25)
   GAME:WaitFrames(25)
 
   cinematique.Emote(carchacrok, 'sweatdrop', 'EVT_Emote_Sweatdrop')
-  cinematique.Dire(carchacrok, 'Pain', 'Grrr… Pas mal pour une jeune équipe de secours… Emportez ce petit Lixy et laissez-moi retrouver mon calme.', 'standard')
+  GAME:WaitFrames(25)
+  cinematique.Dire(carchacrok, 'Pain', 'Grrr… Pas mal pour une jeune équipe de secours… Emportez ce petit Lixy et laissez-moi retrouver mon calme.', 'droite')
   UI:ResetSpeaker()
 
   SOUND:PlayBattleSE('EVT_CH03_Scurry')
@@ -241,15 +260,20 @@ function fgv1.PostBattle()
 
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GROUND:MoveToPosition(nilo, 240, 224, true, 3)
-  GROUND:EntTurn(nilo, Direction.Down)
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(nilo, Direction.Down, 4) end)
+  else
+    GROUND:EntTurn(nilo, Direction.Down)
+  end
   cinematique.Emote(nilo, 'happy')
+  GAME:WaitFrames(25)
   cinematique.Dire(nilo, 'Teary-Eyed', 'Vous… vous avez vraiment tenu tête à ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' pour me sauver !!', 'droite')
   if partenaire ~= nil then
     cinematique.Dire(partenaire, 'Happy', 'C’était moins une ! Vite, rentrons à Réverie Town rassurer Lyra et Léo — ils t’attendent tous !', 'standard')
   end
   cinematique.Dire(nilo, 'Happy', 'Oui !! Allons-y tout de suite !', 'droite')
   UI:ResetSpeaker()
-  GAME:WaitFrames(15)
+  GAME:WaitFrames(20)
 
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.AlerteShinx = 'termine'

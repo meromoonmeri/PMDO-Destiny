@@ -259,6 +259,7 @@ local function gag_depart_sonata(hero, partner, sonata, victoire)
   GROUND:MoveToPosition(sonata, 760, 800, false, 2.5)
   GROUND:Hide('Sonata')
   sonata.CollisionDisabled = collision_sonata
+  cinematique.Respirer(30)
 end
 
 -- Les surnoms choisis par le joueur restent blancs dans les phrases :
@@ -891,21 +892,24 @@ function cliffdaytest.ApresCombatTeamDazzling()
   -- Même cadre Clamp que la rencontre : pieds écran 136 (trio) et
   -- 164 (duo), au-dessus de la boîte de texte.
   GAME:MoveCamera(720, 672, 1, false)
-  SOUND:PlayBGM(MUSIQUE_DAZZLING_SOCIALE, true)
   GAME:FadeIn(30)
+  SOUND:PlayBGM(MUSIQUE_DAZZLING_SOCIALE, true)
   cinematique.Respirer(20)
 
   if victoire then
     SV.Destiny.TeamDazzlingVictoire = true
+    SOUND:PlayBattleSE('EVT_Emote_Shock')
     GROUND:CharSetEmote(sonata, 'shock', 1)
+    GAME:WaitFrames(5)
     GROUND:CharSetEmote(Aria, 'sweating', 1)
-    cinematique.Respirer(20)
+    cinematique.Respirer(25)
     hero_regarde_locuteur(hero, sonata)
     say(sonata, 'Surprised', "Aïe… Non mais… on a perdu ?!", 'droite')
     hero_regarde_locuteur(hero, Aria)
     say(Aria, 'Worried', "Contre eux ? C’est ridicule…", 'droite')
+    SOUND:PlayBattleSE('EVT_Emote_Shock')
     GROUND:CharSetEmote(adagio, 'shock', 1)
-    cinematique.Respirer(20)
+    cinematique.Respirer(25)
     hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Normal', "Assez. La Fédération nous attend à [color=#F5D27A]Réverie Town[color],\net je refuse d’arriver décoiffée.", 'droite')
     hero_regarde_locuteur(hero, partner)
@@ -990,9 +994,11 @@ function cliffdaytest.ApresCombatTeamDazzling()
     say(partner, 'Joyous', "On l’a fait… On a vraiment tenu tête à la [color=#FF9FD8]Team Dazzling[color] !", 'droite')
     say(partner, 'Happy', "Brillantes, peut-être. Invincibles, sûrement pas.", 'droite')
   else
+    SOUND:PlayBattleSE('EVT_Emote_Sweating')
     GROUND:CharSetEmote(partner, 'sweating', 1)
+    GAME:WaitFrames(5)
     GROUND:CharSetEmote(hero, 'sweating', 1)
-    cinematique.Respirer(20)
+    cinematique.Respirer(25)
     hero_regarde_locuteur(hero, adagio)
     say(adagio, 'Happy', "Voilà. C’était bref, mais très instructif.", 'droite')
     hero_regarde_locuteur(hero, partner)
