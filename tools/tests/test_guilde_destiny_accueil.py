@@ -132,11 +132,21 @@ def main() -> None:
     verify_room(
         asset_name="guilde_destiny_accueil",
         sheet_name="Destiny_Guilde_Accueil",
-        expected_gw_gh=(80, 60),
+        expected_gw_gh=(192, 144),
         expected_markers={"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"},
         expected_triggers={"SortieGuilde", "EscalierNord"},
         primary_marker="EntreeSudMarker",
     )
+    # Vérifications additionnelles propres à guilde_destiny_accueil :
+    # - ratio exact 4:3 viewport PMDO (192x144 tuiles = 1536x1152 px, aucun downscale)
+    # - aucune vigne/halo rajouté visible (calques 04, 05, 06 masqués)
+    # - fond extérieur marron chaud assombri (#68482F = RGB(104, 72, 47))
+    acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
+    assert not acc_g["Layers"][4]["Visible"] and not acc_g["Layers"][5]["Visible"] and not acc_g["Layers"][6]["Visible"]
+    acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")
+    loc0 = acc_g["Layers"][0]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
+    corner_rgb = acc_bank[(loc0["X"], loc0["Y"])][0, 0, :3].tolist()
+    assert corner_rgb == [104, 72, 47], f"Fond marron assombri attendu [104, 72, 47], obtenu {corner_rgb}"
     verify_room(
         asset_name="guilde_destiny_missions",
         sheet_name="Destiny_Guilde_Missions",
