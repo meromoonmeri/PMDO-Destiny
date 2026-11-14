@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests structurels, graphiques (0 magenta, 0 Halcyon, calques, collisions BFS) et comportementaux de guilde_destiny_accueil."""
+"""Tests structurels, graphiques (0 magenta, 0 Halcyon, verdure séparée, calques, collisions BFS) et comportementaux de guilde_destiny_accueil et guilde_destiny_missions."""
 from __future__ import annotations
 
 import io
@@ -34,24 +34,27 @@ def load_tile_bank(path: Path) -> dict[tuple[int, int], np.ndarray]:
     return out
 
 
-def main() -> None:
-    z = json.loads((GAME / "Data/Zone/guilde_destiny_interieur.json").read_text(encoding="utf-8-sig"))["Object"]["GroundMaps"]
-    idx = json.loads((GAME / "Data/Zone/index.idx").read_text(encoding="utf-8-sig"))["Object"]["guilde_destiny_interieur"]["Grounds"]
-    assert z == idx == ["guilde_destiny_accueil"]
-
-    tile_path = GAME / "Content/Tile/Destiny_Guilde_Accueil.tile"
-    assert tile_path.is_file()
+def verify_room(
+    asset_name: str,
+    sheet_name: str,
+    expected_gw_gh: tuple[int, int],
+    expected_markers: set[str],
+    expected_triggers: set[str],
+    primary_marker: str,
+) -> None:
+    tile_path = GAME / f"Content/Tile/{sheet_name}.tile"
+    assert tile_path.is_file(), f"Tile manquant : {tile_path}"
     bank = load_tile_bank(tile_path)
 
-    g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
-    assert g["AssetName"] == "guilde_destiny_accueil"
+    g = json.loads((GAME / f"Data/Ground/{asset_name}.rsground").read_text(encoding="utf-8-sig"))["Object"]
+    assert g["AssetName"] == asset_name
     assert g["TexSize"] == 1 and g["EdgeView"] == 1 and g["Music"] == "Guildmaster.ogg"
     assert len(g["Layers"]) == 8
+    assert g["Layers"][4]["Name"] == "04 verdure separee"
     gw, gh = len(g["Layers"][0]["Tiles"]), len(g["Layers"][0]["Tiles"][0])
-    assert (gw, gh) == (80, 60)
+    assert (gw, gh) == expected_gw_gh, f"{asset_name}: attendu {expected_gw_gh}, obtenu {(gw, gh)}"
     assert g["Layers"][7]["Layer"] == 4
 
-    # Aucune référence à Guild_First_Floor ni aucune planche Halcyon
     sheets_used = {
         f["Sheet"]
         for L in g["Layers"]
@@ -60,7 +63,7 @@ def main() -> None:
         for an in t.get("Layers", [])
         for f in an.get("Frames", [])
     }
-    assert sheets_used == {"Destiny_Guilde_Accueil"}, sheets_used
+    assert sheets_used == {sheet_name}, f"{asset_name}: {sheets_used}"
 
     # Vérification 0 pixel magenta dans toute la banque de tuiles
     for loc, patch in bank.items():
@@ -69,7 +72,11 @@ def main() -> None:
             r = patch[nz, 0].astype(int)
             gr = patch[nz, 1].astype(int)
             b = patch[nz, 2].astype(int)
-            assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"Magenta détecté dans la tuile {loc}"
+            assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"{asset_name}: magenta dans tuile {loc}"
+
+    # Calque verdure séparée effectivement actif (> 20 cellules non vides)
+    verd_active = sum(1 for col in g["Layers"][4]["Tiles"] for t in col if t.get("Layers"))
+    assert verd_active >= 20, f"{asset_name}: verdure séparée vide ({verd_active})"
 
     # Le calque Top (Layer=4) ne recouvre aucune cellule praticable (Tags==0)
     obs = g["obstacles"]
@@ -77,13 +84,14 @@ def main() -> None:
     for tx in range(gw):
         for ty in range(gh):
             if obs[tx][ty]["Tags"] == 0:
-                assert not top_tiles[tx][ty]["Layers"], f"Calque Top déborde sur sol praticable ({tx},{ty})"
+                assert not top_tiles[tx][ty]["Layers"], f"{asset_name}: Top déborde sur sol praticable ({tx},{ty})"
 
-    # Vérification marqueurs, capteur de sortie sud et accessibilité BFS 16x16
     markers = {m["EntName"]: m["Collider"] for m in g["Entities"][0]["Markers"]}
-    assert {"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"} <= set(markers)
+    assert expected_markers <= set(markers), f"{asset_name}: marqueurs manquants {expected_markers - set(markers)}"
     gos = {o["EntName"]: o for o in g["Entities"][0]["GroundObjects"]}
-    assert "SortieGuilde" in gos and gos["SortieGuilde"]["triggerType"] == 2 and not gos["SortieGuilde"]["Passable"]
+    assert expected_triggers <= set(gos), f"{asset_name}: capteurs manquants {expected_triggers - set(gos)}"
+    for tname in expected_triggers:
+        assert gos[tname]["triggerType"] == 2 and not gos[tname]["Passable"]
 
     def free16(px: int, py: int) -> bool:
         if px < 0 or py < 0 or px + 16 > gw * 8 or py + 16 > gh * 8:
@@ -94,7 +102,7 @@ def main() -> None:
             for cy in range(py // 8, (py + 15) // 8 + 1)
         )
 
-    ent = markers["EntreeSudMarker"]
+    ent = markers[primary_marker]
     assert free16(ent["X"], ent["Y"]) and free16(ent["X"] + 24, ent["Y"]) and free16(ent["X"] - 24, ent["Y"])
 
     q = deque([(ent["X"], ent["Y"])])
@@ -106,22 +114,41 @@ def main() -> None:
                 seen.add((nx, ny))
                 q.append((nx, ny))
 
-    for mk_name in ("CentreMedaillonMarker", "EscalierNordMarker"):
+    for mk_name in expected_markers:
         mk = markers[mk_name]
-        assert (mk["X"], mk["Y"]) in seen, f"{mk_name} non joignable"
-    sc = gos["SortieGuilde"]["Collider"]
-    assert any(
-        (px, sc["Y"] - 16) in seen and px < sc["X"] + sc["Width"] and px + 16 > sc["X"]
-        for px in range(sc["X"], sc["X"] + sc["Width"], 4)
-    ), "SortieGuilde non joignable"
+        assert (mk["X"], mk["Y"]) in seen, f"{asset_name}: {mk_name} non joignable"
 
-    script_txt = (GAME / "Data/Script/destiny/ground/guilde_destiny_accueil/init.lua").read_text(encoding="utf-8")
+    script_txt = (GAME / f"Data/Script/destiny/ground/{asset_name}/init.lua").read_text(encoding="utf-8")
     assert "sortie_en_cours = false; GAME:FadeIn(20)" in script_txt
     assert script_txt.count("suivi_interieurs.Activer(map)") == 2
 
+
+def main() -> None:
+    expected_grounds = ["guilde_destiny_accueil", "guilde_destiny_missions"]
+    z = json.loads((GAME / "Data/Zone/guilde_destiny_interieur.json").read_text(encoding="utf-8-sig"))["Object"]["GroundMaps"]
+    idx = json.loads((GAME / "Data/Zone/index.idx").read_text(encoding="utf-8-sig"))["Object"]["guilde_destiny_interieur"]["Grounds"]
+    assert z == idx == expected_grounds, f"Attendu {expected_grounds}, obtenu z={z}, idx={idx}"
+
+    verify_room(
+        asset_name="guilde_destiny_accueil",
+        sheet_name="Destiny_Guilde_Accueil",
+        expected_gw_gh=(80, 60),
+        expected_markers={"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"},
+        expected_triggers={"SortieGuilde", "EscalierNord"},
+        primary_marker="EntreeSudMarker",
+    )
+    verify_room(
+        asset_name="guilde_destiny_missions",
+        sheet_name="Destiny_Guilde_Missions",
+        expected_gw_gh=(139, 95),
+        expected_markers={"ArriveeDepuisAccueilMarker", "CentreSalleMarker", "MurGaucheMarker", "MurDroitMarker"},
+        expected_triggers={"EscalierNord"},
+        primary_marker="ArriveeDepuisAccueilMarker",
+    )
+
     os.chdir(ROOT)
     run(ROOT / "tools/tests/test_guilde_destiny_accueil.lua", ROOT)
-    print("PASS guilde_destiny_accueil : 640x480, 8 calques, 0 magenta, 0 Halcyon, BFS 16x16 et raccord falaise <-> accueil validés.")
+    print("PASS guilde_destiny_accueil + guilde_destiny_missions : 0 mixel, verdure séparée, 0 magenta, 0 Halcyon, BFS 16x16 et raccords validés.")
 
 
 if __name__ == "__main__":

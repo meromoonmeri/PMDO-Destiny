@@ -1,5 +1,5 @@
--- Salle d'accueil de la Grande Guilde Destiny (640x480, sans mobilier),
--- raccordée à PorteGuilde sur les 4 ambiances de guilde_cliff_*.
+-- Salle d'accueil de la Grande Guilde Destiny (640x480, zéro mixel, verdure séparée, sans mobilier),
+-- raccordée au sud à PorteGuilde (guilde_cliff_*) et au nord à guilde_destiny_missions.
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 local meteo_reverie = require 'destiny.meteo_reverie'
@@ -26,6 +26,17 @@ local function retourner_falaise_guilde()
   GAME:EnterZone('town02_waterfallvillage', -1, idx, 0)
 end
 
+local function entrer_grande_salle()
+  if sortie_en_cours then return end
+  sortie_en_cours = true
+  GAME:FadeOut(false, 20)
+  if GAME.EnterGroundMap ~= nil then
+    GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_missions', 'ArriveeDepuisAccueilMarker', true)
+  else
+    GAME:EnterZone('guilde_destiny_interieur', -1, 1, 0)
+  end
+end
+
 function guilde_destiny_accueil.Init(map)
   if map ~= nil and RogueEssence ~= nil and RogueEssence.Dungeon ~= nil and RogueEssence.Dungeon.BaseMap ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
@@ -41,6 +52,11 @@ function guilde_destiny_accueil.GameSave(map) end
 function guilde_destiny_accueil.SortieGuilde_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   retourner_falaise_guilde()
+end
+
+function guilde_destiny_accueil.EscalierNord_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  entrer_grande_salle()
 end
 
 return guilde_destiny_accueil

@@ -9,7 +9,7 @@
       }
     },
     "Released": true,
-    "Comment": "Zone dédiée aux salles intérieures de la Grande Guilde Destiny (salle d'accueil raccordée à PorteGuilde sur guilde_cliff_*).",
+    "Comment": "Zone dédiée aux salles intérieures validées de la Grande Guilde Destiny (guilde_destiny_accueil 640x480 + guilde_destiny_missions 1112x760).",
     "NoEXP": false,
     "ExpPercent": 100,
     "Level": -1,
@@ -26,7 +26,8 @@
     "Rogue": 0,
     "Segments": [],
     "GroundMaps": [
-      "guilde_destiny_accueil"
+      "guilde_destiny_accueil",
+      "guilde_destiny_missions"
     ]
   }
 }

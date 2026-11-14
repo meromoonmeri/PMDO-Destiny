@@ -508,7 +508,8 @@
       "CountedFloors": 0,
       "Rogue": 0,
       "Grounds": [
-        "guilde_destiny_accueil"
+        "guilde_destiny_accueil",
+        "guilde_destiny_missions"
       ],
       "Maps": [],
       "Name": {
@@ -518,7 +519,7 @@
         }
       },
       "Released": true,
-      "Comment": "Zone dédiée aux salles intérieures de la Grande Guilde Destiny (salle d'accueil raccordée à PorteGuilde sur guilde_cliff_*).",
+      "Comment": "Zone dédiée aux salles intérieures validées de la Grande Guilde Destiny (guilde_destiny_accueil 640x480 + guilde_destiny_missions 1112x760).",
       "SortOrder": 29
     }
   }

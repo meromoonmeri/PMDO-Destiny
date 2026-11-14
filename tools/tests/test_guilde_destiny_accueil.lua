@@ -1,4 +1,5 @@
--- Simulation Lua aller-retour : PorteGuilde (guilde_cliff_*) -> guilde_destiny_accueil -> SortieGuilde -> guilde_cliff_*.
+-- Simulation Lua aller-retour :
+-- PorteGuilde (guilde_cliff_*) <-> guilde_destiny_accueil <-> guilde_destiny_missions.
 local root = assert(arg[1])
 
 local current_carte = 'guilde_cliff_jour'
@@ -100,6 +101,7 @@ GAME = {
 function LTBL(m) return {Importance = m.Importance} end
 
 local accueil = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_accueil/init.lua'))()
+local missions = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_missions/init.lua'))()
 
 local ambiances = {
   {'jour', 23},
@@ -142,11 +144,32 @@ for _, info in ipairs(ambiances) do
   assert(transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_accueil' and transitions[1][4] == 'EntreeSudMarker')
   assert(m.Decorations[3].Visible == true and m.Decorations[4].Visible == false)
 
+  -- Transition Accueil -> Grande Salle (EscalierNord)
   local m_int = {EdgeView = 0}
   accueil.Init(m_int)
   accueil.Enter(m_int)
   assert(m_int.EdgeView == 1)
 
+  transitions = {}
+  accueil.EscalierNord_Touch({}, actors.Teammate1)
+  assert(#transitions == 0, 'Le partenaire ne doit pas déclencher EscalierNord')
+  accueil.EscalierNord_Touch({}, actors.PLAYER)
+  assert(#transitions == 1 and transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_missions' and transitions[1][4] == 'ArriveeDepuisAccueilMarker' and transitions[1][5] == true)
+
+  -- Transition Grande Salle -> Accueil (EscalierNord)
+  local m_mis = {EdgeView = 0}
+  missions.Init(m_mis)
+  missions.Enter(m_mis)
+  assert(m_mis.EdgeView == 1)
+
+  transitions = {}
+  missions.EscalierNord_Touch({}, actors.Teammate1)
+  assert(#transitions == 0, 'Le partenaire ne doit pas déclencher EscalierNord dans missions')
+  missions.EscalierNord_Touch({}, actors.PLAYER)
+  assert(#transitions == 1 and transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_accueil' and transitions[1][4] == 'EscalierNordMarker' and transitions[1][5] == true)
+
+  -- Réentrée dans Accueil puis sortie vers la falaise
+  accueil.Enter(m_int)
   transitions = {}
   accueil.SortieGuilde_Touch({}, actors.PLAYER)
   assert(#transitions == 1 and transitions[1][1] == 'zone' and transitions[1][2] == 'town02_waterfallvillage' and transitions[1][4] == current_idx)
@@ -157,4 +180,4 @@ for _, info in ipairs(ambiances) do
   assert(SV.Destiny.PassageAmbiance == nil)
 end
 
-print('PASS test_guilde_destiny_accueil.lua : aller-retour sur les 4 ambiances falaise <-> salle accueil validé.')
+print('PASS test_guilde_destiny_accueil.lua : aller-retour falaise <-> accueil <-> grande salle validé sur les 4 ambiances.')

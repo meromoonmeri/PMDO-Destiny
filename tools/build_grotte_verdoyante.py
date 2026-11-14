@@ -842,7 +842,7 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
             {
                 'Key': {'str': [0, 3]},
                 'Value': {
-                    '$type': 'RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements',
+                    '$type': 'RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence',
                     'TurnLength': {'Min': 3, 'Max': 7}, 'MaxLength': {'Min': 22, 'Max': 22},
                     'AllowDeadEnd': False, 'TraverseFloor': False, 'Halls': {'Min': 10, 'Max': 16},
                     'Brush': {'$type': 'RogueElements.DefaultHallBrush, RogueElements'},
@@ -984,10 +984,10 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
             {
                 'Key': {'str': [6, 2]},
                 'Value': {
-                    '$type': 'RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements',
+                    '$type': 'RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence',
                     'Filters': [{'$type': 'PMDC.LevelGen.RoomFilterConnectivity, PMDC', 'Connection': 1}],
                     'IncludeHalls': False,
-                    'Spawn': {'$type': 'RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'Amount': {'Min': init_foes, 'Max': init_foes + 2}},
+                    'Spawn': {'$type': 'RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence', 'Amount': {'Min': init_foes, 'Max': init_foes + 2}},
                     'Ally': False, 'ClumpFactor': 15,
                 },
             },
