@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """
-Refonte Pixel-Art Pur Nintendo DS (Zéro Mixel, Zéro Pixel Parasite, Zéro Interstice) — v3 Finale
+Refonte Pixel-Art Pur Nintendo DS v5 — ZÉRO MIXEL INTEGRAL (Murs, Fenêtres, Escalier, Piliers, Racines, Plancher, Seuil Sud)
 en Réseau Multicalque Paint.NET (.ora + 8 calques PNG + .tile + .rsground PMDO 0.8.12.0) :
 
-1. Plancher 100 % synthétisé au pixel près (planches 12 px nettes, joints décalés 1 px,
-   veinage pixel-art propre — ZÉRO bruit IA, ZÉRO pixel parasite, ZÉRO ombre au sol),
-   glissé SOUS le contour organique 1 px des murs et jambages de racines (ZÉRO encoche, ZÉRO interstice).
-2. Correction totale de l'interstice Sud (image-4.png) :
-   - Suppression totale du trait noir sous alpha blanc qui créait la barre grise baveuse ;
-   - Seuil courbe Chunsoft opaque sans interstice, encastré SOUS les deux jambages de racines
-     organiques symétrisés (l3_walls / l7_top au-dessus de l1_floor et l6_halo), avec fondu
-     concentrique doux du blanc-ivoire au centre vers l'or chaud près des racines.
-3. Purification pixel-art intégrale des murs, escalier, fenêtres, racines et lianes :
-   - Rampe Chunsoft DS stricte (~20 couleurs pures : 0 gris parasite, 0 bouillie de dégradés) ;
-   - Élimination morphologique des amas parasites isolés (1 à 2 px) et symétrisation nette de la plinthe.
+1. Murs, Piliers, Œuf Ailé, Arche & Racines :
+   - Squelettisation Zhang-Suen + élagage des coins en L (traits intérieurs strictement 1x1 px, 8-connexes, 0 pâté 2x2/3x3) ;
+   - Suppression par EDT des halos d'anti-aliasing LANCZOS autour des traits avant quantification ;
+   - Cel-shading Chunsoft franc à 5 tons de bois chauds (+ contour 1 px 8-connexe #2A170E sans coins en L).
+2. Escalier Central Nord (Accueil & Grande Salle) :
+   - Reconstruction pixel-art 1x1 pure des marches horizontales (nez 1 px net, giron plat, contremarche nette,
+     trait d'assise 1 px #2A170E et fondu progressif dans la voûte sombre — 0 marche ondulée).
+3. Fenêtres Cintrées Gauche & Droite (Accueil & Grande Salle) :
+   - Ouverture cintrée lissée au pixel près avec sel-out 1 px 8-connexe (#603418) ;
+   - Vitre cel-shadée nette à 2 tons (#FFFDF2 + liseré #FCE89C) ;
+   - Croisillons bois pixel-art nets (cœur doré 2 px + sel-out 1 px #8E5022, pas 2:1 régulier sans flou).
+4. Plancher 12 px synthétisé (0 pixel parasite, 0 ombre) & Seuil Sud Chunsoft (0 interstice).
 """
 from __future__ import annotations
 
@@ -37,55 +38,139 @@ REPO_ROOT = Path("/var/tmp/PMDO-Destiny")
 GAME = REPO_ROOT / "game"
 
 # ==============================================================================
-# Palette Pixel-Art Chunsoft DS Stricte (~22 couleurs pures, 0 gris parasite !)
+# Palette Cel-Shading Nintendo DS Chunsoft Stricte (Zéro Mixel, Zéro Halo Flou)
 # ==============================================================================
-BG_LIGHT_BROWN = (198, 155, 110)   # #C69B6E marron clair chaud extérieur
+BG_LIGHT_BROWN = (198, 155, 110)   # #C69B6E marron clair extérieur
 
-OUTLINE_WOOD = (42, 23, 14)        # #2A170E trait 1px bois/racines
-WOOD_RAMP = np.array([
-    [42, 23, 14],    # 0: contour sombre #2A170E
-    [70, 38, 20],    # 1: ombre profonde écorce #462614
-    [98, 54, 26],    # 2: brun écorce foncé #62361A
-    [128, 72, 32],   # 3: châtaignier moyen #804820
-    [158, 92, 38],   # 4: bois chaud #9E5C26
-    [188, 114, 44],  # 5: chêne doré sombre #BC722C
-    [216, 138, 50],  # 6: chêne miel clair #D88A32
-    [236, 162, 64],  # 7: rehaut bois ensoleillé #ECA240
-    [248, 188, 90],  # 8: éclat corde/bordure #F8BC5A
+OUTLINE_DARK = (42, 23, 14)        # #2A170E trait de contour 1px
+CAVITY_DARK = (68, 36, 18)         # #442412 cavité d'ombre profonde
+SEL_OUT_WOOD = (96, 52, 24)        # #603418 trait fin intérieur bois / sel-out
+
+# 5 tons francs de bois cel-shadé (0 bande d'anti-aliasing intermédiaire !)
+WOOD_CEL_5 = np.array([
+    [96, 52, 24],     # 0: ombre écorce franche #603418
+    [142, 80, 34],    # 1: châtaignier ombre #8E5022
+    [188, 114, 44],   # 2: chêne moyen #BC722C
+    [224, 146, 54],   # 3: chêne miel clair #E09236
+    [246, 182, 82],   # 4: rehaut solaire #F6B652
 ], dtype=np.uint8)
 
-WIN_RAMP = np.array([
-    [220, 152, 54],  # 0: rebord doré fenêtre
-    [242, 188, 86],  # 1: ambre lumineux
-    [251, 228, 136], # 2: jaune solaire doux
-    [255, 245, 186], # 3: ivoire solaire
-    [255, 253, 242], # 4: blanc-crème pur vitre
-], dtype=np.uint8)
+WIN_GLASS_CORE = (255, 253, 242)   # #FFFDF2 vitre blanc-ivoire pur
+WIN_GLASS_RIM = (252, 232, 156)    # #FCE89C liseré solaire vitre 2px
+WIN_BAR_HI = (248, 196, 100)       # #F8C464 rehaut croisillon
+WIN_BAR_BODY = (224, 146, 54)      # #E09236 corps croisillon
+WIN_BAR_SEL = (142, 80, 34)        # #8E5022 contour 1px croisillon
 
 LEAF_RAMP = np.array([
-    [26, 52, 22],    # 0: contour feuillage #1A3416 (harmonisé au bois)
-    [42, 86, 34],    # 1: vert forêt ombre
-    [64, 120, 42],   # 2: vert feuillage franc
-    [102, 154, 48],  # 3: vert tendre ensoleillé
-    [152, 184, 58],  # 4: olive doré canopée
-    [198, 202, 74],  # 5: pointe feuille dorée
+    [26, 52, 22],     # 0: contour 1px feuillage #1A3416
+    [44, 90, 34],     # 1: vert forêt ombre
+    [72, 128, 44],    # 2: vert franc
+    [114, 164, 50],   # 3: vert tendre
+    [172, 194, 64],   # 4: pointe feuille dorée
 ], dtype=np.uint8)
 
-# Couleurs nettes du plancher chêne miel pixel-art (planches 12 px, 0 bruit !)
-PLANK_SEAM = (142, 74, 22)         # #8E4A16 joint horizontal/vertical 1px
-PLANK_TOP_HI = (244, 174, 66)      # #F4AE42 biseau clair haut 1px
-PLANK_BODY_A = (230, 148, 42)      # #E6942A corps planche chêne miel A
-PLANK_BODY_B = (224, 142, 38)      # #E08E26 corps planche chêne miel B
-PLANK_GRAIN = (208, 126, 32)       # #D07E20 veinage fin 1px propre
+# Plancher chêne miel pixel-art pur (planches 12 px)
+PLANK_SEAM = (142, 74, 22)         # #8E4A16 joint 1px
+PLANK_TOP_HI = (244, 174, 66)      # #F4AE42 biseau haut 1px
+PLANK_BODY_A = (230, 148, 42)      # #E6942A corps planche A
+PLANK_BODY_B = (224, 142, 38)      # #E08E26 corps planche B
+PLANK_GRAIN = (208, 126, 32)       # #D07E20 veinage 1px
 PLANK_BOT_SH = (196, 114, 28)      # #C4721C biseau bas 1px
 
-# Couleurs Chunsoft OPAQUES / QUANTIFIÉES du halo d'entrée Sud (0 gris sale !)
-HALO_LIP_WHITE = (255, 253, 242)   # #FFFDF2 cœur lèvre blanc-ivoire pur
-HALO_BAND_1 = (255, 249, 220)      # #FFF9DC cœur lumineux
-HALO_BAND_2 = (253, 234, 174)      # #FDEAAE couronne ivoire-or
-HALO_BAND_3 = (246, 208, 120)      # #F6D078 couronne miel clair
-HALO_BAND_4 = (238, 178, 76)       # #EEB24C fondu chêne solaire
+# Halo d'entrée Sud Chunsoft (0 interstice)
+HALO_LIP_WHITE = (255, 253, 242)
+HALO_BAND_1 = (255, 249, 220)
+HALO_BAND_2 = (253, 234, 174)
+HALO_BAND_3 = (246, 208, 120)
+HALO_BAND_4 = (238, 178, 76)
 
+
+# ==============================================================================
+# Squelettisation Zhang-Suen Vectorisée + Élagage des Coins en L (1x1 px Pur !)
+# ==============================================================================
+
+def zhang_suen_thin(binary: np.ndarray) -> np.ndarray:
+    """Réduit tout trait épais (2-4 px) à un squelette médian exact de 1 px (vectorisé NumPy)."""
+    img = binary.astype(np.uint8).copy()
+    img[0, :] = 0
+    img[-1, :] = 0
+    img[:, 0] = 0
+    img[:, -1] = 0
+
+    while True:
+        changed = False
+        for step in (1, 2):
+            p2 = img[:-2, 1:-1]
+            p3 = img[:-2, 2:]
+            p4 = img[1:-1, 2:]
+            p5 = img[2:, 2:]
+            p6 = img[2:, 1:-1]
+            p7 = img[2:, :-2]
+            p8 = img[1:-1, :-2]
+            p9 = img[:-2, :-2]
+            p1 = img[1:-1, 1:-1]
+
+            B = p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9
+            A = (
+                ((p2 == 0) & (p3 == 1)).astype(np.uint8)
+                + ((p3 == 0) & (p4 == 1)).astype(np.uint8)
+                + ((p4 == 0) & (p5 == 1)).astype(np.uint8)
+                + ((p5 == 0) & (p6 == 1)).astype(np.uint8)
+                + ((p6 == 0) & (p7 == 1)).astype(np.uint8)
+                + ((p7 == 0) & (p8 == 1)).astype(np.uint8)
+                + ((p8 == 0) & (p9 == 1)).astype(np.uint8)
+                + ((p9 == 0) & (p2 == 1)).astype(np.uint8)
+            )
+            if step == 1:
+                m1 = p2 * p4 * p6
+                m2 = p4 * p6 * p8
+            else:
+                m1 = p2 * p4 * p8
+                m2 = p2 * p6 * p8
+
+            rem = (p1 == 1) & (B >= 2) & (B <= 6) & (A == 1) & (m1 == 0) & (m2 == 0)
+            if np.any(rem):
+                img[1:-1, 1:-1][rem] = 0
+                changed = True
+        if not changed:
+            break
+    return img.astype(bool)
+
+
+def prune_l_corners_1px(line_mask: np.ndarray) -> np.ndarray:
+    """
+    Élimine les coins en L redondants sur les diagonales pour obtenir un vrai trait pixel-art
+    8-connexe d'épaisseur 1 px stricte (sans escaliers épais de 2 px).
+    """
+    m = line_mask.copy()
+    h, w = m.shape
+    for orient in range(4):
+        p2 = m[:-2, 1:-1]
+        p3 = m[:-2, 2:]
+        p4 = m[1:-1, 2:]
+        p5 = m[2:, 2:]
+        p6 = m[2:, 1:-1]
+        p7 = m[2:, :-2]
+        p8 = m[1:-1, :-2]
+        p9 = m[:-2, :-2]
+        c = m[1:-1, 1:-1]
+
+        if orient == 0:
+            # North + East L-corner without opposite diagonal dependency
+            hit = c & p2 & p4 & (~p7) & (~p6) & (~p8)
+        elif orient == 1:
+            hit = c & p4 & p6 & (~p9) & (~p8) & (~p2)
+        elif orient == 2:
+            hit = c & p6 & p8 & (~p3) & (~p2) & (~p4)
+        else:
+            hit = c & p8 & p2 & (~p5) & (~p4) & (~p6)
+        m[1:-1, 1:-1][hit] = False
+    return m
+
+
+# ==============================================================================
+# Détourage Magenta + Purification Pixel-Art 1x1 Sans Mixel
+# ==============================================================================
 
 def clean_magenta_mask(arr_rgb: np.ndarray) -> np.ndarray:
     r = arr_rgb[:, :, 0].astype(np.int16)
@@ -124,95 +209,59 @@ def despill_magenta(arr_rgb: np.ndarray, mag_mask: np.ndarray, fallback_rgb: Tup
     return out
 
 
-def quantize_to_strict_chunsoft_ramps(rgb1x: np.ndarray, fg1x: np.ndarray, is_foliage: bool = False) -> np.ndarray:
-    h, w, _ = rgb1x.shape
-    out = np.zeros_like(rgb1x)
-    out[~fg1x] = BG_LIGHT_BROWN
-
-    if is_foliage:
-        px = rgb1x[fg1x].astype(np.int32)
-        d2 = ((px[:, None, :] - LEAF_RAMP[None, :, :].astype(np.int32)) ** 2).sum(axis=-1)
-        out[fg1x] = LEAF_RAMP[np.argmin(d2, axis=1)]
-        return out
-
-    r = rgb1x[:, :, 0].astype(np.int32)
-    g = rgb1x[:, :, 1].astype(np.int32)
-    b = rgb1x[:, :, 2].astype(np.int32)
-
-    yy = np.arange(h)[:, None]
-    win_mask = fg1x & (yy < int(h * 0.52)) & (r >= 218) & (g >= 182) & (b >= 102)
-    wood_mask = fg1x & (~win_mask)
-
-    if np.any(win_mask):
-        px_w = rgb1x[win_mask].astype(np.int32)
-        d2_w = ((px_w[:, None, :] - WIN_RAMP[None, :, :].astype(np.int32)) ** 2).sum(axis=-1)
-        out[win_mask] = WIN_RAMP[np.argmin(d2_w, axis=1)]
-
-    if np.any(wood_mask):
-        px_wd = rgb1x[wood_mask].astype(np.float32)
-        lum = 0.299 * px_wd[:, 0] + 0.587 * px_wd[:, 1] + 0.114 * px_wd[:, 2]
-        ramp_lum = (
-            0.299 * WOOD_RAMP[:, 0].astype(np.float32)
-            + 0.587 * WOOD_RAMP[:, 1].astype(np.float32)
-            + 0.114 * WOOD_RAMP[:, 2].astype(np.float32)
-        )
-        d_lum = np.abs(lum[:, None] - ramp_lum[None, :])
-        out[wood_mask] = WOOD_RAMP[np.argmin(d_lum, axis=1)]
-
-    return out
-
-
-def remove_parasite_speckles(qarr: np.ndarray, fg_mask: np.ndarray, outline_rgb: Tuple[int, int, int]) -> np.ndarray:
+def remove_small_color_clusters(qarr: np.ndarray, region_mask: np.ndarray, protected_mask: np.ndarray, max_size: int = 3) -> np.ndarray:
+    """Supprime tous les micro-amas isolés (<= max_size px) hors traits 1px protégés."""
     out = qarr.copy()
     h, w, _ = out.shape
-    outline_code = (outline_rgb[0] << 16) | (outline_rgb[1] << 8) | outline_rgb[2]
+    edit_zone = region_mask & (~protected_mask)
     struct8 = np.ones((3, 3), dtype=bool)
 
-    for _pass in range(2):
+    for _ in range(2):
         codes = (
             (out[:, :, 0].astype(np.int32) << 16)
             | (out[:, :, 1].astype(np.int32) << 8)
             | out[:, :, 2].astype(np.int32)
         )
-        unique_codes = [int(c) for c in np.unique(codes[fg_mask]) if int(c) != outline_code]
-        replace_mask = np.zeros((h, w), dtype=bool)
-
-        for c in unique_codes:
-            cmask = fg_mask & (codes == c)
-            lbl, n = ndimage.label(cmask, structure=struct8)
+        uniq = np.unique(codes[edit_zone])
+        rep = np.zeros((h, w), dtype=bool)
+        for c in uniq:
+            cm = edit_zone & (codes == c)
+            lbl, n = ndimage.label(cm, structure=struct8)
             if n == 0:
                 continue
-            sizes = ndimage.sum(cmask, lbl, range(1, n + 1))
-            small_ids = np.where(sizes <= 2)[0] + 1
-            if len(small_ids) > 0:
-                replace_mask |= np.isin(lbl, small_ids)
-
-        if not np.any(replace_mask):
+            sz = ndimage.sum(cm, lbl, range(1, n + 1))
+            small = np.where(sz <= max_size)[0] + 1
+            if len(small):
+                rep |= np.isin(lbl, small)
+        if not np.any(rep):
             break
-
-        ys, xs = np.where(replace_mask)
-        new_out = out.copy()
+        ys, xs = np.where(rep)
+        nxt = out.copy()
         for y, x in zip(ys, xs):
             y0, y1 = max(0, y - 1), min(h, y + 2)
             x0, x1 = max(0, x - 1), min(w, x + 2)
-            nb_fg = fg_mask[y0:y1, x0:x1] & (~replace_mask[y0:y1, x0:x1])
-            if not np.any(nb_fg):
-                nb_fg = fg_mask[y0:y1, x0:x1]
-            nb_codes = codes[y0:y1, x0:x1][nb_fg]
-            if len(nb_codes) > 0:
-                vals, cnts = np.unique(nb_codes, return_counts=True)
-                best_c = int(vals[int(np.argmax(cnts))])
-                new_out[y, x] = [(best_c >> 16) & 255, (best_c >> 8) & 255, best_c & 255]
-        out = new_out
-
-    eroded = ndimage.binary_erosion(fg_mask, structure=np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=bool))
-    out[fg_mask & (~eroded)] = outline_rgb
-    out[~fg_mask] = BG_LIGHT_BROWN
+            valid = edit_zone[y0:y1, x0:x1] & (~rep[y0:y1, x0:x1])
+            if not np.any(valid):
+                valid = edit_zone[y0:y1, x0:x1]
+            nb = codes[y0:y1, x0:x1][valid]
+            if len(nb):
+                vals, cnts = np.unique(nb, return_counts=True)
+                bc = int(vals[int(np.argmax(cnts))])
+                nxt[y, x] = [(bc >> 16) & 255, (bc >> 8) & 255, bc & 255]
+        out = nxt
     return out
 
 
-def pixelize_clean_shell(im2x: Image.Image, w1x: int, h1x: int, is_foliage: bool = False) -> Tuple[np.ndarray, np.ndarray]:
-    outline_rgb = tuple(int(v) for v in (LEAF_RAMP[0] if is_foliage else WOOD_RAMP[0]))
+def pixelize_demixel_shell(im2x: Image.Image, w1x: int, h1x: int, is_foliage: bool = False) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Convertit l'image 2x en VRAI pixel-art Nintendo DS 1x1 sans mixels :
+      - Contours extérieurs 1 px 8-connexes (sans coins en L 2x2) ;
+      - Traits sombres intérieurs squelettisés Zhang-Suen à 1 px strict + élagage des coins en L ;
+      - Suppression par EDT des halos mous d'anti-aliasing autour des traits AVANT quantification ;
+      - Quantification franche à 5 tons cel-shadés (bois) ou 5 tons (feuillage) + nettoyage des amas <= 3 px.
+    Retourne (qarr, fg1x, lum1x_orig).
+    """
+    outline_rgb = tuple(int(v) for v in (LEAF_RAMP[0] if is_foliage else OUTLINE_DARK))
     arr2x = np.array(im2x.convert("RGB").resize((w1x * 2, h1x * 2), Image.Resampling.LANCZOS))
     mag2x = clean_magenta_mask(arr2x)
     fg_raw = ~mag2x
@@ -232,31 +281,359 @@ def pixelize_clean_shell(im2x: Image.Image, w1x: int, h1x: int, is_foliage: bool
 
     blocks = arr2x.reshape(h1x, 2, w1x, 2, 3).transpose(0, 2, 1, 3, 4).reshape(h1x, w1x, 4, 3)
     fg_blocks = (~mag2x).reshape(h1x, 2, w1x, 2).transpose(0, 2, 1, 3).reshape(h1x, w1x, 4)
-
     w_mask = fg_blocks.astype(np.float32)
     w_sum = np.maximum(w_mask.sum(axis=2, keepdims=True), 1.0)
     mean_rgb = (blocks.astype(np.float32) * w_mask[:, :, :, None]).sum(axis=2) / w_sum[:, :, 0, None]
     dists = ((blocks.astype(np.float32) - mean_rgb[:, :, None, :]) ** 2).sum(axis=3)
     dists = np.where(fg_blocks, dists, 1e12)
     best_idx = np.argmin(dists, axis=2)
-
     yy, xx = np.meshgrid(np.arange(h1x), np.arange(w1x), indexing="ij")
     rgb1x = blocks[yy, xx, best_idx].astype(np.uint8)
 
-    qarr = quantize_to_strict_chunsoft_ramps(rgb1x, fg1x, is_foliage=is_foliage)
-    qarr = remove_parasite_speckles(qarr, fg1x, outline_rgb)
-    return qarr, fg1x
+    lum1x = (
+        0.299 * rgb1x[:, :, 0].astype(np.float32)
+        + 0.587 * rgb1x[:, :, 1].astype(np.float32)
+        + 0.114 * rgb1x[:, :, 2].astype(np.float32)
+    )
 
+    # 8-connected exterior 1px outline (erode with 3x3 square -> ZERO L-corners on diagonal edges!)
+    eroded8 = ndimage.binary_erosion(fg1x, structure=np.ones((3, 3), dtype=bool))
+    ext_outline = fg1x & (~eroded8)
+
+    if is_foliage:
+        out = np.zeros_like(rgb1x)
+        out[~fg1x] = BG_LIGHT_BROWN
+        inner = fg1x & (~ext_outline)
+        # Strip dark outline bleed inside leaves before cel-shading onto LEAF_RAMP[1:]
+        clean_leaf = inner & (lum1x >= 46.0)
+        if np.any(clean_leaf) and np.any(inner & (~clean_leaf)):
+            _, idx_l = ndimage.distance_transform_edt(~clean_leaf, return_indices=True)
+            rgb_leaf = rgb1x[idx_l[0], idx_l[1]]
+        else:
+            rgb_leaf = rgb1x
+        px = rgb_leaf[inner].astype(np.int32)
+        d2 = ((px[:, None, :] - LEAF_RAMP[1:, :][None, :, :].astype(np.int32)) ** 2).sum(axis=-1)
+        out[inner] = LEAF_RAMP[1 + np.argmin(d2, axis=1)]
+        # Skeletonize interior dark leaf vein lines cleanly to 1px
+        leaf_veins = prune_l_corners_1px(zhang_suen_thin(inner & (lum1x < 46.0)))
+        out[leaf_veins] = LEAF_RAMP[0]
+        out[ext_outline] = LEAF_RAMP[0]
+        out = remove_small_color_clusters(out, inner, leaf_veins, max_size=2)
+        return out, fg1x, lum1x
+
+    # ==========================================================================
+    # BOIS / MURS / PILIERS / OEUF AILÉ / RACINES : DÉ-MIXELISATION 1x1 STRICTE
+    # ==========================================================================
+    inner_fg = fg1x & (~ext_outline)
+
+    # 1. Separate true broad dark cavities strictly inside the central stair arch vault from fat 2-4px dark lines!
+    cx_room = 0.5 * w1x
+    in_central_vault = (np.abs(xx - cx_room) <= int(w1x * 0.09)) & (yy <= int(h1x * 0.36))
+    deep_cavity = ndimage.binary_opening(inner_fg & in_central_vault & (lum1x < 54.0), structure=np.ones((5, 5), dtype=bool))
+    deep_cavity = ndimage.binary_dilation(deep_cavity, iterations=1) & inner_fg & in_central_vault & (lum1x < 68.0)
+
+    # 2. Detect fat dark lines & creases (restrict win_approx strictly to left/right window X-columns so winged egg stays 100% wood!)
+    in_win_cols = (xx < int(w1x * 0.34)) | (xx > int(w1x * 0.66))
+    win_approx = inner_fg & in_win_cols & (yy < int(h1x * 0.42)) & (rgb1x[:, :, 0] >= 216) & (rgb1x[:, :, 1] >= 180)
+    fat_dark = inner_fg & (~deep_cavity) & (~win_approx) & (lum1x < 80.0)
+
+    # 3. Zhang-Suen skeletonize fat_dark -> exact 1x1 pixel lineart + prune L-corners!
+    thin_dark = prune_l_corners_1px(zhang_suen_thin(fat_dark))
+    # Drop tiny 1-2px isolated dust dots in thin_dark
+    lbl_td, n_td = ndimage.label(thin_dark, structure=np.ones((3, 3), dtype=bool))
+    if n_td > 0:
+        sz_td = ndimage.sum(thin_dark, lbl_td, range(1, n_td + 1))
+        keep_td = np.where(sz_td >= 3)[0] + 1
+        thin_dark = np.isin(lbl_td, keep_td)
+
+    # 4. Strip LANCZOS anti-aliasing collar around fat_dark & ext_outline via EDT BEFORE cel-shading!
+    aa_collar = (ndimage.binary_dilation(fat_dark | ext_outline, iterations=1) & inner_fg & (~deep_cavity) & (~win_approx))
+    clean_wood_src = inner_fg & (~aa_collar) & (~fat_dark) & (~deep_cavity) & (~win_approx)
+    lum_dehalo = lum1x.copy()
+    if np.any(clean_wood_src) and np.any(aa_collar | fat_dark):
+        _, idx_w = ndimage.distance_transform_edt(~clean_wood_src, return_indices=True)
+        replace_z = (aa_collar | fat_dark) & (~deep_cavity)
+        lum_dehalo[replace_z] = lum1x[idx_w[0][replace_z], idx_w[1][replace_z]]
+
+    # 5. Smooth wood regions slightly (median 3x3) so flat cel-shaded clusters form crisp bands without noise!
+    lum_smooth = ndimage.median_filter(lum_dehalo, size=3)
+
+    # 6. Quantize wood strictly onto 5 crisp Chunsoft cel-shaded wood tones!
+    wood_ramp_lum = (
+        0.299 * WOOD_CEL_5[:, 0].astype(np.float32)
+        + 0.587 * WOOD_CEL_5[:, 1].astype(np.float32)
+        + 0.114 * WOOD_CEL_5[:, 2].astype(np.float32)
+    )
+    out = np.zeros_like(rgb1x)
+    out[~fg1x] = BG_LIGHT_BROWN
+
+    wood_fill_mask = inner_fg & (~deep_cavity)
+    if np.any(wood_fill_mask):
+        d_l = np.abs(lum_smooth[wood_fill_mask][:, None] - wood_ramp_lum[None, :])
+        out[wood_fill_mask] = WOOD_CEL_5[np.argmin(d_l, axis=1)]
+
+    # Clean small 1-3px speckles in the flat cel-shaded wood BEFORE stamping crisp 1px lines!
+    out = remove_small_color_clusters(out, wood_fill_mask, np.zeros_like(fg1x), max_size=3)
+
+    # Deep cavities (two-step crisp arch vault shadow)
+    out[deep_cavity & (lum1x >= 42.0)] = CAVITY_DARK
+    out[deep_cavity & (lum1x < 42.0)] = OUTLINE_DARK
+
+    # 7. Stamp razor-sharp 1x1 pixel interior lineart (dark outline #2A170E where strong, warm #603418 sel-out where subtle)
+    strong_line = thin_dark & (lum1x < 58.0)
+    soft_line = thin_dark & (~strong_line)
+    out[soft_line] = SEL_OUT_WOOD
+    out[strong_line] = OUTLINE_DARK
+
+    # 8. Stamp 8-connected 1x1 pixel exterior silhouette outline (#2A170E, 0 L-corners!)
+    out[ext_outline] = OUTLINE_DARK
+
+    return out, fg1x, lum1x
+
+
+# ==============================================================================
+# Reconstruction Pixel-Art 1x1 Pure de l'Escalier Central Nord (0 marche tordue !)
+# ==============================================================================
+
+def reconstruct_crisp_stairs_1px(
+    shell_q: np.ndarray,
+    lum_orig: np.ndarray,
+    cx: float,
+    y_top: int,
+    y_bot: int,
+    half_w_top: int,
+    half_w_bot: int,
+    arch_cy: int,
+    arch_ry: int,
+    step_ys: List[int],
+) -> np.ndarray:
+    """
+    Reconstruit l'ouverture intérieure de l'escalier central en VRAI pixel-art DS 1x1 :
+      - Marche par marche parfaitement horizontale (trait 1 px #2A170E en bas de contremarche,
+        contremarche plane, nez de marche lumineux 1 px droit, giron plat + léger veinage 1 px) ;
+      - Fondu progressif Chunsoft vers l'ombre chaude de la voûte Nord ;
+      - Contours intérieurs 1 px 8-connexes le long des deux piliers de l'arche !
+    """
+    out = shell_q.copy()
+    h, w, _ = out.shape
+
+    # Palette progressive des marches du bas (ensoleillé) vers le haut (ombre sous l'arche)
+    # Chaque entrée : (nose_hi_rgb, tread_rgb, grain_rgb, riser_rgb, riser_top_sh_rgb)
+    step_palettes = [
+        ((246, 182, 82), (224, 146, 54), (188, 114, 44), (142, 80, 34), (96, 52, 24)),   # Marche 0 (bas, pleine lumière)
+        ((236, 164, 66), (206, 130, 48), (168, 98, 38),  (120, 66, 28), (82, 44, 20)),   # Marche 1
+        ((214, 138, 52), (182, 108, 42), (142, 80, 34),  (96, 52, 24),  (68, 36, 18)),   # Marche 2
+        ((182, 108, 42), (142, 80, 34),  (112, 62, 28),  (78, 42, 20),  (54, 29, 15)),   # Marche 3
+        ((134, 74, 32),  (104, 56, 26),  (82, 44, 20),   (62, 33, 16),  (42, 23, 14)),   # Marche 4
+        ((96, 52, 24),   (72, 39, 19),   (58, 31, 16),   (48, 26, 14),  (42, 23, 14)),   # Marche 5 (fond sous voûte)
+    ]
+
+    # Build exact smooth symmetrical archway mask for the stairs
+    arch_mask = np.zeros((h, w), dtype=bool)
+    for y in range(y_top, y_bot + 1):
+        if y < arch_cy:
+            dy = (arch_cy - y) / max(float(arch_ry), 1.0)
+            if dy >= 1.0:
+                continue
+            hw = int(round(half_w_top * math.sqrt(max(0.0, 1.0 - dy * dy))))
+        else:
+            t = (y - arch_cy) / max(float(y_bot - arch_cy), 1.0)
+            hw = int(round(half_w_top + t * (half_w_bot - half_w_top)))
+        xl = int(round(cx - hw))
+        xr = int(round(cx + hw))
+        arch_mask[y, xl : xr + 1] = True
+
+    # Draw 1px #2A170E outline on the wood jambs immediately bordering arch_mask
+    jamb_border = (~arch_mask) & ndimage.binary_dilation(arch_mask, structure=np.ones((3, 3), dtype=bool))
+    jamb_border[y_bot + 1 :, :] = False
+    out[jamb_border] = OUTLINE_DARK
+
+    # Fill upper arch vault above highest step with crisp 2-tone deep shadow
+    top_step_y = step_ys[-1]
+    for y in range(y_top, y_bot + 1):
+        xs = np.where(arch_mask[y])[0]
+        if len(xs) == 0:
+            continue
+        x0, x1 = int(xs.min()), int(xs.max())
+        if y < top_step_y:
+            # Smooth elliptical shadow cap at the very top of the vault
+            out[y, x0 : x1 + 1] = OUTLINE_DARK if (y < top_step_y - 8) else CAVITY_DARK
+            continue
+
+        # Find which step `k` owns row `y` (step_ys = [y_bot, y_s1, y_s2, ..., y_top_step] descending!)
+        k = 0
+        for idx_s in range(len(step_ys) - 1):
+            if step_ys[idx_s + 1] <= y <= step_ys[idx_s]:
+                k = idx_s
+                break
+        yb = step_ys[k]
+        yt = step_ys[k + 1]
+        pal = step_palettes[min(k, len(step_palettes) - 1)]
+        nose_col, tread_col, grain_col, riser_col, riser_sh_col = pal
+
+        span_h = yb - yt
+        riser_h = max(3, min(5, span_h // 3 + 1))
+        nose_y = yb - riser_h
+
+        if y == yb:
+            row_col = OUTLINE_DARK
+        elif y > nose_y:
+            row_col = riser_sh_col if (y == nose_y + 1) else riser_col
+        elif y == nose_y:
+            row_col = nose_col
+        else:
+            row_col = tread_col
+
+        out[y, x0 : x1 + 1] = row_col
+
+        # Subtle clean 1px horizontal woodgrain line in middle of lower treads + 2px side shadow near jambs
+        if yt < y < nose_y and k <= 3:
+            if y == (yt + nose_y) // 2:
+                gx0 = x0 + 8 + (k * 11) % 14
+                gx1 = min(x1 - 8, gx0 + 18)
+                if gx1 > gx0:
+                    out[y, gx0:gx1] = grain_col
+        if y != yb and (x1 - x0) >= 10:
+            # Crisp 2px warm ambient occlusion right next to left & right arch pillars
+            out[y, x0 : x0 + 2] = riser_sh_col
+            out[y, x1 - 1 : x1 + 1] = riser_sh_col
+
+    return out
+
+
+# ==============================================================================
+# Reconstruction Pixel-Art 1x1 Pure des Fenêtres Cintrées & Croisillons (0 flou !)
+# ==============================================================================
+
+def reconstruct_crisp_arched_windows_1px(
+    shell_q: np.ndarray,
+    x_left: int,
+    x_right: int,
+    v_spring: float,
+    ry_arch: float,
+    v_bot: float,
+    transom_vs: List[float],
+    sill_top_h: int = 8,
+    sill_lip_h: int = 4,
+    sill_protrude_r: int = 6,
+) -> np.ndarray:
+    """
+    Reconstruit intégralement les 2 fenêtres cintrées en perspective 2:1 pixel-art pure (1x1 px, 0 mixel) :
+      - Coordonnée cisaillée 2:1 `v(x, y) = y + 0.5 * (x - x_mid)` alignée au pixel près sur la perspective de la pièce ;
+      - Toute l'ancienne zone vitre/croisillons/rebord floue est remplacée à 100 % par :
+          * Vitre cel-shadée nette à 2 tons (#FFFDF2 + liseré #FCE89C de 2 px) entourée d'un sel-out 1 px 8-connexe (#603418) ;
+          * 1 meneau vertical droit + 2 traverses en diagonale 2:1 exacte (cœur doré 2 px + sel-out 1 px #8E5022, 0 flou) ;
+          * Rebord de fenêtre en bois ensoleillé 2:1 net (plateau clair #F6B652 + nez #E09236/#BC722C + contour 1 px #2A170E).
+      - Symétrie miroir exacte gauche <-> droite autour de `w - 1 - x`.
+    """
+    out = shell_q.copy()
+    h, w, _ = out.shape
+    x_mid = 0.5 * (x_left + x_right)
+    rx = 0.5 * (x_right - x_left)
+
+    pad_x0 = max(0, x_left - 4)
+    pad_x1 = min(w // 2, x_right + sill_protrude_r + 4)
+    pad_y0 = max(0, int(v_spring - ry_arch - 0.5 * rx) - 6)
+    pad_y1 = min(h, int(v_bot + 0.5 * rx + sill_top_h + sill_lip_h) + 8)
+
+    pw = pad_x1 - pad_x0
+    ph = pad_y1 - pad_y0
+    yy_l, xx_l = np.mgrid[0:ph, 0:pw]
+    gx = xx_l + pad_x0
+    gy = yy_l + pad_y0
+
+    # 2:1 sheared vertical coordinate (integer half-steps -> exact 2px horizontal per 1px vertical!)
+    v_grid = gy.astype(np.float32) + 0.5 * (gx.astype(np.float32) - x_mid)
+    u_grid = (gx.astype(np.float32) - x_mid) / max(rx, 1.0)
+
+    in_x_pane = (gx >= x_left) & (gx <= x_right)
+    arch_top_v = v_spring - ry_arch * np.sqrt(np.maximum(0.0, 1.0 - np.minimum(1.0, u_grid * u_grid)))
+    pane = in_x_pane & (v_grid >= np.ceil(arch_top_v)) & (v_grid <= v_bot)
+
+    # 8-connected 1px inner wooden frame outline around the glass pane
+    frame_sel1 = (~pane) & ndimage.binary_dilation(pane, structure=np.ones((3, 3), dtype=bool))
+    glass_core = ndimage.binary_erosion(pane, structure=np.ones((5, 5), dtype=bool))
+
+    # Crisp 1x1 vertical mullion at x = round(x_mid)-1 .. round(x_mid)
+    vx = int(round(x_mid)) - 1
+    v_core = pane & ((gx == vx) | (gx == vx + 1))
+    v_hi = pane & (gx == vx + 1)
+    v_sel = pane & ((gx == vx - 1) | (gx == vx + 2))
+
+    # Crisp 2:1 diagonal perspective transoms (exact 2px steps!)
+    t_core = np.zeros((ph, pw), dtype=bool)
+    t_hi = np.zeros((ph, pw), dtype=bool)
+    t_sel = np.zeros((ph, pw), dtype=bool)
+    for tv in transom_vs:
+        # Integerized 2:1 line: yc(x) = int(floor(tv - 0.5 * (gx - x_mid)))
+        yc = np.floor(tv - 0.5 * (gx.astype(np.float32) - x_mid)).astype(int)
+        t_hi |= pane & (gy == yc)
+        t_core |= pane & ((gy == yc) | (gy == yc + 1))
+        t_sel |= pane & ((gy == yc - 1) | (gy == yc + 2))
+
+    all_core = v_core | t_core
+    all_hi = (v_hi | t_hi) & all_core
+    all_sel = (v_sel | t_sel) & (~all_core) & pane
+
+    # Crisp 2:1 3D isometric wooden window sill right below the glass pane!
+    y_sill_top = np.floor(v_bot + 1.0 - 0.5 * (gx.astype(np.float32) - x_mid)).astype(int)
+    dy_sill = gy - y_sill_top
+    # True 3D perspective sill: projects inward into the room (+dy_sill//2 on left, up to x_right + sill_protrude_r on right)
+    x_sill_l = x_left + np.clip(dy_sill // 2, 0, 5)
+    x_sill_r = x_right + np.minimum(sill_protrude_r, np.maximum(2, dy_sill // 2 + 4))
+    in_x_sill = (gx >= x_sill_l) & (gx <= x_sill_r)
+    sill_top_plane = in_x_sill & (dy_sill >= 0) & (dy_sill < sill_top_h) & (~pane)
+    sill_front_lip = in_x_sill & (dy_sill >= sill_top_h) & (dy_sill < sill_top_h + sill_lip_h) & (~pane)
+    sill_total = sill_top_plane | sill_front_lip
+    sill_hi_line = in_x_sill & (dy_sill == sill_top_h - 1) & (~pane)
+    sill_crease = in_x_sill & (dy_sill == sill_top_h) & (~pane)
+    sill_outline = (~sill_total) & (~pane) & ndimage.binary_dilation(sill_total, structure=np.ones((3, 3), dtype=bool))
+
+    sub_out = out[pad_y0:pad_y1, pad_x0:pad_x1].copy()
+
+    # 1. Paint crisp wooden sill first
+    sub_out[sill_top_plane] = WOOD_CEL_5[4]     # #F6B652 sunlit sill top
+    sub_out[sill_hi_line] = WIN_GLASS_RIM       # #FCE89C crisp nose catchlight
+    sub_out[sill_front_lip] = WOOD_CEL_5[2]     # #BC722C front vertical lip
+    sub_out[sill_crease] = SEL_OUT_WOOD         # #603418 1px step crease
+    sub_out[sill_outline] = OUTLINE_DARK        # #2A170E 1px 8-connexe sill border
+
+    # 2. Paint crisp arched glass + 1px sel-out + 2:1 muntin bars
+    sub_out[frame_sel1 & (~sill_top_plane)] = SEL_OUT_WOOD
+    sub_out[pane] = WIN_GLASS_RIM
+    sub_out[glass_core] = WIN_GLASS_CORE
+    sub_out[all_sel] = WIN_BAR_SEL
+    sub_out[all_core] = WIN_BAR_BODY
+    sub_out[all_hi] = WIN_BAR_HI
+    # Clean 1px line right where glass meets sunlit sill
+    glass_sill_joint = in_x_pane & (gy == y_sill_top)
+    sub_out[glass_sill_joint] = WIN_BAR_SEL
+
+    out[pad_y0:pad_y1, pad_x0:pad_x1] = sub_out
+
+    # Mirror exact crisp window + sill onto right wall!
+    edit_mask = pane | frame_sel1 | sill_total | sill_outline
+    rx0, rx1 = w - pad_x1, w - pad_x0
+    sub_right = out[pad_y0:pad_y1, rx0:rx1].copy()
+    sub_mir = sub_out[:, ::-1]
+    mir_m = edit_mask[:, ::-1]
+    sub_right[mir_m] = sub_mir[mir_m]
+    out[pad_y0:pad_y1, rx0:rx1] = sub_right
+
+    return out
+
+
+# ==============================================================================
+# Plancher 12 px Synthétisé & Sprites de Lianes
+# ==============================================================================
 
 def synthesize_crisp_pixel_art_plank_floor(w: int, h: int, plank_h: int = 12, y_offset: int = 4) -> np.ndarray:
     floor = np.zeros((h, w, 3), dtype=np.uint8)
     offsets_cycle = [0, 38, 16, 54, 26, 62]
-
     for y in range(h):
         plank_idx = (y + y_offset) // plank_h
         ry = (y + y_offset) % plank_h
         body_col = PLANK_BODY_A if (plank_idx % 2 == 0) else PLANK_BODY_B
-
         if ry == 0:
             floor[y, :] = PLANK_SEAM
             continue
@@ -266,9 +643,7 @@ def synthesize_crisp_pixel_art_plank_floor(w: int, h: int, plank_h: int = 12, y_
         if ry == plank_h - 1:
             floor[y, :] = PLANK_BOT_SH
             continue
-
         floor[y, :] = body_col
-
         if ry in (5, 8):
             shift_g = (plank_idx * 29 + ry * 13) % 72
             for gx in range(-shift_g, w, 72):
@@ -277,13 +652,11 @@ def synthesize_crisp_pixel_art_plank_floor(w: int, h: int, plank_h: int = 12, y_
                 x1 = min(w, gx + 14 + seg_len)
                 if x1 - x0 >= 8:
                     floor[y, x0:x1] = PLANK_GRAIN
-
         v_shift = offsets_cycle[plank_idx % len(offsets_cycle)]
         for jx in range(v_shift, w, 72):
             if 1 <= jx < w - 2:
                 floor[y, jx] = PLANK_SEAM
                 floor[y, jx + 1] = PLANK_TOP_HI
-
     return floor
 
 
@@ -295,7 +668,6 @@ def build_vine_sprite(vines_path: Path, tw: int, th: int) -> Image.Image:
     lbl, n = ndimage.label(fg)
     sizes = ndimage.sum(fg, lbl, range(1, n + 1))
     main_fg = lbl == (int(np.argmax(sizes)) + 1)
-
     ys, xs = np.where(main_fg)
     pad = 24
     x0, x1 = max(0, int(xs.min()) - pad), min(arr.shape[1], int(xs.max()) + pad)
@@ -303,8 +675,7 @@ def build_vine_sprite(vines_path: Path, tw: int, th: int) -> Image.Image:
     clean_crop = arr.copy()
     clean_crop[~main_fg] = (255, 0, 255)
     sub = Image.fromarray(clean_crop[y0:y1, x0:x1], mode="RGB")
-
-    qarr, fg1x = pixelize_clean_shell(sub, tw, th, is_foliage=True)
+    qarr, fg1x, _ = pixelize_demixel_shell(sub, tw, th, is_foliage=True)
     rgba = np.zeros((th, tw, 4), dtype=np.uint8)
     rgba[:, :, :3] = qarr
     rgba[:, :, 3] = np.where(fg1x, 255, 0)
@@ -312,7 +683,7 @@ def build_vine_sprite(vines_path: Path, tw: int, th: int) -> Image.Image:
 
 
 # ==============================================================================
-# Construction de `guilde_destiny_accueil` (640 x 480) — Zéro Mixel, Zéro Interstice
+# Construction `guilde_destiny_accueil` (640 x 480) — Zéro Mixel, Zéro Interstice
 # ==============================================================================
 
 def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, np.ndarray]], Image.Image, np.ndarray]:
@@ -322,51 +693,61 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
 
     im_orig = Image.open("/home/user/uploads/image-3.png").convert("RGB").resize((1280, 960), Image.Resampling.LANCZOS)
     a_orig = np.array(im_orig)
-    a_orig[32:58, 566:594] = a_orig[32:58, 686:714][:, ::-1]
+    # Symmetrize architectural room left -> right so both windows, pillars, winged egg & root jambs have 100% clean symmetry
+    a_orig[:, 640:] = a_orig[:, :640][:, ::-1]
 
-    # Cut ONLY the flat tan floor-guide between the sculpted South root jambs at 2x BEFORE pixelizing!
-    # Look at image-3.png: inside y_2x=700..916, x_2x=540..740, the sculpted root jambs are rich bark
-    # while the flat floor guide is uniform smooth tan (low local gradient & warm tan RGB).
-    # Symmetrizing the left sculpted root jamb onto the right root jamb at 2x guarantees 100% organic
-    # symmetry AND lets pixelize_clean_shell draw a continuous 1px #2A170E outline along the true organic root curve!
-    a_orig[696:940, 640:820] = a_orig[696:940, 460:640][:, ::-1]
+    shell_q, shell_mask, lum_orig = pixelize_demixel_shell(Image.fromarray(a_orig), W, H, is_foliage=False)
 
-    shell_q, shell_mask = pixelize_clean_shell(Image.fromarray(a_orig), W, H, is_foliage=False)
+    # Reconstruct 100% crisp 1x1 pixel-art arched windows & muntin bars + sunlit 2:1 sill!
+    shell_q = reconstruct_crisp_arched_windows_1px(
+        shell_q,
+        x_left=140,
+        x_right=190,
+        v_spring=116.0,
+        ry_arch=25.0,
+        v_bot=164.0,
+        transom_vs=[122.0, 143.0],
+        sill_top_h=10,
+        sill_lip_h=5,
+        sill_protrude_r=7,
+    )
+
+    # Reconstruct 100% crisp 1x1 pixel-art central staircase inside the winged-egg arch!
+    shell_q = reconstruct_crisp_stairs_1px(
+        shell_q, lum_orig,
+        cx=319.5,
+        y_top=93,
+        y_bot=179,
+        half_w_top=28,
+        half_w_bot=33,
+        arch_cy=125,
+        arch_ry=32,
+        step_ys=[179, 166, 153, 140, 128, 116, 105],
+    )
 
     yy, xx = np.mgrid[0:H, 0:W]
-    r_s = shell_q[:, :, 0].astype(int)
-
     in_candidate_oval = (((xx - 320.0) / 214.0) ** 2 + ((yy - 262.0) / 96.0) ** 2 <= 1.02) & (yy >= 174)
     in_candidate_south = (yy >= 344) & (yy <= 454) & (xx >= 266) & (xx <= 373)
     in_compass_1x = ((xx - 320.0) ** 2 + (yy - 265.0) ** 2) <= 52 ** 2
 
-    is_dark_wall_line = ((r_s <= 102) & (~in_compass_1x)) | (~shell_mask)
+    is_dark_wall_line = ((lum_orig <= 92.0) & (~in_compass_1x)) | (~shell_mask)
     walk_seed_region = (in_candidate_oval | in_candidate_south) & (~is_dark_wall_line)
     lbl_fl, _ = ndimage.label(walk_seed_region)
     floor_interior = lbl_fl == lbl_fl[220, 320]
 
-    # Intersection left/right blocks any single-sided highlight leak into the window baseboards!
     floor_sym = floor_interior & floor_interior[:, ::-1]
-    # Remove the tiny dark shadow-tooth at the base of the stair pillars symmetrically (x=282..358, y=180..186)
-    floor_sym[181:187, 252:388] |= (floor_interior[181:187, 252:388] | floor_interior[181:187, 252:388][:, ::-1])
-    # Silky-smooth Chunsoft oval baseboard curve via circular disk closing + opening (0 jagged teeth!)
+    floor_sym[180:187, 252:388] |= (floor_interior[180:187, 252:388] | floor_interior[180:187, 252:388][:, ::-1])
     dy_d, dx_d = np.mgrid[-4:5, -4:5]
     disk9 = (dx_d * dx_d + dy_d * dy_d) <= 16
     floor_sym = ndimage.binary_closing(floor_sym, structure=disk9)
     floor_sym = ndimage.binary_opening(floor_sym, structure=disk9)
     floor_sym = ndimage.binary_fill_holes(floor_sym)
 
-    # Smooth monotonic Chunsoft curve for the two South root jambs (0 horizontal spikes!)
     raw_hw = np.zeros(453 - 344, dtype=np.float32)
     for idx_y, y in enumerate(range(344, 453)):
-        # Measure inner edge of the sculpted root silhouette from image-3's warm flat guide vs textured bark
         xs_f = np.where(floor_sym[y] & (xx[y] >= 266) & (xx[y] <= 373))[0]
-        if len(xs_f) >= 20:
-            hw_v = 0.5 * (xs_f.max() - xs_f.min())
-        else:
-            hw_v = 45.0
+        hw_v = 0.5 * (xs_f.max() - xs_f.min()) if len(xs_f) >= 20 else 45.0
         raw_hw[idx_y] = np.clip(hw_v, 41.0, 46.5)
-    # Gentle inward rounding right at the bottom root tips (y=442..452: 45.5 -> 42.5), smoothed with Gaussian sigma=4.5
     tip_taper = np.linspace(0.0, 3.0, 14)
     raw_hw[-14:] = np.minimum(raw_hw[-14:], 45.5 - tip_taper)
     smooth_hw = ndimage.gaussian_filter1d(raw_hw, sigma=4.5, mode="nearest")
@@ -379,9 +760,8 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
     floor_core = floor_sym.copy()
     floor_core[348:, :] = False
     floor_core[344:453, :] |= south_smooth[344:453, :]
-    floor_core[yy < 176] = False
+    floor_core[yy < 180] = False
 
-    # Wall shell mask = everything in shell_mask EXCEPT floor_core and EXCEPT open doorway below y=451
     door_below_451 = (yy >= 451) & (xx >= 274) & (xx <= 365)
     wall_shell_mask = shell_mask & (~floor_core) & (~door_below_451)
     lbl_ws, n_ws = ndimage.label(wall_shell_mask)
@@ -389,9 +769,12 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
         sz_ws = ndimage.sum(wall_shell_mask, lbl_ws, range(1, n_ws + 1))
         wall_shell_mask = lbl_ws == (int(np.argmax(sz_ws)) + 1)
 
-    # Crisp 1px #2A170E inner outline along the ENTIRE smooth wall & root-jamb boundary!
-    wall_inner_outline = wall_shell_mask & ndimage.binary_dilation(floor_core | door_below_451, iterations=1)
-    shell_q[wall_inner_outline] = OUTLINE_WOOD
+    # 8-connected 1px inner baseboard outline (erode wall_shell_mask or dilate floor_core with 3x3 + prune L-corners!)
+    wall_inner_raw = wall_shell_mask & ndimage.binary_dilation(floor_core | door_below_451, structure=np.ones((3, 3), dtype=bool))
+    wall_inner_1px = prune_l_corners_1px(zhang_suen_thin(wall_inner_raw)) | (
+        wall_shell_mask & (~ndimage.binary_erosion(wall_shell_mask | (~(floor_core | door_below_451)), structure=np.ones((3, 3), dtype=bool)))
+    )
+    shell_q[wall_inner_1px] = OUTLINE_DARK
 
     # Walkable 8x8 collision grid
     walk_grid = np.zeros((GW, GH), dtype=bool)
@@ -412,15 +795,9 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
             walk_grid[tx, ty] = bool(walk_px[ty * 8 : (ty + 1) * 8, tx * 8 : (tx + 1) * 8].all())
     walk_tiles_px = np.repeat(np.repeat(walk_grid.T, 8, axis=0), 8, axis=1)
 
-    # --------------------------------------------------------------------------
-    # Géométrie Chunsoft EoS du Seuil Courbe & Halo d'Entrée Sud (0 interstice !)
-    # --------------------------------------------------------------------------
-    # Measure exact inner doorway opening at y=450 between left & right sculpted root jambs:
     xs_open = np.where(~wall_shell_mask[450] & (xx[450] >= 266) & (xx[450] <= 373))[0]
     x_left_open, x_right_open = int(xs_open.min()), int(xs_open.max())
     cx_h = 319.5
-    # Extend +4px UNDER both sculpted root jambs (which sit on l3_walls / l7_top ABOVE l1_floor & l6_halo!)
-    # -> ZERO gap, ZERO corner poke, 100% organic root overlap!
     half_w_vis = 0.5 * (x_right_open - x_left_open)
     half_w_under = half_w_vis + 4.0
 
@@ -428,32 +805,20 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
     nx_under = (xx - cx_h) / half_w_under
     in_door_under = np.abs(nx_under) <= 1.0
 
-    # Gentle Chunsoft convex doorway threshold curve (y=451 at the root jambs -> y=455 at center x=320)
     lip_bot_y = 451.0 + 4.0 * np.maximum(0.0, 1.0 - nx_vis * nx_vis)
     lip_top_y = lip_bot_y - 3.0
 
-    # Floor underlap extends 3px UNDER all walls & root jambs AND fills down to lip_bot_y -> ZERO interstice!
     door_plank_zone = in_door_under & (yy >= 348) & (yy <= np.floor(lip_bot_y))
-    floor_underlap = (ndimage.binary_dilation(floor_core, iterations=3) & (wall_shell_mask | floor_core)) | door_plank_zone
-    floor_underlap[yy < 174] = False
-    # Never leak outside the outer silhouette of the root jambs!
-    outer_hull = wall_shell_mask | floor_core | (in_door_under & (yy >= 348) & (yy <= np.floor(lip_bot_y)))
-    floor_underlap &= outer_hull
+    outer_hull = wall_shell_mask | floor_core | door_plank_zone
+    floor_underlap = ((ndimage.binary_dilation(floor_core, iterations=3) & (wall_shell_mask | floor_core)) | door_plank_zone) & outer_hull
+    floor_underlap[yy < 178] = False
 
     pure_planks = synthesize_crisp_pixel_art_plank_floor(W, H, plank_h=12, y_offset=2)
     bevel_ring = floor_core & ndimage.binary_dilation(wall_shell_mask, iterations=1) & (yy < 448)
     pure_planks[bevel_ring] = PLANK_SEAM
 
-    # --------------------------------------------------------------------------
-    # Construction des 8 Calques Paint.NET :
-    #   Ordre de superposition :
-    #     00 fond -> 01 plancher -> 02 ombre escalier -> 06 halo Sud (SOUS les racines !) -> 03 murs/racines -> 04 verdure -> 05 aura fenêtres -> 07 racines Top !
-    #   Attends : dans le .ora et dans PMDO, si on clippe 06_halo sur (~wall_shell_mask), alors MÊME AU-DESSUS de 03,
-    #   les jambages de racines (03 et 07) gardent 100 % de leur contour organique 1 px #2A170E sans AUCUN débordement blanc !
-    # --------------------------------------------------------------------------
     l0_bg = np.zeros((H, W, 4), dtype=np.uint8)
     l0_bg[:, :] = [BG_LIGHT_BROWN[0], BG_LIGHT_BROWN[1], BG_LIGHT_BROWN[2], 255]
-    # Keep l0_bg 100% #C69B6E under the open South doorway sill so ZERO dark pixel ever peeks below the white lip!
     l0_bg[(wall_shell_mask | floor_core) & (~(in_door_under & (yy >= 444)))] = [52, 30, 16, 255]
 
     l1_floor = np.zeros((H, W, 4), dtype=np.uint8)
@@ -465,8 +830,8 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
     )
     m_wall_bot = wall_shell_mask & (~m_top)
 
-    in_arch = (((xx - 320.0) / 27.0) ** 2 + ((yy - 114.0) / 30.0) ** 2 <= 1.0) & (yy >= 82) & (yy <= 128)
-    m_stair_depth = m_wall_bot & in_arch & (shell_q[:, :, 0] <= 98)
+    in_arch_top = (yy >= 92) & (yy <= 122) & (xx >= 290) & (xx <= 349) & (shell_q[:, :, 0] <= 72)
+    m_stair_depth = m_wall_bot & in_arch_top
     m_walls_main = m_wall_bot & (~m_stair_depth)
 
     l2_stair = np.zeros((H, W, 4), dtype=np.uint8)
@@ -487,48 +852,39 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
     vine_canvas.paste(vine_spr, (156, 12), vine_spr)
     vine_canvas.paste(vine_r, (352, 12), vine_r)
     l4_vines = np.array(vine_canvas, dtype=np.uint8)
-    win_glass = (shell_q[:, :, 0] >= 240) & (shell_q[:, :, 1] >= 220) & (yy < 205)
+    win_glass = (shell_q[:, :, 0] >= 248) & (shell_q[:, :, 1] >= 230) & (yy < 190)
     outside_room = ~ndimage.binary_dilation(wall_shell_mask | floor_core, iterations=5)
     l4_vines[win_glass | outside_room, 3] = 0
 
     sun_frames: List[np.ndarray] = []
-    w_d1 = np.sqrt(((xx - 158.0) / 48.0) ** 2 + ((yy - 136.0) / 58.0) ** 2)
-    w_d2 = np.sqrt(((xx - 482.0) / 48.0) ** 2 + ((yy - 136.0) / 58.0) ** 2)
-    w_min = np.minimum(w_d1, w_d2)
-    aura_core = wall_shell_mask & (yy < 204) & (w_min <= 0.58)
-    aura_outer = wall_shell_mask & (yy < 204) & (w_min > 0.58) & (w_min <= 0.90)
+    # Restrict window shimmer strictly to the glass panes + 1x1 pollen motes so flat cel-shaded wood has 0 alpha circle!
+    aura_core = wall_shell_mask & win_glass
     motes = [
-        (178, 158, 0), (194, 174, 4), (166, 180, 8),
-        (462, 158, 2), (446, 174, 6), (474, 180, 10),
+        (174, 152, 0), (186, 166, 4), (162, 168, 8),
+        (466, 152, 2), (454, 166, 6), (478, 168, 10),
     ]
     for ph in range(12):
         fr = np.zeros((H, W, 4), dtype=np.uint8)
         breath = 0.5 + 0.5 * math.sin(2.0 * math.pi * ph / 12.0)
-        fr[aura_core] = [255, 248, 198, int(round((32 + 12 * breath) / 4.0) * 4)]
-        fr[aura_outer] = [255, 242, 182, int(round((16 + 8 * breath) / 4.0) * 4)]
+        fr[aura_core] = [255, 250, 208, int(round((20 + 12 * breath) / 4.0) * 4)]
         for mx0, my0, off in motes:
             t = (ph + off) % 12
             dx = int(round(2.0 * math.cos(2.0 * math.pi * t / 12.0)))
             dy = int(round(2.0 * math.sin(2.0 * math.pi * t / 12.0)))
-            ma = 96 + int(64 * (0.5 + 0.5 * math.sin(2.0 * math.pi * t / 12.0)))
+            ma = 112 + int(64 * (0.5 + 0.5 * math.sin(2.0 * math.pi * t / 12.0)))
             px_x, px_y = mx0 + dx, my0 + dy
             if 0 <= px_x < W - 1 and 0 <= px_y < H - 1 and wall_shell_mask[px_y, px_x]:
-                fr[px_y : px_y + 2, px_x : px_x + 2] = [255, 252, 214, ma]
+                fr[px_y, px_x] = [255, 253, 224, ma]  # 1x1 pixel mote (never 2x2 mixel mote!)
         sun_frames.append(fr)
 
-    # 06 : Halo Chunsoft Concentrique + Lèvre Courbe Opaque (strictement hors wall_shell_mask = 0 débordement !)
     open_south_canvas = (~wall_shell_mask) & in_door_under & (yy >= 390) & (yy <= np.floor(lip_bot_y))
     lip_mask = open_south_canvas & (yy >= np.floor(lip_top_y))
     lip_warm_rim = (~wall_shell_mask) & in_door_under & (yy == np.floor(lip_bot_y) + 1) & (np.abs(nx_vis) <= 0.96)
 
-    # Concentric radial distance from doorway center (cx=319.5, cy=453.0)
     rx_arc = half_w_vis * 0.98
     ry_arc = half_w_vis * 0.90
     rad_arc = np.sqrt(((xx - cx_h) / rx_arc) ** 2 + np.maximum(0.0, (453.0 - yy) / ry_arc) ** 2)
 
-    # Notice how tapering the curved lip with the EXACT SAME concentric warmth near the roots
-    # (pure ivory-white #FFFDF2 in center |nx_vis|<=0.58 -> warm cream #FFF6CE -> sunlit gold #FBE29A right at the root bark)
-    # eliminates any white corner poke AND keeps 100% opaque zero-interstice contact!
     lip_c0 = lip_mask & (np.abs(nx_vis) <= 0.56)
     lip_c1 = lip_mask & (np.abs(nx_vis) > 0.56) & (np.abs(nx_vis) <= 0.82)
     lip_c2 = lip_mask & (np.abs(nx_vis) > 0.82)
@@ -547,7 +903,6 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
         fr[arc_b3] = [HALO_BAND_3[0], HALO_BAND_3[1], HALO_BAND_3[2], int(round((104 + 18 * pulse) / 4.0) * 4)]
         fr[arc_b2] = [HALO_BAND_2[0], HALO_BAND_2[1], HALO_BAND_2[2], int(round((164 + 20 * pulse) / 4.0) * 4)]
         fr[arc_b1] = [HALO_BAND_1[0], HALO_BAND_1[1], HALO_BAND_1[2], int(round((220 + 20 * pulse) / 4.0) * 4)]
-        # 100% OPAQUE Chunsoft curved threshold lip (0 grey gap, tapered gold-to-ivory into root jambs!)
         fr[lip_warm_rim] = [226, 186, 124, 255]
         fr[lip_c2] = [250, 224, 152, 255]
         fr[lip_c1] = [255, 245, 204, 255]
@@ -611,7 +966,7 @@ def build_accueil_clean() -> Tuple[Dict[str, List[np.ndarray]], List[Tuple[str, 
 
 
 # ==============================================================================
-# Purification Pixel-Art identique de `guilde_destiny_missions` (1112 x 760)
+# Purification Identique de `guilde_destiny_missions` (1112 x 760) — Zéro Mixel
 # ==============================================================================
 
 def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np.ndarray]:
@@ -629,12 +984,39 @@ def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np
     wy = np.clip((136.0 - yy) / 16.0, 0.0, 1.0)
     blend = np.maximum(w_rim, wx * wy)[:, :, None]
     merged = np.clip(cr.astype(np.float32) * blend + base.astype(np.float32) * (1.0 - blend), 0, 255).astype(np.uint8)
+    merged[:, 556:] = merged[:, :556][:, ::-1]
 
-    shell_q, shell_mask = pixelize_clean_shell(Image.fromarray(merged), W, H, is_foliage=False)
+    shell_q, shell_mask, lum_orig = pixelize_demixel_shell(Image.fromarray(merged), W, H, is_foliage=False)
 
-    r_s = shell_q[:, :, 0].astype(int)
+    # Crisp 1x1 pixel-art arched windows + 2:1 sunlit sill on Grande Salle
+    shell_q = reconstruct_crisp_arched_windows_1px(
+        shell_q,
+        x_left=142,
+        x_right=206,
+        v_spring=158.0,
+        ry_arch=34.0,
+        v_bot=238.0,
+        transom_vs=[170.0, 204.0],
+        sill_top_h=12,
+        sill_lip_h=6,
+        sill_protrude_r=9,
+    )
+
+    # Crisp 1x1 pixel-art central staircase on Grande Salle (0 motif on arch preserved!)
+    shell_q = reconstruct_crisp_stairs_1px(
+        shell_q, lum_orig,
+        cx=555.5,
+        y_top=128,
+        y_bot=247,
+        half_w_top=48,
+        half_w_bot=57,
+        arch_cy=168,
+        arch_ry=40,
+        step_ys=[247, 231, 215, 199, 183, 167, 152],
+    )
+
     in_cand = (((xx - 556.0) / 456.0) ** 2 + ((yy - 446.0) / 232.0) ** 2 <= 1.02) & (yy >= 232)
-    is_dark_line = (r_s <= 102) | (~shell_mask)
+    is_dark_line = (lum_orig <= 92.0) | (~shell_mask)
     lbl_m, _ = ndimage.label(in_cand & (~is_dark_line))
     fl_core = lbl_m == lbl_m[430, 556]
     fl_core = fl_core & fl_core[:, ::-1]
@@ -643,11 +1025,11 @@ def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np
     fl_core = ndimage.binary_closing(fl_core, structure=disk9_m)
     fl_core = ndimage.binary_opening(fl_core, structure=disk9_m)
     fl_core = ndimage.binary_fill_holes(fl_core)
-    fl_core[yy < 236] = False
+    fl_core[yy < 248] = False
 
     wall_shell = shell_mask & (~fl_core)
-    wall_touch = wall_shell & ndimage.binary_dilation(fl_core, iterations=1)
-    shell_q[wall_touch] = OUTLINE_WOOD
+    wall_inner_1px = wall_shell & (~ndimage.binary_erosion(wall_shell | (~fl_core), structure=np.ones((3, 3), dtype=bool)))
+    shell_q[wall_inner_1px] = OUTLINE_DARK
 
     fl_underlap = ndimage.binary_dilation(fl_core, iterations=3) & shell_mask
     fl_underlap[yy < 235] = False
@@ -686,8 +1068,8 @@ def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np
         (yy >= 540) | ((yy >= 460) & ((xx <= 180) | (xx >= 932)))
     )
     m_wall_bot = wall_shell & (~m_top)
-    in_arch = (((xx - 556.0) / 42.0) ** 2 + ((yy - 168.0) / 36.0) ** 2 <= 1.0) & (yy >= 126) & (yy <= 186)
-    m_stair = m_wall_bot & in_arch & (shell_q[:, :, 0] <= 98)
+    in_arch = (yy >= 126) & (yy <= 155) & (xx >= 505) & (xx <= 606) & (shell_q[:, :, 0] <= 72)
+    m_stair = m_wall_bot & in_arch
     m_walls_main = m_wall_bot & (~m_stair)
 
     l2_stair = np.zeros((H, W, 4), dtype=np.uint8)
@@ -708,21 +1090,16 @@ def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np
     vine_canvas.paste(vine_spr, (304, 18), vine_spr)
     vine_canvas.paste(vine_r, (660, 18), vine_r)
     l4_vines = np.array(vine_canvas, dtype=np.uint8)
-    win_glass = (shell_q[:, :, 0] >= 240) & (shell_q[:, :, 1] >= 220) & (yy < 245)
+    win_glass = (shell_q[:, :, 0] >= 248) & (shell_q[:, :, 1] >= 230) & (yy < 260)
     outside_room = ~ndimage.binary_dilation(shell_mask, iterations=5)
     l4_vines[win_glass | outside_room, 3] = 0
 
     sun_frames: List[np.ndarray] = []
-    w_d1 = np.sqrt(((xx - 172.0) / 60.0) ** 2 + ((yy - 196.0) / 72.0) ** 2)
-    w_d2 = np.sqrt(((xx - 940.0) / 60.0) ** 2 + ((yy - 196.0) / 72.0) ** 2)
-    w_min = np.minimum(w_d1, w_d2)
-    aura_core = wall_shell & (yy < 248) & (w_min <= 0.58)
-    aura_outer = wall_shell & (yy < 248) & (w_min > 0.58) & (w_min <= 0.90)
+    aura_core = wall_shell & win_glass
     for ph in range(12):
         fr = np.zeros((H, W, 4), dtype=np.uint8)
         breath = 0.5 + 0.5 * math.sin(2.0 * math.pi * ph / 12.0)
-        fr[aura_core] = [255, 248, 198, int(round((32 + 12 * breath) / 4.0) * 4)]
-        fr[aura_outer] = [255, 242, 182, int(round((16 + 8 * breath) / 4.0) * 4)]
+        fr[aura_core] = [255, 250, 208, int(round((20 + 12 * breath) / 4.0) * 4)]
         sun_frames.append(fr)
 
     inout_frames = [np.zeros((H, W, 4), dtype=np.uint8) for _ in range(12)]
@@ -744,7 +1121,7 @@ def build_missions_clean() -> Tuple[Dict[str, List[np.ndarray]], Image.Image, np
 
 
 # ==============================================================================
-# Compilation PMDO 0.8.12.0 (.tile + .rsground)
+# Compilation PMDO 0.8.12.0 (.tile + .rsground) + Planche de Présentation
 # ==============================================================================
 
 def premultiply_patch_bytes(patch_rgba: np.ndarray) -> bytes:
@@ -796,6 +1173,8 @@ def compile_room_pmdo(
     rs_ref_path = GAME / "Data/Ground/guilde_destiny_accueil.rsground"
     if not rs_ref_path.exists():
         rs_ref_path = PDN_DIR / "guilde_destiny_accueil.rsground"
+    if not rs_ref_path.exists():
+        rs_ref_path = Path("/home/user/guilde_destiny_src/guilde_destiny_accueil.rsground")
     orig_rs = json.loads(rs_ref_path.read_text(encoding="utf-8-sig"))
     rand_proto = orig_rs["Object"]["rand"]
     empty_tile_proto = {"AutoTileset": "", "Associates": [], "Layers": [], "NeighborCode": -1}
@@ -872,7 +1251,8 @@ def compile_room_pmdo(
         out_tile += struct.pack("<q", len(blob))
         out_tile += blob
 
-    (GAME / f"Content/Tile/{sheet_name}.tile").write_bytes(bytes(out_tile))
+    if (GAME / "Content/Tile").exists():
+        (GAME / f"Content/Tile/{sheet_name}.tile").write_bytes(bytes(out_tile))
     (PDN_DIR / f"{sheet_name}.tile").write_bytes(bytes(out_tile))
 
     obstacles = [
@@ -909,28 +1289,35 @@ def compile_room_pmdo(
         },
     }
     rs_txt = json.dumps(ground_doc, ensure_ascii=False, indent=2) + "\n"
-    (GAME / f"Data/Ground/{asset_name}.rsground").write_text(rs_txt, encoding="utf-8")
+    if (GAME / "Data/Ground").exists():
+        (GAME / f"Data/Ground/{asset_name}.rsground").write_text(rs_txt, encoding="utf-8")
     (PDN_DIR / f"{asset_name}.rsground").write_text(rs_txt, encoding="utf-8")
-    print(f"[OK] {asset_name} ({w}x{h}): {sheet_name}.tile ({n_tiles} tuiles 8x8 pures).")
+    print(f"[OK] {asset_name} ({w}x{h}): {sheet_name}.tile ({n_tiles} tuiles 8x8 pures 1x1).")
 
 
 def build_showcase_board(pdn_layers: List[Tuple[str, np.ndarray]], acc_rgb: Image.Image) -> None:
-    W_B, H_B = 1480, 1080
+    W_B, H_B = 1520, 1090
     board = Image.new("RGB", (W_B, H_B), (36, 26, 20))
     dr = ImageDraw.Draw(board)
 
-    dr.text((28, 16), "Rendu 1:1 Pur Pixel-Art DS - Accueil Guilde Destiny (640x480, 0 mixel, 0 pixel parasite, 0 interstice)", fill=(252, 236, 196))
+    dr.text((28, 16), "Rendu 1:1 Pur Pixel-Art DS (1x1 px) - Accueil Guilde Destiny (0 mixel murs/fenetres/escalier/sol, 0 interstice)", fill=(252, 236, 196))
     board.paste(acc_rgb, (28, 42))
 
-    dr.text((696, 16), "Zoom 4x Seuil Sud : ZERO interstice + Plancher 12px net + Halo Chunsoft", fill=(255, 228, 168))
-    z_s4 = acc_rgb.crop((258, 396, 382, 468)).resize((124 * 4, 72 * 4), Image.Resampling.NEAREST)
-    board.paste(z_s4, (696, 42))
+    # Zoom 3x Fenêtre + Pilier + Mur + Escalier + Oeuf ailé (preuve directe 1x1 px sans mixels !)
+    dr.text((692, 16), "Zoom 3x Murs + Fenetre + Croisillons 1px + Oeuf aile + Escalier horizontal net", fill=(204, 244, 196))
+    z_top3 = acc_rgb.crop((130, 42, 396, 190)).resize((266 * 3, 148 * 2), Image.Resampling.NEAREST)
+    # Use exact uniform integer 3x zoom on (132..396 = 264px -> 792px, y=48..190 = 142px -> 426? Let's fit 264*3 x 96*3 = 792x288!)
+    z_win_st3 = acc_rgb.crop((132, 88, 396, 186)).resize((264 * 3, 98 * 3), Image.Resampling.NEAREST)
+    board.paste(z_win_st3, (692, 42))
 
-    dr.text((696, 344), "Zoom 2x Mur + Fenetres + Escalier + Plancher (rampe Chunsoft pure, 0 parasite)", fill=(204, 244, 196))
-    z_n2 = acc_rgb.crop((140, 104, 500, 194)).resize((720, 180), Image.Resampling.NEAREST)
-    board.paste(z_n2, (696, 366))
+    # Zoom 3x Oeuf ailé + Seuil Sud côte à côte
+    dr.text((692, 348), "Zoom 3x Oeuf aile (traits 1px) + Zoom 3x Seuil Sud (0 interstice)", fill=(255, 228, 168))
+    z_egg3 = acc_rgb.crop((258, 40, 382, 102)).resize((124 * 3, 62 * 3), Image.Resampling.NEAREST)
+    board.paste(z_egg3, (692, 372))
+    z_sill3 = acc_rgb.crop((258, 402, 382, 464)).resize((124 * 3, 62 * 3), Image.Resampling.NEAREST)
+    board.paste(z_sill3, (1084, 372))
 
-    dr.text((28, 552), "Reseau Multicalque Paint.NET (.ora OpenRaster + 8 calques RGBA nets sans pixels parasites) :", fill=(252, 236, 196))
+    dr.text((28, 566), "Reseau Multicalque Paint.NET (.ora OpenRaster + 8 calques RGBA 1x1 px sans mixel ni pixel parasite) :", fill=(252, 236, 196))
     yy, xx = np.mgrid[0:216, 0:320]
     chk = np.where(((xx // 8) + (yy // 8)) % 2 == 0, 224, 192).astype(np.uint8)
     chk_rgba = np.stack([chk, chk, chk, np.full_like(chk, 255)], axis=-1)
@@ -939,17 +1326,17 @@ def build_showcase_board(pdn_layers: List[Tuple[str, np.ndarray]], acc_rgb: Imag
         "00. Fond marron clair uni (#C69B6E)",
         "01. Plancher pixel-art pur 12px (0 bruit)",
         "02. Profondeur arche escalier Nord",
-        "03. Parois, escalier & fenetres (rampe DS)",
-        "04. Verdure & lianes (rampe DS 6 tons)",
-        "05. Lumiere fenetres & pollen (12 ph.)",
+        "03. Murs, escalier & fenetres 1x1 px (0 mixel)",
+        "04. Verdure & lianes 1x1 px (5 tons)",
+        "05. Lumiere fenetres & pollen 1px (12 ph.)",
         "06. Halo Sud Chunsoft (0 interstice)",
-        "07. Couronne racines avant-plan (Top)",
+        "07. Couronne racines avant-plan 1x1 px (Top)",
     ]
     for i, ((_, larr), lbl) in enumerate(zip(pdn_layers, labels_fr)):
         col = i % 4
         row = i // 4
-        bx = 28 + col * 360
-        by = 580 + row * 244
+        bx = 28 + col * 366
+        by = 592 + row * 244
         dr.text((bx, by), lbl, fill=(238, 218, 184))
         thumb_l = Image.fromarray(larr, "RGBA").resize((320, 216), Image.Resampling.NEAREST)
         merged_t = Image.alpha_composite(Image.fromarray(chk_rgba, "RGBA"), thumb_l).convert("RGB")
@@ -965,7 +1352,7 @@ def main() -> None:
         sheet_name="Destiny_Guilde_Accueil",
         name_en="Destiny Guild - Reception Hall",
         name_fr="Grande Guilde — Salle d’accueil",
-        comment_fr="Salle d'accueil pixel-art pur DS (640x480, rampe Chunsoft stricte, plancher 12px sans pixel parasite, halo Sud Chunsoft sans interstice, fond marron clair #C69B6E).",
+        comment_fr="Salle d'accueil pixel-art pur DS 1x1 px (640x480, 0 mixel murs/fenetres/escalier/plancher, 0 interstice Sud, fond marron clair #C69B6E).",
         w=640, h=480,
         layers_dict=acc_layers,
         walk_grid=acc_walk,
@@ -987,7 +1374,7 @@ def main() -> None:
         sheet_name="Destiny_Guilde_Missions",
         name_en="Destiny Guild - Main Mission Hall",
         name_fr="Grande Guilde — Grande Salle",
-        comment_fr="Grande Salle aux deux murs pixel-art pur DS (1112x760, rampe Chunsoft stricte, plancher 12px sans pixel parasite, fond marron clair #C69B6E).",
+        comment_fr="Grande Salle aux deux murs pixel-art pur DS 1x1 px (1112x760, 0 mixel murs/fenetres/escalier/plancher, fond marron clair #C69B6E).",
         w=1112, h=760,
         layers_dict=mis_layers,
         walk_grid=mis_walk,
@@ -1003,7 +1390,7 @@ def main() -> None:
     )
 
     build_showcase_board(pdn_layers, acc_rgb)
-    print("[OK] Purification pixel-art DS v3 + suppression totale d'interstice terminées.")
+    print("[OK] Dé-mixelisation intégrale v5 (murs, fenêtres, escalier, piliers, racines) terminée.")
 
 
 if __name__ == "__main__":
