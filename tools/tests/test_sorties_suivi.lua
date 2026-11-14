@@ -16,6 +16,7 @@ local tests={
  {'reverie_rock_home','Rock_Home_Entrance_Touch'},
  {'reverie_water_home','Water_Home_Entrance_Touch'},
  {'dojo_kingambit','MarowakDojoExit_Touch'},
+ {'guilde_destiny_accueil','SortieGuilde_Touch'},
  {'ledian_dojo','Dojo_Exit_Touch'},
 }
 for _,t in ipairs(tests) do
@@ -25,4 +26,4 @@ for _,t in ipairs(tests) do
  module[t[2]]({}, {EntName='PLAYER'});assert(count==n+1,t[1]..' joueur ne sort pas')
  module[t[2]]({}, {EntName='PLAYER'});assert(count==n+1,t[1]..' sortie doublée')
 end
-print('PASS 11 sorties : partenaire ignoré, joueur accepté, double sortie évitée')
+print('PASS 12 sorties : partenaire ignoré, joueur accepté, double sortie évitée')

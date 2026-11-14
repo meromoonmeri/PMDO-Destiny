@@ -491,6 +491,35 @@
       "Released": true,
       "Comment": "Arène de combat et salle des reliques/archives raccordées aux deux portes coulissantes nord de dojo_kingambit.",
       "SortOrder": 28
+    },
+    "guilde_destiny_interieur": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "guilde_destiny_accueil"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Destiny Guild Interior",
+        "LocalTexts": {
+          "fr": "Intérieur de la Grande Guilde"
+        }
+      },
+      "Released": true,
+      "Comment": "Zone dédiée aux salles intérieures de la Grande Guilde Destiny (salle d'accueil raccordée à PorteGuilde sur guilde_cliff_*).",
+      "SortOrder": 29
     }
   }
 }

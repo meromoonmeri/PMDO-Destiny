@@ -239,14 +239,26 @@ function scene.PorteGuilde_Touch(map, obj, activator)
 
   ouvrir_porte(map)
   GAME:WaitFrames(20)
-  local chatot = creer_figurant('Guilde_Chatot', 'chatot', Gender.Male, 'Pijako', 232, 260, Direction.Down)
-  GAME:WaitFrames(15)
 
   if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.EnrolementGuilde == 'termine' then
-    cinematique.Dire(chatot, 'Happy', 'Toujours prêts pour l’aventure, jeunes apprentis ! Nos salles intérieures achèvent encore leurs derniers travaux, mais le grand plateau reste votre repaire.', 'standard')
-  else
-    cinematique.Dire(chatot, 'Normal', 'Halte ! La Grande Guilde n’ouvre ses rangs qu’aux équipes ayant déjà fait leurs preuves à Réverie Town. Revenez quand vous aurez accompli un vrai sauvetage !', 'standard')
+    if SOUND ~= nil and SOUND.FadeOutBattleSE ~= nil then
+      pcall(function() SOUND:FadeOutBattleSE('Destiny_Falaise_Mer', 30) end)
+    end
+    GAME:FadeOut(false, 20)
+    definir_porte_ouverte(map, false)
+    retour_au_joueur(hero, partenaire)
+    interaction_en_cours = false
+    if GAME.EnterGroundMap ~= nil then
+      GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_accueil', 'EntreeSudMarker', false)
+    else
+      GAME:EnterZone('guilde_destiny_interieur', -1, 0, 0)
+    end
+    return
   end
+
+  local chatot = creer_figurant('Guilde_Chatot', 'chatot', Gender.Male, 'Pijako', 232, 260, Direction.Down)
+  GAME:WaitFrames(15)
+  cinematique.Dire(chatot, 'Normal', 'Halte ! La Grande Guilde n’ouvre ses rangs qu’aux équipes ayant déjà fait leurs preuves à Réverie Town. Revenez quand vous aurez accompli un vrai sauvetage !', 'standard')
 
   UI:ResetSpeaker()
   GAME:WaitFrames(8)
