@@ -78,9 +78,35 @@ local function installer_declencheur(map, nom, x, y, w, h)
   map:AddObject(obj)
 end
 
+local function installer_statue_kangourex(map)
+  if map == nil or map:FindObject('Statue_Kangourex') then return end
+  local obj = RogueEssence.Ground.GroundObject()
+  obj.EntName = 'Statue_Kangourex'
+  obj.Collider = RogueElements.Rect(428, 236, 24, 12)
+  if RogueElements.Loc ~= nil then
+    obj.DrawOffset = RogueElements.Loc(4, 16)
+  end
+  obj.Passable = false
+  if RogueEssence.Content ~= nil and RogueEssence.Content.ObjAnimData ~= nil then
+    pcall(function() obj.ObjectAnim = RogueEssence.Content.ObjAnimData('Statue_Kangourex', 1) end)
+  else
+    obj.ObjectAnim = {AnimIndex = 'Statue_Kangourex'}
+  end
+  obj:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Action)
+  obj:OnMapInit()
+  map:AddObject(obj)
+  pcall(function()
+    if SCRIPT ~= nil and SCRIPT.GetService ~= nil then
+      local svc = SCRIPT:GetService('StatueKangourex')
+      if svc ~= nil and svc.Installer ~= nil then svc:Installer(obj, map) end
+    end
+  end)
+end
+
 local function installer_declencheurs(map)
   installer_declencheur(map, 'SeuilDonjon', 368, 184, 40, 24)
   installer_declencheur(map, 'SortieRetourReverie', 320, 568, 144, 8)
+  installer_statue_kangourex(map)
 end
 
 local function creer_personnage(nom, espece, genre, surnom, x, y, dir)
@@ -145,6 +171,63 @@ local function jouer_ouverture_cascade(map)
   appliquer_cascade_ouverte(map)
 end
 
+local function tourner_anime(ent, dir, frames_par_45)
+  if ent == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(ent, dir, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:EntTurn(ent, dir) end)
+  end
+end
+
+local function tourner_vers_cible(ent, cible, frames_par_45)
+  if ent == nil or cible == nil then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(ent, cible, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:CharTurnToChar(ent, cible) end)
+  end
+end
+
+local function se_regarder(a, b, frames_par_45)
+  if a == nil or b == nil then return end
+  local f = frames_par_45 or 4
+  tourner_vers_cible(a, b, f)
+  GAME:WaitFrames(5)
+  tourner_vers_cible(b, a, f)
+end
+
+-- Découverte de la Statue Kangourex : le héros muet s'interroge en voyant le
+-- Pokémon de pierre sur la berge droite, puis le partenaire dissipe le quiproquo
+-- et explique le fonctionnement de la réserve d'équipe.
+local function decouverte_statue_kangourex(hero, partenaire)
+  if partenaire == nil then
+    SV.Destiny.StatueKangourexExpliquee = true
+    return
+  end
+
+  cinematique.Dire(partenaire, 'Surprised', 'Hein ? Qu’est-ce qui t’intrigue comme ça ? … Attends, ne me dis pas que tu prends ce ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' de pierre pour un vrai Pokémon figé ici ?!', 'standard')
+  UI:ResetSpeaker()
+
+  if hero ~= nil then
+    cinematique.Emote(hero, 'exclaim', 'EVT_Emote_Exclaim')
+    GAME:WaitFrames(18)
+    tourner_anime(hero, Direction.Up, 4)
+    GAME:WaitFrames(10)
+    tourner_vers_cible(hero, partenaire, 4)
+    GAME:WaitFrames(8)
+  end
+
+  cinematique.Dire(partenaire, 'Happy', 'Haha, rassure-toi ! C’est une [color=#FFC663]Statue Kangourex[color] ! On en croise souvent à l’entrée des donjons.', 'standard')
+  cinematique.Respirer(15)
+  cinematique.Dire(partenaire, 'Normal', 'Les équipes d’exploration s’en servent comme relais de réserve : en t’approchant d’elle, tu peux déposer nos objets précieux en lieu sûr ou retirer des provisions avant de descendre.', 'standard')
+  cinematique.Respirer(15)
+  cinematique.Dire(partenaire, 'Inspired', 'Tout ce qui est rangé dans la réserve reste à l’abri, même si on finit K.O. au fond de la grotte !', 'standard')
+  UI:ResetSpeaker()
+
+  SV.Destiny.StatueKangourexExpliquee = true
+end
+
 local function cinematique_ouverture(map)
   local hero = CH('PLAYER')
   local partenaire = equipe_scene.Partenaire(368, 544, Direction.Up)
@@ -168,12 +251,7 @@ local function cinematique_ouverture(map)
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 
   local function tourner_direction_animee(acteur, dir)
-    if acteur == nil then return end
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(acteur, dir, 4) end)
-    else
-      GROUND:EntTurn(acteur, dir)
-    end
+    tourner_anime(acteur, dir, 4)
   end
 
   local taches = {}
@@ -239,7 +317,83 @@ local function cinematique_ouverture(map)
 
   if lyra ~= nil then
     cinematique.Dire(lyra, 'Surprised', 'Un passage caché s’ouvre derrière la chute ! ' .. cinematique.NomColore('Nilo', 'shinx') .. ' est sûrement là-dedans !', 'droite')
+    UI:ResetSpeaker()
   end
+
+  -- Avant de s'engouffrer dans la grotte, le regard du héros est attiré par la
+  -- Statue Kangourex posée sur la berge sablonneuse de droite (428, 236).
+  if not SV.Destiny.StatueKangourexExpliquee and partenaire ~= nil then
+    GAME:WaitFrames(12)
+    if hero ~= nil then
+      tourner_direction_animee(hero, Direction.Right)
+      GAME:WaitFrames(8)
+      cinematique.Emote(hero, 'notice', 'EVT_Emote_Exclaim_2')
+      GAME:WaitFrames(20)
+    end
+
+    GAME:MoveCamera(404, 220, 18, false)
+    local approche = {}
+    if hero ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 432, 250, false, 1)
+        tourner_direction_animee(hero, Direction.Up)
+      end))
+    end
+    table.insert(approche, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(6)
+      GROUND:MoveToPosition(partenaire, 392, 248, false, 2)
+      tourner_direction_animee(partenaire, Direction.Right)
+    end))
+    if lyra ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(10)
+        tourner_direction_animee(lyra, Direction.UpRight)
+      end))
+    end
+    TASK:JoinCoroutines(approche)
+
+    if hero ~= nil then
+      -- Hésitation muette devant la statue : inspection gauche/droite puis « ? ».
+      GAME:WaitFrames(8)
+      tourner_direction_animee(hero, Direction.UpLeft)
+      GAME:WaitFrames(10)
+      tourner_direction_animee(hero, Direction.UpRight)
+      GAME:WaitFrames(10)
+      tourner_direction_animee(hero, Direction.Up)
+      cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
+      GAME:WaitFrames(30)
+      tourner_vers_cible(hero, partenaire, 4)
+      GAME:WaitFrames(6)
+      cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+      GAME:WaitFrames(22)
+    end
+
+    decouverte_statue_kangourex(hero, partenaire)
+
+    -- Retour fluide en formation devant le passage ouvert.
+    GAME:MoveCamera(384, 200, 18, false)
+    local retour_formation = {}
+    if hero ~= nil then
+      table.insert(retour_formation, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 384, 248, false, 2)
+        tourner_direction_animee(hero, Direction.Up)
+      end))
+    end
+    table.insert(retour_formation, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
+      GROUND:MoveToPosition(partenaire, 368, 260, false, 2)
+      tourner_direction_animee(partenaire, Direction.Up)
+    end))
+    if lyra ~= nil then
+      table.insert(retour_formation, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(8)
+        tourner_direction_animee(lyra, Direction.Up)
+      end))
+    end
+    TASK:JoinCoroutines(retour_formation)
+    GAME:WaitFrames(10)
+  end
+
   if partenaire ~= nil then
     cinematique.Respirer(15)
     cinematique.Dire(partenaire, 'Determined', 'La voie est libre ! En avant dans la Grotte Verdoyante !', 'standard')
@@ -255,32 +409,6 @@ local function cinematique_ouverture(map)
   if lyra ~= nil then lyra.CollisionDisabled = false end
   if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
   GAME:CutsceneMode(false)
-end
-
-local function tourner_anime(ent, dir, frames_par_45)
-  if ent == nil then return end
-  if GROUND.CharAnimateTurnTo ~= nil then
-    pcall(function() GROUND:CharAnimateTurnTo(ent, dir, frames_par_45 or 4) end)
-  else
-    pcall(function() GROUND:EntTurn(ent, dir) end)
-  end
-end
-
-local function tourner_vers_cible(ent, cible, frames_par_45)
-  if ent == nil or cible == nil then return end
-  if GROUND.CharTurnToCharAnimated ~= nil then
-    pcall(function() GROUND:CharTurnToCharAnimated(ent, cible, frames_par_45 or 4) end)
-  else
-    pcall(function() GROUND:CharTurnToChar(ent, cible) end)
-  end
-end
-
-local function se_regarder(a, b, frames_par_45)
-  if a == nil or b == nil then return end
-  local f = frames_par_45 or 4
-  tourner_vers_cible(a, b, f)
-  GAME:WaitFrames(5)
-  tourner_vers_cible(b, a, f)
 end
 
 local function cinematique_retour_echec(map, retour)
@@ -524,6 +652,31 @@ function ewc3.Luxray_Ewc3_Action(personnage, activator)
     pcall(function() GROUND:CharAnimateTurnTo(personnage, Direction.Up, 4) end)
   else
     pcall(function() GROUND:EntTurn(personnage, Direction.Up) end)
+  end
+end
+
+-- Repli pour une ancienne sauvegarde ayant déjà ouvert la cascade avant
+-- l'ajout de la statue : joue l'incompréhension + l'explication une seule fois,
+-- puis laisse le service StatueKangourex ouvrir COMMON.ShowTeamStorageMenu().
+function ewc3.Statue_Kangourex_Action(obj, activator)
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.StatueKangourexExpliquee then return end
+  local hero = activator or CH('PLAYER')
+  local partenaire = CH('Teammate1') or equipe_scene.Partenaire(368, 260, Direction.Right)
+  if hero ~= nil and obj ~= nil then
+    tourner_vers_cible(hero, obj, 4)
+    cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
+    GAME:WaitFrames(26)
+  end
+  if partenaire ~= nil and hero ~= nil then
+    se_regarder(hero, partenaire, 4)
+    GAME:WaitFrames(6)
+    cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+    GAME:WaitFrames(18)
+  end
+  decouverte_statue_kangourex(hero, partenaire)
+  if hero ~= nil and obj ~= nil then
+    tourner_vers_cible(hero, obj, 4)
   end
 end
 

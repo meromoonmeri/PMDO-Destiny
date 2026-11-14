@@ -43,7 +43,7 @@ for name in ('dojo_kingambit', 'caféspindaaccueil', 'spindacaféétage1', 'spin
                         assert (xy['X'], xy['Y']) in bank(sheet), (name, frame)
                         found += 1
     counts[name] = found
-assert counts == {'dojo_kingambit':3951, 'caféspindaaccueil':4514, 'spindacaféétage1':4913, 'spindacaféétage1salle2':5022}, counts
+assert counts == {'dojo_kingambit':7339, 'caféspindaaccueil':4514, 'spindacaféétage1':4913, 'spindacaféétage1salle2':5022}, counts
 
 city = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
 dev = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_text(encoding='utf-8')
@@ -53,4 +53,4 @@ assert "titre = 'Auberge'" in city and "interieur = 'reverie_inn'" in city
 assert "PorteCafeSpinda', 1056, 1344, 32, 8" in city
 assert "interieur = 'dojo_kingambit'" in city
 assert len(list(TILES.glob('Reverie_Cafe_*.tile'))) == 10
-print('Intérieurs WIP : 18 400 références de tuiles et associations statiques vérifiées.')
+print('Intérieurs WIP : 21 788 références de tuiles et associations statiques vérifiées.')

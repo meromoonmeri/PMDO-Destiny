@@ -65,6 +65,18 @@ def main() -> None:
     objs_ewc3 = {o['EntName']: o for o in ewc3['Entities'][0]['GroundObjects']}
     assert markers_ewc3['entrance']['Collider']['Y'] == 544
     assert 'SeuilDonjon' in objs_ewc3 and 'SortieRetourReverie' in objs_ewc3
+    assert 'Statue_Kangourex' in objs_ewc3
+    statue_ewc3 = objs_ewc3['Statue_Kangourex']
+    assert statue_ewc3['ObjectAnim']['AnimIndex'] == 'Statue_Kangourex'
+    assert statue_ewc3['Passable'] is False and statue_ewc3['triggerType'] == 1
+    assert statue_ewc3['Collider'] == {'X': 428, 'Y': 236, 'Width': 24, 'Height': 12}
+    # Accès libre devant (432, 248) et à gauche (412, 240) de la statue pour un acteur 16x16
+    for ax, ay in ((432, 248), (412, 240)):
+        assert all(
+            ewc3['obstacles'][cx][cy]['Tags'] == 0
+            for cx in range(ax // 8, (ax + 15) // 8 + 1)
+            for cy in range(ay // 8, (ay + 15) // 8 + 1)
+        ), (ax, ay)
     assert ewc3['Layers'][12]['Visible'] is True and ewc3['Layers'][17]['Visible'] is True
     assert ewc3['Layers'][13]['Visible'] is False and ewc3['Layers'][14]['Visible'] is False and ewc3['Layers'][18]['Visible'] is False
 

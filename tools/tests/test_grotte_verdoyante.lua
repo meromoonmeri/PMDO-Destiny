@@ -152,11 +152,31 @@ local ewc3 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/ewc3_entr
 local m_ewc3 = make_ewc3_map()
 ewc3.Init(m_ewc3)
 assert(m_ewc3.Layers[12].Visible and m_ewc3.Layers[17].Visible and not m_ewc3.Layers[14].Visible)
-assert(m_ewc3.Objects.SeuilDonjon and m_ewc3.Objects.SortieRetourReverie)
+assert(m_ewc3.Objects.SeuilDonjon and m_ewc3.Objects.SortieRetourReverie and m_ewc3.Objects.Statue_Kangourex)
 ewc3.Enter(m_ewc3)
 assert(SV.Destiny.GrotteVerdoyanteOuverte == true)
+assert(SV.Destiny.StatueKangourexExpliquee == true, 'La Statue Kangourex doit être expliquée dès la cinématique d’arrivée')
 assert(not m_ewc3.Layers[12].Visible and not m_ewc3.Layers[13].Visible and m_ewc3.Layers[14].Visible)
 assert(actors.Luxray_Ewc3 and actors.Luxray_Ewc3.Position.X == 400 and actors.Luxray_Ewc3.Position.Y == 260 and actors.Luxray_Ewc3.reloaded == true)
+assert(actors.PLAYER.Position.X == 384 and actors.PLAYER.Position.Y == 248 and actors.PLAYER.CollisionDisabled == false)
+local hero_q, hero_sw, statue_quiproquo, statue_reserve = false, false, false, false
+for _, e in ipairs(events) do
+  if e[1] == 'emote' and e[2] == 'PLAYER' and e[3] == 'question' then hero_q = true end
+  if e[1] == 'emote' and e[2] == 'PLAYER' and e[3] == 'sweatdrop' then hero_sw = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('pierre pour un vrai Pokémon', 1, true) then statue_quiproquo = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('Statue Kangourex', 1, true) then statue_reserve = true end
+end
+assert(hero_q and hero_sw and statue_quiproquo and statue_reserve, 'Incompréhension muette du héros ou explication de la Statue Kangourex manquante')
+
+-- Une fois expliquée, l'interaction directe ne répète pas le tutoriel (laisse StatueKangourex ouvrir le stockage)
+local n_avant = #events
+ewc3.Statue_Kangourex_Action(m_ewc3.Objects.Statue_Kangourex, actors.PLAYER)
+assert(#events == n_avant, 'Statue_Kangourex_Action ne doit pas rejouer le dialogue quand StatueKangourexExpliquee == true')
+
+-- Repli ancienne sauvegarde (cascade déjà ouverte, statue pas encore expliquée)
+SV.Destiny.StatueKangourexExpliquee = nil
+ewc3.Statue_Kangourex_Action(m_ewc3.Objects.Statue_Kangourex, actors.PLAYER)
+assert(SV.Destiny.StatueKangourexExpliquee == true, 'Le repli Statue_Kangourex_Action doit marquer StatueKangourexExpliquee')
 
 -- SeuilDonjon et SortieRetourReverie
 ewc3.SeuilDonjon_Touch(nil, actors.PLAYER)
