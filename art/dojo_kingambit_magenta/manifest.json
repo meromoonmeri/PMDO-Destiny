@@ -1,0 +1,95 @@
+{
+  "asset": "dojo_kingambit",
+  "method": "METHODE_MAGENTA_ET_GENERATEUR.md (projet-creation-pmdo)",
+  "size_px": [
+    768,
+    576
+  ],
+  "grid_8px": [
+    96,
+    72
+  ],
+  "source_size_px": [
+    1200,
+    896
+  ],
+  "palette_colors": 96,
+  "phases": 12,
+  "anim_ticks": 6,
+  "tile_sheet": "Kingambit_Dojo_Interieur",
+  "unique_8x8_tiles": 7937,
+  "total_frame_refs": 13142,
+  "sha256": {
+    "ref_canon_magenta.png": "c70897705711cbcf9be4038a6fb565f71536f0996791dd31e0abfc8f26d7acc3",
+    "decor_magenta.png": "50496c0e8a45abf8a33bd153ee8043bbdf0ce537b632076ac76502df0a1ec67d",
+    "sol_complet.png": "9796f6d93499407e35106b442bc015c95f8c7b777f89f0888b6065ed31b79852",
+    "Kingambit_Dojo_Interieur.tile": "6fb091d4337d444e8be7742c64c70062dea0b34de81db7041a95177ae59d737b"
+  },
+  "fidelity_vs_canonical_rip": {
+    "sol_sable": {
+      "rip_rgb": [
+        146.8,
+        130.9,
+        84.9
+      ],
+      "decor_rgb": [
+        146.3,
+        130.2,
+        82.9
+      ],
+      "distance": 2.12
+    },
+    "paroi_roche": {
+      "rip_rgb": [
+        92.0,
+        80.2,
+        57.6
+      ],
+      "decor_rgb": [
+        93.4,
+        80.8,
+        57.4
+      ],
+      "distance": 1.48
+    },
+    "porte_sarcelle": {
+      "rip_rgb": [
+        63.7,
+        88.8,
+        71.9
+      ],
+      "decor_rgb": [
+        70.7,
+        88.6,
+        68.1
+      ],
+      "distance": 7.98
+    },
+    "cristal_cyan": {
+      "rip_rgb": [
+        52.1,
+        180.9,
+        197.9
+      ],
+      "decor_rgb": [
+        73.6,
+        173.8,
+        182.8
+      ],
+      "distance": 27.25
+    },
+    "rune_orange": {
+      "rip_rgb": [
+        188.1,
+        112.2,
+        66.9
+      ],
+      "decor_rgb": [
+        185.3,
+        107.1,
+        59.9
+      ],
+      "distance": 9.11
+    }
+  }
+}

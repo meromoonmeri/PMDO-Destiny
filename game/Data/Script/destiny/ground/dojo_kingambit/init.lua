@@ -37,5 +37,6 @@ function dojo_kingambit.Kingambit_Action(chara, activator)
   UI:ResetSpeaker()
 end
 function dojo_kingambit.MarowakDojoDungeonEntrance_Touch(obj, activator) end
+function dojo_kingambit.KingambitDojoNorthDoorRight_Touch(obj, activator) end
 
 return dojo_kingambit

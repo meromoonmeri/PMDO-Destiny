@@ -43,7 +43,7 @@ for name in ('dojo_kingambit', 'caféspindaaccueil', 'spindacaféétage1', 'spin
                         assert (xy['X'], xy['Y']) in bank(sheet), (name, frame)
                         found += 1
     counts[name] = found
-assert counts == {'dojo_kingambit':7339, 'caféspindaaccueil':4514, 'spindacaféétage1':4913, 'spindacaféétage1salle2':5022}, counts
+assert counts == {'dojo_kingambit':13142, 'caféspindaaccueil':4514, 'spindacaféétage1':4913, 'spindacaféétage1salle2':5022}, counts
 
 city = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
 dev = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_text(encoding='utf-8')
