@@ -1,95 +1,223 @@
 {
-  "asset": "dojo_kingambit",
   "method": "METHODE_MAGENTA_ET_GENERATEUR.md (projet-creation-pmdo)",
   "size_px": [
     768,
     576
   ],
-  "grid_8px": [
-    96,
-    72
-  ],
-  "source_size_px": [
-    1200,
-    896
-  ],
   "palette_colors": 96,
-  "phases": 12,
-  "anim_ticks": 6,
-  "tile_sheet": "Kingambit_Dojo_Interieur",
-  "unique_8x8_tiles": 7937,
-  "total_frame_refs": 13142,
+  "rooms": {
+    "dojo_kingambit": {
+      "layers": 15,
+      "unique_tiles": 8146,
+      "frame_refs": 13387,
+      "fidelity": {
+        "sol_sable": {
+          "rip_rgb": [
+            146.8,
+            130.9,
+            84.9
+          ],
+          "decor_rgb": [
+            146.2,
+            129.2,
+            81.5
+          ],
+          "distance": 3.83
+        },
+        "paroi_roche": {
+          "rip_rgb": [
+            92.0,
+            80.2,
+            57.6
+          ],
+          "decor_rgb": [
+            93.7,
+            81.0,
+            56.1
+          ],
+          "distance": 2.37
+        },
+        "porte_sarcelle": {
+          "rip_rgb": [
+            63.7,
+            88.8,
+            71.9
+          ],
+          "decor_rgb": [
+            68.4,
+            89.7,
+            71.5
+          ],
+          "distance": 4.79
+        },
+        "cristal_cyan": {
+          "rip_rgb": [
+            52.1,
+            180.9,
+            197.9
+          ],
+          "decor_rgb": [
+            74.8,
+            184.1,
+            191.5
+          ],
+          "distance": 23.85
+        },
+        "rune_orange": {
+          "rip_rgb": [
+            188.1,
+            112.2,
+            66.9
+          ],
+          "decor_rgb": [
+            184.1,
+            106.7,
+            59.2
+          ],
+          "distance": 10.27
+        }
+      }
+    },
+    "dojo_kingambit_arene": {
+      "layers": 9,
+      "unique_tiles": 8937,
+      "frame_refs": 15329,
+      "fidelity": {
+        "sol_sable": {
+          "rip_rgb": [
+            146.8,
+            130.9,
+            84.9
+          ],
+          "decor_rgb": [
+            144.0,
+            127.1,
+            79.0
+          ],
+          "distance": 7.57
+        },
+        "paroi_roche": {
+          "rip_rgb": [
+            92.0,
+            80.2,
+            57.6
+          ],
+          "decor_rgb": [
+            94.1,
+            81.0,
+            55.7
+          ],
+          "distance": 2.95
+        },
+        "cristal_cyan": {
+          "rip_rgb": [
+            52.1,
+            180.9,
+            197.9
+          ],
+          "decor_rgb": [
+            75.3,
+            180.4,
+            187.4
+          ],
+          "distance": 25.51
+        },
+        "rune_orange": {
+          "rip_rgb": [
+            188.1,
+            112.2,
+            66.9
+          ],
+          "decor_rgb": [
+            183.9,
+            98.5,
+            47.7
+          ],
+          "distance": 23.95
+        }
+      }
+    },
+    "dojo_kingambit_reliques": {
+      "layers": 9,
+      "unique_tiles": 9016,
+      "frame_refs": 14515,
+      "fidelity": {
+        "sol_sable": {
+          "rip_rgb": [
+            146.8,
+            130.9,
+            84.9
+          ],
+          "decor_rgb": [
+            143.5,
+            126.1,
+            76.5
+          ],
+          "distance": 10.23
+        },
+        "paroi_roche": {
+          "rip_rgb": [
+            92.0,
+            80.2,
+            57.6
+          ],
+          "decor_rgb": [
+            93.1,
+            79.7,
+            54.8
+          ],
+          "distance": 3.05
+        },
+        "porte_sarcelle": {
+          "rip_rgb": [
+            63.7,
+            88.8,
+            71.9
+          ],
+          "decor_rgb": [
+            70.8,
+            104.4,
+            88.5
+          ],
+          "distance": 23.83
+        },
+        "cristal_cyan": {
+          "rip_rgb": [
+            52.1,
+            180.9,
+            197.9
+          ],
+          "decor_rgb": [
+            76.1,
+            185.5,
+            192.6
+          ],
+          "distance": 25.06
+        },
+        "rune_orange": {
+          "rip_rgb": [
+            188.1,
+            112.2,
+            66.9
+          ],
+          "decor_rgb": [
+            183.6,
+            98.8,
+            48.7
+          ],
+          "distance": 23.04
+        }
+      }
+    }
+  },
   "sha256": {
     "ref_canon_magenta.png": "c70897705711cbcf9be4038a6fb565f71536f0996791dd31e0abfc8f26d7acc3",
     "decor_magenta.png": "50496c0e8a45abf8a33bd153ee8043bbdf0ce537b632076ac76502df0a1ec67d",
+    "arene_decor_magenta.png": "fa201513b13abfb4901ef6e43129b569e29f6586c8c1bbfb2d33a2427e018876",
+    "reliques_decor_magenta.png": "3b777f476de9d03c9c665e07f3d24d5b7cd1f768ce34f61f06badc88371d41af",
     "sol_complet.png": "9796f6d93499407e35106b442bc015c95f8c7b777f89f0888b6065ed31b79852",
-    "Kingambit_Dojo_Interieur.tile": "6fb091d4337d444e8be7742c64c70062dea0b34de81db7041a95177ae59d737b"
-  },
-  "fidelity_vs_canonical_rip": {
-    "sol_sable": {
-      "rip_rgb": [
-        146.8,
-        130.9,
-        84.9
-      ],
-      "decor_rgb": [
-        146.3,
-        130.2,
-        82.9
-      ],
-      "distance": 2.12
-    },
-    "paroi_roche": {
-      "rip_rgb": [
-        92.0,
-        80.2,
-        57.6
-      ],
-      "decor_rgb": [
-        93.4,
-        80.8,
-        57.4
-      ],
-      "distance": 1.48
-    },
-    "porte_sarcelle": {
-      "rip_rgb": [
-        63.7,
-        88.8,
-        71.9
-      ],
-      "decor_rgb": [
-        70.7,
-        88.6,
-        68.1
-      ],
-      "distance": 7.98
-    },
-    "cristal_cyan": {
-      "rip_rgb": [
-        52.1,
-        180.9,
-        197.9
-      ],
-      "decor_rgb": [
-        73.6,
-        173.8,
-        182.8
-      ],
-      "distance": 27.25
-    },
-    "rune_orange": {
-      "rip_rgb": [
-        188.1,
-        112.2,
-        66.9
-      ],
-      "decor_rgb": [
-        185.3,
-        107.1,
-        59.9
-      ],
-      "distance": 9.11
-    }
+    "Kingambit_Dojo_Interieur.tile": "21569f7a14cc7c8a851c3ef45e65508d9f3ae02dab589fd611c29518ed5152a5",
+    "Kingambit_Dojo_Arene.tile": "392c4fe24b9a4e47ba6045fca786b33c7ef087d7f841700b540437219b4a3a7a",
+    "Kingambit_Dojo_Reliques.tile": "4aeb7d0cc078fcb2838f3f8ab5627e1fa63cbf83afdcfa1cb2106ecf38815801"
   }
 }

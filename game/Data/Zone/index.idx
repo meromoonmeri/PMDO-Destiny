@@ -461,6 +461,36 @@
       "Released": true,
       "Comment": "Plage Sablefin (jour/aube/crépuscule/nuit) + Passage Aquatique (10 étages) menant à passage_aquatique_fond.",
       "SortOrder": 33
+    },
+    "dojo_kingambit_salles": {
+      "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+      "ExpPercent": 100,
+      "Level": -1,
+      "LevelCap": false,
+      "KeepSkills": false,
+      "TeamRestrict": false,
+      "TeamSize": -1,
+      "MoneyRestrict": false,
+      "BagRestrict": -1,
+      "KeepTreasure": false,
+      "BagSize": -1,
+      "Rescues": 0,
+      "CountedFloors": 0,
+      "Rogue": 0,
+      "Grounds": [
+        "dojo_kingambit_arene",
+        "dojo_kingambit_reliques"
+      ],
+      "Maps": [],
+      "Name": {
+        "DefaultText": "Kingambit Dojo Chambers",
+        "LocalTexts": {
+          "fr": "Salles intérieures du Dojo Kingambit"
+        }
+      },
+      "Released": true,
+      "Comment": "Arène de combat et salle des reliques/archives raccordées aux deux portes coulissantes nord de dojo_kingambit.",
+      "SortOrder": 28
     }
   }
 }

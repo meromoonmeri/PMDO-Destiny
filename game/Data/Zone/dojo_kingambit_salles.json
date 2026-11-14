@@ -1,0 +1,33 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Kingambit Dojo Chambers",
+      "LocalTexts": {
+        "fr": "Salles intérieures du Dojo Kingambit"
+      }
+    },
+    "Released": true,
+    "Comment": "Arène de combat et salle des reliques/archives raccordées aux deux portes coulissantes nord de dojo_kingambit.",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "dojo_kingambit_arene",
+      "dojo_kingambit_reliques"
+    ]
+  }
+}

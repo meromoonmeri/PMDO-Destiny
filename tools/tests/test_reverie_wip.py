@@ -24,15 +24,17 @@ def bank(name):
 
 
 counts = {}
-for name in ('dojo_kingambit', 'caféspindaaccueil', 'spindacaféétage1', 'spindacaféétage1salle2'):
+for name in ('dojo_kingambit', 'dojo_kingambit_arene', 'dojo_kingambit_reliques', 'caféspindaaccueil', 'spindacaféétage1', 'spindacaféétage1salle2'):
     path = GAME / 'Data/Ground' / f'{name}.rsground'
     ground = json.loads(path.read_text(encoding='utf-8-sig'))['Object']
     assert ground['AssetName'] == name and ground['Entities']
     if name == 'dojo_kingambit':
-        assert ground['TexSize'] == 1 and len(ground['Layers']) == 9
+        assert ground['TexSize'] == 1 and len(ground['Layers']) == 15
         npcs = [x for e in ground['Entities'] for x in e['MapChars']]
         assert len(npcs) == 1 and npcs[0]['EntName'] == 'Kingambit'
         assert npcs[0]['Data']['BaseForm']['Species'] == 'kingambit'
+    elif name in ('dojo_kingambit_arene', 'dojo_kingambit_reliques'):
+        assert ground['TexSize'] == 1 and len(ground['Layers']) == 9
     found = 0
     for layer in ground['Layers']:
         for col in layer['Tiles']:
@@ -43,7 +45,14 @@ for name in ('dojo_kingambit', 'caféspindaaccueil', 'spindacaféétage1', 'spin
                         assert (xy['X'], xy['Y']) in bank(sheet), (name, frame)
                         found += 1
     counts[name] = found
-assert counts == {'dojo_kingambit':13142, 'caféspindaaccueil':4514, 'spindacaféétage1':4913, 'spindacaféétage1salle2':5022}, counts
+assert counts == {
+    'dojo_kingambit': 13387,
+    'dojo_kingambit_arene': 15329,
+    'dojo_kingambit_reliques': 14515,
+    'caféspindaaccueil': 4514,
+    'spindacaféétage1': 4913,
+    'spindacaféétage1salle2': 5022,
+}, counts
 
 city = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf-8')
 dev = (GAME / 'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_text(encoding='utf-8')
