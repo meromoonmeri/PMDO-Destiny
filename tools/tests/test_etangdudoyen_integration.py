@@ -82,10 +82,24 @@ def main() -> None:
         tw, th, frames, dir_img = _decode_dir(dir_p)
         assert (tw, th, frames) == (32, 16, 4) and dir_img.size == (128, 16)
 
+        assert 'Rayons_Lumiere_Etang' in decos
+        ray_deco = decos['Rayons_Lumiere_Etang']
+        assert ray_deco['Visible'] is True and ray_deco['Layer'] == 4
+        assert len(ray_deco['Anims']) == 1
+        ray_anim = ray_deco['Anims'][0]
+        assert ray_anim['MapLoc']['X'] == 0 and ray_anim['MapLoc']['Y'] == 0
+        ray_oa = ray_anim['ObjectAnim']
+        assert ray_oa['AnimIndex'] == f'Etang_Rayons_Lumiere_{suffix}' and ray_oa['FrameTime'] == 8 and ray_oa['AnimDir'] == 0
+
+        ray_dir_p = ROOT / 'game/Content/Object' / f'Etang_Rayons_Lumiere_{suffix}.dir'
+        assert ray_dir_p.is_file()
+        rtw, rth, rframes, ray_img = _decode_dir(ray_dir_p)
+        assert (rtw, rth, rframes) == (768, 344, 16) and ray_img.size == (3072, 1376)
+
         tile_p = ROOT / 'game/Content/Tile' / f'Destiny_Etang_Doyen_{suffix}.tile'
         assert tile_p.is_file()
         tiles = _decode_tiles(tile_p)
-        assert len(tiles) == 3872
+        assert len(tiles) == 4109
 
         for layer in doc['Layers']:
             for col in layer['Tiles']:
@@ -154,6 +168,18 @@ def main() -> None:
             for fx, fy in ((328, 152), (440, 152), (186, 150), (582, 150)):
                 fr_c, fg_c, fb_c, _ = px[fx, fy]
                 assert fr_c >= 150 and fg_c >= 170 and fb_c >= 210, f'Écume non superposée à la falaise en ({fx},{fy})={(fr_c,fg_c,fb_c)}'
+            # Vérifie les falaises supérieures gauche (0..192) et droite (576..768) ajoutées sur les plateaux hauts
+            for ux in (32, 96, 144, 624, 672, 736):
+                ur, ug, ub, _ = px[ux, 72]
+                assert ur > ug + 15 and ur > ub + 30, f'Falaise supérieure absente en ({ux},72)={(ur,ug,ub)}'
+            for x0_up, x1_up in ((161, 191), (577, 607)):
+                up_mauve = sum(
+                    1
+                    for xf in range(x0_up, x1_up)
+                    for yf in range(25, 110)
+                    if px[xf, yf][0] >= 160 and 80 <= px[xf, yf][1] <= 135 and 90 <= px[xf, yf][2] <= 135 and px[xf, yf][0] > px[xf, yf][1] + 45
+                )
+                assert up_mauve >= 200, f'Flanc courbe violet supérieur manquant ({x0_up}..{x1_up}) : {up_mauve}'
             for y in range(576):
                 for x in range(768):
                     r, g, b, _ = px[x, y]
