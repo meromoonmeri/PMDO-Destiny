@@ -520,7 +520,7 @@ def main() -> None:
             "base": "03_grand_salon_central_1x_base.png",
             "flip_h": False,
             "ellipse": (288, 256, 220, 100),
-            "rects": [(264, 96, 312, 184), (256, 336, 320, 416), (8, 216, 88, 280), (488, 216, 568, 280)],
+            "rects": [(264, 144, 312, 184), (256, 336, 320, 416), (8, 216, 88, 280), (488, 216, 568, 280)],
             "primary": "ArriveeSudMarker",
             "markers": [
                 {"name": "ArriveeSudMarker", "x": 280, "y": 344, "dir": 4},
@@ -530,7 +530,7 @@ def main() -> None:
             ],
             "triggers": [
                 {"name": "SeuilSud", "x": 256, "y": 392, "w": 64, "h": 24, "target_idx": 1, "target_marker": "EscalierNordMarker"},
-                {"name": "SortieBureauMaitre", "x": 264, "y": 96, "w": 48, "h": 24, "target_idx": 3, "target_marker": "EntreeSudMarker"},
+                {"name": "SortieBureauMaitre", "x": 264, "y": 144, "w": 48, "h": 16, "target_idx": 3, "target_marker": "EntreeSudMarker"},
                 {"name": "CouloirOuest", "x": 8, "y": 216, "w": 24, "h": 64, "target_idx": 4, "target_marker": "EntreeEstMarker"},
                 {"name": "CouloirEst", "x": 544, "y": 216, "w": 24, "h": 64, "target_idx": 8, "target_marker": "EntreeOuestMarker"},
             ],
@@ -772,6 +772,49 @@ def main() -> None:
         wmask = ellipse_walk_grid(tw, th, cx, cy, rx, ry, r["rects"])
 
         doc = build_rsground(r["id"], r["title"], r["sheet"], rgb, wmask, r["triggers"], r["markers"])
+        if r.get("has_eos_door"):
+            doc["Object"]["Decorations"] = [
+                {
+                    "Name": "PorteSalonFermee",
+                    "Layer": 0,
+                    "Visible": True,
+                    "Anims": [
+                        {
+                            "ObjectAnim": {
+                                "$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+                                "AnimIndex": "Guilde_Destiny_Porte_Salon_Fermee",
+                                "FrameTime": 60,
+                                "StartFrame": -1,
+                                "EndFrame": -1,
+                                "AnimDir": 0,
+                                "Alpha": 255,
+                                "AnimFlip": 0,
+                            },
+                            "MapLoc": {"X": int(door_meta["x"]), "Y": int(door_meta["y"])},
+                        }
+                    ],
+                },
+                {
+                    "Name": "PorteSalonOuverte",
+                    "Layer": 0,
+                    "Visible": False,
+                    "Anims": [
+                        {
+                            "ObjectAnim": {
+                                "$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+                                "AnimIndex": "Guilde_Destiny_Porte_Salon_Ouverte",
+                                "FrameTime": 60,
+                                "StartFrame": -1,
+                                "EndFrame": -1,
+                                "AnimDir": 0,
+                                "Alpha": 255,
+                                "AnimFlip": 0,
+                            },
+                            "MapLoc": {"X": int(door_meta["x"]), "Y": int(door_meta["y"])},
+                        }
+                    ],
+                },
+            ]
         verify_bfs_and_partner(doc, r["primary"])
 
         out_rs = GROUND_DIR / f"{r['id']}.rsground"
@@ -809,8 +852,9 @@ def main() -> None:
   1. Filtre de luminosite et teinte de salle selon les 4 ambiances (`jour`, `aube`, `crepuscule`, `nuit`)
      via `map:SetDestinyAmbiance(moment, true)` synchronise sur `meteo_reverie.Moment()` ou `SV.Destiny.GuildeAmbiance`.
   2. Objets `GroundObject` independants (`.dir`) pour toutes les fenetres cintrees de la Guilde.
-  3. Double Porte sculptee du Grand Salon s'ouvrant VERS L'EXTERIEUR (5 frames : 0 -> 4)
-     sur un jeu d'ombre profond style PMD Explorers of Sky (`Guilde_Destiny_Porte_Salon_*`).
+  3. Double Porte sculptee du Grand Salon s'ouvrant exactement comme la porte d'entree (`guilde_cliff_scene.lua`) :
+     `Decorations` Layer 0 (`PorteSalonFermee` / `PorteSalonOuverte`), capteur `SortieBureauMaitre` devant le seuil,
+     son `EVT_Door_Open`, `WaitFrames(20)`, fondu et remise a l'etat ferme.
 ]]
 
 local meteo_reverie = require 'destiny.meteo_reverie'
@@ -868,9 +912,15 @@ local function ajouter_objet_decor(map, ent_name, anim_sheet, x, y, w, h, passab
     anim,
     RogueElements.Rect(x, y, w, h),
     RogueElements.Loc(0, 0),
-    passable,
+    false,
     ent_name
   )
+  if passable then
+    obj.Passable = true
+    if RogueEssence.Ground.GroundEntity and RogueEssence.Ground.GroundEntity.EEntityTriggerTypes and RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.None ~= nil then
+      pcall(function() obj:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.None) end)
+    end
+  end
   obj:ReloadEvents()
   map.Entities[0].GroundObjects:Add(obj)
   return obj
@@ -892,25 +942,50 @@ function guilde_decors.AppliquerAmbianceEtFenetres(map, map_id, ambiance_forcee)
   end
 end
 
-function guilde_decors.SynchroniserPorteSalon(map)
-  local p = guilde_decors.PORTE_SALON
-  local ouverte = (SV and SV.Destiny and SV.Destiny.GuildePorteMaitreOuverte == true) or false
-  if ouverte then
-    -- Les deux battants en bois sculpte restent ouverts vers l'exterieur de part et d'autre du jeu d'ombre EoS !
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.ouverte, p.x, p.y, p.w, p.h, true, 0, 0)
-    pcall(function() GROUND:Unhide('SortieBureauMaitre') end)
-  else
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.fermee, p.x, p.y, p.w, p.h, true, 0, 0)
-    pcall(function() GROUND:Hide('SortieBureauMaitre') end)
+function guilde_decors.DefinirPorteSalonOuverte(map, ouverte)
+  local est_ouverte = (ouverte == true)
+  if map == nil or map.Decorations == nil then return end
+  if luanet ~= nil and luanet.each ~= nil then
+    for deco in luanet.each(map.Decorations) do
+      if deco.Name == 'PorteSalonFermee' then
+        deco.Visible = not est_ouverte
+      elseif deco.Name == 'PorteSalonOuverte' then
+        deco.Visible = est_ouverte
+      end
+    end
+  elseif type(map.Decorations) == 'table' then
+    for _, deco in ipairs(map.Decorations) do
+      if deco.Name == 'PorteSalonFermee' then
+        deco.Visible = not est_ouverte
+      elseif deco.Name == 'PorteSalonOuverte' then
+        deco.Visible = est_ouverte
+      end
+    end
   end
 end
 
-function guilde_decors.OuvrirPorteSalonDirect(map)
-  -- Ouverture directe instantanee comme dans PMD EoS (sans animation intermediaire) !
-  if SV and SV.Destiny then
-    SV.Destiny.GuildePorteMaitreOuverte = true
+function guilde_decors.OuvrirPorteSalon(map)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Door_Open')
   end
-  guilde_decors.SynchroniserPorteSalon(map)
+  guilde_decors.DefinirPorteSalonOuverte(map, true)
+end
+
+function guilde_decors.FermerPorteSalon(map)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Door_Open')
+  end
+  guilde_decors.DefinirPorteSalonOuverte(map, false)
+end
+
+function guilde_decors.SynchroniserPorteSalon(map)
+  -- Comme `scene.Init` de la porte d'entree (`guilde_cliff_scene.lua`) :
+  -- la porte demarre fermee et `SortieBureauMaitre` reste actif devant le seuil.
+  guilde_decors.DefinirPorteSalonOuverte(map, false)
+end
+
+function guilde_decors.OuvrirPorteSalonDirect(map)
+  guilde_decors.OuvrirPorteSalon(map)
 end
 
 return guilde_decors
@@ -959,12 +1034,43 @@ return guilde_decors
                 touch_funcs.append(f"""function {mid}.{tname}_Touch(obj, activator)
   if sortie_en_cours then return end
   if activator == nil or activator.EntName ~= 'PLAYER' then return end
-  if not (SV and SV.Destiny and SV.Destiny.GuildePorteMaitreOuverte == true) then
-    guilde_decors.OuvrirPorteSalonDirect(_G.GAME and GAME:GetCurrentGround() or nil)
-  end
   sortie_en_cours = true
+
+  local map = carte_courante or (_G.GAME and GAME.GetCurrentGround and GAME:GetCurrentGround()) or nil
+  local hero = (_G.CH and CH('PLAYER')) or activator
+  local partenaire = partenaire_de(hero)
+
+  if GAME ~= nil and GAME.CutsceneMode ~= nil then GAME:CutsceneMode(true) end
+  if partenaire ~= nil and AI ~= nil and AI.DisableCharacterAI ~= nil then AI:DisableCharacterAI(partenaire) end
+  if hero ~= nil then
+    hero.CollisionDisabled = true
+    if GROUND ~= nil and Direction ~= nil then
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+      elseif GROUND.EntTurn ~= nil then
+        GROUND:EntTurn(hero, Direction.Up)
+      end
+    end
+  end
+  if partenaire ~= nil and GROUND ~= nil and Direction ~= nil then
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+    elseif GROUND.EntTurn ~= nil then
+      GROUND:EntTurn(partenaire, Direction.Up)
+    end
+  end
+
+  guilde_decors.OuvrirPorteSalon(map)
+  if GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(20) end
+
   GAME:FadeOut(false, 20)
+  guilde_decors.DefinirPorteSalonOuverte(map, false)
+  retour_au_joueur(hero, partenaire)
+  sortie_en_cours = false
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', '{tmap}', '{tmk}', true) else GAME:EnterZone('guilde_destiny_interieur', -1, {tidx}, 0) end
+end
+function {mid}.{tname}_Action(obj, activator)
+  {mid}.{tname}_Touch(obj, activator)
 end""")
             else:
                 touch_funcs.append(f"""function {mid}.{tname}_Touch(obj, activator)
@@ -975,25 +1081,55 @@ end""")
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', '{tmap}', '{tmk}', true) else GAME:EnterZone('guilde_destiny_interieur', -1, {tidx}, 0) end
 end""")
 
+        extra_req = ""
+        extra_state = ""
+        extra_map_save = ""
         extra_enter = ""
         extra_funcs = ""
         if r.get("has_eos_door"):
+            extra_req = "\nlocal equipe_scene = require 'destiny.equipe_scene'"
+            extra_state = "\nlocal carte_courante = nil"
+            extra_map_save = "\n  carte_courante = map or carte_courante"
             extra_enter = "\n  pcall(guilde_decors.SynchroniserPorteSalon, map)"
             extra_funcs = f"""
+local function partenaire_de(hero)
+  if hero == nil or GAME == nil or GAME.GetPlayerPartyCount == nil then return nil end
+  if GAME:GetPlayerPartyCount() <= 1 then return nil end
+  local partenaire = (_G.CH and CH('Teammate1')) or nil
+  if partenaire ~= nil then return partenaire end
+  if equipe_scene ~= nil and equipe_scene.Partenaire ~= nil and hero.Position ~= nil then
+    local py = math.min(hero.Position.Y + 24, 384)
+    return equipe_scene.Partenaire(hero.Position.X, py, hero.Direction)
+  end
+  return nil
+end
+
+local function retour_au_joueur(hero, partenaire)
+  if UI ~= nil and UI.ResetSpeaker ~= nil then UI:ResetSpeaker() end
+  if hero ~= nil then hero.CollisionDisabled = false end
+  if partenaire ~= nil and equipe_scene ~= nil and equipe_scene.Suivre ~= nil then equipe_scene.Suivre(partenaire, hero) end
+  if GAME ~= nil and GAME.MoveCamera ~= nil then GAME:MoveCamera(0, 0, 1, true) end
+  if GAME ~= nil and GAME.CutsceneMode ~= nil then GAME:CutsceneMode(false) end
+end
+
 function {mid}.OuvrirPorteMaitre(map)
-  guilde_decors.OuvrirPorteSalonDirect(map or GAME:GetCurrentGround())
+  guilde_decors.OuvrirPorteSalon(map or carte_courante or (GAME and GAME:GetCurrentGround()))
+end
+
+function {mid}.FermerPorteMaitre(map)
+  guilde_decors.FermerPorteSalon(map or carte_courante or (GAME and GAME:GetCurrentGround()))
 end
 """
 
         lua_code = f"""require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
-local guilde_decors = require 'destiny.guilde_destiny_decors'
+local guilde_decors = require 'destiny.guilde_destiny_decors'{extra_req}
 
 local {mid} = {{}}
-local sortie_en_cours = false
+local sortie_en_cours = false{extra_state}
 
 function {mid}.Init(map)
-  sortie_en_cours = false
+  sortie_en_cours = false{extra_map_save}
   if DEBUG and DEBUG.EnableDbgCoro then DEBUG.EnableDbgCoro() end
   if map ~= nil then
     map.EdgeView = (RogueEssence and RogueEssence.Dungeon and RogueEssence.Dungeon.BaseMap and RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp) or 1
@@ -1001,7 +1137,7 @@ function {mid}.Init(map)
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, '{mid}'){extra_enter}
 end
 
-function {mid}.Enter(map)
+function {mid}.Enter(map){extra_map_save}
   if map ~= nil then
     map.EdgeView = (RogueEssence and RogueEssence.Dungeon and RogueEssence.Dungeon.BaseMap and RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp) or 1
   end
@@ -1010,7 +1146,7 @@ function {mid}.Enter(map)
   sortie_en_cours = false; GAME:FadeIn(20)
 end
 
-function {mid}.GameLoad(map)
+function {mid}.GameLoad(map){extra_map_save}
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, '{mid}'){extra_enter}
   suivi_interieurs.Activer(map)
   sortie_en_cours = false; GAME:FadeIn(20)

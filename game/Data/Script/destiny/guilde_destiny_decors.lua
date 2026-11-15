@@ -4,8 +4,9 @@
   1. Filtre de luminosite et teinte de salle selon les 4 ambiances (`jour`, `aube`, `crepuscule`, `nuit`)
      via `map:SetDestinyAmbiance(moment, true)` synchronise sur `meteo_reverie.Moment()` ou `SV.Destiny.GuildeAmbiance`.
   2. Objets `GroundObject` independants (`.dir`) pour toutes les fenetres cintrees de la Guilde.
-  3. Double Porte sculptee du Grand Salon s'ouvrant VERS L'EXTERIEUR (5 frames : 0 -> 4)
-     sur un jeu d'ombre profond style PMD Explorers of Sky (`Guilde_Destiny_Porte_Salon_*`).
+  3. Double Porte sculptee du Grand Salon s'ouvrant exactement comme la porte d'entree (`guilde_cliff_scene.lua`) :
+     `Decorations` Layer 0 (`PorteSalonFermee` / `PorteSalonOuverte`), capteur `SortieBureauMaitre` devant le seuil,
+     son `EVT_Door_Open`, `WaitFrames(20)`, fondu et remise a l'etat ferme.
 ]]
 
 local meteo_reverie = require 'destiny.meteo_reverie'
@@ -94,9 +95,15 @@ local function ajouter_objet_decor(map, ent_name, anim_sheet, x, y, w, h, passab
     anim,
     RogueElements.Rect(x, y, w, h),
     RogueElements.Loc(0, 0),
-    passable,
+    false,
     ent_name
   )
+  if passable then
+    obj.Passable = true
+    if RogueEssence.Ground.GroundEntity and RogueEssence.Ground.GroundEntity.EEntityTriggerTypes and RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.None ~= nil then
+      pcall(function() obj:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.None) end)
+    end
+  end
   obj:ReloadEvents()
   map.Entities[0].GroundObjects:Add(obj)
   return obj
@@ -118,25 +125,50 @@ function guilde_decors.AppliquerAmbianceEtFenetres(map, map_id, ambiance_forcee)
   end
 end
 
-function guilde_decors.SynchroniserPorteSalon(map)
-  local p = guilde_decors.PORTE_SALON
-  local ouverte = (SV and SV.Destiny and SV.Destiny.GuildePorteMaitreOuverte == true) or false
-  if ouverte then
-    -- Les deux battants en bois sculpte restent ouverts vers l'exterieur de part et d'autre du jeu d'ombre EoS !
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.ouverte, p.x, p.y, p.w, p.h, true, 0, 0)
-    pcall(function() GROUND:Unhide('SortieBureauMaitre') end)
-  else
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.fermee, p.x, p.y, p.w, p.h, true, 0, 0)
-    pcall(function() GROUND:Hide('SortieBureauMaitre') end)
+function guilde_decors.DefinirPorteSalonOuverte(map, ouverte)
+  local est_ouverte = (ouverte == true)
+  if map == nil or map.Decorations == nil then return end
+  if luanet ~= nil and luanet.each ~= nil then
+    for deco in luanet.each(map.Decorations) do
+      if deco.Name == 'PorteSalonFermee' then
+        deco.Visible = not est_ouverte
+      elseif deco.Name == 'PorteSalonOuverte' then
+        deco.Visible = est_ouverte
+      end
+    end
+  elseif type(map.Decorations) == 'table' then
+    for _, deco in ipairs(map.Decorations) do
+      if deco.Name == 'PorteSalonFermee' then
+        deco.Visible = not est_ouverte
+      elseif deco.Name == 'PorteSalonOuverte' then
+        deco.Visible = est_ouverte
+      end
+    end
   end
 end
 
-function guilde_decors.OuvrirPorteSalonDirect(map)
-  -- Ouverture directe instantanee comme dans PMD EoS (sans animation intermediaire) !
-  if SV and SV.Destiny then
-    SV.Destiny.GuildePorteMaitreOuverte = true
+function guilde_decors.OuvrirPorteSalon(map)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Door_Open')
   end
-  guilde_decors.SynchroniserPorteSalon(map)
+  guilde_decors.DefinirPorteSalonOuverte(map, true)
+end
+
+function guilde_decors.FermerPorteSalon(map)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Door_Open')
+  end
+  guilde_decors.DefinirPorteSalonOuverte(map, false)
+end
+
+function guilde_decors.SynchroniserPorteSalon(map)
+  -- Comme `scene.Init` de la porte d'entree (`guilde_cliff_scene.lua`) :
+  -- la porte demarre fermee et `SortieBureauMaitre` reste actif devant le seuil.
+  guilde_decors.DefinirPorteSalonOuverte(map, false)
+end
+
+function guilde_decors.OuvrirPorteSalonDirect(map)
+  guilde_decors.OuvrirPorteSalon(map)
 end
 
 return guilde_decors

@@ -190,6 +190,23 @@ def main() -> None:
     for spec in room_specs:
         verify_room(*spec)
 
+    # Vérification stricte de la double porte du Grand Salon alignée sur le modèle de la porte d'entrée (`guilde_cliff_*`)
+    sal_g = json.loads((GAME / "Data/Ground/guilde_destiny_grand_salon.rsground").read_text(encoding="utf-8-sig"))["Object"]
+    sal_decos = sal_g["Decorations"]
+    assert [d["Name"] for d in sal_decos] == ["PorteSalonFermee", "PorteSalonOuverte"], sal_decos
+    assert sal_decos[0]["Layer"] == 0 and sal_decos[0]["Visible"] is True
+    assert sal_decos[0]["Anims"][0]["ObjectAnim"]["AnimIndex"] == "Guilde_Destiny_Porte_Salon_Fermee"
+    assert sal_decos[0]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 48}
+    assert sal_decos[1]["Layer"] == 0 and sal_decos[1]["Visible"] is False
+    assert sal_decos[1]["Anims"][0]["ObjectAnim"]["AnimIndex"] == "Guilde_Destiny_Porte_Salon_Ouverte"
+    assert sal_decos[1]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 48}
+    sal_gos = {o["EntName"]: o for o in sal_g["Entities"][0]["GroundObjects"]}
+    assert sal_gos["SortieBureauMaitre"]["Collider"] == {"X": 264, "Y": 144, "Width": 48, "Height": 16}
+    assert sal_gos["SortieBureauMaitre"]["EntEnabled"] is True and sal_gos["SortieBureauMaitre"]["Passable"] is False
+    for tx in range(33, 39):
+        for ty in range(12, 18):
+            assert sal_g["obstacles"][tx][ty]["Tags"] != 0, f"Intérieur porte fermée marchable en ({tx},{ty})"
+
     acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
     assert not acc_g["Layers"][4]["Visible"] and not acc_g["Layers"][5]["Visible"] and not acc_g["Layers"][6]["Visible"]
     acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")

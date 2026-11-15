@@ -59,6 +59,8 @@ end
 function CH(n) return actors[n] end
 
 local transitions = {}
+local sound_events = {}
+local wait_snapshots = {}
 local current_ground = nil
 
 local function make_mock_ground(name)
@@ -68,6 +70,10 @@ local function make_mock_ground(name)
     LastAmbiance = nil,
     LastApplyWorld = nil,
     SpawnedList = {},
+    Decorations = name == 'guilde_destiny_grand_salon' and {
+      {Name='PorteSalonFermee', Layer=0, Visible=true},
+      {Name='PorteSalonOuverte', Layer=0, Visible=false},
+    } or {},
   }
   local go_list = { Count = 0 }
   function go_list:Add(obj)
@@ -97,12 +103,12 @@ RogueEssence = {
     end,
   },
   Ground = {
-    GroundObject = function(anim, rect, loc, passable, name)
+    GroundObject = function(anim, rect, loc, contact, name)
       return {
         EntName = name,
         ObjectAnim = anim,
         Collider = rect,
-        Passable = passable,
+        Passable = false,
         ReloadEvents = function() end,
         OnMapInit = function() end,
         SetTriggerType = function() end,
@@ -113,7 +119,7 @@ RogueEssence = {
       a.Direction = dir
       return a
     end,
-    GroundEntity = {EEntityTriggerTypes = {Touch=2, Action=1}},
+    GroundEntity = {EEntityTriggerTypes = {None=0, Action=1, Touch=2}},
   },
   Dungeon = {
     BaseMap = {ScrollEdge = {Clamp=1}},
@@ -130,18 +136,31 @@ GROUND = {
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
   RemoveCharacter = function(_, n) actors[n] = nil; return true end,
   RemoveObject = function() end,
-  Hide = function() end,
+  Hide = function(_, n) if n == 'SortieBureauMaitre' then error('GROUND:Hide ne doit jamais desactiver SortieBureauMaitre') end end,
   Unhide = function() end,
 }
 AI = {DisableCharacterAI=function()end, EnableCharacterAI=function()end}
-SOUND = {StopBattleSE=function()end, FadeInBattleSE=function()end, FadeOutBattleSE=function()end, PlayBattleSE=function()end}
+SOUND = {
+  StopBattleSE = function() end,
+  FadeInBattleSE = function() end,
+  FadeOutBattleSE = function() end,
+  PlayBattleSE = function(_, se) sound_events[#sound_events + 1] = se end,
+}
 UI = {SetSpeaker=function()end, SetSpeakerLoc=function()end, SetSpeakerEmotion=function()end, ResetSpeaker=function()end, WaitShowDialogue=function()end}
 GAME = {
   CutsceneMode = function() end,
   MoveCamera = function() end,
   FadeIn = function() end,
   FadeOut = function() end,
-  WaitFrames = function() end,
+  WaitFrames = function(_, frames)
+    if current_ground and current_ground.Decorations and #current_ground.Decorations == 2 then
+      wait_snapshots[#wait_snapshots + 1] = {
+        frames = frames,
+        fermee = current_ground.Decorations[1].Visible,
+        ouverte = current_ground.Decorations[2].Visible,
+      }
+    end
+  end,
   GetPlayerPartyCount = function() return 2 end,
   GetTeamLeaderIndex = function() return 0 end,
   GetPlayerPartyMember = function(_, i) return {Importance = i == 0 and 'Hero' or 'Partner', Data = {}} end,
@@ -234,18 +253,25 @@ for _, info in ipairs(ambiances) do
   missions.EscalierNord_Touch({}, actors.PLAYER)
   assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_grand_salon' and transitions[1][4] == 'ArriveeSudMarker')
 
-  -- 3F Grand Salon : Porte fermée -> ouverture battante extérieure 5 frames -> Bureau du Maître
+  -- 3F Grand Salon : Porte fermée -> ouverture animée comme la porte d'entrée (EVT_Door_Open + WaitFrames(20) + refermeture après fondu) -> Bureau du Maître
   local m_sal = make_mock_ground('guilde_destiny_grand_salon')
   current_ground = m_sal
   salon.Init(m_sal)
   salon.Enter(m_sal)
   assert(m_sal.LastAmbiance == current_moment and m_sal.LastApplyWorld == true)
-  assert(m_sal.SpawnedList.PorteBureauMaitreVisuel.ObjectAnim.AnimIndex == 'Guilde_Destiny_Porte_Salon_Fermee')
+  assert(m_sal.SpawnedList.Fenetre_Gauche.Passable == true, 'Les fenetres doivent etre Passable=true')
+  assert(m_sal.Decorations[1].Visible == true and m_sal.Decorations[2].Visible == false, 'La porte du Grand Salon doit demarrer fermee')
 
   transitions = {}
+  sound_events = {}
+  wait_snapshots = {}
+  actors.PLAYER.Direction = Direction.Down
+  actors.Teammate1.Direction = Direction.Down
   salon.SortieBureauMaitre_Touch({}, actors.PLAYER)
-  assert(SV.Destiny.GuildePorteMaitreOuverte == true, 'La double porte doit s ouvrir vers l exterieur')
-  assert(m_sal.SpawnedList.PorteBureauMaitreVisuel.ObjectAnim.AnimIndex == 'Guilde_Destiny_Porte_Salon_Ouverte')
+  assert(actors.PLAYER.Direction == Direction.Up and actors.Teammate1.Direction == Direction.Up, 'Le duo doit se tourner vers la porte')
+  assert(#sound_events >= 1 and sound_events[1] == 'EVT_Door_Open', 'Le son EVT_Door_Open doit etre joue')
+  assert(#wait_snapshots == 1 and wait_snapshots[1].frames == 20 and wait_snapshots[1].fermee == false and wait_snapshots[1].ouverte == true, 'La porte ouverte doit s afficher pendant 20 frames avant le fondu')
+  assert(m_sal.Decorations[1].Visible == true and m_sal.Decorations[2].Visible == false, 'La porte doit se refermer pendant le fondu comme la porte d entree')
   assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_bureau_maitre' and transitions[1][4] == 'EntreeSudMarker')
 
   -- Chambre du Héros : fenêtre centrale 4 ambiances + filtre de luminosité
