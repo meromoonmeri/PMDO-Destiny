@@ -618,9 +618,9 @@ function reveil_nuit.PlotScripting()
         GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
         cinematique.Respirer(12)
         cinematique.Dire(partner, 'Worried', "Ouf… tu ouvres enfin les yeux !", 'droite')
-        cinematique.Dire(partner, 'Worried', "On a tous les deux perdu connaissance dans les [color=#69D98C]Bois Perdus[color] et on s’est retrouvés ici…\nOn reprend notre souffle, puis on repartira ensemble quand tu seras prêt.", 'droite')
+        cinematique.Dire(partner, 'Worried', "On a tous les deux perdu connaissance dans les [color=#69D98C]Bois Perdus[color]\net on s’est retrouvés ici…\nOn reprend notre souffle, puis on repartira ensemble quand tu seras prêt.", 'droite')
       end
-      cinematique.Dire(partner, 'Happy', "Nous savons maintenant comment nous aider. Les [color=#69D98C]Bois Perdus[color] ne nous sépareront pas.", 'droite')
+      cinematique.Dire(partner, 'Happy', "Nous savons maintenant comment nous aider.\nLes [color=#69D98C]Bois Perdus[color] ne nous sépareront pas.", 'droite')
       cinematique.Dire(partner, 'Happy', "Rapproche-toi de l'entrée de la forêt quand tu voudras décider de notre départ.", 'droite')
       UI:ResetSpeaker()
       SV.Destiny.LostWoodTrip = 'pause_retour'

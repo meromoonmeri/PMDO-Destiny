@@ -150,8 +150,8 @@ end
 
 function dojo_kingambit.Kingambit_Action(chara, activator)
   UI:SetSpeaker(chara); UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue("Bienvenue au Dojo Kingambit. Ici, chaque pas compte : on n'entre pas dans l'arène sans savoir pourquoi l'on avance.")
-  UI:WaitShowDialogue("À gauche s'ouvre l'arène octogonale des duels ; à droite reposent les reliques et les traités anciens du dojo.")
+  UI:WaitShowDialogue("Bienvenue au Dojo Kingambit.\nIci, chaque pas compte : on n'entre pas dans l'arène sans savoir pourquoi l'on avance.")
+  UI:WaitShowDialogue("À gauche s'ouvre l'arène octogonale des duels ;\nà droite reposent les reliques et les traités anciens du dojo.")
   UI:ResetSpeaker()
 end
 

@@ -27,7 +27,7 @@ end
 function dojo_kingambit_arene.EstradeArbitre_Action(obj, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue("Une devise est gravée dans la pierre de l'estrade d'arbitrage :")
-  UI:WaitShowDialogue("« Dans l'octogone des runes ardentes, la force brute s'incline devant la maîtrise du souffle et du pas. »")
+  UI:WaitShowDialogue("« Dans l'octogone des runes ardentes,\nla force brute s'incline devant la maîtrise du souffle et du pas. »")
 end
 
 return dojo_kingambit_arene

@@ -27,12 +27,12 @@ end
 function dojo_kingambit_reliques.MonumentRunesNord_Action(obj, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue("Le grand monument runique veille sur la mémoire du dojo :")
-  UI:WaitShowDialogue("« Trois préceptes scellent cette lignée : lucidité dans l'épreuve, loyauté envers son partenaire, retenue dans la victoire. »")
+  UI:WaitShowDialogue("« Trois préceptes scellent cette lignée :\nlucidité dans l'épreuve, loyauté envers son partenaire, retenue dans la victoire. »")
 end
 
 function dojo_kingambit_reliques.ParcheminAncienNE_Action(obj, activator)
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("Un rouleau d'archives soigneusement déroulé répertorie les équipes d'exploration venues parfaire leur garde auprès de Kaito.")
+  UI:WaitShowDialogue("Un rouleau d'archives soigneusement déroulé\nrépertorie les équipes d'exploration venues parfaire leur garde auprès de Kaito.")
 end
 
 function dojo_kingambit_reliques.CoffreReliqueNO_Action(obj, activator)
@@ -52,12 +52,12 @@ end
 
 function dojo_kingambit_reliques.SteleArchiveOuest_Action(obj, activator)
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("Une stèle de pierre où sont détaillés les déplacements de contre et d'esquive enseignés dans l'arène.")
+  UI:WaitShowDialogue("Une stèle de pierre où sont détaillés les déplacements\nde contre et d'esquive enseignés dans l'arène.")
 end
 
 function dojo_kingambit_reliques.SteleArchiveEst_Action(obj, activator)
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("Les gravures décrivent l'accord entre deux partenaires : couvrir l'angle mort de l'autre sans un mot.")
+  UI:WaitShowDialogue("Les gravures décrivent l'accord entre deux partenaires :\ncouvrir l'angle mort de l'autre sans un mot.")
 end
 
 return dojo_kingambit_reliques
