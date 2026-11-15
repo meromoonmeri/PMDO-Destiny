@@ -1188,6 +1188,8 @@ return {mid}
         (script_folder / "init.lua").write_text(lua_code, encoding="utf-8")
 
     print("SUCCESS: All 15 Guild rooms, 4-ambiance luminosity filters, window .dir objects, and outward EoS double door compiled!")
+    import compile_verdure_et_banque_immobilier
+    compile_verdure_et_banque_immobilier.main()
 
 
 if __name__ == "__main__":

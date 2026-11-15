@@ -1,0 +1,1082 @@
+{
+  "halcyon_drapeau_01_emeraude": {
+    "x": 8,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_01_emeraude"
+  },
+  "halcyon_drapeau_02_saphir": {
+    "x": 56,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_02_saphir"
+  },
+  "halcyon_drapeau_03_rubis": {
+    "x": 104,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_03_rubis"
+  },
+  "halcyon_drapeau_04_amethyste": {
+    "x": 152,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_04_amethyste"
+  },
+  "halcyon_drapeau_05_turquoise": {
+    "x": 200,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_05_turquoise"
+  },
+  "halcyon_drapeau_06_ambre": {
+    "x": 248,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_06_ambre"
+  },
+  "halcyon_drapeau_07_bordeaux": {
+    "x": 296,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_07_bordeaux"
+  },
+  "halcyon_drapeau_08_ardoise": {
+    "x": 344,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_08_ardoise"
+  },
+  "halcyon_drapeau_09_corail": {
+    "x": 392,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_09_corail"
+  },
+  "halcyon_drapeau_10_ivoire": {
+    "x": 440,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_10_ivoire"
+  },
+  "halcyon_drapeau_quetes_emeraude": {
+    "x": 488,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_quetes_emeraude"
+  },
+  "halcyon_drapeau_quetes_saphir": {
+    "x": 536,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_quetes_saphir"
+  },
+  "halcyon_drapeau_quetes_rubis": {
+    "x": 584,
+    "y": 8,
+    "w": 40,
+    "h": 104,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_drapeau_quetes_rubis"
+  },
+  "halcyon_tapis_embleme_emeraude": {
+    "x": 632,
+    "y": 8,
+    "w": 112,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_embleme_emeraude"
+  },
+  "halcyon_tapis_embleme_rubis": {
+    "x": 752,
+    "y": 8,
+    "w": 112,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_embleme_rubis"
+  },
+  "halcyon_tapis_embleme_saphir": {
+    "x": 8,
+    "y": 120,
+    "w": 112,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_embleme_saphir"
+  },
+  "halcyon_tapis_embleme_amethyste": {
+    "x": 128,
+    "y": 120,
+    "w": 112,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_embleme_amethyste"
+  },
+  "halcyon_tapis_quetes_sans_oeuf": {
+    "x": 248,
+    "y": 120,
+    "w": 112,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_quetes_sans_oeuf"
+  },
+  "pmu_tableau_quetes_toit": {
+    "x": 368,
+    "y": 120,
+    "w": 72,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_tableau_quetes_toit"
+  },
+  "pmu_tableau_quetes_poteaux": {
+    "x": 448,
+    "y": 120,
+    "w": 64,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_tableau_quetes_poteaux"
+  },
+  "pmu_tableau_quetes_lierre": {
+    "x": 520,
+    "y": 120,
+    "w": 64,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_tableau_quetes_lierre"
+  },
+  "pmu_panneau_fleches": {
+    "x": 592,
+    "y": 120,
+    "w": 56,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_panneau_fleches"
+  },
+  "pmu_panneau_bois_double": {
+    "x": 656,
+    "y": 120,
+    "w": 56,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_panneau_bois_double"
+  },
+  "pmu_banniere_parchemin_1": {
+    "x": 720,
+    "y": 120,
+    "w": 48,
+    "h": 72,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_pmu_banniere_parchemin_1"
+  },
+  "pmu_banniere_parchemin_2": {
+    "x": 776,
+    "y": 120,
+    "w": 48,
+    "h": 72,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_pmu_banniere_parchemin_2"
+  },
+  "pmu_tapis_bleu": {
+    "x": 8,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_bleu"
+  },
+  "pmu_tapis_vert": {
+    "x": 96,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_vert"
+  },
+  "pmu_tapis_jaune": {
+    "x": 184,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_jaune"
+  },
+  "pmu_tapis_rouge": {
+    "x": 272,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_rouge"
+  },
+  "pmu_tapis_lavande": {
+    "x": 360,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_lavande"
+  },
+  "pmu_tapis_peche": {
+    "x": 448,
+    "y": 232,
+    "w": 80,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_peche"
+  },
+  "pmu_paillasson_rouge": {
+    "x": 536,
+    "y": 232,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_paillasson_rouge"
+  },
+  "pmu_paillasson_peche": {
+    "x": 592,
+    "y": 232,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_paillasson_peche"
+  },
+  "pmu_paillasson_bleu": {
+    "x": 648,
+    "y": 232,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_paillasson_bleu"
+  },
+  "pmu_paillasson_vert": {
+    "x": 704,
+    "y": 232,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_paillasson_vert"
+  },
+  "pmu_paillasson_jaune": {
+    "x": 760,
+    "y": 232,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_paillasson_jaune"
+  },
+  "pmu_tapis_royal_rouge": {
+    "x": 816,
+    "y": 232,
+    "w": 48,
+    "h": 56,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_royal_rouge"
+  },
+  "pmu_tapis_rond_ambre": {
+    "x": 8,
+    "y": 320,
+    "w": 56,
+    "h": 56,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_rond_ambre"
+  },
+  "pmu_tapis_rond_sauge": {
+    "x": 72,
+    "y": 320,
+    "w": 56,
+    "h": 56,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_rond_sauge"
+  },
+  "pmu_tapis_tresse_ovale": {
+    "x": 136,
+    "y": 320,
+    "w": 88,
+    "h": 48,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_pmu_tapis_tresse_ovale"
+  },
+  "pmu_fourneau_cuisine": {
+    "x": 232,
+    "y": 320,
+    "w": 64,
+    "h": 104,
+    "kind": "hearth",
+    "dir_object": "Guilde_Imm_pmu_fourneau_cuisine"
+  },
+  "pmu_table_banquet_seule": {
+    "x": 304,
+    "y": 320,
+    "w": 168,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_table_banquet_seule"
+  },
+  "pmu_lit_fourrure": {
+    "x": 480,
+    "y": 320,
+    "w": 88,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_lit_fourrure"
+  },
+  "pmu_table_rondin_grand": {
+    "x": 576,
+    "y": 320,
+    "w": 56,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_table_rondin_grand"
+  },
+  "pmu_table_rondin_moyen": {
+    "x": 640,
+    "y": 320,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_table_rondin_moyen"
+  },
+  "pmu_coffre_bois_bleu": {
+    "x": 688,
+    "y": 320,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_coffre_bois_bleu"
+  },
+  "pmu_coffre_bois_rouge": {
+    "x": 728,
+    "y": 320,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_coffre_bois_rouge"
+  },
+  "pmu_caisse_cordee": {
+    "x": 768,
+    "y": 320,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_caisse_cordee"
+  },
+  "pmu_caisse_grise": {
+    "x": 816,
+    "y": 320,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_caisse_grise"
+  },
+  "pmu_caisse_acajou": {
+    "x": 8,
+    "y": 432,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_caisse_acajou"
+  },
+  "pmu_buches_bois": {
+    "x": 56,
+    "y": 432,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_pmu_buches_bois"
+  },
+  "halcyon_lierre_mural_01": {
+    "x": 96,
+    "y": 432,
+    "w": 40,
+    "h": 64,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_lierre_mural_01"
+  },
+  "halcyon_lierre_mural_02": {
+    "x": 144,
+    "y": 432,
+    "w": 40,
+    "h": 64,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_lierre_mural_02"
+  },
+  "halcyon_tableau_quetes_mural": {
+    "x": 192,
+    "y": 432,
+    "w": 64,
+    "h": 48,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_halcyon_tableau_quetes_mural"
+  },
+  "halcyon_objet_04": {
+    "x": 264,
+    "y": 432,
+    "w": 48,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_04"
+  },
+  "halcyon_comptoir_cloche": {
+    "x": 320,
+    "y": 432,
+    "w": 64,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_comptoir_cloche"
+  },
+  "halcyon_tapis_06": {
+    "x": 392,
+    "y": 432,
+    "w": 48,
+    "h": 32,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_06"
+  },
+  "halcyon_objet_07": {
+    "x": 448,
+    "y": 432,
+    "w": 56,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_07"
+  },
+  "halcyon_objet_08": {
+    "x": 512,
+    "y": 432,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_08"
+  },
+  "halcyon_objet_09": {
+    "x": 560,
+    "y": 432,
+    "w": 32,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_09"
+  },
+  "halcyon_objet_10": {
+    "x": 600,
+    "y": 432,
+    "w": 32,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_10"
+  },
+  "halcyon_objet_11": {
+    "x": 640,
+    "y": 432,
+    "w": 48,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_11"
+  },
+  "halcyon_objet_12": {
+    "x": 696,
+    "y": 432,
+    "w": 56,
+    "h": 72,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_12"
+  },
+  "halcyon_objet_13": {
+    "x": 760,
+    "y": 432,
+    "w": 56,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_13"
+  },
+  "halcyon_objet_14": {
+    "x": 824,
+    "y": 432,
+    "w": 48,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_14"
+  },
+  "halcyon_objet_15": {
+    "x": 8,
+    "y": 512,
+    "w": 48,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_15"
+  },
+  "halcyon_objet_16": {
+    "x": 64,
+    "y": 512,
+    "w": 48,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_16"
+  },
+  "halcyon_objet_17": {
+    "x": 120,
+    "y": 512,
+    "w": 32,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_17"
+  },
+  "halcyon_tapis_18": {
+    "x": 160,
+    "y": 512,
+    "w": 64,
+    "h": 48,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_18"
+  },
+  "halcyon_objet_19": {
+    "x": 232,
+    "y": 512,
+    "w": 56,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_19"
+  },
+  "halcyon_objet_20": {
+    "x": 296,
+    "y": 512,
+    "w": 56,
+    "h": 56,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_20"
+  },
+  "halcyon_objet_21": {
+    "x": 360,
+    "y": 512,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_21"
+  },
+  "halcyon_bureau_parchemin_maitre": {
+    "x": 400,
+    "y": 512,
+    "w": 56,
+    "h": 104,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_bureau_parchemin_maitre"
+  },
+  "halcyon_tapis_23": {
+    "x": 464,
+    "y": 512,
+    "w": 48,
+    "h": 64,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_23"
+  },
+  "halcyon_objet_24": {
+    "x": 520,
+    "y": 512,
+    "w": 96,
+    "h": 88,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_24"
+  },
+  "halcyon_objet_25": {
+    "x": 624,
+    "y": 512,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_25"
+  },
+  "halcyon_objet_26": {
+    "x": 664,
+    "y": 512,
+    "w": 40,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_26"
+  },
+  "halcyon_objet_27": {
+    "x": 712,
+    "y": 512,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_27"
+  },
+  "halcyon_objet_28": {
+    "x": 752,
+    "y": 512,
+    "w": 32,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_28"
+  },
+  "halcyon_objet_29": {
+    "x": 792,
+    "y": 512,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_29"
+  },
+  "halcyon_table_banquet_tapis": {
+    "x": 8,
+    "y": 624,
+    "w": 192,
+    "h": 72,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_table_banquet_tapis"
+  },
+  "halcyon_objet_31": {
+    "x": 208,
+    "y": 624,
+    "w": 40,
+    "h": 72,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_31"
+  },
+  "halcyon_objet_32": {
+    "x": 256,
+    "y": 624,
+    "w": 24,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_32"
+  },
+  "halcyon_objet_33": {
+    "x": 288,
+    "y": 624,
+    "w": 40,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_33"
+  },
+  "halcyon_objet_34": {
+    "x": 336,
+    "y": 624,
+    "w": 24,
+    "h": 16,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_34"
+  },
+  "halcyon_objet_35": {
+    "x": 368,
+    "y": 624,
+    "w": 64,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_35"
+  },
+  "halcyon_objet_36": {
+    "x": 440,
+    "y": 624,
+    "w": 40,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_36"
+  },
+  "halcyon_objet_37": {
+    "x": 488,
+    "y": 624,
+    "w": 32,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_37"
+  },
+  "halcyon_objet_38": {
+    "x": 528,
+    "y": 624,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_38"
+  },
+  "halcyon_objet_39": {
+    "x": 568,
+    "y": 624,
+    "w": 64,
+    "h": 88,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_39"
+  },
+  "halcyon_objet_40": {
+    "x": 640,
+    "y": 624,
+    "w": 96,
+    "h": 72,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_40"
+  },
+  "halcyon_objet_41": {
+    "x": 744,
+    "y": 624,
+    "w": 64,
+    "h": 72,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_41"
+  },
+  "halcyon_objet_42": {
+    "x": 816,
+    "y": 624,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_42"
+  },
+  "halcyon_objet_43": {
+    "x": 856,
+    "y": 624,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_43"
+  },
+  "halcyon_objet_44": {
+    "x": 8,
+    "y": 720,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_44"
+  },
+  "halcyon_objet_45": {
+    "x": 48,
+    "y": 720,
+    "w": 56,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_45"
+  },
+  "halcyon_objet_46": {
+    "x": 112,
+    "y": 720,
+    "w": 48,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_46"
+  },
+  "halcyon_objet_47": {
+    "x": 168,
+    "y": 720,
+    "w": 48,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_47"
+  },
+  "halcyon_tapis_48": {
+    "x": 224,
+    "y": 720,
+    "w": 136,
+    "h": 48,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_48"
+  },
+  "halcyon_objet_49": {
+    "x": 368,
+    "y": 720,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_49"
+  },
+  "halcyon_objet_50": {
+    "x": 408,
+    "y": 720,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_50"
+  },
+  "halcyon_objet_51": {
+    "x": 448,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_51"
+  },
+  "halcyon_objet_52": {
+    "x": 480,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_52"
+  },
+  "halcyon_objet_53": {
+    "x": 512,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_53"
+  },
+  "halcyon_objet_54": {
+    "x": 544,
+    "y": 720,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_54"
+  },
+  "halcyon_objet_55": {
+    "x": 584,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_55"
+  },
+  "halcyon_tapis_56": {
+    "x": 616,
+    "y": 720,
+    "w": 80,
+    "h": 72,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_56"
+  },
+  "halcyon_objet_57": {
+    "x": 704,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_57"
+  },
+  "halcyon_objet_58": {
+    "x": 736,
+    "y": 720,
+    "w": 40,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_58"
+  },
+  "halcyon_objet_59": {
+    "x": 784,
+    "y": 720,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_59"
+  },
+  "halcyon_objet_60": {
+    "x": 824,
+    "y": 720,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_60"
+  },
+  "halcyon_tapis_61": {
+    "x": 8,
+    "y": 800,
+    "w": 72,
+    "h": 80,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_61"
+  },
+  "halcyon_objet_62": {
+    "x": 88,
+    "y": 800,
+    "w": 32,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_62"
+  },
+  "halcyon_tapis_63": {
+    "x": 128,
+    "y": 800,
+    "w": 80,
+    "h": 64,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_63"
+  },
+  "halcyon_objet_64": {
+    "x": 216,
+    "y": 800,
+    "w": 40,
+    "h": 32,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_64"
+  },
+  "halcyon_objet_65": {
+    "x": 264,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_65"
+  },
+  "halcyon_objet_66": {
+    "x": 296,
+    "y": 800,
+    "w": 48,
+    "h": 48,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_66"
+  },
+  "halcyon_objet_67": {
+    "x": 352,
+    "y": 800,
+    "w": 32,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_67"
+  },
+  "halcyon_tapis_68": {
+    "x": 392,
+    "y": 800,
+    "w": 64,
+    "h": 64,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_tapis_68"
+  },
+  "halcyon_objet_69": {
+    "x": 464,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_halcyon_objet_69"
+  },
+  "halcyon_apricorn_big": {
+    "x": 496,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_apricorn_big"
+  },
+  "halcyon_diary_blue_closing": {
+    "x": 528,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_diary_blue_closing"
+  },
+  "halcyon_diary_blue_opening": {
+    "x": 560,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_diary_blue_opening"
+  },
+  "halcyon_diary_red_closing": {
+    "x": 592,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_diary_red_closing"
+  },
+  "halcyon_diary_red_opening": {
+    "x": 624,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_diary_red_opening"
+  },
+  "halcyon_food": {
+    "x": 656,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_food"
+  },
+  "halcyon_food_big": {
+    "x": 688,
+    "y": 800,
+    "w": 32,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_food_big"
+  },
+  "halcyon_food_flipped": {
+    "x": 728,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_food_flipped"
+  },
+  "halcyon_yellow_box": {
+    "x": 760,
+    "y": 800,
+    "w": 24,
+    "h": 24,
+    "kind": "rug",
+    "dir_object": "Guilde_Imm_halcyon_yellow_box"
+  },
+  "ia_tableau_quetes_toit_emeraude": {
+    "x": 792,
+    "y": 800,
+    "w": 72,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_ia_tableau_quetes_toit_emeraude"
+  },
+  "ia_tableau_quetes_poteaux_acajou": {
+    "x": 8,
+    "y": 888,
+    "w": 64,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_ia_tableau_quetes_poteaux_acajou"
+  },
+  "ia_tableau_quetes_lierre_acajou": {
+    "x": 80,
+    "y": 888,
+    "w": 64,
+    "h": 64,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_ia_tableau_quetes_lierre_acajou"
+  },
+  "ia_tableau_quetes_mural_ardoise": {
+    "x": 152,
+    "y": 888,
+    "w": 64,
+    "h": 48,
+    "kind": "banner",
+    "dir_object": "Guilde_Imm_ia_tableau_quetes_mural_ardoise"
+  },
+  "ia_comptoir_cloche_acajou": {
+    "x": 224,
+    "y": 888,
+    "w": 64,
+    "h": 40,
+    "kind": "standing",
+    "dir_object": "Guilde_Imm_ia_comptoir_cloche_acajou"
+  },
+  "ia_fourneau_brique_ardoise": {
+    "x": 296,
+    "y": 888,
+    "w": 64,
+    "h": 104,
+    "kind": "hearth",
+    "dir_object": "Guilde_Imm_ia_fourneau_brique_ardoise"
+  }
+}

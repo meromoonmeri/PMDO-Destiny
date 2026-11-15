@@ -68,20 +68,35 @@ def verify_room(
     assert g["AssetName"] == asset_name
     assert g["TexSize"] == 1 and g["EdgeView"] == 1 and g["Music"] == "Guildmaster.ogg"
     assert len(g["Layers"]) == 8
-    assert g["Layers"][4]["Name"] == "04 verdure separee"
+    assert g["Layers"][4]["Name"] == "04 verdure separee" and g["Layers"][4]["Visible"] is True
+    assert g["Layers"][5]["Name"] == "05 ombres mobilier guilde" and g["Layers"][5]["Visible"] is True
+    assert g["Layers"][6]["Name"] == "06 immobilier guilde" and g["Layers"][6]["Visible"] is True
     gw, gh = len(g["Layers"][0]["Tiles"]), len(g["Layers"][0]["Tiles"][0])
     assert (gw, gh) == expected_gw_gh, f"{asset_name}: attendu {expected_gw_gh}, obtenu {(gw, gh)}"
     assert g["Layers"][7]["Layer"] == 4
 
-    sheets_used = {
+    arch_sheets = {
         f["Sheet"]
-        for L in g["Layers"]
-        for col in L["Tiles"]
+        for li in (0, 1, 2, 3, 7)
+        for col in g["Layers"][li]["Tiles"]
         for t in col
         for an in t.get("Layers", [])
         for f in an.get("Frames", [])
     }
-    assert sheets_used == {sheet_name}, f"{asset_name}: {sheets_used}"
+    assert arch_sheets == {sheet_name}, f"{asset_name}: calques architecture {arch_sheets}"
+
+    verd_sheets = {
+        f["Sheet"]
+        for col in g["Layers"][4]["Tiles"]
+        for t in col
+        for an in t.get("Layers", [])
+        for f in an.get("Frames", [])
+    }
+    assert verd_sheets == {"Destiny_Guilde_Verdure"}, f"{asset_name}: calque verdure {verd_sheets}"
+
+    # Les calques 05 et 06 restent vierges pour placement manuel en jeu par l'utilisateur
+    for li in (5, 6):
+        assert sum(1 for col in g["Layers"][li]["Tiles"] for t in col if t.get("Layers")) == 0
 
     for loc, patch in bank.items():
         nz = patch[..., 3] > 0
@@ -226,7 +241,7 @@ def main() -> None:
     # Vérifie que l'entrée escalier sud en bois est bien présente sur `Destiny_Guilde_Grand_Salon` (pas du vide marron #68482F en y=376) :
     sal_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Grand_Salon.tile")
     stair_tile_rgb = None
-    for layer in sal_g["Layers"]:
+    for layer in sal_g["Layers"][:4]:
         if layer["Visible"] and layer["Tiles"][35][47]["Layers"]:
             tloc = layer["Tiles"][35][47]["Layers"][0]["Frames"][0]["TexLoc"]
             stair_tile_rgb = sal_bank[(tloc["X"], tloc["Y"])][0, 4, :3].tolist()
@@ -238,8 +253,29 @@ def main() -> None:
         for ty in range(12, 18):
             assert sal_g["obstacles"][tx][ty]["Tags"] != 0, f"Intérieur porte fermée marchable en ({tx},{ty})"
 
+    # Vérifie les banques dédiées `Destiny_Guilde_Verdure` et `Destiny_Guilde_Immobilier` + les 135 objets `.dir` d'immobilier :
+    for extra_sheet in ("Destiny_Guilde_Verdure", "Destiny_Guilde_Immobilier"):
+        ebank = load_tile_bank(GAME / f"Content/Tile/{extra_sheet}.tile")
+        for loc, patch in ebank.items():
+            nz = patch[..., 3] > 0
+            if nz.any():
+                r, gr, b = patch[nz, 0].astype(int), patch[nz, 1].astype(int), patch[nz, 2].astype(int)
+                assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"{extra_sheet}: magenta en {loc}"
+
+    imm_dirs = sorted((GAME / "Content/Object").glob("Guilde_Imm_*.dir"))
+    assert len(imm_dirs) >= 120, f"Attendu >= 120 objets Guilde_Imm_*.dir, trouvé {len(imm_dirs)}"
+    for dp in imm_dirs:
+        verify_dir_object(dp, expected_frames=1)
+        rgba_d = _load_dir_rgba(dp)
+        nz = rgba_d[..., 3] > 0
+        if nz.any():
+            # Unpremultiply before checking magenta
+            a_f = rgba_d[nz, 3:4].astype(np.float32)
+            rgb_u = np.clip(np.round(rgba_d[nz, :3].astype(np.float32) * 255.0 / a_f), 0, 255).astype(int)
+            assert not np.any(((rgb_u[:, 0] - rgb_u[:, 1]) > 35) & ((rgb_u[:, 2] - rgb_u[:, 1]) > 25)), f"Magenta dans {dp.name}"
+
     acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
-    assert not acc_g["Layers"][4]["Visible"] and not acc_g["Layers"][5]["Visible"] and not acc_g["Layers"][6]["Visible"]
+    assert acc_g["Layers"][4]["Visible"] and acc_g["Layers"][5]["Visible"] and acc_g["Layers"][6]["Visible"]
     acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")
     loc0 = acc_g["Layers"][0]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
     corner_rgb = acc_bank[(loc0["X"], loc0["Y"])][0, 0, :3].tolist()
