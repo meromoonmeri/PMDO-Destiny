@@ -28,6 +28,19 @@ def main() -> None:
         assert isinstance(obj['BlankBG'].get('Associates'), list), f'{stem} BlankBG.Associates invalid'
         assert obj['rand'].get('$type') == 'RogueElements.ReRandom, RogueElements', f'{stem} rand $type invalid'
         assert len(obj['rand'].get('s', [])) == 4, f'{stem} rand.s invalid'
+
+        # Vérifie que la mer 12 phases adaptée de falaise_promontoire est active sur les deux flancs (ty=19..64)
+        l0 = obj['Layers'][0]
+        assert l0['Name'] == '00_Mer_Animee_12Phases' and l0['Visible'] is True
+        sea_cells = [
+            (tx, ty, l0['Tiles'][tx][ty]['Layers'][0])
+            for tx in range(60)
+            for ty in range(65)
+            if l0['Tiles'][tx][ty].get('Layers')
+        ]
+        assert len(sea_cells) == 900, (stem, len(sea_cells))
+        assert all(len(tl['Frames']) == 12 and tl['FrameLength'] == 8 for _, _, tl in sea_cells)
+        assert any(tx == 0 and ty == 40 for tx, ty, _ in sea_cells) and any(tx == 59 and ty == 40 for tx, ty, _ in sea_cells)
         for dec in obj.get('Decorations', []):
             for anim in dec.get('Anims', []):
                 oa = anim.get('ObjectAnim', {})

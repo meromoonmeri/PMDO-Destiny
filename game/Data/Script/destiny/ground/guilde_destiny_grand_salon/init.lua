@@ -39,7 +39,7 @@ function guilde_destiny_grand_salon.Update(map)
 end
 
 function guilde_destiny_grand_salon.OuvrirPorteMaitre(map)
-  guilde_decors.AnimerOuverturePorteSalon(map or GAME:GetCurrentGround())
+  guilde_decors.OuvrirPorteSalonDirect(map or GAME:GetCurrentGround())
 end
 
 function guilde_destiny_grand_salon.SeuilSud_Touch(obj, activator)
@@ -53,8 +53,7 @@ function guilde_destiny_grand_salon.SortieBureauMaitre_Touch(obj, activator)
   if sortie_en_cours then return end
   if activator == nil or activator.EntName ~= 'PLAYER' then return end
   if not (SV and SV.Destiny and SV.Destiny.GuildePorteMaitreOuverte == true) then
-    GAME:WaitFrames(4)
-    guilde_decors.AnimerOuverturePorteSalon(_G.GAME and GAME:GetCurrentGround() or nil)
+    guilde_decors.OuvrirPorteSalonDirect(_G.GAME and GAME:GetCurrentGround() or nil)
   end
   sortie_en_cours = true
   GAME:FadeOut(false, 20)

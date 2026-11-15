@@ -48,13 +48,12 @@ guilde_decors.FENETRES = {
 }
 
 guilde_decors.PORTE_SALON = {
-  x = 168,
-  y = 24,
-  w = 240,
-  h = 184,
+  x = 232,
+  y = 48,
+  w = 112,
+  h = 104,
   fermee = 'Guilde_Destiny_Porte_Salon_Fermee',
   ouverte = 'Guilde_Destiny_Porte_Salon_Ouverte',
-  ouverture = 'Guilde_Destiny_Porte_Salon_Ouverture',
 }
 
 function guilde_decors.MomentActuel()
@@ -132,13 +131,8 @@ function guilde_decors.SynchroniserPorteSalon(map)
   end
 end
 
-function guilde_decors.AnimerOuverturePorteSalon(map)
-  local p = guilde_decors.PORTE_SALON
-  SOUND:PlayBattleSE('EVT_Battle_Transition')
-  for frame = 0, 4 do
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.ouverture, p.x, p.y, p.w, p.h, true, frame, frame)
-    GAME:WaitFrames(7)
-  end
+function guilde_decors.OuvrirPorteSalonDirect(map)
+  -- Ouverture directe instantanee comme dans PMD EoS (sans animation intermediaire) !
   if SV and SV.Destiny then
     SV.Destiny.GuildePorteMaitreOuverte = true
   end

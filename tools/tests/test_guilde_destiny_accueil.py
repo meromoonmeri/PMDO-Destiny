@@ -166,7 +166,7 @@ def main() -> None:
     # Vérification des objets `.dir` de la porte battante extérieure style PMD EoS + fenêtres 4 ambiances
     verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Fermee.dir", expected_frames=1)
     verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverte.dir", expected_frames=1)
-    verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverture.dir", expected_frames=5)
+    assert not (GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverture.dir").exists(), "Aucune animation intermediaire ne doit subsister"
     for win_dir in sorted((GAME / "Content/Object").glob("Guilde_Fenetre_*.dir")):
         verify_dir_object(win_dir, expected_frames=1)
 

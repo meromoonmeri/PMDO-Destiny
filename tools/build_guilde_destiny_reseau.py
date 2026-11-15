@@ -487,7 +487,6 @@ def main() -> None:
     for src_key, dst_stem in [
         ("fermee_dir", "Guilde_Destiny_Porte_Salon_Fermee"),
         ("ouverte_dir", "Guilde_Destiny_Porte_Salon_Ouverte"),
-        ("ouverture_dir", "Guilde_Destiny_Porte_Salon_Ouverture"),
     ]:
         shutil.copy2(door_meta[src_key], OBJ_DIR / f"{dst_stem}.dir")
 
@@ -829,7 +828,6 @@ guilde_decors.PORTE_SALON = {{
   h = {door_meta['h']},
   fermee = 'Guilde_Destiny_Porte_Salon_Fermee',
   ouverte = 'Guilde_Destiny_Porte_Salon_Ouverte',
-  ouverture = 'Guilde_Destiny_Porte_Salon_Ouverture',
 }}
 
 function guilde_decors.MomentActuel()
@@ -907,13 +905,8 @@ function guilde_decors.SynchroniserPorteSalon(map)
   end
 end
 
-function guilde_decors.AnimerOuverturePorteSalon(map)
-  local p = guilde_decors.PORTE_SALON
-  SOUND:PlayBattleSE('EVT_Battle_Transition')
-  for frame = 0, 4 do
-    ajouter_objet_decor(map, 'PorteBureauMaitreVisuel', p.ouverture, p.x, p.y, p.w, p.h, true, frame, frame)
-    GAME:WaitFrames(7)
-  end
+function guilde_decors.OuvrirPorteSalonDirect(map)
+  -- Ouverture directe instantanee comme dans PMD EoS (sans animation intermediaire) !
   if SV and SV.Destiny then
     SV.Destiny.GuildePorteMaitreOuverte = true
   end
@@ -967,8 +960,7 @@ return guilde_decors
   if sortie_en_cours then return end
   if activator == nil or activator.EntName ~= 'PLAYER' then return end
   if not (SV and SV.Destiny and SV.Destiny.GuildePorteMaitreOuverte == true) then
-    GAME:WaitFrames(4)
-    guilde_decors.AnimerOuverturePorteSalon(_G.GAME and GAME:GetCurrentGround() or nil)
+    guilde_decors.OuvrirPorteSalonDirect(_G.GAME and GAME:GetCurrentGround() or nil)
   end
   sortie_en_cours = true
   GAME:FadeOut(false, 20)
@@ -989,7 +981,7 @@ end""")
             extra_enter = "\n  pcall(guilde_decors.SynchroniserPorteSalon, map)"
             extra_funcs = f"""
 function {mid}.OuvrirPorteMaitre(map)
-  guilde_decors.AnimerOuverturePorteSalon(map or GAME:GetCurrentGround())
+  guilde_decors.OuvrirPorteSalonDirect(map or GAME:GetCurrentGround())
 end
 """
 
