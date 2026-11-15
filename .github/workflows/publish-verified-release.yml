@@ -53,7 +53,7 @@ jobs:
         with:
           ref: ${{ inputs.target_sha }}
           sparse-checkout: |
-            docs/REVERIE_051.md
+            docs/REVERIE_*.md
             tools/build_update_zip.py
           sparse-checkout-cone-mode: false
           lfs: false
@@ -112,7 +112,11 @@ jobs:
           asset="release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
           test -f "$asset"
           test -f "${asset}.sha256"
-          { cat docs/REVERIE_051.md; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 (complète) : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
+          tag_ver="${TAG#v}"
+          notes="docs/REVERIE_$(printf '%s' "$tag_ver" | tr -d '.').md"
+          if [ ! -f "$notes" ]; then notes="docs/REVERIE_051.md"; fi
+          echo "Notes de version : $notes"
+          { cat "$notes"; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 (complète) : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
           files=("$asset" "${asset}.sha256")
           if [ -f release-artifact/update-summary.json ]; then
             update_asset=$(jq -r '.output' release-artifact/update-summary.json)
