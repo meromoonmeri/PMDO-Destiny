@@ -306,7 +306,13 @@ def main() -> None:
     acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
     assert acc_g["Layers"][3]["Visible"] and acc_g["Layers"][4]["Visible"] and acc_g["Layers"][5]["Visible"]
     acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")
-    loc0 = acc_g["Layers"][1]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
+    loc0 = None
+    for li in (0, 1):
+        cell = acc_g["Layers"][li]["Tiles"][0][0]
+        if cell["Layers"]:
+            loc0 = cell["Layers"][0]["Frames"][0]["TexLoc"]
+            break
+    assert loc0 is not None, "Le fond marron assombri doit couvrir le coin (0,0) sur Floor ou Walls"
     corner_rgb = acc_bank[(loc0["X"], loc0["Y"])][0, 0, :3].tolist()
     assert corner_rgb == [104, 72, 47], f"Fond marron assombri attendu [104, 72, 47], obtenu {corner_rgb}"
 
