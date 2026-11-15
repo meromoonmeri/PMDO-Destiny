@@ -68,16 +68,26 @@ def verify_room(
     assert g["AssetName"] == asset_name
     assert g["TexSize"] == 1 and g["EdgeView"] == 1 and g["Music"] == "Guildmaster.ogg"
     assert len(g["Layers"]) == 8
-    assert g["Layers"][4]["Name"] == "04 verdure separee" and g["Layers"][4]["Visible"] is True
-    assert g["Layers"][5]["Name"] == "05 ombres mobilier guilde" and g["Layers"][5]["Visible"] is True
-    assert g["Layers"][6]["Name"] == "06 immobilier guilde" and g["Layers"][6]["Visible"] is True
+    expected_halcyon_layers = [
+        ("Floor", 0),
+        ("Walls", 0),
+        ("Shadows", 0),
+        ("Objects Under", 0),
+        ("Objects", 0),
+        ("Objects Over", 0),
+        ("Fringe", 4),
+        ("Supports", 4),
+    ]
+    for li, (exp_name, exp_draw_layer) in enumerate(expected_halcyon_layers):
+        assert g["Layers"][li]["Name"] == exp_name, f"{asset_name}: Layers[{li}] attendu {exp_name!r}, obtenu {g['Layers'][li]['Name']!r}"
+        assert g["Layers"][li].get("Layer", 0) == exp_draw_layer, f"{asset_name}: Layers[{li}] DrawLayer={g['Layers'][li].get('Layer', 0)} != {exp_draw_layer}"
+        assert g["Layers"][li]["Visible"] is True
     gw, gh = len(g["Layers"][0]["Tiles"]), len(g["Layers"][0]["Tiles"][0])
     assert (gw, gh) == expected_gw_gh, f"{asset_name}: attendu {expected_gw_gh}, obtenu {(gw, gh)}"
-    assert g["Layers"][7]["Layer"] == 4
 
     arch_sheets = {
         f["Sheet"]
-        for li in (0, 1, 2, 3, 7)
+        for li in (0, 1, 2, 7)
         for col in g["Layers"][li]["Tiles"]
         for t in col
         for an in t.get("Layers", [])
@@ -87,15 +97,15 @@ def verify_room(
 
     verd_sheets = {
         f["Sheet"]
-        for col in g["Layers"][4]["Tiles"]
+        for col in g["Layers"][6]["Tiles"]
         for t in col
         for an in t.get("Layers", [])
         for f in an.get("Frames", [])
     }
-    assert verd_sheets == {"Destiny_Guilde_Verdure"}, f"{asset_name}: calque verdure {verd_sheets}"
+    assert verd_sheets == {"Destiny_Guilde_Verdure"}, f"{asset_name}: calque Fringe verdure {verd_sheets}"
 
-    # Les calques 05 et 06 restent vierges pour placement manuel en jeu par l'utilisateur
-    for li in (5, 6):
+    # Les calques Objects Under (3), Objects (4) et Objects Over (5) restent vierges pour placement manuel en jeu
+    for li in (3, 4, 5):
         assert sum(1 for col in g["Layers"][li]["Tiles"] for t in col if t.get("Layers")) == 0
 
     for loc, patch in bank.items():
@@ -106,15 +116,18 @@ def verify_room(
             b = patch[nz, 2].astype(int)
             assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"{asset_name}: magenta dans tuile {loc}"
 
-    verd_active = sum(1 for col in g["Layers"][4]["Tiles"] for t in col if t.get("Layers"))
-    assert verd_active >= 20, f"{asset_name}: verdure séparée vide ({verd_active})"
+    verd_active = sum(1 for col in g["Layers"][6]["Tiles"] for t in col if t.get("Layers"))
+    assert verd_active >= 20, f"{asset_name}: Fringe verdure vide ({verd_active})"
+    supports_active = sum(1 for col in g["Layers"][7]["Tiles"] for t in col if t.get("Layers"))
+    assert supports_active >= 20, f"{asset_name}: Supports vide ({supports_active})"
 
     obs = g["obstacles"]
-    top_tiles = g["Layers"][7]["Tiles"]
-    for tx in range(gw):
-        for ty in range(gh):
-            if obs[tx][ty]["Tags"] == 0:
-                assert not top_tiles[tx][ty]["Layers"], f"{asset_name}: Top déborde sur sol praticable ({tx},{ty})"
+    for over_li, over_name in ((6, "Fringe"), (7, "Supports")):
+        over_tiles = g["Layers"][over_li]["Tiles"]
+        for tx in range(gw):
+            for ty in range(gh):
+                if obs[tx][ty]["Tags"] == 0:
+                    assert not over_tiles[tx][ty]["Layers"], f"{asset_name}: {over_name} déborde sur sol praticable ({tx},{ty})"
 
     markers = {m["EntName"]: m["Collider"] for m in g["Entities"][0]["Markers"]}
     assert expected_markers <= set(markers), f"{asset_name}: marqueurs manquants {expected_markers - set(markers)}"
@@ -240,11 +253,17 @@ def main() -> None:
 
     # Vérifie que l'entrée escalier sud en bois est bien présente sur `Destiny_Guilde_Grand_Salon` (pas du vide marron #68482F en y=376) :
     sal_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Grand_Salon.tile")
-    stair_tile_rgb = None
+    stair_px = np.zeros(3, dtype=np.float32)
+    has_stair = False
     for layer in sal_g["Layers"][:4]:
         if layer["Visible"] and layer["Tiles"][35][47]["Layers"]:
             tloc = layer["Tiles"][35][47]["Layers"][0]["Frames"][0]["TexLoc"]
-            stair_tile_rgb = sal_bank[(tloc["X"], tloc["Y"])][0, 4, :3].tolist()
+            rgba_p = sal_bank[(tloc["X"], tloc["Y"])][0, 4]
+            a = float(rgba_p[3]) / 255.0
+            if a > 0.0:
+                stair_px = rgba_p[:3].astype(np.float32) * a + stair_px * (1.0 - a)
+                has_stair = True
+    stair_tile_rgb = np.round(stair_px).astype(int).tolist() if has_stair else None
     assert stair_tile_rgb is not None and stair_tile_rgb[0] > 125, (
         f"L'escalier sud en bois du Grand Salon doit être dessiné en (x=284, y=376), obtenu {stair_tile_rgb}"
     )
@@ -285,9 +304,9 @@ def main() -> None:
             assert not np.any(((rgb_u[:, 0] - rgb_u[:, 1]) > 35) & ((rgb_u[:, 2] - rgb_u[:, 1]) > 25)), f"Magenta dans {dp.name}"
 
     acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
-    assert acc_g["Layers"][4]["Visible"] and acc_g["Layers"][5]["Visible"] and acc_g["Layers"][6]["Visible"]
+    assert acc_g["Layers"][3]["Visible"] and acc_g["Layers"][4]["Visible"] and acc_g["Layers"][5]["Visible"]
     acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")
-    loc0 = acc_g["Layers"][0]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
+    loc0 = acc_g["Layers"][1]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
     corner_rgb = acc_bank[(loc0["X"], loc0["Y"])][0, 0, :3].tolist()
     assert corner_rgb == [104, 72, 47], f"Fond marron assombri attendu [104, 72, 47], obtenu {corner_rgb}"
 
