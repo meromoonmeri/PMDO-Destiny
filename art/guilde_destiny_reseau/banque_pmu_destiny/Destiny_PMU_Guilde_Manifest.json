@@ -1,0 +1,1637 @@
+{
+  "tile_banks": {
+    "Destiny_PMU_Guilde_01_Architecture": {
+      "width": 448,
+      "height": 3712,
+      "non_empty_8x8_tiles": 8333
+    },
+    "Destiny_PMU_Guilde_02_Mobilier_Interieur": {
+      "width": 912,
+      "height": 2080,
+      "non_empty_8x8_tiles": 17109
+    },
+    "Destiny_PMU_Guilde_03_Decoratifs_A": {
+      "width": 912,
+      "height": 2976,
+      "non_empty_8x8_tiles": 21628
+    },
+    "Destiny_PMU_Guilde_04_Decoratifs_B": {
+      "width": 912,
+      "height": 2528,
+      "non_empty_8x8_tiles": 20359
+    },
+    "Destiny_PMU_Guilde_05_Comptoirs_Et_Tresors": {
+      "width": 912,
+      "height": 1888,
+      "non_empty_8x8_tiles": 10874
+    }
+  },
+  "dir_objects_count": 321,
+  "dir_objects": {
+    "Guilde_PMU_IA_01_ia_cheminee_portrait": {
+      "w": 60,
+      "h": 68,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_02_ia_grande_bibliotheque": {
+      "w": 59,
+      "h": 94,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_03_ia_lit_baldaquin": {
+      "w": 68,
+      "h": 100,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_04_ia_trone_royal": {
+      "w": 81,
+      "h": 67,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_05_ia_orgue_guilde": {
+      "w": 67,
+      "h": 62,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_06_ia_grande_armoire": {
+      "w": 52,
+      "h": 100,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_07_ia_comptoir_reserve": {
+      "w": 108,
+      "h": 91,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_08_ia_comptoir_oracle": {
+      "w": 98,
+      "h": 81,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_09_ia_comptoir_techniques": {
+      "w": 98,
+      "h": 81,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_IA_10_ia_comptoir_banque": {
+      "w": 108,
+      "h": 83,
+      "source": "IA_Destiny"
+    },
+    "Guilde_PMU_Mob_001": {
+      "w": 60,
+      "h": 68,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_002": {
+      "w": 91,
+      "h": 69,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_003": {
+      "w": 36,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_004": {
+      "w": 64,
+      "h": 52,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_005": {
+      "w": 52,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_006": {
+      "w": 69,
+      "h": 84,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_007": {
+      "w": 56,
+      "h": 79,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_008": {
+      "w": 59,
+      "h": 71,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_009": {
+      "w": 64,
+      "h": 40,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_010": {
+      "w": 68,
+      "h": 131,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_011": {
+      "w": 36,
+      "h": 38,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_012": {
+      "w": 91,
+      "h": 42,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_013": {
+      "w": 58,
+      "h": 60,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_014": {
+      "w": 32,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_015": {
+      "w": 34,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_016": {
+      "w": 56,
+      "h": 79,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_017": {
+      "w": 59,
+      "h": 71,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_018": {
+      "w": 34,
+      "h": 126,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_019": {
+      "w": 36,
+      "h": 32,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_020": {
+      "w": 62,
+      "h": 59,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_021": {
+      "w": 58,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_022": {
+      "w": 164,
+      "h": 86,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_023": {
+      "w": 36,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_024": {
+      "w": 66,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_025": {
+      "w": 36,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_026": {
+      "w": 56,
+      "h": 66,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_027": {
+      "w": 58,
+      "h": 49,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_028": {
+      "w": 33,
+      "h": 48,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_029": {
+      "w": 34,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_030": {
+      "w": 97,
+      "h": 42,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_031": {
+      "w": 98,
+      "h": 42,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_032": {
+      "w": 33,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_033": {
+      "w": 46,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_034": {
+      "w": 98,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_035": {
+      "w": 33,
+      "h": 54,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_036": {
+      "w": 46,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_037": {
+      "w": 33,
+      "h": 54,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_038": {
+      "w": 91,
+      "h": 74,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_039": {
+      "w": 68,
+      "h": 84,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_040": {
+      "w": 36,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_041": {
+      "w": 100,
+      "h": 68,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_042": {
+      "w": 52,
+      "h": 81,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_043": {
+      "w": 54,
+      "h": 35,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_044": {
+      "w": 59,
+      "h": 69,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_045": {
+      "w": 58,
+      "h": 49,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_046": {
+      "w": 132,
+      "h": 142,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_047": {
+      "w": 33,
+      "h": 48,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_048": {
+      "w": 97,
+      "h": 42,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_049": {
+      "w": 54,
+      "h": 35,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_050": {
+      "w": 33,
+      "h": 54,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_051": {
+      "w": 36,
+      "h": 33,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_052": {
+      "w": 33,
+      "h": 54,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_053": {
+      "w": 46,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_054": {
+      "w": 58,
+      "h": 68,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_055": {
+      "w": 97,
+      "h": 53,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_056": {
+      "w": 100,
+      "h": 85,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_057": {
+      "w": 34,
+      "h": 64,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_058": {
+      "w": 33,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_059": {
+      "w": 36,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_060": {
+      "w": 52,
+      "h": 100,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_061": {
+      "w": 33,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_062": {
+      "w": 36,
+      "h": 33,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_063": {
+      "w": 66,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_064": {
+      "w": 46,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_065": {
+      "w": 68,
+      "h": 52,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_066": {
+      "w": 52,
+      "h": 33,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_067": {
+      "w": 35,
+      "h": 55,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_068": {
+      "w": 35,
+      "h": 47,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_069": {
+      "w": 32,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_070": {
+      "w": 56,
+      "h": 79,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_071": {
+      "w": 33,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_072": {
+      "w": 64,
+      "h": 52,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_073": {
+      "w": 68,
+      "h": 56,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_074": {
+      "w": 98,
+      "h": 67,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_075": {
+      "w": 68,
+      "h": 52,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_076": {
+      "w": 35,
+      "h": 64,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_077": {
+      "w": 35,
+      "h": 64,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_078": {
+      "w": 46,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_079": {
+      "w": 55,
+      "h": 37,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_080": {
+      "w": 36,
+      "h": 58,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_081": {
+      "w": 36,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_082": {
+      "w": 36,
+      "h": 67,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_083": {
+      "w": 32,
+      "h": 32,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_084": {
+      "w": 196,
+      "h": 95,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_085": {
+      "w": 91,
+      "h": 74,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_086": {
+      "w": 91,
+      "h": 73,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_087": {
+      "w": 34,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_088": {
+      "w": 68,
+      "h": 100,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_089": {
+      "w": 98,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_090": {
+      "w": 66,
+      "h": 90,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_091": {
+      "w": 59,
+      "h": 94,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_092": {
+      "w": 59,
+      "h": 71,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_093": {
+      "w": 33,
+      "h": 66,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_094": {
+      "w": 68,
+      "h": 56,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_095": {
+      "w": 61,
+      "h": 48,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_096": {
+      "w": 59,
+      "h": 44,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_097": {
+      "w": 132,
+      "h": 32,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_098": {
+      "w": 64,
+      "h": 48,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_099": {
+      "w": 54,
+      "h": 61,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_100": {
+      "w": 33,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_101": {
+      "w": 33,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_102": {
+      "w": 192,
+      "h": 74,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_103": {
+      "w": 36,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_104": {
+      "w": 32,
+      "h": 32,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_105": {
+      "w": 36,
+      "h": 65,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_106": {
+      "w": 61,
+      "h": 57,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_107": {
+      "w": 68,
+      "h": 36,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_108": {
+      "w": 118,
+      "h": 91,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_109": {
+      "w": 34,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_110": {
+      "w": 65,
+      "h": 47,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_111": {
+      "w": 58,
+      "h": 52,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_112": {
+      "w": 35,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_113": {
+      "w": 34,
+      "h": 64,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_114": {
+      "w": 32,
+      "h": 46,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_115": {
+      "w": 35,
+      "h": 65,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_116": {
+      "w": 99,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_117": {
+      "w": 34,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_118": {
+      "w": 32,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_119": {
+      "w": 36,
+      "h": 66,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_120": {
+      "w": 34,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_121": {
+      "w": 36,
+      "h": 62,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_122": {
+      "w": 100,
+      "h": 99,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_123": {
+      "w": 81,
+      "h": 67,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_124": {
+      "w": 36,
+      "h": 39,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_125": {
+      "w": 34,
+      "h": 35,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_126": {
+      "w": 34,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_127": {
+      "w": 34,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Mob_128": {
+      "w": 34,
+      "h": 34,
+      "source": "Mob"
+    },
+    "Guilde_PMU_Cpt_129": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_130": {
+      "w": 51,
+      "h": 54,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_131": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_132": {
+      "w": 68,
+      "h": 60,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_133": {
+      "w": 52,
+      "h": 49,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_134": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_135": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_136": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_137": {
+      "w": 78,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_138": {
+      "w": 126,
+      "h": 88,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_139": {
+      "w": 108,
+      "h": 111,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_140": {
+      "w": 76,
+      "h": 76,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_141": {
+      "w": 36,
+      "h": 82,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_142": {
+      "w": 68,
+      "h": 108,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_143": {
+      "w": 108,
+      "h": 91,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_144": {
+      "w": 52,
+      "h": 50,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_145": {
+      "w": 36,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_146": {
+      "w": 36,
+      "h": 36,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_147": {
+      "w": 108,
+      "h": 83,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_148": {
+      "w": 54,
+      "h": 68,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_149": {
+      "w": 36,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_150": {
+      "w": 36,
+      "h": 82,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_151": {
+      "w": 98,
+      "h": 81,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_152": {
+      "w": 124,
+      "h": 132,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_153": {
+      "w": 83,
+      "h": 83,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_154": {
+      "w": 68,
+      "h": 45,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_155": {
+      "w": 100,
+      "h": 124,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_156": {
+      "w": 83,
+      "h": 83,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_157": {
+      "w": 36,
+      "h": 39,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_158": {
+      "w": 60,
+      "h": 44,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_159": {
+      "w": 48,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_160": {
+      "w": 94,
+      "h": 60,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_161": {
+      "w": 44,
+      "h": 36,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_162": {
+      "w": 68,
+      "h": 58,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_163": {
+      "w": 196,
+      "h": 68,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_164": {
+      "w": 95,
+      "h": 108,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_165": {
+      "w": 63,
+      "h": 74,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_166": {
+      "w": 52,
+      "h": 36,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_167": {
+      "w": 52,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_168": {
+      "w": 52,
+      "h": 52,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_Cpt_169": {
+      "w": 45,
+      "h": 43,
+      "source": "Cpt"
+    },
+    "Guilde_PMU_DecA_170": {
+      "w": 45,
+      "h": 43,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_171": {
+      "w": 68,
+      "h": 46,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_172": {
+      "w": 46,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_173": {
+      "w": 46,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_174": {
+      "w": 50,
+      "h": 73,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_175": {
+      "w": 66,
+      "h": 69,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_176": {
+      "w": 52,
+      "h": 48,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_177": {
+      "w": 44,
+      "h": 67,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_178": {
+      "w": 44,
+      "h": 67,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_179": {
+      "w": 41,
+      "h": 58,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_180": {
+      "w": 164,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_181": {
+      "w": 52,
+      "h": 64,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_182": {
+      "w": 59,
+      "h": 58,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_183": {
+      "w": 48,
+      "h": 40,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_184": {
+      "w": 48,
+      "h": 40,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_185": {
+      "w": 68,
+      "h": 55,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_186": {
+      "w": 72,
+      "h": 131,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_187": {
+      "w": 62,
+      "h": 89,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_188": {
+      "w": 48,
+      "h": 42,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_189": {
+      "w": 52,
+      "h": 48,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_190": {
+      "w": 82,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_191": {
+      "w": 46,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_192": {
+      "w": 52,
+      "h": 51,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_193": {
+      "w": 44,
+      "h": 49,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_194": {
+      "w": 123,
+      "h": 72,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_195": {
+      "w": 94,
+      "h": 60,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_196": {
+      "w": 44,
+      "h": 49,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_197": {
+      "w": 80,
+      "h": 50,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_198": {
+      "w": 58,
+      "h": 46,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_199": {
+      "w": 91,
+      "h": 83,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_200": {
+      "w": 84,
+      "h": 63,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_201": {
+      "w": 58,
+      "h": 46,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_202": {
+      "w": 49,
+      "h": 61,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_203": {
+      "w": 48,
+      "h": 49,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_204": {
+      "w": 45,
+      "h": 42,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_205": {
+      "w": 45,
+      "h": 42,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_206": {
+      "w": 100,
+      "h": 100,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_207": {
+      "w": 52,
+      "h": 58,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_208": {
+      "w": 111,
+      "h": 58,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_209": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_210": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_211": {
+      "w": 111,
+      "h": 57,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_212": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_213": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_214": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_215": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_216": {
+      "w": 111,
+      "h": 58,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_217": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_218": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_219": {
+      "w": 41,
+      "h": 44,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_220": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_221": {
+      "w": 44,
+      "h": 73,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_222": {
+      "w": 44,
+      "h": 73,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_223": {
+      "w": 72,
+      "h": 90,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_224": {
+      "w": 45,
+      "h": 48,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_225": {
+      "w": 44,
+      "h": 40,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_226": {
+      "w": 44,
+      "h": 40,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_227": {
+      "w": 167,
+      "h": 45,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_228": {
+      "w": 68,
+      "h": 68,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_229": {
+      "w": 42,
+      "h": 65,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_230": {
+      "w": 60,
+      "h": 66,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_231": {
+      "w": 54,
+      "h": 48,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_232": {
+      "w": 52,
+      "h": 84,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_233": {
+      "w": 55,
+      "h": 68,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_234": {
+      "w": 55,
+      "h": 68,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_235": {
+      "w": 54,
+      "h": 48,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_236": {
+      "w": 100,
+      "h": 68,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_237": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_238": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_239": {
+      "w": 104,
+      "h": 125,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_240": {
+      "w": 42,
+      "h": 50,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_241": {
+      "w": 68,
+      "h": 50,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_242": {
+      "w": 48,
+      "h": 45,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_243": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_244": {
+      "w": 44,
+      "h": 61,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_245": {
+      "w": 54,
+      "h": 44,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_246": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_247": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_248": {
+      "w": 52,
+      "h": 52,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecA_249": {
+      "w": 54,
+      "h": 44,
+      "source": "DecA"
+    },
+    "Guilde_PMU_DecB_250": {
+      "w": 120,
+      "h": 73,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_251": {
+      "w": 130,
+      "h": 99,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_252": {
+      "w": 120,
+      "h": 73,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_253": {
+      "w": 70,
+      "h": 97,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_254": {
+      "w": 70,
+      "h": 77,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_255": {
+      "w": 49,
+      "h": 121,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_256": {
+      "w": 49,
+      "h": 121,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_257": {
+      "w": 44,
+      "h": 48,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_258": {
+      "w": 68,
+      "h": 60,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_259": {
+      "w": 47,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_260": {
+      "w": 47,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_261": {
+      "w": 47,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_262": {
+      "w": 47,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_263": {
+      "w": 63,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_264": {
+      "w": 63,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_265": {
+      "w": 61,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_266": {
+      "w": 63,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_267": {
+      "w": 49,
+      "h": 65,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_268": {
+      "w": 53,
+      "h": 97,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_269": {
+      "w": 115,
+      "h": 57,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_270": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_271": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_272": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_273": {
+      "w": 124,
+      "h": 91,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_274": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_275": {
+      "w": 74,
+      "h": 60,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_276": {
+      "w": 63,
+      "h": 68,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_277": {
+      "w": 44,
+      "h": 48,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_278": {
+      "w": 102,
+      "h": 43,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_279": {
+      "w": 61,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_280": {
+      "w": 120,
+      "h": 84,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_281": {
+      "w": 73,
+      "h": 53,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_282": {
+      "w": 82,
+      "h": 44,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_283": {
+      "w": 58,
+      "h": 74,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_284": {
+      "w": 70,
+      "h": 53,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_285": {
+      "w": 82,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_286": {
+      "w": 48,
+      "h": 40,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_287": {
+      "w": 48,
+      "h": 40,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_288": {
+      "w": 50,
+      "h": 132,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_289": {
+      "w": 50,
+      "h": 132,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_290": {
+      "w": 50,
+      "h": 132,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_291": {
+      "w": 50,
+      "h": 132,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_292": {
+      "w": 50,
+      "h": 132,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_293": {
+      "w": 50,
+      "h": 68,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_294": {
+      "w": 54,
+      "h": 53,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_295": {
+      "w": 68,
+      "h": 41,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_296": {
+      "w": 46,
+      "h": 62,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_297": {
+      "w": 50,
+      "h": 54,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_298": {
+      "w": 50,
+      "h": 54,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_299": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_300": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_301": {
+      "w": 76,
+      "h": 48,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_302": {
+      "w": 46,
+      "h": 62,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_303": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_304": {
+      "w": 100,
+      "h": 100,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_305": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_306": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_307": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_308": {
+      "w": 52,
+      "h": 52,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_309": {
+      "w": 62,
+      "h": 47,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_310": {
+      "w": 60,
+      "h": 49,
+      "source": "DecB"
+    },
+    "Guilde_PMU_DecB_311": {
+      "w": 60,
+      "h": 49,
+      "source": "DecB"
+    }
+  }
+}

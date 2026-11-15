@@ -254,7 +254,15 @@ def main() -> None:
             assert sal_g["obstacles"][tx][ty]["Tags"] != 0, f"Intérieur porte fermée marchable en ({tx},{ty})"
 
     # Vérifie les banques dédiées `Destiny_Guilde_Verdure` et `Destiny_Guilde_Immobilier` + les 135 objets `.dir` d'immobilier :
-    for extra_sheet in ("Destiny_Guilde_Verdure", "Destiny_Guilde_Immobilier"):
+    for extra_sheet in (
+        "Destiny_Guilde_Verdure",
+        "Destiny_Guilde_Immobilier",
+        "Destiny_PMU_Guilde_01_Architecture",
+        "Destiny_PMU_Guilde_02_Mobilier_Interieur",
+        "Destiny_PMU_Guilde_03_Decoratifs_A",
+        "Destiny_PMU_Guilde_04_Decoratifs_B",
+        "Destiny_PMU_Guilde_05_Comptoirs_Et_Tresors",
+    ):
         ebank = load_tile_bank(GAME / f"Content/Tile/{extra_sheet}.tile")
         for loc, patch in ebank.items():
             nz = patch[..., 3] > 0
@@ -262,7 +270,9 @@ def main() -> None:
                 r, gr, b = patch[nz, 0].astype(int), patch[nz, 1].astype(int), patch[nz, 2].astype(int)
                 assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"{extra_sheet}: magenta en {loc}"
 
-    imm_dirs = sorted((GAME / "Content/Object").glob("Guilde_Imm_*.dir"))
+    pmu_dirs = sorted((GAME / "Content/Object").glob("Guilde_PMU_*.dir"))
+    assert len(pmu_dirs) >= 250, f"Attendu >= 250 objets Guilde_PMU_*.dir, trouvé {len(pmu_dirs)}"
+    imm_dirs = sorted((GAME / "Content/Object").glob("Guilde_Imm_*.dir")) + pmu_dirs
     assert len(imm_dirs) >= 120, f"Attendu >= 120 objets Guilde_Imm_*.dir, trouvé {len(imm_dirs)}"
     for dp in imm_dirs:
         verify_dir_object(dp, expected_frames=1)
