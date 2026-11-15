@@ -78,6 +78,26 @@ soit Entreposer / Prendre / Tout entreposer / Argent) après l'explication
 sans script. Un drapeau partagé (`deja_ouvert`) empêche la double ouverture quand
 les deux chemins se superposent.
 
+### 5. Vasques muettes après le chargement d'une sauvegarde
+
+`fgv1_fin_grotte_vasques` a `Music = ''` (contrairement à `ewc3`, qui déclare
+`Lower Spring Cave.ogg`). Le moteur ne lance donc aucune piste à l'entrée, et
+`fgv1.GameLoad` ne faisait que `GAME:FadeIn(20)` : une sauvegarde chargée pendant
+une scène des vasques restait silencieuse jusqu'à la fin du donjon.
+
+Correctif : `GameLoad` relance `Lower Spring Cave.ogg`, l'ambiance déclarée par
+la carte d'entrée du même donjon.
+
+### 6. Lyra « encore sonnée » après un retour en ville
+
+`SV.Destiny.GrotteVerdoyanteDernierKO` n'était effacé qu'en reprenant le donjon
+(`SeuilDonjon_Touch`). Après un K.-O., un aller-retour à Réverie Town laissait le
+drapeau posé : de retour devant la cascade, Lyra récitait encore « Ne forcez pas
+si vous êtes encore sonnés ».
+
+Correctif : `SortieRetourReverie_Touch` efface le drapeau (le duo rentre se
+reposer) ; la réplique de réveil ne vaut plus que sur place.
+
 ## Points audités et **écartés** (ne pas « corriger »)
 
 Ces suspicions ont été levées avec preuve moteur ; les traiter comme des bugs
@@ -139,28 +159,33 @@ casserait des comportements corrects.
   `BattlePositionEvent` → `(10,12),(9,12),(11,12),(10,13)` toutes sur du sol
   (aucun `InvalidOperationException`).
 
-## Risques résiduels (à vérifier en jeu, hors correctif)
+## Choix assumés (pas des bugs)
 
-1. `fgv1` a `Music = ''` : après un chargement de sauvegarde sur cette carte,
-   `GameLoad` ne relance aucune piste. Peu atteignable (la carte n'est visible
-   qu'en cinématique), mais un `SOUND:PlayBGM` dans `GameLoad` serait plus sûr.
-2. `EmptyReturn` incrémente `JourneeVille` à chaque visite libre des vasques,
-   alors que le café est le mécanisme de fin de journée : compteur avançable.
-3. `GrotteVerdoyanteNbKO` est écrit mais jamais lu (drapeau mort).
-4. `GrotteVerdoyanteDernierKO` n'est effacé qu'à la rentrée dans le donjon :
-   Lyra garde sa réplique « ne forcez pas si vous êtes sonnés » après un retour
-   en ville. Choix de dialogue : non modifié sans demande.
-5. `TouchOnce` serait une alternative au verrou, mais le moteur saute le premier
-   contact : le verrou Lua reste la solution retenue.
+- `EmptyReturn` incrémente `JourneeVille` : chaque traversée complète des huit
+  étages fait avancer la journée, comme le prévoit le cycle des missions.
+- `GrotteVerdoyanteNbKO` est écrit mais jamais lu : compteur d'information pour
+  les sauvegardes, volontairement conservé.
+- `TouchOnce` ne remplacerait pas le verrou du seuil : le moteur ignore le
+  **premier** contact de ce type (`GroundChar.Collide`), ce qui laisserait passer
+  le joueur.
 
 ## Validation
 
 ```
-python3 tools/tests/test_grotte_verdoyante.py    PASS
-python3 tools/tests/test_entrees_reverie.py      PASS
-python3 tools/tests/test_e2_reverie.py           PASS
-python3 tools/tests/test_carrefour_reverie.py    PASS
+tools/tests/test_grotte_verdoyante.py            PASS
+tools/tests/test_statue_kangourex.lua            PASS
+tools/tests/test_entrees_reverie.py              PASS
+tools/tests/test_e2_reverie.py                   PASS
+tools/tests/test_carrefour_reverie.py            PASS
+tools/tests/test_lostwood_tutoriel.py            PASS
+tools/tests/test_lostwood_lecons_statue.lua      PASS
+tools/validate.py                                VALIDATION OK
+les 44 scripts tools/tests/test_*.py             PASS
 ```
+
+Les deux alertes vues pendant l'audit (`art/sprites/...` et les `*.csproj`)
+venaient du checkout partiel, pas du dépôt : sur un clone complet, le test des
+Bois Perdus et `tools/validate.py` passent sans modification.
 
 Trois assertions de non-régression ont été ajoutées à
 `tools/tests/test_grotte_verdoyante.lua` ; chacune **échoue** sur le code

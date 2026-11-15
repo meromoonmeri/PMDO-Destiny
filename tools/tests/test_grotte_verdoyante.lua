@@ -279,6 +279,23 @@ for _, e in ipairs(events) do
 end
 assert(post_ko_action_ok, 'dialogue post-K.O. de Lyra manquant')
 
+-- Un aller-retour en ville remet l'état à zéro : au retour, Lyra ne doit plus
+-- croire le duo « encore sonné » et reprend sa réplique habituelle.
+assert(SV.Destiny.GrotteVerdoyanteDernierKO == true)
+events = {}
+ewc3.SortieRetourReverie_Touch(nil, actors.PLAYER)
+assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'town02_waterfallvillage')
+assert(SV.Destiny.GrotteVerdoyanteDernierKO == nil,
+       'le retour en ville doit effacer GrotteVerdoyanteDernierKO')
+ewc3.Init(m_ewc3) -- réarme le verrou des déclencheurs
+events = {}
+ewc3.Luxray_Ewc3_Action(actors.Luxray_Ewc3, actors.PLAYER)
+local lyra_normale = false
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' and tostring(e[2]):find('grand ouvert', 1, true) then lyra_normale = true end
+end
+assert(lyra_normale, 'après un retour en ville, Lyra doit reprendre sa réplique normale')
+
 zone.ExitSegment(zobj, 'Cleared', false, 0, 0)
 assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'grotte_verdoyante' and events[#events][4] == 1)
 
@@ -323,6 +340,16 @@ for _, e in ipairs(events) do
 end
 assert(vfx_count == 2 and flash_se_count == 2 and boss_bgm_ok and wake_dlg_ok, 'réveil Nilo / double flash / Boss Battle 2 manquants')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
+
+-- La carte des vasques ne déclare pas de piste : le chargement d'une sauvegarde
+-- doit relancer l'ambiance au lieu de laisser le silence.
+events = {}
+fgv1.GameLoad({AssetName='fgv1_fin_grotte_vasques'})
+local game_load_bgm = false
+for _, e in ipairs(events) do
+  if e[1] == 'bgm' and e[2] == 'Lower Spring Cave.ogg' then game_load_bgm = true end
+end
+assert(game_load_bgm, 'fgv1.GameLoad doit relancer Lower Spring Cave.ogg')
 
 SV.Destiny.GrotteVerdoyantePhase = 3
 events = {}

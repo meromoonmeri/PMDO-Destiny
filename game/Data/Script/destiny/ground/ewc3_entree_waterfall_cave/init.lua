@@ -740,6 +740,9 @@ function ewc3.SortieRetourReverie_Touch(obj, activator)
   SV.Destiny.ArriveeVille = 'batiment'
   SV.Destiny.RetourBatimentX = 1552
   SV.Destiny.RetourBatimentY = 1600
+  -- Le duo rentre se reposer : Lyra ne doit plus le croire « encore sonné »
+  -- après un aller-retour en ville (la réplique de réveil ne vaut que sur place).
+  SV.Destiny.GrotteVerdoyanteDernierKO = nil
   if SV.Destiny.AlerteShinx == 'a_secourir' then
     SV.Destiny.LuxrayAttente = 'sortie'
   end

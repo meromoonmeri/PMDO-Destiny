@@ -456,7 +456,11 @@ function fgv1.Enter(map)
 end
 
 function fgv1.GameLoad(map)
+  -- La carte ne déclare pas de piste (Music = ''), contrairement à
+  -- ewc3_entree_waterfall_cave : sans cette relance, une sauvegarde chargée
+  -- pendant une scène des vasques restait muette jusqu'à la fin du donjon.
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 end
 
 function fgv1.Update(map, time) end
