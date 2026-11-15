@@ -186,6 +186,38 @@ assert(m_ewc3.Layers[14].Visible and not m_ewc3.Layers[12].Visible)
 ewc3.SortieRetourReverie_Touch(nil, actors.PLAYER)
 assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'town02_waterfallvillage' and SV.Destiny.ArriveeVille == 'batiment')
 
+-- Un pas de plus dans le collider pendant que le menu est ouvert rappelle le
+-- gestionnaire (GroundChar.Collide -> Interact pour chaque « Touch ») : le verrou
+-- doit absorber l'appel au lieu d'empiler un second menu.
+ewc3.Init(m_ewc3)
+local menu_oui_non, wait_choice = UI.ChoiceMenuYesNo, UI.WaitForChoice
+local menus_ouverts, reinsere = 0, false
+UI.ChoiceMenuYesNo = function(_, texte) menus_ouverts = menus_ouverts + 1; ev('menu', texte) end
+UI.WaitForChoice = function()
+  if menus_ouverts == 1 and not reinsere then
+    reinsere = true
+    ewc3.SeuilDonjon_Touch(nil, actors.PLAYER) -- pas suivant, en pleine attente de choix
+  end
+end
+choice_ret = false
+ewc3.SeuilDonjon_Touch(nil, actors.PLAYER)
+assert(menus_ouverts == 1, 'un second pas dans le seuil ne doit pas empiler un menu')
+assert(reinsere, 'le test doit reproduire une ré-entrance du déclencheur')
+UI.ChoiceMenuYesNo, UI.WaitForChoice = menu_oui_non, wait_choice
+choice_ret = true
+
+-- Lyra est persistante dans la carte sauvegardée : après le sauvetage elle doit
+-- disparaître de l'entrée au lieu d'y rester en fantôme.
+SV.Destiny.GrotteVerdoyanteOuverte = true
+SV.Destiny.AlerteShinx = 'termine'
+actors.Luxray_Ewc3 = make_actor('Luxray_Ewc3', 400, 260, 'luxray')
+ewc3.Init(m_ewc3)
+assert(actors.Luxray_Ewc3 == nil, 'Luxray_Ewc3 doit être retirée une fois le sauvetage terminé')
+SV.Destiny.AlerteShinx = 'a_secourir'
+ewc3.Init(m_ewc3)
+assert(actors.Luxray_Ewc3 and actors.Luxray_Ewc3.Position.X == 400 and actors.Luxray_Ewc3.Position.Y == 260,
+  'Luxray_Ewc3 doit être replacée devant la cascade pendant le sauvetage')
+
 -- 2. zone/grotte_verdoyante : Seg 0/1 échec -> respawn devant ewc3_entree_waterfall_cave (Laying -> Wake + réaction Lyra) ; Seg 0/1 succès -> fgv1
 local zone = assert(loadfile(root .. '/game/Data/Script/destiny/zone/grotte_verdoyante/init.lua'))()
 local zobj = {ID='grotte_verdoyante'}
@@ -193,6 +225,7 @@ SV.Destiny = {AlerteShinx='a_secourir', ExplorationReverie=true, GrotteVerdoyant
 events = {}
 zone.ExitSegment(zobj, 'Downed', false, 0, 0)
 assert(SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.LuxrayAttente == 'sortie')
+assert(SV.Destiny.ExplorationReverie == nil, 'ExplorationReverie doit être relâché après un échec (branche visite libre de lost_wood)')
 assert(events[#events][1] == 'end_day' and events[#events][2] == 'Downed' and events[#events][3] == 'grotte_verdoyante')
 assert(SV.Destiny.GrotteVerdoyanteRetourEchec and SV.Destiny.GrotteVerdoyanteRetourEchec.cause == 'ko' and SV.Destiny.GrotteVerdoyanteRetourEchec.segment == 0)
 assert(SV.Destiny.GrotteVerdoyanteNbKO == 1 and SV.Destiny.GrotteVerdoyanteDernierKO == true)

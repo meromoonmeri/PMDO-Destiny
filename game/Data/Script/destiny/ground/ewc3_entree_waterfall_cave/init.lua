@@ -592,9 +592,18 @@ function ewc3.Init(map)
   end
   installer_declencheurs(map)
   synchroniser_cascade(map)
+  -- Les personnages créés par script sont persistants (GroundMap.AddMapChar) :
+  -- Lyra reste donc enregistrée dans la carte des sauvegardes. Sans ce
+  -- nettoyage, elle survit à la fin du sauvetage et continue d'annoncer le
+  -- passage ouvert quand la Grotte Verdoyante est visitée en libre.
+  local lyra = CH('Luxray_Ewc3')
   if SV.Destiny.GrotteVerdoyanteOuverte and SV.Destiny.AlerteShinx == 'a_secourir' then
-    local lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 260, Direction.Up)
+    if lyra == nil then
+      lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 260, Direction.Up)
+    end
     lyra.CollisionDisabled = false
+  elseif lyra ~= nil then
+    GROUND:RemoveCharacter('Luxray_Ewc3')
   end
 end
 
@@ -680,14 +689,25 @@ function ewc3.Statue_Kangourex_Action(obj, activator)
   end
 end
 
+-- Un objet de contact « Touch » rappelle son gestionnaire à chaque pas effectué
+-- dans son collider (GroundChar.Collide -> Interact, sans déduplication, alors
+-- que « TouchOnce » ignore au contraire le premier contact). Le seuil mesure
+-- 3 cases de haut : sans verrou posé dès l'entrée, un joueur qui maintient la
+-- direction empile plusieurs menus. Le verrou n'est relâché qu'après une courte
+-- pause si le joueur refuse, pour ne pas reproposer le menu tant qu'il n'a pas
+-- quitté la zone de contact.
 function ewc3.SeuilDonjon_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if sortie_en_cours then return end
+  sortie_en_cours = true
   UI:ResetSpeaker()
   UI:ChoiceMenuYesNo('Entrer dans la Grotte Verdoyante ?', true)
   UI:WaitForChoice()
-  if not UI:ChoiceResult() then return end
-  sortie_en_cours = true
+  if not UI:ChoiceResult() then
+    GAME:WaitFrames(18)
+    sortie_en_cours = false
+    return
+  end
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.ExplorationReverie = true
   SV.Destiny.GrotteVerdoyanteDernierKO = nil
@@ -699,11 +719,15 @@ end
 function ewc3.SortieRetourReverie_Touch(obj, activator)
   if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
   if sortie_en_cours then return end
+  sortie_en_cours = true
   UI:ResetSpeaker()
   UI:ChoiceMenuYesNo('Retourner à Réverie Town ?', true)
   UI:WaitForChoice()
-  if not UI:ChoiceResult() then return end
-  sortie_en_cours = true
+  if not UI:ChoiceResult() then
+    GAME:WaitFrames(18)
+    sortie_en_cours = false
+    return
+  end
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.ExplorationReverie = nil
   SV.Destiny.ArriveeVille = 'batiment'

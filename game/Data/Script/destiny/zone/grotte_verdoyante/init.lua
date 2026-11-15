@@ -50,6 +50,10 @@ function grotte_verdoyante.ExitSegment(zone, result, rescue, segmentID, mapID)
   SV.Destiny = SV.Destiny or {}
   local R = RogueEssence.Data.GameProgress.ResultType
   if result ~= R.Cleared then
+    -- Le joueur est revenu à la surface : il n'est plus « en exploration ».
+    -- Ce drapeau est relu par lost_wood.ExitSegment (branche visite libre) ;
+    -- le laisser posé ferait passer un trajet scénarisé pour une visite libre.
+    SV.Destiny.ExplorationReverie = nil
     if segmentID == 1 then
       SV.Destiny.GrotteVerdoyantePhase = 1
     end
