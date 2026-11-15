@@ -61,3 +61,25 @@ longueur et les ancres, pas la position réelle des acteurs, qui dépend de la
 caméra de chaque scène. `reveil_nuit` documente le calcul (pieds à 160 pour
 une boîte à 188) ; les scènes de village posent leur caméra en dur et
 mériteraient le même repère explicite.
+
+## Addendum — cadrage des panoramiques
+
+Le contrat « les pieds au-dessus de la boîte » n'était vérifié nulle part.
+`tools/audit_cadrage_acteurs.py` le calcule : un panoramique vise le centre du
+cadre, donc un personnage en `(px, py)` a les pieds à l'écran en
+`py - y + 120`, et la boîte commence à 188.
+
+Un personnage n'est signalé que s'il est **visible** : dans la largeur du cadre
+(`|px - x| ≤ 152`) et les pieds dans la bande `188 … 240`. Un figurant hors du
+cadre n'est pas « caché », il n'est simplement pas à l'image.
+
+Résultat sur les 131 scripts : un seul défaut, Alakazam dans la visite guidée
+de Réverie Town. Son panorama le posait à `(360, 1100)` alors qu'il se tient en
+`(372, 1172)`, soit les pieds à l'écran `1172 - 1100 + 120 = 192` : quatre
+pixels sous le haut de la boîte. Le cadre descend à `(360, 1132)` et le pose à
+160, le repère du projet. La copie miroir `WaterfallVillageCapital_Dev` reçoit
+le même changement, les deux fichiers devant rester identiques octet par octet.
+
+Deux panoramiques restent volontairement proches de la boîte sans rien cacher :
+Kangourex (pieds à 184, 4 px de marge) et Mordudor (172, 16 px). Le mode
+`--strict` les liste comme confort à améliorer, sans les compter comme défauts.

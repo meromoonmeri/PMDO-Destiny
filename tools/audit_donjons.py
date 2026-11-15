@@ -18,6 +18,12 @@ Invariants
                  `GenerateScale.Min^2` doit etre inferieur a
                  `(GenerateScale.Max - 1)^2`, sinon la boucle de generation
                  n'entre jamais et l'etape ne fait rien.
+4b. Garde d'eau   Toute eau posee sur du SOL doit porter un
+                 `NoChokepointTerrainStencil`. L'eau posee uniquement sur des
+                 murs est inoffensive : ces cases ne sont pas marchables.
+                 `WaterStep.DrawBlob` teste le stencil case par case, donc le
+                 garde-fou s'applique aussi aux flaques.
+
 5. Equipe        `TeamSpawnZoneStep.TeamSizes` doit etre defini. Une liste vide
                  fait sortir `PoolTeamSpawner.ChooseSpawns` immediatement et
                  aucun Pokemon n'apparait.
@@ -111,6 +117,21 @@ def auditer_zone(chemin: str, especes: set[str], skills: set[str],
                             problemes.append(
                                 f"{nom} seg{si} F{fi}: eau posee uniquement sur les goulots "
                                 f"(NoChokepoint Negate=true)")
+                # 4b. eau sur le sol sans garde-fou
+                if classe in ("PerlinWaterStep", "BlobWaterStep"):
+                    terrain_id = (valeur.get("Terrain") or {}).get("Data", {}).get("ID")
+                    stencil = valeur.get("TerrainStencil") or {}
+                    sous_stencils = stencil.get("List") or [stencil]
+                    garde = any("NoChokepoint" in str(x.get("$type", "")) for x in sous_stencils)
+                    sur_le_sol = any(
+                        x.get("Room") is True or x.get("Blocked") is True
+                        for x in sous_stencils
+                        if "MapTerrainStencil" in str(x.get("$type", "")))
+                    if terrain_id == "water" and sur_le_sol and not garde:
+                        problemes.append(
+                            f"{nom} seg{si} F{fi}: eau sur le sol sans garde-fou "
+                            f"(NoChokepoint absent)")
+
                 # 4. blobs inertes
                 if classe == "BlobWaterStep":
                     gen = valeur.get("GenerateScale") or {}

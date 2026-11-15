@@ -1185,8 +1185,11 @@ function ville.Visite(map)
     parler_accueil(mordudor, 'Happy', 'Des pièces, des pièces ! Confiez-moi vos Poké : je les garderai en sécurité.')
   end
   if alakazam ~= nil then
-    animer_fond(360, 1100)
-    GAME:MoveCamera(360, 1100, 95, false)
+    -- Pieds d'Alakazam a l'ecran : 1172 - 1100 + 120 = 192, sous le haut
+    -- de la boite (188). Le cadre descend de 32 px pour le poser a 160,
+    -- le repere du projet (cf. reveil_nuit et cinematique.lua).
+    animer_fond(360, 1132)
+    GAME:MoveCamera(360, 1132, 95, false)
     parler_guide('Normal', 'Et tout au bout de la place, Alakazam aide les Pokémon à retrouver des capacités oubliées.')
     GAME:WaitFrames(20)
     parler_guide('Worried', 'Tiens… il n’est pas à son comptoir. C’est étrange, il est pourtant toujours là à cette heure-ci.')

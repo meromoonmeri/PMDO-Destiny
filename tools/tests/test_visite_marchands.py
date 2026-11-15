@@ -10,7 +10,7 @@ scene=city[city.index('function ville.Visite(map)'):city.index('local function p
 assert "CH('NewObject_4'), CH('NewObject_3'), CH('NewObject_24')" in scene
 for name in ['kecleon','kangourex','alakazam','mordudor','forgelina']:
  assert f'if {name} ~= nil then' in scene and f'parler_accueil({name},' in scene,name
-for coordinate in ['GAME:MoveCamera(1104, 992','GAME:MoveCamera(360, 1100','GAME:MoveCamera(504, 1040']:assert coordinate in scene
+for coordinate in ['GAME:MoveCamera(1104, 992','GAME:MoveCamera(360, 1132','GAME:MoveCamera(504, 1040']:assert coordinate in scene
 # Les répliques originales restent dans le même ordre et la visite se concentre sur les boutiques actives (Alakazam en dernier).
 previous=['Nous y voilà ! Bienvenue','Le jour se lève. Reste avec moi','Après cette nuit, tu n’arrives pas ici tout seul','Voici la place. Les chemins','Là-bas, c’est la boutique de','Bienvenue ! Une pomme ou une baie','C’est ça : on vérifiera notre sac','Et voici ','Confiez-moi vos affaires','Exactement : ce que nous laissons','Voici aussi Iris','De l’autre côté de la place, voici Écu','Et tout au bout de la place, Alakazam','Tu ne te souviens toujours pas de ton passé','Tu n’as pas besoin de tout retenir','Pour l’instant, reposons-nous']
 pos=-1

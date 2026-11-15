@@ -116,3 +116,36 @@ nombre d'étages — `Max` est **exclusif** (`SpawnRangeList.GetSpawnList` teste
 une carte vide de 10×10**. Une carte vide n'a ni entrée ni escalier. Ce
 filet de sécurité est dans le moteur et n'a pas été modifié ; il reste la
 seule façon dont un étage peut encore ne pas mener à son escalier.
+
+## Addendum — le filet de sécurité du moteur ne peut plus être atteint
+
+`Zone.GetMap` réessaie cinq fois une génération qui échoue, puis retombe sur
+une carte vide de 10×10. Une carte vide n'a ni entrée ni escalier : c'était le
+dernier moyen de rester coincé sur un étage.
+
+Le seul générateur capable de lever l'exception dans ces deux donjons est
+`DetectIsolatedStairsStep`, qui échoue quand un escalier n'est plus joignable à
+pied sec. Trois propriétés du moteur rendent cette situation impossible
+désormais :
+
+1. `WaterStep.DrawBlob` teste `TerrainStencil` **case par case** avant de poser
+   l'eau, flaques comprises. Le garde-fou n'est donc pas contourné par
+   `BlobWaterStep`.
+2. `NoChokepointTerrainStencil` refuse toute case dont le remplissage coupe la
+   zone. Avec `Negate: false` — rétabli ici — l'eau ne peut plus occuper un
+   goulot d'un tile de large.
+3. `DetectIsolatedStairsStep` tourne après toutes les étapes de terrain sur les
+   dix-huit étages des deux donjons, ce que vérifie la règle 2 de
+   `tools/audit_donjons.py`.
+
+L'audit couvre maintenant aussi le cas d'une eau posée sur le sol **sans**
+garde-fou du tout (règle 4b) : une eau qui ne porte pas de
+`NoChokepointTerrainStencil` peut couper la carte, alors qu'une eau posée sur
+des murs est inoffensive, ces cases n'étant pas marchables. La règle se
+déclenche sur vingt étages si l'on retire les gardes, et reste muette sur
+l'état livré.
+
+Le repli sur carte vide n'est donc plus un risque connu sur ces donjons. Il
+reste, tel quel, dans `engine/`, que ce dépôt matérialise à un commit épinglé
+dans `SOURCE_LOCK.json` : le modifier ferait diverger la copie du moteur, ce
+que la structure du projet interdit.
