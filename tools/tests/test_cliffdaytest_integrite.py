@@ -83,6 +83,38 @@ def main() -> None:
 
     assert obs_ref is not None
 
+    # 1bis. Toute reference de tuile doit exister dans sa planche .tile.
+    #       GraphicsManager.GetTile renvoie defaultTex (damier noir/magenta 32x32)
+    #       quand la case manque : la case est alors dessinee PAR-DESSUS les
+    #       calques precedents, ce qui masquait la mer et le ciel de cliffdaytest.
+    sheet_keys: dict[str, set[tuple[int, int]]] = {}
+
+    def tile_keys(sheet: str) -> set[tuple[int, int]]:
+        if sheet not in sheet_keys:
+            raw = (TILE_DIR / f'{sheet}.tile').read_bytes()
+            _, count = struct.unpack_from('<ii', raw, 0)
+            sheet_keys[sheet] = {
+                (tx, ty) for tx, ty, _ in (struct.unpack_from('<iiq', raw, 8 + 16 * i) for i in range(count))
+            }
+        sheet_keys_ref = sheet_keys[sheet]
+        return sheet_keys_ref
+
+    for gname in ('cliffdaytest', 'cliffdaytest_aube', 'cliffdaytest_crepuscule', 'cliffdaytest_nuit'):
+        obj = grounds[gname]
+        orphelines: list[tuple[int, int, str, int, int]] = []
+        for li, lyr in enumerate(obj['Layers']):
+            for x in range(MAP_W):
+                for y in range(MAP_H):
+                    for sub in lyr['Tiles'][x][y].get('Layers', []):
+                        for fr in sub.get('Frames', []):
+                            loc = (fr['TexLoc']['X'], fr['TexLoc']['Y'])
+                            if loc not in tile_keys(fr['Sheet']):
+                                orphelines.append((li, x, y, loc[0], loc[1]))
+        assert not orphelines, (
+            f'{len(orphelines)} reference(s) de tuile absente(s) de sa planche sur {gname} '
+            f"(damier d'erreur en jeu), ex. {orphelines[:5]}"
+        )
+
     # 2. Moulin (2..7, 78..84) : 4 phases distinctes, 0 trou de mer la nuit, 0 morsure
     wm_broken = [(3, 79), (3, 80), (3, 82), (3, 83), (4, 79), (5, 79)]
     for gname, l_ter, expected_ter in [
