@@ -176,6 +176,11 @@ def palette_cadre(base_name: str, verre: np.ndarray, n: int = 14) -> np.ndarray:
     px = np.concatenate(px)
     if not len(px):
         return np.zeros((1, 3), np.uint8)
+    # uniquement des tons BOIS : les PNG d'ambiance contiennent des pixels de
+    # ciel bleu nuit qui, laissés dans la palette, ressortaient sur le cadre.
+    px = px[px[:, 0].astype(int) >= px[:, 2].astype(int)]
+    if not len(px):
+        return np.zeros((1, 3), np.uint8)
     bande = Image.fromarray(px[None, :, :].astype(np.uint8), "RGB")
     q = bande.quantize(colors=n, method=Image.Quantize.MEDIANCUT)
     pal = np.array(q.getpalette()[: n * 3], np.uint8).reshape(-1, 3)
@@ -191,9 +196,11 @@ def appliquer_palette(rgba: np.ndarray, palette: np.ndarray, verre: np.ndarray) 
     px = rgba[sel][:, :3].astype(np.int32)
     d = ((px[:, None, :] - palette[None, :, :].astype(np.int32)) ** 2).sum(axis=2)
     out[sel, :3] = palette[np.argmin(d, axis=1)]
-    # élimine les pixels isolés nés de la quantification
+    # élimine les pixels isolés nés de la quantification.
+    # `donor=sel` est INDISPENSABLE : sans lui, un pixel de cadre prenait la
+    # couleur d'un pixel de VERRE voisin et laissait des bleu nuit dans le bois.
     from speckle import clean
-    out, _ = clean(out, max_area=1, tol=0.0, iters=1)
+    out, _ = clean(out, max_area=1, tol=0.0, iters=2, donor=sel)
     return out
 
 
