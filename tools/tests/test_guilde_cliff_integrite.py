@@ -39,6 +39,9 @@ def main() -> None:
             if l0['Tiles'][tx][ty].get('Layers')
         ]
         assert len(sea_cells) == 900, (stem, len(sea_cells))
+        if amb in ('aube', 'crepuscule'):
+            bg_anims = [bl['BG']['BGAnim']['AnimIndex'] for bl in obj['Background']['Layers']]
+            assert all('NUAGES_MILIEU' not in a and 'NUAGES_HAUT' not in a for a in bg_anims), (stem, bg_anims)
         assert all(len(tl['Frames']) == 12 and tl['FrameLength'] == 8 for _, _, tl in sea_cells)
         assert any(tx == 0 and ty == 40 for tx, ty, _ in sea_cells) and any(tx == 59 and ty == 40 for tx, ty, _ in sea_cells)
         for dec in obj.get('Decorations', []):

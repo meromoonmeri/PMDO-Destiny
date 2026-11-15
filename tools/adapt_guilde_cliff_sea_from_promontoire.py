@@ -223,6 +223,11 @@ def adapt_sea_to_guilde_cliff(amb: str, cap: str) -> None:
             active_sea_tiles += 1
         new_l0_cols.append(col)
 
+    if amb in ("aube", "crepuscule"):
+        g_doc["Background"]["Layers"] = [
+            bl for bl in g_doc["Background"]["Layers"]
+            if not any(tag in bl["BG"]["BGAnim"]["AnimIndex"] for tag in ("NUAGES_MILIEU", "NUAGES_HAUT"))
+        ]
     g_doc["Layers"][0]["Tiles"] = new_l0_cols
     g_path.write_text(json.dumps(g_full, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
