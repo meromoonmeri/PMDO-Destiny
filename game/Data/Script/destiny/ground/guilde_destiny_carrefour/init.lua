@@ -33,6 +33,7 @@ function guilde_destiny_carrefour.Exit(map)
 end
 
 function guilde_destiny_carrefour.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_carrefour')
 end
 
 function guilde_destiny_carrefour.SortieEst_Touch(obj, activator)

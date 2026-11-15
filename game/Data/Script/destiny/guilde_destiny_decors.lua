@@ -109,8 +109,48 @@ local function ajouter_objet_decor(map, ent_name, anim_sheet, x, y, w, h, passab
   return obj
 end
 
+-- Rafraîchissement en direct : `meteo.Appliquer` ne touche pas les intérieurs,
+-- donc une salle occupée gardait l'ambiance de son entrée. On réapplique quand
+-- le moment change (vérification légère, une fois toutes les 30 frames).
+local dernier_moment = nil
+local compteur = 0
+
+function guilde_decors.SynchroniserAmbiance(map, map_id)
+  if map == nil then return end
+  compteur = compteur + 1
+  if compteur < 30 then return end
+  compteur = 0
+  local moment = guilde_decors.MomentActuel()
+  if moment == dernier_moment then return end
+  dernier_moment = moment
+  guilde_decors.AppliquerAmbianceEtFenetres(map, map_id, moment)
+end
+
+-- Force l'ambiance d'une salle (cinématique, événement scénarisé...).
+-- Écrit `SV.Destiny.GuildeAmbiance`, qui est prioritaire sur `meteo_reverie.Moment()`
+-- et persiste en sauvegarde. `LibererAmbiance` rend la main à l'horloge du monde.
+local MOMENTS = { jour = true, aube = true, crepuscule = true, nuit = true }
+
+function guilde_decors.ForcerAmbiance(map, map_id, moment)
+  if moment == nil or not MOMENTS[moment] then return false end
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.GuildeAmbiance = moment
+  dernier_moment = moment
+  guilde_decors.AppliquerAmbianceEtFenetres(map, map_id, moment)
+  return true
+end
+
+function guilde_decors.LibererAmbiance(map, map_id)
+  if SV and SV.Destiny then SV.Destiny.GuildeAmbiance = nil end
+  dernier_moment = nil
+  if map ~= nil then
+    compteur = 30          -- force la réévaluation au prochain Update
+  end
+end
+
 function guilde_decors.AppliquerAmbianceEtFenetres(map, map_id, ambiance_forcee)
   local moment = ambiance_forcee or guilde_decors.MomentActuel()
+  dernier_moment = moment
   -- 1. Applique le filtre natif de luminosite & teinte de salle + personnages (`SetDestinyAmbiance(moment, true)`)
   if map ~= nil and map.SetDestinyAmbiance ~= nil then
     map:SetDestinyAmbiance(moment, true)

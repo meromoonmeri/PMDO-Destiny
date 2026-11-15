@@ -33,6 +33,7 @@ function guilde_destiny_dortoir_nord_1.Exit(map)
 end
 
 function guilde_destiny_dortoir_nord_1.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_dortoir_nord_1')
 end
 
 function guilde_destiny_dortoir_nord_1.SortieSud_Touch(obj, activator)

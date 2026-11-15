@@ -41,6 +41,7 @@ function guilde_destiny_grand_salon.Exit(map)
 end
 
 function guilde_destiny_grand_salon.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_grand_salon')
 end
 
 local function partenaire_de(hero)

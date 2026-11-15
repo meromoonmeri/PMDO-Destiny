@@ -33,6 +33,7 @@ function guilde_destiny_couloir_est.Exit(map)
 end
 
 function guilde_destiny_couloir_est.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_couloir_est')
 end
 
 function guilde_destiny_couloir_est.SortieOuest_Touch(obj, activator)

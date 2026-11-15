@@ -47,7 +47,9 @@ end
 
 function guilde_destiny_accueil.Enter(map) pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_accueil'); suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function guilde_destiny_accueil.GameLoad(map) pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_accueil'); suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
-function guilde_destiny_accueil.Update(map, time) end
+function guilde_destiny_accueil.Update(map, time)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_accueil')
+end
 function guilde_destiny_accueil.Exit(map) end
 function guilde_destiny_accueil.GameSave(map) end
 

@@ -33,6 +33,7 @@ function guilde_destiny_bureau_maitre.Exit(map)
 end
 
 function guilde_destiny_bureau_maitre.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_bureau_maitre')
 end
 
 function guilde_destiny_bureau_maitre.SeuilSud_Touch(obj, activator)

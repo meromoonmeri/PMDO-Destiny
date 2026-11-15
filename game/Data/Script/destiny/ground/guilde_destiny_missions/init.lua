@@ -33,6 +33,7 @@ function guilde_destiny_missions.Exit(map)
 end
 
 function guilde_destiny_missions.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_missions')
 end
 
 function guilde_destiny_missions.EscalierSud_Touch(obj, activator)

@@ -216,22 +216,30 @@ def main() -> int:
     ecritures = [str(f.relative_to(GAME)) for f in scripts
                  if "GuildeAmbiance" in f.read_text(encoding="utf-8", errors="ignore")
                  and re.search(r"GuildeAmbiance\s*=", f.read_text(encoding="utf-8", errors="ignore"))]
+    # rafraîchissement en direct : chaque salle doit appeler SynchroniserAmbiance dans Update
+    init_txt = {r: (GAME / f"Data/Script/destiny/ground/{r}/init.lua").read_text(encoding="utf-8")
+                for r in rooms}
+    rooms_sync = [r for r, t in init_txt.items() if "SynchroniserAmbiance" in t]
+    decors_sync = "function guilde_decors.SynchroniserAmbiance" in decors
     rapport["cablage"] = {
         "GuildeAmbiance_lu": "SV.Destiny.GuildeAmbiance" in decors,
         "GuildeAmbiance_ecrit_par": ecritures,
+        "override_api": ("function guilde_decors.ForcerAmbiance" in decors
+                         and "function guilde_decors.LibererAmbiance" in decors),
         "meteo_ignore_interieurs": "not exterieurs[map.AssetName]" in meteo,
         "reevaluation": [m for m in ("Init", "Enter", "GameLoad")
-                         if all(m in (GAME / f"Data/Script/destiny/ground/{r}/init.lua").read_text(encoding="utf-8")
-                                for r in rooms)],
+                         if all(m in t for t in init_txt.values())],
+        "salles_rafraichissement_direct": len(rooms_sync),
+        "rafraichissement_direct": decors_sync and len(rooms_sync) == len(rooms),
     }
-    if not ecritures:
+    if not ecritures and not rapport["cablage"]["override_api"]:
         rapport["avertissements"].append(
             "SV.Destiny.GuildeAmbiance est lu mais jamais écrit : l'override d'ambiance "
             "par salle est inopérant (l'ambiance vient toujours de meteo_reverie.Moment()).")
-    if "not exterieurs[map.AssetName]" in meteo:
+    if "not exterieurs[map.AssetName]" in meteo and not rapport["cablage"]["rafraichissement_direct"]:
         rapport["avertissements"].append(
-            "meteo.Appliquer() sort immédiatement pour les intérieurs : pas de mise à jour "
-            "en direct de l'ambiance d'une salle occupée (relue à Init/Enter/GameLoad).")
+            "meteo.Appliquer() sort immédiatement pour les intérieurs et aucune salle ne "
+            "rafraîchit son ambiance : une salle occupée garde l'ambiance de son entrée.")
     rapport["resume"]["avertissements"] = len(rapport["avertissements"])
 
     sans = [s["id"] for s in rapport["salles"] if not s["fenetres"]]

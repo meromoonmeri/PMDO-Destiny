@@ -33,6 +33,7 @@ function guilde_destiny_refectoire.Exit(map)
 end
 
 function guilde_destiny_refectoire.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_refectoire')
 end
 
 function guilde_destiny_refectoire.SortieEst_Touch(obj, activator)

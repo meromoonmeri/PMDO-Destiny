@@ -33,6 +33,7 @@ function guilde_destiny_chambre_heros.Exit(map)
 end
 
 function guilde_destiny_chambre_heros.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_chambre_heros')
 end
 
 function guilde_destiny_chambre_heros.SortieOuest_Touch(obj, activator)

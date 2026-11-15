@@ -33,6 +33,7 @@ function guilde_destiny_reserve.Exit(map)
 end
 
 function guilde_destiny_reserve.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_reserve')
 end
 
 function guilde_destiny_reserve.SortieNord_Touch(obj, activator)

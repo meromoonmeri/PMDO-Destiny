@@ -33,6 +33,7 @@ function guilde_destiny_cuisine.Exit(map)
 end
 
 function guilde_destiny_cuisine.Update(map)
+  guilde_decors.SynchroniserAmbiance(map, 'guilde_destiny_cuisine')
 end
 
 function guilde_destiny_cuisine.SortieSud_Touch(obj, activator)
