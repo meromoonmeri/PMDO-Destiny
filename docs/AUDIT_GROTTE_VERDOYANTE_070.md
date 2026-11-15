@@ -61,6 +61,23 @@ cascade, le drapeau restait posé alors que le joueur n'était plus en explorati
 Correctif : `ExplorationReverie = nil` dans la branche d'échec.
 Les branches `Cleared` sont inchangées : la run continue vers les vasques.
 
+### 4. Statue Kangourex muette (stockage inaccessible)
+
+`ewc3.Statue_Kangourex_Action` commençait par `if SV.Destiny.StatueKangourexExpliquee
+then return end`. Or ce drapeau est posé dès la cinématique d'arrivée : toute
+interaction ultérieure sortait donc immédiatement, sans rien faire, en comptant
+sur l'enveloppe du service `StatueKangourex` pour ouvrir le stockage. Si cette
+enveloppe n'était pas installée (service non chargé, exception dans
+`OnGroundMapInit`, carte rechargée sans passage par `GroundMapInit`), la statue
+devenait totalement inerte : ni dépôt, ni retrait.
+
+Correctif : l'action ouvre désormais elle-même le stockage de l'équipe
+(`destiny.statue_kangourex.OuvrirStockage()` → `COMMON.ShowTeamStorageMenu`,
+soit Entreposer / Prendre / Tout entreposer / Argent) après l'explication
+éventuelle ; le service ne fait plus qu'ajouter le même comportement aux statues
+sans script. Un drapeau partagé (`deja_ouvert`) empêche la double ouverture quand
+les deux chemins se superposent.
+
 ## Points audités et **écartés** (ne pas « corriger »)
 
 Ces suspicions ont été levées avec preuve moteur ; les traiter comme des bugs

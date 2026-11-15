@@ -51,6 +51,18 @@ et exécuté avant l'ouverture du stockage. La carte doit être chargée dans la
 quête Destiny pour que le service soit actif ; le fichier visuel seul, hors
 quête, ne suffit pas.
 
+### Dépôt, retrait et argent (comme le rocher Kangourex d'Halcyon)
+
+L'interaction appelle `destiny.statue_kangourex.OuvrirStockage()`, qui délègue au
+menu de stockage de PMDO (`COMMON.ShowTeamStorageMenu`) : **Entreposer des
+objets**, **Prendre les objets**, **Tout entreposer** et **Argent**. Le menu
+boucle jusqu'à « Annuler », comme chez Halcyon. Deux chemins peuvent ouvrir ce
+stockage — le script de carte (qui joue d'abord la réplique du partenaire) et le
+service `StatueKangourex` (pour les statues posées sans script) — et un drapeau
+partagé (`deja_ouvert`) garantit qu'une seule ouverture a lieu par interaction.
+Une carte qui possède déjà le script de carte n'a besoin d'aucun service : si le
+service est absent, la statue fonctionne quand même.
+
 ## Provenance et droits
 
 - **Tiny Woods** : piste originale de *Pokémon Mystery Dungeon: Blue Rescue

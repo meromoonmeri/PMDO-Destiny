@@ -162,6 +162,8 @@ def main() -> None:
 
     # 4. Vérifications de logique Lua (cascade, zone, boss, post-sauvetage, café, Nilo en ville)
     run(ROOT / 'tools/tests/test_grotte_verdoyante.lua', ROOT)
+    # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
+    run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
     print('PASS Grotte Verdoyante : 9 étages, cascade ewc3, arène 9F, scripts Lua et retours vérifiés.')
 
 

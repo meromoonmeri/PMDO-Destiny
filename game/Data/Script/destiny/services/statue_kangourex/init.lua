@@ -2,6 +2,7 @@
 -- script de carte à écrire. Les callbacks déjà présents restent utilisables.
 require 'origin.common'
 require 'origin.services.baseservice'
+local statue_kangourex = require 'destiny.statue_kangourex'
 
 local StatueKangourex = Class('StatueKangourex', BaseService)
 local ASSET = 'Statue_Kangourex'
@@ -58,12 +59,15 @@ function StatueKangourex:Installer(objet, carte)
   local precedent = table_action[cle]
   if not self.wrappers[precedent] then
     local wrapper = function(cible, activator)
-      -- Si une autre entité partage ce nom, son ancien comportement reste
-      -- intact. Si la statue possédait déjà un script, il s'exécute aussi.
+      -- Le script de carte (s'il existe) garde la main : il peut jouer une
+      -- réplique puis ouvrir lui-même le stockage.
+      statue_kangourex.Reinitialiser()
       if precedent ~= nil then precedent(cible, activator) end
       if cible:GetEntityType() == RogueEssence.Ground.GroundEntity.EEntTypes.Object
-          and cible.ObjectAnim ~= nil and cible.ObjectAnim.AnimIndex == ASSET then
-        COMMON.ShowTeamStorageMenu()
+          and cible.ObjectAnim ~= nil and cible.ObjectAnim.AnimIndex == ASSET
+          and not statue_kangourex.deja_ouvert then
+        -- Carte sans callback : la statue ouvre le stockage de l'équipe.
+        statue_kangourex.OuvrirStockage()
       end
     end
     table_action[cle] = wrapper

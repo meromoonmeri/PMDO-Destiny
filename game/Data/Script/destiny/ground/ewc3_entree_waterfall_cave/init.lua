@@ -7,6 +7,7 @@
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
+local statue_kangourex = require 'destiny.statue_kangourex'
 
 local ewc3 = {}
 local sortie_en_cours = false
@@ -664,29 +665,35 @@ function ewc3.Luxray_Ewc3_Action(personnage, activator)
   end
 end
 
--- Repli pour une ancienne sauvegarde ayant déjà ouvert la cascade avant
--- l'ajout de la statue : joue l'incompréhension + l'explication une seule fois,
--- puis laisse le service StatueKangourex ouvrir COMMON.ShowTeamStorageMenu().
+-- Statue-relais Kangourex : l'incompréhension muette et l'explication se jouent
+-- une seule fois (repli pour une ancienne sauvegarde qui aurait déjà ouvert la
+-- cascade), puis l'interaction ouvre le stockage de l'équipe, exactement comme
+-- le rocher Kangourex de Halcyon : entreposer un objet, en retirer un, tout
+-- entreposer et gérer l'argent. Le service destiny.services.statue_kangourex
+-- n'ouvre pas un second menu : statue_kangourex mémorise l'ouverture.
 function ewc3.Statue_Kangourex_Action(obj, activator)
+  DEBUG.EnableDbgCoro()
   SV.Destiny = SV.Destiny or {}
-  if SV.Destiny.StatueKangourexExpliquee then return end
-  local hero = activator or CH('PLAYER')
-  local partenaire = CH('Teammate1') or equipe_scene.Partenaire(368, 260, Direction.Right)
-  if hero ~= nil and obj ~= nil then
-    tourner_vers_cible(hero, obj, 4)
-    cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
-    GAME:WaitFrames(26)
+  if not SV.Destiny.StatueKangourexExpliquee then
+    local hero = activator or CH('PLAYER')
+    local partenaire = CH('Teammate1') or equipe_scene.Partenaire(368, 260, Direction.Right)
+    if hero ~= nil and obj ~= nil then
+      tourner_vers_cible(hero, obj, 4)
+      cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
+      GAME:WaitFrames(26)
+    end
+    if partenaire ~= nil and hero ~= nil then
+      se_regarder(hero, partenaire, 4)
+      GAME:WaitFrames(6)
+      cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+      GAME:WaitFrames(18)
+    end
+    decouverte_statue_kangourex(hero, partenaire)
+    if hero ~= nil and obj ~= nil then
+      tourner_vers_cible(hero, obj, 4)
+    end
   end
-  if partenaire ~= nil and hero ~= nil then
-    se_regarder(hero, partenaire, 4)
-    GAME:WaitFrames(6)
-    cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
-    GAME:WaitFrames(18)
-  end
-  decouverte_statue_kangourex(hero, partenaire)
-  if hero ~= nil and obj ~= nil then
-    tourner_vers_cible(hero, obj, 4)
-  end
+  statue_kangourex.OuvrirStockage()
 end
 
 -- Un objet de contact « Touch » rappelle son gestionnaire à chaque pas effectué

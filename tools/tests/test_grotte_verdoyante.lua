@@ -10,6 +10,9 @@ package.preload['destiny.meteo_reverie'] = function()
 end
 package.preload['destiny.suivi_interieurs'] = function() return {Lancer=function() end, Terminer=function() end} end
 package.preload['destiny.equipe_scene'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/equipe_scene.lua'))() end
+package.preload['destiny.statue_kangourex'] = function()
+  return assert(loadfile(root .. '/game/Data/Script/destiny/statue_kangourex.lua'))()
+end
 package.preload['destiny.cinematique'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/cinematique.lua'))() end
 package.preload['destiny.missions_reverie'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/missions_reverie.lua'))() end
 
@@ -134,6 +137,7 @@ COMMON = {
   end,
   CreateWalkArea=function() end,
   EndDungeonDay=function(res, z, s, m, e) ev('end_day', res, z, s, m, e) end,
+  ShowTeamStorageMenu=function() appels_stockage = (appels_stockage or 0) + 1 end,
 }
 function LTBL(m) return {Importance=m.Importance} end
 
@@ -168,15 +172,23 @@ for _, e in ipairs(events) do
 end
 assert(hero_q and hero_sw and statue_quiproquo and statue_reserve, 'Incompréhension muette du héros ou explication de la Statue Kangourex manquante')
 
--- Une fois expliquée, l'interaction directe ne répète pas le tutoriel (laisse StatueKangourex ouvrir le stockage)
+-- Une fois expliquée, l'interaction directe ne répète pas le tutoriel mais ouvre
+-- le stockage de l'équipe (dépôt, retrait, tout déposer, argent).
+appels_stockage = 0
 local n_avant = #events
 ewc3.Statue_Kangourex_Action(m_ewc3.Objects.Statue_Kangourex, actors.PLAYER)
 assert(#events == n_avant, 'Statue_Kangourex_Action ne doit pas rejouer le dialogue quand StatueKangourexExpliquee == true')
+assert(appels_stockage == 1, 'Statue_Kangourex_Action doit ouvrir le stockage, ouvert ' .. tostring(appels_stockage) .. ' fois')
 
--- Repli ancienne sauvegarde (cascade déjà ouverte, statue pas encore expliquée)
+-- Repli ancienne sauvegarde (cascade déjà ouverte, statue pas encore expliquée) :
+-- explication unique puis stockage, une seule fois chacun.
 SV.Destiny.StatueKangourexExpliquee = nil
+appels_stockage = 0
+n_avant = #events
 ewc3.Statue_Kangourex_Action(m_ewc3.Objects.Statue_Kangourex, actors.PLAYER)
 assert(SV.Destiny.StatueKangourexExpliquee == true, 'Le repli Statue_Kangourex_Action doit marquer StatueKangourexExpliquee')
+assert(#events > n_avant, 'Le repli doit jouer l’explication de la statue')
+assert(appels_stockage == 1, 'Le repli doit ouvrir le stockage une seule fois')
 
 -- SeuilDonjon et SortieRetourReverie
 ewc3.SeuilDonjon_Touch(nil, actors.PLAYER)
