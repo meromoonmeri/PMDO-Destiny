@@ -180,7 +180,7 @@ tools/tests/test_carrefour_reverie.py            PASS
 tools/tests/test_lostwood_tutoriel.py            PASS
 tools/tests/test_lostwood_lecons_statue.lua      PASS
 tools/validate.py                                VALIDATION OK
-les 44 scripts tools/tests/test_*.py             PASS
+les 43 scripts tools/tests/test_*.py             PASS
 ```
 
 Les deux alertes vues pendant l'audit (`art/sprites/...` et les `*.csproj`)
