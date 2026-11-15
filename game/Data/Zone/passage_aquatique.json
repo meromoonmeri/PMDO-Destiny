@@ -370,7 +370,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -394,12 +394,12 @@
                     "Max": 5
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -444,7 +444,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -1159,7 +1159,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -1183,12 +1183,12 @@
                     "Max": 5
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -1233,7 +1233,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -1948,7 +1948,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -1972,12 +1972,12 @@
                     "Max": 5
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -2022,7 +2022,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -2737,7 +2737,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -2761,12 +2761,12 @@
                     "Max": 6
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -2811,7 +2811,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -3526,7 +3526,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -3550,12 +3550,12 @@
                     "Max": 6
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -3600,7 +3600,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -4315,7 +4315,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -4339,12 +4339,12 @@
                     "Max": 6
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -4389,7 +4389,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -5104,7 +5104,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -5128,12 +5128,12 @@
                     "Max": 7
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -5178,7 +5178,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -5893,7 +5893,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -5917,12 +5917,12 @@
                     "Max": 7
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -5967,7 +5967,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -6682,7 +6682,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -6706,12 +6706,12 @@
                     "Max": 8
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -6756,7 +6756,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -7471,7 +7471,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -7495,12 +7495,12 @@
                     "Max": 8
                   },
                   "AreaScale": {
-                    "Min": 12,
-                    "Max": 28
+                    "Min": 2,
+                    "Max": 8
                   },
                   "GenerateScale": {
-                    "Min": 100,
-                    "Max": 100
+                    "Min": 7,
+                    "Max": 12
                   },
                   "Terrain": {
                     "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
@@ -7545,7 +7545,7 @@
                           "Not": false
                         },
                         "Global": false,
-                        "Negate": true
+                        "Negate": false
                       },
                       {
                         "$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
@@ -8549,7 +8549,25 @@
                 2
               ]
             },
-            "Spawns": [
+                        "TeamSizes": [
+              {
+                "Spawn": 1,
+                "Rate": 12,
+                "Range": {
+                  "Min": 0,
+                  "Max": 10
+                }
+              },
+              {
+                "Spawn": 2,
+                "Rate": 4,
+                "Range": {
+                  "Min": 4,
+                  "Max": 10
+                }
+              }
+            ],
+"Spawns": [
               {
                 "Spawn": {
                   "BaseForm": {
