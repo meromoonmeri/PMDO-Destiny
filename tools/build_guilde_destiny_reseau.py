@@ -22,6 +22,8 @@ import struct
 import numpy as np
 from PIL import Image
 
+from nettete_accueil_guilde import scale3x
+
 ROOT = Path(__file__).resolve().parents[1]
 SRC_RESEAU = Path("/home/user/guilde_destiny_reseau")
 SRC_BASE = SRC_RESEAU / "cartes_base_sans_decors"
@@ -442,28 +444,13 @@ def main() -> None:
         amb_names = {}
         for amb in AMBIANCES:
             src_im = Image.open(slot["ambiances"][amb]["png"]).convert("RGBA")
-            up_rgba = np.array(src_im.resize((w3, h3), Image.Resampling.LANCZOS), dtype=np.float32)
-            mask3 = up_rgba[:, :, 3] >= 128.0
-            rgb3 = up_rgba[:, :, :3]
-            from scipy import ndimage as _ndi
-            for _st in (0.65, 0.45):
-                _L = 0.299 * rgb3[:, :, 0] + 0.587 * rgb3[:, :, 1] + 0.114 * rgb3[:, :, 2]
-                _lmin = _ndi.minimum_filter(_L, size=5)
-                _lmax = _ndi.maximum_filter(_L, size=5)
-                _span = _lmax - _lmin
-                _u = np.clip((_L - _lmin) / np.maximum(_span, 1e-4), 0.0, 1.0)
-                _us = _u * _u * (3.0 - 2.0 * _u)
-                _us = _us * _us * (3.0 - 2.0 * _us)
-                _med = _ndi.median_filter(_L, size=5)
-                _gate = np.where((_L - _med) > 45.0, 0.0, np.clip((_span - 12.0) / 30.0, 0.0, 1.0))
-                _rat = (_L + _st * _gate * ((_lmin + _us * _span) - _L) + 1.0) / (_L + 1.0)
-                _cmin = _ndi.minimum_filter(rgb3, size=(5, 5, 1))
-                _cmax = _ndi.maximum_filter(rgb3, size=(5, 5, 1))
-                rgb3 = np.clip(rgb3 * _rat[:, :, None], _cmin, _cmax)
-            sharp_rgba = np.zeros((h3, w3, 4), dtype=np.uint8)
-            sharp_rgba[:, :, :3][mask3] = np.clip(np.round(rgb3[mask3]), 0, 255).astype(np.uint8)
-            sharp_rgba[:, :, 3] = np.where(mask3, 255, 0).astype(np.uint8)
-            up_im = Image.fromarray(sharp_rgba, "RGBA")
+            # Scale3x (et non Lanczos) : l'Accueil est la seule salle dont l'art
+            # est un 1x agrandi.  Lanczos + « sharpen » inventait 15 000 couleurs
+            # et un degrade de flou sur les vitres ; Scale3x redessine le pixel
+            # art a l'identique, sans halo (cf. tools/nettete_accueil_guilde.py).
+            up_im = scale3x(src_im)
+            if up_im.size != (w3, h3):
+                up_im = up_im.resize((w3, h3), Image.Resampling.NEAREST)
             comp_im = precompensate_window_for_engine(up_im, amb)
             dname = f"Guilde_Fenetre_Accueil_{side}_{amb.capitalize()}"
             write_dir(OBJ_DIR / f"{dname}.dir", comp_im, w3, h3, 0, 1)
