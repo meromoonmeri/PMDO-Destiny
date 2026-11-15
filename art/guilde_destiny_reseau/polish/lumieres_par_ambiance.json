@@ -1,0 +1,242 @@
+[
+ {
+  "salle": "guilde_destiny_accueil",
+  "salle_lum": {
+   "jour": 88.15739900037978,
+   "aube": 73.36605188729612,
+   "crepuscule": 55.71080039782555,
+   "nuit": 38.503138740443134
+  },
+  "vitres_lum": {
+   "jour": 173.0274724093829,
+   "aube": 145.89736741375987,
+   "crepuscule": 97.77408684805792,
+   "nuit": 38.53779454352974
+  },
+  "fenetres": 2
+ },
+ {
+  "salle": "guilde_destiny_bureau_maitre",
+  "salle_lum": {
+   "jour": 98.0279209950765,
+   "aube": 81.56138745468239,
+   "crepuscule": 61.891724470649656,
+   "nuit": 42.72920393032498
+  },
+  "vitres_lum": {
+   "jour": 242.9152215568862,
+   "aube": 184.90986508864623,
+   "crepuscule": 125.44424615240109,
+   "nuit": 49.45346173770107
+  },
+  "fenetres": 1
+ },
+ {
+  "salle": "guilde_destiny_carrefour",
+  "salle_lum": {
+   "jour": 92.82359972222223,
+   "aube": 77.25042289610566,
+   "crepuscule": 58.646602101171005,
+   "nuit": 40.48291852028867
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ },
+ {
+  "salle": "guilde_destiny_chambre_heros",
+  "salle_lum": {
+   "jour": 93.88815714699074,
+   "aube": 78.12108238904774,
+   "crepuscule": 59.2985842503631,
+   "nuit": 40.975807131989825
+  },
+  "vitres_lum": {
+   "jour": 239.38195996360326,
+   "aube": 181.76066002248032,
+   "crepuscule": 122.10531346143553,
+   "nuit": 48.04004300165926
+  },
+  "fenetres": 1
+ },
+ {
+  "salle": "guilde_destiny_couloir_est",
+  "salle_lum": {
+   "jour": 92.18346603587963,
+   "aube": 76.72207797122367,
+   "crepuscule": 58.248218548225296,
+   "nuit": 40.196060251611286
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ },
+ {
+  "salle": "guilde_destiny_couloir_ouest",
+  "salle_lum": {
+   "jour": 92.18981466435184,
+   "aube": 76.72723368282497,
+   "crepuscule": 58.25198370093499,
+   "nuit": 40.198781344271964
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ },
+ {
+  "salle": "guilde_destiny_cuisine",
+  "salle_lum": {
+   "jour": 92.45828989583333,
+   "aube": 76.92714456794661,
+   "crepuscule": 58.38529763262527,
+   "nuit": 40.34192891094771
+  },
+  "vitres_lum": {
+   "jour": 238.89701698018226,
+   "aube": 182.8495297688708,
+   "crepuscule": 121.70302293423671,
+   "nuit": 47.89053850637667
+  },
+  "fenetres": 2
+ },
+ {
+  "salle": "guilde_destiny_dortoir_nord_1",
+  "salle_lum": {
+   "jour": 87.00525286989796,
+   "aube": 72.37197497006615,
+   "crepuscule": 54.93747091969599,
+   "nuit": 38.07463098700417
+  },
+  "vitres_lum": {
+   "jour": 240.48850039968025,
+   "aube": 184.2072642811241,
+   "crepuscule": 124.36775855864329,
+   "nuit": 48.83532115797558
+  },
+  "fenetres": 1
+ },
+ {
+  "salle": "guilde_destiny_dortoir_nord_2",
+  "salle_lum": {
+   "jour": 87.02662359826742,
+   "aube": 72.38979682633472,
+   "crepuscule": 54.95104964160143,
+   "nuit": 38.08398924113916
+  },
+  "vitres_lum": {
+   "jour": 240.48850039968022,
+   "aube": 184.2072642811241,
+   "crepuscule": 124.36775855864329,
+   "nuit": 48.83532115797558
+  },
+  "fenetres": 1
+ },
+ {
+  "salle": "guilde_destiny_dortoir_sud_1",
+  "salle_lum": {
+   "jour": 88.86182246492348,
+   "aube": 73.9069458041029,
+   "crepuscule": 56.093380452024554,
+   "nuit": 38.889849733174515
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ },
+ {
+  "salle": "guilde_destiny_dortoir_sud_2",
+  "salle_lum": {
+   "jour": 88.86966921768708,
+   "aube": 73.91370212063993,
+   "crepuscule": 56.09870951140873,
+   "nuit": 38.89310904726473
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ },
+ {
+  "salle": "guilde_destiny_grand_salon",
+  "salle_lum": {
+   "jour": 93.91749737172069,
+   "aube": 78.1873275630806,
+   "crepuscule": 59.372867562380854,
+   "nuit": 40.90795366337411
+  },
+  "vitres_lum": {
+   "jour": 232.12867211764635,
+   "aube": 176.4557591233159,
+   "crepuscule": 117.23172036992888,
+   "nuit": 44.55216431294595
+  },
+  "fenetres": 2
+ },
+ {
+  "salle": "guilde_destiny_missions",
+  "salle_lum": {
+   "jour": 91.8949262916345,
+   "aube": 76.50787895167005,
+   "crepuscule": 58.09440947067837,
+   "nuit": 39.99661907927169
+  },
+  "vitres_lum": {
+   "jour": 223.56939390228513,
+   "aube": 177.56068747098647,
+   "crepuscule": 115.69353380021793,
+   "nuit": 45.09595211394951
+  },
+  "fenetres": 2
+ },
+ {
+  "salle": "guilde_destiny_refectoire",
+  "salle_lum": {
+   "jour": 97.81235884452161,
+   "aube": 81.40103065304633,
+   "crepuscule": 61.78368733858704,
+   "nuit": 42.60929269916107
+  },
+  "vitres_lum": {
+   "jour": 242.38953755014563,
+   "aube": 184.5734834412492,
+   "crepuscule": 123.378839340098,
+   "nuit": 49.14530753814262
+  },
+  "fenetres": 2
+ },
+ {
+  "salle": "guilde_destiny_reserve",
+  "salle_lum": {
+   "jour": 88.87587288079294,
+   "aube": 73.9187287763022,
+   "crepuscule": 56.102371105186855,
+   "nuit": 38.89578018751771
+  },
+  "vitres_lum": {
+   "jour": null,
+   "aube": null,
+   "crepuscule": null,
+   "nuit": null
+  },
+  "fenetres": 0
+ }
+]

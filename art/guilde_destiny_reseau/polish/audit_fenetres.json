@@ -1,0 +1,1003 @@
+{
+ "salles": [
+  {
+   "id": "guilde_destiny_accueil",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 88.7,
+    "aube": 73.8,
+    "crepuscule": 56.1,
+    "nuit": 38.8
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Gauche",
+     "x": 336,
+     "y": 168,
+     "w": 144,
+     "h": 264,
+     "jour": "Guilde_Fenetre_Accueil_Gauche_Jour",
+     "aube": "Guilde_Fenetre_Accueil_Gauche_Aube",
+     "crepuscule": "Guilde_Fenetre_Accueil_Gauche_Crepuscule",
+     "nuit": "Guilde_Fenetre_Accueil_Gauche_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       144,
+       264
+      ],
+      "aube": [
+       144,
+       264
+      ],
+      "crepuscule": [
+       144,
+       264
+      ],
+      "nuit": [
+       144,
+       264
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 15282,
+      "jour/crepuscule": 22545,
+      "jour/nuit": 24849,
+      "aube/crepuscule": 24174,
+      "aube/nuit": 25497,
+      "crepuscule/nuit": 25263
+     },
+     "px_vitre": 24849,
+     "lum_vitre": {
+      "jour": 166.8,
+      "aube": 140.2,
+      "crepuscule": 105.5,
+      "nuit": 53.8
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.88,
+      "aube": 1.9,
+      "crepuscule": 1.88,
+      "nuit": 1.39
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    },
+    {
+     "name": "Fenetre_Droite",
+     "x": 1056,
+     "y": 168,
+     "w": 144,
+     "h": 264,
+     "jour": "Guilde_Fenetre_Accueil_Droite_Jour",
+     "aube": "Guilde_Fenetre_Accueil_Droite_Aube",
+     "crepuscule": "Guilde_Fenetre_Accueil_Droite_Crepuscule",
+     "nuit": "Guilde_Fenetre_Accueil_Droite_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       144,
+       264
+      ],
+      "aube": [
+       144,
+       264
+      ],
+      "crepuscule": [
+       144,
+       264
+      ],
+      "nuit": [
+       144,
+       264
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 17271,
+      "jour/crepuscule": 21213,
+      "jour/nuit": 25029,
+      "aube/crepuscule": 24903,
+      "aube/nuit": 25920,
+      "crepuscule/nuit": 25605
+     },
+     "px_vitre": 25029,
+     "lum_vitre": {
+      "jour": 166.6,
+      "aube": 140.7,
+      "crepuscule": 105.9,
+      "nuit": 53.7
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.88,
+      "aube": 1.91,
+      "crepuscule": 1.89,
+      "nuit": 1.39
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_bureau_maitre",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 97.5,
+    "aube": 81.1,
+    "crepuscule": 61.6,
+    "nuit": 42.5
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Centre",
+     "x": 224,
+     "y": 16,
+     "w": 64,
+     "h": 88,
+     "jour": "Guilde_Fenetre_04_bureau_maitre_Centre_Jour",
+     "aube": "Guilde_Fenetre_04_bureau_maitre_Centre_Aube",
+     "crepuscule": "Guilde_Fenetre_04_bureau_maitre_Centre_Crepuscule",
+     "nuit": "Guilde_Fenetre_04_bureau_maitre_Centre_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       64,
+       88
+      ],
+      "aube": [
+       64,
+       88
+      ],
+      "crepuscule": [
+       64,
+       88
+      ],
+      "nuit": [
+       64,
+       88
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 3051,
+      "jour/crepuscule": 3319,
+      "jour/nuit": 3794,
+      "aube/crepuscule": 3718,
+      "aube/nuit": 3838,
+      "crepuscule/nuit": 3816
+     },
+     "px_vitre": 3794,
+     "lum_vitre": {
+      "jour": 179.6,
+      "aube": 150.0,
+      "crepuscule": 115.4,
+      "nuit": 57.5
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.84,
+      "aube": 1.85,
+      "crepuscule": 1.87,
+      "nuit": 1.35
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_carrefour",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 92.3,
+    "aube": 76.8,
+    "crepuscule": 58.3,
+    "nuit": 40.2
+   },
+   "monotone": true,
+   "fenetres": []
+  },
+  {
+   "id": "guilde_destiny_chambre_heros",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 93.6,
+    "aube": 77.9,
+    "crepuscule": 59.1,
+    "nuit": 40.9
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Centre",
+     "x": 216,
+     "y": 24,
+     "w": 56,
+     "h": 72,
+     "jour": "Guilde_Fenetre_11_chambre_heros_Centre_Jour",
+     "aube": "Guilde_Fenetre_11_chambre_heros_Centre_Aube",
+     "crepuscule": "Guilde_Fenetre_11_chambre_heros_Centre_Crepuscule",
+     "nuit": "Guilde_Fenetre_11_chambre_heros_Centre_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       56,
+       72
+      ],
+      "aube": [
+       56,
+       72
+      ],
+      "crepuscule": [
+       56,
+       72
+      ],
+      "nuit": [
+       56,
+       72
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1904,
+      "jour/crepuscule": 2127,
+      "jour/nuit": 2578,
+      "aube/crepuscule": 2451,
+      "aube/nuit": 2614,
+      "crepuscule/nuit": 2613
+     },
+     "px_vitre": 2578,
+     "lum_vitre": {
+      "jour": 168.4,
+      "aube": 141.8,
+      "crepuscule": 110.3,
+      "nuit": 53.1
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.8,
+      "aube": 1.82,
+      "crepuscule": 1.87,
+      "nuit": 1.3
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_couloir_est",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 91.6,
+    "aube": 76.2,
+    "crepuscule": 57.9,
+    "nuit": 39.9
+   },
+   "monotone": true,
+   "fenetres": []
+  },
+  {
+   "id": "guilde_destiny_couloir_ouest",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 91.6,
+    "aube": 76.3,
+    "crepuscule": 57.9,
+    "nuit": 40.0
+   },
+   "monotone": true,
+   "fenetres": []
+  },
+  {
+   "id": "guilde_destiny_cuisine",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 91.8,
+    "aube": 76.4,
+    "crepuscule": 58.0,
+    "nuit": 40.1
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Gauche",
+     "x": 136,
+     "y": 32,
+     "w": 48,
+     "h": 72,
+     "jour": "Guilde_Fenetre_06_cuisine_Gauche_Jour",
+     "aube": "Guilde_Fenetre_06_cuisine_Gauche_Aube",
+     "crepuscule": "Guilde_Fenetre_06_cuisine_Gauche_Crepuscule",
+     "nuit": "Guilde_Fenetre_06_cuisine_Gauche_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       48,
+       72
+      ],
+      "aube": [
+       48,
+       72
+      ],
+      "crepuscule": [
+       48,
+       72
+      ],
+      "nuit": [
+       48,
+       72
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1605,
+      "jour/crepuscule": 1688,
+      "jour/nuit": 2124,
+      "aube/crepuscule": 2001,
+      "aube/nuit": 2159,
+      "crepuscule/nuit": 2159
+     },
+     "px_vitre": 2124,
+     "lum_vitre": {
+      "jour": 167.9,
+      "aube": 143.0,
+      "crepuscule": 109.2,
+      "nuit": 53.9
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.83,
+      "aube": 1.87,
+      "crepuscule": 1.88,
+      "nuit": 1.35
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    },
+    {
+     "name": "Fenetre_Droite",
+     "x": 296,
+     "y": 32,
+     "w": 48,
+     "h": 72,
+     "jour": "Guilde_Fenetre_06_cuisine_Droite_Jour",
+     "aube": "Guilde_Fenetre_06_cuisine_Droite_Aube",
+     "crepuscule": "Guilde_Fenetre_06_cuisine_Droite_Crepuscule",
+     "nuit": "Guilde_Fenetre_06_cuisine_Droite_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       48,
+       72
+      ],
+      "aube": [
+       48,
+       72
+      ],
+      "crepuscule": [
+       48,
+       72
+      ],
+      "nuit": [
+       48,
+       72
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1518,
+      "jour/crepuscule": 1696,
+      "jour/nuit": 2125,
+      "aube/crepuscule": 2015,
+      "aube/nuit": 2173,
+      "crepuscule/nuit": 2189
+     },
+     "px_vitre": 2125,
+     "lum_vitre": {
+      "jour": 168.2,
+      "aube": 142.0,
+      "crepuscule": 109.6,
+      "nuit": 54.3
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.83,
+      "aube": 1.86,
+      "crepuscule": 1.89,
+      "nuit": 1.35
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_dortoir_nord_1",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 86.2,
+    "aube": 71.7,
+    "crepuscule": 54.5,
+    "nuit": 37.7
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Centre",
+     "x": 192,
+     "y": 16,
+     "w": 64,
+     "h": 72,
+     "jour": "Guilde_Fenetre_09_dortoir_nord_Centre_Jour",
+     "aube": "Guilde_Fenetre_09_dortoir_nord_Centre_Aube",
+     "crepuscule": "Guilde_Fenetre_09_dortoir_nord_Centre_Crepuscule",
+     "nuit": "Guilde_Fenetre_09_dortoir_nord_Centre_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       64,
+       72
+      ],
+      "aube": [
+       64,
+       72
+      ],
+      "crepuscule": [
+       64,
+       72
+      ],
+      "nuit": [
+       64,
+       72
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1986,
+      "jour/crepuscule": 2678,
+      "jour/nuit": 3046,
+      "aube/crepuscule": 2876,
+      "aube/nuit": 3083,
+      "crepuscule/nuit": 3086
+     },
+     "px_vitre": 3046,
+     "lum_vitre": {
+      "jour": 174.2,
+      "aube": 147.0,
+      "crepuscule": 112.4,
+      "nuit": 56.1
+     },
+     "contraste_vitre_salle": {
+      "jour": 2.02,
+      "aube": 2.05,
+      "crepuscule": 2.06,
+      "nuit": 1.49
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_dortoir_nord_2",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 86.2,
+    "aube": 71.7,
+    "crepuscule": 54.5,
+    "nuit": 37.7
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Centre",
+     "x": 192,
+     "y": 16,
+     "w": 64,
+     "h": 72,
+     "jour": "Guilde_Fenetre_09_dortoir_nord_Centre_Miroir_Jour",
+     "aube": "Guilde_Fenetre_09_dortoir_nord_Centre_Miroir_Aube",
+     "crepuscule": "Guilde_Fenetre_09_dortoir_nord_Centre_Miroir_Crepuscule",
+     "nuit": "Guilde_Fenetre_09_dortoir_nord_Centre_Miroir_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       64,
+       72
+      ],
+      "aube": [
+       64,
+       72
+      ],
+      "crepuscule": [
+       64,
+       72
+      ],
+      "nuit": [
+       64,
+       72
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1986,
+      "jour/crepuscule": 2678,
+      "jour/nuit": 3046,
+      "aube/crepuscule": 2876,
+      "aube/nuit": 3083,
+      "crepuscule/nuit": 3086
+     },
+     "px_vitre": 3046,
+     "lum_vitre": {
+      "jour": 174.2,
+      "aube": 147.0,
+      "crepuscule": 112.4,
+      "nuit": 56.1
+     },
+     "contraste_vitre_salle": {
+      "jour": 2.02,
+      "aube": 2.05,
+      "crepuscule": 2.06,
+      "nuit": 1.49
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_dortoir_sud_1",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 88.5,
+    "aube": 73.6,
+    "crepuscule": 55.8,
+    "nuit": 38.7
+   },
+   "monotone": true,
+   "fenetres": []
+  },
+  {
+   "id": "guilde_destiny_dortoir_sud_2",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 88.5,
+    "aube": 73.6,
+    "crepuscule": 55.8,
+    "nuit": 38.7
+   },
+   "monotone": true,
+   "fenetres": []
+  },
+  {
+   "id": "guilde_destiny_grand_salon",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 93.4,
+    "aube": 77.7,
+    "crepuscule": 59.0,
+    "nuit": 40.7
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Gauche",
+     "x": 88,
+     "y": 64,
+     "w": 48,
+     "h": 96,
+     "jour": "Guilde_Fenetre_03_grand_salon_central_Gauche_Jour",
+     "aube": "Guilde_Fenetre_03_grand_salon_central_Gauche_Aube",
+     "crepuscule": "Guilde_Fenetre_03_grand_salon_central_Gauche_Crepuscule",
+     "nuit": "Guilde_Fenetre_03_grand_salon_central_Gauche_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       48,
+       96
+      ],
+      "aube": [
+       48,
+       96
+      ],
+      "crepuscule": [
+       48,
+       96
+      ],
+      "nuit": [
+       48,
+       96
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1771,
+      "jour/crepuscule": 2284,
+      "jour/nuit": 2705,
+      "aube/crepuscule": 2672,
+      "aube/nuit": 2770,
+      "crepuscule/nuit": 2755
+     },
+     "px_vitre": 2705,
+     "lum_vitre": {
+      "jour": 162.4,
+      "aube": 137.4,
+      "crepuscule": 103.9,
+      "nuit": 51.5
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.74,
+      "aube": 1.77,
+      "crepuscule": 1.76,
+      "nuit": 1.27
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    },
+    {
+     "name": "Fenetre_Droite",
+     "x": 432,
+     "y": 64,
+     "w": 56,
+     "h": 96,
+     "jour": "Guilde_Fenetre_03_grand_salon_central_Droite_Jour",
+     "aube": "Guilde_Fenetre_03_grand_salon_central_Droite_Aube",
+     "crepuscule": "Guilde_Fenetre_03_grand_salon_central_Droite_Crepuscule",
+     "nuit": "Guilde_Fenetre_03_grand_salon_central_Droite_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       56,
+       96
+      ],
+      "aube": [
+       56,
+       96
+      ],
+      "crepuscule": [
+       56,
+       96
+      ],
+      "nuit": [
+       56,
+       96
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1824,
+      "jour/crepuscule": 2228,
+      "jour/nuit": 2788,
+      "aube/crepuscule": 2654,
+      "aube/nuit": 2837,
+      "crepuscule/nuit": 2839
+     },
+     "px_vitre": 2788,
+     "lum_vitre": {
+      "jour": 161.4,
+      "aube": 136.9,
+      "crepuscule": 102.8,
+      "nuit": 52.3
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.73,
+      "aube": 1.76,
+      "crepuscule": 1.74,
+      "nuit": 1.29
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_missions",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 91.8,
+    "aube": 76.5,
+    "crepuscule": 58.1,
+    "nuit": 40.0
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Gauche",
+     "x": 72,
+     "y": 64,
+     "w": 56,
+     "h": 96,
+     "jour": "Guilde_Fenetre_02_missions_Gauche_Jour",
+     "aube": "Guilde_Fenetre_02_missions_Gauche_Aube",
+     "crepuscule": "Guilde_Fenetre_02_missions_Gauche_Crepuscule",
+     "nuit": "Guilde_Fenetre_02_missions_Gauche_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       56,
+       96
+      ],
+      "aube": [
+       56,
+       96
+      ],
+      "crepuscule": [
+       56,
+       96
+      ],
+      "nuit": [
+       56,
+       96
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1965,
+      "jour/crepuscule": 2646,
+      "jour/nuit": 3205,
+      "aube/crepuscule": 3093,
+      "aube/nuit": 3266,
+      "crepuscule/nuit": 3252
+     },
+     "px_vitre": 3205,
+     "lum_vitre": {
+      "jour": 161.0,
+      "aube": 135.7,
+      "crepuscule": 102.1,
+      "nuit": 52.2
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.75,
+      "aube": 1.78,
+      "crepuscule": 1.76,
+      "nuit": 1.31
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    },
+    {
+     "name": "Fenetre_Droite",
+     "x": 448,
+     "y": 64,
+     "w": 56,
+     "h": 96,
+     "jour": "Guilde_Fenetre_02_missions_Droite_Jour",
+     "aube": "Guilde_Fenetre_02_missions_Droite_Aube",
+     "crepuscule": "Guilde_Fenetre_02_missions_Droite_Crepuscule",
+     "nuit": "Guilde_Fenetre_02_missions_Droite_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       56,
+       96
+      ],
+      "aube": [
+       56,
+       96
+      ],
+      "crepuscule": [
+       56,
+       96
+      ],
+      "nuit": [
+       56,
+       96
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 1686,
+      "jour/crepuscule": 2943,
+      "jour/nuit": 3279,
+      "aube/crepuscule": 3222,
+      "aube/nuit": 3337,
+      "crepuscule/nuit": 3320
+     },
+     "px_vitre": 3279,
+     "lum_vitre": {
+      "jour": 160.2,
+      "aube": 135.0,
+      "crepuscule": 101.4,
+      "nuit": 51.5
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.74,
+      "aube": 1.77,
+      "crepuscule": 1.75,
+      "nuit": 1.29
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_refectoire",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 97.9,
+    "aube": 81.5,
+    "crepuscule": 61.8,
+    "nuit": 42.7
+   },
+   "monotone": true,
+   "fenetres": [
+    {
+     "name": "Fenetre_Gauche",
+     "x": 184,
+     "y": 40,
+     "w": 64,
+     "h": 80,
+     "jour": "Guilde_Fenetre_05_refectoire_Gauche_Jour",
+     "aube": "Guilde_Fenetre_05_refectoire_Gauche_Aube",
+     "crepuscule": "Guilde_Fenetre_05_refectoire_Gauche_Crepuscule",
+     "nuit": "Guilde_Fenetre_05_refectoire_Gauche_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       64,
+       80
+      ],
+      "aube": [
+       64,
+       80
+      ],
+      "crepuscule": [
+       64,
+       80
+      ],
+      "nuit": [
+       64,
+       80
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 2648,
+      "jour/crepuscule": 3027,
+      "jour/nuit": 3588,
+      "aube/crepuscule": 3393,
+      "aube/nuit": 3660,
+      "crepuscule/nuit": 3638
+     },
+     "px_vitre": 3588,
+     "lum_vitre": {
+      "jour": 175.5,
+      "aube": 147.8,
+      "crepuscule": 114.5,
+      "nuit": 56.2
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.79,
+      "aube": 1.81,
+      "crepuscule": 1.85,
+      "nuit": 1.32
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    },
+    {
+     "name": "Fenetre_Droite",
+     "x": 320,
+     "y": 40,
+     "w": 64,
+     "h": 80,
+     "jour": "Guilde_Fenetre_05_refectoire_Droite_Jour",
+     "aube": "Guilde_Fenetre_05_refectoire_Droite_Aube",
+     "crepuscule": "Guilde_Fenetre_05_refectoire_Droite_Crepuscule",
+     "nuit": "Guilde_Fenetre_05_refectoire_Droite_Nuit",
+     "complet": true,
+     "tailles": {
+      "jour": [
+       64,
+       80
+      ],
+      "aube": [
+       64,
+       80
+      ],
+      "crepuscule": [
+       64,
+       80
+      ],
+      "nuit": [
+       64,
+       80
+      ]
+     },
+     "taille_ok": true,
+     "pixels_differents": {
+      "jour/aube": 2427,
+      "jour/crepuscule": 2407,
+      "jour/nuit": 2769,
+      "aube/crepuscule": 2765,
+      "aube/nuit": 2904,
+      "crepuscule/nuit": 2787
+     },
+     "px_vitre": 2769,
+     "lum_vitre": {
+      "jour": 180.6,
+      "aube": 150.6,
+      "crepuscule": 115.7,
+      "nuit": 57.6
+     },
+     "contraste_vitre_salle": {
+      "jour": 1.84,
+      "aube": 1.85,
+      "crepuscule": 1.87,
+      "nuit": 1.35
+     },
+     "vitre_monotone": true,
+     "ressort_la_nuit": true
+    }
+   ]
+  },
+  {
+   "id": "guilde_destiny_reserve",
+   "appels_decors": 3,
+   "id_transmis_correct": true,
+   "lum_salle": {
+    "jour": 88.5,
+    "aube": 73.6,
+    "crepuscule": 55.9,
+    "nuit": 38.7
+   },
+   "monotone": true,
+   "fenetres": []
+  }
+ ],
+ "anomalies": [],
+ "avertissements": [],
+ "resume": {
+  "salles": 15,
+  "salles_avec_fenetres": 9,
+  "salles_sans_fenetre": 6,
+  "fenetres_declarees": 14,
+  "fichiers_dir_attendus": 56,
+  "fichiers_dir_trouves": 56,
+  "complet_4_ambiances": 14,
+  "tailles_ok": 14,
+  "variantes_distinctes": 14,
+  "vitres_ressortent_la_nuit": 14,
+  "anomalies": 0,
+  "avertissements": 0
+ },
+ "cablage": {
+  "GuildeAmbiance_lu": true,
+  "GuildeAmbiance_ecrit_par": [
+   "Data/Script/destiny/guilde_destiny_decors.lua"
+  ],
+  "override_api": true,
+  "meteo_ignore_interieurs": true,
+  "reevaluation": [
+   "Init",
+   "Enter",
+   "GameLoad"
+  ],
+  "salles_rafraichissement_direct": 15,
+  "rafraichissement_direct": true
+ },
+ "salles_sans_fenetre": [
+  "guilde_destiny_carrefour",
+  "guilde_destiny_couloir_est",
+  "guilde_destiny_couloir_ouest",
+  "guilde_destiny_dortoir_sud_1",
+  "guilde_destiny_dortoir_sud_2",
+  "guilde_destiny_reserve"
+ ]
+}
