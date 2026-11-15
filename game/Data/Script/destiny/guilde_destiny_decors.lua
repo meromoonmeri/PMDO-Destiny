@@ -50,9 +50,9 @@ guilde_decors.FENETRES = {
 
 guilde_decors.PORTE_SALON = {
   x = 224,
-  y = 48,
+  y = 64,
   w = 128,
-  h = 112,
+  h = 96,
   fermee = 'Guilde_Destiny_Porte_Salon_Fermee',
   ouverte = 'Guilde_Destiny_Porte_Salon_Ouverte',
 }

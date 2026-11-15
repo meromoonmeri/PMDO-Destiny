@@ -196,13 +196,44 @@ def main() -> None:
     assert [d["Name"] for d in sal_decos] == ["PorteSalonFermee", "PorteSalonOuverte"], sal_decos
     assert sal_decos[0]["Layer"] == 0 and sal_decos[0]["Visible"] is True
     assert sal_decos[0]["Anims"][0]["ObjectAnim"]["AnimIndex"] == "Guilde_Destiny_Porte_Salon_Fermee"
-    assert sal_decos[0]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 48}
+    assert sal_decos[0]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 64}
     assert sal_decos[1]["Layer"] == 0 and sal_decos[1]["Visible"] is False
     assert sal_decos[1]["Anims"][0]["ObjectAnim"]["AnimIndex"] == "Guilde_Destiny_Porte_Salon_Ouverte"
-    assert sal_decos[1]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 48}
+    assert sal_decos[1]["Anims"][0]["MapLoc"] == {"X": 224, "Y": 64}
+
+    # Zéro interstice (100 % opaque `alpha == 255` sur tout le patch 128x96) et pleine hauteur d'arche :
+    def _load_dir_rgba(path: Path) -> np.ndarray:
+        raw = path.read_bytes()
+        plen = struct.unpack("<q", raw[:8])[0]
+        return np.array(Image.open(io.BytesIO(raw[8 : 8 + plen])).convert("RGBA"))
+
+    fermee_rgba = _load_dir_rgba(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Fermee.dir")
+    ouverte_rgba = _load_dir_rgba(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverte.dir")
+    assert fermee_rgba.shape == (96, 128, 4) and ouverte_rgba.shape == (96, 128, 4)
+    assert int(fermee_rgba[:, :, 3].min()) == 255, "Aucun trou/interstice alpha autorisé dans PorteSalonFermee"
+    assert int(ouverte_rgba[:, :, 3].min()) == 255, "Aucun trou/interstice alpha autorisé dans PorteSalonOuverte"
+    diff_door = np.abs(fermee_rgba[:, :, :3].astype(int) - ouverte_rgba[:, :, :3].astype(int)).max(axis=2) > 10
+    dys_l = np.where(diff_door[:, 14:20])[0]
+    assert len(dys_l) > 0 and int(dys_l.min()) <= 14 and int(dys_l.max() - dys_l.min() + 1) >= 74, (
+        "Les battants ouverts doivent atteindre la pleine hauteur de l'arche (y_global <= 78, h >= 74 px)"
+    )
+
     sal_gos = {o["EntName"]: o for o in sal_g["Entities"][0]["GroundObjects"]}
     assert sal_gos["SortieBureauMaitre"]["Collider"] == {"X": 264, "Y": 144, "Width": 48, "Height": 16}
     assert sal_gos["SortieBureauMaitre"]["EntEnabled"] is True and sal_gos["SortieBureauMaitre"]["Passable"] is False
+    assert sal_gos["SeuilSud"]["Collider"] == {"X": 256, "Y": 368, "Width": 64, "Height": 24}
+
+    # Vérifie que l'entrée escalier sud en bois est bien présente sur `Destiny_Guilde_Grand_Salon` (pas du vide marron #68482F en y=376) :
+    sal_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Grand_Salon.tile")
+    stair_tile_rgb = None
+    for layer in sal_g["Layers"]:
+        if layer["Visible"] and layer["Tiles"][35][47]["Layers"]:
+            tloc = layer["Tiles"][35][47]["Layers"][0]["Frames"][0]["TexLoc"]
+            stair_tile_rgb = sal_bank[(tloc["X"], tloc["Y"])][0, 4, :3].tolist()
+    assert stair_tile_rgb is not None and stair_tile_rgb[0] > 125, (
+        f"L'escalier sud en bois du Grand Salon doit être dessiné en (x=284, y=376), obtenu {stair_tile_rgb}"
+    )
+
     for tx in range(33, 39):
         for ty in range(12, 18):
             assert sal_g["obstacles"][tx][ty]["Tags"] != 0, f"Intérieur porte fermée marchable en ({tx},{ty})"

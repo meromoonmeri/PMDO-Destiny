@@ -481,14 +481,16 @@ def main() -> None:
             slots_out.append({"name": f"Fenetre_{slot['slot']}", "x": sx, "y": sy, "w": sw, "h": sh, "par_ambiance": amb_names})
         lua_win_registry[map_id] = slots_out
 
-    # 2c. Outward-Swinging PMD EoS Grand Salon Double Door `.dir` objects
+    # 2c. Outward-Swinging PMD EoS Grand Salon Double Door `.dir` objects (100% opaque 128x96 patch at (224, 64) -> zero interstice!)
     door_meta = manifest["porte_grand_salon"]
     dw, dh = door_meta["w"], door_meta["h"]
-    for src_key, dst_stem in [
-        ("fermee_dir", "Guilde_Destiny_Porte_Salon_Fermee"),
-        ("ouverte_dir", "Guilde_Destiny_Porte_Salon_Ouverte"),
+    (ART_DEST / "porte_grand_salon").mkdir(parents=True, exist_ok=True)
+    for src_key, png_key, dst_stem in [
+        ("fermee_dir", "fermee_png", "Guilde_Destiny_Porte_Salon_Fermee"),
+        ("ouverte_dir", "ouverte_png", "Guilde_Destiny_Porte_Salon_Ouverte"),
     ]:
         shutil.copy2(door_meta[src_key], OBJ_DIR / f"{dst_stem}.dir")
+        shutil.copy2(door_meta[png_key], ART_DEST / "porte_grand_salon" / f"{dst_stem}.png")
 
     # 3. Define all 14 compiled 1x GroundMaps (`guilde_destiny_accueil` index 0 stays untouched!)
     ROOMS = [
@@ -520,16 +522,16 @@ def main() -> None:
             "base": "03_grand_salon_central_1x_base.png",
             "flip_h": False,
             "ellipse": (288, 256, 220, 100),
-            "rects": [(264, 144, 312, 184), (256, 336, 320, 416), (8, 216, 88, 280), (488, 216, 568, 280)],
+            "rects": [(264, 144, 312, 184), (256, 336, 320, 392), (8, 216, 88, 280), (488, 216, 568, 280)],
             "primary": "ArriveeSudMarker",
             "markers": [
-                {"name": "ArriveeSudMarker", "x": 280, "y": 344, "dir": 4},
+                {"name": "ArriveeSudMarker", "x": 280, "y": 336, "dir": 4},
                 {"name": "DevantPorteMaitreMarker", "x": 280, "y": 168, "dir": 0},
                 {"name": "EntreeOuestMarker", "x": 56, "y": 240, "dir": 6},
                 {"name": "EntreeEstMarker", "x": 504, "y": 240, "dir": 2},
             ],
             "triggers": [
-                {"name": "SeuilSud", "x": 256, "y": 392, "w": 64, "h": 24, "target_idx": 1, "target_marker": "EscalierNordMarker"},
+                {"name": "SeuilSud", "x": 256, "y": 368, "w": 64, "h": 24, "target_idx": 1, "target_marker": "EscalierNordMarker"},
                 {"name": "SortieBureauMaitre", "x": 264, "y": 144, "w": 48, "h": 16, "target_idx": 3, "target_marker": "EntreeSudMarker"},
                 {"name": "CouloirOuest", "x": 8, "y": 216, "w": 24, "h": 64, "target_idx": 4, "target_marker": "EntreeEstMarker"},
                 {"name": "CouloirEst", "x": 544, "y": 216, "w": 24, "h": 64, "target_idx": 8, "target_marker": "EntreeOuestMarker"},
