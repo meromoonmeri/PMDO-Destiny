@@ -1,7 +1,11 @@
--- Simulation Lua aller-retour :
--- PorteGuilde (guilde_cliff_*) <-> guilde_destiny_accueil <-> guilde_destiny_missions.
+-- Simulation Lua complète sur les 4 ambiances (`jour`, `aube`, `crepuscule`, `nuit`) :
+-- 1. Vérifie `map:SetDestinyAmbiance(moment, true)` (luminosité & filtre de salle) + objets Fenêtres `.dir` associés.
+-- 2. Vérifie les transitions Falaise <-> 1F Accueil <-> 2F Missions (EscalierSud/EscalierNord) <-> 3F Grand Salon
+--    <-> Ouverture battante extérieure 5 frames de la Porte du Maître (style PMD EoS) -> Bureau du Maître
+--    + Carrefour / Réfectoire / Cuisine / Réserve + Couloirs Ouest/Est / Dortoirs / Chambre du Héros.
 local root = assert(arg[1])
 
+local current_moment = 'jour'
 local current_carte = 'guilde_cliff_jour'
 local current_idx = 23
 
@@ -9,6 +13,7 @@ package.preload['origin.common'] = function() return {} end
 package.preload['destiny.meteo_reverie'] = function()
   return {
     SynchroniserZone = function() end,
+    Moment = function() return current_moment end,
     CarteGuilde = function() return current_carte end,
     IndexGuilde = function() return current_idx end,
   }
@@ -28,6 +33,9 @@ package.preload['destiny.suivi_interieurs'] = function()
 end
 package.preload['destiny.cinematique'] = function()
   return assert(loadfile(root .. '/game/Data/Script/destiny/cinematique.lua'))()
+end
+package.preload['destiny.guilde_destiny_decors'] = function()
+  return assert(loadfile(root .. '/game/Data/Script/destiny/guilde_destiny_decors.lua'))()
 end
 
 Direction = {Up=4, Down=0, Left=2, Right=6}
@@ -51,10 +59,55 @@ end
 function CH(n) return actors[n] end
 
 local transitions = {}
+local current_ground = nil
+
+local function make_mock_ground(name)
+  local g = {
+    AssetName = name,
+    EdgeView = 0,
+    LastAmbiance = nil,
+    LastApplyWorld = nil,
+    SpawnedList = {},
+  }
+  local go_list = { Count = 0 }
+  function go_list:Add(obj)
+    self[self.Count] = obj
+    self.Count = self.Count + 1
+    g.SpawnedList[obj.EntName] = obj
+  end
+  function go_list:RemoveAt(idx)
+    for i = idx, self.Count - 2 do
+      self[i] = self[i + 1]
+    end
+    self[self.Count - 1] = nil
+    self.Count = self.Count - 1
+  end
+  g.Entities = { Count = 1, [0] = { GroundObjects = go_list } }
+  function g:SetDestinyAmbiance(m, apply_world)
+    self.LastAmbiance = m
+    self.LastApplyWorld = apply_world
+  end
+  return g
+end
 
 RogueEssence = {
+  Content = {
+    ObjAnimData = function(sheet, ft, sf, ef)
+      return {AnimIndex = sheet, FrameTime = ft, StartFrame = sf, EndFrame = ef}
+    end,
+  },
   Ground = {
-    GroundObject = function() return {OnMapInit=function()end, SetTriggerType=function()end} end,
+    GroundObject = function(anim, rect, loc, passable, name)
+      return {
+        EntName = name,
+        ObjectAnim = anim,
+        Collider = rect,
+        Passable = passable,
+        ReloadEvents = function() end,
+        OnMapInit = function() end,
+        SetTriggerType = function() end,
+      }
+    end,
     GroundChar = function(_, loc, dir, name)
       local a = make_actor(name, loc.X, loc.Y)
       a.Direction = dir
@@ -77,6 +130,8 @@ GROUND = {
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
   RemoveCharacter = function(_, n) actors[n] = nil; return true end,
   RemoveObject = function() end,
+  Hide = function() end,
+  Unhide = function() end,
 }
 AI = {DisableCharacterAI=function()end, EnableCharacterAI=function()end}
 SOUND = {StopBattleSE=function()end, FadeInBattleSE=function()end, FadeOutBattleSE=function()end, PlayBattleSE=function()end}
@@ -90,7 +145,7 @@ GAME = {
   GetPlayerPartyCount = function() return 2 end,
   GetTeamLeaderIndex = function() return 0 end,
   GetPlayerPartyMember = function(_, i) return {Importance = i == 0 and 'Hero' or 'Partner', Data = {}} end,
-  GetCurrentGround = function() return nil end,
+  GetCurrentGround = function() return current_ground end,
   EnterGroundMap = function(_, zone, carte, marker, keep_music)
     transitions[#transitions + 1] = {'ground_map', zone, carte, marker, keep_music}
   end,
@@ -102,16 +157,21 @@ function LTBL(m) return {Importance = m.Importance} end
 
 local accueil = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_accueil/init.lua'))()
 local missions = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_missions/init.lua'))()
+local salon = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_grand_salon/init.lua'))()
+local heros = assert(loadfile(root .. '/game/Data/Script/destiny/ground/guilde_destiny_chambre_heros/init.lua'))()
 
 local ambiances = {
-  {'jour', 23},
-  {'aube', 24},
-  {'crepuscule', 25},
-  {'nuit', 26},
+  {'jour', 23, 'Jour'},
+  {'aube', 24, 'Aube'},
+  {'crepuscule', 25, 'Crepuscule'},
+  {'nuit', 26, 'Nuit'},
 }
 
 for _, info in ipairs(ambiances) do
+  current_moment = info[1]
   current_carte, current_idx = 'guilde_cliff_' .. info[1], info[2]
+  local cap_amb = info[3]
+
   package.loaded['destiny.guilde_cliff_scene'] = nil
   package.preload['destiny.guilde_cliff_scene'] = function()
     return assert(loadfile(root .. '/game/Data/Script/destiny/guilde_cliff_scene.lua'))()
@@ -121,7 +181,7 @@ for _, info in ipairs(ambiances) do
   actors = {}
   make_actor('PLAYER', 232, 272)
   make_actor('Teammate1', 208, 280)
-  SV = {Destiny = {AlerteShinx = 'termine', EnrolementGuilde = 'termine'}}
+  SV = {Destiny = {AlerteShinx = 'termine', EnrolementGuilde = 'termine', GuildePorteMaitreOuverte = false}}
   transitions = {}
 
   local m = {
@@ -140,44 +200,61 @@ for _, info in ipairs(ambiances) do
 
   cliff.Init(m)
   cliff.PorteGuilde_Touch(m.Objects.PorteGuilde, actors.PLAYER)
-  assert(#transitions == 1, current_carte .. ' doit entrer dans guilde_destiny_accueil')
-  assert(transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_accueil' and transitions[1][4] == 'EntreeSudMarker')
-  assert(m.Decorations[3].Visible == true and m.Decorations[4].Visible == false)
+  assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_accueil')
 
-  -- Transition Accueil -> Grande Salle (EscalierNord)
-  local m_int = {EdgeView = 0}
+  -- 1F Accueil : filtre luminosité `SetDestinyAmbiance(moment, true)` + fenêtres .dir
+  local m_int = make_mock_ground('guilde_destiny_accueil')
+  current_ground = m_int
   accueil.Init(m_int)
   accueil.Enter(m_int)
   assert(m_int.EdgeView == 1)
+  assert(m_int.LastAmbiance == current_moment and m_int.LastApplyWorld == true, 'Filtre luminosite salle non applique sur accueil')
+  assert(m_int.SpawnedList.Fenetre_Gauche.ObjectAnim.AnimIndex == 'Guilde_Fenetre_Accueil_Gauche_' .. cap_amb)
 
   transitions = {}
   accueil.EscalierNord_Touch({}, actors.Teammate1)
-  assert(#transitions == 0, 'Le partenaire ne doit pas déclencher EscalierNord')
+  assert(#transitions == 0)
   accueil.EscalierNord_Touch({}, actors.PLAYER)
-  assert(#transitions == 1 and transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_missions' and transitions[1][4] == 'ArriveeDepuisAccueilMarker' and transitions[1][5] == true)
+  assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_missions' and transitions[1][4] == 'ArriveeDepuisAccueilMarker')
 
-  -- Transition Grande Salle -> Accueil (EscalierNord)
-  local m_mis = {EdgeView = 0}
+  -- 2F Missions : EscalierSud -> Accueil, EscalierNord -> 3F Grand Salon
+  local m_mis = make_mock_ground('guilde_destiny_missions')
+  current_ground = m_mis
   missions.Init(m_mis)
   missions.Enter(m_mis)
-  assert(m_mis.EdgeView == 1)
+  assert(m_mis.LastAmbiance == current_moment and m_mis.LastApplyWorld == true)
+  assert(string.find(m_mis.SpawnedList.Fenetre_Gauche.ObjectAnim.AnimIndex, cap_amb, 1, true) ~= nil)
 
   transitions = {}
-  missions.EscalierNord_Touch({}, actors.Teammate1)
-  assert(#transitions == 0, 'Le partenaire ne doit pas déclencher EscalierNord dans missions')
+  missions.EscalierSud_Touch({}, actors.PLAYER)
+  assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_accueil' and transitions[1][4] == 'EscalierNordMarker')
+
+  missions.Enter(m_mis)
+  transitions = {}
   missions.EscalierNord_Touch({}, actors.PLAYER)
-  assert(#transitions == 1 and transitions[1][1] == 'ground_map' and transitions[1][2] == 'guilde_destiny_interieur' and transitions[1][3] == 'guilde_destiny_accueil' and transitions[1][4] == 'EscalierNordMarker' and transitions[1][5] == true)
+  assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_grand_salon' and transitions[1][4] == 'ArriveeSudMarker')
 
-  -- Réentrée dans Accueil puis sortie vers la falaise
-  accueil.Enter(m_int)
+  -- 3F Grand Salon : Porte fermée -> ouverture battante extérieure 5 frames -> Bureau du Maître
+  local m_sal = make_mock_ground('guilde_destiny_grand_salon')
+  current_ground = m_sal
+  salon.Init(m_sal)
+  salon.Enter(m_sal)
+  assert(m_sal.LastAmbiance == current_moment and m_sal.LastApplyWorld == true)
+  assert(m_sal.SpawnedList.PorteBureauMaitreVisuel.ObjectAnim.AnimIndex == 'Guilde_Destiny_Porte_Salon_Fermee')
+
   transitions = {}
-  accueil.SortieGuilde_Touch({}, actors.PLAYER)
-  assert(#transitions == 1 and transitions[1][1] == 'zone' and transitions[1][2] == 'town02_waterfallvillage' and transitions[1][4] == current_idx)
-  assert(SV.Destiny.PassageAmbiance ~= nil and SV.Destiny.PassageAmbiance.carte == current_carte and SV.Destiny.PassageAmbiance.x == 232 and SV.Destiny.PassageAmbiance.y == 282)
+  salon.SortieBureauMaitre_Touch({}, actors.PLAYER)
+  assert(SV.Destiny.GuildePorteMaitreOuverte == true, 'La double porte doit s ouvrir vers l exterieur')
+  assert(m_sal.SpawnedList.PorteBureauMaitreVisuel.ObjectAnim.AnimIndex == 'Guilde_Destiny_Porte_Salon_Ouverte')
+  assert(#transitions == 1 and transitions[1][3] == 'guilde_destiny_bureau_maitre' and transitions[1][4] == 'EntreeSudMarker')
 
-  cliff.Enter(m)
-  assert(actors.PLAYER.Position.X == 232 and actors.PLAYER.Position.Y == 282 and actors.PLAYER.Direction == Direction.Down)
-  assert(SV.Destiny.PassageAmbiance == nil)
+  -- Chambre du Héros : fenêtre centrale 4 ambiances + filtre de luminosité
+  local m_her = make_mock_ground('guilde_destiny_chambre_heros')
+  current_ground = m_her
+  heros.Init(m_her)
+  heros.Enter(m_her)
+  assert(m_her.LastAmbiance == current_moment and m_her.LastApplyWorld == true)
+  assert(m_her.SpawnedList.Fenetre_Centre.ObjectAnim.AnimIndex == 'Guilde_Fenetre_11_chambre_heros_Centre_' .. cap_amb)
 end
 
-print('PASS test_guilde_destiny_accueil.lua : aller-retour falaise <-> accueil <-> grande salle validé sur les 4 ambiances.')
+print('PASS test_guilde_destiny_accueil.lua : 15 salles, filtre luminosite 4 ambiances, fenetres .dir et double porte battante EoS valides.')

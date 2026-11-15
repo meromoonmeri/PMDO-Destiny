@@ -2,6 +2,7 @@
 -- raccordée au sud à PorteGuilde (guilde_cliff_*) et au nord à guilde_destiny_missions.
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
+local guilde_decors = require 'destiny.guilde_destiny_decors'
 local meteo_reverie = require 'destiny.meteo_reverie'
 
 local guilde_destiny_accueil = {}
@@ -38,13 +39,14 @@ local function entrer_grande_salle()
 end
 
 function guilde_destiny_accueil.Init(map)
+  pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_accueil')
   if map ~= nil and RogueEssence ~= nil and RogueEssence.Dungeon ~= nil and RogueEssence.Dungeon.BaseMap ~= nil then
     map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
   end
 end
 
-function guilde_destiny_accueil.Enter(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
-function guilde_destiny_accueil.GameLoad(map) suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function guilde_destiny_accueil.Enter(map) pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_accueil'); suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
+function guilde_destiny_accueil.GameLoad(map) pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_accueil'); suivi_interieurs.Activer(map); sortie_en_cours = false; GAME:FadeIn(20) end
 function guilde_destiny_accueil.Update(map, time) end
 function guilde_destiny_accueil.Exit(map) end
 function guilde_destiny_accueil.GameSave(map) end

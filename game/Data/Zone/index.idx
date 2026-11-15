@@ -509,7 +509,20 @@
       "Rogue": 0,
       "Grounds": [
         "guilde_destiny_accueil",
-        "guilde_destiny_missions"
+        "guilde_destiny_missions",
+        "guilde_destiny_grand_salon",
+        "guilde_destiny_bureau_maitre",
+        "guilde_destiny_carrefour",
+        "guilde_destiny_refectoire",
+        "guilde_destiny_cuisine",
+        "guilde_destiny_reserve",
+        "guilde_destiny_couloir_ouest",
+        "guilde_destiny_couloir_est",
+        "guilde_destiny_dortoir_nord_1",
+        "guilde_destiny_dortoir_nord_2",
+        "guilde_destiny_dortoir_sud_1",
+        "guilde_destiny_dortoir_sud_2",
+        "guilde_destiny_chambre_heros"
       ],
       "Maps": [],
       "Name": {

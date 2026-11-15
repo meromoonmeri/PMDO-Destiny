@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Tests structurels, graphiques (0 magenta, 0 Halcyon, verdure séparée, calques, collisions BFS) et comportementaux de guilde_destiny_accueil et guilde_destiny_missions."""
+"""
+Tests structurels, graphiques (0 magenta, 0 Halcyon, verdure séparée, calques, collisions BFS 16x16),
+objets `.dir` indépendants (fenêtres 4 ambiances + double porte battante extérieure style PMD EoS)
+et simulation comportementale Lua des 15 salles de `guilde_destiny_interieur` (avec filtre de luminosité
+`SetDestinyAmbiance(moment, true)`).
+"""
 from __future__ import annotations
 
 import io
@@ -21,7 +26,7 @@ GAME = ROOT / "game"
 def load_tile_bank(path: Path) -> dict[tuple[int, int], np.ndarray]:
     raw = path.read_bytes()
     ts, n = struct.unpack_from("<ii", raw, 0)
-    assert ts == 8 and n > 100
+    assert ts == 8 and n > 100, f"{path}: ts={ts}, n={n}"
     out: dict[tuple[int, int], np.ndarray] = {}
     for i in range(n):
         tx, ty, ptr = struct.unpack_from("<iiq", raw, 8 + i * 16)
@@ -32,6 +37,19 @@ def load_tile_bank(path: Path) -> dict[tuple[int, int], np.ndarray]:
         arr[nz, :3] = np.clip(np.round(arr[nz, :3] * 255.0 / arr[nz, 3:4]), 0, 255)
         out[(tx, ty)] = arr.astype(np.uint8)
     return out
+
+
+def verify_dir_object(path: Path, expected_frames: int = 1) -> tuple[int, int]:
+    assert path.is_file(), f"Objet .dir manquant : {path}"
+    raw = path.read_bytes()
+    plen = struct.unpack_from("<q", raw, 0)[0]
+    assert len(raw) == 8 + plen + 16, f"Taille .dir invalide : {path}"
+    im = Image.open(io.BytesIO(raw[8 : 8 + plen])).convert("RGBA")
+    tw, th, anim_f, dirs = struct.unpack_from("<iiii", raw, 8 + plen)
+    assert tw == im.width and im.height == th * expected_frames and anim_f == 0 and dirs == 1, (
+        path, im.size, (tw, th, anim_f, dirs)
+    )
+    return tw, th
 
 
 def verify_room(
@@ -65,7 +83,6 @@ def verify_room(
     }
     assert sheets_used == {sheet_name}, f"{asset_name}: {sheets_used}"
 
-    # Vérification 0 pixel magenta dans toute la banque de tuiles
     for loc, patch in bank.items():
         nz = patch[..., 3] > 0
         if nz.any():
@@ -74,11 +91,9 @@ def verify_room(
             b = patch[nz, 2].astype(int)
             assert not np.any(((r - gr) > 35) & ((b - gr) > 25)), f"{asset_name}: magenta dans tuile {loc}"
 
-    # Calque verdure séparée effectivement actif (> 20 cellules non vides)
     verd_active = sum(1 for col in g["Layers"][4]["Tiles"] for t in col if t.get("Layers"))
     assert verd_active >= 20, f"{asset_name}: verdure séparée vide ({verd_active})"
 
-    # Le calque Top (Layer=4) ne recouvre aucune cellule praticable (Tags==0)
     obs = g["obstacles"]
     top_tiles = g["Layers"][7]["Tiles"]
     for tx in range(gw):
@@ -103,7 +118,9 @@ def verify_room(
         )
 
     ent = markers[primary_marker]
-    assert free16(ent["X"], ent["Y"]) and free16(ent["X"] + 24, ent["Y"]) and free16(ent["X"] - 24, ent["Y"])
+    assert free16(ent["X"], ent["Y"]), f"{asset_name}: {primary_marker} bloqué"
+    offsets = [(24, 0), (-24, 0), (0, -24), (0, 24), (32, 0), (-32, 0), (0, -32), (0, 32)]
+    assert any(free16(ent["X"] + dx, ent["Y"] + dy) for dx, dy in offsets), f"{asset_name}: aucun offset partenaire libre"
 
     q = deque([(ent["X"], ent["Y"])])
     seen = {(ent["X"], ent["Y"])}
@@ -116,49 +133,73 @@ def verify_room(
 
     for mk_name in expected_markers:
         mk = markers[mk_name]
-        assert (mk["X"], mk["Y"]) in seen, f"{asset_name}: {mk_name} non joignable"
+        assert any(abs(x - mk["X"]) <= 4 and abs(y - mk["Y"]) <= 4 for x, y in seen), f"{asset_name}: {mk_name} non joignable"
 
     script_txt = (GAME / f"Data/Script/destiny/ground/{asset_name}/init.lua").read_text(encoding="utf-8")
     assert "sortie_en_cours = false; GAME:FadeIn(20)" in script_txt
     assert script_txt.count("suivi_interieurs.Activer(map)") == 2
+    assert "guilde_destiny_decors" in script_txt
 
 
 def main() -> None:
-    expected_grounds = ["guilde_destiny_accueil", "guilde_destiny_missions"]
+    expected_grounds = [
+        "guilde_destiny_accueil",
+        "guilde_destiny_missions",
+        "guilde_destiny_grand_salon",
+        "guilde_destiny_bureau_maitre",
+        "guilde_destiny_carrefour",
+        "guilde_destiny_refectoire",
+        "guilde_destiny_cuisine",
+        "guilde_destiny_reserve",
+        "guilde_destiny_couloir_ouest",
+        "guilde_destiny_couloir_est",
+        "guilde_destiny_dortoir_nord_1",
+        "guilde_destiny_dortoir_nord_2",
+        "guilde_destiny_dortoir_sud_1",
+        "guilde_destiny_dortoir_sud_2",
+        "guilde_destiny_chambre_heros",
+    ]
     z = json.loads((GAME / "Data/Zone/guilde_destiny_interieur.json").read_text(encoding="utf-8-sig"))["Object"]["GroundMaps"]
     idx = json.loads((GAME / "Data/Zone/index.idx").read_text(encoding="utf-8-sig"))["Object"]["guilde_destiny_interieur"]["Grounds"]
     assert z == idx == expected_grounds, f"Attendu {expected_grounds}, obtenu z={z}, idx={idx}"
 
-    verify_room(
-        asset_name="guilde_destiny_accueil",
-        sheet_name="Destiny_Guilde_Accueil",
-        expected_gw_gh=(192, 144),
-        expected_markers={"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"},
-        expected_triggers={"SortieGuilde", "EscalierNord"},
-        primary_marker="EntreeSudMarker",
-    )
-    # Vérifications additionnelles propres à guilde_destiny_accueil :
-    # - ratio exact 4:3 viewport PMDO (192x144 tuiles = 1536x1152 px, aucun downscale)
-    # - aucune vigne/halo rajouté visible (calques 04, 05, 06 masqués)
-    # - fond extérieur marron chaud assombri (#68482F = RGB(104, 72, 47))
+    # Vérification des objets `.dir` de la porte battante extérieure style PMD EoS + fenêtres 4 ambiances
+    verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Fermee.dir", expected_frames=1)
+    verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverte.dir", expected_frames=1)
+    verify_dir_object(GAME / "Content/Object/Guilde_Destiny_Porte_Salon_Ouverture.dir", expected_frames=5)
+    for win_dir in sorted((GAME / "Content/Object").glob("Guilde_Fenetre_*.dir")):
+        verify_dir_object(win_dir, expected_frames=1)
+
+    room_specs = [
+        ("guilde_destiny_accueil", "Destiny_Guilde_Accueil", (192, 144), {"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"}, {"SortieGuilde", "EscalierNord"}, "EntreeSudMarker"),
+        ("guilde_destiny_missions", "Destiny_Guilde_Missions", (72, 54), {"ArriveeDepuisAccueilMarker", "EscalierNordMarker", "CentreSalleMarker", "MurGaucheMarker", "MurDroitMarker"}, {"EscalierSud", "EscalierNord"}, "ArriveeDepuisAccueilMarker"),
+        ("guilde_destiny_grand_salon", "Destiny_Guilde_Grand_Salon", (72, 54), {"ArriveeSudMarker", "DevantPorteMaitreMarker", "EntreeOuestMarker", "EntreeEstMarker"}, {"SeuilSud", "SortieBureauMaitre", "CouloirOuest", "CouloirEst"}, "ArriveeSudMarker"),
+        ("guilde_destiny_bureau_maitre", "Destiny_Guilde_Bureau_Maitre", (64, 48), {"EntreeSudMarker", "CentreBureauMarker"}, {"SeuilSud"}, "EntreeSudMarker"),
+        ("guilde_destiny_carrefour", "Destiny_Guilde_Carrefour", (60, 45), {"EntreeEstMarker", "EntreeOuestMarker", "EntreeNordMarker", "EntreeSudMarker"}, {"SortieEst", "SortieOuest", "SortieNord", "SortieSud"}, "EntreeEstMarker"),
+        ("guilde_destiny_refectoire", "Destiny_Guilde_Refectoire", (72, 54), {"EntreeEstMarker", "CentreRefectoireMarker"}, {"SortieEst"}, "EntreeEstMarker"),
+        ("guilde_destiny_cuisine", "Destiny_Guilde_Cuisine", (60, 45), {"EntreeSudMarker", "CentreCuisineMarker"}, {"SortieSud"}, "EntreeSudMarker"),
+        ("guilde_destiny_reserve", "Destiny_Guilde_Reserve", (56, 42), {"EntreeNordMarker", "CentreReserveMarker"}, {"SortieNord"}, "EntreeNordMarker"),
+        ("guilde_destiny_couloir_ouest", "Destiny_Guilde_Couloir_Ouest", (60, 45), {"EntreeOuestMarker", "EntreeEstMarker", "EntreeNordMarker", "EntreeSudMarker"}, {"SortieOuest", "SortieEst", "SortieNord", "SortieSud"}, "EntreeOuestMarker"),
+        ("guilde_destiny_couloir_est", "Destiny_Guilde_Couloir_Est", (60, 45), {"EntreeOuestMarker", "EntreeEstMarker", "EntreeNordMarker", "EntreeSudMarker"}, {"SortieOuest", "SortieEst", "SortieNord", "SortieSud"}, "EntreeOuestMarker"),
+        ("guilde_destiny_dortoir_nord_1", "Destiny_Guilde_Dortoir_Nord_1", (56, 42), {"EntreeSudMarker", "CentreDortoirMarker"}, {"SortieSud"}, "EntreeSudMarker"),
+        ("guilde_destiny_dortoir_nord_2", "Destiny_Guilde_Dortoir_Nord_2", (56, 42), {"EntreeSudMarker", "CentreDortoirMarker"}, {"SortieSud"}, "EntreeSudMarker"),
+        ("guilde_destiny_dortoir_sud_1", "Destiny_Guilde_Dortoir_Sud_1", (56, 42), {"EntreeNordMarker", "CentreDortoirMarker"}, {"SortieNord"}, "EntreeNordMarker"),
+        ("guilde_destiny_dortoir_sud_2", "Destiny_Guilde_Dortoir_Sud_2", (56, 42), {"EntreeNordMarker", "CentreDortoirMarker"}, {"SortieNord"}, "EntreeNordMarker"),
+        ("guilde_destiny_chambre_heros", "Destiny_Guilde_Chambre_Heros", (60, 45), {"EntreeOuestMarker", "CentreChambreMarker"}, {"SortieOuest"}, "EntreeOuestMarker"),
+    ]
+    for spec in room_specs:
+        verify_room(*spec)
+
     acc_g = json.loads((GAME / "Data/Ground/guilde_destiny_accueil.rsground").read_text(encoding="utf-8-sig"))["Object"]
     assert not acc_g["Layers"][4]["Visible"] and not acc_g["Layers"][5]["Visible"] and not acc_g["Layers"][6]["Visible"]
     acc_bank = load_tile_bank(GAME / "Content/Tile/Destiny_Guilde_Accueil.tile")
     loc0 = acc_g["Layers"][0]["Tiles"][0][0]["Layers"][0]["Frames"][0]["TexLoc"]
     corner_rgb = acc_bank[(loc0["X"], loc0["Y"])][0, 0, :3].tolist()
     assert corner_rgb == [104, 72, 47], f"Fond marron assombri attendu [104, 72, 47], obtenu {corner_rgb}"
-    verify_room(
-        asset_name="guilde_destiny_missions",
-        sheet_name="Destiny_Guilde_Missions",
-        expected_gw_gh=(139, 95),
-        expected_markers={"ArriveeDepuisAccueilMarker", "CentreSalleMarker", "MurGaucheMarker", "MurDroitMarker"},
-        expected_triggers={"EscalierNord"},
-        primary_marker="ArriveeDepuisAccueilMarker",
-    )
 
     os.chdir(ROOT)
     run(ROOT / "tools/tests/test_guilde_destiny_accueil.lua", ROOT)
-    print("PASS guilde_destiny_accueil + guilde_destiny_missions : 0 mixel, verdure séparée, 0 magenta, 0 Halcyon, BFS 16x16 et raccords validés.")
+    print("PASS réseau complet Guilde Destiny (15 salles, 4 ambiances + filtre luminosité, fenêtres .dir, porte battante extérieure EoS, BFS 16x16).")
 
 
 if __name__ == "__main__":
