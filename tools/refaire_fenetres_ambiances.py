@@ -99,42 +99,120 @@ def gradient(verre: np.ndarray, ramp: list[tuple[int, int, int]]) -> np.ndarray:
     y0, y1 = float(ys.min()), float(ys.max())
     t = np.clip((np.arange(verre.shape[0], dtype=np.float32) - y0) / max(1.0, y1 - y0), 0, 1)
     pal = np.array(ramp, np.float32)
-    xs4 = np.array([0.0, 0.36, 0.70, 1.0])
-    grad = np.stack([np.interp(t, xs4, pal[:, c]) for c in range(3)], axis=1)
+    # BANDES PLATES et non un dégradé continu : un ciel en pixel art doit
+    # compter 4 tons francs. L'interpolation donnait ~90 teintes voisines, ce
+    # qui se lisait comme un « flou de filtre » une fois posé sur les murs.
+    seuils = np.array([0.18, 0.53, 0.85], np.float32)
+    idx = np.digitize(t, seuils).astype(np.int32)
+    grad = pal[idx]
     out[:] = grad[:, None, :]
     return out
 
 
 def etoiles(verre: np.ndarray, base: np.ndarray, seed: int = 20260201) -> np.ndarray:
-    """Quelques étoiles nettes + un halo très léger dans le verre."""
+    """Étoiles en AMAS de 3 à 6 px, strictement à l'intérieur du verre.
+
+    Deux défauts corrigés par rapport à la version précédente :
+    * les étoiles isolées d'1 px apparaissaient comme des « pixels parasites »
+      blancs sur la vitre -> ce sont maintenant de petites constellations ;
+    * le halo gaussien débordait du verre et bavait sur le cadre (visible en
+      haut de la baie de l'accueil) -> il est remplacé par une diffusion
+      limitée aux 4 voisins qui sont eux aussi du verre.
+    """
     rng = np.random.default_rng(seed)
-    ys, xs = np.where(verre)
+    # marge de 2 px : aucun amas ne touche le cadre
+    interieur = ndimage.binary_erosion(verre, np.ones((3, 3), bool), iterations=2)
+    ys, xs = np.where(interieur)
     if not len(ys):
         return base
     out = base.copy()
-    n = max(5, int(verre.sum() / 320))
-    for i in rng.choice(len(ys), size=min(n, len(ys)), replace=False):
-        y, x = int(ys[i]), int(xs[i])
-        out[y, x] = STAR
-    # halo
-    star_map = (out.sum(axis=2) >= 3 * 250).astype(np.float32)
-    halo = ndimage.gaussian_filter(star_map, 1.2) * 0.55
-    out += halo[..., None] * np.array([40, 46, 62], np.float32)[None, None, :]
+    h, w = verre.shape
+    n_amas = max(4, int(verre.sum() / 700))
+    pris = np.zeros_like(verre)
+    halo = np.array([44, 52, 74], np.float32)
+
+    for i in rng.choice(len(ys), size=min(n_amas, len(ys)), replace=False):
+        y0, x0 = int(ys[i]), int(xs[i])
+        if pris[max(0, y0 - 2):y0 + 3, max(0, x0 - 2):x0 + 3].any():
+            continue
+        taille = int(rng.integers(3, 7))
+        amas = [(y0, x0)]
+        frontiere = [(y0, x0)]
+        while len(amas) < taille and frontiere:
+            k = int(rng.integers(0, len(frontiere)))
+            cy, cx = frontiere.pop(k)
+            dy, dx = [(0, 1), (0, -1), (1, 0), (-1, 0)][int(rng.integers(0, 4))]
+            ny_, nx_ = cy + dy, cx + dx
+            if not (0 <= ny_ < h and 0 <= nx_ < w) or not interieur[ny_, nx_]:
+                continue
+            if (ny_, nx_) in amas:
+                continue
+            amas.append((ny_, nx_)); frontiere.append((ny_, nx_))
+        for py, px in amas:
+            out[py, px] = STAR
+            pris[py, px] = True
+            for dy, dx in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                yy, xx = py + dy, px + dx
+                if 0 <= yy < h and 0 <= xx < w and verre[yy, xx] and not pris[yy, xx] and \
+                        tuple(out[yy, xx]) != STAR:
+                    out[yy, xx] = np.minimum(out[yy, xx] + halo * 0.5, 255)
+    return out
+
+
+def palette_cadre(base_name: str, verre: np.ndarray, n: int = 14) -> np.ndarray:
+    """Palette de bois du cadre (14 tons), commune aux 4 ambiances.
+
+    Les PNG sources des fenêtres sont peints avec des dégradés lisses : 1885
+    couleurs pour un sprite de 48x88. Posé à côté des murs DS (une dizaine de
+    tons francs), cela se lisait comme un filtre flou, avec des liserés clairs
+    et sombres sur les arêtes. On ré-extrait donc la palette réelle du cadre par
+    coupe médiane, puis on y ramène chaque pixel : bois franc, bords nets.
+    """
+    px = []
+    for amb in AMBIANCES:
+        a = np.array(Image.open(SRC / f"{base_name}_{amb.capitalize()}.png").convert("RGBA"))
+        sel = (a[..., 3] > 0) & ~verre
+        px.append(a[sel][:, :3])
+    px = np.concatenate(px)
+    if not len(px):
+        return np.zeros((1, 3), np.uint8)
+    bande = Image.fromarray(px[None, :, :].astype(np.uint8), "RGB")
+    q = bande.quantize(colors=n, method=Image.Quantize.MEDIANCUT)
+    pal = np.array(q.getpalette()[: n * 3], np.uint8).reshape(-1, 3)
+    return pal
+
+
+def appliquer_palette(rgba: np.ndarray, palette: np.ndarray, verre: np.ndarray) -> np.ndarray:
+    """Ramène les pixels de CADRE à la palette (le verre est laissé de côté)."""
+    out = rgba.copy()
+    sel = (rgba[..., 3] > 0) & ~verre
+    if not sel.any() or not len(palette):
+        return out
+    px = rgba[sel][:, :3].astype(np.int32)
+    d = ((px[:, None, :] - palette[None, :, :].astype(np.int32)) ** 2).sum(axis=2)
+    out[sel, :3] = palette[np.argmin(d, axis=1)]
+    # élimine les pixels isolés nés de la quantification
+    from speckle import clean
+    out, _ = clean(out, max_area=1, tol=0.0, iters=1)
     return out
 
 
 def construire(tag: str, side: str, echelle: int, dry: bool) -> dict:
     base_name = f"Guilde_Fenetre_{tag}_{side}"
-    jour = np.array(Image.open(SRC / f"{base_name}_Jour.png").convert("RGBA"))
+    src_jour = Image.open(SRC / f"{base_name}_Jour.png").convert("RGBA")
+    jour = np.array(src_jour)
     verre = masque_verre(jour)
 
     rendus: dict[str, np.ndarray] = {}
     lums: dict[str, float] = {}
     CONTROL.mkdir(parents=True, exist_ok=True)
+    palette = palette_cadre(base_name, verre)
 
     for amb in AMBIANCES:
         wt = WORLD_TINTS[amb] / 255.0
         brut = np.array(Image.open(SRC / f"{base_name}_{amb.capitalize()}.png").convert("RGBA"))
+        # cadre re-quantifié sur la palette commune aux 4 ambiances
+        brut = appliquer_palette(brut, palette, verre)
         cible = gradient(verre, RAMPS[amb])
         if amb == "nuit":
             cible = etoiles(verre, cible)
@@ -145,6 +223,7 @@ def construire(tag: str, side: str, echelle: int, dry: bool) -> dict:
         out[..., :3][verre] = stocke[verre].astype(np.uint8)
         im = Image.fromarray(out, "RGBA")
         if echelle != 1:
+            # agrandissement net : chaque pixel DS devient un bloc de 3x3
             im = im.resize((im.width * echelle, im.height * echelle), Image.Resampling.NEAREST)
 
         arr = np.array(im, np.float32)

@@ -26,7 +26,7 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage
 
-sys.path.insert(0, str(Path("/var/tmp/work")))
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # pmdo_shade, speckle, lib_tiles
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "game"
