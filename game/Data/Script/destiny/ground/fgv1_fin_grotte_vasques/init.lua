@@ -73,12 +73,12 @@ function fgv1.PreBattle(is_rematch)
     carchacrok = creer_acteur('Carchacrok_Boss', 'garchomp', Gender.Male, '', 240, 196, Direction.Down)
   end
 
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GAME:MoveCamera(240, 224, 1, false)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 
   local arrivee = {}
   if hero ~= nil then
@@ -206,6 +206,8 @@ function fgv1.PreBattle(is_rematch)
       cinematique.Dire(partenaire, 'Determined', 'Nous sommes une équipe de secours ! Nous ne repartirons pas sans ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'standard')
     end
   else
+    SOUND:FadeOutBGM(20)
+    GAME:WaitFrames(20)
     SOUND:PlayBGM('Threat.ogg', true)
     SOUND:PlayBattleSE('EVT_Roar')
     GROUND:CharSetAnim(carchacrok, 'Attack', false)
@@ -245,6 +247,7 @@ function fgv1.PostBattle()
   end
   SOUND:FadeOutBGM(15)
   GAME:MoveCamera(240, 180, 1, false)
+  GAME:WaitFrames(15)
   GAME:FadeIn(25)
   GAME:WaitFrames(25)
 
@@ -276,10 +279,10 @@ function fgv1.PostBattle()
   UI:ResetSpeaker()
 
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
-  cinematique.Emote(nilo, 'exclaim', false)
+  cinematique.Emote(nilo, 'exclaim')
   if partenaire ~= nil then
     GAME:WaitFrames(5)
-    cinematique.Emote(partenaire, 'exclaim', false)
+    cinematique.Emote(partenaire, 'exclaim')
     if GROUND.CharAnimateTurnTo ~= nil then
       pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4) end)
     else
@@ -288,7 +291,7 @@ function fgv1.PostBattle()
   end
   if hero ~= nil then
     GAME:WaitFrames(5)
-    cinematique.Emote(hero, 'exclaim', false)
+    cinematique.Emote(hero, 'exclaim')
     if GROUND.CharAnimateTurnTo ~= nil then
       pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) end)
     else
@@ -401,12 +404,12 @@ function fgv1.EmptyReturn()
     GROUND:TeleportTo(hero, 240, 344, Direction.Up)
   end
 
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
   GAME:MoveCamera(240, 224, 1, false)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 
   local taches = {}
   if hero ~= nil then

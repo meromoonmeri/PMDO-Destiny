@@ -1385,12 +1385,12 @@ function ville.Visite(map)
   pcall(function() GROUND:CharTurnToChar(hero, partenaire) end)
   -- Après un temps de silence, revenir au thème du quartier, sans superposition.
   GAME:WaitFrames(15)
-  SOUND:PlayBGM('Treasure Town.ogg', false)
   -- Ce drapeau ne crée pas de mission ni de donjon automatiquement.
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
   GAME:FadeIn(25)
+  SOUND:PlayBGM('Treasure Town.ogg', false)
   se_faire_face_ville(partenaire, hero)
   parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
   UI:ResetSpeaker()
@@ -1726,8 +1726,8 @@ local function entrer(map)
     end
     SV.Destiny.RetourBatimentPartenaire = nil
   end
-  SOUND:PlayBGM('Treasure Town.ogg', true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM('Treasure Town.ogg', true)
   retour_au_joueur(hero, partenaire)
 end
 

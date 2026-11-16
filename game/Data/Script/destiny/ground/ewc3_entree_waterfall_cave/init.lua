@@ -296,7 +296,7 @@ local function cinematique_ouverture(map)
   GAME:WaitFrames(12)
   SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
   pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 3, 24)) end)
-  if partenaire ~= nil then cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim') end
+  if partenaire ~= nil then cinematique.Emote(partenaire, 'exclaim') end
   if lyra ~= nil then
     GAME:WaitFrames(5)
     cinematique.Emote(lyra, 'exclaim')
@@ -328,7 +328,7 @@ local function cinematique_ouverture(map)
     if hero ~= nil then
       tourner_direction_animee(hero, Direction.Right)
       GAME:WaitFrames(8)
-      cinematique.Emote(hero, 'notice', 'EVT_Emote_Exclaim_2')
+      cinematique.Emote(hero, 'notice', 'EVT_Emote_Exclaim')
       GAME:WaitFrames(20)
     end
 
@@ -501,11 +501,11 @@ local function cinematique_retour_echec(map, retour)
   -- Le duo reprend connaissance et se relève en léger décalage (5-6 frames).
   SOUND:PlayBattleSE('EVT_Emote_Sweating')
   if partenaire ~= nil then
-    cinematique.Emote(partenaire, 'sweating', false)
+    cinematique.Emote(partenaire, 'sweating')
   end
   if hero ~= nil then
     GAME:WaitFrames(5)
-    cinematique.Emote(hero, 'sweating', false)
+    cinematique.Emote(hero, 'sweating')
   end
   GAME:WaitFrames(30)
 

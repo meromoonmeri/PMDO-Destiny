@@ -33,8 +33,8 @@ end
 
 local function entrer()
   sortie_en_cours = false
-  SOUND:PlayBGM("Wigglytuff's Guild.ogg", true)
   GAME:FadeIn(20)
+  SOUND:PlayBGM("Wigglytuff's Guild.ogg", true)
 end
 function crossroadreverietown2.Enter(map) entrer() end
 function crossroadreverietown2.GameLoad(map) meteo_reverie.Appliquer(map); entrer() end

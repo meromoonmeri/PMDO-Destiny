@@ -232,16 +232,17 @@ local function gag_depart_sonata(hero, partner, sonata, victoire)
   say(sonata, 'Surprised', "ANNNNNNNNNNH ATTENDEZ MOI LES FILLES", 'droite')
 
   local choc_sonata = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(5)
     SOUND:PlayBattleSE('EVT_Emote_Startled')
     GROUND:CharSetEmote(sonata, 'shock', 1)
   end)
   local sueur_duo = TASK:BranchCoroutine(function()
-    -- Une seule goutte sonore pour les deux réactions, déclenchées dans
-    -- la même frame au début des sautillements.
+    -- Le duo réagit au second sautillement, une fois le SFX du sursaut terminé,
+    -- avec un seul son pour les deux et un léger décalage du héros.
+    GAME:WaitFrames(28)
     SOUND:PlayBattleSE('EVT_Emote_Sweatdrop')
-    GROUND:CharSetEmote(hero, 'sweatdrop', 1)
     GROUND:CharSetEmote(partner, 'sweatdrop', 1)
+    GAME:WaitFrames(6)
+    GROUND:CharSetEmote(hero, 'sweatdrop', 1)
   end)
   local sautillements = TASK:BranchCoroutine(function()
     anim(sonata, 'Hop', false)
@@ -390,7 +391,12 @@ function cliffdaytest.Init(map)
   -- Adagio, Sonata et Aria restent définies par leurs spawners, mais elles
   -- n'entrent en scène que pendant la rencontre Destiny du retour inverse.
 end
+local sortie_en_cours = false
 local function synchroniser_ambiance(avec_fondu)
+  if not avec_fondu and meteo_reverie.AccesDirectDevSansScenario ~= nil
+      and meteo_reverie.AccesDirectDevSansScenario() then
+    return false
+  end
   if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
     return false
   end
@@ -398,6 +404,8 @@ local function synchroniser_ambiance(avec_fondu)
   local attendu = meteo_reverie.CarteCliff()
   SV.Destiny.FalaiseAmbiance = attendu
   if attendu == CARTE_CLIFF then return false end
+  if sortie_en_cours then return true end
+  sortie_en_cours = true
   if not SV.Destiny.RetourMaisonEquipe then
     local hero = CH('PLAYER')
     if hero ~= nil then
@@ -432,6 +440,7 @@ end
 
 function cliffdaytest.PlotScripting()
   SV.Destiny = SV.Destiny or {}
+  sortie_en_cours = false
   demarrer_mer()
   if SV.Destiny.RetourMaisonEquipe then
     SV.Destiny.RetourMaisonEquipe = nil

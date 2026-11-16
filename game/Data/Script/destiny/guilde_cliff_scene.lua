@@ -244,7 +244,7 @@ function scene.PorteGuilde_Touch(map, obj, activator)
     if SOUND ~= nil and SOUND.FadeOutBattleSE ~= nil then
       pcall(function() SOUND:FadeOutBattleSE('Destiny_Falaise_Mer', 30) end)
     end
-    GAME:FadeOut(false, 20)
+    GAME:FadeOut(false, 30)
     definir_porte_ouverte(map, false)
     retour_au_joueur(hero, partenaire)
     interaction_en_cours = false

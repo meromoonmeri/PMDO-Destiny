@@ -461,7 +461,7 @@ end
 function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
   local joueur = activator or CH('PLAYER')
   tourner_vers(personnage, joueur)
-  pcall(function() GROUND:CharSetEmote(personnage, 'music', 1) end)
+  pcall(function() GROUND:CharSetEmote(personnage, 'happy', 1) end)
   dire(personnage, 'Happy', 'Je mime le verseur parfait : pas une goutte imaginaire ne tombe à côté.')
   local kirlia = CH('Kirlia')
   if kirlia ~= nil then

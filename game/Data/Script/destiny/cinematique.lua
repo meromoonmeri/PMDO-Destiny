@@ -87,7 +87,7 @@ end
 function cinematique.Emote(personnage, emote, son)
   if personnage == nil then return end
   UI:ResetSpeaker()
-  if son ~= nil then SOUND:PlayBattleSE(son) end
+  if type(son) == 'string' and son ~= '' then SOUND:PlayBattleSE(son) end
   GROUND:CharSetEmote(personnage, emote, 1)
 end
 

@@ -79,6 +79,10 @@ function cliffdaytest_nuit.Init(map)
 end
 
 local function synchroniser_ambiance(avec_fondu)
+  if not avec_fondu and meteo_reverie.AccesDirectDevSansScenario ~= nil
+      and meteo_reverie.AccesDirectDevSansScenario() then
+    return false
+  end
   if SV == nil or SV.Destiny == nil or SV.Destiny.VisiteVille ~= 'terminee' then
     return false
   end
