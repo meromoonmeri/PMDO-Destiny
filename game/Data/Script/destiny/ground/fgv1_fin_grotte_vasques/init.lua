@@ -207,19 +207,31 @@ function fgv1.PreBattle(is_rematch)
     if hero ~= nil then
       table.insert(recul, TASK:BranchCoroutine(function()
         GROUND:MoveToPosition(hero, 240, 260, true, 3)
-        GROUND:EntTurn(hero, Direction.Up)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          GROUND:CharAnimateTurnTo(hero, Direction.Up, 3)
+        else
+          GROUND:EntTurn(hero, Direction.Up)
+        end
       end))
     end
     if partenaire ~= nil then
       table.insert(recul, TASK:BranchCoroutine(function()
         GAME:WaitFrames(5)
         GROUND:MoveToPosition(partenaire, 216, 268, true, 3)
-        GROUND:EntTurn(partenaire, Direction.Up)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 3)
+        else
+          GROUND:EntTurn(partenaire, Direction.Up)
+        end
       end))
     end
     table.insert(recul, TASK:BranchCoroutine(function()
       GROUND:MoveToPosition(nilo, 264, 144, true, 3)
-      GROUND:EntTurn(nilo, Direction.Down)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        GROUND:CharAnimateTurnTo(nilo, Direction.Down, 3)
+      else
+        GROUND:EntTurn(nilo, Direction.Down)
+      end
     end))
     TASK:JoinCoroutines(recul)
 

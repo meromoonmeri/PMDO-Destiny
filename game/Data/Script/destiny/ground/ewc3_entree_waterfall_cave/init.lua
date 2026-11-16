@@ -583,10 +583,21 @@ local function cinematique_retour_echec(map, retour)
       cinematique.Respirer(15)
       se_regarder(hero, partenaire, 4)
       GAME:WaitFrames(10)
-      tourner_vers_cible(partenaire, lyra, 4)
-      if hero ~= nil then
-        GAME:WaitFrames(5)
-        tourner_vers_cible(hero, lyra, 4)
+      if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil and hero ~= nil then
+        local t1 = TASK:BranchCoroutine(function()
+          tourner_vers_cible(partenaire, lyra, 4)
+        end)
+        local t2 = TASK:BranchCoroutine(function()
+          GAME:WaitFrames(6)
+          tourner_vers_cible(hero, lyra, 4)
+        end)
+        TASK:JoinCoroutines({t1, t2})
+      else
+        tourner_vers_cible(partenaire, lyra, 4)
+        if hero ~= nil then
+          GAME:WaitFrames(6)
+          tourner_vers_cible(hero, lyra, 4)
+        end
       end
       cinematique.Dire(partenaire, 'Determined', 'Merci, Lyra ! Pas question d’abandonner maintenant : dès qu’on sera prêts, on retournera jusqu’au fond de la Grotte Verdoyante !', 'standard')
     end

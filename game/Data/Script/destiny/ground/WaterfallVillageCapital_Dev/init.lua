@@ -1364,10 +1364,10 @@ function ville.Visite(map)
   GAME:WaitFrames(30)
   -- Fin progressive de la tension ; aucune musique de victoire avant le sauvetage.
   if SOUND.FadeOutBGM ~= nil then SOUND:FadeOutBGM(90) end
-  GAME:WaitFrames(65)
+  GAME:WaitFrames(60)
   -- Fondu de fin de cinématique : on ne voit jamais les habitants ni Alakazam
   -- ni Lyra repartir à reculons ou se téléporter à découvert.
-  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 25) end
+  if GAME.FadeOut ~= nil then GAME:FadeOut(false, 30) end
   for _, depart in ipairs(avances) do
     local acteur = depart.acteur
     if acteur ~= nil and acteur.EntEnabled ~= false then
@@ -1387,12 +1387,12 @@ function ville.Visite(map)
   pcall(function() GROUND:CharTurnToChar(partenaire, hero) end)
   pcall(function() GROUND:CharTurnToChar(hero, partenaire) end)
   -- Après un temps de silence, revenir au thème du quartier, sans superposition.
-  GAME:WaitFrames(15)
+  GAME:WaitFrames(30)
   -- Ce drapeau ne crée pas de mission ni de donjon automatiquement.
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
-  GAME:FadeIn(25)
+  GAME:FadeIn(30)
   SOUND:PlayBGM('Treasure Town.ogg', false)
   se_faire_face_ville(partenaire, hero)
   parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
@@ -1534,7 +1534,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
     for _, auditeur in ipairs(cibles) do
       if auditeur ~= nil and auditeur ~= locuteur and auditeur.EntEnabled ~= false and not vus[auditeur] then
         vus[auditeur] = true
-        table.insert(regards, {auditeur, locuteur, (#regards % 5) * 4, 4})
+        table.insert(regards, {auditeur, locuteur, (#regards % 5) * 6, 4})
       end
     end
     if #regards > 0 then
@@ -2230,7 +2230,7 @@ local function regarder_face_a_face(a, b)
   if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
     local t1 = TASK:BranchCoroutine(function() tourner_vers(a, b) end)
     local t2 = TASK:BranchCoroutine(function()
-      if GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(4) end
+      if GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(6) end
       tourner_vers(b, a)
     end)
     TASK:JoinCoroutines({t1, t2})

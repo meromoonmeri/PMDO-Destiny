@@ -93,7 +93,7 @@ function intro_halo.Scene()
   -- transition dans le halo : fondu blanc (aspiré par la lumière),
   -- puis arrivée sur le test de personnalité (fond « dream »)
   GAME:FadeOut(true, 60)
-  GAME:WaitFrames(20)
+  GAME:WaitFrames(30)
   generation_halo = generation_halo + 1
   GAME:CutsceneMode(false)
   GAME:EnterGroundMap('personality_test', 'Main_Entrance_Marker')

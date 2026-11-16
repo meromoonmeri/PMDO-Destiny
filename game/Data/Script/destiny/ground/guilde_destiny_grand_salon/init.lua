@@ -104,6 +104,7 @@ function guilde_destiny_grand_salon.SortieBureauMaitre_Touch(obj, activator)
     end
     if partenaire ~= nil then
       table.insert(rotations, TASK:BranchCoroutine(function()
+        if GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(6) end
         if GROUND.CharAnimateTurnTo ~= nil then
           pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
         elseif GROUND.EntTurn ~= nil then

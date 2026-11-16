@@ -78,7 +78,7 @@ local function regarder_ensemble(paires)
   for _, p in ipairs(paires) do
     local a, b = p[1], p[2]
     if a ~= nil and b ~= nil and a ~= b and a.EntEnabled ~= false and b.EntEnabled ~= false then
-      actions[#actions + 1] = {a, b, idx * 4, 4}
+      actions[#actions + 1] = {a, b, idx * 6, 4}
       idx = idx + 1
     end
   end
@@ -97,7 +97,7 @@ local function tourner_directions(paires)
     for _, p in ipairs(paires) do
       local acteur, dir = p[1], p[2]
       if acteur ~= nil and dir ~= nil then
-        local delai = idx * 4
+        local delai = idx * 6
         idx = idx + 1
         taches[#taches + 1] = TASK:BranchCoroutine(function()
           if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
@@ -241,7 +241,7 @@ local function premiere_visite(map, hero, partenaire)
         and (a ~= pipo or (a.Position ~= nil and math.abs(a.Position.X-280) <= 160
           and math.abs(a.Position.Y-250) <= 120)) then
         vus[a] = true
-        table.insert(regards, {a, locuteur, #regards * 4, 4})
+        table.insert(regards, {a, locuteur, #regards * 6, 4})
       end
     end
     if #regards > 0 then cinematique.RegarderGroupe(regards) end

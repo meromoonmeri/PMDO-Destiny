@@ -343,10 +343,9 @@ local function geste_heros(hero, geste, partner)
     GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
     GAME:WaitFrames(24)
   elseif geste == 'idle' then
-    GROUND:CharSetAnim(hero, 'Idle', true)
+    GROUND:CharEndAnim(hero)
     vers_partenaire()
     GAME:WaitFrames(30)
-    GROUND:CharEndAnim(hero)
   end
 end
 
@@ -1305,10 +1304,9 @@ function cliffdaytest.SceneArriveeDestiny()
   TASK:JoinCoroutines({ descente_partenaire, descente_heros, descente_camera })
 
   se_faire_face(partner, hero)
-  anim(hero, 'Idle', true)
+  GROUND:CharEndAnim(hero)
   cinematique.Respirer(20)
   pense_heros(hero, 'Worried', "Je me demande dans quoi je me suis embarqué…")
-  GROUND:CharEndAnim(hero)
 
   -- Le héros rejoint le partenaire sur la ligne du face-à-face, puis les
   -- deux se tournent vers la sortie.

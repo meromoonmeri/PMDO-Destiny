@@ -863,6 +863,7 @@ function personality_test.PlotScripting()
   if SV.Destiny ~= nil and (SV.Destiny.ReveilFait or SV.Destiny.PartenaireParti) then
     -- la séquence du rêve est déjà engagée : ne jamais renvoyer le héros
     -- vers une autre ville pendant qu'il est encore allongé.
+    GAME:FadeIn(20)
     return
   end
   personality_test.Quiz()

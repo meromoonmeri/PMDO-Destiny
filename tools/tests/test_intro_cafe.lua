@@ -12,7 +12,7 @@ package.preload['destiny.suivi_interieurs']=function()return {Activer=function()
 end}end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function(a,h) assert(a and h);log('reprendre_suivi')end}end
 package.preload['destiny.cinematique']=function()return {RegarderGroupe=function(actions)
- for i,a in ipairs(actions) do assert(a[1] and a[2] and a[1]~=a[2] and a[1].EntEnabled~=false and a[2].EntEnabled~=false and a[3]==(i-1)*4 and a[4]==4);log('regard',a[1].EntName,a[2].EntName) end
+ for i,a in ipairs(actions) do assert(a[1] and a[2] and a[1]~=a[2] and a[1].EntEnabled~=false and a[2].EntEnabled~=false and a[3]==(i-1)*6 and a[4]==4);log('regard',a[1].EntName,a[2].EntName) end
 end}end
 luanet={each=function(list)local i=0;return function()i=i+1;return list[i]end end}
 Direction={Up=0,Down=1,Left=2,Right=3}

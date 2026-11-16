@@ -270,7 +270,7 @@ function scene.PorteGuilde_Touch(map, obj, activator)
     end
     if partenaire ~= nil then
       table.insert(rotations, TASK:BranchCoroutine(function()
-        GAME:WaitFrames(4)
+        GAME:WaitFrames(6)
         if GROUND.CharAnimateTurnTo ~= nil then
           pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
         else

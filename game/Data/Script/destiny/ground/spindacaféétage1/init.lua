@@ -65,7 +65,7 @@ local function regarder_ensemble(paires)
     for _, p in ipairs(paires) do
       local a, b = p[1], p[2]
       if a ~= nil and b ~= nil and a ~= b then
-        local delai = idx * 4
+        local delai = idx * 6
         idx = idx + 1
         taches[#taches + 1] = TASK:BranchCoroutine(function()
           if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
@@ -86,7 +86,7 @@ local function tourner_directions(paires)
     for _, p in ipairs(paires) do
       local acteur, dir = p[1], p[2]
       if acteur ~= nil and dir ~= nil then
-        local delai = idx * 4
+        local delai = idx * 6
         idx = idx + 1
         taches[#taches + 1] = TASK:BranchCoroutine(function()
           if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
