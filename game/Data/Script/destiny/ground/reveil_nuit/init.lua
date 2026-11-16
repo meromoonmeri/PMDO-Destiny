@@ -218,6 +218,7 @@ local function hero_geste(hero, geste, respirer)
     if geste == 'oui_inquiet' then
       -- Même appel, donc une seule respiration : acquiescement, puis
       -- inquiétude silencieuse en baissant le regard à 45°.
+      SOUND:PlayBattleSE('EVT_Emote_Sweating')
       GROUND:CharSetEmote(hero, 'sweating', 1)
       GROUND:CharAnimateTurnTo(hero, Direction.DownRight, 4)
       GAME:WaitFrames(24)
@@ -256,6 +257,7 @@ local function hero_geste(hero, geste, respirer)
     GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
     GAME:WaitFrames(14)
   elseif geste == 'inquiet' then
+    SOUND:PlayBattleSE('EVT_Emote_Sweating')
     GROUND:CharSetEmote(hero, 'sweating', 1)
     GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
     GAME:WaitFrames(30)
@@ -327,6 +329,7 @@ local function partenaire_geste(partenaire, geste, respirer)
       GAME:WaitFrames(20)
     end
   elseif geste == 'joie' then
+    SOUND:PlayBattleSE('EVT_Emote_Startled')
     if not jouer_animation(partenaire, 'Hop', 24) then
       GAME:WaitFrames(18)
     end
@@ -603,8 +606,9 @@ function reveil_nuit.PlotScripting()
           GROUND:CharEndAnim(partner)
           GAME:WaitFrames(20)
         end
+        SOUND:PlayBattleSE('EVT_Emote_Sweating')
         GROUND:CharSetEmote(partner, 'sweating', 1)
-        GAME:WaitFrames(18)
+        GAME:WaitFrames(25)
         SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
         GROUND:CharSetEmote(partner, 'exclaim', 1)
         GAME:WaitFrames(16)
@@ -1093,7 +1097,7 @@ function reveil_nuit.CinematiqueRetrouvailles()
     GROUND:MoveToPosition(hero, points.vue_x - 20, cible_sortie_y, false, 1)
   end)
   local marche_sortie_partenaire = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(4)
+    GAME:WaitFrames(5)
     GROUND:MoveToPosition(partner, points.vue_x, cible_sortie_y, false, 1)
   end)
   TASK:JoinCoroutines({marche_sortie_heros, marche_sortie_partenaire})

@@ -58,6 +58,48 @@ local function tourner_dir(acteur, dir)
   end
 end
 
+local function regarder_ensemble(paires)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local taches = {}
+    local idx = 0
+    for _, p in ipairs(paires) do
+      local a, b = p[1], p[2]
+      if a ~= nil and b ~= nil and a ~= b then
+        local delai = idx * 4
+        idx = idx + 1
+        taches[#taches + 1] = TASK:BranchCoroutine(function()
+          if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
+          tourner_vers(a, b)
+        end)
+      end
+    end
+    if #taches > 0 then TASK:JoinCoroutines(taches) end
+  else
+    for _, p in ipairs(paires) do tourner_vers(p[1], p[2]) end
+  end
+end
+
+local function tourner_directions(paires)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local taches = {}
+    local idx = 0
+    for _, p in ipairs(paires) do
+      local acteur, dir = p[1], p[2]
+      if acteur ~= nil and dir ~= nil then
+        local delai = idx * 4
+        idx = idx + 1
+        taches[#taches + 1] = TASK:BranchCoroutine(function()
+          if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
+          tourner_dir(acteur, dir)
+        end)
+      end
+    end
+    if #taches > 0 then TASK:JoinCoroutines(taches) end
+  else
+    for _, p in ipairs(paires) do tourner_dir(p[1], p[2]) end
+  end
+end
+
 local function aller_a(index_carte)
   if transition_cafe_en_cours then return end
   transition_cafe_en_cours = true
@@ -154,17 +196,14 @@ end
 
 local function dialogue_atelier(okeoke, qulbutoque, activator)
   local joueur = activator or CH('PLAYER')
-  tourner_vers(okeoke, joueur)
-  tourner_vers(qulbutoque, joueur)
+  regarder_ensemble({{okeoke, joueur}, {qulbutoque, joueur}})
   dire(okeoke, 'Happy', 'Ici, nous rangeons les caisses du recyclage : rubans, graines, éclats et petits objets oubliés.')
-  tourner_vers(qulbutoque, okeoke)
-  tourner_vers(okeoke, qulbutoque)
+  regarder_ensemble({{qulbutoque, okeoke}, {okeoke, qulbutoque}})
   dire(qulbutoque, 'Normal', 'Chaque équipe laisse quelque chose derrière elle. Notre travail est de lui trouver une seconde vie.')
   tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Encore quelques étagères à monter, et l’atelier pourra recevoir les explorateurs.')
   UI:ResetSpeaker()
-  tourner_dir(okeoke, Direction.Down)
-  tourner_dir(qulbutoque, Direction.Down)
+  tourner_directions({{okeoke, Direction.Down}, {qulbutoque, Direction.Down}})
 end
 
 function spindacafeetage1.NewObject_1_Action(personnage, activator)

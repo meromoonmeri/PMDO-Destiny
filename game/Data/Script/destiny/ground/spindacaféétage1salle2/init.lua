@@ -52,6 +52,48 @@ local function tourner_dir(acteur, dir)
   end
 end
 
+local function regarder_ensemble(paires)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local taches = {}
+    local idx = 0
+    for _, p in ipairs(paires) do
+      local a, b = p[1], p[2]
+      if a ~= nil and b ~= nil and a ~= b then
+        local delai = idx * 4
+        idx = idx + 1
+        taches[#taches + 1] = TASK:BranchCoroutine(function()
+          if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
+          tourner_vers(a, b)
+        end)
+      end
+    end
+    if #taches > 0 then TASK:JoinCoroutines(taches) end
+  else
+    for _, p in ipairs(paires) do tourner_vers(p[1], p[2]) end
+  end
+end
+
+local function tourner_directions(paires)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local taches = {}
+    local idx = 0
+    for _, p in ipairs(paires) do
+      local acteur, dir = p[1], p[2]
+      if acteur ~= nil and dir ~= nil then
+        local delai = idx * 4
+        idx = idx + 1
+        taches[#taches + 1] = TASK:BranchCoroutine(function()
+          if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
+          tourner_dir(acteur, dir)
+        end)
+      end
+    end
+    if #taches > 0 then TASK:JoinCoroutines(taches) end
+  else
+    for _, p in ipairs(paires) do tourner_dir(p[1], p[2]) end
+  end
+end
+
 local function aller_a(index_carte)
   if transition_cafe_en_cours then return end
   transition_cafe_en_cours = true
@@ -163,8 +205,7 @@ function spindacafeetage1salle2.NewObject_Action(personnage, activator)
   UI:WaitForChoice()
   local choix = UI:ChoiceResult()
   UI:ResetSpeaker()
-  tourner_dir(personnage, Direction.Down)
-  tourner_dir(asa, Direction.Down)
+  tourner_directions({{personnage, Direction.Down}, {asa, Direction.Down}})
   if choix == 1 then aller_a(2)
   elseif choix == 2 then aller_a(3) end
 end
@@ -177,28 +218,23 @@ function spindacafeetage1salle2.NewObject_1_Action(personnage, activator)
   tourner_vers(pipo, joueur)
   dire(pipo, 'Normal', 'Je tiendrai le rideau. Invisible, bien entendu.')
   UI:ResetSpeaker()
-  tourner_dir(personnage, Direction.Down)
-  tourner_dir(pipo, Direction.Down)
+  tourner_directions({{personnage, Direction.Down}, {pipo, Direction.Down}})
 end
 
 local function dialogue_plusle_minun(mina, pico, premier_mina, activator)
   local joueur = activator or CH('PLAYER')
-  tourner_vers(mina, joueur)
-  tourner_vers(pico, joueur)
+  regarder_ensemble({{mina, joueur}, {pico, joueur}})
   if premier_mina then
     dire(mina, 'Happy', 'Pico et moi préparons un numéro d’étincelles synchronisées. Réverie Town va briller !')
-    tourner_vers(pico, mina)
-    tourner_vers(mina, pico)
+    regarder_ensemble({{pico, mina}, {mina, pico}})
     dire(pico, 'Happy', 'Dès que tu donnes le signal, je lance la première étincelle !')
   else
     dire(pico, 'Happy', 'Mina compte les temps, je lance la première étincelle. Ne clignez pas des yeux !')
-    tourner_vers(mina, pico)
-    tourner_vers(pico, mina)
+    regarder_ensemble({{mina, pico}, {pico, mina}})
     dire(mina, 'Happy', 'Et Pistache donne le rythme des applaudissements juste à côté !')
   end
   UI:ResetSpeaker()
-  tourner_dir(mina, orientations_fixes.NewObject_2)
-  tourner_dir(pico, orientations_fixes.NewObject_9)
+  tourner_directions({{mina, orientations_fixes.NewObject_2}, {pico, orientations_fixes.NewObject_9}})
 end
 
 function spindacafeetage1salle2.NewObject_2_Action(personnage, activator)
@@ -211,22 +247,18 @@ end
 
 local function dialogue_nidoran(lila, remi, premier_lila, activator)
   local joueur = activator or CH('PLAYER')
-  tourner_vers(lila, joueur)
-  tourner_vers(remi, joueur)
+  regarder_ensemble({{lila, joueur}, {remi, joueur}})
   if premier_lila then
     dire(lila, 'Happy', 'Nous venons écouter les histoires des explorateurs. Certaines valent tous les trésors.')
-    tourner_vers(remi, lila)
-    tourner_vers(lila, remi)
+    regarder_ensemble({{remi, lila}, {lila, remi}})
     dire(remi, 'Normal', 'Et je garde bien nos deux places jusqu’au lever du rideau !')
   else
     dire(remi, 'Normal', 'Je garde nos places pendant qu’elle choisit les boissons. Le spectacle commence toujours trop tôt pour les retardataires.')
-    tourner_vers(lila, remi)
-    tourner_vers(remi, lila)
+    regarder_ensemble({{lila, remi}, {remi, lila}})
     dire(lila, 'Happy', 'Merci, Rémi ! Promis, je ne tarde pas dès que le service rouvre.')
   end
   UI:ResetSpeaker()
-  tourner_dir(lila, orientations_fixes.NewObject_5)
-  tourner_dir(remi, orientations_fixes.NewObject_6)
+  tourner_directions({{lila, orientations_fixes.NewObject_5}, {remi, orientations_fixes.NewObject_6}})
 end
 
 function spindacafeetage1salle2.NewObject_5_Action(personnage, activator)

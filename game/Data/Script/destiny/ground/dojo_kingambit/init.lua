@@ -74,8 +74,12 @@ end
 local function orienter_joueur_nord()
   if CH == nil or GROUND == nil or Direction == nil then return end
   local ok, hero = pcall(function() return CH('PLAYER') end)
-  if ok and hero ~= nil and GROUND.EntTurn ~= nil then
-    pcall(function() GROUND:EntTurn(hero, Direction.Up) end)
+  if ok and hero ~= nil then
+    if GROUND.CharAnimateTurnTo ~= nil then
+      pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+    elseif GROUND.EntTurn ~= nil then
+      pcall(function() GROUND:EntTurn(hero, Direction.Up) end)
+    end
   end
 end
 
@@ -110,13 +114,16 @@ local function franchir_porte_gauche(activator)
   if sortie_en_cours then return end
   sortie_en_cours = true
   SV.Destiny = SV.Destiny or {}
-  if not etat_porte_gauche_ouverte() then
+  local cinematique_porte = not etat_porte_gauche_ouverte()
+  if cinematique_porte then
     if GAME ~= nil and GAME.CutsceneMode ~= nil then pcall(function() GAME:CutsceneMode(true) end) end
     coulisser_porte(LAYER_GAUCHE_FERMEE, LAYER_GAUCHE_COULISSE_1, LAYER_GAUCHE_COULISSE_2)
     SV.Destiny.DojoKingambitPorteGaucheOuverte = true
-    if GAME ~= nil and GAME.CutsceneMode ~= nil then pcall(function() GAME:CutsceneMode(false) end) end
   end
   GAME:FadeOut(false, 20)
+  if cinematique_porte and GAME ~= nil and GAME.CutsceneMode ~= nil then
+    pcall(function() GAME:CutsceneMode(false) end)
+  end
   GAME:EnterGroundMap('dojo_kingambit_salles', 'dojo_kingambit_arene', 'entree_sud', true)
 end
 
@@ -125,13 +132,16 @@ local function franchir_porte_droite(activator)
   if sortie_en_cours then return end
   sortie_en_cours = true
   SV.Destiny = SV.Destiny or {}
-  if not etat_porte_droite_ouverte() then
+  local cinematique_porte = not etat_porte_droite_ouverte()
+  if cinematique_porte then
     if GAME ~= nil and GAME.CutsceneMode ~= nil then pcall(function() GAME:CutsceneMode(true) end) end
     coulisser_porte(LAYER_DROITE_FERMEE, LAYER_DROITE_COULISSE_1, LAYER_DROITE_COULISSE_2)
     SV.Destiny.DojoKingambitPorteDroiteOuverte = true
-    if GAME ~= nil and GAME.CutsceneMode ~= nil then pcall(function() GAME:CutsceneMode(false) end) end
   end
   GAME:FadeOut(false, 20)
+  if cinematique_porte and GAME ~= nil and GAME.CutsceneMode ~= nil then
+    pcall(function() GAME:CutsceneMode(false) end)
+  end
   GAME:EnterGroundMap('dojo_kingambit_salles', 'dojo_kingambit_reliques', 'entree_sud', true)
 end
 

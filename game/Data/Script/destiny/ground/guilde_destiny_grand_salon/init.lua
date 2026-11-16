@@ -90,21 +90,42 @@ function guilde_destiny_grand_salon.SortieBureauMaitre_Touch(obj, activator)
 
   if GAME ~= nil and GAME.CutsceneMode ~= nil then GAME:CutsceneMode(true) end
   if partenaire ~= nil and AI ~= nil and AI.DisableCharacterAI ~= nil then AI:DisableCharacterAI(partenaire) end
-  if hero ~= nil then
-    hero.CollisionDisabled = true
-    if GROUND ~= nil and Direction ~= nil then
+  if hero ~= nil then hero.CollisionDisabled = true end
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil and GROUND ~= nil and Direction ~= nil then
+    local rotations = {}
+    if hero ~= nil then
+      table.insert(rotations, TASK:BranchCoroutine(function()
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+        elseif GROUND.EntTurn ~= nil then
+          GROUND:EntTurn(hero, Direction.Up)
+        end
+      end))
+    end
+    if partenaire ~= nil then
+      table.insert(rotations, TASK:BranchCoroutine(function()
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+        elseif GROUND.EntTurn ~= nil then
+          GROUND:EntTurn(partenaire, Direction.Up)
+        end
+      end))
+    end
+    if #rotations > 0 then TASK:JoinCoroutines(rotations) end
+  else
+    if hero ~= nil and GROUND ~= nil and Direction ~= nil then
       if GROUND.CharAnimateTurnTo ~= nil then
         pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
       elseif GROUND.EntTurn ~= nil then
         GROUND:EntTurn(hero, Direction.Up)
       end
     end
-  end
-  if partenaire ~= nil and GROUND ~= nil and Direction ~= nil then
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
-    elseif GROUND.EntTurn ~= nil then
-      GROUND:EntTurn(partenaire, Direction.Up)
+    if partenaire ~= nil and GROUND ~= nil and Direction ~= nil then
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+      elseif GROUND.EntTurn ~= nil then
+        GROUND:EntTurn(partenaire, Direction.Up)
+      end
     end
   end
 

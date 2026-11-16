@@ -84,13 +84,22 @@ function fgv1.PreBattle(is_rematch)
   if hero ~= nil then
     table.insert(arrivee, TASK:BranchCoroutine(function()
       GROUND:MoveToPosition(hero, 240, 240, false, 2)
-      GROUND:EntTurn(hero, Direction.Up)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(hero, Direction.Up)
+      end
     end))
   end
   if partenaire ~= nil then
     table.insert(arrivee, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
       GROUND:MoveToPosition(partenaire, 216, 248, false, 2)
-      GROUND:EntTurn(partenaire, Direction.Up)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(partenaire, Direction.Up)
+      end
     end))
   end
   if #arrivee > 0 then TASK:JoinCoroutines(arrivee) end
@@ -131,8 +140,31 @@ function fgv1.PreBattle(is_rematch)
     end
     UI:ResetSpeaker()
 
-    GROUND:CharSetAnim(nilo, 'Wake', false)
-    GAME:WaitFrames(36)
+    local duree_wake = 36
+    local wake_dispo = true
+    pcall(function()
+      local gm = RogueEssence.Content.GraphicsManager
+      if gm.GetAnimIndex ~= nil then
+        local idx = gm.GetAnimIndex('Wake')
+        if idx == nil or idx < 0 then
+          wake_dispo = false
+        else
+          local feuille = gm.GetChara(nilo.CurrentForm:ToCharID())
+          if feuille:GetReferencedAnimIndex(idx) ~= idx then
+            wake_dispo = false
+          else
+            local t = tonumber(feuille:GetTotalTime(idx, nilo.Direction))
+            if t ~= nil and t > 0 then duree_wake = math.floor(t) end
+          end
+        end
+      end
+    end)
+    if wake_dispo then
+      GROUND:CharSetAnim(nilo, 'Wake', false)
+      GAME:WaitFrames(duree_wake)
+    else
+      GAME:WaitFrames(20)
+    end
     if GROUND.CharEndAnim ~= nil then
       GROUND:CharEndAnim(nilo)
     end
@@ -279,52 +311,51 @@ function fgv1.PostBattle()
   UI:ResetSpeaker()
 
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
-  cinematique.Emote(nilo, 'exclaim')
+  local reactions_appel = {
+    TASK:BranchCoroutine(function()
+      cinematique.Emote(nilo, 'exclaim')
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(nilo, Direction.Down, 4) end)
+      else
+        GROUND:EntTurn(nilo, Direction.Down)
+      end
+    end),
+  }
   if partenaire ~= nil then
-    GAME:WaitFrames(5)
-    cinematique.Emote(partenaire, 'exclaim')
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4) end)
-    else
-      GROUND:EntTurn(partenaire, Direction.Down)
-    end
+    table.insert(reactions_appel, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
+      cinematique.Emote(partenaire, 'exclaim')
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Down, 4) end)
+      else
+        GROUND:EntTurn(partenaire, Direction.Down)
+      end
+    end))
   end
   if hero ~= nil then
-    GAME:WaitFrames(5)
-    cinematique.Emote(hero, 'exclaim')
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) end)
-    else
-      GROUND:EntTurn(hero, Direction.Down)
-    end
+    table.insert(reactions_appel, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(10)
+      cinematique.Emote(hero, 'exclaim')
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) end)
+      else
+        GROUND:EntTurn(hero, Direction.Down)
+      end
+    end))
   end
+  TASK:JoinCoroutines(reactions_appel)
   GAME:WaitFrames(20)
 
   local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', 256, 344, Direction.Up)
   GROUND:MoveToPosition(lyra, 256, 240, true, 2)
-  if GROUND.CharTurnToCharAnimated ~= nil then
-    pcall(function() GROUND:CharTurnToCharAnimated(lyra, nilo, 4) end)
-    pcall(function() GROUND:CharTurnToCharAnimated(nilo, lyra, 4) end)
-  else
-    GROUND:CharTurnToChar(lyra, nilo)
-    GROUND:CharTurnToChar(nilo, lyra)
-  end
-  if partenaire ~= nil then
-    if GROUND.CharTurnToCharAnimated ~= nil then
-      pcall(function() GROUND:CharTurnToCharAnimated(partenaire, lyra, 4) end)
-    else
-      GROUND:CharTurnToChar(partenaire, lyra)
-    end
-  end
-  if hero ~= nil then
-    GAME:WaitFrames(5)
-    if GROUND.CharTurnToCharAnimated ~= nil then
-      pcall(function() GROUND:CharTurnToCharAnimated(hero, lyra, 4) end)
-    else
-      GROUND:CharTurnToChar(hero, lyra)
-    end
-  end
+  cinematique.RegarderGroupe({
+    {lyra, nilo, 0, 4},
+    {nilo, lyra, 3, 4},
+    {partenaire, lyra, 5, 4},
+    {hero, lyra, 8, 4},
+  })
 
+  SOUND:PlayBattleSE('EVT_Emote_Startled')
   GROUND:CharSetAnim(nilo, 'Hop', false)
   GAME:WaitFrames(20)
   GROUND:CharEndAnim(nilo)
@@ -415,13 +446,22 @@ function fgv1.EmptyReturn()
   if hero ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
       GROUND:MoveToPosition(hero, 240, 240, false, 2)
-      GROUND:EntTurn(hero, Direction.Up)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(hero, Direction.Up)
+      end
     end))
   end
   if partenaire ~= nil then
     table.insert(taches, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
       GROUND:MoveToPosition(partenaire, 216, 248, false, 2)
-      GROUND:EntTurn(partenaire, Direction.Up)
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(partenaire, Direction.Up)
+      end
     end))
   end
   if #taches > 0 then TASK:JoinCoroutines(taches) end
@@ -439,6 +479,7 @@ function fgv1.EmptyReturn()
   missions_reverie.Completer('grotte_verdoyante', true)
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.JourneeVille = (SV.Destiny.JourneeVille or 0) + 1
+  SOUND:FadeOutBGM(20)
   GAME:FadeOut(false, 20)
   if hero ~= nil then hero.CollisionDisabled = false end
   GAME:CutsceneMode(false)

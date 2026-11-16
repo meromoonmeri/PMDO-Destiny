@@ -1247,6 +1247,9 @@ function ville.Visite(map)
   -- La course commence hors du cadre et s'arrête avant le groupe.
   GROUND:MoveToPosition(luxray, 800, 1224, true, 2)
   GROUND:CharAnimateTurnTo(luxray, Direction.Up, 4)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Emote_Sweating')
+  end
   GROUND:CharSetEmote(luxray, 'sweating', 2)
   -- À l'arrivée, les proches cherchent Lyra du regard, en décalé.
   ecouter_scene(luxray, partenaire, hero, lombre, ludicolo, roserade, tyranocif_accueil, dracaufeu, machamp, miltank)
@@ -1563,8 +1566,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   if #marche > 0 then TASK:JoinCoroutines(marche) end
   GAME:WaitFrames(15)
 
-  -- Vague d'enthousiasme désynchronisée des habitants sur la place.
-  SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
+  -- Vague d'enthousiasme désynchronisée des habitants sur la place (happy / glowing sans SE d'exclamation).
   for idx, act in ipairs(foule) do
     local em = (idx % 2 == 0) and 'glowing' or 'happy'
     pcall(function() GROUND:CharSetEmote(act, em, 1) end)
@@ -1580,6 +1582,9 @@ local function jouer_celebration_nilo(map, hero, partenaire)
 
   if nilo ~= nil then
     orienter_auditoire(nilo)
+    if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+      SOUND:PlayBattleSE('EVT_Emote_Startled')
+    end
     pcall(function() GROUND:CharSetAnim(nilo, 'Hop', false) end)
     GAME:WaitFrames(20)
     pcall(function() GROUND:CharEndAnim(nilo) end)
@@ -2220,6 +2225,21 @@ local function dialogue_simple(personnage, repliques)
   UI:ResetSpeaker()
 end
 
+local function regarder_face_a_face(a, b)
+  if a == nil or b == nil or a == b then return end
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local t1 = TASK:BranchCoroutine(function() tourner_vers(a, b) end)
+    local t2 = TASK:BranchCoroutine(function()
+      if GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(4) end
+      tourner_vers(b, a)
+    end)
+    TASK:JoinCoroutines({t1, t2})
+  else
+    tourner_vers(a, b)
+    tourner_vers(b, a)
+  end
+end
+
 local function conversation(acteurs, repliques)
   -- Les deux partenaires de discussion restent animés même lorsqu'un seul parle,
   -- et se regardent mutuellement à chaque prise de parole.
@@ -2232,8 +2252,7 @@ local function conversation(acteurs, repliques)
     local acteur = acteurs[idx]
     local autre = acteurs[3 - idx]
     if acteur ~= nil then
-      tourner_vers(autre, acteur)
-      tourner_vers(acteur, autre)
+      regarder_face_a_face(autre, acteur)
       UI:SetSpeaker(acteur)
       UI:SetSpeakerEmotion(replique[2])
       UI:WaitShowDialogue(replique[3])
@@ -2525,8 +2544,7 @@ function ville.Luxray_Alerte_Action(personnage, activator)
     return
   end
   parler_accueil(personnage, 'Worried', 'Merci ! Venez, je vais vous montrer la route.')
-  tourner_vers(partenaire, personnage)
-  tourner_vers(personnage, partenaire)
+  regarder_face_a_face(partenaire, personnage)
   cinematique.Dire(partenaire, 'Determined', 'On y va ! Tiens bon, Nilo, on arrive !', 'droite')
   UI:ResetSpeaker()
   SV.Destiny.DepartShinxAccepte = true

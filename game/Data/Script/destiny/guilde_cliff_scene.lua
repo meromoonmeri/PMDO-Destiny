@@ -128,9 +128,38 @@ local function jouer_enrolement(map, hero)
   local sunflora = creer_figurant('Guilde_Sunflora', 'sunflora', Gender.Female, 'Héliatronc', 188, 292, Direction.Down)
   local loudred = creer_figurant('Guilde_Loudred', 'loudred', Gender.Male, 'Ramboum', 276, 292, Direction.Down)
 
-  if hero ~= nil then GROUND:TeleportTo(hero, 232, 344, Direction.Up) end
-  if partenaire ~= nil then GROUND:TeleportTo(partenaire, 208, 352, Direction.Up) end
-  GAME:MoveCamera(240, 296, 1, false)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil and GROUND.MoveToPosition ~= nil then
+    local mise_en_place = {}
+    table.insert(mise_en_place, TASK:BranchCoroutine(function()
+      GAME:MoveCamera(240, 296, 24, false)
+    end))
+    if hero ~= nil then
+      table.insert(mise_en_place, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 232, 344, false, 1.5)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(hero, Direction.Up)
+        end
+      end))
+    end
+    if partenaire ~= nil then
+      table.insert(mise_en_place, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(5)
+        GROUND:MoveToPosition(partenaire, 208, 352, false, 1.5)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(partenaire, Direction.Up)
+        end
+      end))
+    end
+    TASK:JoinCoroutines(mise_en_place)
+  else
+    if hero ~= nil then GROUND:TeleportTo(hero, 232, 344, Direction.Up) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 208, 352, Direction.Up) end
+    GAME:MoveCamera(240, 296, 1, false)
+  end
   GAME:WaitFrames(20)
 
   SOUND:PlayBattleSE('EVT_Emote_Exclaim')
@@ -150,6 +179,9 @@ local function jouer_enrolement(map, hero)
 
   local wigglytuff = creer_figurant('Guilde_Wigglytuff', 'wigglytuff', Gender.Male, 'Grodoudou', 232, 260, Direction.Down)
   GROUND:MoveInDirection(wigglytuff, Direction.Down, 16, false, 1)
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Emote_Startled')
+  end
   pcall(function() GROUND:CharSetAnim(wigglytuff, 'Hop', false) end)
   GAME:WaitFrames(22)
   pcall(function() GROUND:CharEndAnim(wigglytuff) end)
@@ -158,6 +190,9 @@ local function jouer_enrolement(map, hero)
   cinematique.Dire(wigglytuff, 'Normal', 'Vous avez écouté la détresse d’une maman, bravé une sombre caverne et protégé un tout petit cœur jusqu’au bout.', 'standard')
   cinematique.Dire(wigglytuff, 'Joyous', 'Je vous proclame officiellement ÉQUIPE APPRENTIE DE LA GRANDE GUILDE ! Hourra !', 'standard')
 
+  if SOUND ~= nil and SOUND.PlayBattleSE ~= nil then
+    SOUND:PlayBattleSE('EVT_Emote_Startled')
+  end
   pcall(function() GROUND:CharSetAnim(sunflora, 'Hop', false) end)
   GAME:WaitFrames(5)
   pcall(function() GROUND:CharSetAnim(loudred, 'Hop', false) end)
@@ -221,19 +256,43 @@ function scene.PorteGuilde_Touch(map, obj, activator)
   local partenaire = partenaire_de(hero)
   GAME:CutsceneMode(true)
   if partenaire ~= nil then AI:DisableCharacterAI(partenaire) end
-  if hero ~= nil then
-    hero.CollisionDisabled = true
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
-    else
-      GROUND:EntTurn(hero, Direction.Up)
+  if hero ~= nil then hero.CollisionDisabled = true end
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local rotations = {}
+    if hero ~= nil then
+      table.insert(rotations, TASK:BranchCoroutine(function()
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(hero, Direction.Up)
+        end
+      end))
     end
-  end
-  if partenaire ~= nil then
-    if GROUND.CharAnimateTurnTo ~= nil then
-      pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
-    else
-      GROUND:EntTurn(partenaire, Direction.Up)
+    if partenaire ~= nil then
+      table.insert(rotations, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(4)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(partenaire, Direction.Up)
+        end
+      end))
+    end
+    if #rotations > 0 then TASK:JoinCoroutines(rotations) end
+  else
+    if hero ~= nil then
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(hero, Direction.Up)
+      end
+    end
+    if partenaire ~= nil then
+      if GROUND.CharAnimateTurnTo ~= nil then
+        pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+      else
+        GROUND:EntTurn(partenaire, Direction.Up)
+      end
     end
   end
 
@@ -243,6 +302,9 @@ function scene.PorteGuilde_Touch(map, obj, activator)
   if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.EnrolementGuilde == 'termine' then
     if SOUND ~= nil and SOUND.FadeOutBattleSE ~= nil then
       pcall(function() SOUND:FadeOutBattleSE('Destiny_Falaise_Mer', 30) end)
+    end
+    if SOUND ~= nil and SOUND.FadeOutBGM ~= nil then
+      pcall(function() SOUND:FadeOutBGM(30) end)
     end
     GAME:FadeOut(false, 30)
     definir_porte_ouverte(map, false)
@@ -264,8 +326,34 @@ function scene.PorteGuilde_Touch(map, obj, activator)
   GAME:WaitFrames(8)
   retirer_figurant('Guilde_Chatot')
   fermer_porte(map)
-  if hero ~= nil then GROUND:TeleportTo(hero, 232, 282, Direction.Up) end
-  if partenaire ~= nil then GROUND:TeleportTo(partenaire, 208, 290, Direction.Up) end
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil and GROUND.MoveToPosition ~= nil then
+    local recul = {}
+    if hero ~= nil then
+      table.insert(recul, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 232, 282, false, 1)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(hero, Direction.Up)
+        end
+      end))
+    end
+    if partenaire ~= nil then
+      table.insert(recul, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(4)
+        GROUND:MoveToPosition(partenaire, 208, 290, false, 1)
+        if GROUND.CharAnimateTurnTo ~= nil then
+          pcall(function() GROUND:CharAnimateTurnTo(partenaire, Direction.Up, 4) end)
+        else
+          GROUND:EntTurn(partenaire, Direction.Up)
+        end
+      end))
+    end
+    if #recul > 0 then TASK:JoinCoroutines(recul) end
+  else
+    if hero ~= nil then GROUND:TeleportTo(hero, 232, 282, Direction.Up) end
+    if partenaire ~= nil then GROUND:TeleportTo(partenaire, 208, 290, Direction.Up) end
+  end
   GAME:WaitFrames(10)
   retour_au_joueur(hero, partenaire)
   interaction_en_cours = false

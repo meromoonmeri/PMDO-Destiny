@@ -72,15 +72,55 @@ local function tourner_vers(acteur, cible)
   end
 end
 
+local function regarder_ensemble(paires)
+  local actions = {}
+  local idx = 0
+  for _, p in ipairs(paires) do
+    local a, b = p[1], p[2]
+    if a ~= nil and b ~= nil and a ~= b and a.EntEnabled ~= false and b.EntEnabled ~= false then
+      actions[#actions + 1] = {a, b, idx * 4, 4}
+      idx = idx + 1
+    end
+  end
+  if #actions == 0 then return end
+  if cinematique ~= nil and cinematique.RegarderGroupe ~= nil then
+    cinematique.RegarderGroupe(actions)
+  else
+    for _, a in ipairs(actions) do tourner_vers(a[1], a[2]) end
+  end
+end
+
+local function tourner_directions(paires)
+  if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil then
+    local taches = {}
+    local idx = 0
+    for _, p in ipairs(paires) do
+      local acteur, dir = p[1], p[2]
+      if acteur ~= nil and dir ~= nil then
+        local delai = idx * 4
+        idx = idx + 1
+        taches[#taches + 1] = TASK:BranchCoroutine(function()
+          if delai > 0 and GAME ~= nil and GAME.WaitFrames ~= nil then GAME:WaitFrames(delai) end
+          tourner_dir(acteur, dir)
+        end)
+      end
+    end
+    if #taches > 0 then TASK:JoinCoroutines(taches) end
+  else
+    for _, p in ipairs(paires) do tourner_dir(p[1], p[2]) end
+  end
+end
+
 local function dire(acteur, emotion, texte, cote)
   if acteur == nil then return end
   UI:SetSpeaker(acteur)
-  if cote == 'droite' then
-    if UI.SetSpeakerLoc ~= nil then UI:SetSpeakerLoc(264, 131, true) end
+  local droite = (cote == 'droite')
+  if droite then
+    if UI.SetSpeakerLoc ~= nil then UI:SetSpeakerLoc(256, 132) end
   elseif UI.ResetSpeakerLoc ~= nil then
     UI:ResetSpeakerLoc()
   end
-  UI:SetSpeakerEmotion(emotion)
+  UI:SetSpeakerEmotion(emotion, droite)
   UI:WaitShowDialogue(texte)
 end
 
@@ -434,23 +474,21 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
   if choix == 3 then
     dire(personnage, 'Normal', 'Installez-vous dans un coin tranquille. Demain, Basil et Félix auront renouvelé leurs étals.')
     UI:ResetSpeaker()
+    if SOUND ~= nil and SOUND.FadeOutBGM ~= nil then SOUND:FadeOutBGM(60) end
     GAME:FadeOut(false, 60)
     GAME:WaitFrames(90)
     SV.Destiny = SV.Destiny or {}
     SV.Destiny.JourneeVille = (SV.Destiny.JourneeVille or 0) + 1
     SV.Destiny.StocksKecleon = {}
     GAME:FadeIn(60)
+    if SOUND ~= nil and SOUND.PlayBGM ~= nil then SOUND:PlayBGM("Spinda's Cafe.ogg", true) end
     UI:ResetSpeaker()
     UI:WaitShowDialogue('Une nouvelle journée commence à Réverie Town… ' .. meteo_reverie.Description())
-    tourner_dir(personnage, Direction.Down)
-    tourner_dir(kirlia, Direction.Down)
-    tourner_dir(pipo, Direction.Down)
+    tourner_directions({{personnage, Direction.Down}, {kirlia, Direction.Down}, {pipo, Direction.Down}})
     return
   end
   UI:ResetSpeaker()
-  tourner_dir(personnage, Direction.Down)
-  tourner_dir(kirlia, Direction.Down)
-  tourner_dir(pipo, Direction.Down)
+  tourner_directions({{personnage, Direction.Down}, {kirlia, Direction.Down}, {pipo, Direction.Down}})
   if choix == 1 then aller_a(3)
   elseif choix == 2 then
     SV.Destiny = SV.Destiny or {}; SV.Destiny.ArriveeSalleCafe = true
@@ -473,9 +511,7 @@ function cafespindaaccueil.MrMimeJunior_Action(personnage, activator)
   tourner_vers(spinda, joueur)
   dire(spinda, 'Happy', 'Et pendant les travaux, nous accueillons les visiteurs ensemble !')
   UI:ResetSpeaker()
-  tourner_dir(personnage, Direction.Down)
-  tourner_dir(kirlia, Direction.Down)
-  tourner_dir(spinda, Direction.Down)
+  tourner_directions({{personnage, Direction.Down}, {kirlia, Direction.Down}, {spinda, Direction.Down}})
 end
 
 local conseils_kirlia = {
@@ -533,8 +569,7 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
         tourner_dir(spinda, Direction.Down)
       end
       if pipo ~= nil then
-        tourner_vers(personnage, pipo)
-        tourner_vers(pipo, personnage)
+        regarder_ensemble({{personnage, pipo}, {pipo, personnage}})
         pcall(function() GROUND:CharSetEmote(pipo, 'happy', 1) end)
         dire(personnage, 'Normal', 'Quant à Pipo, ses mimes mettent tout le monde de bonne humeur. Bulle et Balou préparent aussi l’atelier de recyclage.')
       end
@@ -548,24 +583,19 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
   end
   dire(personnage, 'Normal', 'Prenez soin de vous sur les chemins. Mon regard vous accompagne toujours un peu.')
   UI:ResetSpeaker()
-  tourner_dir(personnage, Direction.Down)
-  tourner_dir(spinda, Direction.Down)
-  tourner_dir(pipo, Direction.Down)
+  tourner_directions({{personnage, Direction.Down}, {spinda, Direction.Down}, {pipo, Direction.Down}})
 end
 
 local function dialogue_recyclage(okeoke, qulbutoque, activator)
   local joueur = activator or CH('PLAYER')
-  tourner_vers(okeoke, joueur)
-  tourner_vers(qulbutoque, joueur)
+  regarder_ensemble({{okeoke, joueur}, {qulbutoque, joueur}})
   dire(okeoke, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
-  tourner_vers(qulbutoque, okeoke)
-  tourner_vers(okeoke, qulbutoque)
+  regarder_ensemble({{qulbutoque, okeoke}, {okeoke, qulbutoque}})
   dire(qulbutoque, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
   tourner_vers(okeoke, joueur)
   dire(okeoke, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
   UI:ResetSpeaker()
-  tourner_dir(okeoke, Direction.Right)
-  tourner_dir(qulbutoque, Direction.Left)
+  tourner_directions({{okeoke, Direction.Right}, {qulbutoque, Direction.Left}})
 end
 
 cafespindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
@@ -580,17 +610,14 @@ local function dialogue_table_gauche(noisette, pompon, activator)
   local joueur = activator or CH('PLAYER')
   local bas_gauche = Direction.DownLeft or Direction.Down
   local haut_droite = Direction.UpRight or Direction.Right
-  tourner_vers(noisette, joueur)
-  tourner_vers(pompon, joueur)
+  regarder_ensemble({{noisette, joueur}, {pompon, joueur}})
   dire(noisette, 'Happy', 'Je goûte chaque nouveauté du comptoir. Pour le travail, évidemment. Uniquement pour le travail.')
   if pompon ~= nil then
-    tourner_vers(pompon, noisette)
-    tourner_vers(noisette, pompon)
+    regarder_ensemble({{pompon, noisette}, {noisette, pompon}})
     dire(pompon, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Et Noisette surveille déjà la cuisine !')
   end
   UI:ResetSpeaker()
-  tourner_dir(noisette, bas_gauche)
-  tourner_dir(pompon, haut_droite)
+  tourner_directions({{noisette, bas_gauche}, {pompon, haut_droite}})
 end
 
 function cafespindaaccueil.NewObject_13_Action(personnage, activator)
@@ -603,14 +630,12 @@ function cafespindaaccueil.Pompot_Action(personnage, activator)
     local joueur = activator or CH('PLAYER')
     local bas_gauche = Direction.DownLeft or Direction.Down
     local haut_droite = Direction.UpRight or Direction.Right
-    tourner_vers(personnage, joueur)
-    tourner_vers(noisette, joueur)
+    regarder_ensemble({{personnage, joueur}, {noisette, joueur}})
     dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')
     tourner_vers(noisette, personnage)
     dire(noisette, 'Happy', 'Et dès que le service ouvrira, je te garde une place au premier rang pour le goûter !')
     UI:ResetSpeaker()
-    tourner_dir(noisette, bas_gauche)
-    tourner_dir(personnage, haut_droite)
+    tourner_directions({{noisette, bas_gauche}, {personnage, haut_droite}})
   else
     tourner_vers(personnage, activator or CH('PLAYER'))
     dire(personnage, 'Normal', 'Après les Bois Perdus, même une chaise tranquille ressemble à un trésor. Réverie Town sait accueillir les pattes fatiguées.')

@@ -193,9 +193,16 @@ end
 local function se_regarder(a, b, frames_par_45)
   if a == nil or b == nil then return end
   local f = frames_par_45 or 4
-  tourner_vers_cible(a, b, f)
-  GAME:WaitFrames(5)
-  tourner_vers_cible(b, a, f)
+  if cinematique ~= nil and cinematique.RegarderGroupe ~= nil then
+    cinematique.RegarderGroupe({
+      {a, b, 0, f},
+      {b, a, 5, f},
+    })
+  else
+    tourner_vers_cible(a, b, f)
+    GAME:WaitFrames(5)
+    tourner_vers_cible(b, a, f)
+  end
 end
 
 -- Découverte de la Statue Kangourex : le héros muet s'interroge en voyant le
@@ -509,32 +516,54 @@ local function cinematique_retour_echec(map, retour)
   end
   GAME:WaitFrames(30)
 
+  local function reveiller_acteur(acteur, delai)
+    return TASK:BranchCoroutine(function()
+      if delai > 0 then GAME:WaitFrames(delai) end
+      local duree_wake = 36
+      local wake_dispo = true
+      pcall(function()
+        local gm = RogueEssence.Content.GraphicsManager
+        if gm.GetAnimIndex ~= nil then
+          local idx = gm.GetAnimIndex('Wake')
+          if idx == nil or idx < 0 then
+            wake_dispo = false
+          else
+            local feuille = gm.GetChara(acteur.CurrentForm:ToCharID())
+            if feuille:GetReferencedAnimIndex(idx) ~= idx then
+              wake_dispo = false
+            else
+              local t = tonumber(feuille:GetTotalTime(idx, acteur.Direction))
+              if t ~= nil and t > 0 then duree_wake = math.floor(t) end
+            end
+          end
+        end
+      end)
+      if wake_dispo then
+        GROUND:CharSetAnim(acteur, 'Wake', false)
+        GAME:WaitFrames(duree_wake)
+      else
+        GAME:WaitFrames(20)
+      end
+      GROUND:CharEndAnim(acteur)
+      tourner_anime(acteur, Direction.Down, 4)
+    end)
+  end
+
+  local taches_reveil = {}
   if partenaire ~= nil then
-    GROUND:CharSetAnim(partenaire, 'Wake', false)
+    table.insert(taches_reveil, reveiller_acteur(partenaire, 0))
   end
   if hero ~= nil then
-    if partenaire ~= nil then GAME:WaitFrames(6) end
-    GROUND:CharSetAnim(hero, 'Wake', false)
+    table.insert(taches_reveil, reveiller_acteur(hero, partenaire ~= nil and 6 or 0))
   end
-  GAME:WaitFrames(36)
-  if partenaire ~= nil then
-    GROUND:CharEndAnim(partenaire)
-    GROUND:EntTurn(partenaire, Direction.Down)
-  end
-  if hero ~= nil then
-    GROUND:CharEndAnim(hero)
-    GROUND:EntTurn(hero, Direction.Down)
-  end
+  if #taches_reveil > 0 then TASK:JoinCoroutines(taches_reveil) end
   GAME:WaitFrames(15)
 
   if lyra ~= nil then
-    if partenaire ~= nil then
-      tourner_vers_cible(partenaire, lyra, 4)
-    end
-    if hero ~= nil then
-      if partenaire ~= nil then GAME:WaitFrames(5) end
-      tourner_vers_cible(hero, lyra, 4)
-    end
+    cinematique.RegarderGroupe({
+      {partenaire, lyra, 0, 4},
+      {hero, lyra, partenaire ~= nil and 5 or 0, 4},
+    })
     GAME:WaitFrames(10)
 
     if partenaire ~= nil then

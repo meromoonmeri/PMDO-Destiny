@@ -345,8 +345,29 @@ function cliffdaytest_nuit.SceneEchecPartenaire()
     end
     GROUND:CharSetEmote(partenaire, 'sweating', 1)
     GAME:WaitFrames(30)
-    GROUND:CharSetAnim(partenaire, 'Wake', false)
-    GAME:WaitFrames(35)
+    local duree_wake = 35
+    local wake_dispo = true
+    pcall(function()
+      local gm = RogueEssence.Content.GraphicsManager
+      local idx = gm.GetAnimIndex('Wake')
+      if idx == nil or idx < 0 then
+        wake_dispo = false
+      else
+        local feuille = gm.GetChara(partenaire.CurrentForm:ToCharID())
+        if feuille:GetReferencedAnimIndex(idx) ~= idx then
+          wake_dispo = false
+        else
+          local t = tonumber(feuille:GetTotalTime(idx, partenaire.Direction))
+          if t ~= nil and t > 0 then duree_wake = math.floor(t) end
+        end
+      end
+    end)
+    if wake_dispo then
+      GROUND:CharSetAnim(partenaire, 'Wake', false)
+      GAME:WaitFrames(duree_wake)
+    else
+      GAME:WaitFrames(20)
+    end
     -- Une IdleAnim en boucle ignore les commandes ; revenir à l'action idle
     -- avant d'afficher son portrait éveillé.
     GROUND:CharEndAnim(partenaire)
