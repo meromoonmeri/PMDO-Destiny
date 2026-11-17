@@ -9,7 +9,7 @@ package.preload['destiny.recrutement']=function() return {synchroniser=function(
 local s={unlocked={lost_wood=false, grotte_verdoyante=false},menu=nil,choice=nil,confirm=false,calls={}}
 SV={Destiny={}}
 RogueEssence={Data={DataManager={DataType={Zone='Zone'}},GameProgress={DungeonStakes={Risk='Risk'},ResultType={Cleared='Cleared',Downed='Downed',Failed='Failed'}}},Dungeon={ZoneLoc=function(id,seg,map,entry) return {ID=id,seg=seg,map=map,entry=entry} end}}
-local NAMES={lost_wood='Bois Perdus', grotte_verdoyante='Grotte Verdoyante'}
+local NAMES={lost_wood='Bois Perdus', grotte_verdoyante='Fosse Cascade'}
 _DATA={DataIndices={Zone={Get=function(_,id) assert(NAMES[id]);return {GetColoredName=function() return NAMES[id] end} end}}}
 STRINGS={Format=function(_,s) return s end}
 UI={ResetSpeaker=function()end,WaitShowDialogue=function(_,t)s.dialogue=t end,DestinationMenu=function(_,d)s.menu=d end,WaitForChoice=function()end,ChoiceMenuYesNo=function()end,BeginChoiceMenu=function(_,p,opts)s.choice_opts=opts end,ChoiceResult=function() if not s.asked then s.asked=true;return s.choice else return s.confirm end end}
@@ -33,7 +33,7 @@ ville.SortieExplorationE2_Touch();assert(s.unlocked.lost_wood and #s.menu==1 and
 SV.TakenBoard=nil;SV.Destiny.MissionReverie={Zone='lost_wood',Etat='en_cours'};s.asked=false;s.choice=nil;ville.SortieExplorationE2_Touch();assert(string.find(s.menu[1].Name,'E10F',1,true))
 s.asked=false;s.choice=1;s.confirm=true;SV.Destiny.DonjonHistoireCourant='lost_wood';ville.SortieExplorationE2_Touch();assert(string.find(s.menu[1].Name,'E111',1,true));assert(s.enter[1]=='lost_wood' and s.enter[2]==0 and s.enter[5]=='Risk' and s.enter[6]==true and s.enter[7]==false and SV.Destiny.ExplorationReverie==true)
 
--- Déblocage / entrée directe de Grotte Verdoyante pendant et après le sauvetage
+-- Déblocage / entrée directe de Fosse Cascade pendant et après le sauvetage
 SV.Destiny.ExplorationReverie=nil;SV.Destiny.AlerteShinx='a_secourir';SV.Destiny.DepartShinxAccepte=true
 s.asked=false;s.choice=1;s.zone=nil
 ville.SortieExplorationE2_Touch(nil,{EntName='PLAYER'})
@@ -56,4 +56,4 @@ for _,result in ipairs({'Cleared','Downed','Failed'}) do
 end
 SV.Destiny.ExplorationReverie=nil;SV.Destiny.LostWoodTrip='aller';s.zone=nil;zone.ExitSegment(nil,'Cleared',false,0,0);assert(SV.Destiny.LostWoodTrip=='rencontre' and SV.Destiny.PartenaireParti==true and s.zone[1]=='reverie')
 SV.Destiny.ExplorationReverie=nil;SV.Destiny.LostWoodTrip='retour';s.zone=nil;zone.ExitSegment(nil,'Cleared',false,1,0);assert(SV.Destiny.LostWoodTrip=='termine' and SV.Destiny.RetourAccompli==true and s.zone[1]=='destiny_cliff_tests')
-print('PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Grotte Verdoyante (doubles d’API)')
+print('PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)')

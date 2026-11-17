@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vérifie la structure complète et les scripts du donjon Grotte Verdoyante (9 étages)."""
+"""Vérifie la structure complète et les scripts du donjon Fosse Cascade (9 étages, boss Kabutops)."""
 from __future__ import annotations
 
 import io
@@ -61,6 +61,8 @@ def main() -> None:
     # 1. Cartes au sol ewc3 & fgv1 + continuité animation cascade L12/L13/L14
     ewc3 = check_ground_tiles(GAME / 'Data/Ground/ewc3_entree_waterfall_cave.rsground')
     fgv1 = check_ground_tiles(GAME / 'Data/Ground/fgv1_fin_grotte_vasques.rsground')
+    assert ewc3['Name'] == {'DefaultText': 'Fosse Cascade — Entrée', 'LocalTexts': {'fr': 'Fosse Cascade — Entrée'}}
+    assert fgv1['Name'] == {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
     markers_ewc3 = {m['EntName']: m for m in ewc3['Entities'][0]['Markers']}
     objs_ewc3 = {o['EntName']: o for o in ewc3['Entities'][0]['GroundObjects']}
     assert markers_ewc3['entrance']['Collider']['Y'] == 544
@@ -108,33 +110,40 @@ def main() -> None:
 
     rsmap = json.loads((GAME / 'Data/Map/end_grotte_verdoyante.rsmap').read_text(encoding='utf-8-sig'))['Object']
     assert rsmap['AssetName'] == 'end_grotte_verdoyante' and rsmap['NoRescue'] is True
+    assert rsmap['Name'] == {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
     assert rsmap['Music'] == 'Boss Battle 2.ogg'
-    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}]
-    for rx in range(20):
-        for ry in range(15):
-            for sub in rsmap['Layers'][0]['Tiles'][rx][ry]['Layers']:
-                for fr in sub['Frames']:
-                    assert fr['Sheet'] == 'FGV1_VASQUES_BASE_24'
-                    assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
+    assert rsmap['TileSight'] == 0 and rsmap['CharSight'] == 0 and rsmap['EdgeView'] == 1
+    assert rsmap['DiscoveryArray'] == [[2] * 15 for _ in range(20)]
+    assert rsmap['MapTeams'][0]['BoxStorage'] == []
+    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 11}, 'Dir': 4}]
+    assert len(rsmap['Layers']) == 2
+    assert rsmap['Layers'][0]['Layer'] == 0 and rsmap['Layers'][1]['Layer'] == 4
+    for lyr in rsmap['Layers']:
+        for rx in range(20):
+            for ry in range(15):
+                for sub in lyr['Tiles'][rx][ry]['Layers']:
+                    for fr in sub['Frames']:
+                        assert fr['Sheet'] == 'FGV1_VASQUES_BASE_24'
+                        assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
 
     floors = {(x, y) for x in range(20) for y in range(15) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
-    q = deque([(10, 12)])
-    seen = {(10, 12)}
+    q = deque([(10, 11)])
+    seen = {(10, 11)}
     while q:
         cx, cy = q.popleft()
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             if (cx + dx, cy + dy) in floors and (cx + dx, cy + dy) not in seen:
                 seen.add((cx + dx, cy + dy))
                 q.append((cx + dx, cy + dy))
-    assert floors == seen and len(floors) == 36
-    for st in [(10, 12), (9, 12), (11, 12), (10, 8), (8, 9), (12, 9), (10, 7)]:
+    assert floors == seen and len(floors) == 42
+    for st in [(10, 11), (9, 11), (11, 11), (10, 12), (10, 8), (8, 9), (12, 9), (10, 7)]:
         assert st in floors, st
 
     starts = [e['Value']['$type'] for e in rsmap['MapEffect']['OnMapStarts']]
     assert any('BattlePositionEvent' in s for s in starts)
     assert any('BeginBattleEvent' in s for s in starts)
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
-    assert enemies == [('garchomp', 14)], enemies
+    assert enemies == [('kabutops', 14)], enemies
     for p in rsmap['MapTeams'][0]['Players']:
         assert (BASE / 'Data/Monster' / f"{p['BaseForm']['Species']}.json").is_file()
         for sk in p['Skills']:
@@ -144,9 +153,12 @@ def main() -> None:
 
     # 3. Zone grotte_verdoyante.json (9 étages) & index.idx
     zone = json.loads((GAME / 'Data/Zone/grotte_verdoyante.json').read_text(encoding='utf-8-sig'))['Object']
+    assert zone['Name'] == {'DefaultText': 'Fosse Cascade', 'LocalTexts': {'fr': 'Fosse Cascade'}}
     assert zone['Released'] is True and len(zone['Segments']) == 2
     assert len(zone['Segments'][0]['Floors']) == 8
     assert len(zone['Segments'][1]['Floors']) == 1
+    assert zone['Segments'][0]['ZoneSteps'][1]['Name'] == {'DefaultText': 'Fosse Cascade\n{0}F', 'LocalTexts': {'fr': 'Fosse Cascade\n{0}F'}}
+    assert zone['Segments'][1]['ZoneSteps'][1]['Name'] == {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
     assert zone['GroundMaps'] == ['ewc3_entree_waterfall_cave', 'fgv1_fin_grotte_vasques']
     for i, fl in enumerate(zone['Segments'][0]['Floors']):
         tex_steps = [s['Value'] for s in fl['GenSteps'] if 'MapDictTextureStep' in s['Value']['$type']]
@@ -156,6 +168,7 @@ def main() -> None:
             assert (BASE / 'Data/AutoTile' / f'{at_id}.json').is_file(), at_id
 
     zidx = json.loads((GAME / 'Data/Zone/index.idx').read_text(encoding='utf-8-sig'))['Object']['grotte_verdoyante']
+    assert zidx['Name'] == {'DefaultText': 'Fosse Cascade', 'LocalTexts': {'fr': 'Fosse Cascade'}}
     assert zidx['Released'] is True and zidx['CountedFloors'] == 9
     assert zidx['Maps'] == [[0, 1, 2, 3, 4, 5, 6, 7], [0]]
     assert zidx['Grounds'] == ['ewc3_entree_waterfall_cave', 'fgv1_fin_grotte_vasques']
@@ -164,7 +177,7 @@ def main() -> None:
     run(ROOT / 'tools/tests/test_grotte_verdoyante.lua', ROOT)
     # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
     run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
-    print('PASS Grotte Verdoyante : 9 étages, cascade ewc3, arène 9F, scripts Lua et retours vérifiés.')
+    print('PASS Fosse Cascade : 9 étages, cascade ewc3, Fosse Cascade Fond Kabutops, scripts Lua et retours vérifiés.')
 
 
 if __name__ == '__main__':

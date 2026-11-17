@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Contrôle la sortie E2 (Bois Perdus + Grotte Verdoyante) ; tests Lua si disponibles."""
+"""Contrôle la sortie E2 (Bois Perdus + Fosse Cascade) ; tests Lua si disponibles."""
 from pathlib import Path
 import json, subprocess, shutil
 R = Path(__file__).resolve().parents[2]
@@ -44,4 +44,4 @@ assert index['lost_wood']['Released'] and index['lost_wood']['CountedFloors'] > 
 assert index['grotte_verdoyante']['Released'] and index['grotte_verdoyante']['CountedFloors'] == 9
 from executer_lua import run
 run(R / 'tools/tests/test_e2_reverie.lua', R)
-print('Sortie E2 : structure, indicateurs, Bois Perdus et Grotte Verdoyante vérifiés.')
+print('Sortie E2 : structure, indicateurs, Bois Perdus et Fosse Cascade vérifiés.')

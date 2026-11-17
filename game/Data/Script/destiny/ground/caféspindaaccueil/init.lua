@@ -537,7 +537,7 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
     dire(personnage, 'Happy', 'Je ressens un immense soulagement depuis la place ! Nilo est rentré auprès de Lyra grâce à vous.')
     if spinda ~= nil then
       tourner_vers(spinda, joueur)
-      dire(spinda, 'Happy', 'Bravo pour la Grotte Verdoyante ! Venez souffler ici entre deux expéditions.')
+      dire(spinda, 'Happy', 'Bravo pour la Fosse Cascade ! Venez souffler ici entre deux expéditions.')
       tourner_vers(personnage, joueur)
     end
   else

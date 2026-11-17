@@ -1,4 +1,4 @@
--- Tests comportementaux Lua pour Grotte Verdoyante (doublures d'API).
+-- Tests comportementaux Lua pour Fosse Cascade (doublures d'API).
 local root = assert(arg[1])
 
 package.preload['origin.common'] = function() return {} end
@@ -30,8 +30,11 @@ RogueEssence = {
     ScreenMover = function(dx, dy, dur) return {dx=dx,dy=dy,dur=dur} end,
     FlashEmitter = function() return {FadeInTime=0, HoldTime=0, FadeOutTime=0, Color=nil, Layer=nil, Anim=nil} end,
     BGAnimData = function(name, fr) return {name=name, fr=fr} end,
+    AnimData = function(name, fr) return {name=name, fr=fr} end,
+    SingleEmitter = function(anim, cycles) return {Anim=anim, cycles=cycles, Layer=nil} end,
   },
   Data = {
+    Gender = {Unknown=0, Male=1, Female=2},
     GameProgress = {
       DungeonStakes = {Risk='Risk'},
       ResultType = {Cleared='Cleared', Downed='Downed', Failed='Failed'},
@@ -60,7 +63,7 @@ RogueEssence = {
 }
 RogueElements.Loc = function(x, y) return {X=x, Y=y} end
 function Color(r, g, b, a) return {r=r, g=g, b=b, a=a} end
-DrawLayer = {Top='Top'}
+DrawLayer = {Top='Top', Front='Front'}
 
 local actors = {}
 local function make_actor(n, x, y, sp)
@@ -86,12 +89,22 @@ GROUND = {
   CharSetEmote = function(_, a, em) ev('emote', a.EntName, em) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
   PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y) end,
-  Hide = function(_, n) if actors[n] then actors[n].EntEnabled = false end end,
-  Unhide = function(_, n) if actors[n] then actors[n].EntEnabled = true end end,
+  Hide = function(_, n) if actors[n] then actors[n].EntEnabled = false end; ev('hide', n) end,
+  Unhide = function(_, n) if actors[n] then actors[n].EntEnabled = true end; ev('unhide', n) end,
+  AnimateInDirection = function(_, a, anim, animdir, dir, dur, aspd, spd)
+    a.Direction = animdir
+    ev('anim_move', a.EntName, anim, dir, dur, spd)
+  end,
 }
 AI = {DisableCharacterAI=function()end, EnableCharacterAI=function()end, SetCharacterAI=function()end}
 TASK = {BranchCoroutine=function(_, f) f(); return true end, JoinCoroutines=function() end}
-SOUND = {PlayBGM=function(_, m) ev('bgm', m) end, FadeOutBGM=function() end, PlayBattleSE=function(_, s) ev('se', s) end, PlayFanfare=function(_, f) ev('fanfare', f) end}
+SOUND = {
+  PlayBGM=function(_, m) ev('bgm', m) end,
+  FadeOutBGM=function(_, t) ev('fade_bgm', t) end,
+  StopBGM=function() ev('stop_bgm') end,
+  PlayBattleSE=function(_, s) ev('se', s) end,
+  PlayFanfare=function(_, f) ev('fanfare', f) end,
+}
 local choice_ret = true
 UI = {
   SetSpeaker=function() end, SetSpeakerLoc=function() end, SetSpeakerEmotion=function() end,
@@ -116,7 +129,7 @@ GAME = {
   GetPlayerPartyCount=function() return 2 end,
   GetTeamLeaderIndex=function() return 0 end,
   GetPlayerPartyMember=function(_, i) return {Importance=i==0 and 'Hero' or 'Partner', Data={}} end,
-  GetCurrentGround=function() return {Name={ToLocal=function() return 'Grotte Verdoyante' end}} end,
+  GetCurrentGround=function() return {Name={ToLocal=function() return 'Fosse Cascade Fond' end}} end,
   GetCameraCenter=function() return {X=240, Y=180} end,
   DungeonUnlocked=function(_, id) return unlocked[id] == true end,
   UnlockDungeon=function(_, id) unlocked[id] = true; ev('unlock', id) end,
@@ -307,9 +320,9 @@ ewc3.Init(m_ewc3)
 ewc3.Enter(m_ewc3)
 local boss_ko_dlg = false
 for _, e in ipairs(events) do
-  if e[1] == 'dlg' and tostring(e[2]):find('Carchacrok', 1, true) then boss_ko_dlg = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('Kabutops', 1, true) then boss_ko_dlg = true end
 end
-assert(boss_ko_dlg, 'variante K.O. 9F Carchacrok manquante sur ewc3')
+assert(boss_ko_dlg, 'variante K.O. 9F Kabutops manquante sur ewc3')
 
 -- K.O. post-scénario (sans Lyra) : réveil du duo seul devant la cascade
 SV.Destiny.AlerteShinx = 'termine'
@@ -324,22 +337,39 @@ SV.Destiny.AlerteShinx = 'a_secourir'
 zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zone' and events[#events][4] == 1)
 
--- 3. fgv1 : PreBattle (réveil Nilo + double flash blanc + Carchacrok) -> PostBattle (CelebrationNilo + AlerteShinx='termine') -> EmptyReturn
+-- 3. fgv1 : PreBattle (réveil Nilo + silence/secousse + voix abysses + geyser Kabutops) -> revanche / -dev -> PostBattle -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
-actors = {}; make_actor('PLAYER', 240, 344)
+actors = {}; make_actor('PLAYER', 240, 344); make_actor('Teammate1', 216, 344)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
-local vfx_count, flash_se_count, boss_bgm_ok, wake_dlg_ok = 0, 0, false, false
+assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
+local saw_hide, saw_unhide, saw_stop_bgm, saw_rising_fear, saw_geyser_vfx, saw_geyser_se, saw_slash, boss_bgm_ok, wake_dlg_ok, unseen_voice_ok =
+  false, false, false, false, false, false, false, false, false, false
 for _, e in ipairs(events) do
-  if e[1] == 'vfx' and e[2] == 'White' then vfx_count = vfx_count + 1 end
-  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flash_se_count = flash_se_count + 1 end
+  if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
+  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide = true end
+  if e[1] == 'stop_bgm' then saw_stop_bgm = true end
+  if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
+  if e[1] == 'vfx' and e[2] == 'Water_Column_Ranger' then saw_geyser_vfx = true end
+  if e[1] == 'se' and e[2] == 'EVT_CH05_Waterfall_Cave_Geyser' then saw_geyser_se = true end
+  if e[1] == 'se' and e[2] == 'DUN_Slash' then saw_slash = true end
   if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
   if e[1] == 'dlg' and tostring(e[2]):find('Maman', 1, true) then wake_dlg_ok = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('silence des abysses', 1, true) then unseen_voice_ok = true end
 end
-assert(vfx_count == 2 and flash_se_count == 2 and boss_bgm_ok and wake_dlg_ok, 'réveil Nilo / double flash / Boss Battle 2 manquants')
+assert(saw_hide and saw_unhide and saw_stop_bgm and saw_rising_fear and saw_geyser_vfx and saw_geyser_se and saw_slash and boss_bgm_ok and wake_dlg_ok and unseen_voice_ok,
+       'cinématique d’apparition Kabutops (style Searing Crucible) incomplète')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
+
+-- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
+_ZONE = {InDevZone = true}
+events = {}
+fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
+assert(events[#events][1] == 'enter_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1,
+       'en mode -dev (InDevZone), lancer_duel_boss doit utiliser EnterDungeon pour éviter ReturnToEditor')
+_ZONE = nil
 
 -- La carte des vasques ne déclare pas de piste : le chargement d'une sauvegarde
 -- doit relancer l'ambiance au lieu de laisser le silence.
@@ -356,7 +386,7 @@ events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
 assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
-assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil, 'acteurs temporaires fgv1 doivent être retirés sous écran noir')
+assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabutops_Boss == nil, 'acteurs temporaires fgv1 doivent être retirés')
 local saw_lyra_reunion, saw_job_clear, saw_journal, saw_center_on, saw_center_off = false, false, false, false, false
 for _, e in ipairs(events) do
   if e[1] == 'dlg' and tostring(e[2]):find('précipitée dans la grotte', 1, true) then saw_lyra_reunion = true end
@@ -370,7 +400,7 @@ assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and e
 
 events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
-assert(events[#events][1] == 'end_day' and not actors.Carchacrok_Boss)
+assert(events[#events][1] == 'end_day' and not actors.Kabutops_Boss)
 
 -- 4. Réverie post-sauvetage : CelebrationNilo (accueil des habitants, Léo/Lyra/Nilo, cadeau gummi_royal), Nilo_Shinx + tente Bellossom
 local ville = assert(loadfile(root .. '/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'))()
@@ -425,7 +455,7 @@ assert(actors.Nilo_Shinx and actors.Nilo_Shinx.Position.X == 721 and actors.Nilo
 events = {}
 ville.Nilo_Shinx_Action(actors.Nilo_Shinx, actors.PLAYER)
 local saw_nilo_dlg = false
-for _, e in ipairs(events) do if e[1] == 'dlg' and tostring(e[2]):find('Carchacrok', 1, true) then saw_nilo_dlg = true end end
+for _, e in ipairs(events) do if e[1] == 'dlg' and tostring(e[2]):find('Kabutops', 1, true) then saw_nilo_dlg = true end end
 assert(saw_nilo_dlg)
 
 local cafe = assert(loadfile(root .. '/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()

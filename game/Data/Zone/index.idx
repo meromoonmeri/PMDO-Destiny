@@ -407,13 +407,13 @@
         ]
       ],
       "Name": {
-        "DefaultText": "Grotte Verdoyante",
+        "DefaultText": "Fosse Cascade",
         "LocalTexts": {
-          "fr": "Grotte Verdoyante"
+          "fr": "Fosse Cascade"
         }
       },
       "Released": true,
-      "Comment": "Grotte Verdoyante (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F deep_limestone_cavern, 9F boss Carchacrok et sauvetage de Nilo sur fgv1_fin_grotte_vasques (480x360).",
+      "Comment": "Fosse Cascade (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F deep_limestone_cavern, Fosse Cascade Fond boss Kabutops et sauvetage de Nilo sur fgv1_fin_grotte_vasques (480x360).",
       "SortOrder": 32
     },
     "passage_aquatique": {

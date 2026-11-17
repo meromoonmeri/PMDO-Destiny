@@ -93,15 +93,15 @@ function missions.LireGazette()
   local m = missions.Actuelle()
   UI:WaitShowDialogue('Gazette de Réverie — jour ' .. tostring(missions.Jour() + 1) .. '\nLes habitants échangent les nouvelles du jour.')
   if destiny().AlerteShinx == 'termine' then
-    UI:WaitShowDialogue('Le petit Nilo a été retrouvé sain et sauf derrière la cascade de la Grotte Verdoyante !')
+    UI:WaitShowDialogue('Le petit Nilo a été retrouvé sain et sauf derrière la cascade de la Fosse Cascade !')
   end
   if m ~= nil and m.Etat == 'reussie' then
     UI:WaitShowDialogue('Une mission accomplie attend sa récompense au tableau.')
   elseif m ~= nil then
-    local lieu = m.Zone == 'grotte_verdoyante' and 'la Grotte Verdoyante' or 'les Bois Perdus'
+    local lieu = m.Zone == 'grotte_verdoyante' and 'la Fosse Cascade' or 'les Bois Perdus'
     UI:WaitShowDialogue('Une équipe se prépare à explorer ' .. lieu .. '.')
   elseif grotte_sauvetage_accompli() and GAME:DungeonUnlocked('grotte_verdoyante') then
-    UI:WaitShowDialogue('Les Bois Perdus et la Grotte Verdoyante sont ouverts aux équipes d’exploration.')
+    UI:WaitShowDialogue('Les Bois Perdus et la Fosse Cascade sont ouverts aux équipes d’exploration.')
   elseif GAME:DungeonUnlocked('lost_wood') then
     UI:WaitShowDialogue('Les Bois Perdus sont accessibles aux équipes d’exploration.')
   else

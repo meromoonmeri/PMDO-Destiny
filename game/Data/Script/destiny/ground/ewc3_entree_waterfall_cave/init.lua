@@ -1,4 +1,4 @@
--- Entrée de la Grotte Verdoyante (ewc3_entree_waterfall_cave).
+-- Entrée de la Fosse Cascade (ewc3_entree_waterfall_cave).
 -- Gère l'état de la cascade :
 --   * 1re visite : cascade fermée (L12/L17) -> ouverture synchronisée sur l'horloge
 --     globale (L13/L18 sur 24 phases) -> passage ouvert (L14) ;
@@ -404,7 +404,7 @@ local function cinematique_ouverture(map)
 
   if partenaire ~= nil then
     cinematique.Respirer(15)
-    cinematique.Dire(partenaire, 'Determined', 'La voie est libre ! En avant dans la Grotte Verdoyante !', 'standard')
+    cinematique.Dire(partenaire, 'Determined', 'La voie est libre ! En avant dans la Fosse Cascade !', 'standard')
   end
   if lyra ~= nil then
     cinematique.Respirer(15)
@@ -462,7 +462,7 @@ local function cinematique_retour_echec(map, retour)
       tourner_anime(lyra, Direction.Up, 4)
     elseif partenaire ~= nil then
       tourner_vers_cible(partenaire, hero, 4)
-      cinematique.Dire(partenaire, 'Worried', 'Mieux valait battre en retraite à temps… Reprenons des forces avant de retourner dans la Grotte Verdoyante.', 'standard')
+      cinematique.Dire(partenaire, 'Worried', 'Mieux valait battre en retraite à temps… Reprenons des forces avant de retourner dans la Fosse Cascade.', 'standard')
       UI:ResetSpeaker()
     end
     GAME:MoveCamera(0, 0, 20, true)
@@ -497,7 +497,7 @@ local function cinematique_retour_echec(map, retour)
     GAME:WaitFrames(10)
 
     if segment == 1 then
-      cinematique.Dire(lyra, 'Worried', 'Non !! Vous avez été projetés jusqu’à l’entrée… Ce rugissement au fond des vasques, c’était terrible ! Réveillez-vous, je vous en prie !', 'droite')
+      cinematique.Dire(lyra, 'Worried', 'Non !! Vous avez été projetés jusqu’à l’entrée… Ce fracas au cœur de la Fosse Cascade Fond, c’était terrible ! Réveillez-vous, je vous en prie !', 'droite')
     else
       cinematique.Dire(lyra, 'Worried', 'Oh non !! Vous voilà revenus à bout de forces devant la cascade… Hé ! Est-ce que vous m’entendez ?!', 'droite')
     end
@@ -568,7 +568,7 @@ local function cinematique_retour_echec(map, retour)
 
     if partenaire ~= nil then
       if segment == 1 then
-        cinematique.Dire(partenaire, 'Pain', 'Aïe… ' .. cinematique.NomEspece('garchomp', 'Carchacrok') .. ' est d’une force redoutable… Pardon, Lyra, on a dû céder si près de ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
+        cinematique.Dire(partenaire, 'Pain', 'Aïe… ' .. cinematique.NomEspece('kabutops', 'Kabutops') .. ' est d’une force redoutable… Pardon, Lyra, on a dû céder si près de ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
       else
         cinematique.Dire(partenaire, 'Pain', 'Aïe… la grotte est plus rude qu’elle n’en a l’air… Désolé, Lyra, on s’est fait mettre K.O. avant d’atteindre ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
       end
@@ -599,7 +599,7 @@ local function cinematique_retour_echec(map, retour)
           tourner_vers_cible(hero, lyra, 4)
         end
       end
-      cinematique.Dire(partenaire, 'Determined', 'Merci, Lyra ! Pas question d’abandonner maintenant : dès qu’on sera prêts, on retournera jusqu’au fond de la Grotte Verdoyante !', 'standard')
+      cinematique.Dire(partenaire, 'Determined', 'Merci, Lyra ! Pas question d’abandonner maintenant : dès qu’on sera prêts, on retournera jusqu’à la Fosse Cascade Fond !', 'standard')
     end
     UI:ResetSpeaker()
     GAME:WaitFrames(10)
@@ -611,7 +611,7 @@ local function cinematique_retour_echec(map, retour)
     se_regarder(hero, partenaire, 4)
     GAME:WaitFrames(10)
     if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Pain', 'Ouf… ma tête… On a fini K.O. dans la Grotte Verdoyante, mais on a réussi à ressortir jusqu’à la cascade.', 'standard')
+      cinematique.Dire(partenaire, 'Pain', 'Ouf… ma tête… On a fini K.O. dans la Fosse Cascade, mais on a réussi à ressortir jusqu’à la cascade.', 'standard')
       cinematique.Respirer(15)
       cinematique.Dire(partenaire, 'Determined', 'Vérifions notre sac avant d’y retourner, ou rentrons au sud vers Réverie Town faire le plein de provisions !', 'standard')
       UI:ResetSpeaker()
@@ -636,7 +636,7 @@ function ewc3.Init(map)
   -- Les personnages créés par script sont persistants (GroundMap.AddMapChar) :
   -- Lyra reste donc enregistrée dans la carte des sauvegardes. Sans ce
   -- nettoyage, elle survit à la fin du sauvetage et continue d'annoncer le
-  -- passage ouvert quand la Grotte Verdoyante est visitée en libre.
+  -- passage ouvert quand la Fosse Cascade est visitée en libre.
   local lyra = CH('Luxray_Ewc3')
   if SV.Destiny.GrotteVerdoyanteOuverte and SV.Destiny.AlerteShinx == 'a_secourir' then
     if lyra == nil then
@@ -748,7 +748,7 @@ function ewc3.SeuilDonjon_Touch(obj, activator)
   if sortie_en_cours then return end
   sortie_en_cours = true
   UI:ResetSpeaker()
-  UI:ChoiceMenuYesNo('Entrer dans la Grotte Verdoyante ?', true)
+  UI:ChoiceMenuYesNo('Entrer dans la Fosse Cascade ?', true)
   UI:WaitForChoice()
   if not UI:ChoiceResult() then
     GAME:WaitFrames(18)

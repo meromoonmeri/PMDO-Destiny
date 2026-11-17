@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Construit et assemble les données du donjon Grotte Verdoyante (9 étages) :
+"""Construit et assemble les données du donjon Fosse Cascade (id technique grotte_verdoyante, 9 étages) :
 
 1. game/Data/Ground/ewc3_entree_waterfall_cave.rsground (métadonnées/déclencheurs)
 2. game/Data/Ground/fgv1_fin_grotte_vasques.rsground + FGV1_*.tile (480x360 = 60x45 tuiles 8px, optimisé viewport 320x240)
-3. game/Content/Tile/FGV1_VASQUES_BASE_24.tile (tuiles 24x24 animées 12 phases sur 20x15)
-4. game/Data/Map/end_grotte_verdoyante.rsmap (arène Boss 9F 20x15 : Carchacrok Lv 14)
+3. game/Content/Tile/FGV1_VASQUES_BASE_24.tile (tuiles 24x24 animées 12 phases + avant-plan sur 20x15)
+4. game/Data/Map/end_grotte_verdoyante.rsmap (arène Boss 9F Fosse Cascade Fond 20x15 : Kabutops Lv 14)
 5. game/Data/Zone/grotte_verdoyante.json (1F-8F deep_limestone_cavern + 9F Boss)
 6. game/Data/Zone/index.idx + game/Content/Tile/index.idx
 
@@ -104,9 +104,9 @@ def ensure_ewc3(root: Path) -> None:
     obj = doc['Object']
     obj['AssetName'] = 'ewc3_entree_waterfall_cave'
     obj['Released'] = True
-    obj['Name'] = {'DefaultText': 'Grotte Verdoyante — Entrée', 'LocalTexts': {'fr': 'Grotte Verdoyante — Entrée'}}
+    obj['Name'] = {'DefaultText': 'Fosse Cascade — Entrée', 'LocalTexts': {'fr': 'Fosse Cascade — Entrée'}}
     obj['Music'] = 'Lower Spring Cave.ogg'
-    obj['Comment'] = 'PMDO 0.8.12. Entrée de la Grotte Verdoyante (cascade fermée / ouverture / ouverte), raccordée à Réverie Town et au 1F.'
+    obj['Comment'] = 'PMDO 0.8.12. Entrée de la Fosse Cascade (cascade fermée / ouverture / ouverte), raccordée à Réverie Town et au 1F.'
     ents = obj['Entities'][0]
     for mk in ents.get('Markers', []):
         if mk.get('EntName') == 'entrance':
@@ -140,6 +140,29 @@ def ensure_ewc3(root: Path) -> None:
     ents['GroundObjects'] = [
         _make_trigger('SeuilDonjon', 368, 184, 40, 24),
         _make_trigger('SortieRetourReverie', 320, 568, 144, 8),
+        {
+            'EntName': 'Statue_Kangourex',
+            'Direction': 0,
+            'EntEnabled': True,
+            'EntOrder': 0,
+            'InteractOrder': 0,
+            'triggerType': 1,
+            'ObjectAnim': {
+                '$type': 'RogueEssence.Content.ObjAnimData, RogueEssence',
+                'AnimIndex': 'Statue_Kangourex', 'FrameTime': 1, 'StartFrame': -1, 'EndFrame': -1,
+                'AnimDir': -1, 'Alpha': 255, 'AnimFlip': 0,
+            },
+            'Passable': False,
+            'CurrentAnim': {
+                '$type': 'RogueEssence.Content.ObjAnimData, RogueEssence',
+                'AnimIndex': '', 'FrameTime': 1, 'StartFrame': -1, 'EndFrame': -1,
+                'AnimDir': -1, 'Alpha': 255, 'AnimFlip': 0,
+            },
+            'AnimTime': {'Ticks': 0},
+            'Cycles': 0,
+            'DrawOffset': {'X': 4, 'Y': 16},
+            'Collider': {'X': 428, 'Y': 236, 'Width': 24, 'Height': 12},
+        },
     ]
     p.write_text(json.dumps(doc, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print('[OK] ewc3_entree_waterfall_cave.rsground vérifié')
@@ -172,9 +195,9 @@ def ensure_fgv1_480x360(root: Path) -> tuple[dict, dict[str, dict[tuple[int, int
     obj = doc['Object']
     obj['AssetName'] = 'fgv1_fin_grotte_vasques'
     obj['Released'] = True
-    obj['Name'] = {'DefaultText': 'Grotte Verdoyante — Vasques\n9F', 'LocalTexts': {'fr': 'Grotte Verdoyante — Vasques\n9F'}}
+    obj['Name'] = {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
     obj['Music'] = ''
-    obj['Comment'] = 'PMDO 0.8.12. Salle des vasques (480x360, 9F de la Grotte Verdoyante), réveil de Nilo et combat contre Carchacrok.'
+    obj['Comment'] = 'PMDO 0.8.12. Fosse Cascade Fond (480x360, fin de la Fosse Cascade), réveil de Nilo et combat contre Kabutops.'
 
     cur_w = len(obj['Layers'][0]['Tiles'])
     cur_h = len(obj['Layers'][0]['Tiles'][0])
@@ -354,9 +377,47 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
                     'NeighborCode': -1,
                 }
 
+    # Couche d'avant-plan 24 px (Layer 4 = DrawLayer.Top) issue de FGV1_08_AVANT_PLAN (Layer[8] de fgv1)
+    top_canvas = Image.new('RGBA', (TARGET_W * 8, TARGET_H * 8), (0, 0, 0, 0))
+    if len(obj['Layers']) > 8 and obj['Layers'][8].get('Visible', True):
+        top_src = obj['Layers'][8]['Tiles']
+        for x in range(TARGET_W):
+            for y in range(TARGET_H):
+                for sub in top_src[x][y].get('Layers', []):
+                    frs = sub.get('Frames', [])
+                    if not frs:
+                        continue
+                    fr = frs[0]
+                    sh = fr.get('Sheet')
+                    if not sh:
+                        continue
+                    im = decoded_tiles[sh][(fr['TexLoc']['X'], fr['TexLoc']['Y'])]
+                    top_canvas.alpha_composite(im, (x * 8, y * 8))
+
+    layer1_top_tiles = [[None for _ in range(TARGET24_H)] for _ in range(TARGET24_W)]
+    top_offset_y = TARGET24_H * 12
+    for rx in range(TARGET24_W):
+        for ry in range(TARGET24_H):
+            tcrop = top_canvas.crop((rx * 24, ry * 24, (rx + 1) * 24, (ry + 1) * 24))
+            if tcrop.getchannel('A').getbbox() is not None:
+                base24[(rx, ry + top_offset_y)] = tcrop
+                layer1_top_tiles[rx][ry] = {
+                    'AutoTileset': '',
+                    'Associates': [],
+                    'Layers': [{'Frames': [{'Sheet': 'FGV1_VASQUES_BASE_24', 'TexLoc': {'X': rx, 'Y': ry + top_offset_y}}], 'FrameLength': 60}],
+                    'NeighborCode': -1,
+                }
+            else:
+                layer1_top_tiles[rx][ry] = {
+                    'AutoTileset': '',
+                    'Associates': [],
+                    'Layers': [],
+                    'NeighborCode': -1,
+                }
+
     save_tile_sheet(root / 'game/Content/Tile/FGV1_VASQUES_BASE_24.tile', 24, base24)
 
-    # Grille de combat 20x15 (480x360) alignée sur la clairière de fgv1
+    # Grille de combat 20x15 (480x360) fidèlement calquée sur toute la clairière praticable de fgv1_fin_grotte_vasques
     obs = obj['obstacles']
     tiles_grid = []
     floors: set[tuple[int, int]] = set()
@@ -364,15 +425,7 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         col = []
         for ry in range(TARGET24_H):
             blocked = sum(1 for dx in range(3) for dy in range(3) if obs[rx * 3 + dx][ry * 3 + dy]['Tags'] != 0)
-            is_floor = (
-                8 <= ry <= 14
-                and 7 <= rx <= 12
-                and blocked < 5
-                and not (ry == 12 and rx not in range(8, 12))
-                and not (ry >= 13 and rx not in range(9, 11))
-            )
-            if ry == 7 and 8 <= rx <= 11 and blocked < 5:
-                is_floor = True
+            is_floor = (7 <= ry <= 14 and 7 <= rx <= 13 and blocked <= 1)
             if is_floor:
                 floors.add((rx, ry))
             col.append({
@@ -385,11 +438,11 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             })
         tiles_grid.append(col)
 
-    # Garantir l'entrée équipe (10, 12), les emplacements BattlePositionEvent et l'arène du boss (10, 8)
-    start = (10, 12)
+    # Garantir l'entrée équipe (10, 11), les emplacements BattlePositionEvent et l'arène de Kabutops (10, 8)
+    start = (10, 11)
     must_floor = [
-        (10, 12), (9, 12), (11, 12), (10, 13),
-        (10, 11), (9, 11), (11, 11),
+        (10, 11), (9, 11), (11, 11), (10, 12),
+        (9, 12), (11, 12), (10, 13), (9, 13),
         (10, 10), (9, 10), (11, 10),
         (10, 9), (9, 9), (11, 9),
         (10, 8), (9, 8), (11, 8),
@@ -463,10 +516,10 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         ],
     }
 
-    skills = [('sand_tomb', 15), ('slash', 18), ('scary_face', 16), ('sand_attack', 20)]
-    garchomp = {
-        'Element1': 'dragon',
-        'Element2': 'ground',
+    skills = [('aqua_jet', 18), ('slash', 18), ('mud_shot', 12), ('leer', 16)]
+    kabutops = {
+        'Element1': 'rock',
+        'Element2': 'water',
         'TurnWait': 0,
         'TurnUsed': False,
         'movementSpeed': 0,
@@ -475,7 +528,7 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         'serializationDir': 0,
         'ProxyName': '',
         'ProxySprite': {'Species': '', 'Form': -1, 'Skin': '', 'Gender': -1},
-        'CurrentForm': {'Species': 'garchomp', 'Form': 0, 'Skin': 'normal', 'Gender': 1},
+        'CurrentForm': {'Species': 'kabutops', 'Form': 0, 'Skin': 'normal', 'Gender': 1},
         'ProxyAtk': -1,
         'ProxyDef': -1,
         'ProxyMAtk': -1,
@@ -485,11 +538,11 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             {'Element': {'SkillNum': sk, 'Charges': ch, 'Enabled': True, 'Sealed': False}, 'BackRef': i}
             for i, (sk, ch) in enumerate(skills)
         ],
-        'Intrinsics': [{'Element': {'ID': 'sand_veil'}, 'BackRef': 0}],
+        'Intrinsics': [{'Element': {'ID': 'battle_armor'}, 'BackRef': 0}],
         'EquippedItem': {'ID': '', 'Cursed': False, 'HiddenValue': '', 'Amount': 0, 'Price': 0},
         'Absentee': False,
         'ChargeBoost': 0,
-        'HP': 250,
+        'HP': 162,
         'HPRemainder': 0,
         'Fullness': 100,
         'FullnessRemainder': 0,
@@ -524,17 +577,17 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         'Nickname': '',
         'OriginalUUID': '',
         'OriginalTeam': '',
-        'BaseForm': {'Species': 'garchomp', 'Form': 0, 'Skin': 'normal', 'Gender': 1},
+        'BaseForm': {'Species': 'kabutops', 'Form': 0, 'Skin': 'normal', 'Gender': 1},
         'Level': 14,
         'EXP': 0,
-        'MaxHPBonus': 195,
+        'MaxHPBonus': 256,
         'AtkBonus': 0,
-        'DefBonus': 4,
+        'DefBonus': 24,
         'MAtkBonus': 0,
-        'MDefBonus': 4,
+        'MDefBonus': 24,
         'SpeedBonus': 0,
         'BaseSkills': [{'SkillNum': sk, 'Charges': ch, 'CanForget': True} for sk, ch in skills],
-        'BaseIntrinsics': ['sand_veil'],
+        'BaseIntrinsics': ['battle_armor'],
         'FormIntrinsicSlot': -1,
         'Relearnables': {},
         'Discriminator': 0,
@@ -555,15 +608,15 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         'Version': '0.8.12.0',
         'Object': {
             '$type': 'RogueEssence.Dungeon.Map, RogueEssence',
-            'Name': {'DefaultText': 'Grotte Verdoyante — Vasques', 'LocalTexts': {'fr': 'Grotte Verdoyante — Vasques'}},
+            'Name': {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}},
             'Released': True,
-            'Comment': 'Arène Boss 9F de Grotte Verdoyante (20x15 tuiles 24px = 480x360, contre Carchacrok Lv 14).',
+            'Comment': 'Arène Boss 9F Fosse Cascade Fond (20x15 tuiles 24px = 480x360, même lieu que fgv1_fin_grotte_vasques, contre Kabutops Lv 14).',
             'Begun': False,
             'ID': 0,
             'MapTeams': [{
                 '$type': 'RogueEssence.Dungeon.ExplorerTeam, RogueEssence',
                 'Rank': 'bronze',
-                'Players': [garchomp],
+                'Players': [kabutops],
                 'Guests': [],
                 'inventory': [],
                 'MaxInv': 0,
@@ -575,7 +628,7 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
                 'Fame': 0,
                 'RankExtra': 0,
                 'BackupList': [],
-                'Name': 'Carchacrok',
+                'Name': 'Kabutops',
                 'LeaderIndex': 0,
                 'FoeConflict': False,
             }],
@@ -660,17 +713,25 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             'NoSwitching': False,
             'MapTurns': 0,
             'CurrentTurnMap': {'CurrentOrder': {'TurnTier': 0, 'Faction': 0, 'TurnIndex': 0}, 'TurnToChar': []},
-            'DiscoveryArray': [[0 for _ in range(TARGET24_H)] for _ in range(TARGET24_W)],
-            'Layers': [{
-                'Name': 'Vasques — base animée 24 px',
-                'Layer': 0,
-                'Visible': True,
-                'Tiles': layer0_tiles,
-            }],
+            'DiscoveryArray': [[2 for _ in range(TARGET24_H)] for _ in range(TARGET24_W)],
+            'Layers': [
+                {
+                    'Name': 'Fosse Cascade Fond — base animée 24 px',
+                    'Layer': 0,
+                    'Visible': True,
+                    'Tiles': layer0_tiles,
+                },
+                {
+                    'Name': 'Fosse Cascade Fond — avant-plan 24 px',
+                    'Layer': 4,
+                    'Visible': True,
+                    'Tiles': layer1_top_tiles,
+                },
+            ],
             'Decorations': [],
             'Tiles': tiles_grid,
             'EdgeView': 1,
-            'EntryPoints': [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}],
+            'EntryPoints': [{'Loc': {'X': 10, 'Y': 11}, 'Dir': 4}],
             'Items': [],
         },
     }
@@ -895,7 +956,7 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
                         '$type': 'RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements',
                         'List': [
                             {'$type': 'RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'Room': True, 'Wall': False, 'Blocked': False, 'Not': False},
-                            {'$type': 'RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'TileStencil': {'$type': 'RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'Room': True, 'Wall': False, 'Blocked': False, 'Not': False}, 'Global': False, 'Negate': True},
+                            {'$type': 'RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'TileStencil': {'$type': 'RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements', 'Room': True, 'Wall': False, 'Blocked': False, 'Not': False}, 'Global': False, 'Negate': False},
                             {'$type': 'RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence', 'Not': True},
                         ],
                         'RequireAny': False,
@@ -1066,7 +1127,7 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
 
     zone_steps_s0 = [
         {'$type': 'PMDC.LevelGen.SaveVarsZoneStep, PMDC', 'Priority': {'str': [2, 1]}},
-        {'$type': 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC', 'DropPriority': {'str': [-15]}, 'Name': {'DefaultText': 'Grotte Verdoyante\n{0}F', 'LocalTexts': {'fr': 'Grotte Verdoyante\n{0}F'}}, 'Priority': {'str': [-6]}},
+        {'$type': 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC', 'DropPriority': {'str': [-15]}, 'Name': {'DefaultText': 'Fosse Cascade\n{0}F', 'LocalTexts': {'fr': 'Fosse Cascade\n{0}F'}}, 'Priority': {'str': [-6]}},
         {
             '$type': 'RogueEssence.LevelGen.MoneySpawnZoneStep, RogueEssence',
             'Priority': {'str': [1]}, 'StartAmount': {'Min': 95, 'Max': 125}, 'AddAmount': {'Min': 10, 'Max': 15},
@@ -1103,6 +1164,10 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
         {
             '$type': 'RogueEssence.LevelGen.TeamSpawnZoneStep, RogueEssence',
             'Priority': {'str': [1, 2]},
+            'TeamSizes': [
+                {'Spawn': 1, 'Rate': 12, 'Range': {'Min': 0, 'Max': 8}},
+                {'Spawn': 2, 'Rate': 3, 'Range': {'Min': 5, 'Max': 8}},
+            ],
             'Spawns': [
                 mob_entry('lotad', 8, 9, ['astonish', 'water_gun', 'absorb', 'growl'], 'rain_dish', 0, 4, 12),
                 mob_entry('shroomish', 8, 9, ['absorb', 'tackle', 'stun_spore'], 'effect_spore', 0, 4, 12),
@@ -1155,7 +1220,7 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
         'Floors': [gen_floor(i) for i in range(8)],
         'ZoneSteps': zone_steps_s0,
         'IsRelevant': True,
-        'Comment': 'Étages 1F à 8F de la Grotte Verdoyante — DTEF deep_limestone_cavern sur tous les étages.',
+        'Comment': 'Étages 1F à 8F de la Fosse Cascade — DTEF deep_limestone_cavern sur tous les étages.',
     }
 
     segment1 = {
@@ -1180,23 +1245,23 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
                     },
                 },
             ],
-            'Comment': 'Combat de boss 9F sur end_grotte_verdoyante (Carchacrok Lv 14).',
+            'Comment': 'Combat de boss 9F sur end_grotte_verdoyante (Fosse Cascade Fond, Kabutops Lv 14).',
         }],
         'ZoneSteps': [
             {'$type': 'PMDC.LevelGen.SaveVarsZoneStep, PMDC', 'Priority': {'str': [2, 1]}},
-            {'$type': 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC', 'DropPriority': {'str': [-15]}, 'Name': {'DefaultText': 'Grotte Verdoyante — Vasques\n9F', 'LocalTexts': {'fr': 'Grotte Verdoyante — Vasques\n9F'}}, 'Priority': {'str': [-6]}},
+            {'$type': 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC', 'DropPriority': {'str': [-15]}, 'Name': {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}, 'Priority': {'str': [-6]}},
         ],
         'IsRelevant': True,
-        'Comment': '9e étage : salle des vasques contre Carchacrok.',
+        'Comment': 'Fosse Cascade Fond : salle des vasques contre Kabutops.',
     }
 
     zone_doc = {
         'Version': '0.8.12.0',
         'Object': {
             '$type': 'RogueEssence.Data.ZoneData, RogueEssence',
-            'Name': {'DefaultText': 'Grotte Verdoyante', 'LocalTexts': {'fr': 'Grotte Verdoyante'}},
+            'Name': {'DefaultText': 'Fosse Cascade', 'LocalTexts': {'fr': 'Fosse Cascade'}},
             'Released': True,
-            'Comment': 'Grotte Verdoyante (9 étages) — sauvetage de Nilo derrière la cascade (ewc3 -> 1F-8F deep_limestone_cavern -> fgv1/Carchacrok 9F).',
+            'Comment': 'Fosse Cascade (9 étages) — sauvetage de Nilo derrière la cascade (ewc3 -> 1F-8F deep_limestone_cavern -> fgv1/Kabutops Fosse Cascade Fond).',
             'NoEXP': False, 'ExpPercent': 100, 'Level': 10, 'LevelCap': False, 'KeepSkills': False,
             'TeamRestrict': False, 'TeamSize': -1, 'MoneyRestrict': False, 'BagRestrict': -1,
             'KeepTreasure': False, 'BagSize': -1, 'Persistent': False, 'Rescues': 2, 'Rogue': 1,
@@ -1204,7 +1269,7 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
             'GroundMaps': ['ewc3_entree_waterfall_cave', 'fgv1_fin_grotte_vasques'],
         },
     }
-    (root / 'game/Data/Zone/grotte_verdoyante.json').write_text(json.dumps(zone_doc, ensure_ascii=False, indent=2), encoding='utf-8')
+    (root / 'game/Data/Zone/grotte_verdoyante.json').write_text(json.dumps(zone_doc, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
     idx_path = root / 'game/Data/Zone/index.idx'
     idx_doc = json.loads(idx_path.read_text(encoding='utf-8-sig'))
@@ -1215,13 +1280,13 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
         'KeepTreasure': False, 'BagSize': -1, 'Rescues': 2, 'CountedFloors': 9, 'Rogue': 1,
         'Grounds': ['ewc3_entree_waterfall_cave', 'fgv1_fin_grotte_vasques'],
         'Maps': [[0, 1, 2, 3, 4, 5, 6, 7], [0]],
-        'Name': {'DefaultText': 'Grotte Verdoyante', 'LocalTexts': {'fr': 'Grotte Verdoyante'}},
+        'Name': {'DefaultText': 'Fosse Cascade', 'LocalTexts': {'fr': 'Fosse Cascade'}},
         'Released': True,
-        'Comment': 'Grotte Verdoyante (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F deep_limestone_cavern, 9F boss Carchacrok et sauvetage de Nilo sur fgv1_fin_grotte_vasques (480x360).',
+        'Comment': 'Fosse Cascade (9 étages) : entrée ewc3_entree_waterfall_cave, 1F-8F deep_limestone_cavern, Fosse Cascade Fond boss Kabutops et sauvetage de Nilo sur fgv1_fin_grotte_vasques (480x360).',
         'SortOrder': 32,
     }
     idx_path.write_text(json.dumps(idx_doc, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print('[OK] grotte_verdoyante.json + Zone/index.idx mis à jour (9 étages, deep_limestone_cavern 1F-8F, Carchacrok 9F)')
+    print('[OK] grotte_verdoyante.json + Zone/index.idx mis à jour (Fosse Cascade, 9 étages, Kabutops Fosse Cascade Fond)')
 
 
 def main() -> int:

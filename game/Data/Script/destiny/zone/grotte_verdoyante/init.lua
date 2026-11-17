@@ -1,8 +1,8 @@
--- Grotte Verdoyante (id grotte_verdoyante) :
+-- Fosse Cascade (id technique grotte_verdoyante) :
 --   GroundMap 0 = ewc3_entree_waterfall_cave (entrée avec cascade fermée -> ouverte)
---   GroundMap 1 = fgv1_fin_grotte_vasques (scènes 9F pré-combat, post-combat et visites libres)
+--   GroundMap 1 = fgv1_fin_grotte_vasques (Fosse Cascade Fond : scènes pré-combat, post-combat et visites libres)
 --   Segment 0   = étages 1F à 8F
---   Segment 1   = arène de boss 9F (end_grotte_verdoyante)
+--   Segment 1   = arène de boss Fosse Cascade Fond (end_grotte_verdoyante, Kabutops Lv 14)
 require 'origin.common'
 local recrutement = require 'destiny.recrutement'
 local missions_reverie = require 'destiny.missions_reverie'
@@ -73,16 +73,16 @@ function grotte_verdoyante.ExitSegment(zone, result, rescue, segmentID, mapID)
     if SV.Destiny.AlerteShinx == 'a_secourir' then
       SV.Destiny.LuxrayAttente = 'sortie'
     end
-    -- Respawn directement devant l'entrée de la Grotte Verdoyante (GroundMap 0 = ewc3_entree_waterfall_cave).
+    -- Respawn directement devant l'entrée de la Fosse Cascade (GroundMap 0 = ewc3_entree_waterfall_cave).
     COMMON.EndDungeonDay(result, 'grotte_verdoyante', -1, 0, 0)
     return
   end
 
   if segmentID == 0 then
-    -- Fin du 8e étage : arrivée dans la salle des vasques (GroundMap 1 = fgv1_fin_grotte_vasques).
+    -- Fin du 8e étage : arrivée à Fosse Cascade Fond (GroundMap 1 = fgv1_fin_grotte_vasques).
     GAME:EnterZone('grotte_verdoyante', -1, 1, 0)
   elseif segmentID == 1 then
-    -- Victoire contre Carchacrok au 9e étage : scène de sauvetage sur fgv1_fin_grotte_vasques.
+    -- Victoire contre Kabutops à Fosse Cascade Fond : scène de sauvetage sur fgv1_fin_grotte_vasques.
     SV.Destiny.GrotteVerdoyantePhase = 3
     GAME:EnterZone('grotte_verdoyante', -1, 1, 0)
   else

@@ -1,10 +1,10 @@
 -- Présentation inspirée du BoardMenu/JobMenu d'Halcyon ; données Destiny.
--- Propose les donjons effectivement débloqués à Réverie (Bois Perdus, puis Grotte Verdoyante).
+-- Propose les donjons effectivement débloqués à Réverie (Bois Perdus, puis Fosse Cascade).
 local interface = {}
 
 local LIBELLES_ZONES = {
   lost_wood = {titre = 'Traverser les Bois Perdus', lieu = 'Bois Perdus'},
-  grotte_verdoyante = {titre = 'Explorer la Grotte Verdoyante', lieu = 'Grotte Verdoyante'},
+  grotte_verdoyante = {titre = 'Explorer la Fosse Cascade', lieu = 'Fosse Cascade'},
 }
 
 function interface.Ouvrir(missions)

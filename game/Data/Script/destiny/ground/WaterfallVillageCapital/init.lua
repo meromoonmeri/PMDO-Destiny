@@ -1590,7 +1590,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
     pcall(function() GROUND:CharEndAnim(nilo) end)
     pcall(function() GROUND:CharSetEmote(nilo, 'happy', 1) end)
     GAME:WaitFrames(20)
-    cinematique.Dire(nilo, 'Joyous', 'Papa ! Tout le monde ! Ils ont tenu tête à Carchacrok tout au fond de la grotte pour me ramener !', 'droite')
+    cinematique.Dire(nilo, 'Joyous', 'Papa ! Tout le monde ! Ils ont tenu tête à Kabutops tout au fond de la Fosse Cascade pour me ramener !', 'droite')
     cinematique.Respirer(15)
   end
 
@@ -1608,7 +1608,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   end
   if ludicolo ~= nil then
     orienter_auditoire(ludicolo)
-    parler_accueil(ludicolo, 'Joyous', 'Repousser un Carchacrok au fond des vasques… Bravo, quelle équipe formidable !', 'droite')
+    parler_accueil(ludicolo, 'Joyous', 'Repousser un Kabutops jusqu’à la Fosse Cascade Fond… Bravo, quelle équipe formidable !', 'droite')
     cinematique.Respirer(12)
   end
   if roserade ~= nil then
@@ -1878,7 +1878,7 @@ function ville.SortieExplorationE2_Touch(obj, activator)
   if SV.Destiny.AlerteShinx == 'a_secourir' and SV.Destiny.DepartShinxAccepte then
     UI:ResetSpeaker()
     UI:BeginChoiceMenu('Choisir une destination', {
-      STRINGS:Format('\\uE111 ') .. 'Grotte Verdoyante', 'Autres donjons', 'Retour',
+      STRINGS:Format('\\uE111 ') .. 'Fosse Cascade', 'Autres donjons', 'Retour',
     }, 1, 3)
     UI:WaitForChoice()
     local selection = UI:ChoiceResult()
@@ -2195,7 +2195,7 @@ function ville.Bellossom_Boutique_Action(personnage, activator)
       'Bienvenue sous ma tente fleurie ! Mes gelées, baies et graines aromatiques vous donneront du cœur à l’aventure.')
   else
     ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
-      'Faites provision avant de partir vers la Grotte Verdoyante.')
+      'Faites provision avant de partir vers la Fosse Cascade.')
   end
   terminer_dialogue(personnage, 'Bellossom_Boutique')
 end
@@ -2561,7 +2561,7 @@ function ville.Luxray_Alerte_Action(personnage, activator)
   GAME:MoveCamera(1440, 1592, 1, false)
   GAME:FadeIn(30)
   GAME:WaitFrames(20)
-  cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Grotte Verdoyante.', 'standard')
+  cinematique.Dire(partenaire, 'Normal', 'C’est par ici qu’on choisit habituellement notre route vers les donjons. Cherchons la Fosse Cascade.', 'standard')
   -- Une destination existante peut changer de scène sans reprise de coroutine.
   UI:ResetSpeaker()
   retour_au_joueur(hero, partenaire)
@@ -2574,7 +2574,7 @@ function ville.NewObject_9_Action(personnage, activator)
     parler_accueil(personnage, 'Worried', 'Mon petit Nilo attend toujours là-bas… Je vous en prie, ne tardez pas trop.')
     UI:ResetSpeaker()
   elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
-    parler_accueil(personnage, 'Happy', 'Depuis que vous avez ramené Nilo de la Grotte Verdoyante, il ne lâche plus Léo d’une semelle. Merci encore !')
+    parler_accueil(personnage, 'Happy', 'Depuis que vous avez ramené Nilo de la Fosse Cascade, il ne lâche plus Léo d’une semelle. Merci encore !')
     UI:ResetSpeaker()
   else
     dialogue_lux(CH('NewObject_10'), personnage)
@@ -2589,7 +2589,7 @@ function ville.NewObject_10_Action(personnage, activator)
     terminer_dialogue(personnage, 'NewObject_10')
     return
   elseif SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'termine' then
-    parler_accueil(personnage, 'Happy', 'Vous avez assuré dans la Grotte Verdoyante ! Nilo est rentré sain et sauf grâce à vous.')
+    parler_accueil(personnage, 'Happy', 'Vous avez assuré dans la Fosse Cascade ! Nilo est rentré sain et sauf grâce à vous.')
     UI:ResetSpeaker()
     terminer_dialogue(personnage, 'NewObject_10')
     return
@@ -2599,7 +2599,7 @@ function ville.NewObject_10_Action(personnage, activator)
 end
 function ville.Nilo_Shinx_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des griffes de Carchacrok dans la Grotte Verdoyante ! Promis, je reste près de Maman et Léo maintenant !')
+  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des faux de Kabutops dans la Fosse Cascade ! Promis, je reste près de Maman et Léo maintenant !')
   UI:ResetSpeaker()
   terminer_dialogue(personnage, 'Nilo_Shinx')
 end

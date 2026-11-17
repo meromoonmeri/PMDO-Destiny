@@ -3,13 +3,13 @@
   "Object": {
     "$type": "RogueEssence.Data.ZoneData, RogueEssence",
     "Name": {
-      "DefaultText": "Grotte Verdoyante",
+      "DefaultText": "Fosse Cascade",
       "LocalTexts": {
-        "fr": "Grotte Verdoyante"
+        "fr": "Fosse Cascade"
       }
     },
     "Released": true,
-    "Comment": "Grotte Verdoyante (9 étages) — sauvetage de Nilo derrière la cascade (ewc3 -> 1F-8F deep_limestone_cavern -> fgv1/Carchacrok 9F).",
+    "Comment": "Fosse Cascade (9 étages) — sauvetage de Nilo derrière la cascade (ewc3 -> 1F-8F deep_limestone_cavern -> fgv1/Kabutops Fosse Cascade Fond).",
     "NoEXP": false,
     "ExpPercent": 100,
     "Level": 10,
@@ -6503,9 +6503,9 @@
               ]
             },
             "Name": {
-              "DefaultText": "Grotte Verdoyante\n{0}F",
+              "DefaultText": "Fosse Cascade\n{0}F",
               "LocalTexts": {
-                "fr": "Grotte Verdoyante\n{0}F"
+                "fr": "Fosse Cascade\n{0}F"
               }
             },
             "Priority": {
@@ -7037,7 +7037,7 @@
                 2
               ]
             },
-                        "TeamSizes": [
+            "TeamSizes": [
               {
                 "Spawn": 1,
                 "Rate": 12,
@@ -7055,7 +7055,7 @@
                 }
               }
             ],
-"Spawns": [
+            "Spawns": [
               {
                 "Spawn": {
                   "Spawn": {
@@ -8087,7 +8087,7 @@
           }
         ],
         "IsRelevant": true,
-        "Comment": "Étages 1F à 8F de la Grotte Verdoyante — DTEF deep_limestone_cavern sur tous les étages."
+        "Comment": "Étages 1F à 8F de la Fosse Cascade — DTEF deep_limestone_cavern sur tous les étages."
       },
       {
         "$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
@@ -8158,7 +8158,7 @@
                 }
               }
             ],
-            "Comment": "Combat de boss 9F sur end_grotte_verdoyante (Carchacrok Lv 14)."
+            "Comment": "Combat de boss 9F sur end_grotte_verdoyante (Fosse Cascade Fond, Kabutops Lv 14)."
           }
         ],
         "ZoneSteps": [
@@ -8179,9 +8179,9 @@
               ]
             },
             "Name": {
-              "DefaultText": "Grotte Verdoyante — Vasques\n9F",
+              "DefaultText": "Fosse Cascade Fond",
               "LocalTexts": {
-                "fr": "Grotte Verdoyante — Vasques\n9F"
+                "fr": "Fosse Cascade Fond"
               }
             },
             "Priority": {
@@ -8192,7 +8192,7 @@
           }
         ],
         "IsRelevant": true,
-        "Comment": "9e étage : salle des vasques contre Carchacrok."
+        "Comment": "Fosse Cascade Fond : salle des vasques contre Kabutops."
       }
     ],
     "GroundMaps": [
