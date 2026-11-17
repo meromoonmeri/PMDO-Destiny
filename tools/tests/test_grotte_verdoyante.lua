@@ -55,6 +55,10 @@ RogueEssence = {
   },
   Dungeon = {
     BaseMap = {ScrollEdge={Clamp=1}},
+    -- Énumération réelle du moteur (StatusEffect.cs) : le script demande
+    -- DrawEffect.Shaking pour faire trembler Nilo de façon visible.
+    DrawEffect = {None=-1, Sleeping=0, Stopped=1, Shaking=2, Charging=3, Absent=4,
+                  Spinning=5, Hurt=6, Transparent=7, Trembling=8},
     CharData = function() return {} end,
     MonsterID = function(sp, f, sk, g) return {Species=sp, Form=f, Skin=sk, Gender=g} end,
     Character = function(d) return {Data=d} end,
@@ -79,7 +83,7 @@ GROUND = {
   CreateCharacterFromCharData = function(_, n, d, x, y, dir) local a = make_actor(n, x, y); a.Data = d.Data; a.Direction = dir; return a end,
   RemoveCharacter = function(_, n) actors[n] = nil; return true end,
   TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir end,
-  MoveToPosition = function(_, a, x, y) a.Position = {X=x, Y=y} end,
+  MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
   EntTurn = function(_, a, dir) a.Direction = dir end,
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
   CharTurnToCharAnimated = function() end,
@@ -87,6 +91,8 @@ GROUND = {
   CharSetAnim = function(_, a, anim, loop) ev('anim', a and a.EntName or '?', anim, loop) end,
   CharEndAnim = function(_, a) ev('end_anim', a and a.EntName or '?') end,
   CharSetEmote = function(_, a, em) ev('emote', a.EntName, em) end,
+  CharSetDrawEffect = function(_, a, ef) ev('draw_effect', a.EntName, ef) end,
+  CharEndDrawEffect = function(_, a, ef) ev('end_draw_effect', a.EntName, ef) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
   PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y) end,
   Hide = function(_, n) if actors[n] then actors[n].EntEnabled = false end; ev('hide', n) end,
@@ -337,7 +343,10 @@ SV.Destiny.AlerteShinx = 'a_secourir'
 zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zone' and events[#events][4] == 1)
 
--- 3. fgv1 : PreBattle (réveil Nilo + silence/secousse + voix abysses + geyser Kabutops) -> revanche / -dev -> PostBattle -> EmptyReturn
+-- 3. fgv1 : PreBattle (réveil Nilo + UN éclair blanc d'incompréhension + DOUBLE éclair
+--    blanc d'apparition, sans aucune animation d'eau, Lixy tremblant visiblement,
+--    boss sur le sable et non sur les vasques) -> revanche / -dev
+--    -> PostBattle (fuite au sud en courant) -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
 actors = {}; make_actor('PLAYER', 240, 344); make_actor('Teammate1', 216, 344)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
@@ -345,22 +354,44 @@ events = {}
 fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
 assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
-local saw_hide, saw_unhide, saw_stop_bgm, saw_rising_fear, saw_geyser_vfx, saw_geyser_se, saw_slash, boss_bgm_ok, wake_dlg_ok, unseen_voice_ok =
-  false, false, false, false, false, false, false, false, false, false
+-- Le boss n'apparaît JAMAIS sur la bande des vasques en terrasses (y = 136..208).
+local boss_y = actors.Kabutops_Boss.Position.Y
+assert(boss_y >= 216 and boss_y <= 248,
+  'Kabutops doit apparaître sur le sable plat sous les vasques, pas sur les terrasses (y=' .. tostring(boss_y) .. ')')
+local saw_hide, saw_unhide, saw_stop_bgm, saw_rising_fear, saw_slash, boss_bgm_ok, wake_dlg_ok, unseen_voice_ok =
+  false, false, false, false, false, false, false, false
+local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
+local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
+local eau_vue, geyser_vu = false, false
+local flashes = 0
+local tremble_nilo, tremble_fini = false, false
 for _, e in ipairs(events) do
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide = true end
   if e[1] == 'stop_bgm' then saw_stop_bgm = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
-  if e[1] == 'vfx' and e[2] == 'Water_Column_Ranger' then saw_geyser_vfx = true end
-  if e[1] == 'se' and e[2] == 'EVT_CH05_Waterfall_Cave_Geyser' then saw_geyser_se = true end
   if e[1] == 'se' and e[2] == 'DUN_Slash' then saw_slash = true end
   if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
   if e[1] == 'dlg' and tostring(e[2]):find('Maman', 1, true) then wake_dlg_ok = true end
   if e[1] == 'dlg' and tostring(e[2]):find('silence des abysses', 1, true) then unseen_voice_ok = true end
+  if e[1] == 'vfx' then
+    for _, n in ipairs(eaux_interdites) do if e[2] == n then eau_vue = true end end
+  end
+  if e[1] == 'se' then
+    for _, n in ipairs(geysers_interdits) do if e[2] == n then geyser_vu = true end end
+    if e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
+  end
+  if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' and e[3] == 2 then tremble_nilo = true end
+  if e[1] == 'end_draw_effect' and e[2] == 'Nilo_Grotte' then tremble_fini = true end
 end
-assert(saw_hide and saw_unhide and saw_stop_bgm and saw_rising_fear and saw_geyser_vfx and saw_geyser_se and saw_slash and boss_bgm_ok and wake_dlg_ok and unseen_voice_ok,
-       'cinématique d’apparition Kabutops (style Searing Crucible) incomplète')
+assert(saw_hide and saw_unhide and saw_stop_bgm and saw_rising_fear and saw_slash and boss_bgm_ok and wake_dlg_ok and unseen_voice_ok,
+       'cinématique d’apparition Kabutops incomplète')
+assert(not eau_vue and not geyser_vu,
+       'aucune animation ni son d’eau ne doit accompagner l’apparition du boss')
+assert(flashes == 3,
+       'il faut UN éclair blanc (incompréhension) puis un DOUBLE éclair blanc (apparition), soit 3 au total')
+assert(tremble_nilo and tremble_fini,
+       'Nilo doit trembler de façon visible (DrawEffect.Shaking) puis être relâché')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
 
 -- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
@@ -387,6 +418,22 @@ fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
 assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
 assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabutops_Boss == nil, 'acteurs temporaires fgv1 doivent être retirés')
+-- Kabutops vaincu fuit vers le sud EN COURANT (3 px/image, jusqu'à y >= 344) et
+-- aucune animation d'eau n'accompagne plus son départ (plus de plongeon).
+local fuite_sud, fuite_vitesse, eau_post = false, nil, false
+for _, e in ipairs(events) do
+  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[3] == 240 and e[4] >= 344 then
+    fuite_sud = true
+    fuite_vitesse = e[5]
+  end
+  if e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
+      or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger') then
+    eau_post = true
+  end
+end
+assert(fuite_sud and fuite_vitesse == 3, 'Kabutops doit fuir vers le sud en courant (3 px/image)')
+assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
+
 local saw_lyra_reunion, saw_job_clear, saw_journal, saw_center_on, saw_center_off = false, false, false, false, false
 for _, e in ipairs(events) do
   if e[1] == 'dlg' and tostring(e[2]):find('précipitée dans la grotte', 1, true) then saw_lyra_reunion = true end
