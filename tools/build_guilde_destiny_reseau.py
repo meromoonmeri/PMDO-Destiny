@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Compile le réseau complet de 15 salles de la Guilde Destiny (`guilde_destiny_interieur`) :
-- Conserve `guilde_destiny_accueil.rsground` (1536x1152, `3e659d8`) intact et génère ses fenêtres `.dir` 4 ambiances dédiées.
+- Conserve `guilde_destiny_accueil.rsground` (512x384 1x, `64x48` tuiles) intact et génère ses fenêtres `.dir` 4 ambiances 1x dédiées.
 - Compile les 14 autres salles calibrées à l'échelle Pokémon PMDO 1x (`448x336` à `576x432`, grille 8x8, 8 calques, 0 magenta,
   0 chevauchement Top sur tuile marchable, BFS 16x16 vérifié sur tous les marqueurs et seuils).
 - Génère tous les objets indépendants `.dir` (`game/Content/Object/`) :
@@ -435,27 +435,30 @@ def main() -> None:
     # 2. Export ALL independent `.dir` objects into `game/Content/Object/` (pre-compensated for `SetDestinyAmbiance(moment, true)`)
     lua_win_registry: dict[str, list[dict]] = {}
 
-    # 2a. Special 1536x1152-scale windows for existing `guilde_destiny_accueil` (`3x` of `512x384` `01_accueil`)!
+    # 2a. Native 1x (512x384) windows for `guilde_destiny_accueil` (`48x88` at `(112,56)` & `(352,56)`, with vine cutout)!
+    verd_dir_im = Image.open(ART_DEST / "verdure_accueil" / "Guilde_Verdure_Accueil.png").convert("RGBA") if (ART_DEST / "verdure_accueil" / "Guilde_Verdure_Accueil.png").exists() else None
     acc_slots_lua = []
     for slot in manifest["fenetres_par_salle"]["01_accueil"]:
         side = slot["slot"]
-        w3, h3 = slot["w"] * 3, slot["h"] * 3
-        x3, y3 = slot["x"] * 3, slot["y"] * 3
+        w1, h1 = slot["w"], slot["h"]
+        x1, y1 = slot["x"], slot["y"]
         amb_names = {}
         for amb in AMBIANCES:
             src_im = Image.open(slot["ambiances"][amb]["png"]).convert("RGBA")
-            # Scale3x (et non Lanczos) : l'Accueil est la seule salle dont l'art
-            # est un 1x agrandi.  Lanczos + « sharpen » inventait 15 000 couleurs
-            # et un degrade de flou sur les vitres ; Scale3x redessine le pixel
-            # art a l'identique, sans halo (cf. tools/nettete_accueil_guilde.py).
-            up_im = scale3x(src_im)
-            if up_im.size != (w3, h3):
-                up_im = up_im.resize((w3, h3), Image.Resampling.NEAREST)
-            comp_im = precompensate_window_for_engine(up_im, amb)
+            if src_im.size != (w1, h1):
+                src_im = src_im.resize((w1, h1), Image.Resampling.NEAREST)
+            comp_im = precompensate_window_for_engine(src_im, amb)
+            if verd_dir_im is not None and verd_dir_im.size == (368, 136):
+                import numpy as _np
+                arr_c = _np.array(comp_im)
+                arr_v = _np.array(verd_dir_im)
+                vx0, vy0 = x1 - 72, y1 - 32
+                arr_c[arr_v[vy0:vy0+h1, vx0:vx0+w1, 3] > 128, 3] = 0
+                comp_im = Image.fromarray(arr_c)
             dname = f"Guilde_Fenetre_Accueil_{side}_{amb.capitalize()}"
-            write_dir(OBJ_DIR / f"{dname}.dir", comp_im, w3, h3, 0, 1)
+            write_dir(OBJ_DIR / f"{dname}.dir", comp_im, w1, h1, 0, 1)
             amb_names[amb] = dname
-        acc_slots_lua.append({"name": f"Fenetre_{side}", "x": x3, "y": y3, "w": w3, "h": h3, "par_ambiance": amb_names})
+        acc_slots_lua.append({"name": f"Fenetre_{side}", "x": x1, "y": y1, "w": w1, "h": h1, "par_ambiance": amb_names})
     lua_win_registry["guilde_destiny_accueil"] = acc_slots_lua
 
     # 2b. Standard 1x room windows + mirrored Dortoir Nord 2 windows

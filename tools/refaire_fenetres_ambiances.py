@@ -266,8 +266,8 @@ def _ecrire_dir(path: Path, im: Image.Image) -> None:
 
 
 FENETRES = [
-    ("01_accueil", "Gauche", 3),
-    ("01_accueil", "Droite", 3),
+    ("01_accueil", "Gauche", 1),
+    ("01_accueil", "Droite", 1),
     ("02_missions", "Gauche", 1),
     ("02_missions", "Droite", 1),
     ("03_grand_salon_central", "Gauche", 1),

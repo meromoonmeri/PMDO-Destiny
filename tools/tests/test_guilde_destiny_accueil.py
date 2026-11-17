@@ -197,7 +197,7 @@ def main() -> None:
         verify_dir_object(win_dir, expected_frames=1)
 
     room_specs = [
-        ("guilde_destiny_accueil", "Destiny_Guilde_Accueil", (192, 144), {"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"}, {"SortieGuilde", "EscalierNord"}, "EntreeSudMarker"),
+        ("guilde_destiny_accueil", "Destiny_Guilde_Accueil", (64, 48), {"EntreeSudMarker", "CentreMedaillonMarker", "EscalierNordMarker"}, {"SortieGuilde", "EscalierNord"}, "EntreeSudMarker"),
         ("guilde_destiny_missions", "Destiny_Guilde_Missions", (72, 54), {"ArriveeDepuisAccueilMarker", "EscalierNordMarker", "CentreSalleMarker", "MurGaucheMarker", "MurDroitMarker"}, {"EscalierSud", "EscalierNord"}, "ArriveeDepuisAccueilMarker"),
         ("guilde_destiny_grand_salon", "Destiny_Guilde_Grand_Salon", (72, 54), {"ArriveeSudMarker", "DevantPorteMaitreMarker", "EntreeOuestMarker", "EntreeEstMarker"}, {"SeuilSud", "SortieBureauMaitre", "CouloirOuest", "CouloirEst"}, "ArriveeSudMarker"),
         ("guilde_destiny_bureau_maitre", "Destiny_Guilde_Bureau_Maitre", (64, 48), {"EntreeSudMarker", "CentreBureauMarker"}, {"SeuilSud"}, "EntreeSudMarker"),

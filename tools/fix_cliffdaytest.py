@@ -371,7 +371,7 @@ def make_single_frame_tile(sheet: str, x: int, y: int, frame_length: int = 10) -
     return {
         "Layers": [
             {
-                "Frames": [{"TexLoc": {"X": x, "Y": y}, "Sheet": sheet, "Flip": 0}],
+                "Frames": [{"TexLoc": {"X": x, "Y": y}, "Sheet": sheet}],
                 "FrameLength": frame_length,
             }
         ]
@@ -383,7 +383,7 @@ def make_anim_4_tile(sheet: str, x: int, y: int, frame_length: int = 10) -> dict
         "Layers": [
             {
                 "Frames": [
-                    {"TexLoc": {"X": x, "Y": y + MAP_H * p}, "Sheet": sheet, "Flip": 0}
+                    {"TexLoc": {"X": x, "Y": y + MAP_H * p}, "Sheet": sheet}
                     for p in range(4)
                 ],
                 "FrameLength": frame_length,

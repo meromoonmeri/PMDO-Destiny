@@ -15,8 +15,8 @@ local guilde_decors = {}
 
 guilde_decors.FENETRES = {
   ['guilde_destiny_accueil'] = {
-    { name = 'Fenetre_Gauche', x = 336, y = 168, w = 144, h = 264, jour = 'Guilde_Fenetre_Accueil_Gauche_Jour', aube = 'Guilde_Fenetre_Accueil_Gauche_Aube', crepuscule = 'Guilde_Fenetre_Accueil_Gauche_Crepuscule', nuit = 'Guilde_Fenetre_Accueil_Gauche_Nuit' },
-    { name = 'Fenetre_Droite', x = 1056, y = 168, w = 144, h = 264, jour = 'Guilde_Fenetre_Accueil_Droite_Jour', aube = 'Guilde_Fenetre_Accueil_Droite_Aube', crepuscule = 'Guilde_Fenetre_Accueil_Droite_Crepuscule', nuit = 'Guilde_Fenetre_Accueil_Droite_Nuit' },
+    { name = 'Fenetre_Gauche', x = 112, y = 56, w = 48, h = 88, jour = 'Guilde_Fenetre_Accueil_Gauche_Jour', aube = 'Guilde_Fenetre_Accueil_Gauche_Aube', crepuscule = 'Guilde_Fenetre_Accueil_Gauche_Crepuscule', nuit = 'Guilde_Fenetre_Accueil_Gauche_Nuit' },
+    { name = 'Fenetre_Droite', x = 352, y = 56, w = 48, h = 88, jour = 'Guilde_Fenetre_Accueil_Droite_Jour', aube = 'Guilde_Fenetre_Accueil_Droite_Aube', crepuscule = 'Guilde_Fenetre_Accueil_Droite_Crepuscule', nuit = 'Guilde_Fenetre_Accueil_Droite_Nuit' },
   },
   ['guilde_destiny_missions'] = {
     { name = 'Fenetre_Gauche', x = 72, y = 64, w = 56, h = 96, jour = 'Guilde_Fenetre_02_missions_Gauche_Jour', aube = 'Guilde_Fenetre_02_missions_Gauche_Aube', crepuscule = 'Guilde_Fenetre_02_missions_Gauche_Crepuscule', nuit = 'Guilde_Fenetre_02_missions_Gauche_Nuit' },

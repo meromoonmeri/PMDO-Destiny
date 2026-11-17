@@ -1737,6 +1737,7 @@ local function entrer(map)
 end
 
 function ville.Enter(map) entrer(map) end
+function ville.GameSave(map) end
 function ville.GameLoad(map)
   meteo_reverie.Appliquer(map)
   entree_batiment_en_cours = false

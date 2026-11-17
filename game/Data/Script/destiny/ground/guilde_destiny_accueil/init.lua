@@ -1,4 +1,4 @@
--- Salle d'accueil de la Grande Guilde Destiny (1536x1152 haute résolution 1:1 sans perte, ratio 4:3 viewport PMDO, fond marron assombri),
+-- Salle d'accueil de la Grande Guilde Destiny (512x384 échelle native DS 1x (64x48 tuiles 8x8), ratio 4:3 viewport PMDO, fond marron assombri),
 -- raccordée au sud à PorteGuilde (guilde_cliff_*) et au nord à guilde_destiny_missions.
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'

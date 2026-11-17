@@ -397,14 +397,14 @@ def build_plage_sablefin(root: Path, zip_path: Path) -> None:
         def make_cell(loc: tuple[int, int]) -> dict:
             return {
                 'AutoTileset': '', 'Associates': [],
-                'Layers': [{'Frames': [{'Sheet': sheet_name, 'TexLoc': {'X': loc[0], 'Y': loc[1]}, 'Flip': 0}], 'FrameLength': 1}],
+                'Layers': [{'Frames': [{'Sheet': sheet_name, 'TexLoc': {'X': loc[0], 'Y': loc[1]}}], 'FrameLength': 1}],
                 'NeighborCode': -1,
             }
 
         def make_anim_cell(locs: list[tuple[int, int]]) -> dict:
             return {
                 'AutoTileset': '', 'Associates': [],
-                'Layers': [{'Frames': [{'Sheet': sheet_name, 'TexLoc': {'X': lx, 'Y': ly}, 'Flip': 0} for lx, ly in locs], 'FrameLength': WAVE_FRAME_LENGTH}],
+                'Layers': [{'Frames': [{'Sheet': sheet_name, 'TexLoc': {'X': lx, 'Y': ly}} for lx, ly in locs], 'FrameLength': WAVE_FRAME_LENGTH}],
                 'NeighborCode': -1,
             }
 
@@ -497,6 +497,7 @@ def build_plage_sablefin(root: Path, zip_path: Path) -> None:
 def build_passage_aquatique_fond(root: Path) -> None:
     arch = next((root / 'archive').rglob('*v50812_beach_cave_anse_des_marees.rsground'))
     doc = json.loads(arch.read_text(encoding='utf-8-sig'))
+    doc.pop('$type', None)
     obj = doc['Object']
     obj['AssetName'] = 'passage_aquatique_fond'
     obj['Released'] = True
@@ -661,7 +662,7 @@ def build_zone_passage_aquatique(root: Path) -> None:
             {
                 'Key': {'str': [-5]},
                 'Value': {
-                    '$type': 'PMDC.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC',
+                    '$type': 'RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence',
                     'Effect': {
                         'UniversalStates': [], 'BeforeTryActions': [], 'BeforeActions': [], 'OnActions': [],
                         'BeforeExplosions': [], 'BeforeHits': [], 'OnHits': [], 'OnHitTiles': [], 'AfterActions': [],
@@ -685,7 +686,6 @@ def build_zone_passage_aquatique(root: Path) -> None:
                     '$type': 'RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements',
                     'RoomRatio': {'Min': 75, 'Max': 88},
                     'BranchRatio': {'Min': 10, 'Max': 30},
-                    'NoConnect': False,
                     'GenericRooms': generic_rooms, 'GenericHalls': generic_halls,
                     'RoomComponents': conn_comp, 'HallComponents': conn_comp,
                 },

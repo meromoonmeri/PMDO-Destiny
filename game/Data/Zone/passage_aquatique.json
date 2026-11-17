@@ -118,7 +118,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -201,7 +200,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -907,7 +906,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -990,7 +988,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -1696,7 +1694,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -1779,7 +1776,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -2485,7 +2482,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -2568,7 +2564,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -3274,7 +3270,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -3357,7 +3352,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -4063,7 +4058,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -4146,7 +4140,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -4852,7 +4846,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -4935,7 +4928,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -5641,7 +5634,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -5724,7 +5716,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -6430,7 +6422,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -6513,7 +6504,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -7219,7 +7210,6 @@
                     "Min": 10,
                     "Max": 30
                   },
-                  "NoConnect": false,
                   "GenericRooms": {
                     "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
                     "$values": [
@@ -7302,7 +7292,7 @@
                 },
                 "Value": {
                   "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-                  "ConnectorPercent": 50
+                  "ConnectPercent": 50
                 }
               },
               {
@@ -7964,18 +7954,6 @@
               "Min": 6,
               "Max": 15
             },
-            "SpreadPlan": {
-              "$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-              "FloorSpacing": {
-                "Min": 1,
-                "Max": 1
-              },
-              "BeginStart": true,
-              "FloorRange": {
-                "Min": 0,
-                "Max": 10
-              }
-            },
             "ModStates": []
           },
           {
@@ -7988,149 +7966,124 @@
             },
             "Spawns": {
               "food": {
-                "CategoryWeight": 12,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "food_apple",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 14,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "food_apple",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_oran",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 14,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 14,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_oran",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_leppa",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 14,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_leppa",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_pecha",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 10,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_pecha",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_cheri",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 10,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_cheri",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_lum",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 10,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_lum",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "food_apple_big",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 7,
-                      "Range": {
-                        "Min": 3,
-                        "Max": 10
-                      }
+                    "Rate": 10,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "food_apple_big",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
+                    "Rate": 7,
+                    "Range": {
+                      "Min": 3,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "seed_reviver",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 5,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "seed_reviver",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 5,
+                      "Item": 12,
                       "Range": {
                         "Min": 0,
                         "Max": 10
@@ -8140,79 +8093,70 @@
                 }
               },
               "snacks": {
-                "CategoryWeight": 10,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "seed_blast",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 11,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "seed_sleep",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 10,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "seed_warp",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 10,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "berry_sitrus",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 5,
+                    "Range": {
+                      "Min": 4,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "seed_blast",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 11,
+                      "Item": 10,
                       "Range": {
                         "Min": 0,
-                        "Max": 10
-                      }
-                    },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "seed_sleep",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 10,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
-                    },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "seed_warp",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 10,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
-                    },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "berry_sitrus",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 5,
-                      "Range": {
-                        "Min": 4,
                         "Max": 10
                       }
                     }
@@ -8220,41 +8164,40 @@
                 }
               },
               "boosters": {
-                "CategoryWeight": 5,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "gummi_blue",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 10,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "gummi_blue",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
+                    "Rate": 10,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "gummi_clear",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "gummi_clear",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
+                      "Item": 5,
                       "Range": {
                         "Min": 0,
                         "Max": 10
@@ -8264,95 +8207,82 @@
                 }
               },
               "throwable": {
-                "CategoryWeight": 10,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "ammo_geo_pebble",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 12,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "ammo_geo_pebble",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "ammo_gravelerock",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 9,
-                      "Range": {
-                        "Min": 2,
-                        "Max": 10
-                      }
+                    "Rate": 12,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "ammo_gravelerock",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "ammo_iron_thorn",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 9,
-                      "Range": {
-                        "Min": 3,
-                        "Max": 10
-                      }
+                    "Rate": 9,
+                    "Range": {
+                      "Min": 2,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "ammo_iron_thorn",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "wand_pounce",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 9,
+                    "Range": {
+                      "Min": 3,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "wand_pounce",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "wand_slow",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "wand_slow",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
+                      "Item": 10,
                       "Range": {
                         "Min": 0,
                         "Max": 10
@@ -8362,95 +8292,82 @@
                 }
               },
               "orbs": {
-                "CategoryWeight": 8,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "orb_escape",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "orb_escape",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "orb_cleanse",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "orb_cleanse",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "orb_luminous",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "orb_luminous",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "orb_totter",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
-                      "Range": {
-                        "Min": 0,
-                        "Max": 10
-                      }
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "orb_totter",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "orb_slumber",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 8,
+                    "Range": {
+                      "Min": 0,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "orb_slumber",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 8,
+                      "Item": 8,
                       "Range": {
                         "Min": 0,
                         "Max": 10
@@ -8460,79 +8377,70 @@
                 }
               },
               "tms": {
-                "CategoryWeight": 4,
-                "ItemSpawns": {
-                  "$type": "RogueElements.SpawnRangeList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-                  "$values": [
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "tm_water_pulse",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 3,
-                      "Range": {
-                        "Min": 3,
-                        "Max": 10
-                      }
+                "Spawns": [
+                  {
+                    "Spawn": {
+                      "ID": "tm_water_pulse",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "tm_rain_dance",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 3,
-                      "Range": {
-                        "Min": 4,
-                        "Max": 10
-                      }
+                    "Rate": 3,
+                    "Range": {
+                      "Min": 3,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "tm_rain_dance",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
-                    {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "tm_surf",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 2,
-                      "Range": {
-                        "Min": 6,
-                        "Max": 10
-                      }
+                    "Rate": 3,
+                    "Range": {
+                      "Min": 4,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "tm_surf",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
                     },
+                    "Rate": 2,
+                    "Range": {
+                      "Min": 6,
+                      "Max": 10
+                    }
+                  },
+                  {
+                    "Spawn": {
+                      "ID": "tm_scald",
+                      "Cursed": false,
+                      "HiddenValue": "",
+                      "Amount": 0,
+                      "Price": 0
+                    },
+                    "Rate": 2,
+                    "Range": {
+                      "Min": 7,
+                      "Max": 10
+                    }
+                  }
+                ],
+                "SpawnRates": {
+                  "nodes": [
                     {
-                      "Spawn": {
-                        "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
-                        "Value": "tm_scald",
-                        "Amount": 0,
-                        "Hidden": false,
-                        "Cursed": false,
-                        "TileLoc": {
-                          "X": 0,
-                          "Y": 0
-                        }
-                      },
-                      "Rate": 2,
+                      "Item": 4,
                       "Range": {
-                        "Min": 7,
+                        "Min": 0,
                         "Max": 10
                       }
                     }
@@ -8549,7 +8457,7 @@
                 2
               ]
             },
-                        "TeamSizes": [
+            "TeamSizes": [
               {
                 "Spawn": 1,
                 "Rate": 12,
@@ -8567,37 +8475,32 @@
                 }
               }
             ],
-"Spawns": [
+            "Spawns": [
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "krabby",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "krabby",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "bubble",
+                      "vice_grip",
+                      "leer",
+                      "mud_shot"
+                    ],
+                    "Intrinsic": "hyper_cutter",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "bubble",
-                    "vice_grip",
-                    "leer",
-                    "mud_shot"
-                  ],
-                  "Intrinsic": "hyper_cutter",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 12,
                 "Range": {
@@ -8607,34 +8510,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "shellder",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "shellder",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "tackle",
+                      "withdraw",
+                      "icicle_spear",
+                      "supersonic"
+                    ],
+                    "Intrinsic": "shell_armor",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "tackle",
-                    "withdraw",
-                    "icicle_spear",
-                    "supersonic"
-                  ],
-                  "Intrinsic": "shell_armor",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 11,
                 "Range": {
@@ -8644,34 +8542,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "wingull",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "wingull",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "wing_attack",
+                      "supersonic",
+                      "quick_attack"
+                    ],
+                    "Intrinsic": "keen_eye",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "wing_attack",
-                    "supersonic",
-                    "quick_attack"
-                  ],
-                  "Intrinsic": "keen_eye",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 11,
                 "Range": {
@@ -8681,32 +8574,27 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "wimpod",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "wimpod",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "struggle_bug",
+                      "sand_attack"
+                    ],
+                    "Intrinsic": "wimp_out",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "struggle_bug",
-                    "sand_attack"
-                  ],
-                  "Intrinsic": "wimp_out",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 10,
                 "Range": {
@@ -8716,34 +8604,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "wiglett",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "wiglett",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "sand_attack",
+                      "water_gun",
+                      "mud_slap",
+                      "aqua_jet"
+                    ],
+                    "Intrinsic": "gooey",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "sand_attack",
-                    "water_gun",
-                    "mud_slap",
-                    "aqua_jet"
-                  ],
-                  "Intrinsic": "gooey",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 10,
                 "Range": {
@@ -8753,33 +8636,28 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "surskit",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "surskit",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 11
+                    },
+                    "SpecifiedSkills": [
+                      "bubble",
+                      "quick_attack",
+                      "bubble_beam"
+                    ],
+                    "Intrinsic": "swift_swim",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 11
-                  },
-                  "SpecifiedSkills": [
-                    "bubble",
-                    "quick_attack",
-                    "bubble_beam"
-                  ],
-                  "Intrinsic": "swift_swim",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -8789,34 +8667,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "squirtle",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "squirtle",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 12
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "bubble",
+                      "bite",
+                      "rapid_spin"
+                    ],
+                    "Intrinsic": "torrent",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 12
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "bubble",
-                    "bite",
-                    "rapid_spin"
-                  ],
-                  "Intrinsic": "torrent",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -8826,34 +8699,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "psyduck",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "psyduck",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 10,
+                      "Max": 12
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "confusion",
+                      "fury_swipes",
+                      "water_pulse"
+                    ],
+                    "Intrinsic": "damp",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 10,
-                    "Max": 12
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "confusion",
-                    "fury_swipes",
-                    "water_pulse"
-                  ],
-                  "Intrinsic": "damp",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -8863,34 +8731,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "buizel",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "buizel",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 13
+                    },
+                    "SpecifiedSkills": [
+                      "quick_attack",
+                      "water_gun",
+                      "aqua_jet",
+                      "pursuit"
+                    ],
+                    "Intrinsic": "swift_swim",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 13
-                  },
-                  "SpecifiedSkills": [
-                    "quick_attack",
-                    "water_gun",
-                    "aqua_jet",
-                    "pursuit"
-                  ],
-                  "Intrinsic": "swift_swim",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 10,
                 "Range": {
@@ -8900,34 +8763,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "shellos",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "shellos",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 13
+                    },
+                    "SpecifiedSkills": [
+                      "mud_slap",
+                      "water_pulse",
+                      "mud_bomb",
+                      "rain_dance"
+                    ],
+                    "Intrinsic": "storm_drain",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 13
-                  },
-                  "SpecifiedSkills": [
-                    "mud_slap",
-                    "water_pulse",
-                    "mud_bomb",
-                    "rain_dance"
-                  ],
-                  "Intrinsic": "storm_drain",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 10,
                 "Range": {
@@ -8937,34 +8795,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "corsola",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "corsola",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 14
+                    },
+                    "SpecifiedSkills": [
+                      "bubble",
+                      "bubble_beam",
+                      "recover",
+                      "ancient_power"
+                    ],
+                    "Intrinsic": "natural_cure",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 14
-                  },
-                  "SpecifiedSkills": [
-                    "bubble",
-                    "bubble_beam",
-                    "recover",
-                    "ancient_power"
-                  ],
-                  "Intrinsic": "natural_cure",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -8974,34 +8827,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "slowpoke",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "slowpoke",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 14
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "confusion",
+                      "yawn",
+                      "headbutt"
+                    ],
+                    "Intrinsic": "own_tempo",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 14
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "confusion",
-                    "yawn",
-                    "headbutt"
-                  ],
-                  "Intrinsic": "own_tempo",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9011,34 +8859,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "corphish",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "corphish",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 14
+                    },
+                    "SpecifiedSkills": [
+                      "bubble_beam",
+                      "vice_grip",
+                      "knock_off",
+                      "protect"
+                    ],
+                    "Intrinsic": "hyper_cutter",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 14
-                  },
-                  "SpecifiedSkills": [
-                    "bubble_beam",
-                    "vice_grip",
-                    "knock_off",
-                    "protect"
-                  ],
-                  "Intrinsic": "hyper_cutter",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9048,34 +8891,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "spheal",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "spheal",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 14
+                    },
+                    "SpecifiedSkills": [
+                      "powder_snow",
+                      "water_gun",
+                      "ice_ball",
+                      "rollout"
+                    ],
+                    "Intrinsic": "thick_fat",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 14
-                  },
-                  "SpecifiedSkills": [
-                    "powder_snow",
-                    "water_gun",
-                    "ice_ball",
-                    "rollout"
-                  ],
-                  "Intrinsic": "thick_fat",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9085,34 +8923,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "oshawott",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "oshawott",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 12,
+                      "Max": 14
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "razor_shell",
+                      "fury_cutter",
+                      "water_pulse"
+                    ],
+                    "Intrinsic": "torrent",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 12,
-                    "Max": 14
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "razor_shell",
-                    "fury_cutter",
-                    "water_pulse"
-                  ],
-                  "Intrinsic": "torrent",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 8,
                 "Range": {
@@ -9122,34 +8955,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "staryu",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "staryu",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 13,
+                      "Max": 15
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "psywave",
+                      "swift",
+                      "bubble_beam"
+                    ],
+                    "Intrinsic": "natural_cure",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 13,
-                    "Max": 15
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "psywave",
-                    "swift",
-                    "bubble_beam"
-                  ],
-                  "Intrinsic": "natural_cure",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9159,34 +8987,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "chinchou",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "chinchou",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 13,
+                      "Max": 15
+                    },
+                    "SpecifiedSkills": [
+                      "bubble_beam",
+                      "spark",
+                      "confuse_ray",
+                      "thunder_wave"
+                    ],
+                    "Intrinsic": "volt_absorb",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 13,
-                    "Max": 15
-                  },
-                  "SpecifiedSkills": [
-                    "bubble_beam",
-                    "spark",
-                    "confuse_ray",
-                    "thunder_wave"
-                  ],
-                  "Intrinsic": "volt_absorb",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9196,34 +9019,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "tentacool",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "tentacool",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 13,
+                      "Max": 15
+                    },
+                    "SpecifiedSkills": [
+                      "poison_sting",
+                      "water_pulse",
+                      "acid_spray",
+                      "wrap"
+                    ],
+                    "Intrinsic": "clear_body",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 13,
-                    "Max": 15
-                  },
-                  "SpecifiedSkills": [
-                    "poison_sting",
-                    "water_pulse",
-                    "acid_spray",
-                    "wrap"
-                  ],
-                  "Intrinsic": "clear_body",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9233,33 +9051,28 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "barboach",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "barboach",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 13,
+                      "Max": 15
+                    },
+                    "SpecifiedSkills": [
+                      "mud_bomb",
+                      "water_pulse",
+                      "magnitude"
+                    ],
+                    "Intrinsic": "oblivious",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 13,
-                    "Max": 15
-                  },
-                  "SpecifiedSkills": [
-                    "mud_bomb",
-                    "water_pulse",
-                    "magnitude"
-                  ],
-                  "Intrinsic": "oblivious",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9269,34 +9082,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "finneon",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "finneon",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 13,
+                      "Max": 15
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "gust",
+                      "water_pulse",
+                      "rain_dance"
+                    ],
+                    "Intrinsic": "swift_swim",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 13,
-                    "Max": 15
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "gust",
-                    "water_pulse",
-                    "rain_dance"
-                  ],
-                  "Intrinsic": "swift_swim",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 8,
                 "Range": {
@@ -9306,34 +9114,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "carvanha",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "carvanha",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "bite",
+                      "aqua_jet",
+                      "assurance",
+                      "screech"
+                    ],
+                    "Intrinsic": "rough_skin",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "bite",
-                    "aqua_jet",
-                    "assurance",
-                    "screech"
-                  ],
-                  "Intrinsic": "rough_skin",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9343,34 +9146,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "clamperl",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "clamperl",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "clamp",
+                      "water_gun",
+                      "whirlpool",
+                      "shell_smash"
+                    ],
+                    "Intrinsic": "shell_armor",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "clamp",
-                    "water_gun",
-                    "whirlpool",
-                    "shell_smash"
-                  ],
-                  "Intrinsic": "shell_armor",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 8,
                 "Range": {
@@ -9380,34 +9178,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "mareanie",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "mareanie",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "poison_sting",
+                      "bite",
+                      "venoshock",
+                      "spike_cannon"
+                    ],
+                    "Intrinsic": "merciless",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "poison_sting",
-                    "bite",
-                    "venoshock",
-                    "spike_cannon"
-                  ],
-                  "Intrinsic": "merciless",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9417,34 +9210,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "frillish",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "frillish",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "bubble_beam",
+                      "night_shade",
+                      "water_pulse",
+                      "recover"
+                    ],
+                    "Intrinsic": "water_absorb",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "bubble_beam",
-                    "night_shade",
-                    "water_pulse",
-                    "recover"
-                  ],
-                  "Intrinsic": "water_absorb",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9454,34 +9242,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "clauncher",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "clauncher",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "water_gun",
+                      "vice_grip",
+                      "bubble_beam",
+                      "swords_dance"
+                    ],
+                    "Intrinsic": "mega_launcher",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "water_gun",
-                    "vice_grip",
-                    "bubble_beam",
-                    "swords_dance"
-                  ],
-                  "Intrinsic": "mega_launcher",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 9,
                 "Range": {
@@ -9491,34 +9274,29 @@
               },
               {
                 "Spawn": {
-                  "BaseForm": {
-                    "Species": "dewpider",
-                    "Form": 0,
-                    "Skin": "normal",
-                    "Gender": -1
+                  "Spawn": {
+                    "BaseForm": {
+                      "Species": "dewpider",
+                      "Form": 0,
+                      "Skin": "",
+                      "Gender": -1
+                    },
+                    "Level": {
+                      "Min": 14,
+                      "Max": 16
+                    },
+                    "SpecifiedSkills": [
+                      "bubble_beam",
+                      "bug_bite",
+                      "bite",
+                      "aqua_ring"
+                    ],
+                    "Intrinsic": "water_bubble",
+                    "Tactic": "wander_normal",
+                    "SpawnConditions": [],
+                    "SpawnFeatures": []
                   },
-                  "Level": {
-                    "Min": 14,
-                    "Max": 16
-                  },
-                  "SpecifiedSkills": [
-                    "bubble_beam",
-                    "bug_bite",
-                    "bite",
-                    "aqua_ring"
-                  ],
-                  "Intrinsic": "water_bubble",
-                  "SpawnFeatures": [
-                    {
-                      "$type": "PMDC.LevelGen.MobSpawnLoc, PMDC",
-                      "Loc": {
-                        "X": 0,
-                        "Y": 0
-                      }
-                    }
-                  ],
-                  "Tactic": "wander_normal",
-                  "SpawnConditions": []
+                  "Role": 0
                 },
                 "Rate": 8,
                 "Range": {
@@ -9554,12 +9332,12 @@
                                 "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
                                 "Value": "food_apple",
                                 "Amount": 0,
-                                "Hidden": false,
                                 "Cursed": false,
                                 "TileLoc": {
                                   "X": 0,
                                   "Y": 0
-                                }
+                                },
+                                "HiddenValue": ""
                               },
                               "Rate": 10
                             }
@@ -9617,12 +9395,12 @@
                                 "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
                                 "Value": "berry_oran",
                                 "Amount": 0,
-                                "Hidden": false,
                                 "Cursed": false,
                                 "TileLoc": {
                                   "X": 0,
                                   "Y": 0
-                                }
+                                },
+                                "HiddenValue": ""
                               },
                               "Rate": 10
                             }
@@ -9680,12 +9458,12 @@
                                 "$type": "RogueEssence.Dungeon.MapItem, RogueEssence",
                                 "Value": "berry_leppa",
                                 "Amount": 0,
-                                "Hidden": false,
                                 "Cursed": false,
                                 "TileLoc": {
                                   "X": 0,
                                   "Y": 0
-                                }
+                                },
+                                "HiddenValue": ""
                               },
                               "Rate": 10
                             }

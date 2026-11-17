@@ -23,6 +23,9 @@ function guilde_destiny_chambre_heros.Enter(map)
   sortie_en_cours = false; GAME:FadeIn(20)
 end
 
+function guilde_destiny_chambre_heros.GameSave(map)
+end
+
 function guilde_destiny_chambre_heros.GameLoad(map)
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_chambre_heros')
   suivi_interieurs.Activer(map)
