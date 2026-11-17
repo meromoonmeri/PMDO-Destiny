@@ -1,6 +1,7 @@
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
 local guilde_decors = require 'destiny.guilde_destiny_decors'
+local guilde_effectif = require 'destiny.guilde_effectif'
 
 local guilde_destiny_refectoire = {}
 local sortie_en_cours = false
@@ -12,6 +13,8 @@ function guilde_destiny_refectoire.Init(map)
     map.EdgeView = (RogueEssence and RogueEssence.Dungeon and RogueEssence.Dungeon.BaseMap and RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp) or 1
   end
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_refectoire')
+  -- Repas de la Guilde : émote « eating » en boucle pour chaque membre présent.
+  pcall(guilde_effectif.RepasImmediat)
 end
 
 function guilde_destiny_refectoire.Enter(map)
@@ -20,12 +23,14 @@ function guilde_destiny_refectoire.Enter(map)
   end
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_refectoire')
   suivi_interieurs.Activer(map)
+  pcall(guilde_effectif.RepasImmediat)
   sortie_en_cours = false; GAME:FadeIn(20)
 end
 
 function guilde_destiny_refectoire.GameLoad(map)
   pcall(guilde_decors.AppliquerAmbianceEtFenetres, map, 'guilde_destiny_refectoire')
   suivi_interieurs.Activer(map)
+  pcall(guilde_effectif.RepasImmediat)
   sortie_en_cours = false; GAME:FadeIn(20)
 end
 

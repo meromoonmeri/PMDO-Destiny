@@ -1,0 +1,23 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.EmoteData, RogueEssence",
+    "Name": {
+      "DefaultText": "Eating",
+      "LocalTexts": {
+        "fr": "Manger"
+      }
+    },
+    "Comment": "Emote de repas de la Guilde de Réverie Town, calquée sur celle d'Halcyon (FrameTime 3, LocHeight 10, AnimDir 0, 6 images 32x32). Cycles 0 = repas continu.",
+    "LocHeight": 10,
+    "Anim": {
+      "AnimIndex": "Emote_Eating",
+      "FrameTime": 3,
+      "StartFrame": -1,
+      "EndFrame": -1,
+      "AnimDir": 0,
+      "Alpha": 255,
+      "AnimFlip": 0
+    }
+  }
+}
