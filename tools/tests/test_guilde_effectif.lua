@@ -206,6 +206,8 @@ assert(compter('action', 'Gardevoir', 'Pose') == 0, 'pas de pose pour Gardevoir'
 
 -- 11. Emotes de sortie de repas, un seul cycle chacune.
 assert(compter('emote', 'Simisage', 'happy', 1) == 1, 'Simisage satisfait')
+assert(compter('emote', 'Melofee', 'happy', 1) == 1, 'Melofee satisfaite')
+assert(compter('emote', 'Melofee', 'pose_infirmiere') == 0, 'pas de calot a la fin du repas')
 assert(compter('emote', 'Dimoret', 'notice', 1) == 1, 'Dimoret a l\'affut')
 assert(compter('emote', 'Cizayox', 'happy') == 0 and compter('emote', 'Cizayox', 'notice') == 0
        and compter('emote', 'Cizayox', 'glowing') == 0, 'Cizayox sans emote de sortie')
@@ -238,4 +240,31 @@ vider()
 assert(guilde.RepasImmediat(guilde.TEAM_STAR) == 3, 'team star seule')
 assert(compter('emote', nil, 'eating') == 3)
 
-print('guilde_effectif : 15 groupes de tests OK')
+-- 16. Émotes créées pour la Guilde : la pose de service au calot.
+assert(guilde.EMOTE_REPAS == 'eating' and guilde.EMOTE_POSE == 'pose_infirmiere'
+       and guilde.EMOTE_REVEIL == 'reveil', 'identifiants des emotes')
+
+vider()
+assert(guilde.Poser(CH('Melofee'), true) == true, 'pose de service posee')
+assert(compter('action', 'Melofee', 'Pose', 3) == 1, 'corps en Pose (pose d Audino)')
+assert(compter('emote', 'Melofee', 'pose_infirmiere', 0) == 1, 'calot en boucle infinie')
+
+vider()
+assert(guilde.Poser(CH('Melofee'), false) == true)
+assert(compter('emote', 'Melofee', 'pose_infirmiere') == 0, 'sans calot sur demande')
+
+vider()
+guilde.Deposer(CH('Melofee'))
+assert(compter('emote', 'Melofee', '', 0) == 1, 'le calot disparait avec la pose')
+assert(compter('fin_anim', 'Melofee') == 1, 'corps rendu au repos')
+
+-- 17. Animer ne lance une animation que si la planche la possede vraiment.
+ANIMS_PLANCHE['Draby_CHARA'].Sleep = 4
+vider()
+assert(guilde.Animer(CH('Draby'), 'Sleep', true) == true)
+assert(compter('anim', 'Draby', 'Sleep', true) == 1, 'Sleep joue pour Draby')
+vider()
+assert(guilde.Animer(CH('Cizayox'), 'Sleep', true) == false, 'Sleep absent pour Cizayox')
+assert(compter('anim') == 0, 'aucune animation lancee sans planche')
+
+print('guilde_effectif : 17 groupes de tests OK')

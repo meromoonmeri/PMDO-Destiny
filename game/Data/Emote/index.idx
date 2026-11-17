@@ -10,8 +10,30 @@
         }
       },
       "Released": true,
-      "Comment": "Repas — Guilde de Réverie Town (calqué sur l'emote eating d'Halcyon).",
+      "Comment": "Emote de repas de la Guilde de Réverie Town, calquée sur celle d'Halcyon (FrameTime 3, LocHeight 10, AnimDir 0, 6 images 32x32). Cycles 0 = repas continu.",
       "SortOrder": 9
+    },
+    "reveil": {
+      "Name": {
+        "DefaultText": "Wake Bell",
+        "LocalTexts": {
+          "fr": "Réveil"
+        }
+      },
+      "Released": true,
+      "Comment": "Cloche de réveil de la Guilde, jouée par Mélofée (tournée du matin).",
+      "SortOrder": 10
+    },
+    "pose_infirmiere": {
+      "Name": {
+        "DefaultText": "Nurse Cap",
+        "LocalTexts": {
+          "fr": "Calot d'infirmière"
+        }
+      },
+      "Released": true,
+      "Comment": "Pose de service de Mélofée : calot posé sur la tête (LocHeight 6), à la manière de la pose d'Audino dans Halcyon.",
+      "SortOrder": 11
     }
   }
 }

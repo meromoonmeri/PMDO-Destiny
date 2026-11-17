@@ -1,0 +1,23 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.EmoteData, RogueEssence",
+    "Name": {
+      "DefaultText": "Wake Bell",
+      "LocalTexts": {
+        "fr": "Réveil"
+      }
+    },
+    "Comment": "Cloche de réveil de la Guilde, jouée par Mélofée (tournée du matin).",
+    "LocHeight": 10,
+    "Anim": {
+      "AnimIndex": "Emote_Reveil",
+      "FrameTime": 4,
+      "StartFrame": -1,
+      "EndFrame": -1,
+      "AnimDir": 0,
+      "Alpha": 255,
+      "AnimFlip": 0
+    }
+  }
+}

@@ -71,10 +71,16 @@ POLICE_GRAS = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 
 EMOTES = {
     'eating': ('game/Content/Particle/Emote_Eating.dir', 3, 10),
+    'reveil': ('game/Content/Particle/Emote_Reveil.dir', 4, 10),
+    'pose_infirmiere': ('game/Content/Particle/Emote_Pose_Infirmiere.dir', 12, 6),
     'happy': ('base/Content/Particle/Emote_Happy.dir', 10, 16),
     'notice': ('base/Content/Particle/Emote_Notice.dir', 1, 4),
     'glowing': ('base/Content/Particle/Emote_Glowing.dir', 2, 4),
+    'exclaim': ('base/Content/Particle/Emote_Exclaim.dir', 4, 10),
 }
+
+# Bandes montrées sous le titre : les trois émotes du mod.
+PLANCHES = ['eating', 'reveil', 'pose_infirmiere']
 
 
 def b64_png(image: Image.Image) -> str:
@@ -154,11 +160,13 @@ def construire_donnees() -> dict:
         m['idle'] = idle
         m['manger'] = animation_sprite(m['id'], 'Eat', 'Eat-Anim.png')
         m['pose_anim'] = animation_sprite(m['id'], 'Pose', 'Pose-Anim.png')
+        m['sommeil'] = animation_sprite(m['id'], 'Sleep', 'Sleep-Anim.png')
+        m['reveil_anim'] = animation_sprite(m['id'], 'Wake', 'Wake-Anim.png')
         # Mélofée garde sa pose de service : on la montre avec sa vraie planche
         # si elle existe, sinon avec son attente (repli du code Lua).
         membres.append(m)
 
-    return {'emotes': emotes, 'membres': membres}
+    return {'emotes': emotes, 'membres': membres, 'planches': PLANCHES}
 
 
 # --------------------------------------------------------------------------- #
@@ -212,6 +220,12 @@ GABARIT = """<!doctype html>
   .notes b{color:var(--texte)}
   .notes code{background:#0b1116;border:1px solid var(--trait);border-radius:5px;padding:1px 5px;
               font-size:12.5px;color:var(--accent)}
+  .reveil{margin:6px 32px 20px;background:var(--bande);border:1px solid var(--trait);
+          border-radius:14px;padding:16px 18px}
+  .reveil h2{margin:0 0 4px;font-size:17px}
+  .reveil .sous{margin:0 0 10px}
+  .reveil canvas{display:block;width:100%;height:auto;background:radial-gradient(circle at 50% 70%,#22303b 0%,#161f27 72%);
+                 border-radius:10px;border:1px solid #23303a}
   .planche{display:flex;gap:12px;flex-wrap:wrap;margin:0 32px 6px}
   .planche figure{margin:0;background:var(--bande);border:1px solid var(--trait);border-radius:12px;
                   padding:10px}
@@ -249,6 +263,15 @@ GABARIT = """<!doctype html>
 </header>
 
 <div class="planche" id="planche"></div>
+
+<section class="reveil">
+  <h2>Séquence de réveil — <code>guilde_reveil.Reveiller()</code></h2>
+  <p class="sous">Mélofée prend la pose de service, fait sonner la cloche (2 cycles de 32 images),
+  Draby passe de <b>Sleep</b> à <b>Wake</b>, puis le calot d'infirmière reprend sa place : la cloche
+  et le calot ne peuvent pas se superposer, un personnage ne porte qu'une émote à la fois.</p>
+  <canvas id="scene-reveil" width="1120" height="300"></canvas>
+</section>
+
 <section class="grille" id="grille"></section>
 
 <section class="notes">
@@ -287,6 +310,8 @@ for(const m of DONNEES.membres){
   charger(m.idle.uri);
   if(m.manger) charger(m.manger.uri);
   if(m.pose_anim) charger(m.pose_anim.uri);
+  if(m.sommeil) charger(m.sommeil.uri);
+  if(m.reveil_anim) charger(m.reveil_anim.uri);
 }
 
 const TICK = 1000/60;          // une image du jeu = 1/60 s
@@ -378,11 +403,18 @@ class Convive{
     let emote = null, tEmote = 0;
     if(this.phase === 'repas'){ emote = DONNEES.emotes.eating; tEmote = this.phaseT; }
     else if(this.phase === 'sortie'){ emote = DONNEES.emotes[this.d.apres]; tEmote = this.phaseT; }
+    else if(this.phase === 'repos' && this.d.pose){
+      // Pose de service : le calot reste posé tant qu'elle est de garde.
+      emote = DONNEES.emotes.pose_infirmiere; tEmote = this.phaseT;
+    }
 
     if(emote){
       const i = Math.floor(tEmote / emote.frameTime) % emote.images;
       const ew = emote.largeur * ECHELLE, eh = emote.hauteur * ECHELLE;
-      const centreY = spriteY + lh/2 - emote.locHeight * ECHELLE;
+      // Le moteur ancre l'émote sur le point « tête » de la planche, puis la
+      // remonte de LocHeight (GroundChar.Draw : ActionPointType.Head).
+      const tete = spriteY + lh * 0.30;
+      const centreY = tete - emote.locHeight * ECHELLE;
       ctx.drawImage(charger(emote.uri), i*emote.largeur, 0, emote.largeur, emote.hauteur,
                     cx - ew/2, centreY - eh/2, ew, eh);
     }
@@ -430,28 +462,124 @@ DONNEES.membres.forEach((m, i) => {
   convives.push(convive);
 });
 
+// --- scène de réveil -------------------------------------------------------
+class SceneReveil{
+  constructor(){
+    this.melofee = DONNEES.membres.find(m => m.id === 'Melofee');
+    this.dormeur = DONNEES.membres.find(m => m.id === 'Draby');
+    this.canvas = document.getElementById('scene-reveil');
+    this.ctx = this.canvas.getContext('2d');
+    this.reinitialiser();
+  }
+  reinitialiser(){ this.t = 0; this.phase = 'sommeil'; this.phaseT = 0; this.etat = 'sommeil'; }
+  avancer(){
+    this.t += 1; this.phaseT += 1;
+    if(this.phase === 'sommeil'){
+      this.etat = 'Draby dort · Mélofée veille';
+      if(this.phaseT >= 60){ this.phase = 'cloche'; this.phaseT = 0; }
+    } else if(this.phase === 'cloche'){
+      this.etat = 'la cloche sonne (2 cycles)';
+      if(this.phaseT >= 64){ this.phase = 'reveil'; this.phaseT = 0; }
+    } else if(this.phase === 'reveil'){
+      this.etat = 'Draby se réveille';
+      if(this.phaseT >= 48){ this.phase = 'service'; this.phaseT = 0; }
+    } else {
+      this.etat = 'reprise du service';
+      if(this.phaseT >= 90){ this.reinitialiser(); }
+    }
+  }
+  image(anim, t){
+    if(!anim || !anim.durees || !anim.durees.length) return 0;
+    const total = anim.durees.reduce((a,b)=>a+b,0);
+    let r = t % total;
+    for(let i=0;i<anim.durees.length;i++){ if(r < anim.durees[i]) return i; r -= anim.durees[i]; }
+    return 0;
+  }
+  personnage(anim, index, cx, sol, emote, emoteIndex, echelle){
+    const ctx = this.ctx;
+    const lw = anim.largeur*echelle, lh = anim.hauteur*echelle;
+    const x = cx - lw/2, y = sol - lh;
+    ctx.drawImage(charger(anim.uri), index*anim.largeur, 0, anim.largeur, anim.hauteur, x, y, lw, lh);
+    if(emote){
+      const ew = emote.largeur*echelle, eh = emote.hauteur*echelle;
+      const tete = y + lh*0.30;
+      ctx.drawImage(charger(emote.uri), emoteIndex*emote.largeur, 0, emote.largeur, emote.hauteur,
+                    cx - ew/2, tete - emote.locHeight*echelle - eh/2, ew, eh);
+    }
+  }
+  dessiner(){
+    const ctx = this.ctx, L = this.canvas.width, H = this.canvas.height, E = 4;
+    ctx.clearRect(0,0,L,H);
+    const sol = H - 62;
+    ctx.strokeStyle = 'rgba(126,217,176,.20)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(40, sol); ctx.lineTo(L-40, sol); ctx.stroke();
+    ctx.imageSmoothingEnabled = false;
+
+    // Mélofée : pose de service, cloche pendant l'appel
+    const e = DONNEES.emotes;
+    const mel = this.melofee;
+    const animMel = (mel.pose_anim && this.phase !== 'sommeil') ? mel.pose_anim : mel.idle;
+    const cloche = e.reveil;
+    const enCloche = this.phase === 'cloche' || this.phase === 'reveil';
+    const emoteMel = enCloche ? cloche : (this.phase === 'service' || this.phase === 'sommeil' ? e.pose_infirmiere : null);
+    const tEmote = enCloche ? this.phaseT + (this.phase === 'reveil' ? 64 : 0) : this.phaseT;
+    this.personnage(animMel, this.image(animMel, this.t),
+                    L*0.33, sol,
+                    emoteMel, emoteMel ? Math.floor(tEmote / emoteMel.frameTime) % emoteMel.images : 0, E);
+    ctx.fillStyle = '#8fa6b8'; ctx.font = '13px "DejaVu Sans",system-ui'; ctx.textAlign = 'center';
+    ctx.fillText(mel.nom + ' — pose de service', L*0.33, sol + 30);
+
+    // Draby : sommeil, réveil, debout
+    const dr = this.dormeur;
+    let animDr = dr.idle, tAnim = this.t, emoteDr = null, tEmoteDr = 0;
+    if(this.phase === 'sommeil' && dr.sommeil){ animDr = dr.sommeil; }
+    else if(this.phase === 'cloche' && dr.sommeil){ animDr = dr.sommeil; }
+    else if(this.phase === 'reveil'){
+      if(dr.reveil_anim){ animDr = dr.reveil_anim; tAnim = this.phaseT; }
+      else { emoteDr = e.exclaim; tEmoteDr = this.phaseT; }
+    }
+    this.personnage(animDr, this.image(animDr, tAnim), L*0.66, sol,
+                    emoteDr, emoteDr ? Math.floor(tEmoteDr / emoteDr.frameTime) % emoteDr.images : 0, E);
+    ctx.fillText(dr.nom + ' — ' + (this.phase === 'sommeil' || this.phase === 'cloche' ? 'endormi' :
+                 this.phase === 'reveil' ? 'se réveille' : 'debout'), L*0.66, sol + 30);
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#7ed9b0'; ctx.font = 'bold 14px "DejaVu Sans",system-ui';
+    ctx.fillText('t = ' + this.t + ' images · ' + this.etat, 20, 28);
+  }
+}
+
 // bande des 6 images de l'émote de repas
 const planche = document.getElementById('planche');
-const eating = DONNEES.emotes.eating;
-for(let i=0;i<eating.images;i++){
-  const fig = document.createElement('figure');
-  const c = document.createElement('canvas');
-  c.width = eating.largeur*4; c.height = eating.hauteur*4;
-  const ctx = c.getContext('2d');
-  ctx.imageSmoothingEnabled = false;
-  const img = charger(eating.uri);
-  const dessiner = () => {
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.fillStyle = '#22303b'; ctx.fillRect(0,0,c.width,c.height);
-    ctx.drawImage(img, i*eating.largeur, 0, eating.largeur, eating.hauteur, 0,0,c.width,c.height);
-  };
-  img.complete ? dessiner() : img.addEventListener('load', dessiner);
-  fig.appendChild(c);
-  const leg = document.createElement('figcaption');
-  leg.textContent = 'image ' + (i+1) + ' · t=' + (i*eating.frameTime) + '→' + (i*eating.frameTime+eating.frameTime);
-  fig.appendChild(leg);
-  planche.appendChild(fig);
+for(const nom of DONNEES.planches){
+  const em = DONNEES.emotes[nom];
+  const titre = document.createElement('div');
+  titre.style.cssText = 'flex-basis:100%;color:#8fa6b8;font-size:12px;margin:6px 0 -2px';
+  titre.textContent = nom + ' — ' + em.images + ' images · FrameTime ' + em.frameTime +
+                      ' · LocHeight ' + em.locHeight;
+  planche.appendChild(titre);
+  for(let i=0;i<em.images;i++){
+    const fig = document.createElement('figure');
+    const c = document.createElement('canvas');
+    c.width = em.largeur*4; c.height = em.hauteur*4;
+    const ctx = c.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    const img = charger(em.uri);
+    const dessiner = () => {
+      ctx.clearRect(0,0,c.width,c.height);
+      ctx.fillStyle = '#22303b'; ctx.fillRect(0,0,c.width,c.height);
+      ctx.drawImage(img, i*em.largeur, 0, em.largeur, em.hauteur, 0,0,c.width,c.height);
+    };
+    img.complete ? dessiner() : img.addEventListener('load', dessiner);
+    fig.appendChild(c);
+    const leg = document.createElement('figcaption');
+    leg.textContent = 'image ' + (i+1) + ' · t=' + (i*em.frameTime) + '→' + ((i+1)*em.frameTime);
+    fig.appendChild(leg);
+    planche.appendChild(fig);
+  }
 }
+
+const sceneReveil = new SceneReveil();
 
 // --- boucle ---------------------------------------------------------------
 let enPause = false, vitesse = 1, accumulation = 0, dernier = performance.now(), images = 0;
@@ -477,15 +605,18 @@ function boucle(maintenant){
     accumulation += ecoule * vitesse;
     while(accumulation >= TICK){
       convives.forEach(c => c.avancer());
+      sceneReveil.avancer();
       images += 1;
       accumulation -= TICK;
     }
     convives.forEach(c => { c.dessinerScene(); c.champEtat.textContent = c.etat; });
+    sceneReveil.dessiner();
     horloge.textContent = 't = ' + images + ' image' + (images>1?'s':'') + ' · ' + (images/60).toFixed(1) + ' s';
   }
   requestAnimationFrame(boucle);
 }
 convives.forEach(c => c.dessinerScene());
+sceneReveil.dessiner();
 requestAnimationFrame(boucle);
 </script>
 </body>

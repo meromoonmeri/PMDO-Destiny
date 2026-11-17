@@ -236,3 +236,94 @@ Ce que l'aperçu a confirmé, données en main :
 - **Mélofée n'a pas d'animation `Pose`** dans ces planches : en jeu, la chaîne de
   repli retombe donc sur son attente. Sa pose de service demande soit une planche
   qui possède `Pose`, soit la charsheet dédiée à la manière d'`Audino_Bed`.
+
+## 10. Les émotes créées pour la Guilde (cloche et calot)
+
+Deux émotes ont été **dessinées image par image** (`tools/creer_emotes_guilde.py`,
+ré-exécutable, sans dépendance au-delà de Pillow) et enregistrées comme les autres :
+
+| Clé | Asset | Images | FrameTime | LocHeight | Rôle |
+|---|---|---|---|---|---|
+| `reveil` | `Emote_Reveil.dir` | 8 | 4 | 10 | cloche de réveil de la tournée du matin |
+| `pose_infirmiere` | `Emote_Pose_Infirmiere.dir` | 4 | 12 | 6 | **calot d'infirmière**, pose de service de Mélofée |
+
+Format écrit, celui du moteur (`DirSheet.Load`) :
+`Int64 taille PNG` + PNG + `Int32 largeur, hauteur, directions(0), images`.
+
+### Pourquoi une émote et pas une charsheet comme `Audino_Bed`
+
+Dans Halcyon, la « pose spéciale » d'Audino est portée par une **charsheet dédiée**
+(`Audino_Bed`), parce qu'Audino y est *allongée dans un lit* : la planche elle-même
+est redessinée. Ici, ce n'est pas transposable de façon sûre :
+
+- `GraphicsManager.GetChara` lit `Content/Chara/{espèce}.chara` en **indexant des
+  positions d'octets** (`CharaIndex.GetPosition(espèce, forme, peau, genre)`) puis
+  désérialise en binaire (`CharSheet.Load(BinaryReader)`) ;
+- **aucun `.chara` n'est versionné** dans ce dépôt (`base/Content/Chara` vide) : il
+  n'y a pas de fichier modèle à copier, ni d'index à respecter ;
+- en fabriquer un reviendrait à livrer une planche complète d'espèce, non testable
+  ici (aucun moyen de vérifier le rendu en jeu dans ce dépôt).
+
+### Ce qui rend le calot possible : le point d'ancrage « tête »
+
+`GroundChar.Draw` n'ancre pas les émotes au centre du sprite :
+
+```csharp
+Loc head = currentCharAction.GetActionPoint(sheet, ActionPointType.Head);
+currentEmote.Draw(spriteBatch, offset - head - drawOffset + Loc.UnitY * LocHeight);
+```
+
+L'émote est donc centrée sur le **point d'action « tête »** de la planche, puis
+remontée de `LocHeight`. Avec `LocHeight 6`, le calot — dessiné dans le bas de sa
+cellule 32×32 — vient se poser sur la tête au lieu de flotter au-dessus. Vérifié
+sur la vraie planche de Mélofée (SpriteCollab) en comparant 0, 4, 6 et 9 :
+**0 = sur le visage, 4 = sur les yeux, 6 = juste au-dessus des yeux, 9 = flottant.**
+Le choix retenu est **6** ; c'est un simple nombre dans `pose_infirmiere.json`,
+donc ajustable espèce par espèce si le point « tête » réel diffère.
+
+### La scène de réveil (`game/Data/Script/destiny/guilde_reveil.lua`)
+
+```lua
+local reveil = require 'destiny.guilde_reveil'
+reveil.Reveiller(melofee, draby)          -- un dormeur
+reveil.Tournee(melofee, {'Draby','Noctali','Capumain'}, {pause = 12})  -- la tournée
+```
+
+Déroulé, calé sur les planches :
+
+1. le dormeur passe en `Sleep` (s'il l'a) et attend `SOMMEIL = 30` images ;
+2. Mélofée prend la pose de service (`PoseGroundAction`, la pose d'Audino) et la
+   cloche sonne `SONNERIES = 2` cycles, soit `SONNERIE = 64` images (2 × 8 × 4) ;
+3. le dormeur joue `Wake` — ou, s'il ne l'a pas, l'émote `exclaim` (sursaut) —
+   puis `REVEIL = 24` images ;
+4. on rend le corps au repos et **le calot reprend sa place**.
+
+**Contrainte du moteur respectée** : `GroundChar.StartEmote` remplace l'émote en
+cours, un personnage n'en porte donc qu'une. La cloche et le calot sont joués
+l'un après l'autre, jamais ensemble ; le test vérifie qu'il n'y a que deux émotes
+posées sur Mélofée et que le calot revient *après* la cloche.
+
+### Retouches induites dans l'effectif
+
+- `Poser(acteur, avec_calot)` : pose du corps (`PoseGroundAction`, puis `Pose`,
+  puis `Idle`) **et** calot, désactivable quand une autre émote doit passer ;
+- `Deposer(acteur)` efface désormais aussi l'émote — sinon le calot resterait
+  flotter seul après la pose ;
+- `FinRepas` rejoue l'émote de sortie du membre puis remet le **corps** en pose,
+  **sans** calot : le calot signale la prise de garde, pas la fin d'un repas ;
+- `Animer(acteur, nom, boucle)` centralise le test « la planche a-t-elle vraiment
+  cette animation ? » (`GetReferencedAnimIndex`), utilisé pour `Eat`, `Sleep`,
+  `Wake` et `Pose`.
+
+### Vérifications ajoutées
+
+- Lua, 17 groupes pour l'effectif (+2 : calot posé/retiré, `Animer` qui refuse une
+  animation absente) et **4 groupes** pour `guilde_reveil` (ordre complet du
+  réveil, une seule émote à la fois, repli `exclaim` sans `Wake`, tournée qui
+  saute l'infirmière et les absents) ;
+- Python : les trois données (`FrameTime`/`LocHeight`/`AnimIndex`), les trois
+  assets (32×32, 0 direction, 6/8/4 images), l'index (3 clés, `SortOrder` 9→11,
+  aucune collision avec les 9 émotes de base) et le câblage des scripts ;
+- aperçu (`tools/apercu_emotes_guilde.py`) : les trois bandes d'images du mod et
+  une **scène de réveil animée** (Mélofée posée, cloche, Draby qui se réveille,
+  calot qui revient).

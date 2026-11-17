@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vérifie l'emote de repas « eating » (calquée sur Halcyon) et l'effectif de la Guilde."""
+"""Vérifie les émotes de la Guilde (repas, réveil, calot) et l'effectif."""
 from __future__ import annotations
 
 import json
@@ -9,79 +9,96 @@ from pathlib import Path
 from executer_lua import run
 
 ROOT = Path(__file__).resolve().parents[2]
-EMOTE_JSON = ROOT / 'game/Data/Emote/eating.json'
-EMOTE_INDEX = ROOT / 'game/Data/Emote/index.idx'
-EMOTE_DIR = ROOT / 'game/Content/Particle/Emote_Eating.dir'
+EMOTES_DIR = ROOT / 'game/Data/Emote'
+EMOTE_INDEX = EMOTES_DIR / 'index.idx'
+PARTICULES = ROOT / 'game/Content/Particle'
 SCRIPT = ROOT / 'game/Data/Script/destiny/guilde_effectif.lua'
+REVEIL = ROOT / 'game/Data/Script/destiny/guilde_reveil.lua'
 
-# Les 9 emotes d'origine du PMDO, qui doivent rester visibles une fois
-# l'index du mod composé par-dessus celui de base.
+# Les 9 emotes d'origine du PMDO : elles doivent rester visibles une fois
+# l'index du mod composé par-dessus celui de base (le moteur compose clé par clé).
 BASE_EMOTES = ['angry', 'exclaim', 'glowing', 'happy', 'notice', 'question',
                'shock', 'sweatdrop', 'sweating']
 
+# clé -> (fichier .dir, images, FrameTime, LocHeight)
+ATTENDU = {
+    'eating': ('Emote_Eating', 6, 3, 10),
+    'reveil': ('Emote_Reveil', 8, 4, 10),
+    'pose_infirmiere': ('Emote_Pose_Infirmiere', 4, 12, 6),
+}
 
-def infos_dir(chemin: Path) -> tuple[int, int, int, int]:
+
+def entete_dir(chemin: Path) -> tuple[int, int, int, int]:
     """(largeur, hauteur, directions, images) d'un DirSheet de particule."""
     octets = chemin.read_bytes()
-    assert len(octets) > 12, chemin
+    assert len(octets) > 16, chemin
     (taille_png,) = struct.unpack('<q', octets[:8])
     assert octets[8:16] == b'\x89PNG\r\n\x1a\n', f'PNG attendu dans {chemin.name}'
-    offset = 8 + taille_png
-    largeur, hauteur, dirs, frames = struct.unpack('<iiii', octets[offset:offset + 16])
+    largeur, hauteur, dirs, frames = struct.unpack('<iiii', octets[8 + taille_png:8 + taille_png + 16])
     return largeur, hauteur, dirs, frames
 
 
-def verifier_donnee() -> None:
-    donnee = json.loads(EMOTE_JSON.read_text(encoding='utf-8-sig'))
-    assert donnee['Version'], 'Version obligatoire'
-    obj = donnee['Object']
-    assert obj['$type'] == 'RogueEssence.Data.EmoteData, RogueEssence', obj['$type']
-    assert obj['Name']['DefaultText'] == 'Eating'
-    assert obj['LocHeight'] == 10, 'hauteur calquée sur Halcyon (10)'
-    anim = obj['Anim']
-    assert anim['AnimIndex'] == 'Emote_Eating'
-    assert anim['FrameTime'] == 3, 'cadence Halcyon'
-    assert anim['StartFrame'] == -1 and anim['EndFrame'] == -1, 'toute l\'animation'
-    assert anim['AnimDir'] == 0, 'vers le bas'
-    assert anim['Alpha'] == 255 and anim['AnimFlip'] == 0
-
+def verifier_donnees() -> None:
     index = json.loads(EMOTE_INDEX.read_text(encoding='utf-8-sig'))
     cles = [k for k in index['Object'] if not k.startswith('$')]
-    assert cles == ['eating'], cles
-    entree = index['Object']['eating']
-    assert entree['Released'] is True
-    assert entree['Name']['DefaultText'] == 'Eating'
-    assert entree['SortOrder'] == 9, 'après les neuf emotes de base'
+    assert cles == list(ATTENDU), f'index du mod : {cles}'
+    assert index['Object']['$type'].startswith('System.Collections.Generic.Dictionary'), 'type de l\'index'
+
+    for ordre, (cle, (anim, images, frame_time, loc_height)) in enumerate(ATTENDU.items(), start=9):
+        donnee = json.loads((EMOTES_DIR / f'{cle}.json').read_text(encoding='utf-8-sig'))
+        assert donnee['Version'], cle
+        obj = donnee['Object']
+        assert obj['$type'] == 'RogueEssence.Data.EmoteData, RogueEssence', cle
+        assert obj['LocHeight'] == loc_height, (cle, obj['LocHeight'])
+        assert obj['Name']['LocalTexts'].get('fr'), f'nom français manquant : {cle}'
+        anim_data = obj['Anim']
+        assert anim_data['AnimIndex'] == anim, (cle, anim_data['AnimIndex'])
+        assert anim_data['FrameTime'] == frame_time, (cle, anim_data['FrameTime'])
+        assert anim_data['StartFrame'] == -1 and anim_data['EndFrame'] == -1, cle
+        assert anim_data['AnimDir'] == 0 and anim_data['Alpha'] == 255 and anim_data['AnimFlip'] == 0, cle
+
+        entree = index['Object'][cle]
+        assert entree['Released'] is True, cle
+        assert entree['SortOrder'] == ordre, (cle, entree['SortOrder'])
+        assert entree['Name'] == obj['Name'], cle
 
     base = json.loads((ROOT / 'base/Data/Emote/index.idx').read_text(encoding='utf-8-sig'))
     base_cles = sorted(k for k in base['Object'] if not k.startswith('$'))
     assert base_cles == BASE_EMOTES, base_cles
-    # L'index du mod ne doit jamais masquer une émote de base : l'unicité de la
-    # clé ajoutée suffit, le moteur compose clé par clé.
-    assert 'eating' not in base_cles, 'eating ne doit pas déjà exister dans base'
+    assert not set(ATTENDU) & set(base_cles), 'aucune clé du mod ne doit écraser une émote de base'
 
 
-def verifier_asset() -> None:
-    assert EMOTE_DIR.exists(), 'Emote_Eating.dir doit accompagner la donnée'
-    largeur, hauteur, dirs, frames = infos_dir(EMOTE_DIR)
-    assert (largeur, hauteur) == (32, 32), (largeur, hauteur)
-    assert dirs == 0, 'planche unique, sans directions'
-    assert frames == 6, frames
+def verifier_assets() -> None:
+    for cle, (anim, images, _frame_time, _loc_height) in ATTENDU.items():
+        chemin = PARTICULES / f'{anim}.dir'
+        assert chemin.exists(), f'{anim}.dir manquant pour {cle}'
+        largeur, hauteur, dirs, frames = entete_dir(chemin)
+        assert (largeur, hauteur) == (32, 32), (anim, largeur, hauteur)
+        assert dirs == 0, f'{anim} doit rester sans directions'
+        assert frames == images, (anim, frames, images)
 
 
-def verifier_script() -> None:
+def verifier_scripts() -> None:
     source = SCRIPT.read_text(encoding='utf-8')
-    for attendu in ('EMOTE_REPAS', 'MEMBRES', 'ORDRE', 'TEAM_STAR',
-                    'Manger', 'Repas', 'FinRepas', 'Poser', 'PoseDeService'):
+    for attendu in ('EMOTE_REPAS', 'EMOTE_POSE', 'EMOTE_REVEIL', 'MEMBRES', 'ORDRE', 'TEAM_STAR',
+                    'Manger', 'Repas', 'RepasImmediat', 'FinRepas', 'Animer', 'Poser',
+                    'Deposer', 'PoseDeService'):
         assert attendu in source, f'{attendu} manquant dans guilde_effectif.lua'
-    assert "EMOTE_REPAS = 'eating'" in source
-    # La pose de Mélofée reprend le mécanisme d'Audino dans Halcyon.
+    assert "EMOTE_POSE = 'pose_infirmiere'" in source
+    assert "EMOTE_REVEIL = 'reveil'" in source
+    # La pose reprend le mécanisme de la pose d'Audino dans Halcyon.
     assert 'PoseGroundAction' in source, 'pose via PoseGroundAction'
-    # Le chargement effectif du module (test Lua) garantit qu'aucun identifiant
-    # accentué ne casse le parseur ; les libellés français restent dans les
-    # chaînes, jamais dans les noms de variables.
     assert 'Maîtresse de guilde' in source, 'libellés français conservés'
+
+    reveil = REVEIL.read_text(encoding='utf-8')
+    for attendu in ('Reveiller', 'Tournee', 'SONNERIES', 'EMOTE_REVEIL', "'Sleep'", "'Wake'"):
+        assert attendu in reveil, f'{attendu} manquant dans guilde_reveil.lua'
+    # Une seule émote à la fois : le calot ne revient qu'après la cloche.
+    assert reveil.index('EMOTE_REVEIL') < reveil.rindex('Poser(infirmiere, true)'), \
+        'le calot de service doit être reposé après la cloche'
+
     run(Path(__file__).with_suffix('.lua'), ROOT)
+    run(ROOT / 'tools/tests/test_guilde_reveil.lua', ROOT)
 
 
 def verifier_refectoire() -> None:
@@ -92,11 +109,11 @@ def verifier_refectoire() -> None:
 
 
 def main() -> None:
-    verifier_donnee()
-    verifier_asset()
-    verifier_script()
+    verifier_donnees()
+    verifier_assets()
+    verifier_scripts()
     verifier_refectoire()
-    print('test_guilde_effectif : donnée, asset, script et comportement OK')
+    print('test_guilde_effectif : émotes, assets, scripts et comportement OK')
 
 
 if __name__ == '__main__':

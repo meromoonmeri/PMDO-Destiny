@@ -29,6 +29,11 @@
 local guilde_effectif = {}
 
 guilde_effectif.EMOTE_REPAS = 'eating'
+-- Pose de service de Mélofée : calot posé sur la tête (LocHeight 6), créé pour
+-- imiter la pose spéciale d'Audino dans Halcyon.
+guilde_effectif.EMOTE_POSE = 'pose_infirmiere'
+-- Cloche de réveil, jouée par l'infirmière à la tournée du matin.
+guilde_effectif.EMOTE_REVEIL = 'reveil'
 -- 18 images par bouchée (6 images x FrameTime 3), valeur utile pour caler
 -- les pauses d'une scène de repas sur l'animation réelle.
 guilde_effectif.IMAGES_PAR_BOUCHEE = 18
@@ -217,9 +222,18 @@ local function animation_disponible(acteur, nom)
   return dispo
 end
 
+-- Joue une animation de la planche de l'espèce si elle existe réellement.
+-- Renvoie true quand l'animation a été lancée, false quand il faut se rabattre
+-- sur une émote ou sur l'attente (cas de la plupart des espèces).
+function guilde_effectif.Animer(acteur, nom, boucle)
+  if not animation_disponible(acteur, nom) then return false end
+  return (pcall(function() GROUND:CharSetAnim(acteur, nom, boucle ~= false) end))
+end
+
 -- Pose figée de service : mécanisme exact de la pose d'Audino dans Halcyon.
-function guilde_effectif.Poser(acteur)
+function guilde_effectif.Poser(acteur, avec_calot)
   if acteur == nil then return false end
+  if avec_calot == nil then avec_calot = true end
   local pose_faite = false
   pcall(function()
     local gm = RogueEssence.Content.GraphicsManager
@@ -230,18 +244,26 @@ function guilde_effectif.Poser(acteur)
       pose_faite = true
     end
   end)
-  if pose_faite then return true end
-  if animation_disponible(acteur, 'Pose') then
-    local ok = pcall(function() GROUND:CharSetAnim(acteur, 'Pose', true) end)
-    if ok then return true end
+  if not pose_faite then
+    pose_faite = guilde_effectif.Animer(acteur, 'Pose', true)
   end
-  -- Dernier repli : l'attente neutre, pour ne jamais laisser le PNJ figé sur
-  -- une image vide.
-  return (pcall(function() GROUND:CharSetAnim(acteur, 'Idle', true) end))
+  if not pose_faite then
+    -- Dernier repli : l'attente neutre, pour ne jamais laisser le PNJ figé sur
+    -- une image vide.
+    pcall(function() GROUND:CharSetAnim(acteur, 'Idle', true) end)
+  end
+  -- Le calot est une émote : une seule émote à la fois par personnage, c'est
+  -- pourquoi la cloche de réveil doit d'abord céder la place (cf. guilde_reveil).
+  if avec_calot then
+    pcall(function() GROUND:CharSetEmote(acteur, guilde_effectif.EMOTE_POSE, 0) end)
+  end
+  return pose_faite
 end
 
 function guilde_effectif.Deposer(acteur)
   if acteur == nil then return false end
+  -- Le calot doit disparaître avec la pose, sinon il resterait flotter seul.
+  pcall(function() GROUND:CharSetEmote(acteur, '', 0) end)
   return (pcall(function() GROUND:CharEndAnim(acteur) end))
 end
 
@@ -269,9 +291,7 @@ function guilde_effectif.Manger(acteur, reference, cycles)
   if not ok then return false end
   -- Le corps mâche aussi quand la planche de l'espèce a l'animation « Eat »
   -- (sinon le personnage garde simplement son attente).
-  if animation_disponible(acteur, 'Eat') then
-    pcall(function() GROUND:CharSetAnim(acteur, 'Eat', true) end)
-  end
+  guilde_effectif.Animer(acteur, 'Eat', true)
   return true
 end
 
@@ -326,13 +346,17 @@ function guilde_effectif.FinRepas(liste)
   local presents = guilde_effectif.Acteurs(liste)
   for _, entree in ipairs(presents) do
     local acteur, membre = entree.acteur, entree.membre
+    -- Une seule émote par personnage : on efface celle du repas, on rend le
+    -- corps au repos, puis on laisse l'émote de sortie du membre.
     pcall(function() GROUND:CharSetEmote(acteur, '', 0) end)
-    guilde_effectif.Deposer(acteur)
+    pcall(function() GROUND:CharEndAnim(acteur) end)
     if membre.apres ~= nil then
       pcall(function() GROUND:CharSetEmote(acteur, membre.apres, 1) end)
     end
     if membre.pose == true then
-      guilde_effectif.Poser(acteur)
+      -- Corps en pose de service, mais sans le calot : celui-ci signale la
+      -- prise de garde (PoseDeService), pas la fin d'un repas.
+      guilde_effectif.Poser(acteur, false)
     end
   end
   return #presents
