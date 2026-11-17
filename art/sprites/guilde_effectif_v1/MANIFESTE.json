@@ -1,0 +1,457 @@
+{
+  "animations": [
+    "Eat",
+    "Wake",
+    "Sleep",
+    "Pose"
+  ],
+  "frameTypes": {
+    "Eat": 48,
+    "Wake": 47,
+    "Sleep": 3,
+    "Pose": 50
+  },
+  "membres": {
+    "Gardevoir": {
+      "dossier": "0282_Gardevoir",
+      "dex": "0282",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Canarticho": {
+      "dossier": "0083_Canarticho",
+      "dex": "0083",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            24,
+            24
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Simisage": {
+      "dossier": "0512_Simisage",
+      "dex": "0512",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            32,
+            48
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            32,
+            56
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            56
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            32,
+            56
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Melofee": {
+      "dossier": "0035_Melofee",
+      "dex": "0035",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            24,
+            24
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Cizayox": {
+      "dossier": "0212_Cizayox",
+      "dex": "0212",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            40,
+            40
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            32,
+            64
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            64
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            32,
+            64
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Noctali": {
+      "dossier": "0197_Noctali",
+      "dex": "0197",
+      "animations": {
+        "Eat": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 4,
+          "frameType": 48,
+          "source": "SpriteCollab"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 6,
+          "frameType": 47,
+          "source": "SpriteCollab"
+        },
+        "Sleep": {
+          "cellule": [
+            32,
+            32
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Pose": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 5,
+          "frameType": 50,
+          "source": "SpriteCollab"
+        }
+      }
+    },
+    "Dimoret": {
+      "dossier": "0461_Dimoret",
+      "dex": "0461",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            32,
+            48
+          ],
+          "images": 2,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            48
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            32,
+            48
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Draby": {
+      "dossier": "0371_Draby",
+      "dex": "0371",
+      "animations": {
+        "Eat": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 4,
+          "frameType": 48,
+          "source": "SpriteCollab"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 5,
+          "frameType": 47,
+          "source": "SpriteCollab"
+        },
+        "Sleep": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Pose": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 3,
+          "frameType": 50,
+          "source": "SpriteCollab"
+        }
+      }
+    },
+    "Pandespiegle": {
+      "dossier": "0674_Pandespiegle",
+      "dex": "0674",
+      "animations": {
+        "Sleep": {
+          "cellule": [
+            24,
+            32
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Eat": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 3,
+          "frameType": 48,
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+        },
+        "Wake": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 3,
+          "frameType": 47,
+          "source": "derivee",
+          "recette": "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks"
+        },
+        "Pose": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 1,
+          "frameType": 50,
+          "source": "derivee",
+          "recette": "Idle image 1 tenue — 1 image de 30 ticks"
+        }
+      }
+    },
+    "Capumain": {
+      "dossier": "0190_Capumain",
+      "dex": "0190",
+      "animations": {
+        "Eat": {
+          "cellule": [
+            24,
+            40
+          ],
+          "images": 4,
+          "frameType": 48,
+          "source": "SpriteCollab"
+        },
+        "Wake": {
+          "cellule": [
+            32,
+            40
+          ],
+          "images": 5,
+          "frameType": 47,
+          "source": "SpriteCollab"
+        },
+        "Sleep": {
+          "cellule": [
+            32,
+            32
+          ],
+          "images": 2,
+          "frameType": 3,
+          "source": "SpriteCollab"
+        },
+        "Pose": {
+          "cellule": [
+            40,
+            40
+          ],
+          "images": 3,
+          "frameType": 50,
+          "source": "SpriteCollab"
+        }
+      }
+    }
+  }
+}

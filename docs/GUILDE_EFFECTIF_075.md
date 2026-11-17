@@ -327,3 +327,88 @@ posées sur Mélofée et que le calot revient *après* la cloche.
 - aperçu (`tools/apercu_emotes_guilde.py`) : les trois bandes d'images du mod et
   une **scène de réveil animée** (Mélofée posée, cloche, Draby qui se réveille,
   calot qui revient).
+
+## 11. Les animations de corps des dix membres
+
+Les émotes jouent au-dessus de la tête ; encore faut-il que **le corps** sache
+mâcher, dormir, se réveiller et prendre la pose. Sur les dix membres, SpriteCollab
+ne dessine `Eat`, `Wake` et `Pose` que pour **trois** d'entre eux : les sept autres
+n'avaient que `Sleep` (et les animations de combat). Même méthode que la Team
+Dazzling : on range les sources par membre dans `art/sprites/guilde_effectif_v1/`
+(`AnimData.xml` + trio `<Anim>-Anim/Shadow/Offsets.png`), prêtes pour
+`tools/ajouter_pose_chara.py`.
+
+| Membre | Dossier | Eat | Wake | Sleep | Pose |
+|---|---|---|---|---|---|
+| Gardevoir | `0282_Gardevoir/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Canarticho | `0083_Canarticho/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Simisage | `0512_Simisage/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Melofee | `0035_Melofee/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Cizayox | `0212_Cizayox/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Noctali | `0197_Noctali/` | SpriteCollab | SpriteCollab | SpriteCollab | SpriteCollab |
+| Dimoret | `0461_Dimoret/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Draby | `0371_Draby/` | SpriteCollab | SpriteCollab | SpriteCollab | SpriteCollab |
+| Pandespiegle | `0674_Pandespiegle/` | dérivée | dérivée | SpriteCollab | dérivée |
+| Capumain | `0190_Capumain/` | SpriteCollab | SpriteCollab | SpriteCollab | SpriteCollab |
+
+### Clés d'animation (lues dans `base/Base/GFXParams.xml`)
+
+| Animation | FrameType | Usage |
+|---|---:|---|
+| `Sleep` | 3 | le dormeur avant la cloche |
+| `Wake` | 47 | le réveil (`guilde_reveil`) |
+| `Eat` | 48 | la mâchoire pendant l'émote `eating` |
+| `Pose` | 50 | la pose de service, base de la pose « façon Audino » |
+
+Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordre des
+`<Action>`) : si le moteur bouge, le test casse au lieu de livrer une clé fausse.
+
+### Les sept jeux dérivés
+
+SpriteCollab ne fournit ni `Eat`, ni `Wake`, ni `Pose` pour Gardevoir, Canarticho,
+Simisage, Mélofée, Cizayox, Dimoret et Pandespiègle. Plutôt que de laisser ces PNJ
+sans animation de corps, trois animations d'attente sont **dérivées de leur propre
+planche** (`tools/constituer_animations_guilde.py`), au style et à l'échelle de
+l'espèce :
+
+- `Eat` — le balancement de l'`Idle` joué à 4 ticks par image (mâchoire rapide).
+  Aucun décalage hors cellule, donc pas de pieds rognés ;
+- `Wake` — `Sleep` (l'image de sommeil réellement dessinée), la même inclinée d'un
+  pixel, puis l'`Idle` : dormir, bouger, se lever ;
+- `Pose` — l'`Idle` tenu sur une image de 30 ticks. C'est exactement ce que fait
+  Halcyon pour ses PNJ de guilde : une pose figée, pas une animation.
+
+Chaque case « dérivée » est marquée comme telle dans le manifeste, avec sa recette,
+et se remplace sans rien casser par un vrai dessin (même nom de fichier, même
+`AnimData.xml`).
+
+### Injection dans les `.chara`
+
+```sh
+python3 tools/ajouter_pose_chara.py \
+  --chara game/Content/Chara/371.chara \
+  --sprites art/sprites/guilde_effectif_v1/0371_Draby \
+  --anim Eat --frame-type 48 --out /tmp/371.chara
+```
+
+`--anim Wake --frame-type 47`, `--anim Pose --frame-type 50` de la même façon.
+Aucun `.chara` n'étant versionné dans ce dépôt, l'injection n'a pas pu être rejouée
+ici ; le code du mod se rabat proprement tant qu'elle n'est pas faite
+(`guilde_effectif.Animer`).
+
+### Aperçus
+
+- `art/previews/guilde_effectif_v1/guilde_repas_etoiles.gif` — les dix membres qui
+  mâchent avec l'émote `eating` et les étoiles `Lucky_Chant_Star_Yellow`, comme
+  l'aperçu de la Team Dazzling ;
+- `art/previews/guilde_effectif_v1/guilde_animations_planche.png` — repas, pose de
+  service et réveil, membre par membre.
+
+### Vérifications
+
+`PYTHONPATH=tools/tests python3 tools/tests/test_animations_guilde.py` : dix
+membres × quatre animations, présence du trio Anim/Shadow/Offsets, géométrie des
+planches (multiple exact de la cellule, nombre d'images = nombre de durées),
+`Index` uniques, recette documentée pour chaque animation dérivée, et **clés
+`FrameType` recalculées depuis `GFXParams.xml`**.
+
