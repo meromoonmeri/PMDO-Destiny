@@ -200,3 +200,39 @@ PYTHONPATH=tools/tests python3 tools/tests/test_guilde_effectif.py
    animations `Pose` / `Eat` / `Sleep` ne peuvent pas être vérifiées espèce par
    espèce — le code s'en accommode (replis), mais un contrôle visuel en jeu reste
    nécessaire pour Mélofée (pose) et Draby (bouchées rapides).
+
+## 9. Aperçu visuel des émotes
+
+`tools/apercu_emotes_guilde.py` rejoue le repas de chaque membre et produit deux
+artefacts autonomes (aucune ressource externe au chargement) :
+
+- `apercu_emotes_guilde.html` — aperçu **interactif** : une carte par membre, canvas
+  animé au temps du jeu (60 images/s), avec pause, relance du repas et vitesses
+  0,25× à 2×. Chaque carte affiche l'émote `eating` à la bonne hauteur (10 px),
+  le nombre de bouchées, le délai de départ, l'émote de sortie, et le libellé d'état
+  (attente / bouchée n/N / sortie / pose de service).
+- `apercu_emotes_guilde_banc.png` — banc-titre statique : une ligne par membre avec
+  son attente, les 6 images de la bouchée et son émote de sortie.
+
+```bash
+python tools/apercu_emotes_guilde.py                 # vers le dossier personnel
+python tools/apercu_emotes_guilde.py --sortie /tmp   # vers un dossier donné
+```
+
+Les planches de personnages viennent de **PMDCollab / SpriteCollab** (CC BY-NC-SA,
+aperçu local non commercial), téléchargées au premier lancement dans
+`~/.cache/spritecollab` (surchargeable par `SPRITECOLLAB_CACHE`).
+
+Ce que l'aperçu a confirmé, données en main :
+
+- l'émote `eating` ne devient visible qu'à partir de son image 4 (les trois
+  premières ne sont qu'une étincelle de 1 px) : elle est discrète à l'écran, c'est
+  bien l'asset d'Halcyon ;
+- les hauteurs diffèrent d'une émote à l'autre (`eating` 10, `happy` 16,
+  `notice`/`glowing` 4) : la donnée de chaque émote est respectée ;
+- l'animation de corps `Eat` n'existe que pour **Noctali, Draby et Capumain** dans
+  les planches SpriteCollab ; ailleurs seule l'émote joue — exactement le repli
+  prévu par `GetReferencedAnimIndex` ;
+- **Mélofée n'a pas d'animation `Pose`** dans ces planches : en jeu, la chaîne de
+  repli retombe donc sur son attente. Sa pose de service demande soit une planche
+  qui possède `Pose`, soit la charsheet dédiée à la manière d'`Audino_Bed`.
