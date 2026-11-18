@@ -92,6 +92,12 @@ que choisir et ordonner des poses existantes.
 | Cizayox | `Attack 9` | `Attack 0` |
 | Dimoret | `Attack 1` | `Shoot 3` |
 
+La cadence de référence est celle des membres validés : **quatre images
+de 8 ticks** (Noctali, Draby, Capumain). Gardevoir suit exactement cette
+cadence, avec sa propre séquence : repos, mains devant le visage, mains
+écartées, repos — elle ne repasse pas par le repos entre les deux gestes.
+Les cinq autres gardent 6, 8, 6 et 8 ticks, un peu plus vif.
+
 Pandespiègle garde en revanche le simple balancement, validé tel quel.
 
 

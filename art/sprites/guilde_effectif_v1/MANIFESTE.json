@@ -35,14 +35,20 @@
           "source": "poses",
           "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
-            6,
             8,
-            6,
+            8,
+            8,
             8
           ],
           "poses": [
             "Attack 2",
             "Double 0"
+          ],
+          "sequence": [
+            "repos",
+            "Double 0",
+            "Attack 2",
+            "repos"
           ]
         },
         "Wake": {
@@ -98,6 +104,12 @@
           "poses": [
             "Swing 1",
             "Attack 0"
+          ],
+          "sequence": [
+            "repos",
+            "Swing 1",
+            "repos",
+            "miroir Attack 0"
           ]
         },
         "Wake": {
@@ -153,6 +165,12 @@
           "poses": [
             "Attack 0",
             "Swing 2"
+          ],
+          "sequence": [
+            "repos",
+            "Attack 0",
+            "repos",
+            "miroir Swing 2"
           ]
         },
         "Wake": {
@@ -208,6 +226,12 @@
           "poses": [
             "Attack 3",
             "Dance 2"
+          ],
+          "sequence": [
+            "repos",
+            "Attack 3",
+            "repos",
+            "miroir Dance 2"
           ]
         },
         "Wake": {
@@ -263,6 +287,12 @@
           "poses": [
             "Attack 9",
             "Attack 0"
+          ],
+          "sequence": [
+            "repos",
+            "Attack 9",
+            "repos",
+            "miroir Attack 0"
           ]
         },
         "Wake": {
@@ -360,6 +390,12 @@
           "poses": [
             "Attack 1",
             "Shoot 3"
+          ],
+          "sequence": [
+            "repos",
+            "Attack 1",
+            "repos",
+            "miroir Shoot 3"
           ]
         },
         "Wake": {

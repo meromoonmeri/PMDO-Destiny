@@ -388,6 +388,26 @@ repos, une main, repos, l'autre main — quatre images de 6, 8, 6 et 8 ticks.
 | Cizayox | `Attack` 9 | `Attack` 0 | une pince, puis les deux |
 | Dimoret | `Attack` 1 | `Shoot` 3 | une griffe, puis les deux |
 
+### La cadence et la séquence de Gardevoir
+
+La cadence de référence est celle des membres validés : **quatre images de
+8 ticks** (Noctali, Draby, Capumain, dont le `Eat` est celui de SpriteCollab).
+
+Gardevoir ne se contente pas d'être recadrée sur ce rythme : sa séquence est
+propre (`PLANS`, `CADENCES`), et elle enchaîne son geste sans repasser par le
+repos entre les deux mains —
+
+| Image | Contenu | Ticks |
+|---|---|---:|
+| 1 | repos (`Idle`) | 8 |
+| 2 | `Double 0` : la tête s'incline, les mains montent devant le visage | 8 |
+| 3 | `Attack 2` : les mains s'écartent, elle mâche | 8 |
+| 4 | repos | 8 |
+
+Les phases de repos sont plus longues que le geste, exactement comme dans le
+`Eat` d'origine des membres validés. Les cinq autres membres gardent
+6, 8, 6 et 8 ticks, plus vif.
+
 `pose_dans_cellule()` découpe l'image dans sa planche d'origine, la recadre sur
 son dessin, puis la repose **sur le même sol et le même axe** que l'`Idle` du
 membre, ramenée dans la cellule s'il le faut. Les cellules d'`Attack` font

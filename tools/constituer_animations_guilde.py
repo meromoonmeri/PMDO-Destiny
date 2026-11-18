@@ -74,6 +74,21 @@ POSES = {
     'Cizayox':    [('Attack', 9), ('Attack', 0)],    # une pince, puis les deux
     'Dimoret':    [('Attack', 1), ('Shoot', 3)],     # une griffe, puis l'autre
 }
+# Plan de l'animation de repas, image par image (voir POSES) :
+#   None        le repos, c'est-a-dire l'Idle du membre
+#   0 ou 1      la pose retenue number 0 ou 1
+#   ('miroir', k)  la pose k, retournee sur les vues de face et de dos
+PLAN_DEFAUT = [None, 0, None, ('miroir', 1)]
+PLANS = {
+    # Gardevoir enchaine son geste sans repasser par le repos entre les deux
+    # mains : elle porte, elle mache, elle repose.
+    'Gardevoir': [None, 1, 0, None],
+}
+# Cadence : les membres valides tournent en 4 images de 8 ticks. Gardevoir suit
+# la meme cadence ; les cinq autres gardent 6/8/6/8, plus vif.
+CADENCE_DEFAUT = [6, 8, 6, 8]
+CADENCES = {'Gardevoir': [8, 8, 8, 8]}
+
 EAT_DERIVE_VALIDE = {'Pandespiegle'}
 
 BRELOOM_DEX = '0286'
@@ -486,20 +501,28 @@ def main() -> None:
                     levees.append(rangee_pose)
                 if not levees:
                     continue
-                # suite de poses : repos, une main, repos, l'autre main
-                nombre, durees = 4, [6, 8, 6, 8]
+                # suite de poses, selon le plan du membre
+                plan = PLANS.get(membre, PLAN_DEFAUT)
+                durees = list(CADENCES.get(membre, CADENCE_DEFAUT))
+                nombre = len(plan)
                 RANGEES_MIROIR = (0, 4)   # face et dos : le miroir est symetrique
                 planche = Image.new('RGBA', (largeur_idle * nombre,
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for numero, rangee in enumerate(rangees):
                     base = aligner_rangee(rangee, largeur_idle, hauteur_idle)[0]
-                    premiere = levees[0][numero]
-                    seconde = levees[1][numero]
-                    # sur les vues de profil, un miroir ferait regarder le
-                    # personnage dans le mauvais sens : la pose reste telle quelle
-                    autre = (ImageOps.mirror(seconde) if numero in RANGEES_MIROIR
-                             else seconde)
-                    for colonne, image in enumerate([base, premiere, base, autre]):
+                    suite = []
+                    for etape in plan:
+                        if etape is None:
+                            suite.append(base)
+                        elif isinstance(etape, tuple):
+                            # sur les vues de profil, un miroir ferait regarder le
+                            # personnage dans le mauvais sens : la pose reste telle
+                            pose = levees[etape[1]][numero]
+                            suite.append(ImageOps.mirror(pose) if numero in RANGEES_MIROIR
+                                         else pose)
+                        else:
+                            suite.append(levees[etape][numero])
+                    for colonne, image in enumerate(suite):
                         planche.paste(image, (colonne * largeur_idle, numero * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
@@ -507,10 +530,19 @@ def main() -> None:
                     if origine.exists():
                         (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
                 derivees[anim] = (nombre, durees)
+                noms = [f'{a} {i}' for a, i in poses]
+                sequence = []
+                for etape in plan:
+                    if etape is None:
+                        sequence.append('repos')
+                    elif isinstance(etape, tuple):
+                        sequence.append(f'miroir {noms[etape[1]]}')
+                    else:
+                        sequence.append(noms[etape])
                 obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nombre,
                                 'frameType': types.get(anim), 'source': 'poses',
                                 'recette': RECETTES['Eat_poses'], 'durees': durees,
-                                'poses': [f'{a} {i}' for a, i in poses]}
+                                'poses': noms, 'sequence': sequence}
                 continue
 
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
@@ -633,6 +665,12 @@ def main() -> None:
         fiche_pose = manifeste['membres'].get(membre_pose, {}).get('animations', {}).get('Eat', {})
         retenues = fiche_pose.get('poses') or ['?', '?']
         lignes.append(f'| {membre_pose} | `{retenues[0]}` | `{retenues[1]}` |')
+    lignes.append('')
+    lignes.append('La cadence de référence est celle des membres validés : **quatre images')
+    lignes.append("de 8 ticks** (Noctali, Draby, Capumain). Gardevoir suit exactement cette")
+    lignes.append('cadence, avec sa propre séquence : repos, mains devant le visage, mains')
+    lignes.append('écartées, repos — elle ne repasse pas par le repos entre les deux gestes.')
+    lignes.append('Les cinq autres gardent 6, 8, 6 et 8 ticks, un peu plus vif.')
     lignes.append('')
     lignes.append('Pandespiègle garde en revanche le simple balancement, validé tel quel.')
     lignes.append('')

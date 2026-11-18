@@ -100,9 +100,10 @@ def main() -> None:
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le Eat en poses : repos, une main, repos, l'autre main. Les poses sont
-    # nommees dans le manifeste, les durees tiennent dans AnimData.xml, la
-    # silhouette bouge dans les huit directions et rien ne sort de la cellule.
+    # Le Eat en poses : quatre images decrites par une sequence nommee dans le
+    # manifeste (repos, une pose, une autre, ...). Les durees tiennent dans
+    # AnimData.xml, la silhouette bouge dans les huit directions, les images de
+    # repos sont identiques entre elles et rien ne sort de la cellule.
     for membre in sorted(POSES_ATTENDUES):
         dossier = SPRITES / manifeste['membres'][membre]['dossier']
         declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
@@ -113,23 +114,35 @@ def main() -> None:
         for nom_pose in info['poses']:
             animation, index = nom_pose.split()
             assert animation and index.isdigit(), nom_pose
+        sequence = info.get('sequence') or []
+        assert len(sequence) == info['images'] == len(info['durees']), \
+            (membre, 'sequence, images et durees doivent avoir la meme longueur', sequence)
+        assert sequence.count('repos') >= 1, (membre, 'le repos doit revenir', sequence)
+        assert sum(1 for e in sequence if e != 'repos') >= 2, (membre, 'deux gestes attendus', sequence)
         assert tuple(declarations['Eat']) == tuple(info['durees']), (membre, 'durées incohérentes')
         largeur, hauteur = info['cellule']
-        assert len(info['durees']) == info['images'] == 4, (membre, 'quatre images attendues')
         with Image.open(dossier / 'Eat-Anim.png') as planche:
-            rangees = [[planche.crop((i * largeur, r * hauteur, (i + 1) * largeur, (r + 1) * hauteur))
-                        .convert('RGBA') for i in range(planche.width // largeur)]
+            rangees = [[planche.crop((i * largeur, r * hauteur, (i + 1) * largeur,
+                                      (r + 1) * hauteur)).convert('RGBA')
+                        for i in range(planche.width // largeur)]
                        for r in range(planche.height // hauteur)]
+        assert len(rangees[0]) == info['images'] == len(sequence), (membre, 'nombre d\'images')
         for r, rangee in enumerate(rangees):
-            repos, pose, repos_bis, autre = rangee
-            assert repos.tobytes() != pose.tobytes(), (membre, r, 'aucune pose levée')
-            assert repos.tobytes() == repos_bis.tobytes(), (membre, r, 'le repos doit revenir')
-            assert pose.tobytes() != autre.tobytes(), (membre, r, 'les deux poses identiques')
+            repos = [image for image, etape in zip(rangee, sequence) if etape == 'repos']
+            assert len({image.tobytes() for image in repos}) == 1, \
+                (membre, r, 'les images de repos doivent etre identiques')
+            assert len({image.tobytes() for image in rangee}) >= 3, \
+                (membre, r, 'poses trop pauvres')
             for image in rangee:
                 boite = image.getbbox()
                 assert boite is not None, (membre, r, 'image vide')
                 assert boite[0] >= 0 and boite[2] <= largeur, (membre, r, 'débord horizontal', boite)
                 assert boite[1] >= 0 and boite[3] <= hauteur, (membre, r, 'débord vertical', boite)
+
+    # La cadence de Gardevoir est celle des membres valides : quatre images de
+    # huit ticks, comme leur Eat d'origine.
+    cadence = manifeste['membres']['Gardevoir']['animations']['Eat']['durees']
+    assert cadence == [8, 8, 8, 8], cadence
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 
