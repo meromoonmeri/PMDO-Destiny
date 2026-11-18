@@ -369,33 +369,40 @@ Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordr
 |---|---|---|
 | `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
 | dérivée (validée) | Pandespiègle | balancement de son `Idle`, 4 ticks par image |
-| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | bouchée dessinée ici |
+| empruntée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | mouvement du `Eat` d'un donneur |
 
-Ces six espèces n'ont **aucune animation de repas** dans SpriteCollab. Leurs
-sprites sont donc retouchés au pixel, une image sur deux.
+Ces six espèces n'ont **aucune animation de repas** dans SpriteCollab. On ne
+dessine rien dessus : on emprunte le mouvement d'un Pokémon qui, lui, a une vraie
+animation de repas **et** la même carrure — un bipède à deux bras.
 
-### La bouchée, membre par membre
+### Les donneurs
 
-Chaque bouchée est une mâchoire ouverte (lèvre noire, langue sombre, lèvre
-inférieure) plus un aliment et une touche d'expression, tous pris dans la palette
-de l'espèce. Les positions sont relevées planche par planche (`BOUCHEES` dans
-`tools/constituer_animations_guilde.py`) :
+| Membre | Donneur | Échelle | Ce qui est emprunté |
+|---|---|---:|---|
+| Gardevoir | Lucario (0448) | 0,83 | le buste s'incline, la silhouette se resserre de 16 % |
+| Canarticho | Machop (0066) | 1,00 | la tête plonge de 2 px sur la bouchée |
+| Simisage | Cradopaud (0453) | 1,75 | corps projeté de 22 % plus étroit, balancement latéral |
+| Mélofée | Makuhita (0296) | 1,00 | les bras montent : la silhouette s'ouvre |
+| Cizayox | Lucario (0448) | 1,33 | même carrure large, mouvement le plus ample |
+| Dimoret | Absol (0359) | 1,20 | il se penche en avant pour mordre |
 
-| Membre | Bouche (x, y, largeur) | Aliment | Manière |
-|---|---|---|---|
-| Gardevoir | 14, 12, 3 | baie rose | bouchée du bout des lèvres, rougeur à la joue |
-| Canarticho | 9, 13, 4 | feuille verte | bec grand ouvert sur son poireau |
-| Simisage | 13, 18, 4 | feuille verte | il mord dans une feuille |
-| Mélofée | 13, 19, 3 | baie brune | petite bouchée, rougeur à la joue |
-| Cizayox | 12, 29, 4 | quart de nourriture | mâchoire grande ouverte |
-| Dimoret | 13, 16, 4 | quart clair et miette | il engloutit et laisse des miettes |
+Pour chaque donneur, `mouvement_donneur()` mesure image par image, sur sa propre
+planche : **largeur relative, hauteur relative, recentrage, enfoncement**.
+`appliquer_mouvement()` applique ces quatre valeurs aux sprites du membre, à son
+échelle, pieds au sol et axe conservé. Aucun pixel du donneur n'est repris : seul
+son mouvement l'est, et les sprites restent ceux de l'espèce.
 
-Quatre images, rythme **6-8-6-8** : fermée, il mord (aliment présent), fermée, il
-avale (bouche vide). Les quatre images partent de la même image d'`Idle` ; les
-autres images changent de pose et la bouche retomberait à côté.
+Les donneurs ont été choisis parmi les dix espèces de SpriteCollab qui possèdent
+un `Eat` de bipède (Machop, Éctoplasma, Kirlia, Chapignon, Makuhita, Absol,
+Pachirisu, Riolu, Lucario, Cradopaud), en retenant ceux dont le mouvement est
+**le plus ample** à carrure comparable : un donneur trop proche mais quasi immobile
+donnerait un `Eat` invisible.
 
-Le test vérifie la lèvre noire sur toute la largeur, la langue juste en dessous,
-la présence de l'aliment, et que les images 1 et 3 sont bien identiques.
+### Le cas Pandespiègle
+
+Son `Eat` dérivé (balancement de son `Idle`) a été validé tel quel : il ne change
+pas. Comme les autres, il reste remplaçable par un vrai dessin — même nom de
+fichier, même `AnimData.xml`.
 
 Les autres animations dérivées restent en place, elles n'ont pas été mises en
 cause :

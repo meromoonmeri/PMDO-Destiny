@@ -32,49 +32,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              14,
-              12,
-              3
-            ],
-            "machoire": "petite",
-            "aliment": [
-              "baie",
-              17,
-              14
-            ],
-            "langue": [
-              159,
-              0,
-              0
-            ],
-            "fruit": [
-              231,
-              63,
-              103
-            ],
-            "plus": [
-              [
-                "rougeur",
-                11,
-                14,
-                [
-                  255,
-                  143,
-                  175
-                ]
-              ]
-            ]
-          }
+          "donneur": "0448 Lucario",
+          "echelle": 0.83
         },
         "Wake": {
           "cellule": [
@@ -118,49 +85,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              9,
-              13,
-              4
-            ],
-            "machoire": "grande",
-            "aliment": [
-              "feuille",
-              14,
-              12
-            ],
-            "langue": [
-              159,
-              0,
-              0
-            ],
-            "fruit": [
-              127,
-              223,
-              87
-            ],
-            "plus": [
-              [
-                "rougeur",
-                8,
-                15,
-                [
-                  223,
-                  119,
-                  31
-                ]
-              ]
-            ]
-          }
+          "donneur": "0066 Machop",
+          "echelle": 1.0
         },
         "Wake": {
           "cellule": [
@@ -204,49 +138,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              13,
-              18,
-              4
-            ],
-            "machoire": "grande",
-            "aliment": [
-              "feuille",
-              17,
-              16
-            ],
-            "langue": [
-              139,
-              107,
-              26
-            ],
-            "fruit": [
-              47,
-              189,
-              106
-            ],
-            "plus": [
-              [
-                "rougeur",
-                11,
-                17,
-                [
-                  149,
-                  215,
-                  174
-                ]
-              ]
-            ]
-          }
+          "donneur": "0453 Cradopaud",
+          "echelle": 1.75
         },
         "Wake": {
           "cellule": [
@@ -290,49 +191,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              13,
-              19,
-              3
-            ],
-            "machoire": "petite",
-            "aliment": [
-              "baie",
-              16,
-              17
-            ],
-            "langue": [
-              159,
-              0,
-              0
-            ],
-            "fruit": [
-              167,
-              95,
-              31
-            ],
-            "plus": [
-              [
-                "rougeur",
-                10,
-                19,
-                [
-                  231,
-                  63,
-                  103
-                ]
-              ]
-            ]
-          }
+          "donneur": "0296 Makuhita",
+          "echelle": 1.0
         },
         "Wake": {
           "cellule": [
@@ -376,49 +244,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              12,
-              29,
-              4
-            ],
-            "machoire": "grande",
-            "aliment": [
-              "quart",
-              16,
-              27
-            ],
-            "langue": [
-              159,
-              0,
-              0
-            ],
-            "fruit": [
-              191,
-              207,
-              247
-            ],
-            "plus": [
-              [
-                "miette",
-                22,
-                31,
-                [
-                  255,
-                  135,
-                  95
-                ]
-              ]
-            ]
-          }
+          "donneur": "0448 Lucario",
+          "echelle": 1.33
         },
         "Wake": {
           "cellule": [
@@ -504,49 +339,16 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
+          "source": "empruntee",
+          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouchee": {
-            "bouche": [
-              13,
-              16,
-              4
-            ],
-            "machoire": "grande",
-            "aliment": [
-              "quart",
-              17,
-              15
-            ],
-            "langue": [
-              159,
-              0,
-              0
-            ],
-            "fruit": [
-              255,
-              255,
-              255
-            ],
-            "plus": [
-              [
-                "miette",
-                23,
-                12,
-                [
-                  255,
-                  255,
-                  255
-                ]
-              ]
-            ]
-          }
+          "donneur": "0359 Absol",
+          "echelle": 1.2
         },
         "Wake": {
           "cellule": [

@@ -21,13 +21,13 @@ Les `FrameType` viennent de `base/Base/GFXParams.xml` (ordre des `<Action>`) :
 
 | Membre | Dossier | Cellule | Eat | Wake | Sleep | Pose |
 |---|---|---:|---|---|---|---|
-| Gardevoir | `0282_Gardevoir/` | 24×32 · 32×40 | composée | dérivée | oui | dérivée |
-| Canarticho | `0083_Canarticho/` | 24×24 · 24×32 | composée | dérivée | oui | dérivée |
-| Simisage | `0512_Simisage/` | 32×48 · 32×56 | composée | dérivée | oui | dérivée |
-| Melofee | `0035_Melofee/` | 24×24 · 32×40 | composée | dérivée | oui | dérivée |
-| Cizayox | `0212_Cizayox/` | 32×64 · 40×40 | composée | dérivée | oui | dérivée |
+| Gardevoir | `0282_Gardevoir/` | 24×32 · 32×40 | oui | dérivée | oui | dérivée |
+| Canarticho | `0083_Canarticho/` | 24×24 · 24×32 | oui | dérivée | oui | dérivée |
+| Simisage | `0512_Simisage/` | 32×48 · 32×56 | oui | dérivée | oui | dérivée |
+| Melofee | `0035_Melofee/` | 24×24 · 32×40 | oui | dérivée | oui | dérivée |
+| Cizayox | `0212_Cizayox/` | 32×64 · 40×40 | oui | dérivée | oui | dérivée |
 | Noctali | `0197_Noctali/` | 24×40 · 32×32 · 32×40 | oui | oui | oui | oui |
-| Dimoret | `0461_Dimoret/` | 32×40 · 32×48 | composée | dérivée | oui | dérivée |
+| Dimoret | `0461_Dimoret/` | 32×40 · 32×48 | oui | dérivée | oui | dérivée |
 | Draby | `0371_Draby/` | 24×32 · 24×40 · 32×40 | oui | oui | oui | oui |
 | Pandespiegle | `0674_Pandespiegle/` | 24×32 · 24×40 | dérivée | dérivée | oui | dérivée |
 | Capumain | `0190_Capumain/` | 24×40 · 32×32 · 32×40 · 40×40 | oui | oui | oui | oui |
@@ -67,27 +67,30 @@ l'espèce (SpriteCollab ne les dessine pas pour elle) :
 
 - `Eat` — balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images
 - `Eat_breloom` — mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme
-- `Eat_dessine` — bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux
+- `Eat_emprunte` — mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle
 - `Wake` — Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks
 - `Pose` — Idle image 1 tenue — 1 image de 30 ticks
 
-Les cases **composée** désignent la mâchoire assemblée à partir de
+## Le `Eat` emprunté
 
-## Le `Eat` dessiné
+Ces membres n'ont pas de `Eat` chez SpriteCollab : leur animation
+emprunte le **mouvement** d'un donneur de même carrure. Tout est mesuré
+sur la planche du donneur, image par image : largeur relative, hauteur
+relative, recentrage, enfoncement. Le résultat est appliqué aux sprites
+de l'espèce à son échelle, pieds au sol et axe conservé. Aucun dessin
+du donneur n'est repris — seulement son mouvement.
 
-Pour Canarticho, Cizayox, Dimoret, Gardevoir, Melofee, Simisage, SpriteCollab ne dessine
-aucune animation de repas. La bouchée est donc faite ici : l'Idle de
-l'espèce et, une image sur deux, une **flexion du corps d'un pixel** —
-les genoux plient sur la bouchée. Le visage n'est pas retouché : à
-cette échelle les yeux et les bouches varient trop d'une espèce à
-l'autre pour qu'un trait placé sans dessin original tombe juste.
-Le rythme est celui de Chapignon, 6-8-6-8.
+| Membre | Donneur | Échelle |
+|---|---|---:|
+| Canarticho | Machop (0066) | 1.0 |
+| Cizayox | Lucario (0448) | 1.33 |
+| Dimoret | Absol (0359) | 1.2 |
+| Gardevoir | Lucario (0448) | 0.83 |
+| Melofee | Makuhita (0296) | 1.0 |
+| Simisage | Cradopaud (0453) | 1.75 |
 
-Les cinq cases à mouvement emprunté prennent aussi la **largeur relative**
-et le **recentrage** mesurés sur la planche de Chapignon (Breloom, 286) :
-(). Les sprites restent ceux de l'espèce,
-seul le mouvement est emprunté.
-garde en revanche le simple balancement, validé tel quel.
+Pandespiègle garde en revanche le simple balancement, validé tel quel.
+
 
 Elles se remplacent sans rien casser le jour où un vrai dessin existe :
 même nom de fichier, même `AnimData.xml`.

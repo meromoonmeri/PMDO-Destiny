@@ -114,9 +114,8 @@ def main() -> None:
             img.paste(cellule, (x, y))
             d.text((x + 2, y + CELLULE + 6), membre, font=titre, fill=(200, 216, 228))
             source = infos['animations']['Eat']['source']
-            libelle = {'derivee': 'Eat dérivée', 'dessinee': 'Eat composée',
+            libelle = {'derivee': 'Eat dérivée', 'empruntee': "Eat d'après un donneur",
                        'breloom': 'Eat Chapignon'}.get(source, 'Eat SpriteCollab')
-            libelle = 'Eat dessinée' if source == 'dessinee' else libelle
             d.text((x + 2, y + CELLULE + 19), libelle,
                    font=ImageFont.truetype(POLICE_TEXTE, 10), fill=(140, 160, 176))
         return img
@@ -139,7 +138,7 @@ def main() -> None:
         y = 40 + index * (case_h + 6)
         d.text((ECART, y + 26), membre, font=fonte, fill=(232, 238, 244))
         source_eat = infos['animations']['Eat']['source']
-        etiquette = {'derivee': 'Eat dérivée', 'dessinee': 'Eat dessinée',
+        etiquette = {'derivee': 'Eat dérivée', 'empruntee': 'Eat empruntée',
                      'breloom': 'Eat Chapignon'}.get(source_eat, 'Eat SpriteCollab')
         d.text((ECART, y + 44), etiquette, font=petite, fill=(140, 160, 176))
         for colonne, anim in enumerate((mange, pose, reveil)):

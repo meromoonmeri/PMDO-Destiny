@@ -69,44 +69,20 @@ EAT_DERIVE_VALIDE = {'Pandespiegle'}
 # alternance d'une pose de face et d'une pose tournée plus étroite. Les sprites
 # restent ceux de l'espèce, seul le mouvement est emprunté.
 # ---------------------------------------------------------------------------
-# Bouchées dessinées à la main : chaque membre a sa manière de manger.
-#   bouche : (x, y, largeur) — deux lignes : lèvre supérieure noire, langue claire
-#   aliment : (forme, x, y) — placé devant la bouche, il chevauche la lèvre
-#   plus : touches d'expression (rougeur, miette)
-# Les couleurs viennent toutes de la palette de l'espèce.
+# Animations empruntées : pour chaque membre sans Eat d'origine, un donneur de
+# SpriteCollab dont le Eat est réellement une animation de repas (bouche ou bras
+# qui travaillent), pris chez un bipède à deux bras de même carrure. On mesure son
+# mouvement image par image (largeur, recentrage, enfoncement) et on l'applique
+# aux sprites du membre : les dessins restent ceux de l'espèce, le mouvement est
+# celui du donneur, mis à son échelle.
 # ---------------------------------------------------------------------------
-# Mâchoires ouvertes : (motif, rôle des symboles)
-#   k = noir du contour, T = langue (couleur claire de l'espèce), g = gorge
-MACHOIRES = {
-    'petite': ['kkk', 'TTT', '.k.'],
-    'grande': ['kkkk', 'kTTk', '.kk.'],
-}
-ALIMENTS = {
-    # (motif, couleur du corps) — 3x3 avec contour noir, sauf la feuille (2x3)
-    'baie':    ['.k.', 'kBk', '.k.'],
-    'fruit':   ['kBB', 'BBk', 'kBB'],
-    'quart':   ['kkk', 'kmB', 'kkk'],
-    'feuille': ['gg.', 'GGg', '.gg'],
-}
-BOUCHEES = {
-    'Gardevoir': {'bouche': (14, 12, 3), 'machoire': 'petite', 'aliment': ('baie', 17, 14),
-                  'langue': (159, 0, 0), 'fruit': (231, 63, 103),
-                  'plus': [('rougeur', 11, 14, (255, 143, 175))]},
-    'Canarticho': {'bouche': (9, 13, 4), 'machoire': 'grande', 'aliment': ('feuille', 14, 12),
-                   'langue': (159, 0, 0), 'fruit': (127, 223, 87),
-                   'plus': [('rougeur', 8, 15, (223, 119, 31))]},
-    'Simisage': {'bouche': (13, 18, 4), 'machoire': 'grande', 'aliment': ('feuille', 17, 16),
-                 'langue': (139, 107, 26), 'fruit': (47, 189, 106),
-                 'plus': [('rougeur', 11, 17, (149, 215, 174))]},
-    'Melofee': {'bouche': (13, 19, 3), 'machoire': 'petite', 'aliment': ('baie', 16, 17),
-                'langue': (159, 0, 0), 'fruit': (167, 95, 31),
-                'plus': [('rougeur', 10, 19, (231, 63, 103))]},
-    'Cizayox': {'bouche': (12, 29, 4), 'machoire': 'grande', 'aliment': ('quart', 16, 27),
-                'langue': (159, 0, 0), 'fruit': (191, 207, 247),
-                'plus': [('miette', 22, 31, (255, 135, 95))]},
-    'Dimoret': {'bouche': (13, 16, 4), 'machoire': 'grande', 'aliment': ('quart', 17, 15),
-                'langue': (159, 0, 0), 'fruit': (255, 255, 255),
-                'plus': [('miette', 23, 12, (255, 255, 255))]},
+DONNEURS = {
+    'Gardevoir':   ('0448', 'Lucario'),    # grand bipède droit : 16 % de largeur en moins
+    'Canarticho':  ('0066', 'Machop'),     # bipède trapu qui penche la tête de 2 px
+    'Simisage':    ('0453', 'Cradopaud'),  # bipède nerveux : 22 % de largeur en moins
+    'Melofee':     ('0296', 'Makuhita'),   # petit bipède rond, les bras montent
+    'Cizayox':     ('0448', 'Lucario'),    # même carrure large, mouvement le plus ample
+    'Dimoret':     ('0359', 'Absol'),      # svelte, il se penche en avant pour mordre
 }
 EAT_BRELOOM: set[str] = set()
 BRELOOM_DEX = '0286'
@@ -116,8 +92,9 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
-    'Eat_dessine': ("bouchée dessinée à la main : bouche ouverte, aliment devant "
-                    "la bouche et touche d'expression, une image sur deux"),
+    'Eat_emprunte': ("mouvement du Eat d'un donneur de même carrure, mesuré image "
+                     "par image (largeur, recentrage, enfoncement) puis appliqué à "
+                     "l'Idle de l'espèce à son échelle"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -259,43 +236,84 @@ def _poser(image: Image.Image, x: int, y: int, couleur: tuple[int, int, int],
             image.putpixel((x, y), (*couleur, 255))
 
 
-def dessiner_bouchee(image: Image.Image, fiche: dict, aliment: bool = True) -> Image.Image:
-    """Dessine la bouchée : bouche ouverte, aliment, rougeur ou miette.
+def mouvement_donneur(dossier: Path) -> list[dict] | None:
+    """Mesure le `Eat` d'un donneur : géométrie de chaque image.
 
-    La lèvre supérieure est noire sur une ligne et la langue prend une couleur
-    claire de l'espèce juste en dessous : deux lignes suffisent à lire une
-    bouche ouverte, au-delà on obtient un trou noir. L'aliment est posé devant
-    la bouche, hors silhouette comprise — une baie tenue à la main dépasse
-    forcément du corps.
+    Rend, pour chaque image, la largeur relative, le recentrage et l'enfoncement
+    du corps par rapport à la première image — c'est le mouvement utile du
+    repas, indépendant des couleurs et du dessin du donneur.
     """
-    sortie = image.copy()
-    x, y, largeur = fiche['bouche']
-    machoire = MACHOIRES[fiche.get('machoire', 'grande')]
-    for dy, ligne in enumerate(machoire):
-        for dx, symbole in enumerate(ligne[:largeur]):
-            if symbole == '.':
-                continue
-            teinte = {'k': (0, 0, 0), 'T': fiche['langue'],
-                      'g': tuple(max(0, c - 90) for c in fiche['langue'])}[symbole]
-            _poser(sortie, x + dx, y + dy, teinte)
+    xml = dossier / 'AnimData.xml'
+    planche_png = dossier / 'Eat-Anim.png'
+    if not (xml.exists() and planche_png.exists()):
+        return None
+    largeur, hauteur, _ = cellule(xml, 'Eat')
+    if largeur == 0:
+        return None
+    for noeud in ET.parse(xml).iter('Anim'):
+        if (noeud.findtext('Name') or '').lower() == 'eat':
+            durees = [int(d.text) for d in noeud.findall('Durations/Duration')]
+            break
+    else:
+        return None
+    planche = lire(planche_png)
+    nombre = min(len(durees), planche.width // largeur)
+    boites = []
+    for index in range(nombre):
+        case = planche.crop((index * largeur, 0, (index + 1) * largeur, hauteur))
+        boites.append(case.getbbox())
+    if not all(boites):
+        return None
+    reference = boites[0]
+    largeur_ref = reference[2] - reference[0]
+    hauteur_ref = reference[3] - reference[1]
+    axe_ref = (reference[0] + reference[2]) / 2
+    mouvement = []
+    for boite in boites:
+        mouvement.append({
+            'largeur': (boite[2] - boite[0]) / largeur_ref if largeur_ref else 1.0,
+            'hauteur': (boite[3] - boite[1]) / hauteur_ref if hauteur_ref else 1.0,
+            'centre': (boite[0] + boite[2]) / 2 - axe_ref,
+            'haut': boite[1] - reference[1],
+        })
+    for index, duree in enumerate(durees[:nombre]):
+        mouvement[index]['duree'] = duree
+    return mouvement
 
-    if aliment and fiche['aliment']:
-        forme, ax, ay = fiche['aliment']
-        fonce = tuple(max(0, c - 70) for c in fiche['fruit'])
-        teintes = {'k': (0, 0, 0), 'B': fiche['fruit'], 'm': (87, 87, 87),
-                   'G': fiche['fruit'], 'g': fonce}
-        for dy, ligne in enumerate(ALIMENTS[forme]):
-            for dx, symbole in enumerate(ligne):
-                if symbole != '.':
-                    _poser(sortie, ax + dx, ay + dy, teintes[symbole], libre=True)
 
-    for quoi, px, py, teinte in fiche['plus']:
-        if quoi == 'miette':
-            _poser(sortie, px, py, teinte, libre=True)
-            _poser(sortie, px + 1, py - 1, teinte, libre=True)
-        else:
-            _poser(sortie, px, py, teinte)
-    return sortie
+def appliquer_mouvement(rangee: list[Image.Image], mouvement: list[dict],
+                        echelle: float, largeur: int, hauteur: int) -> list[Image.Image]:
+    """Applique un mouvement de donneur à la rangée d'Idle d'un membre.
+
+    Le corps est recadré sur lui-même, puis étiré de la largeur et de la hauteur
+    relatives mesurées chez le donneur, les pieds restant au sol et l'axe de la
+    première image conservé. `echelle` rapporte la taille du membre à celle du
+    donneur : un donneur plus grand voit son mouvement réduit d'autant.
+    """
+    base = aligner_rangee(rangee, largeur, hauteur)
+    reference = base[0].getbbox()
+    if not reference:
+        return base
+    sol = reference[3]
+    axe = (reference[0] + reference[2]) / 2
+    images = []
+    for index, etape in enumerate(mouvement):
+        source = base[index % len(base)]
+        boite = source.getbbox()
+        if not boite:
+            images.append(source)
+            continue
+        poids = min(1.0, echelle)
+        largeur_vue = max(1, int(round((boite[2] - boite[0]) * (1 + (etape['largeur'] - 1) * poids))))
+        hauteur_vue = max(1, int(round((boite[3] - boite[1]) * (1 + (etape['hauteur'] - 1) * poids))))
+        corps = source.crop(boite).resize((largeur_vue, hauteur_vue), Image.NEAREST)
+        dx = int(round(etape['centre'] * poids))
+        dy = int(round(etape['haut'] * poids * 0.5))
+        case = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
+        # pieds au sol, axe de la première image conservé
+        case.paste(corps, (int(round(axe - largeur_vue / 2 + dx)), sol - hauteur_vue + dy))
+        images.append(case)
+    return images
 
 
 def mouvement_breloom(cache: Path, hors_ligne: bool) -> dict | None:
@@ -488,32 +506,42 @@ def main() -> None:
                                 'recette': RECETTES.get('Eat', ''), 'durees': durees}
                 continue
             if anim == 'Eat' and membre in EAT_DESSINE:
+                don = DONNEURS.get(membre)
                 idle_png = cache / 'Idle-Anim.png'
-                fiche = BOUCHEES.get(membre)
-                if not idle_png.exists() or fiche is None:
+                if don is None or not idle_png.exists():
                     continue
+                dex_don, nom_don = don
+                dossier_don = CACHE / f'donneur_{nom_don}'
+                dossier_don.mkdir(parents=True, exist_ok=True)
+                for fichier in ('AnimData.xml', 'Eat-Anim.png'):
+                    if not telecharger(dex_don, fichier, dossier_don / fichier,
+                                       arguments.hors_ligne):
+                        break
+                mouvement = mouvement_donneur(dossier_don)
+                if mouvement is None:
+                    continue
+                # échelle : hauteur du membre / hauteur du donneur
+                largeur_don, hauteur_don, _ = cellule(dossier_don / 'AnimData.xml', 'Eat')
+                echelle = (hauteur_idle / hauteur_don) if hauteur_don else 1.0
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                durees = [6, 8, 6, 8]
-                planche = Image.new('RGBA', (largeur_idle * len(durees),
+                planche = Image.new('RGBA', (largeur_idle * len(mouvement),
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for index, rangee in enumerate(rangees):
-                    base = rangee[0]
-                    for colonne in range(len(durees)):
-                        image = base
-                        if colonne % 2 == 1:
-                            # image 2 : on mord l'aliment ; image 4 : l'avalée
-                            image = dessiner_bouchee(image, fiche, aliment=(colonne == 1))
+                    for colonne, image in enumerate(
+                            appliquer_mouvement(rangee, mouvement, echelle,
+                                                largeur_idle, hauteur_idle)):
                         planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
                     origine = cache / f'Idle-{suffixe}.png'
                     if origine.exists():
                         (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
+                durees = [etape['duree'] for etape in mouvement]
                 derivees[anim] = (len(durees), durees)
-                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
-                                'images': len(durees), 'frameType': types.get(anim),
-                                'source': 'dessinee', 'recette': RECETTES['Eat_dessine'],
-                                'durees': durees, 'bouchee': fiche}
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': len(durees),
+                                'frameType': types.get(anim), 'source': 'empruntee',
+                                'recette': RECETTES['Eat_emprunte'], 'durees': durees,
+                                'donneur': f'{dex_don} {nom_don}', 'echelle': round(echelle, 2)}
                 continue
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:
@@ -617,23 +645,23 @@ def main() -> None:
     for anim, recette in RECETTES.items():
         lignes.append(f'- `{anim}` — {recette}')
     lignes.append('')
-    lignes.append('Les cases **composée** désignent la mâchoire assemblée à partir de')
+    lignes.append('## Le `Eat` emprunté')
     lignes.append('')
-    lignes.append('## Le `Eat` dessiné')
+    lignes.append('Ces membres n\'ont pas de `Eat` chez SpriteCollab : leur animation')
+    lignes.append('emprunte le **mouvement** d\'un donneur de même carrure. Tout est mesuré')
+    lignes.append('sur la planche du donneur, image par image : largeur relative, hauteur')
+    lignes.append('relative, recentrage, enfoncement. Le résultat est appliqué aux sprites')
+    lignes.append('de l\'espèce à son échelle, pieds au sol et axe conservé. Aucun dessin')
+    lignes.append('du donneur n\'est repris — seulement son mouvement.')
     lignes.append('')
-    lignes.append('Pour ' + ', '.join(sorted(EAT_DESSINE)) + ', SpriteCollab ne dessine')
-    lignes.append("aucune animation de repas. La bouchée est donc faite ici : l'Idle de")
-    lignes.append("l'espèce et, une image sur deux, une **flexion du corps d'un pixel** —")
-    lignes.append("les genoux plient sur la bouchée. Le visage n'est pas retouché : à")
-    lignes.append("cette échelle les yeux et les bouches varient trop d'une espèce à")
-    lignes.append("l'autre pour qu'un trait placé sans dessin original tombe juste.")
-    lignes.append('Le rythme est celui de Chapignon, 6-8-6-8.')
+    lignes.append('| Membre | Donneur | Échelle |')
+    lignes.append('|---|---|---:|')
+    for membre_don, (dex_don, nom_don) in sorted(DONNEURS.items()):
+        fiche_don = manifeste['membres'].get(membre_don, {}).get('animations', {}).get('Eat', {})
+        lignes.append(f'| {membre_don} | {nom_don} ({dex_don}) | {fiche_don.get("echelle", "?")} |')
     lignes.append('')
-    lignes.append('Les cinq cases à mouvement emprunté prennent aussi la **largeur relative**')
-    lignes.append('et le **recentrage** mesurés sur la planche de Chapignon (Breloom, 286) :')
-    lignes.append(f"({', '.join(sorted(EAT_BRELOOM))}). Les sprites restent ceux de l'espèce,")
-    lignes.append('seul le mouvement est emprunté.')
-    lignes.append('garde en revanche le simple balancement, validé tel quel.')
+    lignes.append('Pandespiègle garde en revanche le simple balancement, validé tel quel.')
+    lignes.append('')
     lignes += [
         '',
         'Elles se remplacent sans rien casser le jour où un vrai dessin existe :',

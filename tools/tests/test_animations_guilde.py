@@ -48,9 +48,10 @@ def main() -> None:
         for anim in ATTENDUES:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
-            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee'), \
+            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'empruntee',
+                                      'breloom'), \
                 (membre, anim, info['source'])
-            if info['source'] in ('derivee', 'dessinee'):
+            if info['source'] in ('derivee', 'dessinee', 'empruntee', 'breloom'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -92,45 +93,37 @@ def main() -> None:
     # Les sept membres sans Eat d'origine en ont un dessiné ici ; les trois autres
     # gardent celui de SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
-    assert {m for m, v in sources.items() if v == 'dessinee'} == {
+    assert {m for m, v in sources.items() if v == 'empruntee'} == {
         'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}, sources
     # Pandespiègle garde son Eat dérivé, validé tel quel.
     assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le Eat dessiné : quatre images au rythme 6-8-6-8, la bouchée une image sur
-    # deux. Images 1 et 3 identiques, 2 et 4 aussi, la bouche noire bien posée,
-    # l'aliment présent, et rien qui déborde de la cellule.
+    # Le Eat emprunté : quatre images au rythme du donneur, mouvement mesuré sur
+    # sa planche, pieds au sol et rien hors de la cellule.
     for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'):
         dossier = SPRITES / manifeste['membres'][membre]['dossier']
         declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
                         for a in ET.parse(dossier / 'AnimData.xml').iter('Anim')}
-        assert declarations['Eat'] == [6, 8, 6, 8], (membre, declarations['Eat'])
         info = manifeste['membres'][membre]['animations']['Eat']
+        assert tuple(declarations['Eat']) == tuple(info['durees']), (membre, 'durées incohérentes')
+        assert info['source'] == 'empruntee', (membre, info['source'])
+        assert info['donneur'], membre
         largeur, hauteur = info['cellule']
-        fiche = info['bouchee']
         with Image.open(dossier / 'Eat-Anim.png') as planche:
             images = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).convert('RGBA')
                       for i in range(planche.width // largeur)]
-        assert images[0].tobytes() == images[2].tobytes(), (membre, 'images 1 et 3 différentes')
-        assert images[0].tobytes() != images[1].tobytes(), (membre, 'bouchée jamais dessinée')
-        # image 2 : on mord (aliment présent) ; image 4 : on avale (bouche vide)
-        assert images[1].tobytes() != images[3].tobytes(), (membre, 'morsure et déglutition identiques')
-        x0, y0, largeur_bouche = fiche['bouche']
-        for image in (images[1], images[3]):
-            for dx in range(largeur_bouche):
-                assert image.getpixel((x0 + dx, y0))[:3] == (0, 0, 0), \
-                    (membre, 'lèvre supérieure absente', (x0 + dx, y0))
-            assert tuple(fiche['langue']) in [image.getpixel((x0 + dx, y0 + 1))[:3]
-                                              for dx in range(largeur_bouche)], \
-                (membre, 'langue absente')
-        if fiche['aliment']:
-            _, ax, ay = fiche['aliment']
-            teintes = {tuple(fiche['fruit']), tuple(max(0, c - 70) for c in fiche['fruit']),
-                       (87, 87, 87)}
-            assert any(images[1].getpixel((ax + dx, ay + dy))[:3] in teintes
-                       for dx in range(3) for dy in range(3)), (membre, 'aliment absent')
+        assert len(images) == len(info['durees']), (membre, 'nombre d\'images')
+        # le cycle du donneur anime au moins deux images
+        assert images[0].tobytes() != images[1].tobytes(), (membre, 'aucun mouvement')
+        # le mouvement se voit : la silhouette change de largeur ou de position
+        boites = [image.getbbox() for image in images]
+        assert len({(b[2] - b[0], b[0], b[1]) for b in boites}) > 1, (membre, 'silhouette figée')
+        # rien ne sort de la cellule
+        for boite in boites:
+            assert boite[0] >= 0 and boite[2] <= largeur, (membre, 'débord horizontal', boite)
+            assert boite[1] >= 0 and boite[3] <= hauteur, (membre, 'débord vertical', boite)
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 
