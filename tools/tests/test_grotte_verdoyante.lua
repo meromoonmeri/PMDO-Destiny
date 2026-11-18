@@ -350,14 +350,30 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zo
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
 actors = {}; make_actor('PLAYER', 240, 344); make_actor('Teammate1', 216, 344)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
+-- Un petit calque natif simulé : l'animation doit vraiment être suspendue
+-- pendant chaque retour à l'image, puis remise quand l'écran est noir.
+local reflet = {FrameLength=8, Frames={Count=12}}
+local autre = {FrameLength=9, Frames={Count=4}}
+local bulles = {Name='07 bulles source 24 phases', Visible=true}
+local carte_fosse = {AssetName='fgv1_fin_grotte_vasques', Layers={Count=2,
+  [0]={Name='06 reflets vasques 12 phases', Width=1, Height=1,
+       Tiles={[0]={[0]={Layers={Count=2, [0]=reflet, [1]=autre}}}}},
+  [1]=bulles}}
+local fn_fade_in, fn_fade_out = GAME.FadeIn, GAME.FadeOut
+GAME.FadeIn = function(_, duree)
+  assert(reflet.FrameLength == 0 and not bulles.Visible, 'eau visible en mouvement au pré-combat')
+  ev('fade_in', duree)
+end
+GAME.FadeOut = function(_, blanc, duree) ev('fade_out', blanc, duree) end
 events = {}
-fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
+fgv1.Enter(carte_fosse)
+GAME.FadeIn, GAME.FadeOut = fn_fade_in, fn_fade_out
+assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible, 'calques non restaurés à la sortie')
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
 assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
 -- Le boss n'apparaît JAMAIS sur la bande des vasques en terrasses (y = 136..208).
-local boss_y = actors.Kabutops_Boss.Position.Y
-assert(boss_y >= 216 and boss_y <= 248,
-  'Kabutops doit apparaître sur le sable plat sous les vasques, pas sur les terrasses (y=' .. tostring(boss_y) .. ')')
+assert(actors.Kabutops_Boss.Position.X == 244 and actors.Kabutops_Boss.Position.Y == 244,
+       'ancre terrain identique au centre de la case de combat (10,10)')
 local saw_hide, saw_unhide, saw_stop_bgm, saw_rising_fear, saw_slash, boss_bgm_ok, wake_dlg_ok, unseen_voice_ok =
   false, false, false, false, false, false, false, false
 local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
@@ -365,15 +381,18 @@ local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Sprin
 local eau_vue, geyser_vu = false, false
 local flashes = 0
 local tremble_nilo, tremble_fini = false, false
-for _, e in ipairs(events) do
+local noir, voix, blanc_revelation, apparition
+for i, e in ipairs(events) do
+  if e[1] == 'fade_out' and e[2] == false and noir == nil then noir = i end
+  if e[1] == 'fade_out' and e[2] == true then blanc_revelation = i end
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
-  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide = true end
+  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide, apparition = true, i end
   if e[1] == 'stop_bgm' then saw_stop_bgm = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
   if e[1] == 'se' and e[2] == 'DUN_Slash' then saw_slash = true end
   if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
   if e[1] == 'dlg' and tostring(e[2]):find('Maman', 1, true) then wake_dlg_ok = true end
-  if e[1] == 'dlg' and tostring(e[2]):find('silence des abysses', 1, true) then unseen_voice_ok = true end
+  if e[1] == 'dlg' and tostring(e[2]):find('premier grondement', 1, true) then unseen_voice_ok, voix = true, i end
   if e[1] == 'vfx' then
     for _, n in ipairs(eaux_interdites) do if e[2] == n then eau_vue = true end end
   end
@@ -386,6 +405,8 @@ for _, e in ipairs(events) do
 end
 assert(saw_hide and saw_unhide and saw_stop_bgm and saw_rising_fear and saw_slash and boss_bgm_ok and wake_dlg_ok and unseen_voice_ok,
        'cinématique d’apparition Kabutops incomplète')
+assert(noir < voix and voix < blanc_revelation and apparition == blanc_revelation + 1,
+       'voix hors champ dans le noir, puis révélation pendant le dernier blanc')
 assert(not eau_vue and not geyser_vu,
        'aucune animation ni son d’eau ne doit accompagner l’apparition du boss')
 assert(flashes == 3,
@@ -397,7 +418,11 @@ assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grott
 -- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
 _ZONE = {InDevZone = true}
 events = {}
-fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
+fgv1.Enter(carte_fosse)
+for _, e in ipairs(events) do
+  assert(not (e[1] == 'se' and e[2] == 'EVT_Battle_Flash'), 'pas de révélation rejouée en revanche')
+  assert(not (e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep'), 'pas de réveil rejoué')
+end
 assert(events[#events][1] == 'enter_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1,
        'en mode -dev (InDevZone), lancer_duel_boss doit utiliser EnterDungeon pour éviter ReturnToEditor')
 _ZONE = nil

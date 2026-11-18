@@ -26,6 +26,8 @@ from PIL import Image
 DEFAULT_WT = Path(__file__).resolve().parents[1]
 TARGET_W, TARGET_H = 60, 45
 TARGET24_W, TARGET24_H = 20, 15
+BOSS_START = (10, 10)  # sable, entièrement sous les marches
+TEAM_START = (10, 12)  # deux cases de recul, formation à quatre conservée
 
 
 def load_tile_sheet(tile_dir: Path, sheet: str) -> tuple[int, dict[tuple[int, int], bytes]]:
@@ -202,6 +204,11 @@ def ensure_fgv1_480x360(root: Path) -> tuple[dict, dict[str, dict[tuple[int, int
     cur_w = len(obj['Layers'][0]['Tiles'])
     cur_h = len(obj['Layers'][0]['Tiles'][0])
     decoded = _decode_used_fgv1_tiles(root, obj)
+
+    for mk in obj['Entities'][0].get('Markers', []):
+        if mk.get('EntName') == 'boss':
+            mk['Collider'] = {'X': BOSS_START[0] * 24 + 4, 'Y': BOSS_START[1] * 24 + 4,
+                              'Width': 16, 'Height': 16}
 
     if (cur_w, cur_h) == (TARGET_W, TARGET_H):
         # Déjà à l'échelle 60x45 (480x360) — s'assurer des marqueurs et sorties
@@ -438,8 +445,8 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             })
         tiles_grid.append(col)
 
-    # Garantir l'entrée équipe (10, 11), les emplacements BattlePositionEvent et l'arène de Kabutops (10, 8)
-    start = (10, 11)
+    # Garantir les emplacements du groupe et de Kabutops sur le sable.
+    start = TEAM_START
     must_floor = [
         (10, 11), (9, 11), (11, 11), (10, 12),
         (9, 12), (11, 12), (10, 13), (9, 13),
@@ -524,7 +531,7 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
         'TurnUsed': False,
         'movementSpeed': 0,
         'dead': False,
-        'serializationLoc': {'X': 10, 'Y': 8},
+        'serializationLoc': {'X': BOSS_START[0], 'Y': BOSS_START[1]},
         'serializationDir': 0,
         'ProxyName': '',
         'ProxySprite': {'Species': '', 'Form': -1, 'Skin': '', 'Gender': -1},
@@ -731,7 +738,7 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             'Decorations': [],
             'Tiles': tiles_grid,
             'EdgeView': 1,
-            'EntryPoints': [{'Loc': {'X': 10, 'Y': 11}, 'Dir': 4}],
+            'EntryPoints': [{'Loc': {'X': TEAM_START[0], 'Y': TEAM_START[1]}, 'Dir': 4}],
             'Items': [],
         },
     }

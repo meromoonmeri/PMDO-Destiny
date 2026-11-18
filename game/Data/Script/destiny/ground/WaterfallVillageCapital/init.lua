@@ -30,6 +30,12 @@ local habitants_vivants = {
 }
 local positions_habitants = {}
 local vie_ville_activee = false
+local horloge_ambiance, prochain_geste_ambiance, rotation_ambiance = 0, 132, 0
+local reponse_ambiante
+local function reinitialiser_ambiance()
+  horloge_ambiance, prochain_geste_ambiance, rotation_ambiance = 0, 132, 0
+  reponse_ambiante = nil
+end
 
 -- Services extérieurs : ils restent à leur comptoir ou devant leur bâtiment,
 -- sans IA de déambulation, donc dans leur idle par défaut.
@@ -626,6 +632,7 @@ local function placer_duo_entree_ville()
 end
 
 function ville.Init(map)
+  reinitialiser_ambiance()
   changement_quartier = false
   entree_batiment_en_cours = false
   preparer_habitants_quartier(map)
@@ -1739,6 +1746,7 @@ end
 function ville.Enter(map) entrer(map) end
 function ville.GameSave(map) end
 function ville.GameLoad(map)
+  reinitialiser_ambiance()
   meteo_reverie.Appliquer(map)
   entree_batiment_en_cours = false
   -- Une ancienne sauvegarde peut contenir l'ancienne instance du centre :
@@ -1778,7 +1786,10 @@ function ville.GameLoad(map)
   if CH('NewObject_4') ~= nil then GROUND:Unhide('NewObject_4') end
   entrer(map)
 end
-function ville.Exit(map) end
+function ville.Exit(map)
+  reinitialiser_ambiance()
+  vie_ville_activee = false
+end
 local tic_ambiance
 function ville.Update(map, time)
   if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.MomentScenario ~= nil
@@ -1789,53 +1800,88 @@ function ville.Update(map, time)
 end
 
 
--- Ambiance vivante (non bloquante) : les marchands s'animent comme dans la
--- ville de base PMDO (émotes périodiques) et des paires d'habitants
--- discutent entre eux par émotes, en se tournant l'un vers l'autre.
--- Les paires et les gestes tournent avec le temps… et avec le jour courant.
-local horloge_ambiance = 0
-local function geste_ambiance(nom, emote)
-  local acteur = CH(nom)
-  if acteur == nil then return end
-  pcall(function()
-    if acteur.IsInteracting then return end
-    GROUND:CharSetEmote(acteur, emote, 1)
-  end)
+-- Activités muettes, locales, sans déplacer les comptoirs ni ouvrir de boîte de
+-- dialogue. Les répondants sont revalidés : un menu peut s'ouvrir entre les gestes.
+local gestes_de_quartier = {
+  {'Roserade_Fleuriste', 'happy'},  -- la place
+  {'Cradopaud_Pecheur', 'question'}, -- à l'affût sur la berge
+  {'Magneton_Garde', 'exclaim'},    -- le pont
+  {'Goinfrex_Voyageur', 'happy'},   -- devant le Café
+  {'Kecleon', 'happy'}, {'Kecleon_Violet', 'glowing'},
+  {'NewObject_24', 'exclaim'}, {'NewObject_3', 'glowing'},
+  {'Bellossom_Boutique', 'happy'}, {'Kangourex', 'happy'},
+}
+
+local function voisin_disponible(nom, joueur)
+  local a = CH(nom)
+  if a == nil or a.EntEnabled == false or a.IsInteracting then return nil end
+  local pos, centre = a.Position, joueur.Position
+  if math.abs(pos.X - centre.X) > 128 or math.abs(pos.Y - centre.Y) > 86 then return nil end
+  return a
 end
-local function discussion_ambiance(cycle)
-  local paire = paires_discussion[((cycle + jour_actuel()) % #paires_discussion) + 1]
-  local a1, a2 = CH(paire[1]), CH(paire[2])
-  if a1 == nil or a2 == nil then return end
-  -- Ne jamais détourner du joueur un PNJ déjà en interaction.
-  if a1.IsInteracting or a2.IsInteracting then return end
-  orienter_discussion(paire[1])
-  GROUND:CharSetAnim(a1, 'Idle', true)
-  GROUND:CharSetAnim(a2, 'Idle', true)
-  if cycle % 2 == 0 then
-    geste_ambiance(paire[1], 'question')
-    geste_ambiance(paire[2], 'happy')
-  else
-    geste_ambiance(paire[1], 'happy')
-    geste_ambiance(paire[2], 'glowing')
-  end
+
+local function proches(a, b)
+  return math.abs(a.Position.X - b.Position.X) <= 88 and math.abs(a.Position.Y - b.Position.Y) <= 72
 end
+
+local function controle_libre()
+  local sauvegarde = _DATA and _DATA.Save
+  if not sauvegarde or sauvegarde.CutsceneMode then return false end
+  local menu = RogueEssence.Menu and RogueEssence.Menu.MenuManager
+  return menu == nil or menu.Instance == nil or menu.Instance.MenuCount == 0
+end
+
 tic_ambiance = function()
   if not vie_ville_activee then return end
   horloge_ambiance = horloge_ambiance + 1
-  if horloge_ambiance % 540 == 0 then
-    local cycle = math.floor(horloge_ambiance / 540) % 6
-    if cycle == 0 then
-      geste_ambiance('Kecleon', 'happy')
-      geste_ambiance('Kecleon_Violet', 'glowing')
-    elseif cycle == 1 then geste_ambiance('Kangourex', 'happy')
-    elseif cycle == 2 then geste_ambiance('NewObject_24', 'exclaim')
-    elseif cycle == 3 then geste_ambiance('NewObject_4', 'glowing')
-    elseif cycle == 4 then geste_ambiance('NewObject_3', 'glowing')
-    else geste_ambiance('Kecleon_Violet', 'exclaim') end
+  local due = reponse_ambiante and reponse_ambiante.quand or prochain_geste_ambiance
+  if horloge_ambiance < due then return end
+  local joueur = CH('PLAYER')
+  if not controle_libre() or joueur == nil or joueur.EntEnabled == false or joueur.IsInteracting then
+    reponse_ambiante = nil
+    prochain_geste_ambiance = horloge_ambiance + 90
+    return
   end
-  if horloge_ambiance % 900 == 0 then
-    discussion_ambiance(math.floor(horloge_ambiance / 900))
+
+  if reponse_ambiante ~= nil then
+    local r = reponse_ambiante
+    local a, b = voisin_disponible(r.a, joueur), voisin_disponible(r.b, joueur)
+    if a ~= nil and b ~= nil and proches(a, b) then
+      GROUND:CharTurnToChar(b, a)
+      GROUND:CharSetEmote(b, r.emote, 1)
+    end
+    reponse_ambiante = nil
+    return
   end
+
+  local total = #paires_discussion + #gestes_de_quartier
+  local alerte = SV and SV.Destiny and SV.Destiny.AlerteShinx == 'a_secourir'
+  for offset = 0, total - 1 do
+    local i = (rotation_ambiance + offset) % total + 1
+    if i <= #paires_discussion then
+      local paire = paires_discussion[i]
+      local a, b = voisin_disponible(paire[1], joueur), voisin_disponible(paire[2], joueur)
+      if a ~= nil and b ~= nil and proches(a, b) and not (alerte and paire[2] == 'NewObject_9') then
+        GROUND:CharTurnToChar(a, b)
+        local demande = (i + jour_actuel()) % 2 == 0
+        GROUND:CharSetEmote(a, demande and 'question' or 'happy', 1)
+        reponse_ambiante = {a=paire[1], b=paire[2], emote=demande and 'happy' or 'glowing',
+          quand=horloge_ambiance + 30}
+        rotation_ambiance, prochain_geste_ambiance = i, horloge_ambiance + 360
+        return
+      end
+    else
+      local geste = gestes_de_quartier[i - #paires_discussion]
+      local a = voisin_disponible(geste[1], joueur)
+      if a ~= nil then
+        -- Un marchand conserve l'orientation et l'animation de son service.
+        GROUND:CharSetEmote(a, geste[2], 1)
+        rotation_ambiance, prochain_geste_ambiance = i, horloge_ambiance + 360
+        return
+      end
+    end
+  end
+  prochain_geste_ambiance = horloge_ambiance + 60
 end
 
 function ville.SortieCarrefour_Touch(obj, activator)

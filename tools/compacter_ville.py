@@ -13,9 +13,12 @@ import os
 from pathlib import Path
 import sys
 
-ORIGINAL_SIZE = 36717320
-ORIGINAL_SHA256 = '38c0145a323d9d72c99014ee00abc3191382bfa4bbaa412dac2336919f12b1c4'
-COMPACT_SHA256 = '38c0145a323d9d72c99014ee00abc3191382bfa4bbaa412dac2336919f12b1c4'
+from unpack_payload import PAYLOADS
+
+# La carte livrée est déjà compacte. Les références sont communes avec
+# l'outil de restauration, pour ne pas refuser un payload officiel retouché.
+_, ORIGINAL_SHA256, ORIGINAL_SIZE = PAYLOADS['payload/WaterfallVillageCapital.rsground.gz']
+COMPACT_SHA256 = ORIGINAL_SHA256
 EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
 EMPTY_COUNT = 0
 

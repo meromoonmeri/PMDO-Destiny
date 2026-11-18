@@ -115,7 +115,16 @@ def main() -> None:
     assert rsmap['TileSight'] == 0 and rsmap['CharSight'] == 0 and rsmap['EdgeView'] == 1
     assert rsmap['DiscoveryArray'] == [[2] * 15 for _ in range(20)]
     assert rsmap['MapTeams'][0]['BoxStorage'] == []
-    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 11}, 'Dir': 4}]
+    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}]
+    boss = rsmap['MapTeams'][0]['Players'][0]['serializationLoc']
+    assert boss == {'X': 10, 'Y': 10}
+    marker = next(e for layer in fgv1['Entities'] for e in layer['Markers'] if e['EntName'] == 'boss')
+    anchor = marker['Collider']
+    assert (anchor['X'] + 8, anchor['Y'] + 8) == (boss['X'] * 24 + 12, boss['Y'] * 24 + 12)
+    assert anchor['Y'] >= 240  # entièrement sous les marches dessinées
+    for x in range(boss['X'] * 3, (boss['X'] + 1) * 3):
+        for y in range(boss['Y'] * 3, (boss['Y'] + 1) * 3):
+            assert fgv1['obstacles'][x][y]['Tags'] == 0
     assert len(rsmap['Layers']) == 2
     assert rsmap['Layers'][0]['Layer'] == 0 and rsmap['Layers'][1]['Layer'] == 4
     for lyr in rsmap['Layers']:
@@ -127,8 +136,8 @@ def main() -> None:
                         assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
 
     floors = {(x, y) for x in range(20) for y in range(15) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
-    q = deque([(10, 11)])
-    seen = {(10, 11)}
+    q = deque([(10, 12)])
+    seen = {(10, 12)}
     while q:
         cx, cy = q.popleft()
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
@@ -136,7 +145,7 @@ def main() -> None:
                 seen.add((cx + dx, cy + dy))
                 q.append((cx + dx, cy + dy))
     assert floors == seen and len(floors) == 42
-    for st in [(10, 11), (9, 11), (11, 11), (10, 12), (10, 8), (8, 9), (12, 9), (10, 7)]:
+    for st in [(10, 12), (9, 12), (11, 12), (10, 13), (10, 10), (8, 9), (12, 9), (10, 7)]:
         assert st in floors, st
 
     starts = [e['Value']['$type'] for e in rsmap['MapEffect']['OnMapStarts']]

@@ -33,19 +33,14 @@ def md5(path: Path) -> str:
     return hashlib.md5(path.read_bytes()).hexdigest()
 
 
-# La carte reconstituée doit être exactement celle du payload vérifié.
-assert {k:v for k,v in unpack_payload.PAYLOADS.items() if k in ('payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz')} == {
-    'payload/WaterfallVillageCapital.rsground.gz': (
-        'game/Data/Ground/WaterfallVillageCapital.rsground',
-        '38c0145a323d9d72c99014ee00abc3191382bfa4bbaa412dac2336919f12b1c4',
-        36717320,
-    ),
-    'payload/WaterfallVillageCapital_Dev.rsground.gz': (
-        'game/Data/Ground/WaterfallVillageCapital_Dev.rsground',
-        '7e435a72a59e00d177594efe5a041260152c4b8cb8ccb6ebf251870fedba4ae0',
-        36717324,
+# Empreintes de livraison : comparer la table de décompression et le manifeste du lot.
+lot = json.loads((ROOT / 'tools/reverie_polish_manifest.json').read_text(encoding='utf-8'))
+for nom in ('WaterfallVillageCapital', 'WaterfallVillageCapital_Dev'):
+    attendu = lot['cartes'][nom]
+    assert unpack_payload.PAYLOADS[f'payload/{nom}.rsground.gz'] == (
+        f'game/Data/Ground/{nom}.rsground', attendu['sha256'], attendu['octets'],
     )
-}
+attendu = lot['cartes']['WaterfallVillageCapital']
 assert set(unpack_payload.PAYLOADS) == {
     'payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz',
     'payload/reverie_centre.rsground.gz', 'payload/reverie_nord.rsground.gz',
@@ -55,16 +50,16 @@ assert set(unpack_payload.PAYLOADS) == {
 }
 if not MAP.is_file():
     assert unpack_payload.main() == 0
-assert MAP.stat().st_size == 36717320
-assert sha256(MAP) == '38c0145a323d9d72c99014ee00abc3191382bfa4bbaa412dac2336919f12b1c4'
+assert MAP.stat().st_size == attendu['octets']
+assert sha256(MAP) == attendu['sha256']
 with gzip.open(PAYLOAD, 'rb') as f:
     h = hashlib.sha256()
     size = 0
     for chunk in iter(lambda: f.read(1 << 20), b''):
         h.update(chunk)
         size += len(chunk)
-assert size == 36717320
-assert h.hexdigest() == '38c0145a323d9d72c99014ee00abc3191382bfa4bbaa412dac2336919f12b1c4'
+assert size == attendu['octets']
+assert h.hexdigest() == attendu['sha256']
 
 with MAP.open('rb') as f:
     mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
@@ -87,7 +82,8 @@ with MAP.open('rb') as f:
     finally:
         mm.close()
 
-assert len(sheets) == 28 and {'Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050', 'Reverie_Herbe_Vagues_051', 'Reverie_Rives_Sable_051', 'Reverie_Berges_053', 'Reverie_Animation_Berge_056', 'Reverie_Animation_Eaux_056', 'Reverie_Fond_Transparences_056', 'Reverie_Ondulations_Rochers_056', 'Reverie_Raccord_Chemin30_056', 'Reverie_Raccord_Escalier_056', 'Reverie_Raccord_Etang_056', 'Reverie_Rochers_Eau_056', 'Reverie_Tente_Bellossom'} <= sheets, sorted(sheets)
+assert lot['banque']['nom'] in sheets
+assert len(sheets - {lot['banque']['nom']}) == 28 and {'Reverie_Corrections_Audit', 'Reverie_Raccords_Eau_050', 'Reverie_Herbe_Vagues_051', 'Reverie_Rives_Sable_051', 'Reverie_Berges_053', 'Reverie_Animation_Berge_056', 'Reverie_Animation_Eaux_056', 'Reverie_Fond_Transparences_056', 'Reverie_Ondulations_Rochers_056', 'Reverie_Raccord_Chemin30_056', 'Reverie_Raccord_Escalier_056', 'Reverie_Raccord_Etang_056', 'Reverie_Rochers_Eau_056', 'Reverie_Tente_Bellossom'} <= sheets, sorted(sheets)
 assert {'Reverie_Geo_14_Paysages_composites', 'Reverie_Geo_12_Eaux_frames', 'Reverie_Geo_11_Cascades_frames'} <= sheets
 for sheet in sheets:
     assert (GAME / 'Content/Tile' / f'{sheet}.tile').is_file() or (

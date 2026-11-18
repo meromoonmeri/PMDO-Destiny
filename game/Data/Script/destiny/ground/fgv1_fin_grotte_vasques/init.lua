@@ -1,24 +1,17 @@
 -- Fosse Cascade Fond (fin de la Fosse Cascade : fgv1_fin_grotte_vasques, 480x360).
 -- Quatre phases selon l'avancement :
---   * PreBattle(false) : découverte de Nilo endormi, réveil, puis mise en scène
---                        resserrée : UN éclair blanc (incomprehension du duo),
---                        tremblement de terreur de Nilo bien visible, DOUBLE
---                        éclair blanc d'où jaillit Kabutops — sans aucune
---                        animation d'eau — puis face-à-face et duel.
+--   * PreBattle(false) : Nilo est retrouvé, mais sa mise en garde est interrompue.
+--                        Un éclair vide, voix dans le noir, double éclair puis
+--                        Kabutops sur le sable, sans animation d'eau.
 --   * PreBattle(true)  : revanche condensée après une défaite face à Kabutops
 --   * PostBattle()     : défaite de Kabutops, qui FUIT VERS LE SUD EN COURANT
 --                        (plus de plongeon dans les vasques), retrouvailles de
 --                        Nilo et Lyra, Journal de Victoire
 --   * EmptyReturn()    : visites paisibles après le sauvetage
 --
--- Repères de mise en scène (px carte, carte 480x360) :
---   les vasques en terrasses occupent y = 136..208. Aucun acteur ne s'y tient :
---   le boss apparaît sur le sable plat, sous les vasques (y = 232).
---
--- Sons : chaque effet est déclenché sur l'image de son événement visuel, un
--- seul SE à la fois (Cutscene Guide). La musique n'est jamais coupée d'une
--- piste vers une autre : coupure sèche vers le silence pour le choc, puis
--- relance après le fondu d'entrée.
+-- L'ancre de Kabutops est le centre de la case (10,10) du duel :
+-- (252,252) moins le demi-collider (8,8). Elle est sous toutes les marches.
+-- La caméra laisse Nilo, le duo et le gardien visibles au-dessus des dialogues.
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
@@ -30,16 +23,12 @@ local LIEU_DONJON = '[color=#FFC663]Fosse Cascade[color]'
 local LIEU_FOND = '[color=#FFC663]Fosse Cascade Fond[color]'
 local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
 
--- Sable plat, sous la bande des vasques en terrasses (y = 136..208).
-local SOL_BOSS = {x = 240, y = 232}
--- Duo face à l'estrade d'eau ; pieds à l'écran sous le repère 160 pour la caméra 236.
-local SOL_HEROS = {x = 232, y = 264}
-local SOL_PARTENAIRE = {x = 256, y = 268}
--- Nilo endormi entre les vasques hautes, puis recoin est où il tremble à la vue du boss.
-local SOL_NILO_REVEIL = {x = 264, y = 176}
-local SOL_NILO_TERREUR = {x = 288, y = 248}
-local CAM_FACE = {x = 240, y = 236}
-local CAM_REVEIL = {x = 240, y = 228}
+local SOL_BOSS = {x = 244, y = 244}
+local SOL_HEROS = {x = 220, y = 272}
+local SOL_PARTENAIRE = {x = 260, y = 276}
+local SOL_NILO_REVEIL = {x = 285, y = 228}
+local SOL_NILO_TERREUR = {x = 304, y = 256}
+local CAM_FACE = {x = 240, y = 240}
 local CAM_ENTREE = {x = 240, y = 264}
 
 local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
@@ -163,304 +152,239 @@ function fgv1.Init(map)
   end
 end
 
-function fgv1.PreBattle(is_rematch)
-  local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(216, 344, Direction.Up)
-  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
-    SOL_NILO_REVEIL.x, SOL_NILO_REVEIL.y, Direction.Down)
-  GROUND:CharSetAnim(nilo, 'EventSleep', true)
+-- On gèle les reflets sur la première phase (TileLayer.Draw : FrameLength <= 0)
+-- et on masque les bulles. Le décor, ses sols et ses collisions restent en place.
+-- C'est uniquement l'instance du pré-combat, pas les vasques de la visite libre.
+local function suspendre_eau_precombat(map)
+  local reflets, bulles, bulles_visibles = {}, nil, nil
+  if map ~= nil and map.Layers ~= nil then
+    for i = 0, map.Layers.Count - 1 do
+      local calque = map.Layers[i]
+      if calque.Name == '06 reflets vasques 12 phases' then
+        for x = 0, calque.Width - 1 do
+          for y = 0, calque.Height - 1 do
+            local pistes = calque.Tiles[x][y].Layers
+            for j = 0, pistes.Count - 1 do
+              local piste = pistes[j]
+              if piste.Frames.Count > 1 and piste.FrameLength > 0 then
+                reflets[#reflets + 1] = {piste, piste.FrameLength}
+                piste.FrameLength = 0
+              end
+            end
+          end
+        end
+      elseif calque.Name == '07 bulles source 24 phases' then
+        bulles, bulles_visibles = calque, calque.Visible
+        bulles.Visible = false
+      end
+    end
+  end
+  return function()
+    for _, r in ipairs(reflets) do r[1].FrameLength = r[2] end
+    if bulles ~= nil then bulles.Visible = bulles_visibles end
+  end
+end
 
-  -- Le boss est créé sur le sable plat, sous les vasques : il n'apparaît jamais
-  -- sur les terrasses d'eau (l'« escalier »).
+-- Garde le temps et l'impact de la feuille réellement chargée, pas d'une
+-- animation supposée. Une animation absente n'immobilise pas l'acteur.
+local function temps_animation(ch, nom)
+  local total, impact
+  pcall(function()
+    local gm = RogueEssence.Content.GraphicsManager
+    local idx = gm.GetAnimIndex(nom)
+    if idx < 0 then return end
+    local feuille = gm.GetChara(ch.CurrentForm:ToCharID())
+    if feuille:GetReferencedAnimIndex(idx) ~= idx then return end
+    total = tonumber(feuille:GetTotalTime(idx, ch.Direction))
+    impact = tonumber(feuille:GetHitTime(idx, ch.Direction))
+  end)
+  if total ~= nil and total > 0 then return total, impact end
+end
+
+local function coup_de_faux(kabutops)
+  -- Attack est natif sur Kabutops ; selon la planche, Swing peut l'être aussi.
+  local nom = 'Attack'
+  local total, impact = temps_animation(kabutops, nom)
+  total = total or 24
+  impact = math.max(0, math.min(total - 1, impact or 8))
+  GROUND:CharSetAnim(kabutops, nom, false)
+  if impact > 0 then GAME:WaitFrames(impact) end
+  SOUND:PlayBattleSE('DUN_Slash')
+  secouer_ecran(1, 3, 12)
+  GAME:WaitFrames(total - impact)
+  GROUND:CharEndAnim(kabutops)
+end
+
+function fgv1.PreBattle(is_rematch, map)
+  GAME:CutsceneMode(true)
+  local retablir_eau = suspendre_eau_precombat(map)
+  local hero = CH('PLAYER')
+  local partenaire = equipe_scene.Partenaire(240, 344, Direction.Up)
+  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
+    SOL_NILO_REVEIL.x, SOL_NILO_REVEIL.y, Direction.DownLeft)
+  if not is_rematch then GROUND:CharSetAnim(nilo, 'EventSleep', true) end
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
     SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
-  if not is_rematch then
-    GROUND:Hide('Kabutops_Boss')
-  end
+  if not is_rematch then GROUND:Hide('Kabutops_Boss') end
 
-  GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 240, 344, Direction.Up)
+    GROUND:TeleportTo(hero, 216, 344, Direction.Up)
   end
 
   GAME:MoveCamera(CAM_ENTREE.x, CAM_ENTREE.y, 1, false)
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 16)
-  GAME:WaitFrames(18)
-  UI:WaitHideTitle(14)
-  GAME:FadeIn(16)
-  -- Cutscene Guide : démarrer la musique après la fin du fondu d'entrée.
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  if not is_rematch then
+    UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 16)
+    GAME:WaitFrames(22)
+    UI:WaitHideTitle(14)
+  end
+  GAME:FadeIn(18)
+  SOUND:PlayBGM(is_rematch and 'Rising Fear.ogg' or 'Lower Spring Cave.ogg', true)
 
-  -- 1. Montée rapide du duo vers la clairière (1 px/frame, décalage 5f).
+  -- Repérer Nilo dans le cadre avant de parler. Le duo ne traverse aucune marche.
   local arrivee = {
     TASK:BranchCoroutine(function()
-      GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 36, false)
+      GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 40, false)
     end),
   }
   if hero ~= nil then
-    table.insert(arrivee, TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(hero, SOL_HEROS.x, SOL_HEROS.y, false, 1.5)
-      tourner_vers(hero, Direction.Up, 4)
-    end))
+    arrivee[#arrivee + 1] = TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(hero, SOL_HEROS.x, SOL_HEROS.y, false, 1.6)
+      regarder_cible(hero, is_rematch and kabutops or nilo, 3)
+    end)
   end
   if partenaire ~= nil then
-    table.insert(arrivee, TASK:BranchCoroutine(function()
+    arrivee[#arrivee + 1] = TASK:BranchCoroutine(function()
       GAME:WaitFrames(5)
-      GROUND:MoveToPosition(partenaire, SOL_PARTENAIRE.x, SOL_PARTENAIRE.y, false, 1.5)
-      tourner_vers(partenaire, Direction.Up, 4)
-    end))
+      GROUND:MoveToPosition(partenaire, SOL_PARTENAIRE.x, SOL_PARTENAIRE.y, false, 1.8)
+      regarder_cible(partenaire, is_rematch and kabutops or nilo, 3)
+    end)
   end
   TASK:JoinCoroutines(arrivee)
-  GAME:WaitFrames(6)
+  GAME:WaitFrames(8)
 
   if not is_rematch then
-    -- 2. Découverte : Nilo dort entre les vasques hautes.
     if partenaire ~= nil then
-      cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim_2')
-      GAME:WaitFrames(10)
-    end
-
-    local approche = {
-      TASK:BranchCoroutine(function()
-        GAME:MoveCamera(CAM_REVEIL.x, CAM_REVEIL.y, 16, false)
-      end),
-    }
-    if hero ~= nil then
-      table.insert(approche, TASK:BranchCoroutine(function()
-        GROUND:MoveToPosition(hero, SOL_HEROS.x, SOL_HEROS.y, true, 2)
-        regarder_cible(hero, nilo, 3)
-      end))
-    end
-    if partenaire ~= nil then
-      table.insert(approche, TASK:BranchCoroutine(function()
-        GAME:WaitFrames(4)
-        GROUND:MoveToPosition(partenaire, SOL_PARTENAIRE.x, SOL_PARTENAIRE.y, true, 2)
-        regarder_cible(partenaire, nilo, 3)
-      end))
-    end
-    TASK:JoinCoroutines(approche)
-    GAME:WaitFrames(6)
-
-    if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Worried', cinematique.NomColore('Nilo', 'shinx') .. ' ! Hé, ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! Réveille-toi !', 'standard')
+      cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim')
+      GAME:WaitFrames(12)
+      cinematique.Dire(partenaire, 'Worried', 'Nilo ?[pause=10] Ta maman nous a envoyés. On vient te ramener.', 'standard')
     end
     UI:ResetSpeaker()
-    cinematique.Respirer(10)
-
-    local duree_wake = 36
-    local wake_dispo = true
-    pcall(function()
-      local gm = RogueEssence.Content.GraphicsManager
-      if gm.GetAnimIndex ~= nil then
-        local idx = gm.GetAnimIndex('Wake')
-        if idx == nil or idx < 0 then
-          wake_dispo = false
-        else
-          local feuille = gm.GetChara(nilo.CurrentForm:ToCharID())
-          if feuille:GetReferencedAnimIndex(idx) ~= idx then
-            wake_dispo = false
-          else
-            local t = tonumber(feuille:GetTotalTime(idx, nilo.Direction))
-            if t ~= nil and t > 0 then duree_wake = math.floor(t) end
-          end
-        end
-      end
-    end)
-    if wake_dispo then
+    GROUND:CharEndAnim(nilo)
+    local duree = temps_animation(nilo, 'Wake')
+    if duree ~= nil then
       GROUND:CharSetAnim(nilo, 'Wake', false)
-      GAME:WaitFrames(duree_wake)
-    else
-      GAME:WaitFrames(18)
-    end
-    if GROUND.CharEndAnim ~= nil then
+      GAME:WaitFrames(duree)
       GROUND:CharEndAnim(nilo)
     end
+    regarder_cible(nilo, partenaire or hero, 3)
     GAME:WaitFrames(8)
-
-    cinematique.Dire(nilo, 'Dizzy', 'Maman… grand frère…', 'droite')
-    cinematique.Respirer(8)
-    cinematique.Emote(nilo, 'exclaim', 'EVT_Emote_Exclaim')
-    GAME:WaitFrames(10)
-    cinematique.Dire(nilo, 'Surprised', 'Hein ?! Vous… vous n’êtes pas Maman ni Léo… Qui êtes-vous ?!', 'droite')
-
-    if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Happy', 'Ne t’inquiète pas, ' .. cinematique.NomColore('Nilo', 'shinx') .. ' ! On est une équipe de secours ! Ta maman, Lyra, nous a envoyés te chercher jusqu’ici !', 'standard')
-    end
-
-    cinematique.Emote(nilo, 'shock', 'EVT_Emote_Shock_2')
-    GAME:WaitFrames(10)
-    cinematique.Dire(nilo, 'Pain', 'Non !! Vous n’auriez pas dû descendre jusqu’au fond… Partez tout de suite !!', 'droite')
+    cinematique.Dire(nilo, 'Dizzy', 'Maman…?[pause=10] Attendez. Ne bougez plus.', 'droite')
     UI:ResetSpeaker()
 
-    -- 3. Nilo recule vers le recoin est : il reste à l'écran, tremblant.
-    local recul_nilo = {
+    -- Avertissement interrompu : le choc coupe la musique plutôt que de lancer
+    -- aussitôt un autre thème. Au premier éclair, la clairière est encore vide.
+    couper_musique_choc()
+    GAME:WaitFrames(14)
+    SOUND:PlayBattleSE('EVT_Battle_Flash')
+    eclair_blanc(3, 11)
+    GAME:WaitFrames(8)
+    local reactions = {
       TASK:BranchCoroutine(function()
         GROUND:MoveToPosition(nilo, SOL_NILO_TERREUR.x, SOL_NILO_TERREUR.y, true, 2)
-        tourner_vers(nilo, Direction.DownLeft, 3)
+        tourner_vers(nilo, Direction.UpLeft, 3)
+        trembler_de_peur(nilo)
       end),
     }
-    TASK:JoinCoroutines(recul_nilo)
-    if partenaire ~= nil then
-      regarder_cible(partenaire, nilo, 3)
-    end
-    trembler_de_peur(nilo)
-    GAME:WaitFrames(4)
-
-    -- 4. UN éclair blanc : les héros ne comprennent pas ce qu'ils viennent de voir.
-    couper_musique_choc()
-    SOUND:PlayBattleSE('EVT_Battle_Flash')
-    eclair_blanc(3, 9)
-    GAME:WaitFrames(3)
-
-    local incomprehension = {}
-    if partenaire ~= nil then
-      table.insert(incomprehension, TASK:BranchCoroutine(function()
-        cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
-        tourner_vers(partenaire, Direction.UpRight, 3)
-        GAME:WaitFrames(10)
-        tourner_vers(partenaire, Direction.UpLeft, 3)
-      end))
-    end
     if hero ~= nil then
-      table.insert(incomprehension, TASK:BranchCoroutine(function()
-        GAME:WaitFrames(5)
-        -- Pas de second SFX simultané (Cutscene Guide : un seul SE d'émote).
-        cinematique.Emote(hero, 'question')
+      reactions[#reactions + 1] = TASK:BranchCoroutine(function()
         tourner_vers(hero, Direction.UpLeft, 3)
         GAME:WaitFrames(10)
         tourner_vers(hero, Direction.UpRight, 3)
-      end))
+      end)
     end
-    if #incomprehension > 0 then TASK:JoinCoroutines(incomprehension) end
-    GAME:WaitFrames(4)
-
     if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Surprised', 'Un éclair blanc… ici, sous la pierre ?! Qu’est-ce que c’était que ça ?', 'standard')
+      reactions[#reactions + 1] = TASK:BranchCoroutine(function()
+        GAME:WaitFrames(5)
+        cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
+        tourner_vers(partenaire, Direction.Up, 3)
+      end)
     end
-    -- Voix hors-champ des profondeurs (aucun portrait, Cutscene Guide) : une
-    -- seule réplique, pour ne pas casser le rythme soutenu.
-    parler_voix_abysses('Qui ose troubler le silence des abysses… au plus profond de la ' .. LIEU_DONJON .. '… ?')
-
-    cinematique.Dire(nilo, 'Crying', 'Reculez !! C’est lui… Le seigneur du gouffre… ' .. cinematique.NomEspece('kabutops', 'Kabutops') .. ' !!!', 'droite')
+    TASK:JoinCoroutines(reactions)
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Surprised', 'Tu as vu ?[pause=8] Il n’y avait rien, juste devant nous…', 'standard')
+    end
+    cinematique.Dire(nilo, 'Crying', 'Cette fois, il est tout près…', 'droite')
     UI:ResetSpeaker()
 
-    -- 5. Secousse et DOUBLE éclair blanc : Kabutops est là, sur le sable.
+    -- Cotovol / Électhor : le noir donne la parole à la menace avant de la
+    -- montrer. Pas de portrait, pas de musique sous la voix, pas de geyser.
     SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
-    secouer_ecran(2, 4, 18)
+    secouer_ecran(2, 4, 16)
+    GAME:FadeOut(false, 10)
+    GAME:WaitFrames(30)
+    parler_voix_abysses('Vous avez entendu le premier grondement.[pause=12] Le second est pour vous.')
+    regarder_cible(hero, kabutops, 3)
+    regarder_cible(partenaire, kabutops, 3)
+    GAME:FadeIn(12)
     GAME:WaitFrames(6)
 
+    -- Le premier éclat ne montre toujours personne. Le deuxième révèle
+    -- Kabutops sur le sable plat, sans déplacement visible pendant le blanc.
     SOUND:PlayBattleSE('EVT_Battle_Flash')
-    GAME:FadeOut(true, 2)
+    eclair_blanc(3, 9)
+    GAME:WaitFrames(24)
+    SOUND:PlayBattleSE('EVT_Battle_Flash')
+    GAME:FadeOut(true, 3)
     GROUND:Unhide('Kabutops_Boss')
-    GAME:WaitFrames(2)
-    GAME:FadeIn(6)
-    GAME:WaitFrames(3)
-    SOUND:PlayBattleSE('EVT_Battle_Flash')
-    GAME:FadeOut(true, 2)
-    GAME:WaitFrames(1)
-    GAME:FadeIn(8)
-
-    -- Réception au sol : un seul SE d'impact, coordonné avec le saut.
-    SOUND:PlayBattleSE('EVT_Roar')
-    secouer_ecran(3, 5, 18)
-    GROUND:CharSetAnim(kabutops, 'Hop', false)
-    GAME:WaitFrames(18)
-    if GROUND.CharEndAnim ~= nil then GROUND:CharEndAnim(kabutops) end
-
-    -- Musique de tension lancée une fois l'image revenue (Cutscene Guide).
-    SOUND:PlayBGM('Rising Fear.ogg', true)
+    GAME:FadeIn(9)
     GAME:WaitFrames(8)
+    coup_de_faux(kabutops)
+    GAME:WaitFrames(9)
+    SOUND:PlayBGM('Rising Fear.ogg', true)
 
-    -- Coup de faux d'intimidation : le SE tombe sur la même image que le geste.
-    SOUND:PlayBattleSE('DUN_Slash')
-    GROUND:CharSetAnim(kabutops, 'Swing', false)
-    GAME:WaitFrames(14)
-    if GROUND.CharEndAnim ~= nil then GROUND:CharEndAnim(kabutops) end
-    GAME:WaitFrames(6)
-
-    -- Le recul de terreur du duo reste synchronisé avec Nilo qui tremble.
-    local recul_duo = {}
+    cinematique.Dire(kabutops, 'Angry', 'Cette fosse m’appartient. Faites demi-tour.', 'droite')
+    UI:ResetSpeaker()
+    -- Au lieu de rester côte à côte, le duo couvre Nilo : le partenaire se
+    -- décale à droite pendant que le héros serre la ligne face au gardien.
+    local garde = {}
     if hero ~= nil then
-      table.insert(recul_duo, TASK:BranchCoroutine(function()
-        cinematique.Emote(hero, 'shock')
-        GROUND:MoveToPosition(hero, SOL_HEROS.x, SOL_HEROS.y + 8, true, 2)
-        tourner_vers(hero, Direction.Up, 3)
-      end))
+      garde[#garde + 1] = TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 236, 272, false, 1.4)
+        regarder_cible(hero, kabutops, 3)
+      end)
     end
     if partenaire ~= nil then
-      table.insert(recul_duo, TASK:BranchCoroutine(function()
+      garde[#garde + 1] = TASK:BranchCoroutine(function()
         GAME:WaitFrames(5)
-        cinematique.Emote(partenaire, 'exclaim')
-        GROUND:MoveToPosition(partenaire, SOL_PARTENAIRE.x, SOL_PARTENAIRE.y + 8, true, 2)
-        tourner_vers(partenaire, Direction.Up, 3)
-      end))
+        GROUND:MoveToPosition(partenaire, 277, 268, false, 1.6)
+        regarder_cible(partenaire, kabutops, 3)
+      end)
     end
-    if #recul_duo > 0 then TASK:JoinCoroutines(recul_duo) end
-    GAME:WaitFrames(6)
-
-    -- 6. Face-à-face (acteurs dégagés entre les portraits Y=132..188 et la boîte Y>=188).
-    cinematique.Dire(kabutops, 'Angry', 'KSSSHHHAAARRR !! Depuis des âges oubliés, je veille sur la ' .. LIEU_FOND .. ' !', 'droite')
-    cinematique.Dire(kabutops, 'Angry', 'Quiconque ose plonger jusqu’à mon sanctuaire goûtera au tranchant de mes faux !', 'droite')
+    if #garde > 0 then TASK:JoinCoroutines(garde) end
     if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Determined', 'Nous sommes une équipe de secours ! Nous ne repartirons pas sans ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'standard')
+      cinematique.Dire(partenaire, 'Determined', 'Nilo, derrière moi.[pause=8] On ne repartira pas sans toi.', 'standard')
     end
   else
-    -- Revanche condensée (PreBattle(true)) : mise en place directe et fluide.
-    local mise_en_place = {
-      TASK:BranchCoroutine(function()
-        GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 12, false)
-      end),
-    }
-    if hero ~= nil then
-      table.insert(mise_en_place, TASK:BranchCoroutine(function()
-        GROUND:MoveToPosition(hero, SOL_HEROS.x, SOL_HEROS.y, false, 1.5)
-        tourner_vers(hero, Direction.Up, 4)
-      end))
-    end
+    -- Pas de réveil ni de révélation rejoués lors d'une revanche.
+    coup_de_faux(kabutops)
+    cinematique.Dire(kabutops, 'Angry', 'Vous êtes revenus. La fosse ne vous laissera pas passer deux fois.', 'droite')
     if partenaire ~= nil then
-      table.insert(mise_en_place, TASK:BranchCoroutine(function()
-        GAME:WaitFrames(4)
-        GROUND:MoveToPosition(partenaire, SOL_PARTENAIRE.x, SOL_PARTENAIRE.y, false, 1.5)
-        tourner_vers(partenaire, Direction.Up, 4)
-      end))
-    end
-    TASK:JoinCoroutines(mise_en_place)
-
-    SOUND:FadeOutBGM(15)
-    GAME:WaitFrames(15)
-    SOUND:PlayBattleSE('DUN_Slash')
-    GROUND:CharSetAnim(kabutops, 'Swing', false)
-    GAME:WaitFrames(14)
-    if GROUND.CharEndAnim ~= nil then GROUND.CharEndAnim(kabutops) end
-    SOUND:PlayBGM('Rising Fear.ogg', true)
-    GAME:WaitFrames(10)
-
-    cinematique.Dire(kabutops, 'Angry', 'Encore vous ?! Vous osez défier à nouveau le gardien de la ' .. LIEU_FOND .. ' ?', 'droite')
-    if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Determined', 'Cette fois, nous ne reculerons pas ! Nous ramènerons ' .. cinematique.NomColore('Nilo', 'shinx') .. ' sain et sauf !', 'standard')
+      cinematique.Dire(partenaire, 'Determined', 'On reste ensemble. Cette fois, on ramène Nilo.', 'standard')
     end
   end
 
-  -- Transition musicale propre (fondu court : pacing soutenu), puis thème de boss.
-  SOUND:FadeOutBGM(15)
-  GAME:WaitFrames(15)
-  SOUND:PlayBGM('Boss Battle 2.ogg', true)
-
-  SOUND:PlayBattleSE('EVT_Tower_Tremor_Strong')
-  secouer_ecran(3, 5, 16)
-  GROUND:CharSetAnim(kabutops, 'Charge', false)
-  GAME:WaitFrames(16)
-  if GROUND.CharEndAnim ~= nil then GROUND:CharEndAnim(kabutops) end
-
-  cinematique.Dire(kabutops, 'Shouting', 'En garde ! Que le torrent des abysses vous emporte !', 'droite')
+  cinematique.Dire(kabutops, 'Shouting', 'Alors, tenez bon !', 'droite')
   UI:ResetSpeaker()
-  cinematique.Respirer(12)
-
-  COMMON.BossTransition(true)
+  SOUND:FadeOutBGM(18)
+  SOUND:PlayBattleSE('EVT_Battle_Transition')
+  GAME:FadeOut(false, 18) -- pas de nouveaux éclairs après la révélation
+  GAME:WaitFrames(16)
+  SOUND:PlayBGM('Boss Battle 2.ogg', true)
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.GrotteVerdoyantePhase = 1
   arreter_tremblement(nilo)
+  retablir_eau() -- à noir complet, y compris si l'éditeur conserve l'instance
   if hero ~= nil then hero.CollisionDisabled = false end
   GAME:CutsceneMode(false)
   lancer_duel_boss()
@@ -690,9 +614,9 @@ function fgv1.Enter(map)
   elseif SV.Destiny.GrotteVerdoyanteBossVaincu == true or SV.Destiny.GrotteVerdoyantePhase == 4 then
     fgv1.EmptyReturn()
   elseif SV.Destiny.GrotteVerdoyantePhase == 1 then
-    fgv1.PreBattle(true)
+    fgv1.PreBattle(true, map)
   else
-    fgv1.PreBattle(false)
+    fgv1.PreBattle(false, map)
   end
 end
 
