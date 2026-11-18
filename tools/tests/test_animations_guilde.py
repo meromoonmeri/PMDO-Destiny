@@ -78,6 +78,17 @@ def main() -> None:
     with Image.open(PREUVES / 'guilde_repas.gif') as gif:
         assert getattr(gif, 'n_frames', 1) >= 6, 'GIF trop court'
     assert (PREUVES / 'guilde_animations_planche.png').exists(), 'planche de contrôle manquante'
+    # Les GIF de l'animation Eat : un par membre et une planche animée.
+    planche = PREUVES / 'guilde_eat_tous.gif'
+    assert planche.exists(), 'GIF Eat global manquant'
+    with Image.open(planche) as gif:
+        assert getattr(gif, 'n_frames', 1) == 4, 'le GIF Eat global doit jouer quatre images'
+    for membre in manifeste['membres']:
+        gif_membre = PREUVES / 'eat' / f'{membre}.gif'
+        assert gif_membre.exists(), f'GIF Eat manquant pour {membre}'
+        with Image.open(gif_membre) as gif:
+            attendu = manifeste['membres'][membre]['animations']['Eat']['images']
+            assert getattr(gif, 'n_frames', 1) == attendu, (membre, 'nombre d\'images du GIF')
     # Les sept membres sans Eat d'origine en ont un dessiné ici ; les trois autres
     # gardent celui de SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
