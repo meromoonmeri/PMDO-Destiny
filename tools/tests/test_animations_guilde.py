@@ -49,9 +49,9 @@ def main() -> None:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
             assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'poses',
-                                      'sur_mesure', 'breloom'), \
+                                      'calque', 'breloom'), \
                 (membre, anim, info['source'])
-            if info['source'] in ('derivee', 'dessinee', 'poses', 'sur_mesure', 'breloom'):
+            if info['source'] in ('derivee', 'dessinee', 'poses', 'calque', 'breloom'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -95,8 +95,8 @@ def main() -> None:
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
     POSES_ATTENDUES = {'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
     assert {m for m, v in sources.items() if v == 'poses'} == POSES_ATTENDUES, sources
-    # Gardevoir a une animation ecrite pour sa morphologie, pas une suite de poses.
-    assert sources['Gardevoir'] == 'sur_mesure', sources['Gardevoir']
+    # Gardevoir a une animation calquee sur Kirlia, pas une suite de poses.
+    assert sources['Gardevoir'] == 'calque', sources['Gardevoir']
     # Pandespiegle garde son Eat derive, valide tel quel.
     assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
     for membre in ('Noctali', 'Draby', 'Capumain'):
@@ -147,10 +147,16 @@ def main() -> None:
     declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
                     for a in ET.parse(dossier / 'AnimData.xml').iter('Anim')}
     info = manifeste['membres']['Gardevoir']['animations']['Eat']
-    assert info['source'] == 'sur_mesure', info['source']
-    assert info['durees'] == [8] * info['images'], ('cadence des membres valides', info['durees'])
-    assert info['images'] >= 6, ('trop peu d\'images pour un vrai mouvement', info['images'])
-    assert len(info.get('sequence') or []) == info['images'], info.get('sequence')
+    assert info['source'] == 'calque', info['source']
+    # la cadence est celle de la reference, et c'est aussi celle des membres
+    # valides (Noctali, Draby, Capumain jouent 6, 8, 6 et 8 ticks)
+    assert info['durees'] == [6, 8, 6, 8], ('cadence de la reference', info['durees'])
+    assert info['images'] == 4, info['images']
+    assert info.get('reference', '').endswith('Kirlia'), info.get('reference')
+    mesure = info.get('mesure') or []
+    assert len(mesure) == info['images'], mesure
+    assert mesure[0]['pente'] == 0 and mesure[2]['pente'] == 0, mesure
+    assert mesure[1]['pente'] > 0 > mesure[3]['pente'], mesure
     assert tuple(declarations['Eat']) == tuple(info['durees']), 'durées incohérentes'
     largeur, hauteur = info['cellule']
     with Image.open(dossier / 'Eat-Anim.png') as planche:
@@ -160,9 +166,8 @@ def main() -> None:
                    for r in range(planche.height // hauteur)]
     for r, rangee in enumerate(rangees):
         distinctes = {image.tobytes() for image in rangee}
-        assert len(distinctes) >= 4, ('Gardevoir', r, 'trop peu de poses distinctes')
-        repos = [image for image, nom in zip(rangee, info['sequence']) if nom == 'repos']
-        assert len({image.tobytes() for image in repos}) == 1, (r, 'repos instables')
+        assert len(distinctes) == 3, ('Gardevoir', r, 'trois images distinctes attendues')
+        assert rangee[0].tobytes() == rangee[2].tobytes(), (r, 'les images de repos divergent')
         # la tete bouge vraiment : son sommet change de colonne ou de ligne
         sommets = set()
         for image in rangee:

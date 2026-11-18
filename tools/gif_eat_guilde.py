@@ -133,7 +133,7 @@ def main(argv: list[str]) -> int:
         poses = fiche['animations']['Eat'].get('poses') or []
         etiquette = {'derivee': 'Eat dérivé',
                      'poses': 'poses : ' + ' puis '.join(poses),
-                     'sur_mesure': 'sur mesure',
+                     'calque': 'calqué sur ' + str(fiche['animations']['Eat'].get('reference', '?')),
                      'SpriteCollab': 'Eat SpriteCollab'}.get(source, source)
         rendu = vignette(images, durees, nom, etiquette)
         ecrire_gif(rendu, durees, SORTIE / f'{nom}.gif')

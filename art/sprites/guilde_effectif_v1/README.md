@@ -67,7 +67,7 @@ l'espèce (SpriteCollab ne les dessine pas pour elle) :
 
 - `Eat` — balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images
 - `Eat_breloom` — mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme
-- `Eat_sur_mesure` — animation ecrite pour la morphologie du membre : la tete s'incline d'un cote puis de l'autre en plongeant, le corps s'enfonce et la robe balance, par translation de trois bandes
+- `Eat_calque` — mouvement du Eat de Kirlia, sa pre-evolution, mesure image par image (inclinaison de la tete autour du cou, descente) et applique au casque du membre, a la meme cadence
 - `Eat_poses` — poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle
 - `Wake` — Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks
 - `Pose` — Idle image 1 tenue — 1 image de 30 ticks
@@ -96,30 +96,31 @@ La cadence de référence est celle des membres validés : **8 ticks par
 image** (Noctali, Draby, Capumain). Les cinq poses successives gardent
 6, 8, 6 et 8 ticks, un peu plus vif.
 
-## Le `Eat` sur mesure de Gardevoir
+## Le `Eat` calqué de Gardevoir
 
-Gardevoir n'a pas de bouche visible et ne marche pas : elle **flotte**.
-Un repas qui lui ressemble ne se joue donc pas avec les mains, mais avec
-tout le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :
+Gardevoir n'a pas d'animation de repas, mais **Kirlia**, sa
+pré-évolution, en a une : même morphologie, même artiste. Son `Eat` est
+donc mesuré image par image — inclinaison de la tête autour du cou,
+descente — puis ce mouvement est appliqué au casque et au corps de
+Gardevoir, dans les huit directions, à la cadence de la référence.
+Aucun pixel de Kirlia n'est repris : seul son mouvement est calqué.
 
-| Image | Ce qui bouge |
-|---|---|
-| repos | tête (0, 0), corps (0, 0), robe (0, 0) |
-| incline a gauche | tête (-1, 1), corps (0, 0), robe (1, 0) |
-| plonge a gauche | tête (-1, 2), corps (0, 1), robe (1, 0) |
-| plonge a droite | tête (1, 2), corps (0, 1), robe (-1, 0) |
-| incline a droite | tête (1, 1), corps (0, 0), robe (-1, 0) |
-| repos | tête (0, 0), corps (0, 0), robe (0, 0) |
+| Image | Pente mesurée | Descente | Appliqué à Gardevoir |
+|---|---:|---:|---|
+| 1 | +0.00 px/rangée | +0 px | +0.00 px/rangée |
+| 2 | +0.20 px/rangée | +1 px | +0.30 px/rangée |
+| 3 | +0.00 px/rangée | +0 px | +0.00 px/rangée |
+| 4 | -0.20 px/rangée | +1 px | -0.30 px/rangée |
 
-La tête s'incline d'un côté puis de l'autre en plongeant vers la
-nourriture, le corps s'enfonce, et sa robe blanche balance à contretemps.
-C'est la même grammaire que le `Eat` de Kirlia, sa pré-évolution, dessiné
-par le même artiste pour la même morphologie.
+La pente est multipliée par **1.5** : les cornes de Kirlia rendent son
+basculement très lisible, le casque rond de Gardevoir demande un peu
+plus d'amplitude pour que le geste se voie. La cadence est celle de la
+référence, 6, 8, 6, 8 ticks.
 
-Techniquement, chaque image est une translation de trois bandes
-horizontales (tête, corps et bras, robe). Une translation par bande ne perd
-aucun pixel et ne crée aucun trou : le dessin reste entièrement celui de
-l'espèce, rien n'est repeint.
+Techniquement, la bascule est une translation **rangée par rangée** de
+la tête : la rangée du haut part le plus loin, celle du cou ne bouge
+pas. Une translation par rangée est injective, donc aucun pixel ne
+disparaît et aucun trou n'apparaît dans la silhouette.
 
 Pandespiègle garde en revanche le simple balancement, validé tel quel.
 

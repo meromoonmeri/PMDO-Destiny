@@ -89,27 +89,19 @@ CADENCE_DEFAUT = [6, 8, 6, 8]
 CADENCES = {'Gardevoir': [8, 8, 8, 8]}
 
 # ---------------------------------------------------------------------------
-# Animation sur mesure : Gardevoir n'a pas de bouche visible et ne marche pas,
-# elle flotte. Un repas qui lui ressemble ne se joue donc pas avec les mains,
-# mais avec tout le corps : la tete s'incline d'un cote puis de l'autre en
-# plongeant vers la nourriture, et sa robe blanche balance a contretemps. C'est
-# la meme grammaire que le Eat de Kirlia, sa pre-evolution, dessine par le meme
-# artiste pour la meme morphologie.
-# Chaque image est decrite par le decalage de trois bandes horizontales :
-# tete, corps (avec les bras), robe. Des translations par bande ne perdent aucun
-# pixel et ne creent aucun trou, contrairement a un redessin des bras.
+# Animation calquee : Gardevoir n'a pas d'animation de repas, mais Kirlia — sa
+# pre-evolution, meme morphologie, meme artiste — en a une. Son Eat est mesure
+# image par image (inclinaison de la tete, descente), puis ces mouvements sont
+# appliques au casque et au corps de Gardevoir, direction par direction.
+# Rien du dessin de Kirlia n'est repris : seul son mouvement est calque.
 # ---------------------------------------------------------------------------
-SUR_MESURE = {'Gardevoir'}
-CADENCE_SUR_MESURE = [8, 8, 8, 8, 8, 8]
-PHASES_SUR_MESURE = {
-    'Gardevoir': [
-        ('repos',            (0, 0),  (0, 0), (0, 0)),
-        ('incline a gauche', (-1, 1), (0, 0), (1, 0)),
-        ('plonge a gauche',  (-1, 2), (0, 1), (1, 0)),
-        ('plonge a droite',  (1, 2),  (0, 1), (-1, 0)),
-        ('incline a droite', (1, 1),  (0, 0), (-1, 0)),
-        ('repos',            (0, 0),  (0, 0), (0, 0)),
-    ],
+CALQUES = {
+    'Gardevoir': {
+        'reference': ('0281', 'Kirlia'),
+        # ses cornes rendent le basculement tres lisible ; le casque rond de
+        # Gardevoir demande un peu plus d'amplitude pour que le geste se voie
+        'facteur': 1.5,
+    },
 }
 
 EAT_DERIVE_VALIDE = {'Pandespiegle'}
@@ -121,9 +113,9 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
-    'Eat_sur_mesure': ("animation ecrite pour la morphologie du membre : la tete "
-                       "s'incline d'un cote puis de l'autre en plongeant, le corps "
-                       "s'enfonce et la robe balance, par translation de trois bandes"),
+    'Eat_calque': ("mouvement du Eat de Kirlia, sa pre-evolution, mesure image par "
+                   "image (inclinaison de la tete autour du cou, descente) et "
+                   "applique au casque du membre, a la meme cadence"),
     'Eat_poses': ("poses successives du même Pokémon : repos, une main levée, repos, "
                   "l'autre main, prises dans ses planches Attack/Appeal/Dance et "
                   "alignées sur le sol et l'axe de l'Idle"),
@@ -301,6 +293,87 @@ def image_decalee(image: Image.Image, tete: tuple[int, int], corps: tuple[int, i
                 if 0 <= nx < image.width and 0 <= ny < image.height:
                     sortie.putpixel((nx, ny), couleur)
     return sortie
+
+
+def tete_inclinee(image: Image.Image, pente: float, dy: int) -> Image.Image:
+    """Bascule la tete rangee par rangee, comme une rotation autour du cou.
+
+    Chaque rangee de la tete est translatee de round(pente * (pivot - y)) : la
+    rangee du haut part le plus loin, celle du cou ne bouge pas. Une translation
+    par rangee est injective : aucun pixel n'est perdu et aucun trou n'apparait.
+    """
+    y_tete, _ = bandes_anatomie(image)
+    sortie = Image.new('RGBA', image.size, (0, 0, 0, 0))
+    for y in range(image.height):
+        if y < y_tete:
+            dx, decalage = round(pente * (y_tete - y)), dy
+        else:
+            dx, decalage = 0, 0
+        for x in range(image.width):
+            couleur = image.getpixel((x, y))
+            if couleur[3] < 40:
+                continue
+            nx, ny = x + dx, y + decalage
+            if 0 <= nx < image.width and 0 <= ny < image.height:
+                sortie.putpixel((nx, ny), couleur)
+    return sortie
+
+
+def mesurer_calque(dossier: Path) -> dict | None:
+    """Mesure le repas d'une reference : inclinaison de sa tete, image par image.
+
+    La tete est cherchee comme une rotation autour du cou, c'est-a-dire une
+    pente en pixels par rangee, plus une descente. On essaie toutes les pentes
+    et toutes les descentes possibles et on garde celle qui superpose le mieux
+    la tete de l'image a celle de la premiere image. Rend aussi les durees de la
+    reference, pour que la cadence soit la sienne.
+    """
+    animdata = dossier / 'AnimData.xml'
+    planche_png = dossier / 'Eat-Anim.png'
+    if not animdata.exists() or not planche_png.exists():
+        return None
+    try:
+        largeur, hauteur, images = cellule(animdata, 'Eat')
+    except (TypeError, ValueError):
+        return None
+    if largeur == 0 or images < 2:
+        return None
+    planche = lire(planche_png)
+    cadre = [planche.crop((k * largeur, 0, (k + 1) * largeur, hauteur))
+             for k in range(min(images, planche.width // largeur))]
+    base = cadre[0]
+    boite = base.getbbox()
+    if boite is None:
+        return None
+    haut, bas = boite[1], boite[3]
+    coupe = haut + round((bas - haut) * 0.55)
+    durees = []
+    for noeud in ET.parse(animdata).iter('Anim'):
+        if (noeud.findtext('Name') or '').lower() == 'eat':
+            durees = [int(d.text) for d in noeud.findall('Durations/Duration')]
+    tete = [(x, y, base.getpixel((x, y)))
+            for y in range(haut, coupe + 1) for x in range(largeur)
+            if base.getpixel((x, y))[3] > 40]
+    if not tete:
+        return None
+    etapes = []
+    for image in cadre:
+        meilleur = None
+        for dixiemes in range(-5, 6):
+            pente = dixiemes / 20
+            for dy in range(-3, 4):
+                rates = 0
+                for x, y, couleur in tete:
+                    nx = x + round(pente * (coupe - y))
+                    ny = y + dy
+                    if 0 <= nx < largeur and 0 <= ny < hauteur \
+                            and image.getpixel((nx, ny)) == couleur:
+                        continue
+                    rates += 1
+                if meilleur is None or rates < meilleur[0]:
+                    meilleur = (rates, round(pente, 3), dy)
+        etapes.append({'pente': meilleur[1], 'dy': meilleur[2]})
+    return {'etapes': etapes, 'durees': durees[:len(etapes)], 'images': len(etapes)}
 
 
 def pose_dans_cellule(dossier: Path, animation: str, index: int,
@@ -538,31 +611,45 @@ def main() -> None:
                                 'frameType': types.get(anim), 'source': 'derivee',
                                 'recette': RECETTES.get('Eat', ''), 'durees': durees}
                 continue
-            if anim == 'Eat' and membre in SUR_MESURE:
-                phases = PHASES_SUR_MESURE.get(membre)
+            if anim == 'Eat' and membre in CALQUES:
+                calque = CALQUES[membre]
+                dex_ref, nom_ref = calque['reference']
                 idle_png = cache / 'Idle-Anim.png'
-                if not phases or not idle_png.exists():
+                dossier_ref = CACHE / nom_ref
+                dossier_ref.mkdir(parents=True, exist_ok=True)
+                mesure = None
+                for fichier in ('AnimData.xml', 'Eat-Anim.png'):
+                    if not telecharger(dex_ref, fichier, dossier_ref / fichier,
+                                       arguments.hors_ligne):
+                        break
+                else:
+                    mesure = mesurer_calque(dossier_ref)
+                if not mesure or not idle_png.exists():
                     continue
+                facteur = calque['facteur']
+                durees = mesure['durees']
+                nombre = mesure['images']
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                durees = list(CADENCE_SUR_MESURE[:len(phases)])
-                planche = Image.new('RGBA', (largeur_idle * len(phases),
+                planche = Image.new('RGBA', (largeur_idle * nombre,
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for numero, rangee in enumerate(rangees):
                     base = aligner_rangee(rangee, largeur_idle, hauteur_idle)[0]
-                    for colonne, (_nom, tete, corps, jupe) in enumerate(phases):
-                        planche.paste(image_decalee(base, tete, corps, jupe),
-                                      (colonne * largeur_idle, numero * hauteur_idle))
+                    for colonne, etape in enumerate(mesure['etapes']):
+                        image = tete_inclinee(base, etape['pente'] * facteur, etape['dy'])
+                        planche.paste(image, (colonne * largeur_idle, numero * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
                     origine = cache / f'Idle-{suffixe}.png'
                     if origine.exists():
                         (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
-                derivees[anim] = (len(phases), durees)
-                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
-                                'images': len(phases),
-                                'frameType': types.get(anim), 'source': 'sur_mesure',
-                                'recette': RECETTES['Eat_sur_mesure'], 'durees': durees,
-                                'sequence': [nom for nom, *_ in phases]}
+                derivees[anim] = (nombre, durees)
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nombre,
+                                'frameType': types.get(anim), 'source': 'calque',
+                                'recette': RECETTES['Eat_calque'], 'durees': durees,
+                                'reference': f'{dex_ref} {nom_ref}',
+                                'facteur': facteur,
+                                'mesure': [{'pente': e['pente'], 'dy': e['dy']}
+                                           for e in mesure['etapes']]}
                 continue
 
             if anim == 'Eat' and membre in EAT_DESSINE:
@@ -766,27 +853,34 @@ def main() -> None:
     lignes.append('image** (Noctali, Draby, Capumain). Les cinq poses successives gardent')
     lignes.append('6, 8, 6 et 8 ticks, un peu plus vif.')
     lignes.append('')
-    lignes.append('## Le `Eat` sur mesure de Gardevoir')
+    lignes.append('## Le `Eat` calqué de Gardevoir')
     lignes.append('')
-    lignes.append('Gardevoir n\'a pas de bouche visible et ne marche pas : elle **flotte**.')
-    lignes.append('Un repas qui lui ressemble ne se joue donc pas avec les mains, mais avec')
-    lignes.append('tout le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :')
+    lignes.append('Gardevoir n\'a pas d\'animation de repas, mais **Kirlia**, sa')
+    lignes.append('pré-évolution, en a une : même morphologie, même artiste. Son `Eat` est')
+    lignes.append('donc mesuré image par image — inclinaison de la tête autour du cou,')
+    lignes.append('descente — puis ce mouvement est appliqué au casque et au corps de')
+    lignes.append('Gardevoir, dans les huit directions, à la cadence de la référence.')
+    lignes.append('Aucun pixel de Kirlia n\'est repris : seul son mouvement est calqué.')
     lignes.append('')
-    lignes.append('| Image | Ce qui bouge |')
-    lignes.append('|---|---|')
-    for phase in PHASES_SUR_MESURE.get('Gardevoir', []):
-        nom_phase, tete, corps, jupe = phase
-        lignes.append(f'| {nom_phase} | tête {tete}, corps {corps}, robe {jupe} |')
+    lignes.append('| Image | Pente mesurée | Descente | Appliqué à Gardevoir |')
+    lignes.append('|---|---:|---:|---|')
+    fiche_calque = manifeste['membres'].get('Gardevoir', {}).get('animations', {}).get('Eat', {})
+    for indice, etape in enumerate(fiche_calque.get('mesure') or []):
+        pente = etape['pente'] * fiche_calque.get('facteur', 1)
+        lignes.append(f"| {indice + 1} | {etape['pente']:+.2f} px/rangée | {etape['dy']:+d} px "
+                      f"| {pente:+.2f} px/rangée |")
     lignes.append('')
-    lignes.append('La tête s\'incline d\'un côté puis de l\'autre en plongeant vers la')
-    lignes.append('nourriture, le corps s\'enfonce, et sa robe blanche balance à contretemps.')
-    lignes.append('C\'est la même grammaire que le `Eat` de Kirlia, sa pré-évolution, dessiné')
-    lignes.append('par le même artiste pour la même morphologie.')
+    lignes.append('La pente est multipliée par **' + str(fiche_calque.get('facteur', 1)) +
+                  '** : les cornes de Kirlia rendent son')
+    lignes.append('basculement très lisible, le casque rond de Gardevoir demande un peu')
+    lignes.append('plus d\'amplitude pour que le geste se voie. La cadence est celle de la')
+    lignes.append('référence, ' + ', '.join(str(d) for d in (fiche_calque.get('durees') or [])) +
+                  ' ticks.')
     lignes.append('')
-    lignes.append('Techniquement, chaque image est une translation de trois bandes')
-    lignes.append('horizontales (tête, corps et bras, robe). Une translation par bande ne perd')
-    lignes.append('aucun pixel et ne crée aucun trou : le dessin reste entièrement celui de')
-    lignes.append('l\'espèce, rien n\'est repeint.')
+    lignes.append('Techniquement, la bascule est une translation **rangée par rangée** de')
+    lignes.append('la tête : la rangée du haut part le plus loin, celle du cou ne bouge')
+    lignes.append('pas. Une translation par rangée est injective, donc aucun pixel ne')
+    lignes.append('disparaît et aucun trou n\'apparaît dans la silhouette.')
     lignes.append('')
     lignes.append('Pandespiègle garde en revanche le simple balancement, validé tel quel.')
     lignes.append('')

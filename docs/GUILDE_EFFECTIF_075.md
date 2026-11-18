@@ -390,44 +390,46 @@ repos, une main, repos, l'autre main — quatre images de 6, 8, 6 et 8 ticks.
 
 ### La cadence de référence
 
-C'est celle des membres validés : **8 ticks par image** (Noctali, Draby,
-Capumain, dont le `Eat` est celui de SpriteCollab). Les cinq poses successives
-gardent 6, 8, 6 et 8 ticks, un peu plus vif.
+C'est **6, 8, 6 et 8 ticks** : la cadence du `Eat` d'origine des membres
+validés (Noctali, Draby, Capumain) et celle du `Eat` de Kirlia. Les cinq poses
+successives la suivent aussi.
 
-### Le `Eat` sur mesure de Gardevoir
+### Le `Eat` calqué de Gardevoir
 
 | Famille | Membres | Source |
 |---|---|---|
-| sur mesure | Gardevoir | animation écrite pour sa morphologie |
+| calquée | Gardevoir | mouvement du `Eat` de Kirlia (0281) |
 
-Gardevoir n'a **pas de bouche visible** et **ne marche pas** : elle flotte. Un
-repas qui lui ressemble ne se joue donc pas avec les mains — un geste de bras
-sur une créature qui n'a pas de visage à nourrir ne se lit pas — mais avec tout
-le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :
+Gardevoir n'a pas d'animation de repas, mais **Kirlia**, sa pré-évolution, en a
+une : même morphologie, même artiste. Son `Eat` est donc **mesuré image par
+image**, puis ce mouvement est appliqué au casque et au corps de Gardevoir, dans
+les huit directions. Aucun pixel de Kirlia n'est repris : seul son mouvement
+l'est.
 
-| Image | Tête | Corps et bras | Robe |
-|---|---|---|---|
-| 1 | repos | repos | repos |
-| 2 | s'incline à gauche, −1 px, +1 px vers le bas | repos | balance à droite, +1 px |
-| 3 | plonge à gauche, −1 px, +2 px | s'enfonce de 1 px | balance à droite |
-| 4 | plonge à droite, +1 px, +2 px | s'enfonce de 1 px | balance à gauche |
-| 5 | s'incline à droite, +1 px, +1 px | repos | balance à gauche |
-| 6 | repos | repos | repos |
+| Image | Pente mesurée chez Kirlia | Descente | Appliqué à Gardevoir |
+|---|---:|---:|---:|
+| 1 | 0,00 px par rangée | 0 px | 0,00 |
+| 2 | +0,20 px par rangée | +1 px | +0,30 |
+| 3 | 0,00 px par rangée | 0 px | 0,00 |
+| 4 | −0,20 px par rangée | +1 px | −0,30 |
 
-La tête va d'un côté puis de l'autre en plongeant vers la nourriture, le corps
-s'enfonce, et sa robe blanche balance à contretemps — trois mouvements
-coordonnés, sur toute la silhouette.
+`mesurer_calque()` cherche, pour chaque image, la rotation de tête — une pente en
+pixels par rangée autour du cou, plus une descente — qui superpose le mieux la
+tête de la référence à celle de sa première image. Elle retrouve seule le
+mouvement : **la tête bascule d'un côté, revient, bascule de l'autre**, le corps
+et la robe ne bougent pas.
 
-C'est la même grammaire que le `Eat` de **Kirlia**, sa pré-évolution, dessiné
-par le même artiste pour la même morphologie : là aussi, le repas se dit par un
-fléchissement et un balancement, jamais par les mains.
+La pente est ensuite multipliée par **1,5** : les cornes de Kirlia rendent son
+basculement très lisible, alors que le casque rond de Gardevoir demande un peu
+plus d'amplitude pour que le geste se voie. La cadence et le nombre d'images
+sont ceux de la référence.
 
-Techniquement, chaque image est une **translation de trois bandes
-horizontales** (tête, corps et bras, robe), découpées en fractions de la
-hauteur du dessin pour tomber au même endroit dans les huit directions. Une
-translation par bande est injective : aucun pixel ne disparaît et aucun trou
-n'apparaît, contrairement à un redessin des bras — deux essais de ce genre ont
-laissé des pixels orphelins et ont été abandonnés.
+Techniquement, la bascule est une translation **rangée par rangée** de la tête :
+la rangée du haut part le plus loin, celle du cou ne bouge pas. Une translation
+par rangée est injective — aucun pixel ne disparaît, aucun trou n'apparaît dans
+la silhouette. Deux tentatives précédentes sont écartées : déplacer puis
+redessiner ses bras laissait des pixels orphelins, et une simple translation par
+bandes donnait un hochement, pas un basculement.
 
 `pose_dans_cellule()` découpe l'image dans sa planche d'origine, la recadre sur
 son dessin, puis la repose **sur le même sol et le même axe** que l'`Idle` du

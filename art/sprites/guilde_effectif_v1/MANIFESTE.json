@@ -30,25 +30,35 @@
             32,
             40
           ],
-          "images": 6,
+          "images": 4,
           "frameType": 48,
-          "source": "sur_mesure",
-          "recette": "animation ecrite pour la morphologie du membre : la tete s'incline d'un cote puis de l'autre en plongeant, le corps s'enfonce et la robe balance, par translation de trois bandes",
+          "source": "calque",
+          "recette": "mouvement du Eat de Kirlia, sa pre-evolution, mesure image par image (inclinaison de la tete autour du cou, descente) et applique au casque du membre, a la meme cadence",
           "durees": [
+            6,
             8,
-            8,
-            8,
-            8,
-            8,
+            6,
             8
           ],
-          "sequence": [
-            "repos",
-            "incline a gauche",
-            "plonge a gauche",
-            "plonge a droite",
-            "incline a droite",
-            "repos"
+          "reference": "0281 Kirlia",
+          "facteur": 1.5,
+          "mesure": [
+            {
+              "pente": 0.0,
+              "dy": 0
+            },
+            {
+              "pente": 0.2,
+              "dy": 1
+            },
+            {
+              "pente": 0.0,
+              "dy": 0
+            },
+            {
+              "pente": -0.2,
+              "dy": 1
+            }
           ]
         },
         "Wake": {
