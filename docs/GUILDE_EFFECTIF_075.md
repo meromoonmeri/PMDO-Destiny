@@ -388,25 +388,46 @@ repos, une main, repos, l'autre main — quatre images de 6, 8, 6 et 8 ticks.
 | Cizayox | `Attack` 9 | `Attack` 0 | une pince, puis les deux |
 | Dimoret | `Attack` 1 | `Shoot` 3 | une griffe, puis les deux |
 
-### La cadence et la séquence de Gardevoir
+### La cadence de référence
 
-La cadence de référence est celle des membres validés : **quatre images de
-8 ticks** (Noctali, Draby, Capumain, dont le `Eat` est celui de SpriteCollab).
+C'est celle des membres validés : **8 ticks par image** (Noctali, Draby,
+Capumain, dont le `Eat` est celui de SpriteCollab). Les cinq poses successives
+gardent 6, 8, 6 et 8 ticks, un peu plus vif.
 
-Gardevoir ne se contente pas d'être recadrée sur ce rythme : sa séquence est
-propre (`PLANS`, `CADENCES`), et elle enchaîne son geste sans repasser par le
-repos entre les deux mains —
+### Le `Eat` sur mesure de Gardevoir
 
-| Image | Contenu | Ticks |
-|---|---|---:|
-| 1 | repos (`Idle`) | 8 |
-| 2 | `Double 0` : la tête s'incline, les mains montent devant le visage | 8 |
-| 3 | `Attack 2` : les mains s'écartent, elle mâche | 8 |
-| 4 | repos | 8 |
+| Famille | Membres | Source |
+|---|---|---|
+| sur mesure | Gardevoir | animation écrite pour sa morphologie |
 
-Les phases de repos sont plus longues que le geste, exactement comme dans le
-`Eat` d'origine des membres validés. Les cinq autres membres gardent
-6, 8, 6 et 8 ticks, plus vif.
+Gardevoir n'a **pas de bouche visible** et **ne marche pas** : elle flotte. Un
+repas qui lui ressemble ne se joue donc pas avec les mains — un geste de bras
+sur une créature qui n'a pas de visage à nourrir ne se lit pas — mais avec tout
+le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :
+
+| Image | Tête | Corps et bras | Robe |
+|---|---|---|---|
+| 1 | repos | repos | repos |
+| 2 | s'incline à gauche, −1 px, +1 px vers le bas | repos | balance à droite, +1 px |
+| 3 | plonge à gauche, −1 px, +2 px | s'enfonce de 1 px | balance à droite |
+| 4 | plonge à droite, +1 px, +2 px | s'enfonce de 1 px | balance à gauche |
+| 5 | s'incline à droite, +1 px, +1 px | repos | balance à gauche |
+| 6 | repos | repos | repos |
+
+La tête va d'un côté puis de l'autre en plongeant vers la nourriture, le corps
+s'enfonce, et sa robe blanche balance à contretemps — trois mouvements
+coordonnés, sur toute la silhouette.
+
+C'est la même grammaire que le `Eat` de **Kirlia**, sa pré-évolution, dessiné
+par le même artiste pour la même morphologie : là aussi, le repas se dit par un
+fléchissement et un balancement, jamais par les mains.
+
+Techniquement, chaque image est une **translation de trois bandes
+horizontales** (tête, corps et bras, robe), découpées en fractions de la
+hauteur du dessin pour tomber au même endroit dans les huit directions. Une
+translation par bande est injective : aucun pixel ne disparaît et aucun trou
+n'apparaît, contrairement à un redessin des bras — deux essais de ce genre ont
+laissé des pixels orphelins et ont été abandonnés.
 
 `pose_dans_cellule()` découpe l'image dans sa planche d'origine, la recadre sur
 son dessin, puis la repose **sur le même sol et le même axe** que l'`Idle` du

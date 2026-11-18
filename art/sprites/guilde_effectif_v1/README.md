@@ -67,6 +67,7 @@ l'espèce (SpriteCollab ne les dessine pas pour elle) :
 
 - `Eat` — balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images
 - `Eat_breloom` — mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme
+- `Eat_sur_mesure` — animation ecrite pour la morphologie du membre : la tete s'incline d'un cote puis de l'autre en plongeant, le corps s'enfonce et la robe balance, par translation de trois bandes
 - `Eat_poses` — poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle
 - `Wake` — Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks
 - `Pose` — Idle image 1 tenue — 1 image de 30 ticks
@@ -85,18 +86,40 @@ que choisir et ordonner des poses existantes.
 
 | Membre | Pose « une main » | Pose « l'autre main » |
 |---|---|---|
-| Gardevoir | `Attack 2` | `Double 0` |
 | Canarticho | `Swing 1` | `Attack 0` |
 | Simisage | `Attack 0` | `Swing 2` |
 | Melofee | `Attack 3` | `Dance 2` |
 | Cizayox | `Attack 9` | `Attack 0` |
 | Dimoret | `Attack 1` | `Shoot 3` |
 
-La cadence de référence est celle des membres validés : **quatre images
-de 8 ticks** (Noctali, Draby, Capumain). Gardevoir suit exactement cette
-cadence, avec sa propre séquence : repos, mains devant le visage, mains
-écartées, repos — elle ne repasse pas par le repos entre les deux gestes.
-Les cinq autres gardent 6, 8, 6 et 8 ticks, un peu plus vif.
+La cadence de référence est celle des membres validés : **8 ticks par
+image** (Noctali, Draby, Capumain). Les cinq poses successives gardent
+6, 8, 6 et 8 ticks, un peu plus vif.
+
+## Le `Eat` sur mesure de Gardevoir
+
+Gardevoir n'a pas de bouche visible et ne marche pas : elle **flotte**.
+Un repas qui lui ressemble ne se joue donc pas avec les mains, mais avec
+tout le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :
+
+| Image | Ce qui bouge |
+|---|---|
+| repos | tête (0, 0), corps (0, 0), robe (0, 0) |
+| incline a gauche | tête (-1, 1), corps (0, 0), robe (1, 0) |
+| plonge a gauche | tête (-1, 2), corps (0, 1), robe (1, 0) |
+| plonge a droite | tête (1, 2), corps (0, 1), robe (-1, 0) |
+| incline a droite | tête (1, 1), corps (0, 0), robe (-1, 0) |
+| repos | tête (0, 0), corps (0, 0), robe (0, 0) |
+
+La tête s'incline d'un côté puis de l'autre en plongeant vers la
+nourriture, le corps s'enfonce, et sa robe blanche balance à contretemps.
+C'est la même grammaire que le `Eat` de Kirlia, sa pré-évolution, dessiné
+par le même artiste pour la même morphologie.
+
+Techniquement, chaque image est une translation de trois bandes
+horizontales (tête, corps et bras, robe). Une translation par bande ne perd
+aucun pixel et ne crée aucun trou : le dessin reste entièrement celui de
+l'espèce, rien n'est repeint.
 
 Pandespiègle garde en revanche le simple balancement, validé tel quel.
 

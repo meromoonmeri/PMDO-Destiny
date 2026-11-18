@@ -30,24 +30,24 @@
             32,
             40
           ],
-          "images": 4,
+          "images": 6,
           "frameType": 48,
-          "source": "poses",
-          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
+          "source": "sur_mesure",
+          "recette": "animation ecrite pour la morphologie du membre : la tete s'incline d'un cote puis de l'autre en plongeant, le corps s'enfonce et la robe balance, par translation de trois bandes",
           "durees": [
+            8,
+            8,
             8,
             8,
             8,
             8
           ],
-          "poses": [
-            "Attack 2",
-            "Double 0"
-          ],
           "sequence": [
             "repos",
-            "Double 0",
-            "Attack 2",
+            "incline a gauche",
+            "plonge a gauche",
+            "plonge a droite",
+            "incline a droite",
             "repos"
           ]
         },

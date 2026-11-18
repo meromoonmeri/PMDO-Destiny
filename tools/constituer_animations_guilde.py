@@ -67,7 +67,6 @@ EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dim
 # Poses retenues à la main, apres relecture des planches : une pose ou un bras
 # se leve, une seconde ou c'est l'autre. Les deux tiennent dans la cellule.
 POSES = {
-    'Gardevoir':  [('Attack', 2), ('Double', 0)],    # les deux mains montent
     'Canarticho': [('Swing', 1), ('Attack', 0)],     # il leve son poireau
     'Simisage':   [('Attack', 0), ('Swing', 2)],     # une main, puis l'autre
     'Melofee':    [('Attack', 3), ('Dance', 2)],     # une main, puis les deux
@@ -89,6 +88,30 @@ PLANS = {
 CADENCE_DEFAUT = [6, 8, 6, 8]
 CADENCES = {'Gardevoir': [8, 8, 8, 8]}
 
+# ---------------------------------------------------------------------------
+# Animation sur mesure : Gardevoir n'a pas de bouche visible et ne marche pas,
+# elle flotte. Un repas qui lui ressemble ne se joue donc pas avec les mains,
+# mais avec tout le corps : la tete s'incline d'un cote puis de l'autre en
+# plongeant vers la nourriture, et sa robe blanche balance a contretemps. C'est
+# la meme grammaire que le Eat de Kirlia, sa pre-evolution, dessine par le meme
+# artiste pour la meme morphologie.
+# Chaque image est decrite par le decalage de trois bandes horizontales :
+# tete, corps (avec les bras), robe. Des translations par bande ne perdent aucun
+# pixel et ne creent aucun trou, contrairement a un redessin des bras.
+# ---------------------------------------------------------------------------
+SUR_MESURE = {'Gardevoir'}
+CADENCE_SUR_MESURE = [8, 8, 8, 8, 8, 8]
+PHASES_SUR_MESURE = {
+    'Gardevoir': [
+        ('repos',            (0, 0),  (0, 0), (0, 0)),
+        ('incline a gauche', (-1, 1), (0, 0), (1, 0)),
+        ('plonge a gauche',  (-1, 2), (0, 1), (1, 0)),
+        ('plonge a droite',  (1, 2),  (0, 1), (-1, 0)),
+        ('incline a droite', (1, 1),  (0, 0), (-1, 0)),
+        ('repos',            (0, 0),  (0, 0), (0, 0)),
+    ],
+}
+
 EAT_DERIVE_VALIDE = {'Pandespiegle'}
 
 BRELOOM_DEX = '0286'
@@ -98,6 +121,9 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
+    'Eat_sur_mesure': ("animation ecrite pour la morphologie du membre : la tete "
+                       "s'incline d'un cote puis de l'autre en plongeant, le corps "
+                       "s'enfonce et la robe balance, par translation de trois bandes"),
     'Eat_poses': ("poses successives du même Pokémon : repos, une main levée, repos, "
                   "l'autre main, prises dans ses planches Attack/Appeal/Dance et "
                   "alignées sur le sol et l'axe de l'Idle"),
@@ -232,6 +258,49 @@ def aligner_rangee(rangee: list[Image.Image], largeur: int, hauteur: int) -> lis
             case.paste(image, (int(round(axe - centre)), sol - boite[3]))
         alignees.append(case)
     return alignees
+
+
+def bandes_anatomie(image: Image.Image) -> tuple[int, int]:
+    """Coupe le sprite en trois bandes : tete, corps et bras, robe.
+
+    Les coupes se prennent en fraction de la hauteur du dessin, donc elles
+    tombent au meme endroit dans les huit directions.
+    """
+    boite = image.getbbox() or (0, 0, image.width, image.height)
+    hauteur = boite[3] - boite[1]
+    return boite[1] + round(hauteur * 0.40), boite[1] + round(hauteur * 0.72)
+
+
+def image_decalee(image: Image.Image, tete: tuple[int, int], corps: tuple[int, int],
+                  jupe: tuple[int, int]) -> Image.Image:
+    """Decale les trois bandes de l'anatomie, la tete par-dessus le corps.
+
+    Une translation par bande est injective : aucun pixel ne disparait et aucun
+    trou n'apparait dans la silhouette. La tete est ecrite en dernier pour que,
+    quand elle descend dans les epaules, ce soit bien elle qu'on voie.
+    """
+    y_tete, y_jupe = bandes_anatomie(image)
+    sortie = Image.new('RGBA', image.size, (0, 0, 0, 0))
+    decalages = {'jupe': jupe, 'corps': corps, 'tete': tete}
+    for zone in ('jupe', 'corps', 'tete'):
+        dx, dy = decalages[zone]
+        for y in range(image.height):
+            if zone == 'tete':
+                dedans = y < y_tete
+            elif zone == 'corps':
+                dedans = y_tete <= y < y_jupe
+            else:
+                dedans = y >= y_jupe
+            if not dedans:
+                continue
+            for x in range(image.width):
+                couleur = image.getpixel((x, y))
+                if couleur[3] < 40:
+                    continue
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < image.width and 0 <= ny < image.height:
+                    sortie.putpixel((nx, ny), couleur)
+    return sortie
 
 
 def pose_dans_cellule(dossier: Path, animation: str, index: int,
@@ -469,6 +538,33 @@ def main() -> None:
                                 'frameType': types.get(anim), 'source': 'derivee',
                                 'recette': RECETTES.get('Eat', ''), 'durees': durees}
                 continue
+            if anim == 'Eat' and membre in SUR_MESURE:
+                phases = PHASES_SUR_MESURE.get(membre)
+                idle_png = cache / 'Idle-Anim.png'
+                if not phases or not idle_png.exists():
+                    continue
+                rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
+                durees = list(CADENCE_SUR_MESURE[:len(phases)])
+                planche = Image.new('RGBA', (largeur_idle * len(phases),
+                                             hauteur_idle * len(rangees)), (0, 0, 0, 0))
+                for numero, rangee in enumerate(rangees):
+                    base = aligner_rangee(rangee, largeur_idle, hauteur_idle)[0]
+                    for colonne, (_nom, tete, corps, jupe) in enumerate(phases):
+                        planche.paste(image_decalee(base, tete, corps, jupe),
+                                      (colonne * largeur_idle, numero * hauteur_idle))
+                planche.save(cible / 'Eat-Anim.png')
+                for suffixe in ('Shadow', 'Offsets'):
+                    origine = cache / f'Idle-{suffixe}.png'
+                    if origine.exists():
+                        (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
+                derivees[anim] = (len(phases), durees)
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
+                                'images': len(phases),
+                                'frameType': types.get(anim), 'source': 'sur_mesure',
+                                'recette': RECETTES['Eat_sur_mesure'], 'durees': durees,
+                                'sequence': [nom for nom, *_ in phases]}
+                continue
+
             if anim == 'Eat' and membre in EAT_DESSINE:
                 poses = POSES.get(membre)
                 idle_png = cache / 'Idle-Anim.png'
@@ -666,11 +762,31 @@ def main() -> None:
         retenues = fiche_pose.get('poses') or ['?', '?']
         lignes.append(f'| {membre_pose} | `{retenues[0]}` | `{retenues[1]}` |')
     lignes.append('')
-    lignes.append('La cadence de référence est celle des membres validés : **quatre images')
-    lignes.append("de 8 ticks** (Noctali, Draby, Capumain). Gardevoir suit exactement cette")
-    lignes.append('cadence, avec sa propre séquence : repos, mains devant le visage, mains')
-    lignes.append('écartées, repos — elle ne repasse pas par le repos entre les deux gestes.')
-    lignes.append('Les cinq autres gardent 6, 8, 6 et 8 ticks, un peu plus vif.')
+    lignes.append('La cadence de référence est celle des membres validés : **8 ticks par')
+    lignes.append('image** (Noctali, Draby, Capumain). Les cinq poses successives gardent')
+    lignes.append('6, 8, 6 et 8 ticks, un peu plus vif.')
+    lignes.append('')
+    lignes.append('## Le `Eat` sur mesure de Gardevoir')
+    lignes.append('')
+    lignes.append('Gardevoir n\'a pas de bouche visible et ne marche pas : elle **flotte**.')
+    lignes.append('Un repas qui lui ressemble ne se joue donc pas avec les mains, mais avec')
+    lignes.append('tout le corps. Son `Eat` est écrit pour elle, en six images de 8 ticks :')
+    lignes.append('')
+    lignes.append('| Image | Ce qui bouge |')
+    lignes.append('|---|---|')
+    for phase in PHASES_SUR_MESURE.get('Gardevoir', []):
+        nom_phase, tete, corps, jupe = phase
+        lignes.append(f'| {nom_phase} | tête {tete}, corps {corps}, robe {jupe} |')
+    lignes.append('')
+    lignes.append('La tête s\'incline d\'un côté puis de l\'autre en plongeant vers la')
+    lignes.append('nourriture, le corps s\'enfonce, et sa robe blanche balance à contretemps.')
+    lignes.append('C\'est la même grammaire que le `Eat` de Kirlia, sa pré-évolution, dessiné')
+    lignes.append('par le même artiste pour la même morphologie.')
+    lignes.append('')
+    lignes.append('Techniquement, chaque image est une translation de trois bandes')
+    lignes.append('horizontales (tête, corps et bras, robe). Une translation par bande ne perd')
+    lignes.append('aucun pixel et ne crée aucun trou : le dessin reste entièrement celui de')
+    lignes.append('l\'espèce, rien n\'est repeint.')
     lignes.append('')
     lignes.append('Pandespiègle garde en revanche le simple balancement, validé tel quel.')
     lignes.append('')
