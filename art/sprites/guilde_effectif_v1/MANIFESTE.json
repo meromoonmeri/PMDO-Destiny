@@ -32,8 +32,14 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "source": "breloom",
+          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ]
         },
         "Wake": {
           "cellule": [
@@ -122,8 +128,14 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "source": "breloom",
+          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ]
         },
         "Wake": {
           "cellule": [
@@ -167,8 +179,14 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "source": "breloom",
+          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ]
         },
         "Wake": {
           "cellule": [
@@ -212,8 +230,14 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "source": "breloom",
+          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ]
         },
         "Wake": {
           "cellule": [
@@ -299,8 +323,14 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "source": "breloom",
+          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ]
         },
         "Wake": {
           "cellule": [

@@ -363,21 +363,32 @@ Dazzling : on range les sources par membre dans `art/sprites/guilde_effectif_v1/
 Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordre des
 `<Action>`) : si le moteur bouge, le test casse au lieu de livrer une clé fausse.
 
-### Trois familles de `Eat`
-
-Les dix membres n'ont pas le même `Eat`, et c'est voulu :
+### Quatre familles de `Eat`
 
 | Famille | Membres | Source |
 |---|---|---|
-| `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine, dessinée par SpriteCollab |
+| `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
+| `Chapignon` | Simisage, Gardevoir, Dimoret, Cizayox, Mélofée | mouvement du `Eat` de Chapignon (n° 286), transposé |
+| `composée` | Canarticho | Idle et Idle comprimé de 2 px, alternés |
 | `dérivée` (validée) | Pandespiègle | balancement de son `Idle` joué à 4 ticks par image |
-| `composée` | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | mâchoire assemblée ici |
 
-La **mâchoire composée** alterne, sur quatre images de 5 ticks, l'image d'attente
-et la même comprimée de 2 px : le corps mord puis remonte, ce que le simple
-balancement ne disait pas. Les planches SpriteCollab laissent au moins quatre
-pixels vides sous les pieds, la compression ne rogne donc rien — vérifié sur les
-six espèces.
+### Le mouvement de Chapignon, transposé
+
+Le `Eat` de Chapignon (SpriteCollab) est un cycle de quatre images — 24×40,
+rythme **6-8-6-8** — qui alterne une pose de face et une pose tournée, plus
+étroite et récentrée. On ne copie pas ses sprites (on verrait un Chapignon à la
+place de Gardevoir) : on **mesure** son mouvement et on l'applique à l'`Idle` de
+chaque membre.
+
+`mouvement_breloom()` lit la planche de Chapignon et rend, image par image, la
+**largeur relative** et le **recentrage** par rapport à l'image de référence ;
+`machoire_breloom()` applique ces deux valeurs à l'`Idle` du membre, pieds au sol.
+Les sprites restent donc ceux de l'espèce, seul le mouvement est emprunté, et le
+rythme 6-8-6-8 est conservé (vérifié par le test). Rien n'est écrit à la main :
+si SpriteCollab retouche Chapignon, la transposition suit.
+
+La planche de référence est téléchargée dans le cache SpriteCollab
+(`~/.cache/spritecollab/Breloom/`, surchargeable par `SPRITECOLLAB_CACHE`).
 
 Les autres animations dérivées restent en place, elles n'ont pas été mises en
 cause :

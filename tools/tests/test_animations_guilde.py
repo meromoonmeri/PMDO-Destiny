@@ -48,8 +48,9 @@ def main() -> None:
         for anim in ATTENDUES:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
-            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee'), (membre, anim, info['source'])
-            if info['source'] in ('derivee', 'dessinee'):
+            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'breloom'), \
+                (membre, anim, info['source'])
+            if info['source'] in ('derivee', 'dessinee', 'breloom'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -77,14 +78,22 @@ def main() -> None:
     with Image.open(PREUVES / 'guilde_repas.gif') as gif:
         assert getattr(gif, 'n_frames', 1) >= 6, 'GIF trop court'
     assert (PREUVES / 'guilde_animations_planche.png').exists(), 'planche de contrôle manquante'
-    # La mâchoire composée est réservée aux six membres à refaire ; Pandespiègle
-    # garde son balancement d'Idle validé, et trois membres leur Eat SpriteCollab.
+    # Répartition demandée : cinq membres sur le mouvement de Chapignon, un
+    # composé (Canarticho), un dérivé validé (Pandespiègle), trois SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
     assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
-    attendus = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
-    assert {m for m, v in sources.items() if v == 'dessinee'} == attendus, sources
+    assert {m for m, v in sources.items() if v == 'breloom'} == {
+        'Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'}, sources
+    assert {m for m, v in sources.items() if v == 'dessinee'} == {'Canarticho'}, sources
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
+
+    # Le mouvement de Chapignon garde son rythme 6-8-6-8 sur les cinq membres.
+    for membre in ('Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'):
+        declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
+                        for a in ET.parse(SPRITES / manifeste['membres'][membre]['dossier']
+                                          / 'AnimData.xml').iter('Anim')}
+        assert declarations['Eat'] == [6, 8, 6, 8], (membre, declarations['Eat'])
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 

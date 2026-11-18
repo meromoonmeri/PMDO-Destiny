@@ -216,5 +216,5 @@
 			</Durations>
 		</Anim>
 		
-	<Anim><Name>Eat</Name><Index>13</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>5</Duration><Duration>5</Duration><Duration>5</Duration><Duration>5</Duration></Durations></Anim><Anim><Name>Wake</Name><Index>14</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>6</Duration><Duration>6</Duration><Duration>10</Duration></Durations></Anim><Anim><Name>Pose</Name><Index>15</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>30</Duration></Durations></Anim></Anims>
+	<Anim><Name>Eat</Name><Index>13</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>6</Duration><Duration>8</Duration><Duration>6</Duration><Duration>8</Duration></Durations></Anim><Anim><Name>Wake</Name><Index>14</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>6</Duration><Duration>6</Duration><Duration>10</Duration></Durations></Anim><Anim><Name>Pose</Name><Index>15</Index><FrameWidth>32</FrameWidth><FrameHeight>48</FrameHeight><Durations><Duration>30</Duration></Durations></Anim></Anims>
 </AnimData>
