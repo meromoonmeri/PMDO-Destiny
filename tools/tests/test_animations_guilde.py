@@ -48,9 +48,9 @@ def main() -> None:
         for anim in ATTENDUES:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
-            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'breloom'), \
+            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee'), \
                 (membre, anim, info['source'])
-            if info['source'] in ('derivee', 'dessinee', 'breloom'):
+            if info['source'] in ('derivee', 'dessinee'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -78,22 +78,32 @@ def main() -> None:
     with Image.open(PREUVES / 'guilde_repas.gif') as gif:
         assert getattr(gif, 'n_frames', 1) >= 6, 'GIF trop court'
     assert (PREUVES / 'guilde_animations_planche.png').exists(), 'planche de contrôle manquante'
-    # Répartition demandée : cinq membres sur le mouvement de Chapignon, un
-    # composé (Canarticho), un dérivé validé (Pandespiègle), trois SpriteCollab.
+    # Les sept membres sans Eat d'origine en ont un dessiné ici ; les trois autres
+    # gardent celui de SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
-    assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
-    assert {m for m, v in sources.items() if v == 'breloom'} == {
-        'Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'}, sources
-    assert {m for m, v in sources.items() if v == 'dessinee'} == {'Canarticho'}, sources
+    assert {m for m, v in sources.items() if v == 'dessinee'} == {
+        'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
+        'Pandespiegle'}, sources
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le mouvement de Chapignon garde son rythme 6-8-6-8 sur les cinq membres.
-    for membre in ('Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'):
+    # Le Eat dessiné garde le rythme 6-8-6-8 et la flexion d'un pixel : les pieds
+    # descendent d'exactement un pixel une image sur deux, sans jamais quitter la
+    # cellule.
+    for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
+                   'Pandespiegle'):
+        dossier = SPRITES / manifeste['membres'][membre]['dossier']
         declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
-                        for a in ET.parse(SPRITES / manifeste['membres'][membre]['dossier']
-                                          / 'AnimData.xml').iter('Anim')}
+                        for a in ET.parse(dossier / 'AnimData.xml').iter('Anim')}
         assert declarations['Eat'] == [6, 8, 6, 8], (membre, declarations['Eat'])
+        info = manifeste['membres'][membre]['animations']['Eat']
+        largeur, hauteur = info['cellule']
+        with Image.open(dossier / 'Eat-Anim.png') as planche:
+            bas = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).getbbox()[3]
+                   for i in range(planche.width // largeur)]
+        assert bas[1] == bas[0] + info['flexion'], (membre, bas)
+        assert bas[2] == bas[0] and bas[3] == bas[1], (membre, bas)
+        assert max(bas) <= hauteur - 1, (membre, 'pieds hors cellule', bas)
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 

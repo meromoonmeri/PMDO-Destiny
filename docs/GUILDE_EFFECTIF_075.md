@@ -363,32 +363,44 @@ Dazzling : on range les sources par membre dans `art/sprites/guilde_effectif_v1/
 Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordre des
 `<Action>`) : si le moteur bouge, le test casse au lieu de livrer une clé fausse.
 
-### Quatre familles de `Eat`
+### Deux familles de `Eat`
 
 | Famille | Membres | Source |
 |---|---|---|
 | `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
-| `Chapignon` | Simisage, Gardevoir, Dimoret, Cizayox, Mélofée | mouvement du `Eat` de Chapignon (n° 286), transposé |
-| `composée` | Canarticho | Idle et Idle comprimé de 2 px, alternés |
-| `dérivée` (validée) | Pandespiègle | balancement de son `Idle` joué à 4 ticks par image |
+| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret, Pandespiègle | fabriquée ici, à partir de l'`Idle` de l'espèce |
 
-### Le mouvement de Chapignon, transposé
+Ces sept espèces n'ont **aucune animation de repas** dans
+SpriteCollab : ni `Eat`, ni image à bouche ouverte ailleurs. `Hurt` et `Charge`
+existent, mais ne font que décaler le sprite d'un pixel — vérifié image par image.
+La bouchée est donc faite ici.
 
-Le `Eat` de Chapignon (SpriteCollab) est un cycle de quatre images — 24×40,
-rythme **6-8-6-8** — qui alterne une pose de face et une pose tournée, plus
-étroite et récentrée. On ne copie pas ses sprites (on verrait un Chapignon à la
-place de Gardevoir) : on **mesure** son mouvement et on l'applique à l'`Idle` de
-chaque membre.
+### Comment est faite la bouchée
 
-`mouvement_breloom()` lit la planche de Chapignon et rend, image par image, la
-**largeur relative** et le **recentrage** par rapport à l'image de référence ;
-`machoire_breloom()` applique ces deux valeurs à l'`Idle` du membre, pieds au sol.
-Les sprites restent donc ceux de l'espèce, seul le mouvement est emprunté, et le
-rythme 6-8-6-8 est conservé (vérifié par le test). Rien n'est écrit à la main :
-si SpriteCollab retouche Chapignon, la transposition suit.
+Quatre images, rythme **6-8-6-8**, celui du `Eat` de Chapignon :
 
-La planche de référence est téléchargée dans le cache SpriteCollab
-(`~/.cache/spritecollab/Breloom/`, surchargeable par `SPRITECOLLAB_CACHE`).
+1. l'`Idle` de l'espèce, recalé sur les pieds et sur l'axe de son image de
+   référence — les images d'`Idle` de SpriteCollab flottent (chez Cizayox le bas
+   du sprite passe de la ligne 41 à la 32 d'une image à l'autre) ; sans ce
+   recalage le `Eat` sauterait en boucle ;
+2. la même image **fléchie d'un pixel** : les genoux plient sur la bouchée ;
+3. l'image d'`Idle` suivante ;
+4. la même, fléchie.
+
+La flexion est sûre : les planches laissent au moins quatre pixels vides sous les
+pieds, et le test vérifie que les pieds descendent d'exactement un pixel une image
+sur deux sans jamais quitter la cellule.
+
+Pour Simisage, Gardevoir, Dimoret, Cizayox et Mélofée, le mouvement du `Eat` de
+Chapignon est ajouté par-dessus : `mouvement_breloom()` mesure sur sa planche la
+**largeur relative** et le **recentrage** de chaque image, `machoire_breloom()` les
+applique. Les sprites restent ceux de l'espèce, seul le mouvement est emprunté.
+
+Le visage n'est pas retouché, volontairement. J'ai essayé : à cette échelle les
+yeux et les Bouches varient trop d'une espèce à l'autre (yeux blancs de Gardevoir,
+dorés de Cizayox, à demi cachés sous le chapeau de Simisage) pour qu'un trait placé
+sans dessin original tombe juste — l'essai ne tenait que sur Gardevoir. La bouchée
+est donc dite par le corps, et par l'émote `eating` au-dessus de la tête.
 
 Les autres animations dérivées restent en place, elles n'ont pas été mises en
 cause :

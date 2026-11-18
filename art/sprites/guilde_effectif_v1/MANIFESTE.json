@@ -32,14 +32,15 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "breloom",
-          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
-          ]
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -84,7 +85,14 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -128,14 +136,15 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "breloom",
-          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
-          ]
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -179,14 +188,15 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "breloom",
-          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
-          ]
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -230,14 +240,15 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "breloom",
-          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
-          ]
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -323,14 +334,15 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "breloom",
-          "recette": "mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme",
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
-          ]
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [
@@ -414,10 +426,17 @@
             24,
             40
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "durees": [
+            6,
+            8,
+            6,
+            8
+          ],
+          "flexion": 1
         },
         "Wake": {
           "cellule": [

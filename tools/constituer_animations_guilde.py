@@ -59,23 +59,35 @@ ANIMATIONS = ['Eat', 'Wake', 'Sleep', 'Pose']
 # pour l'espèce. Elles partent toutes de la planche de l'espèce elle-même, donc
 # le style et l'échelle restent ceux du Pokémon ; c'est une solution d'attente,
 # pas un dessin original.
-# Membres dont le Eat « balancement d'Idle » est validé en l'état : ils gardent
-# la recette dérivée, les autres reçoivent une mâchoire composée.
-EAT_DERIVE_VALIDE = {'Pandespiegle'}
+# Membres sans Eat d'origine chez SpriteCollab : on le dessine ici. La bouchée
+# est dite par les yeux qui se ferment, seule animation de visage fiable à cette
+# échelle — SpriteCollab n'a aucune image à bouche ouverte pour ces espèces
+# (Hurt et Charge ne font que décaler le sprite d'un pixel).
+EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
+               'Pandespiegle'}
 
-# Membres dont le Eat reprend le mouvement de Chapignon (Breloom, n° 286) :
-# alternance d'une pose de face et d'une pose tournée plus étroite, au rythme
-# 6-8-6-8 de SpriteCollab. Les sprites restent ceux de l'espèce.
+# Membres dont le Eat reprend *aussi* le mouvement de Chapignon (Breloom, n° 286) :
+# alternance d'une pose de face et d'une pose tournée plus étroite. Les sprites
+# restent ceux de l'espèce, seul le mouvement est emprunté.
 EAT_BRELOOM = {'Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'}
+# Le `Eat` dessiné ici ne touche pas au visage : à cette échelle l'anatomie des
+# visages varie trop d'une espèce à l'autre (yeux blancs, dorés, en amande, à
+# demi cachés par un chapeau) pour placer un trait à coup sûr. La bouchée est
+# dite par le corps : une flexion d'un pixel sur les images de bouchée, qui
+# s'ajoute au mouvement de Chapignon quand la case en porte un. La marge sous
+# les pieds des planches (>= 4 px) garantit que rien n'est rogné.
+FLEXION = 1
+
 BRELOOM_DEX = '0286'
 BRELOOM = 'Breloom'
 
 RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
-    'Eat_dessine': ("Idle et Idle comprimé de 2 px, alternés : la mâchoire mord "
-                    "et remonte — 4 images de 5 ticks"),
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
+    'Eat_dessine': ("bouchée dessinée : Idle avec le mouvement de Chapignon quand la "
+                    "case en porte un, et une flexion d'un pixel une image sur deux, "
+                    "au rythme 6-8-6-8"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -186,6 +198,42 @@ def deriver(anim: str, dossier_source: Path, dossier_cible: Path,
     return durees
 
 
+def aligner_rangee(rangee: list[Image.Image], largeur: int, hauteur: int) -> list[Image.Image]:
+    """Recale les images d'une rangée sur les pieds et l'axe de la première.
+
+    Les images d'Idle de SpriteCollab flottent : chez Cizayox le bas du sprite
+    passe de la ligne 41 à la 32 d'une image à l'autre. Sans recalage, le `Eat`
+    sauterait d'un pixel ou deux en boucle ; ici toutes les images partagent le
+    même sol et le même axe, seul le mouvement voulu subsiste.
+    """
+    reference = rangee[0].getbbox()
+    if not reference:
+        return rangee
+    sol, axe = reference[3], (reference[0] + reference[2]) / 2
+    alignees = []
+    for image in rangee:
+        boite = image.getbbox()
+        case = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
+        if boite:
+            centre = (boite[0] + boite[2]) / 2
+            case.paste(image, (int(round(axe - centre)), sol - boite[3]))
+        alignees.append(case)
+    return alignees
+
+
+def flechir(image: Image.Image, pixels: int = FLEXION) -> Image.Image:
+    """Abaisse le corps de `pixels` pixels : les genoux plient sur la bouchée.
+
+    L'image garde sa taille — la marge vide sous les pieds des planches d'Idle
+    (au moins quatre pixels) absorbe la descente, rien n'est rogné.
+    """
+    if pixels <= 0:
+        return image
+    sortie = Image.new('RGBA', image.size, (0, 0, 0, 0))
+    sortie.paste(image, (0, pixels))
+    return sortie
+
+
 def mouvement_breloom(cache: Path, hors_ligne: bool) -> dict | None:
     """Mesure le `Eat` de Chapignon : géométrie image par image et durées.
 
@@ -249,26 +297,11 @@ def machoire_breloom(rangee_idle: list[Image.Image], largeur: int, hauteur: int,
             reduite = source.resize((largeur_vue, hauteur), Image.NEAREST)
         else:
             reduite = source
+        boite = source.getbbox()
+        axe = (boite[0] + boite[2]) / 2 if boite else largeur / 2
         case = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
-        case.paste(reduite, ((largeur - largeur_vue) // 2 + decalage, 0))
+        case.paste(reduite, delta := (int(round(axe - largeur_vue / 2 + decalage)), 0))
         images.append(case)
-    return images
-
-
-def machoire(rangee_idle: list[Image.Image], largeur: int, hauteur: int) -> list[Image.Image]:
-    """Cycle de mastication composé à partir de l'Idle de l'espèce.
-
-    On alterne l'image d'attente et la même comprimée de 2 px : le corps mord
-    puis remonte, ce que le simple balancement de l'Idle ne dit pas. Les planches
-    SpriteCollab laissent au moins 4 px vides sous les pieds, la compression ne
-    rogne donc rien.
-    """
-    images: list[Image.Image] = []
-    for source in rangee_idle[:2] or [rangee_idle[0]]:
-        comprimee = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
-        reduite = source.resize((largeur, hauteur - 2), Image.NEAREST)
-        comprimee.paste(reduite, (0, 2))
-        images.extend([source, comprimee])
     return images
 
 
@@ -381,57 +414,46 @@ def main() -> None:
                 continue
             # Eat : mouvement de Chapignon transposé pour les membres concernés,
             # mâchoire composée pour les autres, balancement d'Idle si validé.
-            if anim == 'Eat' and membre in EAT_BRELOOM:
-                idle_png = cache / 'Idle-Anim.png'
-                mouvement = mouvement_breloom(CACHE, arguments.hors_ligne)
-                if mouvement is None or not idle_png.exists():
-                    continue
-                rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                nb = mouvement['images']
-                planche = Image.new('RGBA', (largeur_idle * nb, hauteur_idle * len(rangees)),
-                                    (0, 0, 0, 0))
-                for index, rangee in enumerate(rangees):
-                    for colonne, image in enumerate(
-                            machoire_breloom(rangee, largeur_idle, hauteur_idle, mouvement)):
-                        planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
-                planche.save(cible / 'Eat-Anim.png')
-                for suffixe in ('Shadow', 'Offsets'):
-                    source = cache / f'Idle-{suffixe}.png'
-                    if source.exists():
-                        (cible / f'Eat-{suffixe}.png').write_bytes(source.read_bytes())
-                derivees[anim] = (nb, mouvement['durees'])
-                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nb,
-                                'frameType': types.get(anim), 'source': 'breloom',
-                                'recette': RECETTES['Eat_breloom'],
-                                'durees': mouvement['durees']}
-                continue
-            if anim == 'Eat' and membre not in EAT_DERIVE_VALIDE:
+            if anim == 'Eat' and membre in EAT_DESSINE:
                 idle_png = cache / 'Idle-Anim.png'
                 if not idle_png.exists():
                     continue
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                nb = 0
-                planche = None
+                mouvement = (mouvement_breloom(CACHE, arguments.hors_ligne)
+                             if membre in EAT_BRELOOM else None)
+                if mouvement is None:
+                    mouvement = {'images': 4, 'durees': [6, 8, 6, 8],
+                                 'ratios': [1.0] * 4, 'decalages': [0] * 4}
+                # La flexion n'a de sens que si la planche laisse de la place sous
+                # les pieds ; sinon on garde le mouvement seul.
+                marge = hauteur_idle - (lire(idle_png).crop(
+                    (0, 0, largeur_idle, hauteur_idle)).getbbox() or (0, 0, 0, 0))[3]
+                flexion = FLEXION if marge >= FLEXION + 2 else 0
+                planche = Image.new('RGBA', (largeur_idle * mouvement['images'],
+                                             hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for index, rangee in enumerate(rangees):
-                    images = machoire(rangee, largeur_idle, hauteur_idle)
-                    nb = len(images)
-                    if planche is None:
-                        planche = Image.new('RGBA', (largeur_idle * nb, hauteur_idle * len(rangees)),
-                                            (0, 0, 0, 0))
-                    for colonne, image in enumerate(images):
+                    rangee = aligner_rangee(rangee, largeur_idle, hauteur_idle)
+                    # On ferme les yeux sur l'Idle, puis on applique le mouvement :
+                    # le trait suit ainsi la compression de Chapignon.
+                    source = []
+                    for colonne in range(mouvement['images']):
+                        image = rangee[colonne % len(rangee)]
+                        if colonne % 2 == 1:
+                            image = flechir(image, flexion)
+                        source.append(image)
+                    transformees = machoire_breloom(source, largeur_idle, hauteur_idle, mouvement)
+                    for colonne, image in enumerate(transformees):
                         planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
-                if planche is None:
-                    continue
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
-                    source = cache / f'Idle-{suffixe}.png'
-                    if source.exists():
-                        (cible / f'Eat-{suffixe}.png').write_bytes(source.read_bytes())
-                durees = [5] * nb
-                derivees[anim] = (nb, durees)
-                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nb,
-                                'frameType': types.get(anim), 'source': 'dessinee',
-                                'recette': RECETTES['Eat_dessine']}
+                    origine = cache / f'Idle-{suffixe}.png'
+                    if origine.exists():
+                        (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
+                derivees[anim] = (mouvement['images'], mouvement['durees'])
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
+                                'images': mouvement['images'], 'frameType': types.get(anim),
+                                'source': 'dessinee', 'recette': RECETTES['Eat_dessine'],
+                                'durees': mouvement['durees'], 'flexion': flexion}
                 continue
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:
@@ -536,12 +558,21 @@ def main() -> None:
         lignes.append(f'- `{anim}` — {recette}')
     lignes.append('')
     lignes.append('Les cases **composée** désignent la mâchoire assemblée à partir de')
-    lignes.append("l'Idle de l'espèce (attente / attente comprimée) : " + ', '.join(sorted(EAT_DERIVE_VALIDE)))
     lignes.append('')
-    lignes.append('Les cases **Chapignon** reprennent le mouvement du `Eat` de Chapignon')
-    lignes.append(f"({', '.join(sorted(EAT_BRELOOM))}) : la largeur relative et le recentrage de")
-    lignes.append("chaque image sont mesurés sur sa planche, puis appliqués à l'Idle du membre -")
-    lignes.append("les sprites restent ceux de l'espece, seul le mouvement est emprunte.")
+    lignes.append('## Le `Eat` dessiné')
+    lignes.append('')
+    lignes.append('Pour ' + ', '.join(sorted(EAT_DESSINE)) + ', SpriteCollab ne dessine')
+    lignes.append("aucune animation de repas. La bouchée est donc faite ici : l'Idle de")
+    lignes.append("l'espèce et, une image sur deux, une **flexion du corps d'un pixel** —")
+    lignes.append("les genoux plient sur la bouchée. Le visage n'est pas retouché : à")
+    lignes.append("cette échelle les yeux et les bouches varient trop d'une espèce à")
+    lignes.append("l'autre pour qu'un trait placé sans dessin original tombe juste.")
+    lignes.append('Le rythme est celui de Chapignon, 6-8-6-8.')
+    lignes.append('')
+    lignes.append('Les cinq cases à mouvement emprunté prennent aussi la **largeur relative**')
+    lignes.append('et le **recentrage** mesurés sur la planche de Chapignon (Breloom, 286) :')
+    lignes.append(f"({', '.join(sorted(EAT_BRELOOM))}). Les sprites restent ceux de l'espèce,")
+    lignes.append('seul le mouvement est emprunté.')
     lignes.append('garde en revanche le simple balancement, validé tel quel.')
     lignes += [
         '',
