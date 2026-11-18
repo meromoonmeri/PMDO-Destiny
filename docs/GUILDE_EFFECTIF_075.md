@@ -368,39 +368,41 @@ Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordr
 | Famille | Membres | Source |
 |---|---|---|
 | `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
-| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret, Pandespiègle | fabriquée ici, à partir de l'`Idle` de l'espèce |
+| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret, Pandespiègle | sprites retouchés ici |
 
-Ces sept espèces n'ont **aucune animation de repas** dans
-SpriteCollab : ni `Eat`, ni image à bouche ouverte ailleurs. `Hurt` et `Charge`
-existent, mais ne font que décaler le sprite d'un pixel — vérifié image par image.
-La bouchée est donc faite ici.
+Ces sept espèces n'ont **aucune animation de repas** dans SpriteCollab : ni `Eat`,
+ni image à bouche ouverte ailleurs. `Hurt` et `Charge` existent, mais ne font que
+décaler le sprite d'un pixel — vérifié image par image.
 
-### Comment est faite la bouchée
+### Le dessin de la bouche
 
-Quatre images, rythme **6-8-6-8**, celui du `Eat` de Chapignon :
+Quatre images au rythme **6-8-6-8**, sur l'`Idle` de l'espèce :
 
-1. l'`Idle` de l'espèce, recalé sur les pieds et sur l'axe de son image de
-   référence — les images d'`Idle` de SpriteCollab flottent (chez Cizayox le bas
-   du sprite passe de la ligne 41 à la 32 d'une image à l'autre) ; sans ce
-   recalage le `Eat` sauterait en boucle ;
-2. la même image **fléchie d'un pixel** : les genoux plient sur la bouchée ;
-3. l'image d'`Idle` suivante ;
-4. la même, fléchie.
+1. l'`Idle`, bouche fermée ;
+2. le même, **bouche ouverte** ;
+3. l'`Idle` de nouveau ;
+4. le même, bouche ouverte.
 
-La flexion est sûre : les planches laissent au moins quatre pixels vides sous les
-pieds, et le test vérifie que les pieds descendent d'exactement un pixel une image
-sur deux sans jamais quitter la cellule.
+La bouche est peinte pixel par pixel : ouverture sombre cernée de noir d'un pixel,
+sinon deux pixels sombres se liraient comme une tache. Chaque emplacement est
+relevé sur la planche de l'espèce (`BOUCHES` dans
+`tools/constituer_animations_guilde.py`) :
 
-Pour Simisage, Gardevoir, Dimoret, Cizayox et Mélofée, le mouvement du `Eat` de
-Chapignon est ajouté par-dessus : `mouvement_breloom()` mesure sur sa planche la
-**largeur relative** et le **recentrage** de chaque image, `machoire_breloom()` les
-applique. Les sprites restent ceux de l'espèce, seul le mouvement est emprunté.
+| Membre | Ouverture (x, y) | Taille | Repère |
+|---|---|---:|---|
+| Gardevoir | 14, 12 | 3×2 | sous les yeux roses |
+| Canarticho | 10, 13 | 3×2 | sur le bec, au trait noir d'origine |
+| Simisage | 14, 18 | 4×2 | sous le museau doré |
+| Mélofée | 14, 19 | 3×2 | sur le petit sourire d'origine |
+| Cizayox | 13, 29 | 4×2 | sous les yeux dorés |
+| Dimoret | 14, 16 | 4×2 | au bas du visage, avant le col |
+| Pandespiègle | 11, 16 | 4×2 | sous les yeux |
 
-Le visage n'est pas retouché, volontairement. J'ai essayé : à cette échelle les
-yeux et les Bouches varient trop d'une espèce à l'autre (yeux blancs de Gardevoir,
-dorés de Cizayox, à demi cachés sous le chapeau de Simisage) pour qu'un trait placé
-sans dessin original tombe juste — l'essai ne tenait que sur Gardevoir. La bouchée
-est donc dite par le corps, et par l'émote `eating` au-dessus de la tête.
+Une seule image d'`Idle` sert de base aux quatre images : les autres images de
+l'`Idle` changent de pose (bras levés, tête plus haute), et une bouche placée en
+coordonnées de cellule retomberait à côté. Le test vérifie que les images 1 et 3
+sont identiques, que 2 et 4 le sont aussi, que la bouche change bien des pixels,
+et qu'elle reste dans son cadre.
 
 Les autres animations dérivées restent en place, elles n'ont pas été mises en
 cause :

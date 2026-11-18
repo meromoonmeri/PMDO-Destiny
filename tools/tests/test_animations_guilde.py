@@ -87,9 +87,9 @@ def main() -> None:
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le Eat dessiné garde le rythme 6-8-6-8 et la flexion d'un pixel : les pieds
-    # descendent d'exactement un pixel une image sur deux, sans jamais quitter la
-    # cellule.
+    # Le Eat dessiné : quatre images au rythme 6-8-6-8, la bouche ouverte une
+    # image sur deux. Les images 1 et 3 sont identiques (bouche fermée), 2 et 4
+    # aussi (bouche ouverte), et l'ouverture tombe bien dans le sprite.
     for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
                    'Pandespiegle'):
         dossier = SPRITES / manifeste['membres'][membre]['dossier']
@@ -98,12 +98,25 @@ def main() -> None:
         assert declarations['Eat'] == [6, 8, 6, 8], (membre, declarations['Eat'])
         info = manifeste['membres'][membre]['animations']['Eat']
         largeur, hauteur = info['cellule']
+        bouche = info['bouche']
         with Image.open(dossier / 'Eat-Anim.png') as planche:
-            bas = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).getbbox()[3]
-                   for i in range(planche.width // largeur)]
-        assert bas[1] == bas[0] + info['flexion'], (membre, bas)
-        assert bas[2] == bas[0] and bas[3] == bas[1], (membre, bas)
-        assert max(bas) <= hauteur - 1, (membre, 'pieds hors cellule', bas)
+            images = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).convert('RGBA')
+                      for i in range(planche.width // largeur)]
+        assert images[0].tobytes() == images[2].tobytes(), (membre, 'images 1 et 3 différentes')
+        assert images[1].tobytes() == images[3].tobytes(), (membre, 'images 2 et 4 différentes')
+        assert images[0].tobytes() != images[1].tobytes(), (membre, 'bouche jamais dessinée')
+        changees = [(x, y) for x in range(largeur) for y in range(hauteur)
+                    if images[0].getpixel((x, y)) != images[1].getpixel((x, y))]
+        assert changees, (membre, 'aucun pixel changé')
+        x0, y0 = bouche['x'], bouche['y']
+        for x, y in changees:
+            assert x0 - 1 <= x <= x0 + bouche['largeur'] and y0 - 1 <= y <= y0 + bouche['hauteur'], \
+                (membre, 'bouche hors de son cadre', (x, y))
+        # l'ouverture est remplie de sa couleur intérieure
+        interieurs = [images[1].getpixel((x, y))[:3]
+                      for x in range(x0, x0 + bouche['largeur'])
+                      for y in range(y0, y0 + bouche['hauteur'])]
+        assert tuple(bouche['interieur']) in interieurs, (membre, 'intérieur de la bouche absent')
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 

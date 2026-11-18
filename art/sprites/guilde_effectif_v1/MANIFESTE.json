@@ -33,14 +33,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 14,
+            "y": 12,
+            "largeur": 3,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -85,14 +95,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 10,
+            "y": 13,
+            "largeur": 3,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -137,14 +157,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 14,
+            "y": 18,
+            "largeur": 4,
+            "hauteur": 2,
+            "interieur": [
+              88,
+              40,
+              12
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -189,14 +219,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 14,
+            "y": 19,
+            "largeur": 3,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -241,14 +281,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 13,
+            "y": 29,
+            "largeur": 4,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -335,14 +385,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 14,
+            "y": 16,
+            "largeur": 4,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [
@@ -429,14 +489,24 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "flexion": 1
+          "bouche": {
+            "x": 11,
+            "y": 16,
+            "largeur": 4,
+            "hauteur": 2,
+            "interieur": [
+              86,
+              28,
+              36
+            ]
+          }
         },
         "Wake": {
           "cellule": [

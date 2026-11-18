@@ -70,13 +70,19 @@ EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dim
 # alternance d'une pose de face et d'une pose tournée plus étroite. Les sprites
 # restent ceux de l'espèce, seul le mouvement est emprunté.
 EAT_BRELOOM = {'Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'}
-# Le `Eat` dessiné ici ne touche pas au visage : à cette échelle l'anatomie des
-# visages varie trop d'une espèce à l'autre (yeux blancs, dorés, en amande, à
-# demi cachés par un chapeau) pour placer un trait à coup sûr. La bouchée est
-# dite par le corps : une flexion d'un pixel sur les images de bouchée, qui
-# s'ajoute au mouvement de Chapignon quand la case en porte un. La marge sous
-# les pieds des planches (>= 4 px) garantit que rien n'est rogné.
-FLEXION = 1
+# Bouches dessinées à la main, relevées sur les planches de SpriteCollab :
+# (x, y) du coin haut-gauche de l'ouverture, largeur, hauteur, couleur intérieure.
+# L'ouverture reçoit un contour noir d'un pixel : c'est ce contour qui la fait
+# lire comme une bouche plutôt que comme une tache.
+BOUCHES = {
+    'Gardevoir':   {'x': 14, 'y': 12, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
+    'Canarticho':  {'x': 10, 'y': 13, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
+    'Simisage':    {'x': 14, 'y': 18, 'largeur': 4, 'hauteur': 2, 'interieur': (88, 40, 12)},
+    'Melofee':     {'x': 14, 'y': 19, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
+    'Cizayox':     {'x': 13, 'y': 29, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
+    'Dimoret':     {'x': 14, 'y': 16, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
+    'Pandespiegle':{'x': 11, 'y': 16, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
+}
 
 BRELOOM_DEX = '0286'
 BRELOOM = 'Breloom'
@@ -85,9 +91,8 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
-    'Eat_dessine': ("bouchée dessinée : Idle avec le mouvement de Chapignon quand la "
-                    "case en porte un, et une flexion d'un pixel une image sur deux, "
-                    "au rythme 6-8-6-8"),
+    'Eat_dessine': ("bouchée dessinée à la main sur l'Idle de l'espèce : bouche "
+                    "ouverte une image sur deux, au rythme 6-8-6-8"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -221,16 +226,33 @@ def aligner_rangee(rangee: list[Image.Image], largeur: int, hauteur: int) -> lis
     return alignees
 
 
-def flechir(image: Image.Image, pixels: int = FLEXION) -> Image.Image:
-    """Abaisse le corps de `pixels` pixels : les genoux plient sur la bouchée.
+def dessiner_bouche(image: Image.Image, bouche: dict) -> Image.Image:
+    """Dessine une bouche ouverte à la place indiquée par `BOUCHES`.
 
-    L'image garde sa taille — la marge vide sous les pieds des planches d'Idle
-    (au moins quatre pixels) absorbe la descente, rien n'est rogné.
+    L'ouverture est remplie d'une couleur sombre et cernée de noir : sans ce
+    contour, à cette échelle, deux pixels sombres se lisent comme une tache et
+    non comme une bouche. Le dessin ne s'applique que là où le sprite est
+    opaque — on ne peint jamais dans le vide autour du Pokémon.
     """
-    if pixels <= 0:
-        return image
-    sortie = Image.new('RGBA', image.size, (0, 0, 0, 0))
-    sortie.paste(image, (0, pixels))
+    sortie = image.copy()
+    x0, y0 = bouche['x'], bouche['y']
+    largeur, hauteur = bouche['largeur'], bouche['hauteur']
+
+    def peindre(x: int, y: int, couleur: tuple[int, int, int]) -> None:
+        if 0 <= x < sortie.width and 0 <= y < sortie.height:
+            if image.getpixel((x, y))[3] > 40:
+                sortie.putpixel((x, y), (*couleur, 255))
+
+    for x in range(x0, x0 + largeur):
+        for y in range(y0, y0 + hauteur):
+            peindre(x, y, bouche['interieur'])
+    # contour : un pixel de noir tout autour de l'ouverture
+    for x in range(x0 - 1, x0 + largeur + 1):
+        peindre(x, y0 - 1, (0, 0, 0))
+        peindre(x, y0 + hauteur, (0, 0, 0))
+    for y in range(y0 - 1, y0 + hauteur + 1):
+        peindre(x0 - 1, y, (0, 0, 0))
+        peindre(x0 + largeur, y, (0, 0, 0))
     return sortie
 
 
@@ -418,42 +440,33 @@ def main() -> None:
                 idle_png = cache / 'Idle-Anim.png'
                 if not idle_png.exists():
                     continue
+                bouche = BOUCHES.get(membre)
+                if bouche is None:
+                    continue
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                mouvement = (mouvement_breloom(CACHE, arguments.hors_ligne)
-                             if membre in EAT_BRELOOM else None)
-                if mouvement is None:
-                    mouvement = {'images': 4, 'durees': [6, 8, 6, 8],
-                                 'ratios': [1.0] * 4, 'decalages': [0] * 4}
-                # La flexion n'a de sens que si la planche laisse de la place sous
-                # les pieds ; sinon on garde le mouvement seul.
-                marge = hauteur_idle - (lire(idle_png).crop(
-                    (0, 0, largeur_idle, hauteur_idle)).getbbox() or (0, 0, 0, 0))[3]
-                flexion = FLEXION if marge >= FLEXION + 2 else 0
-                planche = Image.new('RGBA', (largeur_idle * mouvement['images'],
+                durees = [6, 8, 6, 8]
+                planche = Image.new('RGBA', (largeur_idle * len(durees),
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for index, rangee in enumerate(rangees):
-                    rangee = aligner_rangee(rangee, largeur_idle, hauteur_idle)
-                    # On ferme les yeux sur l'Idle, puis on applique le mouvement :
-                    # le trait suit ainsi la compression de Chapignon.
-                    source = []
-                    for colonne in range(mouvement['images']):
-                        image = rangee[colonne % len(rangee)]
-                        if colonne % 2 == 1:
-                            image = flechir(image, flexion)
-                        source.append(image)
-                    transformees = machoire_breloom(source, largeur_idle, hauteur_idle, mouvement)
-                    for colonne, image in enumerate(transformees):
+                    # Une seule image d'Idle sert de base : les autres images de
+                    # l'Idle changent de pose (bras levés, tête plus haute) et la
+                    # bouche, placée en coordonnées de cellule, tomberait à côté.
+                    base = rangee[0]
+                    for colonne in range(len(durees)):
+                        image = base
+                        if colonne % 2 == 1:      # une image sur deux : bouche ouverte
+                            image = dessiner_bouche(image, bouche)
                         planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
                     origine = cache / f'Idle-{suffixe}.png'
                     if origine.exists():
                         (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
-                derivees[anim] = (mouvement['images'], mouvement['durees'])
+                derivees[anim] = (len(durees), durees)
                 obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
-                                'images': mouvement['images'], 'frameType': types.get(anim),
+                                'images': len(durees), 'frameType': types.get(anim),
                                 'source': 'dessinee', 'recette': RECETTES['Eat_dessine'],
-                                'durees': mouvement['durees'], 'flexion': flexion}
+                                'durees': durees, 'bouche': bouche}
                 continue
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:

@@ -67,7 +67,7 @@ l'espèce (SpriteCollab ne les dessine pas pour elle) :
 
 - `Eat` — balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images
 - `Eat_breloom` — mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme
-- `Eat_dessine` — bouchée dessinée : Idle avec le mouvement de Chapignon quand la case en porte un, et une flexion d'un pixel une image sur deux, au rythme 6-8-6-8
+- `Eat_dessine` — bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8
 - `Wake` — Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks
 - `Pose` — Idle image 1 tenue — 1 image de 30 ticks
 
