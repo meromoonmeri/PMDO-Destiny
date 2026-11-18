@@ -32,16 +32,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0448 Lucario",
-          "echelle": 0.83
+          "poses": [
+            "Attack 2",
+            "Double 0"
+          ]
         },
         "Wake": {
           "cellule": [
@@ -85,16 +87,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0066 Machop",
-          "echelle": 1.0
+          "poses": [
+            "Swing 1",
+            "Attack 0"
+          ]
         },
         "Wake": {
           "cellule": [
@@ -138,16 +142,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0453 Cradopaud",
-          "echelle": 1.75
+          "poses": [
+            "Attack 0",
+            "Swing 2"
+          ]
         },
         "Wake": {
           "cellule": [
@@ -191,16 +197,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0296 Makuhita",
-          "echelle": 1.0
+          "poses": [
+            "Attack 3",
+            "Dance 2"
+          ]
         },
         "Wake": {
           "cellule": [
@@ -244,16 +252,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0448 Lucario",
-          "echelle": 1.33
+          "poses": [
+            "Attack 9",
+            "Attack 0"
+          ]
         },
         "Wake": {
           "cellule": [
@@ -339,16 +349,18 @@
           ],
           "images": 4,
           "frameType": 48,
-          "source": "empruntee",
-          "recette": "mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle",
+          "source": "poses",
+          "recette": "poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "donneur": "0359 Absol",
-          "echelle": 1.2
+          "poses": [
+            "Attack 1",
+            "Shoot 3"
+          ]
         },
         "Wake": {
           "cellule": [

@@ -67,27 +67,30 @@ l'espèce (SpriteCollab ne les dessine pas pour elle) :
 
 - `Eat` — balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images
 - `Eat_breloom` — mouvement de Chapignon transposé : Idle puis Idle tourné (largeur réduite et recentrée comme chez lui), à son rythme
-- `Eat_emprunte` — mouvement du Eat d'un donneur de même carrure, mesuré image par image (largeur, recentrage, enfoncement) puis appliqué à l'Idle de l'espèce à son échelle
+- `Eat_poses` — poses successives du même Pokémon : repos, une main levée, repos, l'autre main, prises dans ses planches Attack/Appeal/Dance et alignées sur le sol et l'axe de l'Idle
 - `Wake` — Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks
 - `Pose` — Idle image 1 tenue — 1 image de 30 ticks
 
-## Le `Eat` emprunté
+## Le `Eat` en poses successives
 
-Ces membres n'ont pas de `Eat` chez SpriteCollab : leur animation
-emprunte le **mouvement** d'un donneur de même carrure. Tout est mesuré
-sur la planche du donneur, image par image : largeur relative, hauteur
-relative, recentrage, enfoncement. Le résultat est appliqué aux sprites
-de l'espèce à son échelle, pieds au sol et axe conservé. Aucun dessin
-du donneur n'est repris — seulement son mouvement.
+Ces membres n'ont pas de `Eat` chez SpriteCollab. Leur animation
+enchaîne donc **quatre poses déjà dessinées** du même Pokémon : repos,
+une main levée, repos, l'autre main. Les poses sont prises dans les
+planches `Attack`, `Appeal` ou `Dance` de l'espèce — jamais dans le
+dessin d'un autre Pokémon — puis alignées sur le sol et l'axe de son
+`Idle`, sans jamais déborder de sa cellule. Sur les vues de face et de
+dos, la seconde pose est retournée en miroir : c'est le même geste fait
+de l'autre côté, donc l'autre bras. Rien n'est redessiné : on ne fait
+que choisir et ordonner des poses existantes.
 
-| Membre | Donneur | Échelle |
-|---|---|---:|
-| Canarticho | Machop (0066) | 1.0 |
-| Cizayox | Lucario (0448) | 1.33 |
-| Dimoret | Absol (0359) | 1.2 |
-| Gardevoir | Lucario (0448) | 0.83 |
-| Melofee | Makuhita (0296) | 1.0 |
-| Simisage | Cradopaud (0453) | 1.75 |
+| Membre | Pose « une main » | Pose « l'autre main » |
+|---|---|---|
+| Gardevoir | `Attack 2` | `Double 0` |
+| Canarticho | `Swing 1` | `Attack 0` |
+| Simisage | `Attack 0` | `Swing 2` |
+| Melofee | `Attack 3` | `Dance 2` |
+| Cizayox | `Attack 9` | `Attack 0` |
+| Dimoret | `Attack 1` | `Shoot 3` |
 
 Pandespiègle garde en revanche le simple balancement, validé tel quel.
 

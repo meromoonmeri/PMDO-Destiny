@@ -48,10 +48,10 @@ def main() -> None:
         for anim in ATTENDUES:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
-            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'empruntee',
+            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee', 'poses',
                                       'breloom'), \
                 (membre, anim, info['source'])
-            if info['source'] in ('derivee', 'dessinee', 'empruntee', 'breloom'):
+            if info['source'] in ('derivee', 'dessinee', 'poses', 'breloom'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -90,40 +90,46 @@ def main() -> None:
         with Image.open(gif_membre) as gif:
             attendu = manifeste['membres'][membre]['animations']['Eat']['images']
             assert getattr(gif, 'n_frames', 1) == attendu, (membre, 'nombre d\'images du GIF')
-    # Les sept membres sans Eat d'origine en ont un dessiné ici ; les trois autres
-    # gardent celui de SpriteCollab.
+    # Les six membres sans Eat d'origine enchainent des poses de leur propre
+    # planche ; les trois autres gardent celui de SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
-    assert {m for m, v in sources.items() if v == 'empruntee'} == {
-        'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}, sources
-    # Pandespiègle garde son Eat dérivé, validé tel quel.
+    POSES_ATTENDUES = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
+    assert {m for m, v in sources.items() if v == 'poses'} == POSES_ATTENDUES, sources
+    # Pandespiegle garde son Eat derive, valide tel quel.
     assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le Eat emprunté : quatre images au rythme du donneur, mouvement mesuré sur
-    # sa planche, pieds au sol et rien hors de la cellule.
-    for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'):
+    # Le Eat en poses : repos, une main, repos, l'autre main. Les poses sont
+    # nommees dans le manifeste, les durees tiennent dans AnimData.xml, la
+    # silhouette bouge dans les huit directions et rien ne sort de la cellule.
+    for membre in sorted(POSES_ATTENDUES):
         dossier = SPRITES / manifeste['membres'][membre]['dossier']
         declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
                         for a in ET.parse(dossier / 'AnimData.xml').iter('Anim')}
         info = manifeste['membres'][membre]['animations']['Eat']
+        assert info['source'] == 'poses', (membre, info['source'])
+        assert len(info.get('poses', [])) == 2, (membre, 'deux poses attendues', info.get('poses'))
+        for nom_pose in info['poses']:
+            animation, index = nom_pose.split()
+            assert animation and index.isdigit(), nom_pose
         assert tuple(declarations['Eat']) == tuple(info['durees']), (membre, 'durées incohérentes')
-        assert info['source'] == 'empruntee', (membre, info['source'])
-        assert info['donneur'], membre
         largeur, hauteur = info['cellule']
+        assert len(info['durees']) == info['images'] == 4, (membre, 'quatre images attendues')
         with Image.open(dossier / 'Eat-Anim.png') as planche:
-            images = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).convert('RGBA')
-                      for i in range(planche.width // largeur)]
-        assert len(images) == len(info['durees']), (membre, 'nombre d\'images')
-        # le cycle du donneur anime au moins deux images
-        assert images[0].tobytes() != images[1].tobytes(), (membre, 'aucun mouvement')
-        # le mouvement se voit : la silhouette change de largeur ou de position
-        boites = [image.getbbox() for image in images]
-        assert len({(b[2] - b[0], b[0], b[1]) for b in boites}) > 1, (membre, 'silhouette figée')
-        # rien ne sort de la cellule
-        for boite in boites:
-            assert boite[0] >= 0 and boite[2] <= largeur, (membre, 'débord horizontal', boite)
-            assert boite[1] >= 0 and boite[3] <= hauteur, (membre, 'débord vertical', boite)
+            rangees = [[planche.crop((i * largeur, r * hauteur, (i + 1) * largeur, (r + 1) * hauteur))
+                        .convert('RGBA') for i in range(planche.width // largeur)]
+                       for r in range(planche.height // hauteur)]
+        for r, rangee in enumerate(rangees):
+            repos, pose, repos_bis, autre = rangee
+            assert repos.tobytes() != pose.tobytes(), (membre, r, 'aucune pose levée')
+            assert repos.tobytes() == repos_bis.tobytes(), (membre, r, 'le repos doit revenir')
+            assert pose.tobytes() != autre.tobytes(), (membre, r, 'les deux poses identiques')
+            for image in rangee:
+                boite = image.getbbox()
+                assert boite is not None, (membre, r, 'image vide')
+                assert boite[0] >= 0 and boite[2] <= largeur, (membre, r, 'débord horizontal', boite)
+                assert boite[1] >= 0 and boite[3] <= hauteur, (membre, r, 'débord vertical', boite)
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 

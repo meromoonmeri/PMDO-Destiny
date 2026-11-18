@@ -130,8 +130,9 @@ def main(argv: list[str]) -> int:
         dossier = SPRITES / fiche['dossier']
         images, durees = images_eat(dossier, fiche)
         source = fiche['animations']['Eat']['source']
-        etiquette = {'dessinee': 'bouchée dessinée', 'derivee': 'Eat dérivé',
-                     'empruntee': f"d'après {fiche['animations']['Eat'].get('donneur', '?')}",
+        poses = fiche['animations']['Eat'].get('poses') or []
+        etiquette = {'derivee': 'Eat dérivé',
+                     'poses': 'poses : ' + ' puis '.join(poses),
                      'SpriteCollab': 'Eat SpriteCollab'}.get(source, source)
         rendu = vignette(images, durees, nom, etiquette)
         ecrire_gif(rendu, durees, SORTIE / f'{nom}.gif')

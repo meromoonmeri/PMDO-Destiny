@@ -369,34 +369,41 @@ Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordr
 |---|---|---|
 | `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
 | dérivée (validée) | Pandespiègle | balancement de son `Idle`, 4 ticks par image |
-| empruntée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | mouvement du `Eat` d'un donneur |
+| poses successives | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | poses déjà dessinées du même Pokémon |
 
-Ces six espèces n'ont **aucune animation de repas** dans SpriteCollab. On ne
-dessine rien dessus : on emprunte le mouvement d'un Pokémon qui, lui, a une vraie
-animation de repas **et** la même carrure — un bipède à deux bras.
+Ces six espèces n'ont **aucune animation de repas** dans SpriteCollab — et
+aucune n'a de `Eat` non plus. Mais leurs planches d'attaque en contiennent
+l'essentiel : les poses « bras levés », « les deux mains devant la figure »,
+« une pince puis les deux ». Leur `Eat` est donc une **suite de poses** :
+repos, une main, repos, l'autre main — quatre images de 6, 8, 6 et 8 ticks.
 
-### Les donneurs
+### Les poses retenues
 
-| Membre | Donneur | Échelle | Ce qui est emprunté |
-|---|---|---:|---|
-| Gardevoir | Lucario (0448) | 0,83 | le buste s'incline, la silhouette se resserre de 16 % |
-| Canarticho | Machop (0066) | 1,00 | la tête plonge de 2 px sur la bouchée |
-| Simisage | Cradopaud (0453) | 1,75 | corps projeté de 22 % plus étroit, balancement latéral |
-| Mélofée | Makuhita (0296) | 1,00 | les bras montent : la silhouette s'ouvre |
-| Cizayox | Lucario (0448) | 1,33 | même carrure large, mouvement le plus ample |
-| Dimoret | Absol (0359) | 1,20 | il se penche en avant pour mordre |
+| Membre | Une main | Puis l'autre | Ce qu'on voit |
+|---|---|---|---|
+| Gardevoir | `Attack` 2 | `Double` 0 | les mains s'ouvrent, puis montent devant le visage |
+| Canarticho | `Swing` 1 | `Attack` 0 | il lève son poireau, puis le ramène |
+| Simisage | `Attack` 0 | `Swing` 2 | une main part, l'autre suit |
+| Mélofée | `Attack` 3 | `Dance` 2 | une main, puis les deux |
+| Cizayox | `Attack` 9 | `Attack` 0 | une pince, puis les deux |
+| Dimoret | `Attack` 1 | `Shoot` 3 | une griffe, puis les deux |
 
-Pour chaque donneur, `mouvement_donneur()` mesure image par image, sur sa propre
-planche : **largeur relative, hauteur relative, recentrage, enfoncement**.
-`appliquer_mouvement()` applique ces quatre valeurs aux sprites du membre, à son
-échelle, pieds au sol et axe conservé. Aucun pixel du donneur n'est repris : seul
-son mouvement l'est, et les sprites restent ceux de l'espèce.
+`pose_dans_cellule()` découpe l'image dans sa planche d'origine, la recadre sur
+son dessin, puis la repose **sur le même sol et le même axe** que l'`Idle` du
+membre, ramenée dans la cellule s'il le faut. Les cellules d'`Attack` font
+souvent 72 × 88 alors que l'`Idle` tient dans 32 × 64 : la pose est donc réduite
+à la place disponible sans jamais déborder.
 
-Les donneurs ont été choisis parmi les dix espèces de SpriteCollab qui possèdent
-un `Eat` de bipède (Machop, Éctoplasma, Kirlia, Chapignon, Makuhita, Absol,
-Pachirisu, Riolu, Lucario, Cradopaud), en retenant ceux dont le mouvement est
-**le plus ample** à carrure comparable : un donneur trop proche mais quasi immobile
-donnerait un `Eat` invisible.
+Sur les vues de **face** et de **dos** (rangées 0 et 4), la seconde pose est
+retournée en miroir : c'est le même geste fait de l'autre côté, donc l'autre
+bras. Sur les **profils**, un miroir ferait regarder le personnage dans le
+mauvais sens : la pose reste telle quelle.
+
+Rien n'est redessiné ni emprunté à un autre Pokémon : on choisit et on ordonne
+des poses que le dessinateur de l'espèce a déjà faites. Un garde-fou
+(`ecart_premiers()`) prévient si une pose retenue est identique au repos —
+c'est le piège de ces planches, où la première image d'`Attack` est souvent
+l'`Idle` lui-même.
 
 ### Le cas Pandespiègle
 

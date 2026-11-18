@@ -31,7 +31,7 @@ import urllib.request
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 RACINE = Path(__file__).resolve().parents[1]
 SORTIE = RACINE / 'art/sprites/guilde_effectif_v1'
@@ -59,32 +59,23 @@ ANIMATIONS = ['Eat', 'Wake', 'Sleep', 'Pose']
 # pour l'espèce. Elles partent toutes de la planche de l'espèce elle-même, donc
 # le style et l'échelle restent ceux du Pokémon ; c'est une solution d'attente,
 # pas un dessin original.
-# Membres sans Eat d'origine chez SpriteCollab : la bouchée est dessinée ici
-# (bouche ouverte + aliment + expression, voir BOUCHEES). Pandespiègle n'en est
-# pas : son Eat a été validé tel quel et garde la recette dérivée.
+# Membres sans Eat d'origine chez SpriteCollab : leur Eat enchaîne des poses de
+# leur propre planche (voir POSES). Pandespiègle n'en est pas : son Eat a été
+# validé tel quel et garde la recette dérivée.
 EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
+
+# Poses retenues à la main, apres relecture des planches : une pose ou un bras
+# se leve, une seconde ou c'est l'autre. Les deux tiennent dans la cellule.
+POSES = {
+    'Gardevoir':  [('Attack', 2), ('Double', 0)],    # les deux mains montent
+    'Canarticho': [('Swing', 1), ('Attack', 0)],     # il leve son poireau
+    'Simisage':   [('Attack', 0), ('Swing', 2)],     # une main, puis l'autre
+    'Melofee':    [('Attack', 3), ('Dance', 2)],     # une main, puis les deux
+    'Cizayox':    [('Attack', 9), ('Attack', 0)],    # une pince, puis les deux
+    'Dimoret':    [('Attack', 1), ('Shoot', 3)],     # une griffe, puis l'autre
+}
 EAT_DERIVE_VALIDE = {'Pandespiegle'}
 
-# Membres dont le Eat reprend *aussi* le mouvement de Chapignon (Breloom, n° 286) :
-# alternance d'une pose de face et d'une pose tournée plus étroite. Les sprites
-# restent ceux de l'espèce, seul le mouvement est emprunté.
-# ---------------------------------------------------------------------------
-# Animations empruntées : pour chaque membre sans Eat d'origine, un donneur de
-# SpriteCollab dont le Eat est réellement une animation de repas (bouche ou bras
-# qui travaillent), pris chez un bipède à deux bras de même carrure. On mesure son
-# mouvement image par image (largeur, recentrage, enfoncement) et on l'applique
-# aux sprites du membre : les dessins restent ceux de l'espèce, le mouvement est
-# celui du donneur, mis à son échelle.
-# ---------------------------------------------------------------------------
-DONNEURS = {
-    'Gardevoir':   ('0448', 'Lucario'),    # grand bipède droit : 16 % de largeur en moins
-    'Canarticho':  ('0066', 'Machop'),     # bipède trapu qui penche la tête de 2 px
-    'Simisage':    ('0453', 'Cradopaud'),  # bipède nerveux : 22 % de largeur en moins
-    'Melofee':     ('0296', 'Makuhita'),   # petit bipède rond, les bras montent
-    'Cizayox':     ('0448', 'Lucario'),    # même carrure large, mouvement le plus ample
-    'Dimoret':     ('0359', 'Absol'),      # svelte, il se penche en avant pour mordre
-}
-EAT_BRELOOM: set[str] = set()
 BRELOOM_DEX = '0286'
 BRELOOM = 'Breloom'
 
@@ -92,9 +83,9 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
-    'Eat_emprunte': ("mouvement du Eat d'un donneur de même carrure, mesuré image "
-                     "par image (largeur, recentrage, enfoncement) puis appliqué à "
-                     "l'Idle de l'espèce à son échelle"),
+    'Eat_poses': ("poses successives du même Pokémon : repos, une main levée, repos, "
+                  "l'autre main, prises dans ses planches Attack/Appeal/Dance et "
+                  "alignées sur le sol et l'axe de l'Idle"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -228,92 +219,50 @@ def aligner_rangee(rangee: list[Image.Image], largeur: int, hauteur: int) -> lis
     return alignees
 
 
-def _poser(image: Image.Image, x: int, y: int, couleur: tuple[int, int, int],
-           libre: bool = False) -> None:
-    """Pose un pixel. `libre` autorise le dessin hors de la silhouette."""
-    if 0 <= x < image.width and 0 <= y < image.height:
-        if libre or image.getpixel((x, y))[3] > 40:
-            image.putpixel((x, y), (*couleur, 255))
+def pose_dans_cellule(dossier: Path, animation: str, index: int,
+                      largeur: int, hauteur: int,
+                      reference: tuple[int, int, int, int],
+                      rangee: int = 0) -> Image.Image | None:
+    """Pose une image d'une autre animation dans la cellule de l'Idle.
 
-
-def mouvement_donneur(dossier: Path) -> list[dict] | None:
-    """Mesure le `Eat` d'un donneur : géométrie de chaque image.
-
-    Rend, pour chaque image, la largeur relative, le recentrage et l'enfoncement
-    du corps par rapport à la première image — c'est le mouvement utile du
-    repas, indépendant des couleurs et du dessin du donneur.
+    Les cellules d'`Attack` font 72 x 88 alors que l'`Idle` tient dans 32 x 64 :
+    on recadre la pose sur son dessin, puis on la repose sur le meme sol et le
+    meme axe que l'image d'`Idle` de reference, ramenee dans la cellule si elle
+    deborde. La pose garde ainsi sa place dans l'animation de repas.
     """
-    xml = dossier / 'AnimData.xml'
-    planche_png = dossier / 'Eat-Anim.png'
-    if not (xml.exists() and planche_png.exists()):
+    planche_png = dossier / f'{animation}-Anim.png'
+    if not planche_png.exists():
         return None
-    largeur, hauteur, _ = cellule(xml, 'Eat')
-    if largeur == 0:
-        return None
-    for noeud in ET.parse(xml).iter('Anim'):
-        if (noeud.findtext('Name') or '').lower() == 'eat':
-            durees = [int(d.text) for d in noeud.findall('Durations/Duration')]
-            break
-    else:
+    largeur_src, hauteur_src, images = cellule(dossier / 'AnimData.xml', animation)
+    if largeur_src == 0 or index >= images:
         return None
     planche = lire(planche_png)
-    nombre = min(len(durees), planche.width // largeur)
-    boites = []
-    for index in range(nombre):
-        case = planche.crop((index * largeur, 0, (index + 1) * largeur, hauteur))
-        boites.append(case.getbbox())
-    if not all(boites):
+    if (index + 1) * largeur_src > planche.width:
         return None
-    reference = boites[0]
-    largeur_ref = reference[2] - reference[0]
-    hauteur_ref = reference[3] - reference[1]
-    axe_ref = (reference[0] + reference[2]) / 2
-    mouvement = []
-    for boite in boites:
-        mouvement.append({
-            'largeur': (boite[2] - boite[0]) / largeur_ref if largeur_ref else 1.0,
-            'hauteur': (boite[3] - boite[1]) / hauteur_ref if hauteur_ref else 1.0,
-            'centre': (boite[0] + boite[2]) / 2 - axe_ref,
-            'haut': boite[1] - reference[1],
-        })
-    for index, duree in enumerate(durees[:nombre]):
-        mouvement[index]['duree'] = duree
-    return mouvement
-
-
-def appliquer_mouvement(rangee: list[Image.Image], mouvement: list[dict],
-                        echelle: float, largeur: int, hauteur: int) -> list[Image.Image]:
-    """Applique un mouvement de donneur à la rangée d'Idle d'un membre.
-
-    Le corps est recadré sur lui-même, puis étiré de la largeur et de la hauteur
-    relatives mesurées chez le donneur, les pieds restant au sol et l'axe de la
-    première image conservé. `echelle` rapporte la taille du membre à celle du
-    donneur : un donneur plus grand voit son mouvement réduit d'autant.
-    """
-    base = aligner_rangee(rangee, largeur, hauteur)
-    reference = base[0].getbbox()
-    if not reference:
-        return base
-    sol = reference[3]
+    if (rangee + 1) * hauteur_src > planche.height:
+        return None
+    dessin = planche.crop((index * largeur_src, rangee * hauteur_src,
+                           (index + 1) * largeur_src, (rangee + 1) * hauteur_src))
+    boite = dessin.getbbox()
+    if not boite:
+        return None
+    dessin = dessin.crop(boite)
+    if dessin.width > largeur or dessin.height > hauteur:
+        return None
+    case = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
     axe = (reference[0] + reference[2]) / 2
-    images = []
-    for index, etape in enumerate(mouvement):
-        source = base[index % len(base)]
-        boite = source.getbbox()
-        if not boite:
-            images.append(source)
-            continue
-        poids = min(1.0, echelle)
-        largeur_vue = max(1, int(round((boite[2] - boite[0]) * (1 + (etape['largeur'] - 1) * poids))))
-        hauteur_vue = max(1, int(round((boite[3] - boite[1]) * (1 + (etape['hauteur'] - 1) * poids))))
-        corps = source.crop(boite).resize((largeur_vue, hauteur_vue), Image.NEAREST)
-        dx = int(round(etape['centre'] * poids))
-        dy = int(round(etape['haut'] * poids * 0.5))
-        case = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
-        # pieds au sol, axe de la première image conservé
-        case.paste(corps, (int(round(axe - largeur_vue / 2 + dx)), sol - hauteur_vue + dy))
-        images.append(case)
-    return images
+    x = int(round(axe - dessin.width / 2))
+    y = reference[3] - dessin.height
+    x = max(0, min(largeur - dessin.width, x))
+    y = max(0, min(hauteur - dessin.height, y))
+    case.paste(dessin, (x, y))
+    return case
+
+
+def ecart_premiers(image: Image.Image, autre: Image.Image) -> int:
+    """Nombre de pixels qui different entre deux images de meme taille."""
+    gauche, droite = image.tobytes(), autre.tobytes()
+    return sum(1 for i in range(0, len(gauche), 4) if gauche[i:i + 4] != droite[i:i + 4])
 
 
 def mouvement_breloom(cache: Path, hors_ligne: bool) -> dict | None:
@@ -506,43 +455,64 @@ def main() -> None:
                                 'recette': RECETTES.get('Eat', ''), 'durees': durees}
                 continue
             if anim == 'Eat' and membre in EAT_DESSINE:
-                don = DONNEURS.get(membre)
+                poses = POSES.get(membre)
                 idle_png = cache / 'Idle-Anim.png'
-                if don is None or not idle_png.exists():
+                if not poses or not idle_png.exists():
                     continue
-                dex_don, nom_don = don
-                dossier_don = CACHE / f'donneur_{nom_don}'
-                dossier_don.mkdir(parents=True, exist_ok=True)
-                for fichier in ('AnimData.xml', 'Eat-Anim.png'):
-                    if not telecharger(dex_don, fichier, dossier_don / fichier,
-                                       arguments.hors_ligne):
-                        break
-                mouvement = mouvement_donneur(dossier_don)
-                if mouvement is None:
-                    continue
-                # échelle : hauteur du membre / hauteur du donneur
-                largeur_don, hauteur_don, _ = cellule(dossier_don / 'AnimData.xml', 'Eat')
-                echelle = (hauteur_idle / hauteur_don) if hauteur_don else 1.0
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
-                planche = Image.new('RGBA', (largeur_idle * len(mouvement),
+                repose = rangees[0][0]
+                # une pose qui ne differe pas du repos ne dit rien : on le signale
+                levees = []
+                for animation, index in poses:
+                    rangee_pose = []
+                    for numero, images_idle in enumerate(rangees):
+                        reference = images_idle[0].getbbox()
+                        if reference is None:
+                            rangee_pose = []
+                            break
+                        image = pose_dans_cellule(cache, animation, index, largeur_idle,
+                                                  hauteur_idle, reference, numero)
+                        if image is None:
+                            rangee_pose = []
+                            break
+                        rangee_pose.append(image)
+                    if not rangee_pose:
+                        levees = []
+                        break
+                    if ecart_premiers(rangee_pose[0], repose) < 8:
+                        print(f'  ! {membre} : la pose {animation} {index} ne bouge pas')
+                        levees = []
+                        break
+                    levees.append(rangee_pose)
+                if not levees:
+                    continue
+                # suite de poses : repos, une main, repos, l'autre main
+                nombre, durees = 4, [6, 8, 6, 8]
+                RANGEES_MIROIR = (0, 4)   # face et dos : le miroir est symetrique
+                planche = Image.new('RGBA', (largeur_idle * nombre,
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
-                for index, rangee in enumerate(rangees):
-                    for colonne, image in enumerate(
-                            appliquer_mouvement(rangee, mouvement, echelle,
-                                                largeur_idle, hauteur_idle)):
-                        planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
+                for numero, rangee in enumerate(rangees):
+                    base = aligner_rangee(rangee, largeur_idle, hauteur_idle)[0]
+                    premiere = levees[0][numero]
+                    seconde = levees[1][numero]
+                    # sur les vues de profil, un miroir ferait regarder le
+                    # personnage dans le mauvais sens : la pose reste telle quelle
+                    autre = (ImageOps.mirror(seconde) if numero in RANGEES_MIROIR
+                             else seconde)
+                    for colonne, image in enumerate([base, premiere, base, autre]):
+                        planche.paste(image, (colonne * largeur_idle, numero * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
                     origine = cache / f'Idle-{suffixe}.png'
                     if origine.exists():
                         (cible / f'Eat-{suffixe}.png').write_bytes(origine.read_bytes())
-                durees = [etape['duree'] for etape in mouvement]
-                derivees[anim] = (len(durees), durees)
-                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': len(durees),
-                                'frameType': types.get(anim), 'source': 'empruntee',
-                                'recette': RECETTES['Eat_emprunte'], 'durees': durees,
-                                'donneur': f'{dex_don} {nom_don}', 'echelle': round(echelle, 2)}
+                derivees[anim] = (nombre, durees)
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nombre,
+                                'frameType': types.get(anim), 'source': 'poses',
+                                'recette': RECETTES['Eat_poses'], 'durees': durees,
+                                'poses': [f'{a} {i}' for a, i in poses]}
                 continue
+
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:
                 continue
@@ -645,20 +615,24 @@ def main() -> None:
     for anim, recette in RECETTES.items():
         lignes.append(f'- `{anim}` — {recette}')
     lignes.append('')
-    lignes.append('## Le `Eat` emprunté')
+    lignes.append('## Le `Eat` en poses successives')
     lignes.append('')
-    lignes.append('Ces membres n\'ont pas de `Eat` chez SpriteCollab : leur animation')
-    lignes.append('emprunte le **mouvement** d\'un donneur de même carrure. Tout est mesuré')
-    lignes.append('sur la planche du donneur, image par image : largeur relative, hauteur')
-    lignes.append('relative, recentrage, enfoncement. Le résultat est appliqué aux sprites')
-    lignes.append('de l\'espèce à son échelle, pieds au sol et axe conservé. Aucun dessin')
-    lignes.append('du donneur n\'est repris — seulement son mouvement.')
+    lignes.append('Ces membres n\'ont pas de `Eat` chez SpriteCollab. Leur animation')
+    lignes.append('enchaîne donc **quatre poses déjà dessinées** du même Pokémon : repos,')
+    lignes.append('une main levée, repos, l\'autre main. Les poses sont prises dans les')
+    lignes.append('planches `Attack`, `Appeal` ou `Dance` de l\'espèce — jamais dans le')
+    lignes.append('dessin d\'un autre Pokémon — puis alignées sur le sol et l\'axe de son')
+    lignes.append('`Idle`, sans jamais déborder de sa cellule. Sur les vues de face et de')
+    lignes.append('dos, la seconde pose est retournée en miroir : c\'est le même geste fait')
+    lignes.append('de l\'autre côté, donc l\'autre bras. Rien n\'est redessiné : on ne fait')
+    lignes.append('que choisir et ordonner des poses existantes.')
     lignes.append('')
-    lignes.append('| Membre | Donneur | Échelle |')
-    lignes.append('|---|---|---:|')
-    for membre_don, (dex_don, nom_don) in sorted(DONNEURS.items()):
-        fiche_don = manifeste['membres'].get(membre_don, {}).get('animations', {}).get('Eat', {})
-        lignes.append(f'| {membre_don} | {nom_don} ({dex_don}) | {fiche_don.get("echelle", "?")} |')
+    lignes.append('| Membre | Pose « une main » | Pose « l\'autre main » |')
+    lignes.append('|---|---|---|')
+    for membre_pose, poses_membre in POSES.items():
+        fiche_pose = manifeste['membres'].get(membre_pose, {}).get('animations', {}).get('Eat', {})
+        retenues = fiche_pose.get('poses') or ['?', '?']
+        lignes.append(f'| {membre_pose} | `{retenues[0]}` | `{retenues[1]}` |')
     lignes.append('')
     lignes.append('Pandespiègle garde en revanche le simple balancement, validé tel quel.')
     lignes.append('')
