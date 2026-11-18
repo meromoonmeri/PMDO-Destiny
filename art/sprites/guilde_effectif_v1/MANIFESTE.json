@@ -30,10 +30,10 @@
             32,
             40
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [
@@ -75,10 +75,10 @@
             24,
             32
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [
@@ -120,10 +120,10 @@
             32,
             56
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [
@@ -165,10 +165,10 @@
             32,
             40
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [
@@ -210,10 +210,10 @@
             32,
             64
           ],
-          "images": 3,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [
@@ -297,10 +297,10 @@
             32,
             48
           ],
-          "images": 2,
+          "images": 4,
           "frameType": 48,
-          "source": "derivee",
-          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images"
+          "source": "dessinee",
+          "recette": "Idle et Idle comprimé de 2 px, alternés : la mâchoire mord et remonte — 4 images de 5 ticks"
         },
         "Wake": {
           "cellule": [

@@ -363,24 +363,33 @@ Dazzling : on range les sources par membre dans `art/sprites/guilde_effectif_v1/
 Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordre des
 `<Action>`) : si le moteur bouge, le test casse au lieu de livrer une clé fausse.
 
-### Les sept jeux dérivés
+### Trois familles de `Eat`
 
-SpriteCollab ne fournit ni `Eat`, ni `Wake`, ni `Pose` pour Gardevoir, Canarticho,
-Simisage, Mélofée, Cizayox, Dimoret et Pandespiègle. Plutôt que de laisser ces PNJ
-sans animation de corps, trois animations d'attente sont **dérivées de leur propre
-planche** (`tools/constituer_animations_guilde.py`), au style et à l'échelle de
-l'espèce :
+Les dix membres n'ont pas le même `Eat`, et c'est voulu :
 
-- `Eat` — le balancement de l'`Idle` joué à 4 ticks par image (mâchoire rapide).
-  Aucun décalage hors cellule, donc pas de pieds rognés ;
+| Famille | Membres | Source |
+|---|---|---|
+| `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine, dessinée par SpriteCollab |
+| `dérivée` (validée) | Pandespiègle | balancement de son `Idle` joué à 4 ticks par image |
+| `composée` | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | mâchoire assemblée ici |
+
+La **mâchoire composée** alterne, sur quatre images de 5 ticks, l'image d'attente
+et la même comprimée de 2 px : le corps mord puis remonte, ce que le simple
+balancement ne disait pas. Les planches SpriteCollab laissent au moins quatre
+pixels vides sous les pieds, la compression ne rogne donc rien — vérifié sur les
+six espèces.
+
+Les autres animations dérivées restent en place, elles n'ont pas été mises en
+cause :
+
 - `Wake` — `Sleep` (l'image de sommeil réellement dessinée), la même inclinée d'un
   pixel, puis l'`Idle` : dormir, bouger, se lever ;
-- `Pose` — l'`Idle` tenu sur une image de 30 ticks. C'est exactement ce que fait
-  Halcyon pour ses PNJ de guilde : une pose figée, pas une animation.
+- `Pose` — l'`Idle` tenu sur une image de 30 ticks, exactement ce que fait Halcyon
+  pour ses PNJ de guilde : une pose figée, pas une animation.
 
-Chaque case « dérivée » est marquée comme telle dans le manifeste, avec sa recette,
-et se remplace sans rien casser par un vrai dessin (même nom de fichier, même
-`AnimData.xml`).
+Chaque animation porte sa source et, si elle est fabriquée, sa recette dans
+`MANIFESTE.json` ; elle se remplace sans rien casser par un vrai dessin (même nom
+de fichier, même `AnimData.xml`).
 
 ### Injection dans les `.chara`
 
@@ -391,16 +400,16 @@ python3 tools/ajouter_pose_chara.py \
   --anim Eat --frame-type 48 --out /tmp/371.chara
 ```
 
-`--anim Wake --frame-type 47`, `--anim Pose --frame-type 50` de la même façon.
-Aucun `.chara` n'étant versionné dans ce dépôt, l'injection n'a pas pu être rejouée
-ici ; le code du mod se rabat proprement tant qu'elle n'est pas faite
+Puis `--anim Wake --frame-type 47` et `--anim Pose --frame-type 50`. Aucun `.chara`
+n'étant versionné dans ce dépôt, l'injection n'a pas pu être rejouée ici ; le code
+du mod se rabat proprement tant qu'elle n'est pas faite
 (`guilde_effectif.Animer`).
 
 ### Aperçus
 
-- `art/previews/guilde_effectif_v1/guilde_repas_etoiles.gif` — les dix membres qui
-  mâchent avec l'émote `eating` et les étoiles `Lucky_Chant_Star_Yellow`, comme
-  l'aperçu de la Team Dazzling ;
+- `art/previews/guilde_effectif_v1/guilde_repas.gif` — les dix membres qui mâchent
+  avec l'émote `eating`. Les étoiles `Lucky_Chant_Star_Yellow` ont été **retirées** :
+  l'aperçu ne montre plus que le sprite et son émote.
 - `art/previews/guilde_effectif_v1/guilde_animations_planche.png` — repas, pose de
   service et réveil, membre par membre.
 

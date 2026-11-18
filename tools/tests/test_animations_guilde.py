@@ -48,8 +48,8 @@ def main() -> None:
         for anim in ATTENDUES:
             assert anim in infos['animations'], f'{membre} : {anim} annoncée manquante'
             info = infos['animations'][anim]
-            assert info['source'] in ('SpriteCollab', 'derivee'), (membre, anim, info['source'])
-            if info['source'] == 'derivee':
+            assert info['source'] in ('SpriteCollab', 'derivee', 'dessinee'), (membre, anim, info['source'])
+            if info['source'] in ('derivee', 'dessinee'):
                 assert info.get('recette'), f'{membre} : recette non documentée pour {anim}'
 
             png = dossier / f'{anim}-Anim.png'
@@ -73,11 +73,20 @@ def main() -> None:
         indexes = [int(d.findtext('Index')) for d in declarations.values() if d.findtext('Index')]
         assert len(indexes) == len(set(indexes)), f'{membre} : Index SpriteCollab dupliqués'
 
-    assert (PREUVES / 'guilde_repas_etoiles.gif').exists(), 'aperçu animé manquant'
-    with Image.open(PREUVES / 'guilde_repas_etoiles.gif') as gif:
+    assert (PREUVES / 'guilde_repas.gif').exists(), 'aperçu animé manquant'
+    with Image.open(PREUVES / 'guilde_repas.gif') as gif:
         assert getattr(gif, 'n_frames', 1) >= 6, 'GIF trop court'
     assert (PREUVES / 'guilde_animations_planche.png').exists(), 'planche de contrôle manquante'
-    print('test_animations_guilde : 10 membres, 4 animations chacun, clés du moteur alignées')
+    # La mâchoire composée est réservée aux six membres à refaire ; Pandespiègle
+    # garde son balancement d'Idle validé, et trois membres leur Eat SpriteCollab.
+    sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
+    assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
+    attendus = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
+    assert {m for m, v in sources.items() if v == 'dessinee'} == attendus, sources
+    for membre in ('Noctali', 'Draby', 'Capumain'):
+        assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
+
+    print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 
 
 if __name__ == '__main__':

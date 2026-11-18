@@ -59,8 +59,14 @@ ANIMATIONS = ['Eat', 'Wake', 'Sleep', 'Pose']
 # pour l'espèce. Elles partent toutes de la planche de l'espèce elle-même, donc
 # le style et l'échelle restent ceux du Pokémon ; c'est une solution d'attente,
 # pas un dessin original.
+# Membres dont le Eat « balancement d'Idle » est validé en l'état : ils gardent
+# la recette dérivée, les autres reçoivent la mâchoire composée ci-dessous.
+EAT_DERIVE_VALIDE = {'Pandespiegle'}
+
 RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
+    'Eat_dessine': ("Idle et Idle comprimé de 2 px, alternés : la mâchoire mord "
+                    "et remonte — 4 images de 5 ticks"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -171,6 +177,23 @@ def deriver(anim: str, dossier_source: Path, dossier_cible: Path,
     return durees
 
 
+def machoire(rangee_idle: list[Image.Image], largeur: int, hauteur: int) -> list[Image.Image]:
+    """Cycle de mastication composé à partir de l'Idle de l'espèce.
+
+    On alterne l'image d'attente et la même comprimée de 2 px : le corps mord
+    puis remonte, ce que le simple balancement de l'Idle ne dit pas. Les planches
+    SpriteCollab laissent au moins 4 px vides sous les pieds, la compression ne
+    rogne donc rien.
+    """
+    images: list[Image.Image] = []
+    for source in rangee_idle[:2] or [rangee_idle[0]]:
+        comprimee = Image.new('RGBA', (largeur, hauteur), (0, 0, 0, 0))
+        reduite = source.resize((largeur, hauteur - 2), Image.NEAREST)
+        comprimee.paste(reduite, (0, 2))
+        images.extend([source, comprimee])
+    return images
+
+
 def ajouter_entrees_animdata(chemin: Path, ajouts: dict[str, tuple[int, list[int]]],
                              largeur: int, hauteur: int) -> None:
     """Ajoute les animations dérivées à AnimData.xml (Index libres, durées données)."""
@@ -278,6 +301,36 @@ def main() -> None:
         for anim in ANIMATIONS:
             if anim in obtenu or largeur_idle == 0:
                 continue
+            # Eat : mâchoire composée pour tout le monde, sauf les membres dont
+            # le balancement d'Idle est validé.
+            if anim == 'Eat' and membre not in EAT_DERIVE_VALIDE:
+                idle_png = cache / 'Idle-Anim.png'
+                if not idle_png.exists():
+                    continue
+                rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
+                nb = 0
+                planche = None
+                for index, rangee in enumerate(rangees):
+                    images = machoire(rangee, largeur_idle, hauteur_idle)
+                    nb = len(images)
+                    if planche is None:
+                        planche = Image.new('RGBA', (largeur_idle * nb, hauteur_idle * len(rangees)),
+                                            (0, 0, 0, 0))
+                    for colonne, image in enumerate(images):
+                        planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
+                if planche is None:
+                    continue
+                planche.save(cible / 'Eat-Anim.png')
+                for suffixe in ('Shadow', 'Offsets'):
+                    source = cache / f'Idle-{suffixe}.png'
+                    if source.exists():
+                        (cible / f'Eat-{suffixe}.png').write_bytes(source.read_bytes())
+                durees = [5] * nb
+                derivees[anim] = (nb, durees)
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': nb,
+                                'frameType': types.get(anim), 'source': 'dessinee',
+                                'recette': RECETTES['Eat_dessine']}
+                continue
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:
                 continue
@@ -290,8 +343,8 @@ def main() -> None:
                                      largeur_idle, hauteur_idle)
 
         manifeste['membres'][membre] = {'dossier': dossier, 'dex': dex, 'animations': obtenu}
-        marques = ', '.join(a + ('*' if obtenu[a]['source'] == 'derivee' else '')
-                            for a in sorted(obtenu))
+        symboles = {'SprteCollab': '', 'SpriteCollab': '', 'derivee': '*', 'dessinee': '†'}
+        marques = ', '.join(a + symboles.get(obtenu[a]['source'], '') for a in sorted(obtenu))
         print(f'{membre:14s} {dossier:18s} {marques or "—"}')
 
     (SORTIE / 'MANIFESTE.json').write_text(
@@ -331,6 +384,8 @@ def main() -> None:
         for a in ANIMATIONS:
             if a not in animations:
                 marques.append('—')
+            elif animations[a]['source'] == 'dessinee':
+                marques.append('composée')
             elif animations[a]['source'] == 'derivee':
                 marques.append('dérivée')
             else:
@@ -375,6 +430,10 @@ def main() -> None:
     ]
     for anim, recette in RECETTES.items():
         lignes.append(f'- `{anim}` — {recette}')
+    lignes.append('')
+    lignes.append('Les cases **composée** désignent la mâchoire assemblée à partir de')
+    lignes.append("l'Idle de l'espèce (attente / attente comprimée) : " + ', '.join(sorted(EAT_DERIVE_VALIDE)))
+    lignes.append('garde en revanche le simple balancement, validé tel quel.')
     lignes += [
         '',
         'Elles se remplacent sans rien casser le jour où un vrai dessin existe :',

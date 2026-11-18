@@ -24,8 +24,7 @@ RACINE = Path(__file__).resolve().parents[1]
 SPRITES = RACINE / 'art/sprites/guilde_effectif_v1'
 PREUVES = RACINE / 'art/previews/guilde_effectif_v1'
 EMOTE = RACINE / 'game/Content/Particle/Emote_Eating.dir'
-ETOILE = RACINE / 'base/Content/Particle/Lucky_Chant_Star_Yellow.dir'
-GIF = PREUVES / 'guilde_repas_etoiles.gif'
+GIF = PREUVES / 'guilde_repas.gif'
 PLANCHE = PREUVES / 'guilde_animations_planche.png'
 
 ECHELLE = 2
@@ -64,9 +63,8 @@ def animation(dossier: Path, nom: str) -> tuple[list[Image.Image], list[int], in
             durees[:images] or [6] * images, largeur, hauteur)
 
 
-def poser(cellule: Image.Image, sprite: Image.Image, emote: Image.Image | None,
-          etoile: Image.Image | None) -> None:
-    """Pose le sprite au sol de la cellule, l'émote à la tête, une étoile à côté."""
+def poser(cellule: Image.Image, sprite: Image.Image, emote: Image.Image | None) -> None:
+    """Pose le sprite au sol de la cellule et l'émote au-dessus de la tête."""
     sol = cellule.height - 12
     facteur = min((CELLULE - 24) / sprite.width, (CELLULE - 30) / sprite.height)
     vue = sprite.resize((int(sprite.width * facteur), int(sprite.height * facteur)), Image.NEAREST)
@@ -76,15 +74,12 @@ def poser(cellule: Image.Image, sprite: Image.Image, emote: Image.Image | None,
         ev = emote.resize((emote.width * ECHELLE, emote.height * ECHELLE), Image.NEAREST)
         cellule.paste(ev, ((cellule.width - ev.width) // 2,
                            sol - vue.height - 6 - ev.height // 2), ev)
-    if etoile is not None:
-        cellule.paste(etoile, (cellule.width - etoile.width - 4, 8), etoile)
 
 
 def main() -> None:
     PREUVES.mkdir(parents=True, exist_ok=True)
     manifeste = json.loads((SPRITES / 'MANIFESTE.json').read_text(encoding='utf-8'))
     emotes, _l, _h = lire_dir(EMOTE)
-    etoiles, _el, _eh = lire_dir(ETOILE)
 
     membres = []
     for membre, infos in manifeste['membres'].items():
@@ -103,7 +98,7 @@ def main() -> None:
         img = Image.new('RGB', (largeur, hauteur), fond)
         d = ImageDraw.Draw(img)
         titre = ImageFont.truetype(POLICE, 13)
-        d.text((ECART + 2, 8), 'Guilde de Réverie Town — le repas, animation de corps + émote eating',
+        d.text((ECART + 2, 8), 'Guilde de Réverie Town — le repas : animation de corps + émote eating',
                font=titre, fill=(232, 238, 244))
         for index, (membre, infos, mange, pose, reveil) in enumerate(membres):
             rangee, colonne = divmod(index, colonnes)
@@ -115,12 +110,12 @@ def main() -> None:
             sprite = sprites[indice % len(sprites)]
             # images 4 à 6 de l'émote : celles où les miettes se voient
             emote = emotes[3 + (indice // 2) % (len(emotes) - 3)]
-            etoile = etoiles[indice % len(etoiles)] if indice % 4 in (0, 1) else None
-            poser(cellule, sprite, emote, etoile)
+            poser(cellule, sprite, emote)
             img.paste(cellule, (x, y))
             d.text((x + 2, y + CELLULE + 6), membre, font=titre, fill=(200, 216, 228))
             source = infos['animations']['Eat']['source']
-            d.text((x + 2, y + CELLULE + 19), 'Eat ' + ('dérivée' if source == 'derivee' else 'SpriteCollab'),
+            libelle = {'derivee': 'Eat dérivée', 'dessinee': 'Eat composée'}.get(source, 'Eat SpriteCollab')
+            d.text((x + 2, y + CELLULE + 19), libelle,
                    font=ImageFont.truetype(POLICE_TEXTE, 10), fill=(140, 160, 176))
         return img
 
@@ -141,7 +136,8 @@ def main() -> None:
     for index, (membre, infos, mange, pose, reveil) in enumerate(membres):
         y = 40 + index * (case_h + 6)
         d.text((ECART, y + 26), membre, font=fonte, fill=(232, 238, 244))
-        d.text((ECART, y + 44), infos['animations']['Eat']['source'], font=petite, fill=(140, 160, 176))
+        d.text((ECART, y + 44), {'derivee': 'Eat dérivée', 'dessinee': 'Eat composée'}.get(
+            infos['animations']['Eat']['source'], 'Eat SpriteCollab'), font=petite, fill=(140, 160, 176))
         for colonne, anim in enumerate((mange, pose, reveil)):
             x = 190 + ECART + colonne * (case_l + ECART)
             cellule = Image.new('RGBA', (case_l, case_h), (24, 33, 41, 255))
@@ -150,7 +146,7 @@ def main() -> None:
                 continue
             images_anim, _d, _w, _h = anim
             emote = emotes[2] if colonne == 0 else None
-            poser(cellule, images_anim[0], emote, None)
+            poser(cellule, images_anim[0], emote)
             planche.paste(cellule, (x, y))
     planche.save(PLANCHE)
     print(GIF)
