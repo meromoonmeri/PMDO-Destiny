@@ -363,46 +363,39 @@ Dazzling : on range les sources par membre dans `art/sprites/guilde_effectif_v1/
 Ces quatre nombres sont **recalculés par le test** depuis `GFXParams.xml` (ordre des
 `<Action>`) : si le moteur bouge, le test casse au lieu de livrer une clé fausse.
 
-### Deux familles de `Eat`
+### Trois familles de `Eat`
 
 | Famille | Membres | Source |
 |---|---|---|
 | `SpriteCollab` | Noctali, Draby, Capumain | animation d'origine du Pokémon |
-| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret, Pandespiègle | sprites retouchés ici |
+| dérivée (validée) | Pandespiègle | balancement de son `Idle`, 4 ticks par image |
+| dessinée | Gardevoir, Canarticho, Simisage, Mélofée, Cizayox, Dimoret | bouchée dessinée ici |
 
-Ces sept espèces n'ont **aucune animation de repas** dans SpriteCollab : ni `Eat`,
-ni image à bouche ouverte ailleurs. `Hurt` et `Charge` existent, mais ne font que
-décaler le sprite d'un pixel — vérifié image par image.
+Ces six espèces n'ont **aucune animation de repas** dans SpriteCollab. Leurs
+sprites sont donc retouchés au pixel, une image sur deux.
 
-### Le dessin de la bouche
+### La bouchée, membre par membre
 
-Quatre images au rythme **6-8-6-8**, sur l'`Idle` de l'espèce :
-
-1. l'`Idle`, bouche fermée ;
-2. le même, **bouche ouverte** ;
-3. l'`Idle` de nouveau ;
-4. le même, bouche ouverte.
-
-La bouche est peinte pixel par pixel : ouverture sombre cernée de noir d'un pixel,
-sinon deux pixels sombres se liraient comme une tache. Chaque emplacement est
-relevé sur la planche de l'espèce (`BOUCHES` dans
+Chaque bouchée est une mâchoire ouverte (lèvre noire, langue sombre, lèvre
+inférieure) plus un aliment et une touche d'expression, tous pris dans la palette
+de l'espèce. Les positions sont relevées planche par planche (`BOUCHEES` dans
 `tools/constituer_animations_guilde.py`) :
 
-| Membre | Ouverture (x, y) | Taille | Repère |
-|---|---|---:|---|
-| Gardevoir | 14, 12 | 3×2 | sous les yeux roses |
-| Canarticho | 10, 13 | 3×2 | sur le bec, au trait noir d'origine |
-| Simisage | 14, 18 | 4×2 | sous le museau doré |
-| Mélofée | 14, 19 | 3×2 | sur le petit sourire d'origine |
-| Cizayox | 13, 29 | 4×2 | sous les yeux dorés |
-| Dimoret | 14, 16 | 4×2 | au bas du visage, avant le col |
-| Pandespiègle | 11, 16 | 4×2 | sous les yeux |
+| Membre | Bouche (x, y, largeur) | Aliment | Manière |
+|---|---|---|---|
+| Gardevoir | 14, 12, 3 | baie rose | bouchée du bout des lèvres, rougeur à la joue |
+| Canarticho | 9, 13, 4 | feuille verte | bec grand ouvert sur son poireau |
+| Simisage | 13, 18, 4 | feuille verte | il mord dans une feuille |
+| Mélofée | 13, 19, 3 | baie brune | petite bouchée, rougeur à la joue |
+| Cizayox | 12, 29, 4 | quart de nourriture | mâchoire grande ouverte |
+| Dimoret | 13, 16, 4 | quart clair et miette | il engloutit et laisse des miettes |
 
-Une seule image d'`Idle` sert de base aux quatre images : les autres images de
-l'`Idle` changent de pose (bras levés, tête plus haute), et une bouche placée en
-coordonnées de cellule retomberait à côté. Le test vérifie que les images 1 et 3
-sont identiques, que 2 et 4 le sont aussi, que la bouche change bien des pixels,
-et qu'elle reste dans son cadre.
+Quatre images, rythme **6-8-6-8** : fermée, il mord (aliment présent), fermée, il
+avale (bouche vide). Les quatre images partent de la même image d'`Idle` ; les
+autres images changent de pose et la bouche retomberait à côté.
+
+Le test vérifie la lèvre noire sur toute la largeur, la langue juste en dessous,
+la présence de l'aliment, et que les images 1 et 3 sont bien identiques.
 
 Les autres animations dérivées restent en place, elles n'ont pas été mises en
 cause :

@@ -82,41 +82,44 @@ def main() -> None:
     # gardent celui de SpriteCollab.
     sources = {m: i['animations']['Eat']['source'] for m, i in manifeste['membres'].items()}
     assert {m for m, v in sources.items() if v == 'dessinee'} == {
-        'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
-        'Pandespiegle'}, sources
+        'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}, sources
+    # Pandespiègle garde son Eat dérivé, validé tel quel.
+    assert sources['Pandespiegle'] == 'derivee', sources['Pandespiegle']
     for membre in ('Noctali', 'Draby', 'Capumain'):
         assert sources[membre] == 'SpriteCollab', (membre, sources[membre])
 
-    # Le Eat dessiné : quatre images au rythme 6-8-6-8, la bouche ouverte une
-    # image sur deux. Les images 1 et 3 sont identiques (bouche fermée), 2 et 4
-    # aussi (bouche ouverte), et l'ouverture tombe bien dans le sprite.
-    for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
-                   'Pandespiegle'):
+    # Le Eat dessiné : quatre images au rythme 6-8-6-8, la bouchée une image sur
+    # deux. Images 1 et 3 identiques, 2 et 4 aussi, la bouche noire bien posée,
+    # l'aliment présent, et rien qui déborde de la cellule.
+    for membre in ('Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'):
         dossier = SPRITES / manifeste['membres'][membre]['dossier']
         declarations = {a.findtext('Name'): [int(d.text) for d in a.findall('Durations/Duration')]
                         for a in ET.parse(dossier / 'AnimData.xml').iter('Anim')}
         assert declarations['Eat'] == [6, 8, 6, 8], (membre, declarations['Eat'])
         info = manifeste['membres'][membre]['animations']['Eat']
         largeur, hauteur = info['cellule']
-        bouche = info['bouche']
+        fiche = info['bouchee']
         with Image.open(dossier / 'Eat-Anim.png') as planche:
             images = [planche.crop((i * largeur, 0, (i + 1) * largeur, hauteur)).convert('RGBA')
                       for i in range(planche.width // largeur)]
         assert images[0].tobytes() == images[2].tobytes(), (membre, 'images 1 et 3 différentes')
-        assert images[1].tobytes() == images[3].tobytes(), (membre, 'images 2 et 4 différentes')
-        assert images[0].tobytes() != images[1].tobytes(), (membre, 'bouche jamais dessinée')
-        changees = [(x, y) for x in range(largeur) for y in range(hauteur)
-                    if images[0].getpixel((x, y)) != images[1].getpixel((x, y))]
-        assert changees, (membre, 'aucun pixel changé')
-        x0, y0 = bouche['x'], bouche['y']
-        for x, y in changees:
-            assert x0 - 1 <= x <= x0 + bouche['largeur'] and y0 - 1 <= y <= y0 + bouche['hauteur'], \
-                (membre, 'bouche hors de son cadre', (x, y))
-        # l'ouverture est remplie de sa couleur intérieure
-        interieurs = [images[1].getpixel((x, y))[:3]
-                      for x in range(x0, x0 + bouche['largeur'])
-                      for y in range(y0, y0 + bouche['hauteur'])]
-        assert tuple(bouche['interieur']) in interieurs, (membre, 'intérieur de la bouche absent')
+        assert images[0].tobytes() != images[1].tobytes(), (membre, 'bouchée jamais dessinée')
+        # image 2 : on mord (aliment présent) ; image 4 : on avale (bouche vide)
+        assert images[1].tobytes() != images[3].tobytes(), (membre, 'morsure et déglutition identiques')
+        x0, y0, largeur_bouche = fiche['bouche']
+        for image in (images[1], images[3]):
+            for dx in range(largeur_bouche):
+                assert image.getpixel((x0 + dx, y0))[:3] == (0, 0, 0), \
+                    (membre, 'lèvre supérieure absente', (x0 + dx, y0))
+            assert tuple(fiche['langue']) in [image.getpixel((x0 + dx, y0 + 1))[:3]
+                                              for dx in range(largeur_bouche)], \
+                (membre, 'langue absente')
+        if fiche['aliment']:
+            _, ax, ay = fiche['aliment']
+            teintes = {tuple(fiche['fruit']), tuple(max(0, c - 70) for c in fiche['fruit']),
+                       (87, 87, 87)}
+            assert any(images[1].getpixel((ax + dx, ay + dy))[:3] in teintes
+                       for dx in range(3) for dy in range(3)), (membre, 'aliment absent')
 
     print('test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées')
 

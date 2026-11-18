@@ -59,31 +59,56 @@ ANIMATIONS = ['Eat', 'Wake', 'Sleep', 'Pose']
 # pour l'espèce. Elles partent toutes de la planche de l'espèce elle-même, donc
 # le style et l'échelle restent ceux du Pokémon ; c'est une solution d'attente,
 # pas un dessin original.
-# Membres sans Eat d'origine chez SpriteCollab : on le dessine ici. La bouchée
-# est dite par les yeux qui se ferment, seule animation de visage fiable à cette
-# échelle — SpriteCollab n'a aucune image à bouche ouverte pour ces espèces
-# (Hurt et Charge ne font que décaler le sprite d'un pixel).
-EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret',
-               'Pandespiegle'}
+# Membres sans Eat d'origine chez SpriteCollab : la bouchée est dessinée ici
+# (bouche ouverte + aliment + expression, voir BOUCHEES). Pandespiègle n'en est
+# pas : son Eat a été validé tel quel et garde la recette dérivée.
+EAT_DESSINE = {'Gardevoir', 'Canarticho', 'Simisage', 'Melofee', 'Cizayox', 'Dimoret'}
+EAT_DERIVE_VALIDE = {'Pandespiegle'}
 
 # Membres dont le Eat reprend *aussi* le mouvement de Chapignon (Breloom, n° 286) :
 # alternance d'une pose de face et d'une pose tournée plus étroite. Les sprites
 # restent ceux de l'espèce, seul le mouvement est emprunté.
-EAT_BRELOOM = {'Simisage', 'Gardevoir', 'Dimoret', 'Cizayox', 'Melofee'}
-# Bouches dessinées à la main, relevées sur les planches de SpriteCollab :
-# (x, y) du coin haut-gauche de l'ouverture, largeur, hauteur, couleur intérieure.
-# L'ouverture reçoit un contour noir d'un pixel : c'est ce contour qui la fait
-# lire comme une bouche plutôt que comme une tache.
-BOUCHES = {
-    'Gardevoir':   {'x': 14, 'y': 12, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
-    'Canarticho':  {'x': 10, 'y': 13, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
-    'Simisage':    {'x': 14, 'y': 18, 'largeur': 4, 'hauteur': 2, 'interieur': (88, 40, 12)},
-    'Melofee':     {'x': 14, 'y': 19, 'largeur': 3, 'hauteur': 2, 'interieur': (86, 28, 36)},
-    'Cizayox':     {'x': 13, 'y': 29, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
-    'Dimoret':     {'x': 14, 'y': 16, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
-    'Pandespiegle':{'x': 11, 'y': 16, 'largeur': 4, 'hauteur': 2, 'interieur': (86, 28, 36)},
+# ---------------------------------------------------------------------------
+# Bouchées dessinées à la main : chaque membre a sa manière de manger.
+#   bouche : (x, y, largeur) — deux lignes : lèvre supérieure noire, langue claire
+#   aliment : (forme, x, y) — placé devant la bouche, il chevauche la lèvre
+#   plus : touches d'expression (rougeur, miette)
+# Les couleurs viennent toutes de la palette de l'espèce.
+# ---------------------------------------------------------------------------
+# Mâchoires ouvertes : (motif, rôle des symboles)
+#   k = noir du contour, T = langue (couleur claire de l'espèce), g = gorge
+MACHOIRES = {
+    'petite': ['kkk', 'TTT', '.k.'],
+    'grande': ['kkkk', 'kTTk', '.kk.'],
 }
-
+ALIMENTS = {
+    # (motif, couleur du corps) — 3x3 avec contour noir, sauf la feuille (2x3)
+    'baie':    ['.k.', 'kBk', '.k.'],
+    'fruit':   ['kBB', 'BBk', 'kBB'],
+    'quart':   ['kkk', 'kmB', 'kkk'],
+    'feuille': ['gg.', 'GGg', '.gg'],
+}
+BOUCHEES = {
+    'Gardevoir': {'bouche': (14, 12, 3), 'machoire': 'petite', 'aliment': ('baie', 17, 14),
+                  'langue': (159, 0, 0), 'fruit': (231, 63, 103),
+                  'plus': [('rougeur', 11, 14, (255, 143, 175))]},
+    'Canarticho': {'bouche': (9, 13, 4), 'machoire': 'grande', 'aliment': ('feuille', 14, 12),
+                   'langue': (159, 0, 0), 'fruit': (127, 223, 87),
+                   'plus': [('rougeur', 8, 15, (223, 119, 31))]},
+    'Simisage': {'bouche': (13, 18, 4), 'machoire': 'grande', 'aliment': ('feuille', 17, 16),
+                 'langue': (139, 107, 26), 'fruit': (47, 189, 106),
+                 'plus': [('rougeur', 11, 17, (149, 215, 174))]},
+    'Melofee': {'bouche': (13, 19, 3), 'machoire': 'petite', 'aliment': ('baie', 16, 17),
+                'langue': (159, 0, 0), 'fruit': (167, 95, 31),
+                'plus': [('rougeur', 10, 19, (231, 63, 103))]},
+    'Cizayox': {'bouche': (12, 29, 4), 'machoire': 'grande', 'aliment': ('quart', 16, 27),
+                'langue': (159, 0, 0), 'fruit': (191, 207, 247),
+                'plus': [('miette', 22, 31, (255, 135, 95))]},
+    'Dimoret': {'bouche': (13, 16, 4), 'machoire': 'grande', 'aliment': ('quart', 17, 15),
+                'langue': (159, 0, 0), 'fruit': (255, 255, 255),
+                'plus': [('miette', 23, 12, (255, 255, 255))]},
+}
+EAT_BRELOOM: set[str] = set()
 BRELOOM_DEX = '0286'
 BRELOOM = 'Breloom'
 
@@ -91,8 +116,8 @@ RECETTES = {
     'Eat': "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
     'Eat_breloom': ("mouvement de Chapignon transposé : Idle puis Idle tourné "
                     "(largeur réduite et recentrée comme chez lui), à son rythme"),
-    'Eat_dessine': ("bouchée dessinée à la main sur l'Idle de l'espèce : bouche "
-                    "ouverte une image sur deux, au rythme 6-8-6-8"),
+    'Eat_dessine': ("bouchée dessinée à la main : bouche ouverte, aliment devant "
+                    "la bouche et touche d'expression, une image sur deux"),
     'Wake': "Sleep image 1, Sleep image 1 inclinée d'1 px, puis Idle image 1 — 3 images de 6, 6, 10 ticks",
     'Pose': "Idle image 1 tenue — 1 image de 30 ticks",
 }
@@ -226,33 +251,50 @@ def aligner_rangee(rangee: list[Image.Image], largeur: int, hauteur: int) -> lis
     return alignees
 
 
-def dessiner_bouche(image: Image.Image, bouche: dict) -> Image.Image:
-    """Dessine une bouche ouverte à la place indiquée par `BOUCHES`.
+def _poser(image: Image.Image, x: int, y: int, couleur: tuple[int, int, int],
+           libre: bool = False) -> None:
+    """Pose un pixel. `libre` autorise le dessin hors de la silhouette."""
+    if 0 <= x < image.width and 0 <= y < image.height:
+        if libre or image.getpixel((x, y))[3] > 40:
+            image.putpixel((x, y), (*couleur, 255))
 
-    L'ouverture est remplie d'une couleur sombre et cernée de noir : sans ce
-    contour, à cette échelle, deux pixels sombres se lisent comme une tache et
-    non comme une bouche. Le dessin ne s'applique que là où le sprite est
-    opaque — on ne peint jamais dans le vide autour du Pokémon.
+
+def dessiner_bouchee(image: Image.Image, fiche: dict, aliment: bool = True) -> Image.Image:
+    """Dessine la bouchée : bouche ouverte, aliment, rougeur ou miette.
+
+    La lèvre supérieure est noire sur une ligne et la langue prend une couleur
+    claire de l'espèce juste en dessous : deux lignes suffisent à lire une
+    bouche ouverte, au-delà on obtient un trou noir. L'aliment est posé devant
+    la bouche, hors silhouette comprise — une baie tenue à la main dépasse
+    forcément du corps.
     """
     sortie = image.copy()
-    x0, y0 = bouche['x'], bouche['y']
-    largeur, hauteur = bouche['largeur'], bouche['hauteur']
+    x, y, largeur = fiche['bouche']
+    machoire = MACHOIRES[fiche.get('machoire', 'grande')]
+    for dy, ligne in enumerate(machoire):
+        for dx, symbole in enumerate(ligne[:largeur]):
+            if symbole == '.':
+                continue
+            teinte = {'k': (0, 0, 0), 'T': fiche['langue'],
+                      'g': tuple(max(0, c - 90) for c in fiche['langue'])}[symbole]
+            _poser(sortie, x + dx, y + dy, teinte)
 
-    def peindre(x: int, y: int, couleur: tuple[int, int, int]) -> None:
-        if 0 <= x < sortie.width and 0 <= y < sortie.height:
-            if image.getpixel((x, y))[3] > 40:
-                sortie.putpixel((x, y), (*couleur, 255))
+    if aliment and fiche['aliment']:
+        forme, ax, ay = fiche['aliment']
+        fonce = tuple(max(0, c - 70) for c in fiche['fruit'])
+        teintes = {'k': (0, 0, 0), 'B': fiche['fruit'], 'm': (87, 87, 87),
+                   'G': fiche['fruit'], 'g': fonce}
+        for dy, ligne in enumerate(ALIMENTS[forme]):
+            for dx, symbole in enumerate(ligne):
+                if symbole != '.':
+                    _poser(sortie, ax + dx, ay + dy, teintes[symbole], libre=True)
 
-    for x in range(x0, x0 + largeur):
-        for y in range(y0, y0 + hauteur):
-            peindre(x, y, bouche['interieur'])
-    # contour : un pixel de noir tout autour de l'ouverture
-    for x in range(x0 - 1, x0 + largeur + 1):
-        peindre(x, y0 - 1, (0, 0, 0))
-        peindre(x, y0 + hauteur, (0, 0, 0))
-    for y in range(y0 - 1, y0 + hauteur + 1):
-        peindre(x0 - 1, y, (0, 0, 0))
-        peindre(x0 + largeur, y, (0, 0, 0))
+    for quoi, px, py, teinte in fiche['plus']:
+        if quoi == 'miette':
+            _poser(sortie, px, py, teinte, libre=True)
+            _poser(sortie, px + 1, py - 1, teinte, libre=True)
+        else:
+            _poser(sortie, px, py, teinte)
     return sortie
 
 
@@ -436,26 +478,31 @@ def main() -> None:
                 continue
             # Eat : mouvement de Chapignon transposé pour les membres concernés,
             # mâchoire composée pour les autres, balancement d'Idle si validé.
+            if anim == 'Eat' and membre in EAT_DERIVE_VALIDE:
+                durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
+                if durees is None:
+                    continue
+                derivees[anim] = (len(durees), durees)
+                obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle], 'images': len(durees),
+                                'frameType': types.get(anim), 'source': 'derivee',
+                                'recette': RECETTES.get('Eat', ''), 'durees': durees}
+                continue
             if anim == 'Eat' and membre in EAT_DESSINE:
                 idle_png = cache / 'Idle-Anim.png'
-                if not idle_png.exists():
-                    continue
-                bouche = BOUCHES.get(membre)
-                if bouche is None:
+                fiche = BOUCHEES.get(membre)
+                if not idle_png.exists() or fiche is None:
                     continue
                 rangees = decouper(lire(idle_png), largeur_idle, hauteur_idle)
                 durees = [6, 8, 6, 8]
                 planche = Image.new('RGBA', (largeur_idle * len(durees),
                                              hauteur_idle * len(rangees)), (0, 0, 0, 0))
                 for index, rangee in enumerate(rangees):
-                    # Une seule image d'Idle sert de base : les autres images de
-                    # l'Idle changent de pose (bras levés, tête plus haute) et la
-                    # bouche, placée en coordonnées de cellule, tomberait à côté.
                     base = rangee[0]
                     for colonne in range(len(durees)):
                         image = base
-                        if colonne % 2 == 1:      # une image sur deux : bouche ouverte
-                            image = dessiner_bouche(image, bouche)
+                        if colonne % 2 == 1:
+                            # image 2 : on mord l'aliment ; image 4 : l'avalée
+                            image = dessiner_bouchee(image, fiche, aliment=(colonne == 1))
                         planche.paste(image, (colonne * largeur_idle, index * hauteur_idle))
                 planche.save(cible / 'Eat-Anim.png')
                 for suffixe in ('Shadow', 'Offsets'):
@@ -466,7 +513,7 @@ def main() -> None:
                 obtenu[anim] = {'cellule': [largeur_idle, hauteur_idle],
                                 'images': len(durees), 'frameType': types.get(anim),
                                 'source': 'dessinee', 'recette': RECETTES['Eat_dessine'],
-                                'durees': durees, 'bouche': bouche}
+                                'durees': durees, 'bouchee': fiche}
                 continue
             durees = deriver(anim, cache, cible, largeur_idle, hauteur_idle)
             if durees is None:

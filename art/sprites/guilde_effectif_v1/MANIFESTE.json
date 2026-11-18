@@ -33,22 +33,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 14,
-            "y": 12,
-            "largeur": 3,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
+          "bouchee": {
+            "bouche": [
+              14,
+              12,
+              3
+            ],
+            "machoire": "petite",
+            "aliment": [
+              "baie",
+              17,
+              14
+            ],
+            "langue": [
+              159,
+              0,
+              0
+            ],
+            "fruit": [
+              231,
+              63,
+              103
+            ],
+            "plus": [
+              [
+                "rougeur",
+                11,
+                14,
+                [
+                  255,
+                  143,
+                  175
+                ]
+              ]
             ]
           }
         },
@@ -95,22 +119,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 10,
-            "y": 13,
-            "largeur": 3,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
+          "bouchee": {
+            "bouche": [
+              9,
+              13,
+              4
+            ],
+            "machoire": "grande",
+            "aliment": [
+              "feuille",
+              14,
+              12
+            ],
+            "langue": [
+              159,
+              0,
+              0
+            ],
+            "fruit": [
+              127,
+              223,
+              87
+            ],
+            "plus": [
+              [
+                "rougeur",
+                8,
+                15,
+                [
+                  223,
+                  119,
+                  31
+                ]
+              ]
             ]
           }
         },
@@ -157,22 +205,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 14,
-            "y": 18,
-            "largeur": 4,
-            "hauteur": 2,
-            "interieur": [
-              88,
-              40,
-              12
+          "bouchee": {
+            "bouche": [
+              13,
+              18,
+              4
+            ],
+            "machoire": "grande",
+            "aliment": [
+              "feuille",
+              17,
+              16
+            ],
+            "langue": [
+              139,
+              107,
+              26
+            ],
+            "fruit": [
+              47,
+              189,
+              106
+            ],
+            "plus": [
+              [
+                "rougeur",
+                11,
+                17,
+                [
+                  149,
+                  215,
+                  174
+                ]
+              ]
             ]
           }
         },
@@ -219,22 +291,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 14,
-            "y": 19,
-            "largeur": 3,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
+          "bouchee": {
+            "bouche": [
+              13,
+              19,
+              3
+            ],
+            "machoire": "petite",
+            "aliment": [
+              "baie",
+              16,
+              17
+            ],
+            "langue": [
+              159,
+              0,
+              0
+            ],
+            "fruit": [
+              167,
+              95,
+              31
+            ],
+            "plus": [
+              [
+                "rougeur",
+                10,
+                19,
+                [
+                  231,
+                  63,
+                  103
+                ]
+              ]
             ]
           }
         },
@@ -281,22 +377,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 13,
-            "y": 29,
-            "largeur": 4,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
+          "bouchee": {
+            "bouche": [
+              12,
+              29,
+              4
+            ],
+            "machoire": "grande",
+            "aliment": [
+              "quart",
+              16,
+              27
+            ],
+            "langue": [
+              159,
+              0,
+              0
+            ],
+            "fruit": [
+              191,
+              207,
+              247
+            ],
+            "plus": [
+              [
+                "miette",
+                22,
+                31,
+                [
+                  255,
+                  135,
+                  95
+                ]
+              ]
             ]
           }
         },
@@ -385,22 +505,46 @@
           "images": 4,
           "frameType": 48,
           "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "recette": "bouchée dessinée à la main : bouche ouverte, aliment devant la bouche et touche d'expression, une image sur deux",
           "durees": [
             6,
             8,
             6,
             8
           ],
-          "bouche": {
-            "x": 14,
-            "y": 16,
-            "largeur": 4,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
+          "bouchee": {
+            "bouche": [
+              13,
+              16,
+              4
+            ],
+            "machoire": "grande",
+            "aliment": [
+              "quart",
+              17,
+              15
+            ],
+            "langue": [
+              159,
+              0,
+              0
+            ],
+            "fruit": [
+              255,
+              255,
+              255
+            ],
+            "plus": [
+              [
+                "miette",
+                23,
+                12,
+                [
+                  255,
+                  255,
+                  255
+                ]
+              ]
             ]
           }
         },
@@ -486,27 +630,15 @@
             24,
             40
           ],
-          "images": 4,
+          "images": 3,
           "frameType": 48,
-          "source": "dessinee",
-          "recette": "bouchée dessinée à la main sur l'Idle de l'espèce : bouche ouverte une image sur deux, au rythme 6-8-6-8",
+          "source": "derivee",
+          "recette": "balancement de l'Idle joué à 4 ticks par image (mâchoire rapide) — 2 à 4 images",
           "durees": [
-            6,
-            8,
-            6,
-            8
-          ],
-          "bouche": {
-            "x": 11,
-            "y": 16,
-            "largeur": 4,
-            "hauteur": 2,
-            "interieur": [
-              86,
-              28,
-              36
-            ]
-          }
+            4,
+            4,
+            4
+          ]
         },
         "Wake": {
           "cellule": [
