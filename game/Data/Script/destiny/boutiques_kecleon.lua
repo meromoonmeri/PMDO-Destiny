@@ -1,5 +1,5 @@
--- Les deux comptoirs de Réverie. Comme à Metano, chaque étal tire des
--- articles par famille et utilise les vrais menus ShopMenu / SellMenu.
+-- Les deux comptoirs de Réverie. Chaque étal tire des articles par famille
+-- et utilise les vrais menus ShopMenu / SellMenu.
 local boutiques = {}
 local VERSION_STOCK = 1
 local InvItem = function(id, quantite)
