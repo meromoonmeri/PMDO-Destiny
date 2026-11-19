@@ -26,9 +26,14 @@ local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
 local SOL_BOSS = {x = 244, y = 244}
 local SOL_HEROS = {x = 220, y = 272}
 local SOL_PARTENAIRE = {x = 260, y = 276}
-local SOL_NILO_REVEIL = {x = 285, y = 228}
-local SOL_NILO_TERREUR = {x = 304, y = 256}
-local CAM_FACE = {x = 240, y = 240}
+-- Nilo est debout sur les marches qui montent aux vasques (y = 192..200),
+-- a droite de l'axe des vasques (x = 184..280) pour rester lisible a cote
+-- du duo qui arrive par le couloir sud.
+local SOL_NILO_MARCHES = {x = 312, y = 192}
+-- Il se tasse ensuite CONTRE la paroi est des marches, toujours au nord,
+-- sans jamais descendre dans la salle.
+local SOL_NILO_TERREUR = {x = 320, y = 216}
+local CAM_FACE = {x = 252, y = 224}
 local CAM_ENTREE = {x = 240, y = 264}
 
 local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
@@ -216,13 +221,22 @@ local function coup_de_faux(kabutops)
 end
 
 function fgv1.PreBattle(is_rematch, map)
+  -- La decouverte de Nilo ne se joue qu'une fois. La phase passe a 1 des le
+  -- debut de la scene : si la carte est rechargee (rechargement de scripts,
+  -- reentree par l'entree), Enter prend la branche revanche au lieu de
+  -- rejouer tout l'avertissement, l'eclair et la revelation de Kabutops.
+  if not is_rematch then
+    SV.Destiny = SV.Destiny or {}
+    SV.Destiny.GrotteVerdoyantePhase = 1
+  end
   GAME:CutsceneMode(true)
   local retablir_eau = suspendre_eau_precombat(map)
   local hero = CH('PLAYER')
   local partenaire = equipe_scene.Partenaire(240, 344, Direction.Up)
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
-    SOL_NILO_REVEIL.x, SOL_NILO_REVEIL.y, Direction.DownLeft)
-  if not is_rematch then GROUND:CharSetAnim(nilo, 'EventSleep', true) end
+    SOL_NILO_MARCHES.x, SOL_NILO_MARCHES.y, Direction.Down)
+  -- Il n'a jamais dormi : il grelotte deja quand le duo arrive.
+  if not is_rematch then trembler_de_peur(nilo) end
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
     SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
   if not is_rematch then GROUND:Hide('Kabutops_Boss') end
@@ -270,16 +284,10 @@ function fgv1.PreBattle(is_rematch, map)
       cinematique.Dire(partenaire, 'Worried', 'Nilo ?[pause=10] Ta maman nous a envoyés. On vient te ramener.', 'standard')
     end
     UI:ResetSpeaker()
-    GROUND:CharEndAnim(nilo)
-    local duree = temps_animation(nilo, 'Wake')
-    if duree ~= nil then
-      GROUND:CharSetAnim(nilo, 'Wake', false)
-      GAME:WaitFrames(duree)
-      GROUND:CharEndAnim(nilo)
-    end
     regarder_cible(nilo, partenaire or hero, 3)
     GAME:WaitFrames(8)
-    cinematique.Dire(nilo, 'Dizzy', 'Maman…?[pause=10] Attendez. Ne bougez plus.', 'droite')
+    cinematique.Dire(nilo, 'Trembling',
+      'N’approchez pas ![pause=10] Reculez, vite, il est juste derrière vous…', 'droite')
     UI:ResetSpeaker()
 
     -- Avertissement interrompu : le choc coupe la musique plutôt que de lancer
@@ -609,7 +617,12 @@ function fgv1.GameLoad(map)
   -- ewc3_entree_waterfall_cave : sans cette relance, une sauvegarde chargée
   -- pendant une scène des vasques restait muette jusqu'à la fin du donjon.
   GAME:FadeIn(20)
-  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  -- Pendant la révélation de Kabutops, la scène a coupé la musique et joue
+  -- Rising Fear : ne pas la remplacer sous la scène en cours.
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.GrotteVerdoyantePhase ~= 1 then
+    SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  end
 end
 
 function fgv1.Update(map, time) end

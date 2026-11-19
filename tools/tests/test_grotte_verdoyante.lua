@@ -395,7 +395,8 @@ for i, e in ipairs(events) do
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
   if e[1] == 'se' and e[2] == 'DUN_Slash' then saw_slash = true end
   if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
-  if e[1] == 'dlg' and tostring(e[2]):find('Maman', 1, true) then wake_dlg_ok = true end
+  -- Nilo ne se reveille plus : il est deja debout et supplie qu'on recule.
+  if e[1] == 'dlg' and tostring(e[2]):find('Reculez', 1, true) then wake_dlg_ok = true end
   if e[1] == 'dlg' and tostring(e[2]):find('premier grondement', 1, true) then unseen_voice_ok, voix = true, i end
   if e[1] == 'vfx' then
     for _, n in ipairs(eaux_interdites) do if e[2] == n then eau_vue = true end end
@@ -417,7 +418,60 @@ assert(flashes == 3,
        'il faut UN éclair blanc (incompréhension) puis un DOUBLE éclair blanc (apparition), soit 3 au total')
 assert(tremble_nilo and tremble_fini,
        'Nilo doit trembler de façon visible (DrawEffect.Shaking) puis être relâché')
+
+-- 3 bis. Nilo n'est plus endormi : il est debout, sur les marches nord
+-- (les vasques en terrasses montent jusqu'à y = 192), et tremble dès l'arrivée.
+local sommeil_rejoue, recul_demande = false, false
+for _, e in ipairs(events) do
+  if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_rejoue = true end
+end
+assert(not sommeil_rejoue, 'Nilo ne doit plus être endormi à l’arrivée du duo')
+-- Aucun déplacement de Nilo ne doit le faire descendre dans la salle.
+for _, e in ipairs(events) do
+  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then
+    assert(e[4] <= 224, 'Nilo doit rester sur la partie nord (marches), pas descendre dans la salle')
+  end
+end
+assert(actors.Nilo_Grotte.Position.Y <= 224,
+       'Nilo doit rester sur la partie nord (marches des vasques), pas au centre de la salle')
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' and tostring(e[2]):find('Reculez', 1, true) then recul_demande = true end
+end
+assert(recul_demande, 'Nilo doit demander de reculer dès l’arrivée')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
+
+-- 3 ter. Une scene INTERROMPUE ne doit jamais se rejouer entierement.
+-- C'est le cas reel du journal : le moteur recycle la zone pendant la scene
+-- (ScriptEvent.Apply(): Coroutine for event interrupted by break command!),
+-- puis la carte est reentree. Sans garde, tout l'avertissement, l'eclair et
+-- la revelation repartent. On simule l'interruption au 2e dialogue.
+SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
+local cinematique_module = require('destiny.cinematique')
+local dire = cinematique_module.Dire
+local appels = 0
+if dire ~= nil then
+  cinematique_module.Dire = function(...)
+    appels = appels + 1
+    if appels == 1 then error('interruption simulee du moteur', 0) end
+    return dire(...)
+  end
+end
+events = {}
+pcall(function() fgv1.Enter(carte_fosse) end)
+if dire ~= nil then cinematique_module.Dire = dire end
+assert(appels >= 1, 'la scene interrompue doit avoir commence')
+-- La phase doit deja valoir 1 : la decouverte est engagee, elle ne repartira pas.
+assert(SV.Destiny.GrotteVerdoyantePhase == 1,
+       'une scene interrompue doit laisser la phase a 1 pour ne pas se rejouer')
+events = {}
+fgv1.Enter(carte_fosse)
+local flashes_2, sommeil_2 = 0, false
+for _, e in ipairs(events) do
+  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes_2 = flashes_2 + 1 end
+  if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_2 = true end
+end
+assert(flashes_2 == 0, 'la decouverte de Nilo ne doit pas se rejouer a la reentree')
+assert(not sommeil_2, 'aucun sommeil a rejouer a la reentree')
 
 -- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
 _ZONE = {InDevZone = true}
@@ -434,12 +488,22 @@ _ZONE = nil
 -- La carte des vasques ne déclare pas de piste : le chargement d'une sauvegarde
 -- doit relancer l'ambiance au lieu de laisser le silence.
 events = {}
+SV.Destiny.GrotteVerdoyantePhase = nil
 fgv1.GameLoad({AssetName='fgv1_fin_grotte_vasques'})
 local game_load_bgm = false
 for _, e in ipairs(events) do
   if e[1] == 'bgm' and e[2] == 'Lower Spring Cave.ogg' then game_load_bgm = true end
 end
 assert(game_load_bgm, 'fgv1.GameLoad doit relancer Lower Spring Cave.ogg')
+-- Pendant la revelation de Kabutops (phase 1), la scene tient la musique :
+-- GameLoad ne doit pas la remplacer sous la scene en cours.
+events = {}
+SV.Destiny.GrotteVerdoyantePhase = 1
+fgv1.GameLoad({AssetName='fgv1_fin_grotte_vasques'})
+for _, e in ipairs(events) do
+  assert(not (e[1] == 'bgm' and e[2] == 'Lower Spring Cave.ogg'),
+         'GameLoad ne doit pas relancer la musique pendant la revelation')
+end
 
 SV.Destiny.GrotteVerdoyantePhase = 3
 events = {}
