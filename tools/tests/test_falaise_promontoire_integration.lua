@@ -14,7 +14,10 @@ package.preload['destiny.equipe_scene'] = function()
   }
 end
 package.preload['destiny.cinematique'] = function() return {NomEspece = function(_, n) return n end} end
-package.preload['destiny.missions_reverie'] = function() return {} end
+package.preload['destiny.missions_reverie'] = function()
+  local m = assert(loadfile((arg[1] or '.') .. '/game/Data/Script/destiny/missions_reverie.lua'))()
+  return m
+end
 
 Direction = {
   Up = 'Up', Down = 'Down', Left = 'Left', Right = 'Right',
