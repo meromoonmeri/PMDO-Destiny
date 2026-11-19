@@ -28,8 +28,10 @@ for snippet in [
     "SV.Destiny.ArriveeVille = 'batiment'",
     'SV.Destiny.RetourBatimentX = 1552',
     'SV.Destiny.RetourBatimentY = 1600',
+    # La zone ne contient plus d'appel litteral : tout passe par terminer(), qui
+    # appelle GAME:EnterZone(zone_id, -1, map_id, 0). Meme destination, meme carte.
     "terminer(result, 'town02_waterfallvillage', 0)",
-    "GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)",
+    'GAME:EnterZone(zone_id, -1, map_id, 0)',
     "SV.Destiny.LostWoodTrip = 'rencontre'",
     "SV.Destiny.LostWoodTrip = 'termine'",
 ]:
