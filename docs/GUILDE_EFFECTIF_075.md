@@ -1,4 +1,6 @@
-# Guilde de Réverie Town — effectif et émotes de repas (v0.7.5)
+# Guilde de Réverie Town — effectif et animations de repas
+
+Le nom `GUILDE_EFFECTIF_075.md` vient du chantier d’origine. Ces changements font partie de la [mise à jour 0.7.4](REVERIE_074.md), pas d’une version séparée.
 
 **État intégré : dix convives au réfectoire, chacun avec un vrai `Eat`.**
 L’émote de miettes, reprise d’Halcyon (`Data/Emote/eating.json` +

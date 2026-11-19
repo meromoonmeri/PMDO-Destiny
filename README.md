@@ -28,6 +28,11 @@ PMDO fusionne la quest pendant la construction : le lanceur démarre simplement 
 
 Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
+## Notes de mise à jour
+
+- [0.7.4 — Bilans d’expédition, Réverie, comptoirs et Guilde](docs/REVERIE_074.md)
+- [0.7.3 — Fosse Cascade et arène de Kabutops](docs/REVERIE_073.md)
+
 ## Contenu actuel
 
 - écran-titre animé Destiny : mer et ciel JOUR/NUIT selon l'heure (24 poses), blason Œuf Ailé animé à l'ouverture du menu — voir [`docs/MENU_TITRE.md`](docs/MENU_TITRE.md) ;

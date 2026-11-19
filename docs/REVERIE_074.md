@@ -1,72 +1,59 @@
-# Réverie — mise à jour 0.7.4
+# Pokémon Mystery Dungeon: Destiny — Mise à jour 0.7.4
 
-Base : branche `wip/reverie-integration-kingambit-cafe` (après `v0.7.3` / `30dc4447f2`).
-Objet : **refonte complète de la cinématique de pré-combat et de post-combat de la Fosse Cascade Fond** (boss Kabutops), sur demande explicite :
+Depuis la [`v0.7.3`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.3), cette version remanie le duel de la Fosse Cascade Fond et les retours d’expédition, retouche les abords de Réverie, ouvre les comptoirs de Zig et Zag et anime les dix convives de la Guilde.
 
-> « je veux pas d'animation d'eau à son apparition », « le pacing soit soutenu », « un flash blanc => incompréhension des héros/partenaire », « double flash blanc il spawn le boss », « le boss doit pas être sur l'escalier quand il spawn », « le Lixy doit trembler on doit le voir », « quand il part il fuit vers le sud en course », « les sons doivent être coordonnés à la cinématique visuelle ».
+## Bois Perdus et Fosse Cascade : les bilans d’expédition
 
-Fichier central : `game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua` (`PreBattle`, `PostBattle`, `EmptyReturn`).
+- **Bois Perdus.** « La dernière sortie », l’historique et la fanfare de résultat natifs de PMDO sont rétablis à la fin de chaque trajet enregistré. L’aller en solo réussi mène, après le bilan, à la prairie du réveil où l’équipe se reforme. Le retour réussi en duo ramène à la falaise de jour. Un échec à l’aller ramène à la falaise de nuit ; un échec au retour repasse par la prairie. En exploration libre, le bilan précède le retour à Réverie.
+- **Une seule expédition à la Fosse Cascade.** Le 8ᵉ étage mène aux vasques puis à l’arène de Kabutops sans ouvrir de bilan intermédiaire. La victoire reprend la scène avec Nilo et Lyra ; le bilan et la fanfare de fin d’expédition viennent **après les retrouvailles**, avant le retour à Réverie. Une exploration libre réussie après le sauvetage se clôt aussi aux vasques. En cas de K.O. ou de repli, le retour à l’entrée et l’état de reprise du scénario sont conservés.
+- **Les annonces arrivent en ville.** Après l’accueil de Nilo, Réverie annonce que la Fosse est accessible en exploration libre par la sortie est. Si une mission du tableau a été accomplie, son annonce s’affiche au retour ; la prime reste à retirer une seule fois **au tableau des missions**, pas à la sortie du donjon.
 
-## 1. Le problème de mise en scène corrigé
+## Fosse Cascade Fond : la nouvelle mise en scène de Kabutops
 
-La bande des **vasques en terrasses** (« l'escalier » d'eau) occupe `y = 136..208` sur la carte `480x360`. Kabutops était créé en **`(240, 192)`**, c'est-à-dire *au milieu des terrasses*, et il « jaillissait » d'un geyser (`Water_Column_Ranger`, `Water_Spout_Splash`, `Bubbles_Blue`, `Wave_Circle_Blue`, SE `EVT_CH05_Waterfall_Cave_Geyser` / `EVT_CH05_Hot_Spring_Splash`).
+- La découverte alterne un premier éclair blanc sur la clairière vide, des réactions décalées du duo, puis un grondement et une voix hors champ. Un double éclair révèle Kabutops sur le sable, **sans geyser, éclaboussures ni bruit d’eau**. Pendant le pré-combat, les reflets sont figés et le calque des bulles est masqué, puis restauré. Les vasques gardent leurs animations en visite libre.
+- Nilo (Lixy) tremble visiblement. Le partenaire se place pour le couvrir ; la caméra garde le duo et les acteurs lisibles au-dessus du dialogue. La musique s’interrompt au choc, puis reprend après le retour de l’image. Le son du coup de faux est calé sur l’impact de l’animation lorsque la planche le permet. La revanche ne répète pas la scène de découverte ni des éclairs supplémentaires à l’entrée du duel.
+- Le point d’apparition au sol et la position de combat concordent sous les marches : Kabutops en **`(10, 10)`** dans l’arène, équipe en **`(10, 12)`**. Les 42 cases praticables et les statistiques du boss restent inchangées. Le chargement forcé de l’arène depuis l’éditeur et la continuité de l’expédition en partie normale sont conservés.
+- Après sa défaite, Kabutops fuit **en courant vers le sud** au lieu de plonger dans les vasques. Nilo rejoint l’équipe, puis Lyra arrive ; le dialogue et le retour se déroulent à la suite de cette scène.
 
-| Repère | Avant | Après |
-| --- | --- | --- |
-| Kabutops | `(240, 192)` — sur les vasques | **`(240, 232)` — sable plat sous les vasques** |
-| Nilo endormi | `(264, 152)` | `(264, 176)` (même zone, plus lisible) |
-| Nilo en terreur | `(264, 144)` — derrière les vasques | **`(288, 248)` — à l'écran, côté est** |
-| Héros / partenaire | `(240, 248)` / `(216, 256)` | `(232, 264)` / `(256, 268)` |
-| Caméra de face | `(240, 200)` | **`(240, 236)`** (pieds des acteurs ≤ 152 px écran) |
+## Réverie Town : chemins, arbres et habitants
 
-La position de combat du `.rsmap` (`end_grotte_verdoyante`, Kabutops en tuile `(10, 8)`) est **inchangée** : seule la mise en scène au sol change.
+- Quatre raccords de terrain sont repris : le chemin et le virage près de la terrasse du Café, le pied de l’escalier est du Dojo et deux coutures de teinte à l’ouest. Les transitions sable–herbe sont plus progressives ; quatre arbres tronqués retrouvent leur cime, leur tronc et leur ombre. Les tuiles d’herbe répétées sont corrigées sans changer les collisions ni les déclencheurs.
+- Les dix variantes jeu/édition reçoivent les mêmes retouches de calques. Les animations des rivières et cascades, les accès, les intérieurs et les habitations existantes sont conservés. La grande refonte proposée du vert foncé et des quatorze segments de chemin n’est pas incluse.
+- Les habitants proches peuvent échanger un regard ou une émote, avec une réponse décalée. Le pêcheur et la fleuriste ont des gestes à leur poste ; les services ne migrent pas pour ces animations. Le système s’efface devant les menus, les dialogues et les cinématiques, et ne laisse pas de geste en attente après le départ du quartier.
 
-## 2. Pré-combat : nouvelles structures d'éclairs
+## Zig et Zag : deux étals et un stock par jour
 
-1. **Un éclair blanc** (`SOUND:PlayBattleSE('EVT_Battle_Flash')` + `GAME:FadeOut(true, 3)` / `GAME:FadeIn(9)`) : les deux héros ne comprennent pas ce qu'ils viennent de voir — regards désynchronisés (`0f` / `5f`), émote `question`, **un seul** SE d'émote (`EVT_Emote_Confused`), réplique courte du partenaire, puis la voix hors-champ des abysses (une seule réplique, sans portrait).
-2. **Double éclair blanc** (`2f`+`6f`, puis `2f`+`8f`) : `GROUND:Unhide('Kabutops_Boss')` se produit **pendant le premier blanc plein**, donc le boss est déjà là quand le second éclair s'efface — il « apparaît dans le flash », sans aucune animation d'eau.
-3. **Aucune eau** : suppression de tous les VFX (`Water_Column_Ranger`, `Water_Spout_Splash`, `Wave_Circle_Blue`, `Bubbles_Blue`) et des deux SE d'eau du script. Le bouillonnement des vasques est remplacé par une secousse de sol (`EVT_Tower_Tremor_Weak` + `MoveScreen(2, 4, 18)`).
+| Comptoir | Offre au réassort |
+| --- | --- |
+| **Zig, le Kecleon vert** | Deux provisions et quatre soins, avec une Pomme et une Baie Oran garanties, un lot de projectiles et un équipement. |
+| **Zag, le Kecleon violet** | Une CT, trois orbes et deux lots de quatre baguettes. |
 
-## 3. Nilo (Lixy) tremble — visiblement
+- Les deux frères remplacent les noms Basil et Félix dans la visite et les dialogues. Chaque comptoir propose **Acheter**, **Vendre** et **Infos** dans les menus natifs de PMDO. Le prix et la quantité sont calculés pour le lot complet ; les Poké et la place disponible sont vérifiés avant de débiter un achat. Une vente retire la pile sélectionnée, y compris parmi les objets équipés éligibles.
+- Un lot acheté disparaît de l’étal de la journée et reste épuisé après reprise de la sauvegarde. Les assortiments de Zig et Zag sont indépendants ; rouvrir les menus ne les relance pas. Une sieste au Café Spinda fait passer la ville au lendemain ; terminer la Fosse ou sa revisite réussie compte également pour le calendrier de Réverie. Joliflor conserve son propre étal.
 
-`GROUND:CharSetDrawEffect(nilo, RogueEssence.Dungeon.DrawEffect.Shaking)` (repli numérique `= 2` si l'énumération n'est pas exposée à Lua). `Shaking` oscille de **-2 à +2 px** sur un cycle de 8 images, alors que `Trembling` ne fait que 1 px : c'est la seule variante réellement visible à l'écran. Le tremblement est appliqué quand Nilo recule dans son recoin, maintenu pendant tout le face-à-face, relâché par `GROUND:CharEndDrawEffect` juste avant `COMMON.BossTransition`, et réutilisé en post-combat jusqu'au départ du boss.
+## Guilde : dix convives au réfectoire
 
-## 4. Post-combat : Kabutops fuit vers le sud **en courant**
+| Membre | Rôle |
+| --- | --- |
+| Gardevoir | Maîtresse de guilde |
+| Canarticho | Second |
+| Simisage | Cuisine |
+| Mélofée | Infirmerie et tournée du réveil |
+| Cizayox | Entraînement au combat |
+| Noctali | Exploration et cartographie |
+| Dimoret | Éclaireuse |
+| Draby | Chef de la Team Star |
+| Pandespiègle | Recrue à l’entraînement, Team Star |
+| Capumain | Livraisons, Team Star |
 
-Le plongeon dans les vasques (`Water_Spout_Splash` + `Wave_Circle_Blue` + `Hop` + `RemoveCharacter`) est remplacé par :
+- Les dix personnages prennent place dans la salle existante dès l’entrée. Chacun joue une **vraie animation de corps `Eat`** ; l’émote de miettes vient en complément. Parler à un convive interrompt son repas : il se tourne vers le joueur, présente son rôle, puis reprend son animation. Sortir, revenir ou recharger ne crée pas de doublon. La disposition de la salle, ses passages et ses portes sont inchangés.
+- Huit animations de repas ont été intégrées aux conteneurs `Chara` ; celles déjà utilisables de Noctali et Capumain sont conservées. Les planches sources (`Eat`, `Wake`, `Sleep`, `Pose`), leurs aperçus, le manifeste, l’index des personnages et l’importeur documentent ce travail. Les ressources de cloche et de calot, le script de réveil et la pose de service de Mélofée sont disponibles pour les scènes : ce lot n’ajoute pas de tournée jouable dans de nouvelles salles.
 
-* réplique de défaite (courte) puis `arrêter le tremblement de Nilo` ;
-* `GROUND:CharAnimateTurnTo(kabutops, Direction.Down, 3)` ;
-* `SOUND:PlayBattleSE('DUN_Tile_Step')` sur la même image que le départ ;
-* **`GROUND:MoveToPosition(kabutops, 240, 352, true, 3)`** — course de `232` à `352` px dans le couloir sud à **3 px/image**, caméra qui accompagne (`(240,236)` → `(240,240)`, limite de `Clamp`), puis sortie de carte ;
-* Nilo se relève et rejoint le duo (`(256, 248)`), Lyra arrive ensuite du sud comme avant.
+## Installation et vérifications
 
-## 5. Pacing soutenu & sons coordonnés
+- **Faire une copie de sa sauvegarde avant la mise à jour.** Conserver les ressources et les scripts de cette version ensemble, en particulier les `.chara` et leur index. Depuis les sources, `python tools/unpack_payload.py` restaure les dix cartes de Réverie et génère l’index des tuiles avec les ressources de cette révision ; `tools/build_windows.py` l’appelle lors du montage du ZIP complet. Le compacteur vérifie la même empreinte que le payload livré.
+- **Contrôles structurels et automatisés :** payloads et raccords de Réverie, arène et enchaînements de la Fosse, routes solo/duo et échecs des Bois, annonces et prime unique, achats/ventes et réassort, dix variantes `Eat` réellement chargées par le moteur et réapparition sans doublon. Les suites exactes sont sous [`tools/tests/`](../tools/tests/), notamment `test_grotte_verdoyante`, `test_lost_wood`, `test_polish_reverie`, `test_tableaux_reverie`, `test_boutiques_kecleon`, `test_guilde_effectif` et `test_guilde_eat_runtime`.
+- **Essais sous PMDO/Linux :** deux bilans et deux replays distincts pour l’aller et le retour des Bois ; un bilan et un replay uniques du 8ᵉ étage de la Fosse au retour en ville ; achat et vente chez les Kecleon, sauvegarde au Café et réassort après la sieste ; dix convives encore présents après rechargement et reprise du repas après dialogue. Les sorties de donjon ont été déclenchées par une fixture de test : ces essais ne représentent ni une traversée intégrale à la manette, ni un duel joué de bout en bout, ni une vérification audio.
+- **Windows :** [Build Windows](https://github.com/meromoonmeri/PMDO-Destiny/actions/workflows/build-windows.yml) en mode `build` valide et assemble le ZIP. Seule une exécution réussie **sur la révision qui porte cette note** valide ce candidat Windows ; un ancien run vert ne suffit pas.
 
-* Fondu d'entrée `16f`, carte de titre `16f`/`18f`, attentes de réaction réduites de `25–30f` à `6–12f`.
-* Transitions musicales raccourcies : `FadeOutBGM(15)` + `15f` avant `Rising Fear.ogg` et avant `Boss Battle 2.ogg` (au lieu de `30f`).
-* **Jamais de coupe BGM → BGM** : `SOUND:StopBGM()` sec au moment du choc (coupure vers le silence), puis relance **après** le retour de l'image.
-* **Un seul SE par événement**, déclenché sur l'image de son événement visuel : `EVT_Battle_Flash` (chaque éclair), `EVT_Tower_Tremor_Weak` (secousse), `EVT_Roar` + `MoveScreen` (réception), `DUN_Slash` (coup de faux d'intimidation), `DUN_Tile_Step` (départ de la fuite). Le rugissement final est devenu une secousse (`EVT_Tower_Tremor_Strong`) pour éviter deux rugissements identiques.
-* `Camera` : un seul axe de panoramique, `1,5 px/image` pour la montée du duo, pas de panoramique secondaire pendant les répliques, pieds de tous les acteurs sous le repère `160 px` écran (la boîte commence à `188`).
-
-## 6. Vérifications
-
-* `tools/tests/test_grotte_verdoyante.lua` — **PASS**, avec de nouveaux contrôles :
-  * Kabutops créé hors de la bande des terrasses (`y >= 216`) ;
-  * **exactement 3** `EVT_Battle_Flash` (un éclair + un double) ;
-  * **zéro** VFX / SE d'eau en pré- et post-combat ;
-  * `DrawEffect` appliqué **puis** relâché sur `Nilo_Grotte` ;
-  * fuite de Kabutops enregistrée vers `y >= 344` à la vitesse `3`.
-* `tools/audit_cinematiques.py` — OK (131 scripts, aucune réplique > 96 caractères, balises `[color]` équilibrées).
-* `tools/audit_cadrage_acteurs.py` — OK (aucun personnage masqué par la boîte de dialogue).
-* Compilation Lua du script vérifiée (`load`), et `diff` de contrôle : le fichier distant avant patch était bien identique à la sauvegarde `backup_avant_cinematique_boss_fgv1.tar.gz`.
-
-## 7. À valider en jeu
-
-1. `RogueEssence.Dungeon.DrawEffect` n'est pas garanti exposé à Lua : repli numérique `2` (`Shaking`) prévu ; si le tremblement ne s'affiche pas, le repli prend le relais sans erreur.
-2. `DUN_Tile_Step` sert de bruit de course (un seul pas au départ). Alternative possible : `SOUND:LoopBattleSE('DUN_Tile_Step')` pendant la fuite puis `StopBattleSE`.
-3. Les éclairs utilisent `GAME:FadeOut(true, …)` / `GAME:FadeIn(…)` : ce sont des fondus au **blanc** plein écran (le moteur ne possède pas de flash instantané unique), ce qui donne bien l'effet « flash ».
-
-## 8. Hors périmètre (non appliqué)
-
-Le lot **« côté vert foncé rectangulaire » + intérieurs de chemin vs Metano Town** (unification des tuiles `01_Sol_herbe(39,218)` et sables dorés des 14 segments `C-01..C-14`) reste **proposé et simulé uniquement** : aucune carte `.rsground` / `.rsground.gz` n'est modifiée par cette mise à jour. Les 15 points épinglés (`tools/corriger_15_pins_reverie.py`) et l'unification du calque `Cliffs` restent en l'état de `v0.7.3`.
+Détails techniques : [Fosse Cascade et raccords de Réverie](POLISH_FOSSE_REVERIE.md) · [Effectif et ressources de la Guilde](GUILDE_EFFECTIF_075.md) · [Comparaison du code depuis la v0.7.3](https://github.com/meromoonmeri/PMDO-Destiny/compare/v0.7.3...45082b7f5c08b4b909f685e8256d4fb324ab036b).
