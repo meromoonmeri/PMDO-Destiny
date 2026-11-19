@@ -179,8 +179,16 @@ assert "require 'destiny.ground.reveil_nuit.init'" in zrv2_script
 assert "EnterDungeon('lost_wood', 1, 0, 0" in reveil
 zone_script = (GAME / 'Data/Script/destiny/zone/lost_wood/init.lua').read_text(encoding='utf-8')
 assert 'segmentID == 1' in zone_script
-assert zone_script.count("GAME:EnterZone('reverie', -1, 10, 0)") == 2
-assert "GAME:EnterZone('destiny_cliff_tests', -1, 0, 0)" in zone_script
+# Depuis la refonte, les destinations passent par terminer(result, zone, carte),
+# qui appelle GAME:EnterZone(zone_id, -1, map_id, 0). On vérifie le point d'entrée
+# unique ET les deux trajets qui ramènent réellement au réveil (reverie, carte 10),
+# sans exiger qu'aucun autre appel n'existe : le code d'aujourd'hui en a deux.
+assert 'GAME:EnterZone(zone_id, -1, map_id, 0)' in zone_script
+assert zone_script.count("terminer(result, 'reverie', 10)") == 2
+# Mêmes destinations qu'avant la refonte : carte 0 (falaise jour) quand le retour
+# est réussi, carte 1 quand l'aller a échoué.
+assert "terminer(result, 'destiny_cliff_tests', 0)" in zone_script
+assert "terminer(result, 'destiny_cliff_tests', 1)" in zone_script
 # Recrutement et Noigrumes : indisponibles tant que la future Assemblée /
 # boutique des Zones d’Accueil n’est pas débloquée. Le module centralise le
 # verrou natif PMDO, et la zone des Bois Perdus ne génère aucun Noigrume.
