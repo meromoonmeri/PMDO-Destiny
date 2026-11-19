@@ -6,7 +6,7 @@ package.preload['origin.menu.skill.SkillSelectMenu']=function()return {} end
 package.preload['origin.menu.team.AssemblySelectMenu']=function()return {} end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function()end} end
 package.preload['destiny.cinematique']=function()return {NomEspece=function(_,n)return n end} end
-package.preload['destiny.missions_reverie']=function()return {} end
+package.preload['destiny.missions_reverie']=function()return {NotifierRetour=function()end} end
 Direction={Up='Up',Down='Down',Left='Left',Right='Right',UpLeft='UpLeft',UpRight='UpRight',DownLeft='DownLeft'}
 Gender={Male='Male',Female='Female',Genderless='Genderless'}
 RogueElements={Rect=function(x,y,w,h)return {x=x,y=y,w=w,h=h}end}
@@ -153,7 +153,7 @@ SV={Destiny={VisiteVille='terminee'}};local named=newmap('reverie_centre',true)
 named.characters[''].Data.BaseForm={Species='drifloon'}
 named.Entities={{MapChars={named.characters['']}}};ville=init(named)
 assert(named.characters[''].Data.Nickname=='Nuage')
-assert(named.characters.Kecleon.Data.Nickname=='Basil' and named.characters.Kecleon_Violet.Data.Nickname=='Félix')
+assert(named.characters.Kecleon.Data.Nickname=='Zig' and named.characters.Kecleon_Violet.Data.Nickname=='Zag')
 assert(named.characters.NewObject_4.Data.Nickname=='' and named.characters.NewObject_16.Data.Nickname=='')
 assert(named.characters.NewObject_14.Data.Nickname=='' and named.characters.Kangourex.Data.Nickname=='Mado')
 assert(hero.EntName=='PLAYER' and mate.EntName=='Teammate1')

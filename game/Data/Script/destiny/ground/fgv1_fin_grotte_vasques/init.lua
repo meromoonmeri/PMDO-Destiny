@@ -508,7 +508,7 @@ function fgv1.PostBattle()
   UI:ResetSpeaker()
   cinematique.Respirer(12)
 
-  -- Fondu vers le noir (30f + attente sous écran noir, Cutscene Guide), puis Journal de Victoire.
+  -- Dernier fondu des retrouvailles ; COMMON.EndDungeonDay ouvre ensuite le bilan natif.
   SOUND:FadeOutBGM(24)
   GAME:FadeOut(false, 24)
   GAME:WaitFrames(30)
@@ -525,27 +525,11 @@ function fgv1.PostBattle()
   SV.Destiny.GrotteVerdoyantePhase = 4
   SV.Destiny.CelebrationNilo = 'en_attente'
   SV.Destiny.JourneeVille = (SV.Destiny.JourneeVille or 0) + 1
-  local deja_debloque = GAME:DungeonUnlocked('grotte_verdoyante')
-  if not deja_debloque then
+  if not GAME:DungeonUnlocked('grotte_verdoyante') then
     GAME:UnlockDungeon('grotte_verdoyante')
+    SV.Destiny.AvisOuvertureFosse = true
   end
   missions_reverie.Completer('grotte_verdoyante', true)
-
-  -- Journal de victoire (style Halcyon) : texte centré sur écran noir accompagné de "Job Clear!.ogg".
-  UI:ResetSpeaker(false)
-  if UI.SetCenter ~= nil then pcall(function() UI:SetCenter(true) end) end
-  SOUND:PlayBGM('Job Clear!.ogg', false)
-  GAME:WaitFrames(12)
-  UI:WaitShowDialogue('— Journal d’Exploration —\nMission de secours accomplie avec succès !')
-  UI:WaitShowDialogue(cinematique.NomColore('Nilo', 'shinx') .. ' et ' .. cinematique.NomColore('Lyra', 'luxray') .. ' ont retrouvé les leurs sains et saufs au terme de la traversée de la ' .. LIEU_DONJON .. '.')
-  if not deja_debloque then
-    if SOUND.PlayFanfare ~= nil then pcall(function() SOUND:PlayFanfare('Fanfare/NewArea') end) end
-    UI:WaitShowDialogue('L’exploration libre de la ' .. LIEU_DONJON .. ' est désormais ouverte depuis la sortie est de ' .. LIEU_VILLE .. ' !')
-  end
-  if UI.SetCenter ~= nil then pcall(function() UI:SetCenter(false) end) end
-  UI:ResetSpeaker()
-  SOUND:FadeOutBGM(24)
-  GAME:WaitFrames(24)
 
   if hero ~= nil then hero.CollisionDisabled = false end
   GAME:CutsceneMode(false)

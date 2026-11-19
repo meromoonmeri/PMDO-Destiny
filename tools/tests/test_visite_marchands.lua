@@ -6,7 +6,7 @@ package.preload['origin.menu.team.AssemblySelectMenu']=function()return {}end
 local actors, events, sound, directions, speaker, interrompu
 local function event(t,n,v) events[#events+1]={t,n,v} end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function()event('suivi')end}end
-package.preload['destiny.missions_reverie']=function()return {Actuelle=function()return nil end}end
+package.preload['destiny.missions_reverie']=function()return {Actuelle=function()return nil end,NotifierRetour=function()end}end
 package.preload['destiny.cinematique']=function()return {
  NomEspece=function(_,n)return n end,
  Dire=function(a,e,t,placement)assert(a and a.EntEnabled~=false,'locuteur caché');if a.EntName~='Teammate1' then assert(a.idle,'PNJ pas en idle') end;event('dialogue',a.EntName,t);event('portrait',a.EntName,placement)end,
@@ -114,7 +114,7 @@ local function scenario(species,legacy,missing,obstacle,rose_loin,bloc_ludicolo)
   local fin_fondu=find('fade_out','')
   local repos_lombre=nil
   for k=fin_fondu+1,#events do if events[k][1]=='placer' and events[k][2]=='NewObject_7' and events[k][3]=='808,1116' then repos_lombre=k;break end end
-  assert(repos_lombre and repos_lombre<find('dialogue','On peut passer chez Basil'),'Lombre replacé après le fondu')
+  assert(repos_lombre and repos_lombre<find('dialogue','On peut passer chez Zig'),'Lombre replacé après le fondu')
  end
  assert(not find('dialogue','Bienvenue à Réverie Town !')==false)
  local function regard_entre(debut,fin,nom,cible)

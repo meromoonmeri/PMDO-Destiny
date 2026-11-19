@@ -9,6 +9,7 @@ local equipe_scene = require 'destiny.equipe_scene'
 local cinematique = require 'destiny.cinematique'
 local meteo_reverie = require 'destiny.meteo_reverie'
 local missions_reverie = require 'destiny.missions_reverie'
+local boutiques_kecleon = require 'destiny.boutiques_kecleon'
 
 local ville = {}
 local ENTREE_X, ENTREE_Y = 800, 1320
@@ -159,7 +160,7 @@ end
 -- génériques (NewObject_*) : on leur donne leur vrai nom affiché en
 -- dialogue, sans toucher à la carte.
 local noms_habitants = {
-  Kecleon = 'Basil', Kecleon_Violet = 'Félix',
+  Kecleon = 'Zig', Kecleon_Violet = 'Zag',
   NewObject_3 = 'Écu', NewObject_4 = '', Kangourex = 'Mado',
   NewObject_6 = 'Céleste', NewObject_7 = 'Nino', NewObject_8 = 'Marcel',
   NewObject_9 = 'Lyra', NewObject_10 = 'Léo', NewObject_12 = 'Hector',
@@ -1153,7 +1154,7 @@ function ville.Visite(map)
   guide_hors_champ = true
   animer_fond(616, 925)
   GAME:MoveCamera(616, 925, 160, false)
-  parler_guide('Normal', 'Là-bas, c’est la boutique de Basil et Félix. Ces deux frères Kecleon vendent des provisions pour les expéditions.')
+  parler_guide('Normal', 'Là-bas, c’est la boutique de Zig et Zag. Zig vend les provisions ; Zag, en violet, propose des CT, des orbes et des baguettes.')
   if kecleon_violet ~= nil then
     GROUND:CharAnimateTurnTo(kecleon_violet, Direction.Down, 4)
   end
@@ -1402,7 +1403,7 @@ function ville.Visite(map)
   GAME:FadeIn(30)
   SOUND:PlayBGM('Treasure Town.ogg', false)
   se_faire_face_ville(partenaire, hero)
-  parler_guide('Normal', 'On peut passer chez Basil et Félix pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
+  parler_guide('Normal', 'On peut passer chez Zig et Zag pour les courses, puis chez Mado pour déposer les objets des Bois Perdus. Ce n’est pas obligatoire : rejoignons Lyra quand nous serons prêts.')
   UI:ResetSpeaker()
   retour_au_joueur(hero, partenaire)
 end
@@ -1700,7 +1701,10 @@ local function entrer(map)
   local hero = CH('PLAYER')
   local partenaire = partenaire_pour(hero)
   if rediriger_ancienne_ville(map,hero,partenaire) then return end
-  if jouer_celebration_nilo(map, hero, partenaire) then return end
+  if jouer_celebration_nilo(map, hero, partenaire) then
+    missions_reverie.NotifierRetour()
+    return
+  end
   local passage = SV.Destiny.PassageQuartier
   if passage ~= nil then
     SV.Destiny.PassageQuartier = nil
@@ -1741,6 +1745,7 @@ local function entrer(map)
   GAME:FadeIn(20)
   SOUND:PlayBGM('Treasure Town.ogg', true)
   retour_au_joueur(hero, partenaire)
+  missions_reverie.NotifierRetour()
 end
 
 function ville.Enter(map) entrer(map) end
@@ -2131,18 +2136,7 @@ function ville.Kangourex_Action(personnage, activator)
   terminer_dialogue(personnage, 'Kangourex')
 end
 
--- Petits assortiments de départ : menus, argent et sac sont ceux de PMDO.
--- Les deux frères Kecleon ne proposent pas les mêmes marchandises.
-local assortiments_kecleon_vert = {
-  {{id = 'food_apple', prix = 50}, {id = 'berry_oran', prix = 80}, {id = 'berry_leppa', prix = 80}},
-  {{id = 'food_apple_big', prix = 100}, {id = 'berry_pecha', prix = 80}, {id = 'berry_chesto', prix = 80}},
-  {{id = 'food_banana', prix = 100}, {id = 'berry_lum', prix = 150}, {id = 'berry_persim', prix = 80}},
-}
-local assortiments_kecleon_violet = {
-  {{id = 'berry_sitrus', prix = 150}, {id = 'medicine_elixir', prix = 300}, {id = 'seed_reviver', prix = 800}},
-  {{id = 'medicine_max_elixir', prix = 650}, {id = 'orb_escape', prix = 300}, {id = 'seed_joy', prix = 1200}},
-  {{id = 'medicine_max_potion', prix = 500}, {id = 'orb_scanner', prix = 300}, {id = 'seed_pure', prix = 400}},
-}
+-- L’étal de Joliflor conserve son assortiment et son fonctionnement.
 local assortiments_bellossom = {
   {{id = 'gummi_green', prix = 350}, {id = 'gummi_blue', prix = 350}, {id = 'berry_sitrus', prix = 150}},
   {{id = 'gummi_yellow', prix = 350}, {id = 'food_apple_big', prix = 100}, {id = 'seed_sleep', prix = 250}},
@@ -2221,16 +2215,14 @@ end
 function ville.Kecleon_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
   reaction_actualite(personnage, 'Kecleon')
-  ouvrir_boutique(personnage, 'vert', assortiments_kecleon_vert, 0,
-    'Bienvenue à la boutique Kecleon ! Des provisions simples, mais qui ont sauvé plus d’une expédition.')
+  boutiques_kecleon.Ouvrir(personnage, 'vert')
   terminer_dialogue(personnage, 'Kecleon')
 end
 
 function ville.Kecleon_Violet_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
   reaction_actualite(personnage, 'Kecleon_Violet')
-  ouvrir_boutique(personnage, 'violet', assortiments_kecleon_violet, 1,
-    'Mon étal violet garde les articles précieux. Ils coûtent plus cher, mais ils peuvent changer une traversée.')
+  boutiques_kecleon.Ouvrir(personnage, 'violet')
   terminer_dialogue(personnage, 'Kecleon_Violet')
 end
 
@@ -2658,7 +2650,7 @@ local dialogues_habitants = {
   },
   NewObject_12 = {
     {{'Normal', 'Je porte les caisses du marché le matin. L’après-midi, je laisse mes bras raconter qu’ils ont bien travaillé.'}},
-    {{'Worried', 'Deux livraisons pour Basil et Félix, une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
+    {{'Worried', 'Deux livraisons pour Zig et Zag, une pour la forge… Mes quatre bras ont leur propre emploi du temps, aujourd’hui.'}},
     {{'Happy', 'Une caisse bien portée ne casse jamais. C’est ma devise. Bon, sauf celle de la semaine dernière. Une seule !'}},
   },
   NewObject_13 = {
@@ -2667,7 +2659,7 @@ local dialogues_habitants = {
     {{'Normal', 'Aujourd’hui, je compte les équipes qui partent. Demain, je compterai celles qui reviennent. C’est mon rituel.'}},
   },
   NewObject_14 = {
-    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Mado, Basil et Félix peuvent les aider à bien se préparer.'}},
+    {{'Normal', 'Les explorateurs pressés oublient souvent de vérifier leur sac. Mado, Zig et Zag peuvent les aider à bien se préparer.'}},
     {{'Normal', 'Un sac vérifié le matin vaut deux jambes reposées. Notez-le quelque part, ça vous servira en donjon.'}},
     {{'Worried', 'On prévoit du vent sur les hauteurs. Les équipes sages attendront demain, les autres… apprendront vite.'}},
   },

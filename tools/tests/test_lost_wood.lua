@@ -38,7 +38,10 @@ GAME = {
  RemovePlayerAssembly=function(_,i) table.remove(assembly,i+1) end,
  AddPlayerAssembly=function(_,ch) table.insert(assembly,1,ch) end,
  SetRescueAllowed=noop,
- EndDungeonRun=function(_,r,z,segment,map,entry,display,fanfare) table.insert(events,{'end',r,z,map}) end,
+ EndDungeonRun=function(_,r,z,segment,map,entry,display,fanfare)
+  assert(segment==-1 and entry==0 and display==true and fanfare==true, 'bilan natif avec fanfare')
+  table.insert(events,{'end',r,z,map})
+ end,
  EnterZone=function(_,z,seg,map,entry) table.insert(events,{'enter',z,map}) end,
  EnterDungeon=function(_,z,...) table.insert(events,{'dungeon',z}) end,
  EnterGroundMap=function(_,z,m,e) table.insert(events,{'ground',z,m,e}) end,
@@ -198,6 +201,18 @@ for _,case in ipairs({{R.Failed,'ko',false},{R.GaveUp,'abandon',false},{R.Cleare
   assert(has_anim(anims, actors.Teammate1, 'Wake')==(case[2]=='ko'))
  end
 end
+-- En visite libre : le même bilan natif, la même mise à jour de mission,
+-- mais ni drapeaux d'histoire ni cadeau automatique.
+for _,result in ipairs({R.Cleared, R.Downed, R.Escaped}) do
+  events={}; SV={Destiny={ExplorationReverie=true,LostWoodTrip='termine',MissionReverie={Zone='lost_wood',Etat='en_cours'}}}
+  zone.ExitSegment(nil,result,false,0,6)
+  assert(#events==2 and events[1][1]=='end' and events[1][2]==result)
+  assert(events[2][1]=='enter' and events[2][2]=='town02_waterfallvillage')
+  assert(not SV.Destiny.ExplorationReverie and SV.Destiny.LostWoodTrip=='termine')
+  assert((SV.Destiny.MissionReverie.Etat=='reussie')==(result==R.Cleared))
+  assert((SV.Destiny.MissionReverie.AvisRetour==true)==(result==R.Cleared))
+end
+
 -- Prologue : ouverture à Y=136 (vue 16..256), descente vers le panorama,
 -- puis rapprochement lent du héros sans quitter complètement la montagne.
 actors={PLAYER=actor(hero)};events={};SV={Destiny={}}

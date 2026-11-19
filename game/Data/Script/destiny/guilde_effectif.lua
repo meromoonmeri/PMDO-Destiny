@@ -1,6 +1,6 @@
 --[[
   guilde_effectif.lua — Effectif de la Guilde de Réverie Town (10 membres),
-  emote de repas « eating » et pose de service de Mélofée.
+  animations de corps Eat au réfectoire et pose de service de Mélofée.
 
   Les noms d'acteurs (`id`) sont les identifiants sans accent à donner aux
   personnages dans les cartes de la Guilde : `CH('Gardevoir')`, `CH('Melofee')`…
@@ -49,6 +49,7 @@ guilde_effectif.MEMBRES = {
     id = 'Gardevoir', nom = 'Gardevoir', espece = 'gardevoir',
     role = 'Maîtresse de guilde', bloc = 'direction', genre = 'f',
     type = 'Psy / Fée',
+    accueil = 'Je dirige la Guilde et veille à ce que chaque équipe rentre saine et sauve.',
     caractere = 'Paisible, professionnelle, élégante et diplomate',
     cycles = 0, delai = 14, apres = nil, pose = false,
   },
@@ -56,6 +57,7 @@ guilde_effectif.MEMBRES = {
     id = 'Canarticho', nom = 'Canarticho', espece = 'farfetchd',
     role = 'Second', bloc = 'direction', genre = 'm',
     type = 'Normal / Vol',
+    accueil = 'Je suis le second de Gardevoir. Je répartis les tâches et tiens le planning des équipes.',
     caractere = 'Sérieux, méthodique, exigeant et médiateur',
     cycles = 0, delai = 6, apres = nil, pose = false,
   },
@@ -63,6 +65,7 @@ guilde_effectif.MEMBRES = {
     id = 'Simisage', nom = 'Simisage', espece = 'simisage',
     role = 'Cuisinier', bloc = 'vie_quotidienne', genre = 'm',
     type = 'Plante',
+    accueil = 'Je prépare les repas et les rations d’expédition. Aujourd’hui, la tournée de pommes est pour moi !',
     caractere = 'Extraverti, enthousiaste et passionné par sa cuisine',
     cycles = 2, delai = 22, apres = 'happy', pose = false,
   },
@@ -70,6 +73,7 @@ guilde_effectif.MEMBRES = {
     id = 'Melofee', nom = 'Mélofée', espece = 'clefairy',
     role = 'Infirmière et responsable du réveil', bloc = 'vie_quotidienne', genre = 'f',
     type = 'Fée',
+    accueil = 'Je soigne les blessés et je sonne le réveil de la Guilde. Ce sont deux services différents !',
     caractere = 'Douce, attentionnée, organisée et enthousiaste',
     cycles = 0, delai = 10, apres = 'happy', pose = true,
   },
@@ -77,13 +81,15 @@ guilde_effectif.MEMBRES = {
     id = 'Cizayox', nom = 'Cizayox', espece = 'scizor',
     role = 'Combattant', bloc = 'explorateurs', genre = 'm',
     type = 'Insecte / Acier',
+    accueil = 'J’entraîne les équipes au combat. Quand un passage devient dangereux, je mène la marche.',
     caractere = 'Discipliné, stoïque et perfectionniste',
     cycles = 1, delai = 8, apres = nil, pose = false,
   },
   {
     id = 'Noctali', nom = 'Noctali', espece = 'umbreon',
-    role = 'Explorateur', bloc = 'explorateurs', genre = 'm',
+    role = 'Explorateur et cartographe', bloc = 'explorateurs', genre = 'm',
     type = 'Ténèbres',
+    accueil = 'Je relève les chemins au retour des sorties. Une carte précise peut faire gagner une journée entière.',
     caractere = 'Réservé, calme, prudent et observateur',
     cycles = 1, delai = 18, apres = nil, pose = false,
   },
@@ -91,6 +97,7 @@ guilde_effectif.MEMBRES = {
     id = 'Dimoret', nom = 'Dimoret', espece = 'weavile',
     role = 'Éclaireuse', bloc = 'explorateurs', genre = 'f',
     type = 'Ténèbres / Glace',
+    accueil = 'Je pars en éclaireuse. À mon signal, on avance… ou on fait demi-tour.',
     caractere = 'Sarcastique, rusée, indépendante et compétitive (loyale envers ses compagnons)',
     cycles = 2, delai = 4, apres = 'notice', pose = false,
   },
@@ -98,20 +105,23 @@ guilde_effectif.MEMBRES = {
     id = 'Draby', nom = 'Draby', espece = 'bagon',
     role = 'Jeune recrue (leader de la Team Star)', bloc = 'recrues', genre = 'm',
     type = 'Dragon',
+    accueil = 'Je mène la Team Star ! Je choisis notre prochaine mission avec Pandespiègle et Capumain.',
     caractere = 'Rêveur, déterminé et impulsif',
     cycles = 3, delai = 2, apres = 'glowing', pose = false,
   },
   {
     id = 'Pandespiegle', nom = 'Pandespiègle', espece = 'pancham',
-    role = 'Jeune recrue', bloc = 'recrues', genre = 'm',
+    role = 'Recrue à l’entraînement', bloc = 'recrues', genre = 'm',
     type = 'Combat',
+    accueil = 'Cizayox m’apprend à couvrir les autres. Bientôt, plus personne ne traversera la Team Star !',
     caractere = 'Provocateur, fier et turbulent, mais sensible au fond',
     cycles = 2, delai = 5, apres = 'notice', pose = false,
   },
   {
     id = 'Capumain', nom = 'Capumain', espece = 'aipom',
-    role = 'Recrue', bloc = 'recrues', genre = 'f',
+    role = 'Recrue chargée des livraisons', bloc = 'recrues', genre = 'f',
     type = 'Normal',
+    accueil = 'Je fais les livraisons et je rapporte les avis de mission à la Team Star.',
     caractere = 'Espiègle, curieux et malicieux',
     cycles = 2, delai = 12, apres = 'happy', pose = false,
   },
@@ -187,7 +197,7 @@ function guilde_effectif.Acteurs(liste)
   for _, reference in ipairs(cibles) do
     local acteur = nil
     local membre = nil
-    if type(reference) == 'table' and reference.EntName ~= nil then
+    if (type(reference) == 'table' or type(reference) == 'userdata') and reference.EntName ~= nil then
       acteur = reference
       membre = guilde_effectif.Membre(reference.EntName)
     else
@@ -206,14 +216,14 @@ end
 -- Vérifie qu'une planche de personnage possède vraiment l'animation demandée :
 -- GetAnimIndex rend -1 (ou la feuille ne référence pas l'index) pour les
 -- espèces dépourvues de l'animation, et dessiner dessus viderait le sprite.
-local function animation_disponible(acteur, nom)
-  if acteur == nil or nom == nil then return false end
+local function animation_disponible(forme, nom)
+  if forme == nil or nom == nil then return false end
   local dispo = false
   pcall(function()
     local gm = RogueEssence.Content.GraphicsManager
     local index = gm.GetAnimIndex(nom)
     if index ~= nil and index >= 0 then
-      local feuille = gm.GetChara(acteur.CurrentForm:ToCharID())
+      local feuille = gm.GetChara(forme:ToCharID())
       if feuille ~= nil and feuille:GetReferencedAnimIndex(index) == index then
         dispo = true
       end
@@ -226,8 +236,30 @@ end
 -- Renvoie true quand l'animation a été lancée, false quand il faut se rabattre
 -- sur une émote ou sur l'attente (cas de la plupart des espèces).
 function guilde_effectif.Animer(acteur, nom, boucle)
-  if not animation_disponible(acteur, nom) then return false end
+  if acteur == nil or not animation_disponible(acteur.CurrentForm, nom) then return false end
   return (pcall(function() GROUND:CharSetAnim(acteur, nom, boucle ~= false) end))
+end
+
+-- Le réfectoire publié est vide. On installe l'effectif sans réécrire sa carte.
+-- Une émote seule ne permet pas à un personnage d'y prendre place.
+function guilde_effectif.InstallerConvive(membre, x, y, dir)
+  local acteur = CH(membre.id)
+  local forme = acteur and acteur.CurrentForm
+    or RogueEssence.Dungeon.MonsterID(membre.espece, 0, 'normal', guilde_effectif.Genre(membre))
+  if not animation_disponible(forme, 'Eat') then
+    print('[Destiny] Eat absent pour ' .. membre.nom .. ' : convive ignoré.')
+    return nil
+  end
+  if acteur == nil then
+    local donnees = RogueEssence.Dungeon.CharData()
+    donnees.BaseForm = forme
+    donnees.Nickname = membre.nom
+    donnees.Level = 5
+    acteur = GROUND:CreateCharacterFromCharData(membre.id, RogueEssence.Dungeon.Character(donnees), x, y, dir)
+  end
+  AI:DisableCharacterAI(acteur)
+  acteur:ReloadEvents()
+  return acteur
 end
 
 -- Pose figée de service : mécanisme exact de la pose d'Audino dans Halcyon.
@@ -275,29 +307,23 @@ function guilde_effectif.PoseDeService(acteur, reference)
 end
 
 --[[
-  Une bouchée (ou un repas continu si les cycles du membre valent 0).
-  `cycles` force la valeur ; sinon celle du membre est utilisée.
+  Eat en boucle. `cycles` règle seulement la durée des miettes ; 0 les
+  maintient en boucle. Pour une seule animation du corps, utiliser Bouchee.
 ]]
 function guilde_effectif.Manger(acteur, reference, cycles)
-  if acteur == nil then return false end
+  if not guilde_effectif.Animer(acteur, 'Eat', true) then return false end
   local membre = guilde_effectif.Membre(reference or acteur.EntName)
   local bouchees = cycles
-  if bouchees == nil then
-    bouchees = (membre ~= nil and membre.cycles) or 0
-  end
-  local ok = pcall(function()
-    GROUND:CharSetEmote(acteur, guilde_effectif.EMOTE_REPAS, bouchees)
-  end)
-  if not ok then return false end
-  -- Le corps mâche aussi quand la planche de l'espèce a l'animation « Eat »
-  -- (sinon le personnage garde simplement son attente).
-  guilde_effectif.Animer(acteur, 'Eat', true)
+  if bouchees == nil then bouchees = (membre ~= nil and membre.cycles) or 0 end
+  -- Les miettes habillent le geste, elles ne le remplacent jamais.
+  pcall(function() GROUND:CharSetEmote(acteur, guilde_effectif.EMOTE_REPAS, bouchees) end)
   return true
 end
 
--- Émote unique, un cycle, sans animation de corps (réplique de PNJ au comptoir).
-function guilde_effectif.Bouchee(acteur, reference)
-  return guilde_effectif.Manger(acteur, reference, 1)
+function guilde_effectif.Bouchee(acteur)
+  if not guilde_effectif.Animer(acteur, 'Eat', false) then return false end
+  pcall(function() GROUND:CharSetEmote(acteur, guilde_effectif.EMOTE_REPAS, 1) end)
+  return true
 end
 
 --[[
@@ -309,35 +335,32 @@ end
 function guilde_effectif.Repas(liste, duree)
   local presents = guilde_effectif.Acteurs(liste)
   if #presents == 0 then return 0 end
-  local taches = {}
+  local taches, servis = {}, 0
   for _, entree in ipairs(presents) do
     local membre, acteur = entree.membre, entree.acteur
     table.insert(taches, TASK:BranchCoroutine(function()
       local delai = membre.delai or 0
       if delai > 0 then GAME:WaitFrames(delai) end
-      guilde_effectif.Manger(acteur, membre)
+      if guilde_effectif.Manger(acteur, membre) then servis = servis + 1 end
     end))
   end
   TASK:JoinCoroutines(taches)
   if duree == nil then duree = 120 end
   if duree > 0 then GAME:WaitFrames(duree) end
-  if duree > 0 or liste == nil then
-    guilde_effectif.FinRepas(presents)
-  end
-  return #presents
+  if duree > 0 then guilde_effectif.FinRepas(liste) end
+  return servis
 end
 
 --[[
   Repas déjà en cours à l'ouverture de la salle : chaque membre présent démarre
-  son émote en boucle, sans coroutine ni délai (`Enter`/`Init` d'une carte ne
-  sont pas des coroutines). Halcyon fait exactement cela dans sa salle à manger.
+  son Eat et ses miettes en boucle, sans attendre ni lancer de tâche séparée.
 ]]
 function guilde_effectif.RepasImmediat(liste)
-  local presents = guilde_effectif.Acteurs(liste)
-  for _, entree in ipairs(presents) do
-    guilde_effectif.Manger(entree.acteur, entree.membre)
+  local servis = 0
+  for _, entree in ipairs(guilde_effectif.Acteurs(liste)) do
+    if guilde_effectif.Manger(entree.acteur, entree.membre, 0) then servis = servis + 1 end
   end
-  return #presents
+  return servis
 end
 
 -- Coupe l'émote de repas (identifiant vide = StartEmote(null) dans le moteur),

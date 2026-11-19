@@ -1,9 +1,10 @@
 -- Retour des habitants à leurs rôles sans bloquer ni détourner le joueur.
 local root = (arg[1] or '.') .. '/game/Data/Script/destiny/'
 for _, key in ipairs({'origin.common', 'origin.menu.skill.SkillSelectMenu', 'origin.menu.team.AssemblySelectMenu',
-                      'destiny.equipe_scene', 'destiny.cinematique', 'destiny.meteo_reverie', 'destiny.missions_reverie'}) do
+                      'destiny.equipe_scene', 'destiny.cinematique', 'destiny.meteo_reverie'}) do
   package.preload[key] = function() return {} end
 end
+package.preload['destiny.missions_reverie'] = function() return {NotifierRetour=function()end} end
 local acteurs = {}
 local function acteur(nom, x, y)
   acteurs[nom] = {EntName=nom, Position={X=x,Y=y}, EntEnabled=true}

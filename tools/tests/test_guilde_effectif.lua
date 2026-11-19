@@ -109,7 +109,7 @@ local function vider() evenements = {} end
 
 -- 1. Effectif complet, identifiants uniques et sans accent.
 assert(#guilde.MEMBRES == 10, 'dix membres attendus, recu ' .. #guilde.MEMBRES)
-local vus = {}
+local vus, roles = {}, {}
 for _, id in ipairs(guilde.ORDRE) do
   assert(guilde.Membre(id) ~= nil, 'membre absent de ORDRE: ' .. id)
   assert(not vus[id], 'doublon: ' .. id)
@@ -117,6 +117,8 @@ for _, id in ipairs(guilde.ORDRE) do
   local membre = guilde.Membre(id)
   assert(membre.role and membre.type and membre.genre and membre.caractere, 'fiche incomplete: ' .. id)
   assert(membre.id:match('^[A-Za-z]+$') ~= nil, 'identifiant non ASCII: ' .. membre.id)
+  assert(not roles[membre.role] and membre.accueil, 'rôle ou présentation manquante : '..id)
+  roles[membre.role] = true
   assert(membre.cycles ~= nil and membre.delai ~= nil, 'repas incomplet: ' .. id)
 end
 assert(#guilde.MEMBRES == #guilde.ORDRE, 'MEMBRES et ORDRE doivent se recouvrir')
@@ -147,11 +149,11 @@ assert(guilde.Membre('Gardevoir').pose == false, 'Gardevoir ne doit pas avoir la
 local fiche = assert(guilde.Fiche('Melofee'))
 assert(fiche:find('Infirmi') ~= nil, 'la fiche doit rappeler le role')
 
--- Table de présence : tout le monde sauf Canarticho, et seuls Draby/Dimoret
--- disposent de l'animation de corps « Eat ».
+-- Table de présence : tout le monde sauf Canarticho. On simule une feuille
+-- manquante pour Cizayox avant de tester l'effectif complet du réfectoire.
 for _, membre in ipairs(guilde.MEMBRES) do
   if membre.id ~= 'Canarticho' then
-    poser_acteur(membre.id, membre.id == 'Draby' or membre.id == 'Dimoret')
+    poser_acteur(membre.id, membre.id ~= 'Cizayox')
   end
 end
 
@@ -160,10 +162,13 @@ vider()
 assert(guilde.Manger(CH('Draby'), 'Draby'))
 assert(compter('emote', 'Draby', 'eating', 3) == 1, 'Draby doit mordre 3 fois')
 assert(compter('anim', 'Draby', 'Eat', true) == 1, 'Draby a l\'animation Eat')
+vider()
+assert(guilde.Bouchee(CH('Draby')))
+assert(compter('anim', 'Draby', 'Eat', false) == 1 and compter('emote', 'Draby', 'eating', 1) == 1)
 
 vider()
-assert(guilde.Manger(CH('Cizayox'), 'Cizayox'))
-assert(compter('emote', 'Cizayox', 'eating', 1) == 1, 'Cizayox doit mordre 1 fois')
+assert(not guilde.Manger(CH('Cizayox'), 'Cizayox'))
+assert(compter('emote', 'Cizayox', 'eating') == 0, 'aucune imitation du repas avec les miettes seules')
 assert(compter('anim', 'Cizayox', 'Eat') == 0, 'sans planche Eat, aucune animation de corps')
 
 -- 7. Cycles forcés (repas continu comme Halcyon).
@@ -176,10 +181,12 @@ vider()
 assert(guilde.Manger(nil, 'Draby') == false, 'acteur absent')
 
 -- 9. Repas collectif : 9 présents, chacun son délai, puis jointure.
+ANIMS_PLANCHE['Cizayox_CHARA'].Eat = 2
 vider()
 local servis = guilde.Repas(nil, 60)
 assert(servis == 9, 'neuf membres presents attendus, recu ' .. servis)
-assert(compter('emote', nil, 'eating') == 9, 'neuf emotes de repas')
+assert(compter('emote', nil, 'eating') == 9 and compter('anim', nil, 'Eat') == 9)
+assert(compter('fin_anim') == 9, 'une vraie fin pour chaque animation de corps')
 assert(compter('jointure') == 1, 'une jointure des branches')
 assert(compter('attente', 60) == 1, 'la duree du repas est attendue')
 local delais = {}
@@ -232,7 +239,7 @@ assert(guilde.Genre('Draby') == Gender.Male, 'Draby masculin')
 -- 15. Repas immédiat à l'ouverture de la salle : sans coroutine, sans délai.
 vider()
 assert(guilde.RepasImmediat(nil) == 9, 'neuf convives servis')
-assert(compter('emote', nil, 'eating') == 9, 'emotes posees directement')
+assert(compter('emote', nil, 'eating', 0) == 9 and compter('anim', nil, 'Eat') == 9)
 assert(compter('branche') == 0, 'aucune coroutine pour un repas deja en cours')
 assert(compter('attente') == 0, 'aucune attente bloquante')
 

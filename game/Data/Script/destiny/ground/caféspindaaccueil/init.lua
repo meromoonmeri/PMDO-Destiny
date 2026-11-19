@@ -472,7 +472,7 @@ function cafespindaaccueil.Spinda_Action(personnage, activator)
     choix = UI:ChoiceResult()
   end
   if choix == 3 then
-    dire(personnage, 'Normal', 'Installez-vous dans un coin tranquille. Demain, Basil et Félix auront renouvelé leurs étals.')
+    dire(personnage, 'Normal', 'Installez-vous dans un coin tranquille. Demain, Zig et Zag auront renouvelé leurs étals.')
     UI:ResetSpeaker()
     if SOUND ~= nil and SOUND.FadeOutBGM ~= nil then SOUND:FadeOutBGM(60) end
     GAME:FadeOut(false, 60)
@@ -516,7 +516,7 @@ end
 
 local conseils_kirlia = {
   'Avant une expédition, passez voir Mado pour déposer vos objets précieux et Écu pour mettre vos Poké à l’abri.',
-  'Les étals de Basil et Félix changent après chaque sieste ici au café : jetez un œil à leurs réserves quand le jour se lève.',
+  'Les étals de Zig et Zag changent après chaque sieste ici au café : jetez un œil à leurs réserves quand le jour se lève.',
   'Alakazam aide les équipes à retrouver une capacité oubliée, tandis qu’Iris ouvre les coffres ramenés des donjons.',
 }
 

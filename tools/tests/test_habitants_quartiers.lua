@@ -5,7 +5,7 @@ package.preload['origin.menu.skill.SkillSelectMenu']=function()return {} end
 package.preload['origin.menu.team.AssemblySelectMenu']=function()return {} end
 package.preload['destiny.equipe_scene']=function()return {Suivre=function()end} end
 package.preload['destiny.cinematique']=function()return {NomEspece=function(_,n)return n end} end
-package.preload['destiny.missions_reverie']=function()return {} end
+package.preload['destiny.missions_reverie']=function()return {NotifierRetour=function()end} end
 Direction={Up='Up',Down='Down',Left='Left',Right='Right',UpLeft='UpLeft',UpRight='UpRight',DownLeft='DownLeft'}
 Gender={Male='Male',Female='Female',Genderless='Genderless'}
 RogueElements={Rect=function(x,y,w,h)return {x=x,y=y,w=w,h=h}end}

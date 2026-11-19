@@ -145,7 +145,7 @@ def marker_offsets(offset_cell, bounds_center):
     return tuple(c for point in points for c in (point[0] - bounds_center[0], point[1] - bounds_center[1]))
 
 
-def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE):
+def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE, *, reindex=False):
     data = parse_blob(blob)
     if (frame_type in data['groups']
             and data['groups'][frame_type]['copy'] <= -1
@@ -165,16 +165,24 @@ def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE
     fh = int(anim_node.findtext('FrameHeight'))
     durations = [int(x.text) for x in anim_node.findall('./Durations/Duration')]
     internal = int(anim_node.findtext('Index', '13'))
-    if any(group['internal'] == internal and key != frame_type
-           for key, group in data['groups'].items()):
-        raise ValueError(f'InternalIndex {internal} déjà utilisé dans ce payload')
+    used = {group['internal'] for key, group in data['groups'].items() if key != frame_type}
+    if internal in used:
+        if not reindex:
+            raise ValueError(f'InternalIndex {internal} déjà utilisé dans ce payload')
+        # Cet index sert à l'export SpriteCollab, pas à jouer l'action.
+        while internal in used:
+            internal += 1
 
     anim_sheet = Image.open(sprite_dir / f'{anim_name}-Anim.png').convert('RGBA')
     shadow_sheet = Image.open(sprite_dir / f'{anim_name}-Shadow.png').convert('RGBA')
     offset_sheet = Image.open(sprite_dir / f'{anim_name}-Offsets.png').convert('RGBA')
+    if anim_sheet.size != shadow_sheet.size or anim_sheet.size != offset_sheet.size:
+        raise ValueError(f'{anim_name}: Anim, Shadow et Offsets doivent avoir la même taille')
+    if anim_sheet.width % fw or anim_sheet.height % fh:
+        raise ValueError(f'{anim_name}: taille de cellule incorrecte')
     cols = anim_sheet.width // fw
     rows = anim_sheet.height // fh
-    if cols != len(durations) or rows != 8:
+    if cols != len(durations) or rows not in (1, 8):
         raise ValueError(f'{anim_name} inattendue: {cols} colonnes, {rows} lignes')
 
     atlas = data['image']
@@ -188,8 +196,8 @@ def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE
     dedupe = {}
     sequences = []
 
-    for engine_dir in range(8):
-        sheet_row = (8 - engine_dir) % 8
+    for engine_dir in range(rows):
+        sheet_row = (-engine_dir) % rows
         seq = []
         for col in range(cols):
             box = (col * fw, sheet_row * fh, col * fw + fw, sheet_row * fh + fh)
@@ -240,7 +248,7 @@ def add_animation(blob, sprite_dir, anim_name='Pose', frame_type=POSE_FRAME_TYPE
         'internal': internal, 'copy': -1, 'rush': -1, 'hit': -1,
         'return': -1, 'seqs': sequences}
     return serialize_blob(data), {'animation': anim_name, 'frame_type': frame_type,
-                                   'frames': cols * 8,
+                                   'frames': cols * rows,
                                    'tuiles_ajoutees': len(additions),
                                    'atlas': atlas.size,
                                    'tuile': (data['tw'], data['th'])}
@@ -301,7 +309,7 @@ def main():
     parsed = parse_blob(reloaded.payload)
     frame_type_attendu = POSE_FRAME_TYPE if args.migrer else args.frame_type
     assert frame_type_attendu in parsed['groups']
-    assert len(parsed['groups'][frame_type_attendu]['seqs']) == 8
+    assert len(parsed['groups'][frame_type_attendu]['seqs']) in (1, 8)
     print(args.out, info, 'groupes', sorted(parsed['groups']))
 
 

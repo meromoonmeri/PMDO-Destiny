@@ -5,7 +5,7 @@ package.preload['origin.menu.skill.SkillSelectMenu']=function() return {} end
 package.preload['origin.menu.team.AssemblySelectMenu']=function() return {} end
 package.preload['destiny.equipe_scene']=function() return {Suivre=function() end} end
 package.preload['destiny.cinematique']=function() return {NomEspece=function(_,n) return n end} end
-package.preload['destiny.missions_reverie']=function() return {} end
+package.preload['destiny.missions_reverie']=function() return {NotifierRetour=function()end} end
 Direction={Up='Up',Down='Down'}
 RogueElements={Rect=function(x,y,w,h)return {x=x,y=y,w=w,h=h} end}
 RogueEssence={Ground={GroundObject=function() return {OnMapInit=function()end,SetTriggerType=function(self,t)self.trigger=t end} end,GroundEntity={EEntityTriggerTypes={Touch='Touch',Action='Action'}}}}

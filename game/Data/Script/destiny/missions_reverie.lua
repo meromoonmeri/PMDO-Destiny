@@ -70,9 +70,27 @@ function missions.Completer(zone, reussi)
   local m = missions.Actuelle()
   if m ~= nil and m.Etat == 'en_cours' and m.Zone == zone and reussi then
     m.Etat = 'reussie'
+    m.AvisRetour = true
     return true
   end
   return false
+end
+
+-- Annonces de retour, après « La dernière sortie » et l’arrivée en ville.
+-- Le tableau reste le seul endroit qui remet la récompense de la mission.
+function missions.NotifierRetour()
+  local d = destiny()
+  if d.AvisOuvertureFosse then
+    UI:ResetSpeaker(false)
+    UI:WaitShowDialogue('La Fosse Cascade est désormais ouverte à l’exploration libre depuis la sortie est de Réverie !')
+    d.AvisOuvertureFosse = nil
+  end
+  local m = missions.Actuelle()
+  if m ~= nil and m.Etat == 'reussie' and m.AvisRetour then
+    UI:ResetSpeaker(false)
+    UI:WaitShowDialogue('Mission accomplie ! Votre récompense vous attend au tableau des missions de Réverie.')
+    m.AvisRetour = nil
+  end
 end
 
 function missions.Reclamer()

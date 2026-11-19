@@ -105,7 +105,9 @@ def verifier_refectoire() -> None:
     source = (ROOT / 'game/Data/Script/destiny/ground/guilde_destiny_refectoire/init.lua'
               ).read_text(encoding='utf-8')
     assert "require 'destiny.guilde_effectif'" in source
-    assert source.count('guilde_effectif.RepasImmediat') == 3, 'Init, Enter et GameLoad'
+    assert 'InstallerConvive' in source and 'RepasImmediat' in source
+    assert source.count('  repas_en_cours()') == 2, 'Enter et GameLoad'
+    assert "'_Action'" in source and 'membre.role' in source, 'rôles présentés en jeu'
 
 
 def main() -> None:

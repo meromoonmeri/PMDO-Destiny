@@ -315,8 +315,10 @@ for _, e in ipairs(events) do
 end
 assert(lyra_normale, 'après un retour en ville, Lyra doit reprendre sa réplique normale')
 
-zone.ExitSegment(zobj, 'Cleared', false, 0, 0)
-assert(events[#events][1] == 'enter_zone' and events[#events][2] == 'grotte_verdoyante' and events[#events][4] == 1)
+events = {}
+zone.ExitSegment(zobj, 'Cleared', false, 0, 7)
+assert(#events == 1 and events[1][1] == 'enter_zone' and events[1][2] == 'grotte_verdoyante' and events[1][4] == 1,
+  'la fin du 8F ne clôt pas l’expédition')
 
 zone.ExitSegment(zobj, 'Failed', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 1 and SV.Destiny.AlerteShinx == 'a_secourir')
@@ -340,8 +342,10 @@ ewc3.Enter(m_ewc3)
 assert(actors.Luxray_Ewc3 == nil and actors.PLAYER.Position.Y == 248 and actors.Teammate1.Position.Y == 256)
 SV.Destiny.AlerteShinx = 'a_secourir'
 
+events = {}
 zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
-assert(SV.Destiny.GrotteVerdoyantePhase == 3 and events[#events][1] == 'enter_zone' and events[#events][4] == 1)
+assert(SV.Destiny.GrotteVerdoyantePhase == 3 and #events == 1 and events[1][1] == 'enter_zone' and events[1][4] == 1,
+  'les retrouvailles précèdent le bilan')
 
 -- 3. fgv1 : PreBattle (réveil Nilo + UN éclair blanc d'incompréhension + DOUBLE éclair
 --    blanc d'apparition, sans aucune animation d'eau, Lixy tremblant visiblement,
@@ -459,15 +463,14 @@ end
 assert(fuite_sud and fuite_vitesse == 3, 'Kabutops doit fuir vers le sud en courant (3 px/image)')
 assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
 
-local saw_lyra_reunion, saw_job_clear, saw_journal, saw_center_on, saw_center_off = false, false, false, false, false
+local saw_lyra_reunion, fins = false, 0
 for _, e in ipairs(events) do
   if e[1] == 'dlg' and tostring(e[2]):find('précipitée dans la grotte', 1, true) then saw_lyra_reunion = true end
-  if e[1] == 'bgm' and e[2] == 'Job Clear!.ogg' then saw_job_clear = true end
-  if e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true) then saw_journal = true end
-  if e[1] == 'center' and e[2] == true then saw_center_on = true end
-  if e[1] == 'center' and e[2] == false then saw_center_off = true end
+  assert(not (e[1] == 'bgm' and e[2] == 'Job Clear!.ogg'), 'aucun jingle doublant le bilan natif')
+  assert(not (e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true)), 'aucun faux journal')
+  if e[1] == 'end_day' then fins = fins + 1 end
 end
-assert(saw_lyra_reunion and saw_job_clear and saw_journal and saw_center_on and saw_center_off, 'retrouvailles Lyra ou Journal de Victoire Halcyon manquants')
+assert(saw_lyra_reunion and fins == 1 and SV.Destiny.AvisOuvertureFosse, 'retrouvailles puis une seule clôture PMDO')
 assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
 
 events = {}

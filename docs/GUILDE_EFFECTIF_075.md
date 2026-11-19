@@ -1,7 +1,10 @@
 # Guilde de Réverie Town — effectif et émotes de repas (v0.7.5)
 
-Dix membres, dix caractères, et **une émote de repas pour chacun**, calquée sur
-celle d'Halcyon (`Data/Emote/eating.json` + `Content/Particle/Emote_Eating.dir`).
+**État intégré : dix convives au réfectoire, chacun avec un vrai `Eat`.**
+L’émote de miettes, reprise d’Halcyon (`Data/Emote/eating.json` +
+`Content/Particle/Emote_Eating.dir`), s’ajoute au mouvement du corps.
+Les explications du premier lot d’émotes et des planches source sont conservées
+ci-dessous ; elles ne décrivent pas toutes l’état final des ressources natives.
 
 ---
 
@@ -67,11 +70,11 @@ déduite de son caractère. `cycles` = nombre de bouchées (`0` = repas continu)
 | `Simisage` | Cuisinier | Plante | M | 2 | 22 | `happy` | — |
 | `Melofee` | Infirmière, responsable du réveil | Fée | F | continu | 10 | `happy` | **oui** |
 | `Cizayox` | Combattant | Insecte / Acier | M | 1 | 8 | — | — |
-| `Noctali` | Explorateur | Ténèbres | M | 1 | 18 | — | — |
+| `Noctali` | Explorateur et cartographe | Ténèbres | M | 1 | 18 | — | — |
 | `Dimoret` | Éclaireuse | Ténèbres / Glace | F | 2 | 4 | `notice` | — |
 | `Draby` | Jeune recrue, leader de la Team Star | Dragon | M | 3 | 2 | `glowing` | — |
-| `Pandespiegle` | Jeune recrue | Combat | M | 2 | 5 | `notice` | — |
-| `Capumain` | Recrue | Normal | F | 2 | 12 | `happy` | — |
+| `Pandespiegle` | Recrue à l’entraînement | Combat | M | 2 | 5 | `notice` | — |
+| `Capumain` | Recrue chargée des livraisons | Normal | F | 2 | 12 | `happy` | — |
 
 Lecture des choix, tous calés sur la personnalité :
 
@@ -128,8 +131,8 @@ guilde.MEMBRES / guilde.ORDRE / guilde.BLOCS / guilde.TEAM_STAR
 guilde.Membre(id_ou_espece_ou_nom)   -- insensible à la casse et aux accents de saisie
 guilde.ParBloc('explorateurs')
 guilde.Acteurs(liste)                 -- { {membre = …, acteur = …} } des PNJ présents
-guilde.Manger(acteur, id, cycles?)     -- émote « eating » (+ anim de corps « Eat » si la planche l'a)
-guilde.Bouchee(acteur, id)             -- une seule bouchée
+guilde.Manger(acteur, id, cycles?)     -- vrai Eat en boucle ; cycles règle uniquement les miettes
+guilde.Bouchee(acteur)                 -- un seul cycle du corps et des miettes
 guilde.Repas(liste?, duree?)           -- repas collectif désynchronisé, puis FinRepas
 guilde.RepasImmediat(liste?)           -- salle déjà en repas (pas de coroutine)
 guilde.FinRepas(liste?)                -- coupe l'émote, repose les corps, remet Mélofée en pose
@@ -141,18 +144,18 @@ Deux points de sûreté :
 
 1. `Manger` ne lance l'animation de corps `Eat` que si la planche de l'espèce la
    référence réellement (`GetAnimIndex` ≥ 0 **et** `GetReferencedAnimIndex` = index) ;
-   sinon le personnage garde simplement son attente. Aucune espèce n'est cassée si
-   elle n'a pas l'animation.
+   sinon la fonction renvoie `false` et ne joue pas les miettes seules.
 2. `Acteurs()` ignore silencieusement les membres absents de la carte : une carte
    qui n'accueille que trois PNJ marche sans réglage.
 
 ## 6. Branchement dans le réfectoire
 
-`ground/guilde_destiny_refectoire/init.lua` (47 lignes → 56) appelle
-`guilde_effectif.RepasImmediat()` dans `Init`, `Enter` et `GameLoad`, sous `pcall` :
-la salle s'ouvre **repas déjà en cours**, chacun mâchant en boucle, comme la salle à
-manger d'Halcyon. Tant que les PNJ ne sont pas posés sur la carte, l'appel ne fait
-rien (aucun acteur trouvé) — le comportement actuel du réfectoire est inchangé.
+`ground/guilde_destiny_refectoire/init.lua` installe les dix PNJ sur le
+plancher existant dans `Enter` et `GameLoad`. `InstallerConvive` réutilise le
+PNJ s’il est déjà dans la sauvegarde et contrôle son `Eat`. Aucune carte,
+porte ni collision du décor n’est modifiée. Le repas est déjà en cours quand
+le joueur entre. Parler à un membre interrompt son animation, affiche son
+rôle et sa réplique, puis le remet face à sa place et relance le repas.
 
 Pour une scène jouée (arrivée des recrues, service de Simisage), utiliser `Repas`,
 qui attend les délais puis coupe :
@@ -173,7 +176,7 @@ du `Repas`.
 PYTHONPATH=tools/tests python3 tools/tests/test_guilde_effectif.py
 ```
 
-- **Lua** (15 groupes) : effectif complet et identifiants uniques, résolution par
+- **Lua** (17 groupes) : effectif complet et identifiants uniques, résolution par
   espèce/casse, blocs et Team Star, une seule pose de service, cycles respectés
   par membre, cycles forcés, acteur absent, repas collectif (9 présents, 9 délais
   distincts, Draby ouvre à 2 images et Simisage ferme à 22), fin de repas (émote
@@ -185,21 +188,23 @@ PYTHONPATH=tools/tests python3 tools/tests/test_guilde_effectif.py
   non-régression des 9 émotes de base, en-tête du `.dir` (32×32, 0 direction,
   6 images), câblage du réfectoire.
 
-## 8. Ce qui reste à faire pour voir les dix membres en jeu
+## 8. Animations natives livrées
 
-1. **Les poser dans les cartes** de la Guilde (réfectoire, hall, dortoirs) avec les
-   `id` ci-dessus : ce lot fournit le comportement, pas le placement. Les
-   `.rsground` de la Guilde ne sont pas dans ce clone (seules les cartes de Réverie
-   Town y sont), il faut donc soit les fichiers de carte, soit la liste des
-   marqueurs et spawners souhaités.
-2. **Données d'espèce** : sur les dix, seuls `scizor` et `umbreon` ont un
-   `game/Data/Monster/*.json` dans ce clone ; les huit autres (gardevoir,
-   farfetchd, simisage, clefairy, weavile, bagon, pancham, aipom) devront recevoir
-   leur fiche d'espèce, ou être pris dans la banque PMU si elle les contient déjà.
-3. **Planches de personnage** (`.chara`) : aucune n'est versionnée ici, donc les
-   animations `Pose` / `Eat` / `Sleep` ne peuvent pas être vérifiées espèce par
-   espèce — le code s'en accommode (replis), mais un contrôle visuel en jeu reste
-   nécessaire pour Mélofée (pose) et Draby (bouchées rapides).
+Les dix feuilles utilisées en jeu (forme 0, peau normale, sexe du membre)
+contiennent l’action **`Eat` = 48**. Les vrais `Eat` du moteur pour Noctali et
+Capumain sont conservés ; ceux de Mélofée, Canarticho, Cizayox, Gardevoir,
+Draby, Dimoret, Simisage et Pandespiègle sont intégrés dans l’override `game`.
+Les conteneurs de base restent intacts. Les offsets des `.chara` et de
+`game/Content/Chara/index.idx` sont reconstruits ensemble.
+
+```bash
+python tools/tests/test_guilde_eat_runtime.py
+```
+
+Ce contrôle lit les conteneurs réellement résolus, rejette les alias, cases
+vides et pistes fixes, puis vérifie l’accès à chaque convive et à la sortie.
+Les autres fiches d’animation ci-dessous restent des sources : ce lot
+n’intègre pas de nouvelles scènes dans le hall ou les dortoirs.
 
 ## 9. Aperçu visuel des émotes
 
@@ -259,10 +264,9 @@ est redessinée. Ici, ce n'est pas transposable de façon sûre :
 - `GraphicsManager.GetChara` lit `Content/Chara/{espèce}.chara` en **indexant des
   positions d'octets** (`CharaIndex.GetPosition(espèce, forme, peau, genre)`) puis
   désérialise en binaire (`CharSheet.Load(BinaryReader)`) ;
-- **aucun `.chara` n'est versionné** dans ce dépôt (`base/Content/Chara` vide) : il
-  n'y a pas de fichier modèle à copier, ni d'index à respecter ;
-- en fabriquer un reviendrait à livrer une planche complète d'espèce, non testable
-  ici (aucun moyen de vérifier le rendu en jeu dans ce dépôt).
+- à l’étape des émotes seules, aucun import de planche dédiée n’avait été réalisé ;
+  le calot reste une émote de service indépendante. L’intégration native ultérieure
+  porte seulement sur `Eat` (§ 8).
 
 ### Ce qui rend le calot possible : le point d'ancrage « tête »
 
@@ -469,16 +473,13 @@ de fichier, même `AnimData.xml`).
 ### Injection dans les `.chara`
 
 ```sh
-python3 tools/ajouter_pose_chara.py \
-  --chara game/Content/Chara/371.chara \
-  --sprites art/sprites/guilde_effectif_v1/0371_Draby \
-  --anim Eat --frame-type 48 --out /tmp/371.chara
+python tools/importer_eat_guilde.py
+python tools/tests/test_guilde_eat_runtime.py
 ```
 
-Puis `--anim Wake --frame-type 47` et `--anim Pose --frame-type 50`. Aucun `.chara`
-n'étant versionné dans ce dépôt, l'injection n'a pas pu être rejouée ici ; le code
-du mod se rabat proprement tant qu'elle n'est pas faite
-(`guilde_effectif.Animer`).
+L’import est idempotent ; il reprend le conteneur du mod ou, à défaut, celui
+de la base et conserve les autres variantes. Les planches `Wake`, `Sleep` et
+`Pose` ne sont pas injectées par cet outil.
 
 ### Aperçus
 
