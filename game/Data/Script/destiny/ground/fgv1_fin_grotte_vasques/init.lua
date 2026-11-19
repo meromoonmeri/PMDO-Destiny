@@ -26,13 +26,14 @@ local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
 local SOL_BOSS = {x = 244, y = 244}
 local SOL_HEROS = {x = 220, y = 272}
 local SOL_PARTENAIRE = {x = 260, y = 276}
--- Nilo est debout sur les marches qui montent aux vasques (y = 192..200),
--- a droite de l'axe des vasques (x = 184..280) pour rester lisible a cote
--- du duo qui arrive par le couloir sud.
-local SOL_NILO_MARCHES = {x = 312, y = 192}
--- Il se tasse ensuite CONTRE la paroi est des marches, toujours au nord,
--- sans jamais descendre dans la salle.
-local SOL_NILO_TERREUR = {x = 320, y = 216}
+-- Nilo est sur la TERRASSE, la plus haute des vasques (sol libre y = 152..165),
+-- et non sur les marches du bas.
+local SOL_NILO_TERRASSE = {x = 256, y = 160}
+-- La corniche : il bascule de la terrasse jusque dans la salle.
+local SOL_NILO_CHUTE = {x = 256, y = 240}
+-- Le recul force : le duo est repousse de plusieurs cases vers le sud.
+local SOL_RECUL_HEROS = {x = 232, y = 312}
+local SOL_RECUL_PARTENAIRE = {x = 268, y = 308}
 local CAM_FACE = {x = 252, y = 224}
 local CAM_ENTREE = {x = 240, y = 264}
 
@@ -64,6 +65,27 @@ local function regarder_cible(ch, cible, vitesse)
   else
     GROUND:CharTurnToChar(ch, cible)
   end
+end
+
+-- Émotes réellement déclarées dans base/Data/Emote (le nom est sensible à la
+-- casse) : angry, eating, exclaim, glowing, happy, notice, question, shock,
+-- sweatdrop, sweating, reveil, pose_infirmiere. Un identifiant inconnu rend
+-- nil dans DataManager.GetEmote et ferait planter StartEmote.
+local EMOTES_SURS = {
+  angry = true, eating = true, exclaim = true, glowing = true, happy = true,
+  notice = true, pose_infirmiere = true, question = true, reveil = true,
+  shock = true, sweatdrop = true, sweating = true,
+}
+
+local function emote_sur(ch, nom, son)
+  if ch == nil then return end
+  if not EMOTES_SURS[nom] then
+    print('[fgv1] emote inconnue ignoree : ' .. tostring(nom))
+    return
+  end
+  pcall(function()
+    cinematique.Emote(ch, nom, son)
+  end)
 end
 
 local function couper_musique_choc()
@@ -223,8 +245,8 @@ end
 function fgv1.PreBattle(is_rematch, map)
   -- La decouverte de Nilo ne se joue qu'une fois. La phase passe a 1 des le
   -- debut de la scene : si la carte est rechargee (rechargement de scripts,
-  -- reentree par l'entree), Enter prend la branche revanche au lieu de
-  -- rejouer tout l'avertissement, l'eclair et la revelation de Kabutops.
+  -- Prompt et reentree), Enter prend la branche revanche au lieu de rejouer
+  -- l'avertissement, la chute et la revelation de Kabutops.
   if not is_rematch then
     SV.Destiny = SV.Destiny or {}
     SV.Destiny.GrotteVerdoyantePhase = 1
@@ -233,8 +255,9 @@ function fgv1.PreBattle(is_rematch, map)
   local retablir_eau = suspendre_eau_precombat(map)
   local hero = CH('PLAYER')
   local partenaire = equipe_scene.Partenaire(240, 344, Direction.Up)
+  -- Nilo est debout sur la terrasse, tout en haut des vasques.
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
-    SOL_NILO_MARCHES.x, SOL_NILO_MARCHES.y, Direction.Down)
+    SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
   -- Il n'a jamais dormi : il grelotte deja quand le duo arrive.
   if not is_rematch then trembler_de_peur(nilo) end
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
@@ -255,7 +278,7 @@ function fgv1.PreBattle(is_rematch, map)
   GAME:FadeIn(18)
   SOUND:PlayBGM(is_rematch and 'Rising Fear.ogg' or 'Lower Spring Cave.ogg', true)
 
-  -- Repérer Nilo dans le cadre avant de parler. Le duo ne traverse aucune marche.
+  -- Le duo monte jusqu'au pied des vasques et leve les yeux vers la terrasse.
   local arrivee = {
     TASK:BranchCoroutine(function()
       GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 40, false)
@@ -278,57 +301,94 @@ function fgv1.PreBattle(is_rematch, map)
   GAME:WaitFrames(8)
 
   if not is_rematch then
+    -- ---- 1. Nilo les voit, et hurle de reculer ----
     if partenaire ~= nil then
-      cinematique.Emote(partenaire, 'exclaim', 'EVT_Emote_Exclaim')
+      emote_sur(partenaire, 'exclaim', 'EVT_Emote_Exclaim')
       GAME:WaitFrames(12)
-      cinematique.Dire(partenaire, 'Worried', 'Nilo ?[pause=10] Ta maman nous a envoyés. On vient te ramener.', 'standard')
+      cinematique.Dire(partenaire, 'Worried', 'Nilo ! Ta maman nous envoie. On vient te chercher, descends !', 'standard')
     end
     UI:ResetSpeaker()
     regarder_cible(nilo, partenaire or hero, 3)
-    GAME:WaitFrames(8)
-    cinematique.Dire(nilo, 'Trembling',
-      'N’approchez pas ![pause=10] Reculez, vite, il est juste derrière vous…', 'droite')
+    GAME:WaitFrames(10)
+    cinematique.Dire(nilo, 'Worried',
+      'N’approchez pas ![pause=10] Reculez, reculez vite ![pause=8] Il est juste derrière vous…', 'droite')
     UI:ResetSpeaker()
 
-    -- Avertissement interrompu : le choc coupe la musique plutôt que de lancer
-    -- aussitôt un autre thème. Au premier éclair, la clairière est encore vide.
-    couper_musique_choc()
-    GAME:WaitFrames(14)
-    SOUND:PlayBattleSE('EVT_Battle_Flash')
-    eclair_blanc(3, 11)
-    GAME:WaitFrames(8)
-    local reactions = {
+    -- ---- 2. Le vent se leve, comme dans le Gouffre Silence ----
+    SOUND:PlayBattleSE('DUN_Ominous_Wind')
+    SOUND:PlayBattleSE('DUN_Howling_Wind')
+    GAME:WaitFrames(16)
+    secouer_ecran(2, 3, 14)
+    GAME:WaitFrames(10)
+
+    -- ---- 3. Il perd pied sur la terrasse et tombe dans la salle ----
+    SOUND:PlayBattleSE('EVT_Emote_Startled')
+    local chute = {
       TASK:BranchCoroutine(function()
-        GROUND:MoveToPosition(nilo, SOL_NILO_TERREUR.x, SOL_NILO_TERREUR.y, true, 2)
-        tourner_vers(nilo, Direction.UpLeft, 3)
-        trembler_de_peur(nilo)
+        emote_sur(nilo, 'exclaim')
+        GROUND:MoveToPosition(nilo, SOL_NILO_CHUTE.x, SOL_NILO_CHUTE.y, true, 2)
       end),
     }
     if hero ~= nil then
-      reactions[#reactions + 1] = TASK:BranchCoroutine(function()
-        tourner_vers(hero, Direction.UpLeft, 3)
-        GAME:WaitFrames(10)
-        tourner_vers(hero, Direction.UpRight, 3)
+      chute[#chute + 1] = TASK:BranchCoroutine(function()
+        GAME:WaitFrames(4)
+        tourner_vers(hero, Direction.Up, 3)
+      end)
+    end
+    TASK:JoinCoroutines(chute)
+    SOUND:PlayBattleSE('DUN_Tile_Step')
+    secouer_ecran(2, 4, 12)
+    GAME:WaitFrames(6)
+    if partenaire ~= nil then
+      emote_sur(partenaire, 'shock', 'EVT_Emote_Exclaim_2')
+      cinematique.Dire(partenaire, 'Surprised', 'Nilo ![pause=8] Qu’est-ce que tu fais ?!', 'standard')
+    end
+    UI:ResetSpeaker()
+
+    -- ---- 4. Le souffle les repousse tous les trois vers le sud ----
+    SOUND:PlayBattleSE('DUN_Gust_Trap')
+    secouer_ecran(4, 5, 26)
+    local recul = {
+      TASK:BranchCoroutine(function()
+        trembler_de_peur(nilo)
+        GROUND:MoveToPosition(nilo, 240, 300, false, 1.4)
+      end),
+    }
+    if hero ~= nil then
+      recul[#recul + 1] = TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, SOL_RECUL_HEROS.x, SOL_RECUL_HEROS.y, true, 2.4)
+        tourner_vers(hero, Direction.Up, 3)
       end)
     end
     if partenaire ~= nil then
-      reactions[#reactions + 1] = TASK:BranchCoroutine(function()
-        GAME:WaitFrames(5)
-        cinematique.Emote(partenaire, 'question', 'EVT_Emote_Confused')
+      recul[#recul + 1] = TASK:BranchCoroutine(function()
+        GAME:WaitFrames(3)
+        GROUND:MoveToPosition(partenaire, SOL_RECUL_PARTENAIRE.x, SOL_RECUL_PARTENAIRE.y, true, 2.4)
         tourner_vers(partenaire, Direction.Up, 3)
       end)
     end
-    TASK:JoinCoroutines(reactions)
-    if partenaire ~= nil then
-      cinematique.Dire(partenaire, 'Surprised', 'Tu as vu ?[pause=8] Il n’y avait rien, juste devant nous…', 'standard')
-    end
-    cinematique.Dire(nilo, 'Crying', 'Cette fois, il est tout près…', 'droite')
+    TASK:JoinCoroutines(recul)
+    GAME:WaitFrames(8)
+    cinematique.Dire(nilo, 'Teary-Eyed', 'Je vous avais dit de reculer… Il arrive.', 'droite')
     UI:ResetSpeaker()
 
-    -- Cotovol / Électhor : le noir donne la parole à la menace avant de la
-    -- montrer. Pas de portrait, pas de musique sous la voix, pas de geyser.
+    -- 5. Le premier éclat ne montre RIEN : le duo se demande ce qu'il a vu.
+    SOUND:PlayBattleSE('EVT_Battle_Flash')
+    eclair_blanc(3, 11)
+    GAME:WaitFrames(20)
+    if partenaire ~= nil then
+      emote_sur(partenaire, 'question')
+      GAME:WaitFrames(6)
+      cinematique.Dire(partenaire, 'Worried', 'Tu as vu ? Il n’y avait rien…', 'standard')
+    end
+    UI:ResetSpeaker()
+    GAME:WaitFrames(8)
+
+    -- 6. Cotovol / Électhor : la voix prend la parole dans le noir avant
+    --    toute image. Pas de portrait, pas de musique sous la voix.
     SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
     secouer_ecran(2, 4, 16)
+    couper_musique_choc()
     GAME:FadeOut(false, 10)
     GAME:WaitFrames(30)
     parler_voix_abysses('Vous avez entendu le premier grondement.[pause=12] Le second est pour vous.')
@@ -353,20 +413,25 @@ function fgv1.PreBattle(is_rematch, map)
 
     cinematique.Dire(kabutops, 'Angry', 'Cette fosse m’appartient. Faites demi-tour.', 'droite')
     UI:ResetSpeaker()
-    -- Au lieu de rester côte à côte, le duo couvre Nilo : le partenaire se
-    -- décale à droite pendant que le héros serre la ligne face au gardien.
+    -- Le duo ne remonte plus vers le nord : il tient sa position de recul et
+    -- fait seulement face. Nilo se glisse derrière eux pour se mettre a l'abri.
     local garde = {}
     if hero ~= nil then
       garde[#garde + 1] = TASK:BranchCoroutine(function()
-        GROUND:MoveToPosition(hero, 236, 272, false, 1.4)
         regarder_cible(hero, kabutops, 3)
       end)
     end
     if partenaire ~= nil then
       garde[#garde + 1] = TASK:BranchCoroutine(function()
-        GAME:WaitFrames(5)
-        GROUND:MoveToPosition(partenaire, 277, 268, false, 1.6)
+        GAME:WaitFrames(4)
         regarder_cible(partenaire, kabutops, 3)
+      end)
+    end
+    if nilo ~= nil then
+      garde[#garde + 1] = TASK:BranchCoroutine(function()
+        GAME:WaitFrames(2)
+        GROUND:MoveToPosition(nilo, 248, 332, false, 1.4)
+        tourner_vers(nilo, Direction.Up, 3)
       end)
     end
     if #garde > 0 then TASK:JoinCoroutines(garde) end
@@ -400,15 +465,15 @@ end
 
 function fgv1.PostBattle()
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(216, 268, Direction.Up)
-  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 296, 240, Direction.Left)
+  local partenaire = equipe_scene.Partenaire(276, 272, Direction.Up)
+  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 292, 236, Direction.Down)
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
     SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
 
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 240, 264, Direction.Up)
+    GROUND:TeleportTo(hero, 236, 268, Direction.Up)
   end
   SOUND:FadeOutBGM(12)
   GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 1, false)
@@ -417,41 +482,44 @@ function fgv1.PostBattle()
   GAME:WaitFrames(12)
   trembler_de_peur(nilo)
 
-  cinematique.Emote(kabutops, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+  emote_sur(kabutops, 'sweatdrop', 'EVT_Emote_Sweatdrop')
   GAME:WaitFrames(12)
   cinematique.Dire(kabutops, 'Pain', 'Ksshh… Votre détermination surpasse la fureur du courant… Emportez le petit et laissez mes vasques en paix.', 'droite')
   UI:ResetSpeaker()
   cinematique.Respirer(10)
 
-  -- 7. Kabutops vaincu fuit vers le sud EN COURANT (plus aucun effet d'eau).
+  -- 7. Kabutops vaincu fuit VERS LE SUD EN COURANT, traverse toute la salle et
+  --    sort par le couloir sud (256,344 : 16 cases de chemin libre verifiees).
+  --    Il ne s'enfonce plus dans le decor au milieu de la piece.
   arreter_tremblement(nilo)
   tourner_vers(kabutops, Direction.Down, 3)
   GAME:WaitFrames(4)
   SOUND:PlayBattleSE('DUN_Tile_Step')
   local fuite = {
     TASK:BranchCoroutine(function()
-      GAME:MoveCamera(240, 240, 16, false)
+      GAME:MoveCamera(248, 300, 22, false)
     end),
     TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(kabutops, 240, 352, true, 3)
+      GROUND:MoveToPosition(kabutops, 256, 344, true, 3)
     end),
   }
   TASK:JoinCoroutines(fuite)
+  GAME:WaitFrames(6)
   GROUND:RemoveCharacter('Kabutops_Boss')
-  GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 10, false)
-  GAME:WaitFrames(8)
+  GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 12, false)
+  GAME:WaitFrames(10)
 
   SOUND:PlayBGM('Lower Spring Cave.ogg', true)
 
   -- Nilo se relève et rejoint le duo.
   local retour_nilo = {
     TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(nilo, 256, 248, true, 2)
+      GROUND:MoveToPosition(nilo, 268, 252, true, 2)
       tourner_vers(nilo, Direction.Down, 4)
     end),
   }
   TASK:JoinCoroutines(retour_nilo)
-  cinematique.Emote(nilo, 'happy')
+  emote_sur(nilo, 'happy')
   GAME:WaitFrames(10)
   cinematique.Dire(nilo, 'Teary-Eyed', 'Vous… vous avez vraiment tenu tête à ' .. cinematique.NomEspece('kabutops', 'Kabutops') .. ' pour me sauver !!', 'droite')
 
@@ -464,21 +532,21 @@ function fgv1.PostBattle()
   SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
   local reactions_appel = {
     TASK:BranchCoroutine(function()
-      cinematique.Emote(nilo, 'exclaim')
+      emote_sur(nilo, 'exclaim')
       tourner_vers(nilo, Direction.Down, 4)
     end),
   }
   if partenaire ~= nil then
     table.insert(reactions_appel, TASK:BranchCoroutine(function()
       GAME:WaitFrames(5)
-      cinematique.Emote(partenaire, 'exclaim')
+      emote_sur(partenaire, 'exclaim')
       tourner_vers(partenaire, Direction.Down, 4)
     end))
   end
   if hero ~= nil then
     table.insert(reactions_appel, TASK:BranchCoroutine(function()
       GAME:WaitFrames(11)
-      cinematique.Emote(hero, 'exclaim')
+      emote_sur(hero, 'exclaim')
       tourner_vers(hero, Direction.Down, 4)
     end))
   end
@@ -498,7 +566,7 @@ function fgv1.PostBattle()
   GROUND:CharSetAnim(nilo, 'Hop', false)
   GAME:WaitFrames(16)
   if GROUND.CharEndAnim ~= nil then GROUND:CharEndAnim(nilo) end
-  cinematique.Emote(nilo, 'happy')
+  emote_sur(nilo, 'happy')
   GAME:WaitFrames(10)
   cinematique.Dire(nilo, 'Teary-Eyed', 'Maman !! Tu nous as rejoints jusqu’ici !', 'standard')
   cinematique.Respirer(10)

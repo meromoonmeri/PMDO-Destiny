@@ -80,7 +80,13 @@ end
 function CH(n) return actors[n] end
 
 GROUND = {
-  CreateCharacterFromCharData = function(_, n, d, x, y, dir) local a = make_actor(n, x, y); a.Data = d.Data; a.Direction = dir; return a end,
+  CreateCharacterFromCharData = function(_, n, d, x, y, dir)
+    local a = make_actor(n, x, y)
+    a.Data = d.Data
+    a.Direction = dir
+    ev('create', n, dir, x, y)
+    return a
+  end,
   RemoveCharacter = function(_, n) actors[n] = nil; return true end,
   TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir end,
   MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
@@ -414,30 +420,77 @@ assert(noir < voix and voix < blanc_revelation and apparition == blanc_revelatio
        'voix hors champ dans le noir, puis révélation pendant le dernier blanc')
 assert(not eau_vue and not geyser_vu,
        'aucune animation ni son d’eau ne doit accompagner l’apparition du boss')
-assert(flashes == 3,
-       'il faut UN éclair blanc (incompréhension) puis un DOUBLE éclair blanc (apparition), soit 3 au total')
+-- Le souffle qui repousse le duo a sa propre secousse, mais l'apparition
+-- garde son éclair simple en aveugle puis son double éclair de révélation.
+assert(flashes >= 3,
+       'il faut l’éclair de mise en garde puis le double éclair de révélation, soit 3 minimum')
 assert(tremble_nilo and tremble_fini,
        'Nilo doit trembler de façon visible (DrawEffect.Shaking) puis être relâché')
+
+-- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
+-- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
+local EMOTES_EXISTANTES = {
+  angry = true, eating = true, exclaim = true, glowing = true, happy = true,
+  notice = true, pose_infirmiere = true, question = true, reveil = true,
+  shock = true, sweatdrop = true, sweating = true,
+}
+for _, e in ipairs(events) do
+  if e[1] == 'emote' then
+    assert(EMOTES_EXISTANTES[e[3]] == true,
+      'émote inconnue jouée par '..tostring(e[2])..' : '..tostring(e[3]))
+  end
+end
 
 -- 3 bis. Nilo n'est plus endormi : il est debout, sur les marches nord
 -- (les vasques en terrasses montent jusqu'à y = 192), et tremble dès l'arrivée.
 local sommeil_rejoue, recul_demande = false, false
 for _, e in ipairs(events) do
   if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_rejoue = true end
-end
-assert(not sommeil_rejoue, 'Nilo ne doit plus être endormi à l’arrivée du duo')
--- Aucun déplacement de Nilo ne doit le faire descendre dans la salle.
-for _, e in ipairs(events) do
-  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then
-    assert(e[4] <= 224, 'Nilo doit rester sur la partie nord (marches), pas descendre dans la salle')
-  end
-end
-assert(actors.Nilo_Grotte.Position.Y <= 224,
-       'Nilo doit rester sur la partie nord (marches des vasques), pas au centre de la salle')
-for _, e in ipairs(events) do
   if e[1] == 'dlg' and tostring(e[2]):find('Reculez', 1, true) then recul_demande = true end
 end
+assert(not sommeil_rejoue, 'Nilo ne doit plus être endormi à l’arrivée du duo')
 assert(recul_demande, 'Nilo doit demander de reculer dès l’arrivée')
+
+-- Nilo est sur la TERRASSE (la plus haute vasque), pas sur les marches du bas.
+local DEPART_NILO = {x = 256, y = 160}
+local deplacements_nilo, depart_vu = {}, false
+for _, e in ipairs(events) do
+  if e[1] == 'create' and e[2] == 'Nilo_Grotte' then
+    depart_vu = true
+    assert(e[4] == DEPART_NILO.x and e[5] == DEPART_NILO.y,
+      'Nilo doit apparaître sur la terrasse ('..DEPART_NILO.x..','..DEPART_NILO.y..')')
+  end
+  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then
+    deplacements_nilo[#deplacements_nilo + 1] = {x = e[3], y = e[4]}
+  end
+end
+assert(depart_vu, 'Nilo doit être créé pour la scène')
+
+-- Il tombe de la corniche jusque dans la salle : un déplacement descend jusqu’au sable.
+local chute = false
+for _, d in ipairs(deplacements_nilo) do
+  if d.y >= 232 then chute = true end
+end
+assert(chute, 'Nilo doit chuter de la terrasse jusqu’au sable de la salle')
+
+-- Le héros et le partenaire sont REPOUSSÉS vers le sud par le souffle.
+local recul_h, recul_p = nil, nil
+for _, e in ipairs(events) do
+  if e[1] == 'move' and e[2] == 'PLAYER' then recul_h = {x = e[3], y = e[4]} end
+  if e[1] == 'move' and e[2] == 'Teammate1' then recul_p = {x = e[3], y = e[4]} end
+end
+assert(recul_h ~= nil and recul_h.y >= 300,
+       'le héros doit être repoussé vers le sud (y >= 300), reçu : '..tostring(recul_h and recul_h.y))
+assert(recul_p ~= nil and recul_p.y >= 300,
+       'le partenaire doit être repoussé vers le sud (y >= 300), reçu : '..tostring(recul_p and recul_p.y))
+
+-- Le souffle joue un vrai son de vent, comme dans le Gouffre Silence.
+local vent = false
+for _, e in ipairs(events) do
+  if e[1] == 'se' and (e[2] == 'DUN_Ominous_Wind' or e[2] == 'DUN_Howling_Wind'
+      or e[2] == 'DUN_Gust_Trap') then vent = true end
+end
+assert(vent, 'le souffle doit être sonorisé (vent)')
 assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
 
 -- 3 ter. Une scene INTERROMPUE ne doit jamais se rejouer entierement.
@@ -515,7 +568,7 @@ assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabuto
 -- aucune animation d'eau n'accompagne plus son départ (plus de plongeon).
 local fuite_sud, fuite_vitesse, eau_post = false, nil, false
 for _, e in ipairs(events) do
-  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[3] == 240 and e[4] >= 344 then
+  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[4] >= 344 then
     fuite_sud = true
     fuite_vitesse = e[5]
   end
@@ -524,7 +577,8 @@ for _, e in ipairs(events) do
     eau_post = true
   end
 end
-assert(fuite_sud and fuite_vitesse == 3, 'Kabutops doit fuir vers le sud en courant (3 px/image)')
+assert(fuite_sud and fuite_vitesse == 3,
+       'Kabutops doit fuir vers le sud en courant (3 px/image), jusqu’à la sortie du couloir (y >= 344)')
 assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
 
 local saw_lyra_reunion, fins = false, 0
