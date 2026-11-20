@@ -57,12 +57,49 @@ def check_ground_tiles(rsground_path: Path) -> dict:
     return obj
 
 
+def check_antichambre(fond: dict) -> None:
+    """L'approche est un chemin dans le ground, pas une image ou un zoom."""
+    w, h = 72, 66
+    assert fond['TexSize'] == 1
+    for layer in [*(l['Tiles'] for l in fond['Layers']), fond['obstacles']]:
+        assert len(layer) == w and all(len(col) == h for col in layer)
+    markers = {m['EntName']: m['Collider'] for group in fond['Entities'] for m in group['Markers']}
+    assert markers['entrance'] == {'X': 222, 'Y': 492, 'Width': 16, 'Height': 16}
+    obs = fond['obstacles']
+    for x, col in enumerate(obs):
+        for y, cell in enumerate(col):
+            assert cell['Bounds'] == {'X': x * 8, 'Y': y * 8, 'Width': 8, 'Height': 8}
+            if x < 6 or x >= 66 or y >= 45:
+                assert fond['Layers'][0]['Tiles'][x][y]['Layers'][0]['Frames'][0]['Sheet'] == 'FGV1_PASSAGE_SUD'
+            if y >= 45 and (x < 20 or x > 40):
+                assert cell['Tags'] != 0, 'les parois latérales ne sont pas praticables'
+
+    def trajet(*ancres: tuple[int, int]) -> None:
+        for (x0, y0), (x1, y1) in zip(ancres, ancres[1:]):
+            d = max(1, abs(x1 - x0), abs(y1 - y0))
+            for i in range(d + 1):
+                x, y = round(x0 + (x1 - x0) * i / d), round(y0 + (y1 - y0) * i / d)
+                for col in range(x // 8, (x + 15) // 8 + 1):
+                    for row in range(y // 8, (y + 15) // 8 + 1):
+                        assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
+
+    trajet((222, 492), (246, 436), (292, 368), (292, 264), (292, 292))
+    trajet((198, 484), (222, 430), (268, 362), (268, 264), (268, 292))
+    trajet((336, 216), (292, 244))
+    # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
+    assert 264 + 16 - 234 + 120 < 188
+    assert 292 + 16 - 260 + 120 < 188
+    # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
+    assert 372 - 120 > 160 + 16
+
+
 def main() -> None:
     # 1. Cartes au sol ewc3 & fgv1 + continuité animation cascade L12/L13/L14
     ewc3 = check_ground_tiles(GAME / 'Data/Ground/ewc3_entree_waterfall_cave.rsground')
     fgv1 = check_ground_tiles(GAME / 'Data/Ground/fgv1_fin_grotte_vasques.rsground')
     assert ewc3['Name'] == {'DefaultText': 'Fosse Cascade — Entrée', 'LocalTexts': {'fr': 'Fosse Cascade — Entrée'}}
     assert fgv1['Name'] == {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
+    check_antichambre(fgv1)
     markers_ewc3 = {m['EntName']: m for m in ewc3['Entities'][0]['Markers']}
     objs_ewc3 = {o['EntName']: o for o in ewc3['Entities'][0]['GroundObjects']}
     assert markers_ewc3['entrance']['Collider']['Y'] == 544
@@ -120,9 +157,9 @@ def main() -> None:
     assert boss == {'X': 10, 'Y': 10}
     marker = next(e for layer in fgv1['Entities'] for e in layer['Markers'] if e['EntName'] == 'boss')
     anchor = marker['Collider']
-    assert (anchor['X'] + 8, anchor['Y'] + 8) == (boss['X'] * 24 + 12, boss['Y'] * 24 + 12)
+    assert (anchor['X'] - 48 + 8, anchor['Y'] + 8) == (boss['X'] * 24 + 12, boss['Y'] * 24 + 12)
     assert anchor['Y'] >= 240  # entièrement sous les marches dessinées
-    for x in range(boss['X'] * 3, (boss['X'] + 1) * 3):
+    for x in range(6 + boss['X'] * 3, 6 + (boss['X'] + 1) * 3):
         for y in range(boss['Y'] * 3, (boss['Y'] + 1) * 3):
             assert fgv1['obstacles'][x][y]['Tags'] == 0
     assert len(rsmap['Layers']) == 2
@@ -154,6 +191,8 @@ def main() -> None:
     assert not any('MapTitleDrop' in kind for kind in starts)
     assert (BASE / 'Content/BG/Pre_Battle.dir').is_file()
     assert (BASE / 'Content/Sound/Battle/EVT_Battle_Transition.ogg').is_file()
+    assert (BASE / 'Content/Sound/Battle/DUN_Stomp.ogg').is_file()
+    assert (BASE / 'Content/BG/White.dir').is_file()
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
     assert enemies == [('kabutops', 14)], enemies
     for p in rsmap['MapTeams'][0]['Players']:
@@ -196,7 +235,7 @@ def main() -> None:
     run(ROOT / 'tools/tests/test_grotte_verdoyante.lua', ROOT)
     # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
     run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
-    print('PASS Fosse Cascade : 9 étages, cascade ewc3, Fosse Cascade Fond Kabutops, scripts Lua et retours vérifiés.')
+    print('PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène Kabutops 480×360, scripts Lua et retours vérifiés.')
 
 
 if __name__ == '__main__':

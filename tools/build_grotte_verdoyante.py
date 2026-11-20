@@ -2,7 +2,7 @@
 """Construit et assemble les données du donjon Fosse Cascade (id technique grotte_verdoyante, 9 étages) :
 
 1. game/Data/Ground/ewc3_entree_waterfall_cave.rsground (métadonnées/déclencheurs)
-2. game/Data/Ground/fgv1_fin_grotte_vasques.rsground + FGV1_*.tile (480x360 = 60x45 tuiles 8px, optimisé viewport 320x240)
+2. game/Data/Ground/fgv1_fin_grotte_vasques.rsground + FGV1_*.tile (576x528 = 72x66 tuiles 8px, salle haute 480x360)
 3. game/Content/Tile/FGV1_VASQUES_BASE_24.tile (tuiles 24x24 animées 12 phases + avant-plan sur 20x15)
 4. game/Data/Map/end_grotte_verdoyante.rsmap (arène Boss 9F Fosse Cascade Fond 20x15 : Kabutops Lv 14)
 5. game/Data/Zone/grotte_verdoyante.json (1F-8F deep_limestone_cavern + 9F Boss)
@@ -22,6 +22,8 @@ import sys
 from collections import deque
 from pathlib import Path
 from PIL import Image
+
+from agrandir_vasques import GROUND_W, GROUND_H, agrandir_ground, rectangle_salle
 
 DEFAULT_WT = Path(__file__).resolve().parents[1]
 TARGET_W, TARGET_H = 60, 45
@@ -203,6 +205,9 @@ def ensure_fgv1_480x360(root: Path) -> tuple[dict, dict[str, dict[tuple[int, int
 
     cur_w = len(obj['Layers'][0]['Tiles'])
     cur_h = len(obj['Layers'][0]['Tiles'][0])
+    if (cur_w, cur_h) == (GROUND_W, GROUND_H):
+        rectangle_salle(obj)
+        cur_w, cur_h = TARGET_W, TARGET_H
     decoded = _decode_used_fgv1_tiles(root, obj)
 
     for mk in obj['Entities'][0].get('Markers', []):
@@ -216,8 +221,7 @@ def ensure_fgv1_480x360(root: Path) -> tuple[dict, dict[str, dict[tuple[int, int
             if mk.get('EntName') == 'entrance':
                 mk['Collider'] = {'X': 240, 'Y': 344, 'Width': 16, 'Height': 16}
                 mk['Direction'] = 4
-        p.write_text(json.dumps(doc, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-        print(f'[OK] fgv1_fin_grotte_vasques.rsground déjà à {TARGET_W}x{TARGET_H} (480x360)')
+        print(f'[OK] salle haute des vasques à {TARGET_W}x{TARGET_H} (480x360)')
         return doc, decoded
 
     assert (cur_w, cur_h) == (96, 72), f'Dimension source inattendue pour fgv1: {cur_w}x{cur_h}'
@@ -320,8 +324,7 @@ def ensure_fgv1_480x360(root: Path) -> tuple[dict, dict[str, dict[tuple[int, int
             mk['Collider'] = {'X': 240, 'Y': 344, 'Width': 16, 'Height': 16}
             mk['Direction'] = 4
 
-    p.write_text(json.dumps(doc, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-    print(f'[OK] fgv1_fin_grotte_vasques.rsground redimensionné de {cur_w}x{cur_h} -> {TARGET_W}x{TARGET_H} (480x360)')
+    print(f'[OK] salle haute des vasques redimensionnée de {cur_w}x{cur_h} -> {TARGET_W}x{TARGET_H} (480x360)')
     return doc, new_decoded
 
 
@@ -1306,6 +1309,7 @@ def main() -> int:
     ensure_ewc3(root)
     fgv1_doc, fgv1_decoded = ensure_fgv1_480x360(root)
     build_fgv1_battle_map_and_tiles(root, fgv1_doc, fgv1_decoded)
+    agrandir_ground(root, fgv1_doc, fgv1_decoded, save_tile_sheet)
     build_zone_grotte_verdoyante(root)
     build_idx = root / 'tools/build_tile_index.py'
     if build_idx.is_file():

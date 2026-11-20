@@ -68,7 +68,11 @@ RogueEssence = {
   },
 }
 RogueElements.Loc = function(x, y) return {X=x, Y=y} end
-function Color(r, g, b, a) return {r=r, g=g, b=b, a=a} end
+Color = {
+  Transparent = {r=0, g=0, b=0, a=0},
+  Black = {r=0, g=0, b=0, a=255},
+  Multiply = function(c, f) return {r=c.r*f, g=c.g*f, b=c.b*f, a=c.a*f} end,
+}
 DrawLayer = {Top='Top', Front='Front'}
 
 local actors = {}
@@ -90,7 +94,7 @@ GROUND = {
     return a
   end,
   RemoveCharacter = function(_, n) actors[n] = nil; return true end,
-  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir end,
+  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y) end,
   MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
   EntTurn = function(_, a, dir) a.Direction = dir end,
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
@@ -135,9 +139,10 @@ UI = {
   ChoiceResult=function() return choice_ret end,
 }
 local unlocked = {}
+local camera = {X=240,Y=180}
 GAME = {
   CutsceneMode=function() end,
-  MoveCamera=function() end,
+  MoveCamera=function(_, x, y, temps, joueur) camera = {X=x,Y=y}; ev('cam', x, y, temps, joueur) end,
   FadeIn=function(_, duree) ev('fade_in', duree) end,
   FadeOut=function(_, blanc, duree) ev('fade_out', blanc, duree) end,
   WaitFrames=function(_, n)
@@ -149,7 +154,7 @@ GAME = {
   GetTeamLeaderIndex=function() return 0 end,
   GetPlayerPartyMember=function(_, i) return {Importance=i==0 and 'Hero' or 'Partner', Data={}} end,
   GetCurrentGround=function() return {Name={ToLocal=function() return 'Fosse Cascade Fond' end}} end,
-  GetCameraCenter=function() return {X=240, Y=180} end,
+  GetCameraCenter=function() return camera end,
   DungeonUnlocked=function(_, id) return unlocked[id] == true end,
   UnlockDungeon=function(_, id) unlocked[id] = true; ev('unlock', id) end,
   SetRescueAllowed=function() end,
@@ -364,7 +369,7 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 3 and #events == 1 and events[1][1] =
 --    en un éclair blanc et recul du duo, sans titre de zone ni voix anonyme)
 --    -> revanche / -dev -> PostBattle (fuite au sud en courant) -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
-actors = {}; make_actor('PLAYER', 240, 344); make_actor('Teammate1', 216, 344)
+actors = {}; make_actor('PLAYER', 222, 492); make_actor('Teammate1', 198, 484)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
 -- Un petit calque natif simulé : l'animation doit vraiment être suspendue
 -- pendant chaque retour à l'image, puis remise quand l'écran est noir.
@@ -424,14 +429,29 @@ assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible, 'c
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
 assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
 -- Le boss n'apparaît JAMAIS sur la bande des vasques en terrasses (y = 136..208).
-assert(actors.Kabutops_Boss.Position.X == 244 and actors.Kabutops_Boss.Position.Y == 244,
+assert(actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
        'ancre terrain identique au centre de la case de combat (10,10)')
 local saw_hide, saw_rising_fear = false, false
+local seuil, terrasse, premier_dlg, pano_duel, ombre, choc_roche, avance_boss, depart_woosh
 local confession, avertissement, secours, menace, locuteur
 local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
 local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
 local flashes, apparition, faux, impact, recul_h, recul_p = 0, nil, nil, nil, nil, nil
 for i, e in ipairs(events) do
+  if e[1] == 'cam' then
+    if e[2] == 278 and e[3] == 372 and e[4] > 1 then seuil = i end
+    if e[2] == 300 and e[3] == 234 and e[4] > 1 then terrasse = i end
+    if e[2] == 300 and e[3] == 240 then pano_duel = i end
+  end
+  if e[1] == 'vfx' and e[2] == 'White' then
+    assert(e[5].EndColor.r == 0 and e[5].EndColor.g == 0 and e[5].EndColor.b == 0
+      and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 200,
+      'assombrissement partiel, pas de deuxième éclair')
+    ombre = i
+  end
+  if e[1] == 'se' and e[2] == 'DUN_Stomp' then choc_roche = i end
+  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[3] == 292 and e[4] == 244 then avance_boss = i end
+  if e[1] == 'se' and e[2] == 'EVT_Battle_Transition' then depart_woosh = i end
   if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then apparition = i end
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
@@ -448,18 +468,30 @@ for i, e in ipairs(events) do
   if e[1] == 'dlg' then
     assert(locuteur == 'Nilo_Grotte' or locuteur == 'Kabutops_Boss' or locuteur == 'Teammate1',
       'pas de voix anonyme ou de réplique du héros')
+    premier_dlg = premier_dlg or i
     local texte = tostring(e[2])
-    if locuteur == 'Nilo_Grotte' and texte:find('le courant a changé', 1, true) then confession = i end
+    if locuteur == 'Nilo_Grotte' and texte:find('Le courant a changé', 1, true) then confession = i end
     if locuteur == 'Kabutops_Boss' and texte:find('sous ma garde', 1, true) then avertissement = i end
     if locuteur == 'Teammate1' and texte:find('repartir avec lui', 1, true) then secours = i end
     if locuteur == 'Kabutops_Boss' and texte:find('Pas un pas de plus', 1, true) then menace = i end
   end
-  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 288 then
+  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 292 then
     if e[2] == 'PLAYER' then recul_h = i end
     if e[2] == 'Teammate1' then recul_p = i end
   end
 end
 assert(saw_hide and saw_rising_fear and flashes == 1, 'une seule apparition sous l’éclair, puis la tension musicale')
+assert(seuil and terrasse and premier_dlg and seuil < terrasse and terrasse < premier_dlg,
+  'la caméra doit révéler Nilo après le coude et avant toute réplique')
+assert(confession and ombre and choc_roche and apparition and avance_boss and faux
+    and confession < ombre and ombre < choc_roche and choc_roche < apparition
+    and apparition < avance_boss and avance_boss < faux,
+  'le silence et la roche précèdent l’éclair, puis le gardien gagne sa place avant la faux')
+assert(pano_duel and menace and depart_woosh and menace < pano_duel and pano_duel < depart_woosh,
+  'retour au cadre identique à l’arène avant le woosh')
+assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
+  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292,
+  'formation du duo centrée sur la grille de combat')
 assert(confession and apparition and faux and impact and recul_h and recul_p and avertissement and secours and menace
   and confession < apparition and apparition < faux and faux < impact
   and impact < recul_h and recul_h < recul_p and recul_p < avertissement and avertissement < secours and secours < menace,
@@ -480,7 +512,7 @@ for _, e in ipairs(events) do
 end
 
 -- Nilo est créé sur la terrasse et ne change jamais de position pendant le pré-combat.
-local DEPART_NILO = {x = 256, y = 160}
+local DEPART_NILO = {x = 304, y = 160}
 local depart_vu, nilo_a_bouge, nilo_tremble = false, false, false
 for _, e in ipairs(events) do
   if e[1] == 'create' and e[2] == 'Nilo_Grotte' then
@@ -534,9 +566,12 @@ verifier_woosh('continue_dungeon')
 local repl = 0
 for _, e in ipairs(events) do
   if e[1] == 'dlg' then repl = repl + 1 end
-  assert(not (e[1] == 'glisse' or e[1] == 'se' and e[2] == 'DUN_Gust_Trap'), 'pas de souffle en revanche')
+  assert(not (e[1] == 'glisse' or e[1] == 'se' and (e[2] == 'DUN_Gust_Trap' or e[2] == 'DUN_Stomp')
+    or e[1] == 'cam' and e[3] > 300 or e[1] == 'vfx' and e[2] == 'White'), 'pas de découverte ni de souffle en revanche')
 end
 assert(repl == 1, 'la revanche doit rester courte')
+assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible,
+  'la revanche restaure les vasques même après une coupure sur la même instance')
 
 -- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
 _ZONE = {InDevZone = true}

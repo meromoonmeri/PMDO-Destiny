@@ -4,13 +4,17 @@ Après la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v
 
 ## Fosse Cascade Fond
 
-- Le partenaire repère Nilo sur la terrasse. Nilo avoue avoir dérèglé le courant, sans descendre ni trembler. Un seul éclair révèle Kabutops. Son coup de faux déclenche le souffle : le duo recule sans lui tourner le dos, puis le partenaire tente de désamorcer le conflit.
-- L’ultimatum de Kabutops enchaîne sur le woosh de boss : neuf bandes natives `Pre_Battle`, le bruitage `EVT_Battle_Transition` entier, puis le fondu vers l’arène et le démarrage de `Boss Battle 2.ogg` par le moteur. En revanche, un bref défi remplace la rencontre, avec le même woosh.
-- Le carton « Fosse Cascade Fond » ne s’affiche plus à l’entrée du duel. Le segment nomme toujours l’étage pour le journal et conserve ses événements de placement, de combat et de sauvegarde. Les cartons des huit étages et de la visite libre restent inchangés.
-- Après la victoire, Kabutops s’enfuit par le sud. Lyra rejoint Nilo : les regards et les répliques suivent son arrivée. Le bilan reste celui du moteur, sans fanfare ou journal ajouté par le script.
+- La carte de mise en scène passe de **480 × 360 à 576 × 528 px** (72 × 66 tuiles de 8 px). Un passage rocheux éclairé par petites vasques débouche au sud de la salle haute. Deux panoramiques distincts montrent d'abord le couloir, puis Nilo sur la terrasse. Les sprites ne sont pas redimensionnés.
+- Nilo reste à sa place et explique le changement du courant. La musique se tait, le plateau s'assombrit et un coup sourd vient de la rive avant l'unique éclair. Kabutops avance de cette rive jusqu'à l'axe du passage, puis le souffle de sa faux repousse le duo sans lui faire tourner le dos. Ni voix invisible, ni geyser, ni tremblement de Nilo.
+- Après l'ultimatum, le cadre et l'alignement du duo rejoignent ceux de l'arène. Le woosh garde ses neuf bandes natives `Pre_Battle` et le bruitage `EVT_Battle_Transition` entier. La revanche saute le couloir et la révélation, mais conserve le même raccord. `Boss Battle 2.ogg` démarre côté arène.
+- **Duel inchangé** : le générateur prélève la salle haute à `x=48` pour garder l'arène 480 × 360, ses 42 cases praticables et l'équilibrage du 9e étage. Pas de carton au lancement, mais le nom reste dans le journal. Aucun changement aux huit premiers étages.
+- Après la victoire, Kabutops s'enfuit par le sud et Lyra rejoint Nilo. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
 
-La scène conserve les phases de sauvegarde et de revanche. Les cartes, collisions, tuiles et statistiques de combat n’ont pas changé.
+### Références de mise en scène
+
+- [Val Silencieux — Équipe de Secours Rouge (GIF de l'approche et de la révélation)](https://lparchive.org/Pokmon-Mystery-Dungeon-Red-Rescue-Team/Update%2026/) : l'arrivée de Cotovol puis le déplacement vers Tengalice construisent l'espace avant l'apparition d'Électhor. Ici : seuil, terrasse, rive du gardien, sans reprendre les répliques ni le noir complet.
+- [Searing Crucible — Halcyon, `FirstPreBossScene`](https://github.com/Palikadude/Halcyon/blob/1522c7a8b7a34d70078e11ed605b21d563b0dc51/Data/Script/halcyon/ground/searing_crucible/searing_crucible_ch_5.lua) : avance du groupe, caméra en retard, interruption de la musique et signes du décor avant l'arrivée de Magcargo. Le décor et le Lua de Destiny ne copient pas de ressource de cette scène.
 
 ## Régressions couvertes
 
-`tools/tests/test_grotte_verdoyante.py` vérifie la structure du donjon et le nom de l’arène sans carton. Les doublures Lua vérifient l’ordre aveu/éclair/souffle, la synchronisation des bandes et du son, la reprise sans rejouer la découverte, la revanche et le retour après la victoire.
+`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d'approche, l'ordre assombrissement/éclair/avance/faux, le raccord sans carton, la revanche et les phases de fin. Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
