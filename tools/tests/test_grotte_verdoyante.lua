@@ -17,6 +17,7 @@ package.preload['destiny.cinematique'] = function() return assert(loadfile(root 
 package.preload['destiny.missions_reverie'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/missions_reverie.lua'))() end
 
 local events = {}
+local title_calls = 0
 local function ev(k, ...) events[#events+1] = {k, ...} end
 
 local tick_val = 480 * 2 -- démarrer volontairement hors phase 0 pour tester l'attente synchrone
@@ -122,7 +123,7 @@ UI = {
   SetSpeaker=function() end, SetSpeakerLoc=function() end, SetSpeakerEmotion=function() end,
   SetCenter=function(_, b) ev('center', b) end,
   ResetSpeaker=function() end, WaitShowDialogue=function(_, t) ev('dlg', t) end,
-  WaitShowTitle=function() end, WaitHideTitle=function() end,
+  WaitShowTitle=function() title_calls = title_calls + 1 end, WaitHideTitle=function() end,
   BeginChoiceMenu=function() end,
   ChoiceMenuYesNo=function() end, WaitForChoice=function() end,
   ChoiceResult=function() return choice_ret end,
@@ -353,10 +354,9 @@ zone.ExitSegment(zobj, 'Cleared', false, 1, 0)
 assert(SV.Destiny.GrotteVerdoyantePhase == 3 and #events == 1 and events[1][1] == 'enter_zone' and events[1][4] == 1,
   'les retrouvailles précèdent le bilan')
 
--- 3. fgv1 : PreBattle (réveil Nilo + UN éclair blanc d'incompréhension + DOUBLE éclair
---    blanc d'apparition, sans aucune animation d'eau, Lixy tremblant visiblement,
---    boss sur le sable et non sur les vasques) -> revanche / -dev
---    -> PostBattle (fuite au sud en courant) -> EmptyReturn
+-- 3. fgv1 : PreBattle (Nilo immobile, aveu sur les courants, révélation de Kabutops
+--    en un éclair blanc et recul du duo, sans titre de zone ni voix anonyme)
+--    -> revanche / -dev -> PostBattle (fuite au sud en courant) -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
 actors = {}; make_actor('PLAYER', 240, 344); make_actor('Teammate1', 216, 344)
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
@@ -376,6 +376,7 @@ GAME.FadeIn = function(_, duree)
 end
 GAME.FadeOut = function(_, blanc, duree) ev('fade_out', blanc, duree) end
 events = {}
+title_calls = 0
 fgv1.Enter(carte_fosse)
 GAME.FadeIn, GAME.FadeOut = fn_fade_in, fn_fade_out
 assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible, 'calques non restaurés à la sortie')
@@ -384,48 +385,48 @@ assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
 -- Le boss n'apparaît JAMAIS sur la bande des vasques en terrasses (y = 136..208).
 assert(actors.Kabutops_Boss.Position.X == 244 and actors.Kabutops_Boss.Position.Y == 244,
        'ancre terrain identique au centre de la case de combat (10,10)')
-local saw_hide, saw_unhide, saw_stop_bgm, saw_rising_fear, saw_slash, boss_bgm_ok, wake_dlg_ok, unseen_voice_ok =
-  false, false, false, false, false, false, false, false
+local saw_hide, saw_unhide, saw_rising_fear, boss_bgm_ok = false, false, false, false
+local confession, accusation, explication, refus, decision, en_garde = false, false, false, false, false, false
 local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
 local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
-local eau_vue, geyser_vu = false, false
-local flashes = 0
-local tremble_nilo, tremble_fini = false, false
-local noir, voix, blanc_revelation, apparition
+local eau_vue, geyser_vu, voix_anonyme = false, false, false
+local flashes, apparition, recul_h, recul_p = 0, nil, nil, nil
 for i, e in ipairs(events) do
-  if e[1] == 'fade_out' and e[2] == false and noir == nil then noir = i end
-  if e[1] == 'fade_out' and e[2] == true then blanc_revelation = i end
-  if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide, apparition = true, i end
-  if e[1] == 'stop_bgm' then saw_stop_bgm = true end
+  if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
-  if e[1] == 'se' and e[2] == 'DUN_Slash' then saw_slash = true end
   if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
-  -- Nilo ne se reveille plus : il est deja debout et supplie qu'on recule.
-  if e[1] == 'dlg' and tostring(e[2]):find('Reculez', 1, true) then wake_dlg_ok = true end
-  if e[1] == 'dlg' and tostring(e[2]):find('premier grondement', 1, true) then unseen_voice_ok, voix = true, i end
+  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
   if e[1] == 'vfx' then
     for _, n in ipairs(eaux_interdites) do if e[2] == n then eau_vue = true end end
   end
   if e[1] == 'se' then
     for _, n in ipairs(geysers_interdits) do if e[2] == n then geyser_vu = true end end
-    if e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
   end
-  if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' and e[3] == 2 then tremble_nilo = true end
-  if e[1] == 'end_draw_effect' and e[2] == 'Nilo_Grotte' then tremble_fini = true end
+  if e[1] == 'dlg' then
+    local texte = tostring(e[2])
+    if texte:find('courants sont devenus irréguliers', 1, true) then confession = true end
+    if texte:find('bonne et due forme', 1, true) then accusation = true end
+    if texte:find('Il y a méprise', 1, true) then explication = true end
+    if texte:find('Assez de vos excuses', 1, true) then refus = true end
+    if texte:find('trop en colère pour entendre raison', 1, true) then decision = true end
+    if texte:find('Trêve de bavardages', 1, true) and texte:find('En garde', 1, true) then en_garde = true end
+    if texte:find('premier grondement', 1, true) or texte:find('Reculez', 1, true) or texte:find('???', 1, true) then voix_anonyme = true end
+  end
+  if e[1] == 'move' and e[2] == 'PLAYER' and e[4] >= 300 then recul_h = i end
+  if e[1] == 'move' and e[2] == 'Teammate1' and e[4] >= 300 then recul_p = i end
 end
-assert(saw_hide and saw_unhide and saw_stop_bgm and saw_rising_fear and saw_slash and boss_bgm_ok and wake_dlg_ok and unseen_voice_ok,
-       'cinématique d’apparition Kabutops incomplète')
-assert(noir < voix and voix < blanc_revelation and apparition == blanc_revelation + 1,
-       'voix hors champ dans le noir, puis révélation pendant le dernier blanc')
+assert(saw_hide and saw_unhide and saw_rising_fear and boss_bgm_ok,
+       'apparition de Kabutops ou transition musicale incomplète')
+assert(confession and accusation and explication and refus and decision and en_garde,
+       'échange Nilo/Kabutops, explication du secours ou lancement du duel manquant')
+assert(not voix_anonyme, 'aucune voix anonyme ni ordre confus « reculez » ne doit interrompre la scène')
+assert(flashes == 1, 'Kabutops doit apparaître sous un unique éclair blanc')
+assert(apparition and recul_h and recul_p and apparition < recul_h and apparition < recul_p,
+       'le souffle de Kabutops repousse le duo après son apparition')
 assert(not eau_vue and not geyser_vu,
        'aucune animation ni son d’eau ne doit accompagner l’apparition du boss')
--- Le souffle qui repousse le duo a sa propre secousse, mais l'apparition
--- garde son éclair simple en aveugle puis son double éclair de révélation.
-assert(flashes >= 3,
-       'il faut l’éclair de mise en garde puis le double éclair de révélation, soit 3 minimum')
-assert(tremble_nilo and tremble_fini,
-       'Nilo doit trembler de façon visible (DrawEffect.Shaking) puis être relâché')
+assert(title_calls == 0, 'aucun titre de zone ne doit apparaître avant le combat')
 
 -- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
 -- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
@@ -441,57 +442,24 @@ for _, e in ipairs(events) do
   end
 end
 
--- 3 bis. Nilo n'est plus endormi : il est debout, sur les marches nord
--- (les vasques en terrasses montent jusqu'à y = 192), et tremble dès l'arrivée.
-local sommeil_rejoue, recul_demande = false, false
-for _, e in ipairs(events) do
-  if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_rejoue = true end
-  if e[1] == 'dlg' and tostring(e[2]):find('Reculez', 1, true) then recul_demande = true end
-end
-assert(not sommeil_rejoue, 'Nilo ne doit plus être endormi à l’arrivée du duo')
-assert(recul_demande, 'Nilo doit demander de reculer dès l’arrivée')
-
--- Nilo est sur la TERRASSE (la plus haute vasque), pas sur les marches du bas.
+-- Nilo est créé sur la terrasse et ne change jamais de position pendant le pré-combat.
 local DEPART_NILO = {x = 256, y = 160}
-local deplacements_nilo, depart_vu = {}, false
+local depart_vu, nilo_a_bouge, nilo_tremble = false, false, false
 for _, e in ipairs(events) do
   if e[1] == 'create' and e[2] == 'Nilo_Grotte' then
     depart_vu = true
     assert(e[4] == DEPART_NILO.x and e[5] == DEPART_NILO.y,
-      'Nilo doit apparaître sur la terrasse ('..DEPART_NILO.x..','..DEPART_NILO.y..')')
+      'Nilo doit rester sur la terrasse ('..DEPART_NILO.x..','..DEPART_NILO.y..')')
   end
-  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then
-    deplacements_nilo[#deplacements_nilo + 1] = {x = e[3], y = e[4]}
-  end
+  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then nilo_a_bouge = true end
+  if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' then nilo_tremble = true end
 end
-assert(depart_vu, 'Nilo doit être créé pour la scène')
-
--- Il tombe de la corniche jusque dans la salle : un déplacement descend jusqu’au sable.
-local chute = false
-for _, d in ipairs(deplacements_nilo) do
-  if d.y >= 232 then chute = true end
-end
-assert(chute, 'Nilo doit chuter de la terrasse jusqu’au sable de la salle')
-
--- Le héros et le partenaire sont REPOUSSÉS vers le sud par le souffle.
-local recul_h, recul_p = nil, nil
-for _, e in ipairs(events) do
-  if e[1] == 'move' and e[2] == 'PLAYER' then recul_h = {x = e[3], y = e[4]} end
-  if e[1] == 'move' and e[2] == 'Teammate1' then recul_p = {x = e[3], y = e[4]} end
-end
-assert(recul_h ~= nil and recul_h.y >= 300,
-       'le héros doit être repoussé vers le sud (y >= 300), reçu : '..tostring(recul_h and recul_h.y))
-assert(recul_p ~= nil and recul_p.y >= 300,
-       'le partenaire doit être repoussé vers le sud (y >= 300), reçu : '..tostring(recul_p and recul_p.y))
-
--- Le souffle joue un vrai son de vent, comme dans le Gouffre Silence.
-local vent = false
-for _, e in ipairs(events) do
-  if e[1] == 'se' and (e[2] == 'DUN_Ominous_Wind' or e[2] == 'DUN_Howling_Wind'
-      or e[2] == 'DUN_Gust_Trap') then vent = true end
-end
-assert(vent, 'le souffle doit être sonorisé (vent)')
-assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1)
+assert(depart_vu and actors.Nilo_Grotte.Position.X == DEPART_NILO.x and actors.Nilo_Grotte.Position.Y == DEPART_NILO.y,
+       'Nilo doit rester à sa position d’approche')
+assert(not nilo_a_bouge and not nilo_tremble,
+       'Nilo ne doit ni se déplacer ni trembler pendant le pré-combat')
+assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1,
+       'le combat Kabutops doit bien se lancer après la cinématique')
 
 -- 3 ter. Une scene INTERROMPUE ne doit jamais se rejouer entierement.
 -- C'est le cas reel du journal : le moteur recycle la zone pendant la scene
