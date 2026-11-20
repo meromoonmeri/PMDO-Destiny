@@ -765,7 +765,7 @@ assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabuto
 local fosse_scene = require('destiny.fosse_cascade_scene')
 local derniere_sortie, descente_nilo, nb_terre, bruits = nil, nil, 0, 0
 local garde_partie, debut_cam, fondu, terre_boss, pause_centre
-local places, regard_centre, retrouvailles = {}, {}, {}
+local places, regard_centre, marches = {}, {}, {}
 for i, e in ipairs(events) do
   if e[1] == 'cam' and not debut_cam then debut_cam = e end
   if e[1] == 'fade_in' and not fondu then fondu = i end
@@ -777,8 +777,10 @@ for i, e in ipairs(events) do
     if e[2] == 'Teammate1' or e[2] == 'PLAYER' then
       assert(derniere_sortie, 'le duo conserve sa place avant le Tunnel du chef')
     end
-    if e[2] == 'Nilo_Grotte' then descente_nilo = i end
-    retrouvailles[e[2]] = e
+    if e[2] == 'Nilo_Grotte' then descente_nilo = descente_nilo or i end
+    local pas = marches[e[2]] or {}
+    pas[#pas + 1] = {x=e[3], y=e[4], i=i}
+    marches[e[2]] = pas
   end
   if garde_partie and e[1] == 'regard' and e[3] == 'Kabutops_Boss' then regard_centre[e[2]] = i end
   if garde_partie and e[1] == 'wait' and e[2] == 22 and not terre_boss then pause_centre = i end
@@ -798,10 +800,21 @@ assert(p and b and h and b.x - p.x == 32 and h.x - b.x == 32 and p.y == b.y and 
 assert(garde_partie and pause_centre and terre_boss and regard_centre.Teammate1 and regard_centre.PLAYER
   and garde_partie < regard_centre.Teammate1 and garde_partie < regard_centre.PLAYER
   and regard_centre.Teammate1 < pause_centre and regard_centre.PLAYER < pause_centre and pause_centre < terre_boss)
-assert(retrouvailles.Teammate1[3] == 272 and retrouvailles.PLAYER[3] == 336
-  and retrouvailles.Nilo_Grotte[3] == 304 and retrouvailles.Lyra_Grotte[3] == 304
-  and retrouvailles.Lyra_Grotte[4] - retrouvailles.Nilo_Grotte[4] == 32,
-  'Lyra s’arrête devant Nilo, le duo libère leur axe')
+local parcours = {
+  Lyra_Grotte = {{276,376}, {280,352}, {280,288}, {268,352}, {264,376}, {232,420}, {216,456}, {200,496}},
+  Nilo_Grotte = {{304,232}, {280,256}, {292,352}, {288,376}, {256,420}, {240,456}, {224,496}},
+  Teammate1 = {{248,260}, {264,276}, {268,352}, {264,376}, {232,420}, {216,456}, {208,464}},
+  PLAYER = {{312,260}, {300,268}, {292,352}, {288,376}, {256,420}, {240,456}, {232,464}},
+}
+for acteur, points in pairs(parcours) do
+  assert(#marches[acteur] == #points, 'jalons du trajet de ' .. acteur)
+  for j, xy in ipairs(points) do
+    assert(marches[acteur][j].x == xy[1] and marches[acteur][j].y == xy[2], 'jalon ' .. j .. ' de ' .. acteur)
+  end
+end
+local lyra_arret, nilo_arret = marches.Lyra_Grotte[3], marches.Nilo_Grotte[2]
+assert(lyra_arret.x == nilo_arret.x and lyra_arret.y - nilo_arret.y == 32,
+  'Lyra s’arrête au centre du passage juste devant Nilo')
 local function verifier_plongeon(nom, x, y, peur)
   local emote, tremble, repli, terre, negatif, masque, retire
   for i, e in ipairs(events) do
@@ -831,6 +844,7 @@ verifier_plongeon('Kabutops_Boss', 280, 244, false)
 -- aveu, souvenir concret, excuses à Nilo et au duo, puis ordre de se retirer.
 local pages, musique, fin_peur, debut_repli, fin_texte = {}, nil, nil, nil, nil
 local fins, locuteur_post = 0, nil
+local arrivee_lyra, emote_hero, camera_sud
 for i, e in ipairs(events) do
   if e[1] == 'speaker' then locuteur_post = e[2] end
   if e[1] == 'dlg' then pages[#pages + 1] = {locuteur_post, e[2], i} end
@@ -840,7 +854,16 @@ for i, e in ipairs(events) do
   end
   if e[1] == 'end_draw_effect' and e[2] == 'Nilo_Grotte' then fin_peur = i end
   if e[1] == 'glisse' and e[5] == 'Hurt' and not debut_repli then debut_repli = i end
-  if e[1] == 'fade_out' then fin_texte = i end
+  if e[1] == 'create' and e[2] == 'Lyra_Grotte' then
+    assert(e[3] == Direction.Up and e[4] == 244 and e[5] == 420)
+    arrivee_lyra = i
+  end
+  if e[1] == 'emote' and e[2] == 'PLAYER' and e[3] == 'sweatdrop' then emote_hero = i end
+  if e[1] == 'cam' and e[2] == 240 and e[3] == 408 then camera_sud = i end
+  if e[1] == 'fade_out' then
+    assert(e[2] == false and e[3] == 60, 'fondu noir après la marche')
+    fin_texte = i
+  end
   assert(not (e[1] == 'bgm' and e[2] == 'Job Clear!.ogg'), 'aucun jingle doublant le bilan natif')
   assert(not (e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true)), 'aucun faux journal')
   if e[1] == 'end_day' then fins = fins + 1 end
@@ -852,10 +875,14 @@ local pages_attendues = {
   {'Kabutops_Boss', 'Pardon, Nilo.', 'pardon à vous deux'},
   {'Nilo_Grotte', 'rentrer avec maman'},
   {'Kabutops_Boss', 'laissez-leur le passage'},
-  {'Nilo_Grotte', 'Maman !'},
-  {'Lyra_Grotte', 'Tu es là.'},
+  {'Kabutops_Boss', 'Au revoir, Nilo.'},
+  {'Lyra_Grotte', 'J’ai entendu du bruit. Que s’est-il passé ?'},
+  {'Nilo_Grotte', 'Maman !', 'déborder l’eau'},
+  {'Nilo_Grotte', 'L’équipe m’a défendu.', 's’est excusé'},
+  {'PLAYER', 'Ouf…', 'chemin du sud'},
+  {'Lyra_Grotte', 'Rentrons à Réverie Town.'},
 }
-assert(#pages == #pages_attendues, 'dénouement en huit pages, retrouvailles comprises')
+assert(#pages == #pages_attendues, 'dénouement, au revoir et décisions dans l’ordre des locuteurs')
 for i, attendu in ipairs(pages_attendues) do
   assert(pages[i][1] == attendu[1], 'locuteur de la page ' .. i)
   for mot = 2, #attendu do
@@ -865,9 +892,17 @@ end
 assert(musique and fin_peur and debut_repli and fin_texte and fondu < pages[1][3]
   and pages[1][3] < musique and musique < pages[2][3]
   and pages[4][3] < fin_peur and fin_peur < pages[5][3]
-  and pages[6][3] < debut_repli and derniere_sortie < descente_nilo
-  and descente_nilo < pages[7][3] and pages[8][3] < fin_texte,
-  'l’aveu puis les excuses déclenchent l’apaisement et le départ avant la réunion')
+  and pages[6][3] < debut_repli and garde_partie < pages[7][3] and pages[7][3] < terre_boss
+  and derniere_sortie < descente_nilo and descente_nilo < nilo_arret.i
+  and nilo_arret.i < arrivee_lyra and arrivee_lyra < lyra_arret.i and lyra_arret.i < pages[8][3]
+  and pages[10][3] < emote_hero and emote_hero < pages[11][3],
+  'excuses, au revoir avant Tunnel, arrivée et question de Lyra, récit de Nilo et réaction du héros')
+for acteur, points in pairs(marches) do
+  local premier_pas_sud = acteur == 'Lyra_Grotte' and 4 or acteur == 'Nilo_Grotte' and 3 or 2
+  assert(pages[12][3] < points[premier_pas_sud].i and points[#points].i < fin_texte,
+    'le groupe se met en marche entre la décision et le noir')
+end
+assert(camera_sud and pages[12][3] < camera_sud and camera_sud < fin_texte)
 assert(fins == 1 and SV.Destiny.AvisOuvertureFosse, 'une seule clôture PMDO')
 assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
 

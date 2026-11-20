@@ -35,7 +35,12 @@ local RECUL_Y = DUEL_HEROS.y
 -- partagent la même ligne, à 32 px de part et d’autre du chef. Ne pas déplacer
 -- les ancres d’apparition ou de duel pour obtenir cette formation.
 local APRES_DUEL = {boss=AXE_DUO, partenaire=AXE_DUO - 32, hero=AXE_DUO + 32, y=RECUL_Y}
-local REUNION = {axe=SOL_NILO_TERRASSE.x, duo_y=RECUL_Y + 16, nilo_y=RECUL_Y + 12, lyra_y=RECUL_Y + 44}
+local REUNION = {axe=AXE_DUO, duo_y=RECUL_Y + 16, nilo_y=RECUL_Y + 12, lyra_y=RECUL_Y + 44}
+-- Centres du sable visible dans le coude sud (positions de collider 16×16).
+-- Lyra remonte l’axe ; le groupe repart ensuite sur deux voies à ±12 px.
+local CHEMIN_SUD = {{AXE_DUO,352}, {276,376}, {244,420}, {228,456}}
+local SEUIL_SUD_FAMILLE = {212,496}
+local SEUIL_SUD_DUO = {220,464}
 local ENTREE_HEROS = {x = 222, y = 492}
 local ENTREE_PARTENAIRE = {x = 198, y = 484}
 local COUDE_HEROS = {x = 246, y = 436}
@@ -711,7 +716,7 @@ local function s_enfouir(ch, nom, son, grand)
   GAME:WaitFrames(grand and 20 or 9)
 end
 
-local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
+local function la_fuite_sous_terre(kabutops, garde, hero, partenaire, nilo)
   local reactions = {}
   for i, k in ipairs(garde) do
     reactions[#reactions + 1] = TASK:BranchCoroutine(function()
@@ -757,10 +762,12 @@ local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
   TASK:JoinCoroutines(sorties)
   cinematique.Respirer(12) -- la poussière des derniers Kabuto retombe
 
-  -- Les regards reviennent vers le chef, au centre, après les quatre départs.
-  tourner_vers(kabutops, Direction.Down, 4)
-  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 6, 4}})
+  -- Après sa garde, le chef prend congé de Nilo sans quitter sa place.
+  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {kabutops, nilo, 4, 4}, {hero, kabutops, 6, 4}})
   cinematique.Respirer(22)
+  dire(kabutops, 'Normal', 'Au revoir, Nilo. Rentrez bien.', 'droite')
+  cinematique.Respirer(18)
+  tourner_vers(kabutops, Direction.Down, 4)
   s_enfouir(kabutops, 'Kabutops_Boss', true, true)
 end
 
@@ -792,6 +799,73 @@ local function le_gardien_s_excuse(kabutops, nilo, hero, partenaire)
   cinematique.Respirer(12)
 end
 
+local function retrouver_lyra(nilo, hero, partenaire)
+  -- Elle apparaît au-delà du cadre, remonte le coude, puis vient droit sur
+  -- le milieu du sable. Elle s’arrête devant le groupe, sans le traverser.
+  local coude = CHEMIN_SUD[3]
+  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', coude[1], coude[2], Direction.Up)
+  TASK:JoinCoroutines({
+    TASK:BranchCoroutine(function()
+      for i = 2, 1, -1 do
+        local p = CHEMIN_SUD[i]
+        GROUND:MoveToPosition(lyra, p[1], p[2], true, 2)
+      end
+      GROUND:MoveToPosition(lyra, REUNION.axe, REUNION.lyra_y, true, 2)
+    end),
+    TASK:BranchCoroutine(function()
+      GAME:WaitFrames(35)
+      emote_sur(nilo, 'exclaim', 'EVT_Emote_Exclaim_2')
+      cinematique.RegarderGroupe({{nilo, lyra, 0, 4}, {partenaire, lyra, 5, 4}, {hero, lyra, 9, 4}})
+    end),
+  })
+  cinematique.RegarderGroupe({{lyra, nilo, 0, 4}, {nilo, lyra, 5, 4}, {partenaire, lyra, 7, 4}, {hero, lyra, 9, 4}})
+  cinematique.Respirer(14)
+  dire(lyra, 'Worried', 'Nilo ! J’ai entendu du bruit. Que s’est-il passé ?', 'standard')
+  cinematique.Respirer(18)
+  dire(nilo, 'Teary-Eyed', 'Maman ! Je m’étais perdu. Kabutops croyait que j’avais fait déborder l’eau.', 'droite')
+  cinematique.RegarderGroupe({{nilo, hero, 0, 4}, {partenaire, nilo, 5, 4}, {lyra, hero, 9, 4}})
+  cinematique.Respirer(10)
+  dire(nilo, 'Normal', 'L’équipe m’a défendu. Après le combat, Kabutops a compris et s’est excusé.', 'droite')
+  cinematique.Respirer(18)
+  regarder_cible(hero, nilo, 4)
+  emote_sur(hero, 'sweatdrop')
+  cinematique.Respirer(16)
+  dire(hero, 'Normal', 'Ouf… Vous allez bien tous les deux. On reprend le chemin du sud ?', 'droite')
+  cinematique.Respirer(14)
+  cinematique.RegarderGroupe({{lyra, hero, 0, 4}, {nilo, lyra, 6, 4}})
+  dire(lyra, 'Happy', 'Oui. Rentrons à Réverie Town. Nilo, reste près de moi.', 'standard')
+  cinematique.Respirer(18)
+  return lyra
+end
+
+local function repartir_par_le_sud(lyra, nilo, hero, partenaire)
+  local actions = {}
+  local function marcher(ch, delai, voie, seuil, approcher)
+    if ch == nil then return end
+    actions[#actions + 1] = TASK:BranchCoroutine(function()
+      if delai > 0 then GAME:WaitFrames(delai) end
+      -- Les deux équipiers se rapprochent du sable avant le goulet.
+      if approcher then GROUND:MoveToPosition(ch, approcher[1], approcher[2], false, 1.6) end
+      for _, p in ipairs(CHEMIN_SUD) do
+        GROUND:MoveToPosition(ch, p[1] + voie, p[2], false, 1.6)
+      end
+      GROUND:MoveToPosition(ch, seuil[1] + voie, seuil[2], false, 1.6)
+      tourner_vers(ch, Direction.Down, 4)
+    end)
+  end
+  marcher(lyra, 0, -12, SEUIL_SUD_FAMILLE)
+  marcher(nilo, 8, 12, SEUIL_SUD_FAMILLE)
+  marcher(partenaire, 16, -12, SEUIL_SUD_DUO, {264,276})
+  marcher(hero, 24, 12, SEUIL_SUD_DUO, {300,268})
+  actions[#actions + 1] = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(14)
+    GAME:MoveCamera(CAM_VICTOIRE_X, 332, 62, false)
+    GAME:MoveCamera(240, 408, 72, false)
+  end)
+  TASK:JoinCoroutines(actions)
+  cinematique.Respirer(14)
+end
+
 function fgv1.PostBattle()
   GAME:CutsceneMode(true)
   local hero = CH('PLAYER')
@@ -814,11 +888,14 @@ function fgv1.PostBattle()
   GAME:WaitFrames(16)
 
   le_gardien_s_excuse(kabutops, nilo, hero, partenaire)
-  la_fuite_sous_terre(kabutops, garde, hero, partenaire)
+  la_fuite_sous_terre(kabutops, garde, hero, partenaire, nilo)
   -- Même rassuré, Nilo attend que le passage soit redevenu sûr.
   cinematique.Respirer(12)
   TASK:JoinCoroutines({
-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, REUNION.axe, REUNION.nilo_y, false, 1.65) end),
+    TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, RECUL_Y - 12, false, 1.65)
+      GROUND:MoveToPosition(nilo, REUNION.axe, REUNION.nilo_y, false, 1.65)
+    end),
     -- Le duo reste sur les côtés. Ni Nilo ni Lyra ne traversent un acteur.
     TASK:BranchCoroutine(function()
       if partenaire ~= nil then GROUND:MoveToPosition(partenaire, REUNION.axe - 32, REUNION.duo_y, false, 1.1) end
@@ -836,25 +913,10 @@ function fgv1.PostBattle()
   })
   cinematique.Respirer(12)
 
-  -- L'arrivée de Lyra motive les regards. Le duo ne tourne pas le dos à
-  -- Lyra pour jouer une émote après qu'elle s'est déjà placée devant lui.
-  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', REUNION.axe, 344, Direction.Up)
-  TASK:JoinCoroutines({
-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(lyra, REUNION.axe, REUNION.lyra_y, true, 2) end),
-    TASK:BranchCoroutine(function()
-      GAME:WaitFrames(16)
-      if nilo ~= nil then emote_sur(nilo, 'exclaim', 'EVT_Emote_Exclaim_2') end
-      cinematique.RegarderGroupe({{nilo, lyra, 0, 4}, {partenaire, lyra, 5, 4}, {hero, lyra, 9, 4}})
-    end),
-  })
-  cinematique.RegarderGroupe({{lyra, nilo, 0, 4}, {nilo, lyra, 5, 4}, {partenaire, lyra, 7, 4}, {hero, lyra, 11, 4}})
-  cinematique.Respirer(14)
-  dire(nilo, 'Teary-Eyed', 'Maman ! J’ai eu si peur…', 'droite')
-  cinematique.Respirer(18)
-  dire(lyra, 'Teary-Eyed', 'Tu es là. C’est tout ce qui compte.', 'standard')
-  cinematique.Respirer(24)
+  local lyra = retrouver_lyra(nilo, hero, partenaire)
+  repartir_par_le_sud(lyra, nilo, hero, partenaire)
 
-  -- Dernier fondu des retrouvailles ; durée musique/image alignée sur le guide.
+  -- Le moteur ouvre le journal de victoire sur le noir, avant le retour en ville.
   SOUND:FadeOutBGM(60)
   GAME:FadeOut(false, 60)
   GAME:WaitFrames(30)

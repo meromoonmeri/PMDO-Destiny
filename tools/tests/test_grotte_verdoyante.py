@@ -62,6 +62,25 @@ def check_ground_tiles(rsground_path: Path) -> dict:
     return obj
 
 
+# Départ au sud, en deux files autour des virages du sable, et arrivée de Lyra
+# en sens inverse. Les mêmes jalons sont attendus dans le test du script Lua.
+TRAJETS_SUD = (
+    ((244, 420), (276, 376), (280, 352), (280, 288)),
+    ((280, 288), (268, 352), (264, 376), (232, 420), (216, 456), (200, 496)),
+    ((280, 256), (292, 352), (288, 376), (256, 420), (240, 456), (224, 496)),
+    ((248, 260), (264, 276), (268, 352), (264, 376), (232, 420), (216, 456), (208, 464)),
+    ((312, 260), (300, 268), (292, 352), (288, 376), (256, 420), (240, 456), (232, 464)),
+)
+
+
+def positions_sur_trajet(*ancres: tuple[int, int]):
+    # Interpolation par axe dominant, comme AnimateToPositionGroundAction.
+    for (x0, y0), (x1, y1) in zip(ancres, ancres[1:]):
+        d = max(1, abs(x1 - x0), abs(y1 - y0))
+        for i in range(d + 1):
+            yield round(x0 + (x1 - x0) * i / d), round(y0 + (y1 - y0) * i / d)
+
+
 def check_antichambre(fond: dict) -> None:
     """L'approche est un chemin dans le ground, pas une image ou un zoom."""
     w, h = 72, 66
@@ -80,22 +99,20 @@ def check_antichambre(fond: dict) -> None:
                 assert cell['Tags'] != 0, 'les parois latérales ne sont pas praticables'
 
     def trajet(*ancres: tuple[int, int]) -> None:
-        for (x0, y0), (x1, y1) in zip(ancres, ancres[1:]):
-            d = max(1, abs(x1 - x0), abs(y1 - y0))
-            for i in range(d + 1):
-                x, y = round(x0 + (x1 - x0) * i / d), round(y0 + (y1 - y0) * i / d)
-                for col in range(x // 8, (x + 15) // 8 + 1):
-                    for row in range(y // 8, (y + 15) // 8 + 1):
-                        assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
+        for x, y in positions_sur_trajet(*ancres):
+            for col in range(x // 8, (x + 15) // 8 + 1):
+                for row in range(y // 8, (y + 15) // 8 + 1):
+                    assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
 
     trajet((222, 492), (246, 436), (292, 368), (292, 220), (292, 244), (290, 242), (292, 244))
     trajet((198, 484), (222, 430), (268, 362), (268, 220), (268, 244), (270, 248), (268, 244))
     trajet((280, 196), (292, 196))
     trajet((280, 244), (280, 244))  # Kabutops ne quitte le milieu que par Tunnel
-    trajet((248, 244), (272, 260))  # le partenaire reste à gauche de l’axe familial
-    trajet((312, 244), (336, 260))  # le héros libère cet axe vers la droite
-    trajet((304, 152), (304, 256))  # Nilo quitte la même terrasse
-    trajet((304, 344), (304, 288))  # Lyra s’arrête à 32 px, sans le traverser
+    trajet((248, 244), (248, 260))
+    trajet((312, 244), (312, 260))
+    trajet((304, 152), (304, 232), (280, 256))  # Nilo quitte la terrasse et rejoint l’axe
+    for jalons in TRAJETS_SUD:
+        trajet(*jalons)
     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
     assert 220 + 16 - 216 + 120 < 188
     assert 244 + 16 - 226 + 120 < 188
@@ -236,6 +253,12 @@ def main() -> None:
         assert erreurs_a == erreurs_g == 0 and arene.size == (480, 360)
         for x, y in (*departs_sable, (280, 244)):
             sol_sable(image, x, y, ample=True)
+        for jalons in TRAJETS_SUD:
+            for x, y in positions_sur_trajet(*jalons):
+                # Le sable est plus sombre au sud. Échantillonner sous
+                # l’ombre (12 px), pas au bord du collider (16 px).
+                sol = ImageStat.Stat(image.crop((x + 2, y + 10, x + 14, y + 19)).convert('RGB'))
+                assert sol.extrema[0][0] >= 95 and sol.var[0] < 80 and sol.mean[1] - sol.mean[2] > 40, (x, y, sol.mean)
         if t == 0:
             image_reference = image
             assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()

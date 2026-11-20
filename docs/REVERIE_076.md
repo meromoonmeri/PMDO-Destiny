@@ -11,8 +11,8 @@ Depuis la [`v0.7.5`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v
 ## Le duel et les retrouvailles
 
 - Au 9e étage, les deux Kabuto de flanc (niveau 4) et les deux de l’arrière (niveau 3) combattent avec Griffe et Armure. Les positions prolongent le placement de la cinématique. Nilo reste visible et tremble sur la terrasse, sans tour, cible ni collision. Kabutops conserve ses caractéristiques de combat et les huit premiers étages sont inchangés.
-- La victoire exige les **cinq K.O.** Dès le fondu d’après-combat, Kabutops se tient exactement **entre le partenaire et le héros**, sur la même ligne et à égale distance des deux. Kabutops reconnaît qu’il s’est emporté, se souvient du temps où les familles venaient boire en paix et s’excuse auprès de Nilo et du duo. À son signal, les gardes s’enfouissent, l’arrière d’abord, puis les flancs. Il plonge dans le sable au centre et part le dernier.
-- Nilo ne descend qu’après leur fuite. Le duo dégage le passage pour Lyra, qui s’arrête devant lui sans le traverser. Les retrouvailles se resserrent sur deux répliques avant le bilan natif de l’expédition et le retour à Réverie.
+- La victoire exige les **cinq K.O.** Dès le fondu d’après-combat, Kabutops se tient exactement **entre le partenaire et le héros**, sur la même ligne et à égale distance des deux. Kabutops reconnaît qu’il s’est emporté, se souvient du temps où les familles venaient boire en paix et s’excuse auprès de Nilo et du duo. À son signal, les gardes s’enfouissent, l’arrière d’abord, puis les flancs. Il dit au revoir à Nilo avant de plonger dans le sable au centre, le dernier.
+- Nilo ne descend qu’après leur fuite. Lyra remonte par le milieu du passage sud et demande ce qui s’est passé. Nilo lui raconte le sauvetage ; le héros, soulagé, propose de reprendre le chemin du sud. Le groupe repart à pied. Après le fondu au noir, le journal de victoire natif s’affiche avant la cinématique de retour à Réverie Town.
 
 ## Vérification
 
