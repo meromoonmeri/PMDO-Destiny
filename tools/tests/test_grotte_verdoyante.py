@@ -83,11 +83,11 @@ def check_antichambre(fond: dict) -> None:
                     for row in range(y // 8, (y + 15) // 8 + 1):
                         assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
 
-    trajet((222, 492), (246, 436), (292, 368), (292, 264), (292, 292))
-    trajet((198, 484), (222, 430), (268, 362), (268, 264), (268, 292))
-    trajet((336, 216), (292, 244))
+    trajet((222, 492), (246, 436), (292, 368), (292, 268), (292, 292))
+    trajet((198, 484), (222, 430), (268, 362), (268, 268), (268, 292))
+    trajet((280, 244), (280, 244))
     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
-    assert 264 + 16 - 234 + 120 < 188
+    assert 268 + 16 - 234 + 120 < 188
     assert 292 + 16 - 260 + 120 < 188
     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
     assert 372 - 120 > 160 + 16
@@ -191,7 +191,6 @@ def main() -> None:
     assert not any('MapTitleDrop' in kind for kind in starts)
     assert (BASE / 'Content/BG/Pre_Battle.dir').is_file()
     assert (BASE / 'Content/Sound/Battle/EVT_Battle_Transition.ogg').is_file()
-    assert (BASE / 'Content/Sound/Battle/DUN_Stomp.ogg').is_file()
     assert (BASE / 'Content/BG/White.dir').is_file()
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
     assert enemies == [('kabutops', 14)], enemies
