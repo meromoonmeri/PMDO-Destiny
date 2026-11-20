@@ -453,14 +453,14 @@ local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Sprin
 for i, e in ipairs(events) do
   if e[1] == 'cam' then
     if e[2] == 278 and e[3] == 372 and e[4] > 1 then seuil = i end
-    if e[2] == 300 and e[3] == 234 and e[4] > 1 then terrasse = i end
+    if e[2] == 300 and e[3] == 216 and e[4] > 1 then terrasse = i end
     if e[2] == 300 and e[3] == 240 then pano_duel = i end
   elseif e[1] == 'vfx' and e[2] == 'White' then
     assert(e[5].EndColor.r == 0 and e[5].EndColor.g == 0 and e[5].EndColor.b == 0
       and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 140,
       'assombrissement modéré : ne pas blanchir la sortie')
     ombre = i
-  elseif e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 258 then
+  elseif e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 210 then
     assert(not terre and e[5].Layer == DrawLayer.Front)
     terre = i
   elseif e[1] == 'shake' and not tremor then
@@ -476,7 +476,7 @@ for i, e in ipairs(events) do
     if e[3] >= 16 then haut = i end
     if e[3] == 0 then reception = i end
   elseif e[1] == 'move' and e[2] == 'Kabutops_Boss' then
-    assert(recul_h and recul_p and e[3] == 292 and e[4] == 244, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
+    assert(recul_h and recul_p and e[3] == 292 and e[4] == 196, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
     reposition = i
   end
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
@@ -534,7 +534,7 @@ for i, e in ipairs(events) do
       error('réplique sans le bon locuteur : '..texte)
     end
   end
-  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 292 then
+  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 244 then
     if e[2] == 'PLAYER' then
       assert(e[3] == 292 and e[7] == Direction.UpLeft, 'recul dans l’axe, regard vers le boss')
       recul_h = i
@@ -572,16 +572,16 @@ assert(plainte and choix and regard_hero_vers_boss and regard_hero_vers_p and re
   and menace < plainte and plainte < regard_hero_vers_boss and regard_hero_vers_boss < regard_hero_vers_p
   and regard_hero_vers_p < choix and choix < reponse and reponse < pano_duel and pano_duel < depart_woosh,
   'le héros observe et se tourne vers son partenaire avant la décision, le duel attend la réaction')
-assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
-  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292
-  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
+assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 244
+  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 244
+  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 196,
   'la formation du duel retrouve les positions de combat')
 
 -- Les figurants apparaissent APRES le recul du duo. Chacun avance deux fois
 -- et finit à la même case/direction que l'ennemi sérialisé en arène.
 local garde_attendue = {
-  {'Kabuto_Flanc_G',8,11,Direction.DownRight}, {'Kabuto_Flanc_D',11,11,Direction.DownLeft},
-  {'Kabuto_Arriere_G',9,14,Direction.Up}, {'Kabuto_Arriere_D',10,14,Direction.Up},
+  {'Kabuto_Flanc_G',8,9,Direction.DownRight}, {'Kabuto_Flanc_D',11,9,Direction.DownLeft},
+  {'Kabuto_Arriere_G',9,12,Direction.Up}, {'Kabuto_Arriere_D',10,12,Direction.Up},
 }
 local function verifier_garde(revanche)
   local data = require('destiny.fosse_cascade_scene')
@@ -591,10 +591,10 @@ local function verifier_garde(revanche)
     local spec = data.GARDE[i]
     assert(spec.nom == nom and spec.x == col and spec.y == ligne and Direction[spec.face] == dir)
     local x, y = data.AncreAuSol(spec)
-    local creation, cache, sortie, terre_k, retraite, noir
+    local creation, cache, sortie, terre_k, retraite, noir, contour
     local pas = {}
     for j, e in ipairs(events) do
-      if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == spec.depart[1]+8 and e[4] == spec.depart[2]+13 then
+      if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == spec.depart[1]+8 and e[4] == spec.depart[2]+14 then
         assert(e[5].Layer == DrawLayer.Front); terre_k = j
       end
       if i == 1 and e[1] == 'vfx' and e[2] == 'Scratch' then
@@ -611,8 +611,11 @@ local function verifier_garde(revanche)
         elseif e[1] == 'unhide' then
           assert(not sortie and e[7] < 0 and e[8], 'Kabuto commence dans la terre, ombre masquée')
           sortie = j
+        elseif e[1] == 'move' then
+          assert(e[3] == spec.passage[1] and e[4] == spec.passage[2]); contour = j
         elseif e[1] == 'glisse' then
-          assert(e[5] == 'Scratch' or e[5] == 'Attack'); assert(e[7] == dir)
+          assert(e[5] == 'Attack' and contour and contour < j)
+          assert(e[7] == (#pas == 0 and Direction[spec.avance] or dir))
           pas[#pas+1] = e
         elseif e[1] == 'remove' and noir then
           assert(e[3] == x and e[4] == y and e[5] == dir)
@@ -626,7 +629,7 @@ local function verifier_garde(revanche)
     else
       assert(cache and terre_k and sortie and recul_p < cache and cache < terre_k and terre_k < sortie and sortie < danger)
       assert(creation[4] == spec.depart[1] and creation[5] == spec.depart[2])
-      assert(#pas == 2 and pas[1][3] == spec.pas[1] and pas[1][4] == spec.pas[2] and pas[2][3] == x and pas[2][4] == y)
+      assert(#pas == 2 and pas[1][3] == spec.menace[1] and pas[1][4] == spec.menace[2] and pas[2][3] == x and pas[2][4] == y)
     end
   end
   assert(griffes == (revanche and 0 or 4))
@@ -749,22 +752,44 @@ fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
 assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
 assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
 assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabutops_Boss == nil, 'acteurs temporaires fgv1 doivent être retirés')
--- Kabutops vaincu fuit vers le sud EN COURANT (3 px/image, jusqu'à y >= 344) et
--- aucune animation d'eau n'accompagne plus son départ (plus de plongeon).
-local fuite_sud, fuite_vitesse, eau_post = false, nil, false
-for _, e in ipairs(events) do
-  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[4] >= 344 then
-    fuite_sud = true
-    fuite_vitesse = e[5]
-  end
-  if e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
-      or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger') then
-    eau_post = true
-  end
+-- Après le K.O. de toute la garde, les quatre Kabuto expriment leur peur,
+-- reculent et replongent. Kabutops ferme la marche, et Nilo attend sa sortie.
+local fosse_scene = require('destiny.fosse_cascade_scene')
+local derniere_sortie, descente_nilo, nb_terre, bruits = nil, nil, 0, 0
+for i, e in ipairs(events) do
+  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'plus de course de Kabutops vers le sud')
+  assert(not (e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
+      or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger')), 'pas d’eau pendant le Tunnel')
+  if e[1] == 'vfx' and e[2] == 'Dig' then nb_terre = nb_terre + 1 end
+  if e[1] == 'se' and e[2] == 'DUN_Dig' then bruits = bruits + 1 end
+  if e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
+  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then descente_nilo = i end
 end
-assert(fuite_sud and fuite_vitesse == 3,
-       'Kabutops doit fuir vers le sud en courant (3 px/image), jusqu’à la sortie du couloir (y >= 344)')
-assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
+assert(derniere_sortie and descente_nilo and derniere_sortie < descente_nilo and nb_terre == 5 and bruits == 3)
+local function verifier_plongeon(nom, x, y, peur)
+  local emote, tremble, repli, terre, negatif, masque, retire
+  for i, e in ipairs(events) do
+    if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == x+8 and e[4] == y+14 then
+      assert(e[5].Layer == DrawLayer.Front); terre = i
+    end
+    if e[2] == nom then
+      if e[1] == 'emote' and (e[3] == 'shock' or e[3] == 'sweating') then emote = i end
+      if e[1] == 'draw_effect' and e[3] == 2 then tremble = i end
+      if e[1] == 'glisse' and e[5] == 'Hurt' then assert(e[3] == x and e[4] == y); repli = i end
+      if e[1] == 'hauteur' and e[3] <= -16 then negatif = i end
+      if e[1] == 'hide' then masque = i end
+      if e[1] == 'remove' then retire = i end
+    end
+  end
+  assert(terre and negatif and masque and retire and terre < negatif and negatif < masque and masque < retire)
+  assert(not actors[nom])
+  if peur then assert(emote and tremble and repli and emote < tremble and tremble < repli and repli < terre and retire < derniere_sortie) end
+end
+for _, spec in ipairs(fosse_scene.GARDE) do
+  local x,y = fosse_scene.AncreAuSol(spec)
+  verifier_plongeon(spec.nom, x+spec.recul[1], y+spec.recul[2], true)
+end
+verifier_plongeon('Kabutops_Boss', 292, 196, false)
 
 local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
 for _, e in ipairs(events) do

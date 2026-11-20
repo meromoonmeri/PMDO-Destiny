@@ -15,17 +15,21 @@ local LIEU_DONJON = '[color=#FFC663]Fosse Cascade[color]'
 local LIEU_FOND = '[color=#FFC663]Fosse Cascade Fond[color]'
 local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
 
--- Les ancres de fin correspondent aux centres des cases (10,10), (10,12)
--- et (9,12) de l'arène, moins le demi-collider de GroundChar.
+-- Le sol de la scène et les départs du donjon partagent leurs centres.
+-- Le duo s’arrête une case devant sa position de duel, puis y est repoussé.
 local SALLE_X = fosse.SALLE_X
-local SOL_BOSS = {x = 292, y = 244}
-local SOL_HEROS = {x = 292, y = 268}
-local SOL_PARTENAIRE = {x = 268, y = 268}
--- Devant le duo ET au milieu de ses deux axes. L'arène conserve son ancre
--- native SOL_BOSS, utilisée aussi pour la revanche et l'après-combat.
-local APPARITION_BOSS = {x = math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y = SOL_BOSS.y}
+local function ancre(case)
+  local x, y = fosse.AncreAuSol(case)
+  return {x=x, y=y}
+end
+local SOL_BOSS = ancre(fosse.DUEL.boss)
+local DUEL_HEROS = ancre(fosse.DUEL.hero)
+local DUEL_PARTENAIRE = ancre(fosse.DUEL.partenaire)
+local SOL_HEROS = {x=DUEL_HEROS.x, y=DUEL_HEROS.y - 24}
+local SOL_PARTENAIRE = {x=DUEL_PARTENAIRE.x, y=DUEL_PARTENAIRE.y - 24}
+local APPARITION_BOSS = {x=math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y=SOL_BOSS.y}
 local SOL_NILO_TERRASSE = fosse.NILO_TERRASSE
-local RECUL_Y = 292
+local RECUL_Y = DUEL_HEROS.y
 local ENTREE_HEROS = {x = 222, y = 492}
 local ENTREE_PARTENAIRE = {x = 198, y = 484}
 local COUDE_HEROS = {x = 246, y = 436}
@@ -37,9 +41,11 @@ local CAM_DUEL_X = 300
 local CAM_DUEL_Y = 240 -- centre effectif de l'arène une fois clampée
 local CAM_ENTREE = {x = 230, y = 406}
 local CAM_SEUIL = {x = 278, y = 372}
-local CAM_TERRASSE_Y = 234
-local CAM_NILO_REPLI_Y = 250 -- garder Nilo et le duo dans le champ
-local CAM_FACE_Y = 260 -- les pieds du duo restent au-dessus du dialogue après le recul
+local CAM_TERRASSE_Y = 216
+local CAM_FACE_Y = 226 -- l’arrêt du duo laisse un champ libre derrière lui
+local CAM_CERCLE_Y = 242 -- léger recul du cadre au bruit venu du passage sud
+local CAM_NILO_REPLI_Y = 218
+local CAM_VICTOIRE_Y = 242
 
 local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
   local existant = CH(nom)
@@ -399,7 +405,14 @@ local function les_avertissements(hero, partenaire, nilo)
   avertissement_hors_champ('Dernier avertissement : reculez.')
 end
 
--- Une seule sortie façon Tunnel. La terre devient visible avant le sprite ;
+local function terre_tunnel(x, y, cadence, son)
+  local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', cadence))
+  terre.Layer = DrawLayer.Front
+  if son then SOUND:PlayBattleSE('DUN_Dig') end
+  GROUND:PlayVFX(terre, x + 8, y + 14)
+end
+
+-- Sortie du gardien façon Tunnel. La terre devient visible avant le sprite ;
 -- le déplacement est vertical, déjà sur l’axe médian du duo. Les éclats
 -- natifs de Tunnel couvrent les premiers pixels du corps qui sortent du sol.
 local function reveler_gardien(kabutops, hero, partenaire, nilo)
@@ -417,7 +430,7 @@ local function reveler_gardien(kabutops, hero, partenaire, nilo)
       cinematique.TournerGroupe({{hero, Direction.UpLeft, 0, 4}, {partenaire, Direction.UpRight, 4, 4}})
     end),
     TASK:BranchCoroutine(function()
-      GAME:MoveCamera(CAM_DUEL_X, 246, 24, false)
+      GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y - 4, 24, false)
     end),
     TASK:BranchCoroutine(function()
       GAME:WaitFrames(8)
@@ -425,10 +438,7 @@ local function reveler_gardien(kabutops, hero, partenaire, nilo)
       emote_sur(partenaire or hero, 'shock')
     end),
   })
-  local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 3))
-  terre.Layer = DrawLayer.Front
-  SOUND:PlayBattleSE('DUN_Dig')
-  GROUND:PlayVFX(terre, APPARITION_BOSS.x + 8, APPARITION_BOSS.y + 14)
+  terre_tunnel(APPARITION_BOSS.x, APPARITION_BOSS.y, 3, true)
   GAME:WaitFrames(11)
   kabutops.HideShadow = true
   kabutops:SetLocHeight(-10)
@@ -475,19 +485,14 @@ local function placer_garde(en_place)
   return garde
 end
 
-local function pas_de_griffe(k, ax, ay, bx, by, fermer)
-  local anim = 'Scratch'
-  local total, impact = temps_animation(k.ch, anim)
-  if total == nil then
-    anim = 'Attack'
-    total, impact = temps_animation(k.ch, anim)
-  end
-  total = total or 22
+local function pas_de_griffe(k, ax, ay, bx, by, dir, fermer)
+  local total, impact = temps_animation(k.ch, 'Attack')
+  total = total or 28
   local duree = fermer and 22 or 17
   local frappe = math.max(5, math.min(duree - 4, math.floor((impact or 8) * duree / total)))
   local distance = math.max(math.abs(bx - ax), math.abs(by - ay))
   local function bondir()
-    GROUND:AnimateToPosition(k.ch, anim, k.dir, bx, by, total / (duree + 1), distance / duree, 0)
+    GROUND:AnimateToPosition(k.ch, 'Attack', dir, bx, by, total / (duree + 1), distance / duree, 0)
     GROUND:CharEndAnim(k.ch)
   end
   if not fermer then bondir(); return end
@@ -500,9 +505,40 @@ local function pas_de_griffe(k, ax, ay, bx, by, fermer)
       trace.Layer, trace.Offset, trace.LocHeight = DrawLayer.Front, 9, 4
       if k.ancre.signal then SOUND:PlayBattleSE('DUN_Scratch') end
       GROUND:PlayVFX(trace, math.floor(ax + (bx - ax) * t + 8),
-        math.floor(ay + (by - ay) * t + 8), k.dir)
+        math.floor(ay + (by - ay) * t + 8), dir)
     end),
   })
+end
+
+local function surgir_kabuto(k)
+  local spec, ch = k.ancre, k.ch
+  GAME:WaitFrames(spec.delai)
+  terre_tunnel(spec.depart[1], spec.depart[2], 2, spec.signal)
+  GAME:WaitFrames(8)
+  ch.HideShadow = true
+  ch:SetLocHeight(-7)
+  GROUND:Unhide(spec.nom)
+  for _, h in ipairs({-4, 0, 5, 9, 7, 3, 0}) do
+    ch:SetLocHeight(h)
+    GAME:WaitFrames(2)
+  end
+  ch.HideShadow = false
+  GAME:WaitFrames(5)
+  -- Ils ne foncent pas droit sur une cible. D’abord ils gagnent l’angle,
+  -- puis menacent et bouchent la sortie après une hésitation.
+  GROUND:MoveToPosition(ch, spec.passage[1], spec.passage[2], false, 1.35)
+  local direction = Direction[spec.avance]
+  pas_de_griffe(k, spec.passage[1], spec.passage[2], spec.menace[1], spec.menace[2], direction, false)
+  GAME:WaitFrames(spec.attente)
+  tourner_vers(ch, k.dir, 3)
+  pas_de_griffe(k, spec.menace[1], spec.menace[2], k.x, k.y, k.dir, true)
+end
+
+local function pas_du_duo(ch, dir, x, y)
+  if ch ~= nil then
+    GROUND:AnimateToPosition(ch, 'Walk', dir, x, y, 1, 0.7, 0)
+    GROUND:CharEndAnim(ch)
+  end
 end
 
 local function encercler_duo(kabutops, hero, partenaire)
@@ -510,42 +546,39 @@ local function encercler_duo(kabutops, hero, partenaire)
   local garde = placer_garde(false)
   local mouvements = {}
   for _, k in ipairs(garde) do
-    mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
-      local spec, ch = k.ancre, k.ch
-      GAME:WaitFrames(spec.delai)
-      local dx, dy = spec.depart[1], spec.depart[2]
-      local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 2))
-      terre.Layer = DrawLayer.Front
-      if spec.signal then SOUND:PlayBattleSE('DUN_Dig') end
-      GROUND:PlayVFX(terre, dx + 8, dy + 13)
-      GAME:WaitFrames(8)
-      ch.HideShadow = true
-      ch:SetLocHeight(-7)
-      GROUND:Unhide(spec.nom)
-      for _, h in ipairs({-4, 0, 5, 9, 7, 3, 0}) do
-        ch:SetLocHeight(h)
-        GAME:WaitFrames(2)
-      end
-      ch.HideShadow = false
-      GAME:WaitFrames(6)
-      pas_de_griffe(k, dx, dy, spec.pas[1], spec.pas[2], false)
-      GAME:WaitFrames(9)
-      pas_de_griffe(k, spec.pas[1], spec.pas[2], k.x, k.y, true)
-    end)
+    mouvements[#mouvements + 1] = TASK:BranchCoroutine(function() surgir_kabuto(k) end)
   end
-  mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(15)
+  mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(13)
     secouer_ecran(1, 1, 14)
-    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 4}, {partenaire and hero, garde[2].ch, 12, 4}})
-    GAME:WaitFrames(21)
-    emote_sur(hero, 'exclaim')
-    cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
-    GAME:WaitFrames(20)
-    emote_sur(partenaire, 'sweatdrop')
+    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 3}, {partenaire and hero, garde[2].ch, 18, 3}})
+    GAME:WaitFrames(11)
+    -- Pris de flanc, le duo se resserre en se couvrant, sans se percuter.
+    TASK:JoinCoroutines({
+      TASK:BranchCoroutine(function() pas_du_duo(partenaire, Direction.Left, DUEL_PARTENAIRE.x + 2, RECUL_Y + 4) end),
+      TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Right, DUEL_HEROS.x - (partenaire and 2 or 0), RECUL_Y - 2) end),
+    })
+    GAME:WaitFrames(12)
+    -- Le son derrière eux entraîne leurs regards, puis le léger panoramique.
+    TASK:JoinCoroutines({
+      TASK:BranchCoroutine(function() GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 32, false) end),
+      TASK:BranchCoroutine(function()
+        emote_sur(hero, 'exclaim')
+        cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 16, 4}})
+        emote_sur(partenaire, 'sweatdrop')
+      end),
+    })
   end)
   TASK:JoinCoroutines(mouvements)
-  GAME:WaitFrames(24) -- laisser lire le cercle avant de rendre la parole à Kabutops
-  cinematique.RegarderGroupe({{hero, kabutops, 0, 4}, {partenaire, kabutops, 6, 4}})
+  GAME:WaitFrames(25) -- tenir le plan d’ensemble avant de rendre la parole à Kabutops
+  TASK:JoinCoroutines({
+    TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Up, DUEL_HEROS.x, RECUL_Y) end),
+    TASK:BranchCoroutine(function()
+      GAME:WaitFrames(6)
+      pas_du_duo(partenaire, Direction.Up, DUEL_PARTENAIRE.x, RECUL_Y)
+    end),
+  })
+  cinematique.RegarderGroupe({{hero, kabutops, 0, 4}, {partenaire, kabutops, 5, 4}})
 end
 
 local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
@@ -596,8 +629,8 @@ function fgv1.PreBattle(is_rematch, map)
   retirer_garde() -- une réentrée ne garde pas les acteurs d’une prise interrompue
   local retablir_eau = suspendre_eau_precombat(map)
   local hero = CH('PLAYER')
-  local depart_h = is_rematch and {x=SOL_HEROS.x, y=312} or ENTREE_HEROS
-  local depart_p = is_rematch and {x=SOL_PARTENAIRE.x, y=312} or ENTREE_PARTENAIRE
+  local depart_h = is_rematch and {x=DUEL_HEROS.x, y=RECUL_Y + 20} or ENTREE_HEROS
+  local depart_p = is_rematch and {x=DUEL_PARTENAIRE.x, y=RECUL_Y + 20} or ENTREE_PARTENAIRE
   local partenaire = equipe_scene.Partenaire(depart_p.x, depart_p.y, Direction.Up)
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
@@ -621,7 +654,7 @@ function fgv1.PreBattle(is_rematch, map)
     la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
   else
     placer_garde(true)
-    GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 1, false)
+    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 1, false)
     SOUND:PlayBGM('Rising Fear.ogg', false)
     GAME:FadeIn(18)
     TASK:JoinCoroutines({
@@ -651,10 +684,77 @@ function fgv1.PreBattle(is_rematch, map)
   lancer_duel_boss()
 end
 
+-- Le retour inverse la sortie de terre : une impulsion, la terre au ras du
+-- sol, puis le corps s’enfonce dans le nuage. Aucun acteur ne court en coulisse.
+local function s_enfouir(ch, nom, son, grand)
+  local x, y = ch.Position.X, ch.Position.Y
+  arreter_tremblement(ch)
+  GROUND:CharSetAnim(ch, 'Hurt', false)
+  GAME:WaitFrames(5)
+  terre_tunnel(x, y, grand and 3 or 2, son)
+  ch.HideShadow = true
+  for _, h in ipairs({2, 5, 7, 4, 0, -5, -10, -16, -22}) do
+    ch:SetLocHeight(h)
+    GAME:WaitFrames(2)
+  end
+  GROUND:Hide(nom)
+  GROUND:RemoveCharacter(nom)
+  GAME:WaitFrames(grand and 20 or 9)
+end
+
+local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
+  local reactions = {}
+  for i, k in ipairs(garde) do
+    reactions[#reactions + 1] = TASK:BranchCoroutine(function()
+      GAME:WaitFrames((i - 1) * 7)
+      -- Un petit recul sans tourner le dos ; les autres hésitent à leur tour.
+      emote_sur(k.ch, i % 2 == 1 and 'shock' or 'sweating', i == 1 and 'EVT_Emote_Shock' or nil)
+      trembler_de_peur(k.ch)
+      local repli = k.ancre.recul
+      GROUND:AnimateToPosition(k.ch, 'Hurt', k.dir, k.x + repli[1], k.y + repli[2], 0.8, 0.85, 0)
+      GROUND:CharEndAnim(k.ch)
+      GAME:WaitFrames(11)
+      regarder_cible(k.ch, kabutops, 3)
+    end)
+  end
+  reactions[#reactions + 1] = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(10)
+    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 4}, {partenaire and hero, garde[2].ch, 10, 4}})
+  end)
+  TASK:JoinCoroutines(reactions)
+  GAME:WaitFrames(28) -- les quatre restent visibles, tremblants, avant le signal
+  regarder_cible(kabutops, garde[2].ch, 3)
+  tourner_vers(kabutops, Direction.Down, 4)
+  local duree = temps_animation(kabutops, 'Nod')
+  if duree ~= nil then
+    GROUND:CharSetAnim(kabutops, 'Nod', false)
+    GAME:WaitFrames(duree)
+    GROUND:CharEndAnim(kabutops)
+  end
+
+  -- L’arrière garde fuit d’abord ; les deux flancs cèdent ensuite.
+  local delais = {22, 34, 0, 11}
+  local sorties = {}
+  for i, k in ipairs(garde) do
+    sorties[#sorties + 1] = TASK:BranchCoroutine(function()
+      if delais[i] > 0 then GAME:WaitFrames(delais[i]) end
+      s_enfouir(k.ch, k.ancre.nom, k.ancre.signal, false)
+    end)
+  end
+  sorties[#sorties + 1] = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(12)
+    cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
+  end)
+  TASK:JoinCoroutines(sorties)
+  GAME:WaitFrames(10)
+  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
+  s_enfouir(kabutops, 'Kabutops_Boss', true, true)
+end
+
 function fgv1.PostBattle()
   local hero = CH('PLAYER')
-  -- Axe central x=304 laissé libre pour l'arrivée de Lyra depuis le sud.
-  local partenaire = equipe_scene.Partenaire(SALLE_X + 208, 240, Direction.Up)
+  local partenaire = equipe_scene.Partenaire(DUEL_PARTENAIRE.x, DUEL_PARTENAIRE.y, Direction.Up)
+  local garde = placer_garde(true)
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
@@ -663,14 +763,14 @@ function fgv1.PostBattle()
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, SALLE_X + 208, 280, Direction.Up)
+    GROUND:TeleportTo(hero, DUEL_HEROS.x, DUEL_HEROS.y, Direction.Up)
   end
   SOUND:FadeOutBGM(12)
-  GAME:MoveCamera(CAM_DUEL_X, CAM_DUEL_Y, 1, false)
+  GAME:MoveCamera(CAM_DUEL_X, CAM_VICTOIRE_Y, 1, false)
+  trembler_de_peur(nilo)
   GAME:WaitFrames(12)
   GAME:FadeIn(20)
   GAME:WaitFrames(16)
-  trembler_de_peur(nilo)
 
   emote_sur(kabutops, 'sweatdrop')
   GAME:WaitFrames(10)
@@ -685,18 +785,24 @@ function fgv1.PostBattle()
   cinematique.Dire(kabutops, 'Pain', 'Partez. Ne me faites pas regretter de vous laisser passer.', 'droite')
   UI:ResetSpeaker()
 
-  -- La caméra garde le groupe dans le champ. Kabutops sort réellement
-  -- par le couloir sud ; le bruit de pas part avec son premier déplacement.
-  tourner_vers(kabutops, Direction.Down, 4)
-  cinematique.Respirer(16)
+  la_fuite_sous_terre(kabutops, garde, hero, partenaire)
+  -- Nilo ne quitte la terrasse qu'une fois le passage redevenu sûr.
   arreter_tremblement(nilo)
-  SOUND:PlayBattleSE('DUN_Tile_Step')
-  GROUND:MoveToPosition(kabutops, SALLE_X + 256, 344, true, 3)
-  GAME:WaitFrames(8)
-  GROUND:RemoveCharacter('Kabutops_Boss')
   cinematique.Respirer(12)
   SOUND:PlayBGM('Lower Spring Cave.ogg', false)
-  GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65)
+  TASK:JoinCoroutines({
+    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65) end),
+    -- Dégager l'axe x=304 par lequel Lyra arrivera du sud.
+    TASK:BranchCoroutine(function()
+      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, SALLE_X + 196, 258, false, 1.3) end
+    end),
+    TASK:BranchCoroutine(function()
+      if hero ~= nil then
+        GAME:WaitFrames(8)
+        GROUND:MoveToPosition(hero, SALLE_X + 220, 277, false, 1.2)
+      end
+    end),
+  })
   regarder_cible(nilo, hero or partenaire, 4)
   cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
   UI:ResetSpeaker()

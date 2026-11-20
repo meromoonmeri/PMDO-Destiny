@@ -30,10 +30,10 @@ from agrandir_vasques import GROUND_W, GROUND_H, agrandir_ground, rectangle_sall
 DEFAULT_WT = Path(__file__).resolve().parents[1]
 TARGET_W, TARGET_H = 60, 45
 TARGET24_W, TARGET24_H = 20, 15
-BOSS_START = (10, 10)  # sable, entièrement sous les marches
-TEAM_START = (10, 12)  # deux cases de recul, formation à quatre conservée
+BOSS_START = (10, 8)  # bas de la terrasse, deux cases devant le duo
+TEAM_START = (10, 10)  # centre de la salle, formation à quatre conservée
 # x, y, Dir8, niveau — mêmes cases et regards que fosse_cascade_scene.lua.
-KABUTO_STARTS = ((8, 11, 7, 4), (11, 11, 1, 4), (9, 14, 4, 3), (10, 14, 4, 3))
+KABUTO_STARTS = ((8, 9, 7, 4), (11, 9, 1, 4), (9, 12, 4, 3), (10, 12, 4, 3))
 
 
 def garde_kabuto(root: Path, modele: dict) -> list[dict]:

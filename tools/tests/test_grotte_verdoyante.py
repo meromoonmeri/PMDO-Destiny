@@ -14,7 +14,7 @@ from executer_lua import run
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from render_ground_moteur import prepare, rendu, preserver_pixels
-from build_grotte_verdoyante import garde_kabuto
+from build_grotte_verdoyante import garde_kabuto, BOSS_START, TEAM_START
 
 ROOT = Path(__file__).resolve().parents[2]
 GAME = ROOT / 'game'
@@ -88,13 +88,17 @@ def check_antichambre(fond: dict) -> None:
                     for row in range(y // 8, (y + 15) // 8 + 1):
                         assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
 
-    trajet((222, 492), (246, 436), (292, 368), (292, 268), (292, 292))
-    trajet((198, 484), (222, 430), (268, 362), (268, 268), (268, 292))
-    trajet((280, 244), (292, 244))
+    trajet((222, 492), (246, 436), (292, 368), (292, 220), (292, 244), (290, 242), (292, 244))
+    trajet((198, 484), (222, 430), (268, 362), (268, 220), (268, 244), (270, 248), (268, 244))
+    trajet((280, 196), (292, 196))
+    trajet((292, 244), (268, 277))
+    trajet((268, 244), (244, 258))
     trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
-    assert 268 + 16 - 234 + 120 < 188
-    assert 292 + 16 - 260 + 120 < 188
+    assert 220 + 16 - 216 + 120 < 188
+    assert 244 + 16 - 226 + 120 < 188
+    assert 306 + 16 - 242 + 120 < 240  # flancs et arrière entrent dans le cadre
+    assert 292 + 16 - 242 + 120 < 188  # la formation reste lisible pendant le dialogue
     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
     assert 372 - 120 > 152 + 16
 
@@ -158,13 +162,15 @@ def main() -> None:
     assert rsmap['TileSight'] == 0 and rsmap['CharSight'] == 0 and rsmap['EdgeView'] == 1
     assert rsmap['DiscoveryArray'] == [[2] * 15 for _ in range(20)]
     assert rsmap['MapTeams'][0]['BoxStorage'] == []
-    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}]
+    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 10}, 'Dir': 4}]
+    assert TEAM_START == (10, 10)
     boss = rsmap['MapTeams'][0]['Players'][0]['serializationLoc']
-    assert boss == {'X': 10, 'Y': 10}
+    assert boss == {'X': 10, 'Y': 8} and BOSS_START == (10, 8)
     marker = next(e for layer in fgv1['Entities'] for e in layer['Markers'] if e['EntName'] == 'boss')
     anchor = marker['Collider']
     assert (anchor['X'] - 48 + 8, anchor['Y'] + 8) == (boss['X'] * 24 + 12, boss['Y'] * 24 + 12)
-    assert anchor['Y'] >= 240  # entièrement sous les marches dessinées
+    # Le boss est sur le bas des strates et ne rejoint pas la terrasse de Nilo.
+    assert anchor['Y'] - 152 >= 40
     for x in range(6 + boss['X'] * 3, 6 + (boss['X'] + 1) * 3):
         for y in range(boss['Y'] * 3, (boss['Y'] + 1) * 3):
             assert fgv1['obstacles'][x][y]['Tags'] == 0
@@ -179,8 +185,8 @@ def main() -> None:
                         assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
 
     floors = {(x, y) for x in range(20) for y in range(15) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
-    q = deque([(10, 12)])
-    seen = {(10, 12)}
+    q = deque([TEAM_START])
+    seen = {TEAM_START}
     while q:
         cx, cy = q.popleft()
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
@@ -223,26 +229,29 @@ def main() -> None:
     assert enemies == [('kabutops', 14), ('kabuto', 4), ('kabuto', 4), ('kabuto', 3), ('kabuto', 3)], enemies
     assert roster[1:] == garde_kabuto(ROOT, roster[0]), 'les renforts doivent être régénérables sans bonus hérités'
     bornes = [(c['serializationLoc']['X'], c['serializationLoc']['Y'], c['serializationDir']) for c in roster]
-    assert bornes == [(10, 10, 0), (8, 11, 7), (11, 11, 1), (9, 14, 4), (10, 14, 4)]
+    assert bornes == [(10, 8, 0), (8, 9, 7), (11, 9, 1), (9, 12, 4), (10, 12, 4)]
     cases_ennemies = {(x, y) for x, y, _ in bornes}
     assert len(cases_ennemies) == 5 and cases_ennemies <= floors
     positions = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BattlePositionEvent' in e['Value']['$type'])
-    actifs = {(10 + p['Loc']['X'], 12 + p['Loc']['Y']) for p in positions['StartLocs']}
+    actifs = {(TEAM_START[0] + p['Loc']['X'], TEAM_START[1] + p['Loc']['Y']) for p in positions['StartLocs']}
     assert len(actifs) == 4 and actifs <= floors and not actifs & cases_ennemies
     clear = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BeginBattleEvent' in e['Value']['$type'])
     assert clear['CheckClearStatus'] == 'map_clear_check'
-    # Les huit trajets des figurants restent au sol, sans traverser les rochers.
-    chemins = (((220, 244), (230, 254)), ((340, 244), (331, 253)),
-               ((268, 366), (268, 355)), ((292, 369), (292, 358)))
-    for ((ax, ay), (bx, by)), (x, y, _) in zip(chemins, bornes[1:]):
+    # Le détour, l’approche et le recul de peur se font sur du sol libre.
+    chemins = (((205, 202), (212, 224), (226, 224), (-6, -4)),
+               ((362, 200), (352, 225), (338, 224), (6, -4)),
+               ((242, 293), (259, 306), (263, 301), (-3, 7)),
+               ((320, 293), (301, 306), (297, 301), (3, 7)))
+    for (depart, passage, menace, (rx, ry)), (x, y, _) in zip(chemins, bornes[1:]):
         cx, cy = 24 * x + 52, 24 * y + 4
-        for ((sx, sy), (ex, ey)) in (((ax, ay), (bx, by)), ((bx, by), (cx, cy))):
+        trajet = (depart, passage, menace, (cx, cy), (cx + rx, cy + ry))
+        for (sx, sy), (ex, ey) in zip(trajet, trajet[1:]):
             m = max(abs(ex - sx), abs(ey - sy))
             for i in range(m + 1):
                 px, py = round(sx + (ex - sx) * i / m), round(sy + (ey - sy) * i / m)
                 for tx in range(px // 8, (px + 15) // 8 + 1):
                     for ty in range(py // 8, (py + 15) // 8 + 1):
-                        assert fgv1['obstacles'][tx][ty]['Tags'] == 0
+                        assert fgv1['obstacles'][tx][ty]['Tags'] == 0, f'collider de Kabuto dans le relief à {px},{py}'
     for p in roster:
         assert (BASE / 'Data/Monster' / f"{p['BaseForm']['Species']}.json").is_file()
         assert len(p['BaseSkills']) == len(p['Skills']) == 4, 'quatre slots requis au KO par RestoreForm'
