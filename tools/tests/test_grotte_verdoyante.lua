@@ -14,6 +14,7 @@ package.preload['destiny.statue_kangourex'] = function()
   return assert(loadfile(root .. '/game/Data/Script/destiny/statue_kangourex.lua'))()
 end
 package.preload['destiny.cinematique'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/cinematique.lua'))() end
+package.preload['destiny.fosse_cascade_scene'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/fosse_cascade_scene.lua'))() end
 package.preload['destiny.missions_reverie'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/missions_reverie.lua'))() end
 
 local events = {}
@@ -80,6 +81,7 @@ local function make_actor(n, x, y, sp)
   local a = {EntName=n, Position={X=x or 0, Y=y or 0}, Direction=Direction.Down, EntEnabled=true, CollisionDisabled=false, Data={Nickname=n, BaseForm={Species=sp}}}
   function a:GetDisplayName() return self.EntName end
   function a:ReloadEvents() self.reloaded = true end
+  function a:SetLocHeight(h) self.LocHeight = h; ev('hauteur', self.EntName, h, tick_val) end
   actors[n] = a
   return a
 end
@@ -115,7 +117,8 @@ GROUND = {
   Unhide = function(_, n)
     if actors[n] then actors[n].EntEnabled = true end
     local h, p, b = actors.PLAYER, actors.Teammate1, actors[n]
-    ev('unhide', n, tick_val, b and b.Position, h and h.Position, p and p.Position)
+    ev('unhide', n, tick_val, b and b.Position, h and h.Position, p and p.Position,
+      b and b.LocHeight, b and b.HideShadow)
   end,
   AnimateInDirection = function(_, a, anim, animdir, dir, dur, aspd, spd)
     a.Direction = animdir
@@ -372,7 +375,7 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 3 and #events == 1 and events[1][1] =
   'les retrouvailles précèdent le bilan')
 
 -- 3. fgv1 : PreBattle (Nilo tremble, accusation sans preuve et deux avertissements
---    anonymes avant l’éclair et le recul du duo, sans titre de zone)
+--    anonymes avant Tunnel, l’impact et le choix du héros, sans titre de zone)
 --    -> revanche / -dev -> PostBattle (fuite au sud en courant) -> EmptyReturn
 local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
 actors = {}; make_actor('PLAYER', 222, 492); make_actor('Teammate1', 198, 484)
@@ -436,33 +439,43 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 1)
 assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
 local saw_hide, saw_rising_fear = false, false
 local seuil, terrasse, premier_dlg, pano_duel, ombre, depart_woosh
-local innocence, confusion, question, regard_h, regard_p, accusation_visible, secours, locuteur
-local avertissements = {}
+local presentation, cherche_maman, innocence, confusion, question, regard_h, regard_p, locuteur
+local danger, depart_familles, secours, accusation, menace, plainte, choix, reponse, regard_hero_vers_boss, regard_hero_vers_p
+local terre, tremor, apparition, faux, impact, recul_h, recul_p, reposition, haut, reception
+local avertissements, reactions = {}, {}
 local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
 local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
-local flashes, apparition, faux, impact, recul_h, recul_p = 0, nil, nil, nil, nil, nil
 for i, e in ipairs(events) do
   if e[1] == 'cam' then
     if e[2] == 278 and e[3] == 372 and e[4] > 1 then seuil = i end
     if e[2] == 300 and e[3] == 234 and e[4] > 1 then terrasse = i end
     if e[2] == 300 and e[3] == 240 then pano_duel = i end
-  end
-  if e[1] == 'vfx' and e[2] == 'White' then
+  elseif e[1] == 'vfx' and e[2] == 'White' then
     assert(e[5].EndColor.r == 0 and e[5].EndColor.g == 0 and e[5].EndColor.b == 0
-      and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 200,
-      'assombrissement partiel, pas de deuxième éclair')
+      and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 140,
+      'assombrissement modéré : ne pas blanchir la sortie')
     ombre = i
-  end
-  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then
+  elseif e[1] == 'vfx' and e[2] == 'Dig' then
+    assert(not terre and e[5].Layer == DrawLayer.Front and e[3] == 288 and e[4] == 258)
+    terre = i
+  elseif e[1] == 'shake' and not tremor then
+    tremor = i
+  elseif e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then
+    assert(not apparition)
     apparition = i
     local b, h, p = e[4], e[5], e[6]
     assert(b.X * 2 == h.X + p.X and b.Y + 24 == h.Y and h.Y == p.Y,
       'Kabutops doit surgir juste devant le milieu du duo')
+    assert(e[7] < 0 and e[8], 'Kabutops commence sous la terre sans ombre en l’air')
+  elseif e[1] == 'hauteur' and apparition then
+    if e[3] >= 16 then haut = i end
+    if e[3] == 0 then reception = i end
+  elseif e[1] == 'move' and e[2] == 'Kabutops_Boss' then
+    assert(recul_h and recul_p and e[3] == 292 and e[4] == 244, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
+    reposition = i
   end
-  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'pas de trajet du boss depuis la rive')
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
-  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
   if e[1] == 'se' and e[2] == 'EVT_Battle_Transition' then depart_woosh = i end
   if e[1] == 'anim' and e[2] == 'Kabutops_Boss' and e[3] == 'Attack' then faux = i end
   if e[1] == 'se' and e[2] == 'DUN_Gust_Trap' then impact = i end
@@ -470,11 +483,17 @@ for i, e in ipairs(events) do
     for _, n in ipairs(eaux_interdites) do assert(e[2] ~= n, 'pas de geyser à la révélation') end
   end
   if e[1] == 'se' then
+    assert(e[2] ~= 'EVT_Battle_Flash', 'le jaillissement est visible sans plein écran blanc')
     for _, n in ipairs(geysers_interdits) do assert(e[2] ~= n, 'pas de bruit d’eau à la révélation') end
   end
-  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Teammate1' then regard_h = i end
-  if e[1] == 'regard' and e[2] == 'Teammate1' and e[3] == 'PLAYER' then regard_p = i end
+  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Teammate1' then
+    if #avertissements == 1 then regard_h = i end
+    if plainte and not choix then regard_hero_vers_p = i end
+  end
+  if e[1] == 'regard' and e[2] == 'Teammate1' and e[3] == 'PLAYER' and #avertissements == 1 then regard_p = i end
+  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Kabutops_Boss' and plainte and not choix then regard_hero_vers_boss = i end
   if e[1] == 'emote' and e[3] == 'question' then question = i end
+  if e[1] == 'emote' and terre then reactions[e[2]] = true end
   if e[1] == 'speaker' then
     locuteur = e[2]
     if locuteur == '???' then assert(e[3] == '' and e[4] == -1, 'aucun portrait pour la voix cachée') end
@@ -482,19 +501,30 @@ for i, e in ipairs(events) do
   if e[1] == 'dlg' then
     premier_dlg = premier_dlg or i
     local texte = tostring(e[2])
+    local function contient(mot) return texte:find(mot, 1, true) ~= nil end
+    if i == premier_dlg then assert(locuteur == 'Nilo_Grotte' and contient('êtes qui') and contient('Pourquoi')) end
     if locuteur == '???' then
       assert(not apparition, 'les avertissements précèdent la révélation')
       avertissements[#avertissements + 1] = i
     elseif locuteur == 'Nilo_Grotte' then
-      assert(texte:find('rien touché', 1, true), 'Nilo n’avoue rien : l’accusation est fausse')
-      innocence = i
+      if contient('Je la cherchais') then cherche_maman = i end
+      if contient('rien touché') then innocence = i end
+      if contient('je ne comprends pas') then plainte = i end
+      assert(not contient('ai touché') or contient('rien touché'), 'pas d’aveu de Nilo')
     elseif locuteur == 'Kabutops_Boss' then
       assert(apparition, 'Kabutops ne doit pas être identifié avant son apparition')
-      assert(texte:find('vu près des vasques', 1, true), 'le soupçon ne repose que sur sa présence')
-      accusation_visible = i
+      if contient('sentiers ne sont plus sûrs') then danger = i end
+      if contient('quitté la vallée') then depart_familles = i end
+      if contient('sûrement de lui') and contient('près de la source') then accusation = i end
+      if contient('ne contrôle plus ses éclairs') and contient('village en aval') then menace = i end
     elseif locuteur == 'Teammate1' then
-      if texte:find('qui parle ?', 1, true) then confusion = i end
-      if texte:find('pas dire qu’il y a touché', 1, true) then secours = i end
+      if contient('équipe de secours') then presentation = i end
+      if contient('qui parle ?') then confusion = i end
+      if contient('pas dire qu’il y a touché') then secours = i end
+      if contient('on ne t’abandonne pas') then reponse = i end
+    elseif locuteur == 'PLAYER' then
+      assert(texte == "Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix.")
+      choix = i
     else
       error('réplique sans le bon locuteur : '..texte)
     end
@@ -503,8 +533,7 @@ for i, e in ipairs(events) do
     if e[2] == 'PLAYER' then
       assert(e[3] == 292 and e[7] == Direction.UpLeft, 'recul dans l’axe, regard vers le boss')
       recul_h = i
-    end
-    if e[2] == 'Teammate1' then
+    elseif e[2] == 'Teammate1' then
       assert(e[3] == 268 and e[7] == Direction.UpRight, 'le partenaire ne tourne pas le dos')
       recul_p = i
     end
@@ -514,25 +543,34 @@ local premier, second = table.unpack(avertissements)
 assert(#avertissements == 2 and events[premier][2]:find('Pas un pas de plus', 1, true)
   and events[premier][2]:find('a déréglé le courant', 1, true)
   and events[second][2]:find('reculez', 1, true), 'exactement deux avertissements de ???')
-assert(seuil and terrasse and premier_dlg and seuil < terrasse and terrasse < premier_dlg,
-  'la caméra doit révéler Nilo après le coude et avant toute réplique')
+assert(seuil and terrasse and premier_dlg and presentation and cherche_maman
+  and seuil < terrasse and terrasse < premier_dlg and premier_dlg < presentation
+  and presentation < cherche_maman and cherche_maman < premier, 'la rencontre précède la menace')
 assert(regard_h and regard_p and question and confusion and innocence
   and premier < regard_h and premier < regard_p and regard_h < question and regard_p < question
   and question < confusion and confusion < innocence and innocence < second,
   'le duo se cherche du regard et Nilo se défend entre les deux avertissements')
-assert(saw_hide and saw_rising_fear and flashes == 1 and ombre and apparition and faux and impact
-  and second < ombre and ombre < apparition and apparition < faux and faux < impact,
-  'les avertissements débouchent sur un seul éclair puis l’impact de la faux')
-assert(events[faux][5] - events[apparition][3] <= 120
-  and events[impact][3] - events[apparition][3] <= 8 * 120,
-  'pas d’attente entre apparition et attaque (feuille simulée)')
-assert(recul_h and recul_p and accusation_visible and secours and pano_duel and depart_woosh
-  and impact < recul_h and recul_h < recul_p and recul_p < accusation_visible
-  and accusation_visible < secours and secours < pano_duel and pano_duel < depart_woosh,
-  'les deux sont repoussés avant les dialogues à visage découvert et le raccord')
+assert(saw_hide and saw_rising_fear and ombre and tremor and terre and apparition and faux and impact
+  and second < ombre and ombre < tremor and tremor < terre and terre < apparition and apparition < faux and faux < impact,
+  'la secousse et la terre doivent précéder l’impulsion et l’impact de la faux')
+-- Les doublures parcourent les branches en série. Mesurer la courbe elle-même ;
+-- le vrai chevauchement du recul et de la réception est vérifié en capture.
+assert(haut and reception and apparition < haut and haut < reception
+  and events[reception][4] - events[apparition][3] <= 24 * 120
+  and reactions.PLAYER and reactions.Nilo_Grotte and not actors.Kabutops_Boss.HideShadow,
+  'courbe d’élévation et réactions à la sortie du sol')
+assert(recul_h and recul_p and danger and depart_familles and secours and reposition and accusation and menace
+  and impact < recul_h and recul_h < recul_p and recul_p < danger and danger < depart_familles
+  and depart_familles < secours and secours < reposition and reposition < accusation and accusation < menace,
+  'l’explication de la vallée suit le recul ; la faute n’est qu’un soupçon')
+assert(plainte and choix and regard_hero_vers_boss and regard_hero_vers_p and reponse and pano_duel and depart_woosh
+  and menace < plainte and plainte < regard_hero_vers_boss and regard_hero_vers_boss < regard_hero_vers_p
+  and regard_hero_vers_p < choix and choix < reponse and reponse < pano_duel and pano_duel < depart_woosh,
+  'le héros observe et se tourne vers son partenaire avant la décision, le duel attend la réaction')
 assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
-  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292,
-  'la formation du duo arrive aux positions de combat')
+  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292
+  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
+  'la formation du duel retrouve les positions de combat')
 
 -- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
 -- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
@@ -549,7 +587,7 @@ for _, e in ipairs(events) do
 end
 
 -- Nilo est créé sur la terrasse et ne change jamais de position pendant le pré-combat.
-local DEPART_NILO = {x = 304, y = 160}
+local DEPART_NILO = {x = 304, y = 152}
 local depart_vu, nilo_a_bouge, nilo_tremble = false, false, false
 for i, e in ipairs(events) do
   if e[1] == 'create' and e[2] == 'Nilo_Grotte' then
@@ -572,8 +610,7 @@ assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grott
 -- 3 ter. Une scene INTERROMPUE ne doit jamais se rejouer entierement.
 -- C'est le cas reel du journal : le moteur recycle la zone pendant la scene
 -- (ScriptEvent.Apply(): Coroutine for event interrupted by break command!),
--- puis la carte est reentree. Sans garde, tout l'avertissement, l'eclair et
--- la revelation repartent. On simule l'interruption au 2e dialogue.
+-- puis la carte est reentrée. On simule l’interruption au premier dialogue.
 SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
 local cinematique_module = require('destiny.cinematique')
 local dire = cinematique_module.Dire
@@ -594,18 +631,17 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 1,
        'une scene interrompue doit laisser la phase a 1 pour ne pas se rejouer')
 events = {}
 fgv1.Enter(carte_fosse)
-local flashes_2, sommeil_2 = 0, false
+local tunnel_2, tremble_revanche = false, false
 for _, e in ipairs(events) do
-  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes_2 = flashes_2 + 1 end
-  if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_2 = true end
+  if e[1] == 'vfx' and e[2] == 'Dig' then tunnel_2 = true end
+  if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' then tremble_revanche = e[3] == 2 end
 end
-assert(flashes_2 == 0, 'la decouverte de Nilo ne doit pas se rejouer a la reentree')
-assert(not sommeil_2, 'aucun sommeil a rejouer a la reentree')
+assert(not tunnel_2 and tremble_revanche, 'la revanche garde le témoin, pas l’apparition')
 verifier_woosh('continue_dungeon')
 local repl = 0
 for _, e in ipairs(events) do
   if e[1] == 'dlg' then repl = repl + 1 end
-  assert(not (e[1] == 'glisse' or e[1] == 'se' and (e[2] == 'DUN_Gust_Trap' or e[2] == 'DUN_Stomp')
+  assert(not (e[1] == 'glisse' or e[1] == 'se' and (e[2] == 'DUN_Gust_Trap' or e[2] == 'DUN_Dig')
     or e[1] == 'cam' and e[3] > 300 or e[1] == 'vfx' and e[2] == 'White'
     or e[1] == 'speaker' and e[2] == '???'), 'pas de découverte ni de souffle en revanche')
 end

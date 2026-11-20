@@ -17,6 +17,10 @@ Usage :
     python3 tools/render_ground_moteur.py cliffdaytest --out /tmp/apercu
     python3 tools/render_ground_moteur.py cliffdaytest --anime --duree 3 --fps 10
     python3 tools/render_ground_moteur.py cliffdaytest_aube --bande 300 --anime
+    python3 tools/render_ground_moteur.py end_grotte_verdoyante --arene --echelle 2
+
+Sortie PNG ou WebP animé sans perte à taille native, ou agrandissement
+par facteur entier sans filtre. Les planches .tile gardent leur taille (8/24 px).
 
 Aucune dépendance hors Pillow.
 """
@@ -85,8 +89,10 @@ class Planches:
             try:
                 ln = struct.unpack_from('<q', raw, off)[0]
                 png = raw[off + 8:off + 8 + ln]
+                t = struct.unpack_from('<i', raw, 0)[0]
                 full = Image.open(io.BytesIO(png)).convert('RGBA')
-                img = full.crop((0, 0, min(8, full.width), min(8, full.height)))
+                if full.size == (t, t):
+                    img = full
             except Exception:
                 img = None
         cls._tiles[key] = img
@@ -129,8 +135,8 @@ def coller(canvas: Image.Image, img: Image.Image | None, x: int, y: int) -> None
     canvas.paste(Image.alpha_composite(region, piece), (x0, y0))
 
 
-def charge(nom: str) -> dict:
-    p = ROOT / 'game/Data/Ground' / f'{nom}.rsground'
+def charge(nom: str, *, arene: bool = False) -> dict:
+    p = ROOT / (f'game/Data/Map/{nom}.rsmap' if arene else f'game/Data/Ground/{nom}.rsground')
     return json.loads(p.read_text(encoding='utf-8-sig'))['Object']
 
 
@@ -164,9 +170,9 @@ def _calque(o: dict, layer: dict, cell: int, W: int, H: int, index: int) -> Imag
     return canvas
 
 
-def prepare(o: dict) -> dict:
-    tex = int(o.get('TexSize') or 1)
-    cell = tex * 8
+def prepare(o: dict, *, arene: bool = False) -> dict:
+    # Les étages emploient GraphicsManager.TileSize, pas le TexSize du ground.
+    cell = 24 if arene else int(o.get('TexSize') or 1) * 8
     layers = [l for l in (o.get('Layers') or []) if l.get('Visible', True)]
     ref = next((l.get('Tiles') for l in layers if l.get('Tiles')), None) or []
     W, H = len(ref) * cell, (len(ref[0]) if ref else 0) * cell
@@ -219,9 +225,20 @@ def rendu(p: dict, tick: int) -> tuple[Image.Image, int]:
     return canvas, erreurs
 
 
+def preserver_pixels(im: Image.Image, echelle: int = 1) -> Image.Image:
+    """Jamais de rééchantillonnage non entier ni de couleur interpolée."""
+    if not isinstance(echelle, int) or echelle < 1:
+        raise ValueError('échelle entière positive requise')
+    if echelle == 1:
+        return im
+    return im.resize((im.width * echelle, im.height * echelle), Image.Resampling.NEAREST)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('cartes', nargs='+', help='nom(s) de .rsground sans extension')
+    ap.add_argument('cartes', nargs='+', help='nom(s) de carte sans extension')
+    ap.add_argument('--arene', action='store_true', help='rendre les calques de tuiles d’un .rsmap (sans combattants)')
+    ap.add_argument('--echelle', type=int, choices=(1, 2, 3, 4), default=1, help='rapport entier, 1 = taille originale')
     ap.add_argument('--out', default=None, help='dossier de sortie')
     ap.add_argument('--anime', action='store_true', help='produire un WebP animé')
     ap.add_argument('--duree', type=float, default=3.0, help='durée (s) du WebP animé')
@@ -234,8 +251,8 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
 
     for nom in args.cartes:
-        o = charge(nom)
-        p = prepare(o)
+        o = charge(nom, arene=args.arene)
+        p = prepare(o, arene=args.arene)
         if args.anime:
             n = max(1, int(args.duree * args.fps))
             frames = []
@@ -244,16 +261,17 @@ def main() -> None:
                 im = im.convert('RGB')
                 if args.bande:
                     im = im.crop((0, 0, im.width, args.bande))
-                frames.append(im)
+                frames.append(preserver_pixels(im, args.echelle))
             dest = out / f'anime_{nom}.webp'
             frames[0].save(dest, save_all=True, append_images=frames[1:],
                            duration=int(1000 / args.fps), loop=0, format='WEBP',
-                           quality=88, method=6)
+                           lossless=True, method=5)
             print(f'{nom}: {n} images -> {dest}')
         else:
             im, err = rendu(p, 0)
             dest = out / f'carte_{nom}.png'
-            im.convert('RGB').save(dest, optimize=True)
+            im = preserver_pixels(im.convert('RGB'), args.echelle)
+            im.save(dest, optimize=True)
             print(f'{nom}: {im.width}x{im.height}px, {err} case(s) orpheline(s) -> {dest}')
 
 

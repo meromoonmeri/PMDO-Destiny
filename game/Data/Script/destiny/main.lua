@@ -14,3 +14,5 @@
 require 'destiny.services.destiny_title_anim'
 -- Les objets Statue_Kangourex posés dans l'éditeur ouvrent le stockage.
 require 'destiny.services.statue_kangourex'
+-- Nilo observe le duel de la Fosse Cascade, hors de la simulation de combat.
+require 'destiny.services.nilo_temoin'

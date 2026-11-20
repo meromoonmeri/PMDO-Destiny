@@ -11,6 +11,10 @@ from PIL import Image
 
 from executer_lua import run
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from render_ground_moteur import prepare, rendu, preserver_pixels
+
 ROOT = Path(__file__).resolve().parents[2]
 GAME = ROOT / 'game'
 BASE = ROOT / 'base'
@@ -85,12 +89,13 @@ def check_antichambre(fond: dict) -> None:
 
     trajet((222, 492), (246, 436), (292, 368), (292, 268), (292, 292))
     trajet((198, 484), (222, 430), (268, 362), (268, 268), (268, 292))
-    trajet((280, 244), (280, 244))
+    trajet((280, 244), (292, 244))
+    trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
     assert 268 + 16 - 234 + 120 < 188
     assert 292 + 16 - 260 + 120 < 188
     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
-    assert 372 - 120 > 160 + 16
+    assert 372 - 120 > 152 + 16
 
 
 def main() -> None:
@@ -192,6 +197,22 @@ def main() -> None:
     assert (BASE / 'Content/BG/Pre_Battle.dir').is_file()
     assert (BASE / 'Content/Sound/Battle/EVT_Battle_Transition.ogg').is_file()
     assert (BASE / 'Content/BG/White.dir').is_file()
+    assert (BASE / 'Content/Particle/Dig.dir').is_file()
+    assert (BASE / 'Content/Sound/Battle/DUN_Dig.ogg').is_file()
+    assert rsmap['AllyTeams'] == [] and rsmap['Decorations'] == [], 'le spectateur ne change pas les données de l’arène'
+    assert (264 // 24, 160 // 24) not in floors, 'la terrasse de Nilo reste en retrait du terrain de combat'
+
+    # Même palette et mêmes pixels entre la salle haute et son arène, sans
+    # tronquer à 8 px une case de 24 px. Vérifier aussi une phase animée.
+    g, a = prepare(fgv1), prepare(rsmap, arene=True)
+    for t in (0, 8 * 120, 24 * 120):
+        image, erreurs_g = rendu(g, t)
+        arene, erreurs_a = rendu(a, t)
+        assert erreurs_a == erreurs_g == 0 and arene.size == (480, 360)
+        if t == 0:
+            assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()
+    z = preserver_pixels(arene, 2)
+    assert z.size == (960, 720) and z.resize(arene.size, Image.Resampling.NEAREST).tobytes() == arene.tobytes()
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
     assert enemies == [('kabutops', 14)], enemies
     for p in rsmap['MapTeams'][0]['Players']:
@@ -232,6 +253,7 @@ def main() -> None:
 
     # 4. Vérifications de logique Lua (cascade, zone, boss, post-sauvetage, café, Nilo en ville)
     run(ROOT / 'tools/tests/test_grotte_verdoyante.lua', ROOT)
+    run(ROOT / 'tools/tests/test_nilo_temoin.lua', ROOT)
     # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
     run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
     print('PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène Kabutops 480×360, scripts Lua et retours vérifiés.')
