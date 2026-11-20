@@ -151,6 +151,9 @@ def main() -> None:
     starts = [e['Value']['$type'] for e in rsmap['MapEffect']['OnMapStarts']]
     assert any('BattlePositionEvent' in s for s in starts)
     assert any('BeginBattleEvent' in s for s in starts)
+    assert not any('MapTitleDrop' in kind for kind in starts)
+    assert (BASE / 'Content/BG/Pre_Battle.dir').is_file()
+    assert (BASE / 'Content/Sound/Battle/EVT_Battle_Transition.ogg').is_file()
     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
     assert enemies == [('kabutops', 14)], enemies
     for p in rsmap['MapTeams'][0]['Players']:
@@ -167,7 +170,14 @@ def main() -> None:
     assert len(zone['Segments'][0]['Floors']) == 8
     assert len(zone['Segments'][1]['Floors']) == 1
     assert zone['Segments'][0]['ZoneSteps'][1]['Name'] == {'DefaultText': 'Fosse Cascade\n{0}F', 'LocalTexts': {'fr': 'Fosse Cascade\n{0}F'}}
-    assert zone['Segments'][1]['ZoneSteps'][1]['Name'] == {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}
+    normal_steps, boss_steps = (segment['ZoneSteps'] for segment in zone['Segments'])
+    assert any(s['$type'] == 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC' for s in normal_steps)
+    assert not any('FloorNameDrop' in s['$type'] for s in boss_steps), 'carton dynamique dans l’arène'
+    assert any('SaveVarsZoneStep' in s['$type'] for s in boss_steps)
+    nom_duel = [s['Name'] for s in boss_steps if s['$type'] == 'RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence']
+    assert nom_duel == [rsmap['Name']], 'le nom du fond doit rester dans le journal'
+    boss_gen = zone['Segments'][1]['Floors'][0]['GenSteps']
+    assert not any('MapTitleDrop' in s['Value']['$type'] for s in boss_gen)
     assert zone['GroundMaps'] == ['ewc3_entree_waterfall_cave', 'fgv1_fin_grotte_vasques']
     for i, fl in enumerate(zone['Segments'][0]['Floors']):
         tex_steps = [s['Value'] for s in fl['GenSteps'] if 'MapDictTextureStep' in s['Value']['$type']]

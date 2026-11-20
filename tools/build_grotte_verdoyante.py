@@ -1256,7 +1256,8 @@ def build_zone_grotte_verdoyante(root: Path) -> None:
         }],
         'ZoneSteps': [
             {'$type': 'PMDC.LevelGen.SaveVarsZoneStep, PMDC', 'Priority': {'str': [2, 1]}},
-            {'$type': 'PMDC.LevelGen.FloorNameDropZoneStep, PMDC', 'DropPriority': {'str': [-15]}, 'Name': {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}, 'Priority': {'str': [-6]}},
+            # Le nom reste dans le journal, sans carton entre le woosh et le duel.
+            {'$type': 'RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence', 'Name': {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}}, 'Priority': {'str': [-6]}},
         ],
         'IsRelevant': True,
         'Comment': 'Fosse Cascade Fond : salle des vasques contre Kabutops.',

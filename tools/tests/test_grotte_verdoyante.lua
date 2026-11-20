@@ -30,7 +30,8 @@ RogueEssence = {
     GraphicsManager = {TotalFrameTick = tick_val},
     ScreenMover = function(dx, dy, dur) return {dx=dx,dy=dy,dur=dur} end,
     FlashEmitter = function() return {FadeInTime=0, HoldTime=0, FadeOutTime=0, Color=nil, Layer=nil, Anim=nil} end,
-    BGAnimData = function(name, fr) return {name=name, fr=fr} end,
+    BGAnimData = function(name, fr, first, last) return {name=name, fr=fr, first=first, last=last} end,
+    FiniteOverlayEmitter = function() return {} end,
     AnimData = function(name, fr) return {name=name, fr=fr} end,
     SingleEmitter = function(anim, cycles) return {Anim=anim, cycles=cycles, Layer=nil} end,
   },
@@ -101,7 +102,11 @@ GROUND = {
   CharSetDrawEffect = function(_, a, ef) ev('draw_effect', a.EntName, ef) end,
   CharEndDrawEffect = function(_, a, ef) ev('end_draw_effect', a.EntName, ef) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
-  PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y) end,
+  PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y, em, tick_val) end,
+  AnimateToPosition = function(_, a, anim, face, x, y, anim_speed, speed)
+    a.Position = {X=x, Y=y}; a.Direction = face
+    ev('glisse', a.EntName, x, y, anim, speed)
+  end,
   Hide = function(_, n) if actors[n] then actors[n].EntEnabled = false end; ev('hide', n) end,
   Unhide = function(_, n) if actors[n] then actors[n].EntEnabled = true end; ev('unhide', n) end,
   AnimateInDirection = function(_, a, anim, animdir, dir, dur, aspd, spd)
@@ -115,12 +120,13 @@ SOUND = {
   PlayBGM=function(_, m) ev('bgm', m) end,
   FadeOutBGM=function(_, t) ev('fade_bgm', t) end,
   StopBGM=function() ev('stop_bgm') end,
-  PlayBattleSE=function(_, s) ev('se', s) end,
+  PlayBattleSE=function(_, s) ev('se', s, tick_val) end,
   PlayFanfare=function(_, f) ev('fanfare', f) end,
 }
 local choice_ret = true
 UI = {
-  SetSpeaker=function() end, SetSpeakerLoc=function() end, SetSpeakerEmotion=function() end,
+  SetSpeaker=function(_, acteur) ev('speaker', acteur and acteur.EntName) end,
+  SetSpeakerLoc=function() end, SetSpeakerEmotion=function() end,
   SetCenter=function(_, b) ev('center', b) end,
   ResetSpeaker=function() end, WaitShowDialogue=function(_, t) ev('dlg', t) end,
   WaitShowTitle=function() title_calls = title_calls + 1 end, WaitHideTitle=function() end,
@@ -132,8 +138,8 @@ local unlocked = {}
 GAME = {
   CutsceneMode=function() end,
   MoveCamera=function() end,
-  FadeIn=function() end,
-  FadeOut=function() end,
+  FadeIn=function(_, duree) ev('fade_in', duree) end,
+  FadeOut=function(_, blanc, duree) ev('fade_out', blanc, duree) end,
   WaitFrames=function(_, n)
     tick_val = tick_val + (n or 1) * 120
     RogueEssence.Content.GraphicsManager.TotalFrameTick = tick_val
@@ -369,64 +375,95 @@ local carte_fosse = {AssetName='fgv1_fin_grotte_vasques', Layers={Count=2,
   [0]={Name='06 reflets vasques 12 phases', Width=1, Height=1,
        Tiles={[0]={[0]={Layers={Count=2, [0]=reflet, [1]=autre}}}}},
   [1]=bulles}}
-local fn_fade_in, fn_fade_out = GAME.FadeIn, GAME.FadeOut
+local fn_fade_in = GAME.FadeIn
 GAME.FadeIn = function(_, duree)
   assert(reflet.FrameLength == 0 and not bulles.Visible, 'eau visible en mouvement au pré-combat')
   ev('fade_in', duree)
 end
-GAME.FadeOut = function(_, blanc, duree) ev('fade_out', blanc, duree) end
+
+-- Le son et la première bande partent ensemble et ne sont jamais dupliqués.
+-- Le moteur déclenche la musique et le fondu d'entrée au BeginFloor.
+local function verifier_woosh(chemin)
+  local son, noir, duree, nb = nil, nil, 0, 0
+  local premiere_bande, derniere_bande, gauche, droite
+  for i, e in ipairs(events) do
+    if e[1] == 'se' and e[2] == 'EVT_Battle_Transition' then
+      assert(not son and events[i - 1][1] == 'fade_bgm', 'un seul woosh sur la sortie BGM')
+      son = i
+    elseif e[1] == 'vfx' and e[2] == 'Pre_Battle' then
+      local bande, tick = e[5], e[6]
+      assert(son and not noir and bande.Layer == DrawLayer.Top and bande.RepeatX)
+      premiere_bande, derniere_bande = premiere_bande or tick, tick
+      gauche, droite = gauche or bande.Movement.X < 0, droite or bande.Movement.X > 0
+      nb = nb + 1
+    elseif son and e[1] == 'fade_out' then
+      assert(not e[2], 'pas de deuxième éclair de transition')
+      noir = i
+      duree = duree + e[3]
+    elseif son and e[1] == 'wait' then
+      duree = duree + e[2]
+    end
+    assert(not (e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg'), 'la piste du duel appartient à l’arène')
+    assert(not (son and (e[1] == 'dlg' or e[1] == 'fade_in' or e[1] == 'se' and i > son)),
+      'le woosh ne doit être ni interrompu ni couvert')
+  end
+  assert(son and noir and nb == 9 and gauche and droite and premiere_bande == events[son][3]
+    and derniere_bande > premiere_bande and duree >= 187 and duree <= 195,
+    'raccord audiovisuel incomplet ou désynchronisé')
+  local e = events[#events]
+  assert(e[1] == chemin and e[2] == 'grotte_verdoyante' and e[3] == 1 and e[4] == 0 and e[5] == 0)
+  assert(title_calls == 0, 'pas de carton en ground')
+end
+
 events = {}
 title_calls = 0
 fgv1.Enter(carte_fosse)
-GAME.FadeIn, GAME.FadeOut = fn_fade_in, fn_fade_out
+GAME.FadeIn = fn_fade_in
+verifier_woosh('continue_dungeon')
 assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible, 'calques non restaurés à la sortie')
 assert(SV.Destiny.GrotteVerdoyantePhase == 1)
 assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
 -- Le boss n'apparaît JAMAIS sur la bande des vasques en terrasses (y = 136..208).
 assert(actors.Kabutops_Boss.Position.X == 244 and actors.Kabutops_Boss.Position.Y == 244,
        'ancre terrain identique au centre de la case de combat (10,10)')
-local saw_hide, saw_unhide, saw_rising_fear, boss_bgm_ok = false, false, false, false
-local confession, accusation, explication, refus, decision, en_garde = false, false, false, false, false, false
+local saw_hide, saw_rising_fear = false, false
+local confession, avertissement, secours, menace, locuteur
 local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
 local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
-local eau_vue, geyser_vu, voix_anonyme = false, false, false
-local flashes, apparition, recul_h, recul_p = 0, nil, nil, nil
+local flashes, apparition, faux, impact, recul_h, recul_p = 0, nil, nil, nil, nil, nil
 for i, e in ipairs(events) do
-  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then saw_unhide, apparition = true, i end
+  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then apparition = i end
   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
-  if e[1] == 'bgm' and e[2] == 'Boss Battle 2.ogg' then boss_bgm_ok = true end
   if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
+  if e[1] == 'anim' and e[2] == 'Kabutops_Boss' and e[3] == 'Attack' then faux = i end
+  if e[1] == 'se' and e[2] == 'DUN_Gust_Trap' then impact = i end
   if e[1] == 'vfx' then
-    for _, n in ipairs(eaux_interdites) do if e[2] == n then eau_vue = true end end
+    for _, n in ipairs(eaux_interdites) do assert(e[2] ~= n, 'pas de geyser à la révélation') end
   end
   if e[1] == 'se' then
-    for _, n in ipairs(geysers_interdits) do if e[2] == n then geyser_vu = true end end
+    for _, n in ipairs(geysers_interdits) do assert(e[2] ~= n, 'pas de bruit d’eau à la révélation') end
   end
+  if e[1] == 'speaker' then locuteur = e[2] end
   if e[1] == 'dlg' then
+    assert(locuteur == 'Nilo_Grotte' or locuteur == 'Kabutops_Boss' or locuteur == 'Teammate1',
+      'pas de voix anonyme ou de réplique du héros')
     local texte = tostring(e[2])
-    if texte:find('courants sont devenus irréguliers', 1, true) then confession = true end
-    if texte:find('bonne et due forme', 1, true) then accusation = true end
-    if texte:find('Il y a méprise', 1, true) then explication = true end
-    if texte:find('Assez de vos excuses', 1, true) then refus = true end
-    if texte:find('trop en colère pour entendre raison', 1, true) then decision = true end
-    if texte:find('Trêve de bavardages', 1, true) and texte:find('En garde', 1, true) then en_garde = true end
-    if texte:find('premier grondement', 1, true) or texte:find('Reculez', 1, true) or texte:find('???', 1, true) then voix_anonyme = true end
+    if locuteur == 'Nilo_Grotte' and texte:find('le courant a changé', 1, true) then confession = i end
+    if locuteur == 'Kabutops_Boss' and texte:find('sous ma garde', 1, true) then avertissement = i end
+    if locuteur == 'Teammate1' and texte:find('repartir avec lui', 1, true) then secours = i end
+    if locuteur == 'Kabutops_Boss' and texte:find('Pas un pas de plus', 1, true) then menace = i end
   end
-  if e[1] == 'move' and e[2] == 'PLAYER' and e[4] >= 300 then recul_h = i end
-  if e[1] == 'move' and e[2] == 'Teammate1' and e[4] >= 300 then recul_p = i end
+  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 288 then
+    if e[2] == 'PLAYER' then recul_h = i end
+    if e[2] == 'Teammate1' then recul_p = i end
+  end
 end
-assert(saw_hide and saw_unhide and saw_rising_fear and boss_bgm_ok,
-       'apparition de Kabutops ou transition musicale incomplète')
-assert(confession and accusation and explication and refus and decision and en_garde,
-       'échange Nilo/Kabutops, explication du secours ou lancement du duel manquant')
-assert(not voix_anonyme, 'aucune voix anonyme ni ordre confus « reculez » ne doit interrompre la scène')
-assert(flashes == 1, 'Kabutops doit apparaître sous un unique éclair blanc')
-assert(apparition and recul_h and recul_p and apparition < recul_h and apparition < recul_p,
-       'le souffle de Kabutops repousse le duo après son apparition')
-assert(not eau_vue and not geyser_vu,
-       'aucune animation ni son d’eau ne doit accompagner l’apparition du boss')
-assert(title_calls == 0, 'aucun titre de zone ne doit apparaître avant le combat')
+assert(saw_hide and saw_rising_fear and flashes == 1, 'une seule apparition sous l’éclair, puis la tension musicale')
+assert(confession and apparition and faux and impact and recul_h and recul_p and avertissement and secours and menace
+  and confession < apparition and apparition < faux and faux < impact
+  and impact < recul_h and recul_h < recul_p and recul_p < avertissement and avertissement < secours and secours < menace,
+  'aveu, apparition, souffle, tentative d’apaisement puis ultimatum dans l’ordre')
 
 -- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
 -- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
@@ -451,7 +488,7 @@ for _, e in ipairs(events) do
     assert(e[4] == DEPART_NILO.x and e[5] == DEPART_NILO.y,
       'Nilo doit rester sur la terrasse ('..DEPART_NILO.x..','..DEPART_NILO.y..')')
   end
-  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then nilo_a_bouge = true end
+  if (e[1] == 'move' or e[1] == 'glisse') and e[2] == 'Nilo_Grotte' then nilo_a_bouge = true end
   if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' then nilo_tremble = true end
 end
 assert(depart_vu and actors.Nilo_Grotte.Position.X == DEPART_NILO.x and actors.Nilo_Grotte.Position.Y == DEPART_NILO.y,
@@ -493,6 +530,13 @@ for _, e in ipairs(events) do
 end
 assert(flashes_2 == 0, 'la decouverte de Nilo ne doit pas se rejouer a la reentree')
 assert(not sommeil_2, 'aucun sommeil a rejouer a la reentree')
+verifier_woosh('continue_dungeon')
+local repl = 0
+for _, e in ipairs(events) do
+  if e[1] == 'dlg' then repl = repl + 1 end
+  assert(not (e[1] == 'glisse' or e[1] == 'se' and e[2] == 'DUN_Gust_Trap'), 'pas de souffle en revanche')
+end
+assert(repl == 1, 'la revanche doit rester courte')
 
 -- En test Ground Editor (-dev : _ZONE.InDevZone == true), la revanche/transition doit appeler EnterDungeon (forceNewZone = true)
 _ZONE = {InDevZone = true}
@@ -502,8 +546,7 @@ for _, e in ipairs(events) do
   assert(not (e[1] == 'se' and e[2] == 'EVT_Battle_Flash'), 'pas de révélation rejouée en revanche')
   assert(not (e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep'), 'pas de réveil rejoué')
 end
-assert(events[#events][1] == 'enter_dungeon' and events[#events][2] == 'grotte_verdoyante' and events[#events][3] == 1,
-       'en mode -dev (InDevZone), lancer_duel_boss doit utiliser EnterDungeon pour éviter ReturnToEditor')
+verifier_woosh('enter_dungeon') -- zone réelle au lieu d'un ReturnToEditor
 _ZONE = nil
 
 -- La carte des vasques ne déclare pas de piste : le chargement d'une sauvegarde
@@ -549,9 +592,10 @@ assert(fuite_sud and fuite_vitesse == 3,
        'Kabutops doit fuir vers le sud en courant (3 px/image), jusqu’à la sortie du couloir (y >= 344)')
 assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
 
-local saw_lyra_reunion, fins = false, 0
+local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
 for _, e in ipairs(events) do
-  if e[1] == 'dlg' and tostring(e[2]):find('précipitée dans la grotte', 1, true) then saw_lyra_reunion = true end
+  if e[1] == 'speaker' then locuteur_post = e[2] end
+  if e[1] == 'dlg' and locuteur_post == 'Lyra_Grotte' and tostring(e[2]):find('Tu es là.', 1, true) then saw_lyra_reunion = true end
   assert(not (e[1] == 'bgm' and e[2] == 'Job Clear!.ogg'), 'aucun jingle doublant le bilan natif')
   assert(not (e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true)), 'aucun faux journal')
   if e[1] == 'end_day' then fins = fins + 1 end

@@ -8172,12 +8172,7 @@
             }
           },
           {
-            "$type": "PMDC.LevelGen.FloorNameDropZoneStep, PMDC",
-            "DropPriority": {
-              "str": [
-                -15
-              ]
-            },
+            "$type": "RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence",
             "Name": {
               "DefaultText": "Fosse Cascade Fond",
               "LocalTexts": {
