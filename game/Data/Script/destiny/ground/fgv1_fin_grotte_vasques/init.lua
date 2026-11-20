@@ -270,6 +270,8 @@ function fgv1.PreBattle(is_rematch, map)
       cinematique.Dire(partenaire, 'Worried', 'Nilo ?[pause=10] Ta maman nous a envoyés. On vient te ramener.', 'standard')
     end
     UI:ResetSpeaker()
+    -- Le dialogue a une vraie respiration avant le réveil (repère PMDO : 20 f).
+    cinematique.Respirer(20)
     GROUND:CharEndAnim(nilo)
     local duree = temps_animation(nilo, 'Wake')
     if duree ~= nil then
@@ -278,7 +280,7 @@ function fgv1.PreBattle(is_rematch, map)
       GROUND:CharEndAnim(nilo)
     end
     regarder_cible(nilo, partenaire or hero, 3)
-    GAME:WaitFrames(8)
+    GAME:WaitFrames(20)
     cinematique.Dire(nilo, 'Dizzy', 'Maman…?[pause=10] Attendez. Ne bougez plus.', 'droite')
     UI:ResetSpeaker()
 
@@ -316,9 +318,10 @@ function fgv1.PreBattle(is_rematch, map)
     end
     cinematique.Dire(nilo, 'Crying', 'Cette fois, il est tout près…', 'droite')
     UI:ResetSpeaker()
+    cinematique.Respirer(20)
 
-    -- Cotovol / Électhor : le noir donne la parole à la menace avant de la
-    -- montrer. Pas de portrait, pas de musique sous la voix, pas de geyser.
+    -- Le noir donne à la voix le temps d’être identifiée avant la révélation.
+    -- Aucun portrait ni geyser, et la musique reste coupée sous la voix.
     SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
     secouer_ecran(2, 4, 16)
     GAME:FadeOut(false, 10)
@@ -327,7 +330,7 @@ function fgv1.PreBattle(is_rematch, map)
     regarder_cible(hero, kabutops, 3)
     regarder_cible(partenaire, kabutops, 3)
     GAME:FadeIn(12)
-    GAME:WaitFrames(6)
+    GAME:WaitFrames(20)
 
     -- Le premier éclat ne montre toujours personne. Le deuxième révèle
     -- Kabutops sur le sable plat, sans déplacement visible pendant le blanc.
@@ -357,13 +360,44 @@ function fgv1.PreBattle(is_rematch, map)
     if partenaire ~= nil then
       garde[#garde + 1] = TASK:BranchCoroutine(function()
         GAME:WaitFrames(5)
-        GROUND:MoveToPosition(partenaire, 277, 268, false, 1.6)
+        GROUND:MoveToPosition(partenaire, 272, 288, false, 1.6)
         regarder_cible(partenaire, kabutops, 3)
       end)
     end
     if #garde > 0 then TASK:JoinCoroutines(garde) end
     if partenaire ~= nil then
+      -- La protection devient un échange : le partenaire se place devant Nilo,
+      -- puis Nilo lui répond au lieu de passer directement au cri du boss.
+      regarder_cible(nilo, partenaire, 4)
+      GAME:WaitFrames(18)
       cinematique.Dire(partenaire, 'Determined', 'Nilo, derrière moi.[pause=8] On ne repartira pas sans toi.', 'standard')
+      GAME:WaitFrames(12)
+      cinematique.Emote(nilo, 'sweating')
+      regarder_cible(nilo, partenaire, 4)
+      cinematique.Dire(nilo, 'Worried', 'Je… je ne veux pas que vous soyez blessés à cause de moi. Ses faux sont trop rapides…', 'droite')
+      cinematique.Respirer(24)
+      regarder_cible(partenaire, nilo, 4)
+      cinematique.Dire(partenaire, 'Worried', 'Tu as peur, je comprends. Mais tu n’es plus seul, Nilo. Regarde-nous : on reste avec toi.', 'standard')
+      GAME:WaitFrames(16)
+      regarder_cible(nilo, kabutops, 4)
+    end
+
+    -- Kabutops reprend la parole après avoir laissé le duo se placer :
+    -- son emote et son regard marquent l’escalade avant la riposte.
+    cinematique.Respirer(18)
+    cinematique.Emote(kabutops, 'angry', 'EVT_Emote_Complain')
+    regarder_cible(kabutops, hero or partenaire, 4)
+    cinematique.Dire(kabutops, 'Angry', 'Assez ! Si vous refusez de partir, je vous chasserai moi-même de mes vasques.', 'droite')
+    UI:ResetSpeaker()
+    cinematique.RegarderGroupe({
+      {partenaire, kabutops, 0, 4},
+      {hero, kabutops, 5, 4},
+      {nilo, kabutops, 10, 4},
+    })
+    GAME:WaitFrames(20)
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Determined', 'Alors, il faudra d’abord nous passer sur le corps.', 'standard')
+      cinematique.Respirer(18)
     end
   else
     -- Pas de réveil ni de révélation rejoués lors d'une revanche.
@@ -374,12 +408,13 @@ function fgv1.PreBattle(is_rematch, map)
     end
   end
 
+  cinematique.Respirer(20)
   cinematique.Dire(kabutops, 'Shouting', 'Alors, tenez bon !', 'droite')
   UI:ResetSpeaker()
   SOUND:FadeOutBGM(18)
   SOUND:PlayBattleSE('EVT_Battle_Transition')
-  GAME:FadeOut(false, 18) -- pas de nouveaux éclairs après la révélation
-  GAME:WaitFrames(16)
+  GAME:FadeOut(false, 18) -- même durée que le fondu de musique
+  GAME:WaitFrames(30) -- transition standard entre cinématique et duel
   SOUND:PlayBGM('Boss Battle 2.ogg', true)
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.GrotteVerdoyantePhase = 1
@@ -392,7 +427,9 @@ end
 
 function fgv1.PostBattle()
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(216, 268, Direction.Up)
+  -- Formation aérée au centre du cadre : les deux membres du duo restent
+  -- séparés de 40 px et aucun trajet de retrouvailles ne traverse leur ligne.
+  local partenaire = equipe_scene.Partenaire(208, 240, Direction.Up)
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', 296, 240, Direction.Left)
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
     SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
@@ -400,7 +437,7 @@ function fgv1.PostBattle()
   GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, 240, 264, Direction.Up)
+    GROUND:TeleportTo(hero, 208, 280, Direction.Up)
   end
   SOUND:FadeOutBGM(12)
   GAME:MoveCamera(CAM_FACE.x, CAM_FACE.y, 1, false)
@@ -413,18 +450,38 @@ function fgv1.PostBattle()
   GAME:WaitFrames(12)
   cinematique.Dire(kabutops, 'Pain', 'Ksshh… Votre détermination surpasse la fureur du courant… Emportez le petit et laissez mes vasques en paix.', 'droite')
   UI:ResetSpeaker()
-  cinematique.Respirer(10)
+  cinematique.Respirer(24)
+  cinematique.RegarderGroupe({
+    {nilo, kabutops, 0, 4},
+    {partenaire, kabutops, 4, 4},
+    {hero, kabutops, 8, 4},
+  })
+  GAME:WaitFrames(12)
+  cinematique.Dire(nilo, 'Worried', 'Tu… tu nous laisses vraiment partir ?', 'droite')
+  cinematique.Respirer(18)
+  regarder_cible(kabutops, nilo, 4)
+  cinematique.Dire(kabutops, 'Pain', 'Tu m’as vaincu. Ne me force pas à changer d’avis : partez.', 'droite')
+  cinematique.Respirer(18)
+  if partenaire ~= nil then
+    regarder_cible(partenaire, kabutops, 4)
+    cinematique.Dire(partenaire, 'Determined', 'On ne te cherchera pas querelle. On rentre avec Nilo.', 'standard')
+    cinematique.Respirer(20)
+  end
 
-  -- 7. Kabutops vaincu fuit vers le sud EN COURANT (plus aucun effet d'eau).
+  -- Kabutops détourne le regard et choisit de se retirer; Nilo cesse alors de trembler.
+  tourner_vers(kabutops, Direction.Down, 4)
+  GAME:WaitFrames(18)
   arreter_tremblement(nilo)
-  tourner_vers(kabutops, Direction.Down, 3)
+
+  -- Kabutops vaincu fuit vers le sud EN COURANT (plus aucun effet d'eau).
   GAME:WaitFrames(4)
-  SOUND:PlayBattleSE('DUN_Tile_Step')
   local fuite = {
     TASK:BranchCoroutine(function()
       GAME:MoveCamera(240, 240, 16, false)
     end),
     TASK:BranchCoroutine(function()
+      -- Le pas part avec le premier mouvement, pas avant la course.
+      SOUND:PlayBattleSE('DUN_Tile_Step')
       GROUND:MoveToPosition(kabutops, 240, 352, true, 3)
     end),
   }
@@ -438,79 +495,77 @@ function fgv1.PostBattle()
   -- Nilo se relève et rejoint le duo.
   local retour_nilo = {
     TASK:BranchCoroutine(function()
-      GROUND:MoveToPosition(nilo, 256, 248, true, 2)
+      -- Nilo rejoint le côté droit du cadre, sans croiser l'axe d'arrivée de Lyra.
+      GROUND:MoveToPosition(nilo, 296, 272, true, 2)
       tourner_vers(nilo, Direction.Down, 4)
     end),
   }
   TASK:JoinCoroutines(retour_nilo)
   cinematique.Emote(nilo, 'happy')
-  GAME:WaitFrames(10)
+  GAME:WaitFrames(20)
   cinematique.Dire(nilo, 'Teary-Eyed', 'Vous… vous avez vraiment tenu tête à ' .. cinematique.NomEspece('kabutops', 'Kabutops') .. ' pour me sauver !!', 'droite')
+  cinematique.Respirer(20)
 
-  -- Arrivée de Lyra depuis le couloir sud (x = 256 entièrement libre de y = 344 à y = 200).
-  UI:ResetSpeaker(false)
-  UI:SetSpeaker('Lyra', true, '', -1, '', (RogueEssence.Data.Gender and RogueEssence.Data.Gender.Unknown) or Gender.Genderless)
-  UI:WaitShowDialogue(cinematique.NomColore('Nilo', 'shinx') .. ' !! Est-ce que tout le monde va bien ?!')
-  UI:ResetSpeaker()
-
-  SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
-  local reactions_appel = {
-    TASK:BranchCoroutine(function()
-      cinematique.Emote(nilo, 'exclaim')
-      tourner_vers(nilo, Direction.Down, 4)
-    end),
-  }
-  if partenaire ~= nil then
-    table.insert(reactions_appel, TASK:BranchCoroutine(function()
-      GAME:WaitFrames(5)
-      cinematique.Emote(partenaire, 'exclaim')
-      tourner_vers(partenaire, Direction.Down, 4)
-    end))
-  end
-  if hero ~= nil then
-    table.insert(reactions_appel, TASK:BranchCoroutine(function()
-      GAME:WaitFrames(11)
-      cinematique.Emote(hero, 'exclaim')
-      tourner_vers(hero, Direction.Down, 4)
-    end))
-  end
-  TASK:JoinCoroutines(reactions_appel)
-  GAME:WaitFrames(12)
-
+  -- Lyra monte par le couloir sud dégagé (x = 256). Les positions du duo et
+  -- de Nilo laissent cet axe libre : aucune trajectoire ne traverse un autre acteur.
   local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', 256, 344, Direction.Up)
-  GROUND:MoveToPosition(lyra, 256, 240, true, 2)
+  GROUND:MoveToPosition(lyra, 256, 248, true, 2)
   cinematique.RegarderGroupe({
     {lyra, nilo, 0, 4},
     {nilo, lyra, 3, 4},
     {partenaire, lyra, 6, 4},
     {hero, lyra, 10, 4},
   })
+  GAME:WaitFrames(10) -- laisser le groupe enregistrer l'arrivée avant la réplique
+
+  -- Ne pas afficher le portrait de Lyra avant son entrée à l'écran.
+  cinematique.Dire(lyra, 'Worried', cinematique.NomColore('Nilo', 'shinx') .. ' !! Est-ce que tout le monde va bien ?!', 'standard')
+  local reactions_appel = {
+    TASK:BranchCoroutine(function()
+      cinematique.Emote(nilo, 'exclaim', 'EVT_Emote_Exclaim_2')
+    end),
+  }
+  if partenaire ~= nil then
+    table.insert(reactions_appel, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
+      cinematique.Emote(partenaire, 'exclaim')
+    end))
+  end
+  if hero ~= nil then
+    table.insert(reactions_appel, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(11)
+      cinematique.Emote(hero, 'exclaim')
+    end))
+  end
+  TASK:JoinCoroutines(reactions_appel)
+  GAME:WaitFrames(30) -- laisser finir le SFX de groupe avant le son du saut
 
   SOUND:PlayBattleSE('EVT_Emote_Startled')
   GROUND:CharSetAnim(nilo, 'Hop', false)
   GAME:WaitFrames(16)
   if GROUND.CharEndAnim ~= nil then GROUND:CharEndAnim(nilo) end
   cinematique.Emote(nilo, 'happy')
-  GAME:WaitFrames(10)
-  cinematique.Dire(nilo, 'Teary-Eyed', 'Maman !! Tu nous as rejoints jusqu’ici !', 'standard')
-  cinematique.Respirer(10)
-  cinematique.Dire(lyra, 'Teary-Eyed', 'Mon petit ' .. cinematique.NomColore('Nilo', 'shinx') .. '… Quand le fracas du torrent s’est apaisé, je me suis précipitée dans la grotte ! Quel bonheur de te revoir sain et sauf…', 'droite')
-  cinematique.Respirer(10)
+  GAME:WaitFrames(20)
+  cinematique.Dire(nilo, 'Teary-Eyed', 'Maman !! Tu nous as rejoints jusqu’ici !', 'droite')
+  cinematique.Respirer(20)
+  cinematique.Dire(lyra, 'Teary-Eyed', 'Mon petit ' .. cinematique.NomColore('Nilo', 'shinx') .. '… Quand le fracas du torrent s’est apaisé, je me suis précipitée dans la grotte ! Quel bonheur de te revoir sain et sauf…', 'standard')
+  cinematique.Respirer(20)
 
   regarder_cible(lyra, hero or partenaire, 4)
   cinematique.Dire(lyra, 'Happy', 'Merci infiniment à tous les deux ! Sans votre bravoure, je n’ose même pas imaginer ce qui serait arrivé.', 'droite')
   if partenaire ~= nil then
-    cinematique.Respirer(10)
+    cinematique.Respirer(20)
     cinematique.Dire(partenaire, 'Happy', 'L’essentiel, c’est que vous soyez réunis ! Vite, rentrons à ' .. LIEU_VILLE .. ' annoncer la bonne nouvelle à Léo et aux habitants !', 'standard')
   end
-  cinematique.Respirer(10)
-  cinematique.Dire(nilo, 'Happy', 'Oui !! Rentrons tous ensemble !', 'standard')
+  cinematique.Respirer(20)
+  cinematique.Dire(nilo, 'Happy', 'Oui !! Rentrons tous ensemble !', 'droite')
   UI:ResetSpeaker()
-  cinematique.Respirer(12)
+  cinematique.Respirer(20)
 
   -- Dernier fondu des retrouvailles ; COMMON.EndDungeonDay ouvre ensuite le bilan natif.
-  SOUND:FadeOutBGM(24)
-  GAME:FadeOut(false, 24)
+  -- Retrouvailles émotionnelles : fondu musique/image prolongé et apparié.
+  SOUND:FadeOutBGM(60)
+  GAME:FadeOut(false, 60)
   GAME:WaitFrames(30)
   GROUND:RemoveCharacter('Lyra_Grotte')
   GROUND:RemoveCharacter('Nilo_Grotte')
