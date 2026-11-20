@@ -1,7 +1,7 @@
 -- Fosse Cascade Fond (576×528, antichambre au sud et salle haute).
 -- 0 : sauvetage de Nilo, accusation, sortie de terre du gardien et de sa garde.
 -- 1 : revanche courte, sans rejouer la découverte.
--- 3 : retrouvailles et bilan natif après le duel. 4 : visite paisible.
+-- 3 : excuses de Kabutops, départ et retrouvailles après le duel. 4 : visite paisible.
 -- La salle haute commence à x=48 ; l'arène garde son rectangle de 480×360.
 require 'origin.common'
 local equipe_scene = require 'destiny.equipe_scene'
@@ -13,7 +13,6 @@ local fgv1 = {}
 
 local LIEU_DONJON = '[color=#FFC663]Fosse Cascade[color]'
 local LIEU_FOND = '[color=#FFC663]Fosse Cascade Fond[color]'
-local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
 
 -- Le sol de la scène et les départs du donjon partagent leurs centres.
 -- Le duo s’arrête une case devant sa position de duel, puis y est repoussé.
@@ -765,6 +764,34 @@ local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
   s_enfouir(kabutops, 'Kabutops_Boss', true, true)
 end
 
+local function le_gardien_s_excuse(kabutops, nilo, hero, partenaire)
+  emote_sur(kabutops, 'sweatdrop')
+  GAME:WaitFrames(12)
+  regarder_cible(kabutops, hero or partenaire, 4)
+  dire(kabutops, 'Pain', 'Je me suis emporté trop vite. J’ai accusé Nilo sans savoir.', 'droite')
+
+  -- Le regard remonte vers les vasques. Le thème calme revient avec le souvenir,
+  -- pas sous le fondu du duel. Il accompagne la scène jusqu’aux retrouvailles.
+  cinematique.Respirer(22)
+  regarder_cible(kabutops, nilo, 4)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', false)
+  dire(kabutops, 'Normal', 'Avant, on venait boire ici en famille. Les petits faisaient la course sur le sable.', 'droite')
+  cinematique.Respirer(18)
+  tourner_vers(kabutops, Direction.Down, 4)
+  dire(kabutops, 'Pain', 'Depuis les crues, le moindre éclair m’effraie. Ce n’est pas une excuse.', 'droite')
+
+  cinematique.Respirer(20)
+  regarder_cible(kabutops, nilo, 4)
+  dire(kabutops, 'Pain', 'Pardon, Nilo. Et pardon à vous deux de vous avoir attaqués.', 'droite')
+  cinematique.Respirer(28)
+  arreter_tremblement(nilo)
+  cinematique.RegarderGroupe({{nilo, kabutops, 0, 4}, {partenaire, nilo, 5, 4}, {hero, nilo, 9, 4}})
+  dire(nilo, 'Worried', 'Alors… je peux rentrer avec maman ?', 'droite')
+  cinematique.Respirer(14)
+  dire(kabutops, 'Normal', 'Oui. Kabuto, laissez-leur le passage.', 'droite')
+  cinematique.Respirer(12)
+end
+
 function fgv1.PostBattle()
   GAME:CutsceneMode(true)
   local hero = CH('PLAYER')
@@ -786,25 +813,10 @@ function fgv1.PostBattle()
   GAME:FadeIn(20)
   GAME:WaitFrames(16)
 
-  emote_sur(kabutops, 'sweatdrop')
-  GAME:WaitFrames(10)
-  regarder_cible(kabutops, hero or partenaire, 4)
-  cinematique.Dire(kabutops, 'Pain', 'Vous avez gagné… Emmenez le petit.', 'droite')
-  UI:ResetSpeaker()
-  cinematique.Respirer(16)
-  cinematique.RegarderGroupe({{nilo, kabutops, 0, 4}, {partenaire, kabutops, 5, 4}, {hero, kabutops, 9, 4}})
-  cinematique.Dire(nilo, 'Worried', 'On peut vraiment rentrer ?', 'droite')
-  UI:ResetSpeaker()
-  regarder_cible(kabutops, nilo, 4)
-  cinematique.Respirer(12)
-  cinematique.Dire(kabutops, 'Pain', 'Partez. Ne me faites pas regretter de vous laisser passer.', 'droite')
-  UI:ResetSpeaker()
-
+  le_gardien_s_excuse(kabutops, nilo, hero, partenaire)
   la_fuite_sous_terre(kabutops, garde, hero, partenaire)
-  -- Nilo ne quitte la terrasse qu'une fois le passage redevenu sûr.
-  arreter_tremblement(nilo)
+  -- Même rassuré, Nilo attend que le passage soit redevenu sûr.
   cinematique.Respirer(12)
-  SOUND:PlayBGM('Lower Spring Cave.ogg', false)
   TASK:JoinCoroutines({
     TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, REUNION.axe, REUNION.nilo_y, false, 1.65) end),
     -- Le duo reste sur les côtés. Ni Nilo ni Lyra ne traversent un acteur.
@@ -822,10 +834,7 @@ function fgv1.PostBattle()
       GAME:MoveCamera(CAM_VICTOIRE_X, CAM_REUNION_Y, 22, false)
     end),
   })
-  cinematique.RegarderGroupe({{nilo, hero or partenaire, 0, 4}, {partenaire, nilo, 5, 4}, {hero, nilo, 9, 4}})
-  cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
-  UI:ResetSpeaker()
-  cinematique.Respirer(18)
+  cinematique.Respirer(12)
 
   -- L'arrivée de Lyra motive les regards. Le duo ne tourne pas le dos à
   -- Lyra pour jouer une émote après qu'elle s'est déjà placée devant lui.
@@ -839,20 +848,11 @@ function fgv1.PostBattle()
     end),
   })
   cinematique.RegarderGroupe({{lyra, nilo, 0, 4}, {nilo, lyra, 5, 4}, {partenaire, lyra, 7, 4}, {hero, lyra, 11, 4}})
-  cinematique.Respirer(10)
-  cinematique.Dire(lyra, 'Worried', cinematique.NomColore('Nilo', 'shinx') .. ' ! Tu n’as rien ?', 'standard')
-  UI:ResetSpeaker()
   cinematique.Respirer(14)
-  cinematique.Dire(nilo, 'Teary-Eyed', 'Maman… Je ne retrouvais plus la sortie.', 'droite')
-  UI:ResetSpeaker()
+  dire(nilo, 'Teary-Eyed', 'Maman ! J’ai eu si peur…', 'droite')
   cinematique.Respirer(18)
-  cinematique.Dire(lyra, 'Teary-Eyed', 'Tu es là. C’est tout ce qui compte.', 'standard')
-  UI:ResetSpeaker()
-  cinematique.Respirer(20)
-  regarder_cible(lyra, hero or partenaire, 4)
-  cinematique.Dire(lyra, 'Happy', 'Merci à vous deux. On rentre à ' .. LIEU_VILLE .. ' ?', 'standard')
-  UI:ResetSpeaker()
-  cinematique.Respirer(20)
+  dire(lyra, 'Teary-Eyed', 'Tu es là. C’est tout ce qui compte.', 'standard')
+  cinematique.Respirer(24)
 
   -- Dernier fondu des retrouvailles ; durée musique/image alignée sur le guide.
   SOUND:FadeOutBGM(60)

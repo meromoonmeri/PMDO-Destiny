@@ -827,15 +827,48 @@ for _, spec in ipairs(fosse_scene.GARDE) do
 end
 verifier_plongeon('Kabutops_Boss', 280, 244, false)
 
-local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
-for _, e in ipairs(events) do
+-- Le retournement de Kabutops doit précéder le départ de la garde :
+-- aveu, souvenir concret, excuses à Nilo et au duo, puis ordre de se retirer.
+local pages, musique, fin_peur, debut_repli, fin_texte = {}, nil, nil, nil, nil
+local fins, locuteur_post = 0, nil
+for i, e in ipairs(events) do
   if e[1] == 'speaker' then locuteur_post = e[2] end
-  if e[1] == 'dlg' and locuteur_post == 'Lyra_Grotte' and tostring(e[2]):find('Tu es là.', 1, true) then saw_lyra_reunion = true end
+  if e[1] == 'dlg' then pages[#pages + 1] = {locuteur_post, e[2], i} end
+  if e[1] == 'bgm' and e[2] == 'Lower Spring Cave.ogg' then
+    assert(not musique, 'le thème des vasques se poursuit sans redémarrer pendant les retrouvailles')
+    musique = i
+  end
+  if e[1] == 'end_draw_effect' and e[2] == 'Nilo_Grotte' then fin_peur = i end
+  if e[1] == 'glisse' and e[5] == 'Hurt' and not debut_repli then debut_repli = i end
+  if e[1] == 'fade_out' then fin_texte = i end
   assert(not (e[1] == 'bgm' and e[2] == 'Job Clear!.ogg'), 'aucun jingle doublant le bilan natif')
   assert(not (e[1] == 'dlg' and tostring(e[2]):find('Journal d’Exploration', 1, true)), 'aucun faux journal')
   if e[1] == 'end_day' then fins = fins + 1 end
 end
-assert(saw_lyra_reunion and fins == 1 and SV.Destiny.AvisOuvertureFosse, 'retrouvailles puis une seule clôture PMDO')
+local pages_attendues = {
+  {'Kabutops_Boss', 'emporté trop vite'},
+  {'Kabutops_Boss', 'on venait boire ici en famille'},
+  {'Kabutops_Boss', 'Depuis les crues'},
+  {'Kabutops_Boss', 'Pardon, Nilo.', 'pardon à vous deux'},
+  {'Nilo_Grotte', 'rentrer avec maman'},
+  {'Kabutops_Boss', 'laissez-leur le passage'},
+  {'Nilo_Grotte', 'Maman !'},
+  {'Lyra_Grotte', 'Tu es là.'},
+}
+assert(#pages == #pages_attendues, 'dénouement en huit pages, retrouvailles comprises')
+for i, attendu in ipairs(pages_attendues) do
+  assert(pages[i][1] == attendu[1], 'locuteur de la page ' .. i)
+  for mot = 2, #attendu do
+    assert(pages[i][2]:find(attendu[mot], 1, true), 'dialogue du dénouement, page ' .. i)
+  end
+end
+assert(musique and fin_peur and debut_repli and fin_texte and fondu < pages[1][3]
+  and pages[1][3] < musique and musique < pages[2][3]
+  and pages[4][3] < fin_peur and fin_peur < pages[5][3]
+  and pages[6][3] < debut_repli and derniere_sortie < descente_nilo
+  and descente_nilo < pages[7][3] and pages[8][3] < fin_texte,
+  'l’aveu puis les excuses déclenchent l’apaisement et le départ avant la réunion')
+assert(fins == 1 and SV.Destiny.AvisOuvertureFosse, 'une seule clôture PMDO')
 assert(events[#events][1] == 'end_day' and events[#events][2] == 'Cleared' and events[#events][3] == 'town02_waterfallvillage')
 
 events = {}
