@@ -14,7 +14,8 @@ local gfx = {TotalFrameTick=0, IdleAction=0, GetChara=function()
     return {Frames={Count=2, [0]={EndTime=15}, [1]={EndTime=30}}}
   end}}}
 end}
-local map = {AssetName='end_grotte_verdoyante', MapTeams={'kabutops'}, AllyTeams={}, MapTurns=0}
+local joueurs = {'kabutops', 'kabuto', 'kabuto', 'kabuto', 'kabuto'}
+local map = {AssetName='end_grotte_verdoyante', MapTeams={{Players=joueurs}}, AllyTeams={}, MapTurns=0}
 _ZONE = {CurrentMap=map}
 DrawLayer = {Normal=2}; Direction = {Down=0}; Gender = {Male=1}
 RogueElements = {Loc=function(x,y) return {X=x,Y=y} end}
@@ -47,7 +48,8 @@ for i=0,100 do
   minx, maxx = math.min(minx,p.loc.X), math.max(maxx,p.loc.X); frames[p.frame]=true
 end
 assert(minx==262 and maxx==266 and frames[0] and frames[1], 'tremblement entier et poses Idle natives')
-assert(map.MapTeams[1]=='kabutops' and #map.MapTeams==1 and #map.AllyTeams==0 and map.MapTurns==0)
+assert(map.MapTeams[1].Players == joueurs and table.concat(joueurs, ',') == 'kabutops,kabuto,kabuto,kabuto,kabuto')
+assert(#map.MapTeams==1 and #map.AllyTeams==0 and map.MapTurns==0)
 callbacks.exit(); assert(#poses==0)
 _ZONE.CurrentMap = {AssetName='un_autre_etage'}; callbacks.tick(); assert(#poses==0)
 _ZONE.CurrentMap = map; callbacks.tick(); assert(#poses==1)

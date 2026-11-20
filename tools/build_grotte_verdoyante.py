@@ -4,7 +4,7 @@
 1. game/Data/Ground/ewc3_entree_waterfall_cave.rsground (métadonnées/déclencheurs)
 2. game/Data/Ground/fgv1_fin_grotte_vasques.rsground + FGV1_*.tile (576x528 = 72x66 tuiles 8px, salle haute 480x360)
 3. game/Content/Tile/FGV1_VASQUES_BASE_24.tile (tuiles 24x24 animées 12 phases + avant-plan sur 20x15)
-4. game/Data/Map/end_grotte_verdoyante.rsmap (arène Boss 9F Fosse Cascade Fond 20x15 : Kabutops Lv 14)
+4. game/Data/Map/end_grotte_verdoyante.rsmap (arène Boss 9F, Kabutops Lv 14 et quatre Kabuto Lv 3/4)
 5. game/Data/Zone/grotte_verdoyante.json (1F-8F deep_limestone_cavern + 9F Boss)
 6. game/Data/Zone/index.idx + game/Content/Tile/index.idx
 
@@ -20,7 +20,9 @@ import struct
 import subprocess
 import sys
 from collections import deque
+from copy import deepcopy
 from pathlib import Path
+from xml.etree import ElementTree
 from PIL import Image
 
 from agrandir_vasques import GROUND_W, GROUND_H, agrandir_ground, rectangle_salle
@@ -30,6 +32,38 @@ TARGET_W, TARGET_H = 60, 45
 TARGET24_W, TARGET24_H = 20, 15
 BOSS_START = (10, 10)  # sable, entièrement sous les marches
 TEAM_START = (10, 12)  # deux cases de recul, formation à quatre conservée
+# x, y, Dir8, niveau — mêmes cases et regards que fosse_cascade_scene.lua.
+KABUTO_STARTS = ((8, 11, 7, 4), (11, 11, 1, 4), (9, 14, 4, 3), (10, 14, 4, 3))
+
+
+def garde_kabuto(root: Path, modele: dict) -> list[dict]:
+    """Quatre ennemis natifs, sans bonus ni capacité apprise hors niveau."""
+    def data(rel: str) -> dict:
+        return json.loads((root / 'base/Data' / (rel + '.json')).read_text(encoding='utf-8-sig'))['Object']
+
+    kabuto = data('Monster/kabuto')['Forms'][0]
+    max_level = int(ElementTree.parse(root / 'game/Data/StartParams.xml').findtext('MaxLevel'))
+    skills = [(move, data(f'Skill/{move}')['BaseCharges']) for move in ('scratch', 'harden')]
+    # Character.RestoreForm lit les quatre emplacements, même au KO. Les
+    # deux slots vides ne sont pas des capacités : ne pas tronquer la liste.
+    skills += [('', 0), ('', 0)]
+    forme = {'Species': 'kabuto', 'Form': 0, 'Skin': 'normal', 'Gender': 1}
+    garde = []
+    for x, y, direction, niveau in KABUTO_STARTS:
+        ch = deepcopy(modele)
+        ch.update(serializationLoc={'X': x, 'Y': y}, serializationDir=direction,
+                  CurrentForm=forme, BaseForm=forme, Level=niveau,
+                  HP=(kabuto['BaseHP'] + 130) * niveau // max_level + 10)
+        for stat in ('MaxHP', 'Atk', 'Def', 'MAtk', 'MDef', 'Speed'):
+            ch[stat + 'Bonus'] = 0
+        ch['Skills'] = [
+            {'Element': {'SkillNum': move, 'Charges': pp, 'Enabled': True, 'Sealed': False}, 'BackRef': i}
+            for i, (move, pp) in enumerate(skills)
+        ]
+        ch['BaseSkills'] = [{'SkillNum': move, 'Charges': pp, 'CanForget': True} for move, pp in skills]
+        # Talent natif commun à Kabuto et Kabutops : Armurbaston. Aucun statut initial.
+        garde.append(ch)
+    return garde
 
 
 def load_tile_sheet(tile_dir: Path, sheet: str) -> tuple[int, dict[tuple[int, int], bytes]]:
@@ -620,13 +654,13 @@ def build_fgv1_battle_map_and_tiles(root: Path, fgv1_doc: dict, decoded_tiles: d
             '$type': 'RogueEssence.Dungeon.Map, RogueEssence',
             'Name': {'DefaultText': 'Fosse Cascade Fond', 'LocalTexts': {'fr': 'Fosse Cascade Fond'}},
             'Released': True,
-            'Comment': 'Arène Boss 9F Fosse Cascade Fond (20x15 tuiles 24px = 480x360, même lieu que fgv1_fin_grotte_vasques, contre Kabutops Lv 14).',
+            'Comment': 'Arène Boss 9F Fosse Cascade Fond (480x360, Kabutops Lv 14 et sa garde de quatre Kabuto Lv 3/4).',
             'Begun': False,
             'ID': 0,
             'MapTeams': [{
                 '$type': 'RogueEssence.Dungeon.ExplorerTeam, RogueEssence',
                 'Rank': 'bronze',
-                'Players': [kabutops],
+                'Players': [kabutops, *garde_kabuto(root, kabutops)],
                 'Guests': [],
                 'inventory': [],
                 'MaxInv': 0,

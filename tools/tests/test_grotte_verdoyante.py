@@ -14,6 +14,7 @@ from executer_lua import run
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from render_ground_moteur import prepare, rendu, preserver_pixels
+from build_grotte_verdoyante import garde_kabuto
 
 ROOT = Path(__file__).resolve().parents[2]
 GAME = ROOT / 'game'
@@ -199,6 +200,9 @@ def main() -> None:
     assert (BASE / 'Content/BG/White.dir').is_file()
     assert (BASE / 'Content/Particle/Dig.dir').is_file()
     assert (BASE / 'Content/Sound/Battle/DUN_Dig.ogg').is_file()
+    assert (BASE / 'Content/Particle/Scratch.dir').is_file()
+    assert (BASE / 'Content/Sound/Battle/DUN_Scratch.ogg').is_file()
+    assert (BASE / 'Content/Chara/140.chara').is_file()
     assert rsmap['AllyTeams'] == [] and rsmap['Decorations'] == [], 'le spectateur ne change pas les données de l’arène'
     assert (264 // 24, 160 // 24) not in floors, 'la terrasse de Nilo reste en retrait du terrain de combat'
 
@@ -213,12 +217,44 @@ def main() -> None:
             assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()
     z = preserver_pixels(arene, 2)
     assert z.size == (960, 720) and z.resize(arene.size, Image.Resampling.NEAREST).tobytes() == arene.tobytes()
-    enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
-    assert enemies == [('kabutops', 14)], enemies
-    for p in rsmap['MapTeams'][0]['Players']:
+    assert len(rsmap['MapTeams']) == 1 and rsmap['MapTeams'][0]['LeaderIndex'] == 0
+    roster = rsmap['MapTeams'][0]['Players']
+    enemies = [(p['BaseForm']['Species'], p['Level']) for p in roster]
+    assert enemies == [('kabutops', 14), ('kabuto', 4), ('kabuto', 4), ('kabuto', 3), ('kabuto', 3)], enemies
+    assert roster[1:] == garde_kabuto(ROOT, roster[0]), 'les renforts doivent être régénérables sans bonus hérités'
+    bornes = [(c['serializationLoc']['X'], c['serializationLoc']['Y'], c['serializationDir']) for c in roster]
+    assert bornes == [(10, 10, 0), (8, 11, 7), (11, 11, 1), (9, 14, 4), (10, 14, 4)]
+    cases_ennemies = {(x, y) for x, y, _ in bornes}
+    assert len(cases_ennemies) == 5 and cases_ennemies <= floors
+    positions = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BattlePositionEvent' in e['Value']['$type'])
+    actifs = {(10 + p['Loc']['X'], 12 + p['Loc']['Y']) for p in positions['StartLocs']}
+    assert len(actifs) == 4 and actifs <= floors and not actifs & cases_ennemies
+    clear = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BeginBattleEvent' in e['Value']['$type'])
+    assert clear['CheckClearStatus'] == 'map_clear_check'
+    # Les huit trajets des figurants restent au sol, sans traverser les rochers.
+    chemins = (((220, 244), (230, 254)), ((340, 244), (331, 253)),
+               ((268, 366), (268, 355)), ((292, 369), (292, 358)))
+    for ((ax, ay), (bx, by)), (x, y, _) in zip(chemins, bornes[1:]):
+        cx, cy = 24 * x + 52, 24 * y + 4
+        for ((sx, sy), (ex, ey)) in (((ax, ay), (bx, by)), ((bx, by), (cx, cy))):
+            m = max(abs(ex - sx), abs(ey - sy))
+            for i in range(m + 1):
+                px, py = round(sx + (ex - sx) * i / m), round(sy + (ey - sy) * i / m)
+                for tx in range(px // 8, (px + 15) // 8 + 1):
+                    for ty in range(py // 8, (py + 15) // 8 + 1):
+                        assert fgv1['obstacles'][tx][ty]['Tags'] == 0
+    for p in roster:
         assert (BASE / 'Data/Monster' / f"{p['BaseForm']['Species']}.json").is_file()
-        for sk in p['Skills']:
-            assert (BASE / 'Data/Skill' / f"{sk['Element']['SkillNum']}.json").is_file()
+        assert len(p['BaseSkills']) == len(p['Skills']) == 4, 'quatre slots requis au KO par RestoreForm'
+        for i, sk in enumerate(p['Skills']):
+            move = sk['Element']['SkillNum']
+            assert move == p['BaseSkills'][i]['SkillNum'] and sk['BackRef'] == i
+            if move:
+                assert (BASE / 'Data/Skill' / f'{move}.json').is_file()
+            else:
+                assert sk['Element']['Charges'] == p['BaseSkills'][i]['Charges'] == 0
+        if p['BaseForm']['Species'] == 'kabuto':
+            assert [s['SkillNum'] for s in p['BaseSkills']] == ['scratch', 'harden', '', '']
         for intr in p['Intrinsics']:
             assert (BASE / 'Data/Intrinsic' / f"{intr['Element']['ID']}.json").is_file()
 
@@ -256,7 +292,7 @@ def main() -> None:
     run(ROOT / 'tools/tests/test_nilo_temoin.lua', ROOT)
     # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
     run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
-    print('PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène Kabutops 480×360, scripts Lua et retours vérifiés.')
+    print('PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène 480×360, garde Lv 3/4, scripts Lua et retours vérifiés.')
 
 
 if __name__ == '__main__':

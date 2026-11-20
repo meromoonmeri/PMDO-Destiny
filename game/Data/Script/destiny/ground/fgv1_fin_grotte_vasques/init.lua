@@ -1,5 +1,5 @@
 -- Fosse Cascade Fond (576×528, antichambre au sud et salle haute).
--- 0 : sauvetage de Nilo, accusation anonyme, sortie de terre du gardien et duel.
+-- 0 : sauvetage de Nilo, accusation, sortie de terre du gardien et de sa garde.
 -- 1 : revanche courte, sans rejouer la découverte.
 -- 3 : retrouvailles et bilan natif après le duel. 4 : visite paisible.
 -- La salle haute commence à x=48 ; l'arène garde son rectangle de 480×360.
@@ -453,8 +453,102 @@ local function reveler_gardien(kabutops, hero, partenaire, nilo)
   })
 end
 
-local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
+-- La garde n'existe côté ground que le temps du précombat. Sous le noir,
+-- la vraie équipe ennemie de l'arène reprend chacune des quatre positions.
+local function retirer_garde()
+  for _, ancre in ipairs(fosse.GARDE) do
+    if CH(ancre.nom) ~= nil then GROUND:RemoveCharacter(ancre.nom) end
+  end
+end
+
+local function placer_garde(en_place)
+  local garde = {}
+  for i, ancre in ipairs(fosse.GARDE) do
+    local x, y = fosse.AncreAuSol(ancre)
+    local dir = Direction[ancre.face]
+    local depart = ancre.depart
+    local ch = creer_acteur(ancre.nom, 'kabuto', Gender.Male, '',
+      en_place and x or depart[1], en_place and y or depart[2], dir)
+    if not en_place then GROUND:Hide(ancre.nom) end
+    garde[i] = {ch=ch, ancre=ancre, x=x, y=y, dir=dir}
+  end
+  return garde
+end
+
+local function pas_de_griffe(k, ax, ay, bx, by, fermer)
+  local anim = 'Scratch'
+  local total, impact = temps_animation(k.ch, anim)
+  if total == nil then
+    anim = 'Attack'
+    total, impact = temps_animation(k.ch, anim)
+  end
+  total = total or 22
+  local duree = fermer and 22 or 17
+  local frappe = math.max(5, math.min(duree - 4, math.floor((impact or 8) * duree / total)))
+  local distance = math.max(math.abs(bx - ax), math.abs(by - ay))
+  local function bondir()
+    GROUND:AnimateToPosition(k.ch, anim, k.dir, bx, by, total / (duree + 1), distance / duree, 0)
+    GROUND:CharEndAnim(k.ch)
+  end
+  if not fermer then bondir(); return end
+  TASK:JoinCoroutines({
+    TASK:BranchCoroutine(bondir),
+    TASK:BranchCoroutine(function()
+      GAME:WaitFrames(frappe)
+      local t = frappe / duree
+      local trace = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Scratch', 3))
+      trace.Layer, trace.Offset, trace.LocHeight = DrawLayer.Front, 9, 4
+      if k.ancre.signal then SOUND:PlayBattleSE('DUN_Scratch') end
+      GROUND:PlayVFX(trace, math.floor(ax + (bx - ax) * t + 8),
+        math.floor(ay + (by - ay) * t + 8), k.dir)
+    end),
+  })
+end
+
+local function encercler_duo(kabutops, hero, partenaire)
   SOUND:PlayBGM('Rising Fear.ogg', false)
+  local garde = placer_garde(false)
+  local mouvements = {}
+  for _, k in ipairs(garde) do
+    mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
+      local spec, ch = k.ancre, k.ch
+      GAME:WaitFrames(spec.delai)
+      local dx, dy = spec.depart[1], spec.depart[2]
+      local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 2))
+      terre.Layer = DrawLayer.Front
+      if spec.signal then SOUND:PlayBattleSE('DUN_Dig') end
+      GROUND:PlayVFX(terre, dx + 8, dy + 13)
+      GAME:WaitFrames(8)
+      ch.HideShadow = true
+      ch:SetLocHeight(-7)
+      GROUND:Unhide(spec.nom)
+      for _, h in ipairs({-4, 0, 5, 9, 7, 3, 0}) do
+        ch:SetLocHeight(h)
+        GAME:WaitFrames(2)
+      end
+      ch.HideShadow = false
+      GAME:WaitFrames(6)
+      pas_de_griffe(k, dx, dy, spec.pas[1], spec.pas[2], false)
+      GAME:WaitFrames(9)
+      pas_de_griffe(k, spec.pas[1], spec.pas[2], k.x, k.y, true)
+    end)
+  end
+  mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(15)
+    secouer_ecran(1, 1, 14)
+    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 4}, {partenaire and hero, garde[2].ch, 12, 4}})
+    GAME:WaitFrames(21)
+    emote_sur(hero, 'exclaim')
+    cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
+    GAME:WaitFrames(20)
+    emote_sur(partenaire, 'sweatdrop')
+  end)
+  TASK:JoinCoroutines(mouvements)
+  GAME:WaitFrames(24) -- laisser lire le cercle avant de rendre la parole à Kabutops
+  cinematique.RegarderGroupe({{hero, kabutops, 0, 4}, {partenaire, kabutops, 6, 4}})
+end
+
+local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
   cinematique.Respirer(20)
   regarder_cible(kabutops, nilo, 5)
   dire(kabutops, 'Normal', 'Avant, on venait boire ici sans crainte. Depuis peu, même les sentiers ne sont plus sûrs.', 'droite')
@@ -489,7 +583,7 @@ local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
   GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 22, false)
   dire(hero, 'Determined', "Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix.", 'droite')
   cinematique.Respirer(20)
-  dire(partenaire, 'Determined', 'D’accord. On le retient ici. Nilo, reste à l’abri, on ne t’abandonne pas.', 'standard')
+  dire(partenaire, 'Determined', 'D’accord. On les retient ici. Nilo, reste à l’abri, on ne t’abandonne pas.', 'standard')
   cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
   cinematique.Respirer(30)
 end
@@ -499,6 +593,7 @@ function fgv1.PreBattle(is_rematch, map)
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.GrotteVerdoyantePhase = 1
   GAME:CutsceneMode(true)
+  retirer_garde() -- une réentrée ne garde pas les acteurs d’une prise interrompue
   local retablir_eau = suspendre_eau_precombat(map)
   local hero = CH('PLAYER')
   local depart_h = is_rematch and {x=SOL_HEROS.x, y=312} or ENTREE_HEROS
@@ -522,8 +617,10 @@ function fgv1.PreBattle(is_rematch, map)
     premiere_rencontre(hero, partenaire, nilo)
     les_avertissements(hero, partenaire, nilo)
     reveler_gardien(kabutops, hero, partenaire, nilo)
+    encercler_duo(kabutops, hero, partenaire)
     la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
   else
+    placer_garde(true)
     GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 1, false)
     SOUND:PlayBGM('Rising Fear.ogg', false)
     GAME:FadeIn(18)
@@ -546,6 +643,7 @@ function fgv1.PreBattle(is_rematch, map)
   -- On quitte le cadrage décalé qui laissait la place à la boîte de texte.
   GAME:MoveCamera(CAM_DUEL_X, CAM_DUEL_Y, 20, false)
   woosh_duel()
+  retirer_garde()
   retablir_eau() -- à noir complet, y compris si l'éditeur conserve l'instance
   arreter_tremblement(nilo) -- le spectateur de l’arène prend le relais
   if hero ~= nil then hero.CollisionDisabled = false end

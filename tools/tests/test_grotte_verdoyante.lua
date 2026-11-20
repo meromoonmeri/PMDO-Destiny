@@ -95,7 +95,12 @@ GROUND = {
     ev('create', n, dir, x, y)
     return a
   end,
-  RemoveCharacter = function(_, n) actors[n] = nil; return true end,
+  RemoveCharacter = function(_, n)
+    local a = actors[n]
+    if a then ev('remove', n, a.Position.X, a.Position.Y, a.Direction) end
+    actors[n] = nil
+    return true
+  end,
   TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y) end,
   MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
   EntTurn = function(_, a, dir) a.Direction = dir end,
@@ -108,7 +113,7 @@ GROUND = {
   CharSetDrawEffect = function(_, a, ef) ev('draw_effect', a.EntName, ef) end,
   CharEndDrawEffect = function(_, a, ef) ev('end_draw_effect', a.EntName, ef) end,
   MoveScreen = function(_, m) ev('shake', m.dy, m.dur) end,
-  PlayVFX = function(_, em, x, y) ev('vfx', em.Anim.name, x, y, em, tick_val) end,
+  PlayVFX = function(_, em, x, y, dir) ev('vfx', em.Anim.name, x, y, em, tick_val, dir) end,
   AnimateToPosition = function(_, a, anim, face, x, y, anim_speed, speed)
     a.Position = {X=x, Y=y}; a.Direction = face
     ev('glisse', a.EntName, x, y, anim, speed, face)
@@ -455,8 +460,8 @@ for i, e in ipairs(events) do
       and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 140,
       'assombrissement modéré : ne pas blanchir la sortie')
     ombre = i
-  elseif e[1] == 'vfx' and e[2] == 'Dig' then
-    assert(not terre and e[5].Layer == DrawLayer.Front and e[3] == 288 and e[4] == 258)
+  elseif e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 258 then
+    assert(not terre and e[5].Layer == DrawLayer.Front)
     terre = i
   elseif e[1] == 'shake' and not tremor then
     tremor = i
@@ -467,7 +472,7 @@ for i, e in ipairs(events) do
     assert(b.X * 2 == h.X + p.X and b.Y + 24 == h.Y and h.Y == p.Y,
       'Kabutops doit surgir juste devant le milieu du duo')
     assert(e[7] < 0 and e[8], 'Kabutops commence sous la terre sans ombre en l’air')
-  elseif e[1] == 'hauteur' and apparition then
+  elseif e[1] == 'hauteur' and e[2] == 'Kabutops_Boss' and apparition then
     if e[3] >= 16 then haut = i end
     if e[3] == 0 then reception = i end
   elseif e[1] == 'move' and e[2] == 'Kabutops_Boss' then
@@ -572,6 +577,63 @@ assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
   and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
   'la formation du duel retrouve les positions de combat')
 
+-- Les figurants apparaissent APRES le recul du duo. Chacun avance deux fois
+-- et finit à la même case/direction que l'ennemi sérialisé en arène.
+local garde_attendue = {
+  {'Kabuto_Flanc_G',8,11,Direction.DownRight}, {'Kabuto_Flanc_D',11,11,Direction.DownLeft},
+  {'Kabuto_Arriere_G',9,14,Direction.Up}, {'Kabuto_Arriere_D',10,14,Direction.Up},
+}
+local function verifier_garde(revanche)
+  local data = require('destiny.fosse_cascade_scene')
+  local griffes, regards = 0, 0
+  for i, attendu in ipairs(garde_attendue) do
+    local nom, col, ligne, dir = table.unpack(attendu)
+    local spec = data.GARDE[i]
+    assert(spec.nom == nom and spec.x == col and spec.y == ligne and Direction[spec.face] == dir)
+    local x, y = data.AncreAuSol(spec)
+    local creation, cache, sortie, terre_k, retraite, noir
+    local pas = {}
+    for j, e in ipairs(events) do
+      if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == spec.depart[1]+8 and e[4] == spec.depart[2]+13 then
+        assert(e[5].Layer == DrawLayer.Front); terre_k = j
+      end
+      if i == 1 and e[1] == 'vfx' and e[2] == 'Scratch' then
+        assert(e[5].Layer == DrawLayer.Front and e[5].Offset > 0 and e[7] ~= nil)
+        griffes = griffes + 1
+      end
+      if e[1] == 'fade_out' then noir = j end
+      if e[1] == 'regard' and e[3] == nom and (e[2] == 'PLAYER' or e[2] == 'Teammate1') then
+        regards = regards + 1
+      end
+      if e[2] == nom then
+        if e[1] == 'create' then assert(e[3] == dir); creation = e
+        elseif e[1] == 'hide' then cache = j
+        elseif e[1] == 'unhide' then
+          assert(not sortie and e[7] < 0 and e[8], 'Kabuto commence dans la terre, ombre masquée')
+          sortie = j
+        elseif e[1] == 'glisse' then
+          assert(e[5] == 'Scratch' or e[5] == 'Attack'); assert(e[7] == dir)
+          pas[#pas+1] = e
+        elseif e[1] == 'remove' and noir then
+          assert(e[3] == x and e[4] == y and e[5] == dir)
+          retraite = j
+        end
+      end
+    end
+    assert(creation and retraite and not actors[nom], 'garde nettoyée au noir du raccord')
+    if revanche then
+      assert(not cache and not sortie and not terre_k and #pas == 0 and creation[4] == x and creation[5] == y)
+    else
+      assert(cache and terre_k and sortie and recul_p < cache and cache < terre_k and terre_k < sortie and sortie < danger)
+      assert(creation[4] == spec.depart[1] and creation[5] == spec.depart[2])
+      assert(#pas == 2 and pas[1][3] == spec.pas[1] and pas[1][4] == spec.pas[2] and pas[2][3] == x and pas[2][4] == y)
+    end
+  end
+  assert(griffes == (revanche and 0 or 4))
+  assert(revanche or regards == 4, 'le duo regarde les flancs et le passage arrière')
+end
+verifier_garde(false)
+
 -- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
 -- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
 local EMOTES_EXISTANTES = {
@@ -646,6 +708,7 @@ for _, e in ipairs(events) do
     or e[1] == 'speaker' and e[2] == '???'), 'pas de découverte ni de souffle en revanche')
 end
 assert(repl == 1, 'la revanche doit rester courte')
+verifier_garde(true)
 assert(reflet.FrameLength == 8 and autre.FrameLength == 9 and bulles.Visible,
   'la revanche restaure les vasques même après une coupure sur la même instance')
 
