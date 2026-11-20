@@ -7,7 +7,7 @@ import json
 import struct
 from collections import deque
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageStat
 
 from executer_lua import run
 
@@ -91,14 +91,18 @@ def check_antichambre(fond: dict) -> None:
     trajet((222, 492), (246, 436), (292, 368), (292, 220), (292, 244), (290, 242), (292, 244))
     trajet((198, 484), (222, 430), (268, 362), (268, 220), (268, 244), (270, 248), (268, 244))
     trajet((280, 196), (292, 196))
-    trajet((292, 244), (268, 277))
-    trajet((268, 244), (244, 258))
-    trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
+    trajet((280, 244), (280, 244))  # Kabutops ne quitte le milieu que par Tunnel
+    trajet((248, 244), (272, 260))  # le partenaire reste à gauche de l’axe familial
+    trajet((312, 244), (336, 260))  # le héros libère cet axe vers la droite
+    trajet((304, 152), (304, 256))  # Nilo quitte la même terrasse
+    trajet((304, 344), (304, 288))  # Lyra s’arrête à 32 px, sans le traverser
     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
     assert 220 + 16 - 216 + 120 < 188
     assert 244 + 16 - 226 + 120 < 188
-    assert 306 + 16 - 242 + 120 < 240  # flancs et arrière entrent dans le cadre
-    assert 292 + 16 - 242 + 120 < 188  # la formation reste lisible pendant le dialogue
+    assert 332 + 14 + 9 - 246 + 120 < 240  # la terre au sud reste dans le cadre
+    assert 292 + 16 - 246 + 120 < 188  # la formation reste lisible pendant le dialogue
+    assert 244 + 16 - 242 + 120 < 188  # le trio pendant la réplique de Kabutops
+    assert 288 + 16 - 250 + 120 < 188  # Lyra reste au-dessus du texte
     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
     assert 372 - 120 > 152 + 16
 
@@ -215,11 +219,25 @@ def main() -> None:
     # Même palette et mêmes pixels entre la salle haute et son arène, sans
     # tronquer à 8 px une case de 24 px. Vérifier aussi une phase animée.
     g, a = prepare(fgv1), prepare(rsmap, arene=True)
+    # Les colliders ne suffisent pas : sous une partie des berges dessinées
+    # la grille est libre. Vérifier le sable rendu autour du pied des deux
+    # jaillissements arrière, à plusieurs phases des tuiles animées.
+    departs_sable = ((264, 332), (296, 328))
+    def sol_sable(image: Image.Image, x: int, y: int, ample: bool = False) -> None:
+        marge = 3 if ample else 1
+        sol = ImageStat.Stat(image.crop((x - marge, y + 10, x + 16 + marge, y + 19)).convert('RGB'))
+        # Teinte et faible dispersion du sable de cette carte, pas du relief
+        # texturé ou de l’eau. Zone de l’ombre et, avec marge, du Tunnel.
+        assert sol.extrema[0][0] >= 132 and sol.var[0] < 80 and sol.mean[1] - sol.mean[2] > 45, (x, y, sol.mean)
+
     for t in (0, 8 * 120, 24 * 120):
         image, erreurs_g = rendu(g, t)
         arene, erreurs_a = rendu(a, t)
         assert erreurs_a == erreurs_g == 0 and arene.size == (480, 360)
+        for x, y in (*departs_sable, (280, 244)):
+            sol_sable(image, x, y, ample=True)
         if t == 0:
+            image_reference = image
             assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()
     z = preserver_pixels(arene, 2)
     assert z.size == (960, 720) and z.resize(arene.size, Image.Resampling.NEAREST).tobytes() == arene.tobytes()
@@ -240,8 +258,8 @@ def main() -> None:
     # Le détour, l’approche et le recul de peur se font sur du sol libre.
     chemins = (((205, 202), (212, 224), (226, 224), (-6, -4)),
                ((362, 200), (352, 225), (338, 224), (6, -4)),
-               ((242, 293), (259, 306), (263, 301), (-3, 7)),
-               ((320, 293), (301, 306), (297, 301), (3, 7)))
+               (departs_sable[0], (266, 314), (267, 302), (-3, 7)),
+               (departs_sable[1], (296, 312), (294, 301), (3, 7)))
     for (depart, passage, menace, (rx, ry)), (x, y, _) in zip(chemins, bornes[1:]):
         cx, cy = 24 * x + 52, 24 * y + 4
         trajet = (depart, passage, menace, (cx, cy), (cx + rx, cy + ry))
@@ -249,6 +267,8 @@ def main() -> None:
             m = max(abs(ex - sx), abs(ey - sy))
             for i in range(m + 1):
                 px, py = round(sx + (ex - sx) * i / m), round(sy + (ey - sy) * i / m)
+                if depart in departs_sable:
+                    sol_sable(image_reference, px, py)
                 for tx in range(px // 8, (px + 15) // 8 + 1):
                     for ty in range(py // 8, (py + 15) // 8 + 1):
                         assert fgv1['obstacles'][tx][ty]['Tags'] == 0, f'collider de Kabuto dans le relief à {px},{py}'

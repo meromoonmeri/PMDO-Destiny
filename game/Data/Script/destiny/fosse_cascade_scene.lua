@@ -13,16 +13,17 @@ fosse.DUEL = {
 }
 
 -- Cases et directions de MapTeams. Le premier déplacement longe le duo ;
--- le second coupe vers lui. Les arrière-gardes pivotent pour fermer le passage.
+-- le second coupe vers lui. Les arrière-gardes surgissent dans le sable du
+-- passage sud (pas sur les berges), puis pivotent pour fermer le passage.
 fosse.GARDE = {
   {nom='Kabuto_Flanc_G', x=8,  y=9, face='DownRight', avance='DownRight',
     depart={205,202}, passage={212,224}, menace={226,224}, delai=4, attente=48, recul={-6,-4}, signal=true},
   {nom='Kabuto_Flanc_D', x=11, y=9, face='DownLeft', avance='DownLeft',
     depart={362,200}, passage={352,225}, menace={338,224}, delai=23, attente=43, recul={6,-4}},
-  {nom='Kabuto_Arriere_G', x=9,  y=12, face='Up', avance='UpRight',
-    depart={242,293}, passage={259,306}, menace={263,301}, delai=69, attente=24, recul={-3,7}, signal=true},
-  {nom='Kabuto_Arriere_D', x=10, y=12, face='Up', avance='UpLeft',
-    depart={320,293}, passage={301,306}, menace={297,301}, delai=84, attente=20, recul={3,7}},
+  {nom='Kabuto_Arriere_G', x=9,  y=12, face='Up', avance='Up',
+    depart={264,332}, passage={266,314}, menace={267,302}, delai=69, attente=24, recul={-3,7}, signal=true},
+  {nom='Kabuto_Arriere_D', x=10, y=12, face='Up', avance='Up',
+    depart={296,328}, passage={296,312}, menace={294,301}, delai=84, attente=20, recul={3,7}},
 }
 
 function fosse.AncreAuSol(case)

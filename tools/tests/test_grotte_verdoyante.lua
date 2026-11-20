@@ -101,7 +101,7 @@ GROUND = {
     actors[n] = nil
     return true
   end,
-  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y) end,
+  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y, dir) end,
   MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
   EntTurn = function(_, a, dir) a.Direction = dir end,
   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
@@ -590,6 +590,14 @@ local function verifier_garde(revanche)
     local nom, col, ligne, dir = table.unpack(attendu)
     local spec = data.GARDE[i]
     assert(spec.nom == nom and spec.x == col and spec.y == ligne and Direction[spec.face] == dir)
+    if i >= 3 then
+      -- Mêmes trajets et points d’impact que dans le test du rendu Python.
+      local sol = i == 3 and {{264,332}, {266,314}, {267,302}, {-3,7}}
+                           or {{296,328}, {296,312}, {294,301}, {3,7}}
+      for n, champ in ipairs({'depart', 'passage', 'menace', 'recul'}) do
+        assert(spec[champ][1] == sol[n][1] and spec[champ][2] == sol[n][2], spec.nom .. ' : ' .. champ)
+      end
+    end
     local x, y = data.AncreAuSol(spec)
     local creation, cache, sortie, terre_k, retraite, noir, contour
     local pas = {}
@@ -756,16 +764,44 @@ assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabuto
 -- reculent et replongent. Kabutops ferme la marche, et Nilo attend sa sortie.
 local fosse_scene = require('destiny.fosse_cascade_scene')
 local derniere_sortie, descente_nilo, nb_terre, bruits = nil, nil, 0, 0
+local garde_partie, debut_cam, fondu, terre_boss, pause_centre
+local places, regard_centre, retrouvailles = {}, {}, {}
 for i, e in ipairs(events) do
-  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'plus de course de Kabutops vers le sud')
+  if e[1] == 'cam' and not debut_cam then debut_cam = e end
+  if e[1] == 'fade_in' and not fondu then fondu = i end
+  if not fondu and e[1] == 'create' then places[e[2]] = {x=e[4], y=e[5], dir=e[3]} end
+  if not fondu and e[1] == 'teleport' and e[2] == 'PLAYER' then places.PLAYER = {x=e[3], y=e[4], dir=e[5]} end
+  if e[1] == 'remove' and tostring(e[2]):find('^Kabuto_') then garde_partie = i end
+  if e[1] == 'move' then
+    assert(e[2] ~= 'Kabutops_Boss', 'le chef reste entre le duo jusqu’au Tunnel')
+    if e[2] == 'Teammate1' or e[2] == 'PLAYER' then
+      assert(derniere_sortie, 'le duo conserve sa place avant le Tunnel du chef')
+    end
+    if e[2] == 'Nilo_Grotte' then descente_nilo = i end
+    retrouvailles[e[2]] = e
+  end
+  if garde_partie and e[1] == 'regard' and e[3] == 'Kabutops_Boss' then regard_centre[e[2]] = i end
+  if garde_partie and e[1] == 'wait' and e[2] == 22 and not terre_boss then pause_centre = i end
+  if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 258 then terre_boss = i end
   assert(not (e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
       or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger')), 'pas d’eau pendant le Tunnel')
   if e[1] == 'vfx' and e[2] == 'Dig' then nb_terre = nb_terre + 1 end
   if e[1] == 'se' and e[2] == 'DUN_Dig' then bruits = bruits + 1 end
-  if e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
-  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then descente_nilo = i end
+  if terre_boss and e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
 end
 assert(derniere_sortie and descente_nilo and derniere_sortie < descente_nilo and nb_terre == 5 and bruits == 3)
+assert(debut_cam and debut_cam[2] == 288 and debut_cam[3] == 242 and fondu)
+local p, b, h = places.Teammate1, places.Kabutops_Boss, places.PLAYER
+assert(p and b and h and b.x - p.x == 32 and h.x - b.x == 32 and p.y == b.y and b.y == h.y
+  and b.x == 280 and b.y == 244 and p.dir == Direction.Right and h.dir == Direction.Left,
+  'dès le fondu, Kabutops est au milieu exact, entre deux regards et des ombres alignées')
+assert(garde_partie and pause_centre and terre_boss and regard_centre.Teammate1 and regard_centre.PLAYER
+  and garde_partie < regard_centre.Teammate1 and garde_partie < regard_centre.PLAYER
+  and regard_centre.Teammate1 < pause_centre and regard_centre.PLAYER < pause_centre and pause_centre < terre_boss)
+assert(retrouvailles.Teammate1[3] == 272 and retrouvailles.PLAYER[3] == 336
+  and retrouvailles.Nilo_Grotte[3] == 304 and retrouvailles.Lyra_Grotte[3] == 304
+  and retrouvailles.Lyra_Grotte[4] - retrouvailles.Nilo_Grotte[4] == 32,
+  'Lyra s’arrête devant Nilo, le duo libère leur axe')
 local function verifier_plongeon(nom, x, y, peur)
   local emote, tremble, repli, terre, negatif, masque, retire
   for i, e in ipairs(events) do
@@ -789,7 +825,7 @@ for _, spec in ipairs(fosse_scene.GARDE) do
   local x,y = fosse_scene.AncreAuSol(spec)
   verifier_plongeon(spec.nom, x+spec.recul[1], y+spec.recul[2], true)
 end
-verifier_plongeon('Kabutops_Boss', 292, 196, false)
+verifier_plongeon('Kabutops_Boss', 280, 244, false)
 
 local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
 for _, e in ipairs(events) do

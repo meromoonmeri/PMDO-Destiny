@@ -25,11 +25,18 @@ end
 local SOL_BOSS = ancre(fosse.DUEL.boss)
 local DUEL_HEROS = ancre(fosse.DUEL.hero)
 local DUEL_PARTENAIRE = ancre(fosse.DUEL.partenaire)
+local AXE_DUO = math.floor((DUEL_PARTENAIRE.x + DUEL_HEROS.x) / 2)
 local SOL_HEROS = {x=DUEL_HEROS.x, y=DUEL_HEROS.y - 24}
 local SOL_PARTENAIRE = {x=DUEL_PARTENAIRE.x, y=DUEL_PARTENAIRE.y - 24}
-local APPARITION_BOSS = {x=math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y=SOL_BOSS.y}
+local APPARITION_BOSS = {x=AXE_DUO, y=SOL_BOSS.y}
 local SOL_NILO_TERRASSE = fosse.NILO_TERRASSE
 local RECUL_Y = DUEL_HEROS.y
+
+-- Placement propre à la phase 3, installé avant le fondu. Les ombres du trio
+-- partagent la même ligne, à 32 px de part et d’autre du chef. Ne pas déplacer
+-- les ancres d’apparition ou de duel pour obtenir cette formation.
+local APRES_DUEL = {boss=AXE_DUO, partenaire=AXE_DUO - 32, hero=AXE_DUO + 32, y=RECUL_Y}
+local REUNION = {axe=SOL_NILO_TERRASSE.x, duo_y=RECUL_Y + 16, nilo_y=RECUL_Y + 12, lyra_y=RECUL_Y + 44}
 local ENTREE_HEROS = {x = 222, y = 492}
 local ENTREE_PARTENAIRE = {x = 198, y = 484}
 local COUDE_HEROS = {x = 246, y = 436}
@@ -43,9 +50,12 @@ local CAM_ENTREE = {x = 230, y = 406}
 local CAM_SEUIL = {x = 278, y = 372}
 local CAM_TERRASSE_Y = 216
 local CAM_FACE_Y = 226 -- l’arrêt du duo laisse un champ libre derrière lui
-local CAM_CERCLE_Y = 242 -- léger recul du cadre au bruit venu du passage sud
+local CAM_CERCLE_Y = 246 -- inclut les deux jaillissements dans le sable du passage
 local CAM_NILO_REPLI_Y = 218
+local CAM_REVANCHE_Y = 242
+local CAM_VICTOIRE_X = APRES_DUEL.boss + 8 -- centre de l’ombre de Kabutops
 local CAM_VICTOIRE_Y = 242
+local CAM_REUNION_Y = 250
 
 local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
   local existant = CH(nom)
@@ -549,6 +559,11 @@ local function encercler_duo(kabutops, hero, partenaire)
     mouvements[#mouvements + 1] = TASK:BranchCoroutine(function() surgir_kabuto(k) end)
   end
   mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
+    -- Déplacer le cadre sur un seul axe, avant la poussière à l’arrière.
+    GAME:WaitFrames(44)
+    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 22, false)
+  end)
+  mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
     GAME:WaitFrames(13)
     secouer_ecran(1, 1, 14)
     cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 3}, {partenaire and hero, garde[2].ch, 18, 3}})
@@ -559,15 +574,10 @@ local function encercler_duo(kabutops, hero, partenaire)
       TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Right, DUEL_HEROS.x - (partenaire and 2 or 0), RECUL_Y - 2) end),
     })
     GAME:WaitFrames(12)
-    -- Le son derrière eux entraîne leurs regards, puis le léger panoramique.
-    TASK:JoinCoroutines({
-      TASK:BranchCoroutine(function() GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 32, false) end),
-      TASK:BranchCoroutine(function()
-        emote_sur(hero, 'exclaim')
-        cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 16, 4}})
-        emote_sur(partenaire, 'sweatdrop')
-      end),
-    })
+    -- Le bruit au sud attire le regard du duo vers le sable qui remue.
+    emote_sur(hero, 'exclaim')
+    cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 9, 4}})
+    emote_sur(partenaire, 'sweatdrop')
   end)
   TASK:JoinCoroutines(mouvements)
   GAME:WaitFrames(25) -- tenir le plan d’ensemble avant de rendre la parole à Kabutops
@@ -654,7 +664,7 @@ function fgv1.PreBattle(is_rematch, map)
     la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
   else
     placer_garde(true)
-    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 1, false)
+    GAME:MoveCamera(CAM_DUEL_X, CAM_REVANCHE_Y, 1, false)
     SOUND:PlayBGM('Rising Fear.ogg', false)
     GAME:FadeIn(18)
     TASK:JoinCoroutines({
@@ -746,27 +756,31 @@ local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
     cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
   end)
   TASK:JoinCoroutines(sorties)
-  GAME:WaitFrames(10)
-  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
+  cinematique.Respirer(12) -- la poussière des derniers Kabuto retombe
+
+  -- Les regards reviennent vers le chef, au centre, après les quatre départs.
+  tourner_vers(kabutops, Direction.Down, 4)
+  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 6, 4}})
+  cinematique.Respirer(22)
   s_enfouir(kabutops, 'Kabutops_Boss', true, true)
 end
 
 function fgv1.PostBattle()
+  GAME:CutsceneMode(true)
   local hero = CH('PLAYER')
-  local partenaire = equipe_scene.Partenaire(DUEL_PARTENAIRE.x, DUEL_PARTENAIRE.y, Direction.Up)
+  local partenaire = equipe_scene.Partenaire(APRES_DUEL.partenaire, APRES_DUEL.y, Direction.Right)
   local garde = placer_garde(true)
   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
-    SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
+    APRES_DUEL.boss, APRES_DUEL.y, Direction.Down)
 
-  GAME:CutsceneMode(true)
   if hero ~= nil then
     hero.CollisionDisabled = true
-    GROUND:TeleportTo(hero, DUEL_HEROS.x, DUEL_HEROS.y, Direction.Up)
+    GROUND:TeleportTo(hero, APRES_DUEL.hero, APRES_DUEL.y, Direction.Left)
   end
   SOUND:FadeOutBGM(12)
-  GAME:MoveCamera(CAM_DUEL_X, CAM_VICTOIRE_Y, 1, false)
+  GAME:MoveCamera(CAM_VICTOIRE_X, CAM_VICTOIRE_Y, 1, false)
   trembler_de_peur(nilo)
   GAME:WaitFrames(12)
   GAME:FadeIn(20)
@@ -774,6 +788,7 @@ function fgv1.PostBattle()
 
   emote_sur(kabutops, 'sweatdrop')
   GAME:WaitFrames(10)
+  regarder_cible(kabutops, hero or partenaire, 4)
   cinematique.Dire(kabutops, 'Pain', 'Vous avez gagné… Emmenez le petit.', 'droite')
   UI:ResetSpeaker()
   cinematique.Respirer(16)
@@ -791,28 +806,32 @@ function fgv1.PostBattle()
   cinematique.Respirer(12)
   SOUND:PlayBGM('Lower Spring Cave.ogg', false)
   TASK:JoinCoroutines({
-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65) end),
-    -- Dégager l'axe x=304 par lequel Lyra arrivera du sud.
+    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, REUNION.axe, REUNION.nilo_y, false, 1.65) end),
+    -- Le duo reste sur les côtés. Ni Nilo ni Lyra ne traversent un acteur.
     TASK:BranchCoroutine(function()
-      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, SALLE_X + 196, 258, false, 1.3) end
+      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, REUNION.axe - 32, REUNION.duo_y, false, 1.1) end
     end),
     TASK:BranchCoroutine(function()
       if hero ~= nil then
         GAME:WaitFrames(8)
-        GROUND:MoveToPosition(hero, SALLE_X + 220, 277, false, 1.2)
+        GROUND:MoveToPosition(hero, REUNION.axe + 32, REUNION.duo_y, false, 1.1)
       end
     end),
+    TASK:BranchCoroutine(function()
+      GAME:WaitFrames(16)
+      GAME:MoveCamera(CAM_VICTOIRE_X, CAM_REUNION_Y, 22, false)
+    end),
   })
-  regarder_cible(nilo, hero or partenaire, 4)
+  cinematique.RegarderGroupe({{nilo, hero or partenaire, 0, 4}, {partenaire, nilo, 5, 4}, {hero, nilo, 9, 4}})
   cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
   UI:ResetSpeaker()
   cinematique.Respirer(18)
 
   -- L'arrivée de Lyra motive les regards. Le duo ne tourne pas le dos à
   -- Lyra pour jouer une émote après qu'elle s'est déjà placée devant lui.
-  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', SALLE_X + 256, 344, Direction.Up)
+  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', REUNION.axe, 344, Direction.Up)
   TASK:JoinCoroutines({
-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(lyra, SALLE_X + 256, 248, true, 2) end),
+    TASK:BranchCoroutine(function() GROUND:MoveToPosition(lyra, REUNION.axe, REUNION.lyra_y, true, 2) end),
     TASK:BranchCoroutine(function()
       GAME:WaitFrames(16)
       if nilo ~= nil then emote_sur(nilo, 'exclaim', 'EVT_Emote_Exclaim_2') end
