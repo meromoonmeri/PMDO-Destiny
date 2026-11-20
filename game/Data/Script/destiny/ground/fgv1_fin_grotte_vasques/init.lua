@@ -33,7 +33,7 @@ local SOL_NILO_TERRASSE = {x = 256, y = 160}
 local SOL_NILO_CHUTE = {x = 256, y = 240}
 -- Le recul force : le duo est repousse de plusieurs cases vers le sud.
 local SOL_RECUL_HEROS = {x = 208, y = 304}
-local SOL_RECUL_PARTENAIRE = {x = 280, y = 280}
+local SOL_RECUL_PARTENAIRE = {x = 272, y = 304}
 local SOL_RECUL_NILO = {x = 232, y = 336}
 local CAM_FACE = {x = 252, y = 224}
 local CAM_ENTREE = {x = 240, y = 264}
