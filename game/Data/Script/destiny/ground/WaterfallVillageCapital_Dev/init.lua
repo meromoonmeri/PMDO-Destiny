@@ -10,6 +10,8 @@ local cinematique = require 'destiny.cinematique'
 local meteo_reverie = require 'destiny.meteo_reverie'
 local missions_reverie = require 'destiny.missions_reverie'
 local boutiques_kecleon = require 'destiny.boutiques_kecleon'
+local recit_reverie = require 'destiny.reverie_recit'
+local saynetes_reverie = require 'destiny.reverie_saynetes'
 
 local ville = {}
 local ENTREE_X, ENTREE_Y = 800, 1320
@@ -27,7 +29,7 @@ local habitants_vivants = {
   'NewObject_23', 'NewObject_24',
   'Pijako_Livreur', 'Cradopaud_Pecheur', 'Roserade_Fleuriste',
   'Magneton_Garde', 'Babimanta_Enfant', 'Goinfrex_Voyageur',
-  'Bellossom_Boutique',
+  'Bellossom_Boutique', '', 'Nilo_Shinx',
 }
 local positions_habitants = {}
 local vie_ville_activee = false
@@ -58,6 +60,8 @@ local postes_fixes = {
   Magneton_Garde = true,     -- Volt en faction devant le pont sud
   Cradopaud_Pecheur = true,  -- Marius au bord de l'eau
   Goinfrex_Voyageur = true,  -- Moka devant le café Spinda avec Suzie/Capucine
+  [''] = true,             -- Nuage, l'autre Baudrive de la carte publiée
+  Nilo_Shinx = true,
 }
 
 -- Discussions réelles : dialogues partagés (Lombre/Ludicolo, Luxio/Luxray)
@@ -79,6 +83,7 @@ end
 
 local function est_fixe(nom)
   return marchands_fixes[nom] == true or postes_fixes[nom] == true or partenaires_discussion[nom] ~= nil
+    or (positions_habitants[nom] ~= nil and positions_habitants[nom].ancre == true)
 end
 
 local function tourner_vers(acteur, cible)
@@ -94,6 +99,7 @@ local function orienter_discussion(nom)
   local autre_nom = partenaires_discussion[nom]
   if autre_nom == nil then return end
   local acteur, autre = CH(nom), CH(autre_nom)
+  if acteur == nil or autre == nil or acteur.EntEnabled == false or autre.EntEnabled == false then return end
   tourner_vers(acteur, autre)
   tourner_vers(autre, acteur)
 end
@@ -105,7 +111,7 @@ local function restaurer_orientation(nom, acteur)
     orienter_discussion(nom)
     return
   end
-  if marchands_fixes[nom] or postes_fixes[nom] then
+  if est_fixe(nom) then
     local depart = positions_habitants[nom]
     if depart ~= nil and depart.dir ~= nil then
       if GROUND.CharAnimateTurnTo ~= nil then
@@ -406,7 +412,7 @@ local function installer_luxray_attente(map)
     if CH('NewObject_9') ~= nil then
       if attente then GROUND:Hide('NewObject_9') else GROUND:Unhide('NewObject_9') end
     end
-    if SV.Destiny.AlerteShinx == 'termine' then
+    if not attente and recit_reverie.SauvetageFini(SV.Destiny) then
       local nilo = CH('Nilo_Shinx')
       if nilo == nil then
         nilo = habitant('Nilo_Shinx', 'shinx', Gender.Male, 721, 2412)
@@ -630,6 +636,78 @@ local function placer_duo_entree_ville()
     and tyranocif.Position.X == 857 and tyranocif.Position.Y == 1179 then
     GROUND:TeleportTo(tyranocif, 892, 1184, Direction.UpLeft)
   end
+end
+
+-- Collision 16x16 : ne pas mettre un PNJ sur une équipe chargée depuis
+-- une sauvegarde, un seuil, un comptoir ou un voisin déjà présent.
+local function case_pnj_libre(map, nom, x, y)
+  if map == nil or map.Width == nil or map.Height == nil or map.GetObstacle == nil then
+    return false
+  end
+  if not objet_dans_quartier(map, x+8, y+8) or not case_libre(map,x,y) then return false end
+  local function chevauche(bx, by, w, h)
+    return x < bx+w and bx < x+16 and y < by+h and by < y+16
+  end
+  local function occupe(a)
+    return a ~= nil and a.EntEnabled ~= false and a.EntName ~= nom and a.Position ~= nil
+      and chevauche(a.Position.X, a.Position.Y, 16, 16)
+  end
+  if occupe(CH('PLAYER')) or occupe(CH('Teammate1')) or occupe(CH('Luxray_Alerte')) then return false end
+  for _, autre in ipairs(habitants_vivants) do
+    if autre ~= nom and occupe(CH(autre)) then return false end
+  end
+  if map.Entities ~= nil and luanet ~= nil then
+    for couche in luanet.each(map.Entities) do
+      if couche.GroundObjects ~= nil and couche.Visible ~= false then
+        for obj in luanet.each(couche.GroundObjects) do
+          local rect = obj.Collider
+          if obj.EntEnabled ~= false and rect ~= nil and rect.Width > 0 and rect.Height > 0
+              and chevauche(rect.X, rect.Y, rect.Width, rect.Height) then return false end
+        end
+      end
+    end
+  end
+  return true
+end
+
+-- Les deux habitants mobiles sont déjà construits par le script de ville :
+-- aucun nouveau doublon sérialisé, même après un passage ou un GameLoad.
+local mobiles_reverie = {
+  Pijako_Livreur = {'chatot', 'Male'},
+  Babimanta_Enfant = {'mantyke', 'Female'},
+}
+local replis_recit = {{0,0}, {0,24}, {24,0}, {0,-24}, {-24,0}, {24,24}, {-24,24}, {0,48}, {0,-48}}
+local function appliquer_recit(map)
+  if map == nil or map.GetObstacle == nil or (not quartiers_reverie[map.AssetName]
+      and map.AssetName ~= 'WaterfallVillageCapital') then return end
+  for _, p in ipairs(recit_reverie.Placements(SV.Destiny)) do
+    local nom, secteur, x, y, dir = p[1], p[2], p[3], p[4], Direction[p[5]] or Direction.Down
+    local a = CH(nom)
+    if map.AssetName == 'WaterfallVillageCapital' or secteur_fusion(map.AssetName) == secteur then
+      for _, ecart in ipairs(replis_recit) do
+        local px, py = x+ecart[1], y+ecart[2]
+        -- Sur le plan historique, rester aussi dans le quartier visé.
+        if quartier_pour(px+8, py+8) == secteur and case_pnj_libre(map, nom, px, py) then
+          local mobile = mobiles_reverie[nom]
+          if a == nil and mobile ~= nil and secteur == 'reverie_etang' then
+            a = habitant(nom, mobile[1], Gender[mobile[2]], px, py)
+            if a ~= nil and a.Data ~= nil then a.Data.Nickname = noms_habitants[nom] end
+          end
+          if a ~= nil then
+            AI:DisableCharacterAI(a)
+            GROUND:TeleportTo(a, px, py, dir)
+            positions_habitants[nom] = {x=px, y=py, dir=dir, ancre=true}
+          end
+          break
+        end
+      end
+    elseif mobiles_reverie[nom] ~= nil and a ~= nil then
+      AI:DisableCharacterAI(a)
+      GROUND:RemoveCharacter(nom)
+      positions_habitants[nom] = nil
+    end
+  end
+  vie_ville_activee = false
 end
 
 function ville.Init(map)
@@ -1400,6 +1478,7 @@ function ville.Visite(map)
   SV.Destiny.AlerteShinx = 'a_secourir'
   SV.Destiny.LuxrayAttente = 'place'
   SV.Destiny.VisiteVille = 'terminee'
+  appliquer_recit(map)
   GAME:FadeIn(30)
   SOUND:PlayBGM('Treasure Town.ogg', false)
   se_faire_face_ville(partenaire, hero)
@@ -1680,6 +1759,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   end
   if hero ~= nil then GROUND:TeleportTo(hero, 800, 1224, Direction.Down) end
   if partenaire ~= nil then GROUND:TeleportTo(partenaire, 776, 1224, Direction.Down) end
+  appliquer_recit(map)
   GAME:MoveCamera(0, 0, 1, true)
 
   GAME:FadeIn(30)
@@ -1742,6 +1822,7 @@ local function entrer(map)
     end
     SV.Destiny.RetourBatimentPartenaire = nil
   end
+  appliquer_recit(map)
   GAME:FadeIn(20)
   SOUND:PlayBGM('Treasure Town.ogg', true)
   retour_au_joueur(hero, partenaire)
@@ -2069,35 +2150,10 @@ for _, comptoir_def in ipairs(comptoirs) do
   end
 end
 
--- Actualité tant que Nilo attend du secours. Le départ accepté ne signifie
--- pas que le donjon a été parcouru ou que le sauvetage est terminé.
-local nouvelles_nilo = {
-  Kangourex = 'Lyra m’a parlé de Nilo. Je peux garder ce qui vous encombre pendant que vous vous préparez.',
-  Kecleon = 'Pour rejoindre Nilo, vérifiez vos provisions. Mes baies et mes pommes sont là si besoin.',
-  Kecleon_Violet = 'Lyra attend de vos nouvelles. Regardez mes articles avant de partir, si cela peut vous aider.',
-  NewObject_3 = 'Pour Nilo, préparez-vous d’abord ! Je garde vos Poké en sécurité si vous en avez besoin.',
-  NewObject_4 = 'Lyra compte sur vous. Gardez la tête froide et écoutez ses indications sur le chemin.',
-  NewObject_24 = 'Je pense à Nilo. Si vos préparatifs vous amènent à la forge, je suis là.',
-  NewObject_6 = 'J’ai entendu le cri de Lyra depuis la place… J’espère que Nilo tient bon.',
-  NewObject_12 = 'Si Lyra a besoin de matériel pour Nilo, je peux aider à porter les caisses.',
-  NewObject_13 = 'Je regarderai la route. J’espère voir bientôt Lyra et Nilo revenir ensemble.',
-  NewObject_14 = 'Alakazam vous fait confiance. Vérifiez votre sac, puis suivez Lyra jusqu’à Nilo.',
-  NewObject_16 = 'Je reste ici avec les autres. Soyez prudents en allant chercher Nilo.',
-  NewObject_15 = 'Pauvre Lyra… J’espère que Nilo l’entend quand elle l’appelle.',
-  NewObject_22 = 'Un passage dangereux ? Restez ensemble et écoutez bien Lyra.',
-  NewObject_23 = 'Je garde mes décorations pour plus tard. Pour l’instant, je pense à Nilo.',
-  Pijako_Livreur = 'Si des nouvelles de Nilo arrivent, je les porterai aussi vite que possible.',
-  Goinfrex_Voyageur = 'Même moi, je pense à autre chose qu’au goûter. J’espère que Nilo va bien.',
-  Bellossom_Boutique = 'Lyra est si inquiète… Mes gelées et mes baies resteront prêtes pour votre retour avec Nilo.',
-}
+-- Les résidents et les comptoirs partagent la chronique. L'Action du
+-- marchand poursuit ensuite son menu habituel, même après une saynète.
 local function reaction_actualite(personnage, nom)
-  if SV.Destiny == nil or SV.Destiny.AlerteShinx ~= 'a_secourir' or personnage == nil then return false end
-  local phrase = nouvelles_nilo[nom] or 'Tout le monde pense à Lyra et à Nilo. Soyez prudents sur le chemin.'
-  UI:SetSpeaker(personnage)
-  UI:SetSpeakerEmotion('Worried')
-  UI:WaitShowDialogue(phrase)
-  UI:ResetSpeaker()
-  return true
+  return saynetes_reverie.Reagir(SV and SV.Destiny, nom, personnage, marchands_fixes[nom], case_pnj_libre)
 end
 
 -- Les habitants sont visibles pendant la visite et restent utilisables après.
@@ -2228,13 +2284,11 @@ end
 
 function ville.Bellossom_Boutique_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  if not reaction_actualite(personnage, 'Bellossom_Boutique') then
-    ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
-      'Bienvenue sous ma tente fleurie ! Mes gelées, baies et graines aromatiques vous donneront du cœur à l’aventure.')
-  else
-    ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
-      'Faites provision avant de partir vers la Fosse Cascade.')
-  end
+  reaction_actualite(personnage, 'Bellossom_Boutique')
+  local alerte = SV and SV.Destiny and SV.Destiny.AlerteShinx == 'a_secourir'
+  ouvrir_boutique(personnage, 'bellossom', assortiments_bellossom, 2,
+    alerte and 'Faites provision avant de partir vers la Fosse Cascade.'
+      or 'Bienvenue sous ma tente fleurie ! Mes gelées, baies et graines aromatiques vous donneront du cœur à l’aventure.')
   terminer_dialogue(personnage, 'Bellossom_Boutique')
 end
 
@@ -2529,12 +2583,16 @@ local function dialogue_lombre_ludicolo(premier, second)
 end
 function ville.NewObject_7_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  dialogue_lombre_ludicolo(personnage, CH('NewObject_8'))
+  if not reaction_actualite(personnage, 'NewObject_7') then
+    dialogue_lombre_ludicolo(personnage, CH('NewObject_8'))
+  end
   terminer_dialogue(personnage, 'NewObject_7')
 end
 function ville.NewObject_8_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  dialogue_lombre_ludicolo(CH('NewObject_7'), personnage)
+  if not reaction_actualite(personnage, 'NewObject_8') then
+    dialogue_lombre_ludicolo(CH('NewObject_7'), personnage)
+  end
   terminer_dialogue(personnage, 'NewObject_8')
 end
 
@@ -2608,6 +2666,10 @@ end
 
 function ville.NewObject_9_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  if reaction_actualite(personnage, 'NewObject_9') then
+    terminer_dialogue(personnage, 'NewObject_9')
+    return
+  end
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     parler_accueil(personnage, 'Worried', 'Mon petit Nilo attend toujours là-bas… Je vous en prie, ne tardez pas trop.')
     UI:ResetSpeaker()
@@ -2621,6 +2683,10 @@ function ville.NewObject_9_Action(personnage, activator)
 end
 function ville.NewObject_10_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
+  if reaction_actualite(personnage, 'NewObject_10') then
+    terminer_dialogue(personnage, 'NewObject_10')
+    return
+  end
   if SV.Destiny ~= nil and SV.Destiny.AlerteShinx == 'a_secourir' then
     parler_accueil(personnage, 'Worried', 'Lyra est partie chercher de l’aide pour Nilo… J’espère qu’il va bien.')
     UI:ResetSpeaker()
@@ -2637,9 +2703,22 @@ function ville.NewObject_10_Action(personnage, activator)
 end
 function ville.Nilo_Shinx_Action(personnage, activator)
   commencer_dialogue(personnage, activator)
-  parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des faux de Kabutops dans la Fosse Cascade ! Promis, je reste près de Maman et Léo maintenant !')
-  UI:ResetSpeaker()
+  if not reaction_actualite(personnage, 'Nilo_Shinx') then
+    parler_accueil(personnage, 'Happy', 'Merci encore de m’avoir tiré des faux de Kabutops dans la Fosse Cascade ! Promis, je reste près de Maman et Léo maintenant !')
+    UI:ResetSpeaker()
+  end
   terminer_dialogue(personnage, 'Nilo_Shinx')
+end
+
+-- GroundEntity construit le nom "<entité>_Action". Pour cette Baudrive
+-- le nom est vide dans le payload ; on conserve la carte et l'ancien ID.
+function ville._Action(personnage, activator)
+  commencer_dialogue(personnage, activator)
+  if not reaction_actualite(personnage, '') then
+    parler(personnage, 'Normal', 'Je reste près de la pierre : c’est plus facile de retrouver Plume quand le vent se lève.')
+    UI:ResetSpeaker()
+  end
+  terminer_dialogue(personnage, '')
 end
 
 local dialogues_habitants = {

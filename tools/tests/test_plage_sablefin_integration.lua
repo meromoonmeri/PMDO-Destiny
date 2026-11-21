@@ -137,6 +137,7 @@ assert(#calls.dungeon == 1 and calls.dungeon[1][1] == 'passage_aquatique' and SV
 local zpa = assert(loadfile(root .. '/game/Data/Script/destiny/zone/passage_aquatique/init.lua'))()
 zpa.ExitSegment({ID = 'passage_aquatique'}, 'Cleared', false, 0, 9)
 assert(#calls.zone == 1 and calls.zone[1][1] == 'passage_aquatique' and calls.zone[1][3] == 4)
+assert(SV.Destiny.PassageAquatiqueTermine == nil, 'le fond seul ne valide pas le retour')
 
 local paf = assert(loadfile(root .. '/game/Data/Script/destiny/ground/passage_aquatique_fond/init.lua'))()
 local m_paf = new_map('passage_aquatique_fond')
@@ -144,8 +145,13 @@ paf.Init(m_paf)
 paf.Enter(m_paf)
 paf.SortieTunnelSud_Touch(nil, player)
 assert(#calls.end_day == 1 and calls.end_day[1][2] == 'passage_aquatique' and calls.end_day[1][4] == 2 and calls.end_day[1][5] == 2)
-assert(SV.Destiny.ExplorationPassageAquatique == nil)
-
+assert(SV.Destiny.ExplorationPassageAquatique == nil and SV.Destiny.PassageAquatiqueTermine == true)
+SV.Destiny.PassageAquatiqueTermine = nil
 zpa.ExitSegment({ID = 'passage_aquatique'}, 'Downed', false, 0, 4)
 assert(#calls.end_day == 2 and calls.end_day[2][1] == 'Downed' and calls.end_day[2][4] == 2 and calls.end_day[2][5] == 2)
+assert(SV.Destiny.PassageAquatiqueTermine == nil, 'un KO ne valide pas la crique')
+paf.Init(m_paf)
+paf.SortieTunnelSud_Touch(nil, player)
+assert(SV.Destiny.PassageAquatiqueTermine == nil, 'une promenade ne valide pas la crique')
+assert(calls.ground[#calls.ground][2] == 'plage_sablefin_crepuscule' and #calls.end_day == 2)
 print('PASS plage_sablefin + passage_aquatique 10F + crique secrete + crossroad connection')

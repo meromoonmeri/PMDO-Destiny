@@ -90,6 +90,8 @@ function passage_aquatique_fond.SortieTunnelSud_Touch(obj, activator)
   local en_donjon = SV ~= nil and SV.Destiny ~= nil and SV.Destiny.ExplorationPassageAquatique == true
   if en_donjon then
     SV.Destiny.ExplorationPassageAquatique = nil
+    -- Confirmé uniquement à la fin d'une expédition, avant le journal natif.
+    SV.Destiny.PassageAquatiqueTermine = true
     local idx_plage = meteo_reverie.IndexPlageSablefin ~= nil and meteo_reverie.IndexPlageSablefin() or 0
     COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'passage_aquatique', -1, idx_plage, 2)
   else
