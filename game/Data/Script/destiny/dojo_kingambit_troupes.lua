@@ -3,6 +3,10 @@
 local POSES, TICKS = 16, 4
 local PAS = 24
 local M = {}
+-- Ces durées ne s'appliquent qu'aux quatre entrées révisées.
+local CYCLONE = {flying={poses=24, reveler=11, geste='drop'},
+                 dragon={poses=24, reveler=12, geste='jump'}}
+local METEO = {water={poses=26, amorce=10}, fire={poses=26, amorce=8}}
 
 local function troupe(context,args)
   if not context or context.User ~= nil or not args or not _ZONE.CurrentZone
@@ -27,12 +31,13 @@ local function jouer_effet(nom,layer,loc,poses)
   DUNGEON:PlayVFX(e,loc.X*PAS+PAS/2,loc.Y*PAS+PAS/2,Direction.Down)
 end
 
-local function jouer_nappe(nom,loc)
+local function jouer_nappe(nom,loc,poses)
   local c = RogueEssence.Content
   local e = c.FiniteOverlayEmitter()
+  local n = poses or POSES
   e.Layer = c.DrawLayer.Top
-  e.Anim = c.BGAnimData('Kingambit_Entree_' .. nom .. '_Ecran',TICKS,0,POSES-1)
-  e.TotalTime = POSES*TICKS
+  e.Anim = c.BGAnimData('Kingambit_Entree_' .. nom .. '_Ecran',TICKS,0,n-1)
+  e.TotalTime = n*TICKS
   e.RepeatX, e.RepeatY = true, true
   -- Le défilement est dessiné dans chaque pose de la tuile sans raccord.
   DUNGEON:PlayVFX(e,loc.X*PAS+PAS/2,loc.Y*PAS+PAS/2,Direction.Down)
@@ -75,33 +80,43 @@ local function choregraphie(ennemis,args,places)
     for i=1,3 do poser(ennemis[i-1],origines[i],false) end
     GAME:WaitFrames(4)
   end
+  local cyclone=CYCLONE[args.Type]
+  local meteo=METEO[args.Type]
+  local amorce=meteo and meteo.amorce or 0
+  local poses=cyclone and cyclone.poses or POSES
+  local geste=cyclone and cyclone.geste or args.Mode
   local rythme={0,6,12}
-  local apparition=args.Pose*TICKS
+  local apparition=(cyclone and cyclone.reveler or args.Pose)*TICKS
   local t=0
   local function avancer(cible)
     if cible>t then GAME:WaitFrames(cible-t); t=cible end
   end
-  if args.Mode=='whiteout' or args.Mode=='mist' then jouer_nappe(args.Type,places[1]) end
+  if meteo then
+    jouer_nappe(args.Type,places[1],meteo.poses)
+  elseif args.Mode=='whiteout' or args.Mode=='mist' then
+    jouer_nappe(args.Type,places[1])
+  end
   if args.Mode=='storm' then
     -- Un seul impact ; le Sol dessine le champ statique sur les trois cases.
     jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,places[1],POSES)
     jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,places[1],POSES)
   elseif args.Mode~='whiteout' then
     for i,delai in ipairs(rythme) do
-      avancer(delai)
-      -- Chaque combattant quitte SA colonne. Le bord de la brèche dissimule
-      -- les pieds au premier instant du bond (Sol et Roche).
+      avancer(amorce+delai)
+      -- Chaque membre a son cyclone ou sa colonne. Les colonnes partent
+      -- au nord de la formation ; les cyclones restent sur les cases d'arrivée.
       local pivot = (args.Mode=='column' or args.Mode=='emerge') and origines[i] or places[i]
-      jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,pivot,POSES)
-      jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,pivot,POSES)
+      jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,pivot,poses)
+      jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,pivot,poses)
     end
   end
   local delais_revelation = args.Mode=='whiteout' and {0,4,8} or rythme
   for i,delai in ipairs(delais_revelation) do
-    avancer(delai+apparition)
-    reveler(ennemis[i-1],args.Mode,origines[i],places[i])
+    avancer(amorce+delai+apparition)
+    reveler(ennemis[i-1],geste,cyclone and places[i] or origines[i],places[i])
   end
-  avancer(rythme[3]+POSES*TICKS)
+  local fin = amorce+rythme[3]+poses*TICKS
+  avancer(meteo and math.max(fin,meteo.poses*TICKS) or fin)
 end
 
 function M.Masquer(_owner,_ownerChar,context,args)

@@ -54,7 +54,8 @@ assert(log[4][3]=='pose' and log[4][4].X==6 and log[4][4].Y==2)
 assert(log[7][3]=='masque' and log[7][1]==16)
 assert(log[10][1]==44 and log[10][4].X==7 and log[10][4].Y==3)
 assert(t==96 and not _DATA.Save.CutsceneMode and groupe[0].HP==10 and groupe[0].PP==3)
-for _,cas in ipairs({{'ghost','shadow',7,'marche'},{'fairy','idle',10,'pose'},{'water','jump',6,'bond'},{'flying','drop',4,'pique'}}) do
+-- Les quatre entrées météo/cyclone ont leur cadence propre dans le test dédié.
+for _,cas in ipairs({{'ghost','shadow',7,'marche'},{'fairy','idle',10,'pose'},{'ground','emerge',6,'bond'},{'bug','idle',7,'pose'}}) do
   local typ,mode,pose,animation=table.unpack(cas)
   armer(typ);local args=e(typ,mode,pose)
   M.Masquer(nil,nil,{},args); M.Jouer(nil,nil,{},args)
