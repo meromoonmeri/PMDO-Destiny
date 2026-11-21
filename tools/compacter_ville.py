@@ -4,7 +4,8 @@
 Les objets AutoTile entièrement vides sont sérialisés sous la forme {} : le
 constructeur PMDO 0.8.12 leur redonne exactement leurs quatre valeurs par
 défaut. Toutes les autres données, dimensions, couches et références restent
-inchangées. L'entrée doit être la carte livrée vérifiée (carte à 11 calques issue du système Réverie, déjà compacte), pas une carte éditée.
+inchangées. L’entrée doit être la carte officielle de Réverie à 11 calques,
+avec ses dernières cellules par défaut encore explicites, pas une carte éditée.
 """
 from __future__ import annotations
 
@@ -15,12 +16,12 @@ import sys
 
 from unpack_payload import PAYLOADS
 
-# La carte livrée est déjà compacte. Les références sont communes avec
-# l'outil de restauration, pour ne pas refuser un payload officiel retouché.
+# Le payload de Réverie laisse 160 AutoTile explicites dans « Objects Under ».
+# Les coordonnées, autres calques et données de la carte restent intacts.
 _, ORIGINAL_SHA256, ORIGINAL_SIZE = PAYLOADS['payload/WaterfallVillageCapital.rsground.gz']
-COMPACT_SHA256 = ORIGINAL_SHA256
+COMPACT_SHA256 = 'cdd352af56e9699140de6254189c8e865ccee0419b8463e67915d7263f9c3c55'
 EMPTY_TILE = b'{"AutoTileset":"","Associates":[],"Layers":[],"NeighborCode":-1}'
-EMPTY_COUNT = 0
+EMPTY_COUNT = 160
 
 
 def sha256(data: bytes) -> str:

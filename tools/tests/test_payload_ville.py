@@ -35,6 +35,22 @@ def main():
     # Le compacteur et la carte publiée doivent toujours viser le même payload.
     _, attendu, taille = payload.PAYLOADS['payload/WaterfallVillageCapital.rsground.gz']
     assert compacter.ORIGINAL_SHA256 == attendu and compacter.ORIGINAL_SIZE == taille
+
+    # Tester aussi le vrai payload : le constructeur Windows compresse la
+    # copie fusionnée de la carte officielle, pas seulement un exemple réduit.
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        source, destination = root / 'officielle.rsground', root / 'jeu.rsground'
+        with gzip.open(ROOT / 'payload/WaterfallVillageCapital.rsground.gz', 'rb') as archive:
+            original = archive.read()
+        assert len(original) == taille and digest(original) == attendu
+        source.write_bytes(original)
+        destination.write_bytes(original)
+        assert compacter.compact(source, destination) == compacter.EMPTY_COUNT
+        assert digest(destination.read_bytes()) == compacter.COMPACT_SHA256
+        assert compacter.compact(source, destination) == compacter.EMPTY_COUNT
+        assert source.read_bytes() == original
+
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         contenu = b'carte native de test'
