@@ -4,7 +4,7 @@
 "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
 "mega_abomasite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 716,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -20,7 +20,7 @@
 },
 "mega_absolite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 706,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -36,7 +36,7 @@
 },
 "mega_aerodactylite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 684,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -52,7 +52,7 @@
 },
 "mega_aggronite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 699,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -68,7 +68,7 @@
 },
 "mega_alakazite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 678,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -84,7 +84,7 @@
 },
 "mega_altarianite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 704,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -100,7 +100,7 @@
 },
 "mega_ampharosite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 687,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -116,7 +116,7 @@
 },
 "mega_audinite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 718,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -132,7 +132,7 @@
 },
 "mega_banettite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 705,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -148,7 +148,7 @@
 },
 "mega_beedrillite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 676,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -164,7 +164,7 @@
 },
 "mega_blastoisinite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 675,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -180,7 +180,7 @@
 },
 "mega_blazikenite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 694,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -196,7 +196,7 @@
 },
 "mega_cameruptite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 703,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -212,7 +212,7 @@
 },
 "mega_charizardite_x": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 673,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -228,7 +228,7 @@
 },
 "mega_charizardite_y": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 674,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -244,7 +244,7 @@
 },
 "mega_delta_meteorite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 712,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -260,7 +260,7 @@
 },
 "mega_diancite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 719,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -276,7 +276,7 @@
 },
 "mega_galladite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 717,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -292,7 +292,7 @@
 },
 "mega_garchompite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 714,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -308,7 +308,7 @@
 },
 "mega_gardevoirite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 696,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -324,7 +324,7 @@
 },
 "mega_gengarite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 680,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -340,7 +340,7 @@
 },
 "mega_glalitite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 707,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -356,7 +356,7 @@
 },
 "mega_gyaradosite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 683,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -372,7 +372,7 @@
 },
 "mega_heracronite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 690,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -388,7 +388,7 @@
 },
 "mega_houndoominite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 691,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -404,7 +404,7 @@
 },
 "mega_kangaskhanite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 681,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -420,7 +420,7 @@
 },
 "mega_latiasite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 710,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -436,7 +436,7 @@
 },
 "mega_latiosite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 711,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -452,7 +452,7 @@
 },
 "mega_lopunnite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 713,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -468,7 +468,7 @@
 },
 "mega_lucarionite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 715,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -484,7 +484,7 @@
 },
 "mega_manectite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 701,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -500,7 +500,7 @@
 },
 "mega_mawilite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 698,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -516,7 +516,7 @@
 },
 "mega_medichamite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 700,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -532,7 +532,7 @@
 },
 "mega_metagrossite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 709,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -548,7 +548,7 @@
 },
 "mega_mewtwonite_x": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 685,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -564,7 +564,7 @@
 },
 "mega_mewtwonite_y": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 686,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -580,7 +580,7 @@
 },
 "mega_pidgeotite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 677,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -596,7 +596,7 @@
 },
 "mega_pinsirite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 682,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -612,7 +612,7 @@
 },
 "mega_sablenite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 697,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -628,7 +628,7 @@
 },
 "mega_salamencite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 708,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -644,7 +644,7 @@
 },
 "mega_sceptilite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 693,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -660,7 +660,7 @@
 },
 "mega_scizorite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 689,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -676,7 +676,7 @@
 },
 "mega_sharpedonite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 702,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -692,7 +692,7 @@
 },
 "mega_slowbronite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 679,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -708,7 +708,7 @@
 },
 "mega_steelixite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 688,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -724,7 +724,7 @@
 },
 "mega_swampertite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 695,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -740,7 +740,7 @@
 },
 "mega_tyranitarite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 692,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,
@@ -756,7 +756,7 @@
 },
 "mega_venusaurite": {
 "$type": "RogueEssence.Data.ItemEntrySummary, RogueEssence",
-"Icon": 9,
+"Icon": 672,
 "UsageType": 2,
 "States": [],
 "MaxStack": -1,

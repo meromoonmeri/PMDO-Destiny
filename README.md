@@ -30,6 +30,7 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
 ## Notes de mise à jour
 
+- [Réverie — icônes Méga et baies](docs/ICONES_OBJETS_REVERIE.md)
 - [Dojo Kingambit — wooshes PMD, cyclones et Méga](docs/KINGAMBIT_MISE_A_JOUR.md)
 
 - [0.7.4 — Bilans d’expédition, Réverie, comptoirs et Guilde](docs/REVERIE_074.md)
