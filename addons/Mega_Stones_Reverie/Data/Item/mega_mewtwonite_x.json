@@ -8,7 +8,9 @@
     },
     "Desc": {
       "DefaultText": "One variety of the mysterious Mega Stones. It can be used on Mewtwo once per floor to Mega Evolve.",
-      "LocalTexts": {}
+      "LocalTexts": {
+        "fr": "Permet à Mewtwo de prendre sa forme Méga-Mewtwo X une fois par étage."
+      }
     },
     "Released": true,
     "Comment": "",

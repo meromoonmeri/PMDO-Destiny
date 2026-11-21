@@ -8,7 +8,9 @@
     },
     "Desc": {
       "DefaultText": "One variety of the mysterious Mega Stones. It can be used on Charizard once per floor to Mega Evolve.",
-      "LocalTexts": {}
+      "LocalTexts": {
+        "fr": "Permet à Dracaufeu de prendre sa forme Méga-Dracaufeu Y une fois par étage."
+      }
     },
     "Released": true,
     "Comment": "",

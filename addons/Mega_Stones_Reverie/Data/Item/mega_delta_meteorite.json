@@ -8,7 +8,9 @@
     },
     "Desc": {
       "DefaultText": "A Meteorite that shines with seven colors of light. It can be used on Rayquaza once per floor to Mega Evolve.",
-      "LocalTexts": {}
+      "LocalTexts": {
+        "fr": "Une météorite qui brille de sept couleurs. Permet à Rayquaza de méga-évoluer une fois par étage."
+      }
     },
     "Released": true,
     "Comment": "",

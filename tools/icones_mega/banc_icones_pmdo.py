@@ -13,8 +13,11 @@ MOD='Mega_Stones_Reverie'
 SCRIPTS=Path('Data/Script')
 MAP=SCRIPTS/'origin/ground/test_grounds/init.lua'
 MODES={'foyer-fr':(True,False,True,'fr'), 'ensemble-fr':(True,True,False,'fr'),
-       'ensemble-zh-hans':(True,True,False,'zh-hans'),'addon-fr':(False,True,False,'fr'),
-       'destiny-zh-hans':(True,False,False,'zh-hans')}
+       'ensemble-en':(True,True,False,'en'), 'ensemble-zh-hans':(True,True,False,'zh-hans'),
+       'addon-fr':(False,True,False,'fr'),'destiny-zh-hans':(True,False,False,'zh-hans')}
+TEXT_FIELDS={'fr':'description_fr','en':'description_par_defaut'}
+VARIANTS={'mega_charizardite_x':'Dracaufeu-X','mega_charizardite_y':'Dracaufeu-Y',
+          'mega_mewtwonite_x':'Mewtwo-X','mega_mewtwonite_y':'Mewtwo-Y'}
 
 
 def lua(value):
@@ -82,7 +85,9 @@ def run(a):
     pages=[mega[i:i+8] for i in range(0,len(mega),8)]+([berries+['berry_oran','food_apple']] if berries else [])
     sizes=[]
     for row in rows:
-        with Image.open(gen/'Dessins/Objet'/(row['id']+'.png')) as im:sizes.append([row['id'],row['ico'],row['sprite'],*im.size])
+        desc=row[TEXT_FIELDS[lang]] if lang in TEXT_FIELDS else False
+        assert desc or lang not in TEXT_FIELDS, (row['id'],lang)
+        with Image.open(gen/'Dessins/Objet'/(row['id']+'.png')) as im:sizes.append([row['id'],row['ico'],row['sprite'],*im.size,desc])
     script=(HERE/'banc_icones.lua').read_text(encoding='utf-8')
     for k,v in dict(ROWS=sizes,PAGES=pages,ADDON=add,DESTINY=dest,RIDDLE=riddle,LANG=lang).items():script=script.replace('__'+k+'__',lua(v))
     trial=game/MAP;trial.unlink();trial.write_text(script,encoding='utf-8')
@@ -136,11 +141,23 @@ def run(a):
                             if k not in keys:continue
                             spot=locate(f,glyphs/(k+'.png'),(19,27,61,174));assert spot is not None,(k,f)
                             matches.append(f'{f.name}: {k} @ {spot}')
+                        if a.mode=='ensemble-fr':
+                            cursor=0
+                            for i,k in enumerate(pages[n-1]):
+                                if k not in VARIANTS:continue
+                                for _ in range(i-cursor):
+                                    qt_tap('Down');time.sleep(.09)
+                                cursor=i
+                                snap('Description-'+VARIANTS[k]+'.png')
                         print(a.mode,'SAC',n,len(pages[n-1]),flush=True)
                         qt_tap('z')
                     if head=='DONE':
                         assert rest==f'{len(rows)} {len(pages)}'
                         assert len(matches)==len(rows)+int(riddle)
+                        if lang in TEXT_FIELDS:
+                            seen={e.partition(' ')[2].partition(' ')[0]:e.partition(' ')[2].partition(' ')[2]
+                                  for e in qa if e.startswith('DESCRIPTION ')}
+                            assert seen=={row['id']:row[TEXT_FIELDS[lang]] for row in rows},'descriptions du moteur'
                         if riddle:assert set(['GIFT_ONE berry_pecha','GIFT_ONCE berry_pecha']).issubset(qa)
                         if 'Version: 0.8.12.0' not in raw:raise RuntimeError('version inattendue')
                         finish=True

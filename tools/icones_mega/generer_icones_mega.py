@@ -270,6 +270,10 @@ def build(dst,base,out,reference,tsv,catalogue):
         out_font,synth=extend_font((base/'Content/Font'/font).read_bytes(),glyphs)
         fonts[font]=synth
         for target in (staged,game):put(target/'Content/Font'/font,out_font)
+    for row in rows:
+        fiches=game if row['genre']=='baie' else staged
+        desc=jsonb((fiches/a_item/(row['id']+'.json')).read_bytes())['Object']['Desc']
+        row.update(description_fr=desc['LocalTexts'].get('fr'),description_par_defaut=desc['DefaultText'])
     alias=jsonb((base/'Editor/Aliases/Item_Icon.json').read_bytes());alias0=deepcopy(alias)
     alias.update({str(row['ico']):(row['nom'] if row['genre']=='baie' else row['nom']+' — '+row['pokemon']) for row in rows})
     assert len(alias)==len(alias0)+54 and all(alias[k]==v for k,v in alias0.items())

@@ -38,6 +38,12 @@ local function go()
     assert(source:find('MODS/'..folder..'/Content/Item/',1,true),source)
     local sheet=graphics.GetItem(name)
     assert(sheet.TileWidth==w and sheet.TileHeight==h and sheet.TotalFrames==1,id..' dir')
+    if v[6] then
+      -- Même méthode que le panneau de description du vrai ItemSummary.
+      local description = tostring(datum.Desc:ToLocal())
+      assert(description==v[6],id..' description '..lang..' : '..description)
+      log('DESCRIPTION '..id..' '..description)
+    end
     log(string.format('ITEM %s Icon=%d %s %dx%d Released=%s',id,icon,name,w,h,tostring(datum.Released)))
   end
   local native=UI

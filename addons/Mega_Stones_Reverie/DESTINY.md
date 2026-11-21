@@ -5,6 +5,7 @@ Addon facultatif à **Mega Stones 1.2.0** de [Deeshura](https://github.com/Deesh
 - Installer `Mega_Stones_Reverie` dans `MODS` d’une installation PMDO compatible et l’activer. Ne pas activer l’original en même temps : les deux addons ont le même espace de noms et le même UUID.
 - Copier **l’addon comme un dossier autonome** ; ne jamais superposer ses index objet, statut ou zone à `game/Data`.
 - 47 Méga-Gemmes et la Météorite Delta. Chacun des 48 objets a [son émoticône et son sprite au sol](../../docs/ICONES_OBJETS_REVERIE.md), y compris les quatre pierres X/Y. Éligibilité, forme cible, coût de 15 points de satiété et retour à la forme de base au changement d’étage inchangés. Pas de transformation automatique du boss lors d’une apparition Kingambit.
+- Les 48 descriptions s’affichent en français lorsque la langue du jeu est **Français**. Les quatre pierres X/Y indiquent la forme exacte dans leur description. Les textes par défaut d’origine et les effets restent inchangés.
 - Les deux banques de texte 0.8.12 étendues sont incluses dans l’addon afin d’afficher ces émoticônes. Elles préservent aussi les dessins de baies de Destiny ; avec un autre mod de police, une fusion d’atlas peut être nécessaire.
 - Le lot fournit l’animation d’addon à anneau, orbe et onde basse, sans colonne `Lightning`. Il n’installe pas la fusion **[Éclipse X — Prisme fendu](../../art/previews/mega_eclipse_x_prisme/)**, qui est un aperçu à part.
 

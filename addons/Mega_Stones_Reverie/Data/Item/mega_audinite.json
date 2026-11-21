@@ -8,7 +8,9 @@
     },
     "Desc": {
       "DefaultText": "One variety of the mysterious Mega Stones. It can be used on Audino once per floor to Mega Evolve.",
-      "LocalTexts": {}
+      "LocalTexts": {
+        "fr": "Une mystérieuse Méga-Gemme. Permet à Nanméouïe de méga-évoluer une fois par étage."
+      }
     },
     "Released": true,
     "Comment": "",
