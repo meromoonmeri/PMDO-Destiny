@@ -2,6 +2,8 @@
 
 Lot suivant la 0.7.6, développé à part depuis le commit `37e6b5c`. Il concerne les habitants **extérieurs des cartes de Réverie Town**, depuis le nord fusionné jusqu’à l’étang. Les intérieurs, la Guilde et les donjons gardent leur scénario et leurs services.
 
+> Les intérieurs restent inchangés à cette première étape. L’extension suivante, [Les foyers de Réverie](REVERIE_FOYERS.md), peuple les cinq habitations déjà raccordées.
+
 ## Ce qui change dans la ville
 
 | Moment | Transformations visibles et quelques rencontres |

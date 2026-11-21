@@ -707,6 +707,18 @@ local function appliquer_recit(map)
       positions_habitants[nom] = nil
     end
   end
+  -- Après leur échange dehors, ils gagnent la maison au prochain passage.
+  -- Ne pas les retirer sous les yeux du joueur au milieu du dialogue.
+  if (map.AssetName == 'reverie_residentiel' or map.AssetName == 'WaterfallVillageCapital')
+      and recit_reverie.FamilleAuFoyer(SV.Destiny) then
+    for _, nom in ipairs({'NewObject_9','NewObject_10','Nilo_Shinx'}) do
+      local a = CH(nom)
+      if a ~= nil then
+        AI:DisableCharacterAI(a)
+        GROUND:Hide(nom)
+      end
+    end
+  end
   vie_ville_activee = false
 end
 

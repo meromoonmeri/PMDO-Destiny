@@ -9,13 +9,20 @@ markers={'reverie_post_office':'entrance_south','reverie_inn':'Main_Entrance_Mar
 offsets=[(24,0),(-24,0),(0,-24),(0,24),(32,0),(-32,0),(0,-32),(0,32),(24,-24),(-24,-24),(24,24),(-24,24)]
 for name, marker in markers.items():
     s=(ROOT/'game/Data/Script/destiny/ground'/name/'init.lua').read_text(encoding='utf8')
-    assert "require 'destiny.suivi_interieurs'" in s,name
+    if "require('destiny.reverie_foyers').Carte(" in s:
+        assert name in {'reverie_water_home','reverie_rock_home','reverie_grass_home','reverie_fire_home','reverie_hutte_aquatique'}
+        commun=(ROOT/'game/Data/Script/destiny/reverie_foyers.lua').read_text(encoding='utf8')
+        assert "require 'destiny.suivi_interieurs'" in commun
+        assert 'carte.Enter, carte.GameLoad = activer, activer' in commun
+        assert 'suivi.Activer(map)' in commun
+    else:
+        assert "require 'destiny.suivi_interieurs'" in s,name
     if name=='caféspindaaccueil':
         assert s.count('pcall(suivi_interieurs.Activer, map)') == 2,name
         for func in ('Enter', 'GameLoad'):
             part=s.split('function cafespindaaccueil.'+func+'(map)',1)[1].split('\nend',1)[0]
             assert part.index('GAME:FadeIn(30)') < part.index('pcall(suivi_interieurs.Activer, map)'),func
-    else:
+    elif "require('destiny.reverie_foyers').Carte(" not in s:
         assert s.count('suivi_interieurs.Activer(map)') == 2,name
     d=json.loads((D/(name+'.rsground')).read_text(encoding='utf-8-sig'))['Object']
     entities=d['Entities'];mk=next(x for e in entities for x in e.get('Markers',[]) if x['EntName']==marker)['Collider'];x,y=mk['X'],mk['Y'];obs=d['obstacles'];p=None

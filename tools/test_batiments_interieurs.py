@@ -37,6 +37,11 @@ PORTES = [
 ]
 
 
+FOYERS = {'reverie_rock_home':'pierre', 'reverie_grass_home':'plante',
+          'reverie_water_home':'berge', 'reverie_hutte_aquatique':'hutte',
+          'reverie_fire_home':'citrouille'}
+
+
 def lire(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -76,8 +81,14 @@ def main() -> int:
         script = ROOT / "game/Data/Script/destiny/ground" / nom / "init.lua"
         assert script.is_file(), f"script absent : {nom}"
         texte = lire(script)
-        assert "_Touch(obj, activator)" in texte and "sortir()" in texte
-        assert "ArriveeVille = 'batiment'" in texte
+        if nom in FOYERS:
+            assert f"require('destiny.reverie_foyers').Carte('{FOYERS[nom]}')" in texte
+            partage = lire(ROOT / 'game/Data/Script/destiny/reverie_foyers.lua')
+            assert "_Touch'] = function(obj,activator)" in partage
+            assert "ArriveeVille = 'batiment'" in partage
+        else:
+            assert "_Touch(obj, activator)" in texte and "sortir()" in texte
+            assert "ArriveeVille = 'batiment'" in texte
         assert "Halcyon" not in texte and "Remixed" not in texte
         if nom in COQUES_REVERIE:
             doc = json.loads(carte.read_text(encoding="utf-8-sig"))["Object"]

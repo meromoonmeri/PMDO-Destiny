@@ -34,5 +34,9 @@ obj=ent['GroundObjects'][0];assert obj['EntName']=='Water_Home_Entrance' and obj
 assert any(x['EntName']=='Main_Entrance_Marker' for x in ent['Markers'])
 city=(game/'Data/Script/destiny/ground/WaterfallVillageCapital/init.lua').read_text(encoding='utf8');dev=(game/'Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua').read_text(encoding='utf8');assert city==dev
 assert "nom = 'PorteHutteSud', titre = 'Hutte aquatique', x = 608, y = 1680, largeur = 72, hauteur = 40, retour_x = 656, retour_y = 1744, interieur = 'reverie_hutte_aquatique'" in city
-script=(game/'Data/Script/destiny/ground'/name/'init.lua').read_text(encoding='utf8');assert 'Water_Home_Entrance_Touch' in script and "ArriveeVille = 'batiment'" in script and 'sortie_en_cours = false; GAME:FadeIn(20)' in script
+scripts = game/'Data/Script/destiny'
+script = (scripts/'ground'/name/'init.lua').read_text(encoding='utf8')
+assert "require('destiny.reverie_foyers').Carte('hutte')" in script
+foyers = (scripts/'reverie_foyers_recits.lua').read_text(encoding='utf8')
+assert "carte='reverie_hutte_aquatique', sortie='Water_Home_Entrance'" in foyers
 print('Hutte sud : zone, 1 785 tuiles, quatre phases et itinéraire statique contrôlés ; gameplay non testé.')

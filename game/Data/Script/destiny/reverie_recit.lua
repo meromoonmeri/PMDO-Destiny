@@ -17,6 +17,14 @@ function recit.Acte(d)
   return nil
 end
 
+-- La famille reste accessible sous l'arbre tant que l'échange de retour
+-- n'a pas été joué. Elle ne quitte pas une scène principale ni l'alerte.
+function recit.FamilleAuFoyer(d)
+  if recit.Acte(d) ~= 'nilo' then return false end
+  local vues = d.SaynetesReverieVues
+  return type(vues) == 'table' and type(vues.nilo) == 'table' and vues.nilo.famille == true
+end
+
 function recit.Crique(d)
   return d ~= nil and d.PassageAquatiqueTermine == true and d.AlerteShinx ~= 'a_secourir'
     and d.VisiteVille ~= 'en_route' and d.CelebrationNilo ~= 'en_attente'

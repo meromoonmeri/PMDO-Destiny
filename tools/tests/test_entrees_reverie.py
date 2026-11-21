@@ -22,8 +22,13 @@ for n,zone,dest,marker,x,y,w,h,rx,ry,px,py in D:
  interior=json.loads((GAME/'Data/Ground'/f'{dest}.rsground').read_text(encoding='utf-8-sig'))['Object'];markers=interior['Entities'][0]['Markers'];assert any(m['EntName']==marker for m in markers),(n,marker)
  pos=next(m['Collider'] for m in markers if m['EntName']==marker);grid=interior['obstacles'];ix,iy=pos['X'],pos['Y']
  assert all(grid[a][b]['Tags']==0 for a in range(ix//8,(ix+15)//8+1) for b in range(iy//8,(iy+15)//8+1)),(dest,'entrée bloquée')
-for name in ['reverie_post_office','reverie_inn','reverie_water_home','reverie_rock_home','reverie_grass_home','reverie_fire_home','reverie_hutte_aquatique','dojo_kingambit']:
+for name in ['reverie_post_office','reverie_inn','dojo_kingambit']:
  text=(GAME/'Data/Script/destiny/ground'/name/'init.lua').read_text(encoding='utf8');assert 'sortie_en_cours = false; GAME:FadeIn(20)' in text,name
+# Les cinq foyers ont désormais un cycle de vie commun, vérifié en Lua
+# sur leurs cartes natives par test_reverie_foyers.py.
+for suffix, cle in [('water_home','berge'),('rock_home','pierre'),('grass_home','plante'),('fire_home','citrouille'),('hutte_aquatique','hutte')]:
+ text=(GAME/'Data/Script/destiny/ground'/f'reverie_{suffix}'/'init.lua').read_text(encoding='utf8')
+ assert f"require('destiny.reverie_foyers').Carte('{cle}')" in text,suffix
 # Obstacle statique 16x16 : on atteint chaque capteur depuis les retours
 # d'escaliers de son quartier, et chaque retour n'est pas dans le capteur.
 starts={'reverie_nord':[(120,888),(776,808),(1200,808)],'reverie_centre':[(800,1320),(120,952),(776,872),(1200,872),(700,1904)],'reverie_residentiel':[(700,1976),(1120,2456)]}

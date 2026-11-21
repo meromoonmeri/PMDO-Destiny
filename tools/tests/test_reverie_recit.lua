@@ -176,3 +176,16 @@ SV.Destiny.PassageAquatiqueTermine=true
 nettoyer();ville.NewObject_10_Action(CH('NewObject_10'),CH('PLAYER'))
 assert(SV.Destiny.SaynetesReverieVues.crique.maree_famille and #paroles==4)
 print('PASS interruption récupérable, trio en famille, salle disponible pour les échanges de la crique')
+
+-- La scène visible dehors fait entrer les trois membres du foyer au
+-- prochain changement de carte, jamais au milieu du dialogue.
+assert(CH('Nilo_Shinx').EntEnabled and CH('NewObject_10').EntEnabled)
+charge('reverie_residentiel',776,2552,752,2552)
+for _, id in ipairs({'NewObject_9','NewObject_10','Nilo_Shinx'}) do
+  assert(CH(id)==nil or not CH(id).EntEnabled,id..' présent aussi dehors')
+end
+assert(CH('NewObject_11').EntEnabled and CH('NewObject_20').EntEnabled)
+ville.GameLoad(carte)
+assert(not CH('NewObject_9').EntEnabled and not CH('NewObject_10').EntEnabled and not CH('Nilo_Shinx').EntEnabled)
+assert(carte.objets.PorteCitrouilleSud)
+print('PASS le trio rejoint le foyer à la réentrée sans double ni coupure du dialogue extérieur')
