@@ -12,7 +12,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from dojo_reverie_types import TYPES
-from dojo_dtef import Dtef, WIDTH, HEIGHT, START, BOSS, libre, loc, cell
+from dojo_dtef import Dtef, WIDTH, HEIGHT, START, libre, loc, cell
+from dojo_kingambit_troupes import TROUPES, FORMATION, departs
 
 ZONE = 'dojo_kingambit_dedales'
 NS = 'RogueEssence.LevelGen.'
@@ -57,7 +58,53 @@ class Forgeron:
         if r['Intrinsic1'] != 'none': self.contenu('Intrinsic',r['Intrinsic1'])
         return r
 
-    def finale(self, typ, title, theme, master):
+    def lignee(self, mon):
+        vus = {mon}
+        while True:
+            parent = self.contenu('Monster',mon)['PromoteFrom']
+            if not parent: return
+            assert parent not in vus, (mon,parent)
+            assert mon in {p['Result'] for p in self.contenu('Monster',parent)['Promotions']}, (parent,mon)
+            yield parent
+            vus.add(parent)
+            mon = parent
+
+    def combattant(self, modele, mon, moves, pos, niveau, bonus):
+        c = deepcopy(modele)
+        f = self.contenu('Monster',mon)['Forms'][0]
+        assert f['Released'], mon
+        talent = f['Intrinsic1']
+        if talent != 'none': self.contenu('Intrinsic',talent)
+        apprises = {sk['Skill'] for esp in (mon,*self.lignee(mon))
+                    for key,val in self.contenu('Monster',esp)['Forms'][0].items() if key.endswith('Skills')
+                    for sk in val}
+        assert not set(moves)-apprises, (mon,set(moves)-apprises)
+        gender = 1 if f['MaleWeight'] else (2 if f['FemaleWeight'] else 0)
+        form = {'Species': mon, 'Form': 0, 'Skin': 'normal', 'Gender': gender}
+        # PMDC MonsterFormData.GetStat : cohérence HP/MaxHP dès l'entrée.
+        base = f['BaseHP']
+        if base > 1:
+            cap = 1536*base//sum(f['Base'+s] for s in ('HP','Atk','Def','MAtk','MDef','Speed'))
+            hp = (base+130)*niveau//self.max_level+10 + bonus*(cap-base)//256
+        else:
+            hp = niveau//10+1 + bonus*(self.max_level//5-self.max_level//10)//256
+        c.update(BaseForm=form, CurrentForm=deepcopy(form), Nickname='',
+                 Level=niveau, HP=hp, MaxHPBonus=bonus, Element1=f['Element1'], Element2=f['Element2'],
+                 serializationLoc=loc(*pos), Unrecruitable=True)
+        c['BaseIntrinsics'] = [talent]
+        c['Intrinsics'] = [{'Element': {'ID': talent}, 'BackRef': 0}]
+        skills = []
+        for m in moves:
+            skill = self.contenu('Skill',m)
+            assert skill['Released'] and skill['BaseCharges']>0, (mon,m)
+            skills.append((m,skill['BaseCharges']))
+        skills.extend([('',0)]*(4-len(skills)))
+        c['BaseSkills'] = [{'SkillNum': m, 'Charges': n, 'CanForget': True} for m,n in skills]
+        c['Skills'] = [{'Element': dict(SkillNum=m, Charges=n, Enabled=bool(m), Sealed=False), 'BackRef': i}
+                       for i,(m,n) in enumerate(skills)]
+        return c
+
+    def finale(self, typ, title, theme):
         doc = deepcopy(self.map_doc)
         o = doc['Object']
         name = f'{ZONE}_{typ}'
@@ -70,34 +117,27 @@ class Forgeron:
                                   'Owner': 0, 'TileStates': []}}
                       for y in range(HEIGHT)] for x in range(WIDTH)]
         o['DiscoveryArray'] = [[2]*HEIGHT for _ in range(WIDTH)]
-        start, boss = START, BOSS
-        o['EntryPoints'] = [{'Loc': loc(*start), 'Dir': 4}]
+        o['EntryPoints'] = [{'Loc': loc(*START), 'Dir': 4}]
         o.update(AssetName=name, Name=texte(f'Dédale {title}\nSalle du maître'),
-                 Element=typ, HideMinimap=False, Comment='Finale sans recrutement, sortie à la victoire.')
-        mon, *moves = master
-        f = self.monstre(mon, typ)
-        team = o['MapTeams'][0]; c = team['Players'][0]
+                 Element=typ, HideMinimap=False, Comment='Finale de lignée. Victoire après toute la troupe.')
+        casting, scene, pose, mode = TROUPES[typ]
+        chef = casting[0][0]
+        self.monstre(chef,typ)
+        assert all(esp in set(self.lignee(chef)) for esp,*_ in casting[1:]), (typ,casting)
+        origines = departs(typ)
+        assert len(set(FORMATION))==len(set(origines))==3
+        assert all(libre(x,y,typ) and y <= 4 for x,y in (*FORMATION,*origines)), typ
+        team = o['MapTeams'][0]; modele = team['Players'][0]
         team['Name'] = 'Dojo Kingambit'
-        gender = 1 if f['MaleWeight'] else (2 if f['FemaleWeight'] else 0)
-        form = {'Species': mon, 'Form': 0, 'Skin': 'normal', 'Gender': gender}
-        level, bonus = 12, 19
-        # PMDC MonsterFormData.GetStat : cohérence HP/MaxHP dès l'entrée.
-        base = f['BaseHP']
-        if base > 1:
-            cap = 1536*base//sum(f['Base'+s] for s in ('HP','Atk','Def','MAtk','MDef','Speed'))
-            hp = (base+130)*level//self.max_level+10 + bonus*(cap-base)//256
-        else:
-            hp = level//10+1 + bonus*(self.max_level//5-self.max_level//10)//256
-        c.update(BaseForm=form, CurrentForm=deepcopy(form), Nickname='',
-                 Level=level, HP=hp, MaxHPBonus=bonus, Element1=f['Element1'], Element2=f['Element2'],
-                 serializationLoc=loc(*boss), Unrecruitable=True)
-        talent = f['Intrinsic1']
-        c['BaseIntrinsics'] = [talent]
-        c['Intrinsics'] = [{'Element': {'ID': talent}, 'BackRef': 0}]
-        skills = [(m,self.contenu('Skill',m)['BaseCharges']) for m in moves] + [('',0),('',0)]
-        c['BaseSkills'] = [{'SkillNum': m, 'Charges': n, 'CanForget': True} for m,n in skills]
-        c['Skills'] = [{'Element': dict(SkillNum=m, Charges=n, Enabled=bool(m), Sealed=False), 'BackRef': i}
-                       for i,(m,n) in enumerate(skills)]
+        team['Players'] = [self.combattant(modele, mon, moves, pos, niv, bonus)
+                           for (mon,*moves),pos,niv,bonus in zip(casting,FORMATION,(12,8,7),(10,0,0))]
+        origines_lua = '{'+','.join('{'+str(x)+','+str(y)+'}' for x,y in origines)+'}'
+        on_start = o['MapEffect']['OnMapStarts']
+        for i,(pr,phase) in enumerate(((-11,'Masquer'),(-9,'Jouer')),1):
+            on_start.insert(i, {'Key': {'str':[pr]}, 'Value': {
+                '$type':'RogueEssence.Dungeon.SingleCharScriptEvent, RogueEssence',
+                'Script':'DestinyDojoTroupe'+phase,
+                'ArgTable':f'{{ Type = "{typ}", Mode = "{mode}", Pose = {pose}, Origines = {origines_lua} }}'}})
         ecrire(self.out/f'game/Data/Map/{name}.rsmap', doc)
         return name
 
@@ -144,11 +184,11 @@ class Forgeron:
         model_segment = deepcopy(zone['Segments'][0])
         zone.update(Name=texte('Dédales du Dojo Kingambit','Kingambit Dojo Mazes'), Released=True,
                     NoEXP=False, ExpPercent=175,
-                    Comment='18 types : deux étages générés, puis le maître. EXP conservée, aucune mise.',
+                    Comment='18 types : deux étages générés, puis le maître et sa troupe. EXP conservée, aucune mise.',
                     Segments=[])
         labels = ["-- Généré par tools/build_dedales_kingambit.py ; même ordre que les segments.", 'return {']
-        for i,(typ,label,title,theme,accent,glyph,foes,master) in enumerate(TYPES):
-            final = self.finale(typ,title,theme,master)
+        for i,(typ,label,title,theme,accent,glyph,foes) in enumerate(TYPES):
+            final = self.finale(typ,title,theme)
             seg = deepcopy(model_segment)
             f = seg['Floors'][0]; f['GenSteps'][0]['Value']['MapID'] = final
             seg['Floors'][:0] = [self.exploration(typ,theme,tier,i%3) for tier in range(2)]

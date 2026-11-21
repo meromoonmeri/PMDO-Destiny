@@ -160,11 +160,13 @@ function dojo_kingambit.MarowakDojoExit_Touch(obj, activator)
 end
 
 function dojo_kingambit.Kingambit_Action(chara, activator)
-  if sortie_en_cours or (activator and activator.EntName ~= 'PLAYER') then return end
+  if sortie_en_cours or not activator or activator.EntName ~= 'PLAYER' then return end
   local segment = entrainement.Choisir(chara)
   if segment == nil then return end
   sortie_en_cours = true
-  entrainement.Descendre(segment, chara, CH('PLAYER'), (_ZONE and _ZONE.CurrentGround) or carte_active)
+  if not entrainement.Descendre(segment, chara, activator, (_ZONE and _ZONE.CurrentGround) or carte_active) then
+    sortie_en_cours = false
+  end
 end
 
 function dojo_kingambit.MarowakDojoDungeonEntrance_Touch(obj, activator)

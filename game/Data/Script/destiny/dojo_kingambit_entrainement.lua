@@ -1,6 +1,7 @@
 -- Accueil et chutes du dojo ; le dédale et ses combats restent natifs à PMDO.
 local types = require 'destiny.dojo_kingambit_types'
 local equipe = require 'destiny.equipe_scene'
+local sceau = require 'destiny.dojo_kingambit_sceau'
 local M = {Zone = 'dojo_kingambit_dedales'}
 
 local function etat()
@@ -27,7 +28,7 @@ function M.Choisir(maitre)
   if not t then return nil end
   UI:SetSpeaker(maitre)
   UI:SetSpeakerEmotion('Normal')
-  UI:BeginChoiceMenu('Dédale ' .. t[3] .. ' (' .. t[2] .. ').\nDeux étages, puis le maître. On descend ?', {'Descendre', 'Pas maintenant'}, 2, 2)
+  UI:BeginChoiceMenu('Dédale ' .. t[3] .. ' (' .. t[2] .. ').\nDeux étages, puis le maître et sa troupe. Descendre ?', {'Descendre', 'Pas maintenant'}, 2, 2)
   UI:WaitForChoice()
   local ok = tonumber(UI:ChoiceResult()) == 1
   UI:ResetSpeaker()
@@ -42,59 +43,83 @@ local function effet(typ, name, layer, x, y)
   GROUND:PlayVFX(e, x, y)
 end
 
-local function obstacle(map, maitre, x, y)
-  if x < 0 or y < 0 or x+16 > map.TexWidth*8 or y+16 > map.TexHeight*8 then return true end
-  local p = maitre.Position
-  if math.abs(x-p.X) < 16 and math.abs(y-p.Y) < 16 then return true end
-  for a = math.floor(x/8), math.floor((x+15)/8) do
-    for b = math.floor(y/8), math.floor((y+15)/8) do
-      if map:GetObstacle(a,b) ~= 0 then return true end
+local function marcher(acteur, chemin)
+  for _, p in ipairs(chemin) do
+    if acteur.Position.X ~= p.X or acteur.Position.Y ~= p.Y then
+      GROUND:MoveToPosition(acteur,p.X,p.Y,false,2.5)
     end
   end
+  GROUND:CharAnimateTurnTo(acteur, Direction.Down, 2)
+end
+
+local function refuser()
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue('Le passage jusqu’au sceau n’est pas libre. Approchez-vous ensemble et réessayez.')
   return false
 end
 
-function M.Descendre(segment, maitre, hero, map)
+function M.Descendre(segment, maitre, joueur, map)
   local t = types[segment+1]
-  if not t then return end
-  local partenaire = CH('Teammate1')
-  local participants = {hero}
-  GAME:CutsceneMode(true)
-  -- Le héros n'est jamais déplacé, même quand on aborde Kaito de côté.
-  local x, y = hero.Position.X, hero.Position.Y
-  if partenaire then
-    AI:DisableCharacterAI(partenaire)
-    TASK:StopEntityTask(partenaire)
-    GROUND:CharEndAnim(partenaire)
-    local cote = partenaire.Position.X >= x and 1 or -1
-    for _, signe in ipairs({cote, -cote}) do
-      local px = x + 22*signe
-      if not obstacle(map, maitre, px, y) then
-        -- Une courte approche vers le flanc dégagé. En cas de position
-        -- inhabituelle, la trappe s'ouvre aussi sous le partenaire, sur place.
-        if math.abs(partenaire.Position.X-px) + math.abs(partenaire.Position.Y-y) <= 72 then
-          GROUND:MoveToPosition(partenaire, px, y, false, 2)
-        end
-        break
-      end
+  if not t or not joueur or not maitre or not map then return false end
+  local kaito = maitre.Position -- observateur immobile, jamais acteur ni déclencheur de l’effet
+  local heros, ih = equipe.Membre('Hero')
+  local partenaire, ip = equipe.Membre('Partner')
+  local leader = GAME:GetTeamLeaderIndex()
+  local inverse = partenaire ~= nil and ip == leader
+  local autre = inverse and heros or (not inverse and ih == leader and partenaire or nil)
+  if heros and partenaire and not autre then return refuser() end
+  local suivant = autre and CH('Teammate1') or nil
+  -- Un acteur du chef d'équipe inversé (ou absent d'une vieille sauvegarde)
+  -- est créé seulement après validation des trajets, à côté du chef.
+  if suivant and suivant.Data ~= autre then suivant = nil end
+  local a = joueur.Position
+  local b = suivant and suivant.Position or nil
+  if autre and not b then
+    for _, d in ipairs({{24,0},{-24,0},{0,24},{0,-24}}) do
+      if sceau.Libre(map,a.X+d[1],a.Y+d[2],kaito,a) then b={X=a.X+d[1],Y=a.Y+d[2]}; break end
     end
-    participants[2] = partenaire
+    if not b then return refuser() end
   end
+  local cible = sceau.Place(b and (inverse and 1 or -1) or 0)
+  local seconde = b and sceau.Place(inverse and -1 or 1) or nil
+  local chemin = sceau.Trajet(map,a,cible,kaito,b)
+  local chemin2 = b and sceau.Trajet(map,b,seconde,kaito,cible) or nil
+  local d_abord = false
+  if b and (not chemin or not chemin2) then
+    chemin = sceau.Trajet(map,a,cible,kaito,seconde)
+    chemin2 = sceau.Trajet(map,b,seconde,kaito,a)
+    d_abord = true
+  end
+  if not chemin or (b and not chemin2) then return refuser() end
+
+  GAME:CutsceneMode(true)
+  local participants = {joueur}
+  if b then
+    if not suivant then
+      if CH('Teammate1') then GROUND:RemoveCharacter('Teammate1') end
+      suivant = GROUND:CreateCharacterFromCharData('Teammate1',autre,b.X,b.Y,joueur.Direction)
+      suivant.CollisionDisabled = true
+    end
+    AI:DisableCharacterAI(suivant)
+    TASK:StopEntityTask(suivant)
+    GROUND:CharEndAnim(suivant)
+    participants[2] = suivant
+  end
+  if d_abord then marcher(suivant,chemin2) end
+  marcher(joueur,chemin)
+  if suivant and not d_abord then marcher(suivant,chemin2) end
+  local function pose(c,p) return c.Position.X==p.X and c.Position.Y==p.Y end
+  if not pose(joueur,cible) or (suivant and not pose(suivant,seconde)) then
+    if suivant then equipe.Suivre(suivant,joueur) end
+    GAME:CutsceneMode(false)
+    return refuser()
+  end
+  GAME:WaitFrames(9)
+  -- Une seule trappe ; Sol et Rebord sont deux calques au même point.
   local couches = RogueEssence.Content.DrawLayer
   local dessin = RogueEssence.Dungeon.DrawEffect
-  local origines = {{x+8, y+12}}
-  if partenaire then
-    local p = partenaire.Position
-    if math.abs(p.X-x) <= 36 and math.abs(p.Y-y) <= 4 then
-      origines = {{math.floor((p.X+x)/2)+8, math.floor((p.Y+y)/2)+12}}
-    else
-      origines[2] = {p.X+8,p.Y+12}
-    end
-  end
-  for _, p in ipairs(origines) do
-    effet(t[1], 'Sol', couches.Bottom, p[1],p[2])
-    effet(t[1], 'Rebord', couches.Front, p[1],p[2])
-  end
+  effet(t[1], 'Sol', couches.Bottom, sceau.X, sceau.Y)
+  effet(t[1], 'Rebord', couches.Front, sceau.X, sceau.Y)
   SOUND:PlayBattleSE('EVT_EP_Pitfall_Reveal')
   GROUND:MoveScreen(RogueEssence.Content.ScreenMover(1, 2, 14))
   GAME:WaitFrames(25)
@@ -126,10 +151,10 @@ function M.Descendre(segment, maitre, hero, map)
     c.HideShadow = ombres[i]
     GROUND:CharEndAnim(c)
   end
-  if partenaire then equipe.Suivre(partenaire, hero) end
   GAME:CutsceneMode(false)
   GAME:EnterDungeon(M.Zone, segment, 0, 0,
     RogueEssence.Data.GameProgress.DungeonStakes.Progress, false, true)
+  return true
 end
 
 function M.Retour(result, segment)

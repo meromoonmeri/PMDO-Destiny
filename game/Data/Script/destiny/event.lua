@@ -4,6 +4,10 @@ require 'destiny.event_battle'
 require 'destiny.regle_ko'
 require 'destiny.mapgen_lost_wood'
 
+local dojo_troupes = require 'destiny.dojo_kingambit_troupes'
+SINGLE_CHAR_SCRIPT.DestinyDojoTroupeMasquer = dojo_troupes.Masquer
+SINGLE_CHAR_SCRIPT.DestinyDojoTroupeJouer = dojo_troupes.Jouer
+
 -- La table SINGLE_CHAR_SCRIPT est créée par le moteur : ne pas la remplacer.
 -- Les repères ci-dessous sont des pages d'aide neutres : aucun personnage
 -- ne les prononce et aucun portrait ne les accompagne. Les libellés de

@@ -12,8 +12,9 @@ from executer_lua import run
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'tools'))
-from build_dedales_kingambit import ZONE
-from dojo_dtef import Dtef, WIDTH, HEIGHT, START, BOSS, plan, verifier, libre
+from build_dedales_kingambit import ZONE, Forgeron
+from dojo_kingambit_troupes import TROUPES, FORMATION, departs
+from dojo_dtef import WIDTH, HEIGHT, START, plan, verifier, libre
 from dessiner_trappe_kingambit import rupture
 from dojo_reverie_types import TYPES
 from lib_tiles import read_tilesheet
@@ -42,15 +43,17 @@ def dungeon():
     assert {t[0] for t in TYPES} == set('normal fire water grass electric ice fighting poison ground flying psychic bug rock ghost dragon dark steel fairy'.split())
     assert z['Released'] and not z['NoEXP'] and z['ExpPercent']==entry['ExpPercent']==175
     assert z['Rescues']==0 and not z['LevelCap'] and z['BagRestrict']==-1 and not z['MoneyRestrict']
+    assert entry['Comment']==z['Comment']
     assert entry['CountedFloors']==54 and entry['Maps']==[[0,1,2]]*18
     manifest=json.loads((SOURCES/'biomes.json').read_text(encoding='utf-8'))
     assert len(manifest)==18 and len({plan(t[0]) for t in TYPES})==18
     base=os.getenv('DESTINY_DTEF_DATA')
-    dtef=Dtef(base) if base else None
+    forge=Forgeron(ROOT,Path(base),ROOT) if base else None
+    dtef=forge.dtef if forge else None
     assert len({t[3] for t in TYPES})==18
     guild = obj(DATA/'Zone/town02_waterfallvillage.json')
     assert guild['GroundMaps'][17]=='dojo_kingambit'
-    for i,(typ,label,n,theme,_,glyph,foes,boss) in enumerate(TYPES):
+    for i,(typ,label,n,theme,_,glyph,foes) in enumerate(TYPES):
         assert len(glyph)==8 and all(len(l)==8 for l in glyph)
         seg=z['Segments'][i]
         assert len(seg['Floors'])==3
@@ -74,12 +77,26 @@ def dungeon():
         assert final==f'{ZONE}_{typ}'
         m=obj(DATA/f'Map/{final}.rsmap')
         assert m['Element']==typ and m['NoRescue'] and not m['Items'] and len(m['MapTeams'])==1
-        c=m['MapTeams'][0]['Players'][0]
-        assert c['BaseForm']==c['CurrentForm'] and c['BaseForm']['Species']==boss[0]
-        assert typ in (c['Element1'],c['Element2']) and c['Unrecruitable'] and c['Level']==12
-        assert len(c['Skills'])==len(c['BaseSkills'])==4 and all(n['BackRef']==j for j,n in enumerate(c['Skills']))
-        assert tuple(q['SkillNum'] for q in c['BaseSkills'])==(*boss[1:],'','')
-        assert any(e['Value'].get('CheckClearStatus')=='map_clear_check' for e in m['MapEffect']['OnMapStarts'])
+        team=m['MapTeams'][0]; casting,_,pose,mode=TROUPES[typ]
+        assert team['LeaderIndex']==0 and len(team['Players'])==3
+        for c,(mon,*moves),coord,lvl in zip(team['Players'],casting,FORMATION,(12,8,7)):
+            assert c['BaseForm']==c['CurrentForm'] and c['BaseForm']['Species']==mon
+            assert c['Unrecruitable'] and c['Level']==lvl and c['Tactic']['ID']=='boss'
+            assert len(c['Skills'])==len(c['BaseSkills'])==4 and all(n['BackRef']==j for j,n in enumerate(c['Skills']))
+            assert tuple(q['SkillNum'] for q in c['BaseSkills'])==tuple(moves)+('',)*(4-len(moves))
+            assert c['serializationLoc']==dict(zip(('X','Y'),coord))
+            assert libre(*coord,typ) and c['HP']>0
+            if forge:
+                assert c==forge.combattant(forge.map_doc['Object']['MapTeams'][0]['Players'][0],mon,moves,coord,lvl,10 if lvl==12 else 0)
+        chef=team['Players'][0]
+        assert typ in (chef['Element1'],chef['Element2'])
+        if forge: assert all(mon in set(forge.lignee(casting[0][0])) for mon,*_ in casting[1:])
+        assert all(libre(*p,typ) for p in departs(typ))
+        ev=m['MapEffect']['OnMapStarts']
+        assert [e['Key']['str'] for e in ev] == [[-15],[-11],[-9],[-5]]
+        assert [e['Value']['Script'] for e in ev[1:3]]==['DestinyDojoTroupeMasquer','DestinyDojoTroupeJouer']
+        assert all(f'Type = "{typ}", Mode = "{mode}", Pose = {pose}' in e['Value']['ArgTable'] for e in ev[1:3])
+        assert ev[3]['Value']['CheckClearStatus']=='map_clear_check'
         g=plan(typ); verifier(g)
         assert manifest[typ]['biome']==theme and manifest[typ]['plan']==list(g)
         assert [l['Name'] for l in m['Layers']]==['Sol DTEF continu','Parois DTEF','Relief secondaire DTEF']
@@ -88,7 +105,6 @@ def dungeon():
         assert refs and {s for s,x,y in refs} <= set(manifest[typ]['banques_sha256'])
         assert not any(s.startswith(('Ledian','Ossatueur','Kingambit','Reverie_Duel')) for s,x,y in refs)
         assert m['EntryPoints'][0]['Loc']==dict(zip(('X','Y'),START))
-        assert c['serializationLoc']==dict(zip(('X','Y'),BOSS))
         for x in range(WIDTH):
             for y in range(HEIGHT):
                 assert [bool(l['Tiles'][x][y]['Layers']) for l in m['Layers']]==[True,g[y][x]=='#',g[y][x]=='~']
@@ -99,7 +115,7 @@ def dungeon():
         assert len(m['Tiles'])==WIDTH and all(len(col)==HEIGHT for col in m['Tiles'])
         assert all((t['Data']['ID']=='floor')==libre(x,y,typ) and not t['Effect']['ID']
                    for x,col in enumerate(m['Tiles']) for y,t in enumerate(col))
-    print('PASS 18 plans DTEF distincts connectés, 36 étages procéduraux et 18 maîtres.' + (' Références et SHA256 natives exacts.' if dtef else ' Contrôle structurel sans le jeu de base.'))
+    print('PASS 18 plans DTEF distincts connectés, 36 étages procéduraux et 18 lignées de trois combattants.' + (' Références et SHA256 natives exacts.' if dtef else ' Contrôle structurel sans le jeu de base.'))
 
 
 def ground():
@@ -136,6 +152,11 @@ def ground():
     p=markers[3]['Collider']; x,y=p['X'],p['Y']
     assert (x,y)==(376,336) and all(not acc['obstacles'][a][b]['Tags'] for a in (47,48) for b in (42,43))
     assert [l['Visible'] for l in acc['Layers'][8:14]] == [True,False,False,True,False,False]
+    kaito=acc['Entities'][0]['MapChars'][0]['Collider']
+    assert (kaito['X'],kaito['Y'],kaito['Width'],kaito['Height'])==(376,184,16,16)
+    for x in (364,376,388):
+        assert all(not acc['obstacles'][a][b]['Tags'] for a in range(x//8,(x+15)//8+1) for b in (32,33,34))
+    assert kaito['Y']+kaito['Height'] < 270-40
     print('PASS complexe Kingambit : échelles natives, tuiles résolues, 15/9/9 calques, portes et retour.')
 
 
