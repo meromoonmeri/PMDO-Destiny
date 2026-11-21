@@ -1,0 +1,380 @@
+[
+  {
+    "path": "Kingambit_Signaux_normal.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "a5a88758216e75fa3a972e852afab6a9068bc3f676213083bacf7dd27c058816"
+  },
+  {
+    "path": "Kingambit_Mecanisme_normal_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "b555d4c0964096da6d1325850e6fd44019b14a5a791466c5a6e83008c28b2559"
+  },
+  {
+    "path": "Kingambit_Mecanisme_normal_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "290e37b75400d4f0eaf9d6df57d7a727d9a0040b3a11e146035ee5d856bfe68c"
+  },
+  {
+    "path": "Kingambit_Signaux_fire.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "1f26cc32ca6c48abb2545e9c69b1280837093705db6d1d1e37ec652c19cfe9b5"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fire_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "7d3ae598b56f85659c3f38cb25156a2b03ec726f8b6c31745da89a96c79af660"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fire_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "c5d804f78483353285d92fd62675ee96f4a275286e6467186b1c5f8220707543"
+  },
+  {
+    "path": "Kingambit_Signaux_water.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "f2aabe6817224737893a7878020facf389b677c388388d426e6d727a46ca09c6"
+  },
+  {
+    "path": "Kingambit_Mecanisme_water_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "9fc96fbc63a1e736ab3504a69b3a357f9e4db4afd2fa3662f33e9ff964f8aecf"
+  },
+  {
+    "path": "Kingambit_Mecanisme_water_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "a5d35388b38da7ca90518f2df649b3a796e57a0bdb452341075cecf1bf30eab8"
+  },
+  {
+    "path": "Kingambit_Signaux_grass.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "c2907bf66f5f05cf2e4543c827dffe40a46d5f92e49d2254f46306ef46d2266c"
+  },
+  {
+    "path": "Kingambit_Mecanisme_grass_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "7104a6608ce5d201b03f2bb5b5bb7f70c3eb344ae32cb0e1fa1736573374afc7"
+  },
+  {
+    "path": "Kingambit_Mecanisme_grass_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "a680492ae7ae8fba38452ebb15124cffa5d4ba822c4e05fd3c47d512f1665ac0"
+  },
+  {
+    "path": "Kingambit_Signaux_electric.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "b816992541d6ebd6ecfcc4aa2d953efe709fc4c76eec272ebc7d338cc3f552b1"
+  },
+  {
+    "path": "Kingambit_Mecanisme_electric_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "76f15ddbfbb8693d7ae81adf724fbe64e071a8cdc16d69a25480b455ac0bbc05"
+  },
+  {
+    "path": "Kingambit_Mecanisme_electric_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "0c6572e39126b78a16b049d91b11672f6b9f998de1874b2bee23ffe61c4c0b45"
+  },
+  {
+    "path": "Kingambit_Signaux_ice.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "39e43bc3cb41e909bacea2dbd72355ee5776be730899fd6ae6da73313773dbe0"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ice_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "1219129c681bdf6b3b83e557a24033158806083d1296ca7aeffde9cc858c098f"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ice_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "7b047364296dd577bbbae9bffdbc2e84ca84c72e25202c449343b96918243bd3"
+  },
+  {
+    "path": "Kingambit_Signaux_fighting.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "ffbc2d49772cf6fcafed9953145bc763f111f7d947d8864069732d4f95dbade1"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fighting_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "552fd4b57549f1bdd5f7be7a601c88cae784600688cd1e1c8298b846d6d54df3"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fighting_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "e4c49be5603b4250cbe2f42ecaa4bbcc3c9ff3472e1172f605fbe3364884965d"
+  },
+  {
+    "path": "Kingambit_Signaux_poison.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "9e1b9d6af85f9f0039a05ac83a009a55a07f8cc6875202bc5dc74148c0deb8bc"
+  },
+  {
+    "path": "Kingambit_Mecanisme_poison_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "f095c83cccaf4d1f6a7a26274164b5be13694fd1aa95635ca35d58931c6130e0"
+  },
+  {
+    "path": "Kingambit_Mecanisme_poison_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "07de78d8cedc6b582b8b43d8ceb2a14c30236ac39b1dcab268d69b7d5c7e9932"
+  },
+  {
+    "path": "Kingambit_Signaux_ground.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "bae44a445059dd38409ba0c2c8cad26ceaa436f3b98dfc200f118b2996df3f34"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ground_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "2b894bbc6a95c0c5d12413d9a0b4123fcb19a11566efc8fa525355c57ec7148c"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ground_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "00579f168a21ae1f5061d1366146049b5d0c718c40873b6221d225fa7c1e97f2"
+  },
+  {
+    "path": "Kingambit_Signaux_flying.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "ed75a4748011a9d785b54d5aba9bc9e3339e16763d2630c7ea69169556340219"
+  },
+  {
+    "path": "Kingambit_Mecanisme_flying_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "8bb4a78a21bc224750f9a51fa8a3d540b2dfd1935c9d3073d18bd2cdf59c9558"
+  },
+  {
+    "path": "Kingambit_Mecanisme_flying_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "bdeefcc22491f5ccf6ba27accbe852bc4fc23963589c171e791a52e00e8888ea"
+  },
+  {
+    "path": "Kingambit_Signaux_psychic.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "d1bd94fbd0c3d3577cfd0e67f41b3b6f446efbc2d4b209d72baa99a33f4f2747"
+  },
+  {
+    "path": "Kingambit_Mecanisme_psychic_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "dfb0e50631fe6ff01b0093fec36b1a04b78750e540876022a931c69442c0d201"
+  },
+  {
+    "path": "Kingambit_Mecanisme_psychic_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "d751b7b2c8f2a387a8711b2209ab561587023311826b386a6ad70dd31a86540f"
+  },
+  {
+    "path": "Kingambit_Signaux_bug.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "dd225e47b4a3d6eb2fa1839b8d91baf656021eba5004000a5532e6569e4866ce"
+  },
+  {
+    "path": "Kingambit_Mecanisme_bug_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "28096ed85f029d31bd38451f0e8a061fd8b450f26739cdb4437c5a2cd0c85579"
+  },
+  {
+    "path": "Kingambit_Mecanisme_bug_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "e84291d417aa25781fa40663e01e4e6d7292e4da6a7c122dde794f9b7cc3d7ae"
+  },
+  {
+    "path": "Kingambit_Signaux_rock.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "ede088710824862d752af38a0aba215f28c8d0eada4c68cbf25fa91049511c70"
+  },
+  {
+    "path": "Kingambit_Mecanisme_rock_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "efd992cb2b457857ec5bf12c3349494d3a11eadcdc32c9633a24a20d6e0a5e82"
+  },
+  {
+    "path": "Kingambit_Mecanisme_rock_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "4c8c2fc2fcc81da2f518ec1446a40327a5f5ae634104fb62591db365edf99424"
+  },
+  {
+    "path": "Kingambit_Signaux_ghost.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "fa07d8d583d77534fcea10c6761943b17677d4e800e1300f0aaf2163dcbbe1c4"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ghost_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "f4af4aec243a9fe4192e7816a4c0ef989b6d2fe476cc085209c660166a3bf3df"
+  },
+  {
+    "path": "Kingambit_Mecanisme_ghost_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "83271e85bf6ed6d7a567d4bc7ffdb0d3a1224896be88b1d85297975660cb1d07"
+  },
+  {
+    "path": "Kingambit_Signaux_dragon.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "5924c894e665e1ddb00850a28d1153cefd1f8507405d96b902e638f08ebe7a8d"
+  },
+  {
+    "path": "Kingambit_Mecanisme_dragon_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "afea197e2379fd3d4321c036d42b921fa2ef8bca74c1bcb7dc70b73434729ce6"
+  },
+  {
+    "path": "Kingambit_Mecanisme_dragon_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "6ffcd4d97105ee361347463542db33f75fcac3d13a74dda87877df58bc4d8218"
+  },
+  {
+    "path": "Kingambit_Signaux_dark.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "051451b4e8b349c5dea52f2144c5867dca8e21e4a7cf6a1e915fb51ebc9b9cb0"
+  },
+  {
+    "path": "Kingambit_Mecanisme_dark_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "42f29c229346eac79f90a5677e1272d070003fcee86cd804060615f5b0682c4d"
+  },
+  {
+    "path": "Kingambit_Mecanisme_dark_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "c80996aff577b5c5b43507f7598dcc7beef9e31c0d6cc36f7b89210773dfa837"
+  },
+  {
+    "path": "Kingambit_Signaux_steel.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "47a190bbdfa2ab3c26b3cc71dab4e5ee8766cb1dec91aab58d0a312d1d0c64c7"
+  },
+  {
+    "path": "Kingambit_Mecanisme_steel_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "29ecd7effa85dd6e6a48224c7dd71f2ff112fd0c4c3739bd87b769faf2d5fac9"
+  },
+  {
+    "path": "Kingambit_Mecanisme_steel_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "af44c2acf1319f9f13baf50ab0619e99ecc24b05e63774c9ebc248ffee7dfcb2"
+  },
+  {
+    "path": "Kingambit_Signaux_fairy.dir",
+    "width": 384,
+    "height": 288,
+    "frames": 16,
+    "sha256": "d02c5bea8f7db95f976e88a92b1094b15d87f22bda1b588c601e98084a55d536"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fairy_Sol.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "d1ed140d61b4d1a8d0947c6607fb196f2aa9281ebd8ab9672baf543267b0643f"
+  },
+  {
+    "path": "Kingambit_Mecanisme_fairy_Rebord.dir",
+    "width": 96,
+    "height": 80,
+    "frames": 24,
+    "sha256": "a0a59bdf5b9a687fdb3369a4052d0a1ee0be95d2b606285de888be6faab1b9b7"
+  }
+]

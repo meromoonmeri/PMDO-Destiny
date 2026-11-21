@@ -2,6 +2,7 @@
 local types = require 'destiny.dojo_kingambit_types'
 local equipe = require 'destiny.equipe_scene'
 local sceau = require 'destiny.dojo_kingambit_sceau'
+local mecanisme = require 'destiny.dojo_kingambit_mecanisme'
 local M = {Zone = 'dojo_kingambit_dedales'}
 
 local function etat()
@@ -33,14 +34,6 @@ function M.Choisir(maitre)
   local ok = tonumber(UI:ChoiceResult()) == 1
   UI:ResetSpeaker()
   return ok and i-1 or nil
-end
-
-local function effet(typ, name, layer, x, y)
-  local c = RogueEssence.Content
-  local e = c.SingleEmitter()
-  e.Layer = layer
-  e.Anim = c.StaticAnim(c.AnimData('Kingambit_Trappe_' .. typ .. '_' .. name, 5, 0, 9), 1, 50)
-  GROUND:PlayVFX(e, x, y)
 end
 
 local function marcher(acteur, chemin)
@@ -114,43 +107,7 @@ function M.Descendre(segment, maitre, joueur, map)
     GAME:CutsceneMode(false)
     return refuser()
   end
-  GAME:WaitFrames(9)
-  -- Une seule trappe ; Sol et Rebord sont deux calques au même point.
-  local couches = RogueEssence.Content.DrawLayer
-  local dessin = RogueEssence.Dungeon.DrawEffect
-  effet(t[1], 'Sol', couches.Bottom, sceau.X, sceau.Y)
-  effet(t[1], 'Rebord', couches.Front, sceau.X, sceau.Y)
-  SOUND:PlayBattleSE('EVT_EP_Pitfall_Reveal')
-  GROUND:MoveScreen(RogueEssence.Content.ScreenMover(1, 2, 14))
-  GAME:WaitFrames(25)
-  -- Les sprites s'enfoncent derrière la lèvre avant. Les masquer à son
-  -- contact, sinon le moteur les redessine plus bas par-dessus le dallage.
-  SOUND:PlayBattleSE('EVT_EP_Pitfall_Fall')
-  local ombres = {}
-  for i, c in ipairs(participants) do
-    ombres[i] = c.HideShadow
-    c.HideShadow = true
-    GROUND:CharSetAnim(c, 'Hurt', false)
-  end
-  for f = 1, 18 do
-    local profondeur = math.floor(f*f/9)
-    for _, c in ipairs(participants) do
-      if f == 11 then GROUND:CharSetDrawEffect(c, dessin.Transparent) end
-      if f == 13 then GROUND:CharSetDrawEffect(c, dessin.Absent) end
-      c:SetLocHeight(-profondeur)
-    end
-    GAME:WaitFrames(1)
-  end
-  GAME:WaitFrames(2)
-  GAME:FadeOut(false, 6)
-  -- Restaurer l'acteur ground dans le noir avant la présauvegarde moteur.
-  for i, c in ipairs(participants) do
-    GROUND:CharEndDrawEffect(c, dessin.Absent)
-    GROUND:CharEndDrawEffect(c, dessin.Transparent)
-    c:SetLocHeight(0)
-    c.HideShadow = ombres[i]
-    GROUND:CharEndAnim(c)
-  end
+  mecanisme.Jouer(t[1], participants, sceau.X, sceau.Y)
   GAME:CutsceneMode(false)
   GAME:EnterDungeon(M.Zone, segment, 0, 0,
     RogueEssence.Data.GameProgress.DungeonStakes.Progress, false, true)

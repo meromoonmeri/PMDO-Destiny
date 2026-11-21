@@ -6,8 +6,9 @@ require 'destiny.mapgen_lost_wood'
 
 local dojo_troupes = require 'destiny.dojo_kingambit_troupes'
 local dojo_prebatailles = require 'destiny.dojo_kingambit_prebatailles'
+local dojo_cinematiques = require 'destiny.dojo_kingambit_cinematiques'
 SINGLE_CHAR_SCRIPT.DestinyDojoTroupeMasquer = dojo_troupes.Masquer
-SINGLE_CHAR_SCRIPT.DestinyDojoTroupeJouer = dojo_prebatailles.Apres(dojo_troupes.Jouer)
+SINGLE_CHAR_SCRIPT.DestinyDojoTroupeJouer = dojo_cinematiques.Avec(dojo_troupes.Jouer, dojo_prebatailles.Jouer)
 
 -- La table SINGLE_CHAR_SCRIPT est créée par le moteur : ne pas la remplacer.
 -- Les repères ci-dessous sont des pages d'aide neutres : aucun personnage

@@ -15,8 +15,10 @@ package.preload['destiny.equipe_scene'] = function()
   end}
 end
 local layer = {Bottom=0,Front=3}
+local ancienne=false
 local result = {Failed=1,Cleared=2,TimedOut=4,GaveUp=5,Downed=6}
 RogueEssence = {Content={
+  GraphicsManager={GetAttackSheet=function(n) return {TileWidth=96,TileHeight=80,TotalFrames=ancienne and 10 or 24} end},
   DrawLayer=layer, SingleEmitter=function()return {} end,
   AnimData=function(name,t) return {Name=name,Time=t} end,
   StaticAnim=function(a,loop,len) return {Anim=a,Len=len} end,
@@ -33,9 +35,11 @@ Direction={Up=4,Down=0}
 AI={DisableCharacterAI=function(_,ch) assert(ch==p) end}
 TASK={StopEntityTask=function(_,ch) assert(ch==p) end}
 local vfx,sons,entrees,profondeurs,ticks,cut,moved,retour,menus={},{},{},{},0,false,0,{},{}
+local delai=0
 local selections={}
 local dernier_menu
 local refus=0
+function PrintInfo(msg) error(msg) end
 UI={
   SetSpeaker=function() end,SetSpeakerEmotion=function() end,ResetSpeaker=function() end,
   BeginMultiPageMenu=function(_,x,y,w,name,opts,n,def,cancel)
@@ -87,6 +91,10 @@ GROUND={
 SOUND={PlayBattleSE=function(_,s) sons[#sons+1]=s end}
 GAME={
   FadeIn=function() end,
+  MoveCamera=function(_,x,y,duree,j)
+    assert(cut and not ancienne and not j and x==384 and y==258 and duree==26)
+    map.ViewCenter={X=x,Y=y}
+  end,
   FadeOut=function() assert(h.absent and h.LocHeight<0 and cut); assert(#profondeurs>=16) end,
   CutsceneMode=function(_,b) cut=b end,
   WaitFrames=function(_,t)
@@ -94,7 +102,11 @@ GAME={
     ticks=ticks+t
     if h.LocHeight<0 then
       profondeurs[#profondeurs+1]=h.LocHeight
-      if not solo then assert(h.LocHeight==p.LocHeight) end
+      if not solo then
+        assert(h.LocHeight<=p.LocHeight)
+        if p.LocHeight==0 then delai=delai+1 end
+        if ancienne then assert(h.LocHeight==p.LocHeight) end
+      end
     end
   end,
   GetTeamLeaderIndex=function() return leader end,
@@ -102,6 +114,7 @@ GAME={
   EnterDungeon=function(_,z,s,m,e,stakes,recorded,norestrict)
     assert(not cut and h.LocHeight==0 and not h.HideShadow and not h.absent and not h.transparent)
     assert(p.LocHeight==0 and not p.HideShadow and not p.absent and not p.transparent)
+    assert(map.ViewCenter==nil)
     assert(z=='dojo_kingambit_dedales' and stakes==1 and m==0 and e==0 and not recorded and norestrict)
     entrees[#entrees+1]=s
   end,
@@ -130,17 +143,19 @@ for seg=0,17 do
   h.Position={X=o[1],Y=o[2]}; p.Position={X=452,Y=299}
   selections={seg+1,1}
   a.Kingambit_Action(k,h)
-  assert(entrees[#entrees]==seg and #vfx==2 and #sons==2)
+  assert(entrees[#entrees]==seg and #vfx==2 and #sons==4)
+  assert(sons[1]=='EVT_Chest_Click' and sons[2]=='_UNK_DUN_Clank')
+  assert(sons[3]=='EVT_EP_Pitfall_Reveal' and sons[4]=='EVT_EP_Pitfall_Fall')
   assert(vfx[1][3]==384 and vfx[1][4]==270 and vfx[1][2]==layer.Bottom)
   assert(vfx[2][3]==384 and vfx[2][4]==270 and vfx[2][2]==layer.Front)
-  local bank='Kingambit_Trappe_'..types[seg+1][1]..'_'
+  local bank='Kingambit_Mecanisme_'..types[seg+1][1]..'_'
   assert(vfx[1][5]==bank..'Sol' and vfx[2][5]==bank..'Rebord')
   local precedent=0
   for _,z in ipairs(profondeurs) do assert(z<=precedent);precedent=z end
   assert(precedent==-36)
   a.Kingambit_Action(k,h);assert(#entrees==seg+1)
 end
-assert(#entrees==18 and moved>=27)
+assert(#entrees==18 and moved>=27 and delai==36)
 -- Obstacles imprévus au point d'arrivée : pas d'ouverture ni de verrou bloqué.
 solo=false;h.Position={X=376,Y=200}; p.Position={X=400,Y=225}
 a.Enter(map); vfx={}; selections={1,1}
@@ -152,6 +167,12 @@ map.GetObstacle=function() return 0 end
 leader=1; absent=true;h.Data=partner; selections={1,1};a.Kingambit_Action(k,h)
 assert(#entrees==19 and #vfx==2 and p.Data==hero)
 leader=0; h.Data=hero; p.Data=partner
+-- Banque neuve manquante : ancienne ouverture et ancienne synchronisation.
+a.Enter(map); h.Position={X=376,Y=200};p.Position={X=400,Y=220}
+vfx,sons,profondeurs = {},{},{};selections={1,1};ancienne=true
+a.Kingambit_Action(k,h)
+assert(#entrees==20 and #vfx==2 and #sons==2 and vfx[1][5]=='Kingambit_Trappe_normal_Sol')
+ancienne=false
 zone.EnterSegment({},false,17,0)
 assert(sons[#sons]=='EVT_EP_Pitfall_Land')
 zone.ExitSegment({},result.GaveUp,false,17,0)
@@ -168,4 +189,4 @@ assert(SV.Destiny.EntrainementKingambit.Reussis.fairy and not SV.Destiny.Entrain
 assert(#retour==4 and SV.Destiny.DojoKingambitPorteGaucheOuverte==true)
 a.Enter(map);selections={19};a.Kingambit_Action(k,h)
 assert(dernier_menu[18]:find('+',1,true) and not dernier_menu[4]:find('+',1,true))
-print('PASS Kingambit Lua — 18 routes, annulation, sceau unique duo ou solo, Kaito immobile, scénarios obstrué et inversé, victoire, K.O., délai et abandon.')
+print('PASS Kingambit Lua — 18 routes, annulation, serrurerie à deux calques, repli et chute sur le sceau unique, Kaito immobile, scénarios obstrué et inversé, victoire, K.O., délai et abandon.')
