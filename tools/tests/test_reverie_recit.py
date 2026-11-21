@@ -58,7 +58,7 @@ lua = LuaRuntime(unpack_returned_tuples=True)
 lua.globals().package.path = f'{SCRIPTS.as_posix()}/?.lua;' + lua.globals().package.path
 lua.globals().arg = lua.table_from({1: ROOT.as_posix()})
 lua.globals().NATIFS = lua.table_from({n: m for n, (_,m) in maps.items()}, recursive=True)
-lua.globals().OBSTACLE = lambda n,x,y: maps[n][0][x][y] if 0 <= x < 200 and 0 <= y < 500 else 1
+lua.globals().OBSTACLE = lambda n,x,y: maps[n][0][x][y] if 0 <= x < 200 and 0 <= y < len(maps[n][0][x]) else 1
 lua.globals().ACCESSIBLE = lambda n,x,y: any((x//8+dx,y//8+dy) in paths[n]
                                               for dx,dy in [(2,0),(-2,0),(0,2),(0,-2),(0,0)])
 comp = lua.eval('load')

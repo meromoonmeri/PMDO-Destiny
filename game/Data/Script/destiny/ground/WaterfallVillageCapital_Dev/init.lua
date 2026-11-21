@@ -12,6 +12,7 @@ local missions_reverie = require 'destiny.missions_reverie'
 local boutiques_kecleon = require 'destiny.boutiques_kecleon'
 local recit_reverie = require 'destiny.reverie_recit'
 local saynetes_reverie = require 'destiny.reverie_saynetes'
+local itinerants = require 'destiny.reverie_itinerants'
 
 local ville = {}
 local ENTREE_X, ENTREE_Y = 800, 1320
@@ -1772,6 +1773,7 @@ local function jouer_celebration_nilo(map, hero, partenaire)
   if hero ~= nil then GROUND:TeleportTo(hero, 800, 1224, Direction.Down) end
   if partenaire ~= nil then GROUND:TeleportTo(partenaire, 776, 1224, Direction.Down) end
   appliquer_recit(map)
+  itinerants.Installer(map,case_pnj_libre)
   GAME:MoveCamera(0, 0, 1, true)
 
   GAME:FadeIn(30)
@@ -1835,6 +1837,7 @@ local function entrer(map)
     SV.Destiny.RetourBatimentPartenaire = nil
   end
   appliquer_recit(map)
+  itinerants.Installer(map,case_pnj_libre)
   GAME:FadeIn(20)
   SOUND:PlayBGM('Treasure Town.ogg', true)
   retour_au_joueur(hero, partenaire)
@@ -1843,8 +1846,36 @@ end
 
 function ville.Enter(map) entrer(map) end
 function ville.GameSave(map) end
+-- Une sauvegarde au sol contient parfois l'ancienne instance de 4 000 px.
+-- La recharger une fois depuis le jeu, sans toucher aux états des maisons.
+local function migrer_bord_sud(map)
+  if map == nil or map.Width ~= 200 or map.Height == nil
+      or not (quartiers_reverie[map.AssetName] or map.AssetName == 'WaterfallVillageCapital') then return false end
+  local hero = CH('PLAYER')
+  if hero == nil then return false end
+  local x,y = hero.Position.X,hero.Position.Y
+  local partenaire = partenaire_pour(hero)
+  local px,py = x-24,y
+  if partenaire ~= nil then px,py = partenaire.Position.X,partenaire.Position.Y end
+  local limite = 2968 -- début de la rangée de bordure infranchissable
+  if map.Height <= 372 and y+16 <= limite and py+16 <= limite then return false end
+  local destination = secteur_fusion(map.AssetName)
+  if y+16 > limite then
+    -- À la sortie du pont central, du même côté de la rivière que la forêt.
+    x,y,px,py = 688,2896,688,2920
+    destination = 'reverie_residentiel'
+  elseif py+16 > limite then
+    px,py = x,y-24
+  end
+  local dir = hero.Direction == Direction.Up and 'Up' or 'Down'
+  demander_quartier(destination,x,y,px,py,dir)
+  return true
+end
+
 function ville.GameLoad(map)
   reinitialiser_ambiance()
+  itinerants.AnnulerDuelInterrompu()
+  if migrer_bord_sud(map) then return end
   meteo_reverie.Appliquer(map)
   entree_batiment_en_cours = false
   -- Une ancienne sauvegarde peut contenir l'ancienne instance du centre :
@@ -1885,16 +1916,18 @@ function ville.GameLoad(map)
   entrer(map)
 end
 function ville.Exit(map)
+  itinerants.Quitter()
   reinitialiser_ambiance()
   vie_ville_activee = false
 end
-local tic_ambiance
+local tic_ambiance, controle_libre
 function ville.Update(map, time)
   if SV ~= nil and SV.Destiny ~= nil and SV.Destiny.MomentScenario ~= nil
       and SV.Destiny.MomentScenario ~= SV.Destiny.MomentReverie then
     meteo_reverie.Appliquer(map)
   end
   tic_ambiance()
+  itinerants.Update(vie_ville_activee and controle_libre())
 end
 
 
@@ -1922,7 +1955,7 @@ local function proches(a, b)
   return math.abs(a.Position.X - b.Position.X) <= 88 and math.abs(a.Position.Y - b.Position.Y) <= 72
 end
 
-local function controle_libre()
+controle_libre = function()
   local sauvegarde = _DATA and _DATA.Save
   if not sauvegarde or sauvegarde.CutsceneMode then return false end
   local menu = RogueEssence.Menu and RogueEssence.Menu.MenuManager
@@ -2912,4 +2945,5 @@ for nom, variantes in pairs(dialogues_habitants) do
   end
 end
 
+itinerants.Brancher(ville)
 return ville

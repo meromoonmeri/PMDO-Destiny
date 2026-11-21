@@ -50,7 +50,7 @@ local function newmap(name, include_dynamic)
  function m:FindObject(n)return self.objects[n]end
  function m:AddObject(obj)self.objects[obj.EntName]=obj end
  function m:GetObstacle(x,y)return 0 end
- m.Width=200;m.Height=500
+ m.Width=200;m.Height=372
  return m
 end
 local root=(arg[1] or '.')..'/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'

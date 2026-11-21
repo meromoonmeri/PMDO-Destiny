@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Les dix cartes conservent le décor complet et onze couches expérimentales."""
+"""Les dix cartes partagent le décor recadré et conservent onze couches."""
 from pathlib import Path
 import hashlib,ijson
 R=Path(__file__).resolve().parents[2];D=R/'game/Data/Ground'
@@ -14,4 +14,4 @@ for name in ['WaterfallVillageCapital','reverie_centre','reverie_nord','reverie_
  with (D/(name+'_Dev.rsground')).open('rb') as f:
   assert f.read(3)==b'\xef\xbb\xbf';names=[layer['Name'] for layer in ijson.items(f,'Object.Layers.item')]
  assert names==['Base','Cliffs','River','Layer 4','Objects Under','Objects Under Anim','Objects','Objects Anim','Objects Over','Objects Over Anim','Fringe'],name
- print('PASS',name,'11 calques, décor intégral et métadonnées jeu/édition')
+ print('PASS',name,'11 calques, décor commun et métadonnées jeu/édition')

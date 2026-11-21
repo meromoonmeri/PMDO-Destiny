@@ -165,5 +165,64 @@
   "banque": {
     "nom": "Reverie_Raccords_Polish",
     "cellules": 494
+  },
+  "recadrage_sud": {
+    "rangées": 372,
+    "cartes": {
+      "WaterfallVillageCapital": {
+        "sha256": "cce59f4ca65f3ac8c8f841fc94d7a3e734d0bb301a335af1925fd40252d07a06",
+        "octets": 29363257
+      },
+      "WaterfallVillageCapital_Dev": {
+        "sha256": "7b44bb73349b22d5ff9ef712e7f5da94ec25ca6acd97635739d311f211940caa",
+        "octets": 29363261
+      },
+      "reverie_centre": {
+        "sha256": "230c472c42c65920f4d665061dcfae0b4ed0e0c304f393ac12d68571f672d180",
+        "octets": 29357578
+      },
+      "reverie_centre_Dev": {
+        "sha256": "8f8c81b41696abd142356f6bee8cca442ff835ab3e33ed5ceb194aaa08c7831a",
+        "octets": 29357582
+      },
+      "reverie_nord": {
+        "sha256": "acd7498bb0555c1d3df2942c48208647aaabcb9ccb0f44b63bbadf3f8324e40a",
+        "octets": 29357576
+      },
+      "reverie_nord_Dev": {
+        "sha256": "ebd70cdeb2f6c7dcb288bb174137dca94d54b54040ee460909e24053798811a5",
+        "octets": 29357580
+      },
+      "reverie_etang": {
+        "sha256": "2543f49a70ebffa2476239ae531bcc387ee41adc250d1faa644ab997601e4334",
+        "octets": 29329634
+      },
+      "reverie_etang_Dev": {
+        "sha256": "2b4525b1b70e59d33c7d78496e037984b3291267c1823b1efd44486f23d0f3a1",
+        "octets": 29329638
+      },
+      "reverie_residentiel": {
+        "sha256": "eaf10c381e454a120b78d2cdf6debddf0e8da34a14a660f123750630c3fe2196",
+        "octets": 29335309
+      },
+      "reverie_residentiel_Dev": {
+        "sha256": "20795f653bdbfafb392b2dddbdd0ca498ff5a465818fd8d2549c0a89327b5a9e",
+        "octets": 29335313
+      }
+    },
+    "retraits": 160,
+    "pistes": [
+      90537,
+      11420,
+      10408,
+      0,
+      1230,
+      0,
+      25973,
+      3157,
+      2457,
+      0,
+      0
+    ]
   }
 }

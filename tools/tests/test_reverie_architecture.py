@@ -23,7 +23,7 @@ assert names==['Base','Cliffs','River','Layer 4','Objects Under','Objects Under 
 assert water==736 and durations=={10:704,6:32},(water,durations)
 # Interdire toute dérive de calque hors Base (aplats statiques composés) et Objects (arbres).
 avant,apres=lot['pistes']['avant'],lot['pistes']['apres']
-assert seq==apres and sum(avant)==177423
+assert seq==lot['recadrage_sud']['pistes'] and sum(avant)==177423
 assert [i for i,(a,b) in enumerate(zip(avant,apres)) if a!=b]==[0,6]
 assert avant[0]-apres[0]==sum(z['pistes_statiques_regroupees'] for z in lot['chemins'])
 assert apres[6]-avant[6]==76*len(lot['arbres'])-sum(a['cellules_rognées'] for a in lot['arbres'])

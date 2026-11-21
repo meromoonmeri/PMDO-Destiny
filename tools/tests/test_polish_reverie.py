@@ -26,8 +26,8 @@ def verify():
         raw = gzip.decompress((ROOT / rel).read_bytes())
         _, data, _ = parts(raw)
         _unused, digest, size = PAYLOADS[rel]
-        assert len(raw) == size == info['cartes'][name]['octets']
-        assert hashlib.sha256(raw).hexdigest() == digest == info['cartes'][name]['sha256']
+        assert len(raw) == size == info['recadrage_sud']['cartes'][name]['octets']
+        assert hashlib.sha256(raw).hexdigest() == digest == info['recadrage_sud']['cartes'][name]['sha256']
         if city_layers is None:
             city_layers = data
         else:

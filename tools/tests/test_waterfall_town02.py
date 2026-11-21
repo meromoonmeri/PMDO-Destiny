@@ -36,11 +36,11 @@ def md5(path: Path) -> str:
 # Empreintes de livraison : comparer la table de décompression et le manifeste du lot.
 lot = json.loads((ROOT / 'tools/reverie_polish_manifest.json').read_text(encoding='utf-8'))
 for nom in ('WaterfallVillageCapital', 'WaterfallVillageCapital_Dev'):
-    attendu = lot['cartes'][nom]
+    attendu = lot['recadrage_sud']['cartes'][nom]
     assert unpack_payload.PAYLOADS[f'payload/{nom}.rsground.gz'] == (
         f'game/Data/Ground/{nom}.rsground', attendu['sha256'], attendu['octets'],
     )
-attendu = lot['cartes']['WaterfallVillageCapital']
+attendu = lot['recadrage_sud']['cartes']['WaterfallVillageCapital']
 assert set(unpack_payload.PAYLOADS) == {
     'payload/WaterfallVillageCapital.rsground.gz', 'payload/WaterfallVillageCapital_Dev.rsground.gz',
     'payload/reverie_centre.rsground.gz', 'payload/reverie_nord.rsground.gz',

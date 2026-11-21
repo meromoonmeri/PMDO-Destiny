@@ -89,7 +89,7 @@ SOUND = {
 
 local root = (arg[1] or '.')
 local function new_city_map(name)
-  local m = {AssetName = name, Width = 200, Height = 500, objects = {}, characters = {}}
+  local m = {AssetName = name, Width = 200, Height = 372, objects = {}, characters = {}}
   function m:GetMapChar(n) return self.characters[n] end
   function m:FindObject(n) return self.objects[n] end
   function m:AddObject(o) self.objects[o.EntName] = o end

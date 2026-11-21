@@ -918,7 +918,7 @@ local centre = {
   FindObject=function(self, n) return self.objects[n] end,
   AddObject=function(self, o) self.objects[o.EntName] = o end,
   GetObstacle=function() return 0 end,
-  Width=200, Height=500,
+  Width=200, Height=372,
 }
 actors = {}; make_actor('PLAYER', 800, 1160); make_actor('Teammate1', 772, 1160)
 centre.characters.NewObject_7 = make_actor('NewObject_7', 808, 1116, 'lombre')
@@ -952,7 +952,7 @@ local res = {
   FindObject=function(self, n) return self.objects[n] end,
   AddObject=function(self, o) self.objects[o.EntName] = o end,
   GetObstacle=function() return 0 end,
-  Width=200, Height=500,
+  Width=200, Height=372,
 }
 actors = {}; make_actor('PLAYER', 800, 1160); make_actor('Teammate1', 772, 1160)
 res.characters.NewObject_9 = make_actor('NewObject_9', 733, 2391)

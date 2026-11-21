@@ -67,7 +67,7 @@ local function nettoyer()
 end
 local function charge(n, x,y, px,py)
   nettoyer()
-  carte={AssetName=n,Width=200,Height=500,personnages={},objets={}}
+  carte={AssetName=n,Width=200,Height=372,personnages={},objets={}}
   local layer={MapChars={},GroundObjects={}}
   carte.Entities={layer}
   for _, p in ipairs(NATIFS[n]) do

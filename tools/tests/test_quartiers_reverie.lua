@@ -5,6 +5,8 @@ package.preload['origin.menu.skill.SkillSelectMenu']=function() return {} end
 package.preload['origin.menu.team.AssemblySelectMenu']=function() return {} end
 package.preload['destiny.equipe_scene']=function() return {Suivre=function() end} end
 package.preload['destiny.cinematique']=function() return {NomEspece=function(_,n) return n end} end
+-- Les rencontres ont leur propre banc de déplacement et de menus.
+package.preload['destiny.reverie_itinerants']=function() return {Installer=function() end,Brancher=function() end,AnnulerDuelInterrompu=function() end} end
 package.preload['destiny.missions_reverie']=function() return {NotifierRetour=function()end} end
 Direction={Up='Up',Down='Down'}
 RogueElements={Rect=function(x,y,w,h)return {x=x,y=y,w=w,h=h} end}
@@ -21,11 +23,11 @@ SOUND={PlayBGM=function()end}
 local root=(arg[1] or '.')..'/game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua'
 local function load()return assert(loadfile(root))() end
 local function map(name)
- local m={AssetName=name,Width=200,Height=500,objects={}}
+ local m={AssetName=name,Width=200,Height=372,objects={}}
  function m:GetMapChar(name) if self.missing then return nil end; if name=='NewObject_6' or name=='Doyen' or name=='Drifloon' then return {} end end
  function m:FindObject(name)return self.objects[name] end
  function m:AddObject(obj)self.objects[obj.EntName]=obj end
- function m:GetObstacle(x,y)assert(x>=0 and x<200 and y>=0 and y<500);if self.blocked and x==15 and y==101 then return 1 end;return 0 end
+ function m:GetObstacle(x,y)assert(x>=0 and x<200 and y>=0 and y<self.Height);if self.blocked and x==15 and y==101 then return 1 end;return 0 end
  return m
 end
 local entries={
@@ -63,3 +65,17 @@ for _,case in ipairs({'obstacles','habitants','les deux'}) do
  local p=SV.Destiny.PassageQuartier;assert(p.x==800 and p.y==1160 and p.px==772 and p.py==1160)
  print('PASS migration ancienne instance du centre : '..case)
 end
+
+-- Mise à jour depuis les 4 000 px : ne déplacer que ce qui est devenu hors carte.
+for _, e in ipairs({{2336,2360,2336,2360},{3056,3104,2896,2920},{2944,3104,2944,2920}}) do
+ SV={Destiny={VisiteVille='terminee',FoyersReverie={pierre={EnigmeCadeau='berry_pecha'}}}}
+ local m=map('reverie_residentiel');m.Height=500
+ player.Position.X,player.Position.Y=688,e[1];partner.Position.X,partner.Position.Y=688,e[2];call.transition=nil
+ load().GameLoad(m)
+ local p=SV.Destiny.PassageQuartier
+ assert(call.transition and call.transition[2]=='reverie_residentiel' and p.y==e[3] and p.py==e[4])
+ assert(SV.Destiny.FoyersReverie.pierre.EnigmeCadeau=='berry_pecha')
+ load().Enter(map('reverie_residentiel'))
+ assert(player.Position.Y==e[3] and partner.Position.Y==e[4] and SV.Destiny.PassageQuartier==nil)
+end
+print('PASS chargement d’une ancienne carte du sud, bon côté du pont et états des foyers conservés.')

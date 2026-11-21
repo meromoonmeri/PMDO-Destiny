@@ -75,7 +75,7 @@ def main() -> None:
     ob = raw.index(b',"rand":', oa)
     centre_obs = [[c['Tags'] for c in col] for col in json.loads(raw[oa:ob])]
     def free(px: int, py: int) -> bool:
-        return px >= 0 and py >= 0 and px + 16 <= 1600 and py + 16 <= 4000 and all(
+        return px >= 0 and py >= 0 and px + 16 <= 1600 and py + 16 <= len(centre_obs[0])*8 and all(
             centre_obs[tx][ty] == 0
             for tx in range(px // 8, (px + 15) // 8 + 1)
             for ty in range(py // 8, (py + 15) // 8 + 1)

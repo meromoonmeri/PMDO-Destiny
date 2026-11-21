@@ -586,24 +586,36 @@ function cafespindaaccueil.Kirlia_Action(personnage, activator)
   tourner_directions({{personnage, Direction.Down}, {spinda, Direction.Down}, {pipo, Direction.Down}})
 end
 
-local function dialogue_recyclage(okeoke, qulbutoque, activator)
+local function dialogue_recyclage(okeoke, qulbutoque, activator, parle_a_balou)
   local joueur = activator or CH('PLAYER')
   regarder_ensemble({{okeoke, joueur}, {qulbutoque, joueur}})
-  dire(okeoke, 'Happy', 'Nous trions les petits trésors que les explorateurs ne savent plus où ranger.')
-  regarder_ensemble({{qulbutoque, okeoke}, {okeoke, qulbutoque}})
-  dire(qulbutoque, 'Normal', 'Rien ne se perd au café : un objet délaissé peut devenir une surprise pour quelqu’un d’autre.')
+  if parle_a_balou then
+    -- Comme à la Bourse d’échange : on s’adresse à Balou, mais c’est Bulle qui traduit.
+    dire(qulbutoque, 'Happy', 'Banco !', 'droite')
+    tourner_vers(okeoke, qulbutoque)
+    dire(okeoke, 'Happy', 'Tu vois ? Balou dit banco. Pour quelle question, déjà ?')
+  else
+    dire(okeoke, 'Happy', 'Un trésor dont personne ne veut ? Et si c’était pile ce que cherchait quelqu’un ?')
+    tourner_vers(qulbutoque, okeoke)
+    dire(qulbutoque, 'Happy', 'Banco !', 'droite')
+  end
   tourner_vers(okeoke, joueur)
-  dire(okeoke, 'Normal', 'Notre atelier de recyclage ouvrira quand toutes les caisses seront enfin rangées.')
+  dire(okeoke, 'Happy', 'On ouvre la Bourse d’échange tout de suite, alors ?')
+  tourner_vers(qulbutoque, okeoke)
+  -- Un silence en contretemps : le regard tombe sur les caisses encore fermées.
+  cinematique.Respirer(25)
+  dire(okeoke, 'Normal', 'Ah. Il faudrait déjà déballer les caisses, non ? Revenez nous voir !')
+  dire(qulbutoque, 'Happy', 'Banco !', 'droite')
   UI:ResetSpeaker()
   tourner_directions({{okeoke, Direction.Right}, {qulbutoque, Direction.Left}})
 end
 
 cafespindaaccueil['Qulbutoqué_Action'] = function(personnage, activator)
-  dialogue_recyclage(CH('Okéoké'), personnage, activator)
+  dialogue_recyclage(CH('Okéoké'), personnage, activator, true)
 end
 
 cafespindaaccueil['Okéoké_Action'] = function(personnage, activator)
-  dialogue_recyclage(personnage, CH('Qulbutoqué'), activator)
+  dialogue_recyclage(personnage, CH('Qulbutoqué'), activator, false)
 end
 
 local function dialogue_table_gauche(noisette, pompon, activator)
