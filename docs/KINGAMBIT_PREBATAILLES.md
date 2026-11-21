@@ -1,44 +1,44 @@
-# Kingambit — les dix-huit wooshes de prébataille
+# Kingambit — les 18 wooshes façon PMD
 
-Extension du lot **Cyclones–Météo**. Le maître et ses deux cadets arrivent comme avant. Une transition courte signe le type de l'épreuve une fois la troupe en place, puis l'événement natif `BeginBattleEvent` lance le combat. Aucun changement dans les cartes, les espèces, les niveaux, les règles Méga, le menu des dojos, la musique ou les conditions de victoire.
+La variante **PMD à fondu blanc** est active sur `dojos-kingambit-pmd`. La première variante (grands rubans et sceaux) reste consultable au commit `7fcd061` ; ses banques et sons, devenus inactifs, ne sont pas chargés aux côtés de la nouvelle série.
 
-## Dix-huit signatures
+## Enchaînement en jeu
 
-| Type | Maître | Woosh |
+1. Le maître et ses deux cadets apparaissent comme avant. `DestinyDojoTroupeJouer` garde son appel existant ; le module ajoute le woosh seulement dans une finale Kingambit 3F, après le trio en place.
+2. Deux impulsions donnent le départ. Neuf traînées fines entrent en cinq vagues de directions alternées. Elles reprennent le placement, le délai et le son `EVT_Battle_Transition` de [`COMMON.BossTransition`](../base/Data/Script/origin/common.lua). Il n’y a pas de sceau central.
+3. Le moteur exécute `GAME:FadeOut(true, 30)`. Les bandes expirent au blanc complet, maintenu 10 ticks ; `GAME:FadeIn(12)` rend la même arène visible. Le woosh dure 178 ticks (2,97 s à 60 i/s), amorce et retour compris.
+4. L’événement natif `BeginBattleEvent` à `-5` reprend avec `map_clear_check`. Aucun tour n’est ajouté. Ni les équipes, ni les cartes, ni la musique, ni les apparitions météo, ni la scène Dazzling ne changent dans cette variante.
+
+Les quatre textures 256 × 64 et leurs miroirs sont dans chaque `Kingambit_Prebataille_PMD_<type>.dir`. Décor et caméra sont ceux du donjon, pas un panneau précalculé. La banque vanilla sert de repli si celle d’un type manque. Le module restaure le mode de jeu et quitte le blanc en cas d’erreur de raccord.
+
+## Signatures
+
+| Type | Maître | Traînée |
 |---|---|---|
-| Normal | Lockpin | Double écho : rubans ivoire et deux anneaux d'écho. |
-| Feu | Braségali | Braises en éventail : bandes qui ondulent et flammèches ascendantes. |
-| Eau | Tortank | Roulis des marées : crêtes en contre-courant et arcs d'écume. |
-| Plante | Jungko | Entrelacs de feuilles : vrilles et petites feuilles détachées. |
-| Électrik | Élecsprint | Circuit foudroyant : filaments brisés qui claquent sur les côtés. |
-| Glace | Oniglali | Fracture polaire : éclats radiaux et flocon taillé dans la glace. |
-| Combat | Lucario | Frappes croisées : chevrons latéraux brefs et sceau en forme de poing. |
-| Poison | Ectoplasma | Miasme à bulles : voiles roulés et bulles montantes. |
-| Sol | Laggron | Lignes de faille : plusieurs strates et une cassure basse. |
-| Vol | Dracaufeu | Plumes d'alizé : grandes courbes et plumes en piqué. |
-| Psy | Alakazam | Réfraction mentale : trois losanges en miroir autour de l'œil. |
-| Insecte | Dardargnan | Ruée de l'essaim : sillages découpés et alvéoles. |
-| Roche | Tyranocif | Éclats de carrière : blocs cassants avec des fragments taillés. |
-| Spectre | Branette | Feux-follets : ombres en contre-courant et quatre petites veilleuses. |
-| Dragon | Altaria | Sillage des écailles : grandes courbes en S et écailles qui s'écartent. |
-| Ténèbres | Démolosse | Croissants nocturnes : bordures d'ombre et demi-lunes. |
-| Acier | Métalosse | Verrou magnétique : rails rivetés et mâchoires métalliques qui se ferment puis repartent. |
-| Fée | Gardevoir | Étoiles de soie : bandes or et rose, étoiles en tête et en gerbe. |
+| Normal | Lockpin | Échos d’ivoire |
+| Feu | Braségali | Pointes de braise |
+| Eau | Tortank | Crêtes d’écume |
+| Plante | Jungko | Filets de feuilles |
+| Électrik | Élecsprint | Sauts d’étincelles |
+| Glace | Oniglali | Échardes de givre |
+| Combat | Lucario | Chevrons d’impact |
+| Poison | Ectoplasma | Bulles de miasme |
+| Sol | Laggron | Failles de sable |
+| Vol | Dracaufeu | Plumes d’alizé |
+| Psy | Alakazam | Réfraction |
+| Insecte | Dardargnan | Rafales d’essaim |
+| Roche | Tyranocif | Pierres taillées |
+| Spectre | Branette | Veilleuses fuyantes |
+| Dragon | Altaria | Sillage d’écailles |
+| Ténèbres | Démolosse | Entailles nocturnes |
+| Acier | Métalosse | Rails d’argent |
+| Fée | Gardevoir | Poudre d’étoiles |
 
-## Référence et différence
-
-La transition `Pre_Battle_Dazzling_Etoiles` de [`cliffdaytest`](../game/Data/Script/destiny/ground/cliffdaytest/init.lua) est la référence : bandes traversantes alternées, motifs qui les mènent, particules, calque plein écran. Dazzling change de scène sur un blanc plein. Ici on reste dans la même arène, donc le masque se résorbe sans blanc plein, fondu de carte ou coupure de musique. Dessins et sons originaux par type, aucune reprise des pixels ou des samples du woosh Dazzling. La scène de Dazzling n'est pas éditée.
-
-## Intégration et cadence
-
-1. Les événements existants `-15 / -11 / -9` placent puis révèlent les équipes comme avant.
-2. Le raccord ajouté à `destiny/event.lua` enveloppe uniquement `DestinyDojoTroupeJouer`. Le nouveau module vérifie zone, finale 3F, type et troupe de trois. Il attend 4 ticks quand le maître et les cadets sont en place.
-3. `Kingambit_Prebataille_<type>` : une banque BG et un Ogg dans `Sound/Battle`. `FiniteOverlayEmitter` non répété, centré sur `DungeonScene.ViewRect`, calque `Top`. 320 × 240 px, 28 poses × 3 ticks, 84 ticks (1,40 s à 60 i/s). Première/dernière cellules transparentes. Une seule lecture de son. Le module restitue `CutsceneMode` même si un asset ou un son manque.
-4. Après deux ticks de marge, `BeginBattleEvent` à `-5` reprend avec `map_clear_check`. Le lot n'ajoute ni tour, ni effet météo, ni statut, ni code de transformation.
+Douze textures utilisent un dessin généré dédié. Vol, Psy, Insecte, Roche, Spectre et Ténèbres adaptent une texture générée en variant sa silhouette, ses détails et sa vitesse. Le [dossier de l’aperçu](../art/previews/kingambit_wooshes_pmd/) inclut les sources et la provenance des textures.
 
 ```sh
-python tools/dessiner_prebatailles_kingambit.py --out /copie/prebatailles --reviews
-LUA_PATH='./game/Data/Script/?.lua;;' lua tools/tests/test_dojo_kingambit_prebatailles.lua
+python art/previews/kingambit_wooshes_pmd/Sources/texturer_wooshes_pmd.py --pmdo base --out /tmp/wooshes-pmd
+lua tools/tests/test_dojo_kingambit_prebatailles.lua
 ```
 
-Pillow, NumPy, SciPy et FFmpeg/libvorbis sont nécessaires à la reconstruction. Les banques précompilées sont dans `game/Content`. Grille atlas 7 × 4, RGBA prémultiplié dans les `.dir` et alpha droit pour les planches de revue. Hors dépôt, le banc PMDO Linux 0.8.12 entre directement dans chaque finale, enregistre les images et le son du moteur, et contrôle l'ordre apparition → woosh → combat. Il ne teste pas la traversée complète depuis le hall ni un build Windows Destiny.
+Le générateur nécessite Python, Pillow, NumPy et SciPy. Le banc isolé PMDO Linux 0.8.12 ouvre directement chaque finale. Les 18 capturées retrouvent le combat natif avec le trio attendu ; le plateau blanc couvre l’image pendant 5 à 6 images enregistrées à 30 i/s. Le son est celui du moteur. Ce n’est pas un essai de parcours complet de Destiny, ni de build Windows.

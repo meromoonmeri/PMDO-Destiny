@@ -1,0 +1,173 @@
+[
+  {
+    "id": "vanilla",
+    "type": "Référence PMDO",
+    "boss": "Drattak",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 16,
+    "correlation_woosh_natif": 0.497,
+    "passage_combat": null
+  },
+  {
+    "id": "normal",
+    "type": "Normal",
+    "boss": "Lockpin",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.454,
+    "passage_combat": true
+  },
+  {
+    "id": "fire",
+    "type": "Feu",
+    "boss": "Braségali",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "water",
+    "type": "Eau",
+    "boss": "Tortank",
+    "t_blanc": 2.833,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.544,
+    "passage_combat": true
+  },
+  {
+    "id": "grass",
+    "type": "Plante",
+    "boss": "Jungko",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.94,
+    "passage_combat": true
+  },
+  {
+    "id": "electric",
+    "type": "Électrik",
+    "boss": "Élecsprint",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.797,
+    "passage_combat": true
+  },
+  {
+    "id": "ice",
+    "type": "Glace",
+    "boss": "Oniglali",
+    "t_blanc": 2.9,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.994,
+    "passage_combat": true
+  },
+  {
+    "id": "fighting",
+    "type": "Combat",
+    "boss": "Lucario",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "poison",
+    "type": "Poison",
+    "boss": "Ectoplasma",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.816,
+    "passage_combat": true
+  },
+  {
+    "id": "ground",
+    "type": "Sol",
+    "boss": "Laggron",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "flying",
+    "type": "Vol",
+    "boss": "Dracaufeu",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.939,
+    "passage_combat": true
+  },
+  {
+    "id": "psychic",
+    "type": "Psy",
+    "boss": "Alakazam",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "bug",
+    "type": "Insecte",
+    "boss": "Dardargnan",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.913,
+    "passage_combat": true
+  },
+  {
+    "id": "rock",
+    "type": "Roche",
+    "boss": "Tyranocif",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "ghost",
+    "type": "Spectre",
+    "boss": "Branette",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "dragon",
+    "type": "Dragon",
+    "boss": "Altaria",
+    "t_blanc": 2.933,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "dark",
+    "type": "Ténèbres",
+    "boss": "Démolosse",
+    "t_blanc": 2.9,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.645,
+    "passage_combat": true
+  },
+  {
+    "id": "steel",
+    "type": "Acier",
+    "boss": "Métalosse",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 5,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  },
+  {
+    "id": "fairy",
+    "type": "Fée",
+    "boss": "Gardevoir",
+    "t_blanc": 2.867,
+    "nb_images_blanches": 6,
+    "correlation_woosh_natif": 0.941,
+    "passage_combat": true
+  }
+]
