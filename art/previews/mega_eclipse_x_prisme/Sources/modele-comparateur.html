@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Méga-Évolution · Atelier Guilde Treehouse</title>
+<style>
+  :root{--accent:#f8b97f;--ink:#f8f4f0;--muted:#aab5c4;--dim:#7e8b9f;--panel:#131d2b;--line:#2a3749;--bg:#0c131f;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;color-scheme:dark}
+  *{box-sizing:border-box}body{margin:0;background:radial-gradient(70% 50% at 88% 0%,#1b2537 0%,transparent 80%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}button,input{font:inherit}button{color:inherit}button:not([disabled]),input{cursor:pointer}[hidden]{display:none!important}a{color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  main{width:min(1150px,100%);margin:auto;padding:23px 30px 25px}
+  .mast{display:flex;align-items:center;gap:12px;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--line);font-size:11px;font-family:var(--mono);font-weight:800;text-transform:uppercase;letter-spacing:.11em;color:var(--muted)}
+  .brand{display:flex;align-items:center;gap:11px}.brand svg{flex:none}.edition{white-space:nowrap;color:#cec0ae}
+  .intro{padding:24px 0 22px}.intro h1{font-size:clamp(34px,5.5vw,62px);font-weight:790;line-height:1.04;letter-spacing:-.065em;margin:0;color:#faf6ef}.intro p{font-size:clamp(13px,2vw,16px);color:#b4c0cf;margin:9px 0 0}.intro strong{color:#e8edf4;font-weight:650}
+  .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+  .tab{--swatch:#f8b97f;min-width:0;position:relative;padding:11px;min-height:77px;display:grid;grid-template-columns:64px 1fr;align-items:center;gap:11px;text-align:left;background:#121c2a;border:1px solid #293648;border-radius:10px;transition:background-color .17s,border-color .17s;overflow:hidden}
+  .tab:hover{background:#202d40}.tab[aria-selected=true]{background:#1c293a;border-color:var(--swatch);box-shadow:inset 0 -2px 0 var(--swatch)}
+  .thumb{width:64px;height:49px;border:1px solid #3f4b5d;border-radius:5px;object-fit:cover;image-rendering:pixelated;background:#262f3f}.tab-meta{font:700 9px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--swatch);white-space:nowrap;display:block}.tab-name{font-weight:750;display:block;margin-top:4px;font-size:clamp(12px,1.7vw,15px);line-height:1.22;overflow-wrap:anywhere}
+  .compare{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(275px,1fr);gap:12px;align-items:stretch}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;min-width:0}
+  .screen{position:relative;background:#182230;overflow:hidden;aspect-ratio:14/9}.screen video{width:100%;height:100%;display:block;object-fit:contain;image-rendering:pixelated}.monitor{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,12,19,.45),transparent 16%,transparent 82%,rgba(8,12,19,.46));display:flex;justify-content:space-between;align-items:flex-start;padding:13px}.screen-mark{background:#101923d9;border:1px solid #5664776e;border-radius:4px;color:#dae4ef;padding:4px 7px;font:700 9px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+  .viewer-controls{padding:12px 13px 13px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}.ctl{min-height:37px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 10px;background:#202d40;border:1px solid #46566d;font-size:12px;font-weight:700;white-space:nowrap}.ctl:hover{background:#2b3a50}.primary{background:var(--accent);color:#101622;border-color:var(--accent);min-width:88px}.primary:hover{background:#f3ede3;border-color:#f3ede3}.ctl-icon{width:14px;height:14px;flex:none;fill:currentColor}.ctl[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+  .seekbar{flex:1 1 156px;min-width:110px;display:flex;align-items:center;gap:9px}.seekbar input{width:100%;min-width:28px;accent-color:var(--accent)}.time{font:700 10px var(--mono);color:#becada;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .readout{padding:20px 19px;display:flex;flex-direction:column}.readout-top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:11px}.style-name{font:800 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.duration{font:700 11px var(--mono);border:1px solid #46566a;border-radius:6px;padding:4px 8px;color:#d5deea;white-space:nowrap}.readout h2{font-size:clamp(25px,3.3vw,35px);line-height:1.12;letter-spacing:-.055em;margin:0 0 10px}.readout p{font-size:14px;color:#c0ccdb;margin:0;line-height:1.55}.steps{list-style:none;display:grid;gap:8px;padding:15px 0;margin:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.step{display:grid;grid-template-columns:52px 1fr;align-items:baseline;gap:8px;color:#bac9da;font-size:12px}.step time{font:800 11px var(--mono);color:#8293a8}.step.is-past time{color:var(--accent)}.step.is-current{color:var(--ink);font-weight:660}
+  .suggest{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;font-size:12px;color:#c6d0dc}.diamond{color:var(--accent)}.mode{font-weight:750;color:#faf5ed}
+  footer{padding:15px 0 0;display:flex;gap:6px 14px;justify-content:space-between;flex-wrap:wrap;color:#8e9eb3;font:650 10px/1.5 var(--mono);letter-spacing:.025em}footer span:last-child{color:#a2adbd}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:760px){main{padding:15px 17px 16px}.mast{font-size:9px}.intro{padding:17px 0}.compare{grid-template-columns:1fr}.tab{grid-template-columns:44px 1fr;gap:7px;padding:8px;min-height:61px}.thumb{width:44px;height:37px}.tab-meta{font-size:8px;letter-spacing:.03em}.readout{padding:16px}.steps{margin:12px 0}}
+  @media(max-width:440px){.edition{font-size:8px}.tabs{gap:6px}.tab{grid-template-columns:1fr;gap:5px;min-height:68px;padding:7px}.thumb{display:none}.tab-name{margin:0}.tab-meta{white-space:normal}.viewer-controls{gap:6px;padding:9px}.ctl{font-size:11px;padding:5px 7px}.seekbar{flex-basis:100%}.screen-mark{font-size:8px}.monitor{padding:9px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header class="mast">
+    <div class="brand"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" shape-rendering="crispEdges"><path fill="#f8b97f" d="M10 1h4v3h4v4h4v8h-4v4h-4v3h-4v-3H6v-4H2V8h4V4h4z"/><path fill="#1f293b" d="M10 6h4v3h3v6h-3v3h-4v-3H7V9h3z"/><path fill="#fbecd7" d="M11 8h2v3h3v2h-3v3h-2v-3H8v-2h3z"/></svg>Guilde Treehouse <span aria-hidden="true">/</span> Labo VFX</div>
+    <span class="edition">3 propositions</span>
+  </header>
+  <div class="intro"><h1>Méga-Évolution</h1><p><strong>Dracaufeu → Méga-Dracaufeu X.</strong> Trois rythmes, sans colonnes.</p></div>
+  <nav class="tabs" role="tablist" aria-label="Choisir une version" id="tabs"></nav>
+  <noscript>Pour changer de version, active JavaScript ou ouvre les trois fichiers MP4 individuels.</noscript>
+  <section id="preview" class="compare" role="tabpanel" aria-labelledby="version-1">
+    <div class="card">
+      <div class="screen">
+        <video id="stage" playsinline muted disableremoteplayback disablepictureinpicture preload="metadata" aria-label="Animation de Méga-Évolution"></video>
+        <div class="monitor" aria-hidden="true"><span class="screen-mark" id="take">PRISE 02</span><span class="screen-mark">VUE DE FACE</span></div>
+      </div>
+      <div class="viewer-controls">
+        <button class="ctl primary" type="button" id="play"><svg class="ctl-icon" viewBox="0 0 16 16" aria-hidden="true"><path id="play-path" d="M5 2l9 6-9 6z"/></svg><span id="play-label">Lire</span></button>
+        <button class="ctl" type="button" id="rewind" title="Rejouer depuis le début" aria-label="Rejouer"><svg class="ctl-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.3 4.8A5.6 5.6 0 1 1 2.5 9h1.65a4 4 0 1 0 1.57-3.05L8 8H2V2z"/></svg>Rejouer</button>
+        <button class="ctl" type="button" id="sound" aria-pressed="false" title="Activer ou couper le son">Son coupé</button>
+        <div class="seekbar"><label class="sr" for="seek">Position dans l’animation</label><input type="range" id="seek" min="0" value="0" max="4.4" step="0.01"><span class="time" id="time">0,0 / 4,4 s</span></div>
+      </div>
+      <p id="media-error" hidden role="alert" style="margin:0;padding:0 13px 10px;color:#ffdfc7;font-size:12px">Le lecteur ne peut pas lire la vidéo ici. Ouvre le MP4 individuel pour la voir.</p>
+    </div>
+    <aside class="card readout">
+      <div class="readout-top"><span class="style-name" id="affinity">V2 × Mega Stones</span><span class="duration" id="duration">4,4 s</span></div>
+      <h2 id="title">Prisme fendu</h2>
+      <p id="detail"></p>
+      <ol class="steps" id="steps" aria-label="Temps forts de cette version"></ol>
+      <div class="suggest"><span class="diamond" aria-hidden="true">◆</span><span id="recommend"></span></div>
+    </aside>
+  </section>
+  <footer><span>Guildhouse V2 × Deeshura / Mega Stones · SpriteCollab</span><span>Propositions hors moteur · 30 i/s · son d’origine recalé</span></footer>
+</main>
+<script>
+const takes = __TAKES_JSON__;
+const $=x=>document.getElementById(x);
+const tabs=$('tabs'), video=$('stage'), seek=$('seek');
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const playGlyph='M5 2l9 6-9 6z', pauseGlyph='M4 2h3v12H4zM9 2h3v12H9z';
+let active=1;
+let seekWanted=null;
+const format=(n, decimals=1)=>n.toFixed(decimals).replace('.',',');
+for (const [i,v] of takes.entries()) {
+  const b=document.createElement('button');
+  b.type='button'; b.className='tab'; b.id='version-'+i;
+  b.setAttribute('role','tab'); b.setAttribute('aria-controls','preview');
+  b.style.setProperty('--swatch',v.color);
+  const photo=document.createElement('img'); photo.className='thumb'; photo.src=v.thumb; photo.alt='';
+  const label=document.createElement('span');
+  const number=document.createElement('span'); number.className='tab-meta'; number.textContent=`0${i+1} / ${v.short}`;
+  const name=document.createElement('span'); name.className='tab-name'; name.textContent=v.title;
+  label.append(number,name); b.append(photo,label); tabs.append(b);
+  b.addEventListener('click',()=>select(i,true));
+  b.addEventListener('keydown',ev=>{
+    const offset={ArrowLeft:-1,ArrowRight:1};
+    if (!(ev.key in offset)) return;
+    ev.preventDefault(); const next=(i+offset[ev.key]+takes.length)%takes.length;
+    select(next,false); tabs.children[next].focus();
+  });
+}
+function update(){
+  const take=takes[active]; const dur=take.duration;
+  const time=Math.min(dur,Number.isFinite(video.currentTime)?video.currentTime:0);
+  seek.value=time; $('time').textContent=`${format(time)} / ${format(dur)} s`;
+  $('play-label').textContent=video.paused ? (video.ended?'Relire':'Lire') : 'Pause';
+  $('play-path').setAttribute('d',video.paused?playGlyph:pauseGlyph);
+  const current=take.steps.reduce((last,s,i)=>time>=s[0]?i:last,-1);
+  [...$('steps').children].forEach((e,i)=>{
+    e.classList.toggle('is-past',i<=current);
+    e.classList.toggle('is-current',i===current && !video.ended);
+  });
+}
+function resume(){
+  video.play().catch(()=>update());
+}
+function select(i,animate){
+  active=i;const t=takes[i];seekWanted=null;
+  video.pause();$('media-error').hidden=true;
+  document.documentElement.style.setProperty('--accent',t.color);
+  for(const [j,b] of [...tabs.children].entries()){b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1;}
+  $('preview').setAttribute('aria-labelledby',`version-${i}`);
+  $('take').textContent=`PRISE 0${i+1}`;
+  $('title').textContent=t.title;$('affinity').textContent=t.affinity;$('detail').textContent=t.detail;
+  $('duration').textContent=`${format(t.duration)} s`;
+  $('recommend').replaceChildren();const goal=document.createElement('strong');goal.className='mode';goal.textContent=t.tag+' ';$('recommend').append(goal,t.reason);
+  const steps=$('steps');steps.replaceChildren();
+  for(const [sec,label] of t.steps){
+    const item=document.createElement('li');item.className='step';
+    const stamp=document.createElement('time');stamp.textContent=format(sec)+' s';stamp.dateTime=`PT${sec}S`;
+    const descr=document.createElement('span');descr.textContent=label;item.append(stamp,descr);steps.append(item);
+  }
+  seek.max=t.duration; seek.value=0;
+  video.poster=t.poster; video.src=t.video;
+  video.setAttribute('aria-label',`${t.title} : Dracaufeu devient Méga-Dracaufeu X`);
+  video.load();update();if(animate && !reduce)resume();
+}
+$('play').addEventListener('click',()=>{if(video.paused){if(video.ended)video.currentTime=0;resume();}else video.pause();});
+$('rewind').addEventListener('click',()=>{video.currentTime=0;resume();});
+$('sound').addEventListener('click',()=>{video.muted=!video.muted;$('sound').textContent=video.muted?'Son coupé':'Son actif';$('sound').setAttribute('aria-pressed',String(!video.muted));});
+seek.addEventListener('input',()=>{const next=Number(seek.value);if(video.readyState)video.currentTime=next;else seekWanted=next;update();});
+video.addEventListener('loadedmetadata',()=>{if(seekWanted!==null){video.currentTime=seekWanted;seekWanted=null;}update();});
+for(const ev of ['timeupdate','play','pause','ended','seeked'])video.addEventListener(ev,update);
+video.addEventListener('error',()=>{$('media-error').hidden=false;update();});
+select(1,true);
+</script>
+</body>
+</html>

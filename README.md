@@ -30,6 +30,8 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
 ## Notes de mise à jour
 
+- [Dojo Kingambit — wooshes PMD, cyclones et Méga](docs/KINGAMBIT_MISE_A_JOUR.md)
+
 - [0.7.4 — Bilans d’expédition, Réverie, comptoirs et Guilde](docs/REVERIE_074.md)
 - [0.7.3 — Fosse Cascade et arène de Kabutops](docs/REVERIE_073.md)
 

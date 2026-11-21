@@ -1,0 +1,7 @@
+# Vendored, already validated addon snapshot: preserve original bytes and CRLF.
+# The surrounding Destiny documentation is not exempt from whitespace checks.
+Content/** -text
+Data/** -text -whitespace
+Mod.xml -text whitespace=cr-at-eol
+LICENSE -text whitespace=cr-at-eol
+README.md -text -whitespace
