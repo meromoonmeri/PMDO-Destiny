@@ -1,0 +1,585 @@
+{
+  "normal": {
+    "libelle": "Normal",
+    "biome": "tiny_meadow",
+    "autotiles": [
+      "tiny_meadow_wall.json",
+      "tiny_meadow_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "TinyMeadow",
+        "sha256": "5f2b21504310e9be6bffae451ed48d8dc7eb13327fcdbba6b781736b79f8c4b7",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "TinyMeadow": "5f2b21504310e9be6bffae451ed48d8dc7eb13327fcdbba6b781736b79f8c4b7"
+    },
+    "topologie": "Claire-voie",
+    "plan": [
+      "###############",
+      "######...######",
+      "####.......####",
+      "###.........###",
+      "##...........##",
+      "#.............#",
+      "#.............#",
+      "##...........##",
+      "###.........###",
+      "#####.....#####",
+      "###############"
+    ]
+  },
+  "fire": {
+    "libelle": "Feu",
+    "biome": "mt_blaze",
+    "autotiles": [
+      "mt_blaze_wall.json",
+      "mt_blaze_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "MtBlaze",
+        "sha256": "0bbe02e39c102e2f894fc93c8db500c0d9515142234e6ad45b63226b2389eb96",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "MtBlaze": "0bbe02e39c102e2f894fc93c8db500c0d9515142234e6ad45b63226b2389eb96"
+    },
+    "topologie": "Caldeira fendue",
+    "plan": [
+      "###############",
+      "#######..######",
+      "##~~##....#####",
+      "##~#........~~#",
+      "#~~.........#~#",
+      "###..........~#",
+      "##...........~#",
+      "##..........###",
+      "####........###",
+      "#####.....#####",
+      "###############"
+    ]
+  },
+  "water": {
+    "libelle": "Eau",
+    "biome": "brine_cave",
+    "autotiles": [
+      "brine_cave_wall.json",
+      "brine_cave_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "BrineCave",
+        "sha256": "b6e4e4f8f8e355717f3a4bbdde3a49894884b321ae2a3cc38dd7b74fc9e7c21e",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "BrineCave": "b6e4e4f8f8e355717f3a4bbdde3a49894884b321ae2a3cc38dd7b74fc9e7c21e"
+    },
+    "topologie": "Deux anses",
+    "plan": [
+      "###############",
+      "####.......####",
+      "###.........###",
+      "#~~.........###",
+      "#~~~.......~~~#",
+      "#~~~~.....~~~~#",
+      "#~~~.......~~~#",
+      "###.........###",
+      "##...........##",
+      "#####.....#####",
+      "###############"
+    ]
+  },
+  "grass": {
+    "libelle": "Plante",
+    "biome": "apple_woods",
+    "autotiles": [
+      "apple_woods_wall.json",
+      "apple_woods_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "AppleWoods",
+        "sha256": "999d29dd67c6dfd92c0d4bdce6c4ad179b7a39264ae62e7db81f273c55dca900",
+        "github": "https://github.com/meromoonmeri/projet-creation-pmdo/blob/8d2a5b8d9dadef254a0773bb36d633888148adcd/source/dungeon_autotiles_v1/references/assets/AppleWoods.tile"
+      }
+    ],
+    "banques_sha256": {
+      "AppleWoods": "999d29dd67c6dfd92c0d4bdce6c4ad179b7a39264ae62e7db81f273c55dca900"
+    },
+    "topologie": "Croisée des racines",
+    "plan": [
+      "###############",
+      "##..........###",
+      "##..........###",
+      "###........####",
+      "####.......####",
+      "####.......####",
+      "###.........###",
+      "##...........##",
+      "##...........##",
+      "###.........###",
+      "###############"
+    ]
+  },
+  "electric": {
+    "libelle": "Électrik",
+    "biome": "mt_thunder",
+    "autotiles": [
+      "mt_thunder_wall.json",
+      "mt_thunder_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "MtThunder",
+        "sha256": "2bceaf0802d103a395f66c7fc1b7fd082ed444669b720f6722cfa25b78bf4a41",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "MtThunder": "2bceaf0802d103a395f66c7fc1b7fd082ed444669b720f6722cfa25b78bf4a41"
+    },
+    "topologie": "Corniche en zigzag",
+    "plan": [
+      "###############",
+      "####....#######",
+      "###.......#####",
+      "###.........###",
+      "####.........##",
+      "#####.........#",
+      "####..........#",
+      "###..........##",
+      "##.........####",
+      "####......#####",
+      "###############"
+    ]
+  },
+  "ice": {
+    "libelle": "Glace",
+    "biome": "frosty_forest",
+    "autotiles": [
+      "frosty_forest_wall.json",
+      "frosty_forest_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "FrostyForest",
+        "sha256": "503d4e3a52a532e4b5b70d9f53e34188c28e6c1a1bd8d40e8c083c1ec2ab2d80",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "FrostyForest": "503d4e3a52a532e4b5b70d9f53e34188c28e6c1a1bd8d40e8c083c1ec2ab2d80"
+    },
+    "topologie": "Glacis à deux pointes",
+    "plan": [
+      "###############",
+      "###.........###",
+      "##...........##",
+      "##...........##",
+      "###.........###",
+      "#~~~.......~~~#",
+      "#~~.........~~#",
+      "##...........##",
+      "###.........###",
+      "######...######",
+      "###############"
+    ]
+  },
+  "fighting": {
+    "libelle": "Combat",
+    "biome": "rock_maze",
+    "autotiles": [
+      "rock_maze_wall.json",
+      "rock_maze_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "RockMaze",
+        "sha256": "8e0f170749d37d5bd9b129fa18e3eddd67b4bb7d200477b8dd06713296bf7c54",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "RockMaze": "8e0f170749d37d5bd9b129fa18e3eddd67b4bb7d200477b8dd06713296bf7c54"
+    },
+    "topologie": "Cour creusée",
+    "plan": [
+      "###############",
+      "####.......####",
+      "####.......####",
+      "####.......####",
+      "##...........##",
+      "#.............#",
+      "#.............#",
+      "##...........##",
+      "###.........###",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "poison": {
+    "libelle": "Poison",
+    "biome": "murky_forest",
+    "autotiles": [
+      "murky_forest_wall.json",
+      "murky_forest_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "MurkyForest",
+        "sha256": "152dbc967a5c82692353ccee1c351571eeeef19e1d37f1b7e78f5f29afa73266",
+        "github": "https://github.com/meromoonmeri/projet-creation-pmdo/blob/8d2a5b8d9dadef254a0773bb36d633888148adcd/source/donjons_dtef_v2/references/DumpAsset/Content/Tile/MurkyForest.tile"
+      }
+    ],
+    "banques_sha256": {
+      "MurkyForest": "152dbc967a5c82692353ccee1c351571eeeef19e1d37f1b7e78f5f29afa73266"
+    },
+    "topologie": "Mare des spores",
+    "plan": [
+      "###############",
+      "#####.....#####",
+      "####.......#~~#",
+      "###.........~~#",
+      "#~...........~#",
+      "#~..~........##",
+      "#~~.......~..##",
+      "#~~.........###",
+      "####.......####",
+      "#####.....#####",
+      "###############"
+    ]
+  },
+  "ground": {
+    "libelle": "Sol",
+    "biome": "quicksand_cave",
+    "autotiles": [
+      "quicksand_cave_wall.json",
+      "quicksand_cave_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "QuicksandCave",
+        "sha256": "fa1e684001d34572b766dc241d4c358bd0ceb69f183f71d14cbacb9677fc0447",
+        "github": "https://github.com/meromoonmeri/projet-creation-pmdo/blob/8d2a5b8d9dadef254a0773bb36d633888148adcd/source/donjons_dtef_v2/references/DumpAsset/Content/Tile/QuicksandCave.tile"
+      }
+    ],
+    "banques_sha256": {
+      "QuicksandCave": "fa1e684001d34572b766dc241d4c358bd0ceb69f183f71d14cbacb9677fc0447"
+    },
+    "topologie": "Sillons",
+    "plan": [
+      "###############",
+      "###.......#####",
+      "##..........###",
+      "##..........###",
+      "#~~..........##",
+      "#~~...........#",
+      "#~~~..........#",
+      "###..........##",
+      "##..........~~#",
+      "####......#~~~#",
+      "###############"
+    ]
+  },
+  "flying": {
+    "libelle": "Vol",
+    "biome": "sky_peak_7th_pass",
+    "autotiles": [
+      "sky_peak_7th_pass_wall.json",
+      "sky_peak_7th_pass_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "SkyPeak7thPass",
+        "sha256": "2302b481d1c0ee0041e4373ff8b3699d89e1c01fd67910a8d5098eb33cb0f8f0",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "SkyPeak7thPass": "2302b481d1c0ee0041e4373ff8b3699d89e1c01fd67910a8d5098eb33cb0f8f0"
+    },
+    "topologie": "Éperon",
+    "plan": [
+      "###############",
+      "######....#####",
+      "#####.......###",
+      "####..........#",
+      "###...........#",
+      "##...........##",
+      "#..........~~~#",
+      "#..........~~~#",
+      "##.........~~~#",
+      "####......~~~~#",
+      "###############"
+    ]
+  },
+  "psychic": {
+    "libelle": "Psy",
+    "biome": "crystal_cave_2",
+    "autotiles": [
+      "crystal_cave_2_wall.json",
+      "crystal_cave_2_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "CrystalCave2",
+        "sha256": "b51311e7ee2eeec9ac5f310ec8a1d413d7ba1c753f817f252c703caa970460a6",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "CrystalCave2": "b51311e7ee2eeec9ac5f310ec8a1d413d7ba1c753f817f252c703caa970460a6"
+    },
+    "topologie": "Facettes",
+    "plan": [
+      "###############",
+      "######...######",
+      "####.......####",
+      "#~~.........###",
+      "#~...........##",
+      "#.............#",
+      "##...........##",
+      "###.........~~#",
+      "####.......~~~#",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "bug": {
+    "libelle": "Insecte",
+    "biome": "forest_path",
+    "autotiles": [
+      "forest_path_wall.json",
+      "forest_path_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "ForestPath",
+        "sha256": "c2698a0869b879eab575dbbbf458c3015d238b3cc99830e0a6163fd074b7800d",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "ForestPath": "c2698a0869b879eab575dbbbf458c3015d238b3cc99830e0a6163fd074b7800d"
+    },
+    "topologie": "Clairière des cocons",
+    "plan": [
+      "###############",
+      "##...........##",
+      "##...........##",
+      "###.........###",
+      "####.......####",
+      "####.......####",
+      "###.........###",
+      "###.........###",
+      "###.........###",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "rock": {
+    "libelle": "Roche",
+    "biome": "rock_aegis_cave",
+    "autotiles": [
+      "rock_aegis_cave_wall.json",
+      "rock_aegis_cave_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "RockAegisCave",
+        "sha256": "5579992598077d0cf8bbf5b17766b33ce72e512d221123c455781782182fbd56",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "RockAegisCave": "5579992598077d0cf8bbf5b17766b33ce72e512d221123c455781782182fbd56"
+    },
+    "topologie": "Mégalithes",
+    "plan": [
+      "###############",
+      "###.........###",
+      "##...........##",
+      "##...........##",
+      "##...........##",
+      "#~~.........~~#",
+      "###.........###",
+      "##...........##",
+      "##...........##",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "ghost": {
+    "libelle": "Spectre",
+    "biome": "darknight_relic",
+    "autotiles": [
+      "darknight_relic_wall.json",
+      "darknight_relic_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "DarknightRelic",
+        "sha256": "6ee43c8b86dfdd6cb2db064e64c87a8b440bbe59ced40d2fd7e135eba34aab32",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "DarknightRelic": "6ee43c8b86dfdd6cb2db064e64c87a8b440bbe59ced40d2fd7e135eba34aab32"
+    },
+    "topologie": "Galerie brisée",
+    "plan": [
+      "###############",
+      "###.........###",
+      "##~.........~##",
+      "###.........###",
+      "#~...........~#",
+      "#~...........~#",
+      "#~...........~#",
+      "###.........###",
+      "####.......####",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "dragon": {
+    "libelle": "Dragon",
+    "biome": "craggy_peak",
+    "autotiles": [
+      "craggy_peak_wall.json",
+      "craggy_peak_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "CraggyPeakWall",
+        "sha256": "cbbefaea33f0a0a1863a6b2f9d7e603131b4a50032273cdb9775d22150cc32ed",
+        "github": null
+      },
+      {
+        "planche": "CraggyPeakFloor",
+        "sha256": "5290024180cdfdb393f6b396d06d3f1793c3a3e030715503e8fa00fe43c04e7f",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "CraggyPeakFloor": "5290024180cdfdb393f6b396d06d3f1793c3a3e030715503e8fa00fe43c04e7f",
+      "CraggyPeakSecondary": "c3a7fb098fb3c8848802932b6b07a444d2c69e3e5f10c450f6037d9c77418ac2",
+      "CraggyPeakWall": "cbbefaea33f0a0a1863a6b2f9d7e603131b4a50032273cdb9775d22150cc32ed"
+    },
+    "topologie": "Antre en tenaille",
+    "plan": [
+      "###############",
+      "###.........###",
+      "##...........##",
+      "###.........###",
+      "####........###",
+      "###..........##",
+      "##............#",
+      "##...........##",
+      "###.........###",
+      "####.......####",
+      "###############"
+    ]
+  },
+  "dark": {
+    "libelle": "Ténèbres",
+    "biome": "deep_dusk_forest_2",
+    "autotiles": [
+      "deep_dusk_forest_2_wall.json",
+      "deep_dusk_forest_2_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "DeepDuskForest2",
+        "sha256": "d68564adece47d7cb76acc73fb1d981626421ec081d530ea98f188e734623087",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "DeepDuskForest2": "d68564adece47d7cb76acc73fb1d981626421ec081d530ea98f188e734623087"
+    },
+    "topologie": "Trouée en croissant",
+    "plan": [
+      "###############",
+      "##........#####",
+      "##.........####",
+      "##..........###",
+      "###..........##",
+      "####..........#",
+      "#####.........#",
+      "####.........##",
+      "###.........###",
+      "##........#####",
+      "###############"
+    ]
+  },
+  "steel": {
+    "libelle": "Acier",
+    "biome": "steel_aegis_cave",
+    "autotiles": [
+      "steel_aegis_cave_wall.json",
+      "steel_aegis_cave_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "SteelAegisCave",
+        "sha256": "b899eb7c712b5a948fb60e94211302ac9f9c48f8015a9851f5fef0db51c82ef0",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "SteelAegisCave": "b899eb7c712b5a948fb60e94211302ac9f9c48f8015a9851f5fef0db51c82ef0"
+    },
+    "topologie": "Doubles gradins",
+    "plan": [
+      "###############",
+      "#####.....#####",
+      "####.......####",
+      "#~~.........~~#",
+      "#~~.........~~#",
+      "#.............#",
+      "#.............#",
+      "#~~.........~~#",
+      "#~~.........~~#",
+      "#####.....#####",
+      "###############"
+    ]
+  },
+  "fairy": {
+    "libelle": "Fée",
+    "biome": "mystifying_forest",
+    "autotiles": [
+      "mystifying_forest_wall.json",
+      "mystifying_forest_floor.json"
+    ],
+    "planches": [
+      {
+        "planche": "MystifyingForest",
+        "sha256": "fb4c038127c44f960c6d8954a26a2a6e53392bf07e9b8174ccefcf65df317c5a",
+        "github": null
+      }
+    ],
+    "banques_sha256": {
+      "MystifyingForest": "fb4c038127c44f960c6d8954a26a2a6e53392bf07e9b8174ccefcf65df317c5a"
+    },
+    "topologie": "Clairière des lucioles",
+    "plan": [
+      "###############",
+      "#####.......###",
+      "###..........##",
+      "#~~..........##",
+      "#~..........###",
+      "#~..........~~#",
+      "###..........~#",
+      "####.........##",
+      "####.......####",
+      "#####.....#####",
+      "###############"
+    ]
+  }
+}

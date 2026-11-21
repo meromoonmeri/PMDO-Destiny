@@ -99,6 +99,10 @@ jobs:
         run: python tools/run_ci_check.py tools/tests/test_habitants_quartiers.py
       - name: Check Reverie walkers, south boundary and training duel
         run: python tools/run_ci_check.py tools/tests/test_chemins_reverie.py
+      - name: Check all 18 Kingambit training mazes and the trapdoor
+        run: python tools/run_ci_check.py tools/tests/test_dojo_kingambit_dedales.py
+      - name: Check sliding doors and ground routes in Kingambit Dojo
+        run: python tools/run_ci_check.py tools/tests/test_dojo_kingambit_complexe.py
       - name: Check story-driven Reverie residents and optional scenes
         run: python tools/run_ci_check.py tools/tests/test_reverie_recit.py
       - name: Check Reverie households, riddle rewards and branching dialogue

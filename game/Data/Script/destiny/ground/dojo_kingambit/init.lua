@@ -4,6 +4,7 @@
 --   * Porte droite (KingambitDojoNorthDoorRight) -> dojo_kingambit_reliques (Salle des reliques et archives)
 require 'origin.common'
 local suivi_interieurs = require 'destiny.suivi_interieurs'
+local entrainement = require 'destiny.dojo_kingambit_entrainement'
 
 local dojo_kingambit = {}
 local sortie_en_cours = false
@@ -159,10 +160,11 @@ function dojo_kingambit.MarowakDojoExit_Touch(obj, activator)
 end
 
 function dojo_kingambit.Kingambit_Action(chara, activator)
-  UI:SetSpeaker(chara); UI:SetSpeakerEmotion('Normal')
-  UI:WaitShowDialogue("Bienvenue au Dojo Kingambit.\nIci, chaque pas compte : on n'entre pas dans l'arène sans savoir pourquoi l'on avance.")
-  UI:WaitShowDialogue("À gauche s'ouvre l'arène octogonale des duels ;\nà droite reposent les reliques et les traités anciens du dojo.")
-  UI:ResetSpeaker()
+  if sortie_en_cours or (activator and activator.EntName ~= 'PLAYER') then return end
+  local segment = entrainement.Choisir(chara)
+  if segment == nil then return end
+  sortie_en_cours = true
+  entrainement.Descendre(segment, chara, CH('PLAYER'), (_ZONE and _ZONE.CurrentGround) or carte_active)
 end
 
 function dojo_kingambit.MarowakDojoDungeonEntrance_Touch(obj, activator)
