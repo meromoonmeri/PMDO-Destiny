@@ -8,43 +8,26 @@ from dojo_dtef import BOSS
 
 FORMATION = (BOSS, (5, 4), (9, 4))
 TROUPES = {
-    'normal': ((('furret','quick_attack','defense_curl'), ('sentret','scratch'), ('sentret','quick_attack')),
-               'Piste des échos', 5, 'walk'),
-    'fire': ((('arcanine','ember','odor_sleuth'), ('growlithe','ember'), ('growlithe','bite')),
-             'Fournaises', 7, 'idle'),
-    'water': ((('floatzel','water_gun','quick_attack'), ('buizel','water_gun'), ('buizel','quick_attack')),
-              'Couronne de ressac', 6, 'jump'),
-    'grass': ((('breloom','absorb','stun_spore'), ('shroomish','tackle'), ('shroomish','absorb')),
-              'Fougères déroulées', 8, 'idle'),
-    'electric': ((('raichu','thunder_shock','tail_whip'), ('pikachu','thunder_shock'), ('pichu','thunder_shock')),
-                 'Éclairs fourchus', 6, 'idle'),
-    'ice': ((('beartic','powder_snow','growl'), ('cubchoo','powder_snow'), ('cubchoo','powder_snow')),
-            'Éclats de glace', 7, 'walk'),
-    'fighting': ((('primeape','karate_chop','leer'), ('mankey','low_kick'), ('mankey','scratch')),
-                 'Bonds et onde de choc', 3, 'jump'),
-    'poison': ((('arbok','acid','leer'), ('ekans','poison_sting'), ('ekans','poison_sting')),
-               'Brume à bulles', 8, 'idle'),
-    'ground': ((('flygon','mud_slap','feint_attack'), ('vibrava','mud_slap'), ('trapinch','bite')),
-               'Fentes de sable', 7, 'idle'),
-    'flying': ((('swellow','peck','focus_energy'), ('taillow','peck'), ('taillow','quick_attack')),
-               'Piqués des alizés', 4, 'drop'),
-    'psychic': ((('alakazam','confusion','kinesis'), ('kadabra','confusion'), ('abra','hidden_power')),
-                'Téléportation prismatique', 6, 'warp'),
-    'bug': ((('venomoth','silver_wind','tackle'), ('venonat','tackle'), ('venonat','confusion')),
-            'Cocons fendus', 7, 'idle'),
-    'rock': ((('probopass','rock_throw','tackle'), ('nosepass','tackle'), ('nosepass','rock_throw')),
-             'Mégalithes fendus', 8, 'idle'),
-    'ghost': ((('mismagius','astonish','psywave'), ('misdreavus','astonish'), ('misdreavus','psywave')),
-              'Sortie des ombres', 7, 'shadow'),
-    'dragon': ((('dragonite','twister','leer'), ('dragonair','twister'), ('dratini','twister')),
-               'Volutes draconiques', 6, 'idle'),
-    'dark': ((('honchkrow','feint_attack','haze'), ('murkrow','peck'), ('murkrow','astonish')),
-             'Croissants nocturnes', 6, 'walk'),
-    'steel': ((('bisharp','metal_claw','leer'), ('pawniard','metal_claw'), ('pawniard','scratch')),
-              'Berceau magnétique', 8, 'idle'),
-    'fairy': ((('florges','fairy_wind','lucky_chant'), ('floette','fairy_wind'), ('flabebe','tackle')),
-              'Pluie de pétales de cerisier', 10, 'idle'),
+    'normal': ((('lopunny', 'pound', 'quick_attack'), ('buneary', 'pound'), ('buneary', 'quick_attack')), 'Piste des échos', 5, 'walk'),
+    'fire': ((('blaziken', 'ember', 'double_kick'), ('combusken', 'ember'), ('torchic', 'scratch')), 'Fournaises célestes', 6, 'column'),
+    'water': ((('blastoise', 'water_gun', 'withdraw'), ('wartortle', 'water_gun'), ('squirtle', 'tackle')), 'Colonnes de chute', 6, 'column'),
+    'grass': ((('sceptile', 'absorb', 'quick_attack'), ('grovyle', 'absorb'), ('treecko', 'pound')), 'Fougères déroulées', 8, 'idle'),
+    'electric': ((('manectric', 'spark', 'leer'), ('electrike', 'tackle'), ('electrike', 'thunder_wave')), 'Foudre et champ statique', 5, 'storm'),
+    'ice': ((('glalie', 'powder_snow', 'leer'), ('snorunt', 'powder_snow'), ('snorunt', 'ice_shard')), 'Voile de poudreuse', 6, 'whiteout'),
+    'fighting': ((('lucario', 'quick_attack', 'force_palm'), ('riolu', 'quick_attack'), ('riolu', 'endure')), 'Bonds et onde de choc', 3, 'jump'),
+    'poison': ((('gengar', 'lick', 'disable'), ('haunter', 'lick'), ('gastly', 'astonish')), 'Brume du Col Céleste', 8, 'mist'),
+    'ground': ((('swampert', 'mud_slap', 'tackle'), ('marshtomp', 'mud_slap'), ('mudkip', 'tackle')), 'Brèches de sable', 6, 'emerge'),
+    'flying': ((('charizard', 'wing_attack', 'growl'), ('charmeleon', 'ember'), ('charmander', 'scratch')), 'Piqués des alizés', 4, 'drop'),
+    'psychic': ((('alakazam', 'confusion', 'kinesis'), ('kadabra', 'confusion'), ('abra', 'hidden_power')), 'Téléportation prismatique', 6, 'warp'),
+    'bug': ((('beedrill', 'fury_attack', 'focus_energy'), ('kakuna', 'harden'), ('weedle', 'poison_sting')), 'Cocons fendus', 7, 'idle'),
+    'rock': ((('tyranitar', 'smack_down', 'leer'), ('pupitar', 'bite'), ('larvitar', 'bite')), 'Mégalithes soulevés', 6, 'emerge'),
+    'ghost': ((('banette', 'astonish', 'spite'), ('shuppet', 'astonish'), ('shuppet', 'night_shade')), 'Sortie des ombres', 7, 'shadow'),
+    'dragon': ((('altaria', 'dragon_breath', 'growl'), ('swablu', 'peck'), ('swablu', 'astonish')), 'Volutes draconiques', 6, 'idle'),
+    'dark': ((('houndoom', 'bite', 'howl'), ('houndour', 'ember'), ('houndour', 'bite')), 'Croissants nocturnes', 6, 'walk'),
+    'steel': ((('metagross', 'metal_claw', 'confusion'), ('metang', 'metal_claw'), ('beldum', 'take_down')), 'Berceau magnétique', 8, 'idle'),
+    'fairy': ((('gardevoir', 'disarming_voice', 'growl'), ('kirlia', 'disarming_voice'), ('ralts', 'confusion')), 'Pluie de pétales de cerisier', 10, 'idle')
 }
+MEGA_STONES = {'normal': 'mega_lopunnite', 'fire': 'mega_blazikenite', 'water': 'mega_blastoisinite', 'grass': 'mega_sceptilite', 'electric': 'mega_manectite', 'ice': 'mega_glalitite', 'fighting': 'mega_lucarionite', 'poison': 'mega_gengarite', 'ground': 'mega_swampertite', 'flying': 'mega_charizardite_x', 'psychic': 'mega_alakazite', 'bug': 'mega_beedrillite', 'rock': 'mega_tyranitarite', 'ghost': 'mega_banettite', 'dragon': 'mega_altarianite', 'dark': 'mega_houndoominite', 'steel': 'mega_metagrossite', 'fairy': 'mega_gardevoirite'}
 POSES, TICKS = 16, 4
 
 
@@ -54,6 +37,6 @@ def departs(typ):
         return ((6, 2), (4, 2), (10, 2))
     if typ == 'dark':
         return ((6, 3), (4, 4), (10, 4))
-    if mode in ('walk','jump','shadow'):
+    if mode in ('walk','jump','shadow','column','emerge'):
         return tuple((x,y-1) for x,y in FORMATION)
     return FORMATION

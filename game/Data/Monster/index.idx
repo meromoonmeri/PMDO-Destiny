@@ -2495,6 +2495,64 @@
    "Released": true,
    "Comment": "",
    "SortOrder": 870
+  },
+  "tyranitar": {
+   "$type": "RogueEssence.Data.MonsterEntrySummary, RogueEssence",
+   "Forms": [
+    {
+     "Name": {
+      "DefaultText": "Tyranitar",
+      "LocalTexts": {
+       "ja": "バンギラス",
+       "ko": "마기라스",
+       "zh-hant": "班基拉斯",
+       "fr": "Tyranocif",
+       "de": "Despotar",
+       "es": "Tyranitar",
+       "it": "Tyranitar",
+       "ja-jp": "バンギラス",
+       "zh-hans": "班基拉斯"
+      }
+     },
+     "Released": true,
+     "Temporary": false
+    },
+    {
+     "Name": {
+      "DefaultText": "Mega Tyranitar",
+      "LocalTexts": {
+       "ja": "",
+       "ko": "",
+       "zh-hant": "",
+       "fr": "Méga-Tyranocif",
+       "de": "Mega-Despotar",
+       "es": "",
+       "it": "",
+       "ja-jp": "",
+       "zh-hans": ""
+      }
+     },
+     "Released": true,
+     "Temporary": true
+    }
+   ],
+   "Name": {
+    "DefaultText": "Tyranitar",
+    "LocalTexts": {
+     "ja": "バンギラス",
+     "ko": "마기라스",
+     "zh-hant": "班基拉斯",
+     "fr": "Tyranocif",
+     "de": "Despotar",
+     "es": "Tyranitar",
+     "it": "Tyranitar",
+     "ja-jp": "バンギラス",
+     "zh-hans": "班基拉斯"
+    }
+   },
+   "Released": true,
+   "Comment": "",
+   "SortOrder": 248
   }
  }
 }

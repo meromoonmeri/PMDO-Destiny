@@ -27,13 +27,24 @@ local function jouer_effet(nom,layer,loc,poses)
   DUNGEON:PlayVFX(e,loc.X*PAS+PAS/2,loc.Y*PAS+PAS/2,Direction.Down)
 end
 
+local function jouer_nappe(nom,loc)
+  local c = RogueEssence.Content
+  local e = c.FiniteOverlayEmitter()
+  e.Layer = c.DrawLayer.Top
+  e.Anim = c.BGAnimData('Kingambit_Entree_' .. nom .. '_Ecran',TICKS,0,POSES-1)
+  e.TotalTime = POSES*TICKS
+  e.RepeatX, e.RepeatY = true, true
+  -- Le défilement est dessiné dans chaque pose de la tuile sans raccord.
+  DUNGEON:PlayVFX(e,loc.X*PAS+PAS/2,loc.Y*PAS+PAS/2,Direction.Down)
+end
+
 local function reveler(ch,mode,de,vers)
   local d = RogueEssence.Dungeon
   local anim
-  if mode=='jump' then
+  if mode=='jump' or mode=='emerge' then
     anim=d.CharAnimJump()
     anim.FromLoc, anim.ToLoc, anim.CharDir = de, vers, Direction.Down
-  elseif mode=='walk' or mode=='shadow' then
+  elseif mode=='walk' or mode=='shadow' or mode=='column' then
     local direction = Direction.Down
     if de.X < vers.X then direction=Direction.Right elseif de.X > vers.X then direction=Direction.Left end
     anim=d.CharAnimWalk(de,vers,direction,1)
@@ -70,12 +81,23 @@ local function choregraphie(ennemis,args,places)
   local function avancer(cible)
     if cible>t then GAME:WaitFrames(cible-t); t=cible end
   end
-  for i,delai in ipairs(rythme) do
-    avancer(delai)
-    jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,places[i],POSES)
-    jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,places[i],POSES)
+  if args.Mode=='whiteout' or args.Mode=='mist' then jouer_nappe(args.Type,places[1]) end
+  if args.Mode=='storm' then
+    -- Un seul impact ; le Sol dessine le champ statique sur les trois cases.
+    jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,places[1],POSES)
+    jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,places[1],POSES)
+  elseif args.Mode~='whiteout' then
+    for i,delai in ipairs(rythme) do
+      avancer(delai)
+      -- Chaque combattant quitte SA colonne. Le bord de la brèche dissimule
+      -- les pieds au premier instant du bond (Sol et Roche).
+      local pivot = (args.Mode=='column' or args.Mode=='emerge') and origines[i] or places[i]
+      jouer_effet(args.Type .. '_Sol',c.DrawLayer.Bottom,pivot,POSES)
+      jouer_effet(args.Type .. '_Air',c.DrawLayer.Front,pivot,POSES)
+    end
   end
-  for i,delai in ipairs(rythme) do
+  local delais_revelation = args.Mode=='whiteout' and {0,4,8} or rythme
+  for i,delai in ipairs(delais_revelation) do
     avancer(delai+apparition)
     reveler(ennemis[i-1],args.Mode,origines[i],places[i])
   end
