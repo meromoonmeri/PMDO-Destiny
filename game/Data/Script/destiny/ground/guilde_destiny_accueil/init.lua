@@ -63,4 +63,6 @@ function guilde_destiny_accueil.EscalierNord_Touch(obj, activator)
   entrer_grande_salle()
 end
 
+require('destiny.guilde_cadrage_sud').Attacher(guilde_destiny_accueil, 'guilde_destiny_accueil')
+
 return guilde_destiny_accueil

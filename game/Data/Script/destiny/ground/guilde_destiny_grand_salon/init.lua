@@ -157,4 +157,6 @@ function guilde_destiny_grand_salon.CouloirEst_Touch(obj, activator)
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_couloir_ouest', 'EntreeOuestMarker', true) else GAME:EnterZone('guilde_destiny_interieur', -1, 8, 0) end
 end
 
+require('destiny.guilde_cadrage_sud').Attacher(guilde_destiny_grand_salon, 'guilde_destiny_grand_salon')
+
 return guilde_destiny_grand_salon

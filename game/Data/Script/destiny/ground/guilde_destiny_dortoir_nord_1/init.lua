@@ -44,4 +44,6 @@ function guilde_destiny_dortoir_nord_1.SortieSud_Touch(obj, activator)
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_couloir_ouest', 'EntreeNordMarker', true) else GAME:EnterZone('guilde_destiny_interieur', -1, 8, 0) end
 end
 
+require('destiny.guilde_cadrage_sud').Attacher(guilde_destiny_dortoir_nord_1, 'guilde_destiny_dortoir_nord_1')
+
 return guilde_destiny_dortoir_nord_1

@@ -51,4 +51,6 @@ function guilde_destiny_missions.EscalierNord_Touch(obj, activator)
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_grand_salon', 'ArriveeSudMarker', true) else GAME:EnterZone('guilde_destiny_interieur', -1, 2, 0) end
 end
 
+require('destiny.guilde_cadrage_sud').Attacher(guilde_destiny_missions, 'guilde_destiny_missions')
+
 return guilde_destiny_missions

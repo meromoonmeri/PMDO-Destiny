@@ -44,4 +44,6 @@ function guilde_destiny_cuisine.SortieSud_Touch(obj, activator)
   if GAME.EnterGroundMap ~= nil then GAME:EnterGroundMap('guilde_destiny_interieur', 'guilde_destiny_carrefour', 'EntreeNordMarker', true) else GAME:EnterZone('guilde_destiny_interieur', -1, 4, 0) end
 end
 
+require('destiny.guilde_cadrage_sud').Attacher(guilde_destiny_cuisine, 'guilde_destiny_cuisine')
+
 return guilde_destiny_cuisine
