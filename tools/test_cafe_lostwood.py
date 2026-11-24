@@ -4,26 +4,34 @@
 reprises Bois Perdus (novembre 2026).
 
 Ces contrôles sont statiques : ils ne remplacent pas un test du runtime PMDO.
-Ils vérifient les empreintes des cartes café corrigées, l'appartenance des
-salles à la zone de la ville, la présence des ressources town02 réellement
-absentes de game/ et base/, ainsi que les invariants des scripts Lua
+Ils vérifient les seuils et les trajets sur la grille du café, l'appartenance
+des salles à la zone de la ville, les ressources spécifiques à town02, ainsi
+que les invariants des scripts Lua
 (dialogues de reprise Bois Perdus, Kangourex sans banque, menus natifs).
 """
 
 from __future__ import annotations
 
-import hashlib
 import json
-import sys
+import re
+from collections import deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "game/Data/Script/destiny"
 
-CAFE_MAPS = {
-    "caféspindaaccueil.rsground": "182e0a465947db903fb48fd00d70538c",
-    "spindacaféétage1.rsground": "4f5c87686530257bb70ce110e2a050fa",
-    "spindacaféétage1salle2.rsground": "5830da67d6329f6e228a23985bccb72d",
+CAFE_MAPS = ("caféspindaaccueil", "spindacaféétage1", "spindacaféétage1salle2")
+# Les points d'arrivée après transition peuvent être posés par Lua plutôt
+# que par un marqueur. Les autres entrées sont lues dans les cartes.
+ARRIVEES_CAFE = {
+    "caféspindaaccueil": ("NewObject_17", (288, 152)),
+    "spindacaféétage1": ("NewObject_3", (528, 216)),
+    "spindacaféétage1salle2": ((32, 216),),
+}
+SEUILS_CAFE = {
+    "caféspindaaccueil": ("PorteSortieCafe", "EscalierNordCafe"),
+    "spindacaféétage1": ("EscalierCafe", "PassageSalleCafe"),
+    "spindacaféétage1salle2": ("PorteSalleCafe",),
 }
 
 RESSOURCES = [
@@ -57,11 +65,64 @@ LUA_MODIFIES = [
 
 
 def lire(path: Path) -> str:
-    return path.read_text(encoding="utf-8")
+    return path.read_text(encoding="utf-8-sig")
 
 
-def md5(path: Path) -> str:
-    return hashlib.md5(path.read_bytes()).hexdigest()
+def rectangle_contact(script: str, nom: str) -> tuple[int, int, int, int]:
+    # Deux déclarations dans le mod : affectation EntName puis Rect, ou
+    # appel au helper contact(map, nom, x, y, l, h).
+    debut = (rf"(?:porte\.EntName = '{nom}'\s+porte\.Collider = RogueElements\.Rect\("
+             rf"|contact\(map, '{nom}',\s*)")
+    match = re.search(debut + r"(\d+),\s*(\d+),\s*(\d+),\s*(\d+)\)", script)
+    assert match, f"capteur non trouvé : {nom}"
+    return tuple(map(int, match.groups()))
+
+
+def verifier_trajets_cafe() -> None:
+    pas, taille = 8, 16  # maille de collision et boîte du joueur
+    for nom in CAFE_MAPS:
+        carte = json.loads(lire(ROOT / "game/Data/Ground" / f"{nom}.rsground"))["Object"]
+        assert carte["$type"] == "RogueEssence.Ground.GroundMap, RogueEssence", nom
+        grille = carte["obstacles"]
+        largeur, hauteur = len(grille) * pas, len(grille[0]) * pas
+        marqueurs = {m['EntName']: (m['Collider']['X'], m['Collider']['Y'])
+                     for e in carte['Entities'] for m in e['Markers']}
+        script = lire(SCRIPT / "ground" / nom / "init.lua")
+        seuils = {s: rectangle_contact(script, s) for s in SEUILS_CAFE[nom]}
+        for x, y, w, h in seuils.values():
+            assert 0 <= x < x + w <= largeur and 0 <= y < y + h <= hauteur, (nom, x, y, w, h)
+
+        def libre(x: int, y: int) -> bool:
+            return (0 <= x <= largeur - taille and 0 <= y <= hauteur - taille
+                    and all(grille[a][b]['Tags'] == 0
+                            for a in range(x // pas, (x + taille - 1) // pas + 1)
+                            for b in range(y // pas, (y + taille - 1) // pas + 1)))
+
+        for depart in ARRIVEES_CAFE[nom]:
+            x0, y0 = marqueurs[depart] if isinstance(depart, str) else depart
+            assert libre(x0, y0), f"{nom} : arrivée ({x0}, {y0}) bloquée"
+            # Alignement à la grille à au plus une cellule du point d'arrivée.
+            x0, y0 = x0 // pas * pas, y0 // pas * pas
+            vus = {(x, y) for x in (x0, x0 + pas) for y in (y0, y0 + pas) if libre(x, y)}
+            file = deque(vus)
+            restants = set(seuils)
+            while file and restants:
+                x, y = file.popleft()
+                for seuil in tuple(restants):
+                    a, b, w, h = seuils[seuil]
+                    # Atteindre la zone de contact sans supposer que le joueur
+                    # peut traverser le capteur (les portes peuvent être solides).
+                    horizontal = x < a + w and x + taille > a
+                    vertical = y < b + h and y + taille > b
+                    if (horizontal and y <= b + h and y + taille >= b
+                            or vertical and x <= a + w and x + taille >= a):
+                        restants.remove(seuil)
+                for dx, dy in ((pas, 0), (-pas, 0), (0, pas), (0, -pas)):
+                    voisin = (x + dx, y + dy)
+                    if voisin not in vus and libre(*voisin):
+                        vus.add(voisin)
+                        file.append(voisin)
+            assert not restants, f"{nom}, entrée {depart} : seuil(s) inaccessible(s) {sorted(restants)}"
 
 
 def extraire_fonction(texte: str, nom: str) -> str:
@@ -71,25 +132,27 @@ def extraire_fonction(texte: str, nom: str) -> str:
 
 
 def main() -> int:
-    # Cartes café : accueil d'origine town02, étage et salle sans les deux
-    # fenêtres visibles (voir tools/retirer_fenetres_cafe.py).
-    for nom, empreinte in CAFE_MAPS.items():
-        carte = ROOT / "game/Data/Ground" / nom
-        assert carte.is_file(), f"carte café absente : {nom}"
-        assert md5(carte) == empreinte, f"MD5 inattendu pour {nom}"
+    # Pas d'empreinte globale (elle change avec le décor) : protéger les
+    # raccordements et les déplacements, sans restaurer une ancienne carte.
+    verifier_trajets_cafe()
 
     # Les trois salles appartiennent à la zone de la ville, dans cet ordre
-    # (indices utilisés par les transitions : 2, 3 et 4).
-    zone = json.loads(lire(ROOT / "game/Data/Zone/town02_waterfallvillage.json"))
+    # (indices utilisés par les transitions : 2, 3 et 4), et à elle seule.
+    zones = ROOT / "game/Data/Zone"
+    zone = json.loads(lire(zones / "town02_waterfallvillage.json"))
     grounds = zone["Object"]["GroundMaps"]
-    assert grounds[2:5] == ["caféspindaaccueil", "spindacaféétage1", "spindacaféétage1salle2"]
-    archives = json.loads(lire(ROOT / "game/Data/Zone/archives.json"))["Object"]["GroundMaps"]
-    for salle in grounds[2:5]:
-        assert salle not in archives
-    index = json.loads(lire(ROOT / "game/Data/Zone/index.idx"))
-    assert index["Object"]["town02_waterfallvillage"]["Grounds"] == grounds
+    assert grounds[2:5] == list(CAFE_MAPS) and all(grounds.count(s) == 1 for s in CAFE_MAPS)
+    index = json.loads(lire(zones / "index.idx"))["Object"]
+    assert index["town02_waterfallvillage"]["Grounds"] == grounds
+    for fichier in zones.glob("*.json"):
+        if fichier.stem != "town02_waterfallvillage":
+            autres = json.loads(lire(fichier))["Object"].get("GroundMaps", [])
+            assert not set(CAFE_MAPS).intersection(autres), fichier
+    for id_zone, entree in index.items():
+        if id_zone != "town02_waterfallvillage" and not id_zone.startswith('$'):
+            assert not set(CAFE_MAPS).intersection(entree.get("Grounds", [])), id_zone
 
-    # Ressources town02 absentes de game/ et de base/.
+    # Ressources nécessaires à town02 dans le mod.
     for relatif in RESSOURCES:
         assert (ROOT / relatif).is_file(), f"ressource absente : {relatif}"
 

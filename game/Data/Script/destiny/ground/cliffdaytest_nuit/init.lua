@@ -418,6 +418,20 @@ end
 -- ------------------------------------------------------- scène (hésitation)
 
 function cliffdaytest_nuit.ScenePartenaire()
+  -- Un accès direct (notamment en Dev) peut partir d'une équipe solo.
+  -- Ne pas accéder à l'index 1 ni masquer le joueur dans ce cas ; la scène
+  -- pourra encore se jouer avec le duo choisi au quiz.
+  if GAME:GetPlayerPartyCount() < 2 then
+    GAME:FadeIn(20)
+    return
+  end
+  GROUND:SpawnerSetSpawn('Adagio', GAME:GetPlayerPartyMember(1))
+  local partenaire = GROUND:SpawnerDoSpawn('Adagio')
+  if partenaire == nil then
+    GAME:FadeIn(20)
+    return
+  end
+
   SV.Destiny = SV.Destiny or {}
   SV.Destiny.PrologueHeros = 'termine'
   GAME:CutsceneMode(true)
@@ -428,10 +442,6 @@ function cliffdaytest_nuit.ScenePartenaire()
   -- Le héros est inconscient ailleurs : seul le partenaire choisi au quiz
   -- doit apparaître dans cette scène.
   GROUND:Hide('PLAYER')
-
-  local partenaire = GAME:GetPlayerPartyMember(1)
-  GROUND:SpawnerSetSpawn('Adagio', partenaire)
-  partenaire = GROUND:SpawnerDoSpawn('Adagio')
   AI:DisableCharacterAI(partenaire)
   local porte, croisement, entree = MRKR('Pichu_Home_Door'), MRKR('Pichu_Crossroads'),
     MRKR('Dazzling_Exit_East')

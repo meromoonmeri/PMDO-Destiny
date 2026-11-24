@@ -326,6 +326,31 @@ function guilde_effectif.Bouchee(acteur)
   return true
 end
 
+-- Coupe l'émote de repas (identifiant vide = StartEmote(null) dans le moteur),
+-- rend le corps au repos et rétablit la pose de service de Mélofée.
+local function terminer_repas(presents)
+  for _, entree in ipairs(presents) do
+    local acteur, membre = entree.acteur, entree.membre
+    -- Une seule émote par personnage : on efface celle du repas, on rend le
+    -- corps au repos, puis on laisse l'émote de sortie du membre.
+    pcall(function() GROUND:CharSetEmote(acteur, '', 0) end)
+    pcall(function() GROUND:CharEndAnim(acteur) end)
+    if membre.apres ~= nil then
+      pcall(function() GROUND:CharSetEmote(acteur, membre.apres, 1) end)
+    end
+    if membre.pose == true then
+      -- Corps en pose de service, mais sans le calot : celui-ci signale la
+      -- prise de garde (PoseDeService), pas la fin d'un repas.
+      guilde_effectif.Poser(acteur, false)
+    end
+  end
+  return #presents
+end
+
+function guilde_effectif.FinRepas(liste)
+  return terminer_repas(guilde_effectif.Acteurs(liste))
+end
+
 --[[
   Repas de la Guilde : chaque membre présent démarre son émote après son
   propre délai (désynchronisation 2..22 images), puis tout le monde repose son
@@ -346,8 +371,10 @@ function guilde_effectif.Repas(liste, duree)
   end
   TASK:JoinCoroutines(taches)
   if duree == nil then duree = 120 end
-  if duree > 0 then GAME:WaitFrames(duree) end
-  if duree > 0 then guilde_effectif.FinRepas(liste) end
+  if duree > 0 then
+    GAME:WaitFrames(duree)
+    terminer_repas(presents)
+  end
   return servis
 end
 
@@ -361,28 +388,6 @@ function guilde_effectif.RepasImmediat(liste)
     if guilde_effectif.Manger(entree.acteur, entree.membre, 0) then servis = servis + 1 end
   end
   return servis
-end
-
--- Coupe l'émote de repas (identifiant vide = StartEmote(null) dans le moteur),
--- rend le corps au repos et rétablit la pose de service de Mélofée.
-function guilde_effectif.FinRepas(liste)
-  local presents = guilde_effectif.Acteurs(liste)
-  for _, entree in ipairs(presents) do
-    local acteur, membre = entree.acteur, entree.membre
-    -- Une seule émote par personnage : on efface celle du repas, on rend le
-    -- corps au repos, puis on laisse l'émote de sortie du membre.
-    pcall(function() GROUND:CharSetEmote(acteur, '', 0) end)
-    pcall(function() GROUND:CharEndAnim(acteur) end)
-    if membre.apres ~= nil then
-      pcall(function() GROUND:CharSetEmote(acteur, membre.apres, 1) end)
-    end
-    if membre.pose == true then
-      -- Corps en pose de service, mais sans le calot : celui-ci signale la
-      -- prise de garde (PoseDeService), pas la fin d'un repas.
-      guilde_effectif.Poser(acteur, false)
-    end
-  end
-  return #presents
 end
 
 -- Fiche lisible d'un membre (journaux, tableau des missions, tests).

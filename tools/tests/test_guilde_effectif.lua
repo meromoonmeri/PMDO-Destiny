@@ -275,3 +275,21 @@ assert(guilde.Animer(CH('Cizayox'), 'Sleep', true) == false, 'Sleep absent pour 
 assert(compter('anim') == 0, 'aucune animation lancee sans planche')
 
 print('guilde_effectif : 17 groupes de tests OK')
+
+-- Après l'attente, seuls les acteurs effectivement servis sont rendus au repos.
+vider()
+local garde_en_repas = CH('Gardevoir')
+local garde_nouvelle = {EntName = 'Gardevoir'}
+local ancienne_attente, ancienne_fin = GAME.WaitFrames, GROUND.CharEndAnim
+local acteurs_arretes = {}
+GAME.WaitFrames = function(self, duree)
+  ancienne_attente(self, duree)
+  if duree == 61 then PRESENTS.Gardevoir = garde_nouvelle end
+end
+GROUND.CharEndAnim = function(_, acteur) acteurs_arretes[#acteurs_arretes + 1] = acteur end
+assert(guilde.Repas({'Gardevoir'}, 61) == 1)
+assert(#acteurs_arretes == 1 and acteurs_arretes[1] == garde_en_repas,
+       'le même convive, pas son remplaçant, sort du repas')
+GAME.WaitFrames, GROUND.CharEndAnim = ancienne_attente, ancienne_fin
+PRESENTS.Gardevoir = garde_en_repas
+print('PASS fin du repas : seuls les convives du début sont arrêtés')

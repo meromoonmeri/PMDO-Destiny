@@ -9,6 +9,8 @@ from collections import deque
 from pathlib import Path
 from PIL import Image
 
+from executer_lua import run
+
 ROOT = Path(__file__).resolve().parents[2]
 TILE_DIR = ROOT / 'game' / 'Content' / 'Tile'
 GROUND_DIR = ROOT / 'game' / 'Data' / 'Ground'
@@ -296,6 +298,8 @@ def main() -> None:
                 assert crop.tobytes() == base24[(rx, ry + MAP24_H * ph)].tobytes(), (
                     f'CLIFFDAYTEST_BATTLE_BASE_24 desynchronise en ({rx},{ry}) phase {ph}'
                 )
+
+    run(Path(__file__).with_name("test_cliffdaytest_scene.lua"), ROOT)
 
     print(f'TEST CLIFFDAYTEST INTEGRITE OK ({len(floors)} tuiles battle floor connectees, 4 ambiances + source + 24px verifies)')
 

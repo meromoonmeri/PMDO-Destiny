@@ -26,6 +26,10 @@ GROUND={
 AI={DisableCharacterAI=function()end,EnableCharacterAI=function()end}
 TASK={BranchCoroutine=function(_,f)f();return 1 end,JoinCoroutines=function()end}
 GAME={MoveCamera=function(_,x,y,t,follow)log('camera',x,y)end,FadeIn=function()log('fade_in')end,FadeOut=function()log('fade_out')end,WaitFrames=function()end,CutsceneMode=function(_,v)log('cutscene',nil,v)end,EnterZone=function(_,zone,seg,idx,entry)log('zone',zone,idx)end}
+function GAME:EnterGroundMap(zone, carte, marqueur)
+ assert(marqueur=='entrance','marqueur d’entrée du centre')
+ log('ground',zone,carte)
+end
 UI={SetSpeaker=function(_,a)assert(a);log('speaker',a.EntName)end,SetSpeakerEmotion=function()end,WaitShowDialogue=function(_,t)log('dialogue',nil,t)end,ResetSpeaker=function()log('reset_speaker')end,BeginChoiceMenu=function(_,prompt,options)log('menu',prompt,#options)end,WaitForChoice=function()end,ChoiceResult=function()return choice end}
 local cafe=assert(loadfile(arg[1]..'/game/Data/Script/destiny/ground/caféspindaaccueil/init.lua'))()
 local function reset(missing,bloc)
@@ -61,6 +65,19 @@ reset();fail_suivi=true;cafe.Enter(map);assert(find('fade_in') and not SV.Destin
 reset();SV.Destiny.RetourCafeAccueil='escalier';cafe.Enter(map);assert(not SV.Destiny.VisiteCafeSpinda and actors.PLAYER.Position.Y==152);print('PASS retour étage : pas de première visite artificielle')
 reset();cafe.EscalierNordCafe_Touch(nil,actors.PLAYER);assert(find('dialogue','fermé pendant les travaux') and not find('zone'));print('PASS escalier fermé pendant rénovation')
 reset();SV.Destiny.CafeRenovationTerminee=true;cafe.EscalierNordCafe_Touch(nil,actors.PLAYER);assert(find('zone') and events[#events][3]==3);print('PASS escalier préservé pour une réouverture future')
+reset();SV.Destiny.VisiteVille='terminee';SV.Destiny.VisiteCafeSpinda='terminee'
+cafe.Enter(map); events={}
+local npc=new('NPC',300,374)
+cafe.PorteSortieCafe_Touch(nil,npc);assert(#events==0,'seul le joueur ouvre la sortie')
+cafe.PorteSortieCafe_Touch(nil,actors.PLAYER)
+assert(find('fade_out') and find('ground','reverie_centre') and not find('zone'))
+assert(SV.Destiny.ArriveeVille=='cafe' and events[#events][2]=='town02_waterfallvillage')
+local n_sortie=#events;cafe.PorteSortieCafe_Touch(nil,actors.PLAYER);assert(#events==n_sortie)
+print('PASS sortie après la visite : retour direct au centre, sans carte historique')
+reset();SV.Destiny.VisiteCafeSpinda='terminee';cafe.Enter(map);events={}
+cafe.PorteSortieCafe_Touch(nil,actors.PLAYER)
+assert(find('zone') and events[#events][3]==0 and not find('ground'))
+print('PASS sortie avant la visite : enchaînement historique conservé')
 reset();cafe.Spinda_Action(actors.Spinda,actors.PLAYER);assert(find('menu') and not find('zone'));print('PASS accueil pendant rénovation, pas de téléportation vers salles fermées')
 
 reset('Pipo');cafe.Enter(map);assert(SV.Destiny.VisiteCafeSpinda=='terminee' and find('reprendre_suivi'));print('PASS Pipo absent : scène et suivi conservés')

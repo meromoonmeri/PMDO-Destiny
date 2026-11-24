@@ -60,7 +60,13 @@ end
 local function aller_a(index_carte)
   if meteo_reverie.SynchroniserZone ~= nil then meteo_reverie.SynchroniserZone() end
   GAME:FadeOut(false, 20)
-  GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
+  if index_carte == 0 and SV.Destiny.VisiteVille == 'terminee' then
+    -- Le centre traite déjà ArriveeVille = 'cafe' et place le duo devant
+    -- la porte. Ne pas charger toute la carte historique juste pour la quitter.
+    GAME:EnterGroundMap('town02_waterfallvillage', 'reverie_centre', 'entrance')
+  else
+    GAME:EnterZone('town02_waterfallvillage', -1, index_carte, 0)
+  end
 end
 
 local function tourner_vers(acteur, cible)
