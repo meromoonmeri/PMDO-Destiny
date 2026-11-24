@@ -1,0 +1,759 @@
+{
+  "format": "destiny-halcyon-ia-v1",
+  "source": {
+    "repo": "https://github.com/Palikadude/Halcyon",
+    "commit": "da6c2130d641507447e6386a5e47a296e8cb4c71"
+  },
+  "modeles": [
+    {
+      "id": "ia-banquet",
+      "souche": "banquet",
+      "titre": "Table de banquet",
+      "palette": "lierre",
+      "fichier": "Table-banquet-Lierre.png",
+      "taille": [
+        163,
+        49
+      ],
+      "note": "Plateau de noyer, vaisselle verte et attaches de laiton.",
+      "hd": "Detoures-HD/Table-banquet-Lierre.png",
+      "source": "Data/Ground/guild_dining_room.rsground",
+      "salle": "guild_dining_room",
+      "rect_source": [
+        126,
+        153,
+        163,
+        49
+      ],
+      "sha256_sprite_ref": "35d2773e8dfb6456b2f319b014c5f9b7f1af689285c590378ee177cf69dc1941"
+    },
+    {
+      "id": "ia-coffre",
+      "souche": "coffre-haut",
+      "titre": "Grand coffre",
+      "palette": "minuit",
+      "fichier": "Grand-coffre-Minuit.png",
+      "taille": [
+        36,
+        31
+      ],
+      "note": "Panneaux indigo et cerclages de fer bleui. La vue de trois quarts est une interprétation du générateur.",
+      "hd": "Detoures-HD/Grand-coffre-Minuit.png",
+      "source": "Data/Ground/guild_storage_room.rsground",
+      "salle": "guild_storage_room",
+      "rect_source": [
+        216,
+        113,
+        32,
+        31
+      ],
+      "sha256_sprite_ref": "bb9489d22505c7961b1088b8b8801dc668c585799ff0888e8bdd6ad5053cb27a"
+    },
+    {
+      "id": "ia-bureau",
+      "souche": "bureau-rouleau",
+      "titre": "Bureau aux parchemins",
+      "palette": "ronce",
+      "fichier": "Bureau-parchemins-Ronce.png",
+      "taille": [
+        46,
+        77
+      ],
+      "note": "Noyer rougi et papiers ivoire, dans le cadrage vertical de l’original.",
+      "hd": "Detoures-HD/Bureau-parchemins-Ronce.png",
+      "source": "Data/Ground/guild_guildmasters_room.rsground",
+      "salle": "guild_guildmasters_room",
+      "rect_source": [
+        304,
+        177,
+        46,
+        77
+      ],
+      "sha256_sprite_ref": "a361def1154342537da5247f3571e0f881e8345bc12b460e8043074bf7268f07"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "lierre",
+      "nom": "Lierre",
+      "accord": "Noyer brun, étoffe de sous-bois et laiton",
+      "usage": "Salon et Carrefour · vert des ronces",
+      "bois": [
+        "30241e",
+        "4a3125",
+        "6c4830",
+        "956441",
+        "bb895a"
+      ],
+      "tissu": [
+        "162d24",
+        "24483a",
+        "346451",
+        "55866b",
+        "90b89a"
+      ],
+      "metal": [
+        "3b2d20",
+        "695030",
+        "9a733f",
+        "c79c54",
+        "f0d292"
+      ],
+      "feuille": [
+        "183021",
+        "476e3f",
+        "a1ba66"
+      ]
+    },
+    {
+      "id": "minuit",
+      "nom": "Minuit",
+      "accord": "Bois charbon, bleu indigo et fer bleui",
+      "usage": "Accueil et veille de nuit · bleu de Grodoudou",
+      "bois": [
+        "20212c",
+        "322b32",
+        "4d4148",
+        "6b5a5a",
+        "987870"
+      ],
+      "tissu": [
+        "171d34",
+        "263450",
+        "354a72",
+        "546c9c",
+        "8ea6cb"
+      ],
+      "metal": [
+        "252d3d",
+        "405368",
+        "6f8494",
+        "9eafbd",
+        "d6e1e4"
+      ],
+      "feuille": [
+        "192c26",
+        "3d645b",
+        "86b3a0"
+      ]
+    },
+    {
+      "id": "miel",
+      "nom": "Miel",
+      "accord": "Chêne ambré, brocart miel et bronze chaud",
+      "usage": "Réfectoire · chêne et lumière dorée",
+      "bois": [
+        "392217",
+        "5d3520",
+        "8e542c",
+        "bd7f46",
+        "dfab6c"
+      ],
+      "tissu": [
+        "523013",
+        "784517",
+        "a36622",
+        "c78c36",
+        "efd087"
+      ],
+      "metal": [
+        "492716",
+        "754622",
+        "aa692f",
+        "da9847",
+        "f7d49d"
+      ],
+      "feuille": [
+        "27331b",
+        "6e7d3c",
+        "bbbd67"
+      ]
+    },
+    {
+      "id": "ronce",
+      "nom": "Ronce",
+      "accord": "Noyer rougi, lie-de-vin et bronze rosé",
+      "usage": "Salle des missions · baies et parchemin",
+      "bois": [
+        "372327",
+        "533034",
+        "784349",
+        "a36663",
+        "c58b7c"
+      ],
+      "tissu": [
+        "381e2a",
+        "51293b",
+        "794259",
+        "a0657b",
+        "cfa4b5"
+      ],
+      "metal": [
+        "462933",
+        "69474d",
+        "9a6866",
+        "c59389",
+        "ebc2af"
+      ],
+      "feuille": [
+        "272e29",
+        "536c50",
+        "9fa36d"
+      ]
+    },
+    {
+      "id": "brume",
+      "nom": "Brume",
+      "accord": "Frêne grisé, bleu de brume et argent mat",
+      "usage": "Couloirs · ciel de l’aube",
+      "bois": [
+        "2d3034",
+        "444248",
+        "666164",
+        "8a817e",
+        "afa298"
+      ],
+      "tissu": [
+        "233639",
+        "3a5159",
+        "52727e",
+        "82a1aa",
+        "b9cdd0"
+      ],
+      "metal": [
+        "28343b",
+        "4b5a61",
+        "7b8a8e",
+        "aeb8b6",
+        "e4e9e2"
+      ],
+      "feuille": [
+        "253636",
+        "53766f",
+        "a3beb1"
+      ]
+    },
+    {
+      "id": "mousse",
+      "nom": "Mousse",
+      "accord": "Châtaignier olive, laine mousse et cuivre patiné",
+      "usage": "Réserve · verdure des poutres",
+      "bois": [
+        "2f2b1a",
+        "4b4428",
+        "706040",
+        "97805a",
+        "bd9d70"
+      ],
+      "tissu": [
+        "2d3520",
+        "444f2f",
+        "62703d",
+        "8b965e",
+        "bac48b"
+      ],
+      "metal": [
+        "3c3321",
+        "64583b",
+        "8c7351",
+        "b9986c",
+        "e1c29b"
+      ],
+      "feuille": [
+        "24321a",
+        "627d36",
+        "afbb60"
+      ]
+    },
+    {
+      "id": "braise",
+      "nom": "Braise",
+      "accord": "Acajou torréfié, grenat et cuivre rouge",
+      "usage": "Crépuscule · accents chauds",
+      "bois": [
+        "371b1a",
+        "542822",
+        "7b3c2f",
+        "a35d46",
+        "cb8760"
+      ],
+      "tissu": [
+        "3b1820",
+        "652524",
+        "963a30",
+        "b85d46",
+        "e09a78"
+      ],
+      "metal": [
+        "492822",
+        "794735",
+        "ae694f",
+        "d79471",
+        "f3c299"
+      ],
+      "feuille": [
+        "253222",
+        "5d713b",
+        "ada955"
+      ]
+    },
+    {
+      "id": "lin",
+      "nom": "Lin",
+      "accord": "Châtaigne claire, toile écrue et or pâle",
+      "usage": "Dortoirs · cordes et franges naturelles",
+      "bois": [
+        "382820",
+        "5d4532",
+        "8b684a",
+        "b99269",
+        "ddbb8d"
+      ],
+      "tissu": [
+        "474032",
+        "71634c",
+        "958366",
+        "bfaf8d",
+        "eee2c7"
+      ],
+      "metal": [
+        "423624",
+        "746449",
+        "a6956c",
+        "cbbd95",
+        "f2e7c3"
+      ],
+      "feuille": [
+        "29372b",
+        "677d56",
+        "b7c491"
+      ]
+    },
+    {
+      "id": "riviere",
+      "nom": "Rivière",
+      "accord": "Bois fumé, bleu sarcelle et bronze doux",
+      "usage": "Aile ouest · eau et rives",
+      "bois": [
+        "222b25",
+        "384139",
+        "556050",
+        "788170",
+        "a3a68c"
+      ],
+      "tissu": [
+        "122e30",
+        "174b50",
+        "226d73",
+        "40989b",
+        "8ec5bc"
+      ],
+      "metal": [
+        "2c392f",
+        "515f47",
+        "7b8460",
+        "aaa77a",
+        "ddd0a0"
+      ],
+      "feuille": [
+        "18342b",
+        "3f7c65",
+        "8ac297"
+      ]
+    },
+    {
+      "id": "bruyere",
+      "nom": "Bruyère",
+      "accord": "Merisier grisé, laine lilas et étain rosé",
+      "usage": "Bureau et chambre · violet des fonds bleus",
+      "bois": [
+        "2c2330",
+        "453541",
+        "674f5b",
+        "8e6b74",
+        "be9290"
+      ],
+      "tissu": [
+        "2d2239",
+        "453658",
+        "655278",
+        "88759d",
+        "baa8cb"
+      ],
+      "metal": [
+        "353043",
+        "5b5266",
+        "877989",
+        "b2a1af",
+        "e2d6dc"
+      ],
+      "feuille": [
+        "232f2d",
+        "506f61",
+        "9ab5a0"
+      ]
+    }
+  ],
+  "variantes": [
+    {
+      "id": "halcyon-ia-banquet-lierre",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "lierre",
+      "nom_palette": "Lierre",
+      "w": 163,
+      "h": 49,
+      "traitement": "generation-detouree",
+      "png": "PNG-1x/lierre/banquet.png",
+      "sha256": "648687c8382527575b27cee8d69f461f58df41ff00bdde97f52e333527ed90e7"
+    },
+    {
+      "id": "halcyon-ia-banquet-minuit",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "minuit",
+      "nom_palette": "Minuit",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/minuit/banquet.png",
+      "sha256": "f1903b54037f40db69f566c463106228119a7f89a388a1e5759b034a01004794"
+    },
+    {
+      "id": "halcyon-ia-banquet-miel",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "miel",
+      "nom_palette": "Miel",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/miel/banquet.png",
+      "sha256": "0b3b09803ea04389fa595a2f0caeca1d9cc5b8bc033f3340d79e9dc074fddc9d"
+    },
+    {
+      "id": "halcyon-ia-banquet-ronce",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "ronce",
+      "nom_palette": "Ronce",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/ronce/banquet.png",
+      "sha256": "ad754e88c6ed6fc503dfd84799af29941d70a8995762b8f1178801fb1db9796a"
+    },
+    {
+      "id": "halcyon-ia-banquet-brume",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "brume",
+      "nom_palette": "Brume",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/brume/banquet.png",
+      "sha256": "1493d3b49166fad469c2ffafb05ad303e2d69e7cde90124de43cf95e747b64d7"
+    },
+    {
+      "id": "halcyon-ia-banquet-mousse",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "mousse",
+      "nom_palette": "Mousse",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/mousse/banquet.png",
+      "sha256": "fecb8d147e65e2b46c612fba15be7dd659274edbe609dcdb0e4d13259044eeae"
+    },
+    {
+      "id": "halcyon-ia-banquet-braise",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "braise",
+      "nom_palette": "Braise",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/braise/banquet.png",
+      "sha256": "8af7592357b9c2868eb8c15ffda0f7f6dde6a907eed09ca4a6260bcd0e1b69f9"
+    },
+    {
+      "id": "halcyon-ia-banquet-lin",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "lin",
+      "nom_palette": "Lin",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/lin/banquet.png",
+      "sha256": "4b5a17ba16a2b3d30baf031c2677abfd127c3850be3ec70e35763afd6f7ef0ce"
+    },
+    {
+      "id": "halcyon-ia-banquet-riviere",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "riviere",
+      "nom_palette": "Rivière",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/riviere/banquet.png",
+      "sha256": "53789f85fe7e9fbb49c0bb8bbc356d88fe7c507e0921c65e70faab98655f4efe"
+    },
+    {
+      "id": "halcyon-ia-banquet-bruyere",
+      "modele": "ia-banquet",
+      "nom": "Table de banquet",
+      "palette": "bruyere",
+      "nom_palette": "Bruyère",
+      "w": 163,
+      "h": 49,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/bruyere/banquet.png",
+      "sha256": "3e5083392dbc380459131f4e5cc05de148b1984225308098610ab78fd7d3ea71"
+    },
+    {
+      "id": "halcyon-ia-coffre-lierre",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "lierre",
+      "nom_palette": "Lierre",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/lierre/coffre.png",
+      "sha256": "ec02d1ddc171b04355333ed6c9968fa43899d032dd80f98d31d4c0bfc82bab1f"
+    },
+    {
+      "id": "halcyon-ia-coffre-minuit",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "minuit",
+      "nom_palette": "Minuit",
+      "w": 36,
+      "h": 31,
+      "traitement": "generation-detouree",
+      "png": "PNG-1x/minuit/coffre.png",
+      "sha256": "811c9f92235e00e8ef87286398d8d573a845d537b50793e156dc91b221664fd1"
+    },
+    {
+      "id": "halcyon-ia-coffre-miel",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "miel",
+      "nom_palette": "Miel",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/miel/coffre.png",
+      "sha256": "fccc189d284c129aa527e2cdd3babe24e560522af95e6b2351b339e56ce780f2"
+    },
+    {
+      "id": "halcyon-ia-coffre-ronce",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "ronce",
+      "nom_palette": "Ronce",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/ronce/coffre.png",
+      "sha256": "b2fbc6de683bdfab04407a372a3479b763a7b3b25255733e76d2942da7f13f48"
+    },
+    {
+      "id": "halcyon-ia-coffre-brume",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "brume",
+      "nom_palette": "Brume",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/brume/coffre.png",
+      "sha256": "2a731697f95305b893a5c3c1e2ba4f38f6e05bf9bf2fedc71006e6f1241c1766"
+    },
+    {
+      "id": "halcyon-ia-coffre-mousse",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "mousse",
+      "nom_palette": "Mousse",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/mousse/coffre.png",
+      "sha256": "6d985a17d8c27d879e5262b26023dfce12819d06953fa2477bd2eb94eeeb04c8"
+    },
+    {
+      "id": "halcyon-ia-coffre-braise",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "braise",
+      "nom_palette": "Braise",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/braise/coffre.png",
+      "sha256": "1077f309936aa202dbb1ad17af43ba6b8b07379e71657c6bb90b5084ac1edd7d"
+    },
+    {
+      "id": "halcyon-ia-coffre-lin",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "lin",
+      "nom_palette": "Lin",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/lin/coffre.png",
+      "sha256": "2929750cff4dfad891a875a44a25c6d5b2f11d5375a41def71109571b20157e5"
+    },
+    {
+      "id": "halcyon-ia-coffre-riviere",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "riviere",
+      "nom_palette": "Rivière",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/riviere/coffre.png",
+      "sha256": "e34c5b3f8ed1a2f15fc4430182b9ab2c1d5f7282fb903a95769b92691bfe0545"
+    },
+    {
+      "id": "halcyon-ia-coffre-bruyere",
+      "modele": "ia-coffre",
+      "nom": "Grand coffre",
+      "palette": "bruyere",
+      "nom_palette": "Bruyère",
+      "w": 36,
+      "h": 31,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/bruyere/coffre.png",
+      "sha256": "ffadb64e301a915a2a9973790e2256deb60658a21af00056cb40b09f606da265"
+    },
+    {
+      "id": "halcyon-ia-bureau-lierre",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "lierre",
+      "nom_palette": "Lierre",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/lierre/bureau.png",
+      "sha256": "bc32ca268cddb34711c48b1d43a53b1ab856dc72342cc586033598f427c0d089"
+    },
+    {
+      "id": "halcyon-ia-bureau-minuit",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "minuit",
+      "nom_palette": "Minuit",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/minuit/bureau.png",
+      "sha256": "79dd0b1f1db7d6e35b07927bdaec5d33514f9e8a3d5edd6be266c325d08cc34a"
+    },
+    {
+      "id": "halcyon-ia-bureau-miel",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "miel",
+      "nom_palette": "Miel",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/miel/bureau.png",
+      "sha256": "db68e87d16c9f1173e15d7f54db00e2da296b02d73f8cdeab4625cc65aa0d8db"
+    },
+    {
+      "id": "halcyon-ia-bureau-ronce",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "ronce",
+      "nom_palette": "Ronce",
+      "w": 46,
+      "h": 77,
+      "traitement": "generation-detouree",
+      "png": "PNG-1x/ronce/bureau.png",
+      "sha256": "bd3a0a11985b580db99ebc8fe615ff934c05480c36fdae7bbe3daeaa9ecb9dd5"
+    },
+    {
+      "id": "halcyon-ia-bureau-brume",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "brume",
+      "nom_palette": "Brume",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/brume/bureau.png",
+      "sha256": "47e24b005a5138a14647f8ffe6dfbf5b870aaafcc7b33fea871e361ffffe39a5"
+    },
+    {
+      "id": "halcyon-ia-bureau-mousse",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "mousse",
+      "nom_palette": "Mousse",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/mousse/bureau.png",
+      "sha256": "464a64a6111dbe698421a4471b3a4dd4db80021bcddf8475ea36e26131f31649"
+    },
+    {
+      "id": "halcyon-ia-bureau-braise",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "braise",
+      "nom_palette": "Braise",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/braise/bureau.png",
+      "sha256": "d9b2b7433a2a1fe9012c623a61d8e9ea6c5826060e652229ec1fa78d3d359235"
+    },
+    {
+      "id": "halcyon-ia-bureau-lin",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "lin",
+      "nom_palette": "Lin",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/lin/bureau.png",
+      "sha256": "c4896887c8d5b8db33b301e855b37d27606e16a28ff03ccf6227520850b2ec95"
+    },
+    {
+      "id": "halcyon-ia-bureau-riviere",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "riviere",
+      "nom_palette": "Rivière",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/riviere/bureau.png",
+      "sha256": "09616d6ce226621379524d2f5ae77b42bdfe208de6e62d49f59e9f12dccfd7b7"
+    },
+    {
+      "id": "halcyon-ia-bureau-bruyere",
+      "modele": "ia-bureau",
+      "nom": "Bureau aux parchemins",
+      "palette": "bruyere",
+      "nom_palette": "Bruyère",
+      "w": 46,
+      "h": 77,
+      "traitement": "nuancier-derive",
+      "png": "PNG-1x/bruyere/bureau.png",
+      "sha256": "eab7da64ff13179e48dca1e715d532b4fbe478cabd0f4dfec82c16d20f9bff72"
+    }
+  ]
+}

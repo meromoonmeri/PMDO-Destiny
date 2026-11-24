@@ -1,0 +1,68 @@
+{
+  "ia-banquet": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "rectangle": [
+      79,
+      414,
+      1181,
+      748
+    ],
+    "correction_bordure_px": 2188,
+    "sha256_generation": "fd481d67b75e47adbaf9969cda1fd8e4d33eb2f58e566c52e9dd281c018c7ff8",
+    "source_halcyon": "Data/Ground/guild_dining_room.rsground",
+    "modele_halcyon": "banquet",
+    "png_hd": "Detoures-HD/Table-banquet-Lierre.png",
+    "sha256_hd": "1adc1bc0935d7233f20419e31118a74034ada76c1c09e162b9ccd17726d49c7e",
+    "taille_hd": [
+      1102,
+      334
+    ]
+  },
+  "ia-coffre": {
+    "canvas": [
+      2048,
+      2048
+    ],
+    "rectangle": [
+      354,
+      466,
+      1724,
+      1641
+    ],
+    "correction_bordure_px": 6370,
+    "sha256_generation": "47ebf02283bbde28d5e16faed59eadce1b9ba57f05c4331518fc228d4ff68440",
+    "source_halcyon": "Data/Ground/guild_storage_room.rsground",
+    "modele_halcyon": "coffre-haut",
+    "png_hd": "Detoures-HD/Grand-coffre-Minuit.png",
+    "sha256_hd": "6356052593cbd7a5962ece327acb0ac0cff0ca6185adcdb35aa46e2a91307536",
+    "taille_hd": [
+      1370,
+      1175
+    ]
+  },
+  "ia-bureau": {
+    "canvas": [
+      2048,
+      2048
+    ],
+    "rectangle": [
+      656,
+      408,
+      1392,
+      1640
+    ],
+    "correction_bordure_px": 4872,
+    "sha256_generation": "3c40c9cc51604ca75ef791d4d712773d94404e6083bc247ce170b2b02eb28310",
+    "source_halcyon": "Data/Ground/guild_guildmasters_room.rsground",
+    "modele_halcyon": "bureau-rouleau",
+    "png_hd": "Detoures-HD/Bureau-parchemins-Ronce.png",
+    "sha256_hd": "e2bec3d845eceeb1d4687fb2877b463df2f2c084799101a1b0138e54b85ea167",
+    "taille_hd": [
+      736,
+      1232
+    ]
+  }
+}

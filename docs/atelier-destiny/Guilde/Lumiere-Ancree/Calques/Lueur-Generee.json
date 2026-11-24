@@ -1,0 +1,14 @@
+{
+  "provenance": "Texture de lumière produite par le générateur d’images",
+  "sha256_image_generee": "a14c72441950d884ad63398a3bf2fb54ae5ee7723befae74097466ced48d26fa",
+  "sha256_masque": "e245119a2611afb206eb9ddd692bb5c3d0cd45bdebf502a57ffdb3f95e536b79",
+  "taille_source": [
+    1448,
+    1086
+  ],
+  "taille_masque": [
+    161,
+    105
+  ],
+  "traitement": "Luminance → alpha, retrait du fond noir et recentrage sur le cœur ; la faible opacité est réglée lors de la projection."
+}
