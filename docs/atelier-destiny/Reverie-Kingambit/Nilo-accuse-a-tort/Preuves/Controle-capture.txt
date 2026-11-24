@@ -1,0 +1,10 @@
+Capture PMDO, audio natif. Repères dans le MP4.
+Le sprite de Nilo oscille d’environ 3.9 px sur le plan fixe. Fond à 47/255 sous l’ombre avant le seul éclair visible (23.93–24.07 s).
+
+Lower Spring Cave : -0.27 s, corrélation 0.999 (départ mesuré sur la prise brute)
+Éclair : 23.57 s, corrélation 0.934
+Rafale : 24.27 s, corrélation 0.987
+Rising Fear : 26.57 s, corrélation 0.888
+Woosh — accent : 34.25 s, corrélation 0.993
+Woosh — fin ramenée au début : 34.25 s, corrélation 0.997
+Boss Battle 2 : 40.87 s, corrélation 0.999

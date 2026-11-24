@@ -1,0 +1,24 @@
++ python tools/run_ci_check.py tools/tests/test_grotte_verdoyante.py
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+PASS test_nilo_temoin.lua : pose native, oscille derrière Kabutops, sans cible ni tour ; entrée, reprise et nettoyage.
+PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
+PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène 480×360, garde Lv 3/4, scripts Lua et retours vérifiés.
++ python tools/run_ci_check.py tools/tests/test_regle_ko.py
+PASS doubles Lua : héros/partenaire/ancien fondateur, invité, recrue, ennemi, réanimation simulée et sorties scénarisées
+PASS : Universal Destiny, raccordement Lua, scénarios K.O. et sorties testés avec doubles ; partie réelle à vérifier.
++ python tools/run_ci_check.py tools/tests/test_e2_reverie.py
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+Sortie E2 : structure, indicateurs, Bois Perdus et Fosse Cascade vérifiés.
++ python tools/run_ci_check.py tools/tests/test_build_update_zip.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+OK
++ python tools/audit_cadrage_acteurs.py
+
+Audit OK : aucun personnage masque par la boite de dialogue.
++ python tools/audit_cinematiques.py
+
+Audit OK : 136 script(s), aucune replique hors cadre.
++ git diff --check

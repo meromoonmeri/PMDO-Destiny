@@ -1,0 +1,101 @@
+PMDO 0.8.12.0 / Linux. Profil jetable après retour de Nilo et scène sous l’arbre.
+Les scripts de banc n’appartiennent pas au candidat. Ils placent l’équipe pour les prises ou appellent le chargement d’un intérieur.
+Les dialogues et menus utilisent X et les flèches ; sortie et rentrée de la maison de Pierre par le seuil, sans appel direct au callback.
+
+=== Devinette, erreur, indice, cadeau, déplacement, sauvegarde ===
+1795258847 ENTREE reverie_rock_home
+1795258847 PNJ Foyer_Maelle Maëlle X:128 Y:136: 8 Female: 2 true
+1795258847 PNJ Foyer_Basalte Basalte X:216 Y:144: 72 Male: 1 true
+1795258847 PNJ Foyer_Miette Miette X:168 Y:104: 192 Female: 2 true
+1795258848 POSE Foyer_Miette
+1795258848 ETAT reverie_rock_home inventaire= resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258849 INTERACTION Foyer_Miette
+1795258913 FIN Foyer_Miette
+1795258913 ETAT reverie_rock_home inventaire= resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258913 POSE Foyer_Miette
+1795258913 ETAT reverie_rock_home inventaire= resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258914 INTERACTION Foyer_Miette
+1795258933 FIN Foyer_Miette
+1795258933 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258934 POSE Foyer_Miette
+1795258934 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258935 INTERACTION Foyer_Miette
+1795258939 FIN Foyer_Miette
+1795258939 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795258940 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:174: 6
+1795258940 DEBUT SAUVEGARDE
+1795258940 RETOUR SAUVEGARDE
+Fichier écrit : 467684 octets ; SHA-256 (non livré) : bae4dbc85ff9b8c21b167f8cc6c9cfe18855b741cd47ca8d5beaeb6b993b192f
+
+=== Rechargement, autres foyers, sortie et porte ===
+1795259023 CHARGEMENT reverie_rock_home
+1795259023 PNJ Foyer_Maelle Maëlle X:128 Y:136: 8 Female: 2 true
+1795259023 PNJ Foyer_Basalte Basalte X:216 Y:144: 72 Male: 1 true
+1795259023 PNJ Foyer_Miette Miette X:168 Y:104: 192 Female: 2 true
+1795259023 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:174: 6
+1795259024 POSE Foyer_Miette
+1795259024 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795259025 INTERACTION Foyer_Miette
+1795259029 FIN Foyer_Miette
+1795259029 ETAT reverie_rock_home inventaire=berry_pecha resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:168 Y:120: 208
+1795259030 ENTREE reverie_grass_home
+1795259030 PNJ Foyer_Flore Flore X:112 Y:128: 240 Female: 2 true
+1795259030 PNJ Foyer_Aulne Aulne X:216 Y:128: 88 Male: 1 true
+1795259030 PNJ Foyer_Brin Brin X:184 Y:96: 216 Male: 1 true
+1795259031 POSE Foyer_Flore
+1795259031 ETAT reverie_grass_home inventaire=berry_pecha resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:112 Y:144: 224
+1795259031 INTERACTION Foyer_Flore
+1795259040 FIN Foyer_Flore
+1795259040 ETAT reverie_grass_home inventaire=berry_pecha,berry_oran resolue=nil cadeau=nil panier=berry_oran message=nil dessin=nil camera=nil mode=false joueur=X:112 Y:144: 224
+1795259041 POSE Foyer_Brin
+1795259041 ETAT reverie_grass_home inventaire=berry_pecha,berry_oran resolue=nil cadeau=nil panier=berry_oran message=nil dessin=nil camera=nil mode=false joueur=X:184 Y:112: 200
+1795259041 INTERACTION Foyer_Brin
+1795259045 FIN Foyer_Brin
+1795259045 ETAT reverie_grass_home inventaire=berry_pecha,berry_oran resolue=nil cadeau=nil panier=berry_oran message=nil dessin=nil camera=nil mode=false joueur=X:184 Y:112: 200
+1795259046 ENTREE reverie_water_home
+1795259046 PNJ Foyer_Nacre Nacre X:136 Y:128: 8 Female: 2 true
+1795259046 PNJ Foyer_Malo Malo X:208 Y:136: 88 Male: 1 true
+1795259046 PNJ Foyer_Perle Perle X:176 Y:104: 216 Female: 2 true
+1795259047 POSE Foyer_Perle
+1795259047 ETAT reverie_water_home inventaire=berry_pecha,berry_oran resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:176 Y:120: 200
+1795259048 INTERACTION Foyer_Perle
+1795259059 FIN Foyer_Perle
+1795259059 ETAT reverie_water_home inventaire=berry_pecha,berry_oran,orb_escape resolue=true cadeau=orb_escape panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:176 Y:120: 200
+1795259060 ENTREE reverie_hutte_aquatique
+1795259060 PNJ Foyer_Yuna Yuna X:152 Y:176: 40 Female: 2 true
+1795259060 PNJ Foyer_Lino Lino X:200 Y:168: 96 Male: 1 true
+1795259061 POSE Foyer_Lino
+1795259061 ETAT reverie_hutte_aquatique inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:200 Y:184: 112
+1795259061 INTERACTION Foyer_Lino
+1795259072 FIN Foyer_Lino
+1795259072 ETAT reverie_hutte_aquatique inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=table dessin=nil camera=nil mode=false joueur=X:200 Y:184: 112
+1795259072 POSE Foyer_Lino
+1795259072 ETAT reverie_hutte_aquatique inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=table dessin=nil camera=nil mode=false joueur=X:200 Y:184: 112
+1795259073 INTERACTION Foyer_Lino
+1795259077 FIN Foyer_Lino
+1795259077 ETAT reverie_hutte_aquatique inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=table dessin=nil camera=nil mode=false joueur=X:200 Y:184: 112
+1795259078 ENTREE reverie_fire_home
+1795259078 PNJ Foyer_Lyra Lyra X:128 Y:136: 8 Female: 2 true
+1795259078 PNJ Foyer_Leo Léo X:208 Y:136: 88 Male: 1 true
+1795259078 PNJ Foyer_Nilo Nilo X:160 Y:192: 96 Male: 1 true
+1795259079 POSE Foyer_Nilo
+1795259079 ETAT reverie_fire_home inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:160 Y:208: 112
+1795259079 INTERACTION Foyer_Nilo
+1795259094 FIN Foyer_Nilo
+1795259094 ETAT reverie_fire_home inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=nil dessin=garder camera=nil mode=false joueur=X:160 Y:208: 112
+1795259095 POSE Foyer_Leo
+1795259095 ETAT reverie_fire_home inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=nil dessin=garder camera=nil mode=false joueur=X:208 Y:152: 72
+1795259095 INTERACTION Foyer_Leo
+1795259101 FIN Foyer_Leo
+1795259101 ETAT reverie_fire_home inventaire=berry_pecha,berry_oran,orb_escape resolue=nil cadeau=nil panier=nil message=nil dessin=garder camera=nil mode=false joueur=X:208 Y:152: 72
+1795259103 ENTREE reverie_rock_home
+1795259103 PNJ Foyer_Maelle Maëlle X:128 Y:136: 8 Female: 2 true
+1795259103 PNJ Foyer_Basalte Basalte X:216 Y:144: 72 Male: 1 true
+1795259103 PNJ Foyer_Miette Miette X:168 Y:104: 192 Female: 2 true
+1795259112 RETOUR_RESIDENTIEL X:456 Y:2360: 2288 famille_exterieure=false
+1795259114 ENTREE reverie_rock_home
+1795259114 PNJ Foyer_Maelle Maëlle X:128 Y:136: 8 Female: 2 true
+1795259114 PNJ Foyer_Basalte Basalte X:216 Y:144: 72 Male: 1 true
+1795259114 PNJ Foyer_Miette Miette X:168 Y:104: 192 Female: 2 true
+1795259114 ETAT reverie_rock_home inventaire=berry_pecha,berry_oran,orb_escape resolue=true cadeau=berry_pecha panier=nil message=nil dessin=nil camera=nil mode=false joueur=X:152 Y:232: 112
+Empreinte du fichier sauvegardé inchangée après les essais.

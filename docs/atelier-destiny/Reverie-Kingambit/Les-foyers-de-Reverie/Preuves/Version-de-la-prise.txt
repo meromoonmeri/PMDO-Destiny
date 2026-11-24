@@ -1,0 +1,12 @@
+Moteur PMDO 0.8.12.0 (base publique 0.7.6, compilée sous Linux).
+Cinq cartes : blobs Git du commit e885b934a2940096df7bdb3d51758edbce761af9 ; identité avec les cartes de la prise.
+7c1b41ee591d6ac577c2438a8be689ff070ad451  game/Data/Ground/reverie_fire_home.rsground
+5e0f740573060e7663f73eddf897fd3e2bcdcf3b  game/Data/Ground/reverie_grass_home.rsground
+213ac903f97dcb88b3f4e4ffeee2842566586d21  game/Data/Ground/reverie_hutte_aquatique.rsground
+90460833ee95a308b755e8eac79d9ba4a081adce  game/Data/Ground/reverie_rock_home.rsground
+1eca943ac2185c6db82b5a32af8a50041489f65c  game/Data/Ground/reverie_water_home.rsground
+
+Modules métier de la prise finale (octets identiques au candidat) :
+f3c4f8aada9c8fc7add4dc7bf8af9d9ec78d178f4632bb20899ed5a2671c5e9a  reverie_foyers.lua
+508af098e07e112da0a04413db6e9950595107f2c17a58d4a02ae7b02c91bdda  reverie_foyers_recits.lua
+e34039a203641b7674d853797e89a0b120884e5df7f2db0afebf7518c16893e6  reverie_recit.lua

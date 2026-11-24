@@ -1,0 +1,183 @@
+Les foyers de Réverie — e885b934a2940096df7bdb3d51758edbce761af9
+Lua 5.4 via Lupa ; cartes et objets natifs pour les contrôles statiques.
+
+=== test_reverie_foyers ===
+PASS pierre : poses par jalon, genre, porte et vrais trajets 16×16
+PASS plante : poses par jalon, genre, porte et vrais trajets 16×16
+PASS berge : poses par jalon, genre, porte et vrais trajets 16×16
+PASS hutte : poses par jalon, genre, porte et vrais trajets 16×16
+PASS citrouille : poses par jalon, genre, porte et vrais trajets 16×16
+PASS ancienne sauvegarde sur les ancres : repli local sans déplacer l’équipe
+PASS succession Zélie / famille du retour, sans doublon sur une carte rechargée
+PASS 2 devinettes : erreur, indice, annulation, sac plein, cadeau conservé et unique
+PASS panier : deux vrais objets au choix, refus sans effet et suivi de Brin
+[Destiny] foyer hutte, dialogue Foyer_Lino : [string "<python>"]:65: interruption volontaire
+[Destiny] foyer citrouille, dialogue Foyer_Nilo : [string "<python>"]:65: interruption volontaire
+PASS message et dessin : deux branches réelles, reprise et choix mémorisés ; alerte et accueil prioritaires
+
+=== test_reverie_recit ===
+PASS couverture bois : 33 répliques individuelles / 21 saynètes
+PASS couverture alerte : 33 répliques individuelles / 22 saynètes
+PASS couverture nilo : 34 répliques individuelles / 21 saynètes
+PASS couverture crique : 34 répliques individuelles / 22 saynètes
+PASS ancien état, priorité visite / alerte / accueil, crique additive
+PASS tous les ancrages sur les collisions natives et accessibles ; rechargement stable
+PASS deux services, mise en scène et trace « vue » commune, pas de rejeu après sieste ou chargement
+PASS changement de quartier, repli sans déplacer le joueur, pas de Pip et sortie vers le résidentiel
+[Destiny] saynète Réverie (famille) : [string "<python>"]:55: interruption volontaire
+PASS interruption récupérable, trio en famille, salle disponible pour les échanges de la crique
+PASS le trio rejoint le foyer à la réentrée sans double ni coupure du dialogue extérieur
+
+=== test_entrees_reverie ===
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS entrée et retour simulés PortePosteBekipan
+PASS entrée et retour simulés PorteCitrouilleNordOuest
+PASS entrée et retour simulés PorteHutteNordEst
+PASS entrée et retour simulés PorteDojoKingambit
+PASS entrée et retour simulés PorteHutteSud
+PASS entrée et retour simulés PorteMaisonPierre
+PASS entrée et retour simulés PorteMaisonPlanteSud
+PASS entrée et retour simulés PorteCitrouilleSud
+PASS garde, états anciens, café et sorties répétées (doublures)
+PASS prénoms sur habitants, Baudrive anonyme et équipe inchangée
+PASS café : noms cohérents, circulation, retours distincts et gardes répétées (doublures)
+PASS ancien raccord Ledian désactivé, dojo Kingambit intact
+PASS reverie_nord contacts et retours sur grille statique
+PASS reverie_centre contacts et retours sur grille statique
+PASS reverie_residentiel contacts et retours sur grille statique
+PASS destinations, marqueurs, seuils, retours ; gameplay non testé
+
+=== test_suivi_interieurs ===
+PASS suivi intérieur : entrée, chargement, absence, leader, identité, obstacles et ancien duo
+PASS 13 sorties : partenaire ignoré, joueur accepté, double sortie évitée
+PASS placement statique reverie_post_office entrance_south (240, 249)
+PASS placement statique reverie_inn Main_Entrance_Marker (224, 304)
+PASS placement statique reverie_water_home Main_Entrance_Marker (176, 232)
+PASS placement statique dojo_kingambit MarowakDojoExitMarker (400, 504)
+PASS placement statique dojo_kingambit_arene entree_sud (400, 504)
+PASS placement statique dojo_kingambit_reliques entree_sud (400, 504)
+PASS placement statique guilde_destiny_accueil EntreeSudMarker (248, 288)
+PASS placement statique guilde_destiny_missions ArriveeDepuisAccueilMarker (304, 352)
+PASS placement statique guilde_destiny_grand_salon ArriveeSudMarker (304, 336)
+PASS placement statique guilde_destiny_bureau_maitre EntreeSudMarker (272, 304)
+PASS placement statique guilde_destiny_carrefour EntreeEstMarker (432, 176)
+PASS placement statique guilde_destiny_refectoire EntreeEstMarker (528, 240)
+PASS placement statique guilde_destiny_cuisine EntreeSudMarker (256, 288)
+PASS placement statique guilde_destiny_reserve EntreeNordMarker (240, 112)
+PASS placement statique guilde_destiny_couloir_ouest EntreeOuestMarker (80, 176)
+PASS placement statique guilde_destiny_couloir_est EntreeOuestMarker (80, 176)
+PASS placement statique guilde_destiny_dortoir_nord_1 EntreeSudMarker (240, 264)
+PASS placement statique guilde_destiny_dortoir_nord_2 EntreeSudMarker (240, 264)
+PASS placement statique guilde_destiny_dortoir_sud_1 EntreeNordMarker (240, 112)
+PASS placement statique guilde_destiny_dortoir_sud_2 EntreeNordMarker (240, 112)
+PASS placement statique guilde_destiny_chambre_heros EntreeOuestMarker (80, 192)
+PASS placement statique reverie_hutte_aquatique Main_Entrance_Marker (208, 240)
+PASS placement statique reverie_rock_home Main_Entrance_Marker (176, 232)
+PASS placement statique reverie_grass_home Main_Entrance_Marker (184, 240)
+PASS placement statique reverie_fire_home Main_Entrance_Marker (176, 224)
+PASS placement statique maison_equipe_falaise entree (208, 272)
+PASS placement statique reverie_normal_home Main_Entrance_Marker (184, 240)
+PASS placement statique reverie_electric_home Main_Entrance_Marker (176, 240)
+PASS placement statique ledian_dojo Main_Entrance_Marker (232, 128)
+PASS placement statique caféspindaaccueil NewObject_17 (314, 354)
+PASS placement statique spindacaféétage1 NewObject_3 (313, 351)
+PASS placement statique spindacaféétage1salle2 NewObject_11 (29, 220)
+PASS choix système, retour à la falaise
+
+=== test_hutte_aquatique ===
+Hutte sud : zone, 1 785 tuiles, quatre phases et itinéraire statique contrôlés ; gameplay non testé.
+
+=== test_visite_marchands ===
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire vulpix, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire pikachu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire skitty, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+[Destiny] Visite de la ville suspendue : partenaire absent de l’équipe.
+PASS partenaire absent : visite suspendue
+PASS suite Lyra / Nilo : choix, annulation, déplacement et entrée Fosse Cascade
+[Destiny] Visite suspendue : un habitant occupe le trajet.
+PASS placement inattendu : visite suspendue sans traverser un habitant
+PASS dialogues après alerte / départ, banque préservée et variantes quotidiennes avant alerte
+PASS première entrée, introduction unique, suivi, actualité et retour Spinda
+PASS employé absent : écran visible et scène différée
+PASS trajet Spinda occupé : dialogue sans forcer
+[Destiny] Suivi intérieur indisponible : [string "<python>"]:10: simulation erreur suivi
+PASS suivi indisponible : fondu déjà effectué
+PASS retour étage : pas de première visite artificielle
+PASS escalier fermé pendant rénovation
+PASS escalier préservé pour une réouverture future
+PASS accueil pendant rénovation, pas de téléportation vers salles fermées
+PASS Pipo absent : scène et suivi conservés
+PASS sieste : nouveau jour et annonce sans effet intérieur
+[Destiny] café Spinda : étape ignorée (sortie sud) : ...e/Data/Script/destiny/ground/caféspindaaccueil/init.lua:34: attempt to call a nil value (method 'FindObject')
+[Destiny] café Spinda : étape ignorée (escalier nord) : ...e/Data/Script/destiny/ground/caféspindaaccueil/init.lua:49: attempt to call a nil value (method 'FindObject')
+PASS Kirlia côte à côte, clients fixes, dialogue Kirlia et balancement Spinda
+PASS quatre temps, bornes et tirage unique par jour
+PASS dix variantes et carrefour : pluie identique, autres statuts conservés
+PASS aucun effet et aucun tirage dans les intérieurs ou cartes exclues
+PASS rechargement, jour suivant et migration ancienne sauvegarde simulés
+[Destiny] Météo extérieure indisponible : [string "<python>"]:37: simulation erreur moteur
+PASS effet indisponible : erreur confinée
+PASS carrefour Init et GameLoad, sorties intactes
+PASS synchronisation 4 ambiances LUT (sans dark) et routage auto carrefour
+PASS visite au centre, cinq commerçants et dialogue d’origine préservé
+
+=== test_boutiques_kecleon ===
+PASS Zig / Zag : lots, achats, ventes, sauvegarde, rupture, réassort et Joliflor isolé
+60 références natives disponibles ; catalogue et transactions vérifiés.
+
+=== test_e2_reverie ===
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+Sortie E2 : structure, indicateurs, Bois Perdus et Fosse Cascade vérifiés.
+
+=== test_regle_ko (runner autonome) ===
+PASS doubles Lua : héros/partenaire/ancien fondateur, invité, recrue, ennemi, réanimation simulée et sorties scénarisées
+PASS : Universal Destiny, raccordement Lua, scénarios K.O. et sorties testés avec doubles ; partie réelle à vérifier.
+
+=== test_polish_reverie (Lua) ===
+PASS Réverie : réponses décalées, quartier visible, scènes et interactions prioritaires, comptoirs fixes.
+
+=== test_grotte_verdoyante (Lua) ===
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+
+=== test_quartiers_reverie (Lua) ===
+PASS changements de quartier, retours et absence des escaliers internes (doublures)
+PASS migration ancienne instance du centre : obstacles
+PASS migration ancienne instance du centre : habitants
+PASS migration ancienne instance du centre : les deux
+
+=== test_habitants_quartiers (Lua) ===
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS attente de Lyra : états persistants, réentrée, doublons et quartier résidentiel
+
+=== test_plage_sablefin_integration (Lua) ===
+PASS plage_sablefin + passage_aquatique 10F + crique secrete + crossroad connection
+
+Audit OK : aucun personnage masque par la boite de dialogue.
+
+Audit OK : 140 script(s), aucune replique hors cadre.
+
+Contrôles ciblés terminés.

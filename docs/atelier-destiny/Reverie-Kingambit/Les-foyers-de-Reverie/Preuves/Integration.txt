@@ -1,0 +1,26 @@
+Source publique : 37e6b5cdcfb46a064239c7c6983ef4840d27d408 (tag v0.7.6)
+Carnet des retours : c5b067a20e6c13de83d848dfd18ab3a4fda26bc8
+Les foyers de Réverie : e885b934a2940096df7bdb3d51758edbce761af9
+Import cumulatif dans un dépôt indépendant, sans le Carnet avant import.
+Patch inverse puis direct : arbres exacts contrôlés.
+
+M	.github/workflows/build-windows.yml
+A	docs/REVERIE_FOYERS.md
+M	docs/REVERIE_VILLE_REACTIVE.md
+M	game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua
+M	game/Data/Script/destiny/ground/WaterfallVillageCapital_Dev/init.lua
+M	game/Data/Script/destiny/ground/reverie_fire_home/init.lua
+M	game/Data/Script/destiny/ground/reverie_grass_home/init.lua
+M	game/Data/Script/destiny/ground/reverie_hutte_aquatique/init.lua
+M	game/Data/Script/destiny/ground/reverie_rock_home/init.lua
+M	game/Data/Script/destiny/ground/reverie_water_home/init.lua
+A	game/Data/Script/destiny/reverie_foyers.lua
+A	game/Data/Script/destiny/reverie_foyers_recits.lua
+M	game/Data/Script/destiny/reverie_recit.lua
+M	tools/test_batiments_interieurs.py
+M	tools/tests/test_entrees_reverie.py
+M	tools/tests/test_hutte_aquatique.py
+A	tools/tests/test_reverie_foyers.lua
+A	tools/tests/test_reverie_foyers.py
+M	tools/tests/test_reverie_recit.lua
+M	tools/tests/test_suivi_interieurs.py
