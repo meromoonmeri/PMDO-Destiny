@@ -1,0 +1,767 @@
+From a992df4680cc424b139b07514817adf7fdb1649d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Destiny=20=E2=80=94=20int=C3=A9gration=20locale?=
+ <destiny-local@users.noreply.local>
+Date: Fri, 20 Nov 2026 19:20:03 +0000
+Subject: [PATCH] =?UTF-8?q?Recentre=20le=20cercle=20des=20Kabuto=20et=20me?=
+ =?UTF-8?q?t=20en=20sc=C3=A8ne=20leur=20fuite=20sous=20terre?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ docs/REVERIE_075.md                           |  10 +-
+ .../Ground/fgv1_fin_grotte_vasques.rsground   | Bin 4185053 -> 4185053 bytes
+ game/Data/Map/end_grotte_verdoyante.rsmap     | Bin 224886 -> 224883 bytes
+ .../Script/destiny/fosse_cascade_scene.lua    |  23 +-
+ .../ground/fgv1_fin_grotte_vasques/init.lua   | 260 ++++++++++++------
+ tools/build_grotte_verdoyante.py              |   6 +-
+ tools/tests/test_grotte_verdoyante.lua        |  79 ++++--
+ tools/tests/test_grotte_verdoyante.py         |  47 ++--
+ 8 files changed, 287 insertions(+), 138 deletions(-)
+
+diff --git a/docs/REVERIE_075.md b/docs/REVERIE_075.md
+index 7590e53..0f5db36 100644
+--- a/docs/REVERIE_075.md
++++ b/docs/REVERIE_075.md
+@@ -7,11 +7,11 @@ Après la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v
+ - La carte de mise en scène passe de **480 × 360 à 576 × 528 px** (72 × 66 tuiles de 8 px). Un passage rocheux éclairé par petites vasques débouche au sud de la salle haute. Deux panoramiques distincts montrent d'abord le couloir, puis Nilo sur la terrasse. Les sprites ne sont pas redimensionnés.
+ - Nilo tremble déjà sur la terrasse. Il demande qui sont les deux Pokémon, puis raconte qu’il cherchait sa maman et s’est perdu. Le duo se présente et le rassure avant que Kabutops ne l’accuse. **Deux avertissements** signés `???`, sans portrait ; entre les deux, le duo se regarde et Nilo dément l’accusation.
+ - Secousse, terre et jaillissement vertical sur l’axe médian : Kabutops surgit devant le duo, style **Tunnel**, avec les particules et le son natifs `Dig`. L’impulsion, le coup de faux et le recul des deux Pokémon se chevauchent. Pas d’arrivée depuis la rive ni d’éclair plein écran qui masque l’animation.
+-- Après le recul du duo, quatre Kabuto surgissent en décalé : les flancs d’abord, puis l’arrière. Deux avancées courtes en pose d’attaque, une trace de griffe au dernier pas. Le duo suit les deux vagues du regard avant que le gardien reprenne la parole. En revanche, la garde est déjà en place.
++- La confrontation se décale de deux cases vers le cœur de la salle haute. Après le recul du duo, les Kabuto surgissent par les flancs, longent les bords et menacent ; les deux autres passent derrière le duo et ferment le retrait. La caméra suit le bruit au sud ; le duo se resserre, les gardes pivotent et les quatre traces de Griffe ponctuent la fermeture du cercle. En revanche, la garde est déjà en place.
+ - Face au duo, Kabutops explique les crues, les départs de familles et le danger en aval. Il soupçonne Nilo parce qu’il l’a vu près de la source, pas parce qu’il l’a vu agir. Quand le héros constate que le gardien est trop en colère pour entendre raison, son partenaire lui répond et se prépare. Objectif de **1 min 20 à 1 min 30** avec une lecture posée ; la confirmation des dialogues reste manuelle.
+ - Le woosh garde ses neuf bandes natives `Pre_Battle` et le bruitage `EVT_Battle_Transition` entier. La revanche est courte et conserve le même raccord. `Boss Battle 2.ogg` démarre côté arène. Nilo reste visible et tremble sur la terrasse derrière Kabutops, au même point du décor que dans le pré-combat. Sa pose est dessinée depuis le sprite natif de Lixy ; il n’entre dans aucune équipe, n’a ni tour ni collision et ne peut pas être choisi comme cible.
+-- **Combat au 9e** : Kabutops garde ses statistiques, capacités et position. Deux Kabuto **niveau 4** sur les flancs et deux **niveau 3** à l’arrière prennent de vrais tours, avec leurs capacités de départ Griffe et Armure, sans bonus. Leurs positions côté arène reprennent exactement celles de la cinématique, sans bloquer les quatre départs alliés. La victoire native exige toute l’équipe ennemie. Aucun changement aux 42 cases praticables, à l’arène 480 × 360 ou aux huit premiers étages.
+-- Après la victoire, Kabutops s'enfuit par le sud. Nilo redescend de la terrasse et retrouve Lyra. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
++- **Combat au 9e** : Kabutops change de position, pas de statistiques ni de capacités. Deux Kabuto **niveau 4** sur les flancs et deux **niveau 3** à l’arrière prennent de vrais tours, avec leurs capacités de départ Griffe et Armure, sans bonus. Leurs positions côté arène reprennent exactement celles de la cinématique, sans bloquer les quatre départs alliés. La victoire native exige toute l’équipe ennemie. Aucun changement aux 42 cases praticables, à l’arène 480 × 360 ou aux huit premiers étages.
++- Après le dernier K.O., les quatre Kabuto marquent leur peur (émotes, tremblements, recul). L’arrière se replie sous terre, puis les flancs ; Kabutops utilise lui aussi Tunnel et part le dernier. Nilo attend que tous soient partis avant de redescendre de la terrasse et de retrouver Lyra. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
+ 
+ ### Références de mise en scène
+ 
+@@ -21,8 +21,8 @@ Après la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v
+ 
+ ## Netteté, sans retouche de la carte
+ 
+-Le ground, les planches et le décor de l’arène sont inchangés. Seule l’équipe ennemie est mise à jour dans les données de l’arène. Le moteur échantillonne déjà les tuiles en `PointClamp` à une taille de fenêtre entière. Pour les aperçus, `tools/render_ground_moteur.py` conserve désormais les tuiles complètes de 8 ou 24 px et exporte les animations WebP sans perte. `--echelle 2`, `3` ou `4` duplique les pixels, sans interpolation ; le PNG par défaut reste à taille native. `--arene end_grotte_verdoyante` permet de rendre les mêmes strates de la salle haute dans l’arène 480 × 360.
++Les planches, le décor, les collisions et les dimensions restent inchangés. Seuls le repère de Kabutops côté ground et les points de départ côté arène bougent. Le moteur échantillonne déjà les tuiles en `PointClamp` à une taille de fenêtre entière. Pour les aperçus, `tools/render_ground_moteur.py` conserve désormais les tuiles complètes de 8 ou 24 px et exporte les animations WebP sans perte. `--echelle 2`, `3` ou `4` duplique les pixels, sans interpolation ; le PNG par défaut reste à taille native. `--arene end_grotte_verdoyante` permet de rendre les mêmes strates de la salle haute dans l’arène 480 × 360.
+ 
+ ## Régressions couvertes
+ 
+-`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d’approche, l’ordre des échanges, le tremblement avant le premier plan, les deux avertissements anonymes, le mouvement vertical et le recul, les deux vagues de Kabuto et leur placement en arène, la décision du héros, le raccord et le spectateur non combattant (placement, animation et nettoyage), la revanche et les phases de fin. Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
++`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d’approche, l’ordre des échanges, le tremblement avant le premier plan, les deux avertissements anonymes, le mouvement vertical et le recul, les détours, les deux vagues de Kabuto et leur placement en arène, la décision du héros, le raccord et le spectateur non combattant (placement, animation et nettoyage), la revanche et les phases de fin (ordre des cinq fuites, nettoyage, sauvetage et bilan). Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
+diff --git a/game/Data/Ground/fgv1_fin_grotte_vasques.rsground b/game/Data/Ground/fgv1_fin_grotte_vasques.rsground
+index ac27e6f3143374d6b4207d412da2be98e75f292e..c7b2b10497afe46852cff365d705a40cbc4925a1 100644
+GIT binary patch
+delta 151
+zcmWN=ZBhXN007Wo6)8m}7Nt<hN32Q_?Kntx@#EdWMVjen2ib8Jc{6YOyGw2N*HY2~
+z83zt!<s8X7cB0_anWB<&7cP}usi+Fo)HPhY(RAxhOIydi2amd*^z;o3JsTN|OuTsY
+dX6oICnYm93OJ6_nDhZ<5bn}<Q;pRJu*Z*&nH46X$
+
+delta 151
+zcmWN=*G&Qe007XOXF)`ziGqcuG(iE6rr?D^+=Y*~1B;mW=^z(oL0|HAKl@<!e<N@p
+zbm+*j6Dg<C&Sadsa49P%ub}8k$+a706}Rr(dr(zV*U<FnNlRNtSI@J)ffuiaM#kPm
+eCZ=ZQ7T$eWTKW8r*GV{zqU~=Im$zR@y!iufPc;Pq
+
+diff --git a/game/Data/Map/end_grotte_verdoyante.rsmap b/game/Data/Map/end_grotte_verdoyante.rsmap
+index 8b41a84fa3e8d4914c84e103dda1f0eb272a25ae..0cfa5a291b191adbe046506844ce303c37666844 100644
+GIT binary patch
+delta 80
+zcmex%hxhXx-VHKLj24p(HAFWXGi~N!v;;H%^7X-(i==@}qs@jIOCXd2PxCj2_HPc1
+UK+LrLn*(#YE~CNpxIAVF0AmIl1^@s6
+
+delta 90
+zcmex-hxgkZ-VHKLOoj%VWtmR!Fc}(de#W;LOm|5y=3zA1tf#RALMiYxe|Bj9?7#@b
+mOxr&@FsJKE8rAA3xnve8S(((v>L_`Zq~;bYSw+Xz)&c;Uavr+?
+
+diff --git a/game/Data/Script/destiny/fosse_cascade_scene.lua b/game/Data/Script/destiny/fosse_cascade_scene.lua
+index 851f062..fa3f10d 100644
+--- a/game/Data/Script/destiny/fosse_cascade_scene.lua
++++ b/game/Data/Script/destiny/fosse_cascade_scene.lua
+@@ -6,14 +6,23 @@ fosse.NILO_ARENE = {
+   x = fosse.NILO_TERRASSE.x + 8 - fosse.SALLE_X,
+   y = fosse.NILO_TERRASSE.y + 8,
+ }
+--- Les cases sont celles de MapTeams dans end_grotte_verdoyante.rsmap.
+--- Laisser libres les quatre départs natifs de l'équipe, même avec des recrues.
+--- Les directions sont les noms Dir8 ; la carte utilise leurs valeurs natives.
++-- Implantation de la confrontation au centre de la salle haute, deux cases
++-- au nord de la version précédente. Les quatre départs alliés restent libres.
++fosse.DUEL = {
++  boss={x=10,y=8}, hero={x=10,y=10}, partenaire={x=9,y=10},
++}
++
++-- Cases et directions de MapTeams. Le premier déplacement longe le duo ;
++-- le second coupe vers lui. Les arrière-gardes pivotent pour fermer le passage.
+ fosse.GARDE = {
+-  {nom='Kabuto_Flanc_G', x=8,  y=11, face='DownRight', depart={220,244}, pas={230,254}, delai=3,  signal=true},
+-  {nom='Kabuto_Flanc_D', x=11, y=11, face='DownLeft',  depart={340,244}, pas={331,253}, delai=17},
+-  {nom='Kabuto_Arriere_G', x=9,  y=14, face='Up', depart={268,366}, pas={268,355}, delai=42, signal=true},
+-  {nom='Kabuto_Arriere_D', x=10, y=14, face='Up', depart={292,369}, pas={292,358}, delai=54},
++  {nom='Kabuto_Flanc_G', x=8,  y=9, face='DownRight', avance='DownRight',
++    depart={205,202}, passage={212,224}, menace={226,224}, delai=4, attente=48, recul={-6,-4}, signal=true},
++  {nom='Kabuto_Flanc_D', x=11, y=9, face='DownLeft', avance='DownLeft',
++    depart={362,200}, passage={352,225}, menace={338,224}, delai=23, attente=43, recul={6,-4}},
++  {nom='Kabuto_Arriere_G', x=9,  y=12, face='Up', avance='UpRight',
++    depart={242,293}, passage={259,306}, menace={263,301}, delai=69, attente=24, recul={-3,7}, signal=true},
++  {nom='Kabuto_Arriere_D', x=10, y=12, face='Up', avance='UpLeft',
++    depart={320,293}, passage={301,306}, menace={297,301}, delai=84, attente=20, recul={3,7}},
+ }
+ 
+ function fosse.AncreAuSol(case)
+diff --git a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+index b7ba826..6d4e12a 100644
+--- a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
++++ b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+@@ -15,17 +15,21 @@ local LIEU_DONJON = '[color=#FFC663]Fosse Cascade[color]'
+ local LIEU_FOND = '[color=#FFC663]Fosse Cascade Fond[color]'
+ local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
+ 
+--- Les ancres de fin correspondent aux centres des cases (10,10), (10,12)
+--- et (9,12) de l'arène, moins le demi-collider de GroundChar.
++-- Le sol de la scène et les départs du donjon partagent leurs centres.
++-- Le duo s’arrête une case devant sa position de duel, puis y est repoussé.
+ local SALLE_X = fosse.SALLE_X
+-local SOL_BOSS = {x = 292, y = 244}
+-local SOL_HEROS = {x = 292, y = 268}
+-local SOL_PARTENAIRE = {x = 268, y = 268}
+--- Devant le duo ET au milieu de ses deux axes. L'arène conserve son ancre
+--- native SOL_BOSS, utilisée aussi pour la revanche et l'après-combat.
+-local APPARITION_BOSS = {x = math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y = SOL_BOSS.y}
++local function ancre(case)
++  local x, y = fosse.AncreAuSol(case)
++  return {x=x, y=y}
++end
++local SOL_BOSS = ancre(fosse.DUEL.boss)
++local DUEL_HEROS = ancre(fosse.DUEL.hero)
++local DUEL_PARTENAIRE = ancre(fosse.DUEL.partenaire)
++local SOL_HEROS = {x=DUEL_HEROS.x, y=DUEL_HEROS.y - 24}
++local SOL_PARTENAIRE = {x=DUEL_PARTENAIRE.x, y=DUEL_PARTENAIRE.y - 24}
++local APPARITION_BOSS = {x=math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y=SOL_BOSS.y}
+ local SOL_NILO_TERRASSE = fosse.NILO_TERRASSE
+-local RECUL_Y = 292
++local RECUL_Y = DUEL_HEROS.y
+ local ENTREE_HEROS = {x = 222, y = 492}
+ local ENTREE_PARTENAIRE = {x = 198, y = 484}
+ local COUDE_HEROS = {x = 246, y = 436}
+@@ -37,9 +41,11 @@ local CAM_DUEL_X = 300
+ local CAM_DUEL_Y = 240 -- centre effectif de l'arène une fois clampée
+ local CAM_ENTREE = {x = 230, y = 406}
+ local CAM_SEUIL = {x = 278, y = 372}
+-local CAM_TERRASSE_Y = 234
+-local CAM_NILO_REPLI_Y = 250 -- garder Nilo et le duo dans le champ
+-local CAM_FACE_Y = 260 -- les pieds du duo restent au-dessus du dialogue après le recul
++local CAM_TERRASSE_Y = 216
++local CAM_FACE_Y = 226 -- l’arrêt du duo laisse un champ libre derrière lui
++local CAM_CERCLE_Y = 242 -- léger recul du cadre au bruit venu du passage sud
++local CAM_NILO_REPLI_Y = 218
++local CAM_VICTOIRE_Y = 242
+ 
+ local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
+   local existant = CH(nom)
+@@ -399,7 +405,14 @@ local function les_avertissements(hero, partenaire, nilo)
+   avertissement_hors_champ('Dernier avertissement : reculez.')
+ end
+ 
+--- Une seule sortie façon Tunnel. La terre devient visible avant le sprite ;
++local function terre_tunnel(x, y, cadence, son)
++  local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', cadence))
++  terre.Layer = DrawLayer.Front
++  if son then SOUND:PlayBattleSE('DUN_Dig') end
++  GROUND:PlayVFX(terre, x + 8, y + 14)
++end
++
++-- Sortie du gardien façon Tunnel. La terre devient visible avant le sprite ;
+ -- le déplacement est vertical, déjà sur l’axe médian du duo. Les éclats
+ -- natifs de Tunnel couvrent les premiers pixels du corps qui sortent du sol.
+ local function reveler_gardien(kabutops, hero, partenaire, nilo)
+@@ -417,7 +430,7 @@ local function reveler_gardien(kabutops, hero, partenaire, nilo)
+       cinematique.TournerGroupe({{hero, Direction.UpLeft, 0, 4}, {partenaire, Direction.UpRight, 4, 4}})
+     end),
+     TASK:BranchCoroutine(function()
+-      GAME:MoveCamera(CAM_DUEL_X, 246, 24, false)
++      GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y - 4, 24, false)
+     end),
+     TASK:BranchCoroutine(function()
+       GAME:WaitFrames(8)
+@@ -425,10 +438,7 @@ local function reveler_gardien(kabutops, hero, partenaire, nilo)
+       emote_sur(partenaire or hero, 'shock')
+     end),
+   })
+-  local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 3))
+-  terre.Layer = DrawLayer.Front
+-  SOUND:PlayBattleSE('DUN_Dig')
+-  GROUND:PlayVFX(terre, APPARITION_BOSS.x + 8, APPARITION_BOSS.y + 14)
++  terre_tunnel(APPARITION_BOSS.x, APPARITION_BOSS.y, 3, true)
+   GAME:WaitFrames(11)
+   kabutops.HideShadow = true
+   kabutops:SetLocHeight(-10)
+@@ -475,19 +485,14 @@ local function placer_garde(en_place)
+   return garde
+ end
+ 
+-local function pas_de_griffe(k, ax, ay, bx, by, fermer)
+-  local anim = 'Scratch'
+-  local total, impact = temps_animation(k.ch, anim)
+-  if total == nil then
+-    anim = 'Attack'
+-    total, impact = temps_animation(k.ch, anim)
+-  end
+-  total = total or 22
++local function pas_de_griffe(k, ax, ay, bx, by, dir, fermer)
++  local total, impact = temps_animation(k.ch, 'Attack')
++  total = total or 28
+   local duree = fermer and 22 or 17
+   local frappe = math.max(5, math.min(duree - 4, math.floor((impact or 8) * duree / total)))
+   local distance = math.max(math.abs(bx - ax), math.abs(by - ay))
+   local function bondir()
+-    GROUND:AnimateToPosition(k.ch, anim, k.dir, bx, by, total / (duree + 1), distance / duree, 0)
++    GROUND:AnimateToPosition(k.ch, 'Attack', dir, bx, by, total / (duree + 1), distance / duree, 0)
+     GROUND:CharEndAnim(k.ch)
+   end
+   if not fermer then bondir(); return end
+@@ -500,52 +505,80 @@ local function pas_de_griffe(k, ax, ay, bx, by, fermer)
+       trace.Layer, trace.Offset, trace.LocHeight = DrawLayer.Front, 9, 4
+       if k.ancre.signal then SOUND:PlayBattleSE('DUN_Scratch') end
+       GROUND:PlayVFX(trace, math.floor(ax + (bx - ax) * t + 8),
+-        math.floor(ay + (by - ay) * t + 8), k.dir)
++        math.floor(ay + (by - ay) * t + 8), dir)
+     end),
+   })
+ end
+ 
++local function surgir_kabuto(k)
++  local spec, ch = k.ancre, k.ch
++  GAME:WaitFrames(spec.delai)
++  terre_tunnel(spec.depart[1], spec.depart[2], 2, spec.signal)
++  GAME:WaitFrames(8)
++  ch.HideShadow = true
++  ch:SetLocHeight(-7)
++  GROUND:Unhide(spec.nom)
++  for _, h in ipairs({-4, 0, 5, 9, 7, 3, 0}) do
++    ch:SetLocHeight(h)
++    GAME:WaitFrames(2)
++  end
++  ch.HideShadow = false
++  GAME:WaitFrames(5)
++  -- Ils ne foncent pas droit sur une cible. D’abord ils gagnent l’angle,
++  -- puis menacent et bouchent la sortie après une hésitation.
++  GROUND:MoveToPosition(ch, spec.passage[1], spec.passage[2], false, 1.35)
++  local direction = Direction[spec.avance]
++  pas_de_griffe(k, spec.passage[1], spec.passage[2], spec.menace[1], spec.menace[2], direction, false)
++  GAME:WaitFrames(spec.attente)
++  tourner_vers(ch, k.dir, 3)
++  pas_de_griffe(k, spec.menace[1], spec.menace[2], k.x, k.y, k.dir, true)
++end
++
++local function pas_du_duo(ch, dir, x, y)
++  if ch ~= nil then
++    GROUND:AnimateToPosition(ch, 'Walk', dir, x, y, 1, 0.7, 0)
++    GROUND:CharEndAnim(ch)
++  end
++end
++
+ local function encercler_duo(kabutops, hero, partenaire)
+   SOUND:PlayBGM('Rising Fear.ogg', false)
+   local garde = placer_garde(false)
+   local mouvements = {}
+   for _, k in ipairs(garde) do
+-    mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
+-      local spec, ch = k.ancre, k.ch
+-      GAME:WaitFrames(spec.delai)
+-      local dx, dy = spec.depart[1], spec.depart[2]
+-      local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 2))
+-      terre.Layer = DrawLayer.Front
+-      if spec.signal then SOUND:PlayBattleSE('DUN_Dig') end
+-      GROUND:PlayVFX(terre, dx + 8, dy + 13)
+-      GAME:WaitFrames(8)
+-      ch.HideShadow = true
+-      ch:SetLocHeight(-7)
+-      GROUND:Unhide(spec.nom)
+-      for _, h in ipairs({-4, 0, 5, 9, 7, 3, 0}) do
+-        ch:SetLocHeight(h)
+-        GAME:WaitFrames(2)
+-      end
+-      ch.HideShadow = false
+-      GAME:WaitFrames(6)
+-      pas_de_griffe(k, dx, dy, spec.pas[1], spec.pas[2], false)
+-      GAME:WaitFrames(9)
+-      pas_de_griffe(k, spec.pas[1], spec.pas[2], k.x, k.y, true)
+-    end)
++    mouvements[#mouvements + 1] = TASK:BranchCoroutine(function() surgir_kabuto(k) end)
+   end
+-  mouvements[#mouvements+1] = TASK:BranchCoroutine(function()
+-    GAME:WaitFrames(15)
++  mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
++    GAME:WaitFrames(13)
+     secouer_ecran(1, 1, 14)
+-    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 4}, {partenaire and hero, garde[2].ch, 12, 4}})
+-    GAME:WaitFrames(21)
+-    emote_sur(hero, 'exclaim')
+-    cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
+-    GAME:WaitFrames(20)
+-    emote_sur(partenaire, 'sweatdrop')
++    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 3}, {partenaire and hero, garde[2].ch, 18, 3}})
++    GAME:WaitFrames(11)
++    -- Pris de flanc, le duo se resserre en se couvrant, sans se percuter.
++    TASK:JoinCoroutines({
++      TASK:BranchCoroutine(function() pas_du_duo(partenaire, Direction.Left, DUEL_PARTENAIRE.x + 2, RECUL_Y + 4) end),
++      TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Right, DUEL_HEROS.x - (partenaire and 2 or 0), RECUL_Y - 2) end),
++    })
++    GAME:WaitFrames(12)
++    -- Le son derrière eux entraîne leurs regards, puis le léger panoramique.
++    TASK:JoinCoroutines({
++      TASK:BranchCoroutine(function() GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 32, false) end),
++      TASK:BranchCoroutine(function()
++        emote_sur(hero, 'exclaim')
++        cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 16, 4}})
++        emote_sur(partenaire, 'sweatdrop')
++      end),
++    })
+   end)
+   TASK:JoinCoroutines(mouvements)
+-  GAME:WaitFrames(24) -- laisser lire le cercle avant de rendre la parole à Kabutops
+-  cinematique.RegarderGroupe({{hero, kabutops, 0, 4}, {partenaire, kabutops, 6, 4}})
++  GAME:WaitFrames(25) -- tenir le plan d’ensemble avant de rendre la parole à Kabutops
++  TASK:JoinCoroutines({
++    TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Up, DUEL_HEROS.x, RECUL_Y) end),
++    TASK:BranchCoroutine(function()
++      GAME:WaitFrames(6)
++      pas_du_duo(partenaire, Direction.Up, DUEL_PARTENAIRE.x, RECUL_Y)
++    end),
++  })
++  cinematique.RegarderGroupe({{hero, kabutops, 0, 4}, {partenaire, kabutops, 5, 4}})
+ end
+ 
+ local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
+@@ -596,8 +629,8 @@ function fgv1.PreBattle(is_rematch, map)
+   retirer_garde() -- une réentrée ne garde pas les acteurs d’une prise interrompue
+   local retablir_eau = suspendre_eau_precombat(map)
+   local hero = CH('PLAYER')
+-  local depart_h = is_rematch and {x=SOL_HEROS.x, y=312} or ENTREE_HEROS
+-  local depart_p = is_rematch and {x=SOL_PARTENAIRE.x, y=312} or ENTREE_PARTENAIRE
++  local depart_h = is_rematch and {x=DUEL_HEROS.x, y=RECUL_Y + 20} or ENTREE_HEROS
++  local depart_p = is_rematch and {x=DUEL_PARTENAIRE.x, y=RECUL_Y + 20} or ENTREE_PARTENAIRE
+   local partenaire = equipe_scene.Partenaire(depart_p.x, depart_p.y, Direction.Up)
+   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
+     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
+@@ -621,7 +654,7 @@ function fgv1.PreBattle(is_rematch, map)
+     la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
+   else
+     placer_garde(true)
+-    GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 1, false)
++    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 1, false)
+     SOUND:PlayBGM('Rising Fear.ogg', false)
+     GAME:FadeIn(18)
+     TASK:JoinCoroutines({
+@@ -651,10 +684,77 @@ function fgv1.PreBattle(is_rematch, map)
+   lancer_duel_boss()
+ end
+ 
++-- Le retour inverse la sortie de terre : une impulsion, la terre au ras du
++-- sol, puis le corps s’enfonce dans le nuage. Aucun acteur ne court en coulisse.
++local function s_enfouir(ch, nom, son, grand)
++  local x, y = ch.Position.X, ch.Position.Y
++  arreter_tremblement(ch)
++  GROUND:CharSetAnim(ch, 'Hurt', false)
++  GAME:WaitFrames(5)
++  terre_tunnel(x, y, grand and 3 or 2, son)
++  ch.HideShadow = true
++  for _, h in ipairs({2, 5, 7, 4, 0, -5, -10, -16, -22}) do
++    ch:SetLocHeight(h)
++    GAME:WaitFrames(2)
++  end
++  GROUND:Hide(nom)
++  GROUND:RemoveCharacter(nom)
++  GAME:WaitFrames(grand and 20 or 9)
++end
++
++local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
++  local reactions = {}
++  for i, k in ipairs(garde) do
++    reactions[#reactions + 1] = TASK:BranchCoroutine(function()
++      GAME:WaitFrames((i - 1) * 7)
++      -- Un petit recul sans tourner le dos ; les autres hésitent à leur tour.
++      emote_sur(k.ch, i % 2 == 1 and 'shock' or 'sweating', i == 1 and 'EVT_Emote_Shock' or nil)
++      trembler_de_peur(k.ch)
++      local repli = k.ancre.recul
++      GROUND:AnimateToPosition(k.ch, 'Hurt', k.dir, k.x + repli[1], k.y + repli[2], 0.8, 0.85, 0)
++      GROUND:CharEndAnim(k.ch)
++      GAME:WaitFrames(11)
++      regarder_cible(k.ch, kabutops, 3)
++    end)
++  end
++  reactions[#reactions + 1] = TASK:BranchCoroutine(function()
++    GAME:WaitFrames(10)
++    cinematique.RegarderGroupe({{partenaire or hero, garde[1].ch, 0, 4}, {partenaire and hero, garde[2].ch, 10, 4}})
++  end)
++  TASK:JoinCoroutines(reactions)
++  GAME:WaitFrames(28) -- les quatre restent visibles, tremblants, avant le signal
++  regarder_cible(kabutops, garde[2].ch, 3)
++  tourner_vers(kabutops, Direction.Down, 4)
++  local duree = temps_animation(kabutops, 'Nod')
++  if duree ~= nil then
++    GROUND:CharSetAnim(kabutops, 'Nod', false)
++    GAME:WaitFrames(duree)
++    GROUND:CharEndAnim(kabutops)
++  end
++
++  -- L’arrière garde fuit d’abord ; les deux flancs cèdent ensuite.
++  local delais = {22, 34, 0, 11}
++  local sorties = {}
++  for i, k in ipairs(garde) do
++    sorties[#sorties + 1] = TASK:BranchCoroutine(function()
++      if delais[i] > 0 then GAME:WaitFrames(delais[i]) end
++      s_enfouir(k.ch, k.ancre.nom, k.ancre.signal, false)
++    end)
++  end
++  sorties[#sorties + 1] = TASK:BranchCoroutine(function()
++    GAME:WaitFrames(12)
++    cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
++  end)
++  TASK:JoinCoroutines(sorties)
++  GAME:WaitFrames(10)
++  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
++  s_enfouir(kabutops, 'Kabutops_Boss', true, true)
++end
++
+ function fgv1.PostBattle()
+   local hero = CH('PLAYER')
+-  -- Axe central x=304 laissé libre pour l'arrivée de Lyra depuis le sud.
+-  local partenaire = equipe_scene.Partenaire(SALLE_X + 208, 240, Direction.Up)
++  local partenaire = equipe_scene.Partenaire(DUEL_PARTENAIRE.x, DUEL_PARTENAIRE.y, Direction.Up)
++  local garde = placer_garde(true)
+   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
+     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
+   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
+@@ -663,14 +763,14 @@ function fgv1.PostBattle()
+   GAME:CutsceneMode(true)
+   if hero ~= nil then
+     hero.CollisionDisabled = true
+-    GROUND:TeleportTo(hero, SALLE_X + 208, 280, Direction.Up)
++    GROUND:TeleportTo(hero, DUEL_HEROS.x, DUEL_HEROS.y, Direction.Up)
+   end
+   SOUND:FadeOutBGM(12)
+-  GAME:MoveCamera(CAM_DUEL_X, CAM_DUEL_Y, 1, false)
++  GAME:MoveCamera(CAM_DUEL_X, CAM_VICTOIRE_Y, 1, false)
++  trembler_de_peur(nilo)
+   GAME:WaitFrames(12)
+   GAME:FadeIn(20)
+   GAME:WaitFrames(16)
+-  trembler_de_peur(nilo)
+ 
+   emote_sur(kabutops, 'sweatdrop')
+   GAME:WaitFrames(10)
+@@ -685,18 +785,24 @@ function fgv1.PostBattle()
+   cinematique.Dire(kabutops, 'Pain', 'Partez. Ne me faites pas regretter de vous laisser passer.', 'droite')
+   UI:ResetSpeaker()
+ 
+-  -- La caméra garde le groupe dans le champ. Kabutops sort réellement
+-  -- par le couloir sud ; le bruit de pas part avec son premier déplacement.
+-  tourner_vers(kabutops, Direction.Down, 4)
+-  cinematique.Respirer(16)
++  la_fuite_sous_terre(kabutops, garde, hero, partenaire)
++  -- Nilo ne quitte la terrasse qu'une fois le passage redevenu sûr.
+   arreter_tremblement(nilo)
+-  SOUND:PlayBattleSE('DUN_Tile_Step')
+-  GROUND:MoveToPosition(kabutops, SALLE_X + 256, 344, true, 3)
+-  GAME:WaitFrames(8)
+-  GROUND:RemoveCharacter('Kabutops_Boss')
+   cinematique.Respirer(12)
+   SOUND:PlayBGM('Lower Spring Cave.ogg', false)
+-  GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65)
++  TASK:JoinCoroutines({
++    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65) end),
++    -- Dégager l'axe x=304 par lequel Lyra arrivera du sud.
++    TASK:BranchCoroutine(function()
++      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, SALLE_X + 196, 258, false, 1.3) end
++    end),
++    TASK:BranchCoroutine(function()
++      if hero ~= nil then
++        GAME:WaitFrames(8)
++        GROUND:MoveToPosition(hero, SALLE_X + 220, 277, false, 1.2)
++      end
++    end),
++  })
+   regarder_cible(nilo, hero or partenaire, 4)
+   cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
+   UI:ResetSpeaker()
+diff --git a/tools/build_grotte_verdoyante.py b/tools/build_grotte_verdoyante.py
+index cebf578..b93cb59 100644
+--- a/tools/build_grotte_verdoyante.py
++++ b/tools/build_grotte_verdoyante.py
+@@ -30,10 +30,10 @@ from agrandir_vasques import GROUND_W, GROUND_H, agrandir_ground, rectangle_sall
+ DEFAULT_WT = Path(__file__).resolve().parents[1]
+ TARGET_W, TARGET_H = 60, 45
+ TARGET24_W, TARGET24_H = 20, 15
+-BOSS_START = (10, 10)  # sable, entièrement sous les marches
+-TEAM_START = (10, 12)  # deux cases de recul, formation à quatre conservée
++BOSS_START = (10, 8)  # bas de la terrasse, deux cases devant le duo
++TEAM_START = (10, 10)  # centre de la salle, formation à quatre conservée
+ # x, y, Dir8, niveau — mêmes cases et regards que fosse_cascade_scene.lua.
+-KABUTO_STARTS = ((8, 11, 7, 4), (11, 11, 1, 4), (9, 14, 4, 3), (10, 14, 4, 3))
++KABUTO_STARTS = ((8, 9, 7, 4), (11, 9, 1, 4), (9, 12, 4, 3), (10, 12, 4, 3))
+ 
+ 
+ def garde_kabuto(root: Path, modele: dict) -> list[dict]:
+diff --git a/tools/tests/test_grotte_verdoyante.lua b/tools/tests/test_grotte_verdoyante.lua
+index cbe0079..d7ac7b8 100644
+--- a/tools/tests/test_grotte_verdoyante.lua
++++ b/tools/tests/test_grotte_verdoyante.lua
+@@ -453,14 +453,14 @@ local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Sprin
+ for i, e in ipairs(events) do
+   if e[1] == 'cam' then
+     if e[2] == 278 and e[3] == 372 and e[4] > 1 then seuil = i end
+-    if e[2] == 300 and e[3] == 234 and e[4] > 1 then terrasse = i end
++    if e[2] == 300 and e[3] == 216 and e[4] > 1 then terrasse = i end
+     if e[2] == 300 and e[3] == 240 then pano_duel = i end
+   elseif e[1] == 'vfx' and e[2] == 'White' then
+     assert(e[5].EndColor.r == 0 and e[5].EndColor.g == 0 and e[5].EndColor.b == 0
+       and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 140,
+       'assombrissement modéré : ne pas blanchir la sortie')
+     ombre = i
+-  elseif e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 258 then
++  elseif e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 210 then
+     assert(not terre and e[5].Layer == DrawLayer.Front)
+     terre = i
+   elseif e[1] == 'shake' and not tremor then
+@@ -476,7 +476,7 @@ for i, e in ipairs(events) do
+     if e[3] >= 16 then haut = i end
+     if e[3] == 0 then reception = i end
+   elseif e[1] == 'move' and e[2] == 'Kabutops_Boss' then
+-    assert(recul_h and recul_p and e[3] == 292 and e[4] == 244, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
++    assert(recul_h and recul_p and e[3] == 292 and e[4] == 196, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
+     reposition = i
+   end
+   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
+@@ -534,7 +534,7 @@ for i, e in ipairs(events) do
+       error('réplique sans le bon locuteur : '..texte)
+     end
+   end
+-  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 292 then
++  if e[1] == 'glisse' and e[5] == 'Hurt' and e[4] == 244 then
+     if e[2] == 'PLAYER' then
+       assert(e[3] == 292 and e[7] == Direction.UpLeft, 'recul dans l’axe, regard vers le boss')
+       recul_h = i
+@@ -572,16 +572,16 @@ assert(plainte and choix and regard_hero_vers_boss and regard_hero_vers_p and re
+   and menace < plainte and plainte < regard_hero_vers_boss and regard_hero_vers_boss < regard_hero_vers_p
+   and regard_hero_vers_p < choix and choix < reponse and reponse < pano_duel and pano_duel < depart_woosh,
+   'le héros observe et se tourne vers son partenaire avant la décision, le duel attend la réaction')
+-assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
+-  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292
+-  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
++assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 244
++  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 244
++  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 196,
+   'la formation du duel retrouve les positions de combat')
+ 
+ -- Les figurants apparaissent APRES le recul du duo. Chacun avance deux fois
+ -- et finit à la même case/direction que l'ennemi sérialisé en arène.
+ local garde_attendue = {
+-  {'Kabuto_Flanc_G',8,11,Direction.DownRight}, {'Kabuto_Flanc_D',11,11,Direction.DownLeft},
+-  {'Kabuto_Arriere_G',9,14,Direction.Up}, {'Kabuto_Arriere_D',10,14,Direction.Up},
++  {'Kabuto_Flanc_G',8,9,Direction.DownRight}, {'Kabuto_Flanc_D',11,9,Direction.DownLeft},
++  {'Kabuto_Arriere_G',9,12,Direction.Up}, {'Kabuto_Arriere_D',10,12,Direction.Up},
+ }
+ local function verifier_garde(revanche)
+   local data = require('destiny.fosse_cascade_scene')
+@@ -591,10 +591,10 @@ local function verifier_garde(revanche)
+     local spec = data.GARDE[i]
+     assert(spec.nom == nom and spec.x == col and spec.y == ligne and Direction[spec.face] == dir)
+     local x, y = data.AncreAuSol(spec)
+-    local creation, cache, sortie, terre_k, retraite, noir
++    local creation, cache, sortie, terre_k, retraite, noir, contour
+     local pas = {}
+     for j, e in ipairs(events) do
+-      if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == spec.depart[1]+8 and e[4] == spec.depart[2]+13 then
++      if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == spec.depart[1]+8 and e[4] == spec.depart[2]+14 then
+         assert(e[5].Layer == DrawLayer.Front); terre_k = j
+       end
+       if i == 1 and e[1] == 'vfx' and e[2] == 'Scratch' then
+@@ -611,8 +611,11 @@ local function verifier_garde(revanche)
+         elseif e[1] == 'unhide' then
+           assert(not sortie and e[7] < 0 and e[8], 'Kabuto commence dans la terre, ombre masquée')
+           sortie = j
++        elseif e[1] == 'move' then
++          assert(e[3] == spec.passage[1] and e[4] == spec.passage[2]); contour = j
+         elseif e[1] == 'glisse' then
+-          assert(e[5] == 'Scratch' or e[5] == 'Attack'); assert(e[7] == dir)
++          assert(e[5] == 'Attack' and contour and contour < j)
++          assert(e[7] == (#pas == 0 and Direction[spec.avance] or dir))
+           pas[#pas+1] = e
+         elseif e[1] == 'remove' and noir then
+           assert(e[3] == x and e[4] == y and e[5] == dir)
+@@ -626,7 +629,7 @@ local function verifier_garde(revanche)
+     else
+       assert(cache and terre_k and sortie and recul_p < cache and cache < terre_k and terre_k < sortie and sortie < danger)
+       assert(creation[4] == spec.depart[1] and creation[5] == spec.depart[2])
+-      assert(#pas == 2 and pas[1][3] == spec.pas[1] and pas[1][4] == spec.pas[2] and pas[2][3] == x and pas[2][4] == y)
++      assert(#pas == 2 and pas[1][3] == spec.menace[1] and pas[1][4] == spec.menace[2] and pas[2][3] == x and pas[2][4] == y)
+     end
+   end
+   assert(griffes == (revanche and 0 or 4))
+@@ -749,22 +752,44 @@ fgv1.Enter({AssetName='fgv1_fin_grotte_vasques'})
+ assert(SV.Destiny.AlerteShinx == 'termine' and SV.Destiny.CelebrationNilo == 'en_attente' and SV.Destiny.GrotteVerdoyanteBossVaincu == true and SV.Destiny.GrotteVerdoyantePhase == 4)
+ assert(SV.Destiny.JourneeVille == 1 and unlocked.grotte_verdoyante == true)
+ assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabutops_Boss == nil, 'acteurs temporaires fgv1 doivent être retirés')
+--- Kabutops vaincu fuit vers le sud EN COURANT (3 px/image, jusqu'à y >= 344) et
+--- aucune animation d'eau n'accompagne plus son départ (plus de plongeon).
+-local fuite_sud, fuite_vitesse, eau_post = false, nil, false
+-for _, e in ipairs(events) do
+-  if e[1] == 'move' and e[2] == 'Kabutops_Boss' and e[4] >= 344 then
+-    fuite_sud = true
+-    fuite_vitesse = e[5]
+-  end
+-  if e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
+-      or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger') then
+-    eau_post = true
++-- Après le K.O. de toute la garde, les quatre Kabuto expriment leur peur,
++-- reculent et replongent. Kabutops ferme la marche, et Nilo attend sa sortie.
++local fosse_scene = require('destiny.fosse_cascade_scene')
++local derniere_sortie, descente_nilo, nb_terre, bruits = nil, nil, 0, 0
++for i, e in ipairs(events) do
++  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'plus de course de Kabutops vers le sud')
++  assert(not (e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
++      or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger')), 'pas d’eau pendant le Tunnel')
++  if e[1] == 'vfx' and e[2] == 'Dig' then nb_terre = nb_terre + 1 end
++  if e[1] == 'se' and e[2] == 'DUN_Dig' then bruits = bruits + 1 end
++  if e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
++  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then descente_nilo = i end
++end
++assert(derniere_sortie and descente_nilo and derniere_sortie < descente_nilo and nb_terre == 5 and bruits == 3)
++local function verifier_plongeon(nom, x, y, peur)
++  local emote, tremble, repli, terre, negatif, masque, retire
++  for i, e in ipairs(events) do
++    if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == x+8 and e[4] == y+14 then
++      assert(e[5].Layer == DrawLayer.Front); terre = i
++    end
++    if e[2] == nom then
++      if e[1] == 'emote' and (e[3] == 'shock' or e[3] == 'sweating') then emote = i end
++      if e[1] == 'draw_effect' and e[3] == 2 then tremble = i end
++      if e[1] == 'glisse' and e[5] == 'Hurt' then assert(e[3] == x and e[4] == y); repli = i end
++      if e[1] == 'hauteur' and e[3] <= -16 then negatif = i end
++      if e[1] == 'hide' then masque = i end
++      if e[1] == 'remove' then retire = i end
++    end
+   end
++  assert(terre and negatif and masque and retire and terre < negatif and negatif < masque and masque < retire)
++  assert(not actors[nom])
++  if peur then assert(emote and tremble and repli and emote < tremble and tremble < repli and repli < terre and retire < derniere_sortie) end
++end
++for _, spec in ipairs(fosse_scene.GARDE) do
++  local x,y = fosse_scene.AncreAuSol(spec)
++  verifier_plongeon(spec.nom, x+spec.recul[1], y+spec.recul[2], true)
+ end
+-assert(fuite_sud and fuite_vitesse == 3,
+-       'Kabutops doit fuir vers le sud en courant (3 px/image), jusqu’à la sortie du couloir (y >= 344)')
+-assert(not eau_post, 'la fuite de Kabutops ne doit déclencher aucune animation d’eau')
++verifier_plongeon('Kabutops_Boss', 292, 196, false)
+ 
+ local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
+ for _, e in ipairs(events) do
+diff --git a/tools/tests/test_grotte_verdoyante.py b/tools/tests/test_grotte_verdoyante.py
+index bac0c15..07da3f8 100644
+--- a/tools/tests/test_grotte_verdoyante.py
++++ b/tools/tests/test_grotte_verdoyante.py
+@@ -14,7 +14,7 @@ from executer_lua import run
+ import sys
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ from render_ground_moteur import prepare, rendu, preserver_pixels
+-from build_grotte_verdoyante import garde_kabuto
++from build_grotte_verdoyante import garde_kabuto, BOSS_START, TEAM_START
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+ GAME = ROOT / 'game'
+@@ -88,13 +88,17 @@ def check_antichambre(fond: dict) -> None:
+                     for row in range(y // 8, (y + 15) // 8 + 1):
+                         assert obs[col][row]['Tags'] == 0, f'collider 16×16 dans la roche à {x},{y}'
+ 
+-    trajet((222, 492), (246, 436), (292, 368), (292, 268), (292, 292))
+-    trajet((198, 484), (222, 430), (268, 362), (268, 268), (268, 292))
+-    trajet((280, 244), (292, 244))
++    trajet((222, 492), (246, 436), (292, 368), (292, 220), (292, 244), (290, 242), (292, 244))
++    trajet((198, 484), (222, 430), (268, 362), (268, 220), (268, 244), (270, 248), (268, 244))
++    trajet((280, 196), (292, 196))
++    trajet((292, 244), (268, 277))
++    trajet((268, 244), (244, 258))
+     trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
+     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
+-    assert 268 + 16 - 234 + 120 < 188
+-    assert 292 + 16 - 260 + 120 < 188
++    assert 220 + 16 - 216 + 120 < 188
++    assert 244 + 16 - 226 + 120 < 188
++    assert 306 + 16 - 242 + 120 < 240  # flancs et arrière entrent dans le cadre
++    assert 292 + 16 - 242 + 120 < 188  # la formation reste lisible pendant le dialogue
+     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
+     assert 372 - 120 > 152 + 16
+ 
+@@ -158,13 +162,15 @@ def main() -> None:
+     assert rsmap['TileSight'] == 0 and rsmap['CharSight'] == 0 and rsmap['EdgeView'] == 1
+     assert rsmap['DiscoveryArray'] == [[2] * 15 for _ in range(20)]
+     assert rsmap['MapTeams'][0]['BoxStorage'] == []
+-    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 12}, 'Dir': 4}]
++    assert rsmap['EntryPoints'] == [{'Loc': {'X': 10, 'Y': 10}, 'Dir': 4}]
++    assert TEAM_START == (10, 10)
+     boss = rsmap['MapTeams'][0]['Players'][0]['serializationLoc']
+-    assert boss == {'X': 10, 'Y': 10}
++    assert boss == {'X': 10, 'Y': 8} and BOSS_START == (10, 8)
+     marker = next(e for layer in fgv1['Entities'] for e in layer['Markers'] if e['EntName'] == 'boss')
+     anchor = marker['Collider']
+     assert (anchor['X'] - 48 + 8, anchor['Y'] + 8) == (boss['X'] * 24 + 12, boss['Y'] * 24 + 12)
+-    assert anchor['Y'] >= 240  # entièrement sous les marches dessinées
++    # Le boss est sur le bas des strates et ne rejoint pas la terrasse de Nilo.
++    assert anchor['Y'] - 152 >= 40
+     for x in range(6 + boss['X'] * 3, 6 + (boss['X'] + 1) * 3):
+         for y in range(boss['Y'] * 3, (boss['Y'] + 1) * 3):
+             assert fgv1['obstacles'][x][y]['Tags'] == 0
+@@ -179,8 +185,8 @@ def main() -> None:
+                         assert (fr['TexLoc']['X'], fr['TexLoc']['Y']) in t24_locs
+ 
+     floors = {(x, y) for x in range(20) for y in range(15) if rsmap['Tiles'][x][y]['Data']['ID'] == 'floor'}
+-    q = deque([(10, 12)])
+-    seen = {(10, 12)}
++    q = deque([TEAM_START])
++    seen = {TEAM_START}
+     while q:
+         cx, cy = q.popleft()
+         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+@@ -223,26 +229,29 @@ def main() -> None:
+     assert enemies == [('kabutops', 14), ('kabuto', 4), ('kabuto', 4), ('kabuto', 3), ('kabuto', 3)], enemies
+     assert roster[1:] == garde_kabuto(ROOT, roster[0]), 'les renforts doivent être régénérables sans bonus hérités'
+     bornes = [(c['serializationLoc']['X'], c['serializationLoc']['Y'], c['serializationDir']) for c in roster]
+-    assert bornes == [(10, 10, 0), (8, 11, 7), (11, 11, 1), (9, 14, 4), (10, 14, 4)]
++    assert bornes == [(10, 8, 0), (8, 9, 7), (11, 9, 1), (9, 12, 4), (10, 12, 4)]
+     cases_ennemies = {(x, y) for x, y, _ in bornes}
+     assert len(cases_ennemies) == 5 and cases_ennemies <= floors
+     positions = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BattlePositionEvent' in e['Value']['$type'])
+-    actifs = {(10 + p['Loc']['X'], 12 + p['Loc']['Y']) for p in positions['StartLocs']}
++    actifs = {(TEAM_START[0] + p['Loc']['X'], TEAM_START[1] + p['Loc']['Y']) for p in positions['StartLocs']}
+     assert len(actifs) == 4 and actifs <= floors and not actifs & cases_ennemies
+     clear = next(e['Value'] for e in rsmap['MapEffect']['OnMapStarts'] if 'BeginBattleEvent' in e['Value']['$type'])
+     assert clear['CheckClearStatus'] == 'map_clear_check'
+-    # Les huit trajets des figurants restent au sol, sans traverser les rochers.
+-    chemins = (((220, 244), (230, 254)), ((340, 244), (331, 253)),
+-               ((268, 366), (268, 355)), ((292, 369), (292, 358)))
+-    for ((ax, ay), (bx, by)), (x, y, _) in zip(chemins, bornes[1:]):
++    # Le détour, l’approche et le recul de peur se font sur du sol libre.
++    chemins = (((205, 202), (212, 224), (226, 224), (-6, -4)),
++               ((362, 200), (352, 225), (338, 224), (6, -4)),
++               ((242, 293), (259, 306), (263, 301), (-3, 7)),
++               ((320, 293), (301, 306), (297, 301), (3, 7)))
++    for (depart, passage, menace, (rx, ry)), (x, y, _) in zip(chemins, bornes[1:]):
+         cx, cy = 24 * x + 52, 24 * y + 4
+-        for ((sx, sy), (ex, ey)) in (((ax, ay), (bx, by)), ((bx, by), (cx, cy))):
++        trajet = (depart, passage, menace, (cx, cy), (cx + rx, cy + ry))
++        for (sx, sy), (ex, ey) in zip(trajet, trajet[1:]):
+             m = max(abs(ex - sx), abs(ey - sy))
+             for i in range(m + 1):
+                 px, py = round(sx + (ex - sx) * i / m), round(sy + (ey - sy) * i / m)
+                 for tx in range(px // 8, (px + 15) // 8 + 1):
+                     for ty in range(py // 8, (py + 15) // 8 + 1):
+-                        assert fgv1['obstacles'][tx][ty]['Tags'] == 0
++                        assert fgv1['obstacles'][tx][ty]['Tags'] == 0, f'collider de Kabuto dans le relief à {px},{py}'
+     for p in roster:
+         assert (BASE / 'Data/Monster' / f"{p['BaseForm']['Species']}.json").is_file()
+         assert len(p['BaseSkills']) == len(p['Skills']) == 4, 'quatre slots requis au KO par RestoreForm'
+-- 
+2.47.3
+
