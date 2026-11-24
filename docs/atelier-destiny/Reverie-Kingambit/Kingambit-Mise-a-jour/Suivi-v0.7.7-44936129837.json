@@ -1,0 +1,46 @@
+{
+  "repository": "meromoonmeri/PMDO-Destiny",
+  "branch": "wip/reverie-integration-kingambit-cafe",
+  "sha": "b9e1b55742c7adb7eb8bf03aebeba92695745340",
+  "tag": "v0.7.7",
+  "push": "confirmé",
+  "build": {
+    "dispatch_http": 204,
+    "status": "completed",
+    "run_id": 44936129837,
+    "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44936129837",
+    "conclusion": "failure",
+    "attempt": 1,
+    "jobs": [
+      {
+        "id": 136943017192,
+        "name": "windows",
+        "conclusion": "failure",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44936129837/job/136943017192",
+        "failed_steps": [
+          "Build and package Destiny"
+        ]
+      },
+      {
+        "id": 136943018983,
+        "name": "release",
+        "conclusion": "skipped",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44936129837/job/136943018983",
+        "failed_steps": []
+      }
+    ]
+  },
+  "publication": {},
+  "verified_release": null,
+  "refs_before": {
+    "refs/heads/dojos-kingambit-pmd": "36630860da1afb433dafb971a6dd9890fbb11ca9",
+    "refs/heads/main": "57105372209587ee2805327170bc116c335545f9",
+    "refs/heads/wip/reverie-integration-kingambit-cafe": "37e6b5cdcfb46a064239c7c6983ef4840d27d408"
+  },
+  "refs_after_push": {
+    "refs/heads/dojos-kingambit-pmd": "36630860da1afb433dafb971a6dd9890fbb11ca9",
+    "refs/heads/main": "57105372209587ee2805327170bc116c335545f9",
+    "refs/heads/wip/reverie-integration-kingambit-cafe": "b9e1b55742c7adb7eb8bf03aebeba92695745340"
+  },
+  "arrêt": "Build #44936129837 : failure (Build and package Destiny)"
+}

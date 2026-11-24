@@ -1,0 +1,17 @@
+PMDO Linux 0.8.12.0 / destiny-zh-hans
+FONT Destiny/text.zh-hans.font lang=zh-hans
+ITEM berry_aspear Icon=720 Berry_Aspear 19x19 Released=false
+ITEM berry_cheri Icon=721 Berry_Cheri 14x14 Released=false
+ITEM berry_chesto Icon=722 Berry_Chesto 13x13 Released=false
+ITEM berry_pecha Icon=723 Berry_Pecha 16x16 Released=false
+ITEM berry_persim Icon=724 Berry_Persim 17x17 Released=false
+ITEM berry_rawst Icon=725 Berry_Rawst 14x14 Released=false
+BAG 1
+DONE 6 1
+CORRESPONDANCE pixel exact:
+Sac-01.png: berry_pecha @ (37.0, 40.0)
+Sac-01.png: berry_aspear @ (37.0, 54.0)
+Sac-01.png: berry_cheri @ (37.0, 68.0)
+Sac-01.png: berry_chesto @ (37.0, 82.0)
+Sac-01.png: berry_persim @ (37.0, 96.0)
+Sac-01.png: berry_rawst @ (37.0, 110.0)

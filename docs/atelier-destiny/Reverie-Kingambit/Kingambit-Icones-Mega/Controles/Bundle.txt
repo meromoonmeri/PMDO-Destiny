@@ -1,0 +1,7 @@
+The bundle contains this ref:
+36630860da1afb433dafb971a6dd9890fbb11ca9 refs/heads/dojos-kingambit-pmd
+The bundle requires this ref:
+2a216fbee07421f0c0b06bca45afe0fb73d2d7ab 
+The bundle uses this hash algorithm: sha1
+
+Pack déballé dans un dépôt isolé : 197 objets du lot présents. Le clone destinataire doit contenir la base et ses fichiers.

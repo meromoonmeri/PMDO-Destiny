@@ -1,0 +1,1124 @@
+{
+  "items": [
+    {
+      "id": "mega_venusaurite",
+      "nom": "Venusaurite",
+      "pokemon": "Florizarre",
+      "espece": "venusaur",
+      "forme": 1,
+      "dex": 3,
+      "ico": 672,
+      "code": "U+E340",
+      "sprite": "MegaStone_venusaur",
+      "motif": "Corolle et graine",
+      "palette": [
+        "#3a9b83",
+        "#ed8bae",
+        "#fff0c0"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "88cc5c5ada09631f8b4688fdccfb91de665b835aa5896e36044f770948554f77",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Florizarre de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Venusaur once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_charizardite_x",
+      "nom": "Charizardite X",
+      "pokemon": "Dracaufeu X",
+      "espece": "charizard",
+      "forme": 1,
+      "dex": 6,
+      "ico": 673,
+      "code": "U+E341",
+      "sprite": "MegaStone_charizard_X",
+      "motif": "Deux cornes de flamme bleue",
+      "palette": [
+        "#313c70",
+        "#2cc4e9",
+        "#d3ffff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "371085c80b9a714f26864f357f21046817cf5682a6bcda29289169c736a9c57d",
+      "description_fr": "Permet à Dracaufeu de prendre sa forme Méga-Dracaufeu X une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Charizard once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_charizardite_y",
+      "nom": "Charizardite Y",
+      "pokemon": "Dracaufeu Y",
+      "espece": "charizard",
+      "forme": 2,
+      "dex": 6,
+      "ico": 674,
+      "code": "U+E342",
+      "sprite": "MegaStone_charizard_Y",
+      "motif": "Aile de feu et embranchement",
+      "palette": [
+        "#c84c29",
+        "#ffb64c",
+        "#fff2c4"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "7507666a7f23b36c05b1e43de004b5746275ec316fb7a3f4c1e897668015f391",
+      "description_fr": "Permet à Dracaufeu de prendre sa forme Méga-Dracaufeu Y une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Charizard once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_blastoisinite",
+      "nom": "Blastoisinite",
+      "pokemon": "Tortank",
+      "espece": "blastoise",
+      "forme": 1,
+      "dex": 9,
+      "ico": 675,
+      "code": "U+E343",
+      "sprite": "MegaStone_blastoise",
+      "motif": "Canons et coque",
+      "palette": [
+        "#286baf",
+        "#94cfd8",
+        "#f0fcff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "3f302c32016afbcd7582ee6132820d94c88075f4eb5b0c7ecce6f57997ba08f4",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Tortank de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Blastoise once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_beedrillite",
+      "nom": "Beedrillite",
+      "pokemon": "Dardargnan",
+      "espece": "beedrill",
+      "forme": 1,
+      "dex": 15,
+      "ico": 676,
+      "code": "U+E344",
+      "sprite": "MegaStone_beedrill",
+      "motif": "Aiguillon et bandes",
+      "palette": [
+        "#bc852b",
+        "#f4d566",
+        "#29203e"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "aada31bf17276a6ae879d5c2a4ccdc46fc36532e89e9dd235395ea9c2213ac6b",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Dardargnan de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Beedrill once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_pidgeotite",
+      "nom": "Pidgeotite",
+      "pokemon": "Roucarnage",
+      "espece": "pidgeot",
+      "forme": 1,
+      "dex": 18,
+      "ico": 677,
+      "code": "U+E345",
+      "sprite": "MegaStone_pidgeot",
+      "motif": "Plume et crête",
+      "palette": [
+        "#aa734a",
+        "#eaa28c",
+        "#ffecac"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "fd14a853b3925e969250e82826b12992a430119f36f9b7e72147c1ce870e5564",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Roucarnage de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Pidgeot once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_alakazite",
+      "nom": "Alakazite",
+      "pokemon": "Alakazam",
+      "espece": "alakazam",
+      "forme": 1,
+      "dex": 65,
+      "ico": 678,
+      "code": "U+E346",
+      "sprite": "MegaStone_alakazam",
+      "motif": "Deux cuillers",
+      "palette": [
+        "#936334",
+        "#efcf62",
+        "#fdf5d9"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "ff11dbedb1d9fa532657694979c3833a07ccc708e89d881e71aa9e99c9353183",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Alakazam de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Alakazam once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_slowbronite",
+      "nom": "Slowbronite",
+      "pokemon": "Flagadoss",
+      "espece": "slowbro",
+      "forme": 1,
+      "dex": 80,
+      "ico": 679,
+      "code": "U+E347",
+      "sprite": "MegaStone_slowbro",
+      "motif": "Spirale de coquille",
+      "palette": [
+        "#b05780",
+        "#caa8bd",
+        "#ffe0ec"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "edcada2da1c461f18cfa9f805f9ed08a7ece2f39c0fbd7339813f3db2517115b",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Flagadoss de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Slowbro once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_gengarite",
+      "nom": "Gengarite",
+      "pokemon": "Ectoplasma",
+      "espece": "gengar",
+      "forme": 1,
+      "dex": 94,
+      "ico": 680,
+      "code": "U+E348",
+      "sprite": "MegaStone_gengar",
+      "motif": "Regard et grand sourire",
+      "palette": [
+        "#583879",
+        "#a760c2",
+        "#fff0f9"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "20bc128d89a605e4fbcf9d5e25e28ae7ff5f3dec94436e0de3c400979e670c03",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Ectoplasma de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Gengar once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_kangaskhanite",
+      "nom": "Kangaskhanite",
+      "pokemon": "Kangourex",
+      "espece": "kangaskhan",
+      "forme": 1,
+      "dex": 115,
+      "ico": 681,
+      "code": "U+E349",
+      "sprite": "MegaStone_kangaskhan",
+      "motif": "Mère et petite empreinte",
+      "palette": [
+        "#9a6340",
+        "#edbc90",
+        "#fff2d5"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "629c1c00602e4232b0a03c47e9f5a6071479666e417124b188f7b96786881e00",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Kangourex de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Kangaskhan once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_pinsirite",
+      "nom": "Pinsirite",
+      "pokemon": "Scarabrute",
+      "espece": "pinsir",
+      "forme": 1,
+      "dex": 127,
+      "ico": 682,
+      "code": "U+E34A",
+      "sprite": "MegaStone_pinsir",
+      "motif": "Deux pinces",
+      "palette": [
+        "#916040",
+        "#dbb689",
+        "#fdf2d8"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "98ebf745cb20681ef3f459bfafe2c4da3024b5b48f904e73256511a5f2e0faca",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Scarabrute de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Pinsir once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_gyaradosite",
+      "nom": "Gyaradosite",
+      "pokemon": "Léviator",
+      "espece": "gyarados",
+      "forme": 1,
+      "dex": 130,
+      "ico": 683,
+      "code": "U+E34B",
+      "sprite": "MegaStone_gyarados",
+      "motif": "Crête et moustaches",
+      "palette": [
+        "#215c91",
+        "#bd6e89",
+        "#def6ff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "0cd7cffe009c868d2649237e946fe15d577fc68d3ee3994b90d66f7183626310",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Léviator de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Gyarados once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_aerodactylite",
+      "nom": "Aerodactylite",
+      "pokemon": "Ptéra",
+      "espece": "aerodactyl",
+      "forme": 1,
+      "dex": 142,
+      "ico": 684,
+      "code": "U+E34C",
+      "sprite": "MegaStone_aerodactyl",
+      "motif": "V d’ailes fossiles",
+      "palette": [
+        "#805485",
+        "#c292ab",
+        "#ead9fc"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "9450b4fc9c67939b2e9ca3cb13fff5b23f9a9332fd124f570355fc55bda9ad42",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Ptéra de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Aerodactyl once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_mewtwonite_x",
+      "nom": "Mewtwonite X",
+      "pokemon": "Mewtwo X",
+      "espece": "mewtwo",
+      "forme": 1,
+      "dex": 150,
+      "ico": 685,
+      "code": "U+E34D",
+      "sprite": "MegaStone_mewtwo_X",
+      "motif": "Deux épaules et croix psy",
+      "palette": [
+        "#81579e",
+        "#c5a3d0",
+        "#faf3ff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "0b621d067501619da10f7405cdd89a2e7fb4d39825787fa1ce7583331c343f65",
+      "description_fr": "Permet à Mewtwo de prendre sa forme Méga-Mewtwo X une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Mewtwo once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_mewtwonite_y",
+      "nom": "Mewtwonite Y",
+      "pokemon": "Mewtwo Y",
+      "espece": "mewtwo",
+      "forme": 2,
+      "dex": 150,
+      "ico": 686,
+      "code": "U+E34E",
+      "sprite": "MegaStone_mewtwo_Y",
+      "motif": "Comète psychique",
+      "palette": [
+        "#bb6999",
+        "#e5abd9",
+        "#fcf0fa"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "e1a76d2ec9c663d4ed219794ed17253c513f8889f6ae53d02595900ed3d071a7",
+      "description_fr": "Permet à Mewtwo de prendre sa forme Méga-Mewtwo Y une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Mewtwo once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_ampharosite",
+      "nom": "Ampharosite",
+      "pokemon": "Pharamp",
+      "espece": "ampharos",
+      "forme": 1,
+      "dex": 181,
+      "ico": 687,
+      "code": "U+E34F",
+      "sprite": "MegaStone_ampharos",
+      "motif": "Phare et étincelle",
+      "palette": [
+        "#c49a38",
+        "#ffdf91",
+        "#a82950"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "2e1c6142b9c49aee572e794b0d74650046932c24d23c3adb157d99cb6f8d9f34",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Pharamp de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Ampharos once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_steelixite",
+      "nom": "Steelixite",
+      "pokemon": "Steelix",
+      "espece": "steelix",
+      "forme": 1,
+      "dex": 208,
+      "ico": 688,
+      "code": "U+E350",
+      "sprite": "MegaStone_steelix",
+      "motif": "Maillons à rivets",
+      "palette": [
+        "#5e7588",
+        "#b8d4e0",
+        "#fff7ed"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "19cba86ddc205383abf427ad68a712b838efc217649fd059d01843fe0e4aae53",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Steelix de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Steelix once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_scizorite",
+      "nom": "Scizorite",
+      "pokemon": "Cizayox",
+      "espece": "scizor",
+      "forme": 1,
+      "dex": 212,
+      "ico": 689,
+      "code": "U+E351",
+      "sprite": "MegaStone_scizor",
+      "motif": "Pince ouverte",
+      "palette": [
+        "#ac343d",
+        "#f2806c",
+        "#ffebc4"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "24bfc8e079f87387ffa9a257bc0fcd380764e7dec1c414da73fff75c9b59e812",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Cizayox de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Scizor once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_heracronite",
+      "nom": "Heracronite",
+      "pokemon": "Scarhino",
+      "espece": "heracross",
+      "forme": 1,
+      "dex": 214,
+      "ico": 690,
+      "code": "U+E352",
+      "sprite": "MegaStone_heracross",
+      "motif": "Corne fourchue",
+      "palette": [
+        "#475b9d",
+        "#83abe2",
+        "#f5f5ff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "5bbaa6571068d248d5fdc25ae9ccf7cf99efcfd9f4ac4860fed929a4dab1bf2f",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Scarhino de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Heracross once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_houndoominite",
+      "nom": "Houndoominite",
+      "pokemon": "Démolosse",
+      "espece": "houndoom",
+      "forme": 1,
+      "dex": 229,
+      "ico": 691,
+      "code": "U+E353",
+      "sprite": "MegaStone_houndoom",
+      "motif": "Côtes et cornes",
+      "palette": [
+        "#573741",
+        "#ca6559",
+        "#ffe8bb"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "5e5ab445abc2d340cd99d69d9501d0b73a3b8eb1d09cf740555b43bf2923be9b",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Démolosse de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Houndoom once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_tyranitarite",
+      "nom": "Tyranitarite",
+      "pokemon": "Tyranocif",
+      "espece": "tyranitar",
+      "forme": 1,
+      "dex": 248,
+      "ico": 692,
+      "code": "U+E354",
+      "sprite": "MegaStone_tyranitar",
+      "motif": "Crête de roche",
+      "palette": [
+        "#6b803c",
+        "#b8c865",
+        "#f7f5d7"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "81846178eb56f57186198c014af60b45d88aceaf0a86dbfb346ab9aa2967efd0",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Tyranocif de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Tyranitar once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_sceptilite",
+      "nom": "Sceptilite",
+      "pokemon": "Jungko",
+      "espece": "sceptile",
+      "forme": 1,
+      "dex": 254,
+      "ico": 693,
+      "code": "U+E355",
+      "sprite": "MegaStone_sceptile",
+      "motif": "Pointe de feuille",
+      "palette": [
+        "#397c4b",
+        "#97da61",
+        "#f3ffc8"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "262e42d6f0263d3f069cf45a48530fc3315437e70800d393550435195921dfe9",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Jungko de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Sceptile once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_blazikenite",
+      "nom": "Blazikenite",
+      "pokemon": "Braségali",
+      "espece": "blaziken",
+      "forme": 1,
+      "dex": 257,
+      "ico": 694,
+      "code": "U+E356",
+      "sprite": "MegaStone_blaziken",
+      "motif": "Crête et braises",
+      "palette": [
+        "#bd4039",
+        "#ed9959",
+        "#fff3bb"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "db2c621a28ad1d06f2f5e83a82cb86fb8828a4f83dc0bab019294219f5b3dc59",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Braségali de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Blaziken once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_swampertite",
+      "nom": "Swampertite",
+      "pokemon": "Laggron",
+      "espece": "swampert",
+      "forme": 1,
+      "dex": 260,
+      "ico": 695,
+      "code": "U+E357",
+      "sprite": "MegaStone_swampert",
+      "motif": "Branchies et barre de vase",
+      "palette": [
+        "#337eb1",
+        "#f09462",
+        "#e4f9ff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "a707e11fb7ab59e7cdb19a5efcd371185573e6484e3e1861071ee5714d796cfb",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Laggron de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Swampert once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_gardevoirite",
+      "nom": "Gardevoirite",
+      "pokemon": "Gardevoir",
+      "espece": "gardevoir",
+      "forme": 1,
+      "dex": 282,
+      "ico": 696,
+      "code": "U+E358",
+      "sprite": "MegaStone_gardevoir",
+      "motif": "Cœur de la robe",
+      "palette": [
+        "#4a8b7d",
+        "#e8b2cf",
+        "#ffeff8"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "8205b6e2fb8378b7bb14de534eac6bad46444ed893a30818924c922a713d0e1e",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Gardevoir de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Gardevoir once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_sablenite",
+      "nom": "Sablenite",
+      "pokemon": "Ténéfix",
+      "espece": "sableye",
+      "forme": 1,
+      "dex": 302,
+      "ico": 697,
+      "code": "U+E359",
+      "sprite": "MegaStone_sableye",
+      "motif": "Rubis taillé",
+      "palette": [
+        "#79458c",
+        "#d56493",
+        "#ffc3df"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "fd009182f856b032cfdbb43a6edbe20d4e524b6edccee2853336f792f5dff3ce",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Ténéfix de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Sableye once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_mawilite",
+      "nom": "Mawilite",
+      "pokemon": "Mysdibule",
+      "espece": "mawile",
+      "forme": 1,
+      "dex": 303,
+      "ico": 698,
+      "code": "U+E35A",
+      "sprite": "MegaStone_mawile",
+      "motif": "Mâchoire crantée",
+      "palette": [
+        "#77534b",
+        "#ddba66",
+        "#fff1d3"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "1397abf547419f1f49b3f6293b9af5f2356b85e7784421cebcd205e27cd4cef9",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Mysdibule de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Mawile once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_aggronite",
+      "nom": "Aggronite",
+      "pokemon": "Galeking",
+      "espece": "aggron",
+      "forme": 1,
+      "dex": 306,
+      "ico": 699,
+      "code": "U+E35B",
+      "sprite": "MegaStone_aggron",
+      "motif": "Casque à trois pointes",
+      "palette": [
+        "#465a6c",
+        "#a3bcc7",
+        "#edfaff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "7db278561703cc8617a17e2c705d96032bb275181297a3a0904794d63b223f01",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Galeking de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Aggron once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_medichamite",
+      "nom": "Medichamite",
+      "pokemon": "Charmina",
+      "espece": "medicham",
+      "forme": 1,
+      "dex": 308,
+      "ico": 700,
+      "code": "U+E35C",
+      "sprite": "MegaStone_medicham",
+      "motif": "Fleur de méditation",
+      "palette": [
+        "#af5268",
+        "#efad97",
+        "#fff4d2"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "72d2439b420bb2a3b2abc57456c4442a5ab6e0add9026e4ff98700a8142121d3",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Charmina de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Medicham once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_manectite",
+      "nom": "Manectite",
+      "pokemon": "Élecsprint",
+      "espece": "manectric",
+      "forme": 1,
+      "dex": 310,
+      "ico": 701,
+      "code": "U+E35D",
+      "sprite": "MegaStone_manectric",
+      "motif": "Éclair en zigzag",
+      "palette": [
+        "#39729e",
+        "#e9ca4b",
+        "#fffaaa"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "7fbc130ad2c0f63917904ff7d6dde28b9c0824df8b9b97faf576ec662885d2d4",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Élecsprint de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Manectric once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_sharpedonite",
+      "nom": "Sharpedonite",
+      "pokemon": "Sharpedo",
+      "espece": "sharpedo",
+      "forme": 1,
+      "dex": 319,
+      "ico": 702,
+      "code": "U+E35E",
+      "sprite": "MegaStone_sharpedo",
+      "motif": "Nageoire et dents",
+      "palette": [
+        "#265985",
+        "#6e9dc6",
+        "#fff4eb"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "4e55c5bbfe6522607c3b1cc29c9a68b82db1ce4de7c32d3ce92408bd451af14b",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Sharpedo de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Sharpedo once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_cameruptite",
+      "nom": "Cameruptite",
+      "pokemon": "Camérupt",
+      "espece": "camerupt",
+      "forme": 1,
+      "dex": 323,
+      "ico": 703,
+      "code": "U+E35F",
+      "sprite": "MegaStone_camerupt",
+      "motif": "Cratère et coulée",
+      "palette": [
+        "#a8553a",
+        "#e59854",
+        "#ffeea2"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "b35e65876953d7763b97bc62bde6894bd4598e04fdda92c775077feb54f9814a",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Camérupt de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Camerupt once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_altarianite",
+      "nom": "Altarianite",
+      "pokemon": "Altaria",
+      "espece": "altaria",
+      "forme": 1,
+      "dex": 334,
+      "ico": 704,
+      "code": "U+E360",
+      "sprite": "MegaStone_altaria",
+      "motif": "Nuage et plumet",
+      "palette": [
+        "#548fae",
+        "#c2dbf1",
+        "#f7faff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "decd76e7a086ad3f0880e40d42f5c37f7735112cb61c517ff0839c8e6d270126",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Altaria de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Altaria once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_banettite",
+      "nom": "Banettite",
+      "pokemon": "Branette",
+      "espece": "banette",
+      "forme": 1,
+      "dex": 354,
+      "ico": 705,
+      "code": "U+E361",
+      "sprite": "MegaStone_banette",
+      "motif": "Fermeture dorée",
+      "palette": [
+        "#563f66",
+        "#aa7a9e",
+        "#ffdca1"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "e29a31e03b36da20e2822a18b594f338d89602533fd1cedd35f51aa1ce0df479",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Branette de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Banette once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_absolite",
+      "nom": "Absolite",
+      "pokemon": "Absol",
+      "espece": "absol",
+      "forme": 1,
+      "dex": 359,
+      "ico": 706,
+      "code": "U+E362",
+      "sprite": "MegaStone_absol",
+      "motif": "Lame en croissant",
+      "palette": [
+        "#546b84",
+        "#c1cfdf",
+        "#fff1fc"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "6d6074d1f57e7815b7a7f8973764c7afbb6c98cbc46800c3d600d343a3e03d34",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Absol de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Absol once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_glalitite",
+      "nom": "Glalitite",
+      "pokemon": "Oniglali",
+      "espece": "glalie",
+      "forme": 1,
+      "dex": 362,
+      "ico": 707,
+      "code": "U+E363",
+      "sprite": "MegaStone_glalie",
+      "motif": "Masque de givre",
+      "palette": [
+        "#387d9d",
+        "#9adce9",
+        "#edfbff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "075f24b6970607ea3c66904f7e58c3ef9a71d3b25cac7f1aa8f156f8662f867d",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Oniglali de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Glalie once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_salamencite",
+      "nom": "Salamencite",
+      "pokemon": "Drattak",
+      "espece": "salamence",
+      "forme": 1,
+      "dex": 373,
+      "ico": 708,
+      "code": "U+E364",
+      "sprite": "MegaStone_salamence",
+      "motif": "Demi-lune des ailes",
+      "palette": [
+        "#426b9b",
+        "#e17885",
+        "#ffcbd4"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "a21b67fb41b42255714a477d78620a4d548c7e40f7d4c8695a4e98cf67258822",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Drattak de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Salamence once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_metagrossite",
+      "nom": "Metagrossite",
+      "pokemon": "Métalosse",
+      "espece": "metagross",
+      "forme": 1,
+      "dex": 376,
+      "ico": 709,
+      "code": "U+E365",
+      "sprite": "MegaStone_metagross",
+      "motif": "Croix métallique",
+      "palette": [
+        "#617f99",
+        "#add2dd",
+        "#ffebcc"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "c8b635d2d5508d53c2b1a0258d6e7f743bdca581a455ebdaf5f77d89420da57a",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Métalosse de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Metagross once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_latiasite",
+      "nom": "Latiasite",
+      "pokemon": "Latias",
+      "espece": "latias",
+      "forme": 1,
+      "dex": 380,
+      "ico": 710,
+      "code": "U+E366",
+      "sprite": "MegaStone_latias",
+      "motif": "Aile d’éon et pointe rose",
+      "palette": [
+        "#a35482",
+        "#eb9fb5",
+        "#fff5e9"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "43523dafc77577d713b2c43735ec5945db8cff852d5d90732fecdd9ffb53ef61",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Latias de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Latias once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_latiosite",
+      "nom": "Latiosite",
+      "pokemon": "Latios",
+      "espece": "latios",
+      "forme": 1,
+      "dex": 381,
+      "ico": 711,
+      "code": "U+E367",
+      "sprite": "MegaStone_latios",
+      "motif": "Aile d’éon et pointe bleue",
+      "palette": [
+        "#5d639b",
+        "#99b0ea",
+        "#ecfaff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "6ee2f076ec0e26d54aebd25c4ff6e12435dec6dd3027118c6407aab048d8ff14",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Latios de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Latios once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_delta_meteorite",
+      "nom": "Delta Meteorite",
+      "pokemon": "Rayquaza",
+      "espece": "rayquaza",
+      "forme": 1,
+      "dex": 384,
+      "ico": 712,
+      "code": "U+E368",
+      "sprite": "MegaStone_Meteorite_Delta",
+      "motif": "Triangle Delta",
+      "palette": [
+        "#29694c",
+        "#d7a64c",
+        "#fff3a0"
+      ],
+      "genre": "delta",
+      "sprite_sha256": "4f1263ed13ab214297ea1d7f8549937da4da18e1095a80653833e5d398cac1de",
+      "description_fr": "Une météorite qui brille de sept couleurs. Permet à Rayquaza de méga-évoluer une fois par étage.",
+      "description_par_defaut": "A Meteorite that shines with seven colors of light. It can be used on Rayquaza once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_lopunnite",
+      "nom": "Lopunnite",
+      "pokemon": "Lockpin",
+      "espece": "lopunny",
+      "forme": 1,
+      "dex": 428,
+      "ico": 713,
+      "code": "U+E369",
+      "sprite": "MegaStone_lopunny",
+      "motif": "Deux longues oreilles",
+      "palette": [
+        "#99684d",
+        "#ecbd9c",
+        "#fff1ca"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "450592964175dc8920a139dd5c429a749e1b75ceabc2fec9f1e285ce19bc7635",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Lockpin de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Lopunny once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_garchompite",
+      "nom": "Garchompite",
+      "pokemon": "Carchacrok",
+      "espece": "garchomp",
+      "forme": 1,
+      "dex": 445,
+      "ico": 714,
+      "code": "U+E36A",
+      "sprite": "MegaStone_garchomp",
+      "motif": "Aileron oblique",
+      "palette": [
+        "#535486",
+        "#cf7e75",
+        "#ffe9bf"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "73a7d086ce7745df4dade2c4d536ab5479528ab901c02796b5c52e1abc940ebf",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Carchacrok de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Garchomp once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_lucarionite",
+      "nom": "Lucarionite",
+      "pokemon": "Lucario",
+      "espece": "lucario",
+      "forme": 1,
+      "dex": 448,
+      "ico": 715,
+      "code": "U+E36B",
+      "sprite": "MegaStone_lucario",
+      "motif": "Pointe d’aura",
+      "palette": [
+        "#336e9b",
+        "#d58587",
+        "#f5f5ff"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "cab523e680a306fcc17efda8eb3318fb2bf36157ebc5fdca0cbe571a1084fa67",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Lucario de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Lucario once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_abomasite",
+      "nom": "Abomasite",
+      "pokemon": "Blizzaroi",
+      "espece": "abomasnow",
+      "forme": 1,
+      "dex": 460,
+      "ico": 716,
+      "code": "U+E36C",
+      "sprite": "MegaStone_abomasnow",
+      "motif": "Sapin enneigé",
+      "palette": [
+        "#4e806c",
+        "#c0e4d5",
+        "#f9fff1"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "2a5fa610068b9c83627f70907275356f9d4de96f9a43f50d3e9622f7d7598538",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Blizzaroi de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Abomasnow once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_galladite",
+      "nom": "Galladite",
+      "pokemon": "Gallame",
+      "espece": "gallade",
+      "forme": 1,
+      "dex": 475,
+      "ico": 717,
+      "code": "U+E36D",
+      "sprite": "MegaStone_gallade",
+      "motif": "Deux lames opposées",
+      "palette": [
+        "#3a8779",
+        "#bdd7ba",
+        "#fff0ed"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "275b2d67f53a5bbb3eef1425a7d3b7efda7fb2e6a11300cc559e783c3abee729",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Gallame de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Gallade once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_audinite",
+      "nom": "Audinite",
+      "pokemon": "Nanméouïe",
+      "espece": "audino",
+      "forme": 1,
+      "dex": 531,
+      "ico": 718,
+      "code": "U+E36E",
+      "sprite": "MegaStone_audino",
+      "motif": "Écho et oreilles roses",
+      "palette": [
+        "#b77296",
+        "#efc2d9",
+        "#fff5df"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "3be5886cd406c31dfcfa5964cc3a3ef72d3446d4d026afa9ddfaf02f4fc6e6d0",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Nanméouïe de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Audino once per floor to Mega Evolve."
+    },
+    {
+      "id": "mega_diancite",
+      "nom": "Diancite",
+      "pokemon": "Diancie",
+      "espece": "diancie",
+      "forme": 1,
+      "dex": 719,
+      "ico": 719,
+      "code": "U+E36F",
+      "sprite": "MegaStone_diancie",
+      "motif": "Diadème de cristal",
+      "palette": [
+        "#aa5c9a",
+        "#ef9bc4",
+        "#fff2fa"
+      ],
+      "genre": "mega",
+      "sprite_sha256": "2d04387d2c33f4a9ffb4f34c2b9cbae98899e2ea7fae414dc1a945baea97b71f",
+      "description_fr": "Une mystérieuse Méga-Gemme. Permet à Diancie de méga-évoluer une fois par étage.",
+      "description_par_defaut": "One variety of the mysterious Mega Stones. It can be used on Diancie once per floor to Mega Evolve."
+    },
+    {
+      "id": "berry_aspear",
+      "nom": "Baie Willia",
+      "pokemon": null,
+      "ico": 720,
+      "code": "U+E370",
+      "sprite": "Berry_Aspear",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "29437868954c4e5f363c23f5e694c987f6a09ec970e7609cf3c59526d73e4123",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    },
+    {
+      "id": "berry_cheri",
+      "nom": "Baie Ceriz",
+      "pokemon": null,
+      "ico": 721,
+      "code": "U+E371",
+      "sprite": "Berry_Cheri",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "e370816ca3269f235fc573ccde0fc5cbc6891e9d16ad95b5b5f021e6048d4e8e",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    },
+    {
+      "id": "berry_chesto",
+      "nom": "Baie Maron",
+      "pokemon": null,
+      "ico": 722,
+      "code": "U+E372",
+      "sprite": "Berry_Chesto",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "89abfd9dffc3268a29360197162e95aa552d259fbde036185f3dad3ed1a0b264",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    },
+    {
+      "id": "berry_pecha",
+      "nom": "Baie Pêcha",
+      "pokemon": null,
+      "ico": 723,
+      "code": "U+E373",
+      "sprite": "Berry_Pecha",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "70aac739aacd6ee3654f6bdd83955af3715f0ea28a13a7f593ff654bcef79651",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    },
+    {
+      "id": "berry_persim",
+      "nom": "Baie Kika",
+      "pokemon": null,
+      "ico": 724,
+      "code": "U+E374",
+      "sprite": "Berry_Persim",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "84604d105ca8817e537b4d05e3e78ce9caf5d6786cd4f9e9bec3c5372245e5a0",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    },
+    {
+      "id": "berry_rawst",
+      "nom": "Baie Fraive",
+      "pokemon": null,
+      "ico": 725,
+      "code": "U+E375",
+      "sprite": "Berry_Rawst",
+      "motif": "Sprite Destiny déjà dessiné ; lien et glyphe ajoutés.",
+      "palette": [
+        "#e9aadd"
+      ],
+      "genre": "baie",
+      "sprite_sha256": "ebaaac40d511035dafd0090c5179ec1f528311a0adbd9dfa392473133c630cf3",
+      "description_fr": "Restaure 3 points de satiété.",
+      "description_par_defaut": "Restores 3 Belly."
+    }
+  ],
+  "polices": {
+    "text.font": {
+      "avant": 24112,
+      "apres": 24166,
+      "sha256_source": "8b5367c099fd132af23151b74cd4298ac55f84013ee9aae6431fdedfa3540cf8",
+      "sha256_fusion": "af20f6f9187c25870e3cb4e6807f78b2d3f4f008b713a1144bd59ddd14fee185"
+    },
+    "text.zh-hans.font": {
+      "avant": 24202,
+      "apres": 24256,
+      "sha256_source": "77eae5203a167c21adab36ee86b2823b8d6aa9dc0ef6ed584b7eea82f1b3cfd4",
+      "sha256_fusion": "29378545b7e01495c02a8f2e4b246a53b8e982a8a332a57b270bcf5d142d9280"
+    }
+  },
+  "icon_base": 57504,
+  "glyph_debut": 58176
+}
