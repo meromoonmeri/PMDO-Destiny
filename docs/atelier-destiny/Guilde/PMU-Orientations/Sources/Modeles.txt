@@ -1,0 +1,313 @@
+# Identifiant court | nom FR | gabarit | profondeur [pixels] | joint/top [pixels]
+# Une ligne par ressource numérotée. Les ensembles restent une seule ressource.
+001|Cheminée au portrait|foyer
+002|Grande table de paille|table||46
+003|Oreiller rose|coussin
+004|Canapé à dossier cintré|siege
+005|Desserte verte garnie|etagere
+006|Lit rose et porcelaine|ensemble
+007|Crédence à vaisselle verte|buffet||16
+008|Bibliothèque peinte en vert|biblio||16
+009|Dossier de bois cintré|panneau
+010|Établi et accessoires|ensemble
+011|Tissu bleu à franges|toile
+012|Banc à liseré d’or|table||17
+013|Piano droit|buffet||17
+014|Mannequin en robe rouge|mannequin
+015|Mannequin en habit sombre|mannequin
+016|Crédence à vaisselle en noyer|buffet||16
+017|Bibliothèque en noyer|biblio||15
+018|Cyprès et petite coiffeuse|ensemble
+019|Oreiller blanc rayé|coussin
+020|Desserte, légumes et herbes sèches|ensemble
+021|Petit bahut aux objets|bahut
+022|Étal de literie et denrées|ensemble
+023|Panier de légumes verts|pot
+024|Séchoir à poissons et herbes|panneau
+025|Herbes à suspendre|toile
+026|Étagère, baril et panier|ensemble
+027|Commode de bois blond|commode||16
+028|Petite étagère de vaisselle|etagere
+029|Armure sur support|mannequin
+030|Banc brun à socles de pierre|banc||16
+031|Banc à dessus de granit|bloc||20
+032|Buste sur guéridon|statue
+033|Étagère aux bols bleus I|etagere
+034|Meuble de cuisine à trois postes|bahut
+035|Palmier en pot de terre I|palmier
+036|Étagère aux bols bleus II|etagere
+037|Palmier en pot de terre II|palmier
+038|Grande table en bois brun|table||52
+039|Caisses et plantes suspendues|ensemble
+040|Panier rond de légumes II|pot
+041|Vaisselier modulaire|ensemble
+042|Poêle à conduit de cuivre|foyer
+043|Fauteuil en osier I|siege
+044|Bibliothèque en bois blond|biblio||15
+045|Commode claire à quatre tiroirs|commode||16
+046|Comptoirs bas et vaisselle|ensemble
+047|Petite étagère au pichet|etagere
+048|Banc à veines noueuses|banc||16
+049|Fauteuil en osier II|siege
+050|Palmier au pot sombre|palmier
+051|Oreiller sur sommier|coussin
+052|Palmier au pot rouge|palmier
+053|Desserte aux plats bleus|etagere
+054|Bibliothèque à corniche sombre|biblio||15
+055|Four et casseroles|ensemble
+056|Lit doré, robe et vaisselle|ensemble
+057|Mannequin en tunique claire I|mannequin
+058|Trois rouleaux de tissu|rouleaux
+059|Petite table en bois clair|table||15
+060|Armoire à panneau incrusté|armoire|22
+061|Bouquets d’herbes séchées|toile
+062|Panier d’outils|pot
+063|Séchoir à poissons et bottes|panneau
+064|Étagère garnie au bois clair|etagere
+065|Établi en bois sombre|table||18
+066|Étagère à couverts et assiettes|etagere
+067|Bac de pierre et charbon|caisse
+068|Bac à deux compartiments|caisse
+069|Mannequin d’explorateur I|mannequin
+070|Crédence à vaisselle claire|buffet||16
+071|Pioche de décoration|panneau
+072|Commode à quatre poignées|commode||16
+073|Bureau et plume suspendue|ensemble
+074|Four, panier et sac de grain|ensemble
+075|Pile de caisses blondes|pile
+076|Mannequin en armure or et argent|mannequin
+077|Mannequin en armure d’argent|mannequin
+078|Desserte garnie au bois chaud|etagere
+079|Coffre de voyage cerclé|coffre
+080|Sac de grain vert|sac
+081|Panier de légumes au rebord clair|pot
+082|Trône de bois et velours rouge|siege
+083|Fauteuil de velours rouge|siege
+084|Rideaux rouges et mobilier de scène|ensemble
+085|Table en noyer sombre|table||53
+086|Table nappée de blanc|table-nappe
+087|Petit portrait encadré|miroir
+088|Lit à baldaquin rouge|lit
+089|Desserte de cuisine assemblée|bahut
+090|Armoire et coiffeuse à miroir|ensemble
+091|Bibliothèque à fronton sculpté haut|biblio||24
+092|Bibliothèque à fronton sculpté bas|biblio||17
+093|Candélabre sur socle|statue
+094|Bureau, chaise et objets d’écriture|ensemble
+095|Pile de lingots|pile
+096|Tenture verte brodée|toile
+097|Étal bas de trésors|ensemble
+098|Lit simple à couverture rose|lit
+099|Grand miroir doré|miroir
+100|Lingots dorés en paire|pile
+101|Lingots dorés étroits|pile
+102|Coin de chambre et bureau|ensemble
+103|Corde lovée|sol
+104|Coussin vert |coussin
+105|Râtelier de décoration|panneau
+106|Pile de sacs verts|pile
+107|Deux caisses dont une garnie|caisse
+108|Orgue, étoffes et mannequin|ensemble
+109|Mannequin à robe bleue|mannequin
+110|Trois coffres rouges ciselés|pile
+111|Table ronde en argent|gueridon
+112|Petit coffret rouge ciselé|coffre
+113|Mannequin en tunique claire II|mannequin
+114|Râtelier incliné de décoration|panneau
+115|Coffret et écusson|ensemble
+116|Coffret et lames de décoration|ensemble
+117|Mannequin en habit noir|mannequin
+118|Mannequin d’explorateur II|mannequin
+119|Mannequin de cuir noueux|mannequin
+120|Mannequin à cuirasse d’acier|mannequin
+121|Mannequin à cuirasse bleue|mannequin
+122|Grand tapis et coffres colorés|ensemble
+123|Trône à racines dorées|siege
+124|Tabouret à nappe brodée|table-nappe
+125|Coffret en bois à cadre gris|coffre
+126|Coffret bombé à ferrures grises|coffre
+127|Coffret velours rouge et or|coffre
+128|Coffret velours bleu et or|coffre
+129|Tapis carré bleu de la banque|sol
+130|Germination à deux feuilles I|plante
+131|Tapis carré rouge de la banque|sol
+132|Nénuphar rond|sol
+133|Germination à deux feuilles II|plante
+134|Tapis carré vert de la banque|sol
+135|Tapis carré jaune de la banque|sol
+136|Tapis carré lavande de la banque|sol
+137|Comptoir coquille rose|kiosque
+138|Grand nénuphar|sol
+139|Comptoir à antennes et frise|kiosque
+140|Tapis carré pêche de la banque|sol
+141|Échelle courte en bois|echelle
+142|Échelle, lampe et pierre|ensemble
+143|Comptoir à la souche creuse|kiosque
+144|Coffre ajouré aux clous d’or|coffre-ouvert
+145|Paire de fanions fleuris I|panneau
+146|Grille et pierres taillées|ensemble
+147|Comptoir au masque de pierre|kiosque
+148|Arbuste bleu en bac rond|plante
+149|Paire de fanions fleuris II|panneau
+150|Échelle étroite|echelle
+151|Comptoir à masque vert|kiosque
+152|Bac de verdure et pièces de sol|ensemble
+153|Comptoir couronné de feuilles I|kiosque
+154|Paysage dans son cadre|miroir
+155|Mur de briques sur soubassement|paroi
+156|Comptoir couronné de feuilles II|kiosque
+157|Double caisson de pierre et bois|caisse
+158|Foyer aux pierres moussues|foyer
+159|Massif de feuillage|sol
+160|Fontaine de roche ocre I|rocher
+161|Bordure d’herbe en équerre|sol
+162|Panneau sculpté et engrenages|paroi
+163|Banque de pierres, maçonnerie et couche|ensemble
+164|Fenêtre, rideau et tapis|ensemble
+165|Alcôve de pierre et rideau|paroi
+166|Petit banc de bois blond|banc
+167|Plaque d’acier emboutie|sol
+168|Petit rayonnage à quatre tablettes|biblio
+169|Jeune plante dans les pierres I|plante
+170|Jeune plante dans les pierres II|plante
+171|Deux coffres ouverts à gemmes|coffre-ouvert
+172|Coffre ouvert aux gemmes I|coffre-ouvert
+173|Coffre ouvert aux gemmes II|coffre-ouvert
+174|Pupitre à couronne de feuilles|kiosque
+175|Fontaine de bronze sur galets|rocher
+176|Grande souche dorée|souche
+177|Étendard orange sur traverse I|drapeau
+178|Étendard orange sur traverse II|drapeau
+179|Totem à masque et grelots|statue
+180|Table servie aux assiettes I|banquet
+181|Panneau à trois flèches I|panneau
+182|Tableau à avis sur poteaux|panneau
+183|Panneau fléché vers la gauche|panneau
+184|Panneau fléché vers la droite|panneau
+185|Tableau à toit de tuiles I|panneau
+186|Poêle, conduit et ustensiles|ensemble
+187|Tableau au lierre et jardinières|ensemble
+188|Signal à deux planches|panneau
+189|Souche teintée de bleu|souche
+190|Jardinière hexagonale longue|sol
+191|Petite jardinière hexagonale|sol
+192|Appareil vert à manivelle|bloc
+193|Sphère lumineuse sur socle I|orbe
+194|Parasol triple et plateau|ensemble
+195|Fontaine de roche ocre II|rocher
+196|Sphère lumineuse sur socle II|orbe
+197|Table de toile verte|table
+198|Petit bassin bordé de pierres I|sol
+199|Grand bassin à bord sombre|sol
+200|Cadre clair à filets d’or|miroir
+201|Petit bassin bordé de pierres II|sol
+202|Tronçons de bois et madrier|ensemble
+203|Bassin à jet circulaire|orbe
+204|Ornement de lames croisées I|panneau
+205|Ornement de lames croisées II|panneau
+206|Grand bassin rouge et bleu|sol
+207|Décors joyeux et borne|ensemble
+208|Massif rouge au sol|sol
+209|Médaillon bleu texturé I|sol
+210|Tapis circulaire ambre I|sol
+211|Massif bleu au sol|sol
+212|Médaillon de glace I|sol
+213|Médaillon à joints dorés I|sol
+214|Tapis aux quatre étoiles|sol
+215|Cadre bleu à pieds|miroir
+216|Massif jaune au sol|sol
+217|Tapis rond rose brodé I|sol
+218|Tapis rond en sauge I|sol
+219|Bassin en croissant|sol
+220|Muret de briques sur cales|paroi
+221|Bassin au rocher et au lierre I|rocher
+222|Bassin au rocher et au lierre II|rocher
+223|Mangeoire en bois et paille|kiosque
+224|Cabane de pierre et branchages|rocher
+225|Petite statue de dragon rubis|statue
+226|Petite statue de dragon jade|statue
+227|Podium à trois marches|bloc
+228|Ornement de pavillons jaunes|mannequin
+229|Statue bleue aux longues lames|statue
+230|Statue blanche et rose|statue
+231|Statue à trois couleurs I|statue
+232|Borne au disque rouge|kiosque
+233|Auvent bleu sur pieds|table-nappe
+234|Auvent rouge sur pieds|table-nappe
+235|Statue à trois couleurs II|statue
+236|Casiers peints et bacs|ensemble
+237|Médaillon bleu texturé II|sol
+238|Tapis circulaire ambre II|sol
+239|Coin de repas et banquettes|ensemble
+240|Plaque octogonale de salle|miroir
+241|Deux dalles surélevées|bloc
+242|Tapis royal à frange I|sol
+243|Tapis rond en sauge II|sol
+244|Banquette et casier bleu|ensemble
+245|Petite source sur galets I|sol
+246|Médaillon de glace II|sol
+247|Tapis rond rose brodé II|sol
+248|Médaillon à joints dorés II|sol
+249|Petite source sur galets II|sol
+250|Guirlande dorée et six anneaux|ensemble
+251|Perchoir en bois doré|panneau
+252|Guirlande dorée sur corde|toile
+253|Tenture orange à chevrons|toile
+254|Tenture jaune à chevrons|toile
+255|Tenture repliée à gauche|toile
+256|Tenture repliée à droite|toile
+257|Bouquet vert en pot I|plante
+258|Groupe de huit colonnes|ensemble
+259|Guéridon doré à deux tasses I|gueridon
+260|Guéridon doré à deux tasses II|gueridon
+261|Guéridon doré simple I|gueridon
+262|Guéridon doré simple II|gueridon
+263|Moulin en bois doré I|moulin
+264|Moulin en bois doré II|moulin
+265|Moulin en bois doré III|moulin
+266|Moulin en bois doré IV|moulin
+267|Pile de caisses de voyage I|pile
+268|Caisses et souche claire|ensemble
+269|Couchage végétal bordé de feuilles|coussin
+270|Tapis médaillon brun|sol
+271|Tapis médaillon cerise|sol
+272|Tapis médaillon azur|sol
+273|Comptoir aux cornes bleues|kiosque
+274|Tapis médaillon vert vif|sol
+275|Comptoir au visage orangé|kiosque
+276|Moulin en bois doré V|moulin
+277|Bouquet vert en pot II|plante
+278|Tapis de galets et de feuilles|sol
+279|Moulin en bois doré VI|moulin
+280|Grand tapis ovale à carreaux|sol
+281|Banc de rondins jaunes|banc
+282|Tapis tressé à bourrelet I|coussin
+283|Tambour sur trépied doré|moulin
+284|Duo de gardiens argentés|statue
+285|Couchage en fourrure claire|coussin
+286|Boîte à baies cerise I|caisse
+287|Boîte à baies cerise II|caisse
+288|Obélisque bleu à inscriptions I|bloc
+289|Obélisque bleu luminescent I|bloc
+290|Obélisque bleu à inscriptions II|bloc
+291|Obélisque bleu à inscriptions III|bloc
+292|Obélisque bleu luminescent II|bloc
+293|Bloc gravé en pierre bleue|bloc
+294|Brasero de pierre et braises|rocher
+295|Bureau aux deux livres ouverts|table
+296|Pile de caisses carrées I|pile
+297|Caisse ouverte aux noix I|coffre-ouvert
+298|Caisse ouverte aux noix II|coffre-ouvert
+299|Machine bleue avec turbine à droite|bloc
+300|Machine bleue avec turbine à gauche|bloc
+301|Siège en fer à cheval doré|siege
+302|Pile de caisses carrées II|pile
+303|Tapis rond aux deux poissons|sol
+304|Grand tapis rouge à bord décoré|sol
+305|Tapis médaillon mousse|sol
+306|Tapis médaillon doré|sol
+307|Tapis médaillon brique|sol
+308|Tapis circulaire terre brûlée|sol
+309|Tableau d’affichage sculpté|panneau
+310|Arche rose ouverte|arche
+311|Arche rose à porte ronde|paroi

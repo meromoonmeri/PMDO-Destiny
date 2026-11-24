@@ -1,0 +1,309 @@
+{
+  "statut": "PASS",
+  "id": "G01P06",
+  "echelle": "1×",
+  "dimensions_px": [
+    504,
+    360
+  ],
+  "montage": "bois Destiny sur géométrie G01P06, meuble et fontaine à leurs coordonnées EoS",
+  "foyer": {
+    "ancre": [
+      228,
+      83
+    ],
+    "dimension": [
+      46,
+      94
+    ],
+    "nombre": 1,
+    "trame_4x1": true,
+    "raccord_ancre": [
+      228,
+      76
+    ],
+    "raccord_taille": [
+      46,
+      7
+    ],
+    "zone_foyer_int": [
+      11,
+      68,
+      35,
+      89
+    ],
+    "bbox_detourage_etude": [
+      58,
+      10,
+      744,
+      1336
+    ],
+    "etude_sha256": "ce0b0dcf62de8c8703d4c49153d9b00f5ee515a1d60844ede791305d1e4f730d"
+  },
+  "zones_preservees": {
+    "vitres": [
+      [
+        180,
+        110,
+        227,
+        149
+      ],
+      [
+        276,
+        110,
+        323,
+        149
+      ]
+    ],
+    "seuil_est": [
+      487,
+      218,
+      504,
+      244
+    ],
+    "passage": [
+      434,
+      118,
+      504,
+      270
+    ],
+    "table": [
+      175,
+      184,
+      336,
+      232
+    ],
+    "fontaine": [
+      355,
+      138,
+      414,
+      195
+    ],
+    "sol_poly": [
+      [
+        87,
+        173
+      ],
+      [
+        101,
+        165
+      ],
+      [
+        122,
+        159
+      ],
+      [
+        149,
+        157
+      ],
+      [
+        172,
+        160
+      ],
+      [
+        205,
+        161
+      ],
+      [
+        231,
+        160
+      ],
+      [
+        250,
+        162
+      ],
+      [
+        286,
+        160
+      ],
+      [
+        317,
+        159
+      ],
+      [
+        349,
+        159
+      ],
+      [
+        371,
+        172
+      ],
+      [
+        391,
+        187
+      ],
+      [
+        416,
+        205
+      ],
+      [
+        436,
+        210
+      ],
+      [
+        468,
+        214
+      ],
+      [
+        503,
+        212
+      ],
+      [
+        503,
+        248
+      ],
+      [
+        477,
+        247
+      ],
+      [
+        451,
+        251
+      ],
+      [
+        418,
+        253
+      ],
+      [
+        398,
+        257
+      ],
+      [
+        375,
+        265
+      ],
+      [
+        346,
+        274
+      ],
+      [
+        312,
+        274
+      ],
+      [
+        276,
+        276
+      ],
+      [
+        236,
+        276
+      ],
+      [
+        202,
+        274
+      ],
+      [
+        169,
+        276
+      ],
+      [
+        137,
+        272
+      ],
+      [
+        112,
+        260
+      ],
+      [
+        97,
+        237
+      ],
+      [
+        87,
+        209
+      ]
+    ]
+  },
+  "textures_protegees_identiques_au_plan_boise_avant_foyer": true,
+  "memes_positions_table_corbeilles_fontaine": true,
+  "variations_eau_originale_px": 271,
+  "pixels": {
+    "Jour-0": {
+      "pixels": 6525,
+      "parquet_eclaire": 2182
+    },
+    "Jour-1": {
+      "pixels": 6494,
+      "parquet_eclaire": 2173
+    },
+    "Jour-2": {
+      "pixels": 6474,
+      "parquet_eclaire": 2167
+    },
+    "Jour-3": {
+      "pixels": 6513,
+      "parquet_eclaire": 2180
+    },
+    "Nuit-0": {
+      "pixels": 6808,
+      "parquet_eclaire": 2196
+    },
+    "Nuit-1": {
+      "pixels": 6793,
+      "parquet_eclaire": 2196
+    },
+    "Nuit-2": {
+      "pixels": 6785,
+      "parquet_eclaire": 2196
+    },
+    "Nuit-3": {
+      "pixels": 6802,
+      "parquet_eclaire": 2196
+    }
+  },
+  "recomposition": [
+    {
+      "periode": "Jour",
+      "parquet": "Calques/Jour/01-Salle-bois.png",
+      "ameublement": "Calques/Jour/02-Table-et-corbeilles.png",
+      "eau": "Calques/Jour/03-Source-4poses.png",
+      "foyer_eteint": "Calques/Jour/Foyer-eteint.png",
+      "foyer_4poses": "Calques/Jour/Foyer-allume-4poses.png",
+      "raccord": "Calques/Jour/Raccord-sous-traverse.png",
+      "ancres_raccord": [
+        228,
+        76
+      ],
+      "etats": "Plans/Refectoire-EoS-Jour-Anime.png",
+      "facteur_reflets": 0.53
+    },
+    {
+      "periode": "Nuit",
+      "parquet": "Calques/Nuit/01-Salle-bois.png",
+      "ameublement": "Calques/Nuit/02-Table-et-corbeilles.png",
+      "eau": "Calques/Nuit/03-Source-4poses.png",
+      "foyer_eteint": "Calques/Nuit/Foyer-eteint.png",
+      "foyer_4poses": "Calques/Nuit/Foyer-allume-4poses.png",
+      "raccord": "Calques/Nuit/Raccord-sous-traverse.png",
+      "ancres_raccord": [
+        228,
+        76
+      ],
+      "etats": "Plans/Refectoire-EoS-Nuit-Anime.png",
+      "facteur_reflets": 0.92
+    }
+  ],
+  "duree_pose_ms": 100,
+  "source": [
+    {
+      "fichier": "G01P06A-Jour.apng",
+      "sha256": "256121fdc0cbd70eed9d56b6efcbcffe0169fab9ca81aaaf60b714c9e0f9de96",
+      "source": "https://projectpokemon.org/home/gallery/image/77579-g01p06apng/"
+    },
+    {
+      "fichier": "G01P06B-Nuit.apng",
+      "sha256": "09de9bf388391e825d280799819397d8a571512a914e54b94e211f5b7718e824",
+      "source": "https://projectpokemon.org/home/gallery/image/77580-g01p06bpng/"
+    },
+    {
+      "fichier": "G01P05C-Interieur-Nuit.png",
+      "sha256": "d004e7dc9cfbc7bf259e7ef0f55f96f8670bb36cb4eb4fe39db84fe0ad2a7fc8",
+      "source": "https://projectpokemon.org/home/gallery/image/77578-g01p05cpng/"
+    }
+  ],
+  "base_sha256_jour_nuit": [
+    "2e9b8612526a01e0dbdb6f12b62720595bbb54f6f454380026252a15e32cf1b0",
+    "5509f8ece3d10149b412ca25fd1d7cd48f5438e332a45dd75346f9cd32362065"
+  ],
+  "bouche_decoupee_par_masque": true
+}
