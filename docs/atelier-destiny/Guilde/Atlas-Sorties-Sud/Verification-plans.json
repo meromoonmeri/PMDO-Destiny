@@ -1,0 +1,632 @@
+{
+  "statut": "PASS",
+  "salles": 15,
+  "passages": 29,
+  "cadres_sud": {
+    "guilde_destiny_accueil": {
+      "x": 256,
+      "bottom": 352,
+      "band": 32
+    },
+    "guilde_destiny_missions": {
+      "x": 288,
+      "bottom": 395,
+      "band": 37
+    },
+    "guilde_destiny_grand_salon": {
+      "x": 288,
+      "bottom": 383,
+      "band": 49
+    },
+    "guilde_destiny_bureau_maitre": {
+      "x": 256,
+      "bottom": 357,
+      "band": 27
+    },
+    "guilde_destiny_cuisine": {
+      "x": 240,
+      "bottom": 329,
+      "band": 31
+    },
+    "guilde_destiny_dortoir_nord_1": {
+      "x": 224,
+      "bottom": 313,
+      "band": 23
+    },
+    "guilde_destiny_dortoir_nord_2": {
+      "x": 224,
+      "bottom": 313,
+      "band": 23
+    }
+  },
+  "mobilier": 33,
+  "verifications": [
+    {
+      "salle": "guilde_destiny_accueil",
+      "dimensions": [
+        512,
+        384
+      ],
+      "pixels_du_calque_modifies": [
+        6943,
+        6943,
+        6943,
+        6943
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieGuilde",
+          "rect": [
+            232,
+            336,
+            48,
+            16
+          ],
+          "dest": "guilde_cliff_jour"
+        },
+        {
+          "id": "EscalierNord",
+          "rect": [
+            232,
+            104,
+            48,
+            16
+          ],
+          "dest": "guilde_destiny_missions"
+        }
+      ],
+      "south": {
+        "x": 256,
+        "bottom": 352,
+        "band": 32
+      }
+    },
+    {
+      "salle": "guilde_destiny_missions",
+      "dimensions": [
+        576,
+        432
+      ],
+      "pixels_du_calque_modifies": [
+        2885,
+        2885,
+        2885,
+        2885
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "EscalierSud",
+          "rect": [
+            256,
+            400,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_accueil"
+        },
+        {
+          "id": "EscalierNord",
+          "rect": [
+            256,
+            104,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_grand_salon"
+        }
+      ],
+      "south": {
+        "x": 288,
+        "bottom": 395,
+        "band": 37
+      }
+    },
+    {
+      "salle": "guilde_destiny_grand_salon",
+      "dimensions": [
+        576,
+        432
+      ],
+      "pixels_du_calque_modifies": [
+        3350,
+        3350,
+        3350,
+        3350
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SeuilSud",
+          "rect": [
+            256,
+            368,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_missions"
+        },
+        {
+          "id": "SortieBureauMaitre",
+          "rect": [
+            264,
+            144,
+            48,
+            16
+          ],
+          "dest": "guilde_destiny_bureau_maitre"
+        },
+        {
+          "id": "CouloirOuest",
+          "rect": [
+            8,
+            216,
+            24,
+            64
+          ],
+          "dest": "guilde_destiny_carrefour"
+        },
+        {
+          "id": "CouloirEst",
+          "rect": [
+            544,
+            216,
+            24,
+            64
+          ],
+          "dest": "guilde_destiny_couloir_ouest"
+        }
+      ],
+      "south": {
+        "x": 288,
+        "bottom": 383,
+        "band": 49
+      }
+    },
+    {
+      "salle": "guilde_destiny_bureau_maitre",
+      "dimensions": [
+        512,
+        384
+      ],
+      "pixels_du_calque_modifies": [
+        2903,
+        2903,
+        2903,
+        2903
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SeuilSud",
+          "rect": [
+            224,
+            344,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_grand_salon"
+        }
+      ],
+      "south": {
+        "x": 256,
+        "bottom": 357,
+        "band": 27
+      }
+    },
+    {
+      "salle": "guilde_destiny_carrefour",
+      "dimensions": [
+        480,
+        360
+      ],
+      "pixels_du_calque_modifies": [
+        5075,
+        5075,
+        5075,
+        5075
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieEst",
+          "rect": [
+            448,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_grand_salon"
+        },
+        {
+          "id": "SortieOuest",
+          "rect": [
+            8,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_refectoire"
+        },
+        {
+          "id": "SortieNord",
+          "rect": [
+            208,
+            72,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_cuisine"
+        },
+        {
+          "id": "SortieSud",
+          "rect": [
+            208,
+            320,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_reserve"
+        }
+      ],
+      "south": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_refectoire",
+      "dimensions": [
+        576,
+        432
+      ],
+      "pixels_du_calque_modifies": [
+        3161,
+        3161,
+        3161,
+        3161
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieEst",
+          "rect": [
+            544,
+            216,
+            24,
+            64
+          ],
+          "dest": "guilde_destiny_carrefour"
+        }
+      ],
+      "south": null
+    },
+    {
+      "salle": "guilde_destiny_cuisine",
+      "dimensions": [
+        480,
+        360
+      ],
+      "pixels_du_calque_modifies": [
+        2555,
+        2555,
+        2555,
+        2556
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieSud",
+          "rect": [
+            208,
+            320,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_carrefour"
+        }
+      ],
+      "south": {
+        "x": 240,
+        "bottom": 329,
+        "band": 31
+      }
+    },
+    {
+      "salle": "guilde_destiny_reserve",
+      "dimensions": [
+        448,
+        336
+      ],
+      "pixels_du_calque_modifies": [
+        3042,
+        3042,
+        3042,
+        3042
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieNord",
+          "rect": [
+            192,
+            56,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_carrefour"
+        }
+      ],
+      "south": null
+    },
+    {
+      "salle": "guilde_destiny_couloir_ouest",
+      "dimensions": [
+        480,
+        360
+      ],
+      "pixels_du_calque_modifies": [
+        5090,
+        5090,
+        5090,
+        5090
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieOuest",
+          "rect": [
+            8,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_grand_salon"
+        },
+        {
+          "id": "SortieEst",
+          "rect": [
+            448,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_couloir_est"
+        },
+        {
+          "id": "SortieNord",
+          "rect": [
+            208,
+            72,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_dortoir_nord_1"
+        },
+        {
+          "id": "SortieSud",
+          "rect": [
+            208,
+            320,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_dortoir_sud_1"
+        }
+      ],
+      "south": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_couloir_est",
+      "dimensions": [
+        480,
+        360
+      ],
+      "pixels_du_calque_modifies": [
+        4966,
+        4966,
+        4966,
+        4966
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieOuest",
+          "rect": [
+            8,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_couloir_ouest"
+        },
+        {
+          "id": "SortieEst",
+          "rect": [
+            448,
+            160,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_chambre_heros"
+        },
+        {
+          "id": "SortieNord",
+          "rect": [
+            208,
+            72,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_dortoir_nord_2"
+        },
+        {
+          "id": "SortieSud",
+          "rect": [
+            208,
+            320,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_dortoir_sud_2"
+        }
+      ],
+      "south": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_1",
+      "dimensions": [
+        448,
+        336
+      ],
+      "pixels_du_calque_modifies": [
+        2398,
+        2398,
+        2398,
+        2398
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieSud",
+          "rect": [
+            192,
+            296,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_couloir_ouest"
+        }
+      ],
+      "south": {
+        "x": 224,
+        "bottom": 313,
+        "band": 23
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_2",
+      "dimensions": [
+        448,
+        336
+      ],
+      "pixels_du_calque_modifies": [
+        2378,
+        2378,
+        2378,
+        2378
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieSud",
+          "rect": [
+            192,
+            296,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_couloir_est"
+        }
+      ],
+      "south": {
+        "x": 224,
+        "bottom": 313,
+        "band": 23
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_1",
+      "dimensions": [
+        448,
+        336
+      ],
+      "pixels_du_calque_modifies": [
+        3027,
+        3027,
+        3027,
+        3027
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieNord",
+          "rect": [
+            192,
+            56,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_couloir_ouest"
+        }
+      ],
+      "south": null
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_2",
+      "dimensions": [
+        448,
+        336
+      ],
+      "pixels_du_calque_modifies": [
+        2984,
+        2984,
+        2984,
+        2984
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieNord",
+          "rect": [
+            192,
+            56,
+            64,
+            24
+          ],
+          "dest": "guilde_destiny_couloir_est"
+        }
+      ],
+      "south": null
+    },
+    {
+      "salle": "guilde_destiny_chambre_heros",
+      "dimensions": [
+        480,
+        360
+      ],
+      "pixels_du_calque_modifies": [
+        3062,
+        3062,
+        3062,
+        3062
+      ],
+      "regions_hors_calque_intactes": true,
+      "gates": [
+        {
+          "id": "SortieOuest",
+          "rect": [
+            8,
+            176,
+            24,
+            56
+          ],
+          "dest": "guilde_destiny_couloir_est"
+        }
+      ],
+      "south": null
+    }
+  ],
+  "plans_natifs_inchanges": true,
+  "cartes_jeu_modifiees": false
+}

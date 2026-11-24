@@ -1,0 +1,571 @@
+{
+  "statut": "PASS",
+  "palettes": {
+    "commune": {
+      "source": [
+        "G01P04A",
+        "G01P04C"
+      ],
+      "courbes": [
+        [
+          0.89447,
+          -11.93978
+        ],
+        [
+          0.88065,
+          -9.47531
+        ],
+        [
+          0.79784,
+          -4.8279
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "verre_RGB": [
+        15,
+        47,
+        119
+      ],
+      "fond_Nuit_RGB": [
+        81,
+        54,
+        33
+      ]
+    },
+    "maitre": {
+      "source": [
+        "G01P05A",
+        "G01P05C"
+      ],
+      "courbes": [
+        [
+          1.00347,
+          -25.29908
+        ],
+        [
+          1.0068,
+          -25.81704
+        ],
+        [
+          0.98331,
+          -22.9913
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "verre_RGB": [
+        0,
+        39,
+        119
+      ],
+      "fond_Nuit_RGB": [
+        79,
+        47,
+        23
+      ]
+    },
+    "refectoire": {
+      "source": [
+        "G01P06A",
+        "G01P06B"
+      ],
+      "courbes": [
+        [
+          0.88909,
+          -10.6659
+        ],
+        [
+          0.88414,
+          -9.05669
+        ],
+        [
+          0.85183,
+          -7.35929
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        2.0,
+        3.0,
+        3.0
+      ],
+      "verre_RGB": [
+        15,
+        47,
+        119
+      ],
+      "fond_Nuit_RGB": [
+        82,
+        55,
+        33
+      ]
+    },
+    "equipe": {
+      "source": [
+        "G01P07A",
+        "G01P07C"
+      ],
+      "courbes": [
+        [
+          0.70155,
+          -12.00801
+        ],
+        [
+          0.67259,
+          -7.43341
+        ],
+        [
+          0.68455,
+          -9.28733
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "verre_RGB": [
+        7,
+        31,
+        95
+      ],
+      "fond_Nuit_RGB": [
+        61,
+        41,
+        23
+      ]
+    },
+    "nord": {
+      "source": [
+        "G01P09A",
+        "G01P09C"
+      ],
+      "courbes": [
+        [
+          0.70827,
+          -9.1789
+        ],
+        [
+          0.70873,
+          -9.09327
+        ],
+        [
+          0.71941,
+          -9.08984
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "verre_RGB": [
+        7,
+        31,
+        95
+      ],
+      "fond_Nuit_RGB": [
+        64,
+        42,
+        25
+      ]
+    },
+    "sud": {
+      "source": [
+        "G01P10A",
+        "G01P10C"
+      ],
+      "courbes": [
+        [
+          0.69213,
+          -10.49544
+        ],
+        [
+          0.70816,
+          -13.17207
+        ],
+        [
+          0.65628,
+          -9.03658
+        ]
+      ],
+      "erreur_mediane_RVB": [
+        2.0,
+        2.0,
+        1.0
+      ],
+      "verre_RGB": null,
+      "fond_Nuit_RGB": [
+        61,
+        38,
+        22
+      ]
+    }
+  },
+  "salles": [
+    {
+      "salle": "guilde_destiny_accueil",
+      "palette": "commune",
+      "vitres": [
+        {
+          "nom": "Fenetre_Gauche",
+          "pixels_verre": 932,
+          "visibles": 932,
+          "zone": [
+            118,
+            66,
+            31,
+            69
+          ]
+        },
+        {
+          "nom": "Fenetre_Droite",
+          "pixels_verre": 924,
+          "visibles": 924,
+          "zone": [
+            363,
+            66,
+            31,
+            69
+          ]
+        }
+      ],
+      "dimensions": [
+        512,
+        384
+      ],
+      "sud": {
+        "x": 256,
+        "bottom": 352,
+        "band": 32
+      }
+    },
+    {
+      "salle": "guilde_destiny_missions",
+      "palette": "commune",
+      "vitres": [
+        {
+          "nom": "Fenetre_Gauche",
+          "pixels_verre": 1080,
+          "visibles": 1080,
+          "zone": [
+            82,
+            75,
+            33,
+            74
+          ]
+        },
+        {
+          "nom": "Fenetre_Droite",
+          "pixels_verre": 1137,
+          "visibles": 1137,
+          "zone": [
+            461,
+            75,
+            34,
+            74
+          ]
+        }
+      ],
+      "dimensions": [
+        576,
+        432
+      ],
+      "sud": {
+        "x": 288,
+        "bottom": 395,
+        "band": 37
+      }
+    },
+    {
+      "salle": "guilde_destiny_grand_salon",
+      "palette": "commune",
+      "vitres": [
+        {
+          "nom": "Fenetre_Gauche",
+          "pixels_verre": 924,
+          "visibles": 924,
+          "zone": [
+            100,
+            79,
+            30,
+            67
+          ]
+        },
+        {
+          "nom": "Fenetre_Droite",
+          "pixels_verre": 940,
+          "visibles": 940,
+          "zone": [
+            446,
+            79,
+            31,
+            67
+          ]
+        }
+      ],
+      "dimensions": [
+        576,
+        432
+      ],
+      "sud": {
+        "x": 288,
+        "bottom": 383,
+        "band": 49
+      }
+    },
+    {
+      "salle": "guilde_destiny_bureau_maitre",
+      "palette": "maitre",
+      "vitres": [
+        {
+          "nom": "Fenetre_Centre",
+          "pixels_verre": 1652,
+          "visibles": 1651,
+          "zone": [
+            233,
+            31,
+            46,
+            60
+          ]
+        }
+      ],
+      "dimensions": [
+        512,
+        384
+      ],
+      "sud": {
+        "x": 256,
+        "bottom": 357,
+        "band": 27
+      }
+    },
+    {
+      "salle": "guilde_destiny_carrefour",
+      "palette": "commune",
+      "vitres": [],
+      "dimensions": [
+        480,
+        360
+      ],
+      "sud": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_refectoire",
+      "palette": "refectoire",
+      "vitres": [
+        {
+          "nom": "Fenetre_Gauche",
+          "pixels_verre": 1503,
+          "visibles": 1498,
+          "zone": [
+            197,
+            53,
+            44,
+            59
+          ]
+        },
+        {
+          "nom": "Fenetre_Droite",
+          "pixels_verre": 1522,
+          "visibles": 1522,
+          "zone": [
+            330,
+            52,
+            44,
+            60
+          ]
+        }
+      ],
+      "dimensions": [
+        576,
+        432
+      ],
+      "sud": null
+    },
+    {
+      "salle": "guilde_destiny_cuisine",
+      "palette": "refectoire",
+      "vitres": [
+        {
+          "nom": "Fenetre_Gauche",
+          "pixels_verre": 805,
+          "visibles": 802,
+          "zone": [
+            143,
+            45,
+            30,
+            47
+          ]
+        },
+        {
+          "nom": "Fenetre_Droite",
+          "pixels_verre": 802,
+          "visibles": 801,
+          "zone": [
+            307,
+            45,
+            30,
+            47
+          ]
+        }
+      ],
+      "dimensions": [
+        480,
+        360
+      ],
+      "sud": {
+        "x": 240,
+        "bottom": 329,
+        "band": 31
+      }
+    },
+    {
+      "salle": "guilde_destiny_reserve",
+      "palette": "refectoire",
+      "vitres": [],
+      "dimensions": [
+        448,
+        336
+      ],
+      "sud": null
+    },
+    {
+      "salle": "guilde_destiny_couloir_ouest",
+      "palette": "commune",
+      "vitres": [],
+      "dimensions": [
+        480,
+        360
+      ],
+      "sud": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_couloir_est",
+      "palette": "commune",
+      "vitres": [],
+      "dimensions": [
+        480,
+        360
+      ],
+      "sud": {
+        "x": 240,
+        "bottom": 360,
+        "band": 0
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_1",
+      "palette": "nord",
+      "vitres": [
+        {
+          "nom": "Fenetre_Centre",
+          "pixels_verre": 1224,
+          "visibles": 1218,
+          "zone": [
+            204,
+            26,
+            40,
+            54
+          ]
+        }
+      ],
+      "dimensions": [
+        448,
+        336
+      ],
+      "sud": {
+        "x": 224,
+        "bottom": 313,
+        "band": 23
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_2",
+      "palette": "nord",
+      "vitres": [
+        {
+          "nom": "Fenetre_Centre",
+          "pixels_verre": 1224,
+          "visibles": 1218,
+          "zone": [
+            204,
+            26,
+            40,
+            54
+          ]
+        }
+      ],
+      "dimensions": [
+        448,
+        336
+      ],
+      "sud": {
+        "x": 224,
+        "bottom": 313,
+        "band": 23
+      }
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_1",
+      "palette": "sud",
+      "vitres": [],
+      "dimensions": [
+        448,
+        336
+      ],
+      "sud": null
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_2",
+      "palette": "sud",
+      "vitres": [],
+      "dimensions": [
+        448,
+        336
+      ],
+      "sud": null
+    },
+    {
+      "salle": "guilde_destiny_chambre_heros",
+      "palette": "equipe",
+      "vitres": [
+        {
+          "nom": "Fenetre_Centre",
+          "pixels_verre": 1064,
+          "visibles": 1059,
+          "zone": [
+            225,
+            37,
+            36,
+            48
+          ]
+        }
+      ],
+      "dimensions": [
+        480,
+        360
+      ],
+      "sud": null
+    }
+  ],
+  "total_fenetres": 14,
+  "jour_aube_crepuscule": "identiques",
+  "plan_et_cadrage_sud": "identiques",
+  "fond": "brun conservé, assombri par la courbe de la salle",
+  "jeu_modifie": false
+}

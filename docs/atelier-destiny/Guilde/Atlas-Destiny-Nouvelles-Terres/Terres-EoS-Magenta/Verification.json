@@ -1,0 +1,54 @@
+{
+  "statut": "PASS",
+  "generation_raster": 6,
+  "enregistrement_des_entrees": {
+    "orival": {
+      "rapport_aire_apres_cadrage_avant_masque": 0.9955,
+      "composantes_source": 2,
+      "source": "Orival.png"
+    },
+    "seracine": {
+      "rapport_aire_apres_cadrage_avant_masque": 0.9923,
+      "composantes_source": 1,
+      "source": "Seracine.png"
+    },
+    "estrel": {
+      "rapport_aire_apres_cadrage_avant_masque": 0.9908,
+      "composantes_source": 1,
+      "source": "Estrel.png"
+    },
+    "torselune": {
+      "rapport_aire_apres_cadrage_avant_masque": 0.7604,
+      "composantes_source": 1,
+      "source": "Torselune.png"
+    },
+    "reve": {
+      "rapport_aire_apres_cadrage_avant_masque": 0.9401,
+      "composantes_source": 1,
+      "source": "Reverie.png"
+    },
+    "haltes": {
+      "source": "Les-Haltes.png",
+      "traitement": "trois prélèvements intérieurs, clé refaite avec les trois masques"
+    }
+  },
+  "geographie_et_cles": {
+    "alpha_identique_au_masque_valide": true,
+    "fond_magenta_sans_variation": true,
+    "pixel_magenta_a_l_interieur": false,
+    "calques_recomposables_a_l_identique": true,
+    "regions": 6,
+    "ilots": 18,
+    "sites_conserves_dans_index": 34,
+    "empreinte_geographie": "86908bd0b5654423c67e84b588ccb6bde5410c201a7dc5bdd9cee7aeabf5eed0"
+  },
+  "trames_eos": 5,
+  "taille_sprite": [
+    1112,
+    732
+  ],
+  "export_magenta": [
+    5560,
+    3660
+  ]
+}

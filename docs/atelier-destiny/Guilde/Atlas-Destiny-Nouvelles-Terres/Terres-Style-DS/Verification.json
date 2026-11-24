@@ -1,0 +1,582 @@
+{
+  "statut": "PASS",
+  "canvas_px": [
+    1112,
+    732
+  ],
+  "composantes_exactes": 26,
+  "fonctions_alpha_sans_trou": true,
+  "planche_magenta_fond_uniforme": true,
+  "sources_art": "Génération guidée à l’échelle atlas ; quelques détails d’une génération rapprochée pour Réverie.",
+  "regions": [
+    {
+      "indice_geographie": 2,
+      "rectangle_atlas": [
+        466,
+        56,
+        1081,
+        287
+      ],
+      "rectangle_generation": [
+        726,
+        22,
+        1677,
+        236
+      ],
+      "decoupe_du_brut": 1,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9608,
+      "pixel_generes_et_recadres": 73265,
+      "raccords_de_contour": 867
+    },
+    {
+      "indice_geographie": 101,
+      "rectangle_atlas": [
+        91,
+        71,
+        114,
+        88
+      ],
+      "rectangle_generation": [
+        168,
+        35,
+        203,
+        53
+      ],
+      "decoupe_du_brut": 2,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9264,
+      "pixel_generes_et_recadres": 239,
+      "raccords_de_contour": 14
+    },
+    {
+      "indice_geographie": 102,
+      "rectangle_atlas": [
+        121,
+        76,
+        139,
+        86
+      ],
+      "rectangle_generation": [
+        213,
+        40,
+        241,
+        50
+      ],
+      "decoupe_du_brut": 3,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8333,
+      "pixel_generes_et_recadres": 115,
+      "raccords_de_contour": 5
+    },
+    {
+      "indice_geographie": 1,
+      "rectangle_atlas": [
+        72,
+        78,
+        451,
+        418
+      ],
+      "rectangle_generation": [
+        140,
+        43,
+        705,
+        364
+      ],
+      "decoupe_du_brut": 4,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9592,
+      "pixel_generes_et_recadres": 72242,
+      "raccords_de_contour": 853
+    },
+    {
+      "indice_geographie": 104,
+      "rectangle_atlas": [
+        357,
+        227,
+        374,
+        238
+      ],
+      "rectangle_generation": [
+        571,
+        181,
+        595,
+        202
+      ],
+      "decoupe_du_brut": 5,
+      "ilots_bruts_en_contact": true,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.4722,
+      "pixel_generes_et_recadres": 68,
+      "raccords_de_contour": 67
+    },
+    {
+      "indice_geographie": 107,
+      "rectangle_atlas": [
+        1026,
+        231,
+        1040,
+        244
+      ],
+      "rectangle_generation": [
+        1594,
+        184,
+        1616,
+        197
+      ],
+      "decoupe_du_brut": 6,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.907,
+      "pixel_generes_et_recadres": 117,
+      "raccords_de_contour": 0
+    },
+    {
+      "indice_geographie": 103,
+      "rectangle_atlas": [
+        319,
+        233,
+        356,
+        254
+      ],
+      "rectangle_generation": [
+        514,
+        181,
+        595,
+        208
+      ],
+      "decoupe_du_brut": 5,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.6824,
+      "pixel_generes_et_recadres": 348,
+      "raccords_de_contour": 148
+    },
+    {
+      "indice_geographie": 106,
+      "rectangle_atlas": [
+        991,
+        238,
+        1022,
+        259
+      ],
+      "rectangle_generation": [
+        1540,
+        190,
+        1589,
+        211
+      ],
+      "decoupe_du_brut": 7,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.931,
+      "pixel_generes_et_recadres": 378,
+      "raccords_de_contour": 9
+    },
+    {
+      "indice_geographie": 6,
+      "rectangle_atlas": [
+        466,
+        242,
+        509,
+        280
+      ],
+      "rectangle_generation": [
+        726,
+        195,
+        788,
+        232
+      ],
+      "decoupe_du_brut": 8,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9387,
+      "pixel_generes_et_recadres": 1057,
+      "raccords_de_contour": 4
+    },
+    {
+      "indice_geographie": 105,
+      "rectangle_atlas": [
+        298,
+        262,
+        320,
+        275
+      ],
+      "rectangle_generation": [
+        483,
+        214,
+        516,
+        228
+      ],
+      "decoupe_du_brut": 9,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9391,
+      "pixel_generes_et_recadres": 185,
+      "raccords_de_contour": 4
+    },
+    {
+      "indice_geographie": 108,
+      "rectangle_atlas": [
+        1040,
+        268,
+        1065,
+        279
+      ],
+      "rectangle_generation": [
+        1617,
+        218,
+        1653,
+        230
+      ],
+      "decoupe_du_brut": 10,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.85,
+      "pixel_generes_et_recadres": 170,
+      "raccords_de_contour": 7
+    },
+    {
+      "indice_geographie": 109,
+      "rectangle_atlas": [
+        529,
+        287,
+        550,
+        301
+      ],
+      "rectangle_generation": [
+        817,
+        237,
+        848,
+        252
+      ],
+      "decoupe_du_brut": 11,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9196,
+      "pixel_generes_et_recadres": 183,
+      "raccords_de_contour": 8
+    },
+    {
+      "indice_geographie": 3,
+      "rectangle_atlas": [
+        660,
+        306,
+        1083,
+        677
+      ],
+      "rectangle_generation": [
+        1006,
+        253,
+        1682,
+        611
+      ],
+      "decoupe_du_brut": 12,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9555,
+      "pixel_generes_et_recadres": 99600,
+      "raccords_de_contour": 1810
+    },
+    {
+      "indice_geographie": 6,
+      "rectangle_atlas": [
+        503,
+        316,
+        558,
+        367
+      ],
+      "rectangle_generation": [
+        780,
+        260,
+        859,
+        314
+      ],
+      "decoupe_du_brut": 13,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8587,
+      "pixel_generes_et_recadres": 1465,
+      "raccords_de_contour": 119
+    },
+    {
+      "indice_geographie": 110,
+      "rectangle_atlas": [
+        555,
+        365,
+        571,
+        377
+      ],
+      "rectangle_generation": [
+        855,
+        310,
+        878,
+        324
+      ],
+      "decoupe_du_brut": 14,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8611,
+      "pixel_generes_et_recadres": 124,
+      "raccords_de_contour": 13
+    },
+    {
+      "indice_geographie": 6,
+      "rectangle_atlas": [
+        569,
+        389,
+        636,
+        455
+      ],
+      "rectangle_generation": [
+        873,
+        333,
+        970,
+        397
+      ],
+      "decoupe_du_brut": 15,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9015,
+      "pixel_generes_et_recadres": 2417,
+      "raccords_de_contour": 22
+    },
+    {
+      "indice_geographie": 111,
+      "rectangle_atlas": [
+        629,
+        444,
+        644,
+        458
+      ],
+      "rectangle_generation": [
+        960,
+        386,
+        983,
+        401
+      ],
+      "decoupe_du_brut": 16,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9383,
+      "pixel_generes_et_recadres": 152,
+      "raccords_de_contour": 6
+    },
+    {
+      "indice_geographie": 5,
+      "rectangle_atlas": [
+        70,
+        451,
+        246,
+        627
+      ],
+      "rectangle_generation": [
+        140,
+        393,
+        412,
+        565
+      ],
+      "decoupe_du_brut": 17,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9752,
+      "pixel_generes_et_recadres": 19144,
+      "raccords_de_contour": 163
+    },
+    {
+      "indice_geographie": 4,
+      "rectangle_atlas": [
+        265,
+        456,
+        669,
+        688
+      ],
+      "rectangle_generation": [
+        440,
+        397,
+        1019,
+        622
+      ],
+      "decoupe_du_brut": 18,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9745,
+      "pixel_generes_et_recadres": 50473,
+      "raccords_de_contour": 316
+    },
+    {
+      "indice_geographie": 117,
+      "rectangle_atlas": [
+        1085,
+        517,
+        1098,
+        530
+      ],
+      "rectangle_generation": [
+        1686,
+        456,
+        1707,
+        470
+      ],
+      "decoupe_du_brut": 19,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8504,
+      "pixel_generes_et_recadres": 108,
+      "raccords_de_contour": 12
+    },
+    {
+      "indice_geographie": 114,
+      "rectangle_atlas": [
+        258,
+        524,
+        278,
+        537
+      ],
+      "rectangle_generation": [
+        429,
+        462,
+        458,
+        477
+      ],
+      "decoupe_du_brut": 20,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8667,
+      "pixel_generes_et_recadres": 156,
+      "raccords_de_contour": 14
+    },
+    {
+      "indice_geographie": 113,
+      "rectangle_atlas": [
+        64,
+        592,
+        82,
+        607
+      ],
+      "rectangle_generation": [
+        133,
+        530,
+        160,
+        545
+      ],
+      "decoupe_du_brut": 21,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.8491,
+      "pixel_generes_et_recadres": 135,
+      "raccords_de_contour": 2
+    },
+    {
+      "indice_geographie": 118,
+      "rectangle_atlas": [
+        1072,
+        615,
+        1089,
+        628
+      ],
+      "rectangle_generation": [
+        1667,
+        550,
+        1693,
+        563
+      ],
+      "decoupe_du_brut": 22,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9152,
+      "pixel_generes_et_recadres": 151,
+      "raccords_de_contour": 4
+    },
+    {
+      "indice_geographie": 112,
+      "rectangle_atlas": [
+        232,
+        623,
+        250,
+        634
+      ],
+      "rectangle_generation": [
+        389,
+        558,
+        417,
+        570
+      ],
+      "decoupe_du_brut": 23,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9379,
+      "pixel_generes_et_recadres": 136,
+      "raccords_de_contour": 5
+    },
+    {
+      "indice_geographie": 115,
+      "rectangle_atlas": [
+        300,
+        635,
+        320,
+        651
+      ],
+      "rectangle_generation": [
+        491,
+        570,
+        521,
+        587
+      ],
+      "decoupe_du_brut": 24,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9595,
+      "pixel_generes_et_recadres": 213,
+      "raccords_de_contour": 7
+    },
+    {
+      "indice_geographie": 116,
+      "rectangle_atlas": [
+        335,
+        653,
+        350,
+        662
+      ],
+      "rectangle_generation": [
+        544,
+        588,
+        566,
+        598
+      ],
+      "decoupe_du_brut": 25,
+      "ilots_bruts_en_contact": false,
+      "recouvrement_apres_cadrage_avant_ecretage": 0.9291,
+      "pixel_generes_et_recadres": 118,
+      "raccords_de_contour": 6
+    }
+  ],
+  "eaux": {
+    "2": {
+      "pixels_eau_geographie": 4289,
+      "pixels_peints_preserves_dans_eau": 2578,
+      "raccords_anciens_chenaux": 1608,
+      "forme_eaux_livree_identique": true
+    },
+    "1": {
+      "pixels_eau_geographie": 3808,
+      "pixels_peints_preserves_dans_eau": 1948,
+      "raccords_anciens_chenaux": 1685,
+      "forme_eaux_livree_identique": true
+    },
+    "3": {
+      "pixels_eau_geographie": 15561,
+      "pixels_peints_preserves_dans_eau": 9730,
+      "raccords_anciens_chenaux": 3316,
+      "forme_eaux_livree_identique": true
+    },
+    "5": {
+      "pixels_eau_geographie": 1294,
+      "pixels_peints_preserves_dans_eau": 703,
+      "raccords_anciens_chenaux": 409,
+      "forme_eaux_livree_identique": true
+    },
+    "4": {
+      "pixels_eau_geographie": 3363,
+      "pixels_peints_preserves_dans_eau": 1381,
+      "raccords_anciens_chenaux": 442,
+      "forme_eaux_livree_identique": true
+    }
+  },
+  "ancres_de_rendu": {
+    "Reverie_Town": {
+      "ancre_racines_atlas": [
+        150,
+        551
+      ],
+      "dessin": "arbre-village de la génération rapprochée, détouré et placé hors du cours d’eau",
+      "dimensions_du_sprite_px": [
+        28,
+        30
+      ]
+    }
+  },
+  "nombre_exports_individuels": 28,
+  "sha256_geo_avant_apres": "86908bd0b5654423c67e84b588ccb6bde5410c201a7dc5bdd9cee7aeabf5eed0",
+  "sha256_brut_genere": "2179de2287c77cbd1a0cfc64d31617268b94264cd46ed0bc1415c352bb778703",
+  "recomposition_des_7_groupes_pixel_a_pixel": true
+}

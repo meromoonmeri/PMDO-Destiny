@@ -1,0 +1,32 @@
+{
+  "statut": "PASS",
+  "place_sur_plan_atlas": [
+    72,
+    78
+  ],
+  "taille_plan_atlas": [
+    1112,
+    732
+  ],
+  "region_boite_native": [
+    72,
+    78,
+    451,
+    418
+  ],
+  "alpha_2x": [
+    758,
+    680
+  ],
+  "marge_apercu_px": 34,
+  "magenta": [
+    255,
+    0,
+    255
+  ],
+  "iou_silhouette_brute_une_fois_cadree": 0.997678,
+  "silhouette_livree_egale_au_masque_valide": true,
+  "pixels_interieurs_remplis_au_raccord": 534,
+  "rendus_interieurs": "pixels du générateur conservés par voisin le plus proche, sans filtre de grain ni recoloration",
+  "generation_sha256": "93990536d54e900084e893751ac0833e57c833f101a9e57a92a1b10d8e27f3ea"
+}

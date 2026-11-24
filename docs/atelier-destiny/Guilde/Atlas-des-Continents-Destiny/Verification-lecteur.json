@@ -1,0 +1,13 @@
+{
+  "statut": "PASS",
+  "tests": 39,
+  "viewport": [
+    1440,
+    320,
+    390
+  ],
+  "autonome": true,
+  "iframe": "sandbox=allow-scripts",
+  "requetes_externes": [],
+  "erreurs": []
+}
