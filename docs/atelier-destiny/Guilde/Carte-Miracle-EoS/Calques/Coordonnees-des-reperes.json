@@ -1,0 +1,4355 @@
+{
+  "provenance": "https://raw.githubusercontent.com/pret/pmd-sky/9fa563873cec324993a614ea8ce03433add10e46/asm/main_rodata_020A2808.s",
+  "unite": "pixel DS, position native avant caméra",
+  "note": "Identifiants scripts (1…180 = identifiant donjon + 1). Alias résolu d’un saut. Ces lignes n’indiquent pas quels lieux une sauvegarde a ouverts.",
+  "lieux_demonstration": {
+    "184": {
+      "id_script": 184,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ],
+      "nom": "Bourg-Trésor"
+    },
+    "47": {
+      "id_script": 47,
+      "indice_resolu": 47,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        76,
+        276
+      ],
+      "position": [
+        76,
+        276
+      ],
+      "nom": "Île Blizzard"
+    },
+    "36": {
+      "id_script": 36,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        196,
+        156
+      ],
+      "position": [
+        196,
+        156
+      ],
+      "nom": "Caverne Saline"
+    }
+  },
+  "table_native": [
+    {
+      "id_script": 0,
+      "indice_resolu": 0,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        212,
+        180
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 1,
+      "indice_resolu": 1,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        368,
+        152
+      ],
+      "position": [
+        368,
+        152
+      ]
+    },
+    {
+      "id_script": 2,
+      "indice_resolu": 2,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        212,
+        196
+      ],
+      "position": [
+        212,
+        196
+      ]
+    },
+    {
+      "id_script": 3,
+      "indice_resolu": 2,
+      "carte": 268,
+      "alias": 2,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        196
+      ]
+    },
+    {
+      "id_script": 4,
+      "indice_resolu": 4,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        204
+      ],
+      "position": [
+        236,
+        204
+      ]
+    },
+    {
+      "id_script": 5,
+      "indice_resolu": 5,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        308,
+        132
+      ],
+      "position": [
+        308,
+        132
+      ]
+    },
+    {
+      "id_script": 6,
+      "indice_resolu": 5,
+      "carte": 268,
+      "alias": 5,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        132
+      ]
+    },
+    {
+      "id_script": 7,
+      "indice_resolu": 7,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        252,
+        156
+      ],
+      "position": [
+        252,
+        156
+      ]
+    },
+    {
+      "id_script": 8,
+      "indice_resolu": 8,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        324,
+        156
+      ],
+      "position": [
+        324,
+        156
+      ]
+    },
+    {
+      "id_script": 9,
+      "indice_resolu": 9,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        204
+      ],
+      "position": [
+        292,
+        204
+      ]
+    },
+    {
+      "id_script": 10,
+      "indice_resolu": 10,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 11,
+      "indice_resolu": 11,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        348,
+        188
+      ],
+      "position": [
+        348,
+        188
+      ]
+    },
+    {
+      "id_script": 12,
+      "indice_resolu": 12,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 13,
+      "indice_resolu": 13,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        388,
+        204
+      ],
+      "position": [
+        388,
+        204
+      ]
+    },
+    {
+      "id_script": 14,
+      "indice_resolu": 14,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 15,
+      "indice_resolu": 15,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        412,
+        228
+      ],
+      "position": [
+        412,
+        228
+      ]
+    },
+    {
+      "id_script": 16,
+      "indice_resolu": 15,
+      "carte": 268,
+      "alias": 15,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        412,
+        228
+      ]
+    },
+    {
+      "id_script": 17,
+      "indice_resolu": 15,
+      "carte": 268,
+      "alias": 15,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        412,
+        228
+      ]
+    },
+    {
+      "id_script": 18,
+      "indice_resolu": 18,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        260,
+        108
+      ],
+      "position": [
+        260,
+        108
+      ]
+    },
+    {
+      "id_script": 19,
+      "indice_resolu": 18,
+      "carte": 268,
+      "alias": 18,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        260,
+        108
+      ]
+    },
+    {
+      "id_script": 20,
+      "indice_resolu": 18,
+      "carte": 268,
+      "alias": 18,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        260,
+        108
+      ]
+    },
+    {
+      "id_script": 21,
+      "indice_resolu": 21,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        208,
+        108
+      ],
+      "position": [
+        208,
+        108
+      ]
+    },
+    {
+      "id_script": 22,
+      "indice_resolu": 22,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        180,
+        116
+      ],
+      "position": [
+        180,
+        116
+      ]
+    },
+    {
+      "id_script": 23,
+      "indice_resolu": 22,
+      "carte": 268,
+      "alias": 22,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        180,
+        116
+      ]
+    },
+    {
+      "id_script": 24,
+      "indice_resolu": 22,
+      "carte": 268,
+      "alias": 22,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        180,
+        116
+      ]
+    },
+    {
+      "id_script": 25,
+      "indice_resolu": 25,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        308,
+        92
+      ],
+      "position": [
+        308,
+        92
+      ]
+    },
+    {
+      "id_script": 26,
+      "indice_resolu": 26,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        68
+      ],
+      "position": [
+        292,
+        68
+      ]
+    },
+    {
+      "id_script": 27,
+      "indice_resolu": 26,
+      "carte": 268,
+      "alias": 26,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        292,
+        68
+      ]
+    },
+    {
+      "id_script": 28,
+      "indice_resolu": 28,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        108,
+        84
+      ],
+      "position": [
+        108,
+        84
+      ]
+    },
+    {
+      "id_script": 29,
+      "indice_resolu": 29,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        116,
+        108
+      ],
+      "position": [
+        116,
+        108
+      ]
+    },
+    {
+      "id_script": 30,
+      "indice_resolu": 30,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        140,
+        124
+      ],
+      "position": [
+        140,
+        124
+      ]
+    },
+    {
+      "id_script": 31,
+      "indice_resolu": 30,
+      "carte": 269,
+      "alias": 30,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        140,
+        124
+      ]
+    },
+    {
+      "id_script": 32,
+      "indice_resolu": 30,
+      "carte": 269,
+      "alias": 30,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        140,
+        124
+      ]
+    },
+    {
+      "id_script": 33,
+      "indice_resolu": 33,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        164,
+        92
+      ],
+      "position": [
+        164,
+        92
+      ]
+    },
+    {
+      "id_script": 34,
+      "indice_resolu": 34,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        164,
+        68
+      ],
+      "position": [
+        164,
+        68
+      ]
+    },
+    {
+      "id_script": 35,
+      "indice_resolu": 35,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        364,
+        108
+      ],
+      "position": [
+        364,
+        108
+      ]
+    },
+    {
+      "id_script": 36,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        196,
+        156
+      ],
+      "position": [
+        196,
+        156
+      ]
+    },
+    {
+      "id_script": 37,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": 36,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        196,
+        156
+      ]
+    },
+    {
+      "id_script": 38,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": 36,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        196,
+        156
+      ]
+    },
+    {
+      "id_script": 39,
+      "indice_resolu": 39,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        84,
+        220
+      ],
+      "position": [
+        84,
+        220
+      ]
+    },
+    {
+      "id_script": 40,
+      "indice_resolu": 39,
+      "carte": 268,
+      "alias": 39,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        220
+      ]
+    },
+    {
+      "id_script": 41,
+      "indice_resolu": 39,
+      "carte": 268,
+      "alias": 39,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        220
+      ]
+    },
+    {
+      "id_script": 42,
+      "indice_resolu": 42,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        60,
+        180
+      ],
+      "position": [
+        60,
+        180
+      ]
+    },
+    {
+      "id_script": 43,
+      "indice_resolu": 42,
+      "carte": 268,
+      "alias": 42,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        60,
+        180
+      ]
+    },
+    {
+      "id_script": 44,
+      "indice_resolu": 42,
+      "carte": 268,
+      "alias": 42,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        60,
+        180
+      ]
+    },
+    {
+      "id_script": 45,
+      "indice_resolu": 45,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        244,
+        132
+      ],
+      "position": [
+        244,
+        132
+      ]
+    },
+    {
+      "id_script": 46,
+      "indice_resolu": 45,
+      "carte": 268,
+      "alias": 45,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        244,
+        132
+      ]
+    },
+    {
+      "id_script": 47,
+      "indice_resolu": 47,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        76,
+        276
+      ],
+      "position": [
+        76,
+        276
+      ]
+    },
+    {
+      "id_script": 48,
+      "indice_resolu": 48,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        84,
+        292
+      ],
+      "position": [
+        84,
+        292
+      ]
+    },
+    {
+      "id_script": 49,
+      "indice_resolu": 48,
+      "carte": 268,
+      "alias": 48,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        292
+      ]
+    },
+    {
+      "id_script": 50,
+      "indice_resolu": 48,
+      "carte": 268,
+      "alias": 48,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        292
+      ]
+    },
+    {
+      "id_script": 51,
+      "indice_resolu": 51,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        204,
+        292
+      ],
+      "position": [
+        204,
+        292
+      ]
+    },
+    {
+      "id_script": 52,
+      "indice_resolu": 52,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        84,
+        132
+      ],
+      "position": [
+        84,
+        132
+      ]
+    },
+    {
+      "id_script": 53,
+      "indice_resolu": 52,
+      "carte": 268,
+      "alias": 52,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        132
+      ]
+    },
+    {
+      "id_script": 54,
+      "indice_resolu": 52,
+      "carte": 268,
+      "alias": 52,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        132
+      ]
+    },
+    {
+      "id_script": 55,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        340,
+        252
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 56,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 57,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 58,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 59,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 60,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 61,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 62,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 63,
+      "indice_resolu": 63,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        396,
+        132
+      ],
+      "position": [
+        396,
+        132
+      ]
+    },
+    {
+      "id_script": 64,
+      "indice_resolu": 64,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 65,
+      "indice_resolu": 65,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        444,
+        164
+      ],
+      "position": [
+        444,
+        164
+      ]
+    },
+    {
+      "id_script": 66,
+      "indice_resolu": 65,
+      "carte": 268,
+      "alias": 65,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        444,
+        164
+      ]
+    },
+    {
+      "id_script": 67,
+      "indice_resolu": 65,
+      "carte": 268,
+      "alias": 65,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        444,
+        164
+      ]
+    },
+    {
+      "id_script": 68,
+      "indice_resolu": 68,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        68,
+        44
+      ],
+      "position": [
+        68,
+        44
+      ]
+    },
+    {
+      "id_script": 69,
+      "indice_resolu": 68,
+      "carte": 268,
+      "alias": 68,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        68,
+        44
+      ]
+    },
+    {
+      "id_script": 70,
+      "indice_resolu": 68,
+      "carte": 268,
+      "alias": 68,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        68,
+        44
+      ]
+    },
+    {
+      "id_script": 71,
+      "indice_resolu": 71,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        364,
+        260
+      ],
+      "position": [
+        364,
+        260
+      ]
+    },
+    {
+      "id_script": 72,
+      "indice_resolu": 71,
+      "carte": 268,
+      "alias": 71,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        364,
+        260
+      ]
+    },
+    {
+      "id_script": 73,
+      "indice_resolu": 73,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        172,
+        252
+      ],
+      "position": [
+        172,
+        252
+      ]
+    },
+    {
+      "id_script": 74,
+      "indice_resolu": 74,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        156,
+        204
+      ],
+      "position": [
+        156,
+        204
+      ]
+    },
+    {
+      "id_script": 75,
+      "indice_resolu": 74,
+      "carte": 268,
+      "alias": 74,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        156,
+        204
+      ]
+    },
+    {
+      "id_script": 76,
+      "indice_resolu": 76,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        180,
+        76
+      ],
+      "position": [
+        180,
+        76
+      ]
+    },
+    {
+      "id_script": 77,
+      "indice_resolu": 76,
+      "carte": 268,
+      "alias": 76,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        180,
+        76
+      ]
+    },
+    {
+      "id_script": 78,
+      "indice_resolu": 78,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        108,
+        292
+      ],
+      "position": [
+        108,
+        292
+      ]
+    },
+    {
+      "id_script": 79,
+      "indice_resolu": 78,
+      "carte": 268,
+      "alias": 78,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        108,
+        292
+      ]
+    },
+    {
+      "id_script": 80,
+      "indice_resolu": 80,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        84,
+        76
+      ],
+      "position": [
+        84,
+        76
+      ]
+    },
+    {
+      "id_script": 81,
+      "indice_resolu": 80,
+      "carte": 268,
+      "alias": 80,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        76
+      ]
+    },
+    {
+      "id_script": 82,
+      "indice_resolu": 82,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        324,
+        292
+      ],
+      "position": [
+        324,
+        292
+      ]
+    },
+    {
+      "id_script": 83,
+      "indice_resolu": 82,
+      "carte": 268,
+      "alias": 82,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        324,
+        292
+      ]
+    },
+    {
+      "id_script": 84,
+      "indice_resolu": 84,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        188,
+        36
+      ],
+      "position": [
+        188,
+        36
+      ]
+    },
+    {
+      "id_script": 85,
+      "indice_resolu": 84,
+      "carte": 268,
+      "alias": 84,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        36
+      ]
+    },
+    {
+      "id_script": 86,
+      "indice_resolu": 86,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        404,
+        84
+      ],
+      "position": [
+        404,
+        84
+      ]
+    },
+    {
+      "id_script": 87,
+      "indice_resolu": 86,
+      "carte": 268,
+      "alias": 86,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        404,
+        84
+      ]
+    },
+    {
+      "id_script": 88,
+      "indice_resolu": 88,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        172
+      ],
+      "position": [
+        236,
+        172
+      ]
+    },
+    {
+      "id_script": 89,
+      "indice_resolu": 89,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        316,
+        180
+      ],
+      "position": [
+        316,
+        180
+      ]
+    },
+    {
+      "id_script": 90,
+      "indice_resolu": 90,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        268,
+        172
+      ],
+      "position": [
+        268,
+        172
+      ]
+    },
+    {
+      "id_script": 91,
+      "indice_resolu": 91,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        260,
+        196
+      ],
+      "position": [
+        260,
+        196
+      ]
+    },
+    {
+      "id_script": 92,
+      "indice_resolu": 92,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        348,
+        140
+      ],
+      "position": [
+        348,
+        140
+      ]
+    },
+    {
+      "id_script": 93,
+      "indice_resolu": 93,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        156
+      ],
+      "position": [
+        292,
+        156
+      ]
+    },
+    {
+      "id_script": 94,
+      "indice_resolu": 94,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        244,
+        284
+      ],
+      "position": [
+        244,
+        284
+      ]
+    },
+    {
+      "id_script": 95,
+      "indice_resolu": 95,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        460,
+        44
+      ],
+      "position": [
+        460,
+        44
+      ]
+    },
+    {
+      "id_script": 96,
+      "indice_resolu": 96,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        52,
+        100
+      ],
+      "position": [
+        52,
+        100
+      ]
+    },
+    {
+      "id_script": 97,
+      "indice_resolu": 97,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        436,
+        124
+      ],
+      "position": [
+        436,
+        124
+      ]
+    },
+    {
+      "id_script": 98,
+      "indice_resolu": 98,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        420,
+        260
+      ],
+      "position": [
+        420,
+        260
+      ]
+    },
+    {
+      "id_script": 99,
+      "indice_resolu": 99,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        292
+      ],
+      "position": [
+        292,
+        292
+      ]
+    },
+    {
+      "id_script": 100,
+      "indice_resolu": 100,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        228
+      ],
+      "position": [
+        236,
+        228
+      ]
+    },
+    {
+      "id_script": 101,
+      "indice_resolu": 101,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        252,
+        244
+      ],
+      "position": [
+        252,
+        244
+      ]
+    },
+    {
+      "id_script": 102,
+      "indice_resolu": 102,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        220,
+        244
+      ],
+      "position": [
+        220,
+        244
+      ]
+    },
+    {
+      "id_script": 103,
+      "indice_resolu": 103,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        260
+      ],
+      "position": [
+        236,
+        260
+      ]
+    },
+    {
+      "id_script": 104,
+      "indice_resolu": 104,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        244
+      ],
+      "position": [
+        236,
+        244
+      ]
+    },
+    {
+      "id_script": 105,
+      "indice_resolu": 105,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        404,
+        36
+      ],
+      "position": [
+        404,
+        36
+      ]
+    },
+    {
+      "id_script": 106,
+      "indice_resolu": 106,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 107,
+      "indice_resolu": 107,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 108,
+      "indice_resolu": 108,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        372,
+        212
+      ],
+      "position": [
+        372,
+        212
+      ]
+    },
+    {
+      "id_script": 109,
+      "indice_resolu": 109,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        132,
+        236
+      ],
+      "position": [
+        132,
+        236
+      ]
+    },
+    {
+      "id_script": 110,
+      "indice_resolu": 110,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        444,
+        284
+      ],
+      "position": [
+        444,
+        284
+      ]
+    },
+    {
+      "id_script": 111,
+      "indice_resolu": 111,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        116,
+        52
+      ],
+      "position": [
+        116,
+        52
+      ]
+    },
+    {
+      "id_script": 112,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        372,
+        164
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 113,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 114,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 115,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 116,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 117,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 118,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 119,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 120,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 121,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 122,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 123,
+      "indice_resolu": 112,
+      "carte": 268,
+      "alias": 112,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 124,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": null,
+      "coordonnees_brutes": [
+        316,
+        192
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 125,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 126,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 127,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 128,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 129,
+      "indice_resolu": 129,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        140,
+        100
+      ],
+      "position": [
+        140,
+        100
+      ]
+    },
+    {
+      "id_script": 130,
+      "indice_resolu": 130,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        252,
+        132
+      ],
+      "position": [
+        252,
+        132
+      ]
+    },
+    {
+      "id_script": 131,
+      "indice_resolu": 131,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        324,
+        52
+      ],
+      "position": [
+        324,
+        52
+      ]
+    },
+    {
+      "id_script": 132,
+      "indice_resolu": 131,
+      "carte": 298,
+      "alias": 131,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        324,
+        52
+      ]
+    },
+    {
+      "id_script": 133,
+      "indice_resolu": 131,
+      "carte": 298,
+      "alias": 131,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        324,
+        52
+      ]
+    },
+    {
+      "id_script": 134,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        124,
+        92
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 135,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 136,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 137,
+      "indice_resolu": 137,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        132,
+        68
+      ],
+      "position": [
+        132,
+        68
+      ]
+    },
+    {
+      "id_script": 138,
+      "indice_resolu": 138,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        84,
+        44
+      ],
+      "position": [
+        84,
+        44
+      ]
+    },
+    {
+      "id_script": 139,
+      "indice_resolu": 138,
+      "carte": 303,
+      "alias": 138,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        44
+      ]
+    },
+    {
+      "id_script": 140,
+      "indice_resolu": 140,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        164,
+        92
+      ],
+      "position": [
+        164,
+        92
+      ]
+    },
+    {
+      "id_script": 141,
+      "indice_resolu": 141,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 142,
+      "indice_resolu": 142,
+      "carte": 303,
+      "alias": null,
+      "coordonnees_brutes": [
+        172,
+        124
+      ],
+      "position": [
+        172,
+        124
+      ]
+    },
+    {
+      "id_script": 143,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": null,
+      "coordonnees_brutes": [
+        76,
+        84
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 144,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": 143,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 145,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": 143,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 146,
+      "indice_resolu": 146,
+      "carte": 302,
+      "alias": null,
+      "coordonnees_brutes": [
+        132,
+        116
+      ],
+      "position": [
+        132,
+        116
+      ]
+    },
+    {
+      "id_script": 147,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": null,
+      "coordonnees_brutes": [
+        188,
+        92
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 148,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": 147,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 149,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": 147,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 150,
+      "indice_resolu": 150,
+      "carte": 301,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        296
+      ],
+      "position": [
+        292,
+        296
+      ]
+    },
+    {
+      "id_script": 151,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": null,
+      "coordonnees_brutes": [
+        308,
+        296
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 152,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": 151,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 153,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": 151,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 154,
+      "indice_resolu": 154,
+      "carte": 301,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 155,
+      "indice_resolu": 155,
+      "carte": 301,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 156,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": null,
+      "coordonnees_brutes": [
+        308,
+        276
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 157,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": 156,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 158,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": 156,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 159,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": null,
+      "coordonnees_brutes": [
+        272,
+        188
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 160,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 161,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 162,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 163,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 164,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 165,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 166,
+      "indice_resolu": 166,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 167,
+      "indice_resolu": 167,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 168,
+      "indice_resolu": 168,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 169,
+      "indice_resolu": 169,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 170,
+      "indice_resolu": 170,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 171,
+      "indice_resolu": 171,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 172,
+      "indice_resolu": 172,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 173,
+      "indice_resolu": 173,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 174,
+      "indice_resolu": 174,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 175,
+      "indice_resolu": 175,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        316,
+        192
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 176,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        372,
+        164
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 177,
+      "indice_resolu": 177,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        188,
+        92
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 178,
+      "indice_resolu": 178,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        236,
+        124
+      ],
+      "position": [
+        236,
+        124
+      ]
+    },
+    {
+      "id_script": 179,
+      "indice_resolu": 179,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        292,
+        180
+      ],
+      "position": [
+        292,
+        180
+      ]
+    },
+    {
+      "id_script": 180,
+      "indice_resolu": 180,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        300,
+        300
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 181,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        212,
+        180
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 182,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 183,
+      "indice_resolu": 183,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 184,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 185,
+      "indice_resolu": 185,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 186,
+      "indice_resolu": 186,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 187,
+      "indice_resolu": 187,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 188,
+      "indice_resolu": 188,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        164,
+        132
+      ],
+      "position": [
+        164,
+        132
+      ]
+    },
+    {
+      "id_script": 189,
+      "indice_resolu": 189,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        276,
+        52
+      ],
+      "position": [
+        276,
+        52
+      ]
+    },
+    {
+      "id_script": 190,
+      "indice_resolu": 190,
+      "carte": 268,
+      "alias": null,
+      "coordonnees_brutes": [
+        76,
+        196
+      ],
+      "position": [
+        76,
+        196
+      ]
+    },
+    {
+      "id_script": 191,
+      "indice_resolu": 191,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        92,
+        52
+      ],
+      "position": [
+        92,
+        52
+      ]
+    },
+    {
+      "id_script": 192,
+      "indice_resolu": 179,
+      "carte": 268,
+      "alias": 179,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        292,
+        180
+      ]
+    },
+    {
+      "id_script": 193,
+      "indice_resolu": 193,
+      "carte": 269,
+      "alias": null,
+      "coordonnees_brutes": [
+        100,
+        60
+      ],
+      "position": [
+        100,
+        60
+      ]
+    },
+    {
+      "id_script": 194,
+      "indice_resolu": 178,
+      "carte": 268,
+      "alias": 178,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        236,
+        124
+      ]
+    },
+    {
+      "id_script": 195,
+      "indice_resolu": 1,
+      "carte": 268,
+      "alias": 1,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        368,
+        152
+      ]
+    },
+    {
+      "id_script": 196,
+      "indice_resolu": 2,
+      "carte": 268,
+      "alias": 2,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        196
+      ]
+    },
+    {
+      "id_script": 197,
+      "indice_resolu": 9,
+      "carte": 268,
+      "alias": 9,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        292,
+        204
+      ]
+    },
+    {
+      "id_script": 198,
+      "indice_resolu": 11,
+      "carte": 268,
+      "alias": 11,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        348,
+        188
+      ]
+    },
+    {
+      "id_script": 199,
+      "indice_resolu": 13,
+      "carte": 268,
+      "alias": 13,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        388,
+        204
+      ]
+    },
+    {
+      "id_script": 200,
+      "indice_resolu": 15,
+      "carte": 268,
+      "alias": 15,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        412,
+        228
+      ]
+    },
+    {
+      "id_script": 201,
+      "indice_resolu": 15,
+      "carte": 268,
+      "alias": 15,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        412,
+        228
+      ]
+    },
+    {
+      "id_script": 202,
+      "indice_resolu": 18,
+      "carte": 268,
+      "alias": 18,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        260,
+        108
+      ]
+    },
+    {
+      "id_script": 203,
+      "indice_resolu": 22,
+      "carte": 268,
+      "alias": 22,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        180,
+        116
+      ]
+    },
+    {
+      "id_script": 204,
+      "indice_resolu": 25,
+      "carte": 268,
+      "alias": 25,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        92
+      ]
+    },
+    {
+      "id_script": 205,
+      "indice_resolu": 28,
+      "carte": 269,
+      "alias": 28,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        108,
+        84
+      ]
+    },
+    {
+      "id_script": 206,
+      "indice_resolu": 29,
+      "carte": 269,
+      "alias": 29,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        116,
+        108
+      ]
+    },
+    {
+      "id_script": 207,
+      "indice_resolu": 30,
+      "carte": 269,
+      "alias": 30,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        140,
+        124
+      ]
+    },
+    {
+      "id_script": 208,
+      "indice_resolu": 30,
+      "carte": 269,
+      "alias": 30,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        140,
+        124
+      ]
+    },
+    {
+      "id_script": 209,
+      "indice_resolu": 33,
+      "carte": 269,
+      "alias": 33,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        164,
+        92
+      ]
+    },
+    {
+      "id_script": 210,
+      "indice_resolu": 140,
+      "carte": 303,
+      "alias": 140,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        164,
+        92
+      ]
+    },
+    {
+      "id_script": 211,
+      "indice_resolu": 34,
+      "carte": 269,
+      "alias": 34,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        164,
+        68
+      ]
+    },
+    {
+      "id_script": 212,
+      "indice_resolu": 35,
+      "carte": 268,
+      "alias": 35,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        364,
+        108
+      ]
+    },
+    {
+      "id_script": 213,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": 36,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        196,
+        156
+      ]
+    },
+    {
+      "id_script": 214,
+      "indice_resolu": 36,
+      "carte": 268,
+      "alias": 36,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        196,
+        156
+      ]
+    },
+    {
+      "id_script": 215,
+      "indice_resolu": 39,
+      "carte": 268,
+      "alias": 39,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        220
+      ]
+    },
+    {
+      "id_script": 216,
+      "indice_resolu": 39,
+      "carte": 268,
+      "alias": 39,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        220
+      ]
+    },
+    {
+      "id_script": 217,
+      "indice_resolu": 42,
+      "carte": 268,
+      "alias": 42,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        60,
+        180
+      ]
+    },
+    {
+      "id_script": 218,
+      "indice_resolu": 42,
+      "carte": 268,
+      "alias": 42,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        60,
+        180
+      ]
+    },
+    {
+      "id_script": 219,
+      "indice_resolu": 45,
+      "carte": 268,
+      "alias": 45,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        244,
+        132
+      ]
+    },
+    {
+      "id_script": 220,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 221,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 222,
+      "indice_resolu": 55,
+      "carte": 268,
+      "alias": 55,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        340,
+        252
+      ]
+    },
+    {
+      "id_script": 223,
+      "indice_resolu": 52,
+      "carte": 268,
+      "alias": 52,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        132
+      ]
+    },
+    {
+      "id_script": 224,
+      "indice_resolu": 65,
+      "carte": 268,
+      "alias": 65,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        444,
+        164
+      ]
+    },
+    {
+      "id_script": 225,
+      "indice_resolu": 65,
+      "carte": 268,
+      "alias": 65,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        444,
+        164
+      ]
+    },
+    {
+      "id_script": 226,
+      "indice_resolu": 68,
+      "carte": 268,
+      "alias": 68,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        68,
+        44
+      ]
+    },
+    {
+      "id_script": 227,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 228,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 229,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 230,
+      "indice_resolu": 124,
+      "carte": 299,
+      "alias": 124,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        316,
+        192
+      ]
+    },
+    {
+      "id_script": 231,
+      "indice_resolu": 131,
+      "carte": 298,
+      "alias": 131,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        324,
+        52
+      ]
+    },
+    {
+      "id_script": 232,
+      "indice_resolu": 131,
+      "carte": 298,
+      "alias": 131,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        324,
+        52
+      ]
+    },
+    {
+      "id_script": 233,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 234,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 235,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 236,
+      "indice_resolu": 134,
+      "carte": 303,
+      "alias": 134,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        124,
+        92
+      ]
+    },
+    {
+      "id_script": 237,
+      "indice_resolu": 137,
+      "carte": 303,
+      "alias": 137,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        132,
+        68
+      ]
+    },
+    {
+      "id_script": 238,
+      "indice_resolu": 138,
+      "carte": 303,
+      "alias": 138,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        44
+      ]
+    },
+    {
+      "id_script": 239,
+      "indice_resolu": 138,
+      "carte": 303,
+      "alias": 138,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        44
+      ]
+    },
+    {
+      "id_script": 240,
+      "indice_resolu": 141,
+      "carte": 303,
+      "alias": 141,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "id_script": 241,
+      "indice_resolu": 142,
+      "carte": 303,
+      "alias": 142,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        172,
+        124
+      ]
+    },
+    {
+      "id_script": 242,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": 143,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 243,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": 143,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 244,
+      "indice_resolu": 143,
+      "carte": 302,
+      "alias": 143,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        76,
+        84
+      ]
+    },
+    {
+      "id_script": 245,
+      "indice_resolu": 146,
+      "carte": 302,
+      "alias": 146,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        132,
+        116
+      ]
+    },
+    {
+      "id_script": 246,
+      "indice_resolu": 146,
+      "carte": 302,
+      "alias": 146,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        132,
+        116
+      ]
+    },
+    {
+      "id_script": 247,
+      "indice_resolu": 146,
+      "carte": 302,
+      "alias": 146,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        132,
+        116
+      ]
+    },
+    {
+      "id_script": 248,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": 147,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 249,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": 147,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 250,
+      "indice_resolu": 147,
+      "carte": 302,
+      "alias": 147,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 251,
+      "indice_resolu": 150,
+      "carte": 301,
+      "alias": 150,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        292,
+        296
+      ]
+    },
+    {
+      "id_script": 252,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": 151,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 253,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": 151,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 254,
+      "indice_resolu": 151,
+      "carte": 301,
+      "alias": 151,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        296
+      ]
+    },
+    {
+      "id_script": 255,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": 156,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 256,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": 156,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 257,
+      "indice_resolu": 156,
+      "carte": 301,
+      "alias": 156,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        308,
+        276
+      ]
+    },
+    {
+      "id_script": 258,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 259,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 260,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 261,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 262,
+      "indice_resolu": 159,
+      "carte": 300,
+      "alias": 159,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        272,
+        188
+      ]
+    },
+    {
+      "id_script": 263,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 264,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 265,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 266,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 267,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 268,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 269,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 270,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 271,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 272,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 273,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 274,
+      "indice_resolu": 176,
+      "carte": 268,
+      "alias": 176,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        372,
+        164
+      ]
+    },
+    {
+      "id_script": 275,
+      "indice_resolu": 48,
+      "carte": 268,
+      "alias": 48,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        292
+      ]
+    },
+    {
+      "id_script": 276,
+      "indice_resolu": 48,
+      "carte": 268,
+      "alias": 48,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        84,
+        292
+      ]
+    },
+    {
+      "id_script": 277,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 278,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 279,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 280,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 281,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 282,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 283,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 284,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 285,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 286,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 287,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 288,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 289,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 290,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 291,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 292,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 293,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 294,
+      "indice_resolu": 179,
+      "carte": 268,
+      "alias": 179,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        292,
+        180
+      ]
+    },
+    {
+      "id_script": 295,
+      "indice_resolu": 193,
+      "carte": 269,
+      "alias": 193,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        100,
+        60
+      ]
+    },
+    {
+      "id_script": 296,
+      "indice_resolu": 296,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        100,
+        128
+      ],
+      "position": [
+        100,
+        128
+      ]
+    },
+    {
+      "id_script": 297,
+      "indice_resolu": 297,
+      "carte": 298,
+      "alias": null,
+      "coordonnees_brutes": [
+        68,
+        132
+      ],
+      "position": [
+        68,
+        132
+      ]
+    },
+    {
+      "id_script": 298,
+      "indice_resolu": 297,
+      "carte": 298,
+      "alias": 297,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        68,
+        132
+      ]
+    },
+    {
+      "id_script": 299,
+      "indice_resolu": 177,
+      "carte": 298,
+      "alias": 177,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 300,
+      "indice_resolu": 177,
+      "carte": 298,
+      "alias": 177,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        188,
+        92
+      ]
+    },
+    {
+      "id_script": 301,
+      "indice_resolu": 301,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 302,
+      "indice_resolu": 302,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 303,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 304,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 305,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 306,
+      "indice_resolu": 181,
+      "carte": 268,
+      "alias": 181,
+      "coordonnees_brutes": [
+        0,
+        0
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 307,
+      "indice_resolu": 307,
+      "carte": -1,
+      "alias": null,
+      "coordonnees_brutes": [
+        -1,
+        -1
+      ],
+      "position": null
+    },
+    {
+      "id_script": 308,
+      "indice_resolu": 308,
+      "carte": 299,
+      "alias": null,
+      "coordonnees_brutes": [
+        212,
+        180
+      ],
+      "position": [
+        212,
+        180
+      ]
+    },
+    {
+      "id_script": 309,
+      "indice_resolu": 309,
+      "carte": 300,
+      "alias": null,
+      "coordonnees_brutes": [
+        212,
+        180
+      ],
+      "position": [
+        212,
+        180
+      ]
+    }
+  ]
+}

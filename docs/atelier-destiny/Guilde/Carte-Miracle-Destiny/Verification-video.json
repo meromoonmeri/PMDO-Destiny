@@ -1,0 +1,38 @@
+{
+  "statut": "PASS",
+  "fps": 24,
+  "frames": 528,
+  "signals": [
+    {
+      "id": "volcan-geant",
+      "ms": 3417
+    },
+    {
+      "id": "cratere-obscur",
+      "ms": 5417
+    },
+    {
+      "id": "bois-petales",
+      "ms": 9292
+    },
+    {
+      "id": "atoll-coraux",
+      "ms": 13000
+    },
+    {
+      "id": "grotte-amethystes",
+      "ms": 16583
+    }
+  ],
+  "dimensions": [
+    1280,
+    868
+  ],
+  "marche": true,
+  "navigation": true,
+  "vue_complete_finale": true,
+  "duree": 22.0,
+  "video": "H.264",
+  "audio": "AAC, 48 kHz",
+  "lieux_fixes": true
+}

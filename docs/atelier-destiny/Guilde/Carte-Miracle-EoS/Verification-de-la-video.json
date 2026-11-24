@@ -1,0 +1,30 @@
+{
+  "statut": "PASS",
+  "frames": 804,
+  "format": "H.264 + AAC st\u00e9r\u00e9o",
+  "resolution": [
+    1280,
+    864
+  ],
+  "fps": 59.8261,
+  "duree": 13.439,
+  "pixels_repere_jaune_f400": 148,
+  "pixels_repere_rouge_f408": 138,
+  "silence_rms_avant_me": 0.0,
+  "silence_rms_entre_scenes": 0.0,
+  "sons": {
+    "me": {
+      "tick": 400,
+      "seconde": 6.686,
+      "correlation_pcm_reencode": 0.998212,
+      "rms": 0.094494
+    },
+    "bgm": {
+      "tick": 571,
+      "seconde": 9.5443,
+      "correlation_pcm_reencode": 0.982157,
+      "rms": 0.021658
+    }
+  },
+  "sha256": "30481c33bd661d94f38f79e8fda5d6239281dddf006e29859506eb2c235341dc"
+}
