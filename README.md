@@ -30,6 +30,8 @@ Si le son grésille, essayer `JOUER_A_DESTINY_WASAPI.bat`.
 
 ## Notes de mise à jour
 
+- [Atelier Destiny — atlas Grand Large, guilde PMU, cinématiques et sources](docs/atelier-destiny/README.md)
+- [Réverie Town — bilan illustré des retouches de la ville](docs/atelier-destiny/Bilan-Reverie/Bilan_REVERIE_TOWN.md)
 - [Réverie — icônes Méga et baies](docs/ICONES_OBJETS_REVERIE.md)
 - [Dojo Kingambit — wooshes PMD, cyclones et Méga](docs/KINGAMBIT_MISE_A_JOUR.md)
 

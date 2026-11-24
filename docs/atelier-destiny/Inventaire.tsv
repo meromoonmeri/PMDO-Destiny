@@ -205,7 +205,7 @@ Guilde/Carte-Miracle-Destiny-4-Grand-Large/Verification-dessins.json	316	b442f3e
 Guilde/Carte-Miracle-Destiny-4-Grand-Large/Verification-geographie.json	10740	83600e557c3a3e0a0178d09f21ab88a0d7788826
 Guilde/Carte-Miracle-Destiny-4-Grand-Large/Verification-lecteur.json	4207	32d276281af22f4912a0aee4c357b480e47c208d
 Guilde/Carte-Miracle-Destiny-4-Grand-Large/Verification-video.json	381	f0ba30d5bc3b4159f753568930061918678517fe
-Guilde/Carte-Miracle-Destiny-4-Grand-Large/index.html	28	45526a3d8c62152f96bf9629dc8674645f27d3f8
+Guilde/Carte-Miracle-Destiny-4-Grand-Large/index.html	5429435	14518b5ca78c012b62e81d72bf45acaebd3fe784
 Guilde/Accueil-PMD/Calques/Halo-G01P02A-Seuil.png	503	a7f26273521180901c3a013a128b1d5424d09858
 Guilde/Accueil-PMD/Calques/Tapis-PMU-Seuil.png	635	d432c57a84eccac84c8601997221bf5e9ff61394
 Guilde/Accueil-PMD/Index-seuil.json	1365	50a2a93d49699710bba169504dea81d36d2bc222
@@ -2109,7 +2109,7 @@ Guilde/Carte-Miracle-Destiny-4/Sources/Verifier.cjs	9925	7db48002b689e937108855d
 Guilde/Carte-Miracle-Destiny-4/Verification-geographie.json	2787	0e9d655bba884800280cc191c70ff473a3821542
 Guilde/Carte-Miracle-Destiny-4/Verification-lecteur.json	2417	cfabc1be2251c517c6282413b5fa5c8581ea13a6
 Guilde/Carte-Miracle-Destiny-4/Verification-video.json	1151	8071af4467804dd184ebacb15c885522da6aaf28
-Guilde/Carte-Miracle-Destiny-4/index.html	28	45526a3d8c62152f96bf9629dc8674645f27d3f8
+Guilde/Carte-Miracle-Destiny-4/index.html	3725341	68a0d79710f9491942f2ff947a90b15153d0b4dd
 Guilde/Carte-Miracle-Destiny/Apercu-Expedition-Destiny.mp4	11843111	e49bc684406a92553249873abfa592a550f8874f
 Guilde/Carte-Miracle-Destiny/Apercu-Nuages-Destiny.gif	6023349	db3b96d30fbfdae9266546a6bea994a5c6f3afe6
 Guilde/Carte-Miracle-Destiny/Archipels-Destiny-Magenta.png	70778	65fe846273cd88c0d1d7204e7f503822c8f53353
@@ -2196,7 +2196,7 @@ Guilde/Carte-Miracle-Destiny/Verification-geographie.json	3661	0e1ef532faa52a8ac
 Guilde/Carte-Miracle-Destiny/Verification-lecteur.json	324	c552e928ad87d1edbf2af2971bf155d935bdf547
 Guilde/Carte-Miracle-Destiny/Verification-video-nuages.json	1066	a18d83d8f585fd863fe86cdea5e5c46e0bd5d335
 Guilde/Carte-Miracle-Destiny/Verification-video.json	569	b1c466505f37b362c10bab35454d4ccf90ce0b92
-Guilde/Carte-Miracle-Destiny/index.html	26	cc04c102537dcfd03a97eea874aab44d3231f7d6
+Guilde/Carte-Miracle-Destiny/index.html	1762875	1cf75f71baaea154475046bbb2786f2d01bec850
 Guilde/Carte-Miracle-EoS/Calques/Animation.json	17643	6d996d21d7bdcd6ea4e7ea26358842a8ddf7f279
 Guilde/Carte-Miracle-EoS/Calques/Audio/Extrait-Guilde-Remix-ralenti.mp3	193140	b8564e6022f0015b0c8be492a761acefacd544d4
 Guilde/Carte-Miracle-EoS/Calques/Audio/Extrait-Guilde-Remix.mp3	97009	3ace74a3b53e9044d41e5bc523e51409f99c0c3e
