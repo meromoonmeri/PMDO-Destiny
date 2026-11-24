@@ -103,10 +103,15 @@ namespace RogueEssence.Ground
 
         public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
         {
+            Draw(spriteBatch, offset, sheet, tint, default);
+        }
+
+        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
+        {
             Loc drawLoc = GetDrawLoc(offset, sheet);
             drawLoc.Y -= LocHeight;
             //draw sprite at current frame
-            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
+            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
         }
         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
         {
@@ -184,12 +189,12 @@ namespace RogueEssence.Ground
             Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
+        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
         {
             Loc drawLoc = GetDrawLoc(offset, sheet);
             drawLoc.Y -= LocHeight;
             //draw sprite at current frame
-            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
+            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
         }
         public override Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
         {

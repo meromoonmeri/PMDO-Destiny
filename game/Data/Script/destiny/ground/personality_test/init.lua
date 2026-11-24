@@ -22,7 +22,7 @@
 require 'origin.common'
 
 local quiz_data = require 'destiny.ground.personality_test.quiz_data'
-local starters_source = require 'destiny.ground.personality_test.starters_source'
+local starter_pool = require 'destiny.starter_pool'
 local talents_depart = require 'destiny.talents_depart'
 local recrutement = require 'destiny.recrutement'
 
@@ -777,25 +777,7 @@ local function reveler_starter(nature, starter)
     (nature.description or ''), -1)
 end
 
--- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
--- forme : un Goupix d'Alola n'est pas confondu avec celui de Kanto.
-local function construire_pool(espece_exclue)
-  local pool, deja_vu = {}, {}
-  local function ajouter(s)
-    local key = s.espece .. ':' .. tostring(s.forme)
-    if s.espece ~= espece_exclue and not deja_vu[key] then
-      deja_vu[key] = true
-      table.insert(pool, s)
-    end
-  end
-  for _, s in ipairs(starters_source.starters) do ajouter(s) end
-  for _, s in pairs(quiz_data.starters) do ajouter(s) end
-  table.sort(pool, function(a, b)
-    if a.gen ~= b.gen then return a.gen < b.gen end
-    return a.nom < b.nom
-  end)
-  return pool
-end
+local construire_pool = starter_pool.construire
 
 -- Le menu de sélection natif PMDO utilise le même portrait bordé que le
 -- sélecteur du projet de référence. Les libellés propres à Destiny gardent la

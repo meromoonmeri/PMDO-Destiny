@@ -159,6 +159,35 @@ namespace RogueEssence.Content
         }
 
         private CharSheet destinyNightCopy;
+        private bool destinyNightGraded;
+        private byte[] destinyRibbonAlpha;
+        private Dictionary<(int, Dir8, bool, DestinyRibbon.Fit, DestinyRibbon.Kind, Loc), DestinyRibbon.Pose> destinyRibbonPoses;
+
+        internal DestinyRibbon.Pose GetDestinyRibbonPose(CharAnimFrame frame, Dir8 dir, DestinyRibbon.Fit cut, DestinyRibbon.Kind style, Loc seam = default)
+        {
+            int index = frame.Frame.Y * TotalX + frame.Frame.X;
+            if ((uint)frame.Frame.X >= (uint)TotalX || (uint)frame.Frame.Y >= (uint)TotalY || (uint)index >= (uint)OffsetData.Count)
+                return null;
+
+            var key = (index, dir, frame.Flip, cut, style, seam);
+            destinyRibbonPoses ??= new Dictionary<(int, Dir8, bool, DestinyRibbon.Fit, DestinyRibbon.Kind, Loc), DestinyRibbon.Pose>();
+            if (destinyRibbonPoses.TryGetValue(key, out var pose))
+                return pose;
+            if (destinyRibbonAlpha == null)
+            {
+                // One read per sheet while cached, never a GPU read per draw.
+                Color[] pixels = new Color[Width * Height];
+                baseTexture.GetData(pixels);
+                destinyRibbonAlpha = new byte[pixels.Length];
+                for (int ii = 0; ii < pixels.Length; ii++)
+                    destinyRibbonAlpha[ii] = pixels[ii].A;
+            }
+            int start = frame.Frame.Y * TileHeight * Width + frame.Frame.X * TileWidth;
+            pose = DestinyRibbon.Place(destinyRibbonAlpha, Width, start, TileWidth, TileHeight,
+                OffsetData[index], frame.Flip, dir, cut, style, seam);
+            destinyRibbonPoses[key] = pose;
+            return pose;
+        }
 
         /// <summary>
         /// Returns the filtered sheet cached alongside its original. When the
@@ -178,6 +207,8 @@ namespace RogueEssence.Content
                 destinyNightCopy.Dispose();
                 destinyNightCopy = null;
             }
+            destinyRibbonAlpha = null;
+            destinyRibbonPoses = null;
             base.Dispose();
         }
 
@@ -190,28 +221,30 @@ namespace RogueEssence.Content
             Color[] pixels = new Color[Width * Height];
             baseTexture.GetData(pixels);
             for (int ii = 0; ii < pixels.Length; ii++)
-            {
-                Color pixel = pixels[ii];
-                int alpha = pixel.A;
-                if (alpha == 0)
-                    continue;
-
-                // CharSheet PNGs contain premultiplied pixels. Recover their
-                // source RGB before the nonlinear grade, then premultiply again.
-                int r = Math.Min(255, pixel.R * 255 / alpha);
-                int g = Math.Min(255, pixel.G * 255 / alpha);
-                int b = Math.Min(255, pixel.B * 255 / alpha);
-                double gray = 0.299 * r + 0.587 * g + 0.114 * b;
-                double lum = gray / 255.0;
-                double k = 0.20 + 0.30 * lum;
-                int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
-                int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
-                int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
-                pixels[ii] = new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
-            }
+                pixels[ii] = DestinyNightGrade(pixels[ii]);
             Texture2D texture = new Texture2D(device, Width, Height);
             texture.SetData(pixels);
-            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData);
+            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData) { destinyNightGraded = true };
+        }
+
+        internal static Color DestinyNightGrade(Color pixel)
+        {
+            int alpha = pixel.A;
+            if (alpha == 0)
+                return pixel;
+
+            // CharSheet PNGs contain premultiplied pixels. Recover their
+            // source RGB before the nonlinear grade, then premultiply again.
+            int r = Math.Min(255, pixel.R * 255 / alpha);
+            int g = Math.Min(255, pixel.G * 255 / alpha);
+            int b = Math.Min(255, pixel.B * 255 / alpha);
+            double gray = 0.299 * r + 0.587 * g + 0.114 * b;
+            double lum = gray / 255.0;
+            double k = 0.20 + 0.30 * lum;
+            int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
+            int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
+            int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
+            return new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
         }
 
         //frompath (import) will take a folder containing all elements (xml and all animations, or xml and a sheet)
@@ -1440,6 +1473,11 @@ namespace RogueEssence.Content
         //however, also need a way to determine frame for an animation playing at the true specified speed
         public void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color)
         {
+            DrawChar(spriteBatch, type, truncateDash, dir, pos, frameMethod, color, default);
+        }
+
+        internal void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color, DestinyRibbon.Wear ribbon)
+        {
             type = GetReferencedAnimIndex(type);
             CharAnimGroup group = getReferencedAnim(type);
             if (group != null)
@@ -1454,7 +1492,14 @@ namespace RogueEssence.Content
                     adjustedOffset = AdjustOffset(type, group.RushFrame, frameNum, seq.Frames[trueRush].Offset, frame.Offset);
                 }
 
-                DrawTile(spriteBatch, pos + adjustedOffset.ToVector2(), frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+                Vector2 frameTopLeft = pos + adjustedOffset.ToVector2();
+                DestinyRibbon.Pose accessory = ribbon.Ink > 0 && color.A > 0
+                    ? GetDestinyRibbonPose(frame, dir, ribbon.Cut, ribbon.Style, ribbon.Seam(dir)) : null;
+                if (accessory != null)
+                    DestinyRibbon.Draw(spriteBatch, frameTopLeft, accessory.Behind, color, ribbon, destinyNightGraded);
+                DrawTile(spriteBatch, frameTopLeft, frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+                if (accessory != null)
+                    DestinyRibbon.Draw(spriteBatch, frameTopLeft, accessory.Front, color, ribbon, destinyNightGraded);
             }
             else
                 DrawDefault(spriteBatch, new Rectangle((int)pos.X, (int)pos.Y, TileWidth, TileHeight));

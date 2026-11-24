@@ -84,7 +84,8 @@ namespace RogueEssence.Dungeon
         public virtual void UpdateFrame() { currentAnim.UpdateFrame(); }
         public void UpdateDrawEffects(HashSet<DrawEffect> drawEffects) { currentAnim.UpdateDrawEffects(drawEffects); }
         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType) { return currentAnim.GetActionPoint(sheet, pointType); }
-        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { currentAnim.Draw(spriteBatch, offset, sheet); }
+        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { Draw(spriteBatch, offset, sheet, default); }
+        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon) { currentAnim.Draw(spriteBatch, offset, sheet, ribbon); }
         public Loc GetDrawLoc(Loc offset, CharSheet sheet) { return currentAnim.GetDrawLoc(sheet, offset); }
         public Loc GetSheetOffset(CharSheet sheet)
         {
@@ -1667,9 +1668,9 @@ namespace RogueEssence.Dungeon
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
+        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
         {
-            base.Draw(spriteBatch, offset, sheet);
+            base.Draw(spriteBatch, offset, sheet, ribbon);
             foreach (Hitbox hitbox in hitboxes)
                 hitbox.Draw(spriteBatch, offset);
         }

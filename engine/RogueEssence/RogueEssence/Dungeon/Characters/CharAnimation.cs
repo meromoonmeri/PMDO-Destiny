@@ -172,11 +172,16 @@ namespace RogueEssence.Dungeon
 
         public void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
         {
+            Draw(spriteBatch, offset, sheet, default);
+        }
+
+        internal void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
+        {
             Loc drawLoc = GetDrawLoc(sheet, offset);
             drawLoc.Y -= LocHeight;
             
             //draw sprite at current frame
-            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255));
+            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255), ribbon);
         }
         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
         {

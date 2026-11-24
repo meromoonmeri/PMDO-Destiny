@@ -105,6 +105,14 @@ namespace RogueEssence.Menu
                 choices.Add(new MenuTextChoice(Text.FormatKey("MENU_TEAM_SEND_HOME"), SendHomeAction, canSendHome, canSendHome ? Color.White : Color.Red));
 
 
+            Character ribbonMember = DataManager.Instance.Save.ActiveTeam.Players[teamSlot];
+            if (inGround && DataManager.Instance.CurrentReplay == null && DestinyRibbon.CanChoose(ribbonMember))
+            {
+                choices.Add(new MenuTextChoice("Ruban", () => MenuManager.Instance.AddMenu(new DestinyRibbonMenu(ribbonMember, DestinyRibbon.Kind.Ribbon), true)));
+                choices.Add(new MenuTextChoice("Foulard", () => MenuManager.Instance.AddMenu(new DestinyRibbonMenu(ribbonMember, DestinyRibbon.Kind.Scarf), true)));
+                choices.Add(new MenuTextChoice("Chapeaux et lunettes", () => MenuManager.Instance.AddMenu(new DestinyHeadwearMenu(ribbonMember), true)));
+            }
+
             choices.Add(new MenuTextChoice(Text.FormatKey("MENU_EXIT"), ExitAction));
 
             int choice_width = CalculateChoiceLength(choices, 72);

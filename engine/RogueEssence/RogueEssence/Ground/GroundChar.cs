@@ -426,7 +426,11 @@ namespace RogueEssence.Ground
                 else
                     tint = GroundMap.GetAmbianceTint(charAmbiance);
             }
-            currentCharAction.Draw(spriteBatch, offset, sheet, tint);
+            DestinyRibbon.Wear ribbon = DestinyRibbon.From(Data, CurrentForm);
+            if (ribbon.Ink == 0)
+                currentCharAction.Draw(spriteBatch, offset, sheet, tint);
+            else
+                currentCharAction.Draw(spriteBatch, offset, sheet, tint, ribbon);
 
             if (currentEmote != null)
             {

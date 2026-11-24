@@ -53,6 +53,16 @@ namespace RogueEssence.Dungeon
 
         public MonsterID BaseForm;
 
+        // Cosmétique optionnel : champs absents des anciennes sauvegardes.
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string DestinyRibbonColor;
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string DestinyRibbonStyle;
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool DestinyRibbonFitted;
+
         public int Level;
         public int EXP;
 
@@ -142,6 +152,9 @@ namespace RogueEssence.Dungeon
             //clean variables
             Nickname = other.Nickname;
             BaseForm = other.BaseForm;
+            DestinyRibbonColor = other.DestinyRibbonColor;
+            DestinyRibbonStyle = other.DestinyRibbonStyle;
+            DestinyRibbonFitted = other.DestinyRibbonFitted;
             Level = other.Level;
 
             MaxHPBonus = other.MaxHPBonus;

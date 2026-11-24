@@ -482,6 +482,9 @@ namespace RogueEssence.Dungeon
         {
             CharData character = new CharData();
             character.BaseForm = this.BaseForm;
+            character.DestinyRibbonColor = this.DestinyRibbonColor;
+            character.DestinyRibbonStyle = this.DestinyRibbonStyle;
+            character.DestinyRibbonFitted = this.DestinyRibbonFitted;
             character.Nickname = this.Nickname;
             character.Level = this.Level;
             character.MaxHPBonus = this.MaxHPBonus;
@@ -2710,7 +2713,12 @@ namespace RogueEssence.Dungeon
         public void Draw(SpriteBatch spriteBatch, Loc offset)
         {
             CharSheet sheet = GraphicsManager.GetChara(Appearance.ToCharID());
-            currentCharAction.Draw(spriteBatch, offset, sheet);
+            // Preserve the disguise: its cosmetic cannot reveal the real wearer.
+            DestinyRibbon.Wear ribbon = Appearance == CurrentForm ? DestinyRibbon.From(this, Appearance) : default;
+            if (ribbon.Ink == 0)
+                currentCharAction.Draw(spriteBatch, offset, sheet);
+            else
+                currentCharAction.Draw(spriteBatch, offset, sheet, ribbon);
 
             if (currentEmote != null)
             {

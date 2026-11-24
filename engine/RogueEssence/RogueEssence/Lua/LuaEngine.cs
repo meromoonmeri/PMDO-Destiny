@@ -509,6 +509,7 @@ namespace RogueEssence.Script
             //Expose symbols
             ExposeInterface();
             SetupGlobals();
+            Content.DestinyRibbon.ResetRoster();
             CacheMainScripts();
 
             DiagManager.Instance.LogInfo("[SE]: **- Lua engine ready! -**");

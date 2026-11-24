@@ -16,3 +16,5 @@ require 'destiny.services.destiny_title_anim'
 require 'destiny.services.statue_kangourex'
 -- Nilo observe le duel de la Fosse Cascade, hors de la simulation de combat.
 require 'destiny.services.nilo_temoin'
+-- Vestiaire : le quiz fournit exactement les mêmes couples espèce/forme.
+require('destiny.rubans').installer()
