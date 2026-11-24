@@ -1,0 +1,106 @@
+[
+  {
+    "direction": "Down",
+    "rect": [
+      6,
+      16,
+      84,
+      48
+    ],
+    "pivot_dans_sprite": [
+      42,
+      36
+    ]
+  },
+  {
+    "direction": "DownRight",
+    "rect": [
+      105,
+      6,
+      78,
+      68
+    ],
+    "pivot_dans_sprite": [
+      41,
+      47
+    ]
+  },
+  {
+    "direction": "Right",
+    "rect": [
+      219,
+      4,
+      41,
+      72
+    ],
+    "pivot_dans_sprite": [
+      20,
+      48
+    ]
+  },
+  {
+    "direction": "UpRight",
+    "rect": [
+      297,
+      6,
+      78,
+      67
+    ],
+    "pivot_dans_sprite": [
+      41,
+      44
+    ]
+  },
+  {
+    "direction": "Up",
+    "rect": [
+      6,
+      97,
+      84,
+      45
+    ],
+    "pivot_dans_sprite": [
+      42,
+      34
+    ]
+  },
+  {
+    "direction": "UpLeft",
+    "rect": [
+      105,
+      86,
+      78,
+      67
+    ],
+    "pivot_dans_sprite": [
+      37,
+      44
+    ]
+  },
+  {
+    "direction": "Left",
+    "rect": [
+      219,
+      85,
+      41,
+      70
+    ],
+    "pivot_dans_sprite": [
+      21,
+      46
+    ]
+  },
+  {
+    "direction": "DownLeft",
+    "rect": [
+      297,
+      86,
+      78,
+      67
+    ],
+    "pivot_dans_sprite": [
+      37,
+      46
+    ]
+  }
+]

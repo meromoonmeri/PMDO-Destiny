@@ -1,0 +1,338 @@
+[
+  {
+    "salle": "Accueil",
+    "direction": "Down",
+    "haut_gauche": [
+      112,
+      152
+    ],
+    "pivot_sol": [
+      154,
+      188
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "DownRight",
+    "haut_gauche": [
+      112,
+      144
+    ],
+    "pivot_sol": [
+      153,
+      191
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "Right",
+    "haut_gauche": [
+      136,
+      136
+    ],
+    "pivot_sol": [
+      156,
+      184
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "UpRight",
+    "haut_gauche": [
+      112,
+      144
+    ],
+    "pivot_sol": [
+      153,
+      188
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "Up",
+    "haut_gauche": [
+      112,
+      160
+    ],
+    "pivot_sol": [
+      154,
+      194
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "UpLeft",
+    "haut_gauche": [
+      120,
+      152
+    ],
+    "pivot_sol": [
+      157,
+      196
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "Left",
+    "haut_gauche": [
+      144,
+      144
+    ],
+    "pivot_sol": [
+      165,
+      190
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Accueil",
+    "direction": "DownLeft",
+    "haut_gauche": [
+      128,
+      144
+    ],
+    "pivot_sol": [
+      165,
+      190
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "Down",
+    "haut_gauche": [
+      168,
+      152
+    ],
+    "pivot_sol": [
+      210,
+      188
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "DownRight",
+    "haut_gauche": [
+      176,
+      144
+    ],
+    "pivot_sol": [
+      217,
+      191
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "Right",
+    "haut_gauche": [
+      192,
+      144
+    ],
+    "pivot_sol": [
+      212,
+      192
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "UpRight",
+    "haut_gauche": [
+      176,
+      144
+    ],
+    "pivot_sol": [
+      217,
+      188
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "Up",
+    "haut_gauche": [
+      168,
+      152
+    ],
+    "pivot_sol": [
+      210,
+      186
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "UpLeft",
+    "haut_gauche": [
+      176,
+      152
+    ],
+    "pivot_sol": [
+      213,
+      196
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "Left",
+    "haut_gauche": [
+      192,
+      144
+    ],
+    "pivot_sol": [
+      213,
+      190
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Réfectoire",
+    "direction": "DownLeft",
+    "haut_gauche": [
+      176,
+      144
+    ],
+    "pivot_sol": [
+      213,
+      190
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "Down",
+    "haut_gauche": [
+      280,
+      128
+    ],
+    "pivot_sol": [
+      322,
+      164
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "DownRight",
+    "haut_gauche": [
+      272,
+      120
+    ],
+    "pivot_sol": [
+      313,
+      167
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "Right",
+    "haut_gauche": [
+      304,
+      120
+    ],
+    "pivot_sol": [
+      324,
+      168
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "UpRight",
+    "haut_gauche": [
+      280,
+      128
+    ],
+    "pivot_sol": [
+      321,
+      172
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "Up",
+    "haut_gauche": [
+      272,
+      136
+    ],
+    "pivot_sol": [
+      314,
+      170
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "UpLeft",
+    "haut_gauche": [
+      288,
+      128
+    ],
+    "pivot_sol": [
+      325,
+      172
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "Left",
+    "haut_gauche": [
+      304,
+      128
+    ],
+    "pivot_sol": [
+      325,
+      174
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  },
+  {
+    "salle": "Cuisine",
+    "direction": "DownLeft",
+    "haut_gauche": [
+      280,
+      112
+    ],
+    "pivot_sol": [
+      317,
+      158
+    ],
+    "empreinte_et_allée": true,
+    "liaisons_préservées": true
+  }
+]

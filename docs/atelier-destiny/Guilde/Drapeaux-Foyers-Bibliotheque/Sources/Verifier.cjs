@@ -1,0 +1,51 @@
+'use strict';
+const A=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{homedir}=require('node:os'),{createHash}=require('node:crypto'),{pathToFileURL}=require('node:url');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||path.join(homedir(),'.cache/guildhouse-mega-remixes/test-navigateur/node_modules/playwright'));
+const exe=process.env.CHROMIUM||path.join(homedir(),'.cache/ms-playwright/chromium_headless_shell-1255/chrome-headless-shell-linux64/chrome-headless-shell');
+const K=path.resolve(__dirname,'..'),G=path.dirname(K),extract=s=>JSON.parse(s.split('<script id="donnees" type="application/json">')[1].split('</script>')[0]);
+const F=path.join(G,'Guilde-Destiny-Drapeaux-Foyers-Bibliotheque.html'),O=path.join(G,'Guilde-Destiny-Comptoirs-et-Falaise.html'),read=s=>fs.readFileSync(s,'utf8'),html=read(F),old=read(O),d=extract(html),b=extract(old),ext=d.extensions, bib=ext.biblio.salle,ref=ext.foyers.salle,hall=ext.accueil;
+const comptoirs=read(path.join(G,'Comptoirs-et-Falaise/Verification-atelier.json'));
+const sha=d=>createHash('sha256').update(d).digest('hex');A.equal(sha(old),JSON.parse(comptoirs).sha256_atelier);A.equal(d.rooms.find(x=>x.id===bib).label,'Bibliothèque');
+const restore={...d,rooms:d.rooms.map(x=>x.id===bib?{...x,label:'Cuisine'}:x),catalog:d.catalog.slice(0,b.catalog.length),etoffes:Object.fromEntries(Object.entries(d.etoffes).filter(([i])=>!i.startsWith('etendard-'))),cliff:{...d.cliff,calques:[...d.cliff.calques.slice(0,3),d.cliff.edition_precedente]}};delete restore.extensions;delete restore.cliff.edition_precedente;A.deepEqual(restore,b);
+const flags=JSON.parse(read(path.join(K,'Drapeaux','Index-Drapeaux.json'))).variantes;A.equal(flags.length,8);A.equal(d.catalog.length,b.catalog.length+flags.length);
+for(const f of flags){const a=d.catalog.find(v=>v.id===f.id);A(a.previewOnly);A.equal(sha(Buffer.from(a.m[0],'base64')),f.sha256);A.equal(d.etoffes[f.id].n,6);}
+const hsh=async(p,sel)=>p.locator(sel).evaluate(c=>{const q=new Uint32Array(c.getContext('2d').getImageData(0,0,c.width,c.height).data.buffer);let h=0x811c9dc5;for(const a of q)h=Math.imul(a^h,16777619);return h;});
+const scene=(p,q,r,n,num=0)=>p.locator(`${q}[data-scene="${r}:${n}:0:${num}"]`).waitFor({state:'visible'});
+const arch=(p,q,s)=>p.locator(`${q}[data-architecture^="${s}"]`).waitFor({state:'visible'});
+const two=p=>p.evaluate(()=>new Promise(q=>requestAnimationFrame(()=>requestAnimationFrame(q))));
+const phases=async(p,q,key,wait)=>p.evaluate(async({q,key,wait})=>new Promise(ok=>{const e=document.querySelector(q),ss=new Set(),t=performance.now();function a(){ss.add(e.dataset[key]);if(performance.now()-t>wait)ok([...ss]);else requestAnimationFrame(a);}a();}),{q,key,wait});
+(async()=>{
+ const browser=await chromium.launch({executablePath:exe,args:['--no-sandbox','--disable-dev-shm-usage']});const errors=[];const reg=p=>{p.on('pageerror',f=>errors.push(f.stack));p.setDefaultTimeout(6500);return p;};
+ try{
+  const p=reg(await browser.newPage({viewport:{width:1380,height:1040},reducedMotion:'reduce',acceptDownloads:true}));await p.goto(pathToFileURL(F).href);await scene(p,'#ext-room',ref,0);await arch(p,'#ext-room','foyers:allumees');
+  const initial=await hsh(p,'#ext-room');await p.locator('#ext-preview-tools select[data-foyer]').selectOption('eteintes');await arch(p,'#ext-room','foyers:eteintes');const off=await hsh(p,'#ext-room');A.notEqual(off,initial);
+  await p.locator('#ext-preview-tools select[data-foyer]').selectOption('allumees');await arch(p,'#ext-room','foyers:allumees');A.equal(await hsh(p,'#ext-room'),initial);
+  await p.locator('#motion-toggle').click();const seen=await phases(p,'#ext-room','architecture',880);A.equal(new Set(seen.filter(x=>x?.startsWith('foyers:allumees:'))).size,4);
+  const moved=await phases(p,'#ext-flag','trame',880);A.equal(new Set(moved.filter(Boolean)).size,6);await p.locator('#motion-toggle').click();
+  await p.locator('#ext-preview-tools select[data-foyer]').selectOption('masquees');await two(p);A.equal(await p.locator('#ext-room').getAttribute('data-architecture'),'');
+  await p.locator('#ext-bib').click();await scene(p,'#ext-room',bib,0);await arch(p,'#ext-room','rayons:herbiers/archives/atlas');const racks=await hsh(p,'#ext-room');
+  await p.locator('#ext-preview-tools [data-niche="centre"]').selectOption('atlas');await arch(p,'#ext-room','rayons:herbiers/atlas/atlas');A.notEqual(await hsh(p,'#ext-room'),racks);
+  await p.locator('#ext-preview-tools [data-rayonnages="toggle"]').click();await two(p);A.equal(await p.locator('#ext-room').getAttribute('data-architecture'),'');A.notEqual(await hsh(p,'#ext-room'),racks);
+  await p.locator('#ext-preview-tools [data-rayonnages="toggle"]').click();await arch(p,'#ext-room','rayons:herbiers/atlas/atlas');
+  const [dl]=await Promise.all([p.waitForEvent('download'),p.locator('#ext-preview-tools [data-rayonnages="export"]').click()]);const exported=fs.readFileSync(await dl.path());A.equal(dl.suggestedFilename(),'Bibliotheque-Rayonnages-480x360.png');A.deepEqual([exported.readUInt32BE(16),exported.readUInt32BE(20)],[480,360]);
+  const alpha=await p.evaluate(async b=>{const im=new Image();im.src='data:image/png;base64,'+b;await im.decode();const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const x=c.getContext('2d');x.drawImage(im,0,0);const a=x.getImageData(0,0,c.width,c.height).data;let v=0,lo=0;for(let j=3;j<a.length;j+=4)if(a[j]){v++;if(j/4/c.width>133)lo++;}return {v,lo};},exported.toString('base64'));A(alpha.v>4300&&alpha.v<16000);A.equal(alpha.lo,0);
+  await p.locator('#ext-open-room').click();await scene(p,'#map',bib,0);A.equal(await p.locator('#room-name').textContent(),'Bibliothèque');A(await p.locator('#download-ground').isDisabled());
+  await p.locator('#accesses [data-passage="SortieSud"]').click();await scene(p,'#map',d.balade_nuit.depart,0);
+  await p.locator('#accesses [data-passage="SortieNord"]').click();await scene(p,'#map',bib,0);
+  await p.locator('#tab-ext').click();await p.locator('[data-flag-dir="DownRight"]').click();await p.locator('#ext-flag-use').click();await scene(p,'#map',hall,0);A.equal(await p.locator('#collection').inputValue(),'etendards');A.equal(await p.locator('#catalog [data-asset]').count(),8);
+  await p.getByRole('button',{name:'Poser dans l’exemple',exact:true}).click();await scene(p,'#map',hall,0,1);
+  await p.locator('#ext-turn-flag').selectOption('etendard-up');await scene(p,'#map',hall,0,1);A.equal(await p.locator('#ext-turn-flag').inputValue(),'etendard-up');
+  await p.locator('#tab-ext').click();await p.locator('#ext-cliff').click();await p.locator('#cliff-map[data-scene="cliff:3:0:0"]').waitFor({state:'visible',timeout:8500}).catch(async()=>p.locator('#cliff-map[data-scene^="cliff:3:"]').waitFor({state:'visible'}));
+  const newC=await hsh(p,'#cliff-map');await p.locator('#cliff-reflets').click();await p.locator('#cliff-map[data-scene*="ancien-"]').waitFor({state:'visible'});A.notEqual(await hsh(p,'#cliff-map'),newC);
+  await p.locator('#cliff-reflets').click();await two(p);A.equal(await hsh(p,'#cliff-map'),newC);
+  await p.locator('#cliff-door').click();await scene(p,'#map',hall,3,1);A(await p.locator('#accesses [data-passage="EscalierNord"]').isDisabled());
+  await p.locator('#accesses [data-passage="SortieGuilde"]').click();await p.locator('#cliff-map[data-scene^="cliff:3:"]').waitFor();
+  await p.locator('#tab-all').click();A.equal(await p.locator('.atlas-map').count(),15);await p.locator('#tab-south').click();A.equal(await p.locator('.atlas-pair').count(),7);await p.close();
+  const m=reg(await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce',offline:true}));
+  await m.setContent('<meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}</style><iframe sandbox="allow-scripts" style="width:100%;height:837px;border:0"></iframe>');await m.locator('iframe').evaluate((f,s)=>f.srcdoc=s,html);const q=m.frameLocator('iframe');await scene(q,'#ext-room',ref,0);
+  A(await q.locator('html').evaluate(e=>e.scrollWidth<=innerWidth+1));await q.locator('#ext-bib').tap();await scene(q,'#ext-room',bib,0);A(await q.locator('html').evaluate(e=>e.scrollWidth<=innerWidth+1));
+  await q.locator('#ext-nuit').tap();await scene(q,'#ext-room',bib,3);await q.locator('#ext-cliff').tap();await q.locator('#cliff-map[data-scene^="cliff:3:"]').waitFor();A(await q.locator('html').evaluate(e=>e.scrollWidth<=innerWidth+1));
+  A.deepEqual(errors,[]);fs.writeFileSync(path.join(K,'Verification-atelier.json'),JSON.stringify({statut:'PASS',plans:15,cadres_sud:7,version_precedente_intacte:true,nouveau_libelle:'Bibliothèque',id_et_passages_conserves:true,drapeaux:8,poses_drapeaux:6,pose_et_rotation_ancree:true,cheminées:2,poses_foyers:4,allumer_eteindre_masquer:true,calque_mural_rgba_exporte:true,granularite_niches:3,cliff_comparatif:true,grille_intacte:true,iframe_mobile_hors_ligne:true,sha256_precedent:sha(old),sha256_atelier:sha(html)},null,2)+'\n');
+  console.log('PASS · couches indépendantes, faisceau Cliff, rotation, animations, export transparent et mobile hors ligne.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1);});

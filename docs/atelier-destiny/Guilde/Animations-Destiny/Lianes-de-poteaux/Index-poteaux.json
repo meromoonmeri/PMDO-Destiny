@@ -1,0 +1,25 @@
+{
+  "source": "générateur d’image, references Reverie Normal Home / Inn et poteaux natifs Destiny",
+  "motifs": [
+    {
+      "nom": "Enroulement-de-Reverie.png",
+      "dimensions": [
+        30,
+        90
+      ],
+      "sha256_generation": "9f15ab07134dc71cc0c97e3d5b74d914b092c31f0181dd515354cb3594b5c505",
+      "coupe": "liane complète",
+      "bourgeons": 3
+    },
+    {
+      "nom": "Enroulement-de-ceremonie.png",
+      "dimensions": [
+        31,
+        93
+      ],
+      "sha256_generation": "2bdb14e2e3e6bf3da5b31e21b9338d8a29da6d3eb5347b5655e81660b57407ab",
+      "coupe": "spire couronnée isolée",
+      "bourgeons": 7
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "statut": "PASS",
+  "file_sha256": "387169e1d82c0102dafbec9e8b9671cf8841f672237b4a281ce2249a58778f36",
+  "vues": 60,
+  "passages": 29,
+  "comparaisons_original": 6,
+  "mobilier": 33,
+  "png": true,
+  "json": true,
+  "export_carte_natif_verifie_octets": true,
+  "mobile": true,
+  "iframe_sandbox": true,
+  "requete_reseau": []
+}
