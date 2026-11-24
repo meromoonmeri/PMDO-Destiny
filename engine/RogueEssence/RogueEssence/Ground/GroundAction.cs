@@ -189,6 +189,11 @@ namespace RogueEssence.Ground
             Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
         }
 
+        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
+        {
+            Draw(spriteBatch, offset, sheet, tint, default);
+        }
+
         internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
         {
             Loc drawLoc = GetDrawLoc(offset, sheet);
