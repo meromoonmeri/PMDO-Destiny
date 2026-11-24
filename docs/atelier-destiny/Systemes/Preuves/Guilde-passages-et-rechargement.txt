@@ -1,0 +1,7 @@
+REFECTOIRE_ENTREE convives=10 joueur=280,256
+REFECTOIRE_SAUVE convives=10 joueur=280,256
+REFECTOIRE_ENTREE convives=10 joueur=504,240
+[2026/11/19 13:23:29.111] Loading rsground file: guilde_destiny_refectoire
+[2026/11/19 13:23:36.654] Loading rsground file: guilde_destiny_carrefour
+[2026/11/19 13:23:42.352] Loading rsground file: guilde_destiny_refectoire
+REFECTOIRE_RECHARGE convives=10 joueur=280,256

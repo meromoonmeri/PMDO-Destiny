@@ -1,0 +1,15 @@
+{
+  "repository": "meromoonmeri/PMDO-Destiny",
+  "branch": "wip/reverie-integration-kingambit-cafe",
+  "target_sha": "cb88f119af367da674ef4e4decbd008b1e6c15d5",
+  "tag": "v0.7.4",
+  "status": "blocked_authorization",
+  "local_checks": 18,
+  "auth_method": "temporary_github_app",
+  "last_issue": "GitHub n’a pas confirmé le retour d’installation sur Destiny.",
+  "run_count": null,
+  "release_check": 403,
+  "tag_exists": false,
+  "auth_callback_received": false,
+  "workflows_dispatched_this_turn": false
+}
