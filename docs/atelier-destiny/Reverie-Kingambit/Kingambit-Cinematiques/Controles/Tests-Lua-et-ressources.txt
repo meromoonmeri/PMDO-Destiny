@@ -1,0 +1,7 @@
+PASS Kingambit Lua — 18 routes, annulation, serrurerie à deux calques, repli et chute sur le sceau unique, Kaito immobile, scénarios obstrué et inversé, victoire, K.O., délai et abandon.
+PASS Cinématiques Lua — 18 introductions, noir indépendant du dialogue, 3 accents, portrait, caméra et musique restaurées ; solo et deux pannes récupérées.
+PASS test_dojo_kingambit_complexe.lua : portes coulissantes sans bris, arene, reliques et retours OK.
+PASS intro Lua : avant combat, Psy à deux positions, ombres, pétales avant révélation, restauration sûre.
+PASS : 18 types, flashes, neuf bandes croisées, fondu blanc et reprise ; repli vanilla et restauration sur erreur.
+PASS météo avant les trois colonnes, cyclones à trois positions, brèches et éclair inchangés, retour de pose en cas d’erreur.
+PASS 54 DirSheets natives et 59 fichiers de jeu, 18 finales et formes existantes, 18 motifs uniques, sons PMDO, silhouette des trappes intacte.

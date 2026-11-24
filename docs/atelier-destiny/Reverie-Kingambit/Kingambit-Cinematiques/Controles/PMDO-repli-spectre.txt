@@ -1,0 +1,9 @@
+[2026/11/21 22:30:42.202] Version: 0.8.12.0
+[2026/11/21 22:30:51.541] [SE]:KINGAMBIT_SCENE DEPART ghost
+[2026/11/21 22:30:52.818] [SE]:KINGAMBIT_SCENE VOIX
+[2026/11/21 22:30:55.931] [SE]:KINGAMBIT_SCENE VOIX_FIN
+[2026/11/21 22:30:57.532] [SE]:KINGAMBIT_SCENE RACCORD
+[2026/11/21 22:31:00.000] [SE]:KINGAMBIT_SCENE FIN ghost
+[2026/11/21 22:31:00.018] [SE]:KINGAMBIT_SCENE COMBAT ghost count=3 map_clear_check forme=0 banette
+[2026/11/21 22:31:00.763] [SE]:KINGAMBIT_SCENE ALL DONE 1
+[2026/11/21 22:30:56.264] [SE]:[Destiny] Lumières du dojo : .../PMDO/Data/Script/origin/dojo_kingambit_cinematiques.lua:54: la banque de lumière ghost est absente ou ne correspond pas à la scène

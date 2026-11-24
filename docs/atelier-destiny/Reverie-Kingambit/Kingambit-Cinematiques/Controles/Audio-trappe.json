@@ -1,0 +1,14 @@
+{
+  "PENE_GAUCHE": {
+    "t_video": 12.619,
+    "rms_pcm16": 4199
+  },
+  "PENE_DROIT": {
+    "t_video": 12.899,
+    "rms_pcm16": 1251
+  },
+  "CHUTE": {
+    "t_video": 14.003,
+    "rms_pcm16": 3840
+  }
+}
