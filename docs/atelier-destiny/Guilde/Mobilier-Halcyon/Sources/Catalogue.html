@@ -1,0 +1,48 @@
+  <section id="halcyon-page" aria-labelledby="hal-title" hidden>
+    <div class="hal-mast">
+      <div class="hal-copy">
+        <span class="hal-tag"><i></i> Collection 01 · Halcyon</span>
+        <h2 id="hal-title">Des meubles pour les salles de Destiny</h2>
+        <p>Les silhouettes originales de la guilde de Halcyon, recolorées pour le parquet, les ronces et les nuits bleues de Destiny. L’auberge de Metano a son propre rayon.</p>
+        <div class="hal-cta"><button id="hal-browse" class="hal-primary" type="button">Feuilleter le catalogue <span aria-hidden="true">↓</span></button><button id="hal-visit" class="hal-outline" type="button"><svg aria-hidden="true"><use href="#i-moon"/></svg> Visiter de nuit</button></div>
+        <div class="hal-caption"><span>PNG transparents</span><span>Pixels natifs 1×</span><span>Sans installation</span></div>
+      </div>
+      <figure class="hal-vignette">
+        <div class="hal-scene-wrap"><canvas id="hal-scene" width="368" height="236" role="img" aria-label="Mise en situation du mobilier dans le réfectoire"></canvas><span class="hal-scene-label" id="hal-scene-tone">Lierre</span></div>
+        <figcaption><div><b>Sur le parquet de Destiny</b><br><span>Réfectoire · exemple, rien n’est posé</span></div><div class="hal-light" aria-label="Lumière de l’exemple" role="group"><button type="button" id="hal-day" aria-pressed="true">Jour</button><button type="button" id="hal-night" aria-pressed="false">Nuit</button></div></figcaption>
+      </figure>
+    </div>
+    <section class="hal-teintes" aria-labelledby="hal-teintes-title">
+      <header><div><span class="hal-over">01 / COULEURS</span><h2 id="hal-teintes-title">Dix palettes pour les assortir</h2></div><p id="hal-note-tone" aria-live="polite"></p></header>
+      <div class="hal-swatches" id="hal-swatches" role="group" aria-label="Palettes du catalogue"></div>
+    </section>
+    <section class="hal-collection" id="hal-rayons" aria-labelledby="hal-browse-title">
+      <header class="hal-heading"><div><span class="hal-over">02 / OBJETS</span><h2 id="hal-browse-title" tabindex="-1">Le catalogue</h2></div><span class="hal-stamp">ORIGINAUX HALCYON · TEINTES DESTINY</span></header>
+      <div class="hal-filterbar">
+        <div class="hal-origins" id="hal-origins" role="group" aria-label="Provenance du mobilier"></div>
+        <div class="hal-search"><label for="hal-family">Type d’objet</label><select id="hal-family"></select></div>
+        <div class="hal-search"><label for="hal-search">Rechercher</label><div><svg aria-hidden="true"><use href="#i-search"/></svg><input id="hal-search" type="search" placeholder="Tapis, coffre…" autocomplete="off"></div></div>
+      </div>
+      <div class="hal-shelf">
+        <div class="hal-results">
+          <div class="hal-result-head"><p id="hal-count" role="status" aria-live="polite"></p><span id="hal-paging-top"></span></div>
+          <div id="hal-grid" class="hal-grid"></div>
+          <div class="hal-paging" id="hal-paging"><button id="hal-prev" type="button" class="hal-outline" aria-label="Page précédente">←</button><span id="hal-page-number"></span><button id="hal-next" type="button" class="hal-outline" aria-label="Page suivante">→</button></div>
+        </div>
+        <article class="hal-detail" id="hal-detail" aria-labelledby="hal-detail-name" hidden>
+          <div class="hal-detail-head"><span class="hal-over" id="hal-detail-provenance"></span><button id="hal-to-list" class="hal-quiet" type="button">↑ Liste</button></div>
+          <h3 id="hal-detail-name" tabindex="-1"></h3>
+          <div class="hal-stage" id="hal-detail-stage"><img id="hal-detail-image" alt=""><span id="hal-size"></span></div>
+          <div class="hal-detail-caption"><b id="hal-detail-palette"></b><button type="button" class="hal-quiet" id="hal-original" aria-pressed="false">Voir l’original</button></div>
+          <div id="hal-choices" class="hal-choices" role="group" aria-label="Dix teintes pour cet objet"></div>
+          <div class="hal-pose">
+            <label for="hal-room">Essayer dans une salle</label>
+            <select id="hal-room"></select>
+            <div><button id="hal-place" class="hal-primary" type="button">Choisir pour la pose <span aria-hidden="true">↗</span></button><button id="hal-png" class="hal-outline" type="button" aria-label="Télécharger le PNG transparent" title="Télécharger le PNG transparent"><svg aria-hidden="true"><use href="#i-download"/></svg> PNG</button></div>
+          </div>
+          <a id="hal-source" class="hal-source" target="_blank" rel="noopener noreferrer">Voir la carte source sur GitHub ↗</a>
+        </article>
+      </div>
+    </section>
+    <p class="hal-credit">Source : <a href="https://github.com/Palikadude/Halcyon#spriting-credits" target="_blank" rel="noopener noreferrer">Halcyon de Palika</a>. Le dépôt crédite D4yz et Edan Momu pour les décors intérieurs. Les meubles de cette collection sont distincts de la banque PMU.</p>
+  </section>

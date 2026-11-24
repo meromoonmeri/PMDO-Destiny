@@ -1,0 +1,5685 @@
+{
+  "statut": "PASS",
+  "version": "0.7.7",
+  "original_sha256": "ad19914f77daf9a6cc1d0ee813204f7ce2ddd7d937c96ee6d5043a147a09599c",
+  "luminosite_min_RVB": [
+    248,
+    189,
+    108
+  ],
+  "seuil_luminance": 7,
+  "plans": [
+    {
+      "salle": "guilde_destiny_accueil",
+      "nom": "Accueil",
+      "taille": [
+        512,
+        384
+      ],
+      "segments": [
+        {
+          "section": "Corniche ouest",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": false,
+          "reperes": [
+            [
+              104,
+              65
+            ],
+            [
+              131,
+              51
+            ],
+            [
+              170,
+              37
+            ],
+            [
+              207,
+              32
+            ]
+          ],
+          "pixels": 906,
+          "masques": 14,
+          "bourgeons": 8
+        },
+        {
+          "section": "Corniche est",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": true,
+          "reperes": [
+            [
+              306,
+              32
+            ],
+            [
+              349,
+              40
+            ],
+            [
+              381,
+              49
+            ],
+            [
+              409,
+              66
+            ]
+          ],
+          "pixels": 895,
+          "masques": 28,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau intérieur ouest",
+          "module": "L02-Poutre",
+          "largeur": 21,
+          "miroir": false,
+          "reperes": [
+            [
+              177,
+              81
+            ],
+            [
+              181,
+              99
+            ],
+            [
+              176,
+              121
+            ],
+            [
+              174,
+              144
+            ]
+          ],
+          "pixels": 501,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau intérieur est",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              341,
+              76
+            ],
+            [
+              337,
+              94
+            ],
+            [
+              341,
+              114
+            ],
+            [
+              340,
+              138
+            ]
+          ],
+          "pixels": 415,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Bord de plancher ouest",
+          "module": "L03-Rive",
+          "largeur": 17,
+          "miroir": false,
+          "reperes": [
+            [
+              91,
+              216
+            ],
+            [
+              116,
+              237
+            ],
+            [
+              154,
+              258
+            ],
+            [
+              190,
+              276
+            ]
+          ],
+          "pixels": 554,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Bord de plancher est",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": true,
+          "reperes": [
+            [
+              326,
+              274
+            ],
+            [
+              363,
+              256
+            ],
+            [
+              393,
+              236
+            ],
+            [
+              420,
+              213
+            ]
+          ],
+          "pixels": 497,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 116.7,
+          "y": 50.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 192.2,
+          "y": 25.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 125.3,
+          "y": 48.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 168.0,
+          "y": 32.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 144.2,
+          "y": 44.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 171.8,
+          "y": 42.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 196.6,
+          "y": 38.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 157.2,
+          "y": 48.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest"
+        },
+        {
+          "x": 396.3,
+          "y": 49.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 320.8,
+          "y": 26.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 387.6,
+          "y": 46.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 345.0,
+          "y": 34.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 368.9,
+          "y": 44.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 341.5,
+          "y": 44.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 316.5,
+          "y": 39.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 355.8,
+          "y": 49.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche est"
+        },
+        {
+          "x": 187.0,
+          "y": 96.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 169.0,
+          "y": 116.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 181.3,
+          "y": 117.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 180.0,
+          "y": 136.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 331.5,
+          "y": 91.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 347.0,
+          "y": 111.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 336.5,
+          "y": 112.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 336.0,
+          "y": 130.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 110.7,
+          "y": 230.0,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher ouest"
+        },
+        {
+          "x": 168.8,
+          "y": 263.9,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher ouest"
+        },
+        {
+          "x": 137.2,
+          "y": 252.8,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher ouest"
+        },
+        {
+          "x": 174.2,
+          "y": 272.4,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher ouest"
+        },
+        {
+          "x": 142.6,
+          "y": 258.7,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher ouest"
+        },
+        {
+          "x": 401.3,
+          "y": 226.6,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher est"
+        },
+        {
+          "x": 346.3,
+          "y": 263.0,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher est"
+        },
+        {
+          "x": 375.8,
+          "y": 251.2,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher est"
+        },
+        {
+          "x": 340.8,
+          "y": 271.4,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher est"
+        },
+        {
+          "x": 371.2,
+          "y": 257.0,
+          "module": "L03-Rive",
+          "plage": "Bord de plancher est"
+        }
+      ],
+      "pixels_lianes": 9642,
+      "pixels_eclaires_hors_lianes": 71220,
+      "pixels_plancher_eclaires": 28065,
+      "passages_libres": 2,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_missions",
+      "nom": "Salle des missions",
+      "taille": [
+        576,
+        432
+      ],
+      "segments": [
+        {
+          "section": "Traversée de l’aile ouest",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": false,
+          "reperes": [
+            [
+              129,
+              71
+            ],
+            [
+              158,
+              53
+            ],
+            [
+              197,
+              47
+            ],
+            [
+              242,
+              49
+            ]
+          ],
+          "pixels": 984,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Traversée de l’aile est",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": true,
+          "reperes": [
+            [
+              334,
+              48
+            ],
+            [
+              374,
+              48
+            ],
+            [
+              419,
+              53
+            ],
+            [
+              450,
+              73
+            ]
+          ],
+          "pixels": 1016,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau latéral ouest",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              48,
+              117
+            ],
+            [
+              47,
+              144
+            ],
+            [
+              52,
+              181
+            ],
+            [
+              55,
+              211
+            ]
+          ],
+          "pixels": 706,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau intérieur est",
+          "module": "L02-Poutre",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              431,
+              83
+            ],
+            [
+              432,
+              115
+            ],
+            [
+              431,
+              151
+            ]
+          ],
+          "pixels": 472,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Rive sud-ouest",
+          "module": "L03-Rive",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              61,
+              296
+            ],
+            [
+              99,
+              331
+            ],
+            [
+              144,
+              343
+            ],
+            [
+              190,
+              348
+            ]
+          ],
+          "pixels": 854,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Rive sud-est",
+          "module": "L03-Rive",
+          "largeur": 20,
+          "miroir": false,
+          "reperes": [
+            [
+              381,
+              347
+            ],
+            [
+              420,
+              342
+            ],
+            [
+              467,
+              325
+            ],
+            [
+              518,
+              287
+            ]
+          ],
+          "pixels": 920,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 143.5,
+          "y": 52.5,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 225.8,
+          "y": 39.8,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 152.4,
+          "y": 49.7,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 199.2,
+          "y": 41.8,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 173.3,
+          "y": 49.0,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 203.0,
+          "y": 52.8,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 230.5,
+          "y": 53.5,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 187.8,
+          "y": 55.7,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile ouest"
+        },
+        {
+          "x": 435.5,
+          "y": 53.6,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 350.5,
+          "y": 40.5,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 426.8,
+          "y": 50.7,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 377.8,
+          "y": 42.8,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 404.9,
+          "y": 49.9,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 374.0,
+          "y": 53.8,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 345.7,
+          "y": 53.3,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 390.1,
+          "y": 56.9,
+          "module": "L01-Corniche",
+          "plage": "Traversée de l’aile est"
+        },
+        {
+          "x": 41.3,
+          "y": 140.4,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral ouest"
+        },
+        {
+          "x": 57.8,
+          "y": 169.9,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral ouest"
+        },
+        {
+          "x": 45.7,
+          "y": 171.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral ouest"
+        },
+        {
+          "x": 48.9,
+          "y": 199.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral ouest"
+        },
+        {
+          "x": 437.7,
+          "y": 100.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 425.0,
+          "y": 121.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 436.3,
+          "y": 122.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 436.0,
+          "y": 142.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur est"
+        },
+        {
+          "x": 165.1,
+          "y": 342.3,
+          "module": "L03-Rive",
+          "plage": "Rive sud-ouest"
+        },
+        {
+          "x": 88.5,
+          "y": 322.3,
+          "module": "L03-Rive",
+          "plage": "Rive sud-ouest"
+        },
+        {
+          "x": 130.5,
+          "y": 344.5,
+          "module": "L03-Rive",
+          "plage": "Rive sud-ouest"
+        },
+        {
+          "x": 81.4,
+          "y": 323.5,
+          "module": "L03-Rive",
+          "plage": "Rive sud-ouest"
+        },
+        {
+          "x": 123.0,
+          "y": 346.5,
+          "module": "L03-Rive",
+          "plage": "Rive sud-ouest"
+        },
+        {
+          "x": 408.1,
+          "y": 340.5,
+          "module": "L03-Rive",
+          "plage": "Rive sud-est"
+        },
+        {
+          "x": 488.7,
+          "y": 309.4,
+          "module": "L03-Rive",
+          "plage": "Rive sud-est"
+        },
+        {
+          "x": 444.6,
+          "y": 338.8,
+          "module": "L03-Rive",
+          "plage": "Rive sud-est"
+        },
+        {
+          "x": 496.7,
+          "y": 310.4,
+          "module": "L03-Rive",
+          "plage": "Rive sud-est"
+        },
+        {
+          "x": 452.5,
+          "y": 339.4,
+          "module": "L03-Rive",
+          "plage": "Rive sud-est"
+        }
+      ],
+      "pixels_lianes": 12210,
+      "pixels_eclaires_hors_lianes": 93337,
+      "pixels_plancher_eclaires": 36471,
+      "passages_libres": 2,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_grand_salon",
+      "nom": "Grand Salon",
+      "taille": [
+        576,
+        432
+      ],
+      "segments": [
+        {
+          "section": "Guirlande de la grande travée ouest",
+          "module": "L01-Corniche",
+          "largeur": 30,
+          "miroir": false,
+          "reperes": [
+            [
+              128,
+              76
+            ],
+            [
+              153,
+              56
+            ],
+            [
+              202,
+              47
+            ],
+            [
+              247,
+              50
+            ]
+          ],
+          "pixels": 1332,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Arche sculptée du maître",
+          "module": "L04-Arche",
+          "largeur": 73,
+          "miroir": false,
+          "reperes": [
+            [
+              235,
+              69
+            ],
+            [
+              289,
+              68
+            ],
+            [
+              343,
+              69
+            ]
+          ],
+          "pixels": 1562,
+          "masques": 0,
+          "bourgeons": 6
+        },
+        {
+          "section": "Guirlande de la grande travée est",
+          "module": "L01-Corniche",
+          "largeur": 30,
+          "miroir": true,
+          "reperes": [
+            [
+              332,
+              50
+            ],
+            [
+              371,
+              47
+            ],
+            [
+              419,
+              56
+            ],
+            [
+              448,
+              75
+            ]
+          ],
+          "pixels": 1301,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau du mur ouest",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": false,
+          "reperes": [
+            [
+              59,
+              116
+            ],
+            [
+              60,
+              142
+            ],
+            [
+              59,
+              174
+            ],
+            [
+              62,
+              192
+            ]
+          ],
+          "pixels": 561,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau du mur est",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              516,
+              116
+            ],
+            [
+              513,
+              145
+            ],
+            [
+              516,
+              174
+            ],
+            [
+              514,
+              192
+            ]
+          ],
+          "pixels": 562,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Racine sud-ouest",
+          "module": "L03-Rive",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              73,
+              284
+            ],
+            [
+              112,
+              307
+            ],
+            [
+              154,
+              323
+            ],
+            [
+              208,
+              326
+            ]
+          ],
+          "pixels": 955,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Racine sud-est",
+          "module": "L03-Rive",
+          "largeur": 21,
+          "miroir": false,
+          "reperes": [
+            [
+              368,
+              326
+            ],
+            [
+              427,
+              320
+            ],
+            [
+              472,
+              301
+            ],
+            [
+              502,
+              274
+            ]
+          ],
+          "pixels": 955,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 143.0,
+          "y": 52.3,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 229.9,
+          "y": 38.1,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 152.3,
+          "y": 49.8,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 201.9,
+          "y": 40.4,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 174.2,
+          "y": 49.7,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 206.0,
+          "y": 54.2,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 234.9,
+          "y": 54.9,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 190.0,
+          "y": 57.9,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée ouest"
+        },
+        {
+          "x": 293.1,
+          "y": 34.3,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 265.5,
+          "y": 42.3,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 266.0,
+          "y": 52.0,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 324.5,
+          "y": 57.2,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 250.4,
+          "y": 66.6,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 334.1,
+          "y": 70.9,
+          "module": "L04-Arche",
+          "plage": "Arche sculptée du maître"
+        },
+        {
+          "x": 433.6,
+          "y": 54.3,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 348.5,
+          "y": 38.2,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 424.8,
+          "y": 51.9,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 375.9,
+          "y": 40.4,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 402.9,
+          "y": 50.9,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 372.0,
+          "y": 54.2,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 343.6,
+          "y": 54.8,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 388.1,
+          "y": 58.7,
+          "module": "L01-Corniche",
+          "plage": "Guirlande de la grande travée est"
+        },
+        {
+          "x": 65.7,
+          "y": 135.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur ouest"
+        },
+        {
+          "x": 52.0,
+          "y": 158.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur ouest"
+        },
+        {
+          "x": 64.3,
+          "y": 159.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur ouest"
+        },
+        {
+          "x": 65.0,
+          "y": 182.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur ouest"
+        },
+        {
+          "x": 507.3,
+          "y": 135.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur est"
+        },
+        {
+          "x": 522.0,
+          "y": 158.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur est"
+        },
+        {
+          "x": 509.7,
+          "y": 159.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur est"
+        },
+        {
+          "x": 510.0,
+          "y": 182.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau du mur est"
+        },
+        {
+          "x": 181.4,
+          "y": 321.4,
+          "module": "L03-Rive",
+          "plage": "Racine sud-ouest"
+        },
+        {
+          "x": 101.6,
+          "y": 299.6,
+          "module": "L03-Rive",
+          "plage": "Racine sud-ouest"
+        },
+        {
+          "x": 145.3,
+          "y": 325.3,
+          "module": "L03-Rive",
+          "plage": "Racine sud-ouest"
+        },
+        {
+          "x": 94.2,
+          "y": 302.7,
+          "module": "L03-Rive",
+          "plage": "Racine sud-ouest"
+        },
+        {
+          "x": 137.3,
+          "y": 326.8,
+          "module": "L03-Rive",
+          "plage": "Racine sud-ouest"
+        },
+        {
+          "x": 394.3,
+          "y": 320.8,
+          "module": "L03-Rive",
+          "plage": "Racine sud-est"
+        },
+        {
+          "x": 473.3,
+          "y": 297.9,
+          "module": "L03-Rive",
+          "plage": "Racine sud-est"
+        },
+        {
+          "x": 430.2,
+          "y": 323.4,
+          "module": "L03-Rive",
+          "plage": "Racine sud-est"
+        },
+        {
+          "x": 480.8,
+          "y": 300.0,
+          "module": "L03-Rive",
+          "plage": "Racine sud-est"
+        },
+        {
+          "x": 438.2,
+          "y": 325.2,
+          "module": "L03-Rive",
+          "plage": "Racine sud-est"
+        }
+      ],
+      "pixels_lianes": 16558,
+      "pixels_eclaires_hors_lianes": 102997,
+      "pixels_plancher_eclaires": 46795,
+      "passages_libres": 4,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_bureau_maitre",
+      "nom": "Bureau du maître",
+      "taille": [
+        512,
+        384
+      ],
+      "segments": [
+        {
+          "section": "Corniche des rayonnages ouest",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": true,
+          "reperes": [
+            [
+              60,
+              102
+            ],
+            [
+              108,
+              74
+            ],
+            [
+              151,
+              54
+            ],
+            [
+              198,
+              48
+            ]
+          ],
+          "pixels": 1233,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Corniche des rayonnages est",
+          "module": "L01-Corniche",
+          "largeur": 20,
+          "miroir": false,
+          "reperes": [
+            [
+              312,
+              48
+            ],
+            [
+              364,
+              56
+            ],
+            [
+              414,
+              78
+            ],
+            [
+              453,
+              103
+            ]
+          ],
+          "pixels": 1037,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Montant ouest de la baie",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              212,
+              59
+            ],
+            [
+              209,
+              79
+            ],
+            [
+              211,
+              110
+            ],
+            [
+              211,
+              128
+            ]
+          ],
+          "pixels": 483,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau d’angle est",
+          "module": "L02-Poutre",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              463,
+              111
+            ],
+            [
+              460,
+              136
+            ],
+            [
+              464,
+              165
+            ],
+            [
+              462,
+              186
+            ]
+          ],
+          "pixels": 530,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Plinthe sud-ouest",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": false,
+          "reperes": [
+            [
+              67,
+              269
+            ],
+            [
+              101,
+              291
+            ],
+            [
+              146,
+              303
+            ],
+            [
+              192,
+              312
+            ]
+          ],
+          "pixels": 658,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Plinthe sud-est",
+          "module": "L03-Rive",
+          "largeur": 14,
+          "miroir": true,
+          "reperes": [
+            [
+              341,
+              309
+            ],
+            [
+              374,
+              302
+            ],
+            [
+              419,
+              284
+            ],
+            [
+              445,
+              264
+            ]
+          ],
+          "pixels": 473,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 180.6,
+          "y": 41.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 79.6,
+          "y": 82.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 169.9,
+          "y": 45.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 112.4,
+          "y": 66.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 144.4,
+          "y": 55.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 107.0,
+          "y": 80.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 74.3,
+          "y": 98.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 126.5,
+          "y": 71.9,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages ouest"
+        },
+        {
+          "x": 329.9,
+          "y": 43.1,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 433.0,
+          "y": 82.9,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 340.8,
+          "y": 46.9,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 399.4,
+          "y": 66.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 366.5,
+          "y": 56.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 404.7,
+          "y": 77.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 438.7,
+          "y": 97.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 385.4,
+          "y": 70.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche des rayonnages est"
+        },
+        {
+          "x": 203.6,
+          "y": 76.2,
+          "module": "L02-Poutre",
+          "plage": "Montant ouest de la baie"
+        },
+        {
+          "x": 217.0,
+          "y": 98.0,
+          "module": "L02-Poutre",
+          "plage": "Montant ouest de la baie"
+        },
+        {
+          "x": 206.7,
+          "y": 98.7,
+          "module": "L02-Poutre",
+          "plage": "Montant ouest de la baie"
+        },
+        {
+          "x": 206.0,
+          "y": 119.3,
+          "module": "L02-Poutre",
+          "plage": "Montant ouest de la baie"
+        },
+        {
+          "x": 465.5,
+          "y": 129.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau d’angle est"
+        },
+        {
+          "x": 456.0,
+          "y": 153.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau d’angle est"
+        },
+        {
+          "x": 467.3,
+          "y": 154.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau d’angle est"
+        },
+        {
+          "x": 468.1,
+          "y": 176.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau d’angle est"
+        },
+        {
+          "x": 91.4,
+          "y": 283.7,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-ouest"
+        },
+        {
+          "x": 165.4,
+          "y": 305.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-ouest"
+        },
+        {
+          "x": 124.6,
+          "y": 301.1,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-ouest"
+        },
+        {
+          "x": 172.7,
+          "y": 312.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-ouest"
+        },
+        {
+          "x": 132.1,
+          "y": 306.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-ouest"
+        },
+        {
+          "x": 424.5,
+          "y": 278.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-est"
+        },
+        {
+          "x": 362.8,
+          "y": 303.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-est"
+        },
+        {
+          "x": 396.8,
+          "y": 297.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-est"
+        },
+        {
+          "x": 357.3,
+          "y": 309.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-est"
+        },
+        {
+          "x": 389.8,
+          "y": 302.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe sud-est"
+        }
+      ],
+      "pixels_lianes": 11198,
+      "pixels_eclaires_hors_lianes": 91026,
+      "pixels_plancher_eclaires": 37649,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_carrefour",
+      "nom": "Carrefour",
+      "taille": [
+        480,
+        360
+      ],
+      "segments": [
+        {
+          "section": "Demi-corniche nord-ouest",
+          "module": "L01-Corniche",
+          "largeur": 27,
+          "miroir": false,
+          "reperes": [
+            [
+              68,
+              112
+            ],
+            [
+              102,
+              86
+            ],
+            [
+              150,
+              60
+            ],
+            [
+              198,
+              39
+            ]
+          ],
+          "pixels": 1323,
+          "masques": 3,
+          "bourgeons": 8
+        },
+        {
+          "section": "Demi-corniche nord-est",
+          "module": "L01-Corniche",
+          "largeur": 27,
+          "miroir": true,
+          "reperes": [
+            [
+              282,
+              39
+            ],
+            [
+              330,
+              59
+            ],
+            [
+              380,
+              87
+            ],
+            [
+              412,
+              112
+            ]
+          ],
+          "pixels": 1328,
+          "masques": 2,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau du passage ouest",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              72,
+              111
+            ],
+            [
+              74,
+              134
+            ],
+            [
+              70,
+              160
+            ]
+          ],
+          "pixels": 365,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau du passage est",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": false,
+          "reperes": [
+            [
+              408,
+              112
+            ],
+            [
+              406,
+              139
+            ],
+            [
+              409,
+              159
+            ]
+          ],
+          "pixels": 353,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Courbe basse ouest",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": true,
+          "reperes": [
+            [
+              87,
+              209
+            ],
+            [
+              113,
+              235
+            ],
+            [
+              157,
+              255
+            ],
+            [
+              195,
+              256
+            ]
+          ],
+          "pixels": 686,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Courbe basse est",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              283,
+              255
+            ],
+            [
+              324,
+              254
+            ],
+            [
+              362,
+              238
+            ],
+            [
+              394,
+              210
+            ]
+          ],
+          "pixels": 711,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 84.6,
+          "y": 90.0,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 179.6,
+          "y": 37.8,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 94.2,
+          "y": 85.2,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 148.6,
+          "y": 54.9,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 118.8,
+          "y": 75.4,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 153.2,
+          "y": 64.9,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 184.9,
+          "y": 50.4,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 135.3,
+          "y": 76.4,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-ouest"
+        },
+        {
+          "x": 395.4,
+          "y": 89.8,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 300.5,
+          "y": 37.4,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 385.8,
+          "y": 85.2,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 331.4,
+          "y": 53.9,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 361.4,
+          "y": 74.8,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 326.8,
+          "y": 63.9,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 295.1,
+          "y": 49.9,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 344.6,
+          "y": 75.7,
+          "module": "L01-Corniche",
+          "plage": "Demi-corniche nord-est"
+        },
+        {
+          "x": 67.2,
+          "y": 123.4,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage ouest"
+        },
+        {
+          "x": 81.0,
+          "y": 139.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage ouest"
+        },
+        {
+          "x": 70.0,
+          "y": 139.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage ouest"
+        },
+        {
+          "x": 66.2,
+          "y": 153.6,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage ouest"
+        },
+        {
+          "x": 412.5,
+          "y": 123.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage est"
+        },
+        {
+          "x": 399.0,
+          "y": 138.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage est"
+        },
+        {
+          "x": 410.0,
+          "y": 139.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage est"
+        },
+        {
+          "x": 413.0,
+          "y": 152.8,
+          "module": "L02-Poutre",
+          "plage": "Poteau du passage est"
+        },
+        {
+          "x": 174.0,
+          "y": 252.0,
+          "module": "L03-Rive",
+          "plage": "Courbe basse ouest"
+        },
+        {
+          "x": 110.2,
+          "y": 230.9,
+          "module": "L03-Rive",
+          "plage": "Courbe basse ouest"
+        },
+        {
+          "x": 144.9,
+          "y": 256.3,
+          "module": "L03-Rive",
+          "plage": "Courbe basse ouest"
+        },
+        {
+          "x": 104.0,
+          "y": 232.5,
+          "module": "L03-Rive",
+          "plage": "Courbe basse ouest"
+        },
+        {
+          "x": 138.2,
+          "y": 257.1,
+          "module": "L03-Rive",
+          "plage": "Courbe basse ouest"
+        },
+        {
+          "x": 304.6,
+          "y": 251.1,
+          "module": "L03-Rive",
+          "plage": "Courbe basse est"
+        },
+        {
+          "x": 370.3,
+          "y": 230.3,
+          "module": "L03-Rive",
+          "plage": "Courbe basse est"
+        },
+        {
+          "x": 334.7,
+          "y": 255.6,
+          "module": "L03-Rive",
+          "plage": "Courbe basse est"
+        },
+        {
+          "x": 376.5,
+          "y": 232.0,
+          "module": "L03-Rive",
+          "plage": "Courbe basse est"
+        },
+        {
+          "x": 341.3,
+          "y": 256.6,
+          "module": "L03-Rive",
+          "plage": "Courbe basse est"
+        }
+      ],
+      "pixels_lianes": 11518,
+      "pixels_eclaires_hors_lianes": 71844,
+      "pixels_plancher_eclaires": 35539,
+      "passages_libres": 4,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_refectoire",
+      "nom": "Réfectoire",
+      "taille": [
+        576,
+        432
+      ],
+      "segments": [
+        {
+          "section": "Corniche nord-ouest",
+          "module": "L01-Corniche",
+          "largeur": 29,
+          "miroir": false,
+          "reperes": [
+            [
+              67,
+              136
+            ],
+            [
+              102,
+              100
+            ],
+            [
+              145,
+              72
+            ],
+            [
+              185,
+              57
+            ]
+          ],
+          "pixels": 1281,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Corniche nord-est",
+          "module": "L01-Corniche",
+          "largeur": 29,
+          "miroir": true,
+          "reperes": [
+            [
+              391,
+              51
+            ],
+            [
+              437,
+              68
+            ],
+            [
+              480,
+              92
+            ],
+            [
+              514,
+              120
+            ]
+          ],
+          "pixels": 1315,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Guirlande centrale entre les baies",
+          "module": "L01-Corniche",
+          "largeur": 22,
+          "miroir": true,
+          "reperes": [
+            [
+              231,
+              40
+            ],
+            [
+              260,
+              43
+            ],
+            [
+              288,
+              46
+            ],
+            [
+              317,
+              42
+            ],
+            [
+              345,
+              40
+            ]
+          ],
+          "pixels": 927,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau central",
+          "module": "L02-Poutre",
+          "largeur": 23,
+          "miroir": false,
+          "reperes": [
+            [
+              288,
+              64
+            ],
+            [
+              285,
+              89
+            ],
+            [
+              290,
+              116
+            ],
+            [
+              288,
+              137
+            ]
+          ],
+          "pixels": 634,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau côté service",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              515,
+              128
+            ],
+            [
+              519,
+              153
+            ],
+            [
+              518,
+              191
+            ],
+            [
+              518,
+              215
+            ]
+          ],
+          "pixels": 640,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Bois courbé sud-ouest",
+          "module": "L03-Rive",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              71,
+              305
+            ],
+            [
+              101,
+              334
+            ],
+            [
+              149,
+              361
+            ],
+            [
+              209,
+              378
+            ]
+          ],
+          "pixels": 925,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Bois courbé sud-est",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              363,
+              377
+            ],
+            [
+              408,
+              365
+            ],
+            [
+              456,
+              342
+            ],
+            [
+              491,
+              309
+            ]
+          ],
+          "pixels": 799,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 81.9,
+          "y": 109.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 168.0,
+          "y": 52.9,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 91.4,
+          "y": 103.1,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 140.1,
+          "y": 68.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 113.0,
+          "y": 91.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 144.6,
+          "y": 79.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 173.4,
+          "y": 66.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 127.9,
+          "y": 91.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-ouest"
+        },
+        {
+          "x": 498.4,
+          "y": 97.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 408.4,
+          "y": 47.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 488.8,
+          "y": 92.1,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 437.9,
+          "y": 62.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 466.0,
+          "y": 82.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 433.1,
+          "y": 73.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 403.1,
+          "y": 61.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 450.0,
+          "y": 84.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche nord-est"
+        },
+        {
+          "x": 330.5,
+          "y": 34.0,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 247.0,
+          "y": 34.7,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 321.5,
+          "y": 37.0,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 274.1,
+          "y": 39.9,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 301.0,
+          "y": 44.2,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 270.0,
+          "y": 49.8,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 242.5,
+          "y": 46.5,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 286.2,
+          "y": 53.7,
+          "module": "L01-Corniche",
+          "plage": "Guirlande centrale entre les baies"
+        },
+        {
+          "x": 292.2,
+          "y": 82.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau central"
+        },
+        {
+          "x": 279.7,
+          "y": 105.4,
+          "module": "L02-Poutre",
+          "plage": "Poteau central"
+        },
+        {
+          "x": 293.8,
+          "y": 106.8,
+          "module": "L02-Poutre",
+          "plage": "Poteau central"
+        },
+        {
+          "x": 295.6,
+          "y": 127.8,
+          "module": "L02-Poutre",
+          "plage": "Poteau central"
+        },
+        {
+          "x": 512.8,
+          "y": 149.4,
+          "module": "L02-Poutre",
+          "plage": "Poteau côté service"
+        },
+        {
+          "x": 526.0,
+          "y": 177.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau côté service"
+        },
+        {
+          "x": 513.7,
+          "y": 178.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau côté service"
+        },
+        {
+          "x": 513.0,
+          "y": 204.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau côté service"
+        },
+        {
+          "x": 182.3,
+          "y": 368.8,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-ouest"
+        },
+        {
+          "x": 100.2,
+          "y": 331.0,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-ouest"
+        },
+        {
+          "x": 144.9,
+          "y": 363.2,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-ouest"
+        },
+        {
+          "x": 92.5,
+          "y": 332.0,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-ouest"
+        },
+        {
+          "x": 136.7,
+          "y": 363.4,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-ouest"
+        },
+        {
+          "x": 388.1,
+          "y": 367.9,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-est"
+        },
+        {
+          "x": 464.2,
+          "y": 333.7,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-est"
+        },
+        {
+          "x": 422.6,
+          "y": 363.1,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-est"
+        },
+        {
+          "x": 470.6,
+          "y": 335.0,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-est"
+        },
+        {
+          "x": 430.0,
+          "y": 363.5,
+          "module": "L03-Rive",
+          "plage": "Bois courbé sud-est"
+        }
+      ],
+      "pixels_lianes": 15672,
+      "pixels_eclaires_hors_lianes": 102014,
+      "pixels_plancher_eclaires": 42171,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_cuisine",
+      "nom": "Cuisine",
+      "taille": [
+        480,
+        360
+      ],
+      "segments": [
+        {
+          "section": "Niche centrale sans vitrage",
+          "module": "L04-Arche",
+          "largeur": 66,
+          "miroir": false,
+          "reperes": [
+            [
+              191,
+              67
+            ],
+            [
+              240,
+              65
+            ],
+            [
+              289,
+              67
+            ]
+          ],
+          "pixels": 1256,
+          "masques": 0,
+          "bourgeons": 6
+        },
+        {
+          "section": "Corniche du plan de travail ouest",
+          "module": "L01-Corniche",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              59,
+              94
+            ],
+            [
+              87,
+              72
+            ],
+            [
+              114,
+              56
+            ],
+            [
+              135,
+              50
+            ]
+          ],
+          "pixels": 598,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Corniche du plan de travail est",
+          "module": "L01-Corniche",
+          "largeur": 23,
+          "miroir": false,
+          "reperes": [
+            [
+              346,
+              51
+            ],
+            [
+              372,
+              62
+            ],
+            [
+              402,
+              80
+            ],
+            [
+              426,
+              96
+            ]
+          ],
+          "pixels": 680,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau près de la baie ouest",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": false,
+          "reperes": [
+            [
+              121,
+              66
+            ],
+            [
+              123,
+              92
+            ],
+            [
+              121,
+              117
+            ]
+          ],
+          "pixels": 350,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau latéral est",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              420,
+              97
+            ],
+            [
+              420,
+              121
+            ],
+            [
+              416,
+              150
+            ],
+            [
+              416,
+              166
+            ]
+          ],
+          "pixels": 487,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Plinthe ouest",
+          "module": "L03-Rive",
+          "largeur": 15,
+          "miroir": false,
+          "reperes": [
+            [
+              67,
+              224
+            ],
+            [
+              97,
+              253
+            ],
+            [
+              129,
+              270
+            ],
+            [
+              173,
+              283
+            ]
+          ],
+          "pixels": 520,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Plinthe est",
+          "module": "L03-Rive",
+          "largeur": 14,
+          "miroir": true,
+          "reperes": [
+            [
+              314,
+              281
+            ],
+            [
+              354,
+              268
+            ],
+            [
+              386,
+              250
+            ],
+            [
+              413,
+              223
+            ]
+          ],
+          "pixels": 446,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 244.2,
+          "y": 34.6,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 218.7,
+          "y": 42.0,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 219.0,
+          "y": 50.5,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 272.0,
+          "y": 55.8,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 205.2,
+          "y": 64.2,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 280.7,
+          "y": 68.3,
+          "module": "L04-Arche",
+          "plage": "Niche centrale sans vitrage"
+        },
+        {
+          "x": 125.4,
+          "y": 45.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 69.7,
+          "y": 78.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 119.5,
+          "y": 49.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 87.6,
+          "y": 67.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 105.4,
+          "y": 59.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 84.8,
+          "y": 79.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 66.6,
+          "y": 92.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 95.8,
+          "y": 73.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail ouest"
+        },
+        {
+          "x": 356.2,
+          "y": 47.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 414.6,
+          "y": 80.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 362.4,
+          "y": 52.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 395.5,
+          "y": 70.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 377.0,
+          "y": 64.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 398.5,
+          "y": 83.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 418.0,
+          "y": 96.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 387.4,
+          "y": 78.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche du plan de travail est"
+        },
+        {
+          "x": 127.5,
+          "y": 78.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau près de la baie ouest"
+        },
+        {
+          "x": 116.0,
+          "y": 95.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau près de la baie ouest"
+        },
+        {
+          "x": 127.3,
+          "y": 95.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau près de la baie ouest"
+        },
+        {
+          "x": 126.7,
+          "y": 110.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau près de la baie ouest"
+        },
+        {
+          "x": 414.3,
+          "y": 114.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral est"
+        },
+        {
+          "x": 424.5,
+          "y": 136.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral est"
+        },
+        {
+          "x": 413.7,
+          "y": 136.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral est"
+        },
+        {
+          "x": 411.0,
+          "y": 157.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau latéral est"
+        },
+        {
+          "x": 87.3,
+          "y": 242.7,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest"
+        },
+        {
+          "x": 150.6,
+          "y": 276.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest"
+        },
+        {
+          "x": 116.2,
+          "y": 267.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest"
+        },
+        {
+          "x": 156.0,
+          "y": 282.8,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest"
+        },
+        {
+          "x": 122.7,
+          "y": 273.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest"
+        },
+        {
+          "x": 393.4,
+          "y": 241.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe est"
+        },
+        {
+          "x": 335.4,
+          "y": 273.7,
+          "module": "L03-Rive",
+          "plage": "Plinthe est"
+        },
+        {
+          "x": 367.0,
+          "y": 264.5,
+          "module": "L03-Rive",
+          "plage": "Plinthe est"
+        },
+        {
+          "x": 329.8,
+          "y": 280.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe est"
+        },
+        {
+          "x": 360.8,
+          "y": 270.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe est"
+        }
+      ],
+      "pixels_lianes": 11288,
+      "pixels_eclaires_hors_lianes": 82206,
+      "pixels_plancher_eclaires": 37131,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_reserve",
+      "nom": "Réserve",
+      "taille": [
+        448,
+        336
+      ],
+      "segments": [
+        {
+          "section": "Poutre haute à gauche de l’entrée",
+          "module": "L01-Corniche",
+          "largeur": 20,
+          "miroir": false,
+          "reperes": [
+            [
+              111,
+              75
+            ],
+            [
+              138,
+              57
+            ],
+            [
+              162,
+              43
+            ],
+            [
+              188,
+              33
+            ]
+          ],
+          "pixels": 567,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poutre haute à droite de l’entrée",
+          "module": "L01-Corniche",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              262,
+              34
+            ],
+            [
+              285,
+              44
+            ],
+            [
+              312,
+              59
+            ],
+            [
+              337,
+              78
+            ]
+          ],
+          "pixels": 590,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Liane tombante près du stockage ouest",
+          "module": "L02-Poutre",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              116,
+              76
+            ],
+            [
+              115,
+              109
+            ],
+            [
+              119,
+              145
+            ]
+          ],
+          "pixels": 524,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Bord bas ouest",
+          "module": "L03-Rive",
+          "largeur": 17,
+          "miroir": false,
+          "reperes": [
+            [
+              119,
+              183
+            ],
+            [
+              140,
+              205
+            ],
+            [
+              168,
+              223
+            ],
+            [
+              194,
+              242
+            ]
+          ],
+          "pixels": 416,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Bord bas est",
+          "module": "L03-Rive",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              251,
+              246
+            ],
+            [
+              282,
+              223
+            ],
+            [
+              314,
+              200
+            ],
+            [
+              334,
+              177
+            ]
+          ],
+          "pixels": 492,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 120.6,
+          "y": 62.2,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 177.3,
+          "y": 30.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 126.8,
+          "y": 60.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 158.7,
+          "y": 40.3,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 140.7,
+          "y": 54.7,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 161.3,
+          "y": 48.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 180.5,
+          "y": 40.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 151.5,
+          "y": 55.5,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à gauche de l’entrée"
+        },
+        {
+          "x": 327.4,
+          "y": 63.6,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 272.6,
+          "y": 31.8,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 321.4,
+          "y": 61.2,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 290.6,
+          "y": 42.4,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 307.5,
+          "y": 56.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 287.8,
+          "y": 50.8,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 269.8,
+          "y": 41.8,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 298.5,
+          "y": 58.0,
+          "module": "L01-Corniche",
+          "plage": "Poutre haute à droite de l’entrée"
+        },
+        {
+          "x": 109.3,
+          "y": 93.0,
+          "module": "L02-Poutre",
+          "plage": "Liane tombante près du stockage ouest"
+        },
+        {
+          "x": 122.5,
+          "y": 115.0,
+          "module": "L02-Poutre",
+          "plage": "Liane tombante près du stockage ouest"
+        },
+        {
+          "x": 110.7,
+          "y": 115.7,
+          "module": "L02-Poutre",
+          "plage": "Liane tombante près du stockage ouest"
+        },
+        {
+          "x": 112.0,
+          "y": 136.3,
+          "module": "L02-Poutre",
+          "plage": "Liane tombante près du stockage ouest"
+        },
+        {
+          "x": 133.9,
+          "y": 196.6,
+          "module": "L03-Rive",
+          "plage": "Bord bas ouest"
+        },
+        {
+          "x": 178.2,
+          "y": 228.2,
+          "module": "L03-Rive",
+          "plage": "Bord bas ouest"
+        },
+        {
+          "x": 153.7,
+          "y": 217.3,
+          "module": "L03-Rive",
+          "plage": "Bord bas ouest"
+        },
+        {
+          "x": 182.0,
+          "y": 236.8,
+          "module": "L03-Rive",
+          "plage": "Bord bas ouest"
+        },
+        {
+          "x": 158.0,
+          "y": 223.5,
+          "module": "L03-Rive",
+          "plage": "Bord bas ouest"
+        },
+        {
+          "x": 317.7,
+          "y": 193.3,
+          "module": "L03-Rive",
+          "plage": "Bord bas est"
+        },
+        {
+          "x": 268.8,
+          "y": 230.8,
+          "module": "L03-Rive",
+          "plage": "Bord bas est"
+        },
+        {
+          "x": 295.5,
+          "y": 217.0,
+          "module": "L03-Rive",
+          "plage": "Bord bas est"
+        },
+        {
+          "x": 263.8,
+          "y": 240.8,
+          "module": "L03-Rive",
+          "plage": "Bord bas est"
+        },
+        {
+          "x": 290.7,
+          "y": 223.7,
+          "module": "L03-Rive",
+          "plage": "Bord bas est"
+        }
+      ],
+      "pixels_lianes": 7012,
+      "pixels_eclaires_hors_lianes": 56783,
+      "pixels_plancher_eclaires": 26614,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_couloir_ouest",
+      "nom": "Couloir ouest",
+      "taille": [
+        480,
+        360
+      ],
+      "segments": [
+        {
+          "section": "Travée longue de l’aile ouest",
+          "module": "L01-Corniche",
+          "largeur": 29,
+          "miroir": true,
+          "reperes": [
+            [
+              66,
+              111
+            ],
+            [
+              100,
+              88
+            ],
+            [
+              145,
+              59
+            ],
+            [
+              199,
+              34
+            ]
+          ],
+          "pixels": 1457,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Colonne intérieure ouest",
+          "module": "L02-Poutre",
+          "largeur": 24,
+          "miroir": false,
+          "reperes": [
+            [
+              141,
+              69
+            ],
+            [
+              142,
+              88
+            ],
+            [
+              144,
+              115
+            ]
+          ],
+          "pixels": 431,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Retour haut au nord-est",
+          "module": "L01-Corniche",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              281,
+              40
+            ],
+            [
+              309,
+              49
+            ],
+            [
+              338,
+              62
+            ],
+            [
+              364,
+              81
+            ]
+          ],
+          "pixels": 637,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Retombée près de la sortie est",
+          "module": "L02-Poutre",
+          "largeur": 16,
+          "miroir": true,
+          "reperes": [
+            [
+              408,
+              110
+            ],
+            [
+              405,
+              134
+            ],
+            [
+              407,
+              158
+            ]
+          ],
+          "pixels": 295,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Plinthe ouest vers le sud",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              77,
+              202
+            ],
+            [
+              111,
+              235
+            ],
+            [
+              153,
+              253
+            ],
+            [
+              195,
+              257
+            ]
+          ],
+          "pixels": 753,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Plinthe est courte",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": true,
+          "reperes": [
+            [
+              302,
+              254
+            ],
+            [
+              330,
+              247
+            ],
+            [
+              362,
+              230
+            ],
+            [
+              389,
+              214
+            ]
+          ],
+          "pixels": 454,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 182.2,
+          "y": 31.5,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 85.1,
+          "y": 88.6,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 172.0,
+          "y": 39.2,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 116.4,
+          "y": 70.7,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 147.4,
+          "y": 57.0,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 111.8,
+          "y": 87.1,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 79.0,
+          "y": 108.7,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 130.1,
+          "y": 77.8,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile ouest"
+        },
+        {
+          "x": 148.5,
+          "y": 80.5,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure ouest"
+        },
+        {
+          "x": 133.5,
+          "y": 95.0,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure ouest"
+        },
+        {
+          "x": 147.8,
+          "y": 95.6,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure ouest"
+        },
+        {
+          "x": 149.5,
+          "y": 109.0,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure ouest"
+        },
+        {
+          "x": 353.4,
+          "y": 65.6,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 292.6,
+          "y": 36.8,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 347.0,
+          "y": 63.0,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 312.6,
+          "y": 45.8,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 331.4,
+          "y": 58.2,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 309.5,
+          "y": 54.0,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 289.4,
+          "y": 47.2,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 320.6,
+          "y": 60.8,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-est"
+        },
+        {
+          "x": 401.2,
+          "y": 121.6,
+          "module": "L02-Poutre",
+          "plage": "Retombée près de la sortie est"
+        },
+        {
+          "x": 411.0,
+          "y": 137.0,
+          "module": "L02-Poutre",
+          "plage": "Retombée près de la sortie est"
+        },
+        {
+          "x": 401.5,
+          "y": 138.0,
+          "module": "L02-Poutre",
+          "plage": "Retombée près de la sortie est"
+        },
+        {
+          "x": 402.0,
+          "y": 151.8,
+          "module": "L02-Poutre",
+          "plage": "Retombée près de la sortie est"
+        },
+        {
+          "x": 100.0,
+          "y": 223.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest vers le sud"
+        },
+        {
+          "x": 170.1,
+          "y": 253.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest vers le sud"
+        },
+        {
+          "x": 131.8,
+          "y": 249.9,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest vers le sud"
+        },
+        {
+          "x": 176.7,
+          "y": 260.6,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest vers le sud"
+        },
+        {
+          "x": 138.8,
+          "y": 256.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest vers le sud"
+        },
+        {
+          "x": 371.8,
+          "y": 221.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe est courte"
+        },
+        {
+          "x": 320.2,
+          "y": 248.3,
+          "module": "L03-Rive",
+          "plage": "Plinthe est courte"
+        },
+        {
+          "x": 348.8,
+          "y": 240.8,
+          "module": "L03-Rive",
+          "plage": "Plinthe est courte"
+        },
+        {
+          "x": 315.8,
+          "y": 255.2,
+          "module": "L03-Rive",
+          "plage": "Plinthe est courte"
+        },
+        {
+          "x": 343.2,
+          "y": 246.9,
+          "module": "L03-Rive",
+          "plage": "Plinthe est courte"
+        }
+      ],
+      "pixels_lianes": 9905,
+      "pixels_eclaires_hors_lianes": 75324,
+      "pixels_plancher_eclaires": 35557,
+      "passages_libres": 4,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_couloir_est",
+      "nom": "Couloir est",
+      "taille": [
+        480,
+        360
+      ],
+      "segments": [
+        {
+          "section": "Travée longue de l’aile est",
+          "module": "L01-Corniche",
+          "largeur": 29,
+          "miroir": false,
+          "reperes": [
+            [
+              281,
+              35
+            ],
+            [
+              329,
+              56
+            ],
+            [
+              376,
+              83
+            ],
+            [
+              414,
+              111
+            ]
+          ],
+          "pixels": 1458,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Colonne intérieure est",
+          "module": "L02-Poutre",
+          "largeur": 24,
+          "miroir": true,
+          "reperes": [
+            [
+              336,
+              69
+            ],
+            [
+              339,
+              90
+            ],
+            [
+              336,
+              115
+            ]
+          ],
+          "pixels": 424,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Retour haut au nord-ouest",
+          "module": "L01-Corniche",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              116,
+              79
+            ],
+            [
+              141,
+              63
+            ],
+            [
+              170,
+              49
+            ],
+            [
+              200,
+              39
+            ]
+          ],
+          "pixels": 629,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Retombée avant la sortie ouest",
+          "module": "L02-Poutre",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              72,
+              111
+            ],
+            [
+              75,
+              136
+            ],
+            [
+              72,
+              162
+            ]
+          ],
+          "pixels": 371,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Plinthe est vers le sud",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": true,
+          "reperes": [
+            [
+              284,
+              256
+            ],
+            [
+              331,
+              252
+            ],
+            [
+              369,
+              232
+            ],
+            [
+              403,
+              200
+            ]
+          ],
+          "pixels": 754,
+          "masques": 4,
+          "bourgeons": 5
+        },
+        {
+          "section": "Plinthe ouest courte",
+          "module": "L03-Rive",
+          "largeur": 15,
+          "miroir": false,
+          "reperes": [
+            [
+              97,
+              217
+            ],
+            [
+              124,
+              239
+            ],
+            [
+              151,
+              249
+            ],
+            [
+              176,
+              253
+            ]
+          ],
+          "pixels": 387,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 297.8,
+          "y": 32.5,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 395.0,
+          "y": 86.9,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 308.0,
+          "y": 39.9,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 363.5,
+          "y": 68.8,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 332.5,
+          "y": 57.2,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 368.2,
+          "y": 85.1,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 400.9,
+          "y": 107.3,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 349.8,
+          "y": 77.1,
+          "module": "L01-Corniche",
+          "plage": "Travée longue de l’aile est"
+        },
+        {
+          "x": 331.2,
+          "y": 80.4,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure est"
+        },
+        {
+          "x": 347.5,
+          "y": 95.0,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure est"
+        },
+        {
+          "x": 333.2,
+          "y": 95.8,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure est"
+        },
+        {
+          "x": 331.0,
+          "y": 109.0,
+          "module": "L02-Poutre",
+          "plage": "Colonne intérieure est"
+        },
+        {
+          "x": 189.4,
+          "y": 35.8,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 128.0,
+          "y": 64.7,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 182.7,
+          "y": 39.9,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 148.0,
+          "y": 55.0,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 167.5,
+          "y": 49.5,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 144.8,
+          "y": 66.0,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 124.5,
+          "y": 77.5,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 156.5,
+          "y": 61.5,
+          "module": "L01-Corniche",
+          "plage": "Retour haut au nord-ouest"
+        },
+        {
+          "x": 79.5,
+          "y": 123.5,
+          "module": "L02-Poutre",
+          "plage": "Retombée avant la sortie ouest"
+        },
+        {
+          "x": 68.0,
+          "y": 140.0,
+          "module": "L02-Poutre",
+          "plage": "Retombée avant la sortie ouest"
+        },
+        {
+          "x": 79.3,
+          "y": 140.7,
+          "module": "L02-Poutre",
+          "plage": "Retombée avant la sortie ouest"
+        },
+        {
+          "x": 78.0,
+          "y": 155.8,
+          "module": "L02-Poutre",
+          "plage": "Retombée avant la sortie ouest"
+        },
+        {
+          "x": 380.0,
+          "y": 220.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe est vers le sud"
+        },
+        {
+          "x": 309.6,
+          "y": 252.6,
+          "module": "L03-Rive",
+          "plage": "Plinthe est vers le sud"
+        },
+        {
+          "x": 347.9,
+          "y": 249.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe est vers le sud"
+        },
+        {
+          "x": 302.1,
+          "y": 259.8,
+          "module": "L03-Rive",
+          "plage": "Plinthe est vers le sud"
+        },
+        {
+          "x": 340.9,
+          "y": 256.7,
+          "module": "L03-Rive",
+          "plage": "Plinthe est vers le sud"
+        },
+        {
+          "x": 112.5,
+          "y": 228.8,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest courte"
+        },
+        {
+          "x": 159.2,
+          "y": 249.4,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest courte"
+        },
+        {
+          "x": 133.7,
+          "y": 246.3,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest courte"
+        },
+        {
+          "x": 163.5,
+          "y": 255.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest courte"
+        },
+        {
+          "x": 138.5,
+          "y": 251.0,
+          "module": "L03-Rive",
+          "plage": "Plinthe ouest courte"
+        }
+      ],
+      "pixels_lianes": 9893,
+      "pixels_eclaires_hors_lianes": 75125,
+      "pixels_plancher_eclaires": 35567,
+      "passages_libres": 4,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_1",
+      "nom": "Dortoir nord I",
+      "taille": [
+        448,
+        336
+      ],
+      "segments": [
+        {
+          "section": "Corniche au-dessus des lits ouest",
+          "module": "L01-Corniche",
+          "largeur": 23,
+          "miroir": false,
+          "reperes": [
+            [
+              116,
+              77
+            ],
+            [
+              142,
+              56
+            ],
+            [
+              167,
+              41
+            ],
+            [
+              193,
+              33
+            ]
+          ],
+          "pixels": 656,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Montant gauche de la baie",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": false,
+          "reperes": [
+            [
+              183,
+              49
+            ],
+            [
+              182,
+              71
+            ],
+            [
+              185,
+              100
+            ]
+          ],
+          "pixels": 354,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Longue retombée sur le poteau est",
+          "module": "L02-Poutre",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              326,
+              76
+            ],
+            [
+              325,
+              103
+            ],
+            [
+              327,
+              127
+            ],
+            [
+              326,
+              149
+            ]
+          ],
+          "pixels": 577,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Contour de la chambre ouest",
+          "module": "L03-Rive",
+          "largeur": 15,
+          "miroir": true,
+          "reperes": [
+            [
+              122,
+              179
+            ],
+            [
+              143,
+              205
+            ],
+            [
+              167,
+              226
+            ],
+            [
+              191,
+              250
+            ]
+          ],
+          "pixels": 333,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Contour de la chambre est",
+          "module": "L03-Rive",
+          "largeur": 17,
+          "miroir": false,
+          "reperes": [
+            [
+              259,
+              250
+            ],
+            [
+              285,
+              223
+            ],
+            [
+              310,
+              204
+            ],
+            [
+              327,
+              180
+            ]
+          ],
+          "pixels": 386,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 125.5,
+          "y": 61.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 182.3,
+          "y": 28.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 131.8,
+          "y": 58.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 163.8,
+          "y": 37.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 145.8,
+          "y": 53.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 166.5,
+          "y": 46.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 185.4,
+          "y": 39.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 156.5,
+          "y": 54.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits ouest"
+        },
+        {
+          "x": 187.5,
+          "y": 61.5,
+          "module": "L02-Poutre",
+          "plage": "Montant gauche de la baie"
+        },
+        {
+          "x": 176.0,
+          "y": 78.0,
+          "module": "L02-Poutre",
+          "plage": "Montant gauche de la baie"
+        },
+        {
+          "x": 186.3,
+          "y": 78.7,
+          "module": "L02-Poutre",
+          "plage": "Montant gauche de la baie"
+        },
+        {
+          "x": 189.0,
+          "y": 94.0,
+          "module": "L02-Poutre",
+          "plage": "Montant gauche de la baie"
+        },
+        {
+          "x": 318.8,
+          "y": 94.0,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau est"
+        },
+        {
+          "x": 334.0,
+          "y": 117.5,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau est"
+        },
+        {
+          "x": 321.7,
+          "y": 118.7,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau est"
+        },
+        {
+          "x": 321.0,
+          "y": 139.8,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau est"
+        },
+        {
+          "x": 177.7,
+          "y": 233.7,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre ouest"
+        },
+        {
+          "x": 136.8,
+          "y": 196.4,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre ouest"
+        },
+        {
+          "x": 159.0,
+          "y": 222.0,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre ouest"
+        },
+        {
+          "x": 132.3,
+          "y": 196.0,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre ouest"
+        },
+        {
+          "x": 154.5,
+          "y": 221.0,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre ouest"
+        },
+        {
+          "x": 272.0,
+          "y": 232.5,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre est"
+        },
+        {
+          "x": 312.3,
+          "y": 199.5,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre est"
+        },
+        {
+          "x": 290.7,
+          "y": 221.7,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre est"
+        },
+        {
+          "x": 316.5,
+          "y": 200.0,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre est"
+        },
+        {
+          "x": 294.6,
+          "y": 222.2,
+          "module": "L03-Rive",
+          "plage": "Contour de la chambre est"
+        }
+      ],
+      "pixels_lianes": 6432,
+      "pixels_eclaires_hors_lianes": 54178,
+      "pixels_plancher_eclaires": 24129,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_2",
+      "nom": "Dortoir nord II",
+      "taille": [
+        448,
+        336
+      ],
+      "segments": [
+        {
+          "section": "Retombée autour de la baie",
+          "module": "L04-Arche",
+          "largeur": 62,
+          "miroir": true,
+          "reperes": [
+            [
+              173,
+              60
+            ],
+            [
+              224,
+              56
+            ],
+            [
+              275,
+              60
+            ]
+          ],
+          "pixels": 993,
+          "masques": 224,
+          "bourgeons": 5
+        },
+        {
+          "section": "Corniche au-dessus des lits est",
+          "module": "L01-Corniche",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              268,
+              38
+            ],
+            [
+              293,
+              52
+            ],
+            [
+              316,
+              67
+            ],
+            [
+              333,
+              83
+            ]
+          ],
+          "pixels": 504,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Longue retombée sur le poteau ouest",
+          "module": "L02-Poutre",
+          "largeur": 22,
+          "miroir": true,
+          "reperes": [
+            [
+              120,
+              76
+            ],
+            [
+              121,
+              103
+            ],
+            [
+              119,
+              129
+            ],
+            [
+              122,
+              148
+            ]
+          ],
+          "pixels": 587,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Racine au pied du mur est",
+          "module": "L03-Rive",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              258,
+              248
+            ],
+            [
+              280,
+              227
+            ],
+            [
+              307,
+              204
+            ],
+            [
+              328,
+              178
+            ]
+          ],
+          "pixels": 419,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Petite bordure ouest",
+          "module": "L03-Rive",
+          "largeur": 14,
+          "miroir": false,
+          "reperes": [
+            [
+              137,
+              199
+            ],
+            [
+              155,
+              220
+            ],
+            [
+              181,
+              240
+            ]
+          ],
+          "pixels": 200,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 246.3,
+          "y": 35.0,
+          "module": "L04-Arche",
+          "plage": "Retombée autour de la baie"
+        },
+        {
+          "x": 246.5,
+          "y": 42.5,
+          "module": "L04-Arche",
+          "plage": "Retombée autour de la baie"
+        },
+        {
+          "x": 190.9,
+          "y": 48.4,
+          "module": "L04-Arche",
+          "plage": "Retombée autour de la baie"
+        },
+        {
+          "x": 260.7,
+          "y": 56.3,
+          "module": "L04-Arche",
+          "plage": "Retombée autour de la baie"
+        },
+        {
+          "x": 181.6,
+          "y": 60.6,
+          "module": "L04-Arche",
+          "plage": "Retombée autour de la baie"
+        },
+        {
+          "x": 325.0,
+          "y": 68.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 277.4,
+          "y": 36.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 320.0,
+          "y": 66.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 292.6,
+          "y": 47.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 307.6,
+          "y": 60.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 290.3,
+          "y": 55.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 274.5,
+          "y": 46.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 299.5,
+          "y": 63.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche au-dessus des lits est"
+        },
+        {
+          "x": 114.3,
+          "y": 94.0,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau ouest"
+        },
+        {
+          "x": 128.0,
+          "y": 116.5,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau ouest"
+        },
+        {
+          "x": 114.7,
+          "y": 117.7,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau ouest"
+        },
+        {
+          "x": 114.2,
+          "y": 139.4,
+          "module": "L02-Poutre",
+          "plage": "Longue retombée sur le poteau ouest"
+        },
+        {
+          "x": 314.1,
+          "y": 192.8,
+          "module": "L03-Rive",
+          "plage": "Racine au pied du mur est"
+        },
+        {
+          "x": 272.6,
+          "y": 232.2,
+          "module": "L03-Rive",
+          "plage": "Racine au pied du mur est"
+        },
+        {
+          "x": 295.3,
+          "y": 218.0,
+          "module": "L03-Rive",
+          "plage": "Racine au pied du mur est"
+        },
+        {
+          "x": 268.8,
+          "y": 241.8,
+          "module": "L03-Rive",
+          "plage": "Racine au pied du mur est"
+        },
+        {
+          "x": 291.4,
+          "y": 224.8,
+          "module": "L03-Rive",
+          "plage": "Racine au pied du mur est"
+        },
+        {
+          "x": 145.8,
+          "y": 207.8,
+          "module": "L03-Rive",
+          "plage": "Petite bordure ouest"
+        },
+        {
+          "x": 171.7,
+          "y": 232.3,
+          "module": "L03-Rive",
+          "plage": "Petite bordure ouest"
+        },
+        {
+          "x": 157.7,
+          "y": 225.0,
+          "module": "L03-Rive",
+          "plage": "Petite bordure ouest"
+        },
+        {
+          "x": 174.0,
+          "y": 239.0,
+          "module": "L03-Rive",
+          "plage": "Petite bordure ouest"
+        },
+        {
+          "x": 159.7,
+          "y": 229.3,
+          "module": "L03-Rive",
+          "plage": "Petite bordure ouest"
+        }
+      ],
+      "pixels_lianes": 7113,
+      "pixels_eclaires_hors_lianes": 56272,
+      "pixels_plancher_eclaires": 24874,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_1",
+      "nom": "Dortoir sud I",
+      "taille": [
+        448,
+        336
+      ],
+      "segments": [
+        {
+          "section": "Corniche ouest sous la poutre d’accès",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": true,
+          "reperes": [
+            [
+              114,
+              74
+            ],
+            [
+              135,
+              59
+            ],
+            [
+              163,
+              42
+            ],
+            [
+              189,
+              33
+            ]
+          ],
+          "pixels": 673,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Bois courbe est",
+          "module": "L01-Corniche",
+          "largeur": 19,
+          "miroir": false,
+          "reperes": [
+            [
+              260,
+              34
+            ],
+            [
+              284,
+              45
+            ],
+            [
+              312,
+              60
+            ],
+            [
+              335,
+              76
+            ]
+          ],
+          "pixels": 534,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau au pied des lits ouest",
+          "module": "L02-Poutre",
+          "largeur": 22,
+          "miroir": false,
+          "reperes": [
+            [
+              116,
+              80
+            ],
+            [
+              118,
+              100
+            ],
+            [
+              116,
+              127
+            ],
+            [
+              120,
+              148
+            ]
+          ],
+          "pixels": 551,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Bordure de couchage ouest",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": false,
+          "reperes": [
+            [
+              125,
+              181
+            ],
+            [
+              145,
+              204
+            ],
+            [
+              172,
+              229
+            ],
+            [
+              197,
+              246
+            ]
+          ],
+          "pixels": 383,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Bordure de couchage est",
+          "module": "L03-Rive",
+          "largeur": 19,
+          "miroir": true,
+          "reperes": [
+            [
+              247,
+              248
+            ],
+            [
+              277,
+              229
+            ],
+            [
+              307,
+              207
+            ],
+            [
+              330,
+              181
+            ]
+          ],
+          "pixels": 519,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 179.5,
+          "y": 28.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 124.7,
+          "y": 58.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 173.6,
+          "y": 32.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 142.6,
+          "y": 48.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 159.6,
+          "y": 43.2,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 139.8,
+          "y": 61.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 121.7,
+          "y": 73.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 150.5,
+          "y": 56.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche ouest sous la poutre d’accès"
+        },
+        {
+          "x": 269.5,
+          "y": 32.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 324.4,
+          "y": 62.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 275.5,
+          "y": 37.0,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 306.5,
+          "y": 52.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 289.5,
+          "y": 47.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 309.2,
+          "y": 63.0,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 327.3,
+          "y": 74.7,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 298.5,
+          "y": 58.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe est"
+        },
+        {
+          "x": 124.7,
+          "y": 97.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits ouest"
+        },
+        {
+          "x": 108.5,
+          "y": 118.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits ouest"
+        },
+        {
+          "x": 121.3,
+          "y": 119.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits ouest"
+        },
+        {
+          "x": 123.4,
+          "y": 139.3,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits ouest"
+        },
+        {
+          "x": 139.2,
+          "y": 195.0,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage ouest"
+        },
+        {
+          "x": 181.3,
+          "y": 234.2,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage ouest"
+        },
+        {
+          "x": 158.7,
+          "y": 220.3,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage ouest"
+        },
+        {
+          "x": 185.3,
+          "y": 242.7,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage ouest"
+        },
+        {
+          "x": 162.5,
+          "y": 227.0,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage ouest"
+        },
+        {
+          "x": 313.9,
+          "y": 197.0,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage est"
+        },
+        {
+          "x": 264.8,
+          "y": 234.8,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage est"
+        },
+        {
+          "x": 291.3,
+          "y": 223.0,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage est"
+        },
+        {
+          "x": 260.0,
+          "y": 244.8,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage est"
+        },
+        {
+          "x": 286.7,
+          "y": 229.7,
+          "module": "L03-Rive",
+          "plage": "Bordure de couchage est"
+        }
+      ],
+      "pixels_lianes": 7169,
+      "pixels_eclaires_hors_lianes": 58132,
+      "pixels_plancher_eclaires": 26692,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_2",
+      "nom": "Dortoir sud II",
+      "taille": [
+        448,
+        336
+      ],
+      "segments": [
+        {
+          "section": "Bois courbe ouest",
+          "module": "L01-Corniche",
+          "largeur": 21,
+          "miroir": false,
+          "reperes": [
+            [
+              109,
+              79
+            ],
+            [
+              136,
+              58
+            ],
+            [
+              161,
+              44
+            ],
+            [
+              188,
+              33
+            ]
+          ],
+          "pixels": 609,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Corniche est sous la poutre d’accès",
+          "module": "L01-Corniche",
+          "largeur": 25,
+          "miroir": false,
+          "reperes": [
+            [
+              262,
+              34
+            ],
+            [
+              286,
+              45
+            ],
+            [
+              313,
+              61
+            ],
+            [
+              338,
+              79
+            ]
+          ],
+          "pixels": 713,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau au pied des lits est",
+          "module": "L02-Poutre",
+          "largeur": 23,
+          "miroir": true,
+          "reperes": [
+            [
+              328,
+              81
+            ],
+            [
+              325,
+              106
+            ],
+            [
+              329,
+              128
+            ],
+            [
+              326,
+              150
+            ]
+          ],
+          "pixels": 612,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Rive basse ouest",
+          "module": "L03-Rive",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              119,
+              177
+            ],
+            [
+              142,
+              203
+            ],
+            [
+              174,
+              229
+            ],
+            [
+              198,
+              247
+            ]
+          ],
+          "pixels": 463,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Rive basse est",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": false,
+          "reperes": [
+            [
+              252,
+              245
+            ],
+            [
+              278,
+              230
+            ],
+            [
+              306,
+              207
+            ],
+            [
+              327,
+              187
+            ]
+          ],
+          "pixels": 390,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 118.8,
+          "y": 64.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 176.6,
+          "y": 30.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 125.3,
+          "y": 61.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 157.5,
+          "y": 41.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 139.6,
+          "y": 55.2,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 161.2,
+          "y": 48.8,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 180.0,
+          "y": 40.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 150.5,
+          "y": 56.5,
+          "module": "L01-Corniche",
+          "plage": "Bois courbe ouest"
+        },
+        {
+          "x": 271.6,
+          "y": 30.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 327.4,
+          "y": 63.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 277.6,
+          "y": 35.3,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 309.5,
+          "y": 53.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 291.5,
+          "y": 47.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 312.2,
+          "y": 66.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 330.2,
+          "y": 79.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 301.2,
+          "y": 62.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche est sous la poutre d’accès"
+        },
+        {
+          "x": 318.3,
+          "y": 98.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits est"
+        },
+        {
+          "x": 336.5,
+          "y": 120.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits est"
+        },
+        {
+          "x": 322.7,
+          "y": 120.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits est"
+        },
+        {
+          "x": 321.8,
+          "y": 141.4,
+          "module": "L02-Poutre",
+          "plage": "Poteau au pied des lits est"
+        },
+        {
+          "x": 182.5,
+          "y": 232.3,
+          "module": "L03-Rive",
+          "plage": "Rive basse ouest"
+        },
+        {
+          "x": 135.8,
+          "y": 194.7,
+          "module": "L03-Rive",
+          "plage": "Rive basse ouest"
+        },
+        {
+          "x": 161.3,
+          "y": 222.7,
+          "module": "L03-Rive",
+          "plage": "Rive basse ouest"
+        },
+        {
+          "x": 131.3,
+          "y": 196.0,
+          "module": "L03-Rive",
+          "plage": "Rive basse ouest"
+        },
+        {
+          "x": 157.0,
+          "y": 223.0,
+          "module": "L03-Rive",
+          "plage": "Rive basse ouest"
+        },
+        {
+          "x": 266.9,
+          "y": 234.2,
+          "module": "L03-Rive",
+          "plage": "Rive basse est"
+        },
+        {
+          "x": 311.4,
+          "y": 200.4,
+          "module": "L03-Rive",
+          "plage": "Rive basse est"
+        },
+        {
+          "x": 286.7,
+          "y": 226.7,
+          "module": "L03-Rive",
+          "plage": "Rive basse est"
+        },
+        {
+          "x": 315.2,
+          "y": 202.4,
+          "module": "L03-Rive",
+          "plage": "Rive basse est"
+        },
+        {
+          "x": 291.0,
+          "y": 226.2,
+          "module": "L03-Rive",
+          "plage": "Rive basse est"
+        }
+      ],
+      "pixels_lianes": 7379,
+      "pixels_eclaires_hors_lianes": 57753,
+      "pixels_plancher_eclaires": 26786,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    },
+    {
+      "salle": "guilde_destiny_chambre_heros",
+      "nom": "Chambre du héros",
+      "taille": [
+        480,
+        360
+      ],
+      "segments": [
+        {
+          "section": "Coin de l’entrée ouest",
+          "module": "L01-Corniche",
+          "largeur": 20,
+          "miroir": true,
+          "reperes": [
+            [
+              38,
+              119
+            ],
+            [
+              69,
+              116
+            ],
+            [
+              97,
+              105
+            ],
+            [
+              121,
+              89
+            ]
+          ],
+          "pixels": 604,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Arche au-dessus de la baie du héros",
+          "module": "L04-Arche",
+          "largeur": 62,
+          "miroir": false,
+          "reperes": [
+            [
+              194,
+              61
+            ],
+            [
+              244,
+              57
+            ],
+            [
+              296,
+              60
+            ]
+          ],
+          "pixels": 1193,
+          "masques": 39,
+          "bourgeons": 6
+        },
+        {
+          "section": "Corniche de la travée est",
+          "module": "L01-Corniche",
+          "largeur": 24,
+          "miroir": false,
+          "reperes": [
+            [
+              293,
+              45
+            ],
+            [
+              326,
+              54
+            ],
+            [
+              362,
+              80
+            ],
+            [
+              393,
+              114
+            ]
+          ],
+          "pixels": 903,
+          "masques": 0,
+          "bourgeons": 8
+        },
+        {
+          "section": "Poteau intérieur ouest",
+          "module": "L02-Poutre",
+          "largeur": 18,
+          "miroir": false,
+          "reperes": [
+            [
+              152,
+              64
+            ],
+            [
+              154,
+              87
+            ],
+            [
+              152,
+              112
+            ],
+            [
+              152,
+              128
+            ]
+          ],
+          "pixels": 424,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Poteau extérieur est",
+          "module": "L02-Poutre",
+          "largeur": 21,
+          "miroir": true,
+          "reperes": [
+            [
+              390,
+              115
+            ],
+            [
+              388,
+              144
+            ],
+            [
+              391,
+              170
+            ],
+            [
+              388,
+              195
+            ]
+          ],
+          "pixels": 636,
+          "masques": 0,
+          "bourgeons": 4
+        },
+        {
+          "section": "Bordure de plancher sud-ouest",
+          "module": "L03-Rive",
+          "largeur": 16,
+          "miroir": false,
+          "reperes": [
+            [
+              125,
+              254
+            ],
+            [
+              148,
+              279
+            ],
+            [
+              183,
+              299
+            ],
+            [
+              219,
+              312
+            ]
+          ],
+          "pixels": 499,
+          "masques": 0,
+          "bourgeons": 5
+        },
+        {
+          "section": "Bordure de plancher sud-est",
+          "module": "L03-Rive",
+          "largeur": 18,
+          "miroir": true,
+          "reperes": [
+            [
+              286,
+              310
+            ],
+            [
+              320,
+              293
+            ],
+            [
+              355,
+              268
+            ],
+            [
+              379,
+              235
+            ]
+          ],
+          "pixels": 561,
+          "masques": 0,
+          "bourgeons": 5
+        }
+      ],
+      "bourgeons": [
+        {
+          "x": 110.4,
+          "y": 90.8,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 49.7,
+          "y": 112.0,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 104.2,
+          "y": 96.8,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 69.6,
+          "y": 111.8,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 88.5,
+          "y": 109.0,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 66.3,
+          "y": 120.7,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 46.5,
+          "y": 123.5,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 77.6,
+          "y": 120.8,
+          "module": "L01-Corniche",
+          "plage": "Coin de l’entrée ouest"
+        },
+        {
+          "x": 249.2,
+          "y": 28.8,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 222.7,
+          "y": 36.0,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 222.9,
+          "y": 43.7,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 278.5,
+          "y": 48.7,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 208.5,
+          "y": 57.7,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 287.0,
+          "y": 61.0,
+          "module": "L04-Arche",
+          "plage": "Arche au-dessus de la baie du héros"
+        },
+        {
+          "x": 305.6,
+          "y": 39.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 379.0,
+          "y": 89.5,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 313.4,
+          "y": 44.1,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 355.3,
+          "y": 69.0,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 332.1,
+          "y": 56.4,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 358.8,
+          "y": 82.8,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 383.3,
+          "y": 107.7,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 344.9,
+          "y": 73.6,
+          "module": "L01-Corniche",
+          "plage": "Corniche de la travée est"
+        },
+        {
+          "x": 159.0,
+          "y": 79.8,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 146.0,
+          "y": 100.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 157.5,
+          "y": 101.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 157.0,
+          "y": 119.8,
+          "module": "L02-Poutre",
+          "plage": "Poteau intérieur ouest"
+        },
+        {
+          "x": 381.8,
+          "y": 135.0,
+          "module": "L02-Poutre",
+          "plage": "Poteau extérieur est"
+        },
+        {
+          "x": 398.0,
+          "y": 160.5,
+          "module": "L02-Poutre",
+          "plage": "Poteau extérieur est"
+        },
+        {
+          "x": 385.7,
+          "y": 161.7,
+          "module": "L02-Poutre",
+          "plage": "Poteau extérieur est"
+        },
+        {
+          "x": 384.3,
+          "y": 185.1,
+          "module": "L02-Poutre",
+          "plage": "Poteau extérieur est"
+        },
+        {
+          "x": 143.7,
+          "y": 272.6,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-ouest"
+        },
+        {
+          "x": 198.8,
+          "y": 303.9,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-ouest"
+        },
+        {
+          "x": 168.8,
+          "y": 295.2,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-ouest"
+        },
+        {
+          "x": 204.2,
+          "y": 311.4,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-ouest"
+        },
+        {
+          "x": 173.6,
+          "y": 300.7,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-ouest"
+        },
+        {
+          "x": 360.4,
+          "y": 258.9,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-est"
+        },
+        {
+          "x": 306.0,
+          "y": 299.0,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-est"
+        },
+        {
+          "x": 336.0,
+          "y": 286.5,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-est"
+        },
+        {
+          "x": 300.9,
+          "y": 307.7,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-est"
+        },
+        {
+          "x": 330.2,
+          "y": 293.9,
+          "module": "L03-Rive",
+          "plage": "Bordure de plancher sud-est"
+        }
+      ],
+      "pixels_lianes": 12235,
+      "pixels_eclaires_hors_lianes": 82176,
+      "pixels_plancher_eclaires": 40803,
+      "passages_libres": 1,
+      "bord_sud_inchange": true,
+      "vitrage_inchange": true
+    }
+  ],
+  "jeu_modifie": false
+}
