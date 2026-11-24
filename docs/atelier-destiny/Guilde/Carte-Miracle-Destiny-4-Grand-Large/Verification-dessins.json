@@ -1,0 +1,11 @@
+{
+  "statut": "PASS",
+  "ds_pixel_identique": 169344,
+  "pixels_anciens_destiny_identiques": 575972,
+  "lieux_generes_et_ancres": 50,
+  "planches_generees": 4,
+  "motifs_de_reference_places": 20,
+  "voile_interzones_verifie": true,
+  "magenta_absent_des_terres_nouvelles": true,
+  "empreintes_wan_verifiees": true
+}
