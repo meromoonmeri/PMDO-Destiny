@@ -1,0 +1,11 @@
+From https://github.com/meromoonmeri/PMDO-Destiny
+ * [new ref]         37138a7ca93be920e9c47963fea21441b153ec65 -> base
+/home/user/PMDO-Destiny-Kabutops/Le-pardon-des-vasques/Destiny-v0.7.6-Pardon.bundle is okay
+The bundle contains this ref:
+920e5d51e4415fd1be9fa2b0279bf518c8891a5b refs/heads/wip/reverie-integration-kingambit-cafe
+The bundle requires this ref:
+37138a7ca93be920e9c47963fea21441b153ec65 
+The bundle uses this hash algorithm: sha1
+From /home/user/PMDO-Destiny-Kabutops/Le-pardon-des-vasques/Destiny-v0.7.6-Pardon.bundle
+ * [new branch]      wip/reverie-integration-kingambit-cafe -> pardon
+Bundle importé depuis 37138a7ca93be920e9c47963fea21441b153ec65 ; commit exact 920e5d51e4415fd1be9fa2b0279bf518c8891a5b.

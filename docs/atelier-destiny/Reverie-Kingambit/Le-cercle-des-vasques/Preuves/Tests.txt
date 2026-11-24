@@ -1,0 +1,18 @@
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+PASS test_nilo_temoin.lua : pose native, oscille derrière Kabutops, sans cible ni tour ; entrée, reprise et nettoyage.
+PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
+PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène 480×360, garde Lv 3/4, scripts Lua et retours vérifiés.
+
+Audit OK : aucun personnage masque par la boite de dialogue.
+
+Audit OK : 136 script(s), aucune replique hors cadre.
+Ancre Kabutops au sol (292, 244)
+Ancre Kabutops au sol (292, 196)
+Départ duo {'X': 10, 'Y': 12}
+Départ Kabutops et gardes {'X': 10, 'Y': 10} {'X': 8, 'Y': 11} {'X': 11, 'Y': 11} {'X': 9, 'Y': 14} {'X': 10, 'Y': 14}
+Départ duo {'X': 10, 'Y': 10}
+Départ Kabutops et gardes {'X': 10, 'Y': 8} {'X': 8, 'Y': 9} {'X': 11, 'Y': 9} {'X': 9, 'Y': 12} {'X': 10, 'Y': 12}
+PASS Comparaison structurale avec 0403d9c : seules les ancres du boss, du duo et des quatre Kabuto ont changé. Planches, moteur, zone, spectateur et décor identiques.
+
+PASS patch réappliqué sur 0403d9c79a51979ac5265f6723e883e96e9dfa96 et arbre 0def5bec607fb88c060ec3c2285a254c3a240014 reproduit.
+PASS import du bundle sur la base 37138a7 dans un dépôt temporaire.

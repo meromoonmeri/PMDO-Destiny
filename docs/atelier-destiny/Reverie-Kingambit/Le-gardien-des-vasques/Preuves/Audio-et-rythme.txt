@@ -1,0 +1,18 @@
+Prise RGB sans perte, audio natif. Repères indiqués dans le MP4 (r = corrélation de forme d’onde).
+Lower Spring Cave : 0.07 s, r=1.000
+Tunnel : 36.41 s, r=0.978
+Rafale : 36.85 s, r=0.880
+Rising Fear : 38.01 s, r=0.854
+Woosh — accent : 77.88 s, r=0.924
+Woosh — fin ramenée au début : 77.88 s, r=0.887
+Boss Battle 2 : 81.53 s, r=0.966
+
+Durée mesurée, entrée du ground → BeginFloor/contrôle rendu : 81.93 s logiques.
+Au combat, oscillation du centre des pixels bleus de Nilo : 4.0 px sur un plan fixe.
+
+Contrôle sur l’AAC du MP4 exporté :
+Tunnel: brut 36.410s, MP4 36.410s, r=0.978
+Rafale: brut 36.850s, MP4 36.850s, r=0.879
+Woosh — début: brut 77.883s, MP4 77.883s, r=0.919
+Woosh — fin ramenée au début: brut 77.883s, MP4 77.883s, r=0.883
+Boss Battle 2: brut 81.526s, MP4 81.526s, r=0.966

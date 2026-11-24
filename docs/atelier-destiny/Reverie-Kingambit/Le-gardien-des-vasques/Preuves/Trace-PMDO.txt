@@ -1,0 +1,46 @@
+[2026/11/20 15:00:01.795] KABUTOPS_ESSAI NOUVELLE_PARTIE phase=nil membres=2 | tick=52680
+[2026/11/20 15:00:03.223] KABUTOPS_ESSAI GROUND phase=nil replay=true | tick=52680
+[2026/11/20 15:00:03.323] KABUTOPS_ESSAI NILO_TREMBLE X:304 Y:152: 424 | tick=52680
+[2026/11/20 15:00:06.760] KABUTOPS_ESSAI TERRASSE X:304 Y:152: 424 | tick=79680
+[2026/11/20 15:00:06.761] KABUTOPS_ESSAI DIALOGUE Vous êtes qui… ? Pourquoi vous êtes venus ici ? | tick=79680
+[2026/11/20 15:00:09.509] KABUTOPS_ESSAI DIALOGUE_FINI | tick=99360
+[2026/11/20 15:00:09.923] KABUTOPS_ESSAI DIALOGUE On est une équipe de secours. Ta maman nous a demandé de te ramener. | tick=102480
+[2026/11/20 15:00:13.575] KABUTOPS_ESSAI DIALOGUE_FINI | tick=128520
+[2026/11/20 15:00:14.022] KABUTOPS_ESSAI DIALOGUE Je la cherchais… J’ai cru l’entendre près de l’eau. Puis le courant a grondé. | tick=131880
+[2026/11/20 15:00:18.058] KABUTOPS_ESSAI DIALOGUE_FINI | tick=160920
+[2026/11/20 15:00:18.651] KABUTOPS_ESSAI DIALOGUE J’ai couru ici et je ne retrouve plus la sortie… Elle m’attend dehors ? | tick=165360
+[2026/11/20 15:00:22.418] KABUTOPS_ESSAI DIALOGUE_FINI | tick=192360
+[2026/11/20 15:00:23.179] KABUTOPS_ESSAI DIALOGUE Elle t’attend. Reste sur la terrasse, d’accord ? Tu n’es plus tout seul. | tick=197760
+[2026/11/20 15:00:27.001] KABUTOPS_ESSAI DIALOGUE_FINI | tick=225360
+[2026/11/20 15:00:27.877] KABUTOPS_ESSAI DIALOGUE ??? : Pas un pas de plus. Ce Lixy a déréglé le courant. | tick=231600
+[2026/11/20 15:00:30.726] KABUTOPS_ESSAI DIALOGUE_FINI | tick=252120
+[2026/11/20 15:00:31.527] KABUTOPS_ESSAI DIALOGUE Le courant ? Mais… qui parle ? | tick=257880
+[2026/11/20 15:00:33.565] KABUTOPS_ESSAI DIALOGUE_FINI | tick=272640
+[2026/11/20 15:00:34.026] KABUTOPS_ESSAI DIALOGUE J’ai rien touché ! Je voulais juste me mettre à l’abri. | tick=276120
+[2026/11/20 15:00:37.105] KABUTOPS_ESSAI DIALOGUE_FINI | tick=298080
+[2026/11/20 15:00:37.367] KABUTOPS_ESSAI DIALOGUE ??? : Dernier avertissement : reculez. | tick=300000
+[2026/11/20 15:00:39.452] KABUTOPS_ESSAI DIALOGUE_FINI | tick=315000
+[2026/11/20 15:00:39.826] KABUTOPS_ESSAI TERRE | tick=317880
+[2026/11/20 15:00:40.023] KABUTOPS_ESSAI APPARITION X:280 Y:244: 492 hauteur=-10 entre X:292 Y:268: 40 / X:268 Y:268: 0 | tick=319200
+[2026/11/20 15:00:40.267] KABUTOPS_ESSAI IMPACT | tick=321000
+[2026/11/20 15:00:40.368] KABUTOPS_ESSAI RECEPTION hauteur=0 | tick=321720
+[2026/11/20 15:00:41.420] KABUTOPS_ESSAI RECUL X:292 Y:292: 0 / X:268 Y:292: 40 | tick=329160
+[2026/11/20 15:00:42.102] KABUTOPS_ESSAI DIALOGUE Avant, on venait boire ici sans crainte. Depuis peu, même les sentiers ne sont plus sûrs. | tick=334080
+[2026/11/20 15:00:46.694] KABUTOPS_ESSAI DIALOGUE_FINI | tick=367080
+[2026/11/20 15:00:47.302] KABUTOPS_ESSAI DIALOGUE Quand l’eau se déchaîne, elle emporte les berges. Des familles entières ont quitté la vallée. | tick=371400
+[2026/11/20 15:00:52.013] KABUTOPS_ESSAI DIALOGUE_FINI | tick=405480
+[2026/11/20 15:00:52.659] KABUTOPS_ESSAI DIALOGUE Mais Nilo se cachait. Être près de l’eau ne veut pas dire qu’il y a touché ! | tick=410280
+[2026/11/20 15:00:56.661] KABUTOPS_ESSAI DIALOGUE_FINI | tick=438840
+[2026/11/20 15:00:56.929] KABUTOPS_ESSAI DIALOGUE Je l’ai vu près de la source. Ça vient sûrement de lui, de ce Pokémon électrique. | tick=441000
+[2026/11/20 15:01:01.128] KABUTOPS_ESSAI DIALOGUE_FINI | tick=471120
+[2026/11/20 15:01:01.510] KABUTOPS_ESSAI DIALOGUE Il ne contrôle plus ses éclairs. Tant qu’il rôde, aucun village en aval n’est en sécurité. | tick=474000
+[2026/11/20 15:01:06.112] KABUTOPS_ESSAI DIALOGUE_FINI | tick=507000
+[2026/11/20 15:01:07.020] KABUTOPS_ESSAI DIALOGUE Mais je ne comprends pas… Je veux juste rentrer avec maman. | tick=513480
+[2026/11/20 15:01:10.280] KABUTOPS_ESSAI DIALOGUE_FINI | tick=536880
+[2026/11/20 15:01:11.502] KABUTOPS_ESSAI DIALOGUE Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix. | tick=545880
+[2026/11/20 15:01:16.078] KABUTOPS_ESSAI DIALOGUE_FINI | tick=578640
+[2026/11/20 15:01:16.400] KABUTOPS_ESSAI DIALOGUE D’accord. On le retient ici. Nilo, reste à l’abri, on ne t’abandonne pas. | tick=581040
+[2026/11/20 15:01:20.268] KABUTOPS_ESSAI DIALOGUE_FINI | tick=608880
+[2026/11/20 15:01:21.295] KABUTOPS_ESSAI WOOSH_DEBUT | tick=616440
+[2026/11/20 15:01:24.444] KABUTOPS_ESSAI WOOSH_FIN | tick=639000
+[2026/11/20 15:01:25.024] KABUTOPS_ESSAI ARENE map=end_grotte_verdoyante nom=Fosse Cascade Fond son=Boss Battle 2.ogg boss=X:10 Y:10: 0 joueur=X:10 Y:12: 6 equipe=2 replay=true | tick=642600

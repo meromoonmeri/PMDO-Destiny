@@ -1,0 +1,69 @@
+NOUVELLE_PARTIE niveau=14 phase=nil | tick=59520
+SOL phase=nil replay=false | tick=59520
+DIALOGUE Vous êtes qui… ? Pourquoi vous êtes venus ici ? | tick=90000
+FIN_TEXTE | tick=109920
+DIALOGUE On est une équipe de secours. Ta maman nous a demandé de te ramener. | tick=113040
+FIN_TEXTE | tick=139680
+DIALOGUE Je la cherchais… J’ai cru l’entendre près de l’eau. Puis le courant a grondé. | tick=143040
+FIN_TEXTE | tick=172440
+DIALOGUE J’ai couru ici et je ne retrouve plus la sortie… Elle m’attend dehors ? | tick=176880
+FIN_TEXTE | tick=204240
+DIALOGUE Elle t’attend. Reste sur la terrasse, d’accord ? Tu n’es plus tout seul. | tick=209640
+FIN_TEXTE | tick=237360
+DIALOGUE ??? : Pas un pas de plus. Ce Lixy a déréglé le courant. | tick=243600
+DIALOGUE Le courant ? Mais… qui parle ? | tick=270000
+FIN_TEXTE | tick=284760
+DIALOGUE J’ai rien touché ! Je voulais juste me mettre à l’abri. | tick=287760
+FIN_TEXTE | tick=310320
+DIALOGUE ??? : Dernier avertissement : reculez. | tick=312240
+KABUTOPS_JAILLIT X:280 Y:196: 476 | tick=331920
+IMPACT | tick=333720
+KABUTO_SORTIE Kabuto_Flanc_G X:205 Y:202: 7 | tick=343320
+KABUTO_SORTIE Kabuto_Flanc_D X:362 Y:200: 418 | tick=345600
+KABUTO_CONTOUR Kabuto_Flanc_G X:212 Y:224: 52 | tick=347520
+GESTE Kabuto_Flanc_G attaque=28 ferme=false | tick=347520
+KABUTO_CONTOUR Kabuto_Flanc_D X:352 Y:225: 385 | tick=350160
+GESTE Kabuto_Flanc_D attaque=28 ferme=false | tick=350160
+KABUTO_SORTIE Kabuto_Arriere_G X:242 Y:293: 471 | tick=351120
+KABUTO_SORTIE Kabuto_Arriere_D X:320 Y:293: 101 | tick=352920
+KABUTO_CONTOUR Kabuto_Arriere_G X:259 Y:306: 49 | tick=354960
+GESTE Kabuto_Arriere_G attaque=28 ferme=false | tick=354960
+GESTE Kabuto_Flanc_G attaque=28 ferme=true | tick=355320
+GRIFFE Kabuto_Flanc_G | tick=356640
+KABUTO_CONTOUR Kabuto_Arriere_D X:301 Y:306: 31 | tick=356880
+GESTE Kabuto_Arriere_D attaque=28 ferme=false | tick=356880
+GESTE Kabuto_Flanc_D attaque=28 ferme=true | tick=357360
+GRIFFE Kabuto_Flanc_D | tick=358680
+GESTE Kabuto_Arriere_G attaque=28 ferme=true | tick=360120
+GRIFFE Kabuto_Arriere_G | tick=361440
+GESTE Kabuto_Arriere_D attaque=28 ferme=true | tick=361560
+GRIFFE Kabuto_Arriere_D | tick=362880
+CERCLE Kabuto_Flanc_G X:244 Y:220: 40 DownRight: 7 | tick=364320
+CERCLE Kabuto_Flanc_D X:316 Y:220: 480 DownLeft: 1 | tick=364320
+CERCLE Kabuto_Arriere_G X:268 Y:292: 40 Up: 4 | tick=364320
+CERCLE Kabuto_Arriere_D X:292 Y:292: 0 Up: 4 | tick=364320
+DIALOGUE Avant, on venait boire ici sans crainte. Depuis peu, même les sentiers ne sont plus sûrs. | tick=373440
+FIN_TEXTE | tick=406680
+DIALOGUE Quand l’eau se déchaîne, elle emporte les berges. Des familles entières ont quitté la vallée. | tick=410520
+FIN_TEXTE | tick=448440
+DIALOGUE Mais Nilo se cachait. Être près de l’eau ne veut pas dire qu’il y a touché ! | tick=452640
+FIN_TEXTE | tick=481920
+DIALOGUE Je l’ai vu près de la source. Ça vient sûrement de lui, de ce Pokémon électrique. | tick=484080
+FIN_TEXTE | tick=514920
+DIALOGUE Il ne contrôle plus ses éclairs. Tant qu’il rôde, aucun village en aval n’est en sécurité. | tick=517800
+FIN_TEXTE | tick=551040
+DIALOGUE Mais je ne comprends pas… Je veux juste rentrer avec maman. | tick=557520
+FIN_TEXTE | tick=581280
+DIALOGUE Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix. | tick=590280
+FIN_TEXTE | tick=623280
+DIALOGUE D’accord. On les retient ici. Nilo, reste à l’abri, on ne t’abandonne pas. | tick=625680
+FIN_TEXTE | tick=654000
+WOOSH_DEBUT | tick=661560
+WOOSH_FIN | tick=684120
+ENNEMI kabutops nv=14 PV=162/162 X:10 Y:8: 2 dir=Down: 0 | tick=687720
+ENNEMI kabuto nv=4 PV=16/16 X:8 Y:9: 1 dir=DownRight: 7 | tick=687720
+ENNEMI kabuto nv=4 PV=16/16 X:11 Y:9: 2 dir=DownLeft: 1 | tick=687720
+ENNEMI kabuto nv=3 PV=14/14 X:9 Y:12: 5 dir=Up: 4 | tick=687720
+ENNEMI kabuto nv=3 PV=14/14 X:10 Y:12: 6 dir=Up: 4 | tick=687720
+ARENE end_grotte_verdoyante Boss Battle 2.ogg replay=false | tick=687720
+SURVIVANTS kabutops:162@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:10: 0 dir=Up: 4 | tick=687960
