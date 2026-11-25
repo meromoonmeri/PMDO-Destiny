@@ -1,9 +1,0 @@
-Contrôle du profil natif réduit (ressources extérieures au commit)
-
-5700c5fcff31876607f4dfdbd51b8c6fee3694f4   base/Content/Particle/Rain.dir
-ae8f57bbd1152720b7398b58d4d156c9f31c012b   game/Content/Chara/6.chara
-4db9474fd221159906aeea54d2a8dd267ee53173   game/Content/Chara/334.chara
-4ec56bf5c5daa95035669e035dd5ede287465b388f8958935dbb9ac82a1344f5  reverie_centre.rsground
-5a41c0e1203c9775052e7fe1d32da4751149a40a5b2dfc75803f5875e503059c  WaterfallVillageCapital.rsground
-Carte et trois ressources issues de la base publique, inchangées.
-Test sous la pluie au dialogue de Nilo : pixels (255,0,255) du damier, avant 35740, après 0.

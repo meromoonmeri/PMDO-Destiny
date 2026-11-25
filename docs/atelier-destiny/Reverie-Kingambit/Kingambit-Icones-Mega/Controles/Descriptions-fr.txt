@@ -1,4 +1,0 @@
-PASS ensemble-fr : 54 textes exacts dans ItemData.Desc.ToLocal() ; glyphes et sprites vérifiés dans le moteur.
-PASS ensemble-en : 54 textes exacts dans ItemData.Desc.ToLocal() ; glyphes et sprites vérifiés dans le moteur.
-PASS foyer-fr : 6 textes exacts dans ItemData.Desc.ToLocal() ; glyphes et sprites vérifiés dans le moteur.
-PASS : aucun autre champ modifié dans les 48 fiches, y compris le texte anglais par défaut. Les descriptions des six baies étaient déjà en français.

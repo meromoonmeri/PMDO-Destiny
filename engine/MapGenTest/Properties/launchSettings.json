@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "MapGenTest": {
-      "commandName": "Project",
-      "commandLineArgs": "-asset ../../../../../DumpAsset/ -expdir ../../../../../../Logs/EXP"
-    }
-  }
-}

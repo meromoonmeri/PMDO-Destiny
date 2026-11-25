@@ -1,6 +1,0 @@
-COMPTOIRS_ENTREE jour=0 Zig=food_applex1,food_bananax1,berry_oranx1,berry_leppax1,seed_reviverx1,seed_decoyx1,ammo_geo_pebblex9,held_heal_ribbonx1 Zag=tm_facadex1,orb_escapex1,orb_cleansex1,orb_foe_holdx1,wand_whirlwindx4,wand_pouncex4 Poké=6000 sac=0
-ACHAT_SAUVE jour=0 Zig=food_applex1,food_bananax1,berry_oranx1,berry_leppax1,seed_reviverx1,seed_decoyx1,ammo_geo_pebblex9,held_heal_ribbonx1 Zag=orb_escapex1,orb_cleansex1,orb_foe_holdx1,wand_whirlwindx4,wand_pouncex4 Poké=3500 sac=1
-COMMERCE_SAUVE_AU_CAFE
-STOCK_ET_ACHAT_RECHARGES jour=0 Zig=8 Zag=5 Poké=3500 sac=tm_facade
-SIESTE_TERMINEE jour=1
-COMPTOIRS_ENTREE jour=1 Zig=food_applex1,food_apple_bigx1,berry_oranx1,medicine_potionx1,seed_reviverx1,seed_warpx1,ammo_stickx9,held_defense_scarfx1 Zag=tm_thiefx1,orb_rollcallx1,orb_totterx1,orb_slumberx1,wand_warpx4,wand_whirlwindx4 Poké=3500 sac=1

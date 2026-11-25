@@ -1,9 +1,0 @@
-[2026/11/20 20:27:22.014] LuaEngine.SaveData()..
-[2026/11/20 20:27:29.478] LuaEngine.SaveData()..
-[2026/11/20 20:29:56.895] LuaEngine.SaveData()..
-[2026/11/20 20:30:03.228] Loading rsground file: WaterfallVillageCapital
-[2026/11/20 20:30:05.472] Error loading chara 334 -1--1--1
-System.Exception: Error loading chara 334 -1--1--1
-[2026/11/20 20:30:05.531] Error loading chara 6 -1--1--1
-System.Exception: Error loading chara 6 -1--1--1
-[2026/11/20 20:30:05.832] Loading rsground file: reverie_centre

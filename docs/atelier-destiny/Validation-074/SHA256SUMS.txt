@@ -1,2 +1,0 @@
-4a405188b431830d15d4de064b8abb13f53082764ceaa049c1081b94bd056785  Documentation-0.7.4.bundle
-60ffab743fc930df0b36a477fc8e8ae40fc5b1f8dcca0109e1dd018be26ef457  Note-de-mise-a-jour-0.7.4.md

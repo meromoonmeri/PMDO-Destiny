@@ -1,1 +1,0 @@
-PASS galerie : 54 fiches, 113 PNG décodés, filtres 4/6/48, recherche sans accents, mode sol/menu, mobile 390 px, iframe sandbox hors ligne sans requête.

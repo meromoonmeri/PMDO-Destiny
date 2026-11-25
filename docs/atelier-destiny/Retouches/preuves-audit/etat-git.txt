@@ -1,7 +1,0 @@
-Commit présenté au push : b5639d1e36242dde8c7241c6cc55dda0728c2deb
-git push (code 128) :
-error: unable to read askpass response from '/bin/false'
-fatal: could not read Username for 'https://github.com': terminal prompts disabled
-
-Distant avant : aa1430c4e8953e486b82691731fbbcbce8e4c57e	refs/heads/wip/reverie-integration-kingambit-cafe
-Distant après : aa1430c4e8953e486b82691731fbbcbce8e4c57e	refs/heads/wip/reverie-integration-kingambit-cafe

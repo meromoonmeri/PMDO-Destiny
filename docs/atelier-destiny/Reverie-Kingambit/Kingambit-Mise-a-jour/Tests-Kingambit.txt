@@ -1,5 +1,0 @@
-PASS test_dojo_kingambit_complexe.lua : portes coulissantes sans bris, arene, reliques et retours OK.
-PASS Kingambit Lua — 18 routes, annulation, sceau unique duo ou solo, Kaito immobile, scénarios obstrué et inversé, victoire, K.O., délai et abandon.
-PASS intro Lua : avant combat, Psy à deux positions, ombres, pétales avant révélation, restauration sûre.
-PASS météo avant les trois colonnes, cyclones à trois positions, brèches et éclair inchangés, retour de pose en cas d’erreur.
-PASS : 18 types, flashes, neuf bandes croisées, fondu blanc et reprise ; repli vanilla et restauration sur erreur.

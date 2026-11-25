@@ -1,9 +1,0 @@
-PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
-PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
-PASS Fosse Cascade : 9 étages, cascade ewc3, Fosse Cascade Fond Kabutops, scripts Lua et retours vérifiés.
-
-Audit OK : aucun personnage masque par la boite de dialogue.
-
-Audit OK : 134 script(s), aucune replique hors cadre.
-Cinematique-Kabutops.mp4 : woosh ~28.27 s ; signal reconnu sur l’accent et la fin (0.886, 0.996) ; Boss Battle 2 à 36.07 s (0.960).
-Revanche-Kabutops.mp4 : woosh ~6.55 s ; signal reconnu sur l’accent et la fin (0.843, 0.993) ; Boss Battle 2 à 16.32 s (0.893).

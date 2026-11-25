@@ -1,9 +1,0 @@
-Prise PMDO 0.8.12 : le cercle des vasques
-
-Durée entre entrée au sol et chargement de l’arène : 87.250 s logiques ; 86.944 s mesurées dans la prise.
-Première rencontre (duo Nv14 ; roster normal) : 2 avertissements ???, 4 jaillissements de Kabuto, 4 contournements, 8 poses d’attaque, 4 traces de Griffe et 4 ancres raccordées.
-Woosh : 3.133 s logiques. Nilo reste sur la terrasse, hors simulation.
-Revanche : 7.800 s logiques jusqu’à l’arène, une réplique, garde déjà en place.
-Fin : le moteur constate 0 PV pour les cinq adversaires avant la phase 3. Les quatre réactions de peur précèdent Tunnel : arrière gauche, arrière droit, flanc gauche, flanc droit, puis Kabutops. Nilo descend seulement après cette dernière disparition.
-
-Les points de départ sont les seules différences des deux cartes (tests de structure dans Tests.txt).

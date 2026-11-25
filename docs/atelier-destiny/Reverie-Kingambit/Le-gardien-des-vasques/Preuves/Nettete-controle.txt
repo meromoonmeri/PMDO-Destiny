@@ -1,4 +1,0 @@
-Zone x208–280, y24–97 du plan fixe de la terrasse, phases d’eau gelées. Comparatif au facteur entier 4.
-Nouvelle prise : 100.000 % des pixels égaux à la carte, erreur absolue RGB moyenne 0.000/255.
-Ancien MP4 décodé : 0.222 % exact, erreur moyenne 3.910/255.
-Aucune correction colorimétrique du décor ; la prise RGB évite le sous-échantillonnage avant l’agrandissement.

@@ -1,6 +1,0 @@
-Branche : wip/reverie-integration-kingambit-cafe
-Commit candidat : 24be5673a76e06a9824102c5f106f091eb07070a
-SHA GitHub avant : 37138a7ca93be920e9c47963fea21441b153ec65
-SHA GitHub après : 37138a7ca93be920e9c47963fea21441b153ec65
-fatal: could not read Username for 'https://github.com': terminal prompts disabled
-Push non effectué (code 128). CI et publication non lancées.

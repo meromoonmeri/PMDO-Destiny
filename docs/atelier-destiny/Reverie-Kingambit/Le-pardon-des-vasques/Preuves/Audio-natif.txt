@@ -1,4 +1,0 @@
-Piste AAC de la prise : corrélation normalisée avec les ressources du moteur.
-Thème des vasques pendant le souvenir : r=0.673, début estimé à 5.159 s.
-Premier Tunnel de la garde : r=0.878, début estimé à 27.070 s.
-Dernier Tunnel de Kabutops : r=0.988, début estimé à 28.970 s.

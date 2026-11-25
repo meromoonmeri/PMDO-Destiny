@@ -1,3 +1,0 @@
-Branche : dojos-kingambit-pmd
-Révision : 36630860da1afb433dafb971a6dd9890fbb11ca9
-Base cumulative : 37e6b5cdcfb46a064239c7c6983ef4840d27d408

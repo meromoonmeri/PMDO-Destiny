@@ -1,4 +1,0 @@
-Surgissement arrière gauche : son natif DUN_Dig à 0.737 s (r=0.970).
-Fuite de la garde : son natif DUN_Dig à 15.233 s (r=0.996).
-Plongée finale de Kabutops : son natif DUN_Dig à 17.166 s (r=0.983).
-Surgissements arrière gauche et droit à 0.72 et 0.99 s ; trio visible après le fondu à 3.64 s.

@@ -1,9 +1,0 @@
-Corrélation des effets natifs, piste brute (s) et repères MP4 (s)
-Dig de Kabutops: brut 39.713s, MP4 36.569s, r=0.988
-Dig des flancs: brut 41.333s, MP4 38.189s, r=0.988
-Dig de l’arrière: brut 41.977s, MP4 38.833s, r=0.912
-Griffe des flancs: brut 42.397s, MP4 39.253s, r=0.768
-Griffe de l’arrière: brut 43.047s, MP4 39.903s, r=0.773
-Woosh: brut 84.196s, MP4 81.052s, r=0.999
-Woosh (fin): brut 84.196s, MP4 81.052s, r=0.999
-Boss Battle 2: brut 87.486s, MP4 84.342s, r=1.000

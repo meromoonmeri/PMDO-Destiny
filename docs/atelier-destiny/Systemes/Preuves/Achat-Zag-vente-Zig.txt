@@ -1,5 +1,0 @@
-COMPTOIR_NATIF_PRET Zig Zag
-AVANT violet poké=6000 offres=6 bag=0
-APRES violet poké=5900 offres=5 bag=1
-AVANT vert poké=5900 offres=8 bag=1
-APRES vert poké=5920 offres=8 bag=0

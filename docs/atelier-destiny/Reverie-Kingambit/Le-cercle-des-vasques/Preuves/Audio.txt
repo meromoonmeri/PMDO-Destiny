@@ -1,7 +1,0 @@
-Bruitages et musique du moteur identifiés dans les pistes MP4, corrélation normalisée sur le signal mono :
-Tunnel (surgissement de Kabutops) : r=0.976, extrait détecté à 37.366 s (source +0.00 s).
-Griffe du premier flanc : r=0.865, extrait détecté à 40.988 s (source +0.00 s).
-Woosh natif : r=0.849, extrait détecté à 83.623 s (source +0.30 s).
-Musique du duel : r=0.998, extrait détecté à 87.332 s (source +0.75 s).
-Tunnel de la garde (arrière) : r=0.997, extrait détecté à 15.138 s (source +0.00 s).
-Tunnel de Kabutops (dernier) : r=0.973, extrait détecté à 16.757 s (source +0.00 s).
