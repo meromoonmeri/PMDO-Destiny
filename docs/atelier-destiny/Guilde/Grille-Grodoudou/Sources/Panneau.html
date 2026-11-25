@@ -1,0 +1,24 @@
+  <section class="panel grille-demo" id="grille-demo" aria-labelledby="grille-titre">
+    <header class="grille-head">
+      <span class="micro">ACCUEIL <span aria-hidden="true">/</span> ESCALIER NORD</span>
+      <h2 id="grille-titre">La grille de l’Accueil</h2>
+      <p>Lève la grille pour dégager le passage. Les marches du haut s’enfoncent dans l’ombre, derrière l’arche.</p>
+      <div class="grille-actions">
+        <button class="soft grille-lever" id="grille-lever" type="button" aria-controls="grille-plan grille-passer"><svg aria-hidden="true"><use href="#i-door"/></svg><span>Lever la grille</span></button>
+        <button class="soft" id="grille-passer" type="button" disabled>Franchir l’escalier</button>
+      </div>
+      <button class="soft grille-plan-link" id="grille-voir-plan" type="button">Voir l’Accueil entier</button>
+    </header>
+    <figure class="grille-scene">
+      <canvas id="grille-plan" width="112" height="96" role="img" aria-label="Grille baissée devant l’escalier de l’Accueil"></canvas>
+      <figcaption><strong>Destiny</strong><span id="grille-etat" role="status" aria-live="polite">Fermée · passage bloqué</span></figcaption>
+    </figure>
+    <aside class="grille-ref" aria-label="Référence Grodoudou">
+      <span class="micro">RÉFÉRENCE GRODOUDOU</span>
+      <div class="grille-ref-cols">
+        <figure><img id="grille-ref-fermee" width="60" height="48" alt="La grille de Grodoudou barrée, G01P01A2"><figcaption>Fermée</figcaption></figure>
+        <figure><img id="grille-ref-ouverte" width="60" height="48" alt="L’entrée de Grodoudou ouverte, G01P01A"><figcaption>Ouverte</figcaption></figure>
+      </div>
+      <details class="grille-tiles"><summary>Tilesheet · 16 images</summary><img id="grille-sheet" width="256" height="320" alt="Les seize images de levée de la grille, de fermée à ouverte"></details>
+    </aside>
+  </section>

@@ -1,0 +1,34 @@
+PMDO Linux 0.8.12.0 / foyer-fr
+FONT Destiny/text.font lang=fr
+DESCRIPTION berry_aspear Restaure 3 points de satiété.
+ITEM berry_aspear Icon=720 Berry_Aspear 19x19 Released=false
+DESCRIPTION berry_cheri Restaure 3 points de satiété.
+ITEM berry_cheri Icon=721 Berry_Cheri 14x14 Released=false
+DESCRIPTION berry_chesto Restaure 3 points de satiété.
+ITEM berry_chesto Icon=722 Berry_Chesto 13x13 Released=false
+DESCRIPTION berry_pecha Restaure 3 points de satiété.
+ITEM berry_pecha Icon=723 Berry_Pecha 16x16 Released=false
+DESCRIPTION berry_persim Restaure 3 points de satiété.
+ITEM berry_persim Icon=724 Berry_Persim 17x17 Released=false
+DESCRIPTION berry_rawst Restaure 3 points de satiété.
+ITEM berry_rawst Icon=725 Berry_Rawst 14x14 Released=false
+DIALOG
+DIALOG
+CHOICE
+DIALOG
+DIALOG
+RECIPIENT Reçu : [color=#FFCEFF]Baie Pêcha[color] !
+GIFT_ONE berry_pecha
+DIALOG
+DIALOG
+GIFT_ONCE berry_pecha
+BAG 1
+DONE 6 1
+CORRESPONDANCE pixel exact:
+Recompense-Pecha.png: berry_pecha @ (53.0, 196.0)
+Sac-01.png: berry_pecha @ (37.0, 40.0)
+Sac-01.png: berry_aspear @ (37.0, 54.0)
+Sac-01.png: berry_cheri @ (37.0, 68.0)
+Sac-01.png: berry_chesto @ (37.0, 82.0)
+Sac-01.png: berry_persim @ (37.0, 96.0)
+Sac-01.png: berry_rawst @ (37.0, 110.0)

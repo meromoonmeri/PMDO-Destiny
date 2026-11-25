@@ -1,0 +1,19 @@
+ATTENTION: default value of option vblank_mode overridden by environment.
+KABUTOPS_ESSAI NOUVELLE_PARTIE phase=nil membres=2
+KABUTOPS_ESSAI GROUND phase=nil replay=true
+KABUTOPS_ESSAI DIALOGUE Nilo ! On vient te ramener. Ta mère t’attend.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE J’ai touché aux vasques… Depuis, le courant a changé. C’est ma faute.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI ECLAIR Nilo=X:256 Y:160: 416
+KABUTOPS_ESSAI DIALOGUE Ces vasques sont sous ma garde. Le petit vous a dit ce qu’il a fait ?
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE On n’est pas venus se battre. Laisse-nous repartir avec lui.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE Pas un pas de plus.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI WOOSH_DEBUT
+KABUTOPS_ESSAI WOOSH_FIN
+=>_ENV pre-cleanup:145
+=>_ENV post cleanup:144
+KABUTOPS_ESSAI ARENE map=end_grotte_verdoyante nom=Fosse Cascade Fond son=Boss Battle 2.ogg boss=X:10 Y:10: 0 joueur=X:10 Y:12: 6 equipe=2 replay=true

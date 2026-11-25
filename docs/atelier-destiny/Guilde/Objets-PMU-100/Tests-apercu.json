@@ -1,0 +1,122 @@
+{
+  "statut": "PASS",
+  "rooms": 15,
+  "gates": 29,
+  "cuts": 7,
+  "newObjects": 100,
+  "oldObjects": 33,
+  "phases": 4,
+  "vues_identiques_reference_sans_lianes": 60,
+  "vues_lianes": 60,
+  "cadrages_nuit_320x240": 7,
+  "illumination": [
+    {
+      "nom": "Accueil",
+      "plancher": 27944,
+      "decor": 70493,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Salle des missions",
+      "plancher": 35822,
+      "decor": 91812,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Grand Salon",
+      "plancher": 46422,
+      "decor": 102325,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Bureau du maître",
+      "plancher": 37172,
+      "decor": 90268,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Carrefour",
+      "plancher": 35140,
+      "decor": 71265,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Réfectoire",
+      "plancher": 41783,
+      "decor": 101246,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Cuisine",
+      "plancher": 36771,
+      "decor": 81668,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Réserve",
+      "plancher": 26599,
+      "decor": 56583,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Couloir ouest",
+      "plancher": 35159,
+      "decor": 74713,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Couloir est",
+      "plancher": 35190,
+      "decor": 74543,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Dortoir nord I",
+      "plancher": 24086,
+      "decor": 53825,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Dortoir nord II",
+      "plancher": 24870,
+      "decor": 56073,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Dortoir sud I",
+      "plancher": 26692,
+      "decor": 57981,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Dortoir sud II",
+      "plancher": 26786,
+      "decor": 57465,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    },
+    {
+      "nom": "Chambre du héros",
+      "plancher": 40727,
+      "decor": 82026,
+      "pixels_seuils_changes": 0,
+      "pixels_bande_sud_changes": 0
+    }
+  ],
+  "atelier": "Filtres, pose, annulation, import JSON, exports PNG avec/sans, blocage natif des nouveaux sprites",
+  "mobile_390px": true,
+  "iframe_autonome": true
+}

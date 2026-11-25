@@ -1,0 +1,284 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.SkillData, RogueEssence",
+"Name": {
+"DefaultText": "Sparkling Aria",
+"LocalTexts": {
+"fr": "Aria de l'Écume",
+"de": "Schaumserenade",
+"es": "Aria Burbuja",
+"it": "Canto Effimero",
+"ko": "물거품아리아",
+"ja": "うたかたのアリア",
+"ja-jp": "うたかたのアリア",
+"zh-hans": "泡影的咏叹调",
+"zh-hant": "泡影的詠歎調"
+}
+},
+"Desc": {
+"DefaultText": "The user bursts into song, emitting many bubbles. Targets suffering from a burn will be cured. Allies targeted by this move will not take damage.",
+"LocalTexts": {
+"fr": "Le lanceur émet plusieurs bulles en chantant. Les cibles souffrant d'une brûlure seront soignés. Les alliés ciblés par cette capacité ne prennent pas de dégâts.",
+"zh-hans": "随着唱歌会放出很多水球。受到此招式攻击时，灼伤会被治愈。队友不会因此招式受到伤害。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 664,
+"BaseCharges": 10,
+"Strikes": 1,
+"HitboxAction": {
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
+"Emitter": {
+"$type": "RogueEssence.Content.CircleSquareReleaseEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Bubble_Pop_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 10,
+"ParticlesPerBurst": 2,
+"BurstTime": 5,
+"StartDistance": 4,
+"Layer": 2
+},
+"HitTiles": false,
+"BurstTiles": 0,
+"HitArea": 1,
+"Range": 3,
+"Speed": 10,
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+"ActionType": 7
+},
+"TargetAlignments": 6,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Bubble",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 7,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"Data": {
+"Element": "water",
+"Category": 2,
+"HitRate": 100,
+"SkillStates": [
+{
+"$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+"Power": 70
+},
+{
+"$type": "PMDC.Dungeon.SoundState, PMDC"
+}
+],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [
+{
+"Key": {
+"str": [
+-5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AlignmentDifferentEvent, PMDC",
+"Alignments": 3,
+"NewData": {
+"Element": "water",
+"Category": 3,
+"HitRate": -1,
+"SkillStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "burn",
+"AffectTarget": true
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Metal_Sound",
+"Emitter": {
+"$type": "RogueEssence.Content.RepeatEmitter, RogueEssence",
+"LocHeight": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Blue_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Bursts": 4,
+"BurstTime": 8,
+"Layer": 2,
+"Offset": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+}
+}
+}
+],
+"OnHits": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "burn",
+"AffectTarget": true
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Metal_Sound",
+"Emitter": {
+"$type": "RogueEssence.Content.RepeatEmitter, RogueEssence",
+"LocHeight": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Blue_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Bursts": 4,
+"BurstTime": 8,
+"Layer": 2,
+"Offset": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+}
+}
+}

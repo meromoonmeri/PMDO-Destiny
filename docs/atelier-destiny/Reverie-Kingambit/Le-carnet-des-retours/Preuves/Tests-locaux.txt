@@ -1,0 +1,89 @@
+PASS couverture bois : 33 répliques individuelles / 21 saynètes
+PASS couverture alerte : 33 répliques individuelles / 22 saynètes
+PASS couverture nilo : 34 répliques individuelles / 21 saynètes
+PASS couverture crique : 34 répliques individuelles / 22 saynètes
+PASS ancien état, priorité visite / alerte / accueil, crique additive
+PASS tous les ancrages sur les collisions natives et accessibles ; rechargement stable
+PASS deux services, mise en scène et trace « vue » commune, pas de rejeu après sieste ou chargement
+PASS changement de quartier, repli sans déplacer le joueur, pas de Pip et sortie vers le résidentiel
+[Destiny] saynète Réverie (famille) : [string "<python>"]:55: interruption volontaire
+PASS interruption récupérable, trio en famille, salle disponible pour les échanges de la crique
+== habitants_quartiers ==
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS attente de Lyra : états persistants, réentrée, doublons et quartier résidentiel
+== visite_marchands ==
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire vulpix, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire pikachu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire skitty, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+[Destiny] Visite de la ville suspendue : partenaire absent de l’équipe.
+PASS partenaire absent : visite suspendue
+PASS suite Lyra / Nilo : choix, annulation, déplacement et entrée Fosse Cascade
+[Destiny] Visite suspendue : un habitant occupe le trajet.
+PASS placement inattendu : visite suspendue sans traverser un habitant
+PASS dialogues après alerte / départ, banque préservée et variantes quotidiennes avant alerte
+== e2_reverie ==
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+== quartiers_reverie ==
+PASS changements de quartier, retours et absence des escaliers internes (doublures)
+PASS migration ancienne instance du centre : obstacles
+PASS migration ancienne instance du centre : habitants
+PASS migration ancienne instance du centre : les deux
+== entrees_reverie ==
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS entrée et retour simulés PortePosteBekipan
+PASS entrée et retour simulés PorteCitrouilleNordOuest
+PASS entrée et retour simulés PorteHutteNordEst
+PASS entrée et retour simulés PorteDojoKingambit
+PASS entrée et retour simulés PorteHutteSud
+PASS entrée et retour simulés PorteMaisonPierre
+PASS entrée et retour simulés PorteMaisonPlanteSud
+PASS entrée et retour simulés PorteCitrouilleSud
+PASS garde, états anciens, café et sorties répétées (doublures)
+PASS prénoms sur habitants, Baudrive anonyme et équipe inchangée
+PASS café : noms cohérents, circulation, retours distincts et gardes répétées (doublures)
+PASS ancien raccord Ledian désactivé, dojo Kingambit intact
+== plage_sablefin_integration ==
+PASS plage_sablefin + passage_aquatique 10F + crique secrete + crossroad connection
+== grotte_verdoyante ==
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+== polish_reverie ==
+PASS Réverie : réponses décalées, quartier visible, scènes et interactions prioritaires, comptoirs fixes.
+== boutiques_kecleon ==
+PASS Zig / Zag : lots, achats, ventes, sauvegarde, rupture, réassort et Joliflor isolé
+== tableau_et_maison ==
+PASS tableau : ancien état, acceptation unique, échec, réussite, récompense unique, jour suivant
+PASS maison : refus sauvegarde, sauvegarde confirmée, sortie unique et marqueur retour
+== tableaux_reverie ==
+PASS : mission quotidienne débloquée, acceptation, échec, réussite, récompense unique, renouvellement et gazette (doubles).
+
+Audit OK : aucun personnage masque par la boite de dialogue.
+
+Audit OK : 138 script(s), aucune replique hors cadre.
+
+# Règle de K.O. (runner autonome)
+PASS doubles Lua : héros/partenaire/ancien fondateur, invité, recrue, ennemi, réanimation simulée et sorties scénarisées
+PASS : Universal Destiny, raccordement Lua, scénarios K.O. et sorties testés avec doubles ; partie réelle à vérifier.

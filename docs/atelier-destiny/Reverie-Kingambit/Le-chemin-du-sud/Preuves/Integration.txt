@@ -1,0 +1,12 @@
+From https://github.com/meromoonmeri/PMDO-Destiny
+ * [new ref]         37138a7ca93be920e9c47963fea21441b153ec65 -> base
+/home/user/PMDO-Destiny-Kabutops/Le-chemin-du-sud/Destiny-v0.7.6-Retour-Nilo.bundle is okay
+The bundle contains this ref:
+37e6b5cdcfb46a064239c7c6983ef4840d27d408 refs/heads/wip/reverie-integration-kingambit-cafe
+The bundle requires this ref:
+37138a7ca93be920e9c47963fea21441b153ec65 
+The bundle uses this hash algorithm: sha1
+From /home/user/PMDO-Destiny-Kabutops/Le-chemin-du-sud/Destiny-v0.7.6-Retour-Nilo.bundle
+ * [new branch]      wip/reverie-integration-kingambit-cafe -> retour
+Bundle importé depuis 37138a7ca93be920e9c47963fea21441b153ec65 ; commit exact 37e6b5cdcfb46a064239c7c6983ef4840d27d408.
+Patch appliqué à 920e5d5 : l’arbre obtenu est identique au commit livré.

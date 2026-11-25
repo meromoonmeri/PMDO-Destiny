@@ -1,0 +1,25 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Destiny Cliff Tests",
+      "LocalTexts": {
+        "fr": "Destiny — falaises Cliff (tests)"
+      }
+    },
+    "Released": true,
+    "Comment": "Tests falaise : cliffdaytest (jour), cliffdaytest_aube et cliffdaytest_crepuscule (mêmes reliefs, filtres aube et crépuscule), cliffdaytest_nuit (falaise du jour + filtre nuit). Les cartes guilde_cliff v5.9 sont désormais dans la zone ville (town02_waterfallvillage), accessibles depuis le grand escalier nord. GroundMaps remis : le validateur et le moteur lisent ce champ, pas Segments.",
+    "Segments": [],
+    "GroundMaps": [
+      "cliffdaytest",
+      "cliffdaytest_nuit",
+      "cliffdaytest_source",
+      "cliffnordouesttest1",
+      "cliffnordouesttest1_nuit",
+      "maison_equipe_falaise",
+      "cliffdaytest_aube",
+      "cliffdaytest_crepuscule"
+    ]
+  }
+}

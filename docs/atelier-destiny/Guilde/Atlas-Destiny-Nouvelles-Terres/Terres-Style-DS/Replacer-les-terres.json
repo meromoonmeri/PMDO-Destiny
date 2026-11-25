@@ -1,0 +1,1162 @@
+{
+  "canvas_px": [
+    1112,
+    732
+  ],
+  "unite_artistique_px": [
+    556,
+    366
+  ],
+  "ordre_coordonnees": "x y (origine dans l’angle supérieur gauche, maxima exclusifs)",
+  "cle_magenta_hex": "#FF00FF",
+  "pieces": [
+    {
+      "nom": "Orival",
+      "id": "Orival",
+      "type": "continent",
+      "origine_xy": [
+        72,
+        78
+      ],
+      "boite_xyxy": [
+        72,
+        78,
+        451,
+        418
+      ],
+      "taille": [
+        379,
+        340
+      ],
+      "transparent": "Terres-separees/Orival-Transparent.png",
+      "magenta": "Terres-separees/Orival-Magenta.png"
+    },
+    {
+      "nom": "Séracine",
+      "id": "Seracine",
+      "type": "continent",
+      "origine_xy": [
+        466,
+        56
+      ],
+      "boite_xyxy": [
+        466,
+        56,
+        1081,
+        287
+      ],
+      "taille": [
+        615,
+        231
+      ],
+      "transparent": "Terres-separees/Seracine-Transparent.png",
+      "magenta": "Terres-separees/Seracine-Magenta.png"
+    },
+    {
+      "nom": "Estrel",
+      "id": "Estrel",
+      "type": "continent",
+      "origine_xy": [
+        660,
+        306
+      ],
+      "boite_xyxy": [
+        660,
+        306,
+        1083,
+        677
+      ],
+      "taille": [
+        423,
+        371
+      ],
+      "transparent": "Terres-separees/Estrel-Transparent.png",
+      "magenta": "Terres-separees/Estrel-Magenta.png"
+    },
+    {
+      "nom": "Torselune",
+      "id": "Torselune",
+      "type": "continent",
+      "origine_xy": [
+        265,
+        456
+      ],
+      "boite_xyxy": [
+        265,
+        456,
+        669,
+        688
+      ],
+      "taille": [
+        404,
+        232
+      ],
+      "transparent": "Terres-separees/Torselune-Transparent.png",
+      "magenta": "Terres-separees/Torselune-Magenta.png"
+    },
+    {
+      "nom": "Île de Réverie",
+      "id": "Reverie",
+      "type": "ile",
+      "origine_xy": [
+        70,
+        451
+      ],
+      "boite_xyxy": [
+        70,
+        451,
+        246,
+        627
+      ],
+      "taille": [
+        176,
+        176
+      ],
+      "transparent": "Terres-separees/Reverie-Transparent.png",
+      "magenta": "Terres-separees/Reverie-Magenta.png"
+    },
+    {
+      "nom": "Les Haltes",
+      "id": "Les-Haltes",
+      "type": "archipel",
+      "origine_xy": [
+        466,
+        242
+      ],
+      "boite_xyxy": [
+        466,
+        242,
+        636,
+        455
+      ],
+      "taille": [
+        170,
+        213
+      ],
+      "transparent": "Terres-separees/Les-Haltes-Transparent.png",
+      "magenta": "Terres-separees/Les-Haltes-Magenta.png"
+    },
+    {
+      "nom": "Îlots satellites",
+      "id": "Ilots-satellites",
+      "type": "groupe",
+      "origine_xy": [
+        64,
+        71
+      ],
+      "boite_xyxy": [
+        64,
+        71,
+        1098,
+        662
+      ],
+      "taille": [
+        1034,
+        591
+      ],
+      "transparent": "Terres-separees/Ilots-satellites-Transparent.png",
+      "magenta": "Terres-separees/Ilots-satellites-Magenta.png"
+    },
+    {
+      "nom": "Nacre",
+      "id": "Nacre",
+      "type": "composante_archipel",
+      "origine_xy": [
+        466,
+        242
+      ],
+      "boite_xyxy": [
+        466,
+        242,
+        509,
+        280
+      ],
+      "taille": [
+        43,
+        38
+      ],
+      "transparent": "Terres-separees/Haltes/Nacre-Transparent.png",
+      "magenta": "Terres-separees/Haltes/Nacre-Magenta.png"
+    },
+    {
+      "nom": "Voiles",
+      "id": "Voiles",
+      "type": "composante_archipel",
+      "origine_xy": [
+        503,
+        316
+      ],
+      "boite_xyxy": [
+        503,
+        316,
+        558,
+        367
+      ],
+      "taille": [
+        55,
+        51
+      ],
+      "transparent": "Terres-separees/Haltes/Voiles-Transparent.png",
+      "magenta": "Terres-separees/Haltes/Voiles-Magenta.png"
+    },
+    {
+      "nom": "Jusant",
+      "id": "Jusant",
+      "type": "composante_archipel",
+      "origine_xy": [
+        569,
+        389
+      ],
+      "boite_xyxy": [
+        569,
+        389,
+        636,
+        455
+      ],
+      "taille": [
+        67,
+        66
+      ],
+      "transparent": "Terres-separees/Haltes/Jusant-Transparent.png",
+      "magenta": "Terres-separees/Haltes/Jusant-Magenta.png"
+    },
+    {
+      "nom": "Îlot 101",
+      "id": "Ilot-101",
+      "type": "ilot",
+      "origine_xy": [
+        91,
+        71
+      ],
+      "boite_xyxy": [
+        91,
+        71,
+        114,
+        88
+      ],
+      "taille": [
+        23,
+        17
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-101-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-101-Magenta.png"
+    },
+    {
+      "nom": "Îlot 102",
+      "id": "Ilot-102",
+      "type": "ilot",
+      "origine_xy": [
+        121,
+        76
+      ],
+      "boite_xyxy": [
+        121,
+        76,
+        139,
+        86
+      ],
+      "taille": [
+        18,
+        10
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-102-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-102-Magenta.png"
+    },
+    {
+      "nom": "Îlot 103",
+      "id": "Ilot-103",
+      "type": "ilot",
+      "origine_xy": [
+        319,
+        233
+      ],
+      "boite_xyxy": [
+        319,
+        233,
+        356,
+        254
+      ],
+      "taille": [
+        37,
+        21
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-103-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-103-Magenta.png"
+    },
+    {
+      "nom": "Îlot 104",
+      "id": "Ilot-104",
+      "type": "ilot",
+      "origine_xy": [
+        357,
+        227
+      ],
+      "boite_xyxy": [
+        357,
+        227,
+        374,
+        238
+      ],
+      "taille": [
+        17,
+        11
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-104-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-104-Magenta.png"
+    },
+    {
+      "nom": "Îlot 105",
+      "id": "Ilot-105",
+      "type": "ilot",
+      "origine_xy": [
+        298,
+        262
+      ],
+      "boite_xyxy": [
+        298,
+        262,
+        320,
+        275
+      ],
+      "taille": [
+        22,
+        13
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-105-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-105-Magenta.png"
+    },
+    {
+      "nom": "Îlot 106",
+      "id": "Ilot-106",
+      "type": "ilot",
+      "origine_xy": [
+        991,
+        238
+      ],
+      "boite_xyxy": [
+        991,
+        238,
+        1022,
+        259
+      ],
+      "taille": [
+        31,
+        21
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-106-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-106-Magenta.png"
+    },
+    {
+      "nom": "Îlot 107",
+      "id": "Ilot-107",
+      "type": "ilot",
+      "origine_xy": [
+        1026,
+        231
+      ],
+      "boite_xyxy": [
+        1026,
+        231,
+        1040,
+        244
+      ],
+      "taille": [
+        14,
+        13
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-107-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-107-Magenta.png"
+    },
+    {
+      "nom": "Îlot 108",
+      "id": "Ilot-108",
+      "type": "ilot",
+      "origine_xy": [
+        1040,
+        268
+      ],
+      "boite_xyxy": [
+        1040,
+        268,
+        1065,
+        279
+      ],
+      "taille": [
+        25,
+        11
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-108-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-108-Magenta.png"
+    },
+    {
+      "nom": "Îlot 109",
+      "id": "Ilot-109",
+      "type": "ilot",
+      "origine_xy": [
+        529,
+        287
+      ],
+      "boite_xyxy": [
+        529,
+        287,
+        550,
+        301
+      ],
+      "taille": [
+        21,
+        14
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-109-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-109-Magenta.png"
+    },
+    {
+      "nom": "Îlot 110",
+      "id": "Ilot-110",
+      "type": "ilot",
+      "origine_xy": [
+        555,
+        365
+      ],
+      "boite_xyxy": [
+        555,
+        365,
+        571,
+        377
+      ],
+      "taille": [
+        16,
+        12
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-110-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-110-Magenta.png"
+    },
+    {
+      "nom": "Îlot 111",
+      "id": "Ilot-111",
+      "type": "ilot",
+      "origine_xy": [
+        629,
+        444
+      ],
+      "boite_xyxy": [
+        629,
+        444,
+        644,
+        458
+      ],
+      "taille": [
+        15,
+        14
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-111-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-111-Magenta.png"
+    },
+    {
+      "nom": "Îlot 112",
+      "id": "Ilot-112",
+      "type": "ilot",
+      "origine_xy": [
+        232,
+        623
+      ],
+      "boite_xyxy": [
+        232,
+        623,
+        250,
+        634
+      ],
+      "taille": [
+        18,
+        11
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-112-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-112-Magenta.png"
+    },
+    {
+      "nom": "Îlot 113",
+      "id": "Ilot-113",
+      "type": "ilot",
+      "origine_xy": [
+        64,
+        592
+      ],
+      "boite_xyxy": [
+        64,
+        592,
+        82,
+        607
+      ],
+      "taille": [
+        18,
+        15
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-113-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-113-Magenta.png"
+    },
+    {
+      "nom": "Îlot 114",
+      "id": "Ilot-114",
+      "type": "ilot",
+      "origine_xy": [
+        258,
+        524
+      ],
+      "boite_xyxy": [
+        258,
+        524,
+        278,
+        537
+      ],
+      "taille": [
+        20,
+        13
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-114-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-114-Magenta.png"
+    },
+    {
+      "nom": "Îlot 115",
+      "id": "Ilot-115",
+      "type": "ilot",
+      "origine_xy": [
+        300,
+        635
+      ],
+      "boite_xyxy": [
+        300,
+        635,
+        320,
+        651
+      ],
+      "taille": [
+        20,
+        16
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-115-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-115-Magenta.png"
+    },
+    {
+      "nom": "Îlot 116",
+      "id": "Ilot-116",
+      "type": "ilot",
+      "origine_xy": [
+        335,
+        653
+      ],
+      "boite_xyxy": [
+        335,
+        653,
+        350,
+        662
+      ],
+      "taille": [
+        15,
+        9
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-116-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-116-Magenta.png"
+    },
+    {
+      "nom": "Îlot 117",
+      "id": "Ilot-117",
+      "type": "ilot",
+      "origine_xy": [
+        1085,
+        517
+      ],
+      "boite_xyxy": [
+        1085,
+        517,
+        1098,
+        530
+      ],
+      "taille": [
+        13,
+        13
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-117-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-117-Magenta.png"
+    },
+    {
+      "nom": "Îlot 118",
+      "id": "Ilot-118",
+      "type": "ilot",
+      "origine_xy": [
+        1072,
+        615
+      ],
+      "boite_xyxy": [
+        1072,
+        615,
+        1089,
+        628
+      ],
+      "taille": [
+        17,
+        13
+      ],
+      "transparent": "Terres-separees/Satellites/Ilot-118-Transparent.png",
+      "magenta": "Terres-separees/Satellites/Ilot-118-Magenta.png"
+    }
+  ],
+  "lieux": [
+    {
+      "id": "miroir",
+      "nom": "Miroir Suspendu",
+      "region": "orival",
+      "position": [
+        249,
+        181
+      ],
+      "boite": [
+        227,
+        153,
+        271,
+        183
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "lierres",
+      "nom": "Terrasses des Lierres",
+      "region": "orival",
+      "position": [
+        151,
+        248
+      ],
+      "boite": [
+        132,
+        224,
+        169,
+        250
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "pont-racines",
+      "nom": "Pont des Racines",
+      "region": "orival",
+      "position": [
+        170,
+        299
+      ],
+      "boite": [
+        152,
+        280,
+        189,
+        301
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "moulins",
+      "nom": "Domaine des Moulins",
+      "region": "orival",
+      "position": [
+        310,
+        333
+      ],
+      "boite": [
+        288,
+        307,
+        331,
+        335
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "argeline",
+      "nom": "Verger d’Argeline",
+      "region": "orival",
+      "position": [
+        213,
+        389
+      ],
+      "boite": [
+        195,
+        367,
+        231,
+        391
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "tour-ramures",
+      "nom": "Tour des Ramures",
+      "region": "orival",
+      "position": [
+        405,
+        145
+      ],
+      "boite": [
+        392,
+        125,
+        418,
+        147
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "cadran",
+      "nom": "Cadran des Aurores",
+      "region": "seracine",
+      "position": [
+        770,
+        157
+      ],
+      "boite": [
+        752,
+        125,
+        788,
+        159
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "vitrane",
+      "nom": "Arêtes de Vitrane",
+      "region": "seracine",
+      "position": [
+        670,
+        133
+      ],
+      "boite": [
+        652,
+        108,
+        687,
+        135
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "gue",
+      "nom": "Gué des Cèdres",
+      "region": "seracine",
+      "position": [
+        543,
+        176
+      ],
+      "boite": [
+        526,
+        159,
+        559,
+        178
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "vent-debout",
+      "nom": "Porte du Vent Debout",
+      "region": "seracine",
+      "position": [
+        868,
+        161
+      ],
+      "boite": [
+        850,
+        137,
+        886,
+        163
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "deux-mers",
+      "nom": "Phare des Deux Mers",
+      "region": "seracine",
+      "position": [
+        1054,
+        199
+      ],
+      "boite": [
+        1039,
+        175,
+        1069,
+        201
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "fenetre-hauts",
+      "nom": "Fenêtre des Hauts",
+      "region": "seracine",
+      "position": [
+        893,
+        260
+      ],
+      "boite": [
+        876,
+        240,
+        909,
+        262
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "ecluses",
+      "nom": "Écluses des Treize Rives",
+      "region": "estrel",
+      "position": [
+        871,
+        518
+      ],
+      "boite": [
+        848,
+        495,
+        893,
+        520
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "bourg-ecume",
+      "nom": "Bourg Écume",
+      "region": "estrel",
+      "position": [
+        1038,
+        458
+      ],
+      "boite": [
+        1016,
+        435,
+        1059,
+        460
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "cotes-metano",
+      "nom": "Côtes de Métano",
+      "region": "estrel",
+      "position": [
+        839,
+        634
+      ],
+      "boite": [
+        820,
+        615,
+        859,
+        636
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "brumes",
+      "nom": "Escalier des Brumes",
+      "region": "estrel",
+      "position": [
+        789,
+        421
+      ],
+      "boite": [
+        770,
+        397,
+        809,
+        423
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "salines",
+      "nom": "Salines d’Ourle",
+      "region": "estrel",
+      "position": [
+        968,
+        598
+      ],
+      "boite": [
+        948,
+        581,
+        989,
+        600
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "jardin-eau",
+      "nom": "Jardin des Racines d’Eau",
+      "region": "estrel",
+      "position": [
+        1029,
+        574
+      ],
+      "boite": [
+        1012,
+        553,
+        1047,
+        576
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "baie-argile",
+      "nom": "Baie d’Argile Claire",
+      "region": "estrel",
+      "position": [
+        1019,
+        369
+      ],
+      "boite": [
+        1002,
+        349,
+        1035,
+        371
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "siffleurs",
+      "nom": "Roc des Siffleurs",
+      "region": "torselune",
+      "position": [
+        375,
+        518
+      ],
+      "boite": [
+        358,
+        497,
+        393,
+        520
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "vrille",
+      "nom": "Vrille d’Ocre",
+      "region": "torselune",
+      "position": [
+        449,
+        616
+      ],
+      "boite": [
+        424,
+        589,
+        473,
+        618
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "roselame",
+      "nom": "Jardin de Roselame",
+      "region": "torselune",
+      "position": [
+        541,
+        548
+      ],
+      "boite": [
+        524,
+        521,
+        559,
+        550
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "caravane",
+      "nom": "Halte d’Améthyste",
+      "region": "torselune",
+      "position": [
+        562,
+        632
+      ],
+      "boite": [
+        544,
+        614,
+        581,
+        634
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "boussoles",
+      "nom": "Enclos des Boussoles",
+      "region": "torselune",
+      "position": [
+        508,
+        651
+      ],
+      "boite": [
+        492,
+        632,
+        525,
+        653
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "egide",
+      "nom": "Vasque d’Égide",
+      "region": "torselune",
+      "position": [
+        350,
+        579
+      ],
+      "boite": [
+        332,
+        560,
+        367,
+        581
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "reverie",
+      "nom": "Réverie Town",
+      "region": "reve",
+      "position": [
+        150,
+        551
+      ],
+      "boite": [
+        122,
+        507,
+        179,
+        553
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "guilde",
+      "nom": "Falaise de la guilde",
+      "region": "reve",
+      "position": [
+        177,
+        484
+      ],
+      "boite": [
+        162,
+        457,
+        193,
+        486
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "fosse",
+      "nom": "Fosse Cascade",
+      "region": "reve",
+      "position": [
+        208,
+        507
+      ],
+      "boite": [
+        194,
+        484,
+        223,
+        509
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "passage",
+      "nom": "Passage Aquatique",
+      "region": "reve",
+      "position": [
+        205,
+        571
+      ],
+      "boite": [
+        190,
+        549,
+        220,
+        573
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "bois",
+      "nom": "Bois Perdus",
+      "region": "reve",
+      "position": [
+        110,
+        525
+      ],
+      "boite": [
+        95,
+        507,
+        125,
+        527
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "source",
+      "nom": "Source Irisée",
+      "region": "reve",
+      "position": [
+        129,
+        589
+      ],
+      "boite": [
+        116,
+        575,
+        143,
+        591
+      ],
+      "existe_dans_le_projet": true
+    },
+    {
+      "id": "balise-nacre",
+      "nom": "Balise de Nacre",
+      "region": "haltes",
+      "position": [
+        493,
+        270
+      ],
+      "boite": [
+        482,
+        256,
+        503,
+        272
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "signal-voiles",
+      "nom": "Signal des Voiles",
+      "region": "haltes",
+      "position": [
+        522,
+        350
+      ],
+      "boite": [
+        509,
+        334,
+        535,
+        352
+      ],
+      "existe_dans_le_projet": false
+    },
+    {
+      "id": "abri-jusant",
+      "nom": "Abri du Jusant",
+      "region": "haltes",
+      "position": [
+        603,
+        432
+      ],
+      "boite": [
+        591,
+        417,
+        615,
+        434
+      ],
+      "existe_dans_le_projet": false
+    }
+  ],
+  "ancres_de_rendu": {
+    "Reverie_Town": {
+      "ancre_racines_atlas": [
+        150,
+        551
+      ],
+      "dessin": "arbre-village de la génération rapprochée, détouré et placé hors du cours d’eau",
+      "dimensions_du_sprite_px": [
+        28,
+        30
+      ]
+    }
+  },
+  "statut_lieux": "Les huit noms connus sont marqués par existe_dans_le_projet ; les positions restent des propositions. Le terrain ne comporte pas de calque de repères ni de libellés."
+}

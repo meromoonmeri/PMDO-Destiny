@@ -1,0 +1,4 @@
+PASS 48 fiches Méga : uniquement Icon et Sprite modifiés. Résumé : seulement Icon.
+PASS 6 fiches Baies : uniquement Icon, Sprite et description de l’effet existant. Sprites Destiny inchangés.
+PASS 19 gelées préservées, index et fiches concordent sur les icônes, aucune donnée de disponibilité ou d’effet modifiée.
+PASS atlas Destiny/addon identiques dans chacune des 2 langues ; génération répétée byte-identique (224 fichiers).

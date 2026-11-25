@@ -1,0 +1,181 @@
+[2026/10/31 19:41:04.803] =========================================
+
+[2026/10/31 19:41:04.827] SESSION STARTED: 2026/10/31 19:41:04
+
+[2026/10/31 19:41:04.829] Version: 0.8.12.0
+
+[2026/10/31 19:41:04.829] .NET 8.0.33
+
+[2026/10/31 19:41:04.829] =========================================
+
+[2026/10/31 19:41:04.885] -----------------------------------------
+
+[2026/10/31 19:41:04.885] -----------------------------------------
+
+[2026/10/31 19:41:05.363] FNA3D Driver: OpenGL
+
+[2026/10/31 19:41:05.363] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+
+[2026/10/31 19:41:05.363] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+
+[2026/10/31 19:41:05.363] OpenGL Vendor: Mesa
+
+[2026/10/31 19:41:05.365] MojoShader Profile: glsl120
+
+[2026/10/31 19:41:05.439] [SE]:Initialized Lua 5.4
+
+[2026/10/31 19:41:05.439] [SE]:Importing .NET packages..
+
+[2026/10/31 19:41:05.450] [SE]: **- Lua engine started! -**
+
+[2026/10/31 19:41:09.640] [SE]:Exposing game engine components instances..
+
+[2026/10/31 19:41:09.657] [SE]:Exposing script interface..
+
+[2026/10/31 19:41:09.661] [SE]:Setting up lua globals..
+
+[2026/10/31 19:41:09.662] [SE]:Setting up lua paths..
+
+[2026/10/31 19:41:09.668] [SE]:Setting up lua functions...
+
+[2026/10/31 19:41:09.668] [SE]:Setting up debug functions...
+
+[2026/10/31 19:41:09.671] [SE]:Setting up default script vars...
+
+[2026/10/31 19:41:09.676] [SE]:Caching common lib...
+
+[2026/10/31 19:41:09.714] [SE]:Loading events...
+
+[2026/10/31 19:41:09.737] [SE]:Installing game interface functions..
+
+[2026/10/31 19:41:09.745] [SE]:DebugTools:initialize()
+
+[2026/10/31 19:41:09.748] [SE]:Registered service DebugTools!
+
+[2026/10/31 19:41:09.751] [SE]:UpgradeTools:initialize()
+
+[2026/10/31 19:41:09.752] [SE]:Registered service UpgradeTools!
+
+[2026/10/31 19:41:09.753] [SE]:MenuTools:initialize()
+
+[2026/10/31 19:41:09.753] [SE]:Registered service MenuTools!
+
+[2026/10/31 19:41:09.755] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+
+[2026/10/31 19:41:09.755] [SE]:Registered service DestinyTitleAnim!
+
+[2026/10/31 19:41:09.755] [SE]: **- Lua engine ready! -**
+
+[2026/10/31 19:41:09.756] [SE]:
+<!> ExampleSvc: Init..
+
+[2026/10/31 19:41:37.544] Tilesets Reloaded.
+
+[2026/10/31 19:41:37.545] Backgrounds Reloaded.
+
+[2026/10/31 19:41:37.546] Characters Reloaded.
+
+[2026/10/31 19:41:37.547] Portraits Reloaded.
+
+[2026/10/31 19:41:37.547] Effects Reloaded.
+
+[2026/10/31 19:41:37.547] Items Reloaded.
+
+[2026/10/31 19:41:37.547] Icons Reloaded.
+
+[2026/10/31 19:41:37.547] Objects Reloaded.
+
+[2026/10/31 19:41:45.697] LuaEngine.OnMusicChange()..
+
+[2026/10/31 19:41:56.950] LuaEngine.LoadSavedData()..
+
+[2026/10/31 19:41:56.951] LuaEngine.LoadSavedData()..
+
+[2026/10/31 19:42:07.019] LuaEngine.LoadSavedData()..
+
+[2026/10/31 19:42:07.071] Zone Seed: 12955454877605663943
+
+[2026/10/31 19:42:07.072] Zone.OnInit(): Initializing the zone..
+
+[2026/10/31 19:42:07.075] Loading rsground file: cliffdaytest_nuit
+
+[2026/10/31 19:42:08.492] Completed file load.
+
+[2026/10/31 19:42:08.497] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 19:42:08.507] GroundMap.LoadScriptEvents(): Added event Init to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.508] GroundMap.LoadScriptEvents(): Added event Enter to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.508] GroundMap.LoadScriptEvents(): Added event Exit to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.508] GroundMap.LoadScriptEvents(): Added event Update to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.509] GroundMap.LoadScriptEvents(): Added event GameSave to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.509] GroundMap.LoadScriptEvents(): Added event GameLoad to map cliffdaytest_nuit!
+
+[2026/10/31 19:42:08.565] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 19:42:08.599] ScriptGround.SpawnerSetSpawn(TEAMMATE_1):  Couldn't find spawner!
+Exception Depth: 0
+System.ArgumentException: ScriptGround.SpawnerSetSpawn(TEAMMATE_1):  Couldn't find spawner!
+   at RogueEssence.Script.ScriptGround.SpawnerSetSpawn(String spawnername, CharData spawnChar)
+
+
+Lua Trace:
+stack traceback:
+	[C]: in function 'coroutine.resume'
+	[string "MakeCoroutineIterator"]:5: in function <[string "MakeCoroutineIterator"]:4>
+
+Coroutine Trace:
+ScriptEvent: CURMAPSCR.Enter
+RogueEssence.Ground.GroundMap+<RunScriptEvent>d__59
+RogueEssence.Ground.GroundMap+<OnEnter>d__64
+RogueEssence.Ground.GroundScene+<BeginGround>d__44
+RogueEssence.GameManager+<moveToZoneInit>d__80
+RogueEssence.GameManager+<MoveToZone>d__78
+RogueEssence.Menu.TopMenu+<Begin>d__18
+RogueEssence.GameManager+<ScreenMainCoroutine>d__68
+[2026/10/31 19:42:08.637] ScriptGround.SpawnerDoSpawn(TEAMMATE_1):  Couldn't find spawner!
+Exception Depth: 0
+System.ArgumentException: ScriptGround.SpawnerDoSpawn(TEAMMATE_1):  Couldn't find spawner!
+   at RogueEssence.Script.ScriptGround.SpawnerDoSpawn(String spawnername)
+
+
+Lua Trace:
+stack traceback:
+	[C]: in function 'coroutine.resume'
+	[string "MakeCoroutineIterator"]:5: in function <[string "MakeCoroutineIterator"]:4>
+
+Coroutine Trace:
+ScriptEvent: CURMAPSCR.Enter
+RogueEssence.Ground.GroundMap+<RunScriptEvent>d__59
+RogueEssence.Ground.GroundMap+<OnEnter>d__64
+RogueEssence.Ground.GroundScene+<BeginGround>d__44
+RogueEssence.GameManager+<moveToZoneInit>d__80
+RogueEssence.GameManager+<MoveToZone>d__78
+RogueEssence.Menu.TopMenu+<Begin>d__18
+RogueEssence.GameManager+<ScreenMainCoroutine>d__68
+[2026/10/31 19:42:08.641] Entity is not a valid type.
+Exception Depth: 0
+System.ArgumentException: Entity is not a valid type.
+   at RogueEssence.Script.ScriptGround.TeleportTo(GroundEntity ent, Int32 x, Int32 y, Dir8 direction, Int32 height)
+
+
+Lua Trace:
+stack traceback:
+	[C]: in function 'coroutine.resume'
+	[string "MakeCoroutineIterator"]:5: in function <[string "MakeCoroutineIterator"]:4>
+
+Coroutine Trace:
+ScriptEvent: CURMAPSCR.Enter
+RogueEssence.Ground.GroundMap+<RunScriptEvent>d__59
+RogueEssence.Ground.GroundMap+<OnEnter>d__64
+RogueEssence.Ground.GroundScene+<BeginGround>d__44
+RogueEssence.GameManager+<moveToZoneInit>d__80
+RogueEssence.GameManager+<MoveToZone>d__78
+RogueEssence.Menu.TopMenu+<Begin>d__18
+RogueEssence.GameManager+<ScreenMainCoroutine>d__68
+[2026/10/31 19:43:21.613] LuaEngine.OnGroundMapEnter()..
+

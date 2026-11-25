@@ -1,0 +1,36 @@
+{
+  "etat": "PASS",
+  "modeles": [
+    {
+      "id": "ia-banquet",
+      "taille": [
+        163,
+        49
+      ],
+      "pixels_opaques": 6232,
+      "distance_palette_min": 23.87
+    },
+    {
+      "id": "ia-coffre",
+      "taille": [
+        36,
+        31
+      ],
+      "pixels_opaques": 940,
+      "distance_palette_min": 25.06
+    },
+    {
+      "id": "ia-bureau",
+      "taille": [
+        46,
+        77
+      ],
+      "pixels_opaques": 2504,
+      "distance_palette_min": 14.82
+    }
+  ],
+  "images_issues_directement_du_generateur": 3,
+  "sprites_1x": 30,
+  "nuanciers_derives": 27,
+  "alpha_conserve_sur_declinaisons": true
+}

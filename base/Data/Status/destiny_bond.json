@@ -1,0 +1,215 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.StatusData, RogueEssence",
+"Name": {
+"DefaultText": "Destiny Bond",
+"LocalTexts": {
+"fr": "Lien du Destin",
+"de": "Abgangsbund",
+"es": "Mismo Destino",
+"it": "Destinobbligato",
+"zh-hans": "同命"
+}
+},
+"Desc": {
+"DefaultText": "Any damage done to this Pokémon from direct attacks is also done to the target of the Destiny Bond. This status wears off after a few turns, or if the Pokémon moves.",
+"LocalTexts": {
+"fr": "Tout dégat de capacités directes effectué à ce Pokémon sont transmises à la cible du Lien du Destin. Ce statut disparait au bout de quelques tours oàu si le Pokémon bouge.",
+"de": "Jeglicher Schaden, der an diesem Pokémon angerichtet wird, wird auch beim Ziel des Abgangsbundes verursacht. Dieser Status lässt entweder nach einigen Zügen nach oder wenn sich das Pokémon bewegt.",
+"es": "Todo el daño recibido por el Pokémon por ataques directos también lo recibe el objetivo de Mismo Destino. Este estado desparace tras unos turnos, o hasta que el Pokémon se mueva.",
+"it": "Qualsiasi danno da un attacco diretto inflitto al Pokémon viene inflitto anche al bersaglio di Destinobbligato. Questo stato svanisce dopo un po' di turni o se il Pokémon si muove.",
+"zh-hans": "这只宝可梦受到任何直接攻击并造成伤害后，也会对被同命的目标造成伤害。该状态在几回合后，或在移动后解除。"
+}
+},
+"Released": true,
+"Comment": "",
+"MenuName": true,
+"CarryOver": false,
+"Emoticon": "Skull_DarkBlue",
+"DropEmoticon": "",
+"FreeEmote": "",
+"DrawEffect": -1,
+"Targeted": true,
+"StatusStates": [
+{
+"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
+},
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 4
+}
+],
+"OnSkillChanges": [],
+"TargetPassive": {
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SameTargetedStatusCheck, PMDC",
+"Message": {
+"Key": "MSG_NOTHING_HAPPENED"
+}
+}
+}
+],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TargetedBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_DESTINY_BOND_START"
+},
+"Delay": true
+}
+}
+],
+"OnStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TargetedBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_DESTINY_BOND_END"
+},
+"Delay": false
+}
+}
+],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"ShowMessage": true
+}
+}
+],
+"OnMapTurnEnds": [],
+"OnWalks": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveEvent, PMDC",
+"ShowMessage": true
+}
+}
+],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DestinyBondEvent, PMDC"
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

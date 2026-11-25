@@ -1,0 +1,1773 @@
+{
+  "statut": "PASS",
+  "salles": {
+    "guilde_destiny_accueil": {
+      "nom": "Accueil",
+      "sources": [
+        "G01P02A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          31,
+          31,
+          63
+        ],
+        [
+          28,
+          28,
+          60
+        ],
+        [
+          22,
+          22,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 90358,
+      "pixels_du_calque_avant": 2603,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            169.0,
+            124.5
+          ],
+          "reflet": [
+            184.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            48,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            332.5,
+            128.5
+          ],
+          "reflet": [
+            317.0,
+            159.0
+          ],
+          "plafonds_alpha": [
+            41,
+            45,
+            49,
+            49
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5681,
+          "ancienne_version": 28,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6411,
+          "ancienne_version": 111,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 7150,
+          "ancienne_version": 301,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 7122,
+          "ancienne_version": 301,
+          "reflet_alpha_max": 49.0
+        }
+      ],
+      "sonde_plancher": [
+        329,
+        145,
+        21.6
+      ],
+      "pixels_variables": 5683
+    },
+    "guilde_destiny_missions": {
+      "nom": "Salle des missions",
+      "sources": [
+        "G01P03A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 70822,
+      "pixels_du_calque_avant": 677,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            137.0,
+            130.0
+          ],
+          "reflet": [
+            167.0,
+            190.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            437.17,
+            138.17
+          ],
+          "reflet": [
+            408.0,
+            190.0
+          ],
+          "plafonds_alpha": [
+            40,
+            44,
+            48,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5542,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 40.0
+        },
+        {
+          "plancher_delta_luma_6": 6207,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 44.0
+        },
+        {
+          "plancher_delta_luma_6": 6787,
+          "ancienne_version": 21,
+          "reflet_alpha_max": 48.0
+        },
+        {
+          "plancher_delta_luma_6": 6761,
+          "ancienne_version": 21,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        406,
+        189,
+        19.4
+      ],
+      "pixels_variables": 6581
+    },
+    "guilde_destiny_grand_salon": {
+      "nom": "Grand Salon",
+      "sources": [
+        "G01P04A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 84254,
+      "pixels_du_calque_avant": 570,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            152.67,
+            129.67
+          ],
+          "reflet": [
+            175.0,
+            182.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            416.57,
+            138.71
+          ],
+          "reflet": [
+            400.0,
+            182.0
+          ],
+          "plafonds_alpha": [
+            41,
+            44,
+            48,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5490,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6164,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 44.0
+        },
+        {
+          "plancher_delta_luma_6": 6776,
+          "ancienne_version": 34,
+          "reflet_alpha_max": 48.0
+        },
+        {
+          "plancher_delta_luma_6": 6751,
+          "ancienne_version": 34,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        397,
+        183,
+        20.4
+      ],
+      "pixels_variables": 6518
+    },
+    "guilde_destiny_bureau_maitre": {
+      "nom": "Bureau du maître",
+      "sources": [
+        "G01P05A",
+        "G01P05C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 57353,
+      "pixels_du_calque_avant": 380,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            214.5,
+            98.5
+          ],
+          "reflet": [
+            229.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            40,
+            42,
+            47,
+            46
+          ]
+        },
+        {
+          "bourgeon": [
+            465.0,
+            171.0
+          ],
+          "reflet": [
+            432.0,
+            214.0
+          ],
+          "plafonds_alpha": [
+            41,
+            45,
+            49,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5150,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 5827,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 6384,
+          "ancienne_version": 35,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 6350,
+          "ancienne_version": 35,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        220,
+        158,
+        19.2
+      ],
+      "pixels_variables": 6021
+    },
+    "guilde_destiny_carrefour": {
+      "nom": "Carrefour",
+      "sources": [
+        "G01P08A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 68202,
+      "pixels_du_calque_avant": 220,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            71.0,
+            150.0
+          ],
+          "reflet": [
+            86.0,
+            181.0
+          ],
+          "plafonds_alpha": [
+            41,
+            44,
+            49,
+            49
+          ]
+        },
+        {
+          "bourgeon": [
+            418.0,
+            141.0
+          ],
+          "reflet": [
+            403.0,
+            174.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            207.12,
+            34.88
+          ],
+          "reflet": [
+            218.1,
+            42.9
+          ],
+          "plafonds_alpha": [
+            31,
+            33,
+            37,
+            36
+          ]
+        },
+        {
+          "bourgeon": [
+            272.67,
+            34.67
+          ],
+          "reflet": [
+            261.7,
+            42.7
+          ],
+          "plafonds_alpha": [
+            31,
+            34,
+            37,
+            37
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 6146,
+          "ancienne_version": 58,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6915,
+          "ancienne_version": 118,
+          "reflet_alpha_max": 44.0
+        },
+        {
+          "plancher_delta_luma_6": 7604,
+          "ancienne_version": 184,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 7571,
+          "ancienne_version": 180,
+          "reflet_alpha_max": 49.0
+        }
+      ],
+      "sonde_plancher": [
+        69,
+        164,
+        22.5
+      ],
+      "pixels_variables": 6834
+    },
+    "guilde_destiny_refectoire": {
+      "nom": "Réfectoire",
+      "sources": [
+        "G01P06A",
+        "G01P06B"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 72875,
+      "pixels_du_calque_avant": 446,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            139.0,
+            130.0
+          ],
+          "reflet": [
+            159.0,
+            182.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            48,
+            48
+          ]
+        },
+        {
+          "bourgeon": [
+            429.0,
+            137.0
+          ],
+          "reflet": [
+            400.0,
+            182.0
+          ],
+          "plafonds_alpha": [
+            41,
+            45,
+            49,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5329,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 5969,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 6514,
+          "ancienne_version": 10,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 6488,
+          "ancienne_version": 10,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        162,
+        183,
+        19.7
+      ],
+      "pixels_variables": 6261
+    },
+    "guilde_destiny_cuisine": {
+      "nom": "Cuisine",
+      "sources": [
+        "G01P06A",
+        "G01P06B"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 62395,
+      "pixels_du_calque_avant": 209,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            117.0,
+            101.0
+          ],
+          "reflet": [
+            143.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            363.67,
+            96.33
+          ],
+          "reflet": [
+            336.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            39,
+            42,
+            46,
+            46
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5306,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 40.0
+        },
+        {
+          "plancher_delta_luma_6": 5986,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 43.0
+        },
+        {
+          "plancher_delta_luma_6": 6604,
+          "ancienne_version": 8,
+          "reflet_alpha_max": 47.0
+        },
+        {
+          "plancher_delta_luma_6": 6581,
+          "ancienne_version": 8,
+          "reflet_alpha_max": 47.0
+        }
+      ],
+      "sonde_plancher": [
+        139,
+        155,
+        18.3
+      ],
+      "pixels_variables": 6592
+    },
+    "guilde_destiny_reserve": {
+      "nom": "Réserve",
+      "sources": [
+        "G01P06A",
+        "G01P06B"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 82009,
+      "pixels_du_calque_avant": 133,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            115.0,
+            131.0
+          ],
+          "reflet": [
+            135.0,
+            166.0
+          ],
+          "plafonds_alpha": [
+            41,
+            44,
+            49,
+            48
+          ]
+        },
+        {
+          "bourgeon": [
+            331.0,
+            135.0
+          ],
+          "reflet": [
+            312.0,
+            166.0
+          ],
+          "plafonds_alpha": [
+            42,
+            45,
+            49,
+            49
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5100,
+          "ancienne_version": 2,
+          "reflet_alpha_max": 42.0
+        },
+        {
+          "plancher_delta_luma_6": 5731,
+          "ancienne_version": 18,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 6190,
+          "ancienne_version": 109,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 6168,
+          "ancienne_version": 107,
+          "reflet_alpha_max": 49.0
+        }
+      ],
+      "sonde_plancher": [
+        131,
+        167,
+        20.4
+      ],
+      "pixels_variables": 5787
+    },
+    "guilde_destiny_couloir_ouest": {
+      "nom": "Couloir ouest",
+      "sources": [
+        "G01P08A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 66175,
+      "pixels_du_calque_avant": 311,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            135.0,
+            91.0
+          ],
+          "reflet": [
+            150.0,
+            150.0
+          ],
+          "plafonds_alpha": [
+            39,
+            42,
+            46,
+            46
+          ]
+        },
+        {
+          "bourgeon": [
+            413.0,
+            135.0
+          ],
+          "reflet": [
+            398.0,
+            174.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5809,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 40.0
+        },
+        {
+          "plancher_delta_luma_6": 6548,
+          "ancienne_version": 4,
+          "reflet_alpha_max": 43.0
+        },
+        {
+          "plancher_delta_luma_6": 7171,
+          "ancienne_version": 25,
+          "reflet_alpha_max": 47.0
+        },
+        {
+          "plancher_delta_luma_6": 7142,
+          "ancienne_version": 25,
+          "reflet_alpha_max": 47.0
+        }
+      ],
+      "sonde_plancher": [
+        402,
+        164,
+        20.3
+      ],
+      "pixels_variables": 6619
+    },
+    "guilde_destiny_couloir_est": {
+      "nom": "Couloir est",
+      "sources": [
+        "G01P08A",
+        "G01P04C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          21,
+          21,
+          60
+        ],
+        [
+          18,
+          18,
+          54
+        ],
+        [
+          15,
+          15,
+          47
+        ]
+      ],
+      "pixels": 66175,
+      "pixels_du_calque_avant": 311,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            65.0,
+            138.0
+          ],
+          "reflet": [
+            80.0,
+            174.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            344.0,
+            92.5
+          ],
+          "reflet": [
+            329.0,
+            150.0
+          ],
+          "plafonds_alpha": [
+            39,
+            42,
+            45,
+            45
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5705,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 40.0
+        },
+        {
+          "plancher_delta_luma_6": 6446,
+          "ancienne_version": 0,
+          "reflet_alpha_max": 43.0
+        },
+        {
+          "plancher_delta_luma_6": 7062,
+          "ancienne_version": 15,
+          "reflet_alpha_max": 47.0
+        },
+        {
+          "plancher_delta_luma_6": 7039,
+          "ancienne_version": 15,
+          "reflet_alpha_max": 47.0
+        }
+      ],
+      "sonde_plancher": [
+        73,
+        165,
+        20.3
+      ],
+      "pixels_variables": 6535
+    },
+    "guilde_destiny_dortoir_nord_1": {
+      "nom": "Dortoir nord I",
+      "sources": [
+        "G01P09A",
+        "G01P09C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          20,
+          20,
+          57
+        ],
+        [
+          14,
+          14,
+          44
+        ],
+        [
+          7,
+          7,
+          31
+        ]
+      ],
+      "pixels": 82232,
+      "pixels_du_calque_avant": 216,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            121.0,
+            134.0
+          ],
+          "reflet": [
+            136.0,
+            166.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            48,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            325.0,
+            136.0
+          ],
+          "reflet": [
+            310.0,
+            167.0
+          ],
+          "plafonds_alpha": [
+            41,
+            45,
+            49,
+            49
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5771,
+          "ancienne_version": 33,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6221,
+          "ancienne_version": 143,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 6652,
+          "ancienne_version": 265,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 6644,
+          "ancienne_version": 262,
+          "reflet_alpha_max": 49.0
+        }
+      ],
+      "sonde_plancher": [
+        139,
+        166,
+        20.6
+      ],
+      "pixels_variables": 7272
+    },
+    "guilde_destiny_dortoir_nord_2": {
+      "nom": "Dortoir nord II",
+      "sources": [
+        "G01P09A",
+        "G01P09C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          20,
+          20,
+          57
+        ],
+        [
+          14,
+          14,
+          44
+        ],
+        [
+          7,
+          7,
+          31
+        ]
+      ],
+      "pixels": 82232,
+      "pixels_du_calque_avant": 216,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            111.0,
+            121.5
+          ],
+          "reflet": [
+            143.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            39,
+            41,
+            46,
+            46
+          ]
+        },
+        {
+          "bourgeon": [
+            326.0,
+            135.0
+          ],
+          "reflet": [
+            311.0,
+            166.0
+          ],
+          "plafonds_alpha": [
+            41,
+            44,
+            48,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5782,
+          "ancienne_version": 27,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6267,
+          "ancienne_version": 68,
+          "reflet_alpha_max": 44.0
+        },
+        {
+          "plancher_delta_luma_6": 6742,
+          "ancienne_version": 142,
+          "reflet_alpha_max": 48.0
+        },
+        {
+          "plancher_delta_luma_6": 6731,
+          "ancienne_version": 142,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        145,
+        157,
+        21.0
+      ],
+      "pixels_variables": 7686
+    },
+    "guilde_destiny_dortoir_sud_1": {
+      "nom": "Dortoir sud I",
+      "sources": [
+        "G01P10A",
+        "G01P10C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          20,
+          20,
+          57
+        ],
+        [
+          14,
+          14,
+          44
+        ],
+        [
+          7,
+          7,
+          31
+        ]
+      ],
+      "pixels": 82009,
+      "pixels_du_calque_avant": 133,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            118.0,
+            134.0
+          ],
+          "reflet": [
+            135.0,
+            166.0
+          ],
+          "plafonds_alpha": [
+            41,
+            43,
+            48,
+            48
+          ]
+        },
+        {
+          "bourgeon": [
+            335.0,
+            117.0
+          ],
+          "reflet": [
+            304.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            38,
+            41,
+            45,
+            45
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5870,
+          "ancienne_version": 10,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6327,
+          "ancienne_version": 59,
+          "reflet_alpha_max": 43.0
+        },
+        {
+          "plancher_delta_luma_6": 6805,
+          "ancienne_version": 142,
+          "reflet_alpha_max": 48.0
+        },
+        {
+          "plancher_delta_luma_6": 6786,
+          "ancienne_version": 133,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        133,
+        167,
+        20.8
+      ],
+      "pixels_variables": 7715
+    },
+    "guilde_destiny_dortoir_sud_2": {
+      "nom": "Dortoir sud II",
+      "sources": [
+        "G01P10A",
+        "G01P10C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          20,
+          20,
+          57
+        ],
+        [
+          14,
+          14,
+          44
+        ],
+        [
+          7,
+          7,
+          31
+        ]
+      ],
+      "pixels": 82009,
+      "pixels_du_calque_avant": 133,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            124.0,
+            116.0
+          ],
+          "reflet": [
+            143.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            40,
+            43,
+            47,
+            47
+          ]
+        },
+        {
+          "bourgeon": [
+            327.0,
+            136.0
+          ],
+          "reflet": [
+            312.0,
+            167.0
+          ],
+          "plafonds_alpha": [
+            41,
+            44,
+            48,
+            48
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 5917,
+          "ancienne_version": 32,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6351,
+          "ancienne_version": 79,
+          "reflet_alpha_max": 44.0
+        },
+        {
+          "plancher_delta_luma_6": 6818,
+          "ancienne_version": 144,
+          "reflet_alpha_max": 48.0
+        },
+        {
+          "plancher_delta_luma_6": 6802,
+          "ancienne_version": 144,
+          "reflet_alpha_max": 48.0
+        }
+      ],
+      "sonde_plancher": [
+        142,
+        158,
+        21.5
+      ],
+      "pixels_variables": 7482
+    },
+    "guilde_destiny_chambre_heros": {
+      "nom": "Chambre du héros",
+      "sources": [
+        "G01P07A",
+        "G01P07C"
+      ],
+      "phases": [
+        [
+          23,
+          23,
+          63
+        ],
+        [
+          20,
+          20,
+          57
+        ],
+        [
+          14,
+          14,
+          44
+        ],
+        [
+          7,
+          7,
+          31
+        ]
+      ],
+      "pixels": 71764,
+      "pixels_du_calque_avant": 510,
+      "bourgeons": [
+        {
+          "bourgeon": [
+            153.0,
+            115.0
+          ],
+          "reflet": [
+            175.0,
+            158.0
+          ],
+          "plafonds_alpha": [
+            41,
+            43,
+            48,
+            48
+          ]
+        },
+        {
+          "bourgeon": [
+            329.0,
+            103.0
+          ],
+          "reflet": [
+            314.0,
+            142.0
+          ],
+          "plafonds_alpha": [
+            41,
+            45,
+            49,
+            49
+          ]
+        }
+      ],
+      "images": [
+        {
+          "plancher_delta_luma_6": 6363,
+          "ancienne_version": 3,
+          "reflet_alpha_max": 41.0
+        },
+        {
+          "plancher_delta_luma_6": 6910,
+          "ancienne_version": 62,
+          "reflet_alpha_max": 45.0
+        },
+        {
+          "plancher_delta_luma_6": 7538,
+          "ancienne_version": 291,
+          "reflet_alpha_max": 49.0
+        },
+        {
+          "plancher_delta_luma_6": 7513,
+          "ancienne_version": 280,
+          "reflet_alpha_max": 49.0
+        }
+      ],
+      "sonde_plancher": [
+        310,
+        142,
+        20.6
+      ],
+      "pixels_variables": 8095
+    }
+  },
+  "plans_inchanges": 15,
+  "passages_inchanges": 29,
+  "cadres_sud_inchanges": 7,
+  "bourgeons_emetteurs": 32,
+  "alpha_reflet_plafond": 53,
+  "cadence_images_s": 6,
+  "plans_source": {
+    "G01P02A": {
+      "dimensions": [
+        408,
+        312
+      ],
+      "rgb": [
+        31,
+        31,
+        63
+      ],
+      "pixels_de_cette_teinte": 71251,
+      "sha256": "ce191d653bb6fc9d0b2d99d374df072222bc3931ca48ae3a6f8494911621c6f3",
+      "coins_uniformes": true
+    },
+    "G01P03A": {
+      "dimensions": [
+        696,
+        456
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 196655,
+      "sha256": "d9cbdc0d7b06c4134d26a200db1289f798c719aca0aeb5b0791ea425973208b1",
+      "coins_uniformes": true
+    },
+    "G01P04A": {
+      "dimensions": [
+        648,
+        432
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 117491,
+      "sha256": "8fe6ce55615546328e12c77408c488e0c5affcf8b7740172ec7c4427afdf23aa",
+      "coins_uniformes": true
+    },
+    "G01P04C": {
+      "dimensions": [
+        648,
+        432
+      ],
+      "rgb": [
+        15,
+        15,
+        47
+      ],
+      "pixels_de_cette_teinte": 117491,
+      "sha256": "ad4cd465dc481503f12d2cbfc65e263b2b79936581cdadfc92de7778e03953b5",
+      "coins_uniformes": true
+    },
+    "G01P05A": {
+      "dimensions": [
+        408,
+        384
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 77453,
+      "sha256": "be2d303978fe4d9fd4e3c80bcf747156ac17966ff16c6a01c3e9cbb7f1d6f7a1",
+      "coins_uniformes": true
+    },
+    "G01P05C": {
+      "dimensions": [
+        408,
+        384
+      ],
+      "rgb": [
+        15,
+        15,
+        47
+      ],
+      "pixels_de_cette_teinte": 77453,
+      "sha256": "c14baaf131d747d926ddcfdd2a3e90e8348354fa332c6925b1eb4edcee9ad36d",
+      "coins_uniformes": true
+    },
+    "G01P06A": {
+      "dimensions": [
+        504,
+        360
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 87210,
+      "sha256": "59f00012bb784128b3801832308ef0cd491de70d7fec1420099125bd266acf72",
+      "coins_uniformes": true
+    },
+    "G01P06B": {
+      "dimensions": [
+        504,
+        360
+      ],
+      "rgb": [
+        15,
+        15,
+        47
+      ],
+      "pixels_de_cette_teinte": 87210,
+      "sha256": "4e0927f770f5e650fdc63a56df915d7de924b107bf974cb89b6578353556508c",
+      "coins_uniformes": true
+    },
+    "G01P07A": {
+      "dimensions": [
+        384,
+        312
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 74289,
+      "sha256": "6455a20b7803f91bb3c9e9bb14f8d60af0002b97632ad75eda5bd6745543a642",
+      "coins_uniformes": true
+    },
+    "G01P07C": {
+      "dimensions": [
+        384,
+        312
+      ],
+      "rgb": [
+        7,
+        7,
+        31
+      ],
+      "pixels_de_cette_teinte": 74289,
+      "sha256": "c11d77d28d5728c9e17ebe494a58027230b52e1dcce9029e1195c0018de2738f",
+      "coins_uniformes": true
+    },
+    "G01P08A": {
+      "dimensions": [
+        256,
+        360
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 54780,
+      "sha256": "00c92b2f5124a47280c9db5752f1b2be37db65f970a567b85fcda21a55965477",
+      "coins_uniformes": true
+    },
+    "G01P09A": {
+      "dimensions": [
+        432,
+        336
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 106574,
+      "sha256": "35fea6b7d1ee2b19005c34c739426cb73e6d186b16c6629d817763c68e7af5ab",
+      "coins_uniformes": true
+    },
+    "G01P09C": {
+      "dimensions": [
+        432,
+        336
+      ],
+      "rgb": [
+        7,
+        7,
+        31
+      ],
+      "pixels_de_cette_teinte": 106580,
+      "sha256": "0f2101065780b6ef457529e2ba21d154cffdd982612e6d50654bcd7b1a07d892",
+      "coins_uniformes": true
+    },
+    "G01P10A": {
+      "dimensions": [
+        432,
+        336
+      ],
+      "rgb": [
+        23,
+        23,
+        63
+      ],
+      "pixels_de_cette_teinte": 106396,
+      "sha256": "97ce8a1f60cfb52a8fcbef724b81586effb1c5b47eaa53cd62a9e6c1857308b5",
+      "coins_uniformes": true
+    },
+    "G01P10C": {
+      "dimensions": [
+        432,
+        336
+      ],
+      "rgb": [
+        7,
+        7,
+        31
+      ],
+      "pixels_de_cette_teinte": 106396,
+      "sha256": "a60512df9a2299731fe67de668ea49c3c80d1ce23337dc1a842b647e3148501d",
+      "coins_uniformes": true
+    }
+  },
+  "ronces_nord": [
+    {
+      "montant": "ouest",
+      "pointe": [
+        [
+          208,
+          7
+        ],
+        [
+          207,
+          17
+        ],
+        [
+          207,
+          29
+        ],
+        [
+          209,
+          37
+        ]
+      ],
+      "enroulement": [
+        [
+          209,
+          25
+        ],
+        [
+          208,
+          37
+        ],
+        [
+          208,
+          49
+        ],
+        [
+          210,
+          54
+        ],
+        [
+          208,
+          64
+        ]
+      ],
+      "pixels": 192,
+      "bourgeon": [
+        207.12,
+        34.88
+      ]
+    },
+    {
+      "montant": "est",
+      "pointe": [
+        [
+          272,
+          10
+        ],
+        [
+          273,
+          19
+        ],
+        [
+          273,
+          27
+        ],
+        [
+          270,
+          37
+        ]
+      ],
+      "enroulement": [
+        [
+          270,
+          26
+        ],
+        [
+          271,
+          39
+        ],
+        [
+          271,
+          50
+        ],
+        [
+          270,
+          56
+        ],
+        [
+          272,
+          65
+        ]
+      ],
+      "pixels": 191,
+      "bourgeon": [
+        272.67,
+        34.67
+      ]
+    }
+  ],
+  "zones_protegees": [
+    "fond",
+    "vitres",
+    "seuils et arrivées",
+    "arche nord et tapis sud de l’Accueil"
+  ],
+  "alpha_source_generee": {
+    "provenance": "Texture de lumière produite par le générateur d’images",
+    "sha256_image_generee": "a14c72441950d884ad63398a3bf2fb54ae5ee7723befae74097466ced48d26fa",
+    "sha256_masque": "e245119a2611afb206eb9ddd692bb5c3d0cd45bdebf502a57ffdb3f95e536b79",
+    "taille_source": [
+      1448,
+      1086
+    ],
+    "taille_masque": [
+      161,
+      105
+    ],
+    "traitement": "Luminance → alpha, retrait du fond noir et recentrage sur le cœur ; la faible opacité est réglée lors de la projection."
+  },
+  "ambiances_intermediaires": "interpolation entre les échantillons Jour et Nuit",
+  "lecture_video": "Falaise-et-Bourgeons.webm",
+  "jeu_modifie": false,
+  "source_sha256": "9eafa761b64dd0cc5c0e7b0065f63a3c8135f76e8d2517536927e7ba3e786548",
+  "html_sha256": "ed187565fec4cfe2a98ec2c342e5112296222ee6a4ab82b8f67a173dc2d2dc13"
+}

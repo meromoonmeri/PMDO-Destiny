@@ -1,0 +1,110 @@
+{
+  "statut": "PASS",
+  "salles": 15,
+  "passages": 29,
+  "cadrages": 7,
+  "poteaux": 42,
+  "gestes": true,
+  "variantes": 12,
+  "plans_sans_lianes_identiques": 60,
+  "salles_animees": 15,
+  "phase_initiale": "Nuit",
+  "cadrages_identiques_dans_zone_commune": 7,
+  "illumination": [
+    {
+      "salle": "guilde_destiny_accueil",
+      "plancher_eclaire": 19605,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_missions",
+      "plancher_eclaire": 20194,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_grand_salon",
+      "plancher_eclaire": 25107,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_bureau_maitre",
+      "plancher_eclaire": 19668,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_carrefour",
+      "plancher_eclaire": 18974,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_refectoire",
+      "plancher_eclaire": 20112,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_cuisine",
+      "plancher_eclaire": 25377,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_reserve",
+      "plancher_eclaire": 19323,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_couloir_ouest",
+      "plancher_eclaire": 14066,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_couloir_est",
+      "plancher_eclaire": 16278,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_1",
+      "plancher_eclaire": 20902,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_dortoir_nord_2",
+      "plancher_eclaire": 23188,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_1",
+      "plancher_eclaire": 22688,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_dortoir_sud_2",
+      "plancher_eclaire": 22125,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    },
+    {
+      "salle": "guilde_destiny_chambre_heros",
+      "plancher_eclaire": 24233,
+      "px_seuils_changes": 0,
+      "px_bande_sud_changes": 0
+    }
+  ],
+  "native_ground": "anciens objets seulement",
+  "atelier": "aperçu animé, pose manuelle, animation en Jour, arrêt lecture, export PNG et JSON",
+  "mobile_395": true,
+  "mouvement_reduit": true,
+  "iframe_hors_ligne": true
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Destiny · Les objets PMU en huit sens</title>
+<style>/* STYLES_AUTONOMES */</style>
+</head>
+<body>
+<header class="top">
+  <a href="#debut" class="brand"><span class="sigil" aria-hidden="true">✦</span> <b>Destiny</b><span class="dot">/</span> <span>Archives de la Guilde</span></a>
+  <span class="edition"><span class="pulse"></span> DESTINY 0.7.7 · PIXEL ART 1×</span>
+</header>
+<main id="debut">
+  <section class="hero" aria-labelledby="main-title">
+    <div><p class="eyebrow"><span>PLANCHE Nº 08</span> <span>—</span> COLLECTION PMU</p>
+    <h1 id="main-title">Les objets <em>dans<br> les huit sens.</em></h1>
+    <p class="lede">Compare la face, les profils, les diagonales et le dos.<br class="desktop-break"> Chaque vue a son PNG transparent et son propre pivot de placement.</p></div>
+    <div class="stats" aria-label="Contenu du coffret"><div><b>346</b><span>OBJETS DE LA BANQUE</span></div><div><b>4</b><span>CRÉATIONS INÉDITES</span></div><div><b>2 880</b><span>PNG, BONUS COMPRIS</span></div></div>
+  </section>
+  <div class="notice"><span aria-hidden="true">◈</span><p>Décompresse le ZIP avant d’ouvrir cette page. <b>Down</b> reprend le sprite source ; les autres vues sont des reconstitutions, pas des ressources officielles de PMU.</p></div>
+  <div class="workspace">
+    <aside class="panel catalogue" aria-label="Catalogue des objets">
+      <div class="catalogue-head"><p class="eyebrow">01 / LA BANQUE</p><h2>Trouver un objet</h2></div>
+      <label class="search" for="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Recherche : bibliothèque, Mob_017…" autocomplete="off"></label>
+      <div class="filters"><label>Provenance<select id="family" aria-label="Provenance"><option value="*">Toute la collection</option><option value="pmu">Banque PMU · 346</option><option value="new">Créations inédites · 4</option><option value="ai">Bonus existants · 10</option></select></label><label>Catégorie<select id="category"><option value="*">Toutes catégories</option></select></label></div>
+      <p id="results" class="results" aria-live="polite"></p>
+      <div id="entries" class="entries"></div>
+      <div class="paging"><button id="page-prev" type="button" aria-label="Modèles précédents">‹</button><span id="page-n"></span><button id="page-next" type="button" aria-label="Modèles suivants">›</button></div>
+    </aside>
+    <section class="panel viewer" aria-label="Orientations de l’objet sélectionné">
+      <div class="view-head"><div><p class="eyebrow" id="badge">02 / L’OBJET</p><h2 id="object-name" tabindex="-1"></h2><p id="subname"></p></div><span class="tag" id="source-chip"></span></div>
+      <figure class="stage" id="stage"><div class="stage-top"><span><i></i> PNG TRANSPARENT</span><button id="spin" type="button" aria-pressed="false">▷ Tourner</button></div>
+        <div class="graphic"><canvas id="sprite" role="img" aria-label="Sprite sélectionné"></canvas><p class="problem" id="problem" hidden>Image introuvable. Décompresse le ZIP et ouvre son fichier Catalogue.html.</p></div>
+        <figcaption><div><b id="dir-title"></b><span id="dir-scale"></span></div><div class="next-dir"><button id="dir-prev" type="button" aria-label="Orientation précédente">‹</button><button id="dir-next" type="button" aria-label="Orientation suivante">›</button></div></figcaption>
+      </figure>
+      <div class="direction-grid" id="dirs" role="group" aria-label="Huit orientations"></div>
+      <div class="output"><a id="download" class="cta" target="_blank" rel="noopener">Ouvrir ce PNG <span aria-hidden="true">↗</span></a><a id="atlas" class="outline" target="_blank" rel="noopener">Ouvrir l’atlas 4 × 2</a><span id="pivot" class="pivot"></span></div>
+      <p id="method" class="method"></p>
+    </section>
+  </div>
+  <footer><div><b>Le coffret de la Guilde</b><p>Kit graphique hors ligne. Il ne modifie ni les cartes ni les sauvegardes.</p></div><div class="links"><a href="Index-PMU-8.csv" target="_blank" rel="noopener">Index CSV</a><a href="Index-PMU-8.json" target="_blank" rel="noopener">Pivots JSON</a><a href="Lisez-moi.md">Mode d’emploi</a></div></footer>
+</main>
+<script type="application/json" id="banque">DONNEES_COMPACTES</script>
+<script>/* LOGIQUE_AUTONOME */</script>
+</body>
+</html>

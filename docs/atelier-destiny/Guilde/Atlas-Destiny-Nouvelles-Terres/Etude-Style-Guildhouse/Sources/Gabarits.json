@@ -1,0 +1,102 @@
+{
+  "Seracine": {
+    "index": 2,
+    "box": [
+      466,
+      56,
+      1081,
+      287
+    ],
+    "template_units": [
+      688,
+      344
+    ],
+    "template_zoom": 2,
+    "template_land": [
+      36,
+      56,
+      651,
+      287
+    ]
+  },
+  "Estrel": {
+    "index": 3,
+    "box": [
+      660,
+      306,
+      1083,
+      677
+    ],
+    "template_units": [
+      478,
+      478
+    ],
+    "template_zoom": 2,
+    "template_land": [
+      27,
+      53,
+      450,
+      424
+    ]
+  },
+  "Torselune": {
+    "index": 4,
+    "box": [
+      265,
+      456,
+      669,
+      688
+    ],
+    "template_units": [
+      468,
+      312
+    ],
+    "template_zoom": 2,
+    "template_land": [
+      32,
+      40,
+      436,
+      272
+    ]
+  },
+  "Reverie": {
+    "index": 5,
+    "box": [
+      70,
+      451,
+      246,
+      627
+    ],
+    "template_units": [
+      216,
+      216
+    ],
+    "template_zoom": 4,
+    "template_land": [
+      20,
+      20,
+      196,
+      196
+    ]
+  },
+  "Les-Haltes": {
+    "index": 6,
+    "box": [
+      466,
+      242,
+      636,
+      455
+    ],
+    "template_units": [
+      256,
+      256
+    ],
+    "template_zoom": 3,
+    "template_land": [
+      43,
+      21,
+      213,
+      234
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "resultat": "PASS",
+  "page_sha256": "736a3a1f84257e08309ce56006efe8163d54fe7448cbacf9ac8907f454c8b6e8",
+  "navigateur": {
+    "plans": 60,
+    "seuils": 29,
+    "cadre": {
+      "avant": [
+        320,
+        240,
+        104,
+        72,
+        47,
+        255
+      ],
+      "apres": [
+        320,
+        240,
+        217,
+        146,
+        74,
+        255
+      ]
+    },
+    "exports": {
+      "json": true,
+      "native": true,
+      "png": true,
+      "maps_verifiees_octet_par_octet": [
+        "guilde_destiny_grand_salon",
+        "guilde_destiny_accueil"
+      ],
+      "native_ajout": [
+        {
+          "X": 304,
+          "Y": 248
+        },
+        {
+          "X": 328,
+          "Y": 248
+        }
+      ]
+    },
+    "mobile": true,
+    "iframe_sandbox": true,
+    "resultat": "PASS"
+  },
+  "jeu": {
+    "resultat": "PASS",
+    "salle": "guilde_destiny_grand_salon",
+    "ajout_seul": "Decorations/AtelierMobilierPMU",
+    "ambiances": [
+      {
+        "phase": "jour",
+        "pixels_du_mobilier": 7468,
+        "pixels_autres_que_sprite_du_heros": 0,
+        "bas_de_camera": 383
+      },
+      {
+        "phase": "aube",
+        "pixels_du_mobilier": 7468,
+        "pixels_autres_que_sprite_du_heros": 0,
+        "bas_de_camera": 383
+      },
+      {
+        "phase": "crepuscule",
+        "pixels_du_mobilier": 7468,
+        "pixels_autres_que_sprite_du_heros": 0,
+        "bas_de_camera": 383
+      },
+      {
+        "phase": "nuit",
+        "pixels_du_mobilier": 7468,
+        "pixels_autres_que_sprite_du_heros": 0,
+        "bas_de_camera": 383
+      }
+    ],
+    "sortie": "guilde_destiny_missions"
+  },
+  "publication": {
+    "depot": "https://github.com/meromoonmeri/PMDO-Destiny.git",
+    "branche": "refs/heads/wip/reverie-integration-kingambit-cafe",
+    "base": "0c0a13f75e13ab95132b66b282dae1b369ef885b",
+    "cadrage": "0ebeba87d885f5c3381dfa35e27c7fed47cbb20d",
+    "atelier": "355d1f3d3e45544b43260f812997d462afbc715a",
+    "bundle": "Guilde-Destiny-0.7.7-Mise-a-jour.bundle",
+    "etat": "non pousse : authentification d’ecriture indisponible",
+    "tete_distante": "0c0a13f75e13ab95132b66b282dae1b369ef885b"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "statut": "PASS",
+  "salles": 15,
+  "foyers": 30,
+  "poteaux": 42,
+  "plans_hors_nuit_identiques": 45,
+  "texture_sha256": "e245119a2611afb206eb9ddd692bb5c3d0cd45bdebf502a57ffdb3f95e536b79",
+  "reflets_max_pourcent": 9.8,
+  "verification_animation": [
+    {
+      "salle": "Accueil",
+      "pixels_animes": 2859,
+      "variation_max_255": 4,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Salle des missions",
+      "pixels_animes": 2536,
+      "variation_max_255": 9,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Grand Salon",
+      "pixels_animes": 2568,
+      "variation_max_255": 5,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Bureau du maître",
+      "pixels_animes": 2079,
+      "variation_max_255": 9,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Carrefour",
+      "pixels_animes": 2063,
+      "variation_max_255": 9,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Réfectoire",
+      "pixels_animes": 2422,
+      "variation_max_255": 6,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Cuisine",
+      "pixels_animes": 1512,
+      "variation_max_255": 5,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Réserve",
+      "pixels_animes": 1820,
+      "variation_max_255": 5,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Couloir ouest",
+      "pixels_animes": 1596,
+      "variation_max_255": 6,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Couloir est",
+      "pixels_animes": 1948,
+      "variation_max_255": 7,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Dortoir nord I",
+      "pixels_animes": 1820,
+      "variation_max_255": 8,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Dortoir nord II",
+      "pixels_animes": 1841,
+      "variation_max_255": 8,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Dortoir sud I",
+      "pixels_animes": 2151,
+      "variation_max_255": 9,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Dortoir sud II",
+      "pixels_animes": 1703,
+      "variation_max_255": 8,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    },
+    {
+      "salle": "Chambre du héros",
+      "pixels_animes": 2511,
+      "variation_max_255": 7,
+      "seuils_modifies": 0,
+      "raccord_pixels": 0
+    }
+  ],
+  "geometrie_etoffes_ambiances_identiques": true,
+  "iframe_sandbox_hors_ligne": true
+}

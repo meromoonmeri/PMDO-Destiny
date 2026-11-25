@@ -1,0 +1,23 @@
+{
+  "type": "sauvegarde partielle des fichiers Cliff présents dans la sandbox",
+  "directories": [
+    "chantier-cliff-aube-crepuscule",
+    "chantier-cliff-bordures",
+    "chantier-cliff-ciel-guilde",
+    "chantier-cliff-ciels-reveil",
+    "chantier-cliff-eau-canonique",
+    "chantier-cliff-raccord-metano",
+    "chantier-cliff-raccords-qg",
+    "chantier-cliff-retour-droit",
+    "chantier-cliff-vagues-etoiles",
+    "chantier-cap-escalier-nuages",
+    "chantier-grand-cap-nuit",
+    "apercu-cliff-guilde-ambiances"
+  ],
+  "files": 622,
+  "zip_size": 17125276,
+  "zip_sha256": "278d2f75c6ac3ddf8f5cb1b93b79d7144d4ae973e4fa9105ca7d8f426d41f066",
+  "testzip": null,
+  "absence": "La proposition de QG choisie et les APNG produits précédemment ne sont plus présents; animation de porte non créée. Références et outils extérieurs peuvent manquer. Ne couvre pas les autres travaux locaux.",
+  "usage": "Maquettes non intégrées au jeu; aucune validation moteur."
+}

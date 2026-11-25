@@ -1,0 +1,14 @@
+{
+  "statut": "PASS",
+  "salles": 15,
+  "poteaux": 42,
+  "bourgeons": 554,
+  "calques_png": 165,
+  "animations": 12,
+  "frames_par_animation": 16,
+  "apng_equivalents_aux_planches": true,
+  "sha_atelier": "72f8c8530de6e097b5ccbd9af857a41d459f61ad6789f706b747986514f533e9",
+  "sha_zip": "9b4e727846ca0d4df2874a1d07bddda5e4669ea63b6fc321a7a04026748258c6",
+  "fichiers_zip": 198,
+  "jeu_modifie": false
+}

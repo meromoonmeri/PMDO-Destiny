@@ -1,0 +1,18 @@
+{
+  "statut": "PASS",
+  "tests": 74,
+  "hors_ligne": true,
+  "lieux_fixes": true,
+  "erreurs": [],
+  "requêtes_externes": [],
+  "vue_sandbox": true,
+  "archipels": 4,
+  "nouveaux_reperes": 5,
+  "zones_voilees": 9,
+  "ouverture_unique": true,
+  "mouvement_reduit_sans_animation": true,
+  "mobiles": [
+    320,
+    390
+  ]
+}

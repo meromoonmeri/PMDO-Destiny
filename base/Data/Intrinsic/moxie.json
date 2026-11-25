@@ -1,0 +1,130 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Moxie",
+"LocalTexts": {
+"fr": "Impudence",
+"de": "Hochmut",
+"es": "Autoestima",
+"it": "Arroganza",
+"ko": "자기과신",
+"ja": "じしんかじょう",
+"ja-jp": "じしんかじょう",
+"zh-hans": "自信过度",
+"zh-hant": "自信過度"
+}
+},
+"Desc": {
+"DefaultText": "The Pokémon shows moxie, which may boost the Attack stat after knocking out any Pokémon with a move.",
+"LocalTexts": {
+"de": "Besiegt es ein Pokémon mit einer Attacke, steigt sein Selbstvertrauen und somit auch sein Angriff.",
+"es": "El Pokémon muestra autoestima, lo que puede aumentar su Ataque al derrotar un Pokémon con un movimiento.",
+"zh-hans": "如果打倒对手，就会充满自信，攻击可能会提高。"
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 153,
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.OnHitAnyEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": 1,
+"StatusID": "mod_attack",
+"AffectTarget": false,
+"SelfInflicted": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_MOXIE"
+},
+"Anims": []
+}
+],
+"RequireDamage": true,
+"Chance": 50
+}
+]
+}
+]
+}
+}
+],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

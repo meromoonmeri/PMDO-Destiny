@@ -1,0 +1,175 @@
+'use strict';
+const {chromium}=require(process.env.PLAYWRIGHT||'playwright');
+const fs=require('node:fs'), p=require('node:path'), assert=require('node:assert/strict'), {pathToFileURL}=require('node:url');
+const root=p.resolve(__dirname,'..'), target=p.join(root,'Carte-Miracle-Destiny.html'), file=pathToFileURL(target).href;
+const out=process.argv[2];let pass=0;const faults=[],external=[];
+const ok=(v,msg)=>{assert.ok(v,msg);pass++;};
+const snap=page=>page.evaluate(()=>window.carteMiracle.snapshot());
+const step=(page,t)=>page.evaluate(n=>window.carteMiracle.advance(n),t);
+const ready=page=>page.waitForFunction(()=>window.carteMiracle?.snapshot().ready);
+function watch(page){page.on('pageerror',e=>faults.push(e.message));page.on('request',r=>{if(/^https?:/.test(r.url()))external.push(r.url());});}
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME||undefined,headless:true,args:['--no-sandbox']});
+ try{
+  const cx=await browser.newContext({viewport:{width:1430,height:900},offline:true,deviceScaleFactor:1});
+  const pg=await cx.newPage();watch(pg);await pg.goto(file+'?capture=1');await ready(pg);let s=await snap(pg);
+  ok(s.phase==='idle'&&s.current==='reverie'&&s.selected==='fosse','Start in Réverie, first route selected');
+  ok(s.found.length===1&&s.total===25&&s.visibles===25,'25 pins on overview including the four new islands, one discovered');
+  ok(await pg.locator('#depart').isEnabled(),'Starting voyage is enabled');
+  ok(await pg.locator('#minus').isDisabled(),'Cannot zoom out beyond world view');
+  ok(s.clouds&&s.totalZones===9&&s.openedZones.length===0&&!s.opening,'Nine zones begin behind still cloud banks; Réverie is already clear');
+  const swatch=()=>pg.locator('#chart').evaluate(c=>c.toDataURL('image/png'));
+  const first=await swatch();await step(pg,850);ok(first===await swatch(),'Idle chart is pixel-identical: no site, wave, pin, cloud or scenery animation');
+  await pg.locator('#clouds').click();
+  ok(!(await snap(pg)).clouds&&first!==await swatch(),'The clouds switch exposes the same chart without any veil');
+  await pg.locator('#clouds').click();
+  ok(first===await swatch()&&(await snap(pg)).openedZones.length===0,'Preview without clouds does not discover any zone');
+  await pg.mouse.move(1403,133);
+  if(out)await pg.screenshot({path:p.join(out,'Destiny-Bureau.png'),fullPage:false});
+  await pg.locator('#depart').click(); s=await step(pg,480);
+  ok(s.phase==='travel'&&s.transport==='terre'&&s.pos[0]>142&&s.pos[0]<214,'Pikachu progresses continuously during the walk');
+  ok(s.found.length===1&&s.camera.z>1.25,'Camera follows but site remains locked before arrival');
+  await pg.locator('#pause').click();const hold=await snap(pg);const after=await step(pg,1270);
+  ok(after.paused&&after.elapsed===hold.elapsed&&JSON.stringify(after.pos)===JSON.stringify(hold.pos),'Pause freezes movement');
+  await pg.locator('#pause').click();s=await step(pg,(after.totalTime-after.elapsed)*1000+120);
+  ok(s.phase==='reveal'&&s.current==='fosse'&&s.found.includes('fosse')&&s.toast,'Fosse Cascade unlocks on arrival');
+  ok(!s.opening&&s.openedZones.length===0,'A site within the starter region does not replay a regional opening');
+  ok(await pg.locator('#arrival-kind').textContent()==='REPÈRE DÉBLOQUÉ !','Visible unlock banner');
+  ok(await pg.locator('#discTrack').getAttribute('aria-valuenow')==='2','Journal and progress announce the unlock');
+  s=await step(pg,500);await pg.waitForTimeout(330);
+  if(out)await pg.screenshot({path:p.join(out,'Destiny-Deblocage.png')});
+  await step(pg,1300);s=await snap(pg);ok(s.phase==='idle'&&s.current==='fosse','Automatic end of reveal');
+  await pg.reload();await ready(pg);s=await snap(pg);ok(s.current==='fosse'&&s.found.length===2,'Progress survives reload when local storage is available');
+  await pg.locator('#reset').click();s=await snap(pg);ok(s.current==='reverie'&&s.found.length===1&&!s.toast,'Reset restores only the initial pin');
+  await pg.locator('#routes').click();ok(!(await snap(pg)).routes,'Hide route overlay');
+  await pg.locator('#routes').click();await pg.locator('#world').click();await step(pg,1000);
+  await pg.locator('#repere-spirale').click();ok((await snap(pg)).selected==='spirale','Click marine map pin');
+  // In a fixed world view, the destination graphic remains unchanged even mid-journey.
+  await pg.locator('#routes').click();await pg.locator('#depart').click();await step(pg,110);
+  const seaGlyph=()=>pg.locator('#chart').evaluate(c=>{const k=Math.min(c.width/1112,c.height/732), x=Math.round(c.width/2+(568-556)*k), y=Math.round(c.height/2+(286-366)*k);return Array.from(c.getContext('2d').getImageData(x,y,Math.floor(73*k),Math.floor(65*k)).data).join(',');});
+  const fixed=await seaGlyph();await step(pg,520);ok(fixed===await seaGlyph(),'Spiral and target pin do not animate while the team travels');
+  await pg.locator('#reset').click();await pg.locator('#routes').click();await pg.locator('#world').click();await step(pg,400);
+  await pg.locator('#repere-spirale').click();
+  await pg.locator('#follow').click();await pg.locator('#speed').selectOption('4');await pg.locator('#depart').click();s=await step(pg,760);
+  ok(s.phase==='travel'&&s.rate===4&&s.events.some(e=>e.type==='transport'&&e.mode==='mer'),'Overseas route changes from land to boat');
+  if(out){await pg.mouse.move(1404,90);await pg.screenshot({path:p.join(out,'Destiny-Traversee.png')});}
+  s=await step(pg,3500);ok(s.current==='spirale'&&s.found.includes('spirale'),'Marine waypoint is discoverable');
+  ok(s.events.some(e=>e.type==='transport'&&e.mode==='port'),'Explicit embarkation leg');
+  await pg.locator('#reset').click();await pg.locator('#speed').selectOption('4');await pg.locator('#circuitMer').click();s=await step(pg,22000);
+  ok(s.phase==='idle'&&s.current==='grotte-ocre','Maritime circuit reaches the last cave');
+  ok(['houle','balise-nacre','spirale','grotte-ocre'].every(k=>s.found.includes(k)),'Maritime tour unlocks all four stops');
+  await pg.locator('#reset').click();await pg.locator('#world').click();await step(pg,400);
+  const archipelIds=['volcan-geant','cratere-obscur','bois-petales','atoll-coraux','grotte-amethystes'];
+  ok(await pg.locator('#discTrack').getAttribute('aria-valuemax')==='25','Journal has a dynamic total');
+  await pg.locator('#repere-volcan-geant').click();
+  ok((await snap(pg)).selected==='volcan-geant'&&await pg.locator('#siteCaption').textContent().then(x=>x.includes('Explorateurs du Ciel · adaptation Destiny')),'Canonical name and adapted placement distinguished');
+  if ((await snap(pg)).routes) await pg.locator('#routes').click();
+  await pg.locator('#speed').selectOption('1');await pg.locator('#depart').click();await step(pg,130);
+  const volcanicPixels=(sample)=>pg.locator('#chart').evaluate((c,sample)=>{
+    const d=JSON.parse(document.getElementById('atlas-data').textContent), v=d.archipels.find(a=>a.id==='volcans');
+    const [px,py]=d.sites.find(s=>s.id==='volcan-geant').loc;
+    const [l,t,w,h]=sample==='pin'?[px-8,py-8,16,16]:sample==='other'?[750,372,80,80]:[v.x,v.y,v.w,v.h];
+    const k=Math.min(c.width/d.width,c.height/d.height), x=Math.floor(c.width/2+(l-d.width/2)*k),y=Math.floor(c.height/2+(t-d.height/2)*k);
+    const data=c.getContext('2d').getImageData(x,y,Math.ceil(w*k),Math.ceil(h*k)).data;
+    const redAt=[];for(let j=0;j<data.length;j+=4)if(data[j]===255&&data[j+1]===0&&data[j+2]===0)redAt.push(j);
+    return {red:redAt.length,redMask:redAt.join(','),pixels:Array.from(data).join(',')};
+  },sample);
+  const island=await volcanicPixels('island');s=await step(pg,1040);
+  ok(s.phase==='travel'&&!s.found.includes('volcan-geant'),'Volcan Géant stays locked during the voyage');
+  ok(island.pixels===(await volcanicPixels('island')).pixels&&!s.opening,'Undiscovered cloud bank and volcano marks are fixed during the voyage');
+  const yellow=await volcanicPixels('pin');s=await step(pg,(s.totalTime-s.elapsed)*1000+80);
+  ok(s.phase==='reveal'&&s.current==='volcan-geant'&&s.toast&&s.found.includes('volcan-geant'),'First volcano unlocks precisely at arrival');
+  ok(s.opening?.zone==='volcans'&&s.openedZones.join(',')==='volcans','The first arrival opens exactly the destination’s cloud layer');
+  ok(await pg.locator('#arrival-zone').textContent().then(x=>x.includes('nuages s’écartent')),'Narration distinguishes geographic opening and pin unlock');
+  ok(s.events.some(e=>e.type==='transport'&&e.mode==='mer')&&s.events.some(e=>e.type==='transport'&&e.mode==='terre'),'Volcano reached by boat then on foot');
+  const red=await volcanicPixels('pin');ok(red.red>yellow.red+3,'The volcano marker has turned red on the arrival frame');
+  const cover0=await volcanicPixels('island'), other=await volcanicPixels('other');
+  await pg.locator('#pause').click();const duringPause=await step(pg,600);
+  ok(duringPause.paused&&duringPause.opening.progress===s.opening.progress&&cover0.pixels===(await volcanicPixels('island')).pixels,'Pausing freezes the cloud layer too');
+  await pg.locator('#pause').click();
+  s=await step(pg,710);
+  ok(s.opening.progress>0.5&&cover0.pixels!==(await volcanicPixels('island')).pixels,'The local illustrated bank actually changes frame by frame');
+  ok(red.redMask===(await volcanicPixels('pin')).redMask&&s.events.filter(e=>e.type==='deblocage'&&e.id==='volcan-geant').length===1,'The red pin stays pixel-stable over the moving clouds; exactly one unlock');
+  ok(other.pixels===(await volcanicPixels('other')).pixels,'Other regional cloud banks stay still during the opening');
+  if(out){await pg.mouse.move(1411,92);await pg.screenshot({path:p.join(out,'Destiny-Nuages-Volcan.png')});}
+  s=await step(pg,1200);
+  const cleared=await volcanicPixels('island');await pg.locator('#clouds').click();
+  ok(!s.opening&&s.phase==='idle'&&cleared.pixels===(await volcanicPixels('island')).pixels,'The revealed island is identical to the same island with the whole cloud overlay switched off');
+  await pg.locator('#clouds').click();
+  await pg.reload();await ready(pg);s=await snap(pg);
+  ok(s.openedZones.join(',')==='volcans'&&!s.opening,'Previously saved discoveries restore open zones with no animation on reload');
+  await pg.locator('#reset').click();await pg.locator('#speed').selectOption('4');
+  if (!(await snap(pg)).routes) await pg.locator('#routes').click();
+  await pg.locator('#circuitArchipels').click();s=await step(pg,45000);
+  ok(s.phase==='idle'&&s.current==='grotte-amethystes','Guided archipelago voyage reaches its final cave');
+  ok(archipelIds.every(k=>s.found.includes(k))&&s.found.length===6,'All five new destinations unlock and enter the journal');
+  ok(s.events.filter(e=>e.type==='deblocage').map(e=>e.id).join(',')===archipelIds.join(','),'New expedition unlocks all five stops in the intended order');
+  ok(s.events.filter(e=>e.type==='ouverture-zone').map(e=>e.id).join(',')==='volcans,petales,coraux,amethystes','The Cratère Obscur unlocks but does not reopen a cloud bank on an already visited island');
+  ok(s.events.some(e=>e.type==='transport'&&e.mode==='port'),'The new expedition uses an embarkation leg');
+  await pg.locator('#destination').selectOption('atoll-coraux');
+  ok(await pg.locator('#siteCaption').textContent().then(x=>x.includes('Île originale Destiny')),'Original biomes are marked separately from EoS');
+  if(out){await pg.mouse.move(1408,96);await pg.screenshot({path:p.join(out,'Destiny-Fin-des-Archipels.png')});}
+  await pg.locator('#world').click();s=await step(pg,980);ok(s.camera.z<1.005&&!s.follow,'Back to full world overview');
+  await pg.locator('#plus').click();s=await step(pg,630);ok(s.camera.z>1.28,'Zoom controls');
+  const b=await pg.locator('#stage').boundingBox();await pg.mouse.move(b.x+b.width*.49,b.y+b.height*.47);await pg.mouse.wheel(0,-110);s=await step(pg,170);ok(s.camera.z>1.50,'Wheel zoom');
+  const prior=s.camera.x;await pg.mouse.move(b.x+b.width*.45,b.y+b.height*.45);await pg.mouse.down();await pg.mouse.move(b.x+b.width*.60,b.y+b.height*.46,{steps:6});await pg.mouse.up();s=await snap(pg);ok(Math.abs(s.camera.x-prior)>10,'Drag at zoom pans the map');
+  await pg.locator('#stage').focus();await pg.keyboard.press('0');s=await step(pg,850);ok(s.camera.z<=1.006,'Keyboard resets the view');
+  await pg.locator('#sound').click();ok((await snap(pg)).sound,'Optional sound toggle on');await pg.locator('#sound').click();ok(!(await snap(pg)).sound,'Optional sound toggle off');
+  await pg.locator('#reset').click();await pg.locator('#speed').selectOption('4');
+  ok((await snap(pg)).openedZones.length===0,'Reset restores all clouds without affecting the art');
+  await pg.locator('#clouds').click();await pg.locator('#circuitNuages').click();
+  ok((await snap(pg)).clouds,'Guided cloud circuit automatically turns the cloud layer back on');
+  s=await step(pg,43000);
+  const zoneOrder=['torselune','amethystes','haltes','orival','volcans','seracine','petales','estrel','coraux'];
+  ok(s.openedZones.join(',')===zoneOrder.join(',')&&s.phase==='idle'&&s.current==='atoll-coraux','The guided circuit clears all nine distinct zones in order');
+  ok(s.events.filter(e=>e.type==='ouverture-zone').length===9&&s.found.length===10,'Nine openings do not alter the 25-pin progression rules');
+  ok(await pg.locator('#veilCount').textContent()==='Toutes les zones sont dévoilées'&&await pg.locator('#circuitNuages').isDisabled(),'The journal clearly shows a fully unveiled atlas');
+  await pg.locator('#world').click();await step(pg,1100);
+  const clearWorld=await swatch();await pg.locator('#clouds').click();
+  ok(clearWorld===await swatch(),'After all regions are opened, no map pixels differ with the cloud overlay on or off');
+  if(out){await pg.mouse.move(1411,93);await pg.screenshot({path:p.join(out,'Destiny-Toutes-zones.png')});}
+  await cx.close();
+  const chill=await browser.newContext({viewport:{width:1020,height:820},offline:true,reducedMotion:'reduce'});
+  const rm=await chill.newPage();watch(rm);await rm.goto(file+'?capture=1');await ready(rm);
+  await rm.locator('#speed').selectOption('4');await rm.locator('#destination').selectOption('volcan-geant');await rm.locator('#depart').click();
+  const budget=await snap(rm), gentle=await step(rm,budget.totalTime*250+140);
+  ok(gentle.phase==='reveal'&&gentle.openedZones.includes('volcans')&&!gentle.opening,'Reduced motion reveals the same zone instantly without moving the clouds');
+  await chill.close();
+  for(const width of [320,390]){
+    const mobile=await browser.newContext({viewport:{width,height:840},deviceScaleFactor:1,isMobile:true,hasTouch:true,offline:true});const m=await mobile.newPage();watch(m);
+    await m.goto(file+'?capture=1');await ready(m);ok(await m.evaluate(()=>document.documentElement.scrollWidth===innerWidth),`Fits phone ${width}`);
+    ok(await m.locator('#stage').isVisible(),`Map visible on phone ${width}`);
+    if(width===390){
+      const session=await mobile.newCDPSession(m);
+      const centre=await m.locator('#stage').evaluate(stage=>{
+        // Exercise a two-finger gesture with the first finger beginning on the new crystal pin.
+        const b=stage.querySelector('#repere-grotte-amethystes').getBoundingClientRect();
+        return [Math.round(b.x+b.width/2+23),Math.round(b.y+b.height/2)];
+      });
+      const touch=(id,x)=>({id,x:centre[0]+x,y:centre[1]});
+      await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[touch(0,-23),touch(1,23)]});
+      await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[touch(0,-44),touch(1,44)]});
+      await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+      ok((await snap(m)).camera.z>1.7,'Two-finger pinch zoom also works when the first finger is over a pin');
+      await m.locator('#world').click();await step(m,1100);
+      await m.waitForTimeout(220);await m.locator('#repere-bois-petales').tap();
+      ok((await snap(m)).selected==='bois-petales','A plain touch still selects a map pin');
+      await m.locator('#reset').tap();
+      if(out)await m.screenshot({path:p.join(out,'Destiny-Mobile.png'),fullPage:true});
+    }
+    await m.locator('#depart').tap();s=await step(m,3000);ok(s.current==='fosse'&&s.found.includes('fosse'),`Playable trip on phone ${width}`);
+    await mobile.close();
+  }
+  const ctx=await browser.newContext({viewport:{width:1130,height:880},offline:true});const page=await ctx.newPage();watch(page);
+  const html=fs.readFileSync(target,'utf8');await page.setContent('<iframe sandbox="allow-scripts" style="width:100%;height:855px;border:0" title="Carte" srcdoc="'+html.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;')+'"></iframe>');
+  const frame=page.frames()[1];await ready(frame);ok((await snap(frame)).total===25,'Offline viewer iframe works without storage or external resources');
+  await frame.locator('#speed').selectOption('4');await frame.locator('#depart').click();await frame.waitForFunction(()=>window.carteMiracle.snapshot().found.includes('fosse'));
+  ok((await snap(frame)).found.length===2,'Arrival works in the restricted preview');
+  await frame.waitForFunction(()=>window.carteMiracle.snapshot().phase==='idle');
+  await frame.locator('#destination').selectOption('grotte-ocre');await frame.locator('#depart').click();
+  await frame.waitForFunction(()=>window.carteMiracle.snapshot().opening?.zone==='torselune');
+  ok((await snap(frame)).openedZones.includes('torselune'),'A visible cloud opening works offline inside the file viewer');await ctx.close();
+  ok(!faults.length,'No page errors: '+faults.join(', '));ok(!external.length,'No external requests');
+  fs.writeFileSync(p.join(root,'Verification-lecteur.json'),JSON.stringify({statut:'PASS',tests:pass,hors_ligne:true,lieux_fixes:true,erreurs:faults,requêtes_externes:external,vue_sandbox:true,archipels:4,nouveaux_reperes:5,zones_voilees:9,ouverture_unique:true,mouvement_reduit_sans_animation:true,mobiles:[320,390]},null,2)+'\n');console.log(`${pass} contrôles réussis`);
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1);});

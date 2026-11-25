@@ -1,0 +1,228 @@
+{
+  "herbe_cellules": 7982,
+  "arbres": [
+    {
+      "avant_case": [
+        -2,
+        297
+      ],
+      "apres_case": [
+        0,
+        297
+      ],
+      "cellules_rognées": 64
+    },
+    {
+      "avant_case": [
+        -1,
+        338
+      ],
+      "apres_case": [
+        0,
+        338
+      ],
+      "cellules_rognées": 71
+    },
+    {
+      "avant_case": [
+        195,
+        319
+      ],
+      "apres_case": [
+        190,
+        319
+      ],
+      "cellules_rognées": 38
+    },
+    {
+      "avant_case": [
+        192,
+        337
+      ],
+      "apres_case": [
+        190,
+        337
+      ],
+      "cellules_rognées": 64
+    }
+  ],
+  "chemins": [
+    {
+      "nom": "Ruban de la terrasse du Café et coude sud",
+      "rectangle_px": [
+        552,
+        1400,
+        1080,
+        1544
+      ],
+      "cellules": 322,
+      "pistes_statiques_regroupees": 10
+    },
+    {
+      "nom": "Raccord du sable au pied de l’escalier est",
+      "rectangle_px": [
+        1424,
+        576,
+        1496,
+        624
+      ],
+      "cellules": 37,
+      "pistes_statiques_regroupees": 25
+    },
+    {
+      "nom": "Couture sableuse de l’allée ouest",
+      "rectangle_px": [
+        48,
+        2328,
+        136,
+        2432
+      ],
+      "cellules": 88,
+      "pistes_statiques_regroupees": 102
+    },
+    {
+      "nom": "Couture de la place ouest vers le sud",
+      "rectangle_px": [
+        120,
+        1224,
+        200,
+        1304
+      ],
+      "cellules": 64,
+      "pistes_statiques_regroupees": 66
+    }
+  ],
+  "pistes": {
+    "avant": [
+      116340,
+      11420,
+      10408,
+      0,
+      7730,
+      0,
+      25906,
+      3157,
+      2462,
+      0,
+      0
+    ],
+    "apres": [
+      116137,
+      11420,
+      10408,
+      0,
+      7730,
+      0,
+      25973,
+      3157,
+      2462,
+      0,
+      0
+    ]
+  },
+  "cartes": {
+    "WaterfallVillageCapital": {
+      "sha256": "5a41c0e1203c9775052e7fe1d32da4751149a40a5b2dfc75803f5875e503059c",
+      "octets": 36710525
+    },
+    "WaterfallVillageCapital_Dev": {
+      "sha256": "ea8bddb675482afd57eda3329e47582b7a2d2c26d30b6caddaef5bcb4640a011",
+      "octets": 36710529
+    },
+    "reverie_centre": {
+      "sha256": "4ec56bf5c5daa95035669e035dd5ede287465b388f8958935dbb9ac82a1344f5",
+      "octets": 36704846
+    },
+    "reverie_centre_Dev": {
+      "sha256": "4223bc870497b5779ac12f310e0779a8fb674720a09f9cbe52b2557865f286ae",
+      "octets": 36704850
+    },
+    "reverie_nord": {
+      "sha256": "307a195d278de6f7e61751cb545338b118648f685b78a638d4845cc446ea1d32",
+      "octets": 36704844
+    },
+    "reverie_nord_Dev": {
+      "sha256": "da369e6bf48dd7b558dd6fc02fea77c93984625e664872c39653776fae4c9c7e",
+      "octets": 36704848
+    },
+    "reverie_etang": {
+      "sha256": "3cb994860cf4150e8e4aaed1bc28d317364186486a6781ad468f596fc140e67c",
+      "octets": 36676902
+    },
+    "reverie_etang_Dev": {
+      "sha256": "92ed3c369db9158be131296c9dfe382087dcc50b613a9f9304ffccf4cb1ddd7e",
+      "octets": 36676906
+    },
+    "reverie_residentiel": {
+      "sha256": "05882a701c8e1cd9016290e2464134c9fe12ab27f74e2161286ba3a67e822106",
+      "octets": 36682577
+    },
+    "reverie_residentiel_Dev": {
+      "sha256": "641e5560df870a7e3c0915fe66169ab9d3a2290241e0e9376b9a9763b48764af",
+      "octets": 36682581
+    }
+  },
+  "banque": {
+    "nom": "Reverie_Raccords_Polish",
+    "cellules": 494
+  },
+  "recadrage_sud": {
+    "rangées": 372,
+    "cartes": {
+      "WaterfallVillageCapital": {
+        "sha256": "cce59f4ca65f3ac8c8f841fc94d7a3e734d0bb301a335af1925fd40252d07a06",
+        "octets": 29363257
+      },
+      "WaterfallVillageCapital_Dev": {
+        "sha256": "7b44bb73349b22d5ff9ef712e7f5da94ec25ca6acd97635739d311f211940caa",
+        "octets": 29363261
+      },
+      "reverie_centre": {
+        "sha256": "230c472c42c65920f4d665061dcfae0b4ed0e0c304f393ac12d68571f672d180",
+        "octets": 29357578
+      },
+      "reverie_centre_Dev": {
+        "sha256": "8f8c81b41696abd142356f6bee8cca442ff835ab3e33ed5ceb194aaa08c7831a",
+        "octets": 29357582
+      },
+      "reverie_nord": {
+        "sha256": "acd7498bb0555c1d3df2942c48208647aaabcb9ccb0f44b63bbadf3f8324e40a",
+        "octets": 29357576
+      },
+      "reverie_nord_Dev": {
+        "sha256": "ebd70cdeb2f6c7dcb288bb174137dca94d54b54040ee460909e24053798811a5",
+        "octets": 29357580
+      },
+      "reverie_etang": {
+        "sha256": "2543f49a70ebffa2476239ae531bcc387ee41adc250d1faa644ab997601e4334",
+        "octets": 29329634
+      },
+      "reverie_etang_Dev": {
+        "sha256": "2b4525b1b70e59d33c7d78496e037984b3291267c1823b1efd44486f23d0f3a1",
+        "octets": 29329638
+      },
+      "reverie_residentiel": {
+        "sha256": "eaf10c381e454a120b78d2cdf6debddf0e8da34a14a660f123750630c3fe2196",
+        "octets": 29335309
+      },
+      "reverie_residentiel_Dev": {
+        "sha256": "20795f653bdbfafb392b2dddbdd0ca498ff5a465818fd8d2549c0a89327b5a9e",
+        "octets": 29335313
+      }
+    },
+    "retraits": 160,
+    "pistes": [
+      90537,
+      11420,
+      10408,
+      0,
+      1230,
+      0,
+      25973,
+      3157,
+      2457,
+      0,
+      0
+    ]
+  }
+}

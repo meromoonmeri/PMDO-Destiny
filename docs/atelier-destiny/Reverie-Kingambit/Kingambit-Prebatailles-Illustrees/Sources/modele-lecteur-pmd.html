@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dojo Kingambit · Les wooshes PMD</title>
+<style>
+:root{--bg:#11141c;--panel:#1a202d;--border:#30394b;--text:#f4f2ef;--muted:#b8bfcc;--hint:#9da9bc;--accent:#ff9b58;--spacing:22px;color-scheme:dark;}
+*{box-sizing:border-box} [hidden]{display:none!important}
+body{margin:0;color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 76% -15%,#33314b 0,transparent 58%),var(--bg);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button:disabled{opacity:.53;cursor:default}
+.wrap{max-width:1180px;margin:auto;padding:0 32px}
+.mast{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:12px;letter-spacing:.11em;font-weight:740;font-size:13px}.brand b{font-weight:760}.brand .divider{color:#778498}.mark{display:grid;place-content:center;gap:3px;width:32px;height:32px;border-radius:8px;background:#272e3f;border:1px solid #40485e;transform:skewX(-5deg)}.mark i{height:2px;width:14px;background:#e9d5a6}.mark i:nth-child(2){width:18px;margin-left:2px}.mark i:nth-child(3){width:11px;margin-left:4px}
+.brow,.tag,.caps{font:650 11px/1.3 ui-monospace,"SFMono-Regular",Consolas,monospace;letter-spacing:.11em;text-transform:uppercase}
+.brow{color:#e3cc97;margin:0 0 8px;display:flex;align-items:center;gap:10px}.brow:before{content:'';width:20px;height:2px;background:#d7ba7e;display:inline-block}
+.pill{border:1px solid #414a60;padding:6px 10px;border-radius:99px;color:#d7dce5;white-space:nowrap;font-size:11px}
+.hero{padding:31px 0 25px}.hero h1{font-size:clamp(36px,5vw,58px);letter-spacing:-.044em;line-height:1.04;margin:0 0 11px}.hero p:last-child{color:var(--muted);margin:0;font-size:15px}
+.layout{display:grid;grid-template-columns:minmax(0,1.53fr) minmax(300px,1fr);gap:var(--spacing);align-items:start}
+.player,.picker{background:var(--panel);border:1px solid var(--border);border-radius:15px;min-width:0;overflow:hidden;box-shadow:0 18px 50px #090b1050;scroll-margin-top:10px}
+.jump-pick{display:none;margin-top:11px;width:100%;padding:7px 10px;min-height:35px;text-align:center;border:1px solid #414b62;background:#252c3e;border-radius:7px;font-size:12px;font-weight:630}
+.player-head{padding:16px 18px 14px;display:flex;justify-content:space-between;align-items:end;gap:10px;border-top:3px solid var(--accent)}
+.sel{color:var(--accent);margin:0 0 1px}.player-head h2{margin:0;line-height:1.18;letter-spacing:-.02em;font-size:26px}
+.meta{color:var(--hint);text-align:right;white-space:nowrap;padding-bottom:2px}.meta span{display:block;color:var(--text);font:650 12px/1.5 system-ui,sans-serif;letter-spacing:normal;text-transform:none}
+.screen{position:relative;aspect-ratio:4/3;background:#0a0d13;border-block:1px solid #3a4354;display:grid;place-items:center;overflow:hidden}
+video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;background:#10131c;cursor:pointer;image-rendering:pixelated}
+.onframe{position:absolute;inset:auto 14px 12px 14px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.onframe span{box-shadow:0 1px 5px #0004;border-radius:5px;background:#141824e8;border:1px solid #4c5568;padding:5px 8px;font-size:10px;color:#f2e9d7}
+.bigplay{position:relative;display:grid;place-content:center;width:66px;height:66px;border-radius:50%;border:1px solid #ffffff58;background:#101521e8;box-shadow:0 7px 26px #0007}.bigplay:hover{border-color:var(--accent);background:#202839}.bigplay svg{margin-left:4px;fill:var(--accent)}
+.controls{display:flex;gap:9px;align-items:center;padding:10px 14px;border-bottom:1px solid #323b4d;min-height:57px}
+.ctrl{border:1px solid #495367;background:#272f40;border-radius:8px;padding:6px 8px;line-height:1;white-space:nowrap;display:inline-flex;gap:7px;justify-content:center;align-items:center;min-width:34px;min-height:34px;font-weight:650;font-size:12px}.ctrl svg{width:16px;height:16px;flex:none}.ctrl:hover{border-color:var(--accent);background:#303b51}.ctrl[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+#play{background:var(--accent);border-color:var(--accent);color:#15151b;min-width:37px}.timeline{min-width:38px;flex:1;accent-color:var(--accent);cursor:pointer}.clock{white-space:nowrap;font:11px/1 ui-monospace,Consolas,monospace;color:#bfcada;min-width:70px;text-align:center}
+.desc{padding:14px 18px 16px}.desc h3{letter-spacing:-.015em;margin:0 0 3px;font-size:17px}.desc p{font-size:13px;color:var(--muted);margin:0 0 13px}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.phase{text-align:left;border:1px solid #3b4559;background:#222a3a;border-radius:7px;padding:6px 7px;line-height:1.3;display:flex;min-height:39px;align-items:center;justify-content:space-between;gap:5px}.phase:enabled:hover{border-color:var(--accent)}.phase span{font-size:11px;font-weight:640}.phase time{color:#c4ccda;font:10px/1.1 ui-monospace,Consolas,monospace;white-space:nowrap}
+.picker{padding:16px}.chooser-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:9px}.chooser-top h2{margin:0;font-size:20px;letter-spacing:-.025em}.chooser-top .caps{color:#b5bdcc;white-space:nowrap}
+.ref{display:flex;width:100%;align-items:center;justify-content:space-between;gap:9px;padding:12px 12px;text-align:left;border-radius:9px;background:#252a3e;border:1px solid #474967}.ref:hover,.ref[aria-pressed=true]{background:#30334c;border-color:#b8aaff}.ref .cap{display:block;font:650 10px/1.5 ui-monospace,Consolas,monospace;color:#c6baff;letter-spacing:.09em;text-transform:uppercase}.ref .name{display:block;font-weight:680;font-size:14px}.ref svg{width:21px;height:21px;color:#c6baff;flex:none}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}
+.choice{--tint:#dcdaff;text-align:left;min-height:58px;padding:7px 7px 7px 9px;border:1px solid #3d465a;border-radius:8px;background:#202738;color:var(--text);min-width:0}.choice:enabled:hover,.choice[aria-pressed=true]{background:#2c3548;border-color:var(--tint)}.choice[aria-pressed=true]{box-shadow:inset 3px 0 var(--tint);}.choice .type{display:flex;align-items:center;gap:5px;font-weight:750;font-size:13px;line-height:1.22}.choice .type:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--tint);flex:none}.choice .boss{display:block;margin:3px 0 0 11px;color:#bfc9db;font-size:11px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.choice[aria-pressed=true] .type{color:var(--tint)}
+.notes{margin-top:14px;border-top:1px solid #384255;padding-top:12px;color:#b7c2d4;font-size:12px;line-height:1.5}.notes b{color:#f2eddf;font-weight:690}.notes p{margin:0 0 5px}.notes small{display:block;color:#adb9ca;font-size:11px}
+.footer{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#a9b4c6;border-top:1px solid var(--border);padding:12px 0 20px;margin-top:24px;font-size:11px}.footer strong{color:#d5c6aa}.sr{position:absolute;width:1px;height:1px;clip-path:inset(50%);white-space:nowrap;overflow:hidden}
+@media(max-width:940px){.wrap{padding-inline:22px}.layout{--spacing:15px;grid-template-columns:minmax(0,1.42fr) minmax(274px,1fr)}.picker{padding:12px}.chooser-top h2{font-size:17px}.grid{gap:5px}.choice{padding:7px 4px 7px 7px}.choice .type{font-size:12px}.choice .boss{font-size:10px}}
+@media(max-width:715px){.wrap{padding-inline:14px}.layout{grid-template-columns:minmax(0,1fr)}.jump-pick{display:block}.mast{padding:13px 0}.hero{padding:20px 0 17px}.hero p:last-child{font-size:13px}.player-head{padding:12px}.player-head h2{font-size:23px}.meta{font-size:9px}.meta span{font-size:11px}.picker{padding:12px}.choice .type{font-size:13px}.choice .boss{font-size:11px}.footer{display:block}.footer span{display:block}}
+@media(max-width:365px){.mast .pill{font-size:9px;padding:5px}.brand{gap:6px;font-size:10px}.mark{width:26px;height:26px}.controls{padding-inline:8px;gap:5px}.phase time{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast"><div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><b>DESTINY</b><span class="divider">/</span>DOJO KINGAMBIT</div><span class="pill caps">PMDO 0.8.12</span></header>
+  <section class="hero" aria-labelledby="h"><p class="brow">Variante PMD</p><h1 id="h">Les wooshes de boss</h1><p>Traînées à contresens, fondu au blanc, puis retour à l’arène. Choisis un type pour voir sa transition.</p></section>
+  <main class="layout">
+    <section class="player" aria-labelledby="boss">
+      <div class="player-head"><div aria-live="polite"><p id="sel" class="sel caps">Feu</p><h2 id="boss">Braségali</h2></div><div class="meta caps" id="meta">Capture moteur<span id="material">Image dédiée</span></div></div>
+      <div class="screen"><video id="video" playsinline muted preload="metadata" disablepictureinpicture disableremoteplayback aria-label="Aperçu animé de la prébataille"></video>
+        <button id="bigplay" class="bigplay" aria-label="Lire l’aperçu"><svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.8v16.4L21 12 7 3.8Z"/></svg></button>
+        <div class="onframe" id="onframe"><span class="tag">Capture en jeu</span><span class="tag">320 × 240 natif</span></div>
+      </div>
+      <div class="controls" aria-label="Commandes de lecture">
+        <button id="play" class="ctrl" aria-label="Lire" title="Lire / pause"></button>
+        <button id="replay" class="ctrl" aria-label="Rejouer depuis le début" title="Rejouer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 8a7.5 7.5 0 1 1-1.5 7M6 3v6h6"/></svg></button>
+        <input id="seek" class="timeline" type="range" value="0" min="0" max="3.5" step="0.01" aria-label="Position dans la vidéo"><output id="clock" class="clock">0,0 / 3,5 s</output>
+        <button id="sound" class="ctrl" aria-pressed="false" aria-label="Activer le son" title="Son enregistré dans PMDO"></button>
+      </div>
+      <div class="desc"><h3 id="motif">Pointes de braise</h3><p id="note"></p><div class="phases" id="phases" aria-label="Repères dans la vidéo"></div><button type="button" id="jump-pick" class="jump-pick">Choisir un autre type ↓</button></div>
+    </section>
+    <aside class="picker" aria-labelledby="index">
+      <div class="chooser-top"><h2 id="index">Choisir un type</h2><span class="caps">18 finales</span></div>
+      <button id="ref" class="ref" aria-pressed="false"><span><span class="cap">Référence · Vanilla</span><span class="name">Woosh PMDO par défaut</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4V8Z" fill="currentColor" stroke="none"/></svg></button>
+      <div class="grid" id="types" aria-label="Galerie des 18 types"></div>
+      <div class="notes"><p><b>Le blanc est joué par le moteur.</b> Il ne vient pas du montage. Les 18 clips Kingambit montrent aussi la reprise du combat.</p><small>Contient de brefs éclairs blancs. Le son est coupé au départ.</small></div>
+    </aside>
+  </main>
+  <footer class="footer"><span><strong>Référence :</strong> BossTransition / Pre_Battle · PMDO</span><span>12 images générées dédiées · 6 textures adaptées à partir de ces images</span></footer>
+</div>
+<noscript>Le sélecteur nécessite JavaScript. Les vidéos MP4 individuelles sont disponibles dans l’archive.</noscript>
+<script id="data" type="application/json">__CAPSULES__</script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const DATA=JSON.parse($('#data').textContent), V=$('#video'), seek=$('#seek');
+const icon=(body)=>`<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">${body}</svg>`;
+const playIcon=icon('<path d="M8 4v16l13-8L8 4Z" fill="currentColor"/>'),pauseIcon=icon('<path d="M8 5v14m8-14v14" stroke="currentColor" stroke-width="3"/>');
+const volIcon=on=>icon(`<path d="M3 9h4l5-4v14l-5-4H3z" stroke="currentColor" stroke-width="1.8"/>${on?'<path d="M15 9c2 1.3 2 4.7 0 6m3-8c3 2.5 3 7.5 0 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>':'<path d="m16 9 5 6m0-6-5 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'}`);
+const fmt=(s,n=1)=>Number(s).toLocaleString('fr-FR',{minimumFractionDigits:n,maximumFractionDigits:n});
+let chosen, pending=null, soundOn=false;
+function update(){
+  const dur=Number.isFinite(V.duration)?V.duration:chosen.duration;
+  seek.max=dur;seek.value=V.currentTime;
+  $('#clock').value=`${fmt(V.currentTime)} / ${fmt(dur)} s`;
+  const off=V.paused||V.ended;
+  $('#play').innerHTML=off?playIcon:pauseIcon;$('#play').setAttribute('aria-label',off?'Lire':'Mettre en pause');
+  $('#bigplay').hidden=!off||V.currentTime>.08;
+  $('#onframe').hidden=!off||V.currentTime>.08;
+}
+function sound(){
+  V.muted=!soundOn;const b=$('#sound');b.innerHTML=volIcon(soundOn);b.setAttribute('aria-pressed',String(soundOn));b.setAttribute('aria-label',soundOn?'Couper le son':'Activer le son');
+}
+function play(){if (V.ended||V.currentTime>V.duration-.025) V.currentTime=0;V.play().catch(update);}
+function toggle(){if (V.paused||V.ended) play();else V.pause();}
+function jump(t){
+  V.pause();if (Number.isFinite(V.duration)) {V.currentTime=Math.min(V.duration,t);update();} else {pending=t;}
+}
+function setPhase(name,t){
+  const b=document.createElement('button');b.className='phase';
+  const span=document.createElement('span');span.textContent=name;b.appendChild(span);
+  if (t===null){b.disabled=true;b.title='Le clip de référence s’arrête au blanc';return b;}
+  const time=document.createElement('time');time.textContent=fmt(t,2)+' s';b.appendChild(time);
+  b.addEventListener('click',()=>jump(t));return b;
+}
+function select(item,run){
+  V.pause();pending=null;chosen=item;
+  const ref=item.numero===0;
+  document.documentElement.style.setProperty('--accent',item.couleur);
+  $('#sel').textContent=ref?'00 · PMDO PAR DÉFAUT':String(item.numero).padStart(2,'0')+' / 18  ·  '+item.type;
+  $('#boss').textContent=item.boss;$('#motif').textContent=item.titre;$('#note').textContent=item.note;
+  const status=$('#material');status.textContent=ref?'Référence native':item.adaptation?'Texture adaptée':'Image dédiée';
+  status.title=ref?'Aucune modification du woosh par défaut':item.adaptation?'Adaptation de la matière générée '+item.image_source:'Texture découpée depuis une image dédiée à ce type';
+  for (const b of document.querySelectorAll('[data-key]'))b.setAttribute('aria-pressed',String(b.dataset.key===item.id));
+  $('#phases').replaceChildren(setPhase('Balayage',item.t_balayage),setPhase('Blanc',item.t_blanc+.03),setPhase('Combat',item.t_reprise));
+  V.setAttribute('aria-label',item.type+' : '+item.titre);
+  V.poster=item.img;V.src=item.clip;V.load();sound();update();
+  if (run) {
+    if (window.matchMedia('(max-width:715px)').matches) {
+      $('#play').focus({preventScroll:true});$('.player').scrollIntoView({block:'start',behavior:'instant'});
+    }
+    play();
+  }
+}
+const ref=$('#ref');ref.dataset.key=DATA[0].id;ref.addEventListener('click',()=>select(DATA[0],true));
+DATA.slice(1).forEach(item=>{
+  const b=document.createElement('button');b.className='choice';b.style.setProperty('--tint',item.couleur);b.dataset.key=item.id;
+  const a=document.createElement('span'),z=document.createElement('span');a.className='type';z.className='boss';a.textContent=item.type;z.textContent=item.boss;
+  b.title=item.type+' · '+item.titre;b.append(a,z);b.addEventListener('click',()=>select(item,true));$('#types').appendChild(b);
+});
+$('#types').addEventListener('keydown',e=>{
+  const dirs={ArrowLeft:-1,ArrowRight:1,ArrowUp:-3,ArrowDown:3};if (!(e.key in dirs))return;
+  const b=Array.from($('#types').children);const pos=b.indexOf(e.target);if (pos<0)return;
+  e.preventDefault();b[(pos+dirs[e.key]+b.length)%b.length].focus();
+});
+$('#jump-pick').addEventListener('click',()=>{
+  V.pause();const sel=document.querySelector('[data-key][aria-pressed=true]');if(sel)sel.focus({preventScroll:true});
+  $('.picker').scrollIntoView({block:'start',behavior:'instant'});
+});
+$('#sound').addEventListener('click',()=>{soundOn=!soundOn;sound();});
+$('#play').addEventListener('click',toggle);$('#bigplay').addEventListener('click',play);V.addEventListener('click',toggle);
+$('#replay').addEventListener('click',()=>{if(Number.isFinite(V.duration))V.currentTime=0;play();});
+seek.addEventListener('input',()=>jump(Number(seek.value)));
+for(const name of ['timeupdate','play','pause','ended','seeked']) V.addEventListener(name,()=>{if(chosen)update();});
+V.addEventListener('loadedmetadata',()=>{if(pending!==null){let x=pending;pending=null;jump(x);}update();});
+select(DATA.find(x=>x.id==='fire'),false);
+</script>
+</body>
+</html>

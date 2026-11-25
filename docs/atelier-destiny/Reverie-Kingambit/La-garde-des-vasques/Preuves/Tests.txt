@@ -1,0 +1,11 @@
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+PASS test_nilo_temoin.lua : pose native, oscille derrière Kabutops, sans cible ni tour ; entrée, reprise et nettoyage.
+PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
+PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène 480×360, garde Lv 3/4, scripts Lua et retours vérifiés.
+
+Audit OK : aucun personnage masque par la boite de dialogue.
+
+Audit OK : 136 script(s), aucune replique hors cadre.
+index.idx conforme (1507644 octets, 59 planches)
+
+Réapplication du patch (arbre identique) et import hors ligne du bundle : OK (0403d9c79a51979ac5265f6723e883e96e9dfa96).

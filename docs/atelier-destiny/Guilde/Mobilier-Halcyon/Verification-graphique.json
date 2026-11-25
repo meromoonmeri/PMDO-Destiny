@@ -1,0 +1,417 @@
+{
+  "etat": "PASS",
+  "modeles": 49,
+  "palettes": 10,
+  "variantes": 490,
+  "provenances": {
+    "guilde": 420,
+    "metano": 70
+  },
+  "alpha": "strictement identique au sprite Halcyon découpé",
+  "atlas": "toutes les cellules égales aux PNG",
+  "audit": [
+    {
+      "modele": "comptoir-cloche",
+      "distance_rgb_min": 14.65,
+      "matieres": {
+        "metal": 57,
+        "pierre": 916
+      }
+    },
+    {
+      "modele": "banquet",
+      "distance_rgb_min": 18.56,
+      "matieres": {
+        "bois": 4388,
+        "ceramique": 1528,
+        "galon": 54,
+        "ombre": 1704
+      }
+    },
+    {
+      "modele": "bureau-rouleau",
+      "distance_rgb_min": 21.0,
+      "matieres": {
+        "bois": 2059,
+        "encre": 47,
+        "papier": 233,
+        "tissu": 165
+      }
+    },
+    {
+      "modele": "coffre-tresor",
+      "distance_rgb_min": 12.91,
+      "matieres": {
+        "baie": 238,
+        "bois": 1085,
+        "metal": 1
+      }
+    },
+    {
+      "modele": "coffre-haut",
+      "distance_rgb_min": 26.32,
+      "matieres": {
+        "metal": 564,
+        "tissu": 426
+      }
+    },
+    {
+      "modele": "coffre-bas",
+      "distance_rgb_min": 25.18,
+      "matieres": {
+        "metal": 288,
+        "tissu": 238
+      }
+    },
+    {
+      "modele": "coffre-bombe",
+      "distance_rgb_min": 15.15,
+      "matieres": {
+        "bois": 359
+      }
+    },
+    {
+      "modele": "tonneau",
+      "distance_rgb_min": 15.64,
+      "matieres": {
+        "bois": 438,
+        "cercles": 138
+      }
+    },
+    {
+      "modele": "caisses-hautes",
+      "distance_rgb_min": 15.43,
+      "matieres": {
+        "bois": 1882
+      }
+    },
+    {
+      "modele": "caisses-basses",
+      "distance_rgb_min": 15.96,
+      "matieres": {
+        "bois": 1196
+      }
+    },
+    {
+      "modele": "caisse-pommes",
+      "distance_rgb_min": 9.6,
+      "matieres": {
+        "baie": 288,
+        "bois": 438
+      }
+    },
+    {
+      "modele": "caisse-couvercle",
+      "distance_rgb_min": 11.02,
+      "matieres": {
+        "baie": 296,
+        "bois": 637
+      }
+    },
+    {
+      "modele": "reserve",
+      "distance_rgb_min": 16.5,
+      "matieres": {
+        "baie": 375,
+        "bois": 2928,
+        "ceramique": 403
+      }
+    },
+    {
+      "modele": "tabouret",
+      "distance_rgb_min": 15.83,
+      "matieres": {
+        "bois": 365
+      }
+    },
+    {
+      "modele": "seau",
+      "distance_rgb_min": 15.73,
+      "matieres": {
+        "bois": 88,
+        "cercles": 110
+      }
+    },
+    {
+      "modele": "lit-paille",
+      "distance_rgb_min": 16.69,
+      "matieres": {
+        "paille": 878
+      }
+    },
+    {
+      "modele": "maitre",
+      "distance_rgb_min": 33.15,
+      "matieres": {
+        "frange": 774,
+        "galon": 768,
+        "herald": 8338
+      }
+    },
+    {
+      "modele": "paillasson",
+      "distance_rgb_min": 27.42,
+      "matieres": {
+        "frange": 348,
+        "trame": 612
+      }
+    },
+    {
+      "modele": "vestibule",
+      "distance_rgb_min": 31.2,
+      "matieres": {
+        "frange": 540,
+        "trame": 1700
+      }
+    },
+    {
+      "modele": "descente",
+      "distance_rgb_min": 31.2,
+      "matieres": {
+        "frange": 540,
+        "trame": 1700
+      }
+    },
+    {
+      "modele": "nappe-sol",
+      "distance_rgb_min": 34.91,
+      "matieres": {
+        "frange": 1368,
+        "trame": 8721
+      }
+    },
+    {
+      "modele": "chambre-large",
+      "distance_rgb_min": 33.4,
+      "matieres": {
+        "frange": 780,
+        "trame": 3828
+      }
+    },
+    {
+      "modele": "chambre-long",
+      "distance_rgb_min": 33.4,
+      "matieres": {
+        "frange": 780,
+        "trame": 3828
+      }
+    },
+    {
+      "modele": "chambre-bas",
+      "distance_rgb_min": 33.03,
+      "matieres": {
+        "frange": 732,
+        "trame": 3300
+      }
+    },
+    {
+      "modele": "chambre-carre",
+      "distance_rgb_min": 32.37,
+      "matieres": {
+        "frange": 636,
+        "trame": 2500
+      }
+    },
+    {
+      "modele": "couloir",
+      "distance_rgb_min": 37.68,
+      "matieres": {
+        "trame": 5120
+      }
+    },
+    {
+      "modele": "banniere",
+      "distance_rgb_min": 31.6,
+      "matieres": {
+        "bois": 400,
+        "galon": 236,
+        "tissu": 964
+      }
+    },
+    {
+      "modele": "missions",
+      "distance_rgb_min": 12.93,
+      "matieres": {
+        "bois": 1491,
+        "galon": 247,
+        "papier": 502
+      }
+    },
+    {
+      "modele": "liane",
+      "distance_rgb_min": 11.51,
+      "matieres": {
+        "bois": 1,
+        "feuille": 421
+      }
+    },
+    {
+      "modele": "hublot",
+      "distance_rgb_min": 17.46,
+      "matieres": {
+        "bois": 1772,
+        "vitre": 636
+      }
+    },
+    {
+      "modele": "plante-haute",
+      "distance_rgb_min": 13.23,
+      "matieres": {
+        "bois": 175,
+        "feuille": 882
+      }
+    },
+    {
+      "modele": "plante-fleurie",
+      "distance_rgb_min": 13.13,
+      "matieres": {
+        "bois": 38,
+        "feuille": 502,
+        "tissu": 17
+      }
+    },
+    {
+      "modele": "plante-boule",
+      "distance_rgb_min": 12.76,
+      "matieres": {
+        "bois": 104,
+        "feuille": 316
+      }
+    },
+    {
+      "modele": "gobelets",
+      "distance_rgb_min": 22.94,
+      "matieres": {
+        "ceramique": 230,
+        "galon": 131,
+        "vitre": 36
+      }
+    },
+    {
+      "modele": "bourse",
+      "distance_rgb_min": 13.14,
+      "matieres": {
+        "frange": 273,
+        "metal": 28,
+        "tissu": 71
+      }
+    },
+    {
+      "modele": "panier-simple",
+      "distance_rgb_min": 9.3,
+      "matieres": {
+        "baie": 162,
+        "ceramique": 107
+      }
+    },
+    {
+      "modele": "paniers-doubles",
+      "distance_rgb_min": 7.28,
+      "matieres": {
+        "baie": 329,
+        "ceramique": 143
+      }
+    },
+    {
+      "modele": "pot-rouge",
+      "distance_rgb_min": 16.19,
+      "matieres": {
+        "baie": 119,
+        "ceramique": 256
+      }
+    },
+    {
+      "modele": "pot-bleu",
+      "distance_rgb_min": 14.38,
+      "matieres": {
+        "baie": 108,
+        "ceramique": 146
+      }
+    },
+    {
+      "modele": "sac-foulard",
+      "distance_rgb_min": 14.89,
+      "matieres": {
+        "frange": 224,
+        "tissu": 90
+      }
+    },
+    {
+      "modele": "linge",
+      "distance_rgb_min": 34.78,
+      "matieres": {
+        "encre": 72,
+        "tissu": 440
+      }
+    },
+    {
+      "modele": "carnet",
+      "distance_rgb_min": 9.77,
+      "matieres": {
+        "encre": 23,
+        "papier": 94,
+        "tissu": 18
+      }
+    },
+    {
+      "modele": "banc-metano",
+      "distance_rgb_min": 22.76,
+      "matieres": {
+        "bois": 768,
+        "ceramique": 70,
+        "feuille": 218,
+        "papier": 40,
+        "tissu": 432
+      }
+    },
+    {
+      "modele": "table-souche",
+      "distance_rgb_min": 15.61,
+      "matieres": {
+        "baie": 52,
+        "bois": 1609,
+        "feuille": 13
+      }
+    },
+    {
+      "modele": "siege-metano",
+      "distance_rgb_min": 15.35,
+      "matieres": {
+        "bois": 198
+      }
+    },
+    {
+      "modele": "paillasse-metano",
+      "distance_rgb_min": 17.18,
+      "matieres": {
+        "paille": 4988
+      }
+    },
+    {
+      "modele": "tapis-metano",
+      "distance_rgb_min": 33.6,
+      "matieres": {
+        "frange": 876,
+        "trame": 4500
+      }
+    },
+    {
+      "modele": "fleurs-metano",
+      "distance_rgb_min": 18.64,
+      "matieres": {
+        "bois": 79,
+        "feuille": 114,
+        "tissu": 24
+      }
+    },
+    {
+      "modele": "ecuelle-metano",
+      "distance_rgb_min": 25.15,
+      "matieres": {
+        "ceramique": 194,
+        "galon": 28,
+        "vitre": 20
+      }
+    }
+  ]
+}

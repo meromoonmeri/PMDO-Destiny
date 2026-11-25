@@ -1,0 +1,157 @@
+{
+  "statut": "PASS",
+  "routes_evitent_lagon_lave_et_source": true,
+  "trajets_maritimes_et_nouvelles_marches_controles_au_pixel": true,
+  "masque_terrain_identique_a_la_decoupe_de_la_generation_approuvee": true,
+  "source_approuvee_sha256": "d87a5216d5719cd06e326c65ae49e09ed4cf41cbf3d7a133d66cffc3f8a0e947",
+  "fond_sha256": "67e1bf2020a11b1d0dcdb4ea9400eb4cd75e2ada19b48f80c8420f5ea798c1d3",
+  "silhouettes_base": 26,
+  "composantes_ajoutees": 9,
+  "archipels": [
+    {
+      "id": "volcans",
+      "name": "Archipel volcanique",
+      "nature": "EoS · adaptation",
+      "biome": "Basalte, cendres et lave",
+      "file": "Archipels/Volcan-et-Cratere.png",
+      "x": 157,
+      "y": 21,
+      "w": 106,
+      "h": 70,
+      "main": 101,
+      "components": [
+        101,
+        102,
+        103,
+        104
+      ],
+      "port_souhaite": [
+        216,
+        80
+      ],
+      "distance_min_du_decor_existant_px": 10.77,
+      "sha256_du_brut": "c78e6a53eecde77769bb0aee4bade89695cf411ccc7ddc5f4299254209bd44df",
+      "port": {
+        "terre": [
+          218,
+          82
+        ],
+        "mer": [
+          218,
+          86
+        ]
+      }
+    },
+    {
+      "id": "coraux",
+      "name": "Atoll des Coraux",
+      "nature": "Création Destiny",
+      "biome": "Lagon et récif corallien",
+      "file": "Archipels/Atoll-des-Coraux.png",
+      "x": 957,
+      "y": 640,
+      "w": 99,
+      "h": 59,
+      "main": 105,
+      "components": [
+        105,
+        106,
+        107
+      ],
+      "port_souhaite": [
+        988,
+        691
+      ],
+      "distance_min_du_decor_existant_px": 10.0,
+      "sha256_du_brut": "0a7511264e6a2500007f7ef3915ea2c70ff38e71e441422dd1d8ccbe7126d7d3",
+      "port": {
+        "terre": [
+          986,
+          690
+        ],
+        "mer": [
+          986,
+          694
+        ]
+      }
+    },
+    {
+      "id": "amethystes",
+      "name": "Île des Améthystes",
+      "nature": "Création Destiny",
+      "biome": "Contreforts et cristaux lilas",
+      "file": "Archipels/Ile-des-Amethystes.png",
+      "x": 435,
+      "y": 380,
+      "w": 84,
+      "h": 66,
+      "main": 108,
+      "components": [
+        108
+      ],
+      "port_souhaite": [
+        450,
+        429
+      ],
+      "distance_min_du_decor_existant_px": 13.0,
+      "sha256_du_brut": "ef65185bde6a0e084211f328f263383c75ecaddace160236518ede4aeba554b7",
+      "port": {
+        "terre": [
+          450,
+          426
+        ],
+        "mer": [
+          450,
+          430
+        ]
+      }
+    },
+    {
+      "id": "petales",
+      "name": "Bois des Pétales",
+      "nature": "Création Destiny",
+      "biome": "Bosquets de fleurs et terrasses ocre",
+      "file": "Archipels/Bois-des-Petales.png",
+      "x": 941,
+      "y": 26,
+      "w": 91,
+      "h": 61,
+      "main": 109,
+      "components": [
+        109
+      ],
+      "port_souhaite": [
+        982,
+        77
+      ],
+      "distance_min_du_decor_existant_px": 34.41,
+      "sha256_du_brut": "28dd1821ef9d8f4e0e7e145a2ef934a0e62c25d95bcdbda33ceafc053377e63d",
+      "port": {
+        "terre": [
+          982,
+          78
+        ],
+        "mer": [
+          986,
+          78
+        ]
+      }
+    }
+  ],
+  "sans_repeindre_la_carte_existante": true,
+  "donjons_originaires_d_eos": 2,
+  "concordance_brut_avec_edit": 0.990764,
+  "art_image_generee": [
+    "terrain enrichi",
+    "cascade et grotte de Réverie",
+    "spirale",
+    "houle",
+    "barque"
+  ],
+  "sites_simules": 25,
+  "huit_noms_connus": 8,
+  "troncons_dans_masque_de_transport": 136,
+  "raccords_port": 12,
+  "echelle_grille": 4,
+  "franchissements_de_rivieres_valides_pour_la_simulation": 1
+}

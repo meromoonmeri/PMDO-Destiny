@@ -1,0 +1,34 @@
+Candidat : 37e6b5cdcfb46a064239c7c6983ef4840d27d408
+Branche : refs/heads/wip/reverie-integration-kingambit-cafe
+Avant : 37138a7ca93be920e9c47963fea21441b153ec65
+You are not logged into any GitHub hosts. To log in, run: gh auth login
+fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Code de sortie du push : 128
+Après : 37138a7ca93be920e9c47963fea21441b153ec65
+PUSH_NON_EFFECTUE
+Aucun build Windows, tag ou publication déclenché.
+
+Tentatives suivantes par autorisation dans le navigateur
+GitHub CLI a généré deux codes d’autorisation ; l’utilisateur a confirmé leur validation.
+Les deux échanges HTTPS sur /login/oauth/access_token ont échoué avant l’obtention d’un accès : connection reset by peer.
+Aucun git push lancé par ces deux tentatives. Aucun jeton conservé.
+Branche distante contrôlée après les tentatives : 37138a7ca93be920e9c47963fea21441b153ec65.
+
+Tentative unique de push explicitement autorisée, sans conservation de l’identifiant.
+Code du push : 0.
+To https://github.com/meromoonmeri/PMDO-Destiny.git
+ 	37e6b5cdcfb46a064239c7c6983ef4840d27d408:refs/heads/wip/reverie-integration-kingambit-cafe	37138a7..37e6b5c
+Done
+Avant : 37138a7ca93be920e9c47963fea21441b153ec65
+Après vérification publique : 37e6b5cdcfb46a064239c7c6983ef4840d27d408
+
+Publication Windows v0.7.6 — vérification publique
+Le run Build Windows a réussi sur le SHA exact : https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44891174901
+Artefact intact : PMDO-Destiny-Windows-x64, ID 14702840063
+Workflow Build Windows en mode release, avec garde SHA/branche/succès et tag absent : https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44891255312
+Préversion publiée (non brouillon) : https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.6
+Tag déréférencé : 37e6b5cdcfb46a064239c7c6983ef4840d27d408
+Les deux paquets ont été téléchargés, leurs SHA-256 et CRC ZIP revérifiés ; ils contiennent le retour Nilo et pas le lot PNJ suivant.
+e850d6c32bdfc0d09ba48019ea4e892a7c2726ca9223651d18b141a34f031cf6  PMDO-Destiny-Update-0.7.5-to-0.7.6.zip  (50513103 octets)
+3fa982cc6f89e035875672bfecf57be71bbaf097caf3d6c62a30ac71914d5477  PMDO-Destiny-Windows-x64-0.7.6.zip  (1338207514 octets)
+Paquet delta : 9 chemins communs comparés au ZIP complet, contenu identique octet pour octet par SHA-256 ; aucun exécutable moteur ajouté au delta.

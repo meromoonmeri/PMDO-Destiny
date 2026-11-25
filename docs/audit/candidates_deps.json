@@ -1,0 +1,11586 @@
+{
+ "caféspindaaccueil__490832c3.rsground": {
+  "sheets": [
+   "Metano_Inn_Objects",
+   "Metano_Town_Cafe_Objects",
+   "SpindaCafe2",
+   "accueilspindacafé",
+   "spinda_cafe_dojo"
+  ],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [
+   "Berry_Basket_Blue",
+   "Berry_Basket_Red",
+   "Flowerpot_Pink",
+   "Flowerpot_White",
+   "Flowers_Tropical_1"
+  ],
+  "missing_bg_sources": {
+   "Berry_Basket_Blue": [],
+   "Berry_Basket_Red": [],
+   "Flowerpot_Pink": [],
+   "Flowerpot_White": [],
+   "Flowers_Tropical_1": [
+    [
+     "gtp",
+     "source"
+    ]
+   ]
+  },
+  "unfindable": [],
+  "unfindable_bg": [
+   "Berry_Basket_Blue",
+   "Berry_Basket_Red",
+   "Flowerpot_Pink",
+   "Flowerpot_White"
+  ]
+ },
+ "cliff_centre_01_grand_cap_panoramique_jour__0f6d8019.rsground": {
+  "sheets": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "missing": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "missing_sources": {
+   "CliffCentre10_Canon_Jour": []
+  },
+  "missing_bg": [
+   "CLIFF_CENTRE_JOUR_CIEL",
+   "CLIFF_CENTRE_JOUR_NUAGES_HAUT",
+   "CLIFF_CENTRE_JOUR_NUAGES_HORIZON",
+   "CLIFF_CENTRE_JOUR_NUAGES_MILIEU"
+  ],
+  "missing_bg_sources": {
+   "CLIFF_CENTRE_JOUR_CIEL": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_HAUT": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_HORIZON": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_MILIEU": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "unfindable": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "unfindable_bg": []
+ },
+ "cliff_centre_01_grand_cap_panoramique_jour__0f83a791.rsground": {
+  "sheets": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "missing": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "missing_sources": {
+   "CliffCentre10_Canon_Jour": []
+  },
+  "missing_bg": [
+   "CLIFF_CENTRE_JOUR_CIEL",
+   "CLIFF_CENTRE_JOUR_NUAGES_HAUT",
+   "CLIFF_CENTRE_JOUR_NUAGES_HORIZON",
+   "CLIFF_CENTRE_JOUR_NUAGES_MILIEU"
+  ],
+  "missing_bg_sources": {
+   "CLIFF_CENTRE_JOUR_CIEL": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_HAUT": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_HORIZON": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_JOUR_NUAGES_MILIEU": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "unfindable": [
+   "CliffCentre10_Canon_Jour"
+  ],
+  "unfindable_bg": []
+ },
+ "cliff_centre_01_grand_cap_panoramique_nuit__02b6d687.rsground": {
+  "sheets": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "missing": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "missing_sources": {
+   "CliffCentre10_Canon_Nuit": []
+  },
+  "missing_bg": [
+   "CLIFF_CENTRE_NUIT_ASTRES",
+   "CLIFF_CENTRE_NUIT_CIEL",
+   "CLIFF_CENTRE_NUIT_NUAGES_HAUT",
+   "CLIFF_CENTRE_NUIT_NUAGES_HORIZON",
+   "CLIFF_CENTRE_NUIT_NUAGES_MILIEU"
+  ],
+  "missing_bg_sources": {
+   "CLIFF_CENTRE_NUIT_ASTRES": [],
+   "CLIFF_CENTRE_NUIT_CIEL": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_HAUT": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_HORIZON": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_MILIEU": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "unfindable": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "unfindable_bg": [
+   "CLIFF_CENTRE_NUIT_ASTRES"
+  ]
+ },
+ "cliff_centre_01_grand_cap_panoramique_nuit__9ea06bef.rsground": {
+  "sheets": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "missing": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "missing_sources": {
+   "CliffCentre10_Canon_Nuit": []
+  },
+  "missing_bg": [
+   "CLIFF_CENTRE_NUIT_ASTRES",
+   "CLIFF_CENTRE_NUIT_CIEL",
+   "CLIFF_CENTRE_NUIT_NUAGES_HAUT",
+   "CLIFF_CENTRE_NUIT_NUAGES_HORIZON",
+   "CLIFF_CENTRE_NUIT_NUAGES_MILIEU"
+  ],
+  "missing_bg_sources": {
+   "CLIFF_CENTRE_NUIT_ASTRES": [],
+   "CLIFF_CENTRE_NUIT_CIEL": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_HAUT": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_HORIZON": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_CENTRE_NUIT_NUAGES_MILIEU": [
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "unfindable": [
+   "CliffCentre10_Canon_Nuit"
+  ],
+  "unfindable_bg": [
+   "CLIFF_CENTRE_NUIT_ASTRES"
+  ]
+ },
+ "cliffnordouesttest1__1737733c.rsground": {
+  "sheets": [
+   "00_ciel",
+   "Altere_Pond_Cliffs",
+   "INVERSEPATHWAY",
+   "Metano_Altere_Transition_Base",
+   "Metano_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing": [
+   "00_ciel",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "terrain": [
+    [
+     "gtp",
+     "renders"
+    ]
+   ],
+   "terrain (2)": [],
+   "terrain (3)": [],
+   "terrain (4)": [],
+   "v2_promontoire_jour_03": []
+  },
+  "missing_bg": [
+   "CLIFFNW_NIGHT_CLOUDS",
+   "CLIFFNW_NIGHT_VEIL"
+  ],
+  "missing_bg_sources": {
+   "CLIFFNW_NIGHT_CLOUDS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "CLIFFNW_NIGHT_VEIL": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "unfindable": [
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1__4633c9ab.rsground": {
+  "sheets": [
+   "00_ciel",
+   "Altere_Pond_Cliffs",
+   "INVERSEPATHWAY",
+   "Metano_Altere_Transition_Base",
+   "Metano_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing": [
+   "00_ciel",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "terrain": [
+    [
+     "gtp",
+     "renders"
+    ]
+   ],
+   "terrain (2)": [],
+   "terrain (3)": [],
+   "terrain (4)": [],
+   "v2_promontoire_jour_03": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1__51e9dd3b.rsground": {
+  "sheets": [
+   "00_ciel",
+   "Altere_Pond_Cliffs",
+   "INVERSEPATHWAY",
+   "Metano_Altere_Transition_Base",
+   "Metano_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing": [
+   "00_ciel",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "terrain": [
+    [
+     "gtp",
+     "renders"
+    ]
+   ],
+   "terrain (2)": [],
+   "terrain (3)": [],
+   "terrain (4)": [],
+   "v2_promontoire_jour_03": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1__65c48168.rsground": {
+  "sheets": [
+   "00_ciel",
+   "Altere_Pond_Cliffs",
+   "INVERSEPATHWAY",
+   "Metano_Altere_Transition_Base",
+   "Metano_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing": [
+   "00_ciel",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "terrain": [
+    [
+     "gtp",
+     "renders"
+    ]
+   ],
+   "terrain (2)": [],
+   "terrain (3)": [],
+   "terrain (4)": [],
+   "v2_promontoire_jour_03": []
+  },
+  "missing_bg": [
+   "CLIFFNW_NATIVE_CLOUD_OVERLAY"
+  ],
+  "missing_bg_sources": {
+   "CLIFFNW_NATIVE_CLOUD_OVERLAY": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "unfindable": [
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1__84c80b74.rsground": {
+  "sheets": [
+   "00_ciel",
+   "Altere_Pond_Cliffs",
+   "INVERSEPATHWAY",
+   "Treasure_Altere_Transition_Base",
+   "Treasure_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing": [
+   "00_ciel",
+   "Treasure_Altere_Transition_Base",
+   "Treasure_Town_Animation_Tileset",
+   "terrain",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Treasure_Altere_Transition_Base": [],
+   "Treasure_Town_Animation_Tileset": [
+    [
+     "pcp",
+     "source"
+    ]
+   ],
+   "terrain": [
+    [
+     "gtp",
+     "renders"
+    ]
+   ],
+   "terrain (2)": [],
+   "terrain (3)": [],
+   "terrain (4)": [],
+   "v2_promontoire_jour_03": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "Treasure_Altere_Transition_Base",
+   "terrain (2)",
+   "terrain (3)",
+   "terrain (4)",
+   "v2_promontoire_jour_03"
+  ],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1__b40eaa93.rsground": {
+  "sheets": [
+   "00_ciel",
+   "10-PMD SKY",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Altere_Pond_Base",
+   "Altere_Pond_Cliffs",
+   "CLIFF MIROR-Photoroom",
+   "CanyonCamp",
+   "Celestial_Peak_Entrance_Art",
+   "ChampRavage_Base",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "CratereFumant_Base",
+   "D01p11a_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D14p11a_Base",
+   "D28p31a_Base",
+   "D55p11a_Base",
+   "EoN_DininghallNight",
+   "First_Core_Location_Base",
+   "G01p01b_Base",
+   "G01p02a_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p05a_Base",
+   "G01p06a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p08a_Base",
+   "G01p10a_Base",
+   "Gloomy_Forest_Entrance_Art",
+   "GrandCanyonPorte_Base",
+   "Guild_First_Floor",
+   "H01p99a_Base",
+   "H02p99a_Base",
+   "Habitat_SharpedoBluff_Day_Layer1",
+   "HotSpringDetail",
+   "INVERSEPATHWAY",
+   "IleAustrale_Base",
+   "IleFinale_Base",
+   "KINGAMBIT DOJO",
+   "MerTresors_Base",
+   "Metano_Altere_Transition_Base",
+   "Metano_Town_Animation_Tileset",
+   "Metano_Town_Base",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Cave_Base",
+   "Metano_Town_Trimmed",
+   "MontGrondantPied_Base",
+   "P01P01A_layer1",
+   "P01p04a_Base",
+   "P02p01a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "PlacePokemon_Base",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "RiviereLavoir_Base",
+   "SpindaCafe1",
+   "V13p01a_Base",
+   "WoN_overw2_winter",
+   "WoN_overwhb_autumn",
+   "ZxS7gM5MFluSh-Bj--yN3dcycHyaJJ_WdA4fFhYJF6Q",
+   "a04p01_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02c_Base",
+   "b07p01c_Base",
+   "b08p01c_Base",
+   "b09p02c_Base",
+   "b12p02c_Base",
+   "h10p02_Base",
+   "image (2)",
+   "image (3) (1)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "jour_transparente",
+   "metano_scale_verification",
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks",
+   "preview",
+   "s03_Base",
+   "salle_jour",
+   "t01p03_Base",
+   "t01p04_Base",
+   "télécharger",
+   "télécharger (13)",
+   "télécharger (2)",
+   "télécharger (6)",
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk"
+  ],
+  "missing": [
+   "00_ciel",
+   "10-PMD SKY",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Celestial_Peak_Entrance_Art",
+   "ChampRavage_Base",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "CratereFumant_Base",
+   "D01p11a_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D14p11a_Base",
+   "D28p31a_Base",
+   "D55p11a_Base",
+   "EoN_DininghallNight",
+   "First_Core_Location_Base",
+   "G01p01b_Base",
+   "G01p02a_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p05a_Base",
+   "G01p06a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p08a_Base",
+   "G01p10a_Base",
+   "Gloomy_Forest_Entrance_Art",
+   "GrandCanyonPorte_Base",
+   "Guild_First_Floor",
+   "H01p99a_Base",
+   "H02p99a_Base",
+   "Habitat_SharpedoBluff_Day_Layer1",
+   "HotSpringDetail",
+   "IleAustrale_Base",
+   "IleFinale_Base",
+   "MerTresors_Base",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Cave_Base",
+   "MontGrondantPied_Base",
+   "P01P01A_layer1",
+   "P01p04a_Base",
+   "P02p01a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "PlacePokemon_Base",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "RiviereLavoir_Base",
+   "SpindaCafe1",
+   "V13p01a_Base",
+   "WoN_overw2_winter",
+   "WoN_overwhb_autumn",
+   "ZxS7gM5MFluSh-Bj--yN3dcycHyaJJ_WdA4fFhYJF6Q",
+   "a04p01_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02c_Base",
+   "b07p01c_Base",
+   "b08p01c_Base",
+   "b09p02c_Base",
+   "b12p02c_Base",
+   "h10p02_Base",
+   "image (2)",
+   "image (3) (1)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "jour_transparente",
+   "metano_scale_verification",
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks",
+   "preview",
+   "s03_Base",
+   "salle_jour",
+   "t01p03_Base",
+   "t01p04_Base",
+   "télécharger",
+   "télécharger (13)",
+   "télécharger (2)",
+   "télécharger (6)",
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk"
+  ],
+  "missing_sources": {
+   "00_ciel": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "10-PMD SKY": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Celestial_Peak_Entrance_Art": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ChampRavage_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Cloven_Entrance_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Colline_Anciens_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CratereFumant_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D14p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D28p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D55p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_DininghallNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "First_Core_Location_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p01b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p03a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p05a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p06a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p08a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p10a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Gloomy_Forest_Entrance_Art": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrandCanyonPorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_First_Floor": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H01p99a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H02p99a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Habitat_SharpedoBluff_Day_Layer1": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "HotSpringDetail": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "IleAustrale_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "IleFinale_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MerTresors_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe_Base": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Cave_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MontGrondantPied_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01P01A_layer1": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P02p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P17p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P19p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "PlacePokemon_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "RiviereLavoir_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SpindaCafe1": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ]
+   ],
+   "V13p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw2_winter": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhb_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ZxS7gM5MFluSh-Bj--yN3dcycHyaJJ_WdA4fFhYJF6Q": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a04p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b07p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b08p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h10p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (3) (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (4)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "jour_transparente": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "metano_scale_verification": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "preview": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "s03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (13)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (6)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1_nuit__377b14d8.rsground": {
+  "sheets": [
+   "CliffNW_Nuit"
+  ],
+  "missing": [
+   "CliffNW_Nuit"
+  ],
+  "missing_sources": {
+   "CliffNW_Nuit": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "missing_bg": [
+   "CLIFF_NUIT_NUAGES_HAUT",
+   "CLIFF_NUIT_NUAGES_HORIZON",
+   "CLIFF_NUIT_NUAGES_MILIEU",
+   "CLIFF_NW_NUIT_ASTRES",
+   "CLIFF_NW_NUIT_CIEL"
+  ],
+  "missing_bg_sources": {
+   "CLIFF_NUIT_NUAGES_HAUT": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_NUIT_NUAGES_HORIZON": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_NUIT_NUAGES_MILIEU": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_NW_NUIT_ASTRES": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CLIFF_NW_NUIT_CIEL": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ]
+  },
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1_nuit__a67c011d.rsground": {
+  "sheets": [
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "CaverneTroubleAutel_Base",
+   "CaverneTroubleFond_Base",
+   "ChambreAgeeAn_Base",
+   "Cloven_Entrance_Base",
+   "CourantProfond_Base",
+   "CreteTenebres_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D09p03_Base",
+   "D10p03_Base",
+   "D11p03_Base",
+   "D15p41a_Base",
+   "D16p31a_Base",
+   "D17p11a_Base",
+   "D17p45a_Base",
+   "D18p11a_Base",
+   "D19p11a_Base",
+   "D20p11a_Base",
+   "D21p41a_Base",
+   "D29p11a_Base",
+   "D46p11a_Base",
+   "D47p11a_Base",
+   "D48p11a_Base",
+   "D50p11a_Base",
+   "D53p11a_Base",
+   "D56p11a_Base",
+   "D73p28a_Base",
+   "D79p11a_Base",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroStormySharpedo",
+   "EoN_IntroStormySharpedoAnim",
+   "ForetChampignons_Base",
+   "ForetSecrete_Base",
+   "G01p01c_Base",
+   "G01p04c_Base",
+   "G01p05a_Base",
+   "GrotteBenthique_Base",
+   "GrotteCryptique_Base",
+   "GrotteLazuliFond_Base",
+   "GrotteLazuliSeuil_Base",
+   "Guild_First_Floor",
+   "H01p99c_Base",
+   "H01p99d_Base",
+   "H02p99c_Base",
+   "IleClose_Base",
+   "LaboDecrepit_Base",
+   "LacMystique_Base",
+   "LulubyTownNight_Base",
+   "MaraisPoison_Base",
+   "MerTresors_Base",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Base_Night",
+   "Metano_Town_Cave_Base",
+   "Metano_Town_Cliffs_Night",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Under_Night",
+   "MontCendrePied_Base",
+   "MontGelePied_Base",
+   "P05p02a_Base",
+   "P05p04a_Base",
+   "P06p01a_Base",
+   "P07p01a_Base",
+   "P09p01a_Base",
+   "P19p01a_Base",
+   "ParvisCeleste_Base",
+   "PlancherAbysses_Base",
+   "ReliqueAncienne_Base",
+   "S13p05a_Base",
+   "SkyTowerSummitCanonical_Base",
+   "Tornadus_Arene",
+   "V10p03c_Base",
+   "V14p01a_Base",
+   "V14p03a_Base",
+   "VallonPerdu_Base",
+   "WoN_overw1n_winter",
+   "WoN_overw4n_autumn",
+   "WoN_overwhn_autumn",
+   "WoN_overwyh_autumn",
+   "WoN_overwyh_winter",
+   "a02p02_Base",
+   "a04p01_Base",
+   "a04p03_Base",
+   "cloven_ruins_entrance_Base",
+   "d03p02_DirectBase",
+   "d09p03_DirectBase",
+   "d11p03_DirectBase",
+   "h15p01_Base",
+   "h21p01_Base",
+   "h21p02_Base",
+   "h22p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "metano_scale_verification",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "t01p07_Base",
+   "telechargement_6_tileset (1)",
+   "texyre",
+   "téléchargement (6)",
+   "téléchargement (7)",
+   "télécharger (12)"
+  ],
+  "missing": [
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "CaverneTroubleAutel_Base",
+   "CaverneTroubleFond_Base",
+   "ChambreAgeeAn_Base",
+   "Cloven_Entrance_Base",
+   "CourantProfond_Base",
+   "CreteTenebres_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D09p03_Base",
+   "D10p03_Base",
+   "D11p03_Base",
+   "D15p41a_Base",
+   "D16p31a_Base",
+   "D17p11a_Base",
+   "D17p45a_Base",
+   "D18p11a_Base",
+   "D19p11a_Base",
+   "D20p11a_Base",
+   "D21p41a_Base",
+   "D29p11a_Base",
+   "D46p11a_Base",
+   "D47p11a_Base",
+   "D48p11a_Base",
+   "D50p11a_Base",
+   "D53p11a_Base",
+   "D56p11a_Base",
+   "D73p28a_Base",
+   "D79p11a_Base",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroStormySharpedo",
+   "EoN_IntroStormySharpedoAnim",
+   "ForetChampignons_Base",
+   "ForetSecrete_Base",
+   "G01p01c_Base",
+   "G01p04c_Base",
+   "G01p05a_Base",
+   "GrotteBenthique_Base",
+   "GrotteCryptique_Base",
+   "GrotteLazuliFond_Base",
+   "GrotteLazuliSeuil_Base",
+   "Guild_First_Floor",
+   "H01p99c_Base",
+   "H01p99d_Base",
+   "H02p99c_Base",
+   "IleClose_Base",
+   "LaboDecrepit_Base",
+   "LacMystique_Base",
+   "LulubyTownNight_Base",
+   "MaraisPoison_Base",
+   "MerTresors_Base",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cave_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Under_Night",
+   "MontCendrePied_Base",
+   "MontGelePied_Base",
+   "P05p02a_Base",
+   "P05p04a_Base",
+   "P06p01a_Base",
+   "P07p01a_Base",
+   "P09p01a_Base",
+   "P19p01a_Base",
+   "ParvisCeleste_Base",
+   "PlancherAbysses_Base",
+   "ReliqueAncienne_Base",
+   "S13p05a_Base",
+   "SkyTowerSummitCanonical_Base",
+   "Tornadus_Arene",
+   "V10p03c_Base",
+   "V14p01a_Base",
+   "V14p03a_Base",
+   "VallonPerdu_Base",
+   "WoN_overw1n_winter",
+   "WoN_overw4n_autumn",
+   "WoN_overwhn_autumn",
+   "WoN_overwyh_autumn",
+   "WoN_overwyh_winter",
+   "a02p02_Base",
+   "a04p01_Base",
+   "a04p03_Base",
+   "cloven_ruins_entrance_Base",
+   "d03p02_DirectBase",
+   "d09p03_DirectBase",
+   "d11p03_DirectBase",
+   "h15p01_Base",
+   "h21p01_Base",
+   "h21p02_Base",
+   "h22p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "metano_scale_verification",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "t01p07_Base",
+   "telechargement_6_tileset (1)",
+   "texyre",
+   "téléchargement (7)",
+   "télécharger (12)"
+  ],
+  "missing_sources": {
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CaverneTroubleAutel_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CaverneTroubleFond_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ChambreAgeeAn_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Cloven_Entrance_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CourantProfond_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CreteTenebres_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D09p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D10p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D11p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D15p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D16p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D17p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D17p45a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D18p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D19p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D20p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D21p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D29p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D46p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D47p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D48p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D50p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D53p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D56p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D73p28a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D79p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_GuildmasterRoomNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroStormySharpedo": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroStormySharpedoAnim": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ForetChampignons_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ForetSecrete_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p05a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteBenthique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteCryptique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteLazuliFond_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteLazuliSeuil_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_First_Floor": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H01p99c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H01p99d_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H02p99c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "IleClose_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LaboDecrepit_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LacMystique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LulubyTownNight_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MaraisPoison_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MerTresors_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cave_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Under_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MontCendrePied_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MontGelePied_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P05p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P05p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P06p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P07p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P09p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P19p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ParvisCeleste_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "PlancherAbysses_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ReliqueAncienne_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "S13p05a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SkyTowerSummitCanonical_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Tornadus_Arene": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V10p03c_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V14p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V14p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "VallonPerdu_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw1n_winter": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw4n_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhn_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwyh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwyh_winter": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a04p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a04p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "cloven_ruins_entrance_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d03p02_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d09p03_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d11p03_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h15p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h21p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h21p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h22p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "metano_scale_verification": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p07_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "telechargement_6_tileset (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (12)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "cliffnordouesttest1_nuit__fd40bd98.rsground": {
+  "sheets": [
+   "CliffNordOuest_Nuit"
+  ],
+  "missing": [
+   "CliffNordOuest_Nuit"
+  ],
+  "missing_sources": {
+   "CliffNordOuest_Nuit": [
+    [
+     "pcp",
+     "livrables_cliff_nord_nuit_pmdo"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "etc1_tour_celeste__fd716f46.rsground": {
+  "sheets": [
+   "ETC1_00_00_FOND_CIEL_CELESTE",
+   "ETC1_01_01_MER_NUAGES_LOINTAINE",
+   "ETC1_02_02_COURANTS_NUAGES_MEDIANS",
+   "ETC1_03_03_PANACHES_CONVERGENTS_PROCHES",
+   "ETC1_04_04_OMBRES_VOLUMETRIQUES_ILE",
+   "ETC1_05_05_SOL_NUAGE_PRATICABLE",
+   "ETC1_06_06_ARCHE_PORTAIL_TOURBILLON",
+   "ETC1_07_07_SPIRALE_CYCLONE_PORTAIL",
+   "ETC1_08_08_REFLETS_BPL_CANONIQUES",
+   "ETC1_09_09_BOUFFEES_NUAGES_DERIVE"
+  ],
+  "missing": [
+   "ETC1_00_00_FOND_CIEL_CELESTE",
+   "ETC1_01_01_MER_NUAGES_LOINTAINE",
+   "ETC1_02_02_COURANTS_NUAGES_MEDIANS",
+   "ETC1_03_03_PANACHES_CONVERGENTS_PROCHES",
+   "ETC1_04_04_OMBRES_VOLUMETRIQUES_ILE",
+   "ETC1_05_05_SOL_NUAGE_PRATICABLE",
+   "ETC1_06_06_ARCHE_PORTAIL_TOURBILLON",
+   "ETC1_07_07_SPIRALE_CYCLONE_PORTAIL",
+   "ETC1_08_08_REFLETS_BPL_CANONIQUES",
+   "ETC1_09_09_BOUFFEES_NUAGES_DERIVE"
+  ],
+  "missing_sources": {
+   "ETC1_00_00_FOND_CIEL_CELESTE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_01_01_MER_NUAGES_LOINTAINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_02_02_COURANTS_NUAGES_MEDIANS": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_03_03_PANACHES_CONVERGENTS_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_04_04_OMBRES_VOLUMETRIQUES_ILE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_05_05_SOL_NUAGE_PRATICABLE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_06_06_ARCHE_PORTAIL_TOURBILLON": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_07_07_SPIRALE_CYCLONE_PORTAIL": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_08_08_REFLETS_BPL_CANONIQUES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "ETC1_09_09_BOUFFEES_NUAGES_DERIVE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "forest_magenta_v1__bc18f16c.rsground": {
+  "sheets": [
+   "FMV1_FOREST_00",
+   "FMV1_FOREST_01",
+   "FMV1_FOREST_02",
+   "FMV1_FOREST_03",
+   "FMV1_FOREST_04"
+  ],
+  "missing": [
+   "FMV1_FOREST_00",
+   "FMV1_FOREST_01",
+   "FMV1_FOREST_02",
+   "FMV1_FOREST_03",
+   "FMV1_FOREST_04"
+  ],
+  "missing_sources": {
+   "FMV1_FOREST_00": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FMV1_FOREST_01": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FMV1_FOREST_02": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FMV1_FOREST_03": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FMV1_FOREST_04": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "forest_render_v1__5dba77d7.rsground": {
+  "sheets": [
+   "FRV1_FOREST_00",
+   "FRV1_FOREST_01",
+   "FRV1_FOREST_02",
+   "FRV1_FOREST_03",
+   "FRV1_FOREST_04"
+  ],
+  "missing": [
+   "FRV1_FOREST_00",
+   "FRV1_FOREST_01",
+   "FRV1_FOREST_02",
+   "FRV1_FOREST_03",
+   "FRV1_FOREST_04"
+  ],
+  "missing_sources": {
+   "FRV1_FOREST_00": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FRV1_FOREST_01": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FRV1_FOREST_02": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FRV1_FOREST_03": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "FRV1_FOREST_04": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "gma1_tour_celeste__a8913761.rsground": {
+  "sheets": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT": [],
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GMA1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "gme1_tour_celeste__4dd8dcde.rsground": {
+  "sheets": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GME1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT": [],
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GME1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_arene__09b24b06.rsground": {
+  "sheets": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT": [],
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GMA1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_arene__5130a233.rsground": {
+  "sheets": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT": [],
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GMA1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_arene__e25bb61d.rsground": {
+  "sheets": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT": [],
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GMA1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GMA1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GMA1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GMA1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GMA1_03_03_METEORITES_FIXES_CEINTURE",
+   "GMA1_04_04_CHAMBRE_DEOXYS_ET_PONT",
+   "GMA1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GMA1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GMA1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GMA1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GMA1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_entree__80c3cd80.rsground": {
+  "sheets": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GME1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT": [],
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GME1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_entree__9cb20154.rsground": {
+  "sheets": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GME1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT": [],
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GME1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "grotte_meteore_entree__ed349f6a.rsground": {
+  "sheets": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "missing_sources": {
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74": [],
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS": [],
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU": [],
+   "GME1_03_03_METEORITES_FIXES_CEINTURE": [],
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT": [],
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES": [],
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX": [],
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74": [],
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN": [],
+   "GME1_09_09_LEVITATION_METEORITES_TOP": []
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [
+   "GME1_00_00_VIDE_COSMIQUE_ABYSSAL_B74",
+   "GME1_01_01_ETOILES_ET_ECLATS_COSMOS",
+   "GME1_02_02_SOL_DALLE_METEORITE_CONTINU",
+   "GME1_03_03_METEORITES_FIXES_CEINTURE",
+   "GME1_04_04_DALLE_LABYRINTHE_ET_PONT",
+   "GME1_05_05_REMPARTS_METEORITE_SOMBRES",
+   "GME1_06_06_FACETTES_POURPRES_CRISTAUX",
+   "GME1_07_07_ONDE_PSIONIQUE_CIRCUITS_B74",
+   "GME1_08_08_SCINTILLEMENT_CRISTAUX_CYAN",
+   "GME1_09_09_LEVITATION_METEORITES_TOP"
+  ],
+  "unfindable_bg": []
+ },
+ "guild_path_\u0068alcyon__1d6b7e3f.rsground": {
+  "sheets": [
+   "GuildPath\u0048alcyon"
+  ],
+  "missing": [
+   "GuildPath\u0048alcyon"
+  ],
+  "missing_sources": {
+   "GuildPath\u0048alcyon": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ]
+  },
+  "missing_bg": [
+   "Flowers_Tropical_1",
+   "Flowers_Tropical_2",
+   "Flowers_Tropical_3",
+   "Flowers_Tropical_4",
+   "Flowers_Tropical_5",
+   "House_Normal"
+  ],
+  "missing_bg_sources": {
+   "Flowers_Tropical_1": [
+    [
+     "gtp",
+     "source"
+    ]
+   ],
+   "Flowers_Tropical_2": [],
+   "Flowers_Tropical_3": [],
+   "Flowers_Tropical_4": [],
+   "Flowers_Tropical_5": [],
+   "House_Normal": []
+  },
+  "unfindable": [],
+  "unfindable_bg": [
+   "Flowers_Tropical_2",
+   "Flowers_Tropical_3",
+   "Flowers_Tropical_4",
+   "Flowers_Tropical_5",
+   "House_Normal"
+  ]
+ },
+ "guild_path_\u0068alcyon_layers__44ade487.rsground": {
+  "sheets": [
+   "GuildPath_Arbres",
+   "GuildPath_Chemin",
+   "GuildPath_PremierPlan",
+   "GuildPath_Sol",
+   "GuildPath_Vegetation"
+  ],
+  "missing": [
+   "GuildPath_Arbres",
+   "GuildPath_Chemin",
+   "GuildPath_PremierPlan",
+   "GuildPath_Sol",
+   "GuildPath_Vegetation"
+  ],
+  "missing_sources": {
+   "GuildPath_Arbres": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_Chemin": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_PremierPlan": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_Sol": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_Vegetation": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "guild_path_\u0068alcyon_palika__2bf26df8.rsground": {
+  "sheets": [
+   "GuildPath_\u0048alcyon_Base",
+   "GuildPath_\u0048alcyon_BigTree",
+   "GuildPath_\u0048alcyon_Objects",
+   "GuildPath_\u0048alcyon_Shadows",
+   "GuildPath_\u0048alcyon_Trees"
+  ],
+  "missing": [
+   "GuildPath_\u0048alcyon_Base",
+   "GuildPath_\u0048alcyon_BigTree",
+   "GuildPath_\u0048alcyon_Objects",
+   "GuildPath_\u0048alcyon_Shadows",
+   "GuildPath_\u0048alcyon_Trees"
+  ],
+  "missing_sources": {
+   "GuildPath_\u0048alcyon_Base": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_\u0048alcyon_BigTree": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_\u0048alcyon_Objects": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_\u0048alcyon_Shadows": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ],
+   "GuildPath_\u0048alcyon_Trees": [
+    [
+     "gtp",
+     "sprites"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "luminous_spring_pmdo__7434ef0f.rsground": {
+  "sheets": [
+   "01_Luminous_Spring_Base",
+   "02_Luminous_Spring_River",
+   "09_Luminous_Spring_River_Animations"
+  ],
+  "missing": [
+   "01_Luminous_Spring_Base",
+   "02_Luminous_Spring_River",
+   "09_Luminous_Spring_River_Animations"
+  ],
+  "missing_sources": {
+   "01_Luminous_Spring_Base": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ],
+   "02_Luminous_Spring_River": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ],
+   "09_Luminous_Spring_River_Animations": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "luminous_spring_pmdo__dad2812d.rsground": {
+  "sheets": [
+   "01_Luminous_Spring_Base",
+   "02_Luminous_Spring_River",
+   "09_Luminous_Spring_River_Animations"
+  ],
+  "missing": [
+   "01_Luminous_Spring_Base",
+   "02_Luminous_Spring_River",
+   "09_Luminous_Spring_River_Animations"
+  ],
+  "missing_sources": {
+   "01_Luminous_Spring_Base": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ],
+   "02_Luminous_Spring_River": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ],
+   "09_Luminous_Spring_River_Animations": [
+    [
+     "gtp",
+     "tileset_pmd"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "mer_houleuse_entree__ae32210a.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "mer_houleuse_sanctuaire__1c42e708.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_accueil__5e959a8c.rsground": {
+  "sheets": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Altere_Pond_Cliffs",
+   "Altere_Pond_Fringe",
+   "Apricorn_Glade_Big_Tree",
+   "CarriereMagnetique_Base",
+   "ChampRavage_Base",
+   "Colline_Anciens_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D13p11a_Base",
+   "D14p11a_Base",
+   "D24p31a_Base",
+   "D26p31a_Base",
+   "D26p43a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "DesertFournaise_Base",
+   "DrenchedBluffEntranceDetails",
+   "EoN_DininghallNight",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EtangCarapace_Base",
+   "First_Core_Location_Base",
+   "ForetEnvolee_Base",
+   "G01p02a_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p04c_Base",
+   "G01p05a_Base",
+   "G01p06a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p08a_Base",
+   "G01p09a_Base",
+   "G01p09c_Base",
+   "G01p10c_Base",
+   "GROTTE",
+   "GorgeArdentePorte_Base",
+   "GroudonStatueStatic",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Dining_Room_Objects_Over",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Supports",
+   "H02p99a_Base",
+   "INVERSEPATHWAY",
+   "KINGAMBIT DOJO",
+   "LacCascade_Base",
+   "Ledian_Dojo_Ceiling",
+   "LulubyTownEvening_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Cafe_Objects",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Electric_Home_Objects",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fire_Home_Objects",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects",
+   "Metano_Town_Objects",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_Rock_Home_Base",
+   "Metano_Town_Water_Home_Base",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "PMD_TREES",
+   "PreTonnerre_Base",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "S01p02a_Base",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V13p01a_Base",
+   "V14p04a_Base",
+   "WoN_overw1_autumn",
+   "WoN_overw2_autumn",
+   "WoN_overw4_autumn",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "WoN_overwhbn_autumn",
+   "WoN_overwyh_autumn",
+   "a01p01_Base",
+   "a02p02_Base",
+   "a02p04_Base",
+   "a04p01_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b04p01c_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b10p01c_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "b12p02c_Base",
+   "charmina_hut",
+   "d06p03_DirectBase",
+   "d19p01_DirectBase",
+   "d21p01_DirectBase",
+   "d23p01_DirectBase",
+   "image (2)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (1)",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks",
+   "nenupharetcristaux-removebg-preview",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "s02_Base",
+   "salle_jour",
+   "spinda_cafe_dojo",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "telechargement_6_tileset (1)",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (5)",
+   "téléchargement (6)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Altere_Pond_Fringe",
+   "Apricorn_Glade_Big_Tree",
+   "CarriereMagnetique_Base",
+   "ChampRavage_Base",
+   "Colline_Anciens_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D13p11a_Base",
+   "D14p11a_Base",
+   "D24p31a_Base",
+   "D26p31a_Base",
+   "D26p43a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "DesertFournaise_Base",
+   "DrenchedBluffEntranceDetails",
+   "EoN_DininghallNight",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EtangCarapace_Base",
+   "First_Core_Location_Base",
+   "ForetEnvolee_Base",
+   "G01p02a_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p04c_Base",
+   "G01p05a_Base",
+   "G01p06a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p08a_Base",
+   "G01p09a_Base",
+   "G01p09c_Base",
+   "G01p10c_Base",
+   "GROTTE",
+   "GorgeArdentePorte_Base",
+   "GroudonStatueStatic",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Dining_Room_Objects_Over",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Supports",
+   "H02p99a_Base",
+   "LacCascade_Base",
+   "Ledian_Dojo_Ceiling",
+   "LulubyTownEvening_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Electric_Home_Objects",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fire_Home_Objects",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_Rock_Home_Base",
+   "Metano_Town_Water_Home_Base",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "PreTonnerre_Base",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "S01p02a_Base",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V13p01a_Base",
+   "V14p04a_Base",
+   "WoN_overw1_autumn",
+   "WoN_overw2_autumn",
+   "WoN_overw4_autumn",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "WoN_overwhbn_autumn",
+   "WoN_overwyh_autumn",
+   "a01p01_Base",
+   "a02p02_Base",
+   "a02p04_Base",
+   "a04p01_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b04p01c_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b10p01c_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "b12p02c_Base",
+   "d06p03_DirectBase",
+   "d19p01_DirectBase",
+   "d21p01_DirectBase",
+   "d23p01_DirectBase",
+   "image (2)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks",
+   "nenupharetcristaux-removebg-preview",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "s02_Base",
+   "salle_jour",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "telechargement_6_tileset (1)",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (5)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing_sources": {
+   "10-PMD SKY": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Altere_Pond_Fringe": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Apricorn_Glade_Big_Tree": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CarriereMagnetique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ChampRavage_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Colline_Anciens_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D13p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D14p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D24p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D26p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D26p43a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D28p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D41p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D55p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "DesertFournaise_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "DrenchedBluffEntranceDetails": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_DininghallNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_GuildmasterRoomNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroRoad": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EtangCarapace_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "First_Core_Location_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ForetEnvolee_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p03a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p05a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p06a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p08a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p09a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p09c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p10c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GROTTE": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdentePorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GroudonStatueStatic": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Left_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Dining_Room_Objects_Over": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Second_Floor_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Third_Floor_Lobby_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H02p99a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LacCascade_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Ledian_Dojo_Ceiling": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "LulubyTownEvening_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe_Base": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Electric_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Electric_Home_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fringe_Night": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Over_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Under_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Rock_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Water_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P17p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P19p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "PreTonnerre_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QGKingambit_metano_cafe_reference_pmdo_40pct": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "S01p02a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SpindaCafe1": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ]
+   ],
+   "T01p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V13p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V14p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw1_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw2_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw4_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5e_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwf_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhb_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhbn_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwyh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a01p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a04p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b04p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b10p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d06p03_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d19p01_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d21p01_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d23p01_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (4)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "metano_scale_verification": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "n7be-MMZKAaGGNSe1PWN1p_wGSQqkqtV0PrlGaur_ks": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "nenupharetcristaux-removebg-preview": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "s02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "spindacafevFINAL": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "telechargement_6_tileset (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (3)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (5)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_accueil__6f16fc04.rsground": {
+  "sheets": [
+   "MetanoGen_accueil",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_accueil__9bf0b6cd.rsground": {
+  "sheets": [
+   "MetanoGen_accueil",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_accueil__ac4d7281.rsground": {
+  "sheets": [
+   "MetanoGen_accueil",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_cafe__16ffa750.rsground": {
+  "sheets": [
+   "MetanoGen_cafe",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_cafe__1d776a45.rsground": {
+  "sheets": [
+   "MetanoGen_cafe",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_cafe__607f0f0c.rsground": {
+  "sheets": [
+   "MetanoGen_cafe",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_cafe__72d8d089.rsground": {
+  "sheets": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "Celestial_Peak_Entrance_Art",
+   "Cloven_Entrance_Anim_1",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "CratereFumant_Base",
+   "D01p11b_Base",
+   "D06p11a_Base",
+   "D09p03_Base",
+   "D13p11a_Base",
+   "D24p31a_Base",
+   "D28p31a_Base",
+   "D57p44a_Base",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EoN_IntroStormySharpedo",
+   "ForetEnvolee_Base",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p05a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p09c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "GrotteRocheuse_Base",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Bottom_Left_Bedroom_Walls",
+   "Guild_Bottom_Right_Bedroom_Supports",
+   "Guild_Bottom_Right_Bedroom_Walls",
+   "Guild_Dining_Room_Objects",
+   "Guild_First_Floor",
+   "Guild_Guildmasters_Room_Supports",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Objects",
+   "Guild_Top_Right_Bedroom_Supports",
+   "Guild_Top_Right_Bedroom_Walls",
+   "Habitat_SharpedoBluff_Day_Layer1",
+   "LacCascade_Base",
+   "LulubyTownEvening_Base",
+   "LulubyTownMorning_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cave_Objects",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Animated",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fire_Home_Objects",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Rock_Home_Objects",
+   "Metano_Town_Water_Home_Base_Animated",
+   "MontGrondantPied_Base",
+   "P01p04a_Base",
+   "PMD_TREES",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "SpindaCafe1",
+   "T00p02_Base",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "VigieStratos_Base",
+   "WoN_overw1_autumn",
+   "WoN_overw3_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "a01p01_Base",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "alakazam_redimensionne",
+   "b01p01b_Base",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b05p01b_Base",
+   "b05p02b_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b09p02c_Base",
+   "b11p01c_Base",
+   "b12p01a_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "b12p02c_Base",
+   "d09p03_DirectBase",
+   "d12p01_Base",
+   "d12p02_DirectBase",
+   "d12p04_DirectBase",
+   "d19p01_DirectBase",
+   "h26p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (1)",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "salle_jour",
+   "spinda_cafe_dojo",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "telechargement_6_tileset",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (7)",
+   "télécharger (2)",
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk"
+  ],
+  "missing": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "Celestial_Peak_Entrance_Art",
+   "Cloven_Entrance_Anim_1",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "CratereFumant_Base",
+   "D01p11b_Base",
+   "D06p11a_Base",
+   "D09p03_Base",
+   "D13p11a_Base",
+   "D24p31a_Base",
+   "D28p31a_Base",
+   "D57p44a_Base",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EoN_IntroStormySharpedo",
+   "ForetEnvolee_Base",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p05a_Base",
+   "G01p07a_Base",
+   "G01p07c_Base",
+   "G01p09c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "GrotteRocheuse_Base",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Bottom_Left_Bedroom_Walls",
+   "Guild_Bottom_Right_Bedroom_Supports",
+   "Guild_Bottom_Right_Bedroom_Walls",
+   "Guild_Dining_Room_Objects",
+   "Guild_First_Floor",
+   "Guild_Guildmasters_Room_Supports",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Objects",
+   "Guild_Top_Right_Bedroom_Supports",
+   "Guild_Top_Right_Bedroom_Walls",
+   "Habitat_SharpedoBluff_Day_Layer1",
+   "LacCascade_Base",
+   "LulubyTownEvening_Base",
+   "LulubyTownMorning_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cave_Objects",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Animated",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fire_Home_Objects",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Rock_Home_Objects",
+   "Metano_Town_Water_Home_Base_Animated",
+   "MontGrondantPied_Base",
+   "P01p04a_Base",
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "SpindaCafe1",
+   "T00p02_Base",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "VigieStratos_Base",
+   "WoN_overw1_autumn",
+   "WoN_overw3_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "a01p01_Base",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "b01p01b_Base",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b05p01b_Base",
+   "b05p02b_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b09p02c_Base",
+   "b11p01c_Base",
+   "b12p01a_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "b12p02c_Base",
+   "d09p03_DirectBase",
+   "d12p01_Base",
+   "d12p02_DirectBase",
+   "d12p04_DirectBase",
+   "d19p01_DirectBase",
+   "h26p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "salle_jour",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "telechargement_6_tileset",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (7)",
+   "télécharger (2)",
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk"
+  ],
+  "missing_sources": {
+   "10-PMD SKY": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CarriereMagnetique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Celestial_Peak_Entrance_Art": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Cloven_Entrance_Anim_1": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Cloven_Entrance_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Colline_Anciens_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CratereFumant_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D06p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D09p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D13p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D24p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D28p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D57p44a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_GuildmasterRoomNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroRoad": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroStormySharpedo": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "ForetEnvolee_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseArdente_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseVolcanique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p05a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p09c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdenteCoeur_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdentePorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteRocheuse_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Left_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Left_Bedroom_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Right_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Right_Bedroom_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Dining_Room_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_First_Floor": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Guildmasters_Room_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Second_Floor_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Third_Floor_Lobby_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Top_Right_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Top_Right_Bedroom_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Habitat_SharpedoBluff_Day_Layer1": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LacCascade_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LulubyTownEvening_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LulubyTownMorning_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cave_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Electric_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Animated": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Rock_Home_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Water_Home_Base_Animated": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "MontGrondantPied_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QbGsHZzLNXjjGQqPTF7sfhBBqrF3njoBlTbiFK0sRKw": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SpindaCafe1": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ]
+   ],
+   "T00p02_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "VigieStratos_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw1_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw3_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5e_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwf_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhb_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a01p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p01b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b05p01b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b05p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b11p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d09p03_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p02_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p04_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d19p01_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h26p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "metano_scale_verification": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "spindacafevFINAL": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "telechargement_6_tileset": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (3)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "vxLLBr169oj9cLCPdY3wF2uiWmP5zYEBy1P_PyM5ktk": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_casino__1a75313b.rsground": {
+  "sheets": [
+   "MetanoGen_casino",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_casino__aa24abe2.rsground": {
+  "sheets": [
+   "MetanoGen_casino",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_casino__bcf7a437.rsground": {
+  "sheets": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "Crooked_Cavern_Shadows",
+   "D09p03_Base",
+   "D13p11a_Base",
+   "D26p31a_Base",
+   "D26p43a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "D57p44a_Base",
+   "EoN_DininghallNight",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EoN_IntroStormySharpedo",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p04c_Base",
+   "G01p06a_Base",
+   "G01p07c_Base",
+   "G01p10c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_First_Floor",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Objects",
+   "Guild_Top_Right_Bedroom_Walls",
+   "H02p99a_Base",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cliffs_Night",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Animated",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V14p01a_Base",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhbn_autumn",
+   "WoN_overwhn_autumn",
+   "WoN_overwyh_autumn",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02c_Base",
+   "b05p02b_Base",
+   "b06p01c_Base",
+   "b09p01b_Base",
+   "b09p01c_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "d12p04_DirectBase",
+   "h26p01_Base",
+   "image (2)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (1)",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "salle_jour",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (5)",
+   "téléchargement (6)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "Crooked_Cavern_Shadows",
+   "D09p03_Base",
+   "D13p11a_Base",
+   "D26p31a_Base",
+   "D26p43a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "D57p44a_Base",
+   "EoN_DininghallNight",
+   "EoN_GuildmasterRoomNight",
+   "EoN_IntroRoad",
+   "EoN_IntroStormySharpedo",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p04c_Base",
+   "G01p06a_Base",
+   "G01p07c_Base",
+   "G01p10c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_First_Floor",
+   "Guild_Second_Floor_Objects",
+   "Guild_Third_Floor_Lobby_Objects",
+   "Guild_Top_Right_Bedroom_Walls",
+   "H02p99a_Base",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Animated",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "P19p02a_Base",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V14p01a_Base",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhbn_autumn",
+   "WoN_overwhn_autumn",
+   "WoN_overwyh_autumn",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02c_Base",
+   "b05p02b_Base",
+   "b06p01c_Base",
+   "b09p01b_Base",
+   "b09p01c_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b12p02a_Base",
+   "b12p02b_Base",
+   "d12p04_DirectBase",
+   "h26p01_Base",
+   "image (2)",
+   "image (4)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (2)",
+   "metano_scale_verification",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "salle_jour",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (5)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing_sources": {
+   "10-PMD SKY": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CarriereMagnetique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Crooked_Cavern_Shadows": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "D09p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D13p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D26p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D26p43a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D28p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D41p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D55p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D57p44a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_DininghallNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_GuildmasterRoomNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroRoad": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroStormySharpedo": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseArdente_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseVolcanique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p06a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p10c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdenteCoeur_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdentePorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_First_Floor": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Second_Floor_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Third_Floor_Lobby_Objects": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Top_Right_Bedroom_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "H02p99a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Electric_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Animated": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fringe_Night": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Over_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Under_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P17p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P19p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SpindaCafe1": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ]
+   ],
+   "T01p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V14p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5e_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhbn_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhn_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwyh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b05p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b06p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p01b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b12p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p04_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h26p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (4)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "metano_scale_verification": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "spindacafevFINAL": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (3)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (5)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_casino__df084727.rsground": {
+  "sheets": [
+   "MetanoGen_casino",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_bas__16869e6e.rsground": {
+  "sheets": [
+   "MetanoGen_salon_bas",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_bas__2b44c79f.rsground": {
+  "sheets": [
+   "MetanoGen_salon_bas",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_bas__cbbcd0ca.rsground": {
+  "sheets": [
+   "MetanoGen_salon_bas",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_bas__fe860b68.rsground": {
+  "sheets": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "CratereFumant_Base",
+   "D09p03_Base",
+   "EoN_DininghallNight",
+   "EoN_IntroStormySharpedo",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p04c_Base",
+   "G01p07c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "Guild_First_Floor",
+   "Guild_Second_Floor_Objects",
+   "Guild_Second_Floor_Walls",
+   "Ledian_Dojo_Ceiling",
+   "LulubyTownEvening_Base",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cliffs_Night",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_River_Animation_1_Night",
+   "Mount_Windswept_Shadows",
+   "PMD_TREES",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V13p01a_Base",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwh_autumn",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02c_Base",
+   "b09p02a_Base",
+   "d12p02_DirectBase",
+   "d12p04_DirectBase",
+   "h19p01_Base",
+   "h26p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (1)",
+   "interieur_sans_deco_jour (2)",
+   "kzKLPRyU8on31RVdw889r3Rvrcv9dOYB8MJABsvrmlAFRERERERERERERERERERERERERERERERERERERERERERERE5af4B3BJ2tbA2I6MAAAAASUVORK5CYII",
+   "salle_jour",
+   "spindacafevFINAL",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (6)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing": [
+   "10-PMD SKY",
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "CarriereMagnetique_Base",
+   "CratereFumant_Base",
+   "D09p03_Base",
+   "EoN_DininghallNight",
+   "EoN_IntroStormySharpedo",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p03a_Base",
+   "G01p04a_Base",
+   "G01p04c_Base",
+   "G01p07c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "Guild_First_Floor",
+   "Guild_Second_Floor_Objects",
+   "Guild_Second_Floor_Walls",
+   "Ledian_Dojo_Ceiling",
+   "LulubyTownEvening_Base",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_River_Animation_1_Night",
+   "Mount_Windswept_Shadows",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "V13p01a_Base",
+   "WoN_overw5_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwh_autumn",
+   "a02p02_Base",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02c_Base",
+   "b09p02a_Base",
+   "d12p02_DirectBase",
+   "d12p04_DirectBase",
+   "h19p01_Base",
+   "h26p01_Base",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (2)",
+   "salle_jour",
+   "spindacafevFINAL",
+   "texyre",
+   "téléchargement (3)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing_sources": {
+   "10-PMD SKY": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CarriereMagnetique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "CratereFumant_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D09p03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_DininghallNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_IntroStormySharpedo": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseArdente_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseVolcanique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p03a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p04c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdenteCoeur_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdentePorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_First_Floor": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Second_Floor_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Second_Floor_Walls": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Ledian_Dojo_Ceiling": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "LulubyTownEvening_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fringe_Night": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Over_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Under_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_River_Animation_1_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Mount_Windswept_Shadows": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QGKingambit_metano_cafe_reference_pmdo_40pct": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V13p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5e_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p02_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p02_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p04_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h19p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "h26p01_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "spindacafevFINAL": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (3)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_haut__121ebaf7.rsground": {
+  "sheets": [
+   "MetanoGen_salon_haut",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_haut__be93f131.rsground": {
+  "sheets": [
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Altere_Pond_Objects_Under",
+   "CarriereMagnetique_Base",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D14p11a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "DrenchedBluffEntranceDetails",
+   "EoN_GuildmasterRoomNight",
+   "EtangCarapace_Base",
+   "First_Core_Location_Base",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p03a_Base",
+   "G01p05a_Base",
+   "G01p07c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "GrotteRocheuse_Base",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Bottom_Right_Bedroom_Supports",
+   "Guild_Dining_Room_Objects",
+   "Guild_Guildmasters_Room_Supports",
+   "Guild_Second_Floor_Objects",
+   "Ledian_Dojo_Ceiling",
+   "Ledian_Dojo_Objects",
+   "LulubyTownEvening_Base",
+   "LulubyTownMorning_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_Rock_Home_Base",
+   "Metano_Town_Trimmed",
+   "P01p01a_Base",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "PMD_TREES",
+   "PlainesBrulees_Base",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "Searing_Tunnel_Rocks",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "TownBase",
+   "V13p01a_Base",
+   "VigieStratos_Base",
+   "WoN_overw3_autumn",
+   "WoN_overw4_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "WoN_overwhbn_autumn",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b03p01c_Base",
+   "b05p02a_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b10p01c_Base",
+   "d12p04_DirectBase",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (1)",
+   "interieur_sans_deco_jour (2)",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "s03_Base",
+   "salle_jour",
+   "spinda_cafe_dojo",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "texyre",
+   "town_map",
+   "téléchargement (3)",
+   "téléchargement (6)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing": [
+   "10_maisons_eau_sheet",
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA",
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20",
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts",
+   "Altere_Pond_Objects_Under",
+   "CarriereMagnetique_Base",
+   "Cloven_Entrance_Base",
+   "Colline_Anciens_Base",
+   "D01p11b_Base",
+   "D01p41a_Base",
+   "D14p11a_Base",
+   "D28p31a_Base",
+   "D41p41a_Base",
+   "D55p11a_Base",
+   "DrenchedBluffEntranceDetails",
+   "EoN_GuildmasterRoomNight",
+   "EtangCarapace_Base",
+   "First_Core_Location_Base",
+   "FosseArdente_Base",
+   "FosseVolcanique_Base",
+   "G01p03a_Base",
+   "G01p05a_Base",
+   "G01p07c_Base",
+   "GorgeArdenteCoeur_Base",
+   "GorgeArdentePorte_Base",
+   "GrotteRocheuse_Base",
+   "Guild_Bedroom_Hallway_Supports",
+   "Guild_Bedroom_Hallway_Walls",
+   "Guild_Bottom_Left_Bedroom_Supports",
+   "Guild_Bottom_Right_Bedroom_Supports",
+   "Guild_Dining_Room_Objects",
+   "Guild_Guildmasters_Room_Supports",
+   "Guild_Second_Floor_Objects",
+   "Ledian_Dojo_Ceiling",
+   "Ledian_Dojo_Objects",
+   "LulubyTownEvening_Base",
+   "LulubyTownMorning_Base",
+   "Metano_Town_Animated",
+   "Metano_Town_Animated_Night",
+   "Metano_Town_Animation_Tileset_Night",
+   "Metano_Town_Cafe",
+   "Metano_Town_Cafe_Base",
+   "Metano_Town_Electric_Home_Base",
+   "Metano_Town_Fire_Home_Base",
+   "Metano_Town_Fringe_Night",
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Objects_Night",
+   "Metano_Town_Objects_Over_Night",
+   "Metano_Town_Objects_Under_Night",
+   "Metano_Town_Rock_Home_Base",
+   "P01p01a_Base",
+   "P01p04a_Base",
+   "P17p02a_Base",
+   "PlainesBrulees_Base",
+   "QGKingambit_metano_cafe_reference_pmdo_40pct",
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M",
+   "Searing_Tunnel_Rocks",
+   "SpindaCafe1",
+   "T01p03a_Base",
+   "T01p04a_Base",
+   "TownBase",
+   "V13p01a_Base",
+   "VigieStratos_Base",
+   "WoN_overw3_autumn",
+   "WoN_overw4_autumn",
+   "WoN_overw5e_autumn",
+   "WoN_overwf_autumn",
+   "WoN_overwh_autumn",
+   "WoN_overwhb_autumn",
+   "WoN_overwhbn_autumn",
+   "a02p04_Base",
+   "alakazam",
+   "b01p02a_Base",
+   "b01p02b_Base",
+   "b01p02c_Base",
+   "b03p01c_Base",
+   "b05p02a_Base",
+   "b09p02a_Base",
+   "b09p02b_Base",
+   "b10p01c_Base",
+   "d12p04_DirectBase",
+   "image (2)",
+   "image-removebg-preview (2)",
+   "interieur_sans_deco_jour",
+   "interieur_sans_deco_jour (2)",
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)",
+   "s03_Base",
+   "salle_jour",
+   "spindacafevFINAL",
+   "t01p04_Base",
+   "texyre",
+   "town_map",
+   "téléchargement (3)",
+   "téléchargement (7)",
+   "télécharger (2)"
+  ],
+  "missing_sources": {
+   "10_maisons_eau_sheet": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "1UCKBNSs1w1PcwGct3NbnI6Vc-A-Yw9hWOholwPeEhA": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "8f9fbfe4-b846-492b-b564-b6bc33749e20": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "9cWbwSpH8oLENPQSED5Gj7rGQqeFWST8uAxSR55SHts": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Altere_Pond_Objects_Under": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "CarriereMagnetique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Cloven_Entrance_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Colline_Anciens_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p11b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D01p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D14p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D28p31a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D41p41a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "D55p11a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "DrenchedBluffEntranceDetails": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EoN_GuildmasterRoomNight": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "EtangCarapace_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "First_Core_Location_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseArdente_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "FosseVolcanique_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p03a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p05a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "G01p07c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdenteCoeur_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GorgeArdentePorte_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "GrotteRocheuse_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bedroom_Hallway_Walls": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Left_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Bottom_Right_Bedroom_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Dining_Room_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Guild_Guildmasters_Room_Supports": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Guild_Second_Floor_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Ledian_Dojo_Ceiling": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Ledian_Dojo_Objects": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "LulubyTownEvening_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "LulubyTownMorning_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animated_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Animation_Tileset_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Cafe_Base": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Electric_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fire_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Fringe_Night": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Night": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Over_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Objects_Under_Night": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Rock_Home_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p01a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P01p04a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "P17p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "PlainesBrulees_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "QGKingambit_metano_cafe_reference_pmdo_40pct": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "R5WuDAQbkhTImlatxBicXaekW9apaSs_5Ys706CBq2M": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Searing_Tunnel_Rocks": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "SpindaCafe1": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ]
+   ],
+   "T01p03a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "T01p04a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "TownBase": [
+    [
+     "gtp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "V13p01a_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "VigieStratos_Base": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw3_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw4_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overw5e_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwf_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwh_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhb_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "WoN_overwhbn_autumn": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "a02p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "alakazam": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b01p02c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b03p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b05p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02a_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b09p02b_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "b10p01c_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "d12p04_DirectBase": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "image-removebg-preview (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_b"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "interieur_sans_deco_jour (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "pokemon_ressource__montgolfiere_overworld_by_wergan_dcy7dk7-pre (1)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "s03_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "salle_jour": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "spindacafevFINAL": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "t01p04_Base": [
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "texyre": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "town_map": [
+    [
+     "pcp",
+     "town02_tiles_pack_c"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (3)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "téléchargement (7)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "télécharger (2)": [
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_haut__caadc1bf.rsground": {
+  "sheets": [
+   "MetanoGen_salon_haut",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_gen_salon_haut__ce4a1961.rsground": {
+  "sheets": [
+   "MetanoGen_salon_haut",
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_reseau_accueil__bef4fbfa.rsground": {
+  "sheets": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_reseau_cafe__b4bae738.rsground": {
+  "sheets": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_reseau_casino__592c1b64.rsground": {
+  "sheets": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_reseau_salon_bas__5280425e.rsground": {
+  "sheets": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "metano_reseau_salon_haut__5401955b.rsground": {
+  "sheets": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing": [
+   "Metano_Town_Normal_Home_Base",
+   "Metano_Town_Normal_Home_Objects"
+  ],
+  "missing_sources": {
+   "Metano_Town_Normal_Home_Base": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ],
+   "Metano_Town_Normal_Home_Objects": [
+    [
+     "pcp",
+     "source"
+    ],
+    [
+     "pcp",
+     "town02"
+    ],
+    [
+     "town02",
+     "Content"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "plage_pmd_sky_large__e7f4286c.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rtc1_tour_celeste__cc7a29a9.rsground": {
+  "sheets": [
+   "RTC1_00_00_GOUFFRE_BLEU_CELESTE",
+   "RTC1_01_01_BRUMES_GOUFFRE_PROFONDES",
+   "RTC1_02_02_COURANTS_CUMULUS_INTERMEDIAIRES",
+   "RTC1_03_03_MURAILLES_CUMULUS_ETOILEES",
+   "RTC1_04_04_OMBRES_PONTS_ET_ILE",
+   "RTC1_05_05_SOL_PONT_ET_ILE_RELAIS",
+   "RTC1_06_06_OURLET_FESTONNE_BLANC",
+   "RTC1_07_07_SCINTILLEMENT_ETOILES_CUMULUS",
+   "RTC1_08_08_REFLETS_BPL_RELAIS",
+   "RTC1_09_09_PANACHES_ASCENDANTS_PONT"
+  ],
+  "missing": [
+   "RTC1_00_00_GOUFFRE_BLEU_CELESTE",
+   "RTC1_01_01_BRUMES_GOUFFRE_PROFONDES",
+   "RTC1_02_02_COURANTS_CUMULUS_INTERMEDIAIRES",
+   "RTC1_03_03_MURAILLES_CUMULUS_ETOILEES",
+   "RTC1_04_04_OMBRES_PONTS_ET_ILE",
+   "RTC1_05_05_SOL_PONT_ET_ILE_RELAIS",
+   "RTC1_06_06_OURLET_FESTONNE_BLANC",
+   "RTC1_07_07_SCINTILLEMENT_ETOILES_CUMULUS",
+   "RTC1_08_08_REFLETS_BPL_RELAIS",
+   "RTC1_09_09_PANACHES_ASCENDANTS_PONT"
+  ],
+  "missing_sources": {
+   "RTC1_00_00_GOUFFRE_BLEU_CELESTE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_01_01_BRUMES_GOUFFRE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_02_02_COURANTS_CUMULUS_INTERMEDIAIRES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_03_03_MURAILLES_CUMULUS_ETOILEES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_04_04_OMBRES_PONTS_ET_ILE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_05_05_SOL_PONT_ET_ILE_RELAIS": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_06_06_OURLET_FESTONNE_BLANC": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_07_07_SCINTILLEMENT_ETOILES_CUMULUS": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_08_08_REFLETS_BPL_RELAIS": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "RTC1_09_09_PANACHES_ASCENDANTS_PONT": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_ne_jour__0610263a.rsground": {
+  "sheets": [
+   "Metano_Town_Animation_Tileset",
+   "Metano_Town_Base",
+   "Metano_Town_Cliffs",
+   "Metano_Town_Objects",
+   "RVT_NE_JOUR_OBJETS"
+  ],
+  "missing": [
+   "RVT_NE_JOUR_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NE_JOUR_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_ne_jour__4999bf9d.rsground": {
+  "sheets": [
+   "Metano_Town_Animation_Tileset",
+   "Metano_Town_Base",
+   "Metano_Town_Cliffs",
+   "Metano_Town_Objects",
+   "RVT_NE_JOUR_OBJETS"
+  ],
+  "missing": [
+   "RVT_NE_JOUR_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NE_JOUR_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_ne_nuit__42312f0d.rsground": {
+  "sheets": [
+   "Metano_Town_Base_Night",
+   "Metano_Town_Cliffs_Night",
+   "RVT_NE_NUIT_ANIM",
+   "RVT_NE_NUIT_OBJETS"
+  ],
+  "missing": [
+   "RVT_NE_NUIT_ANIM",
+   "RVT_NE_NUIT_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NE_NUIT_ANIM": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "RVT_NE_NUIT_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_ne_nuit__6696d80e.rsground": {
+  "sheets": [
+   "Metano_Town_Base_Night",
+   "Metano_Town_Cliffs_Night",
+   "RVT_NE_NUIT_ANIM",
+   "RVT_NE_NUIT_OBJETS"
+  ],
+  "missing": [
+   "RVT_NE_NUIT_ANIM",
+   "RVT_NE_NUIT_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NE_NUIT_ANIM": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "RVT_NE_NUIT_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_no_jour__679b3d78.rsground": {
+  "sheets": [
+   "Metano_Town_Animation_Tileset",
+   "Metano_Town_Base",
+   "Metano_Town_Cliffs",
+   "Metano_Town_Objects",
+   "RVT_NO_JOUR_OBJETS"
+  ],
+  "missing": [
+   "RVT_NO_JOUR_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NO_JOUR_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_no_jour__f322fec2.rsground": {
+  "sheets": [
+   "Metano_Town_Animation_Tileset",
+   "Metano_Town_Base",
+   "Metano_Town_Cliffs",
+   "Metano_Town_Objects",
+   "RVT_NO_JOUR_OBJETS"
+  ],
+  "missing": [
+   "RVT_NO_JOUR_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NO_JOUR_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_no_nuit__86073b20.rsground": {
+  "sheets": [
+   "Metano_Town_Base_Night",
+   "Metano_Town_Cliffs_Night",
+   "RVT_NO_NUIT_ANIM",
+   "RVT_NO_NUIT_OBJETS"
+  ],
+  "missing": [
+   "RVT_NO_NUIT_ANIM",
+   "RVT_NO_NUIT_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NO_NUIT_ANIM": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "RVT_NO_NUIT_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "rvt_no_nuit__b55c1037.rsground": {
+  "sheets": [
+   "Metano_Town_Base_Night",
+   "Metano_Town_Cliffs_Night",
+   "RVT_NO_NUIT_ANIM",
+   "RVT_NO_NUIT_OBJETS"
+  ],
+  "missing": [
+   "RVT_NO_NUIT_ANIM",
+   "RVT_NO_NUIT_OBJETS"
+  ],
+  "missing_sources": {
+   "RVT_NO_NUIT_ANIM": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ],
+   "RVT_NO_NUIT_OBJETS": [
+    [
+     "gtp",
+     "exports"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "spindacafetest__c8bdbff0.rsground": {
+  "sheets": [
+   "interieur_sans_deco_jour (1)",
+   "téléchargement (6)"
+  ],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "spindacaféétage1__0052a0ae.rsground": {
+  "sheets": [
+   "QULBUTOQUESTAND",
+   "SPINDA kiosk",
+   "SpindaCafe2",
+   "spinda_cafe_dojo",
+   "spindacaféétage1"
+  ],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [
+   "Pot"
+  ],
+  "missing_bg_sources": {
+   "Pot": []
+  },
+  "unfindable": [],
+  "unfindable_bg": [
+   "Pot"
+  ]
+ },
+ "spindacaféétage1salle2__20b4fe53.rsground": {
+  "sheets": [
+   "Metano_Inn_Objects",
+   "Metano_Town_Cafe_Objects",
+   "SpindaCafe2",
+   "chantroom",
+   "rido"
+  ],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__425d6726.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__7cea4a1f.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__a91c5337.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__ad9bcc5e.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__d1b6f8ec.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "stc1_tour_celeste__d8d6cebe.rsground": {
+  "sheets": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing": [
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE",
+   "STC1_01_01_ETOILES_STRATOSPHERE",
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE",
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES",
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES",
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE",
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA",
+   "STC1_07_07_RELIEFS_CRETES_COURONNE",
+   "STC1_08_08_RESPIRATION_BPL_COURONNE",
+   "STC1_09_09_SILLAGES_COURANTS_JET"
+  ],
+  "missing_sources": {
+   "STC1_00_00_STRATOSPHERE_ULTRAMARINE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_01_01_ETOILES_STRATOSPHERE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_02_02_HORIZON_PLANETAIRE_COURBE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_03_03_NAPPES_ALTITUDE_PROFONDES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_04_04_AILES_VENT_SCULPTEES_PROCHES": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_05_05_COURONNE_VOLUMETRIQUE_OMBRE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_06_06_SOL_COURONNE_RAYQUAZA": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_07_07_RELIEFS_CRETES_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_08_08_RESPIRATION_BPL_COURONNE": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ],
+   "STC1_09_09_SILLAGES_COURANTS_JET": [
+    [
+     "pcp",
+     "renders"
+    ]
+   ]
+  },
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "tour_celeste_relais__cd35c98a.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "tour_du_temps_entree__3e17509e.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "tour_du_temps_pinacle__a763c5b2.rsground": {
+  "sheets": [],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ },
+ "v50812_beach_cave_entrance_v2__e4df4aa7.rsground": {
+  "sheets": [
+   "BeachCavePit",
+   "D01P11A_layer1",
+   "D01P11A_layer2",
+   "beach_animation"
+  ],
+  "missing": [],
+  "missing_sources": {},
+  "missing_bg": [],
+  "missing_bg_sources": {},
+  "unfindable": [],
+  "unfindable_bg": []
+ }
+}

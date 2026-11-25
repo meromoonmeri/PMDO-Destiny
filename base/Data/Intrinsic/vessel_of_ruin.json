@@ -1,0 +1,104 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
+"Name": {
+"DefaultText": "Vessel of Ruin",
+"LocalTexts": {
+"fr": "Urne du Fléau",
+"de": "Unheilsgefäß",
+"es": "Caldero Debacle",
+"it": "Vaso Nefasto",
+"ja": "わざわいのうつわ",
+"ja-jp": "わざわいのうつわ",
+"zh-hans": "灾祸之鼎"
+}
+},
+"Desc": {
+"DefaultText": "The power of the Pokémon's ruinous vessel lowers the Sp. Atk stats of all Pokémon except itself.",
+"LocalTexts": {
+"es": "El catastrófico poder del caldero del Pokémon reduce el Ataque Especial de todos los Pokémon menos el usuario.",
+"zh-hans": "以能呼唤灾厄的鼎的力量降低除自己以外的宝可梦的特攻。 "
+}
+},
+"Released": true,
+"Comment": "",
+"IndexNum": 284,
+"ProximityEvent": {
+"Radius": 3,
+"TargetAlignments": 6,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 2,
+"Numerator": 3,
+"Denominator": 4,
+"Anims": []
+}
+}
+],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

@@ -1,0 +1,5 @@
+# Audit préalable — écran noir au café
+
+Base publiée : commit `ee39156a24f350b67e81740478be8505f4ff1a05` (v0.5.7). L’utilisateur signale un écran noir à l’arrivée dans le café ; l’ancien changement plaçait déjà le fondu entrant avant le suivi facultatif, mais n’a jamais démontré la cause ni été testé dans une vraie partie. Le défaut doit être considéré comme ouvert.
+
+À vérifier : transport par zone et numéro de carte, disponibilité des scripts et dépendances, chargement de la Ground et de ses banques, marqueur d’entrée et position, initialisation avant le fondu, caméra et gestion des erreurs ; retour et chargement d’une sauvegarde. Comparer l’API et le cycle de vie du moteur exactement versionnés. Conserver dialogues, personnages, sauvegardes et données des autres projets. Sauvegarder et vérifier les blobs sources avant toute correction ; ne pas accuser une cause sans preuve et ne pas affirmer que l’écran noir est résolu sans test du moteur. Un essai sur doublures ne prouve pas l’affichage ni le chargement réels.

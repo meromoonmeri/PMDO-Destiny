@@ -1,0 +1,5 @@
+Essai Linux sur une copie identique au .rsground du ZIP. Démarrage dans l'entrée de la carte : dimensions moteur 1728 × 1296 ; aucune erreur observée pendant les premières secondes à cette entrée.
+Après 300 images, le script de banc a forcé une téléportation du personnage à (800, 500), dans le rectangle de carte mais hors de la grille d'obstacles de 72 × 54 cellules (576 × 432 px).
+Conséquence observée : System.IndexOutOfRangeException répétée dans GroundMap.findWalls.
+Ce test forcé ne prouve PAS qu'un trajet ordinaire à pied permet d'atteindre cette zone : les murs statiques de l'entrée enferment le personnage avant le bord de la grille.
+Les captures et les scripts de banc ne sont pas intégrés au jeu ; sauvegardes du banc restaurées après test.

@@ -1,0 +1,73 @@
+NOUVELLE_PARTIE niveau=50 phase=1 | tick=60120
+SOL phase=1 replay=true | tick=60120
+DIALOGUE Encore vous ? Cette fois, tenez-vous prêts. | tick=65760
+FIN_TEXTE | tick=87960
+WOOSH_DEBUT | tick=90360
+WOOSH_FIN | tick=112920
+CONTROLE_PRIVE Kabutops 1 PV | tick=116520
+ENNEMI kabutops nv=14 PV=1/162 X:10 Y:8: 2 dir=Down: 0 | tick=116520
+ENNEMI kabuto nv=4 PV=16/16 X:8 Y:9: 1 dir=DownRight: 7 | tick=116520
+ENNEMI kabuto nv=4 PV=16/16 X:11 Y:9: 2 dir=DownLeft: 1 | tick=116520
+ENNEMI kabuto nv=3 PV=14/14 X:9 Y:12: 5 dir=Up: 4 | tick=116520
+ENNEMI kabuto nv=3 PV=14/14 X:10 Y:12: 6 dir=Up: 4 | tick=116520
+ARENE end_grotte_verdoyante Boss Battle 2.ogg replay=true | tick=116520
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:10: 0 dir=Up: 4 | tick=116760
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:9: 3 dir=Up: 4 | tick=186360
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Up: 4 | tick=525240
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Up: 4 | tick=525960
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Up: 4 | tick=626760
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Down: 0 | tick=658920
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:10 Y:8: 2 dir=Down: 0 | tick=659160
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:10 Y:8: 2 dir=Down: 0 | tick=699720
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:10 Y:8: 2 dir=DownRight: 7 | tick=769080
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:16@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownRight: 7 | tick=776280
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownRight: 7 | tick=776760
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownLeft: 1 | tick=858120
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:14@10,12 fin joueur=X:9 Y:13: 4 dir=DownLeft: 1 | tick=865320
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:0@10,12 fin joueur=X:9 Y:13: 4 dir=DownLeft: 1 | tick=866040
+SOL phase=3 replay=true | tick=887520
+TRIO partenaire=X:248 Y:244: 12 boss=X:280 Y:244: 492 hero=X:312 Y:244: 460 cadre=X:288 Y:242: 466 | tick=891480
+DIALOGUE Je me suis emporté trop vite. J’ai accusé Nilo sans savoir. | tick=895800
+FIN_TEXTE | tick=922440
+MUSIQUE_SOUVENIR | tick=926040
+DIALOGUE Avant, on venait boire ici en famille. Les petits faisaient la course sur le sable. | tick=926040
+FIN_TEXTE | tick=960360
+DIALOGUE Depuis les crues, le moindre éclair m’effraie. Ce n’est pas une excuse. | tick=964440
+FIN_TEXTE | tick=994800
+DIALOGUE Pardon, Nilo. Et pardon à vous deux de vous avoir attaqués. | tick=999120
+FIN_TEXTE | tick=1026000
+NILO_APAISE | tick=1029360
+DIALOGUE Alors… je peux rentrer avec maman ? | tick=1031400
+FIN_TEXTE | tick=1050480
+DIALOGUE Oui. Kabuto, laissez-leur le passage. | tick=1052160
+FIN_TEXTE | tick=1071960
+PEUR Kabuto_Flanc_G | tick=1073400
+PEUR Kabuto_Flanc_D | tick=1074120
+PEUR Kabuto_Arriere_G | tick=1074960
+PEUR Kabuto_Arriere_D | tick=1075800
+TUNNEL_DEBUT Kabuto_Arriere_G X:265 Y:299: 34 | tick=1083360
+TERRE X:265 Y:299 cadre=X:288 Y:242: 466 | tick=1083840
+TUNNEL_DEBUT Kabuto_Arriere_D X:295 Y:299: 12 | tick=1084560
+TERRE X:295 Y:299 cadre=X:288 Y:242: 466 | tick=1085160
+TUNNEL_DEBUT Kabuto_Flanc_G X:238 Y:216: 54 | tick=1085880
+TUNNEL_SORTIE Kabuto_Arriere_G | tick=1086000
+TERRE X:238 Y:216 cadre=X:288 Y:242: 466 | tick=1086480
+TUNNEL_DEBUT Kabuto_Flanc_D X:322 Y:216: 410 | tick=1087320
+TUNNEL_SORTIE Kabuto_Arriere_D | tick=1087320
+TERRE X:322 Y:216 cadre=X:288 Y:242: 466 | tick=1087920
+TUNNEL_SORTIE Kabuto_Flanc_G | tick=1088640
+TUNNEL_SORTIE Kabuto_Flanc_D | tick=1090080
+TUNNEL_DEBUT Kabutops_Boss X:280 Y:244: 492 | tick=1097040
+TERRE X:280 Y:244 cadre=X:288 Y:242: 466 | tick=1097640
+TUNNEL_SORTIE Kabutops_Boss | tick=1099800
+NILO_REDESCEND | tick=1103640
+DIALOGUE Maman ! J’ai eu si peur… | tick=1119720
+FIN_TEXTE | tick=1137720
+DIALOGUE Tu es là. C’est tout ce qui compte. | tick=1139880
+FIN_TEXTE | tick=1159200
+FONDU_FINAL | tick=1162080
+NOIR_FINAL | tick=1169280
+BILAN_NATIF | tick=1172880
+DIALOGUE Nilo !! Lyra !! Vous voilà enfin rentrés tous ensemble ! | tick=1251120
+FIN_TEXTE | tick=1277040
+DIALOGUE Papa ! Tout le monde ! Ils ont tenu tête à Kabutops tout au fond de la Fosse Cascade pour me ramener ! | tick=1287000

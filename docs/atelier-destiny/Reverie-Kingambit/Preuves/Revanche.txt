@@ -1,0 +1,11 @@
+ATTENTION: default value of option vblank_mode overridden by environment.
+KABUTOPS_ESSAI NOUVELLE_PARTIE phase=1 membres=2
+KABUTOPS_ESSAI GROUND phase=1 replay=true
+KABUTOPS_ESSAI DIALOGUE Encore vous ? Cette fois, tenez-vous prêts.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI WOOSH_DEBUT
+KABUTOPS_ESSAI WOOSH_FIN
+=>_ENV pre-cleanup:145
+=>_ENV post cleanup:144
+KABUTOPS_ESSAI ARENE map=end_grotte_verdoyante nom=Fosse Cascade Fond son=Boss Battle 2.ogg boss=X:10 Y:10: 0 joueur=X:10 Y:12: 6 equipe=2 replay=true
+KABUTOPS_ESSAI DIALOGUE Non !! Vous avez été projetés jusqu’à l’entrée… Ce fracas au cœur de la Fosse Cascade Fond, c’était terrible ! Réveillez-vous, je vous en prie !

@@ -1,0 +1,30 @@
+KABUTOPS_ESSAI NOUVELLE_PARTIE phase=nil membres=2
+KABUTOPS_ESSAI GROUND phase=nil replay=true
+KABUTOPS_ESSAI PASSAGE
+KABUTOPS_ESSAI SEUIL
+KABUTOPS_ESSAI TERRASSE
+KABUTOPS_ESSAI DIALOGUE Nilo ! Ta mère nous attend. On est venus te chercher.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE Ne montez pas ! J’ai touché aux vasques… Le courant a changé.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI OMBRE alpha=153 R=0
+KABUTOPS_ESSAI ECLAIR
+KABUTOPS_ESSAI FAUX
+KABUTOPS_ESSAI DIALOGUE Ces vasques sont sous ma garde. Vous ne passerez pas.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE On ne touchera plus à rien. Laisse-nous repartir avec lui.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI DIALOGUE Pas un pas de plus.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI WOOSH_DEBUT
+KABUTOPS_ESSAI WOOSH_FIN
+KABUTOPS_ESSAI ARENE map=end_grotte_verdoyante nom=Fosse Cascade Fond son=Boss Battle 2.ogg boss=X:10 Y:10: 0 joueur=X:10 Y:12: 6 equipe=2 replay=true
+
+--- Revanche ---
+KABUTOPS_ESSAI NOUVELLE_PARTIE phase=1 membres=2
+KABUTOPS_ESSAI GROUND phase=1 replay=true
+KABUTOPS_ESSAI DIALOGUE Encore vous ? Cette fois, tenez-vous prêts.
+KABUTOPS_ESSAI DIALOGUE_FINI
+KABUTOPS_ESSAI WOOSH_DEBUT
+KABUTOPS_ESSAI WOOSH_FIN
+KABUTOPS_ESSAI ARENE map=end_grotte_verdoyante nom=Fosse Cascade Fond son=Boss Battle 2.ogg boss=X:10 Y:10: 0 joueur=X:10 Y:12: 6 equipe=2 replay=true

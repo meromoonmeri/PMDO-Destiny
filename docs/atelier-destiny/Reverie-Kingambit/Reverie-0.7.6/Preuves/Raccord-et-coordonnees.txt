@@ -1,0 +1,7 @@
+Arrière G : acteur (264,332), impact (272,346), plan (300,246), sortie 8 images après la terre.
+Arrière D : acteur (296,328), impact (304,342), plan (300,246), sortie 8 images après la terre.
+Première rencontre : +87.317 s logiques jusqu’à l’arène ; woosh 3.133 s.
+Revanche : +7.817 s logiques jusqu’à l’arène, une réplique.
+Le boss à 0 PV n’arrête pas le duel ; les 5 K.O. (tick 1040280) précèdent la phase 3.
+Au fondu : partenaire (248, 244), Kabutops (280, 244), héros (312, 244), caméra (288, 242).
+Sorties : arrière G, arrière D, flanc G, flanc D, Kabutops. Puis descente de Nilo, Lyra et retour à Réverie.

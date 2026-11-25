@@ -1,0 +1,51 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Northern Central Cliffs",
+      "LocalTexts": {
+        "fr": "Falaises nord centrées"
+      }
+    },
+    "Released": true,
+    "Comment": "Pack « 10 Falaises Nord Centrées Nues » (textures canoniques Métano, jour/nuit) — projet-creation-pmdo livrables_cliff_nord_centre_pmdo.",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "cliff_centre_01_grand_cap_panoramique_jour",
+      "cliff_centre_01_grand_cap_panoramique_nuit",
+      "cliff_centre_02_eperon_nord_effile_jour",
+      "cliff_centre_02_eperon_nord_effile_nuit",
+      "cliff_centre_03_double_terrasse_centrale_jour",
+      "cliff_centre_03_double_terrasse_centrale_nuit",
+      "cliff_centre_04_grande_esplanade_royale_jour",
+      "cliff_centre_04_grande_esplanade_royale_nuit",
+      "cliff_centre_05_cap_anse_jumelle_jour",
+      "cliff_centre_05_cap_anse_jumelle_nuit",
+      "cliff_centre_06_presquile_isthme_etroit_jour",
+      "cliff_centre_06_presquile_isthme_etroit_nuit",
+      "cliff_centre_07_cap_asymetrique_ouest_jour",
+      "cliff_centre_07_cap_asymetrique_ouest_nuit",
+      "cliff_centre_08_cap_asymetrique_est_jour",
+      "cliff_centre_08_cap_asymetrique_est_nuit",
+      "cliff_centre_09_trois_paliers_sacres_jour",
+      "cliff_centre_09_trois_paliers_sacres_nuit",
+      "cliff_centre_10_bastion_circulaire_jour",
+      "cliff_centre_10_bastion_circulaire_nuit"
+    ]
+  }
+}

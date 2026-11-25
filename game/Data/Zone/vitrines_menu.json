@@ -1,0 +1,32 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.ZoneData, RogueEssence",
+    "Name": {
+      "DefaultText": "Title-screen showcase maps",
+      "LocalTexts": {
+        "fr": "Cartes vitrines du menu-titre"
+      }
+    },
+    "Released": true,
+    "Comment": "Carte vitrine pmd_destiny_menu_jour (lot pmd_destiny_fangame_v1 de projet-creation-pmdo), reconstruite à l'identique (SHA-256 d'inventaire). Décor animé du menu-titre, pas une carte jouable.",
+    "NoEXP": false,
+    "ExpPercent": 100,
+    "Level": -1,
+    "LevelCap": false,
+    "KeepSkills": false,
+    "TeamRestrict": false,
+    "TeamSize": -1,
+    "MoneyRestrict": false,
+    "BagRestrict": -1,
+    "KeepTreasure": false,
+    "BagSize": -1,
+    "Persistent": false,
+    "Rescues": 0,
+    "Rogue": 0,
+    "Segments": [],
+    "GroundMaps": [
+      "pmd_destiny_menu_jour"
+    ]
+  }
+}

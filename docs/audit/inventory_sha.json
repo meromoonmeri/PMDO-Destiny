@@ -1,0 +1,2178 @@
+{
+"cote20_11_anses_jumelles_jour": {
+"sha": "c63bc3966f851c1d70aebf29ab25edca3ce755a03a89732cc5a242ea46c5f6a7",
+"bytes": 23771681,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_11_anses_jumelles_jour.rsground"
+}
+},
+"cote20_11_anses_jumelles_nuit": {
+"sha": "216b849e27cce9f5a532561adae553a6a359ff5b156dc34db6e0ee3237e98f04",
+"bytes": 23770664,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_11_anses_jumelles_nuit.rsground"
+}
+},
+"cote20_12_balcon_asymetrique_jour": {
+"sha": "15ad2a4f20acdfb494f687e81bb63f0836cf545a59374a236601d20619bdf716",
+"bytes": 20744316,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_12_balcon_asymetrique_jour.rsground"
+}
+},
+"cote20_12_balcon_asymetrique_nuit": {
+"sha": "2e17d87f509e128195304b0e99e71b2c4622b2e1837355f3a670ec9feb571cec",
+"bytes": 20743322,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_12_balcon_asymetrique_nuit.rsground"
+}
+},
+"cote20_13_chapelet_jour": {
+"sha": "643afb081756f6be9b7a53b3517091e1c00d3f31ed598459ba56458d004a6cf0",
+"bytes": 23069190,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_13_chapelet_jour.rsground"
+}
+},
+"cote20_13_chapelet_nuit": {
+"sha": "17da0b9fd5045563a924c0f6d7215c321d937f4d5a4bd1a255229d99556ab1c1",
+"bytes": 23068834,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_13_chapelet_nuit.rsground"
+}
+},
+"cote20_14_corniches_paralleles_jour": {
+"sha": "767529f30d8213a202016dd577e959ce98d1c73c3cdce125309cd4f89ebf3f73",
+"bytes": 20795149,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_14_corniches_paralleles_jour.rsground"
+}
+},
+"cote20_14_corniches_paralleles_nuit": {
+"sha": "bc346f4a0a07c26d3d40043718527c5f1445c634dbedf7c1c2611e1e3020452c",
+"bytes": 20793795,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_14_corniches_paralleles_nuit.rsground"
+}
+},
+"cote20_15_mesas_decalees_jour": {
+"sha": "79982de3dcbf81aca5eb50dc90f217896a2dbd2f7cfd5886be069d4ebb449754",
+"bytes": 20507579,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_15_mesas_decalees_jour.rsground"
+}
+},
+"cote20_15_mesas_decalees_nuit": {
+"sha": "8688c9153605f4372ff3f51aed12422a9fc019f301613008f71300640bb1cb22",
+"bytes": 20506876,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_15_mesas_decalees_nuit.rsground"
+}
+},
+"cote20_16_couronne_jour": {
+"sha": "cdd91a28b2d7934d1a95ca89c2f79e58273e706cf83dfaed8b03c75d4d74e675",
+"bytes": 23353173,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_16_couronne_jour.rsground"
+}
+},
+"cote20_16_couronne_nuit": {
+"sha": "e47aac0cead0302628cd8badb331d9d88e07c89c9cf032387930985608c7b434",
+"bytes": 23352439,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_16_couronne_nuit.rsground"
+}
+},
+"cote20_17_chenal_jour": {
+"sha": "0725b664094ce57ef616dd823dff1bfb7cc20aa64f11cfd26ef3302322068a81",
+"bytes": 20577569,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_17_chenal_jour.rsground"
+}
+},
+"cote20_17_chenal_nuit": {
+"sha": "613024e85e818f287772b94722ede9c2ee728937d2eeacaed092825ad5919d28",
+"bytes": 20576763,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_17_chenal_nuit.rsground"
+}
+},
+"cote20_18_esplanade_jour": {
+"sha": "a5841733b74d0557b34c8428ad90b3864f107e1515d59cf0ce064f2eef8a81ea",
+"bytes": 20754352,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_18_esplanade_jour.rsground"
+}
+},
+"cote20_18_esplanade_nuit": {
+"sha": "68065cb5b83151dfe8539f2d3eff72e7e894373b3825b5465ee2768e7c7ac88d",
+"bytes": 20753411,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_18_esplanade_nuit.rsground"
+}
+},
+"cote20_19_eperon_jour": {
+"sha": "d47be132bf19c72da271bf5f1d689f06367338e1d97bcbefe51fddf5e1516d68",
+"bytes": 20499917,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_19_eperon_jour.rsground"
+}
+},
+"cote20_19_eperon_nuit": {
+"sha": "15a3e908bce7ea88f186f074a6325d97218237088a2f90f78abd13ef3ba9ffbd",
+"bytes": 20499226,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_19_eperon_nuit.rsground"
+}
+},
+"cote20_20_marches_levant_jour": {
+"sha": "84a7068b0ba2d9c13dc9099d02178f2717dc72a50dcad28c99afd52be9bd88e5",
+"bytes": 23479482,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_20_marches_levant_jour.rsground"
+}
+},
+"cote20_20_marches_levant_nuit": {
+"sha": "ea05ed752f6ec28d2eb6675c08ab32621e4e0b30dfebfb18f4e04e3322406804",
+"bytes": 23478628,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_lot2_pmdo.zip",
+"member": "Data/Ground/cote20_20_marches_levant_nuit.rsground"
+}
+},
+"cote10_01_long_cap_jour": {
+"sha": "ff4c121c6cc896704cca06471c95e5b6524f9adeaef82d6acad3fdf397a71eef",
+"bytes": 17842527,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_01_long_cap_jour.rsground"
+}
+},
+"cote10_01_long_cap_nuit": {
+"sha": "9c1845ff0e1614720d0009e7a3ed347cd4f218c5dfbc62a16a96933b33ac7650",
+"bytes": 17842163,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_01_long_cap_nuit.rsground"
+}
+},
+"cote10_02_mesa_jour": {
+"sha": "75463c1f2b2c4b33e8c4299f81f94eb4c0ddcd3ea8d93df85611bacffa1d93dd",
+"bytes": 17731417,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_02_mesa_jour.rsground"
+}
+},
+"cote10_02_mesa_nuit": {
+"sha": "91196436d3d99480e2270fd897e42f60e391daf10f636a428bc86e794d8afddc",
+"bytes": 17731106,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_02_mesa_nuit.rsground"
+}
+},
+"cote10_03_detroit_jour": {
+"sha": "509b0c33a53a5c7f26b173417bd1e19551dbef00c06e5b3974080e29ffb3db66",
+"bytes": 20357854,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_03_detroit_jour.rsground"
+}
+},
+"cote10_03_detroit_nuit": {
+"sha": "f836c9d2f9e7f862ad1d6c8bd34e5045abd96accf209dc524304eb5c6e494c25",
+"bytes": 20357621,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_03_detroit_nuit.rsground"
+}
+},
+"cote10_04_deux_paliers_jour": {
+"sha": "c77e7dd77c26782781c8f45e0ee74b4c1d35c551b288ee1b080e668a4f2a0217",
+"bytes": 20961780,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_04_deux_paliers_jour.rsground"
+}
+},
+"cote10_04_deux_paliers_nuit": {
+"sha": "9f5b7bd9ad371568f935399398ee3a6e86a7ba9b804b3055df5cf3dcf9f978ea",
+"bytes": 20961221,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_04_deux_paliers_nuit.rsground"
+}
+},
+"cote10_05_crique_jour": {
+"sha": "7246d42500d006523d66f1b54154173e81eb44fc59d9bf68ba734dbef88c486f",
+"bytes": 23474409,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_05_crique_jour.rsground"
+}
+},
+"cote10_05_crique_nuit": {
+"sha": "cb0126da2583843b5abd450d357303cfd9728e92e3af3e08ae7a46cbf8ec8c09",
+"bytes": 23474102,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_05_crique_nuit.rsground"
+}
+},
+"cote10_06_cap_est_jour": {
+"sha": "21d5eefa0dcf1ca14f63166d100a20915a7f208a9a8328d1324b697dc0bb54d2",
+"bytes": 17686951,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_06_cap_est_jour.rsground"
+}
+},
+"cote10_06_cap_est_nuit": {
+"sha": "6f533a73539279dcc9ef4fe40a141506a4df37ad15c6d95504ffb61cc02f59ac",
+"bytes": 17686515,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_06_cap_est_nuit.rsground"
+}
+},
+"cote10_07_cap_ouest_jour": {
+"sha": "b5a9f50251dcb1e2fd789bd59b407bc2c2e8749beca7d09a37683981b4c78aae",
+"bytes": 17614449,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_07_cap_ouest_jour.rsground"
+}
+},
+"cote10_07_cap_ouest_nuit": {
+"sha": "31c3208f475296d2dd342e48387bbdd1e3d52990d627b491b8f098cc67dd4c30",
+"bytes": 17614190,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_07_cap_ouest_nuit.rsground"
+}
+},
+"cote10_08_corniche_jour": {
+"sha": "d1385a963bbb199731433bd79c630f9b60319279d32d981591db68d22ddf0bf3",
+"bytes": 17854247,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_08_corniche_jour.rsground"
+}
+},
+"cote10_08_corniche_nuit": {
+"sha": "e66edaf245a246375ce904c422375fb2649ada48131fb305d6e16e3dbc1fed1a",
+"bytes": 17853557,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_08_corniche_nuit.rsground"
+}
+},
+"cote10_09_archipel_jour": {
+"sha": "a827eb13e109b909ef7708a57d1e3abd47675519626f4ae9ac55b2a6f7a3c983",
+"bytes": 23303558,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_09_archipel_jour.rsground"
+}
+},
+"cote10_09_archipel_nuit": {
+"sha": "c562821ce5869b7e9c7573a6cdd2165ef176ce2b0797402a88abc743ed9e80be",
+"bytes": 23303242,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_09_archipel_nuit.rsground"
+}
+},
+"cote10_10_trois_terrasses_jour": {
+"sha": "fff5fb4353195ff1f048a06e65946cbd3975c00b6b4ae4d51407c4cdaed329c4",
+"bytes": 23988263,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_10_trois_terrasses_jour.rsground"
+}
+},
+"cote10_10_trois_terrasses_nuit": {
+"sha": "be6d1f60e46bbdfb5c04dc7b2c731ab5bc8d8b5d5a824873be651bc8d2a832d2",
+"bytes": 23987508,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_10_trois_terrasses_nuit.rsground"
+}
+},
+"cote10_v2_promontoire_jour": {
+"sha": "7cfd980a3643eb713e1ad3d8d967417d232a9d4405b0a8ce48daa6712c0a6083",
+"bytes": 12740857,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_v2_promontoire_jour.rsground"
+}
+},
+"cote10_v2_promontoire_nuit": {
+"sha": "3509ce4a5c934debc36da0a7c07e74adbea04e47dba5a142b13ecf7a0a41b1a7",
+"bytes": 12740833,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_v2_promontoire_nuit.rsground"
+}
+},
+"cote10_v2_terrasse_jour": {
+"sha": "e0e8270d5dd1181e7b1c647085f97f6a95b38095539126801630ce36cb1acb6d",
+"bytes": 13243233,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_v2_terrasse_jour.rsground"
+}
+},
+"cote10_v2_terrasse_nuit": {
+"sha": "179dd2b9266a7f3a8e11feb08c2f68888d8b812d7240ff44aa583444654e72f3",
+"bytes": 13243225,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_dix_zones_pmdo.zip",
+"member": "Data/Ground/cote10_v2_terrasse_nuit.rsground"
+}
+},
+"cote_v2_promontoire": {
+"sha": "14221be579111ef77c09265e3347eff6ff9cdc29ca21b7fcdf6cfb655113054b",
+"bytes": 11365746,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_v2_pmdo.zip",
+"member": "Data/Ground/cote_v2_promontoire.rsground"
+}
+},
+"cote_v2_terrasse": {
+"sha": "2c12428038784d83784e9ebaa813a9e2c38650206216f0a3f465d56e47efc03b",
+"bytes": 12083649,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cote_treasure_v2_pmdo.zip",
+"member": "Data/Ground/cote_v2_terrasse.rsground"
+}
+},
+"v40812_01_cap_large_jour": {
+"sha": "a25d83eb7ff7979f2c9ff8006fc8eaf6849604992c9f6e2ab5412e6d4c0b8b1e",
+"bytes": 17455270,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_01_cap_large_jour.rsground"
+}
+},
+"v40812_01_cap_large_nuit": {
+"sha": "e415b6510053af3377974d1e3c1a2e5dbc38331a948513e3650818f642d841c1",
+"bytes": 17455270,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_01_cap_large_nuit.rsground"
+}
+},
+"v40812_02_terrasse_croissant_jour": {
+"sha": "05fde4f3bc79c4982172396cc810797cdeedc6237b96e81396a8f13ce29eaee2",
+"bytes": 17814667,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_02_terrasse_croissant_jour.rsground"
+}
+},
+"v40812_02_terrasse_croissant_nuit": {
+"sha": "6145955777732151e48a3862c9c435255ddf9a5e29be2bed72dd21ba6c87cf3e",
+"bytes": 17814667,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_02_terrasse_croissant_nuit.rsground"
+}
+},
+"v40812_03_double_belvedere_jour": {
+"sha": "06b4baa7934ca1ae1081c07992148c0253ad5b87239efa8f3a49c258a4fcaf6d",
+"bytes": 18373733,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_03_double_belvedere_jour.rsground"
+}
+},
+"v40812_03_double_belvedere_nuit": {
+"sha": "ee2f20d70fa19a571b19f8c7d2cbe9a22565d7476c5f0a2f3dd220130374eeec",
+"bytes": 18373733,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_03_double_belvedere_nuit.rsground"
+}
+},
+"v40812_04_pointe_sinueuse_jour": {
+"sha": "9d25f27fe303524d82d789f03ac9e691ee24bbcd20931ea89a08d9cdce2735f9",
+"bytes": 17706902,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_04_pointe_sinueuse_jour.rsground"
+}
+},
+"v40812_04_pointe_sinueuse_nuit": {
+"sha": "cd4bea45040496c75db7782dc400e5de3647f4a1fa13ef4d19404c809d3ee33c",
+"bytes": 17706902,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_04_pointe_sinueuse_nuit.rsground"
+}
+},
+"v40812_05_grande_mesa_jour": {
+"sha": "8d4bc572ab715f3e3a44d1768d1fc49c59a43f14f79cf58d813135bbe0ed4a01",
+"bytes": 17707126,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_05_grande_mesa_jour.rsground"
+}
+},
+"v40812_05_grande_mesa_nuit": {
+"sha": "042602dfdb9acf34916aaf2559695f9c728435cf56de4820d26bf14448310eb8",
+"bytes": 17707126,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_05_grande_mesa_nuit.rsground"
+}
+},
+"v40812_06_crique_profonde_jour": {
+"sha": "2e5bab4e5c4109fee94d9ccf998ea9f81843d648e64c02dd3eaa4484aa0de8ca",
+"bytes": 17565280,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_06_crique_profonde_jour.rsground"
+}
+},
+"v40812_06_crique_profonde_nuit": {
+"sha": "efde7c6509c1a86f84419f28eb62e758af68546a2b92a3b47b914a8dcfb56e5e",
+"bytes": 17565280,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_06_crique_profonde_nuit.rsground"
+}
+},
+"v40812_07_balcon_haut_jour": {
+"sha": "5d8dd7708e58fe9ccfb9d4acb49fe193da77b9ad84f4e621b3bef15eab532171",
+"bytes": 17093609,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_07_balcon_haut_jour.rsground"
+}
+},
+"v40812_07_balcon_haut_nuit": {
+"sha": "31eef441505f5d99dbf646dcc41aa5a8840b68ad1e91aa9a3113832a39cbd00e",
+"bytes": 17093609,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_07_balcon_haut_nuit.rsground"
+}
+},
+"v40812_08_terrasses_decalees_jour": {
+"sha": "84ddc486dd0ac9e25a5a193e682085661bf4b6cc049b421c2c71e9edf09e204e",
+"bytes": 18192336,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_08_terrasses_decalees_jour.rsground"
+}
+},
+"v40812_08_terrasses_decalees_nuit": {
+"sha": "1fc7ffe94ecda76c8dbd8dc19c1e48c912c91ef26f39a433dc442a9d97e1c59d",
+"bytes": 18192335,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_08_terrasses_decalees_nuit.rsground"
+}
+},
+"v40812_09_cap_eventail_jour": {
+"sha": "c8cdd661d9414c18b5d4a1f4e40a0c1ae34bfdcbb3ab7b18fe103dfee4034526",
+"bytes": 17382406,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_09_cap_eventail_jour.rsground"
+}
+},
+"v40812_09_cap_eventail_nuit": {
+"sha": "f3d5c0fc960328cfbfa32d3c45fffbb378c1edce8f5873d8b6ee821c1cbb5fa8",
+"bytes": 17382406,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_09_cap_eventail_nuit.rsground"
+}
+},
+"v40812_10_esplanade_arrondie_jour": {
+"sha": "496e3be2fa0125a285009a484b64dc28331d23f7ecd234929b22c67129855bcd",
+"bytes": 17808266,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_10_esplanade_arrondie_jour.rsground"
+}
+},
+"v40812_10_esplanade_arrondie_nuit": {
+"sha": "a7d7a116c11652aadd4be65994a71d6943822ccf6ec62d082bf7be1622e278fb",
+"bytes": 17808266,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v40812_10_esplanade_arrondie_nuit.rsground"
+}
+},
+"v30812_01_cap_large_jour": {
+"sha": "5d3d2dcb5bcfde6adce37705120a177549431152fd253fd0e20998b8a469b340",
+"bytes": 16992966,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_01_cap_large_jour.rsground"
+}
+},
+"v30812_01_cap_large_nuit": {
+"sha": "9593a315e73f389fc3b2db28364c58eb109955f56c7bb62e2346434a344f58fd",
+"bytes": 16993852,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_01_cap_large_nuit.rsground"
+}
+},
+"v30812_02_terrasse_croissant_jour": {
+"sha": "293695419d561a0686d8ec7b1d0eb714adcf395a1acc9bdf511925a5cb0bb47c",
+"bytes": 17075998,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_02_terrasse_croissant_jour.rsground"
+}
+},
+"v30812_02_terrasse_croissant_nuit": {
+"sha": "edec0f53dfd02f06eb39ccc0613db74e0b2c480c0feb3dc7973fa1501ea60b73",
+"bytes": 17076742,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_02_terrasse_croissant_nuit.rsground"
+}
+},
+"v30812_03_double_belvedere_jour": {
+"sha": "48b21129ccc971df107300be43f0cdf5b1412a3d2f7dd5d5719a864c6df309ce",
+"bytes": 17637226,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_03_double_belvedere_jour.rsground"
+}
+},
+"v30812_03_double_belvedere_nuit": {
+"sha": "3d8723a05c365ef1acca6798bffa95662fb0815650285474abba6cf3b8e9fed5",
+"bytes": 17635899,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_03_double_belvedere_nuit.rsground"
+}
+},
+"v30812_04_pointe_sinueuse_jour": {
+"sha": "7649a8272fa586fab810ca42fb93c0e2e79786115b715e2e4cc7b676465ec944",
+"bytes": 17047316,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_04_pointe_sinueuse_jour.rsground"
+}
+},
+"v30812_04_pointe_sinueuse_nuit": {
+"sha": "45b4d9ab284dbb25bb16a6dc198fd802f87e03bd524cac92856af5dbb8e7d2a6",
+"bytes": 17048006,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_04_pointe_sinueuse_nuit.rsground"
+}
+},
+"v30812_05_grande_mesa_jour": {
+"sha": "37e3a935655e00deae636eeb89be8de95ea37d16c10bb9d8f01d8f64454a8e40",
+"bytes": 17134679,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_05_grande_mesa_jour.rsground"
+}
+},
+"v30812_05_grande_mesa_nuit": {
+"sha": "3efb61f029e08578dbb81c54557bc6056174716c095484bb50d31a12c175d1fb",
+"bytes": 17135465,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_05_grande_mesa_nuit.rsground"
+}
+},
+"v30812_06_crique_profonde_jour": {
+"sha": "e0a559f8eda281024d701f461c1115b4ef6288ba0a2462676a42158174a8eb0f",
+"bytes": 16791706,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_06_crique_profonde_jour.rsground"
+}
+},
+"v30812_06_crique_profonde_nuit": {
+"sha": "51870795684b7a615580f204b05f0108c5b28936aaad995d4bc6b8782de4ba94",
+"bytes": 16792197,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_06_crique_profonde_nuit.rsground"
+}
+},
+"v30812_07_balcon_haut_jour": {
+"sha": "5b60707e5563087241bd653316b688f2927f1e89d733f1cdd10c459283ac72dd",
+"bytes": 16709036,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_07_balcon_haut_jour.rsground"
+}
+},
+"v30812_07_balcon_haut_nuit": {
+"sha": "404cca25484022189980db4324ac9dfc167d4297ade0b4effcacaab841db3574",
+"bytes": 16709673,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_07_balcon_haut_nuit.rsground"
+}
+},
+"v30812_08_terrasses_decalees_jour": {
+"sha": "1de5277794988076386795dca561dbe255709f61c286228068c368178024717b",
+"bytes": 17598534,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_08_terrasses_decalees_jour.rsground"
+}
+},
+"v30812_08_terrasses_decalees_nuit": {
+"sha": "8c4f544146efc12ef44c8ac7c4e427c5801dc5b938c6f2ac9f6215a67ecbd718",
+"bytes": 17599298,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_08_terrasses_decalees_nuit.rsground"
+}
+},
+"v30812_09_cap_eventail_jour": {
+"sha": "89394c29c6c958640b8e739acc9077f236d26d94bd5f169c41cb381de461e401",
+"bytes": 16629957,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_09_cap_eventail_jour.rsground"
+}
+},
+"v30812_09_cap_eventail_nuit": {
+"sha": "71ddfacd9ca668d2e854852e4bfff755793a5ed4041776e76e1b8c866249b8b2",
+"bytes": 16630441,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_09_cap_eventail_nuit.rsground"
+}
+},
+"v30812_10_esplanade_arrondie_jour": {
+"sha": "99ebc4e401714af4d9a98b6b9ddd25e4dc3de9e1001edec993f136b9cd512ef5",
+"bytes": 17183073,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_10_esplanade_arrondie_jour.rsground"
+}
+},
+"v30812_10_esplanade_arrondie_nuit": {
+"sha": "cb43394dd6f0df5c2556d7a3ccacfd231ed96de69290d4cf03217f8a946688f5",
+"bytes": 17183701,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "cotes_v2_0812_pmdo.zip",
+"member": "cotes_v2_0812/Data/Ground/v30812_10_esplanade_arrondie_nuit.rsground"
+}
+},
+"v50812_01_crete_sillage_jour": {
+"sha": "853f028207b695828f3d95a54b1df145fdfe9ed8e601343b8213f3bd1ce55f02",
+"bytes": 19345809,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_01_crete_sillage_jour.rsground"
+}
+},
+"v50812_01_crete_sillage_nuit": {
+"sha": "ecb25b4cfcdff7185ea7427851e5ba7b54a784d8e9379e0d93e686dbc4cc44ea",
+"bytes": 19345809,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_01_crete_sillage_nuit.rsground"
+}
+},
+"v50812_02_caps_relies_jour": {
+"sha": "cdcf321b6a20f132b619a760d231f10c973a7de6aaa6381a5172c1eebdc9eebf",
+"bytes": 19299694,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_02_caps_relies_jour.rsground"
+}
+},
+"v50812_02_caps_relies_nuit": {
+"sha": "ed8e59b310bc9ab33b0912eb499e5f8b71b1edc14f333c0b384a281351726c62",
+"bytes": 19299694,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_02_caps_relies_nuit.rsground"
+}
+},
+"v50812_03_eventail_strates_jour": {
+"sha": "5e5692bac8f95f29e917c4f8974e069f22e92422e03d1fb02fe55d4f3c353bff",
+"bytes": 19517201,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_03_eventail_strates_jour.rsground"
+}
+},
+"v50812_03_eventail_strates_nuit": {
+"sha": "680d19f89ddff0f64617b725e37227988c4fe3f0c2fa74bac709101df5820500",
+"bytes": 19517201,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_03_eventail_strates_nuit.rsground"
+}
+},
+"v50812_04_lagune_occident_jour": {
+"sha": "a55f5eee8e6ce8dc0aee40ee2400728ae2d2fd43589c60de0a05f25d05fca932",
+"bytes": 19325954,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_04_lagune_occident_jour.rsground"
+}
+},
+"v50812_04_lagune_occident_nuit": {
+"sha": "7f723fba87fdc51c986ec7b7b27302a89342bfa508e3c0b6c1fbf9e8144dde41",
+"bytes": 19325954,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_04_lagune_occident_nuit.rsground"
+}
+},
+"v50812_05_cote_quatre_pointes_jour": {
+"sha": "186626e986b2d469f055854975c22e69c76a0eb5104dbb06425fbad1e33c1dc7",
+"bytes": 19441666,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_05_cote_quatre_pointes_jour.rsground"
+}
+},
+"v50812_05_cote_quatre_pointes_nuit": {
+"sha": "a5e78ccbc82992bba522ada1436980d930eb5611423ba0c23b2faa49e5d41abb",
+"bytes": 19441666,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_05_cote_quatre_pointes_nuit.rsground"
+}
+},
+"v50812_06_sommet_balcon_jour": {
+"sha": "906e0034112f395927cb3950febb90ebafe659e52e7739c1246b6500e60c8f80",
+"bytes": 19410760,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_06_sommet_balcon_jour.rsground"
+}
+},
+"v50812_06_sommet_balcon_nuit": {
+"sha": "c64a0892507941b9a92efdc35e0f0e16d01d01089ea9a6dbdcc6fe05c011ad80",
+"bytes": 19410760,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_06_sommet_balcon_nuit.rsground"
+}
+},
+"v50812_07_cap_chenal_jour": {
+"sha": "0c6e56c815263227c829388c19eeadfb1c37cf4d68801c19bc6369f3dd88d272",
+"bytes": 19354953,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_07_cap_chenal_jour.rsground"
+}
+},
+"v50812_07_cap_chenal_nuit": {
+"sha": "a86b4848fe07a3661b78ae9f36d3c63a45405145d212aabb5e38894b5fbab9ef",
+"bytes": 19354953,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_07_cap_chenal_nuit.rsground"
+}
+},
+"v50812_08_antre_crochu_jour": {
+"sha": "46fa49f45577678ffb446850b77dac9eca9344d81ba37465f4cc4865fd377975",
+"bytes": 19426527,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_08_antre_crochu_jour.rsground"
+}
+},
+"v50812_08_antre_crochu_nuit": {
+"sha": "412f8f81b7165e84c690a74f36f40d44a11fd3cd15e4fa73cb014a2e5ca53a43",
+"bytes": 19426527,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_08_antre_crochu_nuit.rsground"
+}
+},
+"v50812_09_grotte_marees_jour": {
+"sha": "8be85bdeac35a151d217a9272ea3ae28d58d2cf7d7d5498eb97cd0ef67b334d6",
+"bytes": 19424832,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_09_grotte_marees_jour.rsground"
+}
+},
+"v50812_09_grotte_marees_nuit": {
+"sha": "2801bf436942d195c5b29de9b05907312bb4217eff7d84129da25573b2a42df1",
+"bytes": 19424832,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_09_grotte_marees_nuit.rsground"
+}
+},
+"v50812_10_defile_brume_jour": {
+"sha": "9bb7541b89779e2eb8279df631d3e8fb58c7e18bad7841f3ea0441ba24abcb3b",
+"bytes": 19479038,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_10_defile_brume_jour.rsground"
+}
+},
+"v50812_10_defile_brume_nuit": {
+"sha": "0c4f979496b0d4b55d5566dbd2bf4706e31ee06db2f50e53be1b6d89f8d40d23",
+"bytes": 19479038,
+"src": {
+"repository": "meromoonmeri/projet-pmdo",
+"archive": "mod_treasure_expeditions_pmdo_0812.zip",
+"member": "treasure_expeditions/Data/Ground/v50812_10_defile_brume_nuit.rsground"
+}
+},
+"altere_pond": {
+"sha": "665f18eaa290284898797673a243bd79a22aa607952192931673f4ece8846091",
+"bytes": 10180145,
+"src": {
+"ref": "arena/488d1a47-projet-creation-pmdo",
+"commit": "ac58cc9a37ca8a5b5305419e82f44cf6ba646a5d",
+"sourceDate": "2026-10-27T02:24:04+00:00",
+"path": "quest_pmdo_0812/Data/Ground/altere_pond.rsground",
+"blobOid": "490b39eeaad34047a21874f48be4ca9f0bc76467",
+"blobBytes": 10180145
+}
+},
+"cliffdaytest": {
+"sha": "6567e19df7a073758d8d52ad1491460067a2dccc1c0d03aa0d1c72b5592e4d2f",
+"bytes": 10042767,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "source/cutscene_pichu_dazzling_pmdo/assets/map/cliffdaytest_source.rsground.gz",
+"blobOid": "7cc23d673b9b48b0066349437ebd17e0999b038c",
+"blobBytes": 127586
+}
+},
+"cliffnordouesttest1": {
+"sha": "2d0922a1f2220e9ff7b803aa04e1fa63e2ece2c1d739732d1c31631982e14f3a",
+"bytes": 7103176,
+"src": {
+"ref": "arena/488d1a47-projet-creation-pmdo",
+"commit": "ac58cc9a37ca8a5b5305419e82f44cf6ba646a5d",
+"sourceDate": "2026-10-27T02:24:04+00:00",
+"path": "quest_pmdo_0812/Data/Ground/cliffnordouesttest1.rsground",
+"blobOid": "4633c9abec94fcee153c587651957f004c210ed9",
+"blobBytes": 7103176
+}
+},
+"crooked_cavern_entrance": {
+"sha": "2923ee91eaee79fd647b076aa982a9561e6ea2fe6c5ad8008b2d415d31bb1d48",
+"bytes": 507742,
+"src": {
+"ref": "arena/2a041d50-projet-creation-pmdo",
+"commit": "1a3dd2c1e0ce71f9ce0ce2d45c9ebfc18f0de561",
+"sourceDate": "2026-10-29T16:28:41+00:00",
+"path": "source/viewport_pmdo_v1/refs/crooked.rsground",
+"blobOid": "1be7032fd8e0d3f2f7bba468336ef3d15abd8368",
+"blobBytes": 507742
+}
+},
+"guild_second_floor": {
+"sha": "2eb61ab0d6aff7b5d74025394767a22c5e416f4d67447318a235954f32712c84",
+"bytes": 3949026,
+"src": {
+"ref": "arena/2a041d50-projet-creation-pmdo",
+"commit": "1a3dd2c1e0ce71f9ce0ce2d45c9ebfc18f0de561",
+"sourceDate": "2026-10-29T16:28:41+00:00",
+"path": "source/cafe_multietage_v3/references/guild_second_floor.rsground",
+"blobOid": "86cacad6ee99808e0e51e5919653f6ab3366678c",
+"blobBytes": 3949026
+}
+},
+"ledian_dojo": {
+"sha": "002b904339ab26d7e7fea52b57ab2811f788e380750419343df4443298a95fa8",
+"bytes": 1332361,
+"src": {
+"ref": "arena/488d1a47-projet-creation-pmdo",
+"commit": "ac58cc9a37ca8a5b5305419e82f44cf6ba646a5d",
+"sourceDate": "2026-10-27T02:24:04+00:00",
+"path": "quest_pmdo_0812/Data/Ground/ledian_dojo.rsground",
+"blobOid": "8d5dab798ce7cf10ca0bbe8a1d702544b3a14199",
+"blobBytes": 1332361
+}
+},
+"luminous_spring": {
+"sha": "3c800caef4ddd422f6eab41b9d0b1d8e6356e9e2ebc36e54e62633dc755e0687",
+"bytes": 599016,
+"src": {
+"ref": "arena/2a041d50-projet-creation-pmdo",
+"commit": "1a3dd2c1e0ce71f9ce0ce2d45c9ebfc18f0de561",
+"sourceDate": "2026-10-29T16:28:41+00:00",
+"path": "source/soleil_spring_v1/references/luminous_spring.rsground",
+"blobOid": "1a0a5a728e346de338ed848a8471e462e0553c21",
+"blobBytes": 599016
+}
+},
+"treasure_cafe": {
+"sha": "495fac3e8b198620295654b399731954e93568410a4a74b5bed4c4131c0f5cdb",
+"bytes": 1380320,
+"src": {
+"ref": "arena/2a041d50-projet-creation-pmdo",
+"commit": "1a3dd2c1e0ce71f9ce0ce2d45c9ebfc18f0de561",
+"sourceDate": "2026-10-29T16:28:41+00:00",
+"path": "source/cafe_multietage_v1/references/treasure_cafe.rsground",
+"blobOid": "0010a20bcebc586374fdb7946639647b6d3db505",
+"blobBytes": 1380320
+}
+},
+"vast_steppe_entrance": {
+"sha": "3bf12f6e6e27263dff7781a396252b98740f56a99e60764a236f178dfab9ea99",
+"bytes": 2552633,
+"src": {
+"ref": "arena/488d1a47-projet-creation-pmdo",
+"commit": "ac58cc9a37ca8a5b5305419e82f44cf6ba646a5d",
+"sourceDate": "2026-10-27T02:24:04+00:00",
+"path": "quest_pmdo_0812/Data/Ground/vast_steppe_entrance.rsground",
+"blobOid": "8c38932467402544b3a9a99e5a3bee84abffb6ef",
+"blobBytes": 2552633
+}
+},
+"entree_falaise_trempee_sud_nord_v1": {
+"sha": "91e2fb0c0e84e9189f155503929e8e2a1a2830de1e3860c11278ccdacd038f2f",
+"bytes": 1869255,
+"src": {
+"ref": "arena/52e6a9de-projet-creation-pmdo",
+"commit": "c2d77959d87bf334e9603b47df012bc4f1e3dd7a",
+"sourceDate": "2026-10-15T23:36:14+00:00",
+"path": "exports/entree_falaise_trempee_sud_nord_v1/entree_falaise_trempee_sud_nord_v1.rsground",
+"blobOid": "c3416d3e25883dcd52cff78df1560517d5706158",
+"blobBytes": 1869255
+}
+},
+"entree_promontoire_nuages_sud_nord_v1": {
+"sha": "e96b022dc6c6fa3f059859a65b166eb5788d3101eb1e6069887231ab0a96cc33",
+"bytes": 2374493,
+"src": {
+"ref": "arena/52e6a9de-projet-creation-pmdo",
+"commit": "c2d77959d87bf334e9603b47df012bc4f1e3dd7a",
+"sourceDate": "2026-10-15T23:36:14+00:00",
+"path": "exports/entree_promontoire_nuages_sud_nord_v1/entree_promontoire_nuages_sud_nord_v1.rsground",
+"blobOid": "d63fe388399ff3c7803656de6578d525cc5d02fd",
+"blobBytes": 2374493
+}
+},
+"entree_tourbiere_piliers_sud_nord_v1": {
+"sha": "55e3e643ade4dc02f9c922fc222775d5e897ff362d75571019c6d0206c2997bb",
+"bytes": 2659267,
+"src": {
+"ref": "arena/52e6a9de-projet-creation-pmdo",
+"commit": "c2d77959d87bf334e9603b47df012bc4f1e3dd7a",
+"sourceDate": "2026-10-15T23:36:14+00:00",
+"path": "exports/entree_tourbiere_piliers_sud_nord_v1/entree_tourbiere_piliers_sud_nord_v1.rsground",
+"blobOid": "87db654983e1ea993a53d0e0ac5496dc17072c53",
+"blobBytes": 2659267
+}
+},
+"fin_falaise_trempee_source_v1": {
+"sha": "46cbbfc03e4c3339274f76e5e52a31d4824def561649f9814dfadff9c3a3d1c3",
+"bytes": 2496045,
+"src": {
+"ref": "arena/52e6a9de-projet-creation-pmdo",
+"commit": "c2d77959d87bf334e9603b47df012bc4f1e3dd7a",
+"sourceDate": "2026-10-15T23:36:14+00:00",
+"path": "exports/fin_falaise_trempee_source_v1/fin_falaise_trempee_source_v1.rsground",
+"blobOid": "fb2065f6058b3468913b01160ca7bda7b5fd2e06",
+"blobBytes": 2496045
+}
+},
+"fin_promontoire_nuages_clairiere_v1": {
+"sha": "698d2ab0bbdb45f31f72c3650a3219ddf8e56464f8a252fd8ac561667793f8ef",
+"bytes": 2282036,
+"src": {
+"ref": "arena/52e6a9de-projet-creation-pmdo",
+"commit": "c2d77959d87bf334e9603b47df012bc4f1e3dd7a",
+"sourceDate": "2026-10-15T23:36:14+00:00",
+"path": "exports/fin_promontoire_nuages_clairiere_v1/fin_promontoire_nuages_clairiere_v1.rsground",
+"blobOid": "10917bc42c5dbff1cb55b0904afe1bbc5ab6cadc",
+"blobBytes": 2282036
+}
+},
+"treasure_gen_accueil": {
+"sha": "91b6c38f06dfdb863bb7f101f992d1ee559b1ee14f7d70c67bf4f7255b884e4c",
+"bytes": 1351739,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "renders/reseau_treasure_normal_v1/grounds/treasure_gen_accueil.rsground",
+"blobOid": "5e959a8cf153e18569e22a202c2799037499e2a6",
+"blobBytes": 1351739
+}
+},
+"treasure_gen_cafe": {
+"sha": "428111d8e41498d0bd96e979cf2a20694d88754e91fbe27bf97e20ce117661fe",
+"bytes": 1326303,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "renders/reseau_treasure_normal_v1/grounds/treasure_gen_cafe.rsground",
+"blobOid": "72d8d0899afc10dae9fae04bec3a644bf09a1559",
+"blobBytes": 1326303
+}
+},
+"treasure_gen_casino": {
+"sha": "a6bfa18b6083ce20793bbb149c96b2006186061cc5a3b609bbd850305c3072d9",
+"bytes": 1400361,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "renders/reseau_treasure_normal_v1/grounds/treasure_gen_casino.rsground",
+"blobOid": "bcf7a4374d65e9473963b4090bfce0d4c55f9d01",
+"blobBytes": 1400361
+}
+},
+"treasure_gen_salon_bas": {
+"sha": "f23932b65e3d7294e534bdb13367545def8cc7bdd026e33fc228e0c1759165f4",
+"bytes": 1444354,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "renders/reseau_treasure_normal_v1/grounds/treasure_gen_salon_bas.rsground",
+"blobOid": "fe860b6887718d53aa8be8fec2ec27a67a8185f2",
+"blobBytes": 1444354
+}
+},
+"treasure_gen_salon_haut": {
+"sha": "0f8feeaa6d57399b2f4d87689728470608d168387b4ad368009fd6e150e54f50",
+"bytes": 1319548,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "renders/reseau_treasure_normal_v1/grounds/treasure_gen_salon_haut.rsground",
+"blobOid": "be93f1319bf0d57b8ff40dd5c3a03f3b8320b8e8",
+"blobBytes": 1319548
+}
+},
+"spinda_cafe": {
+"sha": "f7be15712d09507281d0ef6fb16a98b81a7a0d98e9c414303b97eefbf5f5aadd",
+"bytes": 1671742,
+"src": {
+"ref": "arena/2a041d50-projet-creation-pmdo",
+"commit": "1a3dd2c1e0ce71f9ce0ce2d45c9ebfc18f0de561",
+"sourceDate": "2026-10-29T16:28:41+00:00",
+"path": "source/cafe_multietage_v1/references/spinda_cafe.rsground",
+"blobOid": "34405699ef5b4cf3723f4e22d987bc7bfcf729d4",
+"blobBytes": 1671742
+}
+},
+"treasure_normal_home": {
+"sha": "2b33ddaf10a5f486d612c88812b3721131f7b3e8e9906bab5476f76db4faeef8",
+"bytes": 615483,
+"src": {
+"ref": "arena/e39626d2-projet-creation-pmdo",
+"commit": "f9c97fc0c0c359aa063b45aead947fb080962a9d",
+"sourceDate": "2026-10-28T21:35:53+00:00",
+"path": "source/reseau_treasure_normal_v1/references/treasure_normal_home.rsground",
+"blobOid": "06882c3cc955fb64e558ab74ee934c410cc379cf",
+"blobBytes": 615483
+}
+},
+"agm1_arene_groudon_magma": {
+"sha": "ca53e58418b2514fea176eb1541920e83fb6f55afab9baaa0bbd98c565ea0b4b",
+"bytes": 12808059,
+"src": {
+"generatedOutput": ".cache/arene_groudon_magma_v1/arene_groudon_magma/Data/Ground/agm1_arene_groudon_magma.rsground",
+"sourceLot": "arene_groudon_magma_v1",
+"sourceBuildScript": "source/arene_groudon_magma_v1/build.py",
+"buildStatus": true
+}
+},
+"agm2_arene_groudon_magma": {
+"sha": "66bbf7ab1769bd049f705f1a4212eb66743771d4935a2695f82065ad170de54f",
+"bytes": 14322020,
+"src": {
+"generatedOutput": ".cache/arene_groudon_magma_v2/arene_groudon_magma_v2/Data/Ground/agm2_arene_groudon_magma.rsground",
+"sourceLot": "arene_groudon_magma_v2",
+"sourceBuildScript": "source/arene_groudon_magma_v2/build.py",
+"buildStatus": true
+}
+},
+"agm3_arene_groudon_magma": {
+"sha": "12e065894504318f45d2f29bcbf5da1b5ab7f5a229cb8070b016b5b306496773",
+"bytes": 16908479,
+"src": {
+"generatedOutput": ".cache/arene_groudon_magma_v3/arene_groudon_magma_v3/Data/Ground/agm3_arene_groudon_magma.rsground",
+"sourceLot": "arene_groudon_magma_v3",
+"sourceBuildScript": "source/arene_groudon_magma_v3/build.py",
+"buildStatus": true
+}
+},
+"atp1_arene_terapagos": {
+"sha": "f601b92c7e3ca774bb3f318179ef0c6dc7d95c942dbf7f1c841848d33bce7a72",
+"bytes": 15093034,
+"src": {
+"generatedOutput": ".cache/arene_terapagos_v1/arene_terapagos/Data/Ground/atp1_arene_terapagos.rsground",
+"sourceLot": "arene_terapagos_v1",
+"sourceBuildScript": "source/arene_terapagos_v1/build.py",
+"buildStatus": true
+}
+},
+"clr1_colonnes_lances": {
+"sha": "152d1fa8c0afd178364e899e490084ee2d3c7c031e66df4fdff888d0c07d1a47",
+"bytes": 16301300,
+"src": {
+"generatedOutput": ".cache/colonnes_lances_v1/colonnes_lances/Data/Ground/clr1_colonnes_lances.rsground",
+"sourceLot": "colonnes_lances_v1",
+"sourceBuildScript": "source/colonnes_lances_v1/build.py",
+"buildStatus": true
+}
+},
+"ebn1_entree_bristle": {
+"sha": "a285b5b6e26bf1a5f1a601363409dc6055811a5e29087103ef0cea473bcbea56",
+"bytes": 3719210,
+"src": {
+"generatedOutput": ".cache/entree_bristle_sud_nord_v1/entree_bristle_sud_nord/Data/Ground/ebn1_entree_bristle.rsground",
+"sourceLot": "entree_bristle_sud_nord_v1",
+"sourceBuildScript": "source/entree_bristle_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ekr1_entree_caverne_cristal": {
+"sha": "7f1439809f557e4b736b9d414d2a2583df88355e4e40e3eff31fb497387e0788",
+"bytes": 6959641,
+"src": {
+"generatedOutput": ".cache/entree_caverne_cristal_sud_nord_v1/entree_caverne_cristal_sud_nord/Data/Ground/ekr1_entree_caverne_cristal.rsground",
+"sourceLot": "entree_caverne_cristal_sud_nord_v1",
+"sourceBuildScript": "source/entree_caverne_cristal_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"etc1_entree_clairiere_tropicale": {
+"sha": "ba0766aac84a2c81abb400dc34ebf7b80ad390f067f37624be5df649ec21ec0c",
+"bytes": 10413191,
+"src": {
+"generatedOutput": ".cache/entree_clairiere_tropicale_sud_nord_v1/entree_clairiere_tropicale_sud_nord/Data/Ground/etc1_entree_clairiere_tropicale.rsground",
+"sourceLot": "entree_clairiere_tropicale_sud_nord_v1",
+"sourceBuildScript": "source/entree_clairiere_tropicale_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ecv1_entree_couloir_violet": {
+"sha": "a196744e5b8569158af28806e1f168db72f1ea31feeda55482554789342a0e3e",
+"bytes": 7125968,
+"src": {
+"generatedOutput": ".cache/entree_couloir_violet_sud_nord_v1/entree_couloir_violet_sud_nord/Data/Ground/ecv1_entree_couloir_violet.rsground",
+"sourceLot": "entree_couloir_violet_sud_nord_v1",
+"sourceBuildScript": "source/entree_couloir_violet_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ecm1_entree_cratere_magma": {
+"sha": "dd380a12785cf61ce3dd29f78daeb4f611e943a463385d03ba75d6e10950a3b4",
+"bytes": 10895390,
+"src": {
+"generatedOutput": ".cache/entree_cratere_magma_v1/entree_cratere_magma/Data/Ground/ecm1_entree_cratere_magma.rsground",
+"sourceLot": "entree_cratere_magma_v1",
+"sourceBuildScript": "source/entree_cratere_magma_v1/build.py",
+"buildStatus": true
+}
+},
+"ecn1_entree_cratere": {
+"sha": "a504eefb0ab8fd8a379115c9dc6230330b05c0db62025d4da85e8971e5d0ef82",
+"bytes": 3823608,
+"src": {
+"generatedOutput": ".cache/entree_cratere_sud_nord_v1/entree_cratere_sud_nord/Data/Ground/ecn1_entree_cratere.rsground",
+"sourceLot": "entree_cratere_sud_nord_v1",
+"sourceBuildScript": "source/entree_cratere_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"egn1_entree_givre": {
+"sha": "7b7172c19caa1ac1bb5b7111895ac78fbcd00f3fc007e265d92da7a9b6ff3131",
+"bytes": 6211265,
+"src": {
+"generatedOutput": ".cache/entree_givre_sud_nord_v1/entree_givre_sud_nord/Data/Ground/egn1_entree_givre.rsground",
+"sourceLot": "entree_givre_sud_nord_v1",
+"sourceBuildScript": "source/entree_givre_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ejs1_entree_jardin_secret": {
+"sha": "92de3bf9301175792983a865247a72373d50fecc8f043d04bf8d5812b726818b",
+"bytes": 8763494,
+"src": {
+"generatedOutput": ".cache/entree_jardin_secret_sud_nord_v1/entree_jardin_secret_sud_nord/Data/Ground/ejs1_entree_jardin_secret.rsground",
+"sourceLot": "entree_jardin_secret_sud_nord_v1",
+"sourceBuildScript": "source/entree_jardin_secret_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ejs2_entree_jardin_secret_temple": {
+"sha": "d60ec4e06d4564bc4fc15c87eebb87ca8be568616802080b2fc1b77bba7c9632",
+"bytes": 9632790,
+"src": {
+"generatedOutput": ".cache/entree_jardin_secret_sud_nord_v2/entree_jardin_secret_sud_nord_v2/Data/Ground/ejs2_entree_jardin_secret_temple.rsground",
+"sourceLot": "entree_jardin_secret_sud_nord_v2",
+"sourceBuildScript": "source/entree_jardin_secret_sud_nord_v2/build.py",
+"buildStatus": true
+}
+},
+"ejn1_entree_jungle": {
+"sha": "fc50c305346cdd730738c4c913e5d40cacb4de743bb2ccfdc7a99ae89b72ef18",
+"bytes": 10056145,
+"src": {
+"generatedOutput": ".cache/entree_jungle_sud_nord_v1/entree_jungle_sud_nord/Data/Ground/ejn1_entree_jungle.rsground",
+"sourceLot": "entree_jungle_sud_nord_v1",
+"sourceBuildScript": "source/entree_jungle_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"emt1_entree_mt_thunder": {
+"sha": "3cc6bcd73dde25198391508c9dcaf344930990900e8b7a3cca410c3353cc6e45",
+"bytes": 7869744,
+"src": {
+"generatedOutput": ".cache/entree_mt_thunder_sud_nord_v1/entree_mt_thunder_sud_nord/Data/Ground/emt1_entree_mt_thunder.rsground",
+"sourceLot": "entree_mt_thunder_sud_nord_v1",
+"sourceBuildScript": "source/entree_mt_thunder_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"emf1_entree_mystifying_forest": {
+"sha": "887710657a5e698defa3dbd72c636d48c93d505f8aa3fc6ec5665d16986b930d",
+"bytes": 7775602,
+"src": {
+"generatedOutput": ".cache/entree_mystifying_forest_sud_nord_v1/entree_mystifying_forest_sud_nord/Data/Ground/emf1_entree_mystifying_forest.rsground",
+"sourceLot": "entree_mystifying_forest_sud_nord_v1",
+"sourceBuildScript": "source/entree_mystifying_forest_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"eoc1_entree_old_castle": {
+"sha": "bf187e305b4a954b5321f2c480f9dd70bd5301d313ff350146b6e395acf38789",
+"bytes": 6721154,
+"src": {
+"generatedOutput": ".cache/entree_old_castle_sud_nord_v1/entree_old_castle_sud_nord/Data/Ground/eoc1_entree_old_castle.rsground",
+"sourceLot": "entree_old_castle_sud_nord_v1",
+"sourceBuildScript": "source/entree_old_castle_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ern1_entree_ruine": {
+"sha": "a319a0768cc4b93519a6d81407e3bb4dd867fc3281443f51df0b040439d3a2e4",
+"bytes": 4114874,
+"src": {
+"generatedOutput": ".cache/entree_ruine_sud_nord_v1/entree_ruine_sud_nord/Data/Ground/ern1_entree_ruine.rsground",
+"sourceLot": "entree_ruine_sud_nord_v1",
+"sourceBuildScript": "source/entree_ruine_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"eqs1_entree_sables_mouvants": {
+"sha": "769e5e1e9d4464d23dc253c9e5d0cf0a48c693527b9c6bfa6f3d1a7c4ee91e1f",
+"bytes": 7966979,
+"src": {
+"generatedOutput": ".cache/entree_sables_mouvants_sud_nord_v1/entree_sables_mouvants_sud_nord/Data/Ground/eqs1_entree_sables_mouvants.rsground",
+"sourceLot": "entree_sables_mouvants_sud_nord_v1",
+"sourceBuildScript": "source/entree_sables_mouvants_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"esc1_entree_star_cave": {
+"sha": "f0c278c3d96a36b51c1286057f7bce0ef0881ae828e6687c09bbdb92cf5ac4c5",
+"bytes": 8635527,
+"src": {
+"generatedOutput": ".cache/entree_star_cave_sud_nord_v1/entree_star_cave_sud_nord/Data/Ground/esc1_entree_star_cave.rsground",
+"sourceLot": "entree_star_cave_sud_nord_v1",
+"sourceBuildScript": "source/entree_star_cave_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"eul1_entree_underground_lake": {
+"sha": "1f996060099efd36cdeb13ab6636fe797abbbf317754138962dc44f688fad827",
+"bytes": 7423241,
+"src": {
+"generatedOutput": ".cache/entree_underground_lake_sud_nord_v1/entree_underground_lake_sud_nord/Data/Ground/eul1_entree_underground_lake.rsground",
+"sourceLot": "entree_underground_lake_sud_nord_v1",
+"sourceBuildScript": "source/entree_underground_lake_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"esn1_entree_vapeur_jour": {
+"sha": "fc5a62dd47d881a431420a4012ef7c6c27279eefb6f34d6599e335ca52c2b351",
+"bytes": 4389114,
+"src": {
+"generatedOutput": ".cache/entree_vapeur_sud_nord_v1/entree_vapeur_sud_nord/Data/Ground/esn1_entree_vapeur_jour.rsground",
+"sourceLot": "entree_vapeur_sud_nord_v1",
+"sourceBuildScript": null,
+"buildStatus": null
+}
+},
+"esn2_entree_vapeur_jour": {
+"sha": "32cbc1bc784cdebacc88f9e1d74b13bcaf8c2910f43bea438dd8fefa96f298ea",
+"bytes": 4192338,
+"src": {
+"generatedOutput": ".cache/entree_vapeur_sud_nord_v2/entree_vapeur_sud_nord_v2/Data/Ground/esn2_entree_vapeur_jour.rsground",
+"sourceLot": "entree_vapeur_sud_nord_v2",
+"sourceBuildScript": "source/entree_vapeur_sud_nord_v2/build.py",
+"buildStatus": true
+}
+},
+"ewc1_entree_waterfall_cave": {
+"sha": "e10cb07696d041cd1bc292392a2e339be71ebd963e75d8ae4421e085f4fa2bd6",
+"bytes": 9195325,
+"src": {
+"generatedOutput": ".cache/entree_waterfall_cave_sud_nord_v1/entree_waterfall_cave_sud_nord/Data/Ground/ewc1_entree_waterfall_cave.rsground",
+"sourceLot": "entree_waterfall_cave_sud_nord_v1",
+"sourceBuildScript": "source/entree_waterfall_cave_sud_nord_v1/build.py",
+"buildStatus": true
+}
+},
+"ewc2_entree_waterfall_cave": {
+"sha": "5dc492358bf7bff65c57302924484aeb0052a578917e033848066b6639a04028",
+"bytes": 11869210,
+"src": {
+"generatedOutput": ".cache/entree_waterfall_cave_sud_nord_v2/entree_waterfall_cave_v2/Data/Ground/ewc2_entree_waterfall_cave.rsground",
+"sourceLot": "entree_waterfall_cave_sud_nord_v2",
+"sourceBuildScript": "source/entree_waterfall_cave_sud_nord_v2/build.py",
+"buildStatus": true
+}
+},
+"ewc3_entree_waterfall_cave": {
+"sha": "8891ff9060dedf78e200d83f6d2258163ff89dbda66a01398624e2bb6c746f10",
+"bytes": 12339021,
+"src": {
+"generatedOutput": ".cache/entree_waterfall_cave_sud_nord_v3/entree_waterfall_cave_v3/Data/Ground/ewc3_entree_waterfall_cave.rsground",
+"sourceLot": "entree_waterfall_cave_sud_nord_v3",
+"sourceBuildScript": "source/entree_waterfall_cave_sud_nord_v3/build.py",
+"buildStatus": true
+}
+},
+"fbs1_fin_bristle_sommet": {
+"sha": "8b65e234bd32e0e3fda288ba28d1503584eb69c2c1dfd4f7514ed509733f98bf",
+"bytes": 5385027,
+"src": {
+"generatedOutput": ".cache/fin_bristle_sommet_v1/fin_bristle_sommet/Data/Ground/fbs1_fin_bristle_sommet.rsground",
+"sourceLot": "fin_bristle_sommet_v1",
+"sourceBuildScript": "source/fin_bristle_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"fkr1_fin_caverne_cristal": {
+"sha": "65f5f45eb300c2cfd4921350221a554288607f775389b1f2b1646764d2ebefe9",
+"bytes": 7911956,
+"src": {
+"generatedOutput": ".cache/fin_caverne_cristal_v1/fin_caverne_cristal/Data/Ground/fkr1_fin_caverne_cristal.rsground",
+"sourceLot": "fin_caverne_cristal_v1",
+"sourceBuildScript": "source/fin_caverne_cristal_v1/build.py",
+"buildStatus": true
+}
+},
+"fct1_fin_clairiere_tropicale": {
+"sha": "93a4ad0f9935aafa85d7645e1ffb9665776a9bd7b9d34a94907c4b439a0344a0",
+"bytes": 9933325,
+"src": {
+"generatedOutput": ".cache/fin_clairiere_tropicale_v1/fin_clairiere_tropicale/Data/Ground/fct1_fin_clairiere_tropicale.rsground",
+"sourceLot": "fin_clairiere_tropicale_v1",
+"sourceBuildScript": "source/fin_clairiere_tropicale_v1/build.py",
+"buildStatus": true
+}
+},
+"fvc1_fin_couloir_violet": {
+"sha": "843ed60b7f2ee0b0a5e9c9a8d5d0833c29ca4ccdb7484870f8984092b7076fdb",
+"bytes": 6617347,
+"src": {
+"generatedOutput": ".cache/fin_couloir_violet_v1/fin_couloir_violet/Data/Ground/fvc1_fin_couloir_violet.rsground",
+"sourceLot": "fin_couloir_violet_v1",
+"sourceBuildScript": "source/fin_couloir_violet_v1/build.py",
+"buildStatus": true
+}
+},
+"fcf1_fin_cratere_fosse": {
+"sha": "d8a1b7a9a24b2f47e71e98c7c68bf1c67b10fe6217528a522bf6e5080136a526",
+"bytes": 6127342,
+"src": {
+"generatedOutput": ".cache/fin_cratere_fosse_v1/fin_cratere_fosse/Data/Ground/fcf1_fin_cratere_fosse.rsground",
+"sourceLot": "fin_cratere_fosse_v1",
+"sourceBuildScript": "source/fin_cratere_fosse_v1/build.py",
+"buildStatus": true
+}
+},
+"fgg2_fin_givre_aurore": {
+"sha": "a17c3021947b77d18559006c0402f6ef9be36313ef2f0cc4df7c6df5c74cdda0",
+"bytes": 9378536,
+"src": {
+"generatedOutput": ".cache/fin_givre_aurore_v2/fin_givre_aurore/Data/Ground/fgg2_fin_givre_aurore.rsground",
+"sourceLot": "fin_givre_aurore_v2",
+"sourceBuildScript": "source/fin_givre_aurore_v2/build.py",
+"buildStatus": true
+}
+},
+"fgg1_fin_givre_grotte": {
+"sha": "59d303452524631e8d934f730691726a83e243b4359ff633e1b7977bfcef1e4c",
+"bytes": 8258735,
+"src": {
+"generatedOutput": ".cache/fin_givre_grotte_v1/fin_givre_grotte/Data/Ground/fgg1_fin_givre_grotte.rsground",
+"sourceLot": "fin_givre_grotte_v1",
+"sourceBuildScript": "source/fin_givre_grotte_v1/build.py",
+"buildStatus": true
+}
+},
+"fse1_fin_jardin_secret": {
+"sha": "43a86907a9f69d24ae1fd0c017148773395d2a0ba79402c71c6b5cd209eb3e89",
+"bytes": 8768472,
+"src": {
+"generatedOutput": ".cache/fin_jardin_secret_v1/fin_jardin_secret/Data/Ground/fse1_fin_jardin_secret.rsground",
+"sourceLot": "fin_jardin_secret_v1",
+"sourceBuildScript": "source/fin_jardin_secret_v1/build.py",
+"buildStatus": true
+}
+},
+"fjs1_fin_jungle_sud": {
+"sha": "a2917483793ebbca7297170b18bb9bba296a4d388639251aead6408e8e5066e8",
+"bytes": 8633256,
+"src": {
+"generatedOutput": ".cache/fin_jungle_sud_v1/fin_jungle_sud/Data/Ground/fjs1_fin_jungle_sud.rsground",
+"sourceLot": "fin_jungle_sud_v1",
+"sourceBuildScript": "source/fin_jungle_sud_v1/build.py",
+"buildStatus": true
+}
+},
+"fth1_fin_mt_thunder": {
+"sha": "6976b508b07228e83c929dfd2cb56237e6be2df3d6fa7bd0b8dabcbe85d6b067",
+"bytes": 7019039,
+"src": {
+"generatedOutput": ".cache/fin_mt_thunder_v1/fin_mt_thunder/Data/Ground/fth1_fin_mt_thunder.rsground",
+"sourceLot": "fin_mt_thunder_v1",
+"sourceBuildScript": "source/fin_mt_thunder_v1/build.py",
+"buildStatus": true
+}
+},
+"fmy1_fin_mystifying_forest": {
+"sha": "3c3cde3e2c8cdae8265acb61fe2ec08e6c509e0c71b9f2475138803aa7e6edcd",
+"bytes": 7297382,
+"src": {
+"generatedOutput": ".cache/fin_mystifying_forest_v1/fin_mystifying_forest/Data/Ground/fmy1_fin_mystifying_forest.rsground",
+"sourceLot": "fin_mystifying_forest_v1",
+"sourceBuildScript": "source/fin_mystifying_forest_v1/build.py",
+"buildStatus": true
+}
+},
+"foc1_fin_ocean_kyogre": {
+"sha": "4f75d2bec04d8d86eb29c6dfccf2280f4f03f84f3f385152ab164221f557b512",
+"bytes": 11568238,
+"src": {
+"generatedOutput": ".cache/fin_ocean_kyogre_v1/fin_ocean_kyogre/Data/Ground/foc1_fin_ocean_kyogre.rsground",
+"sourceLot": "fin_ocean_kyogre_v1",
+"sourceBuildScript": "source/fin_ocean_kyogre_v1/build.py",
+"buildStatus": true
+}
+},
+"frp1_fin_ruine_puits": {
+"sha": "12ba1de8a3714128c0d836382a2704115a9be608d54bd9dd492aab0766bc5c10",
+"bytes": 5506487,
+"src": {
+"generatedOutput": ".cache/fin_ruine_puits_v1/fin_ruine_puits/Data/Ground/frp1_fin_ruine_puits.rsground",
+"sourceLot": "fin_ruine_puits_v1",
+"sourceBuildScript": "source/fin_ruine_puits_v1/build.py",
+"buildStatus": true
+}
+},
+"fsm1_fin_sables_mouvants": {
+"sha": "e5353c7657eb446ee42ad1365ecaaae6079dd685a736246b4fc7294cf65f014f",
+"bytes": 6569851,
+"src": {
+"generatedOutput": ".cache/fin_sables_mouvants_v1/fin_sables_mouvants/Data/Ground/fsm1_fin_sables_mouvants.rsground",
+"sourceLot": "fin_sables_mouvants_v1",
+"sourceBuildScript": "source/fin_sables_mouvants_v1/build.py",
+"buildStatus": true
+}
+},
+"fst1_fin_star_cave": {
+"sha": "0099a9bc859c91eed817fc4be8fa9cf3934cee4c38cdd535bc8f4e763196fe40",
+"bytes": 9791923,
+"src": {
+"generatedOutput": ".cache/fin_star_cave_v1/fin_star_cave/Data/Ground/fst1_fin_star_cave.rsground",
+"sourceLot": "fin_star_cave_v1",
+"sourceBuildScript": "source/fin_star_cave_v1/build.py",
+"buildStatus": true
+}
+},
+"flu1_fin_underground_lake": {
+"sha": "7dfc38161539b95b56d397c489e554e321ee94b8221772c3c29bc916da4e5c17",
+"bytes": 6969478,
+"src": {
+"generatedOutput": ".cache/fin_underground_lake_v1/fin_underground_lake/Data/Ground/flu1_fin_underground_lake.rsground",
+"sourceLot": "fin_underground_lake_v1",
+"sourceBuildScript": "source/fin_underground_lake_v1/build.py",
+"buildStatus": true
+}
+},
+"fvs1_fin_vapeur_sommet": {
+"sha": "bf12528d4633a6617acf60a89ad7761daef9b9d5be46db2a058967144824d900",
+"bytes": 5960493,
+"src": {
+"generatedOutput": ".cache/fin_vapeur_sommet_v1/fin_vapeur_sommet/Data/Ground/fvs1_fin_vapeur_sommet.rsground",
+"sourceLot": "fin_vapeur_sommet_v1",
+"sourceBuildScript": "source/fin_vapeur_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"fwc1_fin_waterfall_cave": {
+"sha": "bb49d94b8b2ff77bc2bc89c86ca23623f7e82136de06d9f106d6039ed498fb4a",
+"bytes": 6930117,
+"src": {
+"generatedOutput": ".cache/fin_waterfall_cave_v1/fin_waterfall_cave/Data/Ground/fwc1_fin_waterfall_cave.rsground",
+"sourceLot": "fin_waterfall_cave_v1",
+"sourceBuildScript": "source/fin_waterfall_cave_v1/build.py",
+"buildStatus": true
+}
+},
+"rzd1_ruines_zarbi": {
+"sha": "b5a377ca1cf547dcf80d298d335ff47df9d24b8805de8ab14db93cf27043838b",
+"bytes": 9852924,
+"src": {
+"generatedOutput": ".cache/ruines_zarbi_v1/ruines_zarbi/Data/Ground/rzd1_ruines_zarbi.rsground",
+"sourceLot": "ruines_zarbi_v1",
+"sourceBuildScript": "source/ruines_zarbi_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_clairiere_source_lumineuse": {
+"sha": "5e4d9ab4123008ef31cc019c392183d4aa7a53e20160fd7e3d241ad2fa355a11",
+"bytes": 8387100,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_clairiere_source_lumineuse_v1/Data/Ground/destiny_clairiere_source_lumineuse.rsground",
+"sourceLot": "destiny_clairiere_source_lumineuse_v1",
+"sourceBuildScript": "source/destiny_clairiere_source_lumineuse_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_grotte_maree_boss": {
+"sha": "5b07bd1ce84bbea4a25be15a9dd01d840e34ca1e896fb6e7b9f3a9ae91b83071",
+"bytes": 8561396,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_donjon1_grotte_maree_boss_v1/Data/Ground/destiny_grotte_maree_boss.rsground",
+"sourceLot": "destiny_donjon1_grotte_maree_boss_v1",
+"sourceBuildScript": "source/destiny_donjon1_grotte_maree_boss_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_grotte_maree_entree": {
+"sha": "09c84ae54c7b0fb3bacce126c3084e4ae18c6cdb98a733b0c416fe12afd5dd8b",
+"bytes": 7852654,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_donjon1_grotte_maree_entree_v1/Data/Ground/destiny_grotte_maree_entree.rsground",
+"sourceLot": "destiny_donjon1_grotte_maree_entree_v1",
+"sourceBuildScript": "source/destiny_donjon1_grotte_maree_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_caldeira_coeur_solaire_boss": {
+"sha": "7c94878b5b42cbce05777ece86544d126f33bd0ba22820c9bc2b30e32350489d",
+"bytes": 8828937,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_donjon2_caldeira_boss_v1/Data/Ground/destiny_caldeira_coeur_solaire_boss.rsground",
+"sourceLot": "destiny_donjon2_caldeira_boss_v1",
+"sourceBuildScript": "source/destiny_donjon2_caldeira_boss_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_gorge_basaltique_magma_entree": {
+"sha": "68bca53add5772e38abfb763bafcdb764158cea295409c59ba1bbd6d2f56317a",
+"bytes": 9565246,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_donjon2_faille_magma_entree_v1/Data/Ground/destiny_gorge_basaltique_magma_entree.rsground",
+"sourceLot": "destiny_donjon2_faille_magma_entree_v1",
+"sourceBuildScript": "source/destiny_donjon2_faille_magma_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_sous_bois_mycelien": {
+"sha": "7395e2288d8f9483169019fddd375de83cb7ba1cf178642af4ae241b6fd7d045",
+"bytes": 7802243,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_foret_mycelium_sentier_v1/Data/Ground/destiny_sous_bois_mycelien.rsground",
+"sourceLot": "destiny_foret_mycelium_sentier_v1",
+"sourceBuildScript": "source/destiny_foret_mycelium_sentier_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_passe_rocheuse_ecumes": {
+"sha": "5c05689b984c9ff960a2bff254239124e1994e29b6fb6add7de2f6bb12798633",
+"bytes": 7695259,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_route_passe_corail_v1/Data/Ground/destiny_passe_rocheuse_ecumes.rsground",
+"sourceLot": "destiny_route_passe_corail_v1",
+"sourceBuildScript": "source/destiny_route_passe_corail_v1/build.py",
+"buildStatus": true
+}
+},
+"destiny_bourg_ecume_port": {
+"sha": "9a7829d1284f8949df72f30ee1fc39eae136ac417c38c034355d7e2fad51d5a8",
+"bytes": 7928845,
+"src": {
+"generatedOutput": ".cache/tiles/destiny_village_port_aube_v1/Data/Ground/destiny_bourg_ecume_port.rsground",
+"sourceLot": "destiny_village_port_aube_v1",
+"sourceBuildScript": "source/destiny_village_port_aube_v1/build.py",
+"buildStatus": true
+}
+},
+"faille_spatiale_entree": {
+"sha": "2f811283b7d58d062500ef7bb61d78ac449c902848f8edf259cc021bd480f5ec",
+"bytes": 29206643,
+"src": {
+"generatedOutput": ".cache/tiles/faille_spatiale_entree_v1/Data/Ground/faille_spatiale_entree.rsground",
+"sourceLot": "faille_spatiale_entree_v1",
+"sourceBuildScript": "source/faille_spatiale_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"faille_spatiale_sanctuaire_avant_portail": {
+"sha": "ddb87dd417eb54bb1d2e45fcf33434620198c90729fab4ff68360f249b4c2526",
+"bytes": 16102905,
+"src": {
+"generatedOutput": ".cache/tiles/faille_spatiale_sanctuaire_avant_portail_v1/Data/Ground/faille_spatiale_sanctuaire_avant_portail.rsground",
+"sourceLot": "faille_spatiale_sanctuaire_avant_portail_v1",
+"sourceBuildScript": "source/faille_spatiale_sanctuaire_avant_portail_v1/build.py",
+"buildStatus": true
+}
+},
+"faille_spatiale_sanctuaire": {
+"sha": "2e2c5dbcd61da950d58db11456cbee7c83c9d7cfc732379131d8fca5fef59480",
+"bytes": 15494976,
+"src": {
+"generatedOutput": ".cache/tiles/faille_spatiale_sanctuaire_v1/Data/Ground/faille_spatiale_sanctuaire.rsground",
+"sourceLot": "faille_spatiale_sanctuaire_v1",
+"sourceBuildScript": "source/faille_spatiale_sanctuaire_v1/build.py",
+"buildStatus": true
+}
+},
+"foret_givree_entree": {
+"sha": "7b2be9478cc90eaf38610a15790c9ac5b7480a9d5a40d78421e17a1422d347e2",
+"bytes": 11334418,
+"src": {
+"generatedOutput": ".cache/tiles/foret_givree_entree_v1/Data/Ground/foret_givree_entree.rsground",
+"sourceLot": "foret_givree_entree_v1",
+"sourceBuildScript": "source/foret_givree_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"foret_givree_sanctuaire": {
+"sha": "868953c8c60cbb095aa12b6496926dd40c4d30e620b35d0796027580fc6595bb",
+"bytes": 11516705,
+"src": {
+"generatedOutput": ".cache/tiles/foret_givree_sanctuaire_v1/Data/Ground/foret_givree_sanctuaire.rsground",
+"sourceLot": "foret_givree_sanctuaire_v1",
+"sourceBuildScript": "source/foret_givree_sanctuaire_v1/build.py",
+"buildStatus": true
+}
+},
+"fosse_argent_entree": {
+"sha": "381f26e9d662ecaf2edc4c131ff50db0b934b86ce5689f983db4230058e14c79",
+"bytes": 8353179,
+"src": {
+"generatedOutput": ".cache/tiles/fosse_argent_entree_v1/Data/Ground/fosse_argent_entree.rsground",
+"sourceLot": "fosse_argent_entree_v1",
+"sourceBuildScript": "source/fosse_argent_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"fosse_argent_sanctuaire_lugia": {
+"sha": "4603b84368e52e466b6eae2363618b8f0f7a9a7a704ba226b9605347b98fcf96",
+"bytes": 10071340,
+"src": {
+"generatedOutput": ".cache/tiles/fosse_argent_sanctuaire_v1/Data/Ground/fosse_argent_sanctuaire_lugia.rsground",
+"sourceLot": "fosse_argent_sanctuaire_v1",
+"sourceBuildScript": "source/fosse_argent_sanctuaire_v1/build.py",
+"buildStatus": true
+}
+},
+"great_canyon_entree": {
+"sha": "4b3ae266c097b190a7f363c5bf18be2b4b11a8f4a631626ec6217ebaaa5af1c4",
+"bytes": 15341205,
+"src": {
+"generatedOutput": ".cache/tiles/great_canyon_entree_v1/Data/Ground/great_canyon_entree.rsground",
+"sourceLot": "great_canyon_entree_v1",
+"sourceBuildScript": "source/great_canyon_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"great_canyon_fin": {
+"sha": "25017c110eafa3f916e7571bba11d8e11bee8b07e09fb40f8f1a407b060439ed",
+"bytes": 11853510,
+"src": {
+"generatedOutput": ".cache/tiles/great_canyon_fin_v1/Data/Ground/great_canyon_fin.rsground",
+"sourceLot": "great_canyon_fin_v1",
+"sourceBuildScript": "source/great_canyon_fin_v1/build.py",
+"buildStatus": true
+}
+},
+"grotte_ouest_entree": {
+"sha": "6a801f2bc53ab55a809d1f8890c7d71c9962f45c3d567a6c0c7e219e3aa985f1",
+"bytes": 8931839,
+"src": {
+"generatedOutput": ".cache/tiles/grotte_ouest_entree_v1/Data/Ground/grotte_ouest_entree.rsground",
+"sourceLot": "grotte_ouest_entree_v1",
+"sourceBuildScript": "source/grotte_ouest_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"grotte_ouest_sanctuaire_mewtwo": {
+"sha": "ab117fcbc8207280154b94cd2ec57869330a04409b5eef7170eb280239b1a64c",
+"bytes": 10664280,
+"src": {
+"generatedOutput": ".cache/tiles/grotte_ouest_sanctuaire_v1/Data/Ground/grotte_ouest_sanctuaire_mewtwo.rsground",
+"sourceLot": "grotte_ouest_sanctuaire_v1",
+"sourceBuildScript": "source/grotte_ouest_sanctuaire_v1/build.py",
+"buildStatus": true
+}
+},
+"kyurem_cratere_entree": {
+"sha": "39ed735016b4f5bd37c50ef281974bc95f11a6094bbfd5ddfc1e915b09d9273c",
+"bytes": 21689711,
+"src": {
+"generatedOutput": ".cache/tiles/kyurem_cratere_entree_v1/Data/Ground/kyurem_cratere_entree.rsground",
+"sourceLot": "kyurem_cratere_entree_v1",
+"sourceBuildScript": "source/kyurem_cratere_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"kyurem_sanctuaire_glace": {
+"sha": "3cf9e37272631a81ffebd671e6eb092dbc71fcbcff82f5e0c50ce996a26bea4e",
+"bytes": 19301469,
+"src": {
+"generatedOutput": ".cache/tiles/kyurem_sanctuaire_glace_v1/Data/Ground/kyurem_sanctuaire_glace.rsground",
+"sourceLot": "kyurem_sanctuaire_glace_v1",
+"sourceBuildScript": "source/kyurem_sanctuaire_glace_v1/build.py",
+"buildStatus": true
+}
+},
+"mine_magma_arene": {
+"sha": "fd00de176f3a286773a912a0e81c55d24aca8b70f4e0fe6069311a350dba270c",
+"bytes": 16957174,
+"src": {
+"generatedOutput": ".cache/tiles/mine_magma_arene_v1/Data/Ground/mine_magma_arene.rsground",
+"sourceLot": "mine_magma_arene_v1",
+"sourceBuildScript": "source/mine_magma_arene_v1/build.py",
+"buildStatus": true
+}
+},
+"mine_magma_entree": {
+"sha": "fde6f6fccbfb322c604e6f2eaee884655676ca9a3700cd60fad58a27b1ff8c9c",
+"bytes": 14174650,
+"src": {
+"generatedOutput": ".cache/tiles/mine_magma_entree_v1/Data/Ground/mine_magma_entree.rsground",
+"sourceLot": "mine_magma_entree_v1",
+"sourceBuildScript": "source/mine_magma_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_brasier_entree": {
+"sha": "6bcbd30e14c4557afd6ff6f7394eda1790ee51e3e298b64b588157500720edd8",
+"bytes": 8307158,
+"src": {
+"generatedOutput": ".cache/tiles/mont_brasier_entree_v1/Data/Ground/mont_brasier_entree.rsground",
+"sourceLot": "mont_brasier_entree_v1",
+"sourceBuildScript": "source/mont_brasier_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_brasier_sommet": {
+"sha": "c86e8e07e182ddf0057f2fa04a4efff6c8284328f0b001d617e23dacf3f30982",
+"bytes": 9647354,
+"src": {
+"generatedOutput": ".cache/tiles/mont_brasier_sommet_v1/Data/Ground/mont_brasier_sommet.rsground",
+"sourceLot": "mont_brasier_sommet_v1",
+"sourceBuildScript": "source/mont_brasier_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_foudre_entree": {
+"sha": "00662d3ddcbe3477c99481f1ec92365f2af90ca718af7355c3baf7151d84c8a0",
+"bytes": 9877523,
+"src": {
+"generatedOutput": ".cache/tiles/mont_foudre_entree_v1/Data/Ground/mont_foudre_entree.rsground",
+"sourceLot": "mont_foudre_entree_v1",
+"sourceBuildScript": "source/mont_foudre_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_foudre_sommet": {
+"sha": "50211d826b732554205b091736a5ce2bb83bcc680f2e0472fd3889d0f54531cf",
+"bytes": 8697749,
+"src": {
+"generatedOutput": ".cache/tiles/mont_foudre_sommet_v1/Data/Ground/mont_foudre_sommet.rsground",
+"sourceLot": "mont_foudre_sommet_v1",
+"sourceBuildScript": "source/mont_foudre_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_lointain_entree": {
+"sha": "fbe232c9335f0302174eda1d54dbbb5fcd560ee4ddf4b6d50bf741fa13e98479",
+"bytes": 8459637,
+"src": {
+"generatedOutput": ".cache/tiles/mont_lointain_entree_v1/Data/Ground/mont_lointain_entree.rsground",
+"sourceLot": "mont_lointain_entree_v1",
+"sourceBuildScript": "source/mont_lointain_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"mont_lointain_sommet": {
+"sha": "7ad3567e607d4fb66f50abbddfc472efa417052a4a88533d50f04ed0c2ddf443",
+"bytes": 7564034,
+"src": {
+"generatedOutput": ".cache/tiles/mont_lointain_sommet_v1/Data/Ground/mont_lointain_sommet.rsground",
+"sourceLot": "mont_lointain_sommet_v1",
+"sourceBuildScript": "source/mont_lointain_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"pmd_destiny_menu_jour": {
+"sha": "2d00c56d47333c461b1513753b6893539e8fc2f1721601236b3bbc43ae609414",
+"bytes": 11910878,
+"src": {
+"generatedOutput": ".cache/tiles/pmd_destiny_fangame_v1/Data/Ground/pmd_destiny_menu_jour.rsground",
+"sourceLot": "pmd_destiny_fangame_v1",
+"sourceBuildScript": "source/pmd_destiny_fangame_v1/build.py",
+"buildStatus": true
+}
+},
+"reshiram_montagne_entree": {
+"sha": "e703a89c30a4613e7a038a0b294eb9b26c739497f169846452a6da276044cb85",
+"bytes": 7936038,
+"src": {
+"generatedOutput": ".cache/tiles/reshiram_montagne_entree_v1/Data/Ground/reshiram_montagne_entree.rsground",
+"sourceLot": "reshiram_montagne_entree_v1",
+"sourceBuildScript": "source/reshiram_montagne_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"reshiram_sommet_flamme": {
+"sha": "2883ee37543423cecbe8329cb689fed075fed7095381a30d6cde0b0975ef43cd",
+"bytes": 25357906,
+"src": {
+"generatedOutput": ".cache/tiles/reshiram_sommet_flamme_v1/Data/Ground/reshiram_sommet_flamme.rsground",
+"sourceLot": "reshiram_sommet_flamme_v1",
+"sourceBuildScript": "source/reshiram_sommet_flamme_v1/build.py",
+"buildStatus": true
+}
+},
+"ruines_enfouies_entree": {
+"sha": "9fc4de40fca250e6d3e95548b48214c82725298dbf0fc4ce404b3108539a7674",
+"bytes": 7849669,
+"src": {
+"generatedOutput": ".cache/tiles/ruines_enfouies_entree_v1/Data/Ground/ruines_enfouies_entree.rsground",
+"sourceLot": "ruines_enfouies_entree_v1",
+"sourceBuildScript": "source/ruines_enfouies_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"ruines_enfouies_sanctuaire_mew": {
+"sha": "c76815935f470dcae6b0bc4f732314e53a24beaf5fc77d44800c22263d6a7a86",
+"bytes": 9714092,
+"src": {
+"generatedOutput": ".cache/tiles/ruines_enfouies_sanctuaire_v1/Data/Ground/ruines_enfouies_sanctuaire_mew.rsground",
+"sourceLot": "ruines_enfouies_sanctuaire_v1",
+"sourceBuildScript": "source/ruines_enfouies_sanctuaire_v1/build.py",
+"buildStatus": true
+}
+},
+"silent_chasm_entree": {
+"sha": "f2aee444072bc65fc455e8be662ae9bd50e199eb8d1bd8a8df231d182e57e667",
+"bytes": 11699993,
+"src": {
+"generatedOutput": ".cache/tiles/silent_chasm_entree_v1/Data/Ground/silent_chasm_entree.rsground",
+"sourceLot": "silent_chasm_entree_v1",
+"sourceBuildScript": "source/silent_chasm_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"silent_chasm_fin": {
+"sha": "102bbe455a0f909a516bd5fe4111a0708d50aacbb57247df162ea1764c2d9da3",
+"bytes": 11056998,
+"src": {
+"generatedOutput": ".cache/tiles/silent_chasm_fin_v1/Data/Ground/silent_chasm_fin.rsground",
+"sourceLot": "silent_chasm_fin_v1",
+"sourceBuildScript": "source/silent_chasm_fin_v1/build.py",
+"buildStatus": true
+}
+},
+"sinister_woods_entree_nuit": {
+"sha": "6345506818fc5560965ad55a773603b940c6ad84e97f6218bd04ec444681b180",
+"bytes": 15736445,
+"src": {
+"generatedOutput": ".cache/tiles/sinister_woods_entree_nuit_v1/Data/Ground/sinister_woods_entree_nuit.rsground",
+"sourceLot": "sinister_woods_entree_nuit_v1",
+"sourceBuildScript": "source/sinister_woods_entree_nuit_v1/build.py",
+"buildStatus": true
+}
+},
+"sinister_woods_entree": {
+"sha": "3fa39cefc8dba712f5df6d14ef3b036724730eb7d1e5115ea202955d930f7bc8",
+"bytes": 15977636,
+"src": {
+"generatedOutput": ".cache/tiles/sinister_woods_entree_v1/Data/Ground/sinister_woods_entree.rsground",
+"sourceLot": "sinister_woods_entree_v1",
+"sourceBuildScript": "source/sinister_woods_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"sinister_woods_fin_nuit": {
+"sha": "9feb8a53549bca0a505d096789506c7fa03a951ef4311769626f446ba4551ba1",
+"bytes": 16558712,
+"src": {
+"generatedOutput": ".cache/tiles/sinister_woods_fin_nuit_v1/Data/Ground/sinister_woods_fin_nuit.rsground",
+"sourceLot": "sinister_woods_fin_nuit_v1",
+"sourceBuildScript": "source/sinister_woods_fin_nuit_v1/build.py",
+"buildStatus": true
+}
+},
+"sinister_woods_fin": {
+"sha": "70cf328a210ed35bf4a35cca514d5b352d33211d96883aa6f9839b25580748a1",
+"bytes": 16731268,
+"src": {
+"generatedOutput": ".cache/tiles/sinister_woods_fin_v1/Data/Ground/sinister_woods_fin.rsground",
+"sourceLot": "sinister_woods_fin_v1",
+"sourceBuildScript": "source/sinister_woods_fin_v1/build.py",
+"buildStatus": true
+}
+},
+"tiny_woods_entree": {
+"sha": "cc3cf7a719aac6ecb3d4681898513895fa433d1e5ea0fa6217b9ab1e203932ca",
+"bytes": 8434537,
+"src": {
+"generatedOutput": ".cache/tiles/tiny_woods_entree_v1/Data/Ground/tiny_woods_entree.rsground",
+"sourceLot": "tiny_woods_entree_v1",
+"sourceBuildScript": "source/tiny_woods_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"tiny_woods_fin": {
+"sha": "6cd00033a66cd3b49d229cb261818e4d76c4e17b7eb1c17723a54e7f17f5770f",
+"bytes": 8111689,
+"src": {
+"generatedOutput": ".cache/tiles/tiny_woods_fin_v1/Data/Ground/tiny_woods_fin.rsground",
+"sourceLot": "tiny_woods_fin_v1",
+"sourceBuildScript": "source/tiny_woods_fin_v1/build.py",
+"buildStatus": true
+}
+},
+"tour_celeste_entree": {
+"sha": "778fc590a25b637147e9f356af2a163b5de5f2dd28e30e2bab206db9a217afa5",
+"bytes": 28014532,
+"src": {
+"generatedOutput": ".cache/tiles/tour_celeste_entree_v1/Data/Ground/tour_celeste_entree.rsground",
+"sourceLot": "tour_celeste_entree_v1",
+"sourceBuildScript": "source/tour_celeste_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"stc1_tour_celeste": {
+"sha": "62387a4e0ae32d813353de8bebf878f67f8382130aa2718fd6e70222cb8e723c",
+"bytes": 7322870,
+"src": {
+"generatedOutput": ".cache/tiles/tour_celeste_sommet_v1/Data/Ground/stc1_tour_celeste.rsground",
+"sourceLot": "tour_celeste_sommet_v1",
+"sourceBuildScript": "source/tour_celeste_sommet_v1/build.py",
+"buildStatus": true
+}
+},
+"zekrom_montagne_entree": {
+"sha": "fd7ae6101e0c38310f48edf15b25e640dcb57a39088889e7c0c2b3ff1e7a014b",
+"bytes": 8233507,
+"src": {
+"generatedOutput": ".cache/tiles/zekrom_montagne_entree_v1/Data/Ground/zekrom_montagne_entree.rsground",
+"sourceLot": "zekrom_montagne_entree_v1",
+"sourceBuildScript": "source/zekrom_montagne_entree_v1/build.py",
+"buildStatus": true
+}
+},
+"zekrom_sommet_tornade": {
+"sha": "5d2d8effcc6e9ad4309d4f0b0481fc964985bdc1457c404ddb74961c958a1fb0",
+"bytes": 24193715,
+"src": {
+"generatedOutput": ".cache/tiles/zekrom_sommet_tornade_v1/Data/Ground/zekrom_sommet_tornade.rsground",
+"sourceLot": "zekrom_sommet_tornade_v1",
+"sourceBuildScript": "source/zekrom_sommet_tornade_v1/build.py",
+"buildStatus": true
+}
+},
+"eaz1_entree_zone_zero": {
+"sha": "bff2d7619f2c552829c412bbba79921deabc81c20bd38683dc4b99c3f42803e7",
+"bytes": 6894524,
+"src": {
+"generatedOutput": ".cache/zone_zero_v1/entree_zone_zero/Data/Ground/eaz1_entree_zone_zero.rsground",
+"sourceLot": "zone_zero_v1",
+"sourceBuildScript": "source/zone_zero_v1/eaz1/build.py",
+"buildStatus": true
+}
+},
+"raz1_levre_cratere": {
+"sha": "6c40fa7414e3e7b99bcd0844660db1af6051905200b25f296bcfee94d492e69b",
+"bytes": 6947633,
+"src": {
+"generatedOutput": ".cache/zone_zero_v1/route_zone_zero_1/Data/Ground/raz1_levre_cratere.rsground",
+"sourceLot": "zone_zero_v1",
+"sourceBuildScript": "source/zone_zero_v1/raz2/build.py",
+"buildStatus": true
+}
+},
+"raz2_terrasses_cascades": {
+"sha": "fd4cde39afd09f6661765dda98180466b914a77cfd6ee36af31308aa37d755aa",
+"bytes": 7986344,
+"src": {
+"generatedOutput": ".cache/zone_zero_v1/route_zone_zero_2/Data/Ground/raz2_terrasses_cascades.rsground",
+"sourceLot": "zone_zero_v1",
+"sourceBuildScript": "source/zone_zero_v1/raz2/build.py",
+"buildStatus": true
+}
+},
+"raz3_fond_cristallin": {
+"sha": "26befb32706714a3adf1c51329e04d74de0cd3047393bfac1ab6f2374fbe344d",
+"bytes": 6567190,
+"src": {
+"generatedOutput": ".cache/zone_zero_v1/route_zone_zero_3/Data/Ground/raz3_fond_cristallin.rsground",
+"sourceLot": "zone_zero_v1",
+"sourceBuildScript": "source/zone_zero_v1/raz3/build.py",
+"buildStatus": true
+}
+},
+"raf1_levre_cratere_fleurie": {
+"sha": "c40c15f6ffc25dcb91c3eed03126e1fcb39bf25f575f1d6b84cb2c06d12eb4c3",
+"bytes": 11622755,
+"src": {
+"generatedOutput": ".cache/zone_zero_v2/route_zone_zero_fleurie_1/Data/Ground/raf1_levre_cratere_fleurie.rsground",
+"sourceLot": "zone_zero_v2",
+"sourceBuildScript": "source/zone_zero_v2/build.py",
+"buildStatus": true
+}
+}
+}

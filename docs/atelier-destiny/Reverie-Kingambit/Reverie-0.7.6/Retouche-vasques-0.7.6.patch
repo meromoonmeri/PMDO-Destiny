@@ -1,0 +1,457 @@
+From 24be5673a76e06a9824102c5f106f091eb07070a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Destiny=20=E2=80=94=20int=C3=A9gration=20locale?=
+ <destiny-local@users.noreply.local>
+Date: Fri, 20 Nov 2026 20:11:48 +0000
+Subject: [PATCH] =?UTF-8?q?Fait=20surgir=20les=20Kabuto=20du=20sable=20et?=
+ =?UTF-8?q?=20centre=20leur=20chef=20apr=C3=A8s=20le=20duel?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Cadre le passage sud avant la terre de Tunnel. Place le partenaire, Kabutops et le héros sur une ligne dès le fondu, libère l’axe des retrouvailles et conserve les cinq K.O. Prépare les notes 0.7.6 sans retoucher la 0.7.5 publiée.
+---
+ docs/REVERIE_075.md                           | 35 ++++-----
+ docs/REVERIE_076.md                           | 21 ++++++
+ .../Script/destiny/fosse_cascade_scene.lua    | 11 +--
+ .../ground/fgv1_fin_grotte_vasques/init.lua   | 71 ++++++++++++-------
+ tools/tests/test_grotte_verdoyante.lua        | 46 ++++++++++--
+ tools/tests/test_grotte_verdoyante.py         | 36 +++++++---
+ 6 files changed, 153 insertions(+), 67 deletions(-)
+ create mode 100644 docs/REVERIE_076.md
+
+diff --git a/docs/REVERIE_075.md b/docs/REVERIE_075.md
+index 0f5db36..8c3684c 100644
+--- a/docs/REVERIE_075.md
++++ b/docs/REVERIE_075.md
+@@ -1,28 +1,17 @@
+-# Pokémon Mystery Dungeon: Destiny — Chantier 0.7.5
++# Pokémon Mystery Dungeon: Destiny — Mise à jour 0.7.5
+ 
+-Après la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.4), cette retouche reprend le sauvetage de Nilo et l’entrée dans l’arène de Kabutops.
++Depuis la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.4), cette mise à jour reprend et finalise la mise en scène du sauvetage de Nilo dans la Fosse Cascade Fond.
+ 
+-## Fosse Cascade Fond
++## Fosse Cascade Fond : sauvetage de Nilo et Kabutops
+ 
+-- La carte de mise en scène passe de **480 × 360 à 576 × 528 px** (72 × 66 tuiles de 8 px). Un passage rocheux éclairé par petites vasques débouche au sud de la salle haute. Deux panoramiques distincts montrent d'abord le couloir, puis Nilo sur la terrasse. Les sprites ne sont pas redimensionnés.
+-- Nilo tremble déjà sur la terrasse. Il demande qui sont les deux Pokémon, puis raconte qu’il cherchait sa maman et s’est perdu. Le duo se présente et le rassure avant que Kabutops ne l’accuse. **Deux avertissements** signés `???`, sans portrait ; entre les deux, le duo se regarde et Nilo dément l’accusation.
+-- Secousse, terre et jaillissement vertical sur l’axe médian : Kabutops surgit devant le duo, style **Tunnel**, avec les particules et le son natifs `Dig`. L’impulsion, le coup de faux et le recul des deux Pokémon se chevauchent. Pas d’arrivée depuis la rive ni d’éclair plein écran qui masque l’animation.
+-- La confrontation se décale de deux cases vers le cœur de la salle haute. Après le recul du duo, les Kabuto surgissent par les flancs, longent les bords et menacent ; les deux autres passent derrière le duo et ferment le retrait. La caméra suit le bruit au sud ; le duo se resserre, les gardes pivotent et les quatre traces de Griffe ponctuent la fermeture du cercle. En revanche, la garde est déjà en place.
+-- Face au duo, Kabutops explique les crues, les départs de familles et le danger en aval. Il soupçonne Nilo parce qu’il l’a vu près de la source, pas parce qu’il l’a vu agir. Quand le héros constate que le gardien est trop en colère pour entendre raison, son partenaire lui répond et se prépare. Objectif de **1 min 20 à 1 min 30** avec une lecture posée ; la confirmation des dialogues reste manuelle.
+-- Le woosh garde ses neuf bandes natives `Pre_Battle` et le bruitage `EVT_Battle_Transition` entier. La revanche est courte et conserve le même raccord. `Boss Battle 2.ogg` démarre côté arène. Nilo reste visible et tremble sur la terrasse derrière Kabutops, au même point du décor que dans le pré-combat. Sa pose est dessinée depuis le sprite natif de Lixy ; il n’entre dans aucune équipe, n’a ni tour ni collision et ne peut pas être choisi comme cible.
+-- **Combat au 9e** : Kabutops change de position, pas de statistiques ni de capacités. Deux Kabuto **niveau 4** sur les flancs et deux **niveau 3** à l’arrière prennent de vrais tours, avec leurs capacités de départ Griffe et Armure, sans bonus. Leurs positions côté arène reprennent exactement celles de la cinématique, sans bloquer les quatre départs alliés. La victoire native exige toute l’équipe ennemie. Aucun changement aux 42 cases praticables, à l’arène 480 × 360 ou aux huit premiers étages.
+-- Après le dernier K.O., les quatre Kabuto marquent leur peur (émotes, tremblements, recul). L’arrière se replie sous terre, puis les flancs ; Kabutops utilise lui aussi Tunnel et part le dernier. Nilo attend que tous soient partis avant de redescendre de la terrasse et de retrouver Lyra. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
++- Nilo se trouve sur la terrasse supérieure des vasques et avertit le duo avant de tomber dans la salle. Le souffle de Kabutops repousse ensuite les trois personnages sur des trajectoires distinctes, vers des points libres de la carte.
++- La découverte du boss conserve ses éclairs et sa voix hors champ sans effet ni son d’eau. L’état de la scène est enregistré avant sa séquence afin qu’une interruption suivie d’une réentrée ne rejoue pas la révélation.
++- Avant le duel, Nilo et le partenaire échangent quelques répliques sur la peur et la protection du groupe. Le fondu sonore et visuel précède la transition au combat.
++- Après la victoire, Kabutops refuse encore de changer d’avis puis s’enfuit en courant vers le sud. Nilo rejoint le duo et Lyra entre dans le cadre avant de l’appeler; les retrouvailles se poursuivent avant le retour de fin d’expédition.
++- Les changements préexistants de la WIP Kingambit — notamment Nilo sur la terrasse et le souffle qui repousse le duo — sont conservés. Aucun changement de carte ou de tuiles n’est inclus dans cette mise à jour.
+ 
+-### Références de mise en scène
++## Vérifications et limites
+ 
+-- [Val Silencieux — Équipe de Secours Rouge (GIF de l'approche et de la révélation)](https://lparchive.org/Pokmon-Mystery-Dungeon-Red-Rescue-Team/Update%2026/) : l'arrivée de Cotovol puis le déplacement vers Tengalice construisent l'espace avant l'apparition d'Électhor. Ici : seuil, terrasse, voix non identifiée puis révélation, sans reprendre les répliques ni le noir complet.
+-- [Searing Crucible — Halcyon, `FirstPreBossScene`](https://github.com/Palikadude/Halcyon/blob/1522c7a8b7a34d70078e11ed605b21d563b0dc51/Data/Script/halcyon/ground/searing_crucible/searing_crucible_ch_5.lua) : avance du groupe, caméra en retard, interruption de la musique et signes du décor avant l'arrivée de Magcargo. Le décor et le Lua de Destiny ne copient pas de ressource de cette scène.
+-- [Le Passage du Temps — Explorateurs du Ciel](https://bulbapedia.bulbagarden.net/wiki/Walkthrough:Pok%C3%A9mon_Mystery_Dungeon:_Explorers_of_Sky/Chapter_15) : les Ténéfix resserrent le cercle ; ici, une menace lisible par les positions et les mouvements, avec les ressources natives de PMDO.
+-
+-## Netteté, sans retouche de la carte
+-
+-Les planches, le décor, les collisions et les dimensions restent inchangés. Seuls le repère de Kabutops côté ground et les points de départ côté arène bougent. Le moteur échantillonne déjà les tuiles en `PointClamp` à une taille de fenêtre entière. Pour les aperçus, `tools/render_ground_moteur.py` conserve désormais les tuiles complètes de 8 ou 24 px et exporte les animations WebP sans perte. `--echelle 2`, `3` ou `4` duplique les pixels, sans interpolation ; le PNG par défaut reste à taille native. `--arene end_grotte_verdoyante` permet de rendre les mêmes strates de la salle haute dans l’arène 480 × 360.
+-
+-## Régressions couvertes
+-
+-`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d’approche, l’ordre des échanges, le tremblement avant le premier plan, les deux avertissements anonymes, le mouvement vertical et le recul, les détours, les deux vagues de Kabuto et leur placement en arène, la décision du héros, le raccord et le spectateur non combattant (placement, animation et nettoyage), la revanche et les phases de fin (ordre des cinq fuites, nettoyage, sauvetage et bilan). Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
++- Les contrôles automatisés de la CI couvrent les états de la scène, les déplacements et la transition de fin; la validation doit être exécutée sur le commit de cette version.
++- Les points d’arrivée et certains trajets ont été contrôlés statiquement sur la carte WIP. Cela ne remplace pas un essai en jeu : aucune validation manuelle PMDO, audio ou sauvegarde réelle n’est annoncée ici.
++- Par précaution, sauvegarder ses parties avant la mise à jour.
+diff --git a/docs/REVERIE_076.md b/docs/REVERIE_076.md
+new file mode 100644
+index 0000000..ffadf0f
+--- /dev/null
++++ b/docs/REVERIE_076.md
+@@ -0,0 +1,21 @@
++# Pokémon Mystery Dungeon: Destiny — Mise à jour 0.7.6
++
++Depuis la [`v0.7.5`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.5), la Fosse Cascade Fond accueille une nouvelle mise en scène du sauvetage de Nilo et un duel contre Kabutops et sa garde.
++
++## L’arrivée aux vasques
++
++- Un passage au sud agrandit la carte de mise en scène, de 480 × 360 à 576 × 528 px. L’approche découvre le couloir, puis Nilo sur la terrasse. Le duo le rassure avant que deux avertissements hors champ fassent entendre la voix de Kabutops.
++- Kabutops surgit avec les particules et le bruitage natifs de Tunnel. Il accuse Nilo d’avoir causé les crues, mais le duo conteste son accusation. La caméra accompagne le recul du duo et révèle la garde qui l’encercle.
++- Deux Kabuto débouchent par les flancs. Les deux de l’arrière **jaillissent du sable du passage sud**, à distance des berges rocheuses, avant de remonter vers le duo. Leurs traces de Griffe ponctuent la fermeture du cercle. En revanche, la garde est déjà en place et la révélation n’est pas rejouée.
++
++## Le duel et les retrouvailles
++
++- Au 9e étage, les deux Kabuto de flanc (niveau 4) et les deux de l’arrière (niveau 3) combattent avec Griffe et Armure. Les positions prolongent le placement de la cinématique. Nilo reste visible et tremble sur la terrasse, sans tour, cible ni collision. Kabutops conserve ses caractéristiques de combat et les huit premiers étages sont inchangés.
++- La victoire exige les **cinq K.O.** Dès le fondu d’après-combat, Kabutops se tient exactement **entre le partenaire et le héros**, sur la même ligne et à égale distance des deux. Les gardes reculent et s’enfouissent, l’arrière d’abord, puis les flancs. Kabutops plonge dans le sable au centre et part le dernier.
++- Nilo ne descend qu’après leur fuite. Le duo dégage le passage pour Lyra, qui s’arrête devant lui sans le traverser. Les dialogues des retrouvailles, le bilan natif de l’expédition et le retour à Réverie sont conservés.
++
++## Vérification
++
++Les tests de scène couvrent le rendu du sable aux points d’impact, les trajets jusqu’à l’arène, la formation dès le fondu d’après-combat et l’ordre des fuites. La première confrontation et le retour de victoire ont également été contrôlés dans PMDO. Le duel de contrôle utilise un profil de test pour atteindre la victoire, pas une partie d’équilibrage.
++
++Sauvegardez votre partie avant d’appliquer la mise à jour.
+diff --git a/game/Data/Script/destiny/fosse_cascade_scene.lua b/game/Data/Script/destiny/fosse_cascade_scene.lua
+index fa3f10d..abbc207 100644
+--- a/game/Data/Script/destiny/fosse_cascade_scene.lua
++++ b/game/Data/Script/destiny/fosse_cascade_scene.lua
+@@ -13,16 +13,17 @@ fosse.DUEL = {
+ }
+ 
+ -- Cases et directions de MapTeams. Le premier déplacement longe le duo ;
+--- le second coupe vers lui. Les arrière-gardes pivotent pour fermer le passage.
++-- le second coupe vers lui. Les arrière-gardes surgissent dans le sable du
++-- passage sud (pas sur les berges), puis pivotent pour fermer le passage.
+ fosse.GARDE = {
+   {nom='Kabuto_Flanc_G', x=8,  y=9, face='DownRight', avance='DownRight',
+     depart={205,202}, passage={212,224}, menace={226,224}, delai=4, attente=48, recul={-6,-4}, signal=true},
+   {nom='Kabuto_Flanc_D', x=11, y=9, face='DownLeft', avance='DownLeft',
+     depart={362,200}, passage={352,225}, menace={338,224}, delai=23, attente=43, recul={6,-4}},
+-  {nom='Kabuto_Arriere_G', x=9,  y=12, face='Up', avance='UpRight',
+-    depart={242,293}, passage={259,306}, menace={263,301}, delai=69, attente=24, recul={-3,7}, signal=true},
+-  {nom='Kabuto_Arriere_D', x=10, y=12, face='Up', avance='UpLeft',
+-    depart={320,293}, passage={301,306}, menace={297,301}, delai=84, attente=20, recul={3,7}},
++  {nom='Kabuto_Arriere_G', x=9,  y=12, face='Up', avance='Up',
++    depart={264,332}, passage={266,314}, menace={267,302}, delai=69, attente=24, recul={-3,7}, signal=true},
++  {nom='Kabuto_Arriere_D', x=10, y=12, face='Up', avance='Up',
++    depart={296,328}, passage={296,312}, menace={294,301}, delai=84, attente=20, recul={3,7}},
+ }
+ 
+ function fosse.AncreAuSol(case)
+diff --git a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+index 6d4e12a..221c54a 100644
+--- a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
++++ b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+@@ -25,11 +25,18 @@ end
+ local SOL_BOSS = ancre(fosse.DUEL.boss)
+ local DUEL_HEROS = ancre(fosse.DUEL.hero)
+ local DUEL_PARTENAIRE = ancre(fosse.DUEL.partenaire)
++local AXE_DUO = math.floor((DUEL_PARTENAIRE.x + DUEL_HEROS.x) / 2)
+ local SOL_HEROS = {x=DUEL_HEROS.x, y=DUEL_HEROS.y - 24}
+ local SOL_PARTENAIRE = {x=DUEL_PARTENAIRE.x, y=DUEL_PARTENAIRE.y - 24}
+-local APPARITION_BOSS = {x=math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y=SOL_BOSS.y}
++local APPARITION_BOSS = {x=AXE_DUO, y=SOL_BOSS.y}
+ local SOL_NILO_TERRASSE = fosse.NILO_TERRASSE
+ local RECUL_Y = DUEL_HEROS.y
++
++-- Placement propre à la phase 3, installé avant le fondu. Les ombres du trio
++-- partagent la même ligne, à 32 px de part et d’autre du chef. Ne pas déplacer
++-- les ancres d’apparition ou de duel pour obtenir cette formation.
++local APRES_DUEL = {boss=AXE_DUO, partenaire=AXE_DUO - 32, hero=AXE_DUO + 32, y=RECUL_Y}
++local REUNION = {axe=SOL_NILO_TERRASSE.x, duo_y=RECUL_Y + 16, nilo_y=RECUL_Y + 12, lyra_y=RECUL_Y + 44}
+ local ENTREE_HEROS = {x = 222, y = 492}
+ local ENTREE_PARTENAIRE = {x = 198, y = 484}
+ local COUDE_HEROS = {x = 246, y = 436}
+@@ -43,9 +50,12 @@ local CAM_ENTREE = {x = 230, y = 406}
+ local CAM_SEUIL = {x = 278, y = 372}
+ local CAM_TERRASSE_Y = 216
+ local CAM_FACE_Y = 226 -- l’arrêt du duo laisse un champ libre derrière lui
+-local CAM_CERCLE_Y = 242 -- léger recul du cadre au bruit venu du passage sud
++local CAM_CERCLE_Y = 246 -- inclut les deux jaillissements dans le sable du passage
+ local CAM_NILO_REPLI_Y = 218
++local CAM_REVANCHE_Y = 242
++local CAM_VICTOIRE_X = APRES_DUEL.boss + 8 -- centre de l’ombre de Kabutops
+ local CAM_VICTOIRE_Y = 242
++local CAM_REUNION_Y = 250
+ 
+ local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
+   local existant = CH(nom)
+@@ -548,6 +558,11 @@ local function encercler_duo(kabutops, hero, partenaire)
+   for _, k in ipairs(garde) do
+     mouvements[#mouvements + 1] = TASK:BranchCoroutine(function() surgir_kabuto(k) end)
+   end
++  mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
++    -- Déplacer le cadre sur un seul axe, avant la poussière à l’arrière.
++    GAME:WaitFrames(44)
++    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 22, false)
++  end)
+   mouvements[#mouvements + 1] = TASK:BranchCoroutine(function()
+     GAME:WaitFrames(13)
+     secouer_ecran(1, 1, 14)
+@@ -559,15 +574,10 @@ local function encercler_duo(kabutops, hero, partenaire)
+       TASK:BranchCoroutine(function() pas_du_duo(hero, Direction.Right, DUEL_HEROS.x - (partenaire and 2 or 0), RECUL_Y - 2) end),
+     })
+     GAME:WaitFrames(12)
+-    -- Le son derrière eux entraîne leurs regards, puis le léger panoramique.
+-    TASK:JoinCoroutines({
+-      TASK:BranchCoroutine(function() GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 32, false) end),
+-      TASK:BranchCoroutine(function()
+-        emote_sur(hero, 'exclaim')
+-        cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 16, 4}})
+-        emote_sur(partenaire, 'sweatdrop')
+-      end),
+-    })
++    -- Le bruit au sud attire le regard du duo vers le sable qui remue.
++    emote_sur(hero, 'exclaim')
++    cinematique.RegarderGroupe({{partenaire or hero, garde[3].ch, 0, 4}, {partenaire and hero, garde[4].ch, 9, 4}})
++    emote_sur(partenaire, 'sweatdrop')
+   end)
+   TASK:JoinCoroutines(mouvements)
+   GAME:WaitFrames(25) -- tenir le plan d’ensemble avant de rendre la parole à Kabutops
+@@ -654,7 +664,7 @@ function fgv1.PreBattle(is_rematch, map)
+     la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
+   else
+     placer_garde(true)
+-    GAME:MoveCamera(CAM_DUEL_X, CAM_CERCLE_Y, 1, false)
++    GAME:MoveCamera(CAM_DUEL_X, CAM_REVANCHE_Y, 1, false)
+     SOUND:PlayBGM('Rising Fear.ogg', false)
+     GAME:FadeIn(18)
+     TASK:JoinCoroutines({
+@@ -746,27 +756,31 @@ local function la_fuite_sous_terre(kabutops, garde, hero, partenaire)
+     cinematique.RegarderGroupe({{hero, garde[4].ch, 0, 4}, {partenaire, garde[3].ch, 7, 4}})
+   end)
+   TASK:JoinCoroutines(sorties)
+-  GAME:WaitFrames(10)
+-  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
++  cinematique.Respirer(12) -- la poussière des derniers Kabuto retombe
++
++  -- Les regards reviennent vers le chef, au centre, après les quatre départs.
++  tourner_vers(kabutops, Direction.Down, 4)
++  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 6, 4}})
++  cinematique.Respirer(22)
+   s_enfouir(kabutops, 'Kabutops_Boss', true, true)
+ end
+ 
+ function fgv1.PostBattle()
++  GAME:CutsceneMode(true)
+   local hero = CH('PLAYER')
+-  local partenaire = equipe_scene.Partenaire(DUEL_PARTENAIRE.x, DUEL_PARTENAIRE.y, Direction.Up)
++  local partenaire = equipe_scene.Partenaire(APRES_DUEL.partenaire, APRES_DUEL.y, Direction.Right)
+   local garde = placer_garde(true)
+   local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
+     SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
+   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
+-    SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
++    APRES_DUEL.boss, APRES_DUEL.y, Direction.Down)
+ 
+-  GAME:CutsceneMode(true)
+   if hero ~= nil then
+     hero.CollisionDisabled = true
+-    GROUND:TeleportTo(hero, DUEL_HEROS.x, DUEL_HEROS.y, Direction.Up)
++    GROUND:TeleportTo(hero, APRES_DUEL.hero, APRES_DUEL.y, Direction.Left)
+   end
+   SOUND:FadeOutBGM(12)
+-  GAME:MoveCamera(CAM_DUEL_X, CAM_VICTOIRE_Y, 1, false)
++  GAME:MoveCamera(CAM_VICTOIRE_X, CAM_VICTOIRE_Y, 1, false)
+   trembler_de_peur(nilo)
+   GAME:WaitFrames(12)
+   GAME:FadeIn(20)
+@@ -774,6 +788,7 @@ function fgv1.PostBattle()
+ 
+   emote_sur(kabutops, 'sweatdrop')
+   GAME:WaitFrames(10)
++  regarder_cible(kabutops, hero or partenaire, 4)
+   cinematique.Dire(kabutops, 'Pain', 'Vous avez gagné… Emmenez le petit.', 'droite')
+   UI:ResetSpeaker()
+   cinematique.Respirer(16)
+@@ -791,28 +806,32 @@ function fgv1.PostBattle()
+   cinematique.Respirer(12)
+   SOUND:PlayBGM('Lower Spring Cave.ogg', false)
+   TASK:JoinCoroutines({
+-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65) end),
+-    -- Dégager l'axe x=304 par lequel Lyra arrivera du sud.
++    TASK:BranchCoroutine(function() GROUND:MoveToPosition(nilo, REUNION.axe, REUNION.nilo_y, false, 1.65) end),
++    -- Le duo reste sur les côtés. Ni Nilo ni Lyra ne traversent un acteur.
+     TASK:BranchCoroutine(function()
+-      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, SALLE_X + 196, 258, false, 1.3) end
++      if partenaire ~= nil then GROUND:MoveToPosition(partenaire, REUNION.axe - 32, REUNION.duo_y, false, 1.1) end
+     end),
+     TASK:BranchCoroutine(function()
+       if hero ~= nil then
+         GAME:WaitFrames(8)
+-        GROUND:MoveToPosition(hero, SALLE_X + 220, 277, false, 1.2)
++        GROUND:MoveToPosition(hero, REUNION.axe + 32, REUNION.duo_y, false, 1.1)
+       end
+     end),
++    TASK:BranchCoroutine(function()
++      GAME:WaitFrames(16)
++      GAME:MoveCamera(CAM_VICTOIRE_X, CAM_REUNION_Y, 22, false)
++    end),
+   })
+-  regarder_cible(nilo, hero or partenaire, 4)
++  cinematique.RegarderGroupe({{nilo, hero or partenaire, 0, 4}, {partenaire, nilo, 5, 4}, {hero, nilo, 9, 4}})
+   cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
+   UI:ResetSpeaker()
+   cinematique.Respirer(18)
+ 
+   -- L'arrivée de Lyra motive les regards. Le duo ne tourne pas le dos à
+   -- Lyra pour jouer une émote après qu'elle s'est déjà placée devant lui.
+-  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', SALLE_X + 256, 344, Direction.Up)
++  local lyra = creer_acteur('Lyra_Grotte', 'luxray', Gender.Female, 'Lyra', REUNION.axe, 344, Direction.Up)
+   TASK:JoinCoroutines({
+-    TASK:BranchCoroutine(function() GROUND:MoveToPosition(lyra, SALLE_X + 256, 248, true, 2) end),
++    TASK:BranchCoroutine(function() GROUND:MoveToPosition(lyra, REUNION.axe, REUNION.lyra_y, true, 2) end),
+     TASK:BranchCoroutine(function()
+       GAME:WaitFrames(16)
+       if nilo ~= nil then emote_sur(nilo, 'exclaim', 'EVT_Emote_Exclaim_2') end
+diff --git a/tools/tests/test_grotte_verdoyante.lua b/tools/tests/test_grotte_verdoyante.lua
+index d7ac7b8..512faeb 100644
+--- a/tools/tests/test_grotte_verdoyante.lua
++++ b/tools/tests/test_grotte_verdoyante.lua
+@@ -101,7 +101,7 @@ GROUND = {
+     actors[n] = nil
+     return true
+   end,
+-  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y) end,
++  TeleportTo = function(_, a, x, y, dir) a.Position = {X=x, Y=y}; a.Direction = dir; ev('teleport', a.EntName, x, y, dir) end,
+   MoveToPosition = function(_, a, x, y, walk, speed) a.Position = {X=x, Y=y}; ev('move', a.EntName, x, y, speed) end,
+   EntTurn = function(_, a, dir) a.Direction = dir end,
+   CharAnimateTurnTo = function(_, a, dir) a.Direction = dir end,
+@@ -590,6 +590,14 @@ local function verifier_garde(revanche)
+     local nom, col, ligne, dir = table.unpack(attendu)
+     local spec = data.GARDE[i]
+     assert(spec.nom == nom and spec.x == col and spec.y == ligne and Direction[spec.face] == dir)
++    if i >= 3 then
++      -- Mêmes trajets et points d’impact que dans le test du rendu Python.
++      local sol = i == 3 and {{264,332}, {266,314}, {267,302}, {-3,7}}
++                           or {{296,328}, {296,312}, {294,301}, {3,7}}
++      for n, champ in ipairs({'depart', 'passage', 'menace', 'recul'}) do
++        assert(spec[champ][1] == sol[n][1] and spec[champ][2] == sol[n][2], spec.nom .. ' : ' .. champ)
++      end
++    end
+     local x, y = data.AncreAuSol(spec)
+     local creation, cache, sortie, terre_k, retraite, noir, contour
+     local pas = {}
+@@ -756,16 +764,44 @@ assert(actors.Lyra_Grotte == nil and actors.Nilo_Grotte == nil and actors.Kabuto
+ -- reculent et replongent. Kabutops ferme la marche, et Nilo attend sa sortie.
+ local fosse_scene = require('destiny.fosse_cascade_scene')
+ local derniere_sortie, descente_nilo, nb_terre, bruits = nil, nil, 0, 0
++local garde_partie, debut_cam, fondu, terre_boss, pause_centre
++local places, regard_centre, retrouvailles = {}, {}, {}
+ for i, e in ipairs(events) do
+-  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'plus de course de Kabutops vers le sud')
++  if e[1] == 'cam' and not debut_cam then debut_cam = e end
++  if e[1] == 'fade_in' and not fondu then fondu = i end
++  if not fondu and e[1] == 'create' then places[e[2]] = {x=e[4], y=e[5], dir=e[3]} end
++  if not fondu and e[1] == 'teleport' and e[2] == 'PLAYER' then places.PLAYER = {x=e[3], y=e[4], dir=e[5]} end
++  if e[1] == 'remove' and tostring(e[2]):find('^Kabuto_') then garde_partie = i end
++  if e[1] == 'move' then
++    assert(e[2] ~= 'Kabutops_Boss', 'le chef reste entre le duo jusqu’au Tunnel')
++    if e[2] == 'Teammate1' or e[2] == 'PLAYER' then
++      assert(derniere_sortie, 'le duo conserve sa place avant le Tunnel du chef')
++    end
++    if e[2] == 'Nilo_Grotte' then descente_nilo = i end
++    retrouvailles[e[2]] = e
++  end
++  if garde_partie and e[1] == 'regard' and e[3] == 'Kabutops_Boss' then regard_centre[e[2]] = i end
++  if garde_partie and e[1] == 'wait' and e[2] == 22 and not terre_boss then pause_centre = i end
++  if e[1] == 'vfx' and e[2] == 'Dig' and e[3] == 288 and e[4] == 258 then terre_boss = i end
+   assert(not (e[1] == 'vfx' and (e[2] == 'Water_Spout_Splash' or e[2] == 'Wave_Circle_Blue'
+       or e[2] == 'Bubbles_Blue' or e[2] == 'Water_Column_Ranger')), 'pas d’eau pendant le Tunnel')
+   if e[1] == 'vfx' and e[2] == 'Dig' then nb_terre = nb_terre + 1 end
+   if e[1] == 'se' and e[2] == 'DUN_Dig' then bruits = bruits + 1 end
+-  if e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
+-  if e[1] == 'move' and e[2] == 'Nilo_Grotte' then descente_nilo = i end
++  if terre_boss and e[1] == 'remove' and e[2] == 'Kabutops_Boss' then derniere_sortie = i end
+ end
+ assert(derniere_sortie and descente_nilo and derniere_sortie < descente_nilo and nb_terre == 5 and bruits == 3)
++assert(debut_cam and debut_cam[2] == 288 and debut_cam[3] == 242 and fondu)
++local p, b, h = places.Teammate1, places.Kabutops_Boss, places.PLAYER
++assert(p and b and h and b.x - p.x == 32 and h.x - b.x == 32 and p.y == b.y and b.y == h.y
++  and b.x == 280 and b.y == 244 and p.dir == Direction.Right and h.dir == Direction.Left,
++  'dès le fondu, Kabutops est au milieu exact, entre deux regards et des ombres alignées')
++assert(garde_partie and pause_centre and terre_boss and regard_centre.Teammate1 and regard_centre.PLAYER
++  and garde_partie < regard_centre.Teammate1 and garde_partie < regard_centre.PLAYER
++  and regard_centre.Teammate1 < pause_centre and regard_centre.PLAYER < pause_centre and pause_centre < terre_boss)
++assert(retrouvailles.Teammate1[3] == 272 and retrouvailles.PLAYER[3] == 336
++  and retrouvailles.Nilo_Grotte[3] == 304 and retrouvailles.Lyra_Grotte[3] == 304
++  and retrouvailles.Lyra_Grotte[4] - retrouvailles.Nilo_Grotte[4] == 32,
++  'Lyra s’arrête devant Nilo, le duo libère leur axe')
+ local function verifier_plongeon(nom, x, y, peur)
+   local emote, tremble, repli, terre, negatif, masque, retire
+   for i, e in ipairs(events) do
+@@ -789,7 +825,7 @@ for _, spec in ipairs(fosse_scene.GARDE) do
+   local x,y = fosse_scene.AncreAuSol(spec)
+   verifier_plongeon(spec.nom, x+spec.recul[1], y+spec.recul[2], true)
+ end
+-verifier_plongeon('Kabutops_Boss', 292, 196, false)
++verifier_plongeon('Kabutops_Boss', 280, 244, false)
+ 
+ local saw_lyra_reunion, fins, locuteur_post = false, 0, nil
+ for _, e in ipairs(events) do
+diff --git a/tools/tests/test_grotte_verdoyante.py b/tools/tests/test_grotte_verdoyante.py
+index 07da3f8..34d2871 100644
+--- a/tools/tests/test_grotte_verdoyante.py
++++ b/tools/tests/test_grotte_verdoyante.py
+@@ -7,7 +7,7 @@ import json
+ import struct
+ from collections import deque
+ from pathlib import Path
+-from PIL import Image
++from PIL import Image, ImageStat
+ 
+ from executer_lua import run
+ 
+@@ -91,14 +91,18 @@ def check_antichambre(fond: dict) -> None:
+     trajet((222, 492), (246, 436), (292, 368), (292, 220), (292, 244), (290, 242), (292, 244))
+     trajet((198, 484), (222, 430), (268, 362), (268, 220), (268, 244), (270, 248), (268, 244))
+     trajet((280, 196), (292, 196))
+-    trajet((292, 244), (268, 277))
+-    trajet((268, 244), (244, 258))
+-    trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
++    trajet((280, 244), (280, 244))  # Kabutops ne quitte le milieu que par Tunnel
++    trajet((248, 244), (272, 260))  # le partenaire reste à gauche de l’axe familial
++    trajet((312, 244), (336, 260))  # le héros libère cet axe vers la droite
++    trajet((304, 152), (304, 256))  # Nilo quitte la même terrasse
++    trajet((304, 344), (304, 288))  # Lyra s’arrête à 32 px, sans le traverser
+     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
+     assert 220 + 16 - 216 + 120 < 188
+     assert 244 + 16 - 226 + 120 < 188
+-    assert 306 + 16 - 242 + 120 < 240  # flancs et arrière entrent dans le cadre
+-    assert 292 + 16 - 242 + 120 < 188  # la formation reste lisible pendant le dialogue
++    assert 332 + 14 + 9 - 246 + 120 < 240  # la terre au sud reste dans le cadre
++    assert 292 + 16 - 246 + 120 < 188  # la formation reste lisible pendant le dialogue
++    assert 244 + 16 - 242 + 120 < 188  # le trio pendant la réplique de Kabutops
++    assert 288 + 16 - 250 + 120 < 188  # Lyra reste au-dessus du texte
+     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
+     assert 372 - 120 > 152 + 16
+ 
+@@ -215,11 +219,25 @@ def main() -> None:
+     # Même palette et mêmes pixels entre la salle haute et son arène, sans
+     # tronquer à 8 px une case de 24 px. Vérifier aussi une phase animée.
+     g, a = prepare(fgv1), prepare(rsmap, arene=True)
++    # Les colliders ne suffisent pas : sous une partie des berges dessinées
++    # la grille est libre. Vérifier le sable rendu autour du pied des deux
++    # jaillissements arrière, à plusieurs phases des tuiles animées.
++    departs_sable = ((264, 332), (296, 328))
++    def sol_sable(image: Image.Image, x: int, y: int, ample: bool = False) -> None:
++        marge = 3 if ample else 1
++        sol = ImageStat.Stat(image.crop((x - marge, y + 10, x + 16 + marge, y + 19)).convert('RGB'))
++        # Teinte et faible dispersion du sable de cette carte, pas du relief
++        # texturé ou de l’eau. Zone de l’ombre et, avec marge, du Tunnel.
++        assert sol.extrema[0][0] >= 132 and sol.var[0] < 80 and sol.mean[1] - sol.mean[2] > 45, (x, y, sol.mean)
++
+     for t in (0, 8 * 120, 24 * 120):
+         image, erreurs_g = rendu(g, t)
+         arene, erreurs_a = rendu(a, t)
+         assert erreurs_a == erreurs_g == 0 and arene.size == (480, 360)
++        for x, y in (*departs_sable, (280, 244)):
++            sol_sable(image, x, y, ample=True)
+         if t == 0:
++            image_reference = image
+             assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()
+     z = preserver_pixels(arene, 2)
+     assert z.size == (960, 720) and z.resize(arene.size, Image.Resampling.NEAREST).tobytes() == arene.tobytes()
+@@ -240,8 +258,8 @@ def main() -> None:
+     # Le détour, l’approche et le recul de peur se font sur du sol libre.
+     chemins = (((205, 202), (212, 224), (226, 224), (-6, -4)),
+                ((362, 200), (352, 225), (338, 224), (6, -4)),
+-               ((242, 293), (259, 306), (263, 301), (-3, 7)),
+-               ((320, 293), (301, 306), (297, 301), (3, 7)))
++               (departs_sable[0], (266, 314), (267, 302), (-3, 7)),
++               (departs_sable[1], (296, 312), (294, 301), (3, 7)))
+     for (depart, passage, menace, (rx, ry)), (x, y, _) in zip(chemins, bornes[1:]):
+         cx, cy = 24 * x + 52, 24 * y + 4
+         trajet = (depart, passage, menace, (cx, cy), (cx + rx, cy + ry))
+@@ -249,6 +267,8 @@ def main() -> None:
+             m = max(abs(ex - sx), abs(ey - sy))
+             for i in range(m + 1):
+                 px, py = round(sx + (ex - sx) * i / m), round(sy + (ey - sy) * i / m)
++                if depart in departs_sable:
++                    sol_sable(image_reference, px, py)
+                 for tx in range(px // 8, (px + 15) // 8 + 1):
+                     for ty in range(py // 8, (py + 15) // 8 + 1):
+                         assert fgv1['obstacles'][tx][ty]['Tags'] == 0, f'collider de Kabuto dans le relief à {px},{py}'
+-- 
+2.47.3
+

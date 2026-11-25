@@ -1,0 +1,105 @@
+[2026/10/31 17:06:32.889] =========================================
+
+[2026/10/31 17:06:32.898] SESSION STARTED: 2026/10/31 17:06:32
+
+[2026/10/31 17:06:32.899] Version: 0.8.12.0
+
+[2026/10/31 17:06:32.899] .NET 8.0.33
+
+[2026/10/31 17:06:32.900] =========================================
+
+[2026/10/31 17:06:32.933] -----------------------------------------
+
+[2026/10/31 17:06:32.933] -----------------------------------------
+
+[2026/10/31 17:06:33.181] FNA3D Driver: OpenGL
+
+[2026/10/31 17:06:33.181] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+
+[2026/10/31 17:06:33.181] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+
+[2026/10/31 17:06:33.181] OpenGL Vendor: Mesa
+
+[2026/10/31 17:06:33.182] MojoShader Profile: glsl120
+
+[2026/10/31 17:06:33.209] [SE]:Initialized Lua 5.4
+
+[2026/10/31 17:06:33.209] [SE]:Importing .NET packages..
+
+[2026/10/31 17:06:33.216] [SE]: **- Lua engine started! -**
+
+[2026/10/31 17:06:37.265] [SE]:Exposing game engine components instances..
+
+[2026/10/31 17:06:37.283] [SE]:Exposing script interface..
+
+[2026/10/31 17:06:37.287] [SE]:Setting up lua globals..
+
+[2026/10/31 17:06:37.288] [SE]:Setting up lua paths..
+
+[2026/10/31 17:06:37.291] [SE]:Setting up lua functions...
+
+[2026/10/31 17:06:37.292] [SE]:Setting up debug functions...
+
+[2026/10/31 17:06:37.294] [SE]:Setting up default script vars...
+
+[2026/10/31 17:06:37.298] [SE]:Caching common lib...
+
+[2026/10/31 17:06:37.315] [SE]:Loading events...
+
+[2026/10/31 17:06:37.324] [SE]:Installing game interface functions..
+
+[2026/10/31 17:06:37.330] [SE]:DebugTools:initialize()
+
+[2026/10/31 17:06:37.333] [SE]:Registered service DebugTools!
+
+[2026/10/31 17:06:37.333] [SE]:UpgradeTools:initialize()
+
+[2026/10/31 17:06:37.334] [SE]:Registered service UpgradeTools!
+
+[2026/10/31 17:06:37.335] [SE]:MenuTools:initialize()
+
+[2026/10/31 17:06:37.335] [SE]:Registered service MenuTools!
+
+[2026/10/31 17:06:37.335] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+
+[2026/10/31 17:06:37.336] [SE]:Registered service DestinyTitleAnim!
+
+[2026/10/31 17:06:37.336] [SE]: **- Lua engine ready! -**
+
+[2026/10/31 17:06:37.336] [SE]:
+<!> ExampleSvc: Init..
+
+[2026/10/31 17:07:35.153] LuaEngine.OnMusicChange()..
+
+[2026/10/31 17:07:49.679] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:07:49.681] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:07:54.466] LuaEngine.LoadSavedData()..
+
+[2026/10/31 17:07:54.524] Zone Seed: 14147969624202065374
+
+[2026/10/31 17:07:54.525] Zone.OnInit(): Initializing the zone..
+
+[2026/10/31 17:07:54.528] Loading rsground file: destiny_clairiere_source_lumineuse
+
+[2026/10/31 17:07:55.394] Completed file load.
+
+[2026/10/31 17:07:55.398] GroundMap.OnInit(): Initializing the map..
+
+[2026/10/31 17:07:55.403] GroundMap.LoadScriptEvents(): Added event Init to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:07:55.404] GroundMap.LoadScriptEvents(): Added event Enter to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:07:55.404] GroundMap.LoadScriptEvents(): Added event Update to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:07:55.404] GroundMap.LoadScriptEvents(): Added event GameLoad to map destiny_clairiere_source_lumineuse!
+
+[2026/10/31 17:07:55.463] [SE]:DESTINY_QA : gains 5/4/3/2/1/15, seuil 409/410, Méga X et retour, sérialisation QI : OK
+
+[2026/10/31 17:07:55.464] GroundEntity.ReloadEvents(): Added event Action to entity SourceMega!
+
+[2026/10/31 17:07:55.466] LuaEngine.OnGroundMapInit()..
+
+[2026/10/31 17:07:56.931] LuaEngine.OnGroundMapEnter()..
+

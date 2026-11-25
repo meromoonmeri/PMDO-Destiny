@@ -1,0 +1,25 @@
+﻿{
+"Version": "0.8.12.0",
+"Object": {
+"$type": "RogueEssence.Data.RankData, RogueEssence",
+"Name": {
+"DefaultText": "Hyper",
+"LocalTexts": {
+"fr": "Hyper",
+"fr-ca": "Extraordinaire",
+"de": "Hyper",
+"es": "Avanzado",
+"pt": "Hiper",
+"it": "Iper",
+"ko": "하이퍼",
+"ja": "ハイパー",
+"ja-jp": "ハイパー",
+"zh-hans": "高级等级"
+}
+},
+"Comment": "",
+"BagSize": 48,
+"FameToNext": 50000,
+"Next": "master"
+}
+}

@@ -1,0 +1,4 @@
+Banc Linux instrumenté : entrée directe scène de retour, équipe et indicateur forcés, scène et appels caméra inchangés.
+Après CutsceneMode(false) : IsCameraOnChar=false ; caméra (666,516) ; joueur (648,516).
+Après déplacement à droite : IsCameraOnChar=false ; caméra (666,516) ; joueur (688,516).
+Le banc a également signalé TEAMMATE_1 introuvable ; lancement direct initial noir non assimilable à une preuve du rendu dans le trajet complet.

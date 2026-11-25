@@ -1,0 +1,110 @@
+{
+  "statut": "PASS",
+  "dimensions": [
+    2224,
+    1112
+  ],
+  "silhouettes_image_4": 101,
+  "silhouettes_ajouts_en_mer": 34,
+  "silhouettes_Destiny_inchangees": 26,
+  "zones": 24,
+  "sites": 45,
+  "troncons": 503,
+  "ports": 27,
+  "zones_inexplorees_entierement_masquees": true,
+  "art_brut_genere": [
+    {
+      "brut": "Seracine.png",
+      "sha256": "796e700b149cf009157cf5d6872b4c23b06cbe050cff6359e9a3764a7e267670",
+      "silhouette_px": 68989,
+      "appariements_du_brut": 0,
+      "couverture_avant_recalage": 0.9956
+    },
+    {
+      "brut": "Torselune.png",
+      "sha256": "93f27927c92ad95acfa341b12c3ac2ca181000adf5606fc11101b66803b4393e",
+      "silhouette_px": 58089,
+      "appariements_du_brut": 0,
+      "couverture_avant_recalage": 0.9943
+    },
+    {
+      "brut": "Falaises-Occidentales.png",
+      "sha256": "68de3bd6661afb83f07f3d6239564f583ab025bd2bdcf232103e25c3e97d0086",
+      "silhouette_px": 46729,
+      "appariements_du_brut": 18,
+      "couverture_avant_recalage": 0.9838
+    },
+    {
+      "brut": "Terres-du-Centre.png",
+      "sha256": "5a826ac51a7d9e3dd208efc2005b8cf73878f1dfc8951738f13ee60210740d31",
+      "silhouette_px": 35971,
+      "appariements_du_brut": 10,
+      "couverture_avant_recalage": 0.9865
+    },
+    {
+      "brut": "Terres-Boreales.png",
+      "sha256": "2c34bf1b36cc0893fff28ab878c96c92a0de33e806ac35a95d4839c85d318f58",
+      "silhouette_px": 54992,
+      "appariements_du_brut": 17,
+      "couverture_avant_recalage": 0.9871
+    },
+    {
+      "brut": "Archipel-Austral.png",
+      "sha256": "8d737fc086fc06e725a62ffa481fd50ef2a7988c071f07a1833be11b2d78f7cf",
+      "silhouette_px": 25036,
+      "appariements_du_brut": 26,
+      "couverture_avant_recalage": 0.8058
+    },
+    {
+      "brut": "Terres-du-Levant.png",
+      "sha256": "bc4a914dd7c29d14613a4f5f9f6aa2e2adcc4dcf72bb02e42169fe2b0b75ff78",
+      "silhouette_px": 56466,
+      "appariements_du_brut": 21,
+      "couverture_avant_recalage": 0.9809
+    },
+    {
+      "brut": "Archipel-des-Alizes.png",
+      "sha256": "8323551887f32f72decaa7e7bca6727b9af449ed689c8903d0cc4d7be0b5f2c1"
+    },
+    {
+      "brut": "Recifs-d-Emeraude.png",
+      "sha256": "0b53d646a2c8845456748b2235e96d89104075585e535ce2a43818162fd12fde"
+    }
+  ],
+  "placements": {
+    "heritage": {
+      "origine": [
+        1148,
+        168
+      ],
+      "dimensions": [
+        1040,
+        778
+      ],
+      "source": "image-14.png",
+      "silhouettes": 101
+    },
+    "alizes": {
+      "origine": [
+        1110,
+        602
+      ],
+      "dimensions": [
+        160,
+        82
+      ],
+      "silhouettes": 19
+    },
+    "emeraude": {
+      "origine": [
+        1023,
+        918
+      ],
+      "dimensions": [
+        174,
+        102
+      ],
+      "silhouettes": 15
+    }
+  }
+}

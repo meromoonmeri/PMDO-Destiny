@@ -1,0 +1,67 @@
+/* Offline/iframe, native pixels, real waveform, two routes and mobile. */
+const {chromium}=require(process.env.PLAYWRIGHT||'playwright'),A=require('node:assert/strict'),F=require('node:fs'),p=require('node:path'),u=require('node:url'),crypto=require('node:crypto');
+const ROOT=p.resolve(__dirname,'..'),FILE=p.join(ROOT,'Carte-Miracle-En-Action.html'),D=require('../Calques/Animation.json'),E=require('./Moteur.js');
+const CACHE=process.env.CAPTURES||require('os').tmpdir();
+let assertions=0;const yes=(cond,msg)=>{A.ok(cond,msg);assertions++},same=(a,b,m)=>{A.deepEqual(a,b,m);assertions++};
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const plan=E.makePlan(D),cut=plan.U.jingle,stage=t=>E.frame(D,plan,t);
+function native(){
+ same(plan.total,804,'Frames totales');same(plan.acts[0].end,555);
+ same(stage(plan.U.nuage_depart-1).level,6,'Palier pré');same(stage(plan.U.nuage_depart).level,7,'Palier post');same(stage(plan.U.nuage_depart).black,1,'Fondu noir');same(stage(plan.U.nuage_depart+16).black,0);
+ same(stage(plan.U.nuage_depart+30).sprites.length,5,'1 grand et 4 petits');
+ same(stage(plan.U.nuage_depart+29).sprites,stage(plan.U.nuage_depart+30).sprites);
+ yes(stage(plan.U.nuage_depart+61).sprites.some((v,i)=>v.y!==stage(plan.U.nuage_depart+30).sprites[i].y),'Mouvement brume');
+ same(stage(plan.U.nuage_fin).sprites.length,0);same(stage(plan.U.nuage_fin).phase,'texte');
+ for(let i=0;i<20;i++)same(stage(cut+i).sprites.find(x=>x.usage==='clignotant').pose,[2,9,4,9,2][Math.floor(i/4)],`pose #${i}`);
+ same(stage(cut+20).sprites[0].pose,2);same(stage(cut+19).sprites[1].pose,5);same(stage(cut+20).sprites[1].pose,6);
+ same(stage(cut).cam,{x:0,y:144,w:256,h:192});same(plan.events[0].at,cut);same(plan.events[1].at,571);
+ same(plan.T.steps[0].p,[212*256,180*256]);same(plan.T.steps.at(-1).p,[76*256,276*256]);
+ same(plan.T.arrive-plan.T.walk,83);same(plan.T.steps.at(-1).d,7);same(E.travel(D,'saline').steps.at(-1).p,[196*256,156*256]);same(E.travel(D,'saline').steps.at(-1).d,5);same(E.travel(D,'saline').arrive-E.travel(D,'saline').walk,14);
+ yes(stage(plan.acts[1].start+plan.T.walk).hero.x<212,'Premier pas de Pikachu');same(stage(plan.acts[1].start+plan.T.arrive).hero.x,76);same(stage(plan.acts[1].start+plan.T.arrive).hero.y,276);
+ const f0=stage(plan.acts[1].start+plan.T.walk),f1=stage(plan.acts[1].start+plan.T.walk+12);yes(f0.hero.pose!==f1.hero.pose,'vraie marche, pas translation d’une image');yes(f0.cam.x>f1.cam.x&&f0.cam.y<f1.cam.y,'caméra suit');
+ same(hash(F.readFileSync(p.join(ROOT,D.fond_nu.fichier))),D.fond_nu.sha256);
+}
+function sample(page){return page.evaluate(()=>({s:carteMiracle.snapshot(),r:carteMiracle.rms(),phase:document.getElementById('stage').dataset.phase}));}
+const beat=(context,key)=>context.locator(`button[data-key=${key}]`);
+(async()=>{
+ native(); const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME||undefined,args:['--no-sandbox']});
+ const ctx=await browser.newContext({viewport:{width:1440,height:940},offline:true});
+ const errs=[],reqs=[],page=await ctx.newPage();page.on('pageerror',e=>errs.push(String(e)));page.on('request',r=>{if(/^https?:/.test(r.url()))reqs.push(r.url());});
+ const start=async()=>{await page.goto(u.pathToFileURL(FILE).href);await page.waitForSelector('html[data-ready=yes]');};
+ await start(); const poster=await sample(page);yes(poster.s.poster);same(poster.s.frame.level,7);same(poster.s.frame.highlight,'jaune');same(poster.s.acState,null);same(poster.r,0);
+ const bare=await page.evaluate(()=>JSON.parse(document.getElementById('assets').textContent).fond_nu.uri.split(',')[1]);same(hash(Buffer.from(bare,'base64')),D.fond_nu.sha256,'Parchemin en HTML bit-identique');
+ await page.locator('[data-layer=nu]').click();same((await sample(page)).s.frame.base,'nu');
+ await page.locator('#view').click();same((await sample(page)).s.frame.cam,{x:0,y:0,w:504,h:336});same(await page.locator('canvas').getAttribute('width'),'504');
+ await beat(page,'rouge').click();const me=await sample(page);same(me.s.frame.highlight,'rouge');same(me.s.t,408);same(me.s.log,[]);
+ await page.locator('#view').click();same(await page.locator('canvas').getAttribute('width'),'256');await page.locator('[data-layer=eos]').click();
+ await page.screenshot({path:p.join(CACHE,'Carte-Miracle-Flash.png'),fullPage:true});
+ await page.locator('#jingle-now').click();await page.waitForFunction(()=>carteMiracle.snapshot().playing&&carteMiracle.rms()>.018,{},{timeout:6000});
+ const j=await sample(page);same(j.s.acState,'running');same(j.s.log.map(o=>o.id),['me']);same(j.s.log[0].tick,cut);yes(j.r>.006,'signal ME non nul');
+ await page.locator('#mute').click();await page.waitForFunction(()=>carteMiracle.rms()<.003);yes((await sample(page)).s.muted);
+ await page.locator('#mute').click();await page.locator('#toggle-play').click();const paused=await sample(page);yes(!paused.s.playing);same(paused.s.part,'deblocage');
+ await page.locator('#rate').click();same((await sample(page)).s.rate,.5);await page.locator('#jingle-now').click();await page.waitForFunction(()=>carteMiracle.snapshot().playing&&carteMiracle.rms()>.018);
+ const slowed=await sample(page);yes(slowed.s.log[0].duree>3.0,'Ralentissement sans transposition depuis atempo');same(slowed.s.rate,.5);
+ await page.locator('#rate').click();await page.locator('#chapter-travel').click();await page.waitForFunction(()=>{const z=carteMiracle.snapshot();return z.playing&&z.frame.phase==='marche'&&carteMiracle.rms()>.006;});
+ const walking=await sample(page);same(walking.s.log.map(o=>o.id),['bgm']);same(walking.s.rate,1);yes(walking.s.frame.hero.x<212&&walking.s.frame.hero.x>76);
+ await beat(page,'arrive').click();const arrive=await sample(page);same(arrive.s.frame.hero.x,76);same(arrive.s.frame.hero.y,276);same(arrive.s.frame.caption,'Île Blizzard');yes(!arrive.s.playing);
+ await page.locator('#route').selectOption('saline');same((await sample(page)).s.route,'saline');
+ await beat(page,'arrive').click();const saline=await sample(page);same(saline.s.frame.caption,'Caverne Saline');same(saline.s.frame.level,5);same(saline.s.frame.hero.x,196);same(saline.s.frame.hero.y,156);
+ await beat(page,'marche').click();await page.screenshot({path:p.join(CACHE,'Carte-Miracle-Saline.png'),fullPage:true});
+ await page.locator('#seek').focus();await page.keyboard.press('Home');same((await sample(page)).s.t,0);await page.keyboard.press('End');same((await sample(page)).s.t,E.travel(D,'saline').end-1);
+ await page.locator('#play-all').click();await page.waitForFunction(()=>carteMiracle.snapshot().playing);
+ const whole=await sample(page);same(whole.s.part,'film');same(whole.s.log.map(o=>o.id),['me','bgm']);same(whole.s.log[0].tick,400);
+ await page.locator('#toggle-play').click();await page.setViewportSize({width:390,height:844});await page.reload();await page.waitForSelector('html[data-ready=yes]');
+ same(await page.evaluate(()=>document.documentElement.scrollWidth),390,'Mobile sans débordement');await page.locator('#view').click();same(await page.evaluate(()=>document.documentElement.scrollWidth),390,'Vue entière mobile');
+ await page.setViewportSize({width:320,height:710});same(await page.evaluate(()=>document.documentElement.scrollWidth),320,'Petit mobile sans débordement');
+ await page.locator('details summary').click();yes(await page.locator('details').evaluate(x=>x.open),'Panneau des sources');
+ const iframe=await ctx.newPage();iframe.on('pageerror',e=>errs.push(String(e)));iframe.on('request',r=>{if(/^https?:/.test(r.url()))reqs.push(r.url());});
+ await iframe.setContent('<iframe sandbox="allow-scripts" style="width:100%;height:840px;border:0"></iframe>');
+ await iframe.locator('iframe').evaluate((el,content)=>{el.srcdoc=content;},F.readFileSync(FILE,'utf8'));
+ const fr=iframe.frameLocator('iframe');await fr.locator('html[data-ready=yes]').waitFor();
+ await fr.locator('#jingle-now').click();await fr.locator('html').evaluate(()=>new Promise((resolve,reject)=>{let remaining=300;function check(){if(window.carteMiracle.rms()>.015&&carteMiracle.snapshot().playing)return resolve();if(--remaining===0)return reject(Error('aucun signal dans l’iframe'));requestAnimationFrame(check);}check();}));
+ const emb=await fr.locator('html').evaluate(()=>({s:carteMiracle.snapshot(),r:carteMiracle.rms()}));same(emb.s.acState,'running');yes(emb.r>.003);same(emb.s.log[0].tick,400);
+ same(reqs,[],'Aucun HTTP, aucun CDN');same(errs,[],'Aucune erreur JS');
+ await browser.close();
+ const result={statut:'PASS',assertions,iframe:'sandbox=allow-scripts, connexion hors ligne',rms_me:j.r,rms_bgm:walking.r,rms_iframe:emb.r,canvas_DS:[256,192],mobile_390:true,mobile_320:true,requêtes_http:reqs,erreurs:errs};
+ F.writeFileSync(p.join(ROOT,'Verification-du-lecteur.json'),JSON.stringify(result,null,2)+'\n');console.log(result);
+})().catch(e=>{console.error(e);process.exit(1);});

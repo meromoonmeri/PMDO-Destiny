@@ -1,0 +1,91 @@
+{
+  "statut": "PASS",
+  "sources_par_provenance": {
+    "PMU 0.7.7": 346,
+    "Créations existantes": 10,
+    "Créations inédites": 4
+  },
+  "vues_png": 2880,
+  "atlases_png": 360,
+  "ordre_direction_verifie": [
+    "Down",
+    "DownRight",
+    "Right",
+    "UpRight",
+    "Up",
+    "UpLeft",
+    "Left",
+    "DownLeft"
+  ],
+  "sources_down_verifiees_pixel_par_pixel": 356,
+  "sha256_png_et_rectangles_atlas_verifies": 2880,
+  "gabarits": {
+    "volume_et_textures": 276,
+    "ensemble_de_volumes": 19,
+    "plan_sol": 65
+  },
+  "symetries_exactes": [
+    {
+      "code": "DecA_209",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_210",
+      "vues_distinctes": 3
+    },
+    {
+      "code": "DecA_212",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_213",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_217",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_218",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_237",
+      "vues_distinctes": 7
+    },
+    {
+      "code": "DecA_238",
+      "vues_distinctes": 3
+    },
+    {
+      "code": "DecA_246",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecA_248",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecB_270",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecB_303",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecB_305",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecB_306",
+      "vues_distinctes": 5
+    },
+    {
+      "code": "DecB_307",
+      "vues_distinctes": 3
+    }
+  ],
+  "pivots_en_dehors_du_png_detoure": 10,
+  "note": "Les contrôles de pixels et d’emprise ne garantissent pas que les dos reconstitués soient les dos des objets originaux."
+}

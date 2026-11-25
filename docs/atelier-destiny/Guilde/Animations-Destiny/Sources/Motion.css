@@ -1,0 +1,9 @@
+/* The workshop keeps its original navigation and decoration tools. */
+.atlas-nav .motion-button{color:#b7c2ca;border-color:#536372;background:#202934}
+.atlas-nav .motion-button[aria-pressed=true]{color:#e0eafe;background:#293548;border-color:#637e9f}
+.atlas-nav .motion-button:hover{border-color:#90a6c6}
+.atlas-nav .motion-button svg{width:15px;height:15px}
+.asset .thumb{position:relative}
+.asset .thumb .apercu-etoffe{max-width:93%;max-height:52px;object-fit:contain;image-rendering:pixelated;height:auto;box-shadow:none;border:0;border-radius:0;background:transparent}
+.badge-anime{position:absolute;top:3px;right:3px;font:700 8px var(--mono);color:#fbe7bc;background:#302a20e8;border:1px solid #b68f6052;border-radius:4px;padding:1px 3px;text-transform:uppercase;letter-spacing:.025em;pointer-events:none}
+@media(max-width:425px){.atlas-nav .motion-button{min-height:33px}.atlas-nav .motion-button svg{width:13px;height:13px}}

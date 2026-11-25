@@ -1,0 +1,794 @@
+-- Entrée de la Fosse Cascade (ewc3_entree_waterfall_cave).
+-- Gère l'état de la cascade :
+--   * 1re visite : cascade fermée (L12/L17) -> ouverture synchronisée sur l'horloge
+--     globale (L13/L18 sur 24 phases) -> passage ouvert (L14) ;
+--   * Visites suivantes : cascade déjà ouverte (L14 visible dès Init).
+--   * Triggers : SeuilDonjon (entrée 1F) et SortieRetourReverie (retour à Réverie).
+require 'origin.common'
+local equipe_scene = require 'destiny.equipe_scene'
+local cinematique = require 'destiny.cinematique'
+local statue_kangourex = require 'destiny.statue_kangourex'
+
+local ewc3 = {}
+local sortie_en_cours = false
+
+local LAYER_FERMEE = 12
+local LAYER_OUVERTURE = 13
+local LAYER_OUVERTE = 14
+local LAYER_ECUME_FERMEE = 17
+local LAYER_ECUME_OUVERTURE = 18
+local TICKS_PAR_CASE = 480 -- FrameTick.FRAME_TICKS_PER_FRAME (120) * FrameLength (4)
+
+local function layer_at(map, idx)
+  if map == nil or map.Layers == nil then return nil end
+  local ok, lyr = pcall(function() return map.Layers[idx] end)
+  if ok and lyr ~= nil then return lyr end
+  ok, lyr = pcall(function() return map.Layers:get_Item(idx) end)
+  if ok and lyr ~= nil then return lyr end
+  return nil
+end
+
+local function set_layer_visible(map, idx, vis)
+  local lyr = layer_at(map, idx)
+  if lyr ~= nil then
+    lyr.Visible = vis
+  end
+end
+
+local function appliquer_cascade_fermee(map)
+  set_layer_visible(map, LAYER_FERMEE, true)
+  set_layer_visible(map, LAYER_ECUME_FERMEE, true)
+  set_layer_visible(map, LAYER_OUVERTURE, false)
+  set_layer_visible(map, LAYER_ECUME_OUVERTURE, false)
+  set_layer_visible(map, LAYER_OUVERTE, false)
+end
+
+local function appliquer_cascade_ouverture(map)
+  set_layer_visible(map, LAYER_FERMEE, false)
+  set_layer_visible(map, LAYER_ECUME_FERMEE, false)
+  set_layer_visible(map, LAYER_OUVERTURE, true)
+  set_layer_visible(map, LAYER_ECUME_OUVERTURE, true)
+  set_layer_visible(map, LAYER_OUVERTE, false)
+end
+
+local function appliquer_cascade_ouverte(map)
+  set_layer_visible(map, LAYER_FERMEE, false)
+  set_layer_visible(map, LAYER_ECUME_FERMEE, false)
+  set_layer_visible(map, LAYER_OUVERTURE, false)
+  set_layer_visible(map, LAYER_ECUME_OUVERTURE, false)
+  set_layer_visible(map, LAYER_OUVERTE, true)
+end
+
+local function phase24()
+  local ok, ph = pcall(function()
+    local t = tonumber(RogueEssence.Content.GraphicsManager.TotalFrameTick) or 0
+    return math.floor(t / TICKS_PAR_CASE) % 24
+  end)
+  if ok and type(ph) == 'number' then return ph end
+  return nil
+end
+
+local function installer_declencheur(map, nom, x, y, w, h)
+  if map == nil or map:FindObject(nom) then return end
+  local obj = RogueEssence.Ground.GroundObject()
+  obj.EntName = nom
+  obj.Collider = RogueElements.Rect(x, y, w, h)
+  obj.Passable = true
+  obj:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Touch)
+  obj:OnMapInit()
+  map:AddObject(obj)
+end
+
+local function installer_statue_kangourex(map)
+  if map == nil or map:FindObject('Statue_Kangourex') then return end
+  local obj = RogueEssence.Ground.GroundObject()
+  obj.EntName = 'Statue_Kangourex'
+  obj.Collider = RogueElements.Rect(428, 236, 24, 12)
+  if RogueElements.Loc ~= nil then
+    obj.DrawOffset = RogueElements.Loc(4, 16)
+  end
+  obj.Passable = false
+  if RogueEssence.Content ~= nil and RogueEssence.Content.ObjAnimData ~= nil then
+    pcall(function() obj.ObjectAnim = RogueEssence.Content.ObjAnimData('Statue_Kangourex', 1) end)
+  else
+    obj.ObjectAnim = {AnimIndex = 'Statue_Kangourex'}
+  end
+  obj:SetTriggerType(RogueEssence.Ground.GroundEntity.EEntityTriggerTypes.Action)
+  obj:OnMapInit()
+  map:AddObject(obj)
+  pcall(function()
+    if SCRIPT ~= nil and SCRIPT.GetService ~= nil then
+      local svc = SCRIPT:GetService('StatueKangourex')
+      if svc ~= nil and svc.Installer ~= nil then svc:Installer(obj, map) end
+    end
+  end)
+end
+
+local function installer_declencheurs(map)
+  installer_declencheur(map, 'SeuilDonjon', 368, 184, 40, 24)
+  installer_declencheur(map, 'SortieRetourReverie', 320, 568, 144, 8)
+  installer_statue_kangourex(map)
+end
+
+local function creer_personnage(nom, espece, genre, surnom, x, y, dir)
+  local existant = CH(nom)
+  if existant ~= nil then GROUND:RemoveCharacter(nom) end
+  local d = RogueEssence.Dungeon.CharData()
+  d.BaseForm = RogueEssence.Dungeon.MonsterID(espece, 0, 'normal', genre)
+  d.Nickname = surnom or ''
+  local ch = GROUND:CreateCharacterFromCharData(nom, RogueEssence.Dungeon.Character(d), x, y, dir)
+  AI:DisableCharacterAI(ch)
+  ch:ReloadEvents()
+  ch.CollisionDisabled = true
+  return ch
+end
+
+local function synchroniser_cascade(map)
+  SV.Destiny = SV.Destiny or {}
+  if SV.Destiny.GrotteVerdoyanteOuverte then
+    appliquer_cascade_ouverte(map)
+  else
+    appliquer_cascade_fermee(map)
+  end
+end
+
+local function jouer_ouverture_cascade(map)
+  -- TileLayer.Draw indexe L12/L13/L14 sur GraphicsManager.TotalFrameTick.
+  -- Attendre la phase 0 (mod 24) assure L12[0] == L13[0] (0 octet d'écart),
+  -- puis couper sur la phase 23 assure L13[23] == L14[11] sans clignotement.
+  local ph = phase24()
+  if ph ~= nil then
+    local garde = 0
+    while ph ~= 0 and garde < 96 do
+      GAME:WaitFrames(1)
+      garde = garde + 1
+      local suivant = phase24()
+      if suivant == ph and garde >= 8 then break end
+      ph = suivant
+    end
+  end
+  appliquer_cascade_ouverture(map)
+  SOUND:PlayBattleSE('DUN_Waterfall')
+  pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 4, 80)) end)
+
+  ph = phase24()
+  local debut = ph
+  if ph ~= nil then
+    local frames = 0
+    while frames < 96 do
+      GAME:WaitFrames(1)
+      frames = frames + 1
+      local cur = phase24()
+      if cur == 23 then break end
+      if cur == debut and frames >= 12 then
+        -- Double horloge figée (ex. doublure de test)
+        GAME:WaitFrames(80)
+        break
+      end
+    end
+  else
+    GAME:WaitFrames(92)
+  end
+  appliquer_cascade_ouverte(map)
+end
+
+local function tourner_anime(ent, dir, frames_par_45)
+  if ent == nil then return end
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(ent, dir, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:EntTurn(ent, dir) end)
+  end
+end
+
+local function tourner_vers_cible(ent, cible, frames_par_45)
+  if ent == nil or cible == nil then return end
+  if GROUND.CharTurnToCharAnimated ~= nil then
+    pcall(function() GROUND:CharTurnToCharAnimated(ent, cible, frames_par_45 or 4) end)
+  else
+    pcall(function() GROUND:CharTurnToChar(ent, cible) end)
+  end
+end
+
+local function se_regarder(a, b, frames_par_45)
+  if a == nil or b == nil then return end
+  local f = frames_par_45 or 4
+  if cinematique ~= nil and cinematique.RegarderGroupe ~= nil then
+    cinematique.RegarderGroupe({
+      {a, b, 0, f},
+      {b, a, 5, f},
+    })
+  else
+    tourner_vers_cible(a, b, f)
+    GAME:WaitFrames(5)
+    tourner_vers_cible(b, a, f)
+  end
+end
+
+-- Découverte de la Statue Kangourex : le héros muet s'interroge en voyant le
+-- Pokémon de pierre sur la berge droite, puis le partenaire dissipe le quiproquo
+-- et explique le fonctionnement de la réserve d'équipe.
+local function decouverte_statue_kangourex(hero, partenaire)
+  if partenaire == nil then
+    SV.Destiny.StatueKangourexExpliquee = true
+    return
+  end
+
+  cinematique.Dire(partenaire, 'Surprised', 'Hein ? Qu’est-ce qui t’intrigue comme ça ? … Attends, ne me dis pas que tu prends ce ' .. cinematique.NomEspece('kangaskhan', 'Kangourex') .. ' de pierre pour un vrai Pokémon figé ici ?!', 'standard')
+  UI:ResetSpeaker()
+
+  if hero ~= nil then
+    cinematique.Emote(hero, 'exclaim', 'EVT_Emote_Exclaim')
+    GAME:WaitFrames(18)
+    tourner_anime(hero, Direction.Up, 4)
+    GAME:WaitFrames(10)
+    tourner_vers_cible(hero, partenaire, 4)
+    GAME:WaitFrames(8)
+  end
+
+  cinematique.Dire(partenaire, 'Happy', 'Haha, rassure-toi ! C’est une [color=#FFC663]Statue Kangourex[color] ! On en croise souvent à l’entrée des donjons.', 'standard')
+  cinematique.Respirer(15)
+  cinematique.Dire(partenaire, 'Normal', 'Les équipes d’exploration s’en servent comme relais de réserve : en t’approchant d’elle, tu peux déposer nos objets précieux en lieu sûr ou retirer des provisions avant de descendre.', 'standard')
+  cinematique.Respirer(15)
+  cinematique.Dire(partenaire, 'Inspired', 'Tout ce qui est rangé dans la réserve reste à l’abri, même si on finit K.O. au fond de la grotte !', 'standard')
+  UI:ResetSpeaker()
+
+  SV.Destiny.StatueKangourexExpliquee = true
+end
+
+local function cinematique_ouverture(map)
+  local hero = CH('PLAYER')
+  local partenaire = equipe_scene.Partenaire(368, 544, Direction.Up)
+  local lyra = nil
+  local en_sauvetage = (SV.Destiny.AlerteShinx == 'a_secourir')
+
+  GAME:CutsceneMode(true)
+  if hero ~= nil then
+    hero.CollisionDisabled = true
+    GROUND:TeleportTo(hero, 384, 544, Direction.Up)
+  end
+  if en_sauvetage then
+    lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 544, Direction.Up)
+  end
+
+  GAME:MoveCamera(0, 0, 1, true)
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  GAME:FadeIn(30)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+
+  local function tourner_direction_animee(acteur, dir)
+    tourner_anime(acteur, dir, 4)
+  end
+
+  local taches = {}
+  if hero ~= nil then
+    table.insert(taches, TASK:BranchCoroutine(function()
+      GROUND:MoveToPosition(hero, 384, 248, false, 2)
+      tourner_direction_animee(hero, Direction.Up)
+    end))
+  end
+  if partenaire ~= nil then
+    table.insert(taches, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
+      GROUND:MoveToPosition(partenaire, 368, 260, false, 2)
+      tourner_direction_animee(partenaire, Direction.Up)
+    end))
+  end
+  if lyra ~= nil then
+    table.insert(taches, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(9)
+      GROUND:MoveToPosition(lyra, 400, 260, false, 2)
+      tourner_direction_animee(lyra, Direction.Up)
+    end))
+  end
+  if #taches > 0 then TASK:JoinCoroutines(taches) end
+
+  GAME:MoveCamera(384, 200, 25, false)
+  GAME:WaitFrames(20)
+
+  if partenaire ~= nil then
+    cinematique.Dire(partenaire, 'Worried', 'Voilà la cascade dont parlait tout le monde… Mais le mur d’eau bouche complètement la falaise !', 'standard')
+  end
+  if lyra ~= nil then
+    cinematique.Respirer(15)
+    cinematique.Dire(lyra, 'Worried', 'Non… ' .. cinematique.NomColore('Nilo', 'shinx') .. ' a dû tomber juste derrière ce rideau d’eau ! Comment passer ?', 'droite')
+  end
+  UI:ResetSpeaker()
+  GAME:WaitFrames(20)
+
+  -- Tremblement / déclic mystérieux devant la cascade.
+  SOUND:PlayBattleSE('EVT_CH05_Waterfall_Gem_Click')
+  GAME:WaitFrames(12)
+  SOUND:PlayBattleSE('EVT_Tower_Tremor_Weak')
+  pcall(function() GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 3, 24)) end)
+  if partenaire ~= nil then cinematique.Emote(partenaire, 'exclaim') end
+  if lyra ~= nil then
+    GAME:WaitFrames(5)
+    cinematique.Emote(lyra, 'exclaim')
+  end
+  if hero ~= nil then
+    GAME:WaitFrames(4)
+    cinematique.Emote(hero, 'exclaim')
+  end
+  GAME:WaitFrames(25)
+
+  if partenaire ~= nil then
+    cinematique.Dire(partenaire, 'Surprised', 'Hein ?! Regardez l’eau… Elle commence à s’écarter !', 'standard')
+  end
+  UI:ResetSpeaker()
+
+  jouer_ouverture_cascade(map)
+  SV.Destiny.GrotteVerdoyanteOuverte = true
+  GAME:WaitFrames(20)
+
+  if lyra ~= nil then
+    cinematique.Dire(lyra, 'Surprised', 'Un passage caché s’ouvre derrière la chute ! ' .. cinematique.NomColore('Nilo', 'shinx') .. ' est sûrement là-dedans !', 'droite')
+    UI:ResetSpeaker()
+  end
+
+  -- Avant de s'engouffrer dans la grotte, le regard du héros est attiré par la
+  -- Statue Kangourex posée sur la berge sablonneuse de droite (428, 236).
+  if not SV.Destiny.StatueKangourexExpliquee and partenaire ~= nil then
+    GAME:WaitFrames(12)
+    if hero ~= nil then
+      tourner_direction_animee(hero, Direction.Right)
+      GAME:WaitFrames(8)
+      cinematique.Emote(hero, 'notice', 'EVT_Emote_Exclaim')
+      GAME:WaitFrames(20)
+    end
+
+    GAME:MoveCamera(404, 220, 18, false)
+    local approche = {}
+    if hero ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 432, 250, false, 1)
+        tourner_direction_animee(hero, Direction.Up)
+      end))
+    end
+    table.insert(approche, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(6)
+      GROUND:MoveToPosition(partenaire, 392, 248, false, 2)
+      tourner_direction_animee(partenaire, Direction.Right)
+    end))
+    if lyra ~= nil then
+      table.insert(approche, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(10)
+        tourner_direction_animee(lyra, Direction.UpRight)
+      end))
+    end
+    TASK:JoinCoroutines(approche)
+
+    if hero ~= nil then
+      -- Hésitation muette devant la statue : inspection gauche/droite puis « ? ».
+      GAME:WaitFrames(8)
+      tourner_direction_animee(hero, Direction.UpLeft)
+      GAME:WaitFrames(10)
+      tourner_direction_animee(hero, Direction.UpRight)
+      GAME:WaitFrames(10)
+      tourner_direction_animee(hero, Direction.Up)
+      cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
+      GAME:WaitFrames(30)
+      tourner_vers_cible(hero, partenaire, 4)
+      GAME:WaitFrames(6)
+      cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+      GAME:WaitFrames(22)
+    end
+
+    decouverte_statue_kangourex(hero, partenaire)
+
+    -- Retour fluide en formation devant le passage ouvert.
+    GAME:MoveCamera(384, 200, 18, false)
+    local retour_formation = {}
+    if hero ~= nil then
+      table.insert(retour_formation, TASK:BranchCoroutine(function()
+        GROUND:MoveToPosition(hero, 384, 248, false, 2)
+        tourner_direction_animee(hero, Direction.Up)
+      end))
+    end
+    table.insert(retour_formation, TASK:BranchCoroutine(function()
+      GAME:WaitFrames(5)
+      GROUND:MoveToPosition(partenaire, 368, 260, false, 2)
+      tourner_direction_animee(partenaire, Direction.Up)
+    end))
+    if lyra ~= nil then
+      table.insert(retour_formation, TASK:BranchCoroutine(function()
+        GAME:WaitFrames(8)
+        tourner_direction_animee(lyra, Direction.Up)
+      end))
+    end
+    TASK:JoinCoroutines(retour_formation)
+    GAME:WaitFrames(10)
+  end
+
+  if partenaire ~= nil then
+    cinematique.Respirer(15)
+    cinematique.Dire(partenaire, 'Determined', 'La voie est libre ! En avant dans la Fosse Cascade !', 'standard')
+  end
+  if lyra ~= nil then
+    cinematique.Respirer(15)
+    cinematique.Dire(lyra, 'Determined', 'Passez devant, je couvre vos arrières !', 'droite')
+  end
+  UI:ResetSpeaker()
+
+  GAME:MoveCamera(0, 0, 20, true)
+  if hero ~= nil then hero.CollisionDisabled = false end
+  if lyra ~= nil then lyra.CollisionDisabled = false end
+  if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+  GAME:CutsceneMode(false)
+end
+
+local function cinematique_retour_echec(map, retour)
+  SV.Destiny = SV.Destiny or {}
+  local en_sauvetage = (SV.Destiny.AlerteShinx == 'a_secourir')
+  local cause = (type(retour) == 'table' and retour.cause) or 'ko'
+  local segment = (type(retour) == 'table' and retour.segment) or 0
+
+  local hero = CH('PLAYER')
+  local partenaire = equipe_scene.Partenaire(344, 256, Direction.Down)
+  local lyra = nil
+  if en_sauvetage then
+    lyra = CH('Luxray_Ewc3') or creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 224, Direction.Up)
+  end
+
+  GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+
+  if hero ~= nil then
+    hero.CollisionDisabled = true
+    GROUND:TeleportTo(hero, 368, 248, Direction.Down)
+  end
+  if partenaire ~= nil then
+    GROUND:TeleportTo(partenaire, 344, 256, Direction.Down)
+  end
+  if lyra ~= nil then
+    lyra.CollisionDisabled = true
+    GROUND:TeleportTo(lyra, 400, 224, Direction.Up)
+  end
+
+  if cause ~= 'ko' then
+    -- Repli volontaire : retour debout devant la cascade ouverte.
+    GAME:MoveCamera(376, 232, 1, false)
+    GAME:FadeIn(25)
+    SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+    GAME:WaitFrames(15)
+    if lyra ~= nil then
+      tourner_vers_cible(lyra, hero or partenaire, 4)
+      GAME:WaitFrames(10)
+      cinematique.Dire(lyra, 'Worried', 'Vous voilà ressortis ! Si le passage est trop périlleux sans provisions, n’hésitez pas à redescendre au sud vers Réverie Town avant d’y retourner.', 'droite')
+      UI:ResetSpeaker()
+      GROUND:MoveToPosition(lyra, 400, 260, false, 1)
+      tourner_anime(lyra, Direction.Up, 4)
+    elseif partenaire ~= nil then
+      tourner_vers_cible(partenaire, hero, 4)
+      cinematique.Dire(partenaire, 'Worried', 'Mieux valait battre en retraite à temps… Reprenons des forces avant de retourner dans la Fosse Cascade.', 'standard')
+      UI:ResetSpeaker()
+    end
+    GAME:MoveCamera(0, 0, 20, true)
+    if hero ~= nil then hero.CollisionDisabled = false end
+    if lyra ~= nil then lyra.CollisionDisabled = false end
+    if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+    GAME:CutsceneMode(false)
+    return
+  end
+
+  -- K.O. dans le donjon : le duo gît au bord du bassin devant la cascade ouverte (aucun portrait éveillé avant Wake).
+  if hero ~= nil then
+    GROUND:CharSetAnim(hero, 'Laying', true)
+  end
+  if partenaire ~= nil then
+    GROUND:CharSetAnim(partenaire, 'Laying', true)
+  end
+
+  GAME:MoveCamera(376, 228, 1, false)
+  GAME:FadeIn(30)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  GAME:WaitFrames(25)
+
+  if lyra ~= nil then
+    cinematique.Emote(lyra, 'exclaim', 'EVT_Emote_Exclaim')
+    tourner_vers_cible(lyra, hero or partenaire, 4)
+    GAME:WaitFrames(25)
+
+    -- Course verticale pure le long de x = 400 (32 px d'écart net avec le héros en Laying à x = 368).
+    GROUND:MoveToPosition(lyra, 400, 248, false, 2)
+    tourner_anime(lyra, Direction.Left, 4)
+    GAME:WaitFrames(10)
+
+    if segment == 1 then
+      cinematique.Dire(lyra, 'Worried', 'Non !! Vous avez été projetés jusqu’à l’entrée… Ce fracas au cœur de la Fosse Cascade Fond, c’était terrible ! Réveillez-vous, je vous en prie !', 'droite')
+    else
+      cinematique.Dire(lyra, 'Worried', 'Oh non !! Vous voilà revenus à bout de forces devant la cascade… Hé ! Est-ce que vous m’entendez ?!', 'droite')
+    end
+    UI:ResetSpeaker()
+    GAME:WaitFrames(15)
+  end
+
+  -- Le duo reprend connaissance et se relève en léger décalage (5-6 frames).
+  SOUND:PlayBattleSE('EVT_Emote_Sweating')
+  if partenaire ~= nil then
+    cinematique.Emote(partenaire, 'sweating')
+  end
+  if hero ~= nil then
+    GAME:WaitFrames(5)
+    cinematique.Emote(hero, 'sweating')
+  end
+  GAME:WaitFrames(30)
+
+  local function reveiller_acteur(acteur, delai)
+    return TASK:BranchCoroutine(function()
+      if delai > 0 then GAME:WaitFrames(delai) end
+      local duree_wake = 36
+      local wake_dispo = true
+      pcall(function()
+        local gm = RogueEssence.Content.GraphicsManager
+        if gm.GetAnimIndex ~= nil then
+          local idx = gm.GetAnimIndex('Wake')
+          if idx == nil or idx < 0 then
+            wake_dispo = false
+          else
+            local feuille = gm.GetChara(acteur.CurrentForm:ToCharID())
+            if feuille:GetReferencedAnimIndex(idx) ~= idx then
+              wake_dispo = false
+            else
+              local t = tonumber(feuille:GetTotalTime(idx, acteur.Direction))
+              if t ~= nil and t > 0 then duree_wake = math.floor(t) end
+            end
+          end
+        end
+      end)
+      if wake_dispo then
+        GROUND:CharSetAnim(acteur, 'Wake', false)
+        GAME:WaitFrames(duree_wake)
+      else
+        GAME:WaitFrames(20)
+      end
+      GROUND:CharEndAnim(acteur)
+      tourner_anime(acteur, Direction.Down, 4)
+    end)
+  end
+
+  local taches_reveil = {}
+  if partenaire ~= nil then
+    table.insert(taches_reveil, reveiller_acteur(partenaire, 0))
+  end
+  if hero ~= nil then
+    table.insert(taches_reveil, reveiller_acteur(hero, partenaire ~= nil and 6 or 0))
+  end
+  if #taches_reveil > 0 then TASK:JoinCoroutines(taches_reveil) end
+  GAME:WaitFrames(15)
+
+  if lyra ~= nil then
+    cinematique.RegarderGroupe({
+      {partenaire, lyra, 0, 4},
+      {hero, lyra, partenaire ~= nil and 5 or 0, 4},
+    })
+    GAME:WaitFrames(10)
+
+    if partenaire ~= nil then
+      if segment == 1 then
+        cinematique.Dire(partenaire, 'Pain', 'Aïe… ' .. cinematique.NomEspece('kabutops', 'Kabutops') .. ' est d’une force redoutable… Pardon, Lyra, on a dû céder si près de ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
+      else
+        cinematique.Dire(partenaire, 'Pain', 'Aïe… la grotte est plus rude qu’elle n’en a l’air… Désolé, Lyra, on s’est fait mettre K.O. avant d’atteindre ' .. cinematique.NomColore('Nilo', 'shinx') .. '…', 'standard')
+      end
+      cinematique.Respirer(15)
+    end
+
+    cinematique.Dire(lyra, 'Worried', 'Ne vous excusez surtout pas ! Voir que vous êtes sains et saufs me soulage déjà tellement…', 'droite')
+    cinematique.Respirer(15)
+    cinematique.Dire(lyra, 'Determined', 'Reprenez votre souffle ici. Si vos réserves sont épuisées, redescendez au sud vers Réverie Town pour vous préparer avant de repartir chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+
+    if partenaire ~= nil then
+      cinematique.Respirer(15)
+      se_regarder(hero, partenaire, 4)
+      GAME:WaitFrames(10)
+      if TASK ~= nil and TASK.BranchCoroutine ~= nil and TASK.JoinCoroutines ~= nil and hero ~= nil then
+        local t1 = TASK:BranchCoroutine(function()
+          tourner_vers_cible(partenaire, lyra, 4)
+        end)
+        local t2 = TASK:BranchCoroutine(function()
+          GAME:WaitFrames(6)
+          tourner_vers_cible(hero, lyra, 4)
+        end)
+        TASK:JoinCoroutines({t1, t2})
+      else
+        tourner_vers_cible(partenaire, lyra, 4)
+        if hero ~= nil then
+          GAME:WaitFrames(6)
+          tourner_vers_cible(hero, lyra, 4)
+        end
+      end
+      cinematique.Dire(partenaire, 'Determined', 'Merci, Lyra ! Pas question d’abandonner maintenant : dès qu’on sera prêts, on retournera jusqu’à la Fosse Cascade Fond !', 'standard')
+    end
+    UI:ResetSpeaker()
+    GAME:WaitFrames(10)
+
+    -- Lyra reprend son poste de garde devant la cascade ouverte (400, 260, Direction.Up).
+    GROUND:MoveToPosition(lyra, 400, 260, false, 1)
+    tourner_anime(lyra, Direction.Up, 4)
+  else
+    se_regarder(hero, partenaire, 4)
+    GAME:WaitFrames(10)
+    if partenaire ~= nil then
+      cinematique.Dire(partenaire, 'Pain', 'Ouf… ma tête… On a fini K.O. dans la Fosse Cascade, mais on a réussi à ressortir jusqu’à la cascade.', 'standard')
+      cinematique.Respirer(15)
+      cinematique.Dire(partenaire, 'Determined', 'Vérifions notre sac avant d’y retourner, ou rentrons au sud vers Réverie Town faire le plein de provisions !', 'standard')
+      UI:ResetSpeaker()
+    end
+  end
+
+  GAME:MoveCamera(0, 0, 20, true)
+  if hero ~= nil then hero.CollisionDisabled = false end
+  if lyra ~= nil then lyra.CollisionDisabled = false end
+  if partenaire ~= nil then equipe_scene.Suivre(partenaire, hero) end
+  GAME:CutsceneMode(false)
+end
+
+function ewc3.Init(map)
+  sortie_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  if map ~= nil then
+    map.EdgeView = RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp
+  end
+  installer_declencheurs(map)
+  synchroniser_cascade(map)
+  -- Les personnages créés par script sont persistants (GroundMap.AddMapChar) :
+  -- Lyra reste donc enregistrée dans la carte des sauvegardes. Sans ce
+  -- nettoyage, elle survit à la fin du sauvetage et continue d'annoncer le
+  -- passage ouvert quand la Fosse Cascade est visitée en libre.
+  local lyra = CH('Luxray_Ewc3')
+  if SV.Destiny.GrotteVerdoyanteOuverte and SV.Destiny.AlerteShinx == 'a_secourir' then
+    if lyra == nil then
+      lyra = creer_personnage('Luxray_Ewc3', 'luxray', Gender.Female, 'Lyra', 400, 260, Direction.Up)
+    end
+    lyra.CollisionDisabled = false
+  elseif lyra ~= nil then
+    GROUND:RemoveCharacter('Luxray_Ewc3')
+  end
+end
+
+function ewc3.Enter(map)
+  sortie_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  synchroniser_cascade(map)
+  if not SV.Destiny.GrotteVerdoyanteOuverte then
+    cinematique_ouverture(map)
+    return
+  end
+  if SV.Destiny.GrotteVerdoyanteRetourEchec ~= nil then
+    local retour = SV.Destiny.GrotteVerdoyanteRetourEchec
+    SV.Destiny.GrotteVerdoyanteRetourEchec = nil
+    cinematique_retour_echec(map, retour)
+    return
+  end
+  local hero = CH('PLAYER')
+  local partenaire = equipe_scene.Partenaire(368, 544, Direction.Up)
+  if hero ~= nil then
+    GROUND:TeleportTo(hero, 384, 544, Direction.Up)
+  end
+  GAME:MoveCamera(0, 0, 1, true)
+  GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+  if partenaire ~= nil then
+    equipe_scene.Suivre(partenaire, hero)
+  end
+end
+
+function ewc3.GameLoad(map)
+  sortie_en_cours = false
+  SV.Destiny = SV.Destiny or {}
+  installer_declencheurs(map)
+  synchroniser_cascade(map)
+  GAME:MoveCamera(0, 0, 1, true)
+  GAME:FadeIn(20)
+  SOUND:PlayBGM('Lower Spring Cave.ogg', true)
+end
+
+function ewc3.Update(map, time) end
+
+function ewc3.Luxray_Ewc3_Action(personnage, activator)
+  if personnage == nil then return end
+  pcall(function() GROUND:CharTurnToCharAnimated(personnage, activator or CH('PLAYER'), 4) end)
+  if SV.Destiny and SV.Destiny.GrotteVerdoyanteDernierKO then
+    cinematique.Dire(personnage, 'Worried', 'Ne forcez pas si vous êtes encore sonnés ! Le sentier au sud ramène à Réverie Town pour refaire le plein de provisions.', 'droite')
+    cinematique.Respirer(15)
+    cinematique.Dire(personnage, 'Determined', 'Dès que vous vous sentirez d’attaque, le passage derrière la cascade vous attend pour sauver ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+  else
+    cinematique.Dire(personnage, 'Determined', 'Le passage est grand ouvert. Entrons vite chercher ' .. cinematique.NomColore('Nilo', 'shinx') .. ' !', 'droite')
+  end
+  UI:ResetSpeaker()
+  if GROUND.CharAnimateTurnTo ~= nil then
+    pcall(function() GROUND:CharAnimateTurnTo(personnage, Direction.Up, 4) end)
+  else
+    pcall(function() GROUND:EntTurn(personnage, Direction.Up) end)
+  end
+end
+
+-- Statue-relais Kangourex : l'incompréhension muette et l'explication se jouent
+-- une seule fois (repli pour une ancienne sauvegarde qui aurait déjà ouvert la
+-- cascade), puis l'interaction ouvre le stockage de l'équipe, exactement comme
+-- le rocher Kangourex de Halcyon : entreposer un objet, en retirer un, tout
+-- entreposer et gérer l'argent. Le service destiny.services.statue_kangourex
+-- n'ouvre pas un second menu : statue_kangourex mémorise l'ouverture.
+function ewc3.Statue_Kangourex_Action(obj, activator)
+  DEBUG.EnableDbgCoro()
+  SV.Destiny = SV.Destiny or {}
+  if not SV.Destiny.StatueKangourexExpliquee then
+    local hero = activator or CH('PLAYER')
+    local partenaire = CH('Teammate1') or equipe_scene.Partenaire(368, 260, Direction.Right)
+    if hero ~= nil and obj ~= nil then
+      tourner_vers_cible(hero, obj, 4)
+      cinematique.Emote(hero, 'question', 'EVT_Emote_Confused')
+      GAME:WaitFrames(26)
+    end
+    if partenaire ~= nil and hero ~= nil then
+      se_regarder(hero, partenaire, 4)
+      GAME:WaitFrames(6)
+      cinematique.Emote(hero, 'sweatdrop', 'EVT_Emote_Sweatdrop')
+      GAME:WaitFrames(18)
+    end
+    decouverte_statue_kangourex(hero, partenaire)
+    if hero ~= nil and obj ~= nil then
+      tourner_vers_cible(hero, obj, 4)
+    end
+  end
+  statue_kangourex.OuvrirStockage()
+end
+
+-- Un objet de contact « Touch » rappelle son gestionnaire à chaque pas effectué
+-- dans son collider (GroundChar.Collide -> Interact, sans déduplication, alors
+-- que « TouchOnce » ignore au contraire le premier contact). Le seuil mesure
+-- 3 cases de haut : sans verrou posé dès l'entrée, un joueur qui maintient la
+-- direction empile plusieurs menus. Le verrou n'est relâché qu'après une courte
+-- pause si le joueur refuse, pour ne pas reproposer le menu tant qu'il n'a pas
+-- quitté la zone de contact.
+function ewc3.SeuilDonjon_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_en_cours then return end
+  sortie_en_cours = true
+  UI:ResetSpeaker()
+  UI:ChoiceMenuYesNo('Entrer dans la Fosse Cascade ?', true)
+  UI:WaitForChoice()
+  if not UI:ChoiceResult() then
+    GAME:WaitFrames(18)
+    sortie_en_cours = false
+    return
+  end
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.ExplorationReverie = true
+  SV.Destiny.GrotteVerdoyanteDernierKO = nil
+  SOUND:FadeOutBGM(20)
+  GAME:FadeOut(false, 20)
+  GAME:EnterDungeon('grotte_verdoyante', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+end
+
+function ewc3.SortieRetourReverie_Touch(obj, activator)
+  if activator ~= nil and activator.EntName ~= 'PLAYER' then return end
+  if sortie_en_cours then return end
+  sortie_en_cours = true
+  UI:ResetSpeaker()
+  UI:ChoiceMenuYesNo('Retourner à Réverie Town ?', true)
+  UI:WaitForChoice()
+  if not UI:ChoiceResult() then
+    GAME:WaitFrames(18)
+    sortie_en_cours = false
+    return
+  end
+  SV.Destiny = SV.Destiny or {}
+  SV.Destiny.ExplorationReverie = nil
+  SV.Destiny.ArriveeVille = 'batiment'
+  SV.Destiny.RetourBatimentX = 1552
+  SV.Destiny.RetourBatimentY = 1600
+  -- Le duo rentre se reposer : Lyra ne doit plus le croire « encore sonné »
+  -- après un aller-retour en ville (la réplique de réveil ne vaut que sur place).
+  SV.Destiny.GrotteVerdoyanteDernierKO = nil
+  if SV.Destiny.AlerteShinx == 'a_secourir' then
+    SV.Destiny.LuxrayAttente = 'sortie'
+  end
+  SOUND:FadeOutBGM(20)
+  GAME:FadeOut(false, 20)
+  GAME:EnterZone('town02_waterfallvillage', -1, 0, 0)
+end
+
+return ewc3

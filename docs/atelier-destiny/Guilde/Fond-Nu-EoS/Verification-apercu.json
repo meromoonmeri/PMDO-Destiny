@@ -1,0 +1,17 @@
+{
+  "controle": "PASS",
+  "assertions": 58,
+  "transitions": 7,
+  "vues": [
+    "fond nu",
+    "états fixes",
+    "animation",
+    "cadre DS"
+  ],
+  "byte_identical_download": true,
+  "mode_hors_ligne": true,
+  "iframe_sandbox_allow_scripts": true,
+  "viewport_mobile_px": 390,
+  "erreurs": [],
+  "requêtes_HTTP": []
+}

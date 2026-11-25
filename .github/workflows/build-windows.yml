@@ -1,0 +1,258 @@
+name: Build Windows
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Build or publish an already verified build
+        type: choice
+        options: [build, release]
+        default: build
+      run_id:
+        description: Build run ID for a release
+        required: false
+        type: string
+      target_sha:
+        description: Exact build commit for a release
+        required: false
+        type: string
+      tag:
+        description: New release tag
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUTF8: '1'
+
+jobs:
+  windows:
+    if: ${{ inputs.mode != 'release' }}
+    runs-on: windows-latest
+    steps:
+      - name: Checkout (no LFS required)
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+          submodules: false
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependency
+        run: python -m pip install Pillow ijson lupa
+      - name: Validate source tree
+        run: python tools/run_ci_check.py tools/validate.py
+      - name: Check Lost Wood DTEF
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_dtef.py
+      - name: Check Lost Wood autotile edges
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_raccords.py
+      - name: Check Lost Wood reconstruction
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_reproduction.py
+      - name: Check PMUniverse tiles
+        run: python tools/run_ci_check.py tools/tests/test_banques_pmu.py
+      - name: Check HD Guild tilesets
+        run: python tools/run_ci_check.py tools/tests/test_guilde_hd_tiles.py
+      - name: Check cliffdaytest integrity (4 ambiances, source and 24px battle map)
+        run: python tools/run_ci_check.py tools/tests/test_cliffdaytest_integrite.py
+      - name: Check hero and partner knockout rule
+        run: python tools/run_ci_check.py tools/tests/test_regle_ko.py
+      - name: Check reunion naming and Pelipper flight
+        run: python tools/run_ci_check.py tools/tests/test_retrouvailles_roles.py
+      - name: Check Lost Wood tutorial and statue assets
+        run: python tools/run_ci_check.py tools/tests/test_lostwood_tutoriel.py
+      - name: Check Lost Wood river, paths and new ruins
+        run: python tools/run_ci_check.py tools/tests/test_lost_wood_refonte.py
+      - name: Check safe native city payload and compact copy
+        run: python tools/run_ci_check.py tools/tests/test_payload_ville.py
+      - name: Check Waterfall Village town02 map and dependencies
+        run: python tools/run_ci_check.py tools/tests/test_waterfall_town02.py
+      - name: Check Reverie building interiors
+        run: python tools/run_ci_check.py tools/test_batiments_interieurs.py
+      - name: Check Reverie crossroads and connections
+        run: python tools/run_ci_check.py tools/tests/test_carrefour_reverie.py
+      - name: Check renamed Reverie resources
+        run: python tools/run_ci_check.py tools/tests/test_renommage_reverie.py
+      - name: Check Reverie editing map and compiled map
+        run: python tools/run_ci_check.py tools/tests/test_reverie_architecture.py
+      - name: Check Reverie WIP interiors and thresholds
+        run: python tools/run_ci_check.py tools/tests/test_reverie_wip.py
+      - name: Check animated water hut and doorway
+        run: python tools/run_ci_check.py tools/tests/test_hutte_aquatique.py
+      - name: Check E2 destination and exploration return
+        run: python tools/run_ci_check.py tools/tests/test_e2_reverie.py
+      - name: Check Grotte Verdoyante dungeon, waterfall entrance and Nilo rescue
+        run: python tools/run_ci_check.py tools/tests/test_grotte_verdoyante.py
+      - name: Check retired guild interiors and recovery maps
+        run: python tools/run_ci_check.py tools/tests/test_retrait_guilde.py
+      - name: Check daily missions and Reverie boards
+        run: python tools/run_ci_check.py tools/tests/test_tableaux_reverie.py
+      - name: Check four Reverie districts and five stairs
+        run: python tools/run_ci_check.py tools/tests/test_quartiers_reverie.py
+      - name: Check local NPCs, independent layers and centre visit
+        run: python tools/run_ci_check.py tools/tests/test_habitants_quartiers.py
+      - name: Check Reverie walkers, south boundary and training duel
+        run: python tools/run_ci_check.py tools/tests/test_chemins_reverie.py
+      - name: Check all 18 Kingambit training mazes and the trapdoor
+        run: python tools/run_ci_check.py tools/tests/test_dojo_kingambit_dedales.py
+      - name: Check sliding doors and ground routes in Kingambit Dojo
+        run: python tools/run_ci_check.py tools/tests/test_dojo_kingambit_complexe.py
+      - name: Check story-driven Reverie residents and optional scenes
+        run: python tools/run_ci_check.py tools/tests/test_reverie_recit.py
+      - name: Check Reverie households, riddle rewards and branching dialogue
+        run: python tools/run_ci_check.py tools/tests/test_reverie_foyers.py
+      - name: Check Reverie guided tour merchant replies
+        run: python tools/run_ci_check.py tools/tests/test_visite_marchands.py
+      - name: Check automatic Reverie building entrances
+        run: python tools/run_ci_check.py tools/tests/test_entrees_reverie.py
+      - name: Check editable district layers
+        run: python tools/run_ci_check.py tools/tests/test_cartes_edition_reverie.py
+      - name: Check independent Reverie tilesheets
+        run: python tools/run_ci_check.py tools/tests/test_tilessheets_reverie.py
+      - name: Check partner follow inside buildings
+        run: python tools/run_ci_check.py tools/tests/test_suivi_interieurs.py
+      - name: Check PMU object sheets
+        run: python tools/run_ci_check.py tools/tests/test_objets_pmu_natifs.py
+      - name: Check Reverie visual repairs
+        run: python tools/run_ci_check.py tools/tests/test_reverie_raccords_052.py
+      - name: Validate animated shorelines and cutscene 0.5.3
+        run: python tools/run_ci_check.py tools/tests/test_reverie_berges_053.py
+      - name: Check guilde_cliff BlankBG/rand integrity and editor guards
+        run: python tools/run_ci_check.py tools/tests/test_guilde_cliff_integrite.py
+      - name: Check Grand Guild HD cliff placement and enrollment
+        run: python tools/run_ci_check.py tools/tests/test_guilde_enrolement.py
+      - name: Check falaise_promontoire integration and pond path
+        run: python tools/run_ci_check.py tools/tests/test_falaise_promontoire_integration.py
+      - name: Check Reverie Town and cutscene 4-ambiance LUT filters
+        run: python tools/run_ci_check.py tools/tests/test_ambiances_reverie_et_cinematiques.py
+      - name: Check Etang du Doyen integration and swim ripples
+        run: python tools/run_ci_check.py tools/tests/test_etangdudoyen_integration.py
+      - name: Check Plage Sablefin and Passage Aquatique integration
+        run: python tools/run_ci_check.py tools/tests/test_plage_sablefin_integration.py
+      - name: Check incremental update ZIP builder
+        run: python tools/run_ci_check.py tools/tests/test_build_update_zip.py
+      - name: Build and package Destiny
+        run: python tools/build_windows.py
+      - name: Upload Windows ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: PMDO-Destiny-Windows-x64
+          path: dist/PMDO-Destiny-Windows-x64.zip
+          if-no-files-found: error
+
+  release:
+    if: ${{ inputs.mode == 'release' }}
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate run and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$TARGET" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          for attempt in $(seq 1 90); do
+            data=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}")
+            [ "$(jq -r '.head_sha' <<<"$data")" = "$TARGET" ]
+            [ "$(jq -r '.name' <<<"$data")" = 'Build Windows' ]
+            [ "$(jq -r '.head_branch' <<<"$data")" = 'wip/reverie-integration-kingambit-cafe' ]
+            if [ "$(jq -r '.status' <<<"$data")" = completed ]; then break; fi
+            echo "Build Windows en cours : attente ${attempt}/90"
+            sleep 20
+          done
+          [ "$(jq -r '.status' <<<"$data")" = completed ]
+          [ "$(jq -r '.conclusion' <<<"$data")" = success ]
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then echo 'Tag déjà existant : arrêt' >&2; exit 1; fi
+      - name: Checkout verified commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_sha }}
+          sparse-checkout: |
+            docs/REVERIE_*.md
+            tools/build_update_zip.py
+          sparse-checkout-cone-mode: false
+          lfs: false
+          submodules: false
+      - name: Download the verified Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: PMDO-Destiny-Windows-x64
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: release-artifact
+      - name: Build incremental update ZIP (from previous release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          new_ver="${TAG#v}"
+          mv release-artifact/PMDO-Destiny-Windows-x64.zip "release-artifact/PMDO-Destiny-Windows-x64-${new_ver}.zip"
+          asset="release-artifact/PMDO-Destiny-Windows-x64-${new_ver}.zip"
+          unzip -tq "$asset" > /dev/null
+          sha256sum "$asset" > "${asset}.sha256"
+
+          prev_info=$(gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=20"             --jq "[.[] | select(.draft == false and .tag_name != \"${TAG}\") | {tag: .tag_name, url: ([.assets[] | select(.name | test(\"^PMDO-Destiny-Windows-x64-.*\\\\.zip$\")) | .browser_download_url][0] // \"\")} | select(.url != \"\")][0] // empty")
+          prev_tag=$(jq -r '.tag // ""' <<<"$prev_info")
+          prev_url=$(jq -r '.url // ""' <<<"$prev_info")
+
+          if [ -n "$prev_tag" ] && [ -n "$prev_url" ]; then
+            prev_ver="${prev_tag#v}"
+            engine_flag=""
+            if ! cmp_json=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${prev_tag}...${TARGET}" 2>/dev/null) || [ "$(jq '.files | length' <<<"$cmp_json")" -ge 300 ] || jq -e '.files[] | select(.filename | startswith("engine/"))' <<<"$cmp_json" >/dev/null; then
+              engine_flag="--include-engine"
+            fi
+            update_asset="release-artifact/PMDO-Destiny-Update-${prev_ver}-to-${new_ver}.zip"
+            if ! python3 tools/build_update_zip.py --new-zip "$asset" --prev-url "$prev_url" --prev-version "$prev_ver" --new-version "$new_ver" --output "$update_asset" --summary-file release-artifact/update-summary.json $engine_flag; then
+              mkdir -p /tmp/prev_release
+              gh release download "$prev_tag" -p "PMDO-Destiny-Windows-x64-*.zip" -D /tmp/prev_release
+              prev_local=$(find /tmp/prev_release -maxdepth 1 -name 'PMDO-Destiny-Windows-x64-*.zip' | head -n1)
+              python3 tools/build_update_zip.py --new-zip "$asset" --prev-zip "$prev_local" --prev-version "$prev_ver" --new-version "$new_ver" --output "$update_asset" --summary-file release-artifact/update-summary.json $engine_flag
+              rm -rf /tmp/prev_release
+            fi
+            unzip -tq "$update_asset" > /dev/null
+            sha256sum "$update_asset" > "${update_asset}.sha256"
+          fi
+      - name: Verify and publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.target_sha }}
+          TAG: ${{ inputs.tag }}
+          RUN_ID: ${{ inputs.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset="release-artifact/PMDO-Destiny-Windows-x64-${TAG#v}.zip"
+          test -f "$asset"
+          test -f "${asset}.sha256"
+          tag_ver="${TAG#v}"
+          notes="docs/REVERIE_$(printf '%s' "$tag_ver" | tr -d '.').md"
+          if [ ! -f "$notes" ]; then notes="docs/REVERIE_051.md"; fi
+          echo "Notes de version : $notes"
+          title=$(head -n 1 "$notes" | sed 's/^# //')
+          { cat "$notes"; printf '\n\nCI : https://github.com/%s/actions/runs/%s\n\nSHA-256 (complète) : ' "$GITHUB_REPOSITORY" "$RUN_ID"; cut -d' ' -f1 "${asset}.sha256"; } > release-notes.md
+          files=("$asset" "${asset}.sha256")
+          if [ -f release-artifact/update-summary.json ]; then
+            update_asset=$(jq -r '.output' release-artifact/update-summary.json)
+            prev_ver=$(jq -r '.prev_version' release-artifact/update-summary.json)
+            update_sha=$(cut -d' ' -f1 "${update_asset}.sha256")
+            printf '\n\nMise à jour seule (%s -> %s) : `%s`\nSHA-256 (mise à jour) : %s\n'               "$prev_ver" "${TAG#v}" "$(basename "$update_asset")" "$update_sha" >> release-notes.md
+            files+=("$update_asset" "${update_asset}.sha256")
+          fi
+          gh release create "$TAG" "${files[@]}" --target "$TARGET" --title "$title" --notes-file release-notes.md --prerelease

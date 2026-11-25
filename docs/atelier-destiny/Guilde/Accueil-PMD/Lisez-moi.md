@@ -1,0 +1,9 @@
+# Destiny · Le seuil de l’Accueil
+
+Ouvre **`../Guilde-Destiny-Bourgeons-PMD.html`** : le plan et le gros plan du seuil sont visibles en haut de l’aperçu. **Ouvrir l’Accueil** affiche la salle entière dans l’atelier ; **Halo et tapis : avec / sans** permet la comparaison sans changer le plan. Le comparatif vidéo du Grand Salon reste juste en dessous.
+
+- **Halo.** Les deux arcs rosés et le liseré clair sont isolés des pixels de la [carte G01P02A — vestibule de Grodoudou](https://projectpokemon.org/home/gallery/image/77350-g01p02apng/). Les arcs sont ajustés au tissage ; le liseré le plus blanc coïncide avec la dernière planche du seuil (y = 349–351), sans éclairer les montants ni le fond. Le halo reste fixe, plein en Jour et plus doux en Nuit. La lumière animée des bourgeons reste inchangée.
+- **Tapis.** Le paillasson rouge de la banque PMU (`Guilde_Imm_pmu_paillasson_rouge`) a été retissé aux **64 px de l’ouverture visible** (x = 224–287), avec un joint d’ombre au contact des montants. Sa bordure conserve l’échelle de la trame PMU et l’œuf ailé Halcyon rubis a été agrandi. Le bas du tapis rejoint la première ligne de la dernière planche, juste là où commence le liseré blanc.
+- **Passage.** Le déclencheur de sortie `[232, 336, 48, 16]` est plus étroit que le seuil dessiné ; il ne sert plus à dimensionner le tapis. Il n’a pas bougé, pas plus que le cadre sud, les escaliers et le contour brun. L’habillage est un calque de sol sans collision. Aucun objet supplémentaire n’est introduit dans la sauvegarde de l’atelier. Les fichiers du jeu ne sont pas modifiés.
+
+`Calques/` contient les deux PNG transparents (tapis avant la correction d’ambiance, halo plein Jour). `Index-seuil.json` donne leurs ancrages et la mesure de la référence. Les quatre ambiances et les couches sont intégrées à l’HTML, sans réseau. Pour actualiser l’aperçu depuis sa version « verdure ajustée » : `python Accueil-PMD/Sources/Assembler-seuil.py` (Pillow et NumPy).

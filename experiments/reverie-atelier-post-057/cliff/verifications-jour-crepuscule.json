@@ -1,0 +1,25 @@
+{
+  "jour_ciel_reference": "https://projectpokemon.org/home/gallery/image/81080-t00p04agif/",
+  "jour_sky_reconstruction": "couleurs modales par rangée/parité issue de l’image composée; régions masquées reconstruites",
+  "jour_nuage_boite_source": [
+    26,
+    82,
+    55,
+    101
+  ],
+  "jour_couleurs_sky_comparaison_parite": {
+    "agree": 59864,
+    "total": 60057
+  },
+  "crepuscule_ciel_nuages": "https://projectpokemon.org/home/gallery/image/77462-v02p01apng/",
+  "crepuscule_mer": "https://projectpokemon.org/home/gallery/image/77513-v22p01apng/",
+  "crepuscule_fond_exact_guilde": "non établi, adaptation de deux vrais fonds EoS",
+  "nuit": "ciel, lune et étoiles de la zone Réveil Destiny v0.5.7; nuages PMD; génération séparée",
+  "images": 120,
+  "phase0_egale_phase120_avant_encodage": {
+    "jour": true,
+    "crepuscule": true
+  },
+  "period_s": 16,
+  "moteur": "non intégré"
+}

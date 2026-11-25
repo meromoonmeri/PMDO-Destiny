@@ -1,0 +1,3225 @@
+{
+  "version": "2.3.28",
+  "destiny_commit": "c1db7708744dcd4bb86b832186e42d14145056f4",
+  "starters": [
+    {
+      "group": "starter",
+      "number": 1,
+      "nom_public": "Bulbasaur",
+      "nom_fr": "Bulbizarre",
+      "slug": "bulbasaur",
+      "dex": 1,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 1,
+        "sprite": 0,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 601,
+        "sprite": 0,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 2,
+      "nom_public": "Charmander",
+      "nom_fr": "Salamèche",
+      "slug": "charmander",
+      "dex": 4,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 4,
+        "sprite": 4,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 604,
+        "sprite": 4,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 3,
+      "nom_public": "Squirtle",
+      "nom_fr": "Carapuce",
+      "slug": "squirtle",
+      "dex": 7,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 7,
+        "sprite": 7,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 607,
+        "sprite": 7,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 4,
+      "nom_public": "Pikachu",
+      "nom_fr": "Pikachu",
+      "slug": "pikachu",
+      "dex": 25,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 25,
+        "sprite": 26,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 625,
+        "sprite": 21,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 5,
+      "nom_public": "Kantonian Vulpix",
+      "nom_fr": "Goupix de Kanto",
+      "slug": "vulpix",
+      "dex": 37,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 37,
+        "sprite": 39,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 637,
+        "sprite": 39,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 6,
+      "nom_public": "Kantonian Growlithe",
+      "nom_fr": "Caninos de Kanto",
+      "slug": "growlithe",
+      "dex": 58,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 58,
+        "sprite": 65,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 658,
+        "sprite": 65,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 7,
+      "nom_public": "Eevee",
+      "nom_fr": "Évoli",
+      "slug": "eevee",
+      "dex": 133,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 1137,
+        "sprite": 669,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1354,
+        "sprite": 669,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 8,
+      "nom_public": "Dratini",
+      "nom_fr": "Minidraco",
+      "slug": "dratini",
+      "dex": 147,
+      "forme": 0,
+      "generation": 1,
+      "male": {
+        "md_id": 147,
+        "sprite": 159,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 747,
+        "sprite": 159,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 9,
+      "nom_public": "Chikorita",
+      "nom_fr": "Germignon",
+      "slug": "chikorita",
+      "dex": 152,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 152,
+        "sprite": 164,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 752,
+        "sprite": 164,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 10,
+      "nom_public": "Cyndaquil",
+      "nom_fr": "Héricendre",
+      "slug": "cyndaquil",
+      "dex": 155,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 155,
+        "sprite": 168,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 755,
+        "sprite": 168,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 11,
+      "nom_public": "Totodile",
+      "nom_fr": "Kaiminus",
+      "slug": "totodile",
+      "dex": 158,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 158,
+        "sprite": 171,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 758,
+        "sprite": 171,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 12,
+      "nom_public": "Togepi",
+      "nom_fr": "Togepi",
+      "slug": "togepi",
+      "dex": 175,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 175,
+        "sprite": 190,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 775,
+        "sprite": 190,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 13,
+      "nom_public": "Mareep",
+      "nom_fr": "Wattouat",
+      "slug": "mareep",
+      "dex": 179,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 179,
+        "sprite": 195,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 779,
+        "sprite": 967,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 14,
+      "nom_public": "Johtonian Wooper",
+      "nom_fr": "Axoloto de Johto",
+      "slug": "wooper",
+      "dex": 194,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 194,
+        "sprite": 212,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 794,
+        "sprite": 211,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 15,
+      "nom_public": "Murkrow",
+      "nom_fr": "Cornèbre",
+      "slug": "murkrow",
+      "dex": 198,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 198,
+        "sprite": 216,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 798,
+        "sprite": 216,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 16,
+      "nom_public": "Johtonian Sneasel",
+      "nom_fr": "Farfuret de Johto",
+      "slug": "sneasel",
+      "dex": 215,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 242,
+        "sprite": 263,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 842,
+        "sprite": 263,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 17,
+      "nom_public": "Phanpy",
+      "nom_fr": "Phanpy",
+      "slug": "phanpy",
+      "dex": 231,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 258,
+        "sprite": 279,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 858,
+        "sprite": 279,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 18,
+      "nom_public": "Larvitar",
+      "nom_fr": "Embrylex",
+      "slug": "larvitar",
+      "dex": 246,
+      "forme": 0,
+      "generation": 2,
+      "male": {
+        "md_id": 273,
+        "sprite": 295,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 873,
+        "sprite": 295,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 19,
+      "nom_public": "Treecko",
+      "nom_fr": "Arcko",
+      "slug": "treecko",
+      "dex": 252,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 280,
+        "sprite": 440,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 880,
+        "sprite": 440,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 20,
+      "nom_public": "Torchic",
+      "nom_fr": "Poussifeu",
+      "slug": "torchic",
+      "dex": 255,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 283,
+        "sprite": 445,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 883,
+        "sprite": 445,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 21,
+      "nom_public": "Mudkip",
+      "nom_fr": "Gobou",
+      "slug": "mudkip",
+      "dex": 258,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 286,
+        "sprite": 450,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 886,
+        "sprite": 450,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 22,
+      "nom_public": "Ralts",
+      "nom_fr": "Tarsal",
+      "slug": "ralts",
+      "dex": 280,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 308,
+        "sprite": 474,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 908,
+        "sprite": 474,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 23,
+      "nom_public": "Skitty",
+      "nom_fr": "Skitty",
+      "slug": "skitty",
+      "dex": 300,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 328,
+        "sprite": 495,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 928,
+        "sprite": 495,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 24,
+      "nom_public": "Swablu",
+      "nom_fr": "Tylton",
+      "slug": "swablu",
+      "dex": 333,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 361,
+        "sprite": 530,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 961,
+        "sprite": 530,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 25,
+      "nom_public": "Snorunt",
+      "nom_fr": "Stalgamin",
+      "slug": "snorunt",
+      "dex": 361,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 393,
+        "sprite": 566,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 993,
+        "sprite": 566,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 26,
+      "nom_public": "Beldum",
+      "nom_fr": "Terhal",
+      "slug": "beldum",
+      "dex": 374,
+      "forme": 0,
+      "generation": 3,
+      "male": {
+        "md_id": 406,
+        "sprite": 580,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 406,
+        "sprite": 580,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 27,
+      "nom_public": "Turtwig",
+      "nom_fr": "Tortipouss",
+      "slug": "turtwig",
+      "dex": 387,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 422,
+        "sprite": 302,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1022,
+        "sprite": 302,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 28,
+      "nom_public": "Chimchar",
+      "nom_fr": "Ouisticram",
+      "slug": "chimchar",
+      "dex": 390,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 425,
+        "sprite": 305,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1025,
+        "sprite": 305,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 29,
+      "nom_public": "Piplup",
+      "nom_fr": "Tiplouf",
+      "slug": "piplup",
+      "dex": 393,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 428,
+        "sprite": 308,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1028,
+        "sprite": 308,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 30,
+      "nom_public": "Shinx",
+      "nom_fr": "Lixy",
+      "slug": "shinx",
+      "dex": 403,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 438,
+        "sprite": 321,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1038,
+        "sprite": 221,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 31,
+      "nom_public": "Budew",
+      "nom_fr": "Rozbouton",
+      "slug": "budew",
+      "dex": 406,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 441,
+        "sprite": 324,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1041,
+        "sprite": 324,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 32,
+      "nom_public": "Buneary",
+      "nom_fr": "Laporeille",
+      "slug": "buneary",
+      "dex": 427,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 469,
+        "sprite": 351,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1069,
+        "sprite": 351,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 33,
+      "nom_public": "Gible",
+      "nom_fr": "Griknot",
+      "slug": "gible",
+      "dex": 443,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 485,
+        "sprite": 393,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1085,
+        "sprite": 392,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 34,
+      "nom_public": "Riolu",
+      "nom_fr": "Riolu",
+      "slug": "riolu",
+      "dex": 447,
+      "forme": 0,
+      "generation": 4,
+      "male": {
+        "md_id": 489,
+        "sprite": 390,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1089,
+        "sprite": 390,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 35,
+      "nom_public": "Snivy",
+      "nom_fr": "Vipélierre",
+      "slug": "snivy",
+      "dex": 495,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1200,
+        "sprite": 599,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1251,
+        "sprite": 599,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 36,
+      "nom_public": "Tepig",
+      "nom_fr": "Gruikui",
+      "slug": "tepig",
+      "dex": 498,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1203,
+        "sprite": 602,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1272,
+        "sprite": 602,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 37,
+      "nom_public": "Oshawott",
+      "nom_fr": "Moustillon",
+      "slug": "oshawott",
+      "dex": 501,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1206,
+        "sprite": 605,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1273,
+        "sprite": 605,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 38,
+      "nom_public": "Sandile",
+      "nom_fr": "Mascaïman",
+      "slug": "sandile",
+      "dex": 551,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1357,
+        "sprite": 699,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1358,
+        "sprite": 699,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 39,
+      "nom_public": "Unovan Zorua",
+      "nom_fr": "Zorua d'Unys",
+      "slug": "zorua",
+      "dex": 570,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1209,
+        "sprite": 608,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1283,
+        "sprite": 608,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 40,
+      "nom_public": "Minccino",
+      "nom_fr": "Chinchidou",
+      "slug": "minccino",
+      "dex": 572,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1420,
+        "sprite": 730,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1421,
+        "sprite": 730,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 41,
+      "nom_public": "Joltik",
+      "nom_fr": "Statitik",
+      "slug": "joltik",
+      "dex": 595,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1264,
+        "sprite": 657,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1305,
+        "sprite": 657,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 42,
+      "nom_public": "Litwick",
+      "nom_fr": "Funécire",
+      "slug": "litwick",
+      "dex": 607,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1470,
+        "sprite": 755,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1471,
+        "sprite": 755,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 43,
+      "nom_public": "Axew",
+      "nom_fr": "Coupenotte",
+      "slug": "axew",
+      "dex": 610,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1504,
+        "sprite": 771,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1505,
+        "sprite": 771,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 44,
+      "nom_public": "Golett",
+      "nom_fr": "Gringolem",
+      "slug": "golett",
+      "dex": 622,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1428,
+        "sprite": 734,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1428,
+        "sprite": 734,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 45,
+      "nom_public": "Pawniard",
+      "nom_fr": "Scalpion",
+      "slug": "pawniard",
+      "dex": 624,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1494,
+        "sprite": 766,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1495,
+        "sprite": 766,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 46,
+      "nom_public": "Larvesta",
+      "nom_fr": "Pyronille",
+      "slug": "larvesta",
+      "dex": 636,
+      "forme": 0,
+      "generation": 5,
+      "male": {
+        "md_id": 1466,
+        "sprite": 1136,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1467,
+        "sprite": 1136,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 47,
+      "nom_public": "Chespin",
+      "nom_fr": "Marisson",
+      "slug": "chespin",
+      "dex": 650,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1211,
+        "sprite": 610,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1274,
+        "sprite": 610,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 48,
+      "nom_public": "Fennekin",
+      "nom_fr": "Feunnec",
+      "slug": "fennekin",
+      "dex": 653,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1214,
+        "sprite": 613,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1275,
+        "sprite": 613,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 49,
+      "nom_public": "Froakie",
+      "nom_fr": "Grenousse",
+      "slug": "froakie",
+      "dex": 656,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1217,
+        "sprite": 616,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1316,
+        "sprite": 616,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 50,
+      "nom_public": "Pancham",
+      "nom_fr": "Pandespiègle",
+      "slug": "pancham",
+      "dex": 674,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1626,
+        "sprite": 1140,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1627,
+        "sprite": 1140,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 51,
+      "nom_public": "Espurr",
+      "nom_fr": "Psystigri",
+      "slug": "espurr",
+      "dex": 677,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1276,
+        "sprite": 652,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1277,
+        "sprite": 652,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 52,
+      "nom_public": "Goomy",
+      "nom_fr": "Mucuscule",
+      "slug": "goomy",
+      "dex": 704,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1432,
+        "sprite": 736,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1433,
+        "sprite": 736,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 53,
+      "nom_public": "Phantump",
+      "nom_fr": "Brocélôme",
+      "slug": "phantump",
+      "dex": 708,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1294,
+        "sprite": 666,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1336,
+        "sprite": 666,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 54,
+      "nom_public": "Pumpkaboo",
+      "nom_fr": "Pitrouille",
+      "slug": "pumpkaboo",
+      "dex": 710,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1674,
+        "sprite": 860,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1675,
+        "sprite": 860,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 55,
+      "nom_public": "Noibat",
+      "nom_fr": "Sonistrelle",
+      "slug": "noibat",
+      "dex": 714,
+      "forme": 0,
+      "generation": 6,
+      "male": {
+        "md_id": 1678,
+        "sprite": 905,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1679,
+        "sprite": 905,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 6
+    },
+    {
+      "group": "starter",
+      "number": 56,
+      "nom_public": "Rowlet",
+      "nom_fr": "Brindibou",
+      "slug": "rowlet",
+      "dex": 722,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1220,
+        "sprite": 619,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1318,
+        "sprite": 619,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 57,
+      "nom_public": "Litten",
+      "nom_fr": "Flamiaou",
+      "slug": "litten",
+      "dex": 725,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1223,
+        "sprite": 622,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1320,
+        "sprite": 622,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 58,
+      "nom_public": "Popplio",
+      "nom_fr": "Otaquin",
+      "slug": "popplio",
+      "dex": 728,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1226,
+        "sprite": 911,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1322,
+        "sprite": 911,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 59,
+      "nom_public": "Alolan Vulpix",
+      "nom_fr": "Goupix d'Alola",
+      "slug": "vulpix",
+      "dex": 37,
+      "forme": 1,
+      "generation": 7,
+      "male": {
+        "md_id": 1297,
+        "sprite": 914,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1301,
+        "sprite": 914,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 60,
+      "nom_public": "Rockruff",
+      "nom_fr": "Rocabot",
+      "slug": "rockruff",
+      "dex": 744,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1247,
+        "sprite": 916,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1284,
+        "sprite": 916,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 61,
+      "nom_public": "Salandit",
+      "nom_fr": "Tritox",
+      "slug": "salandit",
+      "dex": 757,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1371,
+        "sprite": 920,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1372,
+        "sprite": 920,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 62,
+      "nom_public": "Stufful",
+      "nom_fr": "Nounourson",
+      "slug": "stufful",
+      "dex": 759,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1724,
+        "sprite": 922,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1725,
+        "sprite": 922,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 63,
+      "nom_public": "Wimpod",
+      "nom_fr": "Sovkipou",
+      "slug": "wimpod",
+      "dex": 767,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1402,
+        "sprite": 924,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1403,
+        "sprite": 924,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 64,
+      "nom_public": "Jangmo-o",
+      "nom_fr": "Bébécaille",
+      "slug": "jangmo_o",
+      "dex": 782,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1736,
+        "sprite": 970,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1737,
+        "sprite": 970,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 65,
+      "nom_public": "Cosmog",
+      "nom_fr": "Cosmog",
+      "slug": "cosmog",
+      "dex": 789,
+      "forme": 0,
+      "generation": 7,
+      "male": {
+        "md_id": 1992,
+        "sprite": 974,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1992,
+        "sprite": 974,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 7
+    },
+    {
+      "group": "starter",
+      "number": 66,
+      "nom_public": "Grookey",
+      "nom_fr": "Ouistempo",
+      "slug": "grookey",
+      "dex": 810,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1229,
+        "sprite": 982,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1323,
+        "sprite": 982,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 67,
+      "nom_public": "Scorbunny",
+      "nom_fr": "Flambino",
+      "slug": "scorbunny",
+      "dex": 813,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1232,
+        "sprite": 985,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1280,
+        "sprite": 985,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 68,
+      "nom_public": "Sobble",
+      "nom_fr": "Larméléon",
+      "slug": "sobble",
+      "dex": 816,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1235,
+        "sprite": 988,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1285,
+        "sprite": 988,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 69,
+      "nom_public": "Rookidee",
+      "nom_fr": "Minisange",
+      "slug": "rookidee",
+      "dex": 821,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1762,
+        "sprite": 991,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1763,
+        "sprite": 991,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 70,
+      "nom_public": "Nickit",
+      "nom_fr": "Goupilou",
+      "slug": "nickit",
+      "dex": 827,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1598,
+        "sprite": 1142,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1599,
+        "sprite": 1142,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 71,
+      "nom_public": "Applin",
+      "nom_fr": "Verpom",
+      "slug": "applin",
+      "dex": 840,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1414,
+        "sprite": 1065,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1415,
+        "sprite": 1065,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 72,
+      "nom_public": "Hatenna",
+      "nom_fr": "Bibichut",
+      "slug": "hatenna",
+      "dex": 856,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1778,
+        "sprite": 994,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1779,
+        "sprite": 994,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 73,
+      "nom_public": "Snom",
+      "nom_fr": "Frissonille",
+      "slug": "snom",
+      "dex": 872,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1375,
+        "sprite": 997,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 1376,
+        "sprite": 997,
+        "ombre": 0
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 74,
+      "nom_public": "Dreepy",
+      "nom_fr": "Fantyrm",
+      "slug": "dreepy",
+      "dex": 885,
+      "forme": 0,
+      "generation": 8,
+      "male": {
+        "md_id": 1798,
+        "sprite": 999,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1799,
+        "sprite": 999,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 8
+    },
+    {
+      "group": "starter",
+      "number": 75,
+      "nom_public": "Hisuian Growlithe",
+      "nom_fr": "Caninos de Hisui",
+      "slug": "growlithe",
+      "dex": 58,
+      "forme": 1,
+      "generation": 8,
+      "male": {
+        "md_id": 1379,
+        "sprite": 1002,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1380,
+        "sprite": 1002,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 76,
+      "nom_public": "Hisuian Sneasel",
+      "nom_fr": "Farfuret de Hisui",
+      "slug": "sneasel",
+      "dex": 215,
+      "forme": 1,
+      "generation": 8,
+      "male": {
+        "md_id": 1369,
+        "sprite": 705,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1370,
+        "sprite": 705,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 77,
+      "nom_public": "Hisuian Zorua",
+      "nom_fr": "Zorua de Hisui",
+      "slug": "zorua",
+      "dex": 570,
+      "forme": 1,
+      "generation": 8,
+      "male": {
+        "md_id": 1289,
+        "sprite": 658,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1290,
+        "sprite": 658,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 78,
+      "nom_public": "Sprigatito",
+      "nom_fr": "Poussacha",
+      "slug": "sprigatito",
+      "dex": 906,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1238,
+        "sprite": 1006,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1281,
+        "sprite": 1006,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 79,
+      "nom_public": "Fuecoco",
+      "nom_fr": "Chochodile",
+      "slug": "fuecoco",
+      "dex": 909,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1241,
+        "sprite": 1009,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1271,
+        "sprite": 1009,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 80,
+      "nom_public": "Quaxly",
+      "nom_fr": "Coiffeton",
+      "slug": "quaxly",
+      "dex": 912,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1244,
+        "sprite": 1012,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1282,
+        "sprite": 1012,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 81,
+      "nom_public": "Paldean Wooper",
+      "nom_fr": "Axoloto de Paldea",
+      "slug": "wooper",
+      "dex": 194,
+      "forme": 1,
+      "generation": 9,
+      "male": {
+        "md_id": 1448,
+        "sprite": 1004,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1449,
+        "sprite": 1004,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 82,
+      "nom_public": "Pawmi",
+      "nom_fr": "Pohm",
+      "slug": "pawmi",
+      "dex": 921,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1442,
+        "sprite": 741,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1443,
+        "sprite": 741,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 83,
+      "nom_public": "Fidough",
+      "nom_fr": "Pâtachiot",
+      "slug": "fidough",
+      "dex": 926,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1836,
+        "sprite": 1144,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1837,
+        "sprite": 1144,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 84,
+      "nom_public": "Charcadet",
+      "nom_fr": "Charbambin",
+      "slug": "charcadet",
+      "dex": 935,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1846,
+        "sprite": 1062,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1847,
+        "sprite": 1062,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    },
+    {
+      "group": "starter",
+      "number": 85,
+      "nom_public": "Tinkatink",
+      "nom_fr": "Forgerette",
+      "slug": "tinkatink",
+      "dex": 957,
+      "forme": 0,
+      "generation": 9,
+      "male": {
+        "md_id": 1387,
+        "sprite": 1072,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1388,
+        "sprite": 1072,
+        "ombre": 1
+      },
+      "generation_source_pmdo": 9
+    }
+  ],
+  "megas": [
+    {
+      "group": "mega",
+      "nom_public": "Mega Venusaur",
+      "nom_fr": "Méga-Florizarre",
+      "slug": "venusaur",
+      "dex": 3,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emboarger/N-A",
+      "type_source_public": "Grass/Poison",
+      "talents_source_public": "Thick Fat/Chlorophyll",
+      "male": {
+        "md_id": 201,
+        "sprite": 779,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 801,
+        "sprite": 779,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Charizard",
+      "nom_fr": "Méga-Dracaufeu X",
+      "slug": "charizard",
+      "dex": 6,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emboarger/Kevin0itachi",
+      "type_source_public": "Fire/Dragon",
+      "talents_source_public": "Drought/Solar Power",
+      "male": {
+        "md_id": 202,
+        "sprite": 776,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 802,
+        "sprite": 776,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Blastoise",
+      "nom_fr": "Méga-Tortank",
+      "slug": "blastoise",
+      "dex": 9,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/N-A",
+      "type_source_public": "Water/Steel",
+      "talents_source_public": "Swift Swim/Rain Dish",
+      "male": {
+        "md_id": 203,
+        "sprite": 781,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 803,
+        "sprite": 781,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Beedrill",
+      "nom_fr": "Méga-Dardargnan",
+      "slug": "beedrill",
+      "dex": 15,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emboarger/SilverDeoxys563",
+      "type_source_public": "Bug/Poison",
+      "talents_source_public": "Adaptability/Sniper",
+      "male": {
+        "md_id": 1686,
+        "sprite": 949,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1687,
+        "sprite": 949,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Raichu X",
+      "nom_fr": "Méga-Raichu X",
+      "slug": "raichu",
+      "dex": 26,
+      "forme": 2,
+      "nouvelle_forme": true,
+      "credit_public": "Deeshura/",
+      "type_source_public": "Electric/Fighting",
+      "talents_source_public": "Static/Galvanize",
+      "male": {
+        "md_id": 172,
+        "sprite": 187,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 772,
+        "sprite": 187,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Raichu Y",
+      "nom_fr": "Méga-Raichu Y",
+      "slug": "raichu",
+      "dex": 26,
+      "forme": 3,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin/",
+      "type_source_public": "Electric/Fairy",
+      "talents_source_public": "Hydration/LightningRod",
+      "male": {
+        "md_id": 278,
+        "sprite": 22,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 878,
+        "sprite": 22,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Gengar",
+      "nom_fr": "Méga-Ectoplasma",
+      "slug": "gengar",
+      "dex": 94,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/Emmuffin",
+      "type_source_public": "Ghost/Poison",
+      "talents_source_public": "Cursed Body/Shadow Tag",
+      "male": {
+        "md_id": 402,
+        "sprite": 576,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1002,
+        "sprite": 576,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Gyarados",
+      "nom_fr": "Méga-Léviator",
+      "slug": "gyarados",
+      "dex": 130,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/N-A",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Mold Breaker/Moxie",
+      "male": {
+        "md_id": 398,
+        "sprite": 571,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 998,
+        "sprite": 571,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Vaporeon",
+      "nom_fr": "Méga-Aquali",
+      "slug": "vaporeon",
+      "dex": 134,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Water/Poison",
+      "talents_source_public": "Water Absorb/Poison Point",
+      "male": {
+        "md_id": 1339,
+        "sprite": 691,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1340,
+        "sprite": 691,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Jolteon",
+      "nom_fr": "Méga-Voltali",
+      "slug": "jolteon",
+      "dex": 135,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Electric/Bug",
+      "talents_source_public": "Volt Absorb/CompoundEyes",
+      "male": {
+        "md_id": 1341,
+        "sprite": 692,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1342,
+        "sprite": 692,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Flareon",
+      "nom_fr": "Méga-Pyroli",
+      "slug": "flareon",
+      "dex": 136,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Fire/Ghost",
+      "talents_source_public": "Flash Fire/White Smoke",
+      "male": {
+        "md_id": 1343,
+        "sprite": 693,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1344,
+        "sprite": 693,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Aerodactyl",
+      "nom_fr": "Méga-Ptéra",
+      "slug": "aerodactyl",
+      "dex": 142,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/Caitemis",
+      "type_source_public": "Rock/Flying",
+      "talents_source_public": "Rock Head/Speed Boost",
+      "male": {
+        "md_id": 473,
+        "sprite": 370,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1073,
+        "sprite": 370,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Dragonite",
+      "nom_fr": "Méga-Dracolosse",
+      "slug": "dragonite",
+      "dex": 149,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Garbage, NOLASMOR/Crazy_Dragon, Deeshura",
+      "type_source_public": "Dragon/Flying",
+      "talents_source_public": "Filter/Marvel Scale",
+      "male": {
+        "md_id": 339,
+        "sprite": 1084,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 939,
+        "sprite": 1084,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Meganium",
+      "nom_fr": "Méga-Méganium",
+      "slug": "meganium",
+      "dex": 154,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin",
+      "type_source_public": "Grass/Fairy",
+      "talents_source_public": "Drought/Heatproof",
+      "male": {
+        "md_id": 219,
+        "sprite": 784,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 819,
+        "sprite": 784,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Feraligatr",
+      "nom_fr": "Méga-Aligatueur",
+      "slug": "feraligatr",
+      "dex": 160,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "N/A/Delta L, pi",
+      "type_source_public": "Water/Dragon",
+      "talents_source_public": "Dragonize/Sheer Force",
+      "male": {
+        "md_id": 223,
+        "sprite": 787,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 823,
+        "sprite": 787,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Espeon",
+      "nom_fr": "Méga-Mentali",
+      "slug": "espeon",
+      "dex": 196,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Psychic/Fighting",
+      "talents_source_public": "Magic Bounce/Competitive",
+      "male": {
+        "md_id": 1345,
+        "sprite": 694,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1346,
+        "sprite": 694,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Umbreon",
+      "nom_fr": "Méga-Noctali",
+      "slug": "umbreon",
+      "dex": 197,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Dark/Steel",
+      "talents_source_public": "Inner Focus/Prankster",
+      "male": {
+        "md_id": 1347,
+        "sprite": 695,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1348,
+        "sprite": 695,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Steelix",
+      "nom_fr": "Méga-Steelix",
+      "slug": "steelix",
+      "dex": 208,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Ichor/baronessfaron",
+      "type_source_public": "Steel/Ground",
+      "talents_source_public": "Sand Rush/Sheer Force",
+      "male": {
+        "md_id": 118,
+        "sprite": 128,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 718,
+        "sprite": 128,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Scizor",
+      "nom_fr": "Méga-Cizayox",
+      "slug": "scizor",
+      "dex": 212,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/N-A",
+      "type_source_public": "Bug/Steel",
+      "talents_source_public": "Unburden/Technician",
+      "male": {
+        "md_id": 210,
+        "sprite": 229,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 810,
+        "sprite": 229,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Heracross",
+      "nom_fr": "Méga-Scarhino",
+      "slug": "heracross",
+      "dex": 214,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/N-A",
+      "type_source_public": "Bug/Fighting",
+      "talents_source_public": "Skill Link/Guts",
+      "male": {
+        "md_id": 436,
+        "sprite": 319,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1036,
+        "sprite": 319,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Skarmory",
+      "nom_fr": "Méga-Airmure",
+      "slug": "skarmory",
+      "dex": 227,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Sonikku_A/Johanne2",
+      "type_source_public": "Steel/Flying",
+      "talents_source_public": "Aerilate/Sturdy",
+      "male": {
+        "md_id": 363,
+        "sprite": 532,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 963,
+        "sprite": 532,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Houndoom",
+      "nom_fr": "Méga-Démolosse",
+      "slug": "houndoom",
+      "dex": 229,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Top_Kec/Top_Kec",
+      "type_source_public": "Dark/Fire",
+      "talents_source_public": "Early Bird/Solar Power",
+      "male": {
+        "md_id": 1794,
+        "sprite": 878,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1795,
+        "sprite": 878,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Sceptile",
+      "nom_fr": "Méga-Jungko",
+      "slug": "sceptile",
+      "dex": 254,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "0palite/Emmuffin",
+      "type_source_public": "Grass/Dragon",
+      "talents_source_public": "LightningRod/Unburden",
+      "male": {
+        "md_id": 212,
+        "sprite": 1079,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 812,
+        "sprite": 1079,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Blaziken",
+      "nom_fr": "Méga-Braségali",
+      "slug": "blaziken",
+      "dex": 257,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Sugi/N-A",
+      "type_source_public": "Fire/Fighting",
+      "talents_source_public": "Iron Fist/Speed Boost",
+      "male": {
+        "md_id": 213,
+        "sprite": 841,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 813,
+        "sprite": 841,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Swampert",
+      "nom_fr": "Méga-Laggron",
+      "slug": "swampert",
+      "dex": 260,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/N-A",
+      "type_source_public": "Water/Ground",
+      "talents_source_public": "Swift Swim/Damp",
+      "male": {
+        "md_id": 214,
+        "sprite": 842,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 814,
+        "sprite": 842,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Gardevoir",
+      "nom_fr": "Méga-Gardevoir",
+      "slug": "gardevoir",
+      "dex": 282,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/baronessfaron",
+      "type_source_public": "Psychic/Fairy",
+      "talents_source_public": "Pixilate/Trace",
+      "male": {
+        "md_id": 215,
+        "sprite": 846,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 815,
+        "sprite": 846,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Sableye",
+      "nom_fr": "Méga-Ténéfix",
+      "slug": "sableye",
+      "dex": 302,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Ichor, NOLASMOR/Emmuffin",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Prankster/Magic Bounce",
+      "male": {
+        "md_id": 119,
+        "sprite": 129,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 719,
+        "sprite": 129,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Mawile",
+      "nom_fr": "Méga-Mysdibule",
+      "slug": "mawile",
+      "dex": 303,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/N-A",
+      "type_source_public": "Steel/Fairy",
+      "talents_source_public": "Huge Power/Intimidate",
+      "male": {
+        "md_id": 1796,
+        "sprite": 877,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1797,
+        "sprite": 877,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Manectric",
+      "nom_fr": "Méga-Élecsprint",
+      "slug": "manectric",
+      "dex": 310,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/Top_Kec",
+      "type_source_public": "Electric/Steel",
+      "talents_source_public": "Intimidate/LightningRod",
+      "male": {
+        "md_id": 1692,
+        "sprite": 946,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1693,
+        "sprite": 946,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Sharpedo",
+      "nom_fr": "Méga-Sharpedo",
+      "slug": "sharpedo",
+      "dex": 319,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/baronessfaron",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Rough Skin/Sheer Force",
+      "male": {
+        "md_id": 1383,
+        "sprite": 712,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1384,
+        "sprite": 712,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Camerupt",
+      "nom_fr": "Méga-Camérupt",
+      "slug": "camerupt",
+      "dex": 323,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/Caitemis",
+      "type_source_public": "Fire/Ground",
+      "talents_source_public": "Sheer Force/Solid Rock",
+      "male": {
+        "md_id": 1385,
+        "sprite": 713,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1386,
+        "sprite": 152,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Altaria",
+      "nom_fr": "Méga-Altaria",
+      "slug": "altaria",
+      "dex": 334,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Ichor, Emmuffin, ◥θ┴θ◤/N-A",
+      "type_source_public": "Dragon/Fairy",
+      "talents_source_public": "Natural Cure/Magic Guard",
+      "male": {
+        "md_id": 1770,
+        "sprite": 843,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1771,
+        "sprite": 843,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Banette",
+      "nom_fr": "Méga-Branette",
+      "slug": "banette",
+      "dex": 354,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "chime, baronessfaron/baronessfaron",
+      "type_source_public": "Ghost/Dark",
+      "talents_source_public": "Prankster/Cursed Body",
+      "male": {
+        "md_id": 1768,
+        "sprite": 891,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1769,
+        "sprite": 891,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Absol",
+      "nom_fr": "Méga-Absol",
+      "slug": "absol",
+      "dex": 359,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/Emboarger",
+      "type_source_public": "Dark/Fairy",
+      "talents_source_public": "Super Luck/Magic Bounce",
+      "male": {
+        "md_id": 1308,
+        "sprite": 689,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1309,
+        "sprite": 689,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Absol Z",
+      "nom_fr": "Méga-Absol Z",
+      "slug": "absol",
+      "dex": 359,
+      "forme": 2,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin/",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Super Luck/Defiant",
+      "male": {
+        "md_id": 128,
+        "sprite": 138,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 728,
+        "sprite": 138,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Glalie",
+      "nom_fr": "Méga-Oniglali",
+      "slug": "glalie",
+      "dex": 362,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/baronessfaron",
+      "type_source_public": "Ice/Dark",
+      "talents_source_public": "Refrigerate/Slush Rush",
+      "male": {
+        "md_id": 389,
+        "sprite": 844,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 989,
+        "sprite": 844,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Metagross",
+      "nom_fr": "Méga-Métalosse",
+      "slug": "metagross",
+      "dex": 376,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/N-A",
+      "type_source_public": "Steel/Psychic",
+      "talents_source_public": "Levitate/Iron Fist",
+      "male": {
+        "md_id": 218,
+        "sprite": 686,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 818,
+        "sprite": 686,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Rayquaza",
+      "nom_fr": "Méga-Rayquaza",
+      "slug": "rayquaza",
+      "dex": 384,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Top_Kec/Top_Kec",
+      "type_source_public": "Dragon/Flying",
+      "talents_source_public": "Air Lock/Adaptability",
+      "male": {
+        "md_id": 451,
+        "sprite": 330,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1051,
+        "sprite": 330,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Lopunny",
+      "nom_fr": "Méga-Lockpin",
+      "slug": "lopunny",
+      "dex": 428,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "baronessfaron/JFain",
+      "type_source_public": "Normal/Fighting",
+      "talents_source_public": "Cute Charm/Scrappy",
+      "male": {
+        "md_id": 1732,
+        "sprite": 852,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1733,
+        "sprite": 852,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Lucario",
+      "nom_fr": "Méga-Lucario",
+      "slug": "lucario",
+      "dex": 448,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Caitemis/baronessfaron",
+      "type_source_public": "Fighting/Steel",
+      "talents_source_public": "Steadfast/Adaptability",
+      "male": {
+        "md_id": 1858,
+        "sprite": 853,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1859,
+        "sprite": 853,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Lucario Z",
+      "nom_fr": "Méga-Lucario Z",
+      "slug": "lucario",
+      "dex": 448,
+      "forme": 2,
+      "nouvelle_forme": true,
+      "credit_public": "Deeshura/",
+      "type_source_public": "Fighting/Ghost",
+      "talents_source_public": "Steadfast/Iron Fist",
+      "male": {
+        "md_id": 1012,
+        "sprite": 1087,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1013,
+        "sprite": 1087,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Leafeon",
+      "nom_fr": "Méga-Phyllali",
+      "slug": "leafeon",
+      "dex": 470,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Grass/Rock",
+      "talents_source_public": "Leaf Guard/Solid Rock",
+      "male": {
+        "md_id": 1349,
+        "sprite": 696,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1350,
+        "sprite": 696,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Glaceon",
+      "nom_fr": "Méga-Givrali",
+      "slug": "glaceon",
+      "dex": 471,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Ice/Ground",
+      "talents_source_public": "Snow Cloak/Sand Veil",
+      "male": {
+        "md_id": 1138,
+        "sprite": 670,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1353,
+        "sprite": 670,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Gallade",
+      "nom_fr": "Méga-Gallame",
+      "slug": "gallade",
+      "dex": 475,
+      "forme": 1,
+      "nouvelle_forme": false,
+      "credit_public": "Emmuffin/JFain",
+      "type_source_public": "Psychic/Fighting",
+      "talents_source_public": "Steadfast/Defiant",
+      "male": {
+        "md_id": 220,
+        "sprite": 421,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 820,
+        "sprite": 421,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Froslass",
+      "nom_fr": "Méga-Momartik",
+      "slug": "froslass",
+      "dex": 478,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin/N-A",
+      "type_source_public": "Ice/Ghost",
+      "talents_source_public": "Snow Cloak/Snow Warning",
+      "male": {
+        "md_id": 204,
+        "sprite": 850,
+        "ombre": 0
+      },
+      "femelle": {
+        "md_id": 804,
+        "sprite": 850,
+        "ombre": 0
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Darkrai",
+      "nom_fr": "Méga-Darkrai",
+      "slug": "darkrai",
+      "dex": 491,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Deeshura/Chi, baronessfaron",
+      "type_source_public": "Dark/Ghost",
+      "talents_source_public": "Bad Dreams/Shadow Tag",
+      "male": {
+        "md_id": 1620,
+        "sprite": 1026,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1621,
+        "sprite": 1026,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Emboar",
+      "nom_fr": "Méga-Roitiflam",
+      "slug": "emboar",
+      "dex": 500,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Garbage/NeroIntruder, Emboarger",
+      "type_source_public": "Fire/Fighting",
+      "talents_source_public": "Rock Head/Reckless",
+      "male": {
+        "md_id": 460,
+        "sprite": 337,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1060,
+        "sprite": 337,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Chandelure",
+      "nom_fr": "Méga-Lugulabre",
+      "slug": "chandelure",
+      "dex": 609,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin/baronessfaron",
+      "type_source_public": "Ghost/Fire",
+      "talents_source_public": "Infiltrator/Flame Body",
+      "male": {
+        "md_id": 461,
+        "sprite": 338,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1061,
+        "sprite": 338,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Golurk",
+      "nom_fr": "Méga-Golemastoc",
+      "slug": "golurk",
+      "dex": 623,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "baronessfaron/baronessfaron",
+      "type_source_public": "Ground/Ghost",
+      "talents_source_public": "Iron Fist/Simple",
+      "male": {
+        "md_id": 1618,
+        "sprite": 856,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1619,
+        "sprite": 856,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Chesnaught",
+      "nom_fr": "Méga-Blindépique",
+      "slug": "chesnaught",
+      "dex": 652,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Soulja/Soulja",
+      "type_source_public": "Grass/Fighting",
+      "talents_source_public": "Thick Fat/Battle Armor",
+      "male": {
+        "md_id": 217,
+        "sprite": 858,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 817,
+        "sprite": 858,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Delphox",
+      "nom_fr": "Méga-Goupelin",
+      "slug": "delphox",
+      "dex": 655,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Top_Kec/",
+      "type_source_public": "Fire/Psychic",
+      "talents_source_public": "Levitate/Magic Guard",
+      "male": {
+        "md_id": 211,
+        "sprite": 859,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 811,
+        "sprite": 859,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Greninja",
+      "nom_fr": "Méga-Amphinobi",
+      "slug": "greninja",
+      "dex": 658,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin/",
+      "type_source_public": "Water/Dark",
+      "talents_source_public": "Poison Heal/Protean",
+      "male": {
+        "md_id": 216,
+        "sprite": 908,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 816,
+        "sprite": 908,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Meowstic",
+      "nom_fr": "Méga-Mistigrix",
+      "slug": "meowstic",
+      "dex": 678,
+      "forme": 2,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin, NeroIntruder, JFain/NeroIntruder, Garbage",
+      "type_source_public": "Psychic",
+      "talents_source_public": "Trace/Prankster",
+      "male": {
+        "md_id": 1150,
+        "sprite": 1130,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1151,
+        "sprite": 235,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Sylveon",
+      "nom_fr": "Méga-Nymphali",
+      "slug": "sylveon",
+      "dex": 700,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Gala1D",
+      "type_source_public": "Fairy/Flying",
+      "talents_source_public": "Pixilate/Filter",
+      "male": {
+        "md_id": 1351,
+        "sprite": 697,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1352,
+        "sprite": 697,
+        "ombre": 1
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Golisopod",
+      "nom_fr": "Méga-Sarmuraï",
+      "slug": "golisopod",
+      "dex": 768,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Soulja, G~",
+      "type_source_public": "Bug/Steel",
+      "talents_source_public": "Sheer Force/Shell Armor",
+      "male": {
+        "md_id": 474,
+        "sprite": 371,
+        "ombre": 2
+      },
+      "femelle": {
+        "md_id": 1074,
+        "sprite": 371,
+        "ombre": 2
+      }
+    },
+    {
+      "group": "mega",
+      "nom_public": "Mega Zeraora",
+      "nom_fr": "Méga-Zeraora",
+      "slug": "zeraora",
+      "dex": 807,
+      "forme": 1,
+      "nouvelle_forme": true,
+      "credit_public": "Emmuffin, Delta L, pi",
+      "type_source_public": "Electric",
+      "talents_source_public": "Speed Boost/Iron Fist",
+      "male": {
+        "md_id": 1148,
+        "sprite": 1129,
+        "ombre": 1
+      },
+      "femelle": {
+        "md_id": 1149,
+        "sprite": 1129,
+        "ombre": 1
+      }
+    }
+  ],
+  "alertes": [
+    {
+      "mega": "Mega Raichu X",
+      "forme": 2,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Raichu Y",
+      "forme": 3,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Vaporeon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Jolteon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Flareon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Dragonite",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Meganium",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Feraligatr",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Feraligatr",
+      "forme": 1,
+      "nature": "talent non porté",
+      "detail": "Dragonize : talent de la forme de base en repli."
+    },
+    {
+      "mega": "Mega Espeon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Umbreon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Skarmory",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Absol Z",
+      "forme": 2,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Metagross",
+      "forme": 1,
+      "nature": "genre ROM atypique",
+      "detail": "Entrées MD 3 et 0, préservées sans en déduire un sexe biologique."
+    },
+    {
+      "mega": "Mega Rayquaza",
+      "forme": 1,
+      "nature": "genre ROM atypique",
+      "detail": "Entrées MD 3 et 0, préservées sans en déduire un sexe biologique."
+    },
+    {
+      "mega": "Mega Lucario Z",
+      "forme": 2,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Leafeon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Glaceon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Froslass",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Darkrai",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Darkrai",
+      "forme": 1,
+      "nature": "genre ROM atypique",
+      "detail": "Entrées MD 3 et 0, préservées sans en déduire un sexe biologique."
+    },
+    {
+      "mega": "Mega Emboar",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Chandelure",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Golurk",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Golurk",
+      "forme": 1,
+      "nature": "genre ROM atypique",
+      "detail": "Entrées MD 3 et 0, préservées sans en déduire un sexe biologique."
+    },
+    {
+      "mega": "Mega Chesnaught",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Delphox",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Greninja",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Meowstic",
+      "forme": 2,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Sylveon",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Golisopod",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Zeraora",
+      "forme": 1,
+      "nature": "statistiques provisoires",
+      "detail": "Les statistiques PMDO de la forme de base sont conservées ; les courbes source ne sont pas directement portables."
+    },
+    {
+      "mega": "Mega Zeraora",
+      "forme": 1,
+      "nature": "genre ROM atypique",
+      "detail": "Entrées MD 3 et 0, préservées sans en déduire un sexe biologique."
+    }
+  ]
+}

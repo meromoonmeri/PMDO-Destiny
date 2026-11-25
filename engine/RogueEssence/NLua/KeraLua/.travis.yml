@@ -1,0 +1,36 @@
+#
+# KeraLua Travis-CI Hook
+#
+
+language: csharp
+
+dotnet: 3.1
+
+before_install:
+  - export PATH=/opt/mono/bin:$PATH
+
+install:
+  - sudo apt-get install mono-devel nunit nuget
+
+script:
+  - nuget restore KeraLua.sln
+  - msbuild KeraLua.sln /p:Configuration=Release /t:Restore
+  - msbuild KeraLua.sln /p:Configuration=Release
+  - dotnet test ./tests/build/net46/bin/Release/KeraLuaTest.dll
+
+# Execute additional tests or commands
+#after_script:
+#  - [run additional test commans]
+
+# Only watch the main branch
+branches:
+  only:
+    - main
+
+# Notify if needed
+notifications:
+  recipients:
+    - viniciusjarina@gmail.com
+  email:
+    on_success: change
+    on_failure: always

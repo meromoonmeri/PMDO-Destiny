@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using RogueElements;
+using RogueEssence.Content;
+
+namespace RogueEssence.Menu
+{
+    public class BuyChosenMenu : SingleStripMenu
+    {
+
+        public int origIndex {get; private set;}
+        private List<int> selections;
+        public List<int> Selections {
+            get
+            {
+                List<int> newList = new List<int>();
+                newList.AddRange(selections);
+                return newList;
+            }
+        }
+        private OnMultiChoice action;
+
+        public BuyChosenMenu(List<int> selections, int origIndex, string itemID, OnMultiChoice chooseSlots) :
+            this(MenuLabel.SHOP_CHOSEN_MENU, selections, origIndex, itemID, chooseSlots) { }
+        public BuyChosenMenu(string label, List<int> selections, int origIndex, string itemID, OnMultiChoice chooseSlots)
+        {
+            Label = label;
+            this.origIndex = origIndex;
+            this.selections = selections;
+            action = chooseSlots;
+
+            List<MenuTextChoice> choices = new List<MenuTextChoice>();
+            choices.Add(new MenuTextChoice(Text.FormatKey("MENU_SHOP_BUY"), BuyAction));
+
+            if (selections.Count == 1)
+            {
+                Data.ItemData entry = Data.DataManager.Instance.GetItem(itemID);
+
+                if (entry.UsageType == Data.ItemData.UseType.Learn)
+                    choices.Add(new MenuTextChoice(Text.FormatKey("MENU_INFO"), () => { MenuManager.Instance.AddMenu(new TeachInfoMenu(itemID), false); }));
+            }
+
+            choices.Add(new MenuTextChoice(Text.FormatKey("MENU_EXIT"), ExitAction));
+
+            int choice_width = CalculateChoiceLength(choices, 72);
+            Initialize(new Loc(Math.Min(ItemMenu.ITEM_MENU_WIDTH + 16, GraphicsManager.ScreenWidth - choice_width), 16), choice_width, choices.ToArray(), 0);
+        }
+
+        private void BuyAction()
+        {
+            //remove both this and parent menu
+            MenuManager.Instance.RemoveMenu();
+            MenuManager.Instance.RemoveMenu();
+
+            action(selections);
+        }
+
+        private void ExitAction()
+        {
+            MenuManager.Instance.RemoveMenu();
+        }
+        
+    }
+}

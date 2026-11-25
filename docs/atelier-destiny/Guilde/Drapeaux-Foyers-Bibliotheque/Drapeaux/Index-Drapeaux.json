@@ -1,0 +1,154 @@
+{
+  "nom": "Étendard au gland",
+  "variantes": [
+    {
+      "id": "etendard-down",
+      "direction": "Down",
+      "nom": "Face",
+      "flèche": "↓",
+      "pivot": [
+        22,
+        80
+      ],
+      "w": 44,
+      "h": 85,
+      "png": "Drapeaux/PNG-1x/Down.png",
+      "atlas": "Drapeaux/Animation/Down-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "e539a85e3e67c3e552b854b4db5399a741b406e6b996180ee621a4d6e94c2a1d"
+    },
+    {
+      "id": "etendard-downright",
+      "direction": "DownRight",
+      "nom": "Avant droit",
+      "flèche": "↘",
+      "pivot": [
+        17,
+        81
+      ],
+      "w": 34,
+      "h": 86,
+      "png": "Drapeaux/PNG-1x/DownRight.png",
+      "atlas": "Drapeaux/Animation/DownRight-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "7a8da9ebcdfa80448e550badd2f6d00f7973a594dbc98398802a28be87d728e3"
+    },
+    {
+      "id": "etendard-right",
+      "direction": "Right",
+      "nom": "Profil droit",
+      "flèche": "→",
+      "pivot": [
+        9,
+        84
+      ],
+      "w": 18,
+      "h": 89,
+      "png": "Drapeaux/PNG-1x/Right.png",
+      "atlas": "Drapeaux/Animation/Right-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "23791fd7014e9f5f3debf2ee56904410a07bb4373f7cca3ab8e155189458f12e"
+    },
+    {
+      "id": "etendard-upright",
+      "direction": "UpRight",
+      "nom": "Arrière droit",
+      "flèche": "↗",
+      "pivot": [
+        17,
+        81
+      ],
+      "w": 35,
+      "h": 86,
+      "png": "Drapeaux/PNG-1x/UpRight.png",
+      "atlas": "Drapeaux/Animation/UpRight-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "fbf6f0dd8667eda04b03474c5ec9ea39eb509fa3942d7b84f08aba3f43ea5c0e"
+    },
+    {
+      "id": "etendard-up",
+      "direction": "Up",
+      "nom": "Dos",
+      "flèche": "↑",
+      "pivot": [
+        22,
+        80
+      ],
+      "w": 44,
+      "h": 85,
+      "png": "Drapeaux/PNG-1x/Up.png",
+      "atlas": "Drapeaux/Animation/Up-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "557d795d4553cf60492480f6ab8f53c22d5701c947924071fd553a8e8a8b3c6c"
+    },
+    {
+      "id": "etendard-upleft",
+      "direction": "UpLeft",
+      "nom": "Arrière gauche",
+      "flèche": "↖",
+      "pivot": [
+        17,
+        81
+      ],
+      "w": 34,
+      "h": 86,
+      "png": "Drapeaux/PNG-1x/UpLeft.png",
+      "atlas": "Drapeaux/Animation/UpLeft-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "e9130308ffd8a6adbb1e590fa992fcaabf37390a366e14b580c2a15e73a7db98"
+    },
+    {
+      "id": "etendard-left",
+      "direction": "Left",
+      "nom": "Profil gauche",
+      "flèche": "←",
+      "pivot": [
+        9,
+        84
+      ],
+      "w": 18,
+      "h": 89,
+      "png": "Drapeaux/PNG-1x/Left.png",
+      "atlas": "Drapeaux/Animation/Left-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "40cd9a6f058416bd35b95cdd7d5b1d3a2246764ebedb414b99dc2813227b53f2"
+    },
+    {
+      "id": "etendard-downleft",
+      "direction": "DownLeft",
+      "nom": "Avant gauche",
+      "flèche": "↙",
+      "pivot": [
+        18,
+        81
+      ],
+      "w": 35,
+      "h": 86,
+      "png": "Drapeaux/PNG-1x/DownLeft.png",
+      "atlas": "Drapeaux/Animation/DownLeft-6-poses.png",
+      "poses": 6,
+      "colonnes": 3,
+      "duree_ms": 125,
+      "sha256": "150ca7018a245f98a98f308fc8fb34cd971fbfafa452490f4f4a066478ed6793"
+    }
+  ],
+  "source": {
+    "fichier": "Reference/Drapeau-etude-IA.png",
+    "sha256": "440dfdec0665c6e4137100a34d59acbcb962128acc03bccae235515c4c7d2048"
+  },
+  "projection": "maillage tissu recto/verso avec hampe, barre et pied en volumes"
+}

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Bellsprout_Line_001" xml:space="preserve">
+    <value>Shroomish and I got to this camp no problem,[pause=0] but the dungeon ahead is another story.</value>
+    <comment></comment>  </data>
+  <data name="Bellsprout_Line_002" xml:space="preserve">
+    <value>The Flying-type Pokémon there just ruin us.</value>
+    <comment></comment>  </data>
+  <data name="Bellsprout_Line_003" xml:space="preserve">
+    <value>Shouldn't we ask an Electric Pokémon for help?</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_001" xml:space="preserve">
+    <value>Ugh...[pause=30] It's not here![br] How did I manage to lose my satchel, too?</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_002" xml:space="preserve">
+    <value>Hey wait,[pause=0] you’re that new team,[pause=30] aren't you?[br]Could you help me with something?[scroll]I dropped my explorer's satchel in {0},[pause=0] I can't do anything without it![br]It should be easy for you to find,[pause=0] and I'll give you a gift for your troubles!</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_003" xml:space="preserve">
+    <value>Just to remind you,[pause=0] I dropped my satchel in {0}![br][emote=Worried]Er,[pause=30] no rush,[pause=0] I'll just wait here until you can find it...</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_004" xml:space="preserve">
+    <value>Ah![pause=30] You found it![pause=30] Thank you so much![br][emote=Normal]One second,[pause=10] let me look inside...</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_005" xml:space="preserve">
+    <value>What a relief,[pause=30] the items are still inside.[br][emote=Normal]You can't lose exclusive items if you faint in a dungeon,[pause=30] so there's no risk to bring them along.[br][emote=Sigh]Even if you're horrible with items like me...[br][emote=Normal]Here,[pause=30] I have an extra {0}.[br]I was going to trade it,[pause=0] but why don't you take it instead?</value>
+    <comment></comment>  </data>
+  <data name="Broke_Line_006" xml:space="preserve">
+    <value>Thanks for reuniting me with my satchel![br][emote=Normal]I'm going to take it a bit more easy from now on...[br][emote=Pain]I'm still trying to recover from losing everything before.[br][emote=Normal]I guess storing your items saves you time in the long run...</value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_001" xml:space="preserve">
+    <value>I've heard some bad rumors about the {0} before...</value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_002" xml:space="preserve">
+    <value>[tmp](Carry) Did you get back the supplies?</value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_003" xml:space="preserve">
+    <value>I'm not sure if this is the last we'll hear about {0} and that clan of his...</value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_004" xml:space="preserve">
+    <value>When the first wave of trailblazers came to the island,[pause=30] they cut a path all the way to {0}.[br]But after that,[pause=30] the terrain became too hostile to camp in.</value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_005" xml:space="preserve">
+    <value></value>
+    <comment></comment>  </data>
+  <data name="Carry_Line_Route" xml:space="preserve">
+    <value>[tmp](carry) I'm on my routine route in forest camp!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Done_Line_001" xml:space="preserve">
+    <value>[tmp]That gem! You got it back!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Done_Line_002" xml:space="preserve">
+    <value>[tmp]Oh thank you thank you thank you!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Done_Line_003" xml:space="preserve">
+    <value>[tmp]We're saved! I thought we were gonna have to trade for a new one.[br]Here you can have this!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Done_Line_004" xml:space="preserve">
+    <value>[tmp]Let's go home.</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_001" xml:space="preserve">
+    <value>[tmp]We're playing catch by the cliffs!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_002" xml:space="preserve">
+    <value>[tmp]Oh no! I fumbled the ball!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_003" xml:space="preserve">
+    <value>[tmp]No! That was my dad's one and only Normal Gem signed by Babe Ruth![br]And now it's fallen into Overgrown Wilds!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_004" xml:space="preserve">
+    <value>[tmp]What?? NOOOOOOO!</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_005" xml:space="preserve">
+    <value>[tmp]What're we gonna do?</value>
+    <comment></comment>  </data>
+  <data name="Catch_Line_006" xml:space="preserve">
+    <value>[tmp]Overgrown Wilds is covered in underbrush... we'll never find that gem...</value>
+    <comment></comment>  </data>
+  <data name="Conjurer_Line_001" xml:space="preserve">
+    <value>[tmp]Watch the fire spin around us!</value>
+    <comment></comment>  </data>
+  <data name="Conjurer_Line_002" xml:space="preserve">
+    <value>[tmp]We're different than how we were when we set foot on this island.</value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_001" xml:space="preserve">
+    <value>{0} doesn't like it when he has to pay a toll...</value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_002" xml:space="preserve">
+    <value>[tmp](Deliver) Did you get back the supplies?</value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_003" xml:space="preserve">
+    <value>It's good to know you've got our backs!</value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_004" xml:space="preserve">
+    <value>Since {0} was the last camp the trailblazers could set up,[pause=30] lots of Pokémon gather there.</value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_005" xml:space="preserve">
+    <value></value>
+    <comment></comment>  </data>
+  <data name="Deliver_Line_Route" xml:space="preserve">
+    <value>[tmp](deliver) I'm on my routine route in forest camp!</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Check_000" xml:space="preserve">
+    <value>It looks like you haven't befriended any Pokémon yet...[br]Did you know you can recruit them by throwing Apricorns at them?</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Check_001" xml:space="preserve">
+    <value>{0}, was it?[pause=0] I heard your team's befriended {1} kinds of Pokémon!</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Full_001" xml:space="preserve">
+    <value>Thanks for bringing the Pokémon of this island closer together!</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Intro_001" xml:space="preserve">
+    <value>The assembly bell's a wonderful thing \u266A[pause=0]\nBring all your friends over with just one ring \u266A</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Next_001" xml:space="preserve">
+    <value>If you can befriend {0} kinds of Pokémon,[pause=30] I'll give you something special \u266A</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Reward_Dungeon" xml:space="preserve">
+    <value>A good deed,[pause=30] indeed![pause=0]\n As thanks,[pause=30] let me tell you a secret...</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Reward_Dungeon_Alt" xml:space="preserve">
+    <value>Also,[pause=30] let me tell you a secret...</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Reward_Item" xml:space="preserve">
+    <value>Thanks for bringing everyone a little closer together![scroll] Please,[pause=30] take this token of appreciation.</value>
+    <comment></comment>  </data>
+  <data name="DexRater_Reward_Item_Alt" xml:space="preserve">
+    <value>Also,[pause=30] take this token of appreciation!</value>
+    <comment></comment>  </data>
+  <data name="Doduo_Line_001" xml:space="preserve">
+    <value>[tmp]Wild Pokemon aren't very smart. They'll lose you easily if you run through grass.</value>
+    <comment></comment>  </data>
+  <data name="Doduo_Line_002" xml:space="preserve">
+    <value>[tmp]Maybe retreating isn't always the answer...</value>
+    <comment></comment>  </data>
+  <data name="Hint_Father_Line_001" xml:space="preserve">
+    <value>[tmp]That was strange, wasn't it?</value>
+    <comment></comment>  </data>
+  <data name="Hint_Father_Line_002" xml:space="preserve">
+    <value>[tmp]That Pokemon stuck in Exotic Wilds (later Deserted Fortress) didn't come with us when we used an escape orb.</value>
+    <comment></comment>  </data>
+  <data name="Hint_Pet_Line_001" xml:space="preserve">
+    <value>[tmp]That was strange, wasn't it?</value>
+    <comment></comment>  </data>
+  <data name="Hint_Pet_Line_002" xml:space="preserve">
+    <value>[tmp]That Pokemon stuck in Wayward Wetlands didn't come with us when we used an escape orb.</value>
+    <comment></comment>  </data>
+  <data name="Kidnap_Line_001" xml:space="preserve">
+    <value>[tmp]I'm hunting for treasure, but I keep getting lost... can you help me?</value>
+    <comment></comment>  </data>
+  <data name="Kidnap_Line_002" xml:space="preserve">
+    <value>[tmp]We Drifloon just blew into camp. Where we're going has plenty of rare items.[br]Will you join us, fellow traveler?</value>
+    <comment></comment>  </data>
+  <data name="Kidnap_Line_003" xml:space="preserve">
+    <value>[tmp]A free ride to treasure? Wow I could sure use a lift!</value>
+    <comment></comment>  </data>
+  <data name="Kidnap_Line_004" xml:space="preserve">
+    <value>[tmp]Is it just you? No one will miss you if you're gone? [br]Good.[br]Grab my strings, and we shall pass on to our final destination.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_001" xml:space="preserve">
+    <value>Explorers on this island have many reasons for ascending this mountain range.[pause=0] What are yours?</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_002" xml:space="preserve">
+    <value>May you find what you seek here.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_Curiosity" xml:space="preserve">
+    <value>But of course.[br]As the last unexplored region in the world,[pause=0] it is only natural for you to be drawn here.[br]Some may fear the unknown,[pause=0] but you are among those that are drawn to it.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_Fame" xml:space="preserve">
+    <value>I see...[pause=0] so you have been lured by the rumors of the Guildmaster's promise.[br]That any team that reaches the top shall be named their successor.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_Fortune" xml:space="preserve">
+    <value>The hidden treasures of the legendary exploration team![br]I too have heard the rumors of how they locked their fortunes deep within this island.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_Strength" xml:space="preserve">
+    <value>Ah,[pause=0] our goals are one and the same.[br]Absent any desire for material gains,[pause=0] I am merely here to hone my body and mind.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Line_Unknown" xml:space="preserve">
+    <value>Indecisive?[pause=0] Perhaps you will find a purpose nonetheless.[br]Experiencing the Mystery Dungeons can reveal things about yourself that you may not even know.</value>
+    <comment></comment>  </data>
+  <data name="Monk_Option_Curiosity" xml:space="preserve">
+    <value>Adventure</value>
+    <comment></comment>  </data>
+  <data name="Monk_Option_Fame" xml:space="preserve">
+    <value>Fame</value>
+    <comment></comment>  </data>
+  <data name="Monk_Option_Fortune" xml:space="preserve">
+    <value>Fortune</value>
+    <comment></comment>  </data>
+  <data name="Monk_Option_Strength" xml:space="preserve">
+    <value>Strength</value>
+    <comment></comment>  </data>
+  <data name="Monk_Option_Unknown" xml:space="preserve">
+    <value>Don't know...</value>
+    <comment></comment>  </data>
+  <data name="Pachirisu_Done_Line_001" xml:space="preserve">
+    <value>[tmp]Thanks for helping us out![br]Have a reward!</value>
+    <comment></comment>  </data>
+  <data name="Pachirisu_Help_Line_001" xml:space="preserve">
+    <value>[tmp]Doduo's stuck in Trickster Woods (later Deserted Fortress)![br]We had an escape orb but it became sticky![br]Please help!</value>
+    <comment></comment>  </data>
+  <data name="Pachirisu_Help_Line_002" xml:space="preserve">
+    <value>[tmp]Doduo's stuck in Trickster Woods (later Deserted Fortress)![br]There were too many enemies, I had to Run Away![br]Please help!</value>
+    <comment></comment>  </data>
+  <data name="Pachirisu_Line_001" xml:space="preserve">
+    <value>[tmp]Some moves like Tackle and Quick Attack can send you forward. You can use them to outpace your foes, and even cross short gaps!</value>
+    <comment></comment>  </data>
+  <data name="Pachirisu_Line_002" xml:space="preserve">
+    <value>[tmp]We should mix up our strategy and use our speed for offense too!</value>
+    <comment></comment>  </data>
+  <data name="Rival_1_Line_001" xml:space="preserve">
+    <value>I can't stand that {0}![pause=0] I can't let her get ahead of me!</value>
+    <comment></comment>  </data>
+  <data name="Rival_2_Line_001" xml:space="preserve">
+    <value>I can't stand that {0}![pause=0] I can't let her get ahead of me!</value>
+    <comment></comment>  </data>
+  <data name="Rival_Line_001" xml:space="preserve">
+    <value></value>
+    <comment></comment>  </data>
+  <data name="Seer_Line_001" xml:space="preserve">
+    <value>[tmp]We're Team Firecracker! We're performers!</value>
+    <comment></comment>  </data>
+  <data name="Seer_Line_002" xml:space="preserve">
+    <value>[tmp]We're Team Occult! Let me read your fortune.</value>
+    <comment></comment>  </data>
+  <data name="Shroomish_Line_001" xml:space="preserve">
+    <value>Come on,[pause=20] one more try![pause=0] We can do it with just the two of us!</value>
+    <comment></comment>  </data>
+  <data name="Sightseer_Line_001" xml:space="preserve">
+    <value>The path through {0} is filled with apricorns, berries, and seeds.[scroll]But venture too deep,[pause=0] and you might find yourself in some dense undergrowths.</value>
+    <comment></comment>  </data>
+  <data name="Sightseer_Quest_Line_001" xml:space="preserve">
+    <value>[tmp]I'm worried about meowth.[br]He was last seen getting carried off by a drifloon.[br]They were floating in the direction of Secret Garden (later Oblivion Valley).[br]Please rescue.</value>
+    <comment></comment>  </data>
+  <data name="Sightseer_Quest_Line_002" xml:space="preserve">
+    <value>[tmp]Please rescue meowth at Secret Garden (later Oblivion Valley).</value>
+    <comment></comment>  </data>
+  <data name="Sightseer_Quest_Line_003" xml:space="preserve">
+    <value>[tmp]My intuition was correct. Thank you for rescuing meowth.</value>
+    <comment></comment>  </data>
+  <data name="Solo_Line_001" xml:space="preserve">
+    <value>[tmp]I don't need teammates, I can get through myself!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Complete_001" xml:space="preserve">
+    <value>Thanks to your help,[pause=0] the way to {0} is safe again.[br]Take is as a reward![pause=0] Our premium rations!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_001" xml:space="preserve">
+    <value>You were blocked by a {0}?</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_002" xml:space="preserve">
+    <value>That's right,[pause=0] and we would've been stuck longer if it wasn't for {0} over here!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_003" xml:space="preserve">
+    <value>I see.[pause=0] But that still doesn't explain the missing inventory!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_004" xml:space="preserve">
+    <value>Well, we had another incident in {1}...[scroll]We were approached by a {0},[pause=0] who said he was part of the {2}!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_005" xml:space="preserve">
+    <value>The {0}?</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_006" xml:space="preserve">
+    <value>He said the woods belonged to them, and we needed to pay a fee to pass.</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_007" xml:space="preserve">
+    <value>What?[pause=30] A fee!?[br]That's no guardian,[pause=30] that's just a lousy bandit![pause=0]\nHe won't get away with this!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_008" xml:space="preserve">
+    <value>I don't know if we should cross the clan...[pause=0]\nthey sound like they mean business.</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_009" xml:space="preserve">
+    <value>Well we just can't let this go![pause=0] I'm not letting those cretins eat into my supply chain!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Help_010" xml:space="preserve">
+    <value>{0}, you're the ones that helped us with the {1} problem, right?[br]I'm putting a bounty on that {2}![br]If you can teach him a lesson and clear the trail for us,[pause=0] I'll give you a reward.</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_001" xml:space="preserve">
+    <value>Confound it![pause=0] Where are those two slackers?[br]{0} and {1} were supposed to be here with the supplies a long time ago!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_002" xml:space="preserve">
+    <value>[tmp]I'll wait one more day.</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_003" xml:space="preserve">
+    <value>If only someone could chase that {0} out of {1}!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_004" xml:space="preserve">
+    <value>With the route safe again, we can head for the next camp!</value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_005" xml:space="preserve">
+    <value></value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_006" xml:space="preserve">
+    <value></value>
+    <comment></comment>  </data>
+  <data name="Storehouse_Line_Route" xml:space="preserve">
+    <value>[tmp]I'm on my routine route in forest camp!</value>
+    <comment></comment>  </data>
+  <data name="Undergrowth_Intro_001" xml:space="preserve">
+    <value>We're Team Undergrowth.[pause=0] Pleased to meet you.</value>
+    <comment></comment>  </data>
+  <data name="Unlucky_Done_Line_001" xml:space="preserve">
+    <value>[tmp]Thanks for rescuing me, I should be more wary of strangers![br]Here, this is the free rare item they gave me but everytime I look at it I get bad vibes.[br]It's yours.</value>
+    <comment></comment>  </data>
+  <data name="Unlucky_Done_Line_002" xml:space="preserve">
+    <value>[tmp]I should be more wary of strangers![br]I'm taking the path to Ravine Camp myself now!</value>
+    <comment></comment>  </data>
+</root>

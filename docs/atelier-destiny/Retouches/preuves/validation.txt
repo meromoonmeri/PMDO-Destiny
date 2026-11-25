@@ -1,0 +1,136 @@
+Validation du lot Fosse Cascade & Réverie — PMDO 0.8.12
+
+15 suites ciblées passent. Campagne complète du pré-audit non rejouée.
+
+index.idx écrit : 205452392 octets, 2283 planches
+ATTENTION : > 100 Mio — fichier généré ignoré par Git, à ne pas versionner en blob ordinaire
+OK (reconstitué) game/Data/Ground/reverie_centre.rsground (36704846 octets)
+OK (reconstitué) game/Data/Ground/reverie_nord.rsground (36704844 octets)
+OK (reconstitué) game/Data/Ground/WaterfallVillageCapital.rsground (36710525 octets)
+OK (reconstitué) game/Data/Ground/reverie_residentiel.rsground (36682577 octets)
+OK (reconstitué) game/Data/Ground/reverie_etang.rsground (36676902 octets)
+OK (reconstitué) game/Data/Ground/reverie_centre_Dev.rsground (36704850 octets)
+OK (reconstitué) game/Data/Ground/reverie_nord_Dev.rsground (36704848 octets)
+OK (reconstitué) game/Data/Ground/WaterfallVillageCapital_Dev.rsground (36710529 octets)
+OK (reconstitué) game/Data/Ground/reverie_residentiel_Dev.rsground (36682581 octets)
+OK (reconstitué) game/Data/Ground/reverie_etang_Dev.rsground (36676906 octets)
+OK (régénéré) game/Content/Tile/index.idx
+Files checked: 17842
+Source size: 3903.5 MiB
+Largest file: game/Content/Tile/index.idx (195.93 MiB)
+Git LFS: none
+Submodules: none
+VALIDATION OK
+PASS Réverie : réponses décalées, quartier visible, scènes et interactions prioritaires, comptoirs fixes.
+PASS : 10 variantes synchronisées, tuiles natives valides, 4 arbres complets et 4 raccords bornés.
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
+PASS Fosse Cascade : 9 étages, cascade ewc3, Fosse Cascade Fond Kabutops, scripts Lua et retours vérifiés.
+PASS WaterfallVillageCapital 11 calques, décor intégral et métadonnées jeu/édition
+PASS reverie_centre 11 calques, décor intégral et métadonnées jeu/édition
+PASS reverie_nord 11 calques, décor intégral et métadonnées jeu/édition
+PASS reverie_residentiel 11 calques, décor intégral et métadonnées jeu/édition
+PASS reverie_etang 11 calques, décor intégral et métadonnées jeu/édition
+OK : 10 cartes, objets entiers, animations, retouches et banques v0.5.2.
+PASS 10 cartes synchronisées, 30 raccords animés, banques et garde-fous cinématique
+Intérieurs WIP : 21 788 références de tuiles et associations statiques vérifiées.
+PASS changements de quartier, retours et absence des escaliers internes (doublures)
+PASS migration ancienne instance du centre : obstacles
+PASS migration ancienne instance du centre : habitants
+PASS migration ancienne instance du centre : les deux
+PASS union exacte jeu 7095 cases ; étang ouvert ( 107 cases ) et résidentiel inchangé
+PASS union exacte _Dev 7095 cases ; étang ouvert ( 107 cases ) et résidentiel inchangé
+PASS passage (120, 952) (120, 888)
+PASS passage (776, 872) (776, 808)
+PASS passage (1200, 872) (1200, 808)
+PASS passage étang vers falaise_promontoire (1120,2352) -> (1576,2056)
+PASS zone, alias et liaisons existantes ; partie réelle nécessaire
+
+=== test_ambiances_reverie_et_cinematiques.py ===
+PASS quatre temps, bornes et tirage unique par jour
+PASS dix variantes et carrefour : pluie identique, autres statuts conservés
+PASS aucun effet et aucun tirage dans les intérieurs ou cartes exclues
+PASS rechargement, jour suivant et migration ancienne sauvegarde simulés
+[Destiny] Météo extérieure indisponible : [string "<python>"]:37: simulation erreur moteur
+PASS effet indisponible : erreur confinée
+PASS carrefour Init et GameLoad, sorties intactes
+PASS synchronisation 4 ambiances LUT (sans dark) et routage auto carrefour
+TEST AMBIANCES REVERIE ET CINEMATIQUES OK
+exit=0
+
+=== test_e2_reverie.py ===
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+Sortie E2 : structure, indicateurs, Bois Perdus et Fosse Cascade vérifiés.
+exit=0
+
+=== Architecture, circulation et banques : dernière passe ===
+
+=== reverie_architecture ===
+Copie 11 calques validée et créée sans fusion.
+PASS 11 calques, cascades, compilation exacte et protection des fichiers ; témoin historique 37 calques.
+exit=0
+
+=== carrefour_reverie ===
+OK : carte, tuiles, musique, liaisons et parcours estimé ; essai PMDO encore nécessaire.
+exit=0
+
+=== entrees_reverie ===
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS entrée et retour simulés PortePosteBekipan
+PASS entrée et retour simulés PorteCitrouilleNordOuest
+PASS entrée et retour simulés PorteHutteNordEst
+PASS entrée et retour simulés PorteDojoKingambit
+PASS entrée et retour simulés PorteHutteSud
+PASS entrée et retour simulés PorteMaisonPierre
+PASS entrée et retour simulés PorteMaisonPlanteSud
+PASS entrée et retour simulés PorteCitrouilleSud
+PASS garde, états anciens, café et sorties répétées (doublures)
+PASS prénoms sur habitants, Baudrive anonyme et équipe inchangée
+PASS café : noms cohérents, circulation, retours distincts et gardes répétées (doublures)
+PASS ancien raccord Ledian désactivé, dojo Kingambit intact
+PASS reverie_nord contacts et retours sur grille statique
+PASS reverie_centre contacts et retours sur grille statique
+PASS reverie_residentiel contacts et retours sur grille statique
+PASS destinations, marqueurs, seuils, retours ; gameplay non testé
+exit=0
+
+=== tableaux_reverie ===
+PASS : mission quotidienne débloquée, acceptation, échec, réussite, récompense unique, renouvellement et gazette (doubles).
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+PASS tableau : ancien état, acceptation unique, échec, réussite, récompense unique, jour suivant
+PASS maison : refus sauvegarde, sauvegarde confirmée, sortie unique et marqueur retour
+PASS porte bloquée avant visite, partenaire ignoré, entrée et retour sans chevauchement
+PASS zone et index, sortie et accès statique aux deux lits
+Tableaux et mission quotidienne : vérifications structurelles OK ; test en jeu nécessaire.
+exit=0
+
+=== tilessheets_reverie ===
+PASS WaterfallVillageCapital_Dev 201661 frames, carte initiale exactement reconstituée
+PASS reverie_centre_Dev 181983 frames, carte initiale exactement reconstituée
+PASS reverie_nord_Dev 133703 frames, carte initiale exactement reconstituée
+PASS reverie_residentiel_Dev 166923 frames, carte initiale exactement reconstituée
+PASS reverie_etang_Dev 165133 frames, carte initiale exactement reconstituée
+PASS WaterfallVillageCapital 201661 frames, carte initiale exactement reconstituée
+PASS reverie_centre 181983 frames, carte initiale exactement reconstituée
+PASS reverie_nord 133703 frames, carte initiale exactement reconstituée
+PASS reverie_residentiel 166923 frames, carte initiale exactement reconstituée
+PASS reverie_etang 165133 frames, carte initiale exactement reconstituée
+PASS 14 nouvelles planches, 39091 tuiles identiques à la source, toutes frames préservées
+exit=0
+
+=== Waterfall Village : relance après intégration de la nouvelle banque ===
+OK : Waterfall Village étendue, 14 banques Réverie autonomes, habitants, objets, décorations town02 et comptoirs des marchands.
+
+=== Génération répétable des 10 payloads et de la banque ===
+{"herbe_cellules": 7982, "arbres": [{"avant_case": [-2, 297], "apres_case": [0, 297], "cellules_rognées": 64}, {"avant_case": [-1, 338], "apres_case": [0, 338], "cellules_rognées": 71}, {"avant_case": [195, 319], "apres_case": [190, 319], "cellules_rognées": 38}, {"avant_case": [192, 337], "apres_case": [190, 337], "cellules_rognées": 64}], "chemins": [{"nom": "Ruban de la terrasse du Café et coude sud", "rectangle_px": [552, 1400, 1080, 1544], "cellules": 322, "pistes_statiques_regroupees": 10}, {"nom": "Raccord du sable au pied de l’escalier est", "rectangle_px": [1424, 576, 1496, 624], "cellules": 37, "pistes_statiques_regroupees": 25}, {"nom": "Couture sableuse de l’allée ouest", "rectangle_px": [48, 2328, 136, 2432], "cellules": 88, "pistes_statiques_regroupees": 102}, {"nom": "Couture de la place ouest vers le sud", "rectangle_px": [120, 1224, 200, 1304], "cellules": 64, "pistes_statiques_regroupees": 66}], "pistes": {"avant": [116340, 11420, 10408, 0, 7730, 0, 25906, 3157, 2462, 0, 0], "apres": [116137, 11420, 10408, 0, 7730, 0, 25973, 3157, 2462, 0, 0]}, "banque": {"nom": "Reverie_Raccords_Polish", "cellules": 494}}
+
+=== Diff source ===
+git diff --check : OK

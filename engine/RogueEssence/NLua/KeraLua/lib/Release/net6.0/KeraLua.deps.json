@@ -1,0 +1,52 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "KeraLua/1.0.0": {
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.CodeStyle": "4.0.1",
+          "Microsoft.CodeAnalysis.NetAnalyzers": "6.0.0",
+          "RefactoringEssentials": "5.6.0"
+        },
+        "runtime": {
+          "KeraLua.dll": {}
+        }
+      },
+      "Microsoft.CodeAnalysis.CSharp.CodeStyle/4.0.1": {},
+      "Microsoft.CodeAnalysis.NetAnalyzers/6.0.0": {},
+      "RefactoringEssentials/5.6.0": {}
+    }
+  },
+  "libraries": {
+    "KeraLua/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.CodeAnalysis.CSharp.CodeStyle/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z0k1CuGmNiURlzyCauo3IXPYxMqP3DQ2KxW8fp+FNSylTymsFh2zlDE98lHttEbi8b06uMwKjgQQ/lN1pQoVPw==",
+      "path": "microsoft.codeanalysis.csharp.codestyle/4.0.1",
+      "hashPath": "microsoft.codeanalysis.csharp.codestyle.4.0.1.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.NetAnalyzers/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cjG06LMeOADNUeCUaklOfVgrnVkLy80H5PVll4QHDUXv+C+6G9rHczrNdWjfb3xKv3Ts9s4UsP6J2ZWe52Gz4Q==",
+      "path": "microsoft.codeanalysis.netanalyzers/6.0.0",
+      "hashPath": "microsoft.codeanalysis.netanalyzers.6.0.0.nupkg.sha512"
+    },
+    "RefactoringEssentials/5.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+Pzgxi43EDSLipnXOAYl9tO+78ivupQRTQCY6/OxsV0GvOsul+Sh2mYellZLk//iCcWawsXABxOAABttptBNEg==",
+      "path": "refactoringessentials/5.6.0",
+      "hashPath": "refactoringessentials.5.6.0.nupkg.sha512"
+    }
+  }
+}

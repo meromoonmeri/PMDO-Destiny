@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\targets\BuildLua.Common.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B766E88-5872-4437-882D-C887A3C0CDF7}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>KeraLua.Android</RootNamespace>
+    <AssemblyName>KeraLua</AssemblyName>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\lib\Debug\MonoAndroid</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <JavaMaximumHeapSize>
+    </JavaMaximumHeapSize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+    <OutputPath>..\..\lib\Release\MonoAndroid</OutputPath>
+    <DefineConstants>__MOBILE__;__ANDROID__</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <JavaMaximumHeapSize>
+    </JavaMaximumHeapSize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>..\..\lib\Release\MonoAndroid\KeraLua.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedNativeLibrary Include="$(OutputRuntimeDir)\android-arm64\native\liblua54.so">
+      <Link>libs\arm64-v8a\liblua54.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="$(OutputRuntimeDir)\android-arm\native\liblua54.so">
+      <Link>libs\armeabi-v7a\liblua54.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="$(OutputRuntimeDir)\android-x86\native\liblua54.so">
+      <Link>libs\x86\liblua54.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="$(OutputRuntimeDir)\android-x64\native\liblua54.so">
+      <Link>libs\x86_64\liblua54.so</Link>
+    </EmbeddedNativeLibrary>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="..\targets\BuildLua.Android.targets" />
+  <Import Project="..\..\src\KeraLua.Core.projitems" Label="Shared" Condition="Exists('..\..\src\KeraLua.Core.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="..\targets\KeraLua.Sign.targets" />
+</Project>

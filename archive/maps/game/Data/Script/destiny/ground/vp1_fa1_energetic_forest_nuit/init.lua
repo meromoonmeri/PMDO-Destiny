@@ -1,0 +1,22 @@
+-- Squelette de script Destiny pour une carte importée de l'atelier guilde-treehouse-pmd.
+-- La carte ne déclare aucun callback : simple fondu d'entrée (règle L16 du manuel).
+-- Cinématiques et raccordements : à écrire (voir PROJECT_CONTEXT.md).
+require 'origin.common'
+
+local vp1_fa1_energetic_forest_nuit = {}
+
+function vp1_fa1_energetic_forest_nuit.Init(map)
+end
+
+function vp1_fa1_energetic_forest_nuit.Enter(map)
+  GAME:FadeIn(30)
+end
+
+function vp1_fa1_energetic_forest_nuit.GameLoad(map)
+  GAME:FadeIn(30)
+end
+
+function vp1_fa1_energetic_forest_nuit.Update(map, time)
+end
+
+return vp1_fa1_energetic_forest_nuit

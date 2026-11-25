@@ -1,0 +1,70 @@
+{
+  "description": "Concepts générés aplatis, pas de ressources natives ni de cartes jouables",
+  "fichiers": [
+    {
+      "nom": "01-hall-missions.png",
+      "octets": 2090536,
+      "sha256": "9aaa9ed7d4d284038e2a66c0c6d211cb91ac0fe470d53acaf401ef4e117d0280"
+    },
+    {
+      "nom": "02-salle-commune-corrige.png",
+      "octets": 2259886,
+      "sha256": "5827ad39306ffdeb1b84b141fa9bfd3b95045436014280a2a8141af467b96510"
+    },
+    {
+      "nom": "02-salle-commune.png",
+      "octets": 2204613,
+      "sha256": "938010cd7751ec3faaf8aa3a1f1634c788044ce9c4cdea37e1560d652acd207a"
+    },
+    {
+      "nom": "03-cantine-corrige.png",
+      "octets": 2501939,
+      "sha256": "d11e28ffb785f33268c454cc5faf39a49eff13a85dc0e4f08b096e86460fd157"
+    },
+    {
+      "nom": "03-cantine.png",
+      "octets": 2345107,
+      "sha256": "fdca927d7aa1a5e46e681bd5e6831c225fe90b599d4001f6f6995596b478a355"
+    },
+    {
+      "nom": "04-salle-chef.png",
+      "octets": 2351742,
+      "sha256": "a5850f9b9e32a7548b5cc9deb5b0fbad802b5bf44b999b1f707e8d876e0a3579"
+    },
+    {
+      "nom": "05-chambre-equipe.png",
+      "octets": 1950384,
+      "sha256": "740ca12fe79843c2a825f9a5355c26790eeb71c5cff85be1c7a6341d7339223d"
+    },
+    {
+      "nom": "06-dortoir-corrige.png",
+      "octets": 2276625,
+      "sha256": "9a10eace60f35c7c75560fd448acd1d2a34a0edb2c1d2c95c967695aa8986d7b"
+    },
+    {
+      "nom": "06-dortoir.png",
+      "octets": 2293472,
+      "sha256": "cc803eddc991fe1f76c88737c66b3cb4417b6c800a12751ef773a86fb47f7d52"
+    },
+    {
+      "nom": "RAPPORT-PREALABLE.md",
+      "octets": 1004,
+      "sha256": "c97b495dc3dfaeff1eb5953985701b406b95032a174646f732ace3e9ca0164c4"
+    },
+    {
+      "nom": "RESULTATS.md",
+      "octets": 1827,
+      "sha256": "2ae83e4980185af8499f11183422085b45d090aa344e6ba5e4528177add96df9"
+    },
+    {
+      "nom": "vue-salles-arrondies.jpg",
+      "octets": 273952,
+      "sha256": "de99e4ad1b63b3512cc090378d0724d1205dc942c4935c185e7a822a1a49b0b5"
+    },
+    {
+      "nom": "apercu-salles.html",
+      "octets": 1056207,
+      "sha256": "198c4e4069b41f245e4eb255721a6126adffd4afa23b6a0772c8e6422578e02b"
+    }
+  ]
+}

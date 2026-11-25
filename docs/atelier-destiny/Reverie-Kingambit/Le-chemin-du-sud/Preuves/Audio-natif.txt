@@ -1,0 +1,5 @@
+Capture directe du son PMDO, sans ajout au montage. Corrélation sur piste mono :
+Lower Spring Cave — thème du souvenir : r=0.618 à 5.527 s (extrait de la source à +0.31 s).
+Tunnel de la garde : r=0.823 à 27.196 s (extrait de la source à +0.00 s).
+Dernier Tunnel, Kabutops : r=0.888 à 32.249 s (extrait de la source à +0.00 s).
+A Successful Rescue — accueil en ville : r=0.980 à 71.681 s (extrait de la source à +0.60 s).

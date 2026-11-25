@@ -1,0 +1,708 @@
+{
+  "finales": [
+    {
+      "type": "normal",
+      "chef": "Lockpin",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 8.22,
+        "VOIX": 9.709,
+        "VOIX_FIN": 12.744,
+        "LUMIERES": 13.149,
+        "PORTRAIT": 16.06,
+        "PORTRAIT_FIN": 19.109,
+        "RACCORD": 19.444,
+        "FIN": 22.412,
+        "COMBAT": 22.438
+      }
+    },
+    {
+      "type": "fire",
+      "chef": "Braségali",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 23.233,
+        "VOIX": 24.459,
+        "VOIX_FIN": 27.562,
+        "LUMIERES": 28.032,
+        "PORTRAIT": 31.109,
+        "PORTRAIT_FIN": 34.193,
+        "RACCORD": 34.54,
+        "FIN": 38.283,
+        "COMBAT": 38.284
+      }
+    },
+    {
+      "type": "water",
+      "chef": "Tortank",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 39.172,
+        "VOIX": 40.542,
+        "VOIX_FIN": 43.648,
+        "LUMIERES": 44.061,
+        "PORTRAIT": 47.192,
+        "PORTRAIT_FIN": 50.283,
+        "RACCORD": 50.615,
+        "FIN": 53.611,
+        "COMBAT": 53.612
+      }
+    },
+    {
+      "type": "grass",
+      "chef": "Jungko",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 54.398,
+        "VOIX": 55.643,
+        "VOIX_FIN": 58.726,
+        "LUMIERES": 59.13,
+        "PORTRAIT": 61.659,
+        "PORTRAIT_FIN": 64.726,
+        "RACCORD": 65.059,
+        "FIN": 68.062,
+        "COMBAT": 68.072
+      }
+    },
+    {
+      "type": "electric",
+      "chef": "Élecsprint",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 68.888,
+        "VOIX": 70.202,
+        "VOIX_FIN": 73.286,
+        "LUMIERES": 73.679,
+        "PORTRAIT": 76.676,
+        "PORTRAIT_FIN": 79.747,
+        "RACCORD": 80.109,
+        "FIN": 83.1,
+        "COMBAT": 83.102
+      }
+    },
+    {
+      "type": "ice",
+      "chef": "Oniglali",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 83.901,
+        "VOIX": 85.226,
+        "VOIX_FIN": 88.276,
+        "LUMIERES": 88.668,
+        "PORTRAIT": 91.292,
+        "PORTRAIT_FIN": 94.376,
+        "RACCORD": 94.709,
+        "FIN": 98.165,
+        "COMBAT": 98.177
+      }
+    },
+    {
+      "type": "fighting",
+      "chef": "Lucario",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 99.285,
+        "VOIX": 100.726,
+        "VOIX_FIN": 103.848,
+        "LUMIERES": 104.329,
+        "PORTRAIT": 107.829,
+        "PORTRAIT_FIN": 110.908,
+        "RACCORD": 111.515,
+        "FIN": 117.521,
+        "COMBAT": 117.523
+      }
+    },
+    {
+      "type": "poison",
+      "chef": "Ectoplasma",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 119.093,
+        "VOIX": 120.678,
+        "VOIX_FIN": 123.721,
+        "LUMIERES": 124.207,
+        "PORTRAIT": 128.409,
+        "PORTRAIT_FIN": 131.463,
+        "RACCORD": 131.81,
+        "FIN": 135.439,
+        "COMBAT": 135.441
+      }
+    },
+    {
+      "type": "ground",
+      "chef": "Laggron",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 136.357,
+        "VOIX": 137.972,
+        "VOIX_FIN": 141.03,
+        "LUMIERES": 141.583,
+        "PORTRAIT": 145.198,
+        "PORTRAIT_FIN": 148.307,
+        "RACCORD": 148.773,
+        "FIN": 153.353,
+        "COMBAT": 153.353
+      }
+    },
+    {
+      "type": "flying",
+      "chef": "Dracaufeu",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 154.368,
+        "VOIX": 156.708,
+        "VOIX_FIN": 159.762,
+        "LUMIERES": 160.297,
+        "PORTRAIT": 164.326,
+        "PORTRAIT_FIN": 167.442,
+        "RACCORD": 167.776,
+        "FIN": 170.862,
+        "COMBAT": 170.863
+      }
+    },
+    {
+      "type": "psychic",
+      "chef": "Alakazam",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 171.652,
+        "VOIX": 172.893,
+        "VOIX_FIN": 175.976,
+        "LUMIERES": 176.38,
+        "PORTRAIT": 178.992,
+        "PORTRAIT_FIN": 182.063,
+        "RACCORD": 182.426,
+        "FIN": 185.616,
+        "COMBAT": 185.617
+      }
+    },
+    {
+      "type": "bug",
+      "chef": "Dardargnan",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 186.482,
+        "VOIX": 187.73,
+        "VOIX_FIN": 190.828,
+        "LUMIERES": 191.288,
+        "PORTRAIT": 194.009,
+        "PORTRAIT_FIN": 197.111,
+        "RACCORD": 197.445,
+        "FIN": 200.695,
+        "COMBAT": 200.696
+      }
+    },
+    {
+      "type": "rock",
+      "chef": "Tyranocif",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 201.512,
+        "VOIX": 202.909,
+        "VOIX_FIN": 205.969,
+        "LUMIERES": 206.37,
+        "PORTRAIT": 209.076,
+        "PORTRAIT_FIN": 212.117,
+        "RACCORD": 212.446,
+        "FIN": 215.614,
+        "COMBAT": 215.615
+      }
+    },
+    {
+      "type": "ghost",
+      "chef": "Branette",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 216.397,
+        "VOIX": 217.776,
+        "VOIX_FIN": 220.829,
+        "LUMIERES": 221.274,
+        "PORTRAIT": 223.988,
+        "PORTRAIT_FIN": 227.016,
+        "RACCORD": 227.343,
+        "FIN": 230.362,
+        "COMBAT": 230.363
+      }
+    },
+    {
+      "type": "dragon",
+      "chef": "Altaria",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 231.152,
+        "VOIX": 232.413,
+        "VOIX_FIN": 235.493,
+        "LUMIERES": 235.901,
+        "PORTRAIT": 238.926,
+        "PORTRAIT_FIN": 242.072,
+        "RACCORD": 242.461,
+        "FIN": 246.589,
+        "COMBAT": 246.59
+      }
+    },
+    {
+      "type": "dark",
+      "chef": "Démolosse",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 247.623,
+        "VOIX": 248.99,
+        "VOIX_FIN": 252.127,
+        "LUMIERES": 252.613,
+        "PORTRAIT": 255.295,
+        "PORTRAIT_FIN": 258.344,
+        "RACCORD": 258.676,
+        "FIN": 261.729,
+        "COMBAT": 261.733
+      }
+    },
+    {
+      "type": "steel",
+      "chef": "Métalosse",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 262.595,
+        "VOIX": 263.859,
+        "VOIX_FIN": 266.931,
+        "LUMIERES": 267.447,
+        "PORTRAIT": 269.993,
+        "PORTRAIT_FIN": 273.033,
+        "RACCORD": 273.36,
+        "FIN": 276.825,
+        "COMBAT": 276.826
+      }
+    },
+    {
+      "type": "fairy",
+      "chef": "Gardevoir",
+      "fond_noir_fraction": 1.0,
+      "positions": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "map_clear_check": true,
+      "moteur": "0.8.12.0",
+      "camera_direction_musique_restaures": true,
+      "phases_capture": {
+        "DEPART": 277.758,
+        "VOIX": 279.076,
+        "VOIX_FIN": 282.143,
+        "LUMIERES": 282.536,
+        "PORTRAIT": 284.893,
+        "PORTRAIT_FIN": 288.709,
+        "RACCORD": 289.043,
+        "FIN": 292.012,
+        "COMBAT": 292.013
+      }
+    }
+  ],
+  "trappe": {
+    "INTERACTION": 5.695,
+    "CHOIX": 7.578,
+    "CONFIRMER": 8.888,
+    "CONFIRMER_FIN": 14.534,
+    "MECANISME": 18.043,
+    "PENE_GAUCHE": 18.464,
+    "PENE_DROIT": 18.744,
+    "CHUTE": 19.848,
+    "RESTAURE": 22.356,
+    "ALL": 22.811
+  },
+  "chapitres": [
+    [
+      "Kaito — La trappe mécanique",
+      0,
+      17766
+    ],
+    [
+      "Normal · Lockpin — Les trois échos",
+      17766,
+      32633
+    ],
+    [
+      "Feu · Braségali — La braise sous la cendre",
+      32633,
+      48333
+    ],
+    [
+      "Eau · Tortank — La salle en ressac",
+      48333,
+      63433
+    ],
+    [
+      "Plante · Jungko — Les vrilles du seuil",
+      63433,
+      77766
+    ],
+    [
+      "Électrik · Élecsprint — Le circuit fermé",
+      77766,
+      92633
+    ],
+    [
+      "Glace · Oniglali — La fissure muette",
+      92633,
+      107566
+    ],
+    [
+      "Combat · Lucario — La mesure du poing",
+      107566,
+      126466
+    ],
+    [
+      "Poison · Ectoplasma — Les spores au ras du sol",
+      126466,
+      143466
+    ],
+    [
+      "Sol · Laggron — Les trois évents",
+      143466,
+      161133
+    ],
+    [
+      "Vol · Dracaufeu — Le plafond en mouvement",
+      161133,
+      178299
+    ],
+    [
+      "Psy · Alakazam — Le prisme dédoublé",
+      178299,
+      192932
+    ],
+    [
+      "Insecte · Dardargnan — L’alvéole se referme",
+      192932,
+      207798
+    ],
+    [
+      "Roche · Tyranocif — La dalle qui rompt",
+      207798,
+      222564
+    ],
+    [
+      "Spectre · Branette — Les lanternes sans porteur",
+      222564,
+      237197
+    ],
+    [
+      "Dragon · Altaria — Le chant dans la voûte",
+      237197,
+      253297
+    ],
+    [
+      "Ténèbres · Démolosse — Les veilles dans l’ombre",
+      253297,
+      268064
+    ],
+    [
+      "Acier · Métalosse — L’arrêt du cliquet",
+      268064,
+      282964
+    ],
+    [
+      "Fée · Gardevoir — Les lucioles en couronne",
+      282964,
+      297864
+    ]
+  ],
+  "sha256_video": "fc2148e50a82fa436f7a8b125aefb3489c9052f42d94b41d630fe3617a7b9199"
+}

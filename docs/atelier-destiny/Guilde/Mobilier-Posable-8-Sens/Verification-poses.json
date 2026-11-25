@@ -1,0 +1,62 @@
+{
+  "statut": "PASS",
+  "banque": 1108,
+  "vues": 8864,
+  "tests_pose_avec_ou_sans_miroir": 17728,
+  "plan_ok": true,
+  "pivots_verifies": [
+    {
+      "i": 0,
+      "x": 212,
+      "y": 220,
+      "hash": "3c5e6da5764377dc7c2dcf1877d852026e21c1d3bc6fdb37d79aa6ed6808f9f3"
+    },
+    {
+      "i": 1,
+      "x": 212,
+      "y": 220,
+      "hash": "ca7a4e61759c452f77aab62afd7b51177e8ceb82573e5b5fe88ed606ac34a30b"
+    },
+    {
+      "i": 2,
+      "x": 212,
+      "y": 220,
+      "hash": "1fe63d3e04197103077816e29fc3fcc1adb08e23bef82ab248547789a8f28b58"
+    },
+    {
+      "i": 3,
+      "x": 212,
+      "y": 220,
+      "hash": "496057f5b4eff7ac1093a45c88c5e904ee8b0556d5601869eed2a81f06caf870"
+    },
+    {
+      "i": 4,
+      "x": 212,
+      "y": 220,
+      "hash": "63f6abc81e7fda5f517e22df564330bf2e5c4063f0da2be1365657638139767e"
+    },
+    {
+      "i": 5,
+      "x": 212,
+      "y": 220,
+      "hash": "f94a50b5efdbdb6a0c66eaa4539a5dc95e1d4363a54f2cdadfa8812406a22610"
+    },
+    {
+      "i": 6,
+      "x": 212,
+      "y": 220,
+      "hash": "1dc6df400c04b7c645ac8dd4fa282827d17ec789490415299d05bfe12591e050"
+    },
+    {
+      "i": 7,
+      "x": 212,
+      "y": 220,
+      "hash": "02541007ec168a587f0af2d9e8887df8c987248f64c20272950a27d40aa3dd01"
+    }
+  ],
+  "glisser": true,
+  "import_export": true,
+  "export_png_et_plan": true,
+  "hors_ligne": true,
+  "mobile": true
+}

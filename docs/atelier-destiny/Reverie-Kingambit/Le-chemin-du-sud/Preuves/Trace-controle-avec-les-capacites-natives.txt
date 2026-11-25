@@ -1,0 +1,89 @@
+NOUVELLE_PARTIE niveau=50 phase=1 | tick=126960
+SOL phase=1 replay=true | tick=126960
+DIALOGUE Encore vous ? Cette fois, tenez-vous prêts. | tick=132600
+FIN_TEXTE | tick=154440
+WOOSH_DEBUT | tick=156840
+WOOSH_FIN | tick=179400
+CONTROLE_PRIVE Kabutops 1 PV | tick=183000
+ENNEMI kabutops nv=14 PV=1/162 X:10 Y:8: 2 dir=Down: 0 | tick=183000
+ENNEMI kabuto nv=4 PV=16/16 X:8 Y:9: 1 dir=DownRight: 7 | tick=183000
+ENNEMI kabuto nv=4 PV=16/16 X:11 Y:9: 2 dir=DownLeft: 1 | tick=183000
+ENNEMI kabuto nv=3 PV=14/14 X:9 Y:12: 5 dir=Up: 4 | tick=183000
+ENNEMI kabuto nv=3 PV=14/14 X:10 Y:12: 6 dir=Up: 4 | tick=183000
+ARENE end_grotte_verdoyante Boss Battle 2.ogg replay=true | tick=183000
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:10: 0 dir=Up: 4 | tick=183240
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:9: 3 dir=Up: 4 | tick=423960
+SURVIVANTS kabutops:1@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Up: 4 | tick=527640
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Up: 4 | tick=528360
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:7: 13 dir=Down: 0 | tick=988680
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:8: 2 dir=Down: 0 | tick=989160
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:10 Y:8: 2 dir=DownRight: 7 | tick=1090200
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:16@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownRight: 7 | tick=1097880
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownRight: 7 | tick=1098600
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:12 Y:10: 6 dir=DownLeft: 1 | tick=1285320
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:14@10,12 fin joueur=X:9 Y:13: 4 dir=DownLeft: 1 | tick=1292280
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:0@10,12 fin joueur=X:9 Y:13: 4 dir=DownLeft: 1 | tick=1293000
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:0@10,12 fin joueur=X:9 Y:13: 4 dir=Up: 4 | tick=1802280
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:14@9,12 kabuto:0@10,12 fin joueur=X:9 Y:8: 1 dir=Up: 4 | tick=1809240
+SURVIVANTS kabutops:0@10,8 kabuto:16@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:0@10,12 fin joueur=X:9 Y:8: 1 dir=Up: 4 | tick=1809480
+SURVIVANTS kabutops:0@10,8 kabuto:0@8,9 kabuto:0@11,9 kabuto:0@9,12 kabuto:0@10,12 fin joueur=X:9 Y:8: 1 dir=Up: 4 | tick=2429160
+SOL phase=3 replay=true | tick=2446920
+TRIO partenaire=X:248 Y:244: 12 boss=X:280 Y:244: 492 hero=X:312 Y:244: 460 cadre=X:288 Y:242: 466 | tick=2450880
+DIALOGUE Je me suis emporté trop vite. J’ai accusé Nilo sans savoir. | tick=2455200
+FIN_TEXTE | tick=2481960
+MUSIQUE_SOUVENIR | tick=2485560
+DIALOGUE Avant, on venait boire ici en famille. Les petits faisaient la course sur le sable. | tick=2485560
+FIN_TEXTE | tick=2519880
+DIALOGUE Depuis les crues, le moindre éclair m’effraie. Ce n’est pas une excuse. | tick=2523960
+FIN_TEXTE | tick=2554560
+DIALOGUE Pardon, Nilo. Et pardon à vous deux de vous avoir attaqués. | tick=2558880
+FIN_TEXTE | tick=2585520
+NILO_APAISE | tick=2588880
+DIALOGUE Alors… je peux rentrer avec maman ? | tick=2590920
+FIN_TEXTE | tick=2610360
+DIALOGUE Oui. Kabuto, laissez-leur le passage. | tick=2612040
+FIN_TEXTE | tick=2631960
+PEUR Kabuto_Flanc_G | tick=2633400
+PEUR Kabuto_Flanc_D | tick=2634120
+PEUR Kabuto_Arriere_G | tick=2634960
+PEUR Kabuto_Arriere_D | tick=2635800
+TUNNEL_DEBUT Kabuto_Arriere_G X:265 Y:299: 34 | tick=2643360
+TERRE X:265 Y:299 cadre=X:288 Y:242: 466 | tick=2643840
+TUNNEL_DEBUT Kabuto_Arriere_D X:295 Y:299: 12 | tick=2644560
+TERRE X:295 Y:299 cadre=X:288 Y:242: 466 | tick=2645160
+TUNNEL_DEBUT Kabuto_Flanc_G X:238 Y:216: 54 | tick=2645880
+TUNNEL_SORTIE Kabuto_Arriere_G | tick=2646000
+TERRE X:238 Y:216 cadre=X:288 Y:242: 466 | tick=2646480
+TUNNEL_DEBUT Kabuto_Flanc_D X:322 Y:216: 410 | tick=2647320
+TUNNEL_SORTIE Kabuto_Arriere_D | tick=2647320
+TERRE X:322 Y:216 cadre=X:288 Y:242: 466 | tick=2647920
+TUNNEL_SORTIE Kabuto_Flanc_G | tick=2648640
+TUNNEL_SORTIE Kabuto_Flanc_D | tick=2650080
+DIALOGUE Au revoir, Nilo. Rentrez bien. | tick=2657760
+FIN_TEXTE | tick=2675640
+TUNNEL_DEBUT Kabutops_Boss X:280 Y:244: 492 | tick=2679720
+TERRE X:280 Y:244 cadre=X:288 Y:242: 466 | tick=2680320
+TUNNEL_SORTIE Kabutops_Boss | tick=2682480
+NILO_REDESCEND | tick=2686320
+LYRA_ENTREE | tick=2695560
+LYRA_ARRIVEE X:280 Y:288: 56 devant Nilo X:280 Y:256: 24 cadre=X:288 Y:250: 474 | tick=2706600
+DIALOGUE Nilo ! J’ai entendu du bruit. Que s’est-il passé ? | tick=2706600
+FIN_TEXTE | tick=2730480
+DIALOGUE Maman ! Je m’étais perdu. Kabutops croyait que j’avais fait déborder l’eau. | tick=2732640
+FIN_TEXTE | tick=2764440
+DIALOGUE L’équipe m’a défendu. Après le combat, Kabutops a compris et s’est excusé. | tick=2767200
+FIN_TEXTE | tick=2798760
+DIALOGUE Ouf… Vous allez bien tous les deux. On reprend le chemin du sud ? | tick=2803320
+FIN_TEXTE | tick=2831760
+DIALOGUE Oui. Rentrons à Réverie Town. Nilo, reste près de moi. | tick=2835120
+FIN_TEXTE | tick=2860560
+DEPART_SUD | tick=2862720
+SEUIL_SUD Lyra=X:200 Y:496: 312 Nilo=X:224 Y:496: 272 partenaire=X:208 Y:464: 256 hero=X:232 Y:464: 312 cadre=X:240 Y:408: 360 | tick=2881920
+FONDU_FINAL | tick=2883600
+NOIR_FINAL | tick=2890800
+BILAN_NATIF | tick=2894400
+DIALOGUE Nilo !! Lyra !! Vous voilà enfin rentrés tous ensemble ! | tick=2962080
+FIN_TEXTE | tick=2988120
+DIALOGUE Papa ! Tout le monde ! Ils ont tenu tête à Kabutops tout au fond de la Fosse Cascade pour me ramener ! | tick=2998080
+FIN_TEXTE | tick=3033240
+DIALOGUE Quel soulagement ! Toute la place retenait son souffle depuis votre départ ! | tick=3038400

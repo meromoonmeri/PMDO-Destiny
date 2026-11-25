@@ -1,0 +1,157 @@
+
+=== boutiques_kecleon ===
+PASS Zig / Zag : lots, achats, ventes, sauvegarde, rupture, réassort et Joliflor isolé
+60 références natives disponibles ; catalogue et transactions vérifiés.
+
+=== guilde_eat_runtime ===
+10/10 Eat de corps : forme 0, peau normale, sexe réel, index et pixels contrôlés.
+Les 10 convives et le centre sont accessibles ; le passage reste libre.
+
+=== guilde_effectif ===
+guilde_effectif : 17 groupes de tests OK
+guilde_reveil : 4 groupes de tests OK
+test_guilde_effectif : émotes, assets, scripts et comportement OK
+
+=== grotte_verdoyante ===
+PASS test_grotte_verdoyante.lua : cascade 24f synchrone, zone 9F, boss, sauvetage Nilo, ville et missions.
+PASS test_statue_kangourex.lua : stockage Kangourex (dépôt, retrait, argent) raccordé sans doublon.
+PASS Fosse Cascade : 9 étages, cascade ewc3, Fosse Cascade Fond Kabutops, scripts Lua et retours vérifiés.
+
+=== visite_marchands ===
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire vulpix, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire pikachu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire skitty, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte historique, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire eevee, carte centrale, témoins nommés, anonyme, temporaire et caché
+PASS partenaire riolu, carte centrale, témoins nommés, anonyme, temporaire et caché
+[Destiny] Visite de la ville suspendue : partenaire absent de l’équipe.
+PASS partenaire absent : visite suspendue
+PASS suite Lyra / Nilo : choix, annulation, déplacement et entrée Fosse Cascade
+[Destiny] Visite suspendue : un habitant occupe le trajet.
+PASS placement inattendu : visite suspendue sans traverser un habitant
+PASS dialogues après alerte / départ, banque préservée et variantes quotidiennes avant alerte
+PASS première entrée, introduction unique, suivi, actualité et retour Spinda
+PASS employé absent : écran visible et scène différée
+PASS trajet Spinda occupé : dialogue sans forcer
+[Destiny] Suivi intérieur indisponible : [string "<python>"]:10: simulation erreur suivi
+PASS suivi indisponible : fondu déjà effectué
+PASS retour étage : pas de première visite artificielle
+PASS escalier fermé pendant rénovation
+PASS escalier préservé pour une réouverture future
+PASS accueil pendant rénovation, pas de téléportation vers salles fermées
+PASS Pipo absent : scène et suivi conservés
+PASS sieste : nouveau jour et annonce sans effet intérieur
+[Destiny] café Spinda : étape ignorée (sortie sud) : ...e/Data/Script/destiny/ground/caféspindaaccueil/init.lua:34: attempt to call a nil value (method 'FindObject')
+[Destiny] café Spinda : étape ignorée (escalier nord) : ...e/Data/Script/destiny/ground/caféspindaaccueil/init.lua:49: attempt to call a nil value (method 'FindObject')
+PASS Kirlia côte à côte, clients fixes, dialogue Kirlia et balancement Spinda
+PASS quatre temps, bornes et tirage unique par jour
+PASS dix variantes et carrefour : pluie identique, autres statuts conservés
+PASS aucun effet et aucun tirage dans les intérieurs ou cartes exclues
+PASS rechargement, jour suivant et migration ancienne sauvegarde simulés
+[Destiny] Météo extérieure indisponible : [string "<python>"]:37: simulation erreur moteur
+PASS effet indisponible : erreur confinée
+PASS carrefour Init et GameLoad, sorties intactes
+PASS synchronisation 4 ambiances LUT (sans dark) et routage auto carrefour
+PASS visite au centre, cinq commerçants et dialogue d’origine préservé
+
+=== entrees_reverie ===
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS entrée et retour simulés PortePosteBekipan
+PASS entrée et retour simulés PorteCitrouilleNordOuest
+PASS entrée et retour simulés PorteHutteNordEst
+PASS entrée et retour simulés PorteDojoKingambit
+PASS entrée et retour simulés PorteHutteSud
+PASS entrée et retour simulés PorteMaisonPierre
+PASS entrée et retour simulés PorteMaisonPlanteSud
+PASS entrée et retour simulés PorteCitrouilleSud
+PASS garde, états anciens, café et sorties répétées (doublures)
+PASS prénoms sur habitants, Baudrive anonyme et équipe inchangée
+PASS café : noms cohérents, circulation, retours distincts et gardes répétées (doublures)
+PASS ancien raccord Ledian désactivé, dojo Kingambit intact
+PASS reverie_nord contacts et retours sur grille statique
+PASS reverie_centre contacts et retours sur grille statique
+PASS reverie_residentiel contacts et retours sur grille statique
+PASS destinations, marqueurs, seuils, retours ; gameplay non testé
+
+=== habitants_quartiers ===
+PASS centre : 27 habitants locaux ; état ancienne sauvegarde
+PASS centre : 27 habitants locaux ; état carte native
+PASS nord : 27 habitants locaux ; état ancienne sauvegarde
+PASS nord : 27 habitants locaux ; état carte native
+PASS residentiel : 6 habitants locaux ; état ancienne sauvegarde
+PASS residentiel : 6 habitants locaux ; état carte native
+PASS etang : 0 habitants locaux ; état ancienne sauvegarde
+PASS etang : 0 habitants locaux ; état carte native
+PASS carte historique préservée ; équipe conservée
+PASS attente de Lyra : états persistants, réentrée, doublons et quartier résidentiel
+PASS reverie_centre 21 habitants natifs
+PASS reverie_nord 21 habitants natifs
+PASS reverie_residentiel 5 habitants natifs
+PASS reverie_etang 0 habitants natifs
+PASS habitants, accueil et visite ; pas de validation en jeu.
+
+=== quartiers_reverie ===
+PASS changements de quartier, retours et absence des escaliers internes (doublures)
+PASS migration ancienne instance du centre : obstacles
+PASS migration ancienne instance du centre : habitants
+PASS migration ancienne instance du centre : les deux
+PASS union exacte jeu 7095 cases ; étang ouvert ( 107 cases ) et résidentiel inchangé
+PASS union exacte _Dev 7095 cases ; étang ouvert ( 107 cases ) et résidentiel inchangé
+PASS passage (120, 952) (120, 888)
+PASS passage (776, 872) (776, 808)
+PASS passage (1200, 872) (1200, 808)
+PASS passage étang vers falaise_promontoire (1120,2352) -> (1576,2056)
+PASS zone, alias et liaisons existantes ; partie réelle nécessaire
+
+=== tableaux_reverie ===
+PASS : mission quotidienne débloquée, acceptation, échec, réussite, récompense unique, renouvellement et gazette (doubles).
+PASS E2 : déblocage, menu, annulation, indicateurs, Bois Perdus et Fosse Cascade (doubles d’API)
+PASS tableau : ancien état, acceptation unique, échec, réussite, récompense unique, jour suivant
+PASS maison : refus sauvegarde, sauvegarde confirmée, sortie unique et marqueur retour
+PASS porte bloquée avant visite, partenaire ignoré, entrée et retour sans chevauchement
+PASS zone et index, sortie et accès statique aux deux lits
+Tableaux et mission quotidienne : vérifications structurelles OK ; test en jeu nécessaire.
+
+=== polish_reverie ===
+PASS Réverie : réponses décalées, quartier visible, scènes et interactions prioritaires, comptoirs fixes.
+PASS : 10 variantes synchronisées, tuiles natives valides, 4 arbres complets et 4 raccords bornés.
+
+=== regle_ko ===
+PASS doubles Lua : héros/partenaire/ancien fondateur, invité, recrue, ennemi, réanimation simulée et sorties scénarisées
+PASS : Universal Destiny, raccordement Lua, scénarios K.O. et sorties testés avec doubles ; partie réelle à vérifier.
+[Destiny] Héros introuvable ou ambigu dans la réserve : équipe inchangée.
+Lost Wood : scénarios KO/abandon, pause et reprise, succès solo, rechargement, échec/succès duo, identité et caméra OK.
+test_animations_guilde : 10 membres, 4 animations chacun, mâchoires conformes, clés du moteur alignées
+Gardevoir conservé [282/0/0/2] 8 direction(s) · 4 images · 28 ticks
+Canarticho conservé [83/0/0/1] 8 direction(s) · 4 images · 28 ticks
+Simisage conservé [512/0/0/1] 8 direction(s) · 4 images · 28 ticks
+Melofee conservé [35/0/0/2] 8 direction(s) · 4 images · 28 ticks
+Cizayox conservé [212/0/0/1] 8 direction(s) · 4 images · 28 ticks
+Noctali conservé [197/0/0/1] 1 direction(s) · 4 images · 28 ticks
+Dimoret conservé [461/0/0/2] 8 direction(s) · 4 images · 28 ticks
+Draby conservé [371/0/0/1] 1 direction(s) · 4 images · 28 ticks
+Pandespiegle conservé [674/0/0/1] 8 direction(s) · 3 images · 12 ticks
+Capumain conservé [190/0/0/2] 1 direction(s) · 4 images · 28 ticks
+game/Content/Chara/35.chara: OK
+game/Content/Chara/83.chara: OK
+game/Content/Chara/212.chara: OK
+game/Content/Chara/282.chara: OK
+game/Content/Chara/371.chara: OK
+game/Content/Chara/461.chara: OK
+game/Content/Chara/512.chara: OK
+game/Content/Chara/674.chara: OK
+game/Content/Chara/index.idx: OK
+31 feuilles et variantes existantes hors Eat, préservées à l’octet près.

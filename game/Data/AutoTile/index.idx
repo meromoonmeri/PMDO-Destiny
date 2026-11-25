@@ -1,0 +1,39 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+    "lost_wood_floor": {
+      "Name": {
+        "DefaultText": "Lost Wood — Sol ancien",
+        "LocalTexts": {
+          "fr": "Lost Wood — Sol ancien"
+        }
+      },
+      "Released": true,
+      "Comment": "Création PMD Destiny originale ; données d’autotiling PMDO natives, pixels générés (art_approved:false).",
+      "SortOrder": 0
+    },
+    "lost_wood_secondary": {
+      "Name": {
+        "DefaultText": "Lost Wood — Eau et marécage",
+        "LocalTexts": {
+          "fr": "Lost Wood — Eau et marécage"
+        }
+      },
+      "Released": true,
+      "Comment": "Création PMD Destiny originale ; données d’autotiling PMDO natives, pixels générés (art_approved:false).",
+      "SortOrder": 0
+    },
+    "lost_wood_wall": {
+      "Name": {
+        "DefaultText": "Lost Wood — Mur raciné",
+        "LocalTexts": {
+          "fr": "Lost Wood — Mur raciné"
+        }
+      },
+      "Released": true,
+      "Comment": "Création PMD Destiny originale ; données d’autotiling PMDO natives, pixels générés (art_approved:false).",
+      "SortOrder": 0
+    }
+  }
+}

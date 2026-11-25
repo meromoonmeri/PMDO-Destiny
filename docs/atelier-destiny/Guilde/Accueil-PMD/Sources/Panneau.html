@@ -1,0 +1,28 @@
+  <section class="panel seuil-demo" id="seuil-demo" aria-labelledby="seuil-titre">
+    <header class="seuil-head">
+      <span class="micro">SALLE 01 <span aria-hidden="true">/</span> ENTRÉE SUD</span>
+      <h2 id="seuil-titre">Le seuil de l’Accueil</h2>
+      <p>Le tapis PMU épouse l’ouverture entre les deux montants. Les arcs de Grodoudou partent de la dernière planche du seuil.</p>
+    </header>
+    <figure class="seuil-room">
+      <canvas id="seuil-salle" width="512" height="384" role="img" aria-label="Plan de l’Accueil de Destiny : le tapis et le halo sont au bas du passage en bois"></canvas>
+      <figcaption><strong>Destiny · Accueil</strong><span id="seuil-indication">Jour · seuil sud</span></figcaption>
+    </figure>
+    <div class="seuil-comparatif" aria-label="Le même halo dans les deux accueils">
+      <figure>
+        <figcaption><span>Grodoudou</span><span class="seuil-code">G01P02A</span></figcaption>
+        <img id="seuil-source" width="88" height="56" alt="Halo original de Grodoudou, deux arcs rosés et un liseré blanc sur le seuil">
+      </figure>
+      <figure>
+        <figcaption><span>Destiny</span><span class="seuil-code" id="seuil-legende">Après</span></figcaption>
+        <canvas id="seuil-detail" width="88" height="56" role="img" aria-label="Gros plan du seuil de Destiny, tapis et lumière au bord du passage"></canvas>
+      </figure>
+    </div>
+    <div class="seuil-pied">
+      <div class="phases seuil-phases" id="seuil-phases" role="group" aria-label="Ambiance de l’Accueil"></div>
+      <div class="seuil-actions">
+        <button class="soft seuil-open" type="button" id="ouvrir-accueil"><svg aria-hidden="true"><use href="#i-guilde"/></svg><span>Ouvrir l’Accueil</span></button>
+        <button class="soft" type="button" id="seuil-toggle" aria-pressed="true" title="Afficher ou masquer l’habillage du seuil"><span>Halo et tapis : avec</span></button>
+      </div>
+    </div>
+  </section>

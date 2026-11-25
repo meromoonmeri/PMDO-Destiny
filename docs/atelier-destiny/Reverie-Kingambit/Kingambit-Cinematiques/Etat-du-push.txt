@@ -1,0 +1,9 @@
+Push vérifié de 0c0a13f75e13ab95132b66b282dae1b369ef885b sur refs/heads/wip/reverie-integration-kingambit-cafe.
+Dépôt : https://github.com/meromoonmeri/PMDO-Destiny.git
+Base avant push : 3d86bd838698d9de699c76f6f715c8eef35562e5
+Ni tag ni release créés ou modifiés. Aucune CI déclenchée manuellement.
+
+36630860da1afb433dafb971a6dd9890fbb11ca9	refs/heads/dojos-kingambit-pmd
+57105372209587ee2805327170bc116c335545f9	refs/heads/main
+0c0a13f75e13ab95132b66b282dae1b369ef885b	refs/heads/wip/reverie-integration-kingambit-cafe
+3d86bd838698d9de699c76f6f715c8eef35562e5	refs/tags/v0.7.7

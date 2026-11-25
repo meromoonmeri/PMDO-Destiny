@@ -1,0 +1,280 @@
+{
+ "Version": "0.8.12.0",
+ "Object": {
+  "$type": "RogueEssence.Data.DataType, RogueEssence",
+  "Comment": "Quiz de personnalité — 16 natures. Le badge étoile de l'opening sert de silhouette à la révélation finale ; ses VFX transparents sont colorés selon le type principal du starter conclu et restent dessinés par-dessus le fond de base du quiz.",
+  "Natures": [
+   {
+    "Index": 0,
+    "NomFR": "Hardi",
+    "NomEN": "Hardy",
+    "Couleur": {
+     "Nom": "Or",
+     "Hex": "#E8A020",
+     "Hue": 37,
+     "Sat": 0.82,
+     "Val": 0.92
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_hardy.png",
+    "HerosMale": "Poussifeu",
+    "HerosFemelle": "Arcko",
+    "DescriptionFR": "Tu avances avec constance et tu termines ce que tu commences."
+   },
+   {
+    "Index": 1,
+    "NomFR": "Docile",
+    "NomEN": "Docile",
+    "Couleur": {
+     "Nom": "Sable",
+     "Hex": "#D8C050",
+     "Hue": 50,
+     "Sat": 0.62,
+     "Val": 0.9
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_docile.png",
+    "HerosMale": "Reptincel",
+    "HerosFemelle": "Bulbizarre",
+    "DescriptionFR": "Tu écoutes les autres et tu sais créer un climat de confiance."
+   },
+   {
+    "Index": 2,
+    "NomFR": "Brave",
+    "NomEN": "Brave",
+    "Couleur": {
+     "Nom": "Écarlate",
+     "Hex": "#E03028",
+     "Hue": 2,
+     "Sat": 0.85,
+     "Val": 0.9
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_brave.png",
+    "HerosMale": "Pikachu",
+    "HerosFemelle": "Reptincel",
+    "DescriptionFR": "Quand quelque chose compte, tu trouves le courage d’agir."
+   },
+   {
+    "Index": 3,
+    "NomFR": "Joyeux",
+    "NomEN": "Jolly",
+    "Couleur": {
+     "Nom": "Citron",
+     "Hex": "#E8D828",
+     "Hue": 56,
+     "Sat": 0.8,
+     "Val": 0.95
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_jolly.png",
+    "HerosMale": "Kaiminus",
+    "HerosFemelle": "Évoli",
+    "DescriptionFR": "Ton énergie et ton rire donnent envie aux autres de te suivre."
+   },
+   {
+    "Index": 4,
+    "NomFR": "Malicieux",
+    "NomEN": "Impish",
+    "Couleur": {
+     "Nom": "Améthyste",
+     "Hex": "#9040D0",
+     "Hue": 272,
+     "Sat": 0.72,
+     "Val": 0.85
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_impish.png",
+    "HerosMale": "Tiplouf",
+    "HerosFemelle": "Ouisticram",
+    "DescriptionFR": "Tu aimes les détours, les ruses et les petites étincelles de malice."
+   },
+   {
+    "Index": 5,
+    "NomFR": "Naïf",
+    "NomEN": "Naive",
+    "Couleur": {
+     "Nom": "Rose",
+     "Hex": "#F070B0",
+     "Hue": 332,
+     "Sat": 0.72,
+     "Val": 0.95
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_naive.png",
+    "HerosMale": "Ouisticram",
+    "HerosFemelle": "Skitty",
+    "DescriptionFR": "Tu regardes le monde avec spontanéité et un émerveillement sincère."
+   },
+   {
+    "Index": 6,
+    "NomFR": "Timide",
+    "NomEN": "Timid",
+    "Couleur": {
+     "Nom": "Bleu brume",
+     "Hex": "#6098D8",
+     "Hue": 208,
+     "Sat": 0.62,
+     "Val": 0.88
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_timid.png",
+    "HerosMale": "Héricendre",
+    "HerosFemelle": "Tortipouss",
+    "DescriptionFR": "Tu observes avant d’agir, avec une sensibilité plus forte qu’on ne l’imagine."
+   },
+   {
+    "Index": 7,
+    "NomFR": "Pressé",
+    "NomEN": "Hasty",
+    "Couleur": {
+     "Nom": "Mandarine",
+     "Hex": "#F06820",
+     "Hue": 20,
+     "Sat": 0.88,
+     "Val": 0.94
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_hasty.png",
+    "HerosMale": "Lixy",
+    "HerosFemelle": "Pikachu",
+    "DescriptionFR": "Ton esprit va vite, parfois même un peu avant le reste du monde."
+   },
+   {
+    "Index": 8,
+    "NomFR": "Malin",
+    "NomEN": "Sassy",
+    "Couleur": {
+     "Nom": "Indigo",
+     "Hex": "#5848C8",
+     "Hue": 250,
+     "Sat": 0.72,
+     "Val": 0.8
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_sassy.png",
+    "HerosMale": "Riolu",
+    "HerosFemelle": "Kaiminus",
+    "DescriptionFR": "Tu sais qui tu es, et tu n’as pas peur de le montrer."
+   },
+   {
+    "Index": 9,
+    "NomFR": "Calme",
+    "NomEN": "Calm",
+    "Couleur": {
+     "Nom": "Menthe",
+     "Hex": "#40C898",
+     "Hue": 155,
+     "Sat": 0.68,
+     "Val": 0.85
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_calm.png",
+    "HerosMale": "Germignon",
+    "HerosFemelle": "Héricendre",
+    "DescriptionFR": "Même sous pression, tu cherches d’abord l’équilibre."
+   },
+   {
+    "Index": 10,
+    "NomFR": "Relax",
+    "NomEN": "Relaxed",
+    "Couleur": {
+     "Nom": "Lagune",
+     "Hex": "#28A0B8",
+     "Hue": 190,
+     "Sat": 0.78,
+     "Val": 0.78
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_relaxed.png",
+    "HerosMale": "Phanpy",
+    "HerosFemelle": "Goupix",
+    "DescriptionFR": "Tu avances sans te laisser happer par l’agitation."
+   },
+   {
+    "Index": 11,
+    "NomFR": "Solo",
+    "NomEN": "Lonely",
+    "Couleur": {
+     "Nom": "Bleu nuit",
+     "Hex": "#28406E",
+     "Hue": 232,
+     "Sat": 0.7,
+     "Val": 0.55
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_lonely.png",
+    "HerosMale": "Bulbizarre",
+    "HerosFemelle": "Gobou",
+    "DescriptionFR": "Tu chéris les moments à part, là où tes pensées deviennent claires."
+   },
+   {
+    "Index": 12,
+    "NomFR": "Bizarre",
+    "NomEN": "Quirky",
+    "Couleur": {
+     "Nom": "Cyan",
+     "Hex": "#28C8C8",
+     "Hue": 178,
+     "Sat": 0.82,
+     "Val": 0.82
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_quirky.png",
+    "HerosMale": "Carapuce",
+    "HerosFemelle": "Tiplouf",
+    "DescriptionFR": "Tu suis une logique bien à toi, souvent là où personne n’aurait regardé."
+   },
+   {
+    "Index": 13,
+    "NomFR": "Discret",
+    "NomEN": "Quiet",
+    "Couleur": {
+     "Nom": "Émeraude",
+     "Hex": "#28B058",
+     "Hue": 142,
+     "Sat": 0.82,
+     "Val": 0.72
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_quiet.png",
+    "HerosMale": "Arcko",
+    "HerosFemelle": "Germignon",
+    "DescriptionFR": "Tu remarques les détails que les autres traversent sans les voir."
+   },
+   {
+    "Index": 14,
+    "NomFR": "Précipité",
+    "NomEN": "Rash",
+    "Couleur": {
+     "Nom": "Magenta",
+     "Hex": "#D02890",
+     "Hue": 318,
+     "Sat": 0.82,
+     "Val": 0.88
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_rash.png",
+    "HerosMale": "Gobou",
+    "HerosFemelle": "Poussifeu",
+    "DescriptionFR": "Quand l’élan est là, tu fonces et tu réfléchis en chemin."
+   },
+   {
+    "Index": 15,
+    "NomFR": "Assuré",
+    "NomEN": "Bold",
+    "Couleur": {
+     "Nom": "Saphir",
+     "Hex": "#2858D0",
+     "Hue": 222,
+     "Sat": 0.82,
+     "Val": 0.85
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_bold.png",
+    "HerosMale": "Tortipouss",
+    "HerosFemelle": "Carapuce",
+    "DescriptionFR": "Tu prends ta place naturellement et tu oses décider."
+   },
+   {
+    "Index": -1,
+    "NomFR": "Avant analyse",
+    "NomEN": "Unrevealed",
+    "Couleur": {
+     "Nom": "Blanc",
+     "Hex": "#E8E8F0",
+     "Hue": 0,
+     "Sat": 0,
+     "Val": 1
+    },
+    "Badge": "Content/UI/quiz_badges/badge_etoile_blanc.png",
+    "HerosMale": "",
+    "HerosFemelle": ""
+   }
+  ]
+ }
+}

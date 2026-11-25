@@ -1,0 +1,9 @@
+<Header>
+  <Name>Pokémon Mystery Dungeon: Destiny</Name>
+  <Author>meromoonmeri</Author>
+  <Description>Base technique autonome du fangame Destiny. Histoire originale à venir.</Description>
+  <Namespace>destiny</Namespace>
+  <UUID>746CBBCD-426F-5419-A735-D50248440935</UUID>
+  <Version>0.1.0</Version>
+  <ModType>Quest</ModType>
+</Header>

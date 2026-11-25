@@ -1,0 +1,9 @@
+# Banques PMUniverse et catalogue des cartes — essai
+
+Cette version ajoute au sélecteur de textures PMDO les 11 banques du client PMU public de 2014, converties en 40 planches `PMU_00_partie_01` à `PMU_10_partie_01`. Une case d'origine de 32 × 32 pixels équivaut à 4 × 4 cases PMDO de 8 × 8 pixels. Les planches sont découpées en bandes avec un chevauchement de 256 pixels ; des décors plus grands que ce chevauchement peuvent encore être séparés. Voir **Ground Editor → Textures → Tiles** et les banques `PMU_*`. Sauvegardez vos cartes avant toute modification.
+
+Le catalogue de 2 000 cartes standard historiques et le serveur d'aperçu sont dans le fichier séparé `Module-PMU-Destiny-cartes-et-tuiles-ESSAI.zip` de cette release. Le module permet de télécharger les cinq calques PNG et un fichier Ground visuel pour une carte sélectionnée. Il n'installe pas automatiquement 2 000 cartes dans le jeu ; leurs collisions, PNJ, scripts et sorties ne sont pas convertis. Les maisons de joueurs et les données personnelles de la base sont exclues. Sur 177 cartes, certaines références graphiques ne sont pas présentes dans les 11 banques historiques. Le rendu et la cadence d'animation exportée nécessitent vérification.
+
+Sources historiques : PMUniverse/PMU-Client commit `c25c01f9879369647cd5a19731b2e4e5acd33e67` et PMUniverse/PMU-Server commit `8fb424a520e559e94cff4973def8172cf29d90a2`. Cet instantané ne représente pas nécessairement PMU actuel. La licence MIT du code PMU est reproduite dans `LICENCE_PMU.txt` ; l'utilisateur indique disposer des droits sur les graphismes, non vérifiés indépendamment.
+
+L'import des banques et les exports de cartes n'ont pas été validés dans l'éditeur graphique ni en partie réelle. CI et tests de reconstruction ne remplacent pas ce contrôle. Le module s'exécute avec Python et Pillow ; le jeu Windows lui-même n'en a pas besoin pour les tuiles déjà incluses.

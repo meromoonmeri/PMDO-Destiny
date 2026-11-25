@@ -1,0 +1,15 @@
+{
+  "statut": "PASS",
+  "images_selectionnees": 3,
+  "variants": 30,
+  "donnees_precedentes_intactes": true,
+  "export_png_identique": true,
+  "rayon_ia_separe": true,
+  "pose": true,
+  "recoloration_sans_deplacement": true,
+  "balade_nuit": true,
+  "grille": true,
+  "iframe_hors_ligne": true,
+  "sha256_apercu": "0f249392c60360f3c65e5db6b1ba7b691857445d7d4c9d50df0948889304204b",
+  "sha256_atelier_precedent": "a45b4f07580fe23648bc2f0e5a3f77b6a2f552e62c2c9415cfb677db9c871e5a"
+}
