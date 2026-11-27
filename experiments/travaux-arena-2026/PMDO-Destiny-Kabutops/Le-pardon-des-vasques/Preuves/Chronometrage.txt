@@ -1,0 +1,13 @@
+Prise PMDO continue, sans coupe ni accélération. Les boîtes de dialogue ont été confirmées après lecture.
+Durée de la vidéo : 39.066 s. Phase 3 jusqu’au noir : 39.133 s de jeu.
+Le duel ne se termine qu’au cinquième K.O. : [0, 0, 0, 0, 0].
+Trio à l’ouverture : partenaire (248,244), Kabutops (280,244), héros (312,244).
+Les cinq départs, dans l’ordre : Kabuto_Arriere_G, Kabuto_Arriere_D, Kabuto_Flanc_G, Kabuto_Flanc_D, Kabutops_Boss.
+souvenir          :   5.14 s
+excuses           :  15.29 s
+tunnel_garde      :  27.07 s
+tunnel_chef       :  28.96 s
+sortie_chef       :  29.27 s
+nilo_descend      :  29.81 s
+retrouvailles     :  32.06 s
+fondu_final       :  37.92 s

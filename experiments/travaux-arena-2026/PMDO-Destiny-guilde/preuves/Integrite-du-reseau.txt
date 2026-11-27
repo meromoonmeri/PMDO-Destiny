@@ -1,0 +1,21 @@
+Révision : 9feecc86355a9e7346e07f6bb2f80ec5102f2bcd
+Référence avant refonte : b5639d1e36242dde8c7241c6cc55dda0728c2deb
+
+15 cartes : grille repensée, dimensions constantes. Capacités et marqueurs inchangés hors la paire de passages déplacés au salon et leurs marqueurs. 42 marqueurs au total. Scripts de transition et index de zone identiques.
+Les octets des 15 cartes, des 15 atlas, des baies et du registre d’ambiance sont identiques à la fixture native.
+
+accueil            558 →  963 cases de sol ; 3 marqueurs
+missions          1300 → 1495 cases de sol ; 5 marqueurs
+grand_salon       1252 → 1311 cases de sol ; 4 marqueurs
+bureau_maitre      908 →  859 cases de sol ; 2 marqueurs
+carrefour          788 →  741 cases de sol ; 4 marqueurs
+refectoire        1173 → 1398 cases de sol ; 2 marqueurs
+cuisine            780 →  766 cases de sol ; 2 marqueurs
+reserve            484 →  376 cases de sol ; 2 marqueurs
+couloir_ouest      778 →  699 cases de sol ; 4 marqueurs
+couloir_est        778 →  684 cases de sol ; 4 marqueurs
+dortoir_nord_1     452 →  453 cases de sol ; 2 marqueurs
+dortoir_nord_2     452 →  455 cases de sol ; 2 marqueurs
+dortoir_sud_1      484 →  448 cases de sol ; 2 marqueurs
+dortoir_sud_2      484 →  436 cases de sol ; 2 marqueurs
+chambre_heros      706 →  681 cases de sol ; 2 marqueurs

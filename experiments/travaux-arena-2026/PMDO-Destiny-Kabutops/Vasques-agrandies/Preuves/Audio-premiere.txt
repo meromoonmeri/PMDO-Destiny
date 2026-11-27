@@ -1,0 +1,9 @@
+Son du jeu dans Cinematique-Kabutops-Vasques-agrandies.mp4 ; aucun ajout au montage.
+Lower Spring Cave : départ ≈ -0.17s ; corrélation 0.999
+Coup sourd (Stomp) : départ ≈ 14.64s ; corrélation 0.999
+Éclair (Battle Flash) : départ ≈ 15.59s ; corrélation 0.997
+Souffle (Gust Trap) : départ ≈ 18.77s ; corrélation 1.000
+Rising Fear : départ ≈ 21.00s ; corrélation 0.887
+Transition de combat — accent : départ ≈ 30.95s ; corrélation 0.885
+Transition de combat — fin du son : départ ≈ 30.95s ; corrélation 0.853
+Boss Battle 2 : départ ≈ 38.57s ; corrélation 0.980

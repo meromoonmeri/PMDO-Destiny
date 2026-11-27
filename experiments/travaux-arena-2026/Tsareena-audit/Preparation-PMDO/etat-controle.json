@@ -1,0 +1,28 @@
+{
+  "etat": "BLOQUÉ – pas prêt à intégrer",
+  "dossier": "/home/user/Tsareena-audit/Preparation-PMDO/brouillon-NE-PAS-IMPORTER",
+  "verifications": [
+    "Walk : 32/32 cases non vides, cellules 32×56, durées ['8', '10', '8', '10']",
+    "Palette globale trouvée : 15 couleurs visibles"
+  ],
+  "points_bloquants": [
+    "Fichier manquant : Walk-Offsets.png",
+    "Fichier manquant : Walk-Shadow.png",
+    "Animation manquante : Attack",
+    "Animation manquante : Shoot",
+    "Animation manquante : Kick",
+    "Animation manquante : Sleep",
+    "Animation manquante : Hurt",
+    "Animation manquante : Idle",
+    "Animation manquante : Swing",
+    "Animation manquante : Double",
+    "Animation manquante : Hop",
+    "Animation manquante : Charge",
+    "Animation manquante : Rotate",
+    "Validation artistique image par image non réalisée",
+    "Offsets/ombres et mouvements à contrôler dans PMDO",
+    "Transformation et intégration Destiny non réalisées",
+    "Test réel dans PMDO non réalisé"
+  ],
+  "note": "Les vérifications automatiques ne garantissent ni conformité artistique ni compatibilité réelle. Aucun import ou publication."
+}

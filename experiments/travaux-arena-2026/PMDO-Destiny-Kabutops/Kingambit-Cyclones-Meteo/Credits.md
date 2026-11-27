@@ -1,0 +1,12 @@
+# Crédits et provenance
+
+- **Mega Stones — Deeshura**, [distribution 1.2.0](https://github.com/Deeshura/Mega_Stones/releases/tag/1.2.0). L’archive officielle est incluse telle quelle. La copie `Mega_Stones_Reverie` conserve le fichier `LICENSE` MIT, les auteurs, les icônes de **Ryveriel**, le son et les mécanismes ; seuls les effets d’activation et leur cadence sont retouchés.
+- **Animation d’origine : PMD Collab / [RawAsset](https://github.com/PMDCollab/RawAsset/tree/0b88bbd7dec6f3373d5ec2b0f40bbdc3f44ce90c)**. Planches sources : `Circle_Small_Purple_In`, `Light_Ball_Purple`, `Mega_Background_Red`, `_White`, `_Yellow`, `_Light_Blue` et `Fog_2`. La nouvelle animation dérive de ces éléments et de leur mise en scène dans Mega Stones.
+- **Sprites Pokémon :** [PMD Sprite Repository / PMDCollab SpriteCollab](https://github.com/PMDCollab/SpriteCollab), ses contributeurs et CHUNSOFT pour les ressources d’origine ; compilation native Audino/PMDO et variantes Destiny. Les banques sont accompagnées de crédits et d’un catalogue avec empreintes par source. Le banc PMDO 0.8.12 utilise [DumpAsset `9d864d14`](https://github.com/audinowho/DumpAsset/tree/9d864d1425f002b051e7a54fffc639988d8ef9c9). Méga-Tyranocif : banque issue de [DumpAsset `6333a8aa`](https://github.com/audinowho/DumpAsset/tree/6333a8aacfb255d94b085ecf22edb15fcaef56f3), sprite de **JFain**, crédité dans [l’entrée SpriteCollab 0248/0001](https://github.com/PMDCollab/SpriteCollab/blob/28ed420fb8a56144b9ef39ea1b2f8dd995093e4d/sprite/0248/0001/credits.txt), licence [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Les ressources de tiers gardent leurs licences respectives.
+- **Arènes, effets antérieurs, distances et bruitages du dojo :** projet Pokémon Mystery Dungeon: Destiny, révision Troupes `936b5623`. Les silhouettes nouvelles des spawns ont été créées avec le générateur d’images, puis détourées, réduites au pixel et animées dans les planches PMDO. La brume du Col Céleste en reprend l’idée visuelle ; ce n’est pas une extraction de cette cinématique.
+
+Projet de fans à usage non commercial. Pokémon et Donjon Mystère sont la propriété de leurs ayants droit.
+
+## Révision cyclones et météo
+
+Les quatre nouveaux dessins du générateur sont dans `Sources/dessins-generes`. Ils ont été détourés, découpés et animés pour le rendu PMDO ; les colonnes validées et les sons du lot précédent restent crédités ci-dessus. La prise des Méga-Évolutions n’a pas modifié l’addon distribué.

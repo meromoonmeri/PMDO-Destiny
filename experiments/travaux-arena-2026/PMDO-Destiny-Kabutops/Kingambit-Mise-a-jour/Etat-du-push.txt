@@ -1,0 +1,31 @@
+Dépôt : https://github.com/meromoonmeri/PMDO-Destiny.git
+Branche distante : refs/heads/dojos-kingambit-pmd
+Commit vérifié sur GitHub : 36630860da1afb433dafb971a6dd9890fbb11ca9
+Push réussi, sans force.
+
+Build Windows #44933908820 : terminé en échec, aucun ZIP Windows produit.
+https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44933908820/job/136936293355
+Étape en échec : Check Reverie WIP interiors and thresholds.
+Le test tools/tests/test_reverie_wip.py a interprété une trame transparente de Kingambit comme une référence à un fichier .tile sans nom. Le moteur représente bien ces trames par TileFrame.Empty (banque vide, coordonnées 0,0).
+
+Correctif local : 934edbe8433bbc41e1d75307e97426edc3556879 (ci/reverie-trames-transparentes), enfant direct de 3663086. Correctif-CI-trames-Reverie.patch ne modifie que ce test, pas les cartes, les données de jeu ou les workflows.
+L’erreur d’origine a été reproduite sur les fichiers du SHA publié. Avec le correctif, le contrôle local passe : 52 893 références texturées et 885 trames transparentes vérifiées. Une banque manquante, une coordonnée absente, une trame vide mal formée et une perte de référence sont toujours rejetées. Les cinq suites Lua Kingambit et le test de création du ZIP différentiel passent aussi en local. Pas de nouvelle validation Windows.
+
+Préversion v0.7.7 autorisée. Build Windows #44936129837 (b9e1b55) : tous les contrôles, dont les intérieurs corrigés, passent. Le packaging s’est arrêté dans le compacteur de la ville, qui attendait zéro cellule explicitement vide au lieu des 160 du payload officiel. Ce build n’a rien publié.
+
+Correctif packaging 3d86bd838698d9de699c76f6f715c8eef35562e5 : compte et empreinte de sortie vérifiés sur le payload réel, test de régression sur ce fichier, protection des cartes modifiées intacte. Ni le payload ni le moteur n’ont été modifiés. La comparaison structurelle confirme que seules les valeurs par défaut des 160 cellules du calque Objects Under sont compactées.
+
+SHA 3d86bd8 poussé sans force sur wip/reverie-integration-kingambit-cafe et confirmé. dojos-kingambit-pmd reste à 3663086 et main à 5710537.
+Build Windows #44937172432 : terminé avec succès, artefact Windows contrôlé.
+https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44937172432
+Publication #44938062280 : terminée avec succès, sur le même SHA.
+https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/44938062280
+
+Préversion publique v0.7.7 : https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.7
+Le tag v0.7.7 désigne 3d86bd838698d9de699c76f6f715c8eef35562e5, le commit testé. Les fichiers SHA-256 publics ont été téléchargés et concordent avec les métadonnées de publication des ZIP.
+- Mise à jour v0.7.6 → v0.7.7 : 114 317 596 octets, SHA-256 005a9015eb74a0b3e00de84f02a41743aecc8b15aba694e4576dbae72f2c30ab
+  https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.7/PMDO-Destiny-Update-0.7.6-to-0.7.7.zip
+- Windows x64 complet : 1 341 244 828 octets, SHA-256 a106eafdff52f9aeca0ca934bf76e23a9b0a585c432768a0336d39902833b415
+  https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.7/PMDO-Destiny-Windows-x64-0.7.7.zip
+
+Vérifications finales : wip/reverie-integration-kingambit-cafe = 3d86bd8 ; main = 5710537 inchangée ; dojos-kingambit-pmd = 3663086 inchangée. Suivi-v0.7.7.json conserve les exécutions, l’artefact et les références.

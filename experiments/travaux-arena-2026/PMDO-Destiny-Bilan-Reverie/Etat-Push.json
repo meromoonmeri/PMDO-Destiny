@@ -1,0 +1,17 @@
+{
+  "repository": "meromoonmeri/PMDO-Destiny",
+  "branch": "wip/reverie-integration-kingambit-cafe",
+  "city_revision": "d5d44d7edbca8ad39406db10257df20fac845d40",
+  "published_tag": "v0.7.4",
+  "published_tag_sha": "4b0ece4cee0218c669d8e89a264f30bd78dbd863",
+  "remote_before": "5ff5f268fb509e8959047f50c2bbc0d0967167df",
+  "report_commit": "ef31275582189a37f867e33c9f12492829f78b2a",
+  "report_path": "docs/Bilan_REVERIE_TOWN.md",
+  "city_regression": "pass",
+  "push_status": "rejected_ssh",
+  "remote_after": "5ff5f268fb509e8959047f50c2bbc0d0967167df",
+  "tag_unchanged": true,
+  "workflows_dispatched": false,
+  "temporary_private_key_deleted": true,
+  "ssh_error": "Permission denied (publickey)"
+}

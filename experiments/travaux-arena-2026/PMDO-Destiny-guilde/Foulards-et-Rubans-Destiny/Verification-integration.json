@@ -1,0 +1,285 @@
+{
+  "statut": "PASS pour le périmètre indiqué",
+  "revision": "8f80c6e2c47e681acd334be661d601a59fed2367",
+  "patch_sha256": "b4398f781c3be0fe6cdb53a039c2183a1d3973ddca44ed010315f910293787a5",
+  "compilation": {
+    "statut": "PASS",
+    "cible": "moteur complet, Linux / .NET 8 / Roslyn, 605 sources C#",
+    "dll_sha256": "5acaf2978609080b8d66b2562c17ddc985bb4bcede0d2b24eaaa890613f8cf8c",
+    "windows": "non compilé"
+  },
+  "jeu": {
+    "environnement": "copie isolée Destiny 0.7.7 et moteur recompilé",
+    "traces": [
+      {
+        "id": "NEWLEGACY",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "-",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "NEWCANCEL",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "-",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "NEWSYNC",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "PARTNERSYNC",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "saphir",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "PARTSAVE",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "save",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "saphir",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "RESTART2",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "saphir",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "PARTNERCHANGE2",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "saphir",
+            "style": "foulard",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "REMOVEP1",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "-",
+            "style": "-",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINALDUO",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "état équipe et acteurs relevé",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINWALK",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "walk",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINPOS",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240 Right: 6",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINSAVE",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "save",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "couleur": "garance",
+            "style": "foulard",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "couleur": "lagon",
+            "style": "-",
+            "objet_tenu": "-"
+          }
+        ]
+      }
+    ],
+    "resume": [
+      "Anciennes couleurs chargées avec style absent : ruban par défaut.",
+      "Annulation du menu après changement de couleur et rotation : état inchangé.",
+      "Choix foulard validé pour Pikachu, acteur et données de l’équipe synchronisés.",
+      "Choix de teinte ruban distincte pour Goupix, sans toucher à la Baie Oran.",
+      "Sauvegarde puis reprise dans un nouveau processus : foulard et ruban conservés.",
+      "Après reprise : modification du partenaire et retrait du héros, avec mise à jour des acteurs.",
+      "Jour, nuit, orientations et déplacement local exécutés au réfectoire."
+    ],
+    "temoin_R2_sha256_avant_et_apres": "93842029a14cba08c4afbcf4bbb46350da35b936ed2123842074408ba42f4f0a",
+    "sauvegarde": "banc uniquement, non incluse"
+  },
+  "limites": [
+    "Les doublons de membres impossibles à distinguer ne sont pas synchronisés de force sur les acteurs détachés ; un changement de carte peut être nécessaire pour rafraîchir leur aspect.",
+    "Pas de parcours complet en donjon : seules des actions natives ont été rendues et comparées sur banc FNA.",
+    "Les contraintes géométriques ne certifient pas la reconnaissance du visage ou la qualité visuelle de chaque image de chaque espèce.",
+    "Pas de build Windows, publication GitHub ni installation sur une sauvegarde joueur."
+  ]
+}

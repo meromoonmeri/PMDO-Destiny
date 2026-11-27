@@ -1,0 +1,27 @@
+{
+  "resultat": "PASS",
+  "formes": 86,
+  "profils": 15,
+  "variantes_testees": 774,
+  "feuilles_distinctes": 346,
+  "images_sprite_visitees": 28168,
+  "poses_ruban_ou_foulard": 56336,
+  "poses_accessoires_de_tete": 169008,
+  "rendus_accessoires_de_tete": 2880,
+  "rubans_sans_noeud_au_dos": 3857,
+  "poses_cote_lointain": 528,
+  "pans_de_profil": 2502,
+  "pans_emergeant_du_profil": 818,
+  "pixels_de_pan_occultes": 38005,
+  "rendus_fna": 4480,
+  "rendus_donjon": 1440,
+  "note": "Les poses sont comptées sur toutes les séquences de marche et de repos des feuilles natives distinctes. Les compteurs de projection concernent des positions uniques par feuille.",
+  "verifications": [
+    "Les attaches restent sur la silhouette, angle par angle",
+    "Ruban : pas de nœud frontal au dos",
+    "Foulard : pan projeté vers l’arrière, occulté par le corps",
+    "Attache latérale : pli visible seulement du côté anatomique porteur",
+    "Aucune grappe extérieure de tissu sans attache",
+    "Calques natifs comparés pixel à pixel, au sol, de nuit et en mouvement de donjon (huit types)"
+  ]
+}

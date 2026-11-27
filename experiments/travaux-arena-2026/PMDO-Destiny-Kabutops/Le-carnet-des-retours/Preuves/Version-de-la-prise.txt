@@ -1,0 +1,13 @@
+PMDO 0.8.12.0 compilé sur la base publique 0.7.6, Linux.
+Ressources du ZIP public 0.7.5 vérifié ; 4 cartes de la ville contrôlées avec le payload exact 37e6b5c.
+Scripts du candidat c5b067a20e6c13de83d848dfd18ab3a4fda26bc8, octets contrôlés ci-dessous.
+Le profil privé remplace seulement le point de départ, recrée l’état « après accueil » et commande les interactions pour la prise. Hors jeu distribué.
+7e1d8c56c3252ca12e6797cacf846f26a30ff516d9cbdbe4b738d9f957cfc68b  game/Data/Script/destiny/reverie_recit.lua
+24665ec19808aac3295fd71b60e600db93929fa4fc7d24e43739c6c6a5aeef93  game/Data/Script/destiny/reverie_saynetes.lua
+e203354c561d620c65f45ff9eef06a3a5a9b26f235fbdf4eda61d08e40be2793  game/Data/Script/destiny/ground/WaterfallVillageCapital/init.lua
+
+Comparaison octet pour octet des cartes de la prise avec les blobs du tag 0.7.6 (après décompression) :
+5a41c0e1203c9775052e7fe1d32da4751149a40a5b2dfc75803f5875e503059c  Data/Ground/WaterfallVillageCapital.rsground
+4ec56bf5c5daa95035669e035dd5ede287465b388f8958935dbb9ac82a1344f5  Data/Ground/reverie_centre.rsground
+05882a701c8e1cd9016290e2464134c9fe12ab27f74e2161286ba3a67e822106  Data/Ground/reverie_residentiel.rsground
+3cb994860cf4150e8e4aaed1bc28d317364186486a6781ad468f596fc140e67c  Data/Ground/reverie_etang.rsground

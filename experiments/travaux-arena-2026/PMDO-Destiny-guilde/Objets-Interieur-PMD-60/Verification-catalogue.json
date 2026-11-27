@@ -1,0 +1,13 @@
+{
+  "statut": "PASS",
+  "objets_livres": 40,
+  "controles": [
+    "10 images par lot disponible, progression et ouverture directe par lot",
+    "Les trois fonds s’affichent",
+    "Les 10 fiches, zoom natif et téléchargement individuel conforme au PNG",
+    "Téléchargement de la planche bit-identique et hors ligne",
+    "Responsive 320, 390 et 760 px : pas de défilement horizontal ni sprite tronqué",
+    "Catalogue et inspection utilisables dans l’iframe isolée du viewer",
+    "Aucune requête externe ou erreur JavaScript"
+  ]
+}

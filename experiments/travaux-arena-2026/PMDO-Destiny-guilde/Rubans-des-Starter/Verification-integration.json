@@ -1,0 +1,177 @@
+{
+  "statut": "PASS",
+  "revision": "8f80c6e2c47e681acd334be661d601a59fed2367",
+  "patch_fichiers": 15,
+  "patch_sha256": "09cad8b1ad034f7f78a51fde6d1bf6426b4b568fab8310fffd95d20232b2782c",
+  "full_source_build": {
+    "statut": "PASS",
+    "sources_cs": 605,
+    "plateforme": "Linux, .NET 8 / Roslyn",
+    "dll_sha256": "125ee5f62a09605a2ad2256683a340b027c07676cf0c2f6d3512a54d6ca21d88"
+  },
+  "quiz": {
+    "statut": "PASS",
+    "choix": 86,
+    "especes": 81,
+    "identique_au_quiz_original": [
+      "ordre",
+      "doublons espèce + forme",
+      "exclusion de l’espèce du héros chez le partenaire"
+    ]
+  },
+  "bench": {
+    "version": "Destiny 0.7.7, moteur source patché, banc indépendant Linux/FNA",
+    "traces": [
+      {
+        "ordre": "CANCEL",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": null,
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": null,
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "HERO",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": "garance",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": null,
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "COLOR",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": "garance",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": "lagon",
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "WALK02",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 432 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": "garance",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": "lagon",
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "SAVE01",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "save",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": "garance",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": "lagon",
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "RELOAD3",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": "garance",
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": "lagon",
+            "objet_tenu": null
+          }
+        ]
+      },
+      {
+        "ordre": "REMOVE",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "stat 504 240",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": 0,
+            "ruban": null,
+            "objet_tenu": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": 1,
+            "ruban": "lagon",
+            "objet_tenu": null
+          }
+        ]
+      }
+    ],
+    "captures": [
+      "Menu ouvert par Équipe → Pokémon → Ruban",
+      "Direction tournée sans valider ; annulation sans effet",
+      "Deux palettes distinctes confirmées au réfectoire",
+      "Valeurs RGB des deux rubans contrôlées sur captures jour/nuit",
+      "Déplacement natif et pose consultée",
+      "Clic sur la zone d’aperçu sans validation de couleur",
+      "Retrait indépendant du premier ruban"
+    ],
+    "save_fichier": "SAVE.rssv (banc uniquement, non livré)",
+    "save_sha256": "93842029a14cba08c4afbcf4bbb46350da35b936ed2123842074408ba42f4f0a",
+    "test_reprise": "Nouveau processus + reprise depuis menu-titre"
+  },
+  "limitations": [
+    "Pas de compilation de distribution Windows",
+    "Pas de partie complète en donjon (rendu des actions vérifié dans FNA)",
+    "Pas de publication GitHub ni d’installation sur les fichiers du joueur"
+  ]
+}

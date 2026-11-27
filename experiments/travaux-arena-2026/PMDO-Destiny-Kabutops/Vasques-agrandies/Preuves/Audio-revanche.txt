@@ -1,0 +1,5 @@
+Son du jeu dans Revanche-Kabutops-Vasques-agrandies.mp4 ; aucun ajout au montage.
+Rising Fear : départ ≈ -0.19s ; corrélation 0.999
+Transition de combat — accent : départ ≈ 5.41s ; corrélation 0.985
+Transition de combat — fin du son : départ ≈ 5.42s ; corrélation 0.995
+Boss Battle 2 : départ ≈ 14.14s ; corrélation 0.678

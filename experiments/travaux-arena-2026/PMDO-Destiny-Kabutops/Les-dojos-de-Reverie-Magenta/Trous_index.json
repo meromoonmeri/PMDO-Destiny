@@ -1,0 +1,136 @@
+{
+  "taille_tuile": 24,
+  "sprite": [
+    96,
+    80
+  ],
+  "cellule": [
+    96,
+    96
+  ],
+  "decalage": [
+    0,
+    8
+  ],
+  "poses": 10,
+  "ticks": 5,
+  "origine_sol": [
+    0,
+    0
+  ],
+  "origine_rebord": [
+    0,
+    72
+  ],
+  "tuiles": 2009,
+  "lignes": [
+    {
+      "ligne": 0,
+      "id": "normal",
+      "type": "Normal",
+      "biome": "tiny_meadow"
+    },
+    {
+      "ligne": 1,
+      "id": "fire",
+      "type": "Feu",
+      "biome": "mt_blaze"
+    },
+    {
+      "ligne": 2,
+      "id": "water",
+      "type": "Eau",
+      "biome": "brine_cave"
+    },
+    {
+      "ligne": 3,
+      "id": "grass",
+      "type": "Plante",
+      "biome": "apple_woods"
+    },
+    {
+      "ligne": 4,
+      "id": "electric",
+      "type": "Électrik",
+      "biome": "mt_thunder"
+    },
+    {
+      "ligne": 5,
+      "id": "ice",
+      "type": "Glace",
+      "biome": "frosty_forest"
+    },
+    {
+      "ligne": 6,
+      "id": "fighting",
+      "type": "Combat",
+      "biome": "rock_maze"
+    },
+    {
+      "ligne": 7,
+      "id": "poison",
+      "type": "Poison",
+      "biome": "murky_forest"
+    },
+    {
+      "ligne": 8,
+      "id": "ground",
+      "type": "Sol",
+      "biome": "quicksand_cave"
+    },
+    {
+      "ligne": 9,
+      "id": "flying",
+      "type": "Vol",
+      "biome": "sky_peak_7th_pass"
+    },
+    {
+      "ligne": 10,
+      "id": "psychic",
+      "type": "Psy",
+      "biome": "crystal_cave_2"
+    },
+    {
+      "ligne": 11,
+      "id": "bug",
+      "type": "Insecte",
+      "biome": "forest_path"
+    },
+    {
+      "ligne": 12,
+      "id": "rock",
+      "type": "Roche",
+      "biome": "rock_aegis_cave"
+    },
+    {
+      "ligne": 13,
+      "id": "ghost",
+      "type": "Spectre",
+      "biome": "darknight_relic"
+    },
+    {
+      "ligne": 14,
+      "id": "dragon",
+      "type": "Dragon",
+      "biome": "craggy_peak"
+    },
+    {
+      "ligne": 15,
+      "id": "dark",
+      "type": "Ténèbres",
+      "biome": "deep_dusk_forest_2"
+    },
+    {
+      "ligne": 16,
+      "id": "steel",
+      "type": "Acier",
+      "biome": "steel_aegis_cave"
+    },
+    {
+      "ligne": 17,
+      "id": "fairy",
+      "type": "Fée",
+      "biome": "mystifying_forest"
+    }
+  ]
+}

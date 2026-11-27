@@ -1,0 +1,16 @@
+{
+  "statut": "PASS",
+  "sha256": "ad19914f77daf9a6cc1d0ee813204f7ce2ddd7d937c96ee6d5043a147a09599c",
+  "plans": 15,
+  "ambiances": 4,
+  "vues_differentes": 60,
+  "vues_nuit_identiques": 15,
+  "verifications_vitrage_phase": 56,
+  "ouverture_jour": true,
+  "cadres": 7,
+  "paires_controlees": 28,
+  "mobilier": 33,
+  "aucune_requete_externe": true,
+  "mobile": true,
+  "iframe_sandbox": true
+}

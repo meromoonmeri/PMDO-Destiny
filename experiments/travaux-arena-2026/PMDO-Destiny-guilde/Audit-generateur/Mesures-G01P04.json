@@ -1,0 +1,250 @@
+{
+  "verdict": "non_valide",
+  "limite": "Un audit de PNG, pas un contrôle d’export ni un test moteur.",
+  "methode_git": "8d2a5b8d9dadef254a0773bb36d633888148adcd",
+  "references": {
+    "destiny": {
+      "archive": "Salles-Destiny-originaux.zip",
+      "version": "Windows 0.7.3",
+      "grand_salon_ouvert": "PNG/Jour/guilde_destiny_grand_salon-ouverte.png",
+      "sha256": "a24412edcf5b361305a56eb020f0d74c44577c8c3203ebddf713b8a28cf53706"
+    },
+    "plan": {
+      "rip": "G01P04A.png",
+      "traitement": "Fond extérieur remplacé par #FF00FF uniquement.",
+      "sha256_reference_magenta": "ba8a4b03da7999bf488db9ba1816960330320d32928fb0709603ba397b979d52"
+    }
+  },
+  "fichiers": {
+    "G01P04-decor_magenta.png": {
+      "dimensions": [
+        1264,
+        848
+      ],
+      "sha256": "5acfa9a1601aeb96fc4b017f29d0cf472f749c1f3b5d55acb3223c0f1fbaca3a"
+    },
+    "sol_complet.png": {
+      "dimensions": [
+        2320,
+        464
+      ],
+      "sha256": "03af577fe94c39cfb1015c0f349eb971c22dd6b93cfe966b6f2b2b034b28d262"
+    }
+  },
+  "silhouette": {
+    "canevas_mesure": [
+      648,
+      432
+    ],
+    "methode": "key(), masque du brut projeté dans le canevas G01P04 pour la mesure uniquement",
+    "surface_plan_px": 162088,
+    "surface_brut_px": 214909,
+    "intersection_px": 160970,
+    "union_px": 216027,
+    "iou": 0.7451383391890829,
+    "entree_bord_gauche_y": {
+      "plan": 153,
+      "brut": 25
+    }
+  },
+  "seuils_lateraux": [
+    {
+      "xyxy": [
+        0,
+        266,
+        15,
+        302
+      ],
+      "fraction_opaque": 1.0
+    },
+    {
+      "xyxy": [
+        633,
+        266,
+        648,
+        302
+      ],
+      "fraction_opaque": 1.0
+    }
+  ],
+  "magenta": {
+    "detoures_key": 248751,
+    "exact_ff00ff": 63
+  },
+  "parquet": {
+    "grand_salon_destiny": {
+      "crop_xyxy": [
+        130,
+        165,
+        421,
+        318
+      ],
+      "facteur_uniforme": 1,
+      "rgb_moyen": [
+        210.319,
+        135.518,
+        46.917
+      ],
+      "lignes_y": [
+        171,
+        183,
+        194,
+        205,
+        218,
+        230,
+        243,
+        255,
+        268,
+        279,
+        291,
+        302,
+        313
+      ],
+      "pas_median_px": 12.0,
+      "proeminence_mediane_rouge": 118.0
+    },
+    "missions_destiny": {
+      "crop_xyxy": [
+        130,
+        166,
+        421,
+        319
+      ],
+      "facteur_uniforme": 1,
+      "rgb_moyen": [
+        202.754,
+        132.17,
+        51.1
+      ],
+      "lignes_y": [
+        176,
+        189,
+        201,
+        213,
+        226,
+        239,
+        253,
+        268,
+        282,
+        295,
+        308
+      ],
+      "pas_median_px": 13.0,
+      "proeminence_mediane_rouge": 93.0
+    },
+    "salle_brute": {
+      "crop_xyxy": [
+        300,
+        393,
+        950,
+        655
+      ],
+      "facteur_uniforme": 0.5,
+      "rgb_moyen": [
+        209.466,
+        134.667,
+        33.558
+      ],
+      "lignes_y": [
+        402,
+        425,
+        448,
+        470,
+        493,
+        516,
+        539,
+        562,
+        584,
+        607,
+        630,
+        652
+      ],
+      "pas_median_px": 11.5,
+      "proeminence_mediane_rouge": 141.5
+    },
+    "sol_complet": {
+      "crop_xyxy": [
+        0,
+        0,
+        2320,
+        464
+      ],
+      "facteur_uniforme": 0.5,
+      "rgb_moyen": [
+        203.898,
+        128.301,
+        39.602
+      ],
+      "lignes_y": [
+        12,
+        55,
+        97,
+        138,
+        182,
+        225,
+        272,
+        320,
+        366,
+        410,
+        452
+      ],
+      "pas_median_px": 21.75,
+      "proeminence_mediane_rouge": 97.0
+    }
+  },
+  "vitres_jour": {
+    "grand_salon_destiny": {
+      "crops_xyxy": [
+        [
+          97,
+          81,
+          134,
+          150
+        ],
+        [
+          443,
+          81,
+          479,
+          150
+        ]
+      ],
+      "nombre_echantillons": 1680,
+      "rgb_moyen": [
+        252.202,
+        248.188,
+        193.456
+      ],
+      "nombre_quasi_blanc": 0
+    },
+    "salle_brute": {
+      "crops_xyxy": [
+        [
+          211,
+          218,
+          275,
+          374
+        ],
+        [
+          989,
+          216,
+          1056,
+          373
+        ]
+      ],
+      "nombre_echantillons": 5420,
+      "rgb_moyen": [
+        253.334,
+        250.49,
+        246.522
+      ],
+      "nombre_quasi_blanc": 4299
+    }
+  },
+  "non_livre": [
+    "autres salles",
+    "nuit",
+    "porte fermée",
+    "calques finaux",
+    "Ground PMDO"
+  ]
+}

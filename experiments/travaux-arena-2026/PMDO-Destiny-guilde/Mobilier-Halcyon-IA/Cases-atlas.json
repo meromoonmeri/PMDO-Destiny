@@ -1,0 +1,189 @@
+{
+  "image": "Atlas-IA-30.png",
+  "dimensions": [
+    528,
+    960
+  ],
+  "cases": {
+    "halcyon-ia-banquet-lierre": [
+      6,
+      40,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-lierre": [
+      246,
+      58,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-lierre": [
+      417,
+      12,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-minuit": [
+      6,
+      136,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-minuit": [
+      246,
+      154,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-minuit": [
+      417,
+      108,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-miel": [
+      6,
+      232,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-miel": [
+      246,
+      250,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-miel": [
+      417,
+      204,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-ronce": [
+      6,
+      328,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-ronce": [
+      246,
+      346,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-ronce": [
+      417,
+      300,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-brume": [
+      6,
+      424,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-brume": [
+      246,
+      442,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-brume": [
+      417,
+      396,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-mousse": [
+      6,
+      520,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-mousse": [
+      246,
+      538,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-mousse": [
+      417,
+      492,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-braise": [
+      6,
+      616,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-braise": [
+      246,
+      634,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-braise": [
+      417,
+      588,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-lin": [
+      6,
+      712,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-lin": [
+      246,
+      730,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-lin": [
+      417,
+      684,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-riviere": [
+      6,
+      808,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-riviere": [
+      246,
+      826,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-riviere": [
+      417,
+      780,
+      46,
+      77
+    ],
+    "halcyon-ia-banquet-bruyere": [
+      6,
+      904,
+      163,
+      49
+    ],
+    "halcyon-ia-coffre-bruyere": [
+      246,
+      922,
+      36,
+      31
+    ],
+    "halcyon-ia-bureau-bruyere": [
+      417,
+      876,
+      46,
+      77
+    ]
+  }
+}

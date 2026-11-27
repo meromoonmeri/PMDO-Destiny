@@ -1,0 +1,60 @@
+{
+  "etat": "PASS",
+  "illustrations_valides": 150,
+  "par_region": {
+    "destiny": 5,
+    "eau": 24,
+    "air": 30,
+    "herbe": 32,
+    "brume": 28,
+    "sable": 14,
+    "mer": 14,
+    "mystere": 3
+  },
+  "par_type": {
+    "bourg": 11,
+    "eau": 12,
+    "grotte": 22,
+    "foret": 15,
+    "ruine": 18,
+    "sommet": 25,
+    "plaine": 16,
+    "glace": 6,
+    "volcan": 7,
+    "mer": 11,
+    "sable": 7
+  },
+  "composites_exactement_reconstitues": true,
+  "carte_px": [
+    1536,
+    1152
+  ],
+  "grand_png_px": [
+    6144,
+    4608
+  ],
+  "criteres": {
+    "motifs_tous_distincts": true,
+    "decors_reverie_originaux_pixels_exacts": 5,
+    "chevauchements_de_rectangles": 0,
+    "animation_sur_8_poses": 32,
+    "poses_reverie_identiques": 24,
+    "distances_au_depart_en_pixels": {
+      "fosse": 52.7,
+      "passage": 35.36,
+      "bois": 43.46,
+      "guilde": 47.13
+    },
+    "decalage_max_a_Eddy_en_pixels": 50.93,
+    "decalage_median_a_Eddy_en_pixels": 0.0
+  },
+  "sha256": {
+    "Monde-Destiny-150-Lieux-6144x4608.png": "05e13b6c913ee6dc8f0c37d72d1f5f2823c72919c5207b2d04e450882169a6c4",
+    "Apercu/assets/Animations.png": "56e42f44f9dc968bb0d65e48d44af3d4b9cbddf879fb58bf188989f2ce2f92c9",
+    "Apercu/assets/Lieux-150.png": "eac8247ab809a77243692bbcf3847b321e46b7e6bc47ea1a0aca24374442733c",
+    "Apercu/assets/Lieux.json": "40178bdcd5ae3d1218771e46897eb92cc98ee8dcdb5f45ae4ef5e0db7d5c14f9",
+    "Apercu/assets/Monde-150.png": "1419a3354ce0c77c632a7a3f3af9c8743fbee90b504b0cb35b51b987fb919517",
+    "Apercu/assets/Nuages.png": "d1b885db186b04bf8646a07feba503262d7ed005781ea7f5bacc1bf278a9de65",
+    "Apercu/assets/Terrain.png": "cade39c3fea4ebb12552356af82395cb9a02c5f8ea551b3ac7110af5e2d42cbc"
+  }
+}

@@ -1,0 +1,83 @@
+PARCOURS PMDC 0.8.12 Linux — Révision 9feecc86355a9e7346e07f6bb2f80ec5102f2bcd
+
+Les 15 cartes, leurs atlas et leurs scripts de transition sont ceux du commit.
+Fixture hors dépôt : départ sur l’accueil après enrôlement, ambiance jour, un héros, mesures des positions. Index de test réduit à 23 planches (15 intérieurs + 4 ambiances de falaise), sans modification de l’index du projet.
+Touches directionnelles réelles : 30 franchissements distincts, 28 internes plus l’aller-retour accueil / falaise. Aucune cinématique de campagne intégrale ni parcours duo natif à ce stade.
+
+MARCHE accueil 248 168
+CAPTURE 01-accueil.png accueil 248 168
+FRANCHI accueil → missions 280 350
+MARCHE missions 280 176
+CAPTURE 02-missions.png missions 280 176
+FRANCHI missions → grand_salon 280 154
+MARCHE grand_salon 280 196
+MARCHE grand_salon 326 196
+CAPTURE 03-grand_salon.png grand_salon 326 196
+MARCHE grand_salon 370 196
+FRANCHI grand_salon → bureau_maitre 248 302
+MARCHE bureau_maitre 248 156
+CAPTURE 04-bureau_maitre.png bureau_maitre 248 156
+FRANCHI bureau_maitre → grand_salon 368 178
+MARCHE grand_salon 368 242
+FRANCHI grand_salon → carrefour 406 176
+MARCHE carrefour 230 176
+CAPTURE 05-carrefour.png carrefour 230 176
+FRANCHI carrefour → refectoire 502 240
+MARCHE refectoire 278 240
+MARCHE refectoire 278 182
+CAPTURE 06-refectoire.png refectoire 278 182
+MARCHE refectoire 278 242
+FRANCHI refectoire → carrefour 58 176
+MARCHE carrefour 234 176
+FRANCHI carrefour → cuisine 232 284
+MARCHE cuisine 232 166
+CAPTURE 07-cuisine.png cuisine 232 166
+FRANCHI cuisine → carrefour 232 122
+FRANCHI carrefour → reserve 216 114
+MARCHE reserve 216 176
+CAPTURE 08-reserve.png reserve 216 176
+FRANCHI reserve → carrefour 232 286
+MARCHE carrefour 232 174
+FRANCHI carrefour → grand_salon 58 240
+FRANCHI grand_salon → couloir_ouest 58 176
+MARCHE couloir_ouest 234 176
+CAPTURE 09-couloir_ouest.png couloir_ouest 234 176
+FRANCHI couloir_ouest → dortoir_nord_1 216 260
+MARCHE dortoir_nord_1 216 160
+CAPTURE 10-dortoir_nord_1.png dortoir_nord_1 216 160
+FRANCHI dortoir_nord_1 → couloir_ouest 232 122
+FRANCHI couloir_ouest → dortoir_sud_1 216 114
+MARCHE dortoir_sud_1 216 182
+CAPTURE 11-dortoir_sud_1.png dortoir_sud_1 216 182
+FRANCHI dortoir_sud_1 → couloir_ouest 232 284
+MARCHE couloir_ouest 232 174
+FRANCHI couloir_ouest → couloir_est 58 176
+MARCHE couloir_est 234 176
+CAPTURE 12-couloir_est.png couloir_est 234 176
+FRANCHI couloir_est → dortoir_nord_2 216 262
+MARCHE dortoir_nord_2 216 162
+CAPTURE 13-dortoir_nord_2.png dortoir_nord_2 216 162
+FRANCHI dortoir_nord_2 → couloir_est 232 122
+FRANCHI couloir_est → dortoir_sud_2 216 116
+MARCHE dortoir_sud_2 216 182
+CAPTURE 14-dortoir_sud_2.png dortoir_sud_2 216 182
+FRANCHI dortoir_sud_2 → couloir_est 232 286
+MARCHE couloir_est 232 174
+FRANCHI couloir_est → chambre_heros 58 192
+MARCHE chambre_heros 248 192
+MARCHE chambre_heros 248 170
+CAPTURE 15-chambre_heros.png chambre_heros 248 170
+MARCHE chambre_heros 248 196
+FRANCHI chambre_heros → couloir_est 406 176
+FRANCHI couloir_est → couloir_ouest 406 176
+FRANCHI couloir_ouest → grand_salon 502 240
+MARCHE grand_salon 278 240
+FRANCHI grand_salon → missions 280 150
+FRANCHI missions → accueil 248 138
+FRANCHI accueil → falaise_jour 232 284
+FRANCHI falaise_jour → accueil 248 308
+
+Porte du bureau : sur le même moteur, second passage au seuil. L’image 17 montre la porte fermée à l’approche, l’image 16 l’arche ouverte juste avant le fondu. Les deux images sont des captures nativement rendues, et le log enregistre ensuite « GUILDE_ENTREE bureau_maitre » puis (248,302).
+Vérification des deux captures : l’intérieur de l’arche est sombre sur l’image 16 alors que le sol est encore éclairé. Le journal Update initial ne voyait pas ce changement pendant l’événement ; la séquence d’images le montre.
+
+Le moteur a été arrêté après ces vérifications. Le message de fermeture de l’affichage X83 provient de cet arrêt.

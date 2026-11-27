@@ -1,0 +1,795 @@
+diff --git a/engine/RogueEssence/RogueEssence/Content/CharSheet.cs b/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
+index 1f31e5012588b51162227562182b38728ffa9279..73c6bc5f798e5bc3e82939d4c0492f75f6c301dd 100644
+--- a/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
++++ b/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
+@@ -159,6 +159,35 @@ namespace RogueEssence.Content
+         }
+ 
+         private CharSheet destinyNightCopy;
++        private bool destinyNightGraded;
++        private byte[] destinyRibbonAlpha;
++        private Dictionary<(int, Dir8, bool, DestinyRibbon.Fit), DestinyRibbon.Pose> destinyRibbonPoses;
++
++        internal DestinyRibbon.Pose GetDestinyRibbonPose(CharAnimFrame frame, Dir8 dir, DestinyRibbon.Fit cut)
++        {
++            int index = frame.Frame.Y * TotalX + frame.Frame.X;
++            if ((uint)frame.Frame.X >= (uint)TotalX || (uint)frame.Frame.Y >= (uint)TotalY || (uint)index >= (uint)OffsetData.Count)
++                return DestinyRibbon.Pose.None;
++
++            var key = (index, dir, frame.Flip, cut);
++            destinyRibbonPoses ??= new Dictionary<(int, Dir8, bool, DestinyRibbon.Fit), DestinyRibbon.Pose>();
++            if (destinyRibbonPoses.TryGetValue(key, out var pose))
++                return pose;
++            if (destinyRibbonAlpha == null)
++            {
++                // One read per sheet while cached, never a GPU read per draw.
++                Color[] pixels = new Color[Width * Height];
++                baseTexture.GetData(pixels);
++                destinyRibbonAlpha = new byte[pixels.Length];
++                for (int ii = 0; ii < pixels.Length; ii++)
++                    destinyRibbonAlpha[ii] = pixels[ii].A;
++            }
++            int start = frame.Frame.Y * TileHeight * Width + frame.Frame.X * TileWidth;
++            pose = DestinyRibbon.Place(destinyRibbonAlpha, Width, start, TileWidth, TileHeight,
++                OffsetData[index], frame.Flip, dir, cut);
++            destinyRibbonPoses[key] = pose;
++            return pose;
++        }
+ 
+         /// <summary>
+         /// Returns the filtered sheet cached alongside its original. When the
+@@ -178,6 +207,8 @@ namespace RogueEssence.Content
+                 destinyNightCopy.Dispose();
+                 destinyNightCopy = null;
+             }
++            destinyRibbonAlpha = null;
++            destinyRibbonPoses = null;
+             base.Dispose();
+         }
+ 
+@@ -190,28 +221,30 @@ namespace RogueEssence.Content
+             Color[] pixels = new Color[Width * Height];
+             baseTexture.GetData(pixels);
+             for (int ii = 0; ii < pixels.Length; ii++)
+-            {
+-                Color pixel = pixels[ii];
+-                int alpha = pixel.A;
+-                if (alpha == 0)
+-                    continue;
+-
+-                // CharSheet PNGs contain premultiplied pixels. Recover their
+-                // source RGB before the nonlinear grade, then premultiply again.
+-                int r = Math.Min(255, pixel.R * 255 / alpha);
+-                int g = Math.Min(255, pixel.G * 255 / alpha);
+-                int b = Math.Min(255, pixel.B * 255 / alpha);
+-                double gray = 0.299 * r + 0.587 * g + 0.114 * b;
+-                double lum = gray / 255.0;
+-                double k = 0.20 + 0.30 * lum;
+-                int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
+-                int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
+-                int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
+-                pixels[ii] = new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
+-            }
++                pixels[ii] = DestinyNightGrade(pixels[ii]);
+             Texture2D texture = new Texture2D(device, Width, Height);
+             texture.SetData(pixels);
+-            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData);
++            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData) { destinyNightGraded = true };
++        }
++
++        internal static Color DestinyNightGrade(Color pixel)
++        {
++            int alpha = pixel.A;
++            if (alpha == 0)
++                return pixel;
++
++            // CharSheet PNGs contain premultiplied pixels. Recover their
++            // source RGB before the nonlinear grade, then premultiply again.
++            int r = Math.Min(255, pixel.R * 255 / alpha);
++            int g = Math.Min(255, pixel.G * 255 / alpha);
++            int b = Math.Min(255, pixel.B * 255 / alpha);
++            double gray = 0.299 * r + 0.587 * g + 0.114 * b;
++            double lum = gray / 255.0;
++            double k = 0.20 + 0.30 * lum;
++            int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
++            int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
++            int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
++            return new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
+         }
+ 
+         //frompath (import) will take a folder containing all elements (xml and all animations, or xml and a sheet)
+@@ -1439,6 +1472,11 @@ namespace RogueEssence.Content
+         //need a way to determine frame the old fashioned way,
+         //however, also need a way to determine frame for an animation playing at the true specified speed
+         public void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color)
++        {
++            DrawChar(spriteBatch, type, truncateDash, dir, pos, frameMethod, color, default);
++        }
++
++        internal void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color, DestinyRibbon.Wear ribbon)
+         {
+             type = GetReferencedAnimIndex(type);
+             CharAnimGroup group = getReferencedAnim(type);
+@@ -1454,7 +1492,10 @@ namespace RogueEssence.Content
+                     adjustedOffset = AdjustOffset(type, group.RushFrame, frameNum, seq.Frames[trueRush].Offset, frame.Offset);
+                 }
+ 
+-                DrawTile(spriteBatch, pos + adjustedOffset.ToVector2(), frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
++                Vector2 frameTopLeft = pos + adjustedOffset.ToVector2();
++                DrawTile(spriteBatch, frameTopLeft, frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
++                if (ribbon.Ink > 0 && color.A > 0)
++                    DestinyRibbon.Draw(spriteBatch, frameTopLeft, GetDestinyRibbonPose(frame, dir, ribbon.Cut), color, ribbon, destinyNightGraded);
+             }
+             else
+                 DrawDefault(spriteBatch, new Rectangle((int)pos.X, (int)pos.Y, TileWidth, TileHeight));
+diff --git a/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs b/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs
+new file mode 100644
+index 0000000000000000000000000000000000000000..db71ed33b3b13a0a2dfab064f95342bdee7b067f
+--- /dev/null
++++ b/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs
+@@ -0,0 +1,266 @@
++using System;
++using System.Collections.Generic;
++using Microsoft.Xna.Framework;
++using Microsoft.Xna.Framework.Graphics;
++using RogueElements;
++using RogueEssence.Data;
++using RogueEssence.Dungeon;
++
++namespace RogueEssence.Content
++{
++    /// <summary>Vestiaire cosmétique de Destiny. Aucun objet, skin ou état de combat.</summary>
++    public static class DestinyRibbon
++    {
++        internal enum Fit { Collar, Shoulder, LowCollar }
++        internal readonly struct Wear
++        {
++            // Index 0 = aucun ruban. Le code sauvegardé est stable même si l'ordre du menu change.
++            public readonly int Ink;
++            public readonly Fit Cut;
++            public Wear(int ink, Fit cut) { Ink = ink; Cut = cut; }
++        }
++
++        internal sealed class Shade
++        {
++            public readonly string Key;
++            public readonly string Name;
++            public readonly Color[] Ink;
++            public Shade(string key, string name, params int[] rgb)
++            {
++                Key = key;
++                Name = name;
++                Ink = Array.ConvertAll(rgb, c => new Color(c >> 16, (c >> 8) & 255, c & 255));
++            }
++        }
++
++        // Liseré, pli, tissu, lumière ; rampe dessinée, pas un aplat teinté.
++        internal static readonly Shade[] Colors = {
++            new Shade(null, "Sans ruban"),
++            new Shade("garance", "Garance", 0x4A2033, 0xA43148, 0xDF5C65, 0xFFAE93),
++            new Shade("ambre", "Ambre", 0x5C3327, 0xB76635, 0xE7A14A, 0xFFE3A0),
++            new Shade("emeraude", "Émeraude", 0x203C37, 0x337C58, 0x63B67A, 0xC8E59B),
++            new Shade("lagon", "Lagon", 0x213948, 0x27878C, 0x51C1BC, 0xB4F1E1),
++            new Shade("saphir", "Saphir", 0x253052, 0x405BB2, 0x6B8DDC, 0xBFD8FF),
++            new Shade("lilas", "Lilas", 0x45304E, 0x8558A3, 0xB487D6, 0xEBD9FA),
++            new Shade("rose", "Rose nacré", 0x5A2D48, 0xAF557E, 0xE681A3, 0xFFCFD6),
++            new Shade("ivoire", "Ivoire", 0x5B4842, 0xB59476, 0xF2DCAC, 0xFFF5D9),
++            new Shade("encre", "Encre", 0x201A30, 0x4E4565, 0x746789, 0xC2ACCC),
++        };
++
++        private static readonly Dictionary<(string species, int form), Fit> Roster =
++            new Dictionary<(string, int), Fit>();
++        internal static void ResetRoster() => Roster.Clear();
++
++        // Appelé par destiny/main.lua à partir de la même liste que le quiz.
++        public static void RegisterStarter(string species, int form, string cut)
++        {
++            if (String.IsNullOrEmpty(species) || form < 0)
++                return;
++            Roster[(species, form)] = cut == "epaule" ? Fit.Shoulder : cut == "bas" ? Fit.LowCollar : Fit.Collar;
++        }
++
++        private static Fit GetFit(MonsterID id) => Roster.TryGetValue((id.Species, id.Form), out Fit fit) ? fit : Fit.Collar;
++
++        // Un fondateur déjà évolué sur une ancienne sauvegarde reste éligible.
++        // Un starter recruté garde l'accès après évolution s'il a porté un ruban.
++        internal static bool CanChoose(CharData member)
++        {
++            return Roster.Count > 0 && member != null && (DataManager.Instance?.Save is MainProgress)
++                && (Roster.ContainsKey((member.BaseForm.Species, member.BaseForm.Form))
++                    || member.DestinyRibbonFitted || (member.IsFounder && member.IsPartner));
++        }
++
++        internal static bool TrySet(CharData member, int index)
++        {
++            if (!CanChoose(member) || index < 0 || index >= Colors.Length)
++                return false;
++            member.DestinyRibbonColor = Colors[index].Key;
++            member.DestinyRibbonFitted |= index > 0;
++            return true;
++        }
++
++        internal static int IndexOf(string key)
++        {
++            if (String.IsNullOrEmpty(key))
++                return 0;
++            for (int ii = 1; ii < Colors.Length; ii++)
++                if (String.Equals(key, Colors[ii].Key, StringComparison.Ordinal))
++                    return ii;
++            return 0;
++        }
++
++        internal static Wear ForPreview(MonsterID visible, int ink) => new Wear(ink, GetFit(visible));
++
++        internal static Wear From(CharData wearer, MonsterID visible)
++        {
++            if (wearer == null || String.IsNullOrEmpty(wearer.DestinyRibbonColor) || !CanChoose(wearer))
++                return default;
++            return ForPreview(visible, IndexOf(wearer.DestinyRibbonColor));
++        }
++
++        // Masques de tissu distincts : face, trois-quarts/profil, dos et petite attache.
++        // Le nœud reste exactement au repère (4,3), même après miroir.
++        internal const int StampW = 9;
++        internal const int StampH = 8;
++        internal const int KnotX = 4;
++        internal const int KnotY = 3;
++        internal static readonly string[][] Masks = {
++            new[] { ".........", ".11...11.", ".143.341.", ".1234321.", "..11211..", "...3.2...", "..31.21..", "........." },
++            new[] { ".........", ".....11..", "..11.341.", "..134321.", "...1211..", "....23...", ".....31..", "........." },
++            new[] { ".........", "..1...1..", ".133.331.", ".1234321.", "..12221..", "..31.13..", "..1...1..", "........." },
++            new[] { ".........", ".........", "..11.11..", "..13431..", "...121...", "...3.2...", "..1..1...", "........." },
++            new[] { ".........", ".........", ".....11..", "...1431..", "...121...", "....23...", ".....1...", "........." },
++            new[] { ".........", ".........", "..1...1..", "..13431..", "...121...", "..31.13..", ".........", "........." },
++        };
++
++        internal readonly struct Pose
++        {
++            public readonly int X;
++            public readonly int Y;
++            public readonly int Mask;
++            public readonly bool Mirror;
++            public bool Exists => Mask >= 0;
++            public Pose(int x, int y, int mask, bool mirror) { X = x; Y = y; Mask = mask; Mirror = mirror; }
++            public static readonly Pose None = new Pose(0, 0, -1, false);
++        }
++
++        /// <summary>
++        /// Pose calculée sur la tuile affichée (et non sur le monstre immobile) :
++        /// repères natifs tête/centre, masque opaque et perspective. Pas d'ancrage hors du corps.
++        /// </summary>
++        internal static Pose Place(byte[] alpha, int stride, int start, int w, int h, OffsetData anchor,
++            bool flip, Dir8 dir, Fit cut)
++        {
++            if (w < 1 || h < 1 || anchor == null)
++                return Pose.None;
++
++            int l = w, t = h, r = -1, b = -1;
++            for (int y = 0; y < h; y++)
++                for (int x = 0; x < w; x++)
++                    if (alpha[start + y * stride + x] >= 64)
++                    {
++                        l = Math.Min(l, x);
++                        r = Math.Max(r, x);
++                        t = Math.Min(t, y);
++                        b = Math.Max(b, y);
++                    }
++            if (r < l)
++                return Pose.None;
++            if (flip)
++                (l, r) = (w - 1 - r, w - 1 - l);
++
++            Loc center = flip ? anchor.CenterFlip : anchor.Center;
++            Loc head = flip ? anchor.HeadFlip : anchor.Head;
++            int cx = Math.Clamp(center.X + w / 2, l, r);
++            int cy = Math.Clamp(center.Y + h / 2, t, b);
++            int hx = Math.Clamp(head.X + w / 2, l, r);
++            int hy = Math.Clamp(head.Y + h / 2, t, b);
++            int sizeY = b - t + 1;
++            int sizeX = r - l + 1;
++            int d = (int)dir & 7;
++            bool front = d == 0 || d == 1 || d == 7;
++            bool back = d == 4;
++            bool side = !back && d != 0;
++            bool mirror = d >= 5;
++            bool shoulder = cut == Fit.Shoulder;
++            bool small = shoulder || sizeX <= 13 || sizeY <= 14;
++            int targetX = (3 * cx + hx + 2) / 4;
++            int targetY;
++            if (shoulder)
++            {
++                // Broche d'épaule sur les espèces sans col ; préserve la feuille de Brindibou,
++                // la grande pupille de Terhal et le visage court de Frissonille.
++                targetX = cx + (back ? -1 : 1) * Math.Clamp(sizeX / (side ? 13 : 6), 1, 4) * (mirror ? -1 : 1);
++                targetY = Math.Max(cy + 1, t + sizeY * (back ? 4 : 6) / 10);
++            }
++            else if (front && !side)
++            {
++                targetY = Math.Max(Math.Max(cy, hy) + 1, t + sizeY * 61 / 100);
++                if (cut == Fit.LowCollar)
++                    targetY++;
++            }
++            else if (back)
++            {
++                targetY = (cy * 3 + hy) / 4 + 1;
++                targetY = Math.Max(targetY, t + sizeY * 43 / 100);
++            }
++            else
++            {
++                targetY = (cy * 2 + hy + 1) / 3 + Math.Clamp(sizeY / 12, 1, 3);
++                if (front && cut == Fit.LowCollar)
++                    targetY++;
++                targetY = Math.Max(targetY, t + sizeY * (front ? 54 : 44) / 100);
++            }
++            // Le nœud ne tombe pas sur le dernier pixel d'un pied. Les pans
++            // peuvent dépasser légèrement de la silhouette comme du tissu.
++            targetY = Math.Clamp(targetY, t, Math.Max(t, b - (small ? 2 : 3)));
++            targetX = Math.Clamp(targetX, l, r);
++
++            int best = Int32.MaxValue, bestX = 0, bestY = 0;
++            for (int y = t; y <= b; y++)
++                for (int x = l; x <= r; x++)
++                {
++                    if (ReadAlpha(alpha, stride, start, w, h, x, y, flip) < 64)
++                        continue;
++                    int dx = x - targetX, dy = y - targetY;
++                    int score = 5 * dx * dx + (dy < 0 && front ? 13 : 8) * dy * dy;
++                    if (ReadAlpha(alpha, stride, start, w, h, x, y - 1, flip) < 64) score += 11;
++                    if (ReadAlpha(alpha, stride, start, w, h, x, y + 1, flip) < 64) score += 9;
++                    if (ReadAlpha(alpha, stride, start, w, h, x + 1, y, flip) < 64) score += 5;
++                    if (ReadAlpha(alpha, stride, start, w, h, x - 1, y, flip) < 64) score += 5;
++                    if (score < best)
++                    {
++                        best = score;
++                        bestX = x;
++                        bestY = y;
++                    }
++                }
++            int mask = (small ? 3 : 0) + (back ? 2 : side ? 1 : 0);
++            return best == Int32.MaxValue ? Pose.None : new Pose(bestX, bestY, mask, mirror);
++        }
++
++        private static byte ReadAlpha(byte[] alpha, int stride, int start, int w, int h, int x, int y, bool flip)
++        {
++            if ((uint)x >= (uint)w || (uint)y >= (uint)h)
++                return 0;
++            return alpha[start + y * stride + (flip ? w - 1 - x : x)];
++        }
++
++        private static Texture2D atlas;
++        private static Texture2D Atlas(GraphicsDevice device)
++        {
++            if (atlas != null && !atlas.IsDisposed && atlas.GraphicsDevice == device)
++                return atlas;
++            atlas?.Dispose();
++            int width = StampW * Masks.Length;
++            int height = StampH * Colors.Length * 2;
++            Color[] pixels = new Color[width * height];
++            for (int night = 0; night < 2; night++)
++                for (int ink = 1; ink < Colors.Length; ink++)
++                    for (int mask = 0; mask < Masks.Length; mask++)
++                        for (int y = 0; y < StampH; y++)
++                            for (int x = 0; x < StampW; x++)
++                            {
++                                char code = Masks[mask][y][x];
++                                if (code == '.')
++                                    continue;
++                                Color c = Colors[ink].Ink[code - '1'];
++                                pixels[((night * Colors.Length + ink) * StampH + y) * width + mask * StampW + x] =
++                                    night == 1 ? CharSheet.DestinyNightGrade(c) : c;
++                            }
++            atlas = new Texture2D(device, width, height);
++            atlas.SetData(pixels);
++            return atlas;
++        }
++
++        internal static void Draw(SpriteBatch batch, Vector2 frameTopLeft, Pose pose, Color tint, Wear wear, bool night)
++        {
++            if (!pose.Exists || wear.Ink <= 0 || wear.Ink >= Colors.Length || tint.A == 0)
++                return;
++            Rectangle src = new Rectangle(pose.Mask * StampW, (wear.Ink + (night ? Colors.Length : 0)) * StampH, StampW, StampH);
++            Vector2 loc = frameTopLeft + new Vector2(pose.X - KnotX, pose.Y - KnotY);
++            batch.Draw(Atlas(batch.GraphicsDevice), loc, src, tint, 0f, Vector2.Zero, 1f,
++                pose.Mirror ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
++        }
++    }
++}
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
+index 380d1520eb1b87df2062702ee210c9d9ce554689..20f8dbbf66b583d4a0416541aed28baf3eb8460f 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
+@@ -84,7 +84,8 @@ namespace RogueEssence.Dungeon
+         public virtual void UpdateFrame() { currentAnim.UpdateFrame(); }
+         public void UpdateDrawEffects(HashSet<DrawEffect> drawEffects) { currentAnim.UpdateDrawEffects(drawEffects); }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType) { return currentAnim.GetActionPoint(sheet, pointType); }
+-        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { currentAnim.Draw(spriteBatch, offset, sheet); }
++        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { Draw(spriteBatch, offset, sheet, default); }
++        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon) { currentAnim.Draw(spriteBatch, offset, sheet, ribbon); }
+         public Loc GetDrawLoc(Loc offset, CharSheet sheet) { return currentAnim.GetDrawLoc(sheet, offset); }
+         public Loc GetSheetOffset(CharSheet sheet)
+         {
+@@ -1667,9 +1668,9 @@ namespace RogueEssence.Dungeon
+             }
+         }
+ 
+-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
++        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
+         {
+-            base.Draw(spriteBatch, offset, sheet);
++            base.Draw(spriteBatch, offset, sheet, ribbon);
+             foreach (Hitbox hitbox in hitboxes)
+                 hitbox.Draw(spriteBatch, offset);
+         }
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
+index 6b9fff542739c949db7926aba82ca039bb043771..09308a0d6257369e0a34992015e9a24ed5924dbd 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
+@@ -171,12 +171,17 @@ namespace RogueEssence.Dungeon
+ 
+ 
+         public void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
++        {
++            Draw(spriteBatch, offset, sheet, default);
++        }
++
++        internal void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(sheet, offset);
+             drawLoc.Y -= LocHeight;
+             
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255), ribbon);
+         }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
+index 9adec613d26d4f704f078c2bb4a77da052100329..9052bc17c1cc1635f801ed5e4d3f0c76dcf6fdc2 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
+@@ -53,6 +53,13 @@ namespace RogueEssence.Dungeon
+ 
+         public MonsterID BaseForm;
+ 
++        // Cosmétique optionnel : champs absents des anciennes sauvegardes.
++        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
++        public string DestinyRibbonColor;
++
++        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
++        public bool DestinyRibbonFitted;
++
+         public int Level;
+         public int EXP;
+ 
+@@ -142,6 +149,8 @@ namespace RogueEssence.Dungeon
+             //clean variables
+             Nickname = other.Nickname;
+             BaseForm = other.BaseForm;
++            DestinyRibbonColor = other.DestinyRibbonColor;
++            DestinyRibbonFitted = other.DestinyRibbonFitted;
+             Level = other.Level;
+ 
+             MaxHPBonus = other.MaxHPBonus;
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
+index 35fdbdfdad09e6ee07d28f06c72cbb4f61d99861..bdf6e791674b32b34027e1b7d237324436a62579 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
+@@ -482,6 +482,8 @@ namespace RogueEssence.Dungeon
+         {
+             CharData character = new CharData();
+             character.BaseForm = this.BaseForm;
++            character.DestinyRibbonColor = this.DestinyRibbonColor;
++            character.DestinyRibbonFitted = this.DestinyRibbonFitted;
+             character.Nickname = this.Nickname;
+             character.Level = this.Level;
+             character.MaxHPBonus = this.MaxHPBonus;
+@@ -2710,7 +2712,12 @@ namespace RogueEssence.Dungeon
+         public void Draw(SpriteBatch spriteBatch, Loc offset)
+         {
+             CharSheet sheet = GraphicsManager.GetChara(Appearance.ToCharID());
+-            currentCharAction.Draw(spriteBatch, offset, sheet);
++            // Preserve the disguise: its cosmetic cannot reveal the real wearer.
++            DestinyRibbon.Wear ribbon = Appearance == CurrentForm ? DestinyRibbon.From(this, Appearance) : default;
++            if (ribbon.Ink == 0)
++                currentCharAction.Draw(spriteBatch, offset, sheet);
++            else
++                currentCharAction.Draw(spriteBatch, offset, sheet, ribbon);
+ 
+             if (currentEmote != null)
+             {
+diff --git a/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs b/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
+index 089153967fb35b78787d26942f7f6e7a9afa7a3d..067bfdc3d2d1584bfd42b9017087f54bee9f850b 100644
+--- a/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
++++ b/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
+@@ -102,11 +102,16 @@ namespace RogueEssence.Ground
+         }
+ 
+         public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
++        {
++            Draw(spriteBatch, offset, sheet, tint, default);
++        }
++
++        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(offset, sheet);
+             drawLoc.Y -= LocHeight;
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
+         }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+@@ -184,12 +189,12 @@ namespace RogueEssence.Ground
+             Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
+         }
+ 
+-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
++        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(offset, sheet);
+             drawLoc.Y -= LocHeight;
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
+         }
+         public override Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+diff --git a/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs b/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
+index 54946dfb74d92042468edd45ad9fd2dd7f82694a..53dbee0577fdeb2ab344e23148f02da1b6562d1d 100644
+--- a/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
++++ b/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
+@@ -426,7 +426,11 @@ namespace RogueEssence.Ground
+                 else
+                     tint = GroundMap.GetAmbianceTint(charAmbiance);
+             }
+-            currentCharAction.Draw(spriteBatch, offset, sheet, tint);
++            DestinyRibbon.Wear ribbon = DestinyRibbon.From(Data, CurrentForm);
++            if (ribbon.Ink == 0)
++                currentCharAction.Draw(spriteBatch, offset, sheet, tint);
++            else
++                currentCharAction.Draw(spriteBatch, offset, sheet, tint, ribbon);
+ 
+             if (currentEmote != null)
+             {
+diff --git a/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs b/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
+index 12f374ecae19eddcde43ddef7e11706f9d237715..9b518b819124eb9dd7297630f19a7a96a594b8c9 100644
+--- a/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
++++ b/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
+@@ -509,6 +509,7 @@ namespace RogueEssence.Script
+             //Expose symbols
+             ExposeInterface();
+             SetupGlobals();
++            Content.DestinyRibbon.ResetRoster();
+             CacheMainScripts();
+ 
+             DiagManager.Instance.LogInfo("[SE]: **- Lua engine ready! -**");
+diff --git a/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs b/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs
+new file mode 100644
+index 0000000000000000000000000000000000000000..4370b7c5516812b8e07bb2cbd7dc54e5011b0969
+--- /dev/null
++++ b/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs
+@@ -0,0 +1,101 @@
++using System;
++using System.Collections.Generic;
++using Microsoft.Xna.Framework;
++using Microsoft.Xna.Framework.Graphics;
++using RogueEssence.Content;
++using RogueEssence.Data;
++using RogueEssence.Dungeon;
++using RogueEssence.Ground;
++using RogueElements;
++
++namespace RogueEssence.Menu
++{
++    internal sealed class DestinyRibbonMenu : TitledStripMenu
++    {
++        private readonly Character member;
++        private Dir8 direction = Dir8.Down;
++        private readonly MenuText colorName;
++        private readonly MenuText rotateHint;
++        private readonly MenuText confirmHint;
++        private readonly MenuText faceName;
++        private readonly MenuText previewTitle;
++        private static readonly string[] Directions = {
++            "Face", "3/4 gauche", "Profil gauche", "Dos gauche", "Dos", "Dos droit", "Profil droit", "3/4 droit"
++        };
++
++        public DestinyRibbonMenu(Character member)
++        {
++            Label = "DESTINY_RIBBON_MENU";
++            this.member = member;
++            int width = Math.Min(240, GraphicsManager.ScreenWidth - 16);
++            int rowCount = DestinyRibbon.Colors.Length;
++            int height = rowCount * VERT_SPACE + GraphicsManager.MenuBG.TileHeight * 2 + TITLE_OFFSET;
++            int saved = DestinyRibbon.IndexOf(member.DestinyRibbonColor);
++            List<MenuTextChoice> options = new List<MenuTextChoice>();
++            for (int ii = 0; ii < rowCount; ii++)
++            {
++                int choice = ii;
++                options.Add(new MenuTextChoice(DestinyRibbon.Colors[ii].Name, () => Apply(choice), true,
++                    ii == saved ? TextTan : Color.White));
++            }
++            Initialize(new Loc((GraphicsManager.ScreenWidth - width) / 2, (GraphicsManager.ScreenHeight - height) / 2),
++                width, "Ruban de guilde", options.ToArray(), saved);
++            foreach (MenuTextChoice option in options)
++            {
++                Rect row = option.Bounds;
++                option.Bounds = new Rect(row.X, row.Y, Math.Max(1, Math.Min(row.Width, width - 111 - row.X)), row.Height);
++            }
++            int previewX = width - 62;
++            previewTitle = Small("Aperçu", previewX, 36, TextTan);
++            colorName = Small("", previewX, 112, Color.White);
++            faceName = Small("", previewX, 125, TextPale);
++            rotateHint = Small("Gauche / droite", previewX, 142, Color.White);
++            confirmHint = Small("Valider le choix", previewX, 154, TextTan);
++        }
++
++        private static MenuText Small(string value, int x, int y, Color color)
++            => new MenuText(value, new Loc(x, y), DirV.Up, DirH.None, color);
++
++        private void Apply(int choice)
++        {
++            var save = DataManager.Instance.Save;
++            if (GameManager.Instance.CurrentScene != GroundScene.Instance || DataManager.Instance.CurrentReplay != null
++                || save == null || !save.ActiveTeam.Players.Contains(member) || !DestinyRibbon.TrySet(member, choice))
++                return;
++            MenuManager.Instance.RemoveMenu();
++        }
++
++        protected override void UpdateKeys(InputManager input)
++        {
++            // Gauche/droite ne change pas et n'applique jamais la couleur surlignée.
++            if ((input.Direction == Dir8.Left || input.Direction == Dir8.Right) && input.Direction != input.PrevDirection)
++                direction = (Dir8)(((int)direction + (input.Direction == Dir8.Left ? 1 : 7)) % 8);
++            base.UpdateKeys(input);
++        }
++
++        public override void Draw(SpriteBatch batch)
++        {
++            base.Draw(batch);
++            if (!Visible)
++                return;
++            Loc start = Bounds.Start;
++            int x = Bounds.Right - 62;
++            int y = Bounds.Y + 82;
++            GraphicsManager.Pixel.Draw(batch, new Rectangle(x - 45, y - 28, 90, 54), null, new Color(23, 30, 47));
++            GraphicsManager.Pixel.Draw(batch, new Rectangle(x - 45, y + 25, 90, 1), null, new Color(91, 104, 130));
++            MonsterID id = member.BaseForm;
++            CharSheet sheet = GraphicsManager.GetChara(id.ToCharID());
++            Vector2 origin = new Vector2(x - sheet.TileWidth / 2, y - sheet.TileHeight / 2);
++            sheet.DrawChar(batch, GraphicsManager.IdleAction, false, direction, origin,
++                frames => CharSheet.TrueFrame(frames, (long)GraphicsManager.TotalFrameTick, false),
++                Color.White, DestinyRibbon.ForPreview(id, CurrentChoice));
++            colorName.SetText(DestinyRibbon.Colors[CurrentChoice].Name);
++            faceName.SetText(Directions[(int)direction]);
++            previewTitle.Draw(batch, start);
++            colorName.Draw(batch, start);
++            faceName.Draw(batch, start);
++            rotateHint.Draw(batch, start);
++            confirmHint.Draw(batch, start);
++        }
++    }
++}
+diff --git a/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs b/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
+index 3eb76492f200d664bb301c341a1b299cf8f98ccf..108a03e0d4283983ed263cab0bf1eb4c8cf3672d 100644
+--- a/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
++++ b/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
+@@ -105,6 +105,10 @@ namespace RogueEssence.Menu
+                 choices.Add(new MenuTextChoice(Text.FormatKey("MENU_TEAM_SEND_HOME"), SendHomeAction, canSendHome, canSendHome ? Color.White : Color.Red));
+ 
+ 
++            Character ribbonMember = DataManager.Instance.Save.ActiveTeam.Players[teamSlot];
++            if (inGround && DataManager.Instance.CurrentReplay == null && DestinyRibbon.CanChoose(ribbonMember))
++                choices.Add(new MenuTextChoice("Ruban", () => MenuManager.Instance.AddMenu(new DestinyRibbonMenu(ribbonMember), true)));
++
+             choices.Add(new MenuTextChoice(Text.FormatKey("MENU_EXIT"), ExitAction));
+ 
+             int choice_width = CalculateChoiceLength(choices, 72);
+diff --git a/game/Data/Script/destiny/ground/personality_test/init.lua b/game/Data/Script/destiny/ground/personality_test/init.lua
+index b727edb91e4dfc51fb0676c8a6e47550371308fc..484ddb3a1dd5f6edd2a47223c75f0be48a985be6 100644
+--- a/game/Data/Script/destiny/ground/personality_test/init.lua
++++ b/game/Data/Script/destiny/ground/personality_test/init.lua
+@@ -22,7 +22,7 @@
+ require 'origin.common'
+ 
+ local quiz_data = require 'destiny.ground.personality_test.quiz_data'
+-local starters_source = require 'destiny.ground.personality_test.starters_source'
++local starter_pool = require 'destiny.starter_pool'
+ local talents_depart = require 'destiny.talents_depart'
+ local recrutement = require 'destiny.recrutement'
+ 
+@@ -777,25 +777,7 @@ local function reveler_starter(nature, starter)
+     (nature.description or ''), -1)
+ end
+ 
+--- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
+--- forme : un Goupix d'Alola n'est pas confondu avec celui de Kanto.
+-local function construire_pool(espece_exclue)
+-  local pool, deja_vu = {}, {}
+-  local function ajouter(s)
+-    local key = s.espece .. ':' .. tostring(s.forme)
+-    if s.espece ~= espece_exclue and not deja_vu[key] then
+-      deja_vu[key] = true
+-      table.insert(pool, s)
+-    end
+-  end
+-  for _, s in ipairs(starters_source.starters) do ajouter(s) end
+-  for _, s in pairs(quiz_data.starters) do ajouter(s) end
+-  table.sort(pool, function(a, b)
+-    if a.gen ~= b.gen then return a.gen < b.gen end
+-    return a.nom < b.nom
+-  end)
+-  return pool
+-end
++local construire_pool = starter_pool.construire
+ 
+ -- Le menu de sélection natif PMDO utilise le même portrait bordé que le
+ -- sélecteur du projet de référence. Les libellés propres à Destiny gardent la
+diff --git a/game/Data/Script/destiny/main.lua b/game/Data/Script/destiny/main.lua
+index 6b4b406866e2f83c90cf8a77565628715b9b2ecc..277e89ea43d5f387a14061591035beddac1afbc9 100644
+--- a/game/Data/Script/destiny/main.lua
++++ b/game/Data/Script/destiny/main.lua
+@@ -16,3 +16,5 @@ require 'destiny.services.destiny_title_anim'
+ require 'destiny.services.statue_kangourex'
+ -- Nilo observe le duel de la Fosse Cascade, hors de la simulation de combat.
+ require 'destiny.services.nilo_temoin'
++-- Vestiaire : le quiz fournit exactement les mêmes couples espèce/forme.
++require('destiny.rubans').installer()
+diff --git a/game/Data/Script/destiny/rubans.lua b/game/Data/Script/destiny/rubans.lua
+new file mode 100644
+index 0000000000000000000000000000000000000000..b5f6524d7536bc34fff23c62767c17e97a53c5f8
+--- /dev/null
++++ b/game/Data/Script/destiny/rubans.lua
+@@ -0,0 +1,22 @@
++-- Profils de pose seulement : jamais de filtre d'éligibilité supplémentaire.
++local pool = require 'destiny.starter_pool'
++local M = {}
++local epaule = {
++  rowlet=true, snom=true, beldum=true, joltik=true, applin=true, cosmog=true,
++  phanpy=true, larvesta=true, litwick=true, goomy=true, togepi=true,
++  fidough=true, budew=true, rookidee=true,
++}
++local col_bas = { tepig=true, squirtle=true }
++
++function M.installer()
++  -- Permet de passer du script seul à une build moteur complète sans
++  -- casser le lancement d'une ancienne édition portant les mêmes scripts.
++  local ok, moteur = pcall(luanet.import_type, 'RogueEssence.Content.DestinyRibbon')
++  if not ok or moteur == nil then return end
++  for _, s in ipairs(pool.construire(nil)) do
++    local coupe = epaule[s.espece] and 'epaule' or (col_bas[s.espece] and 'bas' or 'col')
++    moteur.RegisterStarter(s.espece, s.forme, coupe)
++  end
++end
++
++return M
+diff --git a/game/Data/Script/destiny/starter_pool.lua b/game/Data/Script/destiny/starter_pool.lua
+new file mode 100644
+index 0000000000000000000000000000000000000000..c8867f80ed26ecc58ab87ed8e3f891d8cef3736c
+--- /dev/null
++++ b/game/Data/Script/destiny/starter_pool.lua
+@@ -0,0 +1,24 @@
++-- Liste commune au quiz de personnalité et au vestiaire.
++local source = require 'destiny.ground.personality_test.starters_source'
++local quiz = require 'destiny.ground.personality_test.quiz_data'
++local M = {}
++
++function M.construire(espece_exclue)
++  local pool, deja_vu = {}, {}
++  local function ajouter(s)
++    local key = s.espece .. ':' .. tostring(s.forme)
++    if s.espece ~= espece_exclue and not deja_vu[key] then
++      deja_vu[key] = true
++      table.insert(pool, s)
++    end
++  end
++  for _, s in ipairs(source.starters) do ajouter(s) end
++  for _, s in pairs(quiz.starters) do ajouter(s) end
++  table.sort(pool, function(a, b)
++    if a.gen ~= b.gen then return a.gen < b.gen end
++    return a.nom < b.nom
++  end)
++  return pool
++end
++
++return M

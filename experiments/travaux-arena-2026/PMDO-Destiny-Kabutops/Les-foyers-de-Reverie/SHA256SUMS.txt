@@ -1,0 +1,16 @@
+e2c7dffd2befe874d8f6dc48ead156a3bf5ab16b2271a8456893226831e04ffa  ./Les-foyers-de-Reverie.bundle
+7c599033a4ee2a1a01b182bacc7683687f4cfb062941c5598c817175e4dbf2d0  ./Les-foyers-de-Reverie.patch
+91e92d4b56c28db6856db3474fc9b4604dfc90076802a933c77bb7c6ccb945a3  ./Notes.md
+55faf3d1bf7cd1bf446014e97da99d2e5b235606744b814bf5dad540c24bc6bb  ./Preuves/Flore-Le-panier.png
+ac3e5ea7867b04f7a4b9c35419efc31990f4f7901b4ad3fd3b6a99d809a06ef6  ./Preuves/Integration.txt
+f153f4d3920cbcb2921f1a1035b40be062de19b28cb51a6503af1ecb50b89eae  ./Preuves/Leo-apres-le-choix.png
+1214f33be24ee20b3cc6b50bce62e552e21a09da7d779aa17114a331f21a5a89  ./Preuves/Lino-Le-mot.png
+ba907d138afdd2d12a94a38cc4186e6382f56acabc59b2024dbc886bf53388a3  ./Preuves/Miette-cadeau.png
+2cbef90fde8c2e254c623c1cd1fc13fa4f004abe9929778366c16103babfd092  ./Preuves/Miette-devinette.png
+e50296b8625aae7657ef0e16bc0665814740d3cadff4dd0c38c627e2a49943d0  ./Preuves/Nilo-Le-dessin.png
+6ec2a39b46e3cb8d30b9575b146a5fae5440f3e96368cad6af97f78d8b6709cd  ./Preuves/Perle-devinette.png
+675379b994a4f7feb4285575d86956e95b30a4fd4817e1b792ae4127c9e83272  ./Preuves/Retour-au-residentiel.png
+68421685c60c325ca8ee5a16c8786db6b2065d10f061fa3ac89a5be707db1fba  ./Preuves/Tests-locaux.txt
+75b635601f3ae88d54b493be39b9771981ed59bb6ee664d8e5c2e6d0a5014d86  ./Preuves/Traces-en-jeu.txt
+6a2a28910c178da2b09c52fdb947dd3a3ba203b180cbdb2e2e621e000aff13af  ./Preuves/Version-de-la-prise.txt
+76a25720e3c40c63cb12ba857ff7ec8202e751433ce3d78052a875205494bdf4  ./Validation.md

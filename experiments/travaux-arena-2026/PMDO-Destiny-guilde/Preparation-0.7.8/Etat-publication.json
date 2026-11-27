@@ -1,0 +1,57 @@
+{
+  "cible": "7bd2dc104706571c91a2ea4a3c45282b94eabbb6",
+  "branche": "wip/reverie-integration-kingambit-cafe",
+  "tag": "v0.7.8",
+  "status": "publication_verifiee",
+  "build": {
+    "id": 45387714347,
+    "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/45387714347",
+    "status": "completed",
+    "conclusion": "success",
+    "sha": "7bd2dc104706571c91a2ea4a3c45282b94eabbb6",
+    "artifact": {
+      "id": 14917432767,
+      "name": "PMDO-Destiny-Windows-x64",
+      "size_in_bytes": 1317487430
+    }
+  },
+  "publication": {
+    "id": 45389835273,
+    "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/45389835273",
+    "status": "completed",
+    "conclusion": "success",
+    "sha": "7bd2dc104706571c91a2ea4a3c45282b94eabbb6"
+  },
+  "release": {
+    "url": "https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v0.7.8",
+    "draft": false,
+    "prerelease": true,
+    "target_commitish": "7bd2dc104706571c91a2ea4a3c45282b94eabbb6",
+    "assets": [
+      {
+        "name": "PMDO-Destiny-Update-0.7.7-to-0.7.8.zip",
+        "size": 54787952,
+        "digest": "sha256:66a7b179840aa606034d3561fdfdf5dd56483780e95ee90bece0303a0ab39941",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.8/PMDO-Destiny-Update-0.7.7-to-0.7.8.zip"
+      },
+      {
+        "name": "PMDO-Destiny-Update-0.7.7-to-0.7.8.zip.sha256",
+        "size": 122,
+        "digest": "sha256:af32dcabfb48cd52266b00465343eae466adb9e5a85d2bb71d2af09428cd6014",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.8/PMDO-Destiny-Update-0.7.7-to-0.7.8.zip.sha256"
+      },
+      {
+        "name": "PMDO-Destiny-Windows-x64-0.7.8.zip",
+        "size": 1344533172,
+        "digest": "sha256:bc0df2c724bdae26211a9b980527cc39fcc0545fea60522d1452e649da925eb0",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.8/PMDO-Destiny-Windows-x64-0.7.8.zip"
+      },
+      {
+        "name": "PMDO-Destiny-Windows-x64-0.7.8.zip.sha256",
+        "size": 118,
+        "digest": "sha256:acc849675779a659361e4a21577ae9cbac81d81644d3d0c523e01d3d0cb0a09c",
+        "url": "https://github.com/meromoonmeri/PMDO-Destiny/releases/download/v0.7.8/PMDO-Destiny-Windows-x64-0.7.8.zip.sha256"
+      }
+    ]
+  }
+}

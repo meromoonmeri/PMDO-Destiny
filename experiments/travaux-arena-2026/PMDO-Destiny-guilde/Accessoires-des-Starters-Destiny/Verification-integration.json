@@ -1,0 +1,296 @@
+{
+  "statut": "PARTIEL — utilisable pour essais, ajustement visuel non garanti",
+  "revision": "8f80c6e2c47e681acd334be661d601a59fed2367",
+  "patch_sha256": "b6a5159a5b3271eba87f924b9d8adf6813a7cffd61d773243a493198b282680d",
+  "moteur_linux_dotnet8_sha256": "52d82d0eeee83a642eccf8f6a22050248f798be2192c1bc8581008de43f0cdaf",
+  "jeu_isole": {
+    "banc": "Destiny 0.7.7, source recompilée Linux/FNA, sauvegarde de test",
+    "temoin_R2_inchange_sha256": "93842029a14cba08c4afbcf4bbb46350da35b936ed2123842074408ba42f4f0a",
+    "essais_menu_version_03": [
+      {
+        "id": "DEPART",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "-",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "CANCEL",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "-",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "COWBOY",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:nil",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "cowboy",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "LUNETTES",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:lunettes|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:lunettes",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "cowboy",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "lunettes",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "REPRISE",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:lunettes|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:lunettes",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "cowboy",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "lunettes",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "RETRAITP",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:foulard|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::lagon:foulard",
+        "equipe": [
+          {
+            "espece": "pikachu",
+            "forme": "0",
+            "teinte": "-",
+            "type": "-",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "lagon",
+            "type": "foulard",
+            "objet": "-"
+          }
+        ]
+      }
+    ],
+    "essais_Kaiminus_version_04": [
+      {
+        "id": "KAIM",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "kaiminus",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "-",
+            "type": "-",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "KAIMRUBAN",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:nil|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "-",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "KAIMFOULARD",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:foulard|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:foulard|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "foulard",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "KAIMCOW",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "cowboy",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINALRESTART",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:cowboy|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "cowboy",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      },
+      {
+        "id": "FINALGLASSES",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:lunettes|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:lunettes|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "lunettes",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      }
+    ],
+    "reprise_version_finale_05": [
+      {
+        "id": "V5RESTART",
+        "carte": "guilde_destiny_refectoire",
+        "detail": "PLAYER:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:lunettes|Teammate1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil|team0:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::garance:lunettes|team1:RogueEssence.Dungeon.Character:0:A53D780D-303E-49A3-BDA2-1A26669C3278::nil:nil",
+        "equipe": [
+          {
+            "espece": "totodile",
+            "forme": "0",
+            "teinte": "garance",
+            "type": "lunettes",
+            "objet": "berry_oran"
+          },
+          {
+            "espece": "vulpix",
+            "forme": "1",
+            "teinte": "-",
+            "type": "-",
+            "objet": "-"
+          }
+        ]
+      }
+    ],
+    "note_version": "La version finale 05 ajoute une retouche des lunettes de Kaiminus à la version 04 ; les tests FNA et navigateur ont été relancés. La reprise a été exécutée avec la DLL 05."
+  },
+  "limitations": [
+    "Le montage automatique des lunettes et des coiffes peut être inexact selon espèce, pose ou orientation ; pas de reconnaissance sémantique des yeux.",
+    "Les 11 008 tests HTML comparent les calques exportés pour la première image de chaque séquence ; ils ne certifient pas la qualité visuelle.",
+    "Pas de parcours complet en donjon ni compilation Windows.",
+    "Aucune installation joueur, publication GitHub ou modification de sauvegarde joueur."
+  ]
+}

@@ -1,0 +1,10 @@
+Extrait du journal PMDO 0.8.12.0, mode joueur, quête Destiny — 18/11/2026
+Horaires UTC ; seuls les jalons de progression sont reproduits ici.
+
+[2026/11/18 20:22:52.984] Loading rsground file: intro_halo
+[2026/11/18 20:23:18.085] Loading rsground file: personality_test
+[2026/11/18 20:29:30.789] Loading rsground file: zrv2_zone_reveil_nuit
+[2026/11/18 20:30:32.321] Loading rsground file: cliffdaytest_nuit
+[2026/11/18 20:31:22.459] Zone.LoadScriptEvents(): Added event Init to zone lost_wood!
+[2026/11/18 20:31:22.459] Zone.LoadScriptEvents(): Added event ExitSegment to zone lost_wood!
+[2026/11/18 20:31:22.459] Zone.LoadScriptEvents(): Added event Rescued to zone lost_wood!

@@ -1,0 +1,15 @@
+{
+  "statut": "PASS",
+  "catalogue": 360,
+  "sources_pmu": 346,
+  "nouveautes": 4,
+  "bonus": 10,
+  "appariement_profil_et_png": 8,
+  "rotation": true,
+  "fichiers_ouverts_et_sha256": [
+    "PNG",
+    "atlas 4×2"
+  ],
+  "mobile_390_px": true,
+  "ressources_HTTP": 0
+}

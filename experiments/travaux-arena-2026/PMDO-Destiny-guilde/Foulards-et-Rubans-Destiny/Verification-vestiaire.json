@@ -1,0 +1,13 @@
+{
+  "statut": "PASS",
+  "verifications": [
+    "86 choix préchargés, neuf teintes + Sans accessoire, deux sprites natifs visibles",
+    "Type et teinte indépendants pour les deux membres ; retrait de l’accessoire",
+    "Recherche sans accent, formes régionales conservées, Miaouss trouvé, aucun résultat propre",
+    "Huit angles, images de marche successives, filtres jour/nuit actifs hors ligne",
+    "2 752 essais pixel à pixel : deux pièces, 86 formes, huit angles, deux animations",
+    "Pas de débordement à 320, 390, 730 ni 1024 px",
+    "Fonctionne dans le lecteur iframe allow-scripts, sans stockage et sans réseau",
+    "Zéro erreur JavaScript, zéro requête externe"
+  ]
+}

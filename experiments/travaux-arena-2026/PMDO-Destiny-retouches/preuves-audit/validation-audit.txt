@@ -1,0 +1,71 @@
+PMDO Destiny — campagne de non-régression
+48 suites : 47 succès au passage général, 1 échec de référence (compacteur de ville).
+Après alignement du compacteur sur unpack_payload et relance : 48 suites validées.
+La copie de la ville de 36 710 525 octets est identique à la source vérifiée.
+
+test	exit
+tools/tests/test_ambiances_reverie_et_cinematiques.py	0
+tools/tests/test_animations_guilde.py	0
+tools/tests/test_banques_pmu.py	0
+tools/tests/test_build_update_zip.py	0
+tools/tests/test_carrefour_reverie.py	0
+tools/tests/test_cartes_edition_reverie.py	0
+tools/tests/test_cliffdaytest_integrite.py	0
+tools/tests/test_correctifs_runtime_zones_et_debugger.py	0
+tools/tests/test_dojo_kingambit_complexe.py	0
+tools/tests/test_e2_reverie.py	0
+tools/tests/test_entrees_reverie.py	0
+tools/tests/test_etangdudoyen_integration.py	0
+tools/tests/test_falaise_promontoire_integration.py	0
+tools/tests/test_falinks_0870.py	0
+tools/tests/test_grotte_verdoyante.py	0
+tools/tests/test_guilde_cliff_integrite.py	0
+tools/tests/test_guilde_destiny_accueil.py	0
+tools/tests/test_guilde_effectif.py	0
+tools/tests/test_guilde_enrolement.py	0
+tools/tests/test_guilde_hd_tiles.py	0
+tools/tests/test_habitants_quartiers.py	0
+tools/tests/test_hutte_aquatique.py	0
+tools/tests/test_lost_wood_dtef.py	0
+tools/tests/test_lost_wood_raccords.py	0
+tools/tests/test_lost_wood_refonte.py	0
+tools/tests/test_lost_wood_reproduction.py	0
+tools/tests/test_lostwood_tutoriel.py	0
+tools/tests/test_maison_structure.py	0
+tools/tests/test_objets_pmu_natifs.py	0
+tools/tests/test_payload_ville.py	1
+tools/tests/test_plage_sablefin_integration.py	0
+tools/tests/test_quartiers_reverie.py	0
+tools/tests/test_regle_ko.py	0
+tools/tests/test_renommage_reverie.py	0
+tools/tests/test_retrait_guilde.py	0
+tools/tests/test_retrouvailles_roles.py	0
+tools/tests/test_reverie_architecture.py	0
+tools/tests/test_reverie_berges_053.py	0
+tools/tests/test_reverie_raccords_052.py	0
+tools/tests/test_reverie_wip.py	0
+tools/tests/test_suivi_interieurs.py	0
+tools/tests/test_tableaux_reverie.py	0
+tools/tests/test_tilessheets_reverie.py	0
+tools/tests/test_visite_marchands.py	0
+tools/tests/test_waterfall_town02.py	0
+tools/test_batiments_interieurs.py	0
+tools/test_cafe_lostwood.py	0
+tools/tests/test_polish_reverie.py	0
+
+Relance test_payload_ville.py :
+OK (reconstitué) game/carte.rsground (20 octets)
+OK (déjà présent) game/carte.rsground
+ERREUR game/carte.rsground existe et diffère de la carte native : aucun écrasement. Comparez ou déplacez votre fichier avant de réessayer.
+ERREUR game/carte.rsground: Not a gzipped file (b'pa')
+Carte de jeu : 147 -> 23 octets ; 2 cellules par défaut.
+Carte de jeu : 147 -> 23 octets ; 2 cellules par défaut.
+OK : payload non destructif et compactage des seules cellules vides.
+
+Validation du paquet préparé (Linux) :
+Files checked: 17843
+Source size: 3903.6 MiB
+Largest file: game/Content/Tile/index.idx (195.93 MiB)
+Git LFS: none
+Submodules: none
+VALIDATION OK

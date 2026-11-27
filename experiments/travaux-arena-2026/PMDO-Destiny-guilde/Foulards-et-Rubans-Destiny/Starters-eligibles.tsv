@@ -1,0 +1,87 @@
+Espece	Forme	Nom	Generation	Coupe	Coutures-par-angle
+bulbasaur	0	Bulbizarre	1	flanc	1,-3;0,-2;0,-2;0,-1;0,-1
+growlithe	0	Caninos de Kanto	1	quadrupede	0,-1;1,-1;2,0;0,0;0,0
+squirtle	0	Carapuce	1	cou_court	
+vulpix	0	Goupix de Kanto	1	quadrupede	0,-4;1,-3;4,-2;0,-1;0,0
+meowth	0	Miaouss	1	debout	
+dratini	0	Minidraco	1	long	
+pikachu	0	Pikachu	1	debout	
+charmander	0	Salamèche	1	debout	
+eevee	0	Évoli	1	criniere	0,0;1,0;2,0;0,0;0,1
+wooper	0	Axoloto de Johto	2	cou_court	
+murkrow	0	Cornèbre	2	plumes	
+larvitar	0	Embrylex	2	debout	
+sneasel	0	Farfuret de Johto	2	debout	
+chikorita	0	Germignon	2	quadrupede	
+cyndaquil	0	Héricendre	2	quadrupede	
+totodile	0	Kaiminus	2	debout	
+phanpy	0	Phanpy	2	flanc	
+togepi	0	Togepi	2	tronc_bas	
+mareep	0	Wattouat	2	flanc	0,-2;0,-1;1,0;0,0;0,0
+treecko	0	Arcko	3	debout	
+mudkip	0	Gobou	3	quadrupede	
+torchic	0	Poussifeu	3	plumes	
+skitty	0	Skitty	3	quadrupede	0,0;1,0;3,1;2,2;0,3
+snorunt	0	Stalgamin	3	cou_court	
+ralts	0	Tarsal	3	debout	
+beldum	0	Terhal	3	coque_metal	
+swablu	0	Tylton	3	plumes	
+gible	0	Griknot	4	debout	
+buneary	0	Laporeille	4	debout	
+shinx	0	Lixy	4	quadrupede	0,0;2,0;3,-1;0,0;0,0
+chimchar	0	Ouisticram	4	debout	
+riolu	0	Riolu	4	debout	
+budew	0	Rozbouton	4	tronc_bas	
+piplup	0	Tiplouf	4	plumes	
+turtwig	0	Tortipouss	4	quadrupede	0,0;1,0;2,0;2,2;0,1
+minccino	0	Chinchidou	5	debout	
+axew	0	Coupenotte	5	debout	
+litwick	0	Funécire	5	tronc_bas	0,-6;0,-6;0,-6;0,-2;0,-1
+golett	0	Gringolem	5	debout	0,-5;0,-5;0,-1;-2,-3;0,-3
+tepig	0	Gruikui	5	quadrupede	
+sandile	0	Mascaïman	5	flanc	0,-1;0,0;1,0;0,0;0,0
+oshawott	0	Moustillon	5	debout	
+larvesta	0	Pyronille	5	carapace	
+pawniard	0	Scalpion	5	debout	
+joltik	0	Statitik	5	carapace	
+snivy	0	Vipélierre	5	debout	
+zorua	0	Zorua d'Unys	5	quadrupede	
+phantump	0	Brocélôme	6	tronc_bas	
+fennekin	0	Feunnec	6	quadrupede	
+froakie	0	Grenousse	6	debout	
+chespin	0	Marisson	6	debout	
+goomy	0	Mucuscule	6	tronc_bas	
+pancham	0	Pandespiègle	6	debout	
+pumpkaboo	0	Pitrouille	6	tronc_bas	
+espurr	0	Psystigri	6	debout	
+noibat	0	Sonistrelle	6	debout	
+rowlet	0	Brindibou	7	aile	
+jangmo_o	0	Bébécaille	7	quadrupede	0,-2;0,-1;1,-1;0,0;0,1
+cosmog	0	Cosmog	7	nuage	
+litten	0	Flamiaou	7	quadrupede	
+vulpix	1	Goupix d'Alola	7	quadrupede	0,-4;1,-3;4,-2;0,-1;0,0
+stufful	0	Nounourson	7	quadrupede	
+popplio	0	Otaquin	7	long	
+rockruff	0	Rocabot	7	quadrupede	
+wimpod	0	Sovkipou	7	carapace	
+salandit	0	Tritox	7	quadrupede	
+hatenna	0	Bibichut	8	tronc_bas	0,1;-2,1;-3,1;0,2;0,2
+growlithe	1	Caninos de Hisui	8	criniere	0,-1;2,-1;3,0;0,0;0,1
+dreepy	0	Fantyrm	8	long	
+sneasel	1	Farfuret de Hisui	8	debout	
+scorbunny	0	Flambino	8	debout	
+snom	0	Frissonille	8	carapace	
+nickit	0	Goupilou	8	quadrupede	0,-1;1,0;2,0;0,0;0,1
+sobble	0	Larméléon	8	debout	
+rookidee	0	Minisange	8	plumes	
+grookey	0	Ouistempo	8	debout	
+applin	0	Verpom	8	pomme	
+zorua	1	Zorua de Hisui	8	quadrupede	
+wooper	1	Axoloto de Paldea	9	branchies	0,-1;0,0;0,0;0,0;0,0
+charcadet	0	Charbambin	9	debout	
+fuecoco	0	Chochodile	9	debout	
+quaxly	0	Coiffeton	9	plumes	
+tinkatink	0	Forgerette	9	debout	
+pawmi	0	Pohm	9	quadrupede	0,0;2,-2;1,0;0,0;0,1
+sprigatito	0	Poussacha	9	quadrupede	0,0;1,1;1,0;0,0;0,0
+fidough	0	Pâtachiot	9	flanc	

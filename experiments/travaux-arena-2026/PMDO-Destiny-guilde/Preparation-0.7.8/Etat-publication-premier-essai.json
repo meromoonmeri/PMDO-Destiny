@@ -1,0 +1,14 @@
+{
+  "cible": "2e467a383d2677004548f26d5fdd584d99ef3c92",
+  "branche": "wip/reverie-integration-kingambit-cafe",
+  "tag": "v0.7.8",
+  "status": "build_echec",
+  "build": {
+    "id": 45386390451,
+    "url": "https://github.com/meromoonmeri/PMDO-Destiny/actions/runs/45386390451",
+    "status": "completed",
+    "conclusion": "failure",
+    "sha": "2e467a383d2677004548f26d5fdd584d99ef3c92"
+  },
+  "publication": null
+}

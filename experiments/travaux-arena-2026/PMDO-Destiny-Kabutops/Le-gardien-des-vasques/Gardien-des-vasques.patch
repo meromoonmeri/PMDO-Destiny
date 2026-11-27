@@ -1,0 +1,951 @@
+From a349c316bf60447b64d87263cc9ece4b31e4bd1a Mon Sep 17 00:00:00 2001
+From: Destiny <destiny@users.noreply.github.com>
+Date: Fri, 20 Nov 2026 15:00:46 +0000
+Subject: [PATCH] =?UTF-8?q?D=C3=A9veloppe=20le=20pr=C3=A9combat=20des=20va?=
+ =?UTF-8?q?sques=20et=20garde=20Nilo=20t=C3=A9moin=20du=20duel?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Tunnel natif, crues et évacuations, décision du héros. Nilo tremble pendant le combat sans entrer dans sa simulation. Export de carte sans lissage, aucun changement aux tuiles ou à l’équilibrage.
+---
+ docs/REVERIE_075.md                           |  15 +-
+ .../Script/destiny/fosse_cascade_scene.lua    |   9 +
+ .../ground/fgv1_fin_grotte_vasques/init.lua   | 185 +++++++++++++-----
+ game/Data/Script/destiny/main.lua             |   2 +
+ .../destiny/services/nilo_temoin/init.lua     |  69 +++++++
+ tools/render_ground_moteur.py                 |  42 ++--
+ tools/tests/test_grotte_verdoyante.lua        | 128 +++++++-----
+ tools/tests/test_grotte_verdoyante.py         |  26 ++-
+ tools/tests/test_nilo_temoin.lua              |  55 ++++++
+ 9 files changed, 416 insertions(+), 115 deletions(-)
+ create mode 100644 game/Data/Script/destiny/fosse_cascade_scene.lua
+ create mode 100644 game/Data/Script/destiny/services/nilo_temoin/init.lua
+ create mode 100644 tools/tests/test_nilo_temoin.lua
+
+diff --git a/docs/REVERIE_075.md b/docs/REVERIE_075.md
+index 327cd62..835d0b2 100644
+--- a/docs/REVERIE_075.md
++++ b/docs/REVERIE_075.md
+@@ -5,17 +5,22 @@ Après la [`v0.7.4`](https://github.com/meromoonmeri/PMDO-Destiny/releases/tag/v
+ ## Fosse Cascade Fond
+ 
+ - La carte de mise en scène passe de **480 × 360 à 576 × 528 px** (72 × 66 tuiles de 8 px). Un passage rocheux éclairé par petites vasques débouche au sud de la salle haute. Deux panoramiques distincts montrent d'abord le couloir, puis Nilo sur la terrasse. Les sprites ne sont pas redimensionnés.
+-- Nilo tremble déjà sur la terrasse, sans bouger de place. Il n'a rien touché : Kabutops l'accuse parce qu'il l'a vu près des vasques. Après la coupure de musique, **deux avertissements** sont signés `???`, sans portrait. Entre les deux, les protagonistes se regardent, cherchent qui parle et entendent Nilo se défendre.
+-- Juste après le second avertissement, le plateau s'assombrit. Un seul éclair révèle Kabutops déjà devant et à mi-distance du héros et du partenaire. La faux et le recul s'enchaînent pendant le retour à l'image : les deux glissent en arrière sans tourner le dos. Pas de détour par la rive ni de geyser.
+-- Après le face-à-face, le cadre et l'alignement du duo rejoignent ceux de l'arène. Le woosh garde ses neuf bandes natives `Pre_Battle` et le bruitage `EVT_Battle_Transition` entier. La revanche saute le couloir et la révélation, mais conserve le même raccord. `Boss Battle 2.ogg` démarre côté arène.
++- Nilo tremble déjà sur la terrasse. Il demande qui sont les deux Pokémon, puis raconte qu’il cherchait sa maman et s’est perdu. Le duo se présente et le rassure avant que Kabutops ne l’accuse. **Deux avertissements** signés `???`, sans portrait ; entre les deux, le duo se regarde et Nilo dément l’accusation.
++- Secousse, terre et jaillissement vertical sur l’axe médian : Kabutops surgit devant le duo, style **Tunnel**, avec les particules et le son natifs `Dig`. L’impulsion, le coup de faux et le recul des deux Pokémon se chevauchent. Pas d’arrivée depuis la rive ni d’éclair plein écran qui masque l’animation.
++- Face au duo, Kabutops explique les crues, les départs de familles et le danger en aval. Il soupçonne Nilo parce qu’il l’a vu près de la source, pas parce qu’il l’a vu agir. Quand le héros constate que le gardien est trop en colère pour entendre raison, son partenaire lui répond et se prépare. Objectif de **1 min 20 à 1 min 30** avec une lecture posée ; la confirmation des dialogues reste manuelle.
++- Le woosh garde ses neuf bandes natives `Pre_Battle` et le bruitage `EVT_Battle_Transition` entier. La revanche est courte et conserve le même raccord. `Boss Battle 2.ogg` démarre côté arène. Nilo reste visible et tremble sur la terrasse derrière Kabutops, au même point du décor que dans le pré-combat. Sa pose est dessinée depuis le sprite natif de Lixy ; il n’entre dans aucune équipe, n’a ni tour ni collision et ne peut pas être choisi comme cible.
+ - **Duel inchangé** : le générateur prélève la salle haute à `x=48` pour garder l'arène 480 × 360, ses 42 cases praticables et l'équilibrage du 9e étage. Pas de carton au lancement, mais le nom reste dans le journal. Aucun changement aux huit premiers étages.
+-- Après la victoire, Kabutops s'enfuit par le sud et Lyra rejoint Nilo. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
++- Après la victoire, Kabutops s'enfuit par le sud. Nilo redescend de la terrasse et retrouve Lyra. Les retrouvailles et le retour paisible suivent le décalage de la salle haute. Le bilan reste celui du moteur, sans fanfare ni journal ajouté par le script.
+ 
+ ### Références de mise en scène
+ 
+ - [Val Silencieux — Équipe de Secours Rouge (GIF de l'approche et de la révélation)](https://lparchive.org/Pokmon-Mystery-Dungeon-Red-Rescue-Team/Update%2026/) : l'arrivée de Cotovol puis le déplacement vers Tengalice construisent l'espace avant l'apparition d'Électhor. Ici : seuil, terrasse, voix non identifiée puis révélation, sans reprendre les répliques ni le noir complet.
+ - [Searing Crucible — Halcyon, `FirstPreBossScene`](https://github.com/Palikadude/Halcyon/blob/1522c7a8b7a34d70078e11ed605b21d563b0dc51/Data/Script/halcyon/ground/searing_crucible/searing_crucible_ch_5.lua) : avance du groupe, caméra en retard, interruption de la musique et signes du décor avant l'arrivée de Magcargo. Le décor et le Lua de Destiny ne copient pas de ressource de cette scène.
+ 
++## Netteté, sans retouche de la carte
++
++Les fichiers ground, arène et planches sont inchangés. Le moteur échantillonne déjà les tuiles en `PointClamp` à une taille de fenêtre entière. Pour les aperçus, `tools/render_ground_moteur.py` conserve désormais les tuiles complètes de 8 ou 24 px et exporte les animations WebP sans perte. `--echelle 2`, `3` ou `4` duplique les pixels, sans interpolation ; le PNG par défaut reste à taille native. `--arene end_grotte_verdoyante` permet de rendre les mêmes strates de la salle haute dans l’arène 480 × 360.
++
+ ## Régressions couvertes
+ 
+-`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d'approche, le tremblement avant le premier plan, les deux avertissements anonymes, l'innocence de Nilo et le recul à la révélation, le raccord sans carton, la revanche et les phases de fin. Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
++`tools/tests/test_grotte_verdoyante.py` vérifie les dimensions du ground, tous les liens vers la planche d'extension, le passage des colliders le long des trajets et l'intégrité de l'arène et du donjon. Les doublures Lua vérifient les deux plans d’approche, l’ordre des échanges, le tremblement avant le premier plan, les deux avertissements anonymes, le mouvement vertical et le recul, la décision du héros, le raccord et le spectateur non combattant (placement, animation et nettoyage), la revanche et les phases de fin. Relancer `python tools/build_grotte_verdoyante.py` avec Pillow pour régénérer les cartes et l'index des tuiles. Le nouvel atlas est assemblé par `tools/agrandir_vasques.py` à partir du décor Destiny.
+diff --git a/game/Data/Script/destiny/fosse_cascade_scene.lua b/game/Data/Script/destiny/fosse_cascade_scene.lua
+new file mode 100644
+index 0000000..4cb3e42
+--- /dev/null
++++ b/game/Data/Script/destiny/fosse_cascade_scene.lua
+@@ -0,0 +1,9 @@
++-- Les deux cartes partagent la terrasse. Le ground positionne un collider
++-- 16×16 ; le sprite témoin de l’arène est ancré sur le centre correspondant.
++local fosse = {SALLE_X = 48, NILO_TERRASSE = {x = 304, y = 152}}
++fosse.ARENE = 'end_grotte_verdoyante'
++fosse.NILO_ARENE = {
++  x = fosse.NILO_TERRASSE.x + 8 - fosse.SALLE_X,
++  y = fosse.NILO_TERRASSE.y + 8,
++}
++return fosse
+diff --git a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+index 87c2137..7b4fb49 100644
+--- a/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
++++ b/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua
+@@ -1,5 +1,5 @@
+ -- Fosse Cascade Fond (576×528, antichambre au sud et salle haute).
+--- 0 : Nilo tremble sur la terrasse ; une voix l’accuse avant de surgir.
++-- 0 : sauvetage de Nilo, accusation anonyme, sortie de terre du gardien et duel.
+ -- 1 : revanche courte, sans rejouer la découverte.
+ -- 3 : retrouvailles et bilan natif après le duel. 4 : visite paisible.
+ -- La salle haute commence à x=48 ; l'arène garde son rectangle de 480×360.
+@@ -7,6 +7,7 @@ require 'origin.common'
+ local equipe_scene = require 'destiny.equipe_scene'
+ local cinematique = require 'destiny.cinematique'
+ local missions_reverie = require 'destiny.missions_reverie'
++local fosse = require 'destiny.fosse_cascade_scene'
+ 
+ local fgv1 = {}
+ 
+@@ -16,14 +17,14 @@ local LIEU_VILLE = '[color=#FFC663]Réverie Town[color]'
+ 
+ -- Les ancres de fin correspondent aux centres des cases (10,10), (10,12)
+ -- et (9,12) de l'arène, moins le demi-collider de GroundChar.
+-local SALLE_X = 48
++local SALLE_X = fosse.SALLE_X
+ local SOL_BOSS = {x = 292, y = 244}
+ local SOL_HEROS = {x = 292, y = 268}
+ local SOL_PARTENAIRE = {x = 268, y = 268}
+ -- Devant le duo ET au milieu de ses deux axes. L'arène conserve son ancre
+ -- native SOL_BOSS, utilisée aussi pour la revanche et l'après-combat.
+ local APPARITION_BOSS = {x = math.floor((SOL_HEROS.x + SOL_PARTENAIRE.x) / 2), y = SOL_BOSS.y}
+-local SOL_NILO_TERRASSE = {x = 304, y = 160}
++local SOL_NILO_TERRASSE = fosse.NILO_TERRASSE
+ local RECUL_Y = 292
+ local ENTREE_HEROS = {x = 222, y = 492}
+ local ENTREE_PARTENAIRE = {x = 198, y = 484}
+@@ -37,6 +38,7 @@ local CAM_DUEL_Y = 240 -- centre effectif de l'arène une fois clampée
+ local CAM_ENTREE = {x = 230, y = 406}
+ local CAM_SEUIL = {x = 278, y = 372}
+ local CAM_TERRASSE_Y = 234
++local CAM_NILO_REPLI_Y = 250 -- garder Nilo et le duo dans le champ
+ local CAM_FACE_Y = 260 -- les pieds du duo restent au-dessus du dialogue après le recul
+ 
+ local function creer_acteur(nom, espece, genre, surnom, x, y, dir)
+@@ -99,7 +101,7 @@ end
+ -- Valeurs de repli de RogueEssence.Dungeon.DrawEffect lorsque l'énumération
+ -- n'est pas exposée à Lua (None=-1, Sleeping=0, Stopped=1, Shaking=2,
+ -- Charging=3, Absent=4, Spinning=5, Hurt=6, Transparent=7, Trembling=8).
+-local EFFETS_DESSIN = {Shaking = 2, Trembling = 8}
++local EFFETS_DESSIN = {Shaking = 2}
+ 
+ local function effet_dessin(nom)
+   local ok, effet = pcall(function() return RogueEssence.Dungeon.DrawEffect[nom] end)
+@@ -333,6 +335,40 @@ local function au_pied_de_la_terrasse(hero, partenaire, nilo)
+   cinematique.Respirer(13)
+ end
+ 
++local function dire(ch, emotion, texte, cote)
++  if ch == nil then return end
++  cinematique.Dire(ch, emotion, texte, cote)
++  UI:ResetSpeaker()
++end
++
++local function premiere_rencontre(hero, partenaire, nilo)
++  dire(nilo, 'Worried', 'Vous êtes qui… ? Pourquoi vous êtes venus ici ?', 'droite')
++  if partenaire ~= nil then
++    regarder_cible(hero, partenaire, 4)
++    cinematique.Respirer(18)
++    dire(partenaire, 'Normal', 'On est une équipe de secours. Ta maman nous a demandé de te ramener.', 'standard')
++  else
++    dire(hero, 'Normal', 'Je fais partie d’une équipe de secours. Ta maman m’a demandé de te ramener.', 'standard')
++  end
++  cinematique.RegarderGroupe({{hero, nilo, 0, 4}, {partenaire, nilo, 5, 4}})
++  cinematique.Respirer(20)
++  dire(nilo, 'Worried', 'Je la cherchais… J’ai cru l’entendre près de l’eau. Puis le courant a grondé.', 'droite')
++  -- Nilo cherche la sortie des yeux. Le héros le laisse finir avant de le rassurer.
++  tourner_vers(nilo, Direction.DownLeft, 5)
++  cinematique.Respirer(32)
++  dire(nilo, 'Teary-Eyed', 'J’ai couru ici et je ne retrouve plus la sortie… Elle m’attend dehors ?', 'droite')
++  tourner_vers(nilo, Direction.Down, 5)
++  local duree_signe = hero and temps_animation(hero, 'Nod')
++  if duree_signe ~= nil then
++    GROUND:CharSetAnim(hero, 'Nod', false)
++    GAME:WaitFrames(duree_signe)
++    GROUND:CharEndAnim(hero)
++  end
++  cinematique.Respirer(20)
++  dire(partenaire or hero, 'Normal', 'Elle t’attend. Reste sur la terrasse, d’accord ? Tu n’es plus tout seul.', 'standard')
++  cinematique.Respirer(28)
++end
++
+ local function avertissement_hors_champ(texte)
+   -- Kabutops est encore masqué. Aucun portrait ne doit trahir son identité.
+   UI:ResetSpeaker()
+@@ -345,7 +381,7 @@ local function les_avertissements(hero, partenaire, nilo)
+   SOUND:FadeOutBGM(22)
+   GAME:WaitFrames(24)
+   avertissement_hors_champ('Pas un pas de plus. Ce Lixy a déréglé le courant.')
+-  cinematique.Respirer(9)
++  cinematique.Respirer(15)
+   -- Ils se cherchent du regard, puis le partenaire demande qui parle.
+   -- Le héros n'a pas de réplique : le désarroi passe par le jeu du duo.
+   if partenaire ~= nil and hero ~= nil then
+@@ -354,46 +390,108 @@ local function les_avertissements(hero, partenaire, nilo)
+     tourner_vers(partenaire or hero, Direction.Right, 4)
+   end
+   emote_sur(partenaire or hero, 'question')
+-  GAME:WaitFrames(13)
+-  if partenaire ~= nil then
+-    cinematique.Dire(partenaire, 'Worried', 'Le courant ? Mais… qui parle ?', 'standard')
+-    UI:ResetSpeaker()
+-  end
++  GAME:WaitFrames(20)
++  dire(partenaire or hero, 'Worried', 'Le courant ? Mais… qui parle ?', 'standard')
+   cinematique.RegarderGroupe({{hero, nilo, 0, 4}, {partenaire, nilo, 5, 4}})
+-  cinematique.Dire(nilo, 'Worried', 'J’ai rien touché ! Je cherchais juste la sortie…', 'droite')
+-  UI:ResetSpeaker()
+-  cinematique.Respirer(10)
++  cinematique.Respirer(16)
++  dire(nilo, 'Worried', 'J’ai rien touché ! Je voulais juste me mettre à l’abri.', 'droite')
++  cinematique.Respirer(16)
+   avertissement_hors_champ('Dernier avertissement : reculez.')
+ end
+ 
+-local function reveler_gardien(kabutops, hero, partenaire)
+-  -- Juste après le second avertissement, la salle s'assombrit et les
+-  -- regards reviennent vers le centre. Pas de détour du boss par la rive.
++-- Une seule sortie façon Tunnel. La terre devient visible avant le sprite ;
++-- le déplacement est vertical, déjà sur l’axe médian du duo. Les éclats
++-- natifs de Tunnel couvrent les premiers pixels du corps qui sortent du sol.
++local function reveler_gardien(kabutops, hero, partenaire, nilo)
+   local centre = GAME:GetCameraCenter()
+   local ombre = RogueEssence.Content.FlashEmitter()
+   ombre.Anim = RogueEssence.Content.BGAnimData('White', 0)
+   ombre.Layer = DrawLayer.Top
+-  -- Éviter l’ambiguïté de surcharge int/float de Color(...) via NLua.
++  -- Valeur noire prémultipliée : aucun écran blanc par-dessus la sortie de terre.
+   ombre.StartColor = Color.Transparent
+-  ombre.EndColor = Color.Multiply(Color.Black, 0.60)
+-  ombre.FadeInTime, ombre.HoldTime, ombre.FadeOutTime = 12, 18, 8
++  ombre.EndColor = Color.Multiply(Color.Black, 0.36)
++  ombre.FadeInTime, ombre.HoldTime, ombre.FadeOutTime = 14, 20, 15
+   GROUND:PlayVFX(ombre, centre.X, centre.Y)
+   TASK:JoinCoroutines({
+     TASK:BranchCoroutine(function()
+-      cinematique.TournerGroupe({{hero, Direction.UpLeft, 0, 4}, {partenaire, Direction.UpRight, 3, 4}})
++      cinematique.TournerGroupe({{hero, Direction.UpLeft, 0, 4}, {partenaire, Direction.UpRight, 4, 4}})
++    end),
++    TASK:BranchCoroutine(function()
++      GAME:MoveCamera(CAM_DUEL_X, 246, 24, false)
++    end),
++    TASK:BranchCoroutine(function()
++      GAME:WaitFrames(8)
++      secouer_ecran(1, 2, 32)
++      emote_sur(partenaire or hero, 'shock')
+     end),
+-    TASK:BranchCoroutine(function() GAME:WaitFrames(25) end),
+   })
+-
+-  SOUND:PlayBattleSE('EVT_Battle_Flash')
+-  GAME:FadeOut(true, 3)
++  local terre = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData('Dig', 3))
++  terre.Layer = DrawLayer.Front
++  SOUND:PlayBattleSE('DUN_Dig')
++  GROUND:PlayVFX(terre, APPARITION_BOSS.x + 8, APPARITION_BOSS.y + 14)
++  GAME:WaitFrames(11)
++  kabutops.HideShadow = true
++  kabutops:SetLocHeight(-10)
+   GROUND:Unhide('Kabutops_Boss')
+-  -- La faux part au moment où Kabutops surgit. Le retour à l'image se
+-  -- joue en parallèle : le recul n'attend ni la fin du fondu ni un pas.
+   TASK:JoinCoroutines({
+-    TASK:BranchCoroutine(function() GAME:FadeIn(8) end),
++    TASK:BranchCoroutine(function()
++      -- Impulsion rapide, sommet bref, puis réception. La faux s’arme
++      -- pendant cette courbe : pas de battement entre sortie et recul.
++      for _, h in ipairs({-6, -1, 5, 11, 16, 17, 16, 13, 9, 4, 0}) do
++        kabutops:SetLocHeight(h)
++        GAME:WaitFrames(2)
++      end
++      kabutops.HideShadow = false
++    end),
+     TASK:BranchCoroutine(function() souffle_du_gardien(kabutops, hero, partenaire) end),
++    TASK:BranchCoroutine(function()
++      GAME:WaitFrames(6)
++      emote_sur(hero, 'exclaim')
++      GAME:WaitFrames(6)
++      emote_sur(nilo, 'sweating')
++    end),
++  })
++end
++
++local function la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
++  SOUND:PlayBGM('Rising Fear.ogg', false)
++  cinematique.Respirer(20)
++  regarder_cible(kabutops, nilo, 5)
++  dire(kabutops, 'Normal', 'Avant, on venait boire ici sans crainte. Depuis peu, même les sentiers ne sont plus sûrs.', 'droite')
++  cinematique.RegarderGroupe({{partenaire, nilo, 0, 4}, {hero, nilo, 6, 4}})
++  cinematique.Respirer(26)
++  dire(kabutops, 'Determined', 'Quand l’eau se déchaîne, elle emporte les berges. Des familles entières ont quitté la vallée.', 'droite')
++  tourner_vers(kabutops, Direction.Down, 5)
++  regarder_cible(partenaire or hero, kabutops, 4)
++  cinematique.Respirer(20)
++  dire(partenaire or hero, 'Determined', 'Mais Nilo se cachait. Être près de l’eau ne veut pas dire qu’il y a touché !', 'standard')
++  -- Le gardien se place dans l’axe du duel seulement après l’apparition.
++  GROUND:MoveToPosition(kabutops, SOL_BOSS.x, SOL_BOSS.y, false, 1.25)
++  tourner_vers(kabutops, Direction.Down, 4)
++  dire(kabutops, 'Angry', 'Je l’ai vu près de la source. Ça vient sûrement de lui, de ce Pokémon électrique.', 'droite')
++  emote_sur(kabutops, 'angry')
++  cinematique.Respirer(24)
++  dire(kabutops, 'Angry', 'Il ne contrôle plus ses éclairs. Tant qu’il rôde, aucun village en aval n’est en sécurité.', 'droite')
++
++  -- La caméra et les regards reviennent à Nilo un instant
++  -- avant la décision : l’accusation est celle du gardien, pas de la scène.
++  TASK:JoinCoroutines({
++    TASK:BranchCoroutine(function() GAME:MoveCamera(CAM_DUEL_X, CAM_NILO_REPLI_Y, 28, false) end),
++    TASK:BranchCoroutine(function()
++      cinematique.RegarderGroupe({{hero, nilo, 0, 4}, {partenaire, nilo, 7, 4}})
++    end),
+   })
++  cinematique.Respirer(26)
++  dire(nilo, 'Teary-Eyed', 'Mais je ne comprends pas… Je veux juste rentrer avec maman.', 'droite')
++  regarder_cible(hero, kabutops, 5)
++  cinematique.Respirer(36)
++  cinematique.RegarderGroupe({{hero, partenaire, 0, 4}, {partenaire, hero, 9, 4}})
++  GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 22, false)
++  dire(hero, 'Determined', "Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix.", 'droite')
++  cinematique.Respirer(20)
++  dire(partenaire, 'Determined', 'D’accord. On le retient ici. Nilo, reste à l’abri, on ne t’abandonne pas.', 'standard')
++  cinematique.RegarderGroupe({{partenaire, kabutops, 0, 4}, {hero, kabutops, 5, 4}})
++  cinematique.Respirer(30)
+ end
+ 
+ function fgv1.PreBattle(is_rematch, map)
+@@ -411,10 +509,8 @@ function fgv1.PreBattle(is_rematch, map)
+   local seuil_boss = is_rematch and SOL_BOSS or APPARITION_BOSS
+   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
+     seuil_boss.x, seuil_boss.y, Direction.Down)
+-  if not is_rematch then
+-    GROUND:Hide('Kabutops_Boss')
+-    trembler_de_peur(nilo) -- déjà actif quand la caméra découvre la terrasse
+-  end
++  if not is_rematch then GROUND:Hide('Kabutops_Boss') end
++  trembler_de_peur(nilo) -- déjà actif quand la caméra découvre la terrasse
+   if hero ~= nil then
+     hero.CollisionDisabled = true
+     GROUND:TeleportTo(hero, depart_h.x, depart_h.y, Direction.Up)
+@@ -423,22 +519,10 @@ function fgv1.PreBattle(is_rematch, map)
+   if not is_rematch then
+     traverser_passage(hero, partenaire)
+     au_pied_de_la_terrasse(hero, partenaire, nilo)
+-    if partenaire ~= nil then
+-      cinematique.Dire(partenaire, 'Worried', 'Nilo ! Tu nous entends ?', 'standard')
+-      UI:ResetSpeaker()
+-    end
++    premiere_rencontre(hero, partenaire, nilo)
+     les_avertissements(hero, partenaire, nilo)
+-    reveler_gardien(kabutops, hero, partenaire)
+-    SOUND:PlayBGM('Rising Fear.ogg', false)
+-    cinematique.Dire(kabutops, 'Angry', 'Je l’ai vu près des vasques. Ça me suffit.', 'droite')
+-    UI:ResetSpeaker()
+-    if partenaire ~= nil then
+-      regarder_cible(partenaire, kabutops, 4)
+-      cinematique.Respirer(10)
+-      cinematique.Dire(partenaire, 'Determined', 'Être là ne veut pas dire qu’il y a touché ! On est venus le ramener.', 'standard')
+-      UI:ResetSpeaker()
+-    end
+-    cinematique.Respirer(12)
++    reveler_gardien(kabutops, hero, partenaire, nilo)
++    la_vallee_et_le_choix(kabutops, hero, partenaire, nilo)
+   else
+     GAME:MoveCamera(CAM_DUEL_X, CAM_FACE_Y, 1, false)
+     SOUND:PlayBGM('Rising Fear.ogg', false)
+@@ -463,7 +547,7 @@ function fgv1.PreBattle(is_rematch, map)
+   GAME:MoveCamera(CAM_DUEL_X, CAM_DUEL_Y, 20, false)
+   woosh_duel()
+   retablir_eau() -- à noir complet, y compris si l'éditeur conserve l'instance
+-  if not is_rematch then arreter_tremblement(nilo) end
++  arreter_tremblement(nilo) -- le spectateur de l’arène prend le relais
+   if hero ~= nil then hero.CollisionDisabled = false end
+   GAME:CutsceneMode(false)
+   lancer_duel_boss()
+@@ -473,7 +557,8 @@ function fgv1.PostBattle()
+   local hero = CH('PLAYER')
+   -- Axe central x=304 laissé libre pour l'arrivée de Lyra depuis le sud.
+   local partenaire = equipe_scene.Partenaire(SALLE_X + 208, 240, Direction.Up)
+-  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo', SALLE_X + 296, 240, Direction.Left)
++  local nilo = creer_acteur('Nilo_Grotte', 'shinx', Gender.Male, 'Nilo',
++    SOL_NILO_TERRASSE.x, SOL_NILO_TERRASSE.y, Direction.Down)
+   local kabutops = creer_acteur('Kabutops_Boss', 'kabutops', Gender.Male, '',
+     SOL_BOSS.x, SOL_BOSS.y, Direction.Down)
+ 
+@@ -513,7 +598,7 @@ function fgv1.PostBattle()
+   GROUND:RemoveCharacter('Kabutops_Boss')
+   cinematique.Respirer(12)
+   SOUND:PlayBGM('Lower Spring Cave.ogg', false)
+-  GROUND:MoveToPosition(nilo, SALLE_X + 296, 272, false, 1.4)
++  GROUND:MoveToPosition(nilo, SOL_NILO_TERRASSE.x, 272, false, 1.65)
+   regarder_cible(nilo, hero or partenaire, 4)
+   cinematique.Dire(nilo, 'Teary-Eyed', 'J’ai cru que je ne reverrais pas maman… Merci d’être venus.', 'droite')
+   UI:ResetSpeaker()
+@@ -647,7 +732,7 @@ function fgv1.GameLoad(map)
+   -- ewc3_entree_waterfall_cave : sans cette relance, une sauvegarde chargée
+   -- pendant une scène des vasques restait muette jusqu'à la fin du donjon.
+   GAME:FadeIn(20)
+-  -- Pendant la révélation de Kabutops, la scène a coupé la musique et joue
++  -- Pendant la sortie du sol, la scène a coupé la musique et joue ensuite
+   -- Rising Fear : ne pas la remplacer sous la scène en cours.
+   SV.Destiny = SV.Destiny or {}
+   if SV.Destiny.GrotteVerdoyantePhase ~= 1 then
+diff --git a/game/Data/Script/destiny/main.lua b/game/Data/Script/destiny/main.lua
+index d2a4abc..6b4b406 100644
+--- a/game/Data/Script/destiny/main.lua
++++ b/game/Data/Script/destiny/main.lua
+@@ -14,3 +14,5 @@
+ require 'destiny.services.destiny_title_anim'
+ -- Les objets Statue_Kangourex posés dans l'éditeur ouvrent le stockage.
+ require 'destiny.services.statue_kangourex'
++-- Nilo observe le duel de la Fosse Cascade, hors de la simulation de combat.
++require 'destiny.services.nilo_temoin'
+diff --git a/game/Data/Script/destiny/services/nilo_temoin/init.lua b/game/Data/Script/destiny/services/nilo_temoin/init.lua
+new file mode 100644
+index 0000000..2273550
+--- /dev/null
++++ b/game/Data/Script/destiny/services/nilo_temoin/init.lua
+@@ -0,0 +1,69 @@
++-- Nilo est un spectateur filmé, pas un monstre, un allié ou un obstacle.
++-- Le renderer de CharAfterImage sait dessiner la feuille d’un Pokémon dans
++-- les couches d’animation du donjon. On ne conserve qu’une pose opaque
++-- à la fois ; aucun sprite recopié, tour, collider, effet de statut ou cible.
++local fosse = require 'destiny.fosse_cascade_scene'
++local scene = RogueEssence.Dungeon.DungeonScene.Instance
++local gm = RogueEssence.GameManager.Instance
++local gfx = RogueEssence.Content.GraphicsManager
++local layer = DrawLayer.Normal
++local normal = tonumber(layer) or 2 -- DrawLayer.Normal dans Anims (index .NET)
++local service = {}
++local state
++
++local function retirer_pose()
++  if state ~= nil and state.pose ~= nil then
++    scene.Anims[normal]:Remove(state.pose)
++    state.pose = nil
++  end
++end
++
++function service:Effacer()
++  retirer_pose()
++  state = nil
++end
++
++function service:MettreAJour()
++  -- Le test de la carte courante fonctionne aussi en reprise de sauvegarde :
++  -- les animations de scène ne sont pas sérialisées avec le donjon.
++  local map = gm.CurrentScene == scene and _ZONE.CurrentMap or nil
++  if map == nil or map.AssetName ~= fosse.ARENE then
++    self:Effacer()
++    return
++  end
++  if state == nil or map ~= state.map then
++    self:Effacer()
++    local id = RogueEssence.Dungeon.MonsterID('shinx', 0, 'normal', Gender.Male):ToCharID()
++    local planche = gfx.GetChara(id)
++    local idle = planche:GetReferencedAnimIndex(gfx.IdleAction)
++    local frames = planche.AnimData[idle]:SeqAtDir(Direction.Down).Frames
++    state = {map=map, id=id, idle=idle, frames=frames, total=frames[frames.Count - 1].EndTime}
++  end
++  local t = math.floor(tonumber(gfx.TotalFrameTick) / 120)
++  local phase = t % state.total
++  local frame = 0
++  while phase >= state.frames[frame].EndTime do frame = frame + 1 end
++  -- Même amplitude que Shaking au sol, un peu plus lente pour rester lisible
++  -- une fois le contrôle rendu (Update servi environ toutes les 20 ms).
++  local oscillation = math.floor(t * 2 / 3) % 8
++  local dx = oscillation > 4 and 6 - oscillation or oscillation - 2
++  if state.pose ~= nil and state.dx == dx and state.frame == frame and not state.pose.Finished then return end
++  retirer_pose()
++  state.dx, state.frame = dx, frame
++  local loc = RogueElements.Loc(fosse.NILO_ARENE.x + dx, fosse.NILO_ARENE.y)
++  state.pose = RogueEssence.Content.CharAfterImage(loc, state.id, state.idle, frame, Direction.Down, 0, 120, 255, 0)
++  DUNGEON:PlayVFXAnim(state.pose, layer)
++end
++
++function service:Subscribe(med)
++  med:Subscribe('NiloTemoin', EngineServiceEvents.Update, function() self:MettreAJour() end)
++  med:Subscribe('NiloTemoin', EngineServiceEvents.DungeonFloorExit, function() self:Effacer() end)
++  med:Subscribe('NiloTemoin', EngineServiceEvents.DungeonModeEnd, function() self:Effacer() end)
++end
++
++function service:UnSubscribe(med)
++  self:Effacer()
++end
++
++SCRIPT:AddService('NiloTemoin', service)
++return service
+diff --git a/tools/render_ground_moteur.py b/tools/render_ground_moteur.py
+index e5a95ce..721d3a3 100644
+--- a/tools/render_ground_moteur.py
++++ b/tools/render_ground_moteur.py
+@@ -17,6 +17,10 @@ Usage :
+     python3 tools/render_ground_moteur.py cliffdaytest --out /tmp/apercu
+     python3 tools/render_ground_moteur.py cliffdaytest --anime --duree 3 --fps 10
+     python3 tools/render_ground_moteur.py cliffdaytest_aube --bande 300 --anime
++    python3 tools/render_ground_moteur.py end_grotte_verdoyante --arene --echelle 2
++
++Sortie PNG ou WebP animé sans perte à taille native, ou agrandissement
++par facteur entier sans filtre. Les planches .tile gardent leur taille (8/24 px).
+ 
+ Aucune dépendance hors Pillow.
+ """
+@@ -85,8 +89,10 @@ class Planches:
+             try:
+                 ln = struct.unpack_from('<q', raw, off)[0]
+                 png = raw[off + 8:off + 8 + ln]
++                t = struct.unpack_from('<i', raw, 0)[0]
+                 full = Image.open(io.BytesIO(png)).convert('RGBA')
+-                img = full.crop((0, 0, min(8, full.width), min(8, full.height)))
++                if full.size == (t, t):
++                    img = full
+             except Exception:
+                 img = None
+         cls._tiles[key] = img
+@@ -129,8 +135,8 @@ def coller(canvas: Image.Image, img: Image.Image | None, x: int, y: int) -> None
+     canvas.paste(Image.alpha_composite(region, piece), (x0, y0))
+ 
+ 
+-def charge(nom: str) -> dict:
+-    p = ROOT / 'game/Data/Ground' / f'{nom}.rsground'
++def charge(nom: str, *, arene: bool = False) -> dict:
++    p = ROOT / (f'game/Data/Map/{nom}.rsmap' if arene else f'game/Data/Ground/{nom}.rsground')
+     return json.loads(p.read_text(encoding='utf-8-sig'))['Object']
+ 
+ 
+@@ -164,9 +170,9 @@ def _calque(o: dict, layer: dict, cell: int, W: int, H: int, index: int) -> Imag
+     return canvas
+ 
+ 
+-def prepare(o: dict) -> dict:
+-    tex = int(o.get('TexSize') or 1)
+-    cell = tex * 8
++def prepare(o: dict, *, arene: bool = False) -> dict:
++    # Les étages emploient GraphicsManager.TileSize, pas le TexSize du ground.
++    cell = 24 if arene else int(o.get('TexSize') or 1) * 8
+     layers = [l for l in (o.get('Layers') or []) if l.get('Visible', True)]
+     ref = next((l.get('Tiles') for l in layers if l.get('Tiles')), None) or []
+     W, H = len(ref) * cell, (len(ref[0]) if ref else 0) * cell
+@@ -219,9 +225,20 @@ def rendu(p: dict, tick: int) -> tuple[Image.Image, int]:
+     return canvas, erreurs
+ 
+ 
++def preserver_pixels(im: Image.Image, echelle: int = 1) -> Image.Image:
++    """Jamais de rééchantillonnage non entier ni de couleur interpolée."""
++    if not isinstance(echelle, int) or echelle < 1:
++        raise ValueError('échelle entière positive requise')
++    if echelle == 1:
++        return im
++    return im.resize((im.width * echelle, im.height * echelle), Image.Resampling.NEAREST)
++
++
+ def main() -> None:
+     ap = argparse.ArgumentParser(description=__doc__)
+-    ap.add_argument('cartes', nargs='+', help='nom(s) de .rsground sans extension')
++    ap.add_argument('cartes', nargs='+', help='nom(s) de carte sans extension')
++    ap.add_argument('--arene', action='store_true', help='rendre les calques de tuiles d’un .rsmap (sans combattants)')
++    ap.add_argument('--echelle', type=int, choices=(1, 2, 3, 4), default=1, help='rapport entier, 1 = taille originale')
+     ap.add_argument('--out', default=None, help='dossier de sortie')
+     ap.add_argument('--anime', action='store_true', help='produire un WebP animé')
+     ap.add_argument('--duree', type=float, default=3.0, help='durée (s) du WebP animé')
+@@ -234,8 +251,8 @@ def main() -> None:
+     out.mkdir(parents=True, exist_ok=True)
+ 
+     for nom in args.cartes:
+-        o = charge(nom)
+-        p = prepare(o)
++        o = charge(nom, arene=args.arene)
++        p = prepare(o, arene=args.arene)
+         if args.anime:
+             n = max(1, int(args.duree * args.fps))
+             frames = []
+@@ -244,16 +261,17 @@ def main() -> None:
+                 im = im.convert('RGB')
+                 if args.bande:
+                     im = im.crop((0, 0, im.width, args.bande))
+-                frames.append(im)
++                frames.append(preserver_pixels(im, args.echelle))
+             dest = out / f'anime_{nom}.webp'
+             frames[0].save(dest, save_all=True, append_images=frames[1:],
+                            duration=int(1000 / args.fps), loop=0, format='WEBP',
+-                           quality=88, method=6)
++                           lossless=True, method=5)
+             print(f'{nom}: {n} images -> {dest}')
+         else:
+             im, err = rendu(p, 0)
+             dest = out / f'carte_{nom}.png'
+-            im.convert('RGB').save(dest, optimize=True)
++            im = preserver_pixels(im.convert('RGB'), args.echelle)
++            im.save(dest, optimize=True)
+             print(f'{nom}: {im.width}x{im.height}px, {err} case(s) orpheline(s) -> {dest}')
+ 
+ 
+diff --git a/tools/tests/test_grotte_verdoyante.lua b/tools/tests/test_grotte_verdoyante.lua
+index 1fc4dfb..f4cf23f 100644
+--- a/tools/tests/test_grotte_verdoyante.lua
++++ b/tools/tests/test_grotte_verdoyante.lua
+@@ -14,6 +14,7 @@ package.preload['destiny.statue_kangourex'] = function()
+   return assert(loadfile(root .. '/game/Data/Script/destiny/statue_kangourex.lua'))()
+ end
+ package.preload['destiny.cinematique'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/cinematique.lua'))() end
++package.preload['destiny.fosse_cascade_scene'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/fosse_cascade_scene.lua'))() end
+ package.preload['destiny.missions_reverie'] = function() return assert(loadfile(root .. '/game/Data/Script/destiny/missions_reverie.lua'))() end
+ 
+ local events = {}
+@@ -80,6 +81,7 @@ local function make_actor(n, x, y, sp)
+   local a = {EntName=n, Position={X=x or 0, Y=y or 0}, Direction=Direction.Down, EntEnabled=true, CollisionDisabled=false, Data={Nickname=n, BaseForm={Species=sp}}}
+   function a:GetDisplayName() return self.EntName end
+   function a:ReloadEvents() self.reloaded = true end
++  function a:SetLocHeight(h) self.LocHeight = h; ev('hauteur', self.EntName, h, tick_val) end
+   actors[n] = a
+   return a
+ end
+@@ -115,7 +117,8 @@ GROUND = {
+   Unhide = function(_, n)
+     if actors[n] then actors[n].EntEnabled = true end
+     local h, p, b = actors.PLAYER, actors.Teammate1, actors[n]
+-    ev('unhide', n, tick_val, b and b.Position, h and h.Position, p and p.Position)
++    ev('unhide', n, tick_val, b and b.Position, h and h.Position, p and p.Position,
++      b and b.LocHeight, b and b.HideShadow)
+   end,
+   AnimateInDirection = function(_, a, anim, animdir, dir, dur, aspd, spd)
+     a.Direction = animdir
+@@ -372,7 +375,7 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 3 and #events == 1 and events[1][1] =
+   'les retrouvailles précèdent le bilan')
+ 
+ -- 3. fgv1 : PreBattle (Nilo tremble, accusation sans preuve et deux avertissements
+---    anonymes avant l’éclair et le recul du duo, sans titre de zone)
++--    anonymes avant Tunnel, l’impact et le choix du héros, sans titre de zone)
+ --    -> revanche / -dev -> PostBattle (fuite au sud en courant) -> EmptyReturn
+ local fgv1 = assert(loadfile(root .. '/game/Data/Script/destiny/ground/fgv1_fin_grotte_vasques/init.lua'))()
+ actors = {}; make_actor('PLAYER', 222, 492); make_actor('Teammate1', 198, 484)
+@@ -436,33 +439,43 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 1)
+ assert(actors.Kabutops_Boss and actors.Kabutops_Boss.EntEnabled == true)
+ local saw_hide, saw_rising_fear = false, false
+ local seuil, terrasse, premier_dlg, pano_duel, ombre, depart_woosh
+-local innocence, confusion, question, regard_h, regard_p, accusation_visible, secours, locuteur
+-local avertissements = {}
++local presentation, cherche_maman, innocence, confusion, question, regard_h, regard_p, locuteur
++local danger, depart_familles, secours, accusation, menace, plainte, choix, reponse, regard_hero_vers_boss, regard_hero_vers_p
++local terre, tremor, apparition, faux, impact, recul_h, recul_p, reposition, haut, reception
++local avertissements, reactions = {}, {}
+ local eaux_interdites = {'Water_Column_Ranger', 'Water_Spout_Splash', 'Wave_Circle_Blue', 'Bubbles_Blue'}
+ local geysers_interdits = {'EVT_CH05_Waterfall_Cave_Geyser', 'EVT_CH05_Hot_Spring_Splash'}
+-local flashes, apparition, faux, impact, recul_h, recul_p = 0, nil, nil, nil, nil, nil
+ for i, e in ipairs(events) do
+   if e[1] == 'cam' then
+     if e[2] == 278 and e[3] == 372 and e[4] > 1 then seuil = i end
+     if e[2] == 300 and e[3] == 234 and e[4] > 1 then terrasse = i end
+     if e[2] == 300 and e[3] == 240 then pano_duel = i end
+-  end
+-  if e[1] == 'vfx' and e[2] == 'White' then
++  elseif e[1] == 'vfx' and e[2] == 'White' then
+     assert(e[5].EndColor.r == 0 and e[5].EndColor.g == 0 and e[5].EndColor.b == 0
+-      and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 200,
+-      'assombrissement partiel, pas de deuxième éclair')
++      and e[5].StartColor.a == 0 and e[5].EndColor.a > 0 and e[5].EndColor.a < 140,
++      'assombrissement modéré : ne pas blanchir la sortie')
+     ombre = i
+-  end
+-  if e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then
++  elseif e[1] == 'vfx' and e[2] == 'Dig' then
++    assert(not terre and e[5].Layer == DrawLayer.Front and e[3] == 288 and e[4] == 258)
++    terre = i
++  elseif e[1] == 'shake' and not tremor then
++    tremor = i
++  elseif e[1] == 'unhide' and e[2] == 'Kabutops_Boss' then
++    assert(not apparition)
+     apparition = i
+     local b, h, p = e[4], e[5], e[6]
+     assert(b.X * 2 == h.X + p.X and b.Y + 24 == h.Y and h.Y == p.Y,
+       'Kabutops doit surgir juste devant le milieu du duo')
++    assert(e[7] < 0 and e[8], 'Kabutops commence sous la terre sans ombre en l’air')
++  elseif e[1] == 'hauteur' and apparition then
++    if e[3] >= 16 then haut = i end
++    if e[3] == 0 then reception = i end
++  elseif e[1] == 'move' and e[2] == 'Kabutops_Boss' then
++    assert(recul_h and recul_p and e[3] == 292 and e[4] == 244, 'pas d’arrivée depuis la rive : juste le raccord à l’arène')
++    reposition = i
+   end
+-  assert(not (e[1] == 'move' and e[2] == 'Kabutops_Boss'), 'pas de trajet du boss depuis la rive')
+   if e[1] == 'hide' and e[2] == 'Kabutops_Boss' then saw_hide = true end
+   if e[1] == 'bgm' and e[2] == 'Rising Fear.ogg' then saw_rising_fear = true end
+-  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes = flashes + 1 end
+   if e[1] == 'se' and e[2] == 'EVT_Battle_Transition' then depart_woosh = i end
+   if e[1] == 'anim' and e[2] == 'Kabutops_Boss' and e[3] == 'Attack' then faux = i end
+   if e[1] == 'se' and e[2] == 'DUN_Gust_Trap' then impact = i end
+@@ -470,11 +483,17 @@ for i, e in ipairs(events) do
+     for _, n in ipairs(eaux_interdites) do assert(e[2] ~= n, 'pas de geyser à la révélation') end
+   end
+   if e[1] == 'se' then
++    assert(e[2] ~= 'EVT_Battle_Flash', 'le jaillissement est visible sans plein écran blanc')
+     for _, n in ipairs(geysers_interdits) do assert(e[2] ~= n, 'pas de bruit d’eau à la révélation') end
+   end
+-  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Teammate1' then regard_h = i end
+-  if e[1] == 'regard' and e[2] == 'Teammate1' and e[3] == 'PLAYER' then regard_p = i end
++  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Teammate1' then
++    if #avertissements == 1 then regard_h = i end
++    if plainte and not choix then regard_hero_vers_p = i end
++  end
++  if e[1] == 'regard' and e[2] == 'Teammate1' and e[3] == 'PLAYER' and #avertissements == 1 then regard_p = i end
++  if e[1] == 'regard' and e[2] == 'PLAYER' and e[3] == 'Kabutops_Boss' and plainte and not choix then regard_hero_vers_boss = i end
+   if e[1] == 'emote' and e[3] == 'question' then question = i end
++  if e[1] == 'emote' and terre then reactions[e[2]] = true end
+   if e[1] == 'speaker' then
+     locuteur = e[2]
+     if locuteur == '???' then assert(e[3] == '' and e[4] == -1, 'aucun portrait pour la voix cachée') end
+@@ -482,19 +501,30 @@ for i, e in ipairs(events) do
+   if e[1] == 'dlg' then
+     premier_dlg = premier_dlg or i
+     local texte = tostring(e[2])
++    local function contient(mot) return texte:find(mot, 1, true) ~= nil end
++    if i == premier_dlg then assert(locuteur == 'Nilo_Grotte' and contient('êtes qui') and contient('Pourquoi')) end
+     if locuteur == '???' then
+       assert(not apparition, 'les avertissements précèdent la révélation')
+       avertissements[#avertissements + 1] = i
+     elseif locuteur == 'Nilo_Grotte' then
+-      assert(texte:find('rien touché', 1, true), 'Nilo n’avoue rien : l’accusation est fausse')
+-      innocence = i
++      if contient('Je la cherchais') then cherche_maman = i end
++      if contient('rien touché') then innocence = i end
++      if contient('je ne comprends pas') then plainte = i end
++      assert(not contient('ai touché') or contient('rien touché'), 'pas d’aveu de Nilo')
+     elseif locuteur == 'Kabutops_Boss' then
+       assert(apparition, 'Kabutops ne doit pas être identifié avant son apparition')
+-      assert(texte:find('vu près des vasques', 1, true), 'le soupçon ne repose que sur sa présence')
+-      accusation_visible = i
++      if contient('sentiers ne sont plus sûrs') then danger = i end
++      if contient('quitté la vallée') then depart_familles = i end
++      if contient('sûrement de lui') and contient('près de la source') then accusation = i end
++      if contient('ne contrôle plus ses éclairs') and contient('village en aval') then menace = i end
+     elseif locuteur == 'Teammate1' then
+-      if texte:find('qui parle ?', 1, true) then confusion = i end
+-      if texte:find('pas dire qu’il y a touché', 1, true) then secours = i end
++      if contient('équipe de secours') then presentation = i end
++      if contient('qui parle ?') then confusion = i end
++      if contient('pas dire qu’il y a touché') then secours = i end
++      if contient('on ne t’abandonne pas') then reponse = i end
++    elseif locuteur == 'PLAYER' then
++      assert(texte == "Ce Pokémon est beaucoup trop en colère pour entendre raison... Nous n'avons pas le choix.")
++      choix = i
+     else
+       error('réplique sans le bon locuteur : '..texte)
+     end
+@@ -503,8 +533,7 @@ for i, e in ipairs(events) do
+     if e[2] == 'PLAYER' then
+       assert(e[3] == 292 and e[7] == Direction.UpLeft, 'recul dans l’axe, regard vers le boss')
+       recul_h = i
+-    end
+-    if e[2] == 'Teammate1' then
++    elseif e[2] == 'Teammate1' then
+       assert(e[3] == 268 and e[7] == Direction.UpRight, 'le partenaire ne tourne pas le dos')
+       recul_p = i
+     end
+@@ -514,25 +543,34 @@ local premier, second = table.unpack(avertissements)
+ assert(#avertissements == 2 and events[premier][2]:find('Pas un pas de plus', 1, true)
+   and events[premier][2]:find('a déréglé le courant', 1, true)
+   and events[second][2]:find('reculez', 1, true), 'exactement deux avertissements de ???')
+-assert(seuil and terrasse and premier_dlg and seuil < terrasse and terrasse < premier_dlg,
+-  'la caméra doit révéler Nilo après le coude et avant toute réplique')
++assert(seuil and terrasse and premier_dlg and presentation and cherche_maman
++  and seuil < terrasse and terrasse < premier_dlg and premier_dlg < presentation
++  and presentation < cherche_maman and cherche_maman < premier, 'la rencontre précède la menace')
+ assert(regard_h and regard_p and question and confusion and innocence
+   and premier < regard_h and premier < regard_p and regard_h < question and regard_p < question
+   and question < confusion and confusion < innocence and innocence < second,
+   'le duo se cherche du regard et Nilo se défend entre les deux avertissements')
+-assert(saw_hide and saw_rising_fear and flashes == 1 and ombre and apparition and faux and impact
+-  and second < ombre and ombre < apparition and apparition < faux and faux < impact,
+-  'les avertissements débouchent sur un seul éclair puis l’impact de la faux')
+-assert(events[faux][5] - events[apparition][3] <= 120
+-  and events[impact][3] - events[apparition][3] <= 8 * 120,
+-  'pas d’attente entre apparition et attaque (feuille simulée)')
+-assert(recul_h and recul_p and accusation_visible and secours and pano_duel and depart_woosh
+-  and impact < recul_h and recul_h < recul_p and recul_p < accusation_visible
+-  and accusation_visible < secours and secours < pano_duel and pano_duel < depart_woosh,
+-  'les deux sont repoussés avant les dialogues à visage découvert et le raccord')
++assert(saw_hide and saw_rising_fear and ombre and tremor and terre and apparition and faux and impact
++  and second < ombre and ombre < tremor and tremor < terre and terre < apparition and apparition < faux and faux < impact,
++  'la secousse et la terre doivent précéder l’impulsion et l’impact de la faux')
++-- Les doublures parcourent les branches en série. Mesurer la courbe elle-même ;
++-- le vrai chevauchement du recul et de la réception est vérifié en capture.
++assert(haut and reception and apparition < haut and haut < reception
++  and events[reception][4] - events[apparition][3] <= 24 * 120
++  and reactions.PLAYER and reactions.Nilo_Grotte and not actors.Kabutops_Boss.HideShadow,
++  'courbe d’élévation et réactions à la sortie du sol')
++assert(recul_h and recul_p and danger and depart_familles and secours and reposition and accusation and menace
++  and impact < recul_h and recul_h < recul_p and recul_p < danger and danger < depart_familles
++  and depart_familles < secours and secours < reposition and reposition < accusation and accusation < menace,
++  'l’explication de la vallée suit le recul ; la faute n’est qu’un soupçon')
++assert(plainte and choix and regard_hero_vers_boss and regard_hero_vers_p and reponse and pano_duel and depart_woosh
++  and menace < plainte and plainte < regard_hero_vers_boss and regard_hero_vers_boss < regard_hero_vers_p
++  and regard_hero_vers_p < choix and choix < reponse and reponse < pano_duel and pano_duel < depart_woosh,
++  'le héros observe et se tourne vers son partenaire avant la décision, le duel attend la réaction')
+ assert(actors.PLAYER.Position.X == 292 and actors.PLAYER.Position.Y == 292
+-  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292,
+-  'la formation du duo arrive aux positions de combat')
++  and actors.Teammate1.Position.X == 268 and actors.Teammate1.Position.Y == 292
++  and actors.Kabutops_Boss.Position.X == 292 and actors.Kabutops_Boss.Position.Y == 244,
++  'la formation du duel retrouve les positions de combat')
+ 
+ -- Toute émote jouée doit exister dans base/Data/Emote : un identifiant inconnu
+ -- donnerait une EmoteData nulle et ferait planter StartEmote en jeu.
+@@ -549,7 +587,7 @@ for _, e in ipairs(events) do
+ end
+ 
+ -- Nilo est créé sur la terrasse et ne change jamais de position pendant le pré-combat.
+-local DEPART_NILO = {x = 304, y = 160}
++local DEPART_NILO = {x = 304, y = 152}
+ local depart_vu, nilo_a_bouge, nilo_tremble = false, false, false
+ for i, e in ipairs(events) do
+   if e[1] == 'create' and e[2] == 'Nilo_Grotte' then
+@@ -572,8 +610,7 @@ assert(events[#events][1] == 'continue_dungeon' and events[#events][2] == 'grott
+ -- 3 ter. Une scene INTERROMPUE ne doit jamais se rejouer entierement.
+ -- C'est le cas reel du journal : le moteur recycle la zone pendant la scene
+ -- (ScriptEvent.Apply(): Coroutine for event interrupted by break command!),
+--- puis la carte est reentree. Sans garde, tout l'avertissement, l'eclair et
+--- la revelation repartent. On simule l'interruption au 2e dialogue.
++-- puis la carte est reentrée. On simule l’interruption au premier dialogue.
+ SV.Destiny = {AlerteShinx='a_secourir', JourneeVille=0}
+ local cinematique_module = require('destiny.cinematique')
+ local dire = cinematique_module.Dire
+@@ -594,18 +631,17 @@ assert(SV.Destiny.GrotteVerdoyantePhase == 1,
+        'une scene interrompue doit laisser la phase a 1 pour ne pas se rejouer')
+ events = {}
+ fgv1.Enter(carte_fosse)
+-local flashes_2, sommeil_2 = 0, false
++local tunnel_2, tremble_revanche = false, false
+ for _, e in ipairs(events) do
+-  if e[1] == 'se' and e[2] == 'EVT_Battle_Flash' then flashes_2 = flashes_2 + 1 end
+-  if e[1] == 'anim' and e[2] == 'Nilo_Grotte' and e[3] == 'EventSleep' then sommeil_2 = true end
++  if e[1] == 'vfx' and e[2] == 'Dig' then tunnel_2 = true end
++  if e[1] == 'draw_effect' and e[2] == 'Nilo_Grotte' then tremble_revanche = e[3] == 2 end
+ end
+-assert(flashes_2 == 0, 'la decouverte de Nilo ne doit pas se rejouer a la reentree')
+-assert(not sommeil_2, 'aucun sommeil a rejouer a la reentree')
++assert(not tunnel_2 and tremble_revanche, 'la revanche garde le témoin, pas l’apparition')
+ verifier_woosh('continue_dungeon')
+ local repl = 0
+ for _, e in ipairs(events) do
+   if e[1] == 'dlg' then repl = repl + 1 end
+-  assert(not (e[1] == 'glisse' or e[1] == 'se' and (e[2] == 'DUN_Gust_Trap' or e[2] == 'DUN_Stomp')
++  assert(not (e[1] == 'glisse' or e[1] == 'se' and (e[2] == 'DUN_Gust_Trap' or e[2] == 'DUN_Dig')
+     or e[1] == 'cam' and e[3] > 300 or e[1] == 'vfx' and e[2] == 'White'
+     or e[1] == 'speaker' and e[2] == '???'), 'pas de découverte ni de souffle en revanche')
+ end
+diff --git a/tools/tests/test_grotte_verdoyante.py b/tools/tests/test_grotte_verdoyante.py
+index 26485a3..c718154 100644
+--- a/tools/tests/test_grotte_verdoyante.py
++++ b/tools/tests/test_grotte_verdoyante.py
+@@ -11,6 +11,10 @@ from PIL import Image
+ 
+ from executer_lua import run
+ 
++import sys
++sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++from render_ground_moteur import prepare, rendu, preserver_pixels
++
+ ROOT = Path(__file__).resolve().parents[2]
+ GAME = ROOT / 'game'
+ BASE = ROOT / 'base'
+@@ -85,12 +89,13 @@ def check_antichambre(fond: dict) -> None:
+ 
+     trajet((222, 492), (246, 436), (292, 368), (292, 268), (292, 292))
+     trajet((198, 484), (222, 430), (268, 362), (268, 268), (268, 292))
+-    trajet((280, 244), (280, 244))
++    trajet((280, 244), (292, 244))
++    trajet((304, 152), (304, 272))  # retour de Nilo depuis la même terrasse
+     # Le groupe n'est pas masqué sur le plan de découverte ni après la rafale.
+     assert 268 + 16 - 234 + 120 < 188
+     assert 292 + 16 - 260 + 120 < 188
+     # Nilo est hors de la fenêtre 320×240 pendant le bas du passage.
+-    assert 372 - 120 > 160 + 16
++    assert 372 - 120 > 152 + 16
+ 
+ 
+ def main() -> None:
+@@ -192,6 +197,22 @@ def main() -> None:
+     assert (BASE / 'Content/BG/Pre_Battle.dir').is_file()
+     assert (BASE / 'Content/Sound/Battle/EVT_Battle_Transition.ogg').is_file()
+     assert (BASE / 'Content/BG/White.dir').is_file()
++    assert (BASE / 'Content/Particle/Dig.dir').is_file()
++    assert (BASE / 'Content/Sound/Battle/DUN_Dig.ogg').is_file()
++    assert rsmap['AllyTeams'] == [] and rsmap['Decorations'] == [], 'le spectateur ne change pas les données de l’arène'
++    assert (264 // 24, 160 // 24) not in floors, 'la terrasse de Nilo reste en retrait du terrain de combat'
++
++    # Même palette et mêmes pixels entre la salle haute et son arène, sans
++    # tronquer à 8 px une case de 24 px. Vérifier aussi une phase animée.
++    g, a = prepare(fgv1), prepare(rsmap, arene=True)
++    for t in (0, 8 * 120, 24 * 120):
++        image, erreurs_g = rendu(g, t)
++        arene, erreurs_a = rendu(a, t)
++        assert erreurs_a == erreurs_g == 0 and arene.size == (480, 360)
++        if t == 0:
++            assert image.crop((48, 0, 528, 360)).tobytes() == arene.tobytes()
++    z = preserver_pixels(arene, 2)
++    assert z.size == (960, 720) and z.resize(arene.size, Image.Resampling.NEAREST).tobytes() == arene.tobytes()
+     enemies = [(p['BaseForm']['Species'], p['Level']) for p in rsmap['MapTeams'][0]['Players']]
+     assert enemies == [('kabutops', 14)], enemies
+     for p in rsmap['MapTeams'][0]['Players']:
+@@ -232,6 +253,7 @@ def main() -> None:
+ 
+     # 4. Vérifications de logique Lua (cascade, zone, boss, post-sauvetage, café, Nilo en ville)
+     run(ROOT / 'tools/tests/test_grotte_verdoyante.lua', ROOT)
++    run(ROOT / 'tools/tests/test_nilo_temoin.lua', ROOT)
+     # 5. Statue-relais Kangourex : le stockage de l'équipe s'ouvre à chaque interaction
+     run(ROOT / 'tools/tests/test_statue_kangourex.lua', ROOT)
+     print('PASS Fosse Cascade : 9 étages, cascade ewc3, antichambre 576×528, arène Kabutops 480×360, scripts Lua et retours vérifiés.')
+diff --git a/tools/tests/test_nilo_temoin.lua b/tools/tests/test_nilo_temoin.lua
+new file mode 100644
+index 0000000..8e5882e
+--- /dev/null
++++ b/tools/tests/test_nilo_temoin.lua
+@@ -0,0 +1,55 @@
++-- Le spectateur ne fait pas partie du modèle de combat, même à la reprise.
++local root = assert(arg[1])
++package.preload['destiny.fosse_cascade_scene'] = function()
++  return assert(loadfile(root..'/game/Data/Script/destiny/fosse_cascade_scene.lua'))()
++end
++local poses = {}
++local brushes = {Remove=function(_, pose)
++  for i,v in ipairs(poses) do if v == pose then table.remove(poses, i); return true end end
++end}
++local scene = {Anims={[2]=brushes}}
++local gm = {CurrentScene=nil}
++local gfx = {TotalFrameTick=0, IdleAction=0, GetChara=function()
++  return {GetReferencedAnimIndex=function() return 0 end, AnimData={[0]={SeqAtDir=function()
++    return {Frames={Count=2, [0]={EndTime=15}, [1]={EndTime=30}}}
++  end}}}
++end}
++local map = {AssetName='end_grotte_verdoyante', MapTeams={'kabutops'}, AllyTeams={}, MapTurns=0}
++_ZONE = {CurrentMap=map}
++DrawLayer = {Normal=2}; Direction = {Down=0}; Gender = {Male=1}
++RogueElements = {Loc=function(x,y) return {X=x,Y=y} end}
++RogueEssence = {
++  GameManager={Instance=gm},
++  Dungeon={DungeonScene={Instance=scene}, MonsterID=function(s)
++    assert(s=='shinx'); return {ToCharID=function() return 'shinx' end}
++  end},
++  Content={GraphicsManager=gfx, CharAfterImage=function(loc,id,anim,frame,dir,height,time,alpha)
++    assert(id=='shinx' and alpha==255 and time>0 and height==0 and dir==Direction.Down)
++    return {loc=loc, frame=frame, Finished=false}
++  end},
++}
++DUNGEON = {PlayVFXAnim=function(_, pose, layer) assert(layer == 2); table.insert(poses, pose) end}
++EngineServiceEvents = {Update='tick', DungeonFloorExit='exit', DungeonModeEnd='end'}
++local callbacks = {}
++SCRIPT = {AddService=function(_,name,svc)
++  assert(name=='NiloTemoin')
++  svc:Subscribe({Subscribe=function(_, _, k, v) callbacks[k] = v end})
++end}
++assert(loadfile(root..'/game/Data/Script/destiny/services/nilo_temoin/init.lua'))()
++callbacks.tick(); assert(#poses==0, 'pas de spectateur hors donjon')
++gm.CurrentScene = scene
++local minx,maxx,frames = math.huge,-math.huge,{}
++for i=0,100 do
++  -- Même chemin en entrée et après une sauvegarde : aucun hook de combat requis.
++  gfx.TotalFrameTick = i*120
++  callbacks.tick()
++  local p = assert(poses[1]); assert(#poses==1 and p.loc.Y==160)
++  minx, maxx = math.min(minx,p.loc.X), math.max(maxx,p.loc.X); frames[p.frame]=true
++end
++assert(minx==262 and maxx==266 and frames[0] and frames[1], 'tremblement entier et poses Idle natives')
++assert(map.MapTeams[1]=='kabutops' and #map.MapTeams==1 and #map.AllyTeams==0 and map.MapTurns==0)
++callbacks.exit(); assert(#poses==0)
++_ZONE.CurrentMap = {AssetName='un_autre_etage'}; callbacks.tick(); assert(#poses==0)
++_ZONE.CurrentMap = map; callbacks.tick(); assert(#poses==1)
++callbacks['end'](); gm.CurrentScene=nil; callbacks.tick(); assert(#poses==0)
++print('PASS test_nilo_temoin.lua : pose native, oscille derrière Kabutops, sans cible ni tour ; entrée, reprise et nettoyage.')
+-- 
+2.47.3
+

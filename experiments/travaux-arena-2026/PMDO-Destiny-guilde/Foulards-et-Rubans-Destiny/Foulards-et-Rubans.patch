@@ -1,0 +1,1173 @@
+diff --git a/engine/RogueEssence/RogueEssence/Content/CharSheet.cs b/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
+index 1f31e5012588b51162227562182b38728ffa9279..7c02ba8c43e9c5298afb33739b0b68b7d39dff7a 100644
+--- a/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
++++ b/engine/RogueEssence/RogueEssence/Content/CharSheet.cs
+@@ -159,6 +159,35 @@ namespace RogueEssence.Content
+         }
+ 
+         private CharSheet destinyNightCopy;
++        private bool destinyNightGraded;
++        private byte[] destinyRibbonAlpha;
++        private Dictionary<(int, Dir8, bool, DestinyRibbon.Fit, DestinyRibbon.Kind, Loc), DestinyRibbon.Pose> destinyRibbonPoses;
++
++        internal DestinyRibbon.Pose GetDestinyRibbonPose(CharAnimFrame frame, Dir8 dir, DestinyRibbon.Fit cut, DestinyRibbon.Kind style, Loc seam = default)
++        {
++            int index = frame.Frame.Y * TotalX + frame.Frame.X;
++            if ((uint)frame.Frame.X >= (uint)TotalX || (uint)frame.Frame.Y >= (uint)TotalY || (uint)index >= (uint)OffsetData.Count)
++                return null;
++
++            var key = (index, dir, frame.Flip, cut, style, seam);
++            destinyRibbonPoses ??= new Dictionary<(int, Dir8, bool, DestinyRibbon.Fit, DestinyRibbon.Kind, Loc), DestinyRibbon.Pose>();
++            if (destinyRibbonPoses.TryGetValue(key, out var pose))
++                return pose;
++            if (destinyRibbonAlpha == null)
++            {
++                // One read per sheet while cached, never a GPU read per draw.
++                Color[] pixels = new Color[Width * Height];
++                baseTexture.GetData(pixels);
++                destinyRibbonAlpha = new byte[pixels.Length];
++                for (int ii = 0; ii < pixels.Length; ii++)
++                    destinyRibbonAlpha[ii] = pixels[ii].A;
++            }
++            int start = frame.Frame.Y * TileHeight * Width + frame.Frame.X * TileWidth;
++            pose = DestinyRibbon.Place(destinyRibbonAlpha, Width, start, TileWidth, TileHeight,
++                OffsetData[index], frame.Flip, dir, cut, style, seam);
++            destinyRibbonPoses[key] = pose;
++            return pose;
++        }
+ 
+         /// <summary>
+         /// Returns the filtered sheet cached alongside its original. When the
+@@ -178,6 +207,8 @@ namespace RogueEssence.Content
+                 destinyNightCopy.Dispose();
+                 destinyNightCopy = null;
+             }
++            destinyRibbonAlpha = null;
++            destinyRibbonPoses = null;
+             base.Dispose();
+         }
+ 
+@@ -190,28 +221,30 @@ namespace RogueEssence.Content
+             Color[] pixels = new Color[Width * Height];
+             baseTexture.GetData(pixels);
+             for (int ii = 0; ii < pixels.Length; ii++)
+-            {
+-                Color pixel = pixels[ii];
+-                int alpha = pixel.A;
+-                if (alpha == 0)
+-                    continue;
+-
+-                // CharSheet PNGs contain premultiplied pixels. Recover their
+-                // source RGB before the nonlinear grade, then premultiply again.
+-                int r = Math.Min(255, pixel.R * 255 / alpha);
+-                int g = Math.Min(255, pixel.G * 255 / alpha);
+-                int b = Math.Min(255, pixel.B * 255 / alpha);
+-                double gray = 0.299 * r + 0.587 * g + 0.114 * b;
+-                double lum = gray / 255.0;
+-                double k = 0.20 + 0.30 * lum;
+-                int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
+-                int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
+-                int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
+-                pixels[ii] = new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
+-            }
++                pixels[ii] = DestinyNightGrade(pixels[ii]);
+             Texture2D texture = new Texture2D(device, Width, Height);
+             texture.SetData(pixels);
+-            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData);
++            return new CharSheet(texture, TileWidth, TileHeight, ShadowSize, AnimData, OffsetData) { destinyNightGraded = true };
++        }
++
++        internal static Color DestinyNightGrade(Color pixel)
++        {
++            int alpha = pixel.A;
++            if (alpha == 0)
++                return pixel;
++
++            // CharSheet PNGs contain premultiplied pixels. Recover their
++            // source RGB before the nonlinear grade, then premultiply again.
++            int r = Math.Min(255, pixel.R * 255 / alpha);
++            int g = Math.Min(255, pixel.G * 255 / alpha);
++            int b = Math.Min(255, pixel.B * 255 / alpha);
++            double gray = 0.299 * r + 0.587 * g + 0.114 * b;
++            double lum = gray / 255.0;
++            double k = 0.20 + 0.30 * lum;
++            int nr = Math.Clamp((int)((r * 0.95 + gray * 0.05) * (k * 0.52)), 0, 255);
++            int ng = Math.Clamp((int)((g * 0.95 + gray * 0.05) * (k * 0.70)), 0, 255);
++            int nb = Math.Clamp((int)((b * 0.95 + gray * 0.05) * (k * 1.60) + 6 * lum), 0, 255);
++            return new Color(nr * alpha / 255, ng * alpha / 255, nb * alpha / 255, alpha);
+         }
+ 
+         //frompath (import) will take a folder containing all elements (xml and all animations, or xml and a sheet)
+@@ -1439,6 +1472,11 @@ namespace RogueEssence.Content
+         //need a way to determine frame the old fashioned way,
+         //however, also need a way to determine frame for an animation playing at the true specified speed
+         public void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color)
++        {
++            DrawChar(spriteBatch, type, truncateDash, dir, pos, frameMethod, color, default);
++        }
++
++        internal void DrawChar(SpriteBatch spriteBatch, int type, bool truncateDash, Dir8 dir, Vector2 pos, DetermineFrame frameMethod, Color color, DestinyRibbon.Wear ribbon)
+         {
+             type = GetReferencedAnimIndex(type);
+             CharAnimGroup group = getReferencedAnim(type);
+@@ -1454,7 +1492,14 @@ namespace RogueEssence.Content
+                     adjustedOffset = AdjustOffset(type, group.RushFrame, frameNum, seq.Frames[trueRush].Offset, frame.Offset);
+                 }
+ 
+-                DrawTile(spriteBatch, pos + adjustedOffset.ToVector2(), frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
++                Vector2 frameTopLeft = pos + adjustedOffset.ToVector2();
++                DestinyRibbon.Pose accessory = ribbon.Ink > 0 && color.A > 0
++                    ? GetDestinyRibbonPose(frame, dir, ribbon.Cut, ribbon.Style, ribbon.Seam(dir)) : null;
++                if (accessory != null)
++                    DestinyRibbon.Draw(spriteBatch, frameTopLeft, accessory.Behind, color, ribbon, destinyNightGraded);
++                DrawTile(spriteBatch, frameTopLeft, frame.Frame.X, frame.Frame.Y, color, frame.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
++                if (accessory != null)
++                    DestinyRibbon.Draw(spriteBatch, frameTopLeft, accessory.Front, color, ribbon, destinyNightGraded);
+             }
+             else
+                 DrawDefault(spriteBatch, new Rectangle((int)pos.X, (int)pos.Y, TileWidth, TileHeight));
+diff --git a/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs b/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs
+new file mode 100644
+index 0000000000000000000000000000000000000000..51e996ff1f4aec8f68e00deb0c1d8e6b3434753e
+--- /dev/null
++++ b/engine/RogueEssence/RogueEssence/Content/DestinyRibbon.cs
+@@ -0,0 +1,536 @@
++using System;
++using System.Collections.Generic;
++using Microsoft.Xna.Framework;
++using Microsoft.Xna.Framework.Graphics;
++using RogueElements;
++using RogueEssence.Data;
++using RogueEssence.Dungeon;
++
++namespace RogueEssence.Content
++{
++    /// <summary>Vêtements cosmétiques, indépendants de l'objet et du sprite de base.</summary>
++    public static class DestinyRibbon
++    {
++        internal enum Kind { Ribbon, Scarf }
++        internal enum Fit
++        {
++            Upright, ShortNeck, FourLegs, Ruff, Bird, Wing, LongNeck, Flank,
++            Shell, Metal, LowBody, Cloud, Apple, Gills
++        }
++
++        internal readonly struct Wear
++        {
++            public readonly int Ink;
++            public readonly Fit Cut;
++            public readonly Kind Style;
++            private readonly Loc[] seams;
++            public Wear(int ink, Fit cut, Kind style = Kind.Ribbon, Loc[] seams = null)
++            { Ink = ink; Cut = cut; Style = style; this.seams = seams; }
++            public Loc Seam(Dir8 dir) => seams == null ? Loc.Zero : seams[(int)dir & 7];
++        }
++
++        internal sealed class Shade
++        {
++            public readonly string Key;
++            public readonly string Name;
++            public readonly Color[] Ink;
++            public Shade(string key, string name, params int[] rgb)
++            {
++                Key = key;
++                Name = name;
++                Ink = Array.ConvertAll(rgb, c => new Color(c >> 16, (c >> 8) & 255, c & 255));
++            }
++        }
++
++        // Liseré, pli, tissu, lumière ; rampe dessinée, pas un aplat teinté.
++        internal static readonly Shade[] Colors = {
++            new Shade(null, "Sans accessoire"),
++            new Shade("garance", "Garance", 0x4A2033, 0xA43148, 0xDF5C65, 0xFFAE93),
++            new Shade("ambre", "Ambre", 0x5C3327, 0xB76635, 0xE7A14A, 0xFFE3A0),
++            new Shade("emeraude", "Émeraude", 0x203C37, 0x337C58, 0x63B67A, 0xC8E59B),
++            new Shade("lagon", "Lagon", 0x213948, 0x27878C, 0x51C1BC, 0xB4F1E1),
++            new Shade("saphir", "Saphir", 0x253052, 0x405BB2, 0x6B8DDC, 0xBFD8FF),
++            new Shade("lilas", "Lilas", 0x45304E, 0x8558A3, 0xB487D6, 0xEBD9FA),
++            new Shade("rose", "Rose nacré", 0x5A2D48, 0xAF557E, 0xE681A3, 0xFFCFD6),
++            new Shade("ivoire", "Ivoire", 0x5B4842, 0xB59476, 0xF2DCAC, 0xFFF5D9),
++            new Shade("encre", "Encre", 0x201A30, 0x4E4565, 0x746789, 0xC2ACCC),
++        };
++
++        private static readonly Dictionary<(string species, int form), (Fit cut, Loc[] seams)> Roster =
++            new Dictionary<(string, int), (Fit, Loc[])>();
++        internal static void ResetRoster() => Roster.Clear();
++
++        public static void RegisterStarter(string species, int form, string cut, string seams)
++        {
++            if (String.IsNullOrEmpty(species) || form < 0) return;
++            Roster[(species, form)] = (ReadFit(cut), ReadSeams(seams));
++        }
++
++        // Retouches relatives à la tête et au centre : cinq angles pour les
++        // coupes symétriques, huit si le sprite porte un détail asymétrique.
++        internal static Loc[] ReadSeams(string text)
++        {
++            if (String.IsNullOrEmpty(text)) return null;
++            string[] rows = text.Split(';');
++            if (rows.Length != 5 && rows.Length != 8) throw new FormatException("Couture Destiny : " + text);
++            var result = new Loc[8];
++            for (int d = 0; d < rows.Length; d++)
++            {
++                string[] pt = rows[d].Split(',');
++                if (pt.Length != 2 || !Int32.TryParse(pt[0], out int x) || !Int32.TryParse(pt[1], out int y)
++                    || x < -7 || x > 7 || y < -7 || y > 7)
++                    throw new FormatException("Couture Destiny : " + text);
++                result[d] = new Loc(x, y);
++            }
++            if (rows.Length == 5)
++                for (int d = 5; d < 8; d++) result[d] = new Loc(-result[8-d].X, result[8-d].Y);
++            return result;
++        }
++
++        internal static Fit ReadFit(string cut)
++        {
++            return cut switch
++            {
++                "cou_court" => Fit.ShortNeck,
++                "quadrupede" => Fit.FourLegs,
++                "criniere" => Fit.Ruff,
++                "plumes" => Fit.Bird,
++                "aile" => Fit.Wing,
++                "long" => Fit.LongNeck,
++                "flanc" => Fit.Flank,
++                "carapace" => Fit.Shell,
++                "coque_metal" => Fit.Metal,
++                "tronc_bas" => Fit.LowBody,
++                "nuage" => Fit.Cloud,
++                "pomme" => Fit.Apple,
++                "branchies" => Fit.Gills,
++                _ => Fit.Upright,
++            };
++        }
++
++        internal static bool CanChoose(CharData member)
++        {
++            return Roster.Count > 0 && member != null && (DataManager.Instance?.Save is MainProgress)
++                && (Roster.ContainsKey((member.BaseForm.Species, member.BaseForm.Form))
++                    || member.DestinyRibbonFitted || (member.IsFounder && member.IsPartner));
++        }
++
++        internal static Kind StyleOf(CharData member) => member.DestinyRibbonStyle == "foulard" ? Kind.Scarf : Kind.Ribbon;
++
++        internal static bool TrySet(CharData member, int index, Kind style)
++        {
++            if (!CanChoose(member) || index < 0 || index >= Colors.Length)
++                return false;
++            member.DestinyRibbonColor = Colors[index].Key;
++            // Un ruban déjà sauvegardé n'a pas de nouveau champ à migrer.
++            member.DestinyRibbonStyle = index > 0 && style == Kind.Scarf ? "foulard" : null;
++            member.DestinyRibbonFitted |= index > 0;
++            return true;
++        }
++
++        internal static int IndexOf(string key)
++        {
++            if (String.IsNullOrEmpty(key)) return 0;
++            for (int ii = 1; ii < Colors.Length; ii++)
++                if (String.Equals(key, Colors[ii].Key, StringComparison.Ordinal)) return ii;
++            return 0;
++        }
++
++        internal static Wear ForPreview(MonsterID visible, int ink, Kind style)
++        {
++            return Roster.TryGetValue((visible.Species, visible.Form), out var fit)
++                ? new Wear(ink, fit.cut, style, fit.seams) : new Wear(ink, Fit.Upright, style);
++        }
++        internal static Wear From(CharData wearer, MonsterID visible)
++        {
++            if (wearer == null || String.IsNullOrEmpty(wearer.DestinyRibbonColor) || !CanChoose(wearer))
++                return default;
++            return ForPreview(visible, IndexOf(wearer.DestinyRibbonColor), StyleOf(wearer));
++        }
++
++        // Les deux passes ont le même espace que la tuile du sprite. Les pans
++        // de profil sont sous le sprite (donc vraiment occultés, même en marche).
++        internal readonly struct Run
++        {
++            public readonly int X;
++            public readonly int Y;
++            public readonly int Width;
++            public readonly byte Ink;
++            public Run(int x, int y, int width, byte ink) { X = x; Y = y; Width = width; Ink = ink; }
++        }
++
++        internal sealed class Pose
++        {
++            public readonly Loc Anchor;
++            public readonly Run[] Behind;
++            public readonly Run[] Front;
++            public readonly bool Knot;
++            public readonly bool Limited;
++            public Pose(Loc anchor, Run[] behind, Run[] front, bool knot, bool limited)
++            { Anchor = anchor; Behind = behind; Front = front; Knot = knot; Limited = limited; }
++        }
++
++        // Fittings share the palette, not a projection: each shape is sewn on one
++        // stable place of the body before deciding which part the camera can see.
++        private static readonly string[] FullBow = { "11...11", "143.341", "1234321", ".11211.", "..3.2..", ".31.21." };
++        private static readonly string[] SmallBow = { "11.11", "13431", ".121.", ".3.2.", ".1.1." };
++        private static readonly string[] PinBow = { "1.1", "343", "121", ".2." };
++        private static readonly string[] TurnedBow = { "....11", ".1.341", "134321", ".1211.", "..23..", "...31." };
++        private static readonly string[] SideFold = { ".11.", ".341", ".121", "..31" };
++
++        private sealed class Forme
++        {
++            public readonly int Width, Height;
++            private readonly byte[] alpha;
++            private readonly int stride, start;
++            private readonly bool flip;
++            public int Left, Right, Top, Bottom;
++
++            public Forme(byte[] alpha, int stride, int start, int w, int h, bool flip)
++            {
++                this.alpha = alpha; this.stride = stride; this.start = start; this.flip = flip;
++                Width = w; Height = h; Left = w; Top = h; Right = Bottom = -1;
++                for (int y = 0; y < h; y++)
++                    for (int x = 0; x < w; x++)
++                        if (Solid(x, y))
++                        {
++                            Left = Math.Min(Left, x); Right = Math.Max(Right, x);
++                            Top = Math.Min(Top, y); Bottom = Math.Max(Bottom, y);
++                        }
++            }
++            public bool Solid(int x, int y) => (uint)x < (uint)Width && (uint)y < (uint)Height
++                && alpha[start + stride * y + (flip ? Width - 1 - x : x)] >= 64;
++
++            public Loc Seat(int tx, int ty, bool guardHead)
++            {
++                tx = Math.Clamp(tx, Left, Right);
++                ty = Math.Clamp(ty, Top, Bottom);
++                int best = Int32.MaxValue;
++                Loc seat = Loc.Zero;
++                for (int y = Top; y <= Bottom; y++)
++                    for (int x = Left; x <= Right; x++)
++                    {
++                        if (!Solid(x, y)) continue;
++                        int dx = x - tx, dy = y - ty;
++                        int score = 7 * dx * dx + (dy < 0 && guardHead ? 23 : 9) * dy * dy;
++                        if (!Solid(x - 1, y)) score += 6;
++                        if (!Solid(x + 1, y)) score += 6;
++                        if (!Solid(x, y + 1)) score += 8;
++                        if (score < best) { best = score; seat = new Loc(x, y); }
++                    }
++                return seat;
++            }
++        }
++
++        private sealed class Textile
++        {
++            private const int Pad = 9;
++            private readonly Forme sprite;
++            private readonly int w, h;
++            private readonly byte[] front, behind;
++            public Textile(Forme sprite)
++            {
++                this.sprite = sprite;
++                w = sprite.Width + Pad * 2; h = sprite.Height + Pad * 2;
++                front = new byte[w * h]; behind = new byte[w * h];
++            }
++            public void Put(int x, int y, int color, bool back = false, bool bodyOnly = true)
++            {
++                if ((uint)(x + Pad) >= (uint)w || (uint)(y + Pad) >= (uint)h) return;
++                if (!back && bodyOnly && !sprite.Solid(x, y)) return;
++                (back ? behind : front)[x + Pad + (y + Pad) * w] = (byte)color;
++            }
++            public void Stamp(string[] pattern, int kx, int ky, Loc knot, bool mirror, bool bodyOnly)
++            {
++                int cols = pattern[0].Length;
++                for (int y = 0; y < pattern.Length; y++)
++                    for (int x = 0; x < cols; x++)
++                    {
++                        char pixel = pattern[y][x];
++                        if (pixel == '.') continue;
++                        int dx = (x - kx) * (mirror ? -1 : 1);
++                        Put(knot.X + dx, knot.Y + y - ky, pixel - '0', bodyOnly: bodyOnly);
++                    }
++            }
++            // Un pan ne doit pas ressembler à une île flottante. On retire
++            // toute grappe de pixels extérieurs sans jonction au corps/tissu.
++            private void TrimLoose()
++            {
++                bool[] joined = new bool[w * h];
++                var queue = new Queue<int>();
++                for (int yy = 0; yy < h; yy++)
++                    for (int xx = 0; xx < w; xx++)
++                    {
++                        int n = yy * w + xx;
++                        if (front[n] == 0 && behind[n] == 0) continue;
++                        if (!sprite.Solid(xx - Pad, yy - Pad)) continue;
++                        joined[n] = true; queue.Enqueue(n);
++                    }
++                while (queue.Count != 0)
++                {
++                    int old = queue.Dequeue(), x = old % w, y = old / w;
++                    for (int dy = -1; dy <= 1; dy++)
++                        for (int dx = -1; dx <= 1; dx++)
++                        {
++                            if ((uint)(x + dx) >= (uint)w || (uint)(y + dy) >= (uint)h) continue;
++                            int next = old + dy * w + dx;
++                            if (joined[next] || (front[next] == 0 && behind[next] == 0)) continue;
++                            joined[next] = true; queue.Enqueue(next);
++                        }
++                }
++                for (int n = 0; n < joined.Length; n++)
++                    if (!joined[n]) front[n] = behind[n] = 0;
++            }
++            private Run[] Pack(byte[] pixels)
++            {
++                var runs = new List<Run>();
++                for (int y = 0; y < h; y++)
++                    for (int x = 0; x < w; x++)
++                    {
++                        int n = y * w + x;
++                        byte code = pixels[n];
++                        if (code == 0) continue;
++                        int end = x + 1;
++                        while (end < w && pixels[y * w + end] == code) end++;
++                        runs.Add(new Run(x - Pad, y - Pad, end - x, code));
++                        x = end - 1;
++                    }
++                return runs.ToArray();
++            }
++            public Pose Finish(Loc anchor, bool knot, bool limited)
++            {
++                TrimLoose();
++                return new Pose(anchor, Pack(behind), Pack(front), knot, limited);
++            }
++        }
++
++        private static int Mix(int a, int b, int pct) => a + ((b - a) * pct) / 100;
++
++        internal static Pose Place(byte[] alpha, int stride, int start, int w, int h, OffsetData anchor,
++            bool flip, Dir8 dir, Fit cut, Kind style, Loc seam)
++        {
++            if (w < 1 || h < 1 || anchor == null) return null;
++            var sprite = new Forme(alpha, stride, start, w, h, flip);
++            if (sprite.Right < sprite.Left) return null;
++            var center = flip ? anchor.CenterFlip : anchor.Center;
++            var head = flip ? anchor.HeadFlip : anchor.Head;
++            int cx = Math.Clamp(center.X + w / 2, sprite.Left, sprite.Right);
++            int cy = Math.Clamp(center.Y + h / 2, sprite.Top, sprite.Bottom);
++            int hx = Math.Clamp(head.X + w / 2, sprite.Left, sprite.Right);
++            int hy = Math.Clamp(head.Y + h / 2, sprite.Top, sprite.Bottom);
++            int sw = sprite.Right - sprite.Left + 1, sh = sprite.Bottom - sprite.Top + 1;
++            int d = (int)dir & 7;
++            int yaw = Math.Min(d, 8 - d);
++            int forward = d == 0 || d == 4 ? 0 : d < 4 ? -1 : 1;
++            bool front = yaw <= 1, back = yaw >= 3;
++            bool sidePin = cut == Fit.Wing || cut == Fit.Flank;
++            bool quadruped = cut == Fit.FourLegs || cut == Fit.Ruff;
++            bool farSide = sidePin && d >= 1 && d <= 3;
++            bool shielded = cut == Fit.Shell || cut == Fit.Metal;
++            bool soft = cut == Fit.LowBody || cut == Fit.Cloud || cut == Fit.Apple;
++            bool tiny = sw <= 14 || sh <= 14;
++            bool compact = tiny || sidePin || shielded || soft || cut == Fit.Bird || cut == Fit.LongNeck;
++            int tx = Mix(cx, hx, yaw == 0 ? 45 : back ? 30 : 45);
++            int ty = front ? Math.Max(cy - 1, hy + 2) : yaw == 2 ? Math.Clamp(cy, hy + 1, hy + 4) : Mix(cy, hy, 45) + 1;
++
++            if (cut == Fit.ShortNeck || cut == Fit.Gills)
++            {
++                if (front) ty = Math.Max(cy, hy + 2) + (cut == Fit.Gills ? 1 : 0);
++                tx = Mix(cx, hx, 30);
++            }
++            if (quadruped)
++            {
++                tx = Mix(cx, hx, yaw == 0 ? 45 : back ? 62 : 72);
++                ty = yaw == 0 ? Math.Max(cy - 1, hy + 2) : back ? Mix(cy, hy, 68) + 1
++                    : Math.Max(hy + 1, Mix(cy, hy, 72) + 1);
++            }
++            if (cut == Fit.Bird || cut == Fit.LongNeck)
++            {
++                tx = Mix(cx, hx, cut == Fit.LongNeck ? (yaw == 0 ? 55 : 70) : 42);
++                ty = back ? Mix(cy, hy, 54) + 2 : Math.Max(hy + 2, Mix(cy, hy, 35));
++            }
++            if (sidePin)
++            {
++                // Épaule/aile droite anatomique, jamais l'aile opposée.
++                int reach = Math.Clamp(sw / 4, 2, 5);
++                int projectedRight = yaw == 0 ? -reach : yaw == 1 ? -reach / 2 : yaw == 2 ? 0 : yaw == 3 ? reach / 2 : reach;
++                tx = Mix(cx, hx, cut == Fit.Wing ? 0 : 22) + projectedRight;
++                ty = cut == Fit.Wing ? Math.Max(cy + 1, sprite.Top + sh * 64 / 100)
++                    : (front ? cy + 1 : Mix(cy, hy, 20) + 1);
++            }
++            if (shielded)
++            {
++                // Encolure inexistante : attache sur la coque, côté corps,
++                // jamais au point de tête (œil de Terhal, face de Frissonille).
++                int away = Math.Clamp(cx - hx, -6, 6);
++                tx = cx + (yaw > 0 && yaw < 4 ? away / 2 : 0);
++                ty = cut == Fit.Metal ? (front ? Math.Min(cy, hy - 3) : cy - 1)
++                    : front ? Math.Min(cy, hy - 2) : cy;
++            }
++            if (soft)
++            {
++                // Fruit et nuage : le bandeau prend la partie basse, sous les yeux
++                // et sous les feuilles/pans du chapeau, et ne serre pas un faux cou.
++                int ratio = cut == Fit.Apple ? 78 : cut == Fit.Cloud ? 74 : 69;
++                tx = Mix(cx, hx, cut == Fit.Apple ? 5 : 22);
++                ty = Math.Max(sprite.Top + sh * ratio / 100, cy + 1);
++                if (!back) ty = Math.Max(ty, hy + 2);
++            }
++            int reserve = shielded || soft ? 1 : compact || quadruped ? 2 : 3;
++            int bottom = Math.Max(sprite.Top, sprite.Bottom - reserve);
++            ty = Math.Clamp(Math.Clamp(ty, sprite.Top, bottom) + seam.Y, sprite.Top, bottom);
++            Loc seat = sprite.Seat(tx + seam.X, ty, front && !shielded);
++            var piece = new Textile(sprite);
++
++            // La bande suit la portion CONTINUE du corps au niveau de la couture.
++            // La largeur de la tête/queue/ailes n'est pas celle de l'encolure.
++            bool scarf = style == Kind.Scarf;
++            int radius = sidePin ? Math.Clamp(sw / 6, 1, 3) : shielded ? Math.Clamp(sw / 4, 2, 5)
++                : cut == Fit.LongNeck ? Math.Clamp(sh / 5, 2, 4) : soft ? Math.Clamp(sw * 2 / 5, 2, 5)
++                : (quadruped || yaw == 2) ? Math.Clamp(sh / 4, 2, yaw == 2 ? 3 : 5)
++                : Math.Clamp(sw * (scarf ? 38 : 31) / 100, 2, compact ? 4 : 6);
++            if (farSide) radius = Math.Max(1, radius - 1);
++            int neckStart = -radius, neckEnd = radius;
++            if (quadruped && yaw == 2)
++            {
++                // Le museau ne fait pas partie de la circonférence du col.
++                if (forward < 0) neckStart++; else neckEnd--;
++            }
++            int low = seat.X, high = seat.X;
++            while (low > seat.X + neckStart && Covers(low - 1)) low--;
++            while (high < seat.X + neckEnd && Covers(high + 1)) high++;
++            for (int x = low; x <= high; x++)
++            {
++                int y = BandY(x);
++                bool edge = x == low || x == high;
++                piece.Put(x, y, edge ? 1 : back ? 2 : (scarf && (x - seat.X) * forward <= 0 ? 4 : 3));
++                if (!farSide || scarf) piece.Put(x, y + 1, edge && !back ? 2 : 1);
++                if (scarf && !compact && !quadruped && yaw != 2 && !edge && (back || x == seat.X))
++                    piece.Put(x, y - 1, back ? 2 : 4);
++            }
++
++            int BandY(int x)
++            {
++                int rel = x - seat.X, towardFace = rel * forward;
++                if (sidePin || soft || shielded) return seat.Y;
++                if (forward == 0) return seat.Y - (Math.Abs(rel) >= radius && radius > 2 ? 1 : 0);
++                int step = quadruped || cut == Fit.LongNeck ? 2 : 3;
++                return seat.Y + (towardFace >= step ? 1 : towardFace <= -step ? -1 : 0);
++            }
++            bool Covers(int x) => sprite.Solid(x, BandY(x)) || sprite.Solid(x, BandY(x) + 1);
++            piece.Put(seat.X, seat.Y, back ? 2 : 3);
++
++            bool knot;
++            if (!scarf)
++            {
++                // Ruban noué devant. À 90° on ne voit que son pli, et derrière
++                // on ne copie surtout pas le nœud de face sur le dos.
++                knot = !back && !farSide;
++                if (knot)
++                {
++                    int lift = shielded ? 0 : 1;
++                    int lead = sidePin || soft || shielded ? 0 : forward;
++                    Loc at = sprite.Seat(seat.X + lead, seat.Y + lift, front && !shielded);
++                    bool clip = compact || quadruped || yaw == 2;
++                    if (yaw == 2) piece.Stamp(SideFold, 2, 1, at, forward < 0, clip);
++                    else if (cut == Fit.Apple || cut == Fit.Cloud || cut == Fit.Wing) piece.Stamp(PinBow, 1, 1, at, false, true);
++                    else if (compact || quadruped) piece.Stamp(SmallBow, 2, 1, at, forward > 0, clip);
++                    else if (yaw == 1) piece.Stamp(TurnedBow, 3, 2, at, forward > 0, false);
++                    else piece.Stamp(FullBow, 3, 2, at, false, false);
++                }
++            }
++            else
++            {
++                // Foulard : bavette devant, lien de profil, nœud et pan courts
++                // à la nuque (ou côté arrière du harnais). Pas de bavette dans le dos.
++                knot = back && !farSide;
++                if (front && !farSide)
++                {
++                    int bib = Math.Clamp(radius - 1, 1, compact ? 2 : 4);
++                    int half = yaw == 1 ? Math.Max(bib - 1, 1) : bib;
++                    int length = compact ? 3 : 4 + (radius >= 6 ? 1 : 0);
++                    for (int yy = 0; yy < length; yy++)
++                    {
++                        int span = Math.Max(0, half - (yy + 1) / 2);
++                        int x = seat.X + (yaw == 1 ? forward * (yy <= 1 ? 1 : 2) : 0);
++                        for (int dx = -span; dx <= span; dx++)
++                            piece.Put(x + dx, seat.Y + 1 + yy,
++                                yy == length - 1 || (span > 0 && Math.Abs(dx) == span) ? 1 : yy <= 1 && dx < 0 ? 4 : yy > 2 ? 2 : 3);
++                    }
++                }
++                if (yaw == 2 && !farSide)
++                {
++                    // La ligne du pan est tournée vers l'arrière du mouvement.
++                    // Son début est sous le corps, sa sortie seulement peut être vue.
++                    int rear = -forward;
++                    int x0 = seat.X + rear * Math.Clamp((high - low) / 3, 1, 2);
++                    int n = compact ? 4 : 7;
++                    for (int j = 0; j < n; j++)
++                    {
++                        int x = x0 + rear * j;
++                        int y = seat.Y + j / 2;
++                        piece.Put(x, y - 1, 1, back: true);
++                        piece.Put(x, y, j >= n - 2 ? 2 : 3, back: true);
++                        if (j < n - 1) piece.Put(x, y + 1, 1, back: true);
++                    }
++                }
++                if (knot)
++                {
++                    int rear = -forward;
++                    Loc at = sprite.Seat(seat.X + rear * (compact ? 1 : 2), seat.Y, false);
++                    // Le nœud de nuque est plus petit que le ruban décoratif.
++                    piece.Put(at.X - 1, at.Y, 2); piece.Put(at.X, at.Y - 1, 1);
++                    piece.Put(at.X, at.Y, 4); piece.Put(at.X + 1, at.Y, 2); piece.Put(at.X, at.Y + 1, 3);
++                    int n = compact ? 3 : 5;
++                    for (int j = 0; j < n; j++)
++                    {
++                        int x = at.X + (rear == 0 ? -1 : rear) * ((j + 1) / 2);
++                        int y = at.Y + 1 + j;
++                        piece.Put(x, y, j == n - 1 ? 1 : 3);
++                        if (j < n - 1) piece.Put(x + (rear != 0 ? -rear : 1), y, 2);
++                    }
++                }
++            }
++            return piece.Finish(seat, knot, farSide);
++        }
++
++        private static Texture2D dot;
++        private static Texture2D Dot(GraphicsDevice device)
++        {
++            if (dot != null && !dot.IsDisposed && dot.GraphicsDevice == device) return dot;
++            dot?.Dispose();
++            dot = new Texture2D(device, 1, 1);
++            dot.SetData(new[] { Color.White });
++            return dot;
++        }
++
++        private static Color Tint(Color ink, Color tint) => new Color(
++            ink.R * tint.R / 255, ink.G * tint.G / 255, ink.B * tint.B / 255, tint.A);
++
++        private static Color[][] nightInks;
++        private static Color[][] NightInks()
++        {
++            if (nightInks == null)
++            {
++                nightInks = new Color[Colors.Length][];
++                for (int i = 0; i < Colors.Length; i++)
++                    nightInks[i] = Array.ConvertAll(Colors[i].Ink, CharSheet.DestinyNightGrade);
++            }
++            return nightInks;
++        }
++
++        internal static void Draw(SpriteBatch batch, Vector2 frameTopLeft, Run[] runs, Color tint, Wear wear, bool night)
++        {
++            if (runs.Length == 0 || wear.Ink <= 0 || wear.Ink >= Colors.Length || tint.A == 0) return;
++            Color[] colors = night ? NightInks()[wear.Ink] : Colors[wear.Ink].Ink;
++            var brush = Dot(batch.GraphicsDevice);
++            Color a = Tint(colors[0], tint), b = Tint(colors[1], tint), c = Tint(colors[2], tint), d = Tint(colors[3], tint);
++            foreach (Run run in runs)
++            {
++                Color ink = run.Ink == 1 ? a : run.Ink == 2 ? b : run.Ink == 3 ? c : d;
++                batch.Draw(brush, frameTopLeft + new Vector2(run.X, run.Y), null, ink, 0f,
++                    Vector2.Zero, new Vector2(run.Width, 1), SpriteEffects.None, 0f);
++            }
++        }
++    }
++}
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
+index 380d1520eb1b87df2062702ee210c9d9ce554689..20f8dbbf66b583d4a0416541aed28baf3eb8460f 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAction.cs
+@@ -84,7 +84,8 @@ namespace RogueEssence.Dungeon
+         public virtual void UpdateFrame() { currentAnim.UpdateFrame(); }
+         public void UpdateDrawEffects(HashSet<DrawEffect> drawEffects) { currentAnim.UpdateDrawEffects(drawEffects); }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType) { return currentAnim.GetActionPoint(sheet, pointType); }
+-        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { currentAnim.Draw(spriteBatch, offset, sheet); }
++        public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet) { Draw(spriteBatch, offset, sheet, default); }
++        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon) { currentAnim.Draw(spriteBatch, offset, sheet, ribbon); }
+         public Loc GetDrawLoc(Loc offset, CharSheet sheet) { return currentAnim.GetDrawLoc(sheet, offset); }
+         public Loc GetSheetOffset(CharSheet sheet)
+         {
+@@ -1667,9 +1668,9 @@ namespace RogueEssence.Dungeon
+             }
+         }
+ 
+-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
++        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
+         {
+-            base.Draw(spriteBatch, offset, sheet);
++            base.Draw(spriteBatch, offset, sheet, ribbon);
+             foreach (Hitbox hitbox in hitboxes)
+                 hitbox.Draw(spriteBatch, offset);
+         }
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
+index 6b9fff542739c949db7926aba82ca039bb043771..09308a0d6257369e0a34992015e9a24ed5924dbd 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharAnimation.cs
+@@ -171,12 +171,17 @@ namespace RogueEssence.Dungeon
+ 
+ 
+         public void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet)
++        {
++            Draw(spriteBatch, offset, sheet, default);
++        }
++
++        internal void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(sheet, offset);
+             drawLoc.Y -= LocHeight;
+             
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, charFrameType, InPlace, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), determineFrame, Microsoft.Xna.Framework.Color.White * ((float)opacity / 255), ribbon);
+         }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
+index 9adec613d26d4f704f078c2bb4a77da052100329..6d163a7eb6e8bc1fa7d8e82d2be4afc2a4f98a41 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/CharData.cs
+@@ -53,6 +53,16 @@ namespace RogueEssence.Dungeon
+ 
+         public MonsterID BaseForm;
+ 
++        // Cosmétique optionnel : champs absents des anciennes sauvegardes.
++        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
++        public string DestinyRibbonColor;
++
++        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
++        public string DestinyRibbonStyle;
++
++        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
++        public bool DestinyRibbonFitted;
++
+         public int Level;
+         public int EXP;
+ 
+@@ -142,6 +152,9 @@ namespace RogueEssence.Dungeon
+             //clean variables
+             Nickname = other.Nickname;
+             BaseForm = other.BaseForm;
++            DestinyRibbonColor = other.DestinyRibbonColor;
++            DestinyRibbonStyle = other.DestinyRibbonStyle;
++            DestinyRibbonFitted = other.DestinyRibbonFitted;
+             Level = other.Level;
+ 
+             MaxHPBonus = other.MaxHPBonus;
+diff --git a/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs b/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
+index 35fdbdfdad09e6ee07d28f06c72cbb4f61d99861..1eb559471772bf04d5a1bcab7908fb2e19b8d822 100644
+--- a/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
++++ b/engine/RogueEssence/RogueEssence/Dungeon/Characters/Character.cs
+@@ -482,6 +482,9 @@ namespace RogueEssence.Dungeon
+         {
+             CharData character = new CharData();
+             character.BaseForm = this.BaseForm;
++            character.DestinyRibbonColor = this.DestinyRibbonColor;
++            character.DestinyRibbonStyle = this.DestinyRibbonStyle;
++            character.DestinyRibbonFitted = this.DestinyRibbonFitted;
+             character.Nickname = this.Nickname;
+             character.Level = this.Level;
+             character.MaxHPBonus = this.MaxHPBonus;
+@@ -2710,7 +2713,12 @@ namespace RogueEssence.Dungeon
+         public void Draw(SpriteBatch spriteBatch, Loc offset)
+         {
+             CharSheet sheet = GraphicsManager.GetChara(Appearance.ToCharID());
+-            currentCharAction.Draw(spriteBatch, offset, sheet);
++            // Preserve the disguise: its cosmetic cannot reveal the real wearer.
++            DestinyRibbon.Wear ribbon = Appearance == CurrentForm ? DestinyRibbon.From(this, Appearance) : default;
++            if (ribbon.Ink == 0)
++                currentCharAction.Draw(spriteBatch, offset, sheet);
++            else
++                currentCharAction.Draw(spriteBatch, offset, sheet, ribbon);
+ 
+             if (currentEmote != null)
+             {
+diff --git a/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs b/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
+index 089153967fb35b78787d26942f7f6e7a9afa7a3d..067bfdc3d2d1584bfd42b9017087f54bee9f850b 100644
+--- a/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
++++ b/engine/RogueEssence/RogueEssence/Ground/GroundAction.cs
+@@ -102,11 +102,16 @@ namespace RogueEssence.Ground
+         }
+ 
+         public virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
++        {
++            Draw(spriteBatch, offset, sheet, tint, default);
++        }
++
++        internal virtual void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(offset, sheet);
+             drawLoc.Y -= LocHeight;
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, AnimFrameType, true, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
+         }
+         public virtual Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+@@ -184,12 +189,12 @@ namespace RogueEssence.Ground
+             Draw(spriteBatch, offset, sheet, Microsoft.Xna.Framework.Color.White);
+         }
+ 
+-        public override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint)
++        internal override void Draw(SpriteBatch spriteBatch, Loc offset, CharSheet sheet, Microsoft.Xna.Framework.Color tint, DestinyRibbon.Wear ribbon)
+         {
+             Loc drawLoc = GetDrawLoc(offset, sheet);
+             drawLoc.Y -= LocHeight;
+             //draw sprite at current frame
+-            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255));
++            sheet.DrawChar(spriteBatch, AnimFrameType, false, DirExt.AddAngles(CharDir, dirOffset), drawLoc.ToVector2(), FrameMethod, tint * ((float)opacity / 255), ribbon);
+         }
+         public override Loc GetActionPoint(CharSheet sheet, ActionPointType pointType)
+         {
+diff --git a/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs b/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
+index 54946dfb74d92042468edd45ad9fd2dd7f82694a..53dbee0577fdeb2ab344e23148f02da1b6562d1d 100644
+--- a/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
++++ b/engine/RogueEssence/RogueEssence/Ground/GroundChar.cs
+@@ -426,7 +426,11 @@ namespace RogueEssence.Ground
+                 else
+                     tint = GroundMap.GetAmbianceTint(charAmbiance);
+             }
+-            currentCharAction.Draw(spriteBatch, offset, sheet, tint);
++            DestinyRibbon.Wear ribbon = DestinyRibbon.From(Data, CurrentForm);
++            if (ribbon.Ink == 0)
++                currentCharAction.Draw(spriteBatch, offset, sheet, tint);
++            else
++                currentCharAction.Draw(spriteBatch, offset, sheet, tint, ribbon);
+ 
+             if (currentEmote != null)
+             {
+diff --git a/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs b/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
+index 12f374ecae19eddcde43ddef7e11706f9d237715..9b518b819124eb9dd7297630f19a7a96a594b8c9 100644
+--- a/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
++++ b/engine/RogueEssence/RogueEssence/Lua/LuaEngine.cs
+@@ -509,6 +509,7 @@ namespace RogueEssence.Script
+             //Expose symbols
+             ExposeInterface();
+             SetupGlobals();
++            Content.DestinyRibbon.ResetRoster();
+             CacheMainScripts();
+ 
+             DiagManager.Instance.LogInfo("[SE]: **- Lua engine ready! -**");
+diff --git a/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs b/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs
+new file mode 100644
+index 0000000000000000000000000000000000000000..07bbe448176d70dff7c5d9a5073d7617e1354737
+--- /dev/null
++++ b/engine/RogueEssence/RogueEssence/Menu/Team/DestinyRibbonMenu.cs
+@@ -0,0 +1,140 @@
++using System;
++using System.Collections.Generic;
++using Microsoft.Xna.Framework;
++using Microsoft.Xna.Framework.Graphics;
++using RogueEssence.Content;
++using RogueEssence.Data;
++using RogueEssence.Dungeon;
++using RogueEssence.Ground;
++using RogueElements;
++
++namespace RogueEssence.Menu
++{
++    internal sealed class DestinyRibbonMenu : TitledStripMenu
++    {
++        private readonly Character member;
++        private readonly DestinyRibbon.Kind style;
++        private Dir8 direction = Dir8.Down;
++        private readonly MenuText colorName;
++        private readonly MenuText rotateHint;
++        private readonly MenuText confirmHint;
++        private readonly MenuText faceName;
++        private readonly MenuText previewTitle;
++        private static readonly string[] Directions = {
++            "Face", "3/4 gauche", "Profil gauche", "Dos gauche", "Dos", "Dos droit", "Profil droit", "3/4 droit"
++        };
++
++        public DestinyRibbonMenu(Character member, DestinyRibbon.Kind style)
++        {
++            Label = "DESTINY_RIBBON_MENU";
++            this.member = member;
++            this.style = style;
++            int width = Math.Min(240, GraphicsManager.ScreenWidth - 16);
++            int rowCount = DestinyRibbon.Colors.Length;
++            int height = rowCount * VERT_SPACE + GraphicsManager.MenuBG.TileHeight * 2 + TITLE_OFFSET;
++            int saved = DestinyRibbon.IndexOf(member.DestinyRibbonColor);
++            int confirmed = DestinyRibbon.StyleOf(member) == style || saved == 0 ? saved : -1;
++            List<MenuTextChoice> options = new List<MenuTextChoice>();
++            for (int ii = 0; ii < rowCount; ii++)
++            {
++                int choice = ii;
++                options.Add(new MenuTextChoice(DestinyRibbon.Colors[ii].Name, () => Apply(choice), true,
++                    ii == confirmed ? TextTan : Color.White));
++            }
++            Initialize(new Loc((GraphicsManager.ScreenWidth - width) / 2, (GraphicsManager.ScreenHeight - height) / 2),
++                width, style == DestinyRibbon.Kind.Scarf ? "Foulard de guilde" : "Ruban de guilde", options.ToArray(), saved);
++            foreach (MenuTextChoice option in options)
++            {
++                Rect row = option.Bounds;
++                option.Bounds = new Rect(row.X, row.Y, Math.Max(1, Math.Min(row.Width, width - 111 - row.X)), row.Height);
++            }
++            int previewX = width - 62;
++            previewTitle = Small("Aperçu", previewX, 36, TextTan);
++            colorName = Small("", previewX, 112, Color.White);
++            faceName = Small("", previewX, 125, TextPale);
++            rotateHint = Small("Gauche / droite", previewX, 142, Color.White);
++            confirmHint = Small("Valider le choix", previewX, 154, TextTan);
++        }
++
++        private static MenuText Small(string value, int x, int y, Color color)
++            => new MenuText(value, new Loc(x, y), DirV.Up, DirH.None, color);
++
++        private void Apply(int choice)
++        {
++            var save = DataManager.Instance.Save;
++            if (GameManager.Instance.CurrentScene != GroundScene.Instance || DataManager.Instance.CurrentReplay != null
++                || save == null || !save.ActiveTeam.Players.Contains(member) || !DestinyRibbon.TrySet(member, choice, style))
++                return;
++            SyncGroundActors(member);
++            MenuManager.Instance.RemoveMenu();
++        }
++
++        // A ground save serializes the map and the team separately. After loading,
++        // the visible actor may therefore contain a detached copy of the member.
++        // Update only an unambiguously identified actor; never change an NPC or
++        // replace its data, location, actions, inventory or script state.
++        private static void SyncGroundActors(Character member)
++        {
++            var team = DataManager.Instance.Save.ActiveTeam;
++            var map = ZoneManager.Instance.CurrentGround;
++            if (map == null) return;
++            foreach (GroundChar actor in map.IterateCharacters())
++            {
++                if (!(actor.Data is Character data)) continue;
++                if (ReferenceEquals(data, member)) continue;
++                Character match = null;
++                if (ReferenceEquals(actor, map.ActiveChar))
++                    match = team.Leader;
++                else
++                {
++                    foreach (Character candidate in team.Players)
++                    {
++                        if (candidate.BaseForm != data.BaseForm || candidate.Nickname != data.Nickname ||
++                            candidate.Discriminator != data.Discriminator || candidate.OriginalUUID != data.OriginalUUID ||
++                            candidate.OriginalTeam != data.OriginalTeam || candidate.IsFounder != data.IsFounder ||
++                            candidate.IsPartner != data.IsPartner) continue;
++                        if (match != null) { match = null; break; }
++                        match = candidate;
++                    }
++                }
++                if (!ReferenceEquals(match, member) || data.BaseForm != member.BaseForm) continue;
++                data.DestinyRibbonColor = member.DestinyRibbonColor;
++                data.DestinyRibbonStyle = member.DestinyRibbonStyle;
++                data.DestinyRibbonFitted = member.DestinyRibbonFitted;
++            }
++        }
++
++        protected override void UpdateKeys(InputManager input)
++        {
++            // Gauche/droite ne change pas et n'applique jamais la couleur surlignée.
++            if ((input.Direction == Dir8.Left || input.Direction == Dir8.Right) && input.Direction != input.PrevDirection)
++                direction = (Dir8)(((int)direction + (input.Direction == Dir8.Left ? 1 : 7)) % 8);
++            base.UpdateKeys(input);
++        }
++
++        public override void Draw(SpriteBatch batch)
++        {
++            base.Draw(batch);
++            if (!Visible)
++                return;
++            Loc start = Bounds.Start;
++            int x = Bounds.Right - 62;
++            int y = Bounds.Y + 82;
++            GraphicsManager.Pixel.Draw(batch, new Rectangle(x - 45, y - 28, 90, 54), null, new Color(23, 30, 47));
++            GraphicsManager.Pixel.Draw(batch, new Rectangle(x - 45, y + 25, 90, 1), null, new Color(91, 104, 130));
++            MonsterID id = member.BaseForm;
++            CharSheet sheet = GraphicsManager.GetChara(id.ToCharID());
++            Vector2 origin = new Vector2(x - sheet.TileWidth / 2, y - sheet.TileHeight / 2);
++            sheet.DrawChar(batch, GraphicsManager.IdleAction, false, direction, origin,
++                frames => CharSheet.TrueFrame(frames, (long)GraphicsManager.TotalFrameTick, false),
++                Color.White, DestinyRibbon.ForPreview(id, CurrentChoice, style));
++            colorName.SetText(DestinyRibbon.Colors[CurrentChoice].Name);
++            faceName.SetText(Directions[(int)direction]);
++            previewTitle.Draw(batch, start);
++            colorName.Draw(batch, start);
++            faceName.Draw(batch, start);
++            rotateHint.Draw(batch, start);
++            confirmHint.Draw(batch, start);
++        }
++    }
++}
+diff --git a/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs b/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
+index 3eb76492f200d664bb301c341a1b299cf8f98ccf..3cdd0e8015344956455044ef2c8a98a074885177 100644
+--- a/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
++++ b/engine/RogueEssence/RogueEssence/Menu/Team/TeamChosenMenu.cs
+@@ -105,6 +105,13 @@ namespace RogueEssence.Menu
+                 choices.Add(new MenuTextChoice(Text.FormatKey("MENU_TEAM_SEND_HOME"), SendHomeAction, canSendHome, canSendHome ? Color.White : Color.Red));
+ 
+ 
++            Character ribbonMember = DataManager.Instance.Save.ActiveTeam.Players[teamSlot];
++            if (inGround && DataManager.Instance.CurrentReplay == null && DestinyRibbon.CanChoose(ribbonMember))
++            {
++                choices.Add(new MenuTextChoice("Ruban", () => MenuManager.Instance.AddMenu(new DestinyRibbonMenu(ribbonMember, DestinyRibbon.Kind.Ribbon), true)));
++                choices.Add(new MenuTextChoice("Foulard", () => MenuManager.Instance.AddMenu(new DestinyRibbonMenu(ribbonMember, DestinyRibbon.Kind.Scarf), true)));
++            }
++
+             choices.Add(new MenuTextChoice(Text.FormatKey("MENU_EXIT"), ExitAction));
+ 
+             int choice_width = CalculateChoiceLength(choices, 72);
+diff --git a/game/Data/Script/destiny/ground/personality_test/init.lua b/game/Data/Script/destiny/ground/personality_test/init.lua
+index b727edb91e4dfc51fb0676c8a6e47550371308fc..484ddb3a1dd5f6edd2a47223c75f0be48a985be6 100644
+--- a/game/Data/Script/destiny/ground/personality_test/init.lua
++++ b/game/Data/Script/destiny/ground/personality_test/init.lua
+@@ -22,7 +22,7 @@
+ require 'origin.common'
+ 
+ local quiz_data = require 'destiny.ground.personality_test.quiz_data'
+-local starters_source = require 'destiny.ground.personality_test.starters_source'
++local starter_pool = require 'destiny.starter_pool'
+ local talents_depart = require 'destiny.talents_depart'
+ local recrutement = require 'destiny.recrutement'
+ 
+@@ -777,25 +777,7 @@ local function reveler_starter(nature, starter)
+     (nature.description or ''), -1)
+ end
+ 
+--- Réunit les choix source et ceux du quiz préexistant. La clé comprend la
+--- forme : un Goupix d'Alola n'est pas confondu avec celui de Kanto.
+-local function construire_pool(espece_exclue)
+-  local pool, deja_vu = {}, {}
+-  local function ajouter(s)
+-    local key = s.espece .. ':' .. tostring(s.forme)
+-    if s.espece ~= espece_exclue and not deja_vu[key] then
+-      deja_vu[key] = true
+-      table.insert(pool, s)
+-    end
+-  end
+-  for _, s in ipairs(starters_source.starters) do ajouter(s) end
+-  for _, s in pairs(quiz_data.starters) do ajouter(s) end
+-  table.sort(pool, function(a, b)
+-    if a.gen ~= b.gen then return a.gen < b.gen end
+-    return a.nom < b.nom
+-  end)
+-  return pool
+-end
++local construire_pool = starter_pool.construire
+ 
+ -- Le menu de sélection natif PMDO utilise le même portrait bordé que le
+ -- sélecteur du projet de référence. Les libellés propres à Destiny gardent la
+diff --git a/game/Data/Script/destiny/main.lua b/game/Data/Script/destiny/main.lua
+index 6b4b406866e2f83c90cf8a77565628715b9b2ecc..277e89ea43d5f387a14061591035beddac1afbc9 100644
+--- a/game/Data/Script/destiny/main.lua
++++ b/game/Data/Script/destiny/main.lua
+@@ -16,3 +16,5 @@ require 'destiny.services.destiny_title_anim'
+ require 'destiny.services.statue_kangourex'
+ -- Nilo observe le duel de la Fosse Cascade, hors de la simulation de combat.
+ require 'destiny.services.nilo_temoin'
++-- Vestiaire : le quiz fournit exactement les mêmes couples espèce/forme.
++require('destiny.rubans').installer()
+diff --git a/game/Data/Script/destiny/rubans.lua b/game/Data/Script/destiny/rubans.lua
+new file mode 100644
+index 0000000000000000000000000000000000000000..007503fb0975ad86dd903c6d65537858e6c309e5
+--- /dev/null
++++ b/game/Data/Script/destiny/rubans.lua
+@@ -0,0 +1,79 @@
++-- Atelier des deux pièces : un profil anatomique, pas un filtre de déblocage.
++-- Les clés « espèce:forme » priment sur l'espèce. Un futur starter conserve
++-- une pose par défaut et reste éligible même avant sa retouche dédiée.
++local pool = require 'destiny.starter_pool'
++local M = {}
++local profils = {}
++local function groupe(coupe, liste)
++  for espece in liste:gmatch('%S+') do
++    assert(profils[espece] == nil, 'Profil répété : ' .. espece)
++    profils[espece] = coupe
++  end
++end
++
++groupe('debout', [[
++  pikachu meowth charmander larvitar sneasel totodile treecko ralts gible
++  buneary chimchar riolu minccino axew golett oshawott pawniard snivy
++  froakie chespin pancham espurr noibat scorbunny sobble grookey charcadet
++  fuecoco tinkatink
++]])
++groupe('cou_court', [[squirtle snorunt wooper]])
++groupe('quadrupede', [[
++  growlithe vulpix chikorita cyndaquil mudkip skitty shinx
++  turtwig tepig zorua fennekin jangmo_o litten stufful rockruff
++  salandit nickit sprigatito pawmi
++]])
++groupe('criniere', [[eevee growlithe:1]])
++groupe('plumes', [[murkrow torchic swablu piplup rookidee quaxly]])
++groupe('aile', [[rowlet]])
++groupe('long', [[dratini popplio dreepy]])
++groupe('flanc', [[phanpy fidough bulbasaur mareep sandile]])
++groupe('carapace', [[snom joltik wimpod larvesta]])
++groupe('coque_metal', [[beldum]])
++groupe('tronc_bas', [[togepi budew litwick goomy phantump pumpkaboo hatenna]])
++groupe('nuage', [[cosmog]])
++groupe('pomme', [[applin]])
++groupe('branchies', [[wooper:1]])
++
++-- Face, ¾ gauche, profil gauche, dos ¾ gauche, dos. Le moteur projette
++-- l'autre côté. Les coordonnées sont des retouches en pixels de sprite.
++local coutures = {
++  -- Tour de cou : on remonte du poitrail vers la gorge, sans gagner le museau.
++  vulpix       = '0,-4;1,-3;4,-2;0,-1;0,0',
++  ['vulpix:1'] = '0,-4;1,-3;4,-2;0,-1;0,0',
++  growlithe    = '0,-1;1,-1;2,0;0,0;0,0',
++  ['growlithe:1'] = '0,-1;2,-1;3,0;0,0;0,1',
++  eevee        = '0,0;1,0;2,0;0,0;0,1',
++  skitty       = '0,0;1,0;3,1;2,2;0,3',
++  shinx        = '0,0;2,0;3,-1;0,0;0,0',
++  nickit       = '0,-1;1,0;2,0;0,0;0,1',
++  pawmi        = '0,0;2,-2;1,0;0,0;0,1',
++  jangmo_o     = '0,-2;0,-1;1,-1;0,0;0,1',
++  turtwig      = '0,0;1,0;2,0;2,2;0,1',
++  sprigatito   = '0,0;1,1;1,0;0,0;0,0',
++  -- Le décor reste sur le tissu/la coque ; ni sur les yeux ni sur la cire basse.
++  bulbasaur    = '1,-3;0,-2;0,-2;0,-1;0,-1',
++  mareep       = '0,-2;0,-1;1,0;0,0;0,0',
++  sandile      = '0,-1;0,0;1,0;0,0;0,0',
++  litwick      = '0,-6;0,-6;0,-6;0,-2;0,-1',
++  hatenna      = '0,1;-2,1;-3,1;0,2;0,2',
++  golett       = '0,-5;0,-5;0,-1;-2,-3;0,-3',
++  ['wooper:1'] = '0,-1;0,0;0,0;0,0;0,0',
++}
++function M.couture(espece, forme)
++  return coutures[espece .. ':' .. tostring(forme)] or coutures[espece] or ''
++end
++
++function M.profil(espece, forme)
++  return profils[espece .. ':' .. tostring(forme)] or profils[espece]
++end
++
++function M.installer()
++  local ok, moteur = pcall(luanet.import_type, 'RogueEssence.Content.DestinyRibbon')
++  if not ok or moteur == nil then return end
++  for _, s in ipairs(pool.construire(nil)) do
++    moteur.RegisterStarter(s.espece, s.forme, M.profil(s.espece,s.forme) or 'debout', M.couture(s.espece,s.forme))
++  end
++end
++
++return M
+diff --git a/game/Data/Script/destiny/starter_pool.lua b/game/Data/Script/destiny/starter_pool.lua
+new file mode 100644
+index 0000000000000000000000000000000000000000..c8867f80ed26ecc58ab87ed8e3f891d8cef3736c
+--- /dev/null
++++ b/game/Data/Script/destiny/starter_pool.lua
+@@ -0,0 +1,24 @@
++-- Liste commune au quiz de personnalité et au vestiaire.
++local source = require 'destiny.ground.personality_test.starters_source'
++local quiz = require 'destiny.ground.personality_test.quiz_data'
++local M = {}
++
++function M.construire(espece_exclue)
++  local pool, deja_vu = {}, {}
++  local function ajouter(s)
++    local key = s.espece .. ':' .. tostring(s.forme)
++    if s.espece ~= espece_exclue and not deja_vu[key] then
++      deja_vu[key] = true
++      table.insert(pool, s)
++    end
++  end
++  for _, s in ipairs(source.starters) do ajouter(s) end
++  for _, s in pairs(quiz.starters) do ajouter(s) end
++  table.sort(pool, function(a, b)
++    if a.gen ~= b.gen then return a.gen < b.gen end
++    return a.nom < b.nom
++  end)
++  return pool
++end
++
++return M

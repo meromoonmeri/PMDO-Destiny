@@ -1,0 +1,13 @@
+{
+  "statut": "PASS",
+  "verifications": [
+    "86 choix préchargés, neuf teintes + Sans ruban, deux sprites natifs visibles",
+    "Changer une teinte ne change que le membre actif ; retrait du ruban",
+    "Recherche sans accent, formes régionales conservées, Miaouss trouvé, aucun résultat propre",
+    "Huit angles, images de marche successives, filtres jour/nuit actifs hors ligne",
+    "Comparaison pixel à pixel avec/sans ruban pour chacun des 86 choix",
+    "Pas de débordement à 320, 390, 730 ni 1024 px",
+    "Fonctionne dans le lecteur iframe allow-scripts, sans stockage et sans réseau",
+    "Zéro erreur JavaScript, zéro requête externe"
+  ]
+}

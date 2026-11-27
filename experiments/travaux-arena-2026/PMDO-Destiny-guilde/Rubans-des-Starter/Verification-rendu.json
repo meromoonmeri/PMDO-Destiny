@@ -1,0 +1,18 @@
+{
+  "resultat": "PASS",
+  "formes": 86,
+  "variantes_testees": 774,
+  "feuilles_distinctes": 346,
+  "attaches_sur_alpha": 28168,
+  "rendus_fna": 1232,
+  "rendus_donjon": 336,
+  "note": "Variantes = 3 skins × 3 genres ; replis natifs conservant l'espèce et la forme. Seule la feuille normale est exportée dans le vestiaire.",
+  "verifications": [
+    "Espèce et forme maintenues dans chaque repli",
+    "Les 8 directions en attente et en marche",
+    "Nœud attaché à un pixel visible, y compris en miroir",
+    "Comparaisons GPU du nœud au sol : couleur, nuit, hauteur et déplacement",
+    "Comparaisons GPU des actions de donjon : repos, marche et invisibilité",
+    "Sans ruban : aucun pixel cosmétique"
+  ]
+}

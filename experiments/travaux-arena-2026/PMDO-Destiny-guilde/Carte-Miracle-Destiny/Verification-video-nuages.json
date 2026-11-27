@@ -1,0 +1,68 @@
+{
+  "statut": "PASS",
+  "edition": "nuages",
+  "fps": 20,
+  "frames": 740,
+  "signals": [
+    {
+      "id": "grotte-ocre",
+      "zone": "torselune",
+      "ms": 2300
+    },
+    {
+      "id": "grotte-amethystes",
+      "zone": "amethystes",
+      "ms": 4850
+    },
+    {
+      "id": "signal-voiles",
+      "zone": "haltes",
+      "ms": 7300
+    },
+    {
+      "id": "grotte-ramures",
+      "zone": "orival",
+      "ms": 10300
+    },
+    {
+      "id": "volcan-geant",
+      "zone": "volcans",
+      "ms": 14300
+    },
+    {
+      "id": "grotte-givre",
+      "zone": "seracine",
+      "ms": 18450
+    },
+    {
+      "id": "bois-petales",
+      "zone": "petales",
+      "ms": 22350
+    },
+    {
+      "id": "bourg-ecume",
+      "zone": "estrel",
+      "ms": 27500
+    },
+    {
+      "id": "atoll-coraux",
+      "zone": "coraux",
+      "ms": 31850
+    }
+  ],
+  "dimensions": [
+    1280,
+    900
+  ],
+  "carte": [
+    45,
+    219,
+    820,
+    538
+  ],
+  "vue_complete_finale": true,
+  "duree": 37.0,
+  "video": "H.264",
+  "audio": "AAC, 48 kHz",
+  "lieux_fixes": true
+}

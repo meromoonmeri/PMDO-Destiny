@@ -1,0 +1,44 @@
+{
+  "statut": "PASS",
+  "drapeaux": 8,
+  "trames_drapeaux_et_pieds_stables": 48,
+  "modules_rayonnages": 9,
+  "rayonnages_alpha_rgba_et_fenetres_libres": true,
+  "poses_cheminées_4_ambiances": 32,
+  "composites_cliff": 4,
+  "pixels_exactement_conservés_sur_trépieds": 8009,
+  "reflets_mesurés": [
+    {
+      "pose": 1,
+      "pixels_de_surface_eclaires": 44654,
+      "pixels_facade_concernes": 23011,
+      "hausse_lum_facade_vs_edition_precedente": 24.95,
+      "hausse_lum_sol_vs_edition_precedente": 18.16,
+      "falaise_haute_ciel_mer_intacts": true
+    },
+    {
+      "pose": 2,
+      "pixels_de_surface_eclaires": 44498,
+      "pixels_facade_concernes": 22915,
+      "hausse_lum_facade_vs_edition_precedente": 23.0,
+      "hausse_lum_sol_vs_edition_precedente": 16.86,
+      "falaise_haute_ciel_mer_intacts": true
+    },
+    {
+      "pose": 3,
+      "pixels_de_surface_eclaires": 44538,
+      "pixels_facade_concernes": 22942,
+      "hausse_lum_facade_vs_edition_precedente": 23.61,
+      "hausse_lum_sol_vs_edition_precedente": 17.69,
+      "falaise_haute_ciel_mer_intacts": true
+    },
+    {
+      "pose": 4,
+      "pixels_de_surface_eclaires": 44686,
+      "pixels_facade_concernes": 23028,
+      "hausse_lum_facade_vs_edition_precedente": 25.44,
+      "hausse_lum_sol_vs_edition_precedente": 18.93,
+      "falaise_haute_ciel_mer_intacts": true
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "salle": "guilde_destiny_accueil",
+  "sortie": {
+    "id": "SortieGuilde",
+    "rect": [
+      232,
+      336,
+      48,
+      16
+    ],
+    "bottom": 352
+  },
+  "seuil_visible": {
+    "zone": {
+      "x": 224,
+      "y": 313,
+      "w": 64,
+      "h": 39
+    },
+    "largeur": 64,
+    "premiere_ligne_derniere_planche": 349,
+    "dernier_pixel_y": 351
+  },
+  "reference": {
+    "carte": "G01P02A",
+    "url": "https://projectpokemon.org/home/gallery/image/77350-g01p02apng/",
+    "sha256": "2bd9bf5a11a2ef3a861e4ba8f48468f20d06ba177a765ccd370d4ca9f1e387b9",
+    "cadrage_halo": [
+      171,
+      227,
+      237,
+      255
+    ],
+    "pixels_par_classe": {
+      "1": 406,
+      "2": 334,
+      "3": 362,
+      "4": 83
+    }
+  },
+  "tapis": {
+    "atlas": "Guilde_Imm_pmu_paillasson_rouge",
+    "motif": "œuf ailé de la variante Halcyon rubis",
+    "rect": [
+      224,
+      313,
+      64,
+      37
+    ],
+    "lisiere_bas_y": 348
+  },
+  "halo": {
+    "rect": [
+      224,
+      325,
+      64,
+      27
+    ],
+    "gains": [
+      1,
+      0.84,
+      0.76,
+      0.53
+    ],
+    "animation": false,
+    "ancrage_bord_clair_y": 349,
+    "pixels_au_sol": 1236
+  },
+  "hors_plancher": 0,
+  "entree_modifiee_dans_le_jeu": false,
+  "couches_atelier_ajoutees": 0,
+  "donnees_heritees_sha256": "6d1be6abdc913895b4caf39a412c7ace52625715dde0839b57e7a6a4c1ae322d"
+}

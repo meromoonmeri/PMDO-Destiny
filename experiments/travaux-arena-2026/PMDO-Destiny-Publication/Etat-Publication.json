@@ -1,0 +1,143 @@
+{
+  "depot": "meromoonmeri/PMDO-Destiny",
+  "branche": "wip/reverie-integration-kingambit-cafe",
+  "base_avant_guilde": "0c0a13f75e13ab95132b66b282dae1b369ef885b",
+  "commit_natif_guilde": "355d1f3d3e45544b43260f812997d462afbc715a",
+  "total_fichiers": 2784,
+  "lots": [
+    {
+      "nom": "Carte Miracle de Destiny 4 — Grand Large",
+      "sha": "6684cad8622c120d6ce0bf18940ac10697596b35",
+      "fichiers": 207,
+      "precedent": "355d1f3d3e45544b43260f812997d462afbc715a"
+    },
+    {
+      "nom": "Guilde : salles, décors, mobilier et ateliers",
+      "sha": "b6556fa1f8d7f02fd8558d80c3b290991f313470",
+      "fichiers": 574,
+      "precedent": "6684cad8622c120d6ce0bf18940ac10697596b35"
+    },
+    {
+      "nom": "Guilde : salles, décors, mobilier et ateliers",
+      "sha": "f8177ba8c962ccdeecfdbae9f4a1d7c0aca62713",
+      "fichiers": 83,
+      "precedent": "b6556fa1f8d7f02fd8558d80c3b290991f313470"
+    },
+    {
+      "nom": "Guilde : salles, décors, mobilier et ateliers",
+      "sha": "41000a2e60a577704a88de36f962897511f063b7",
+      "fichiers": 658,
+      "precedent": "f8177ba8c962ccdeecfdbae9f4a1d7c0aca62713"
+    },
+    {
+      "nom": "Guilde : salles, décors, mobilier et ateliers",
+      "sha": "1b45cffad0641267006628652b4d726d87e4a393",
+      "fichiers": 119,
+      "precedent": "41000a2e60a577704a88de36f962897511f063b7"
+    },
+    {
+      "nom": "Cartes du monde de Destiny et ressources EoS",
+      "sha": "ab54ac97b2a36e349f50c1b2b43ca52b641027df",
+      "fichiers": 363,
+      "precedent": "1b45cffad0641267006628652b4d726d87e4a393"
+    },
+    {
+      "nom": "Cartes du monde de Destiny et ressources EoS",
+      "sha": "7e03866c09db3ed3f5ae88aa24410b0944160574",
+      "fichiers": 166,
+      "precedent": "ab54ac97b2a36e349f50c1b2b43ca52b641027df"
+    },
+    {
+      "nom": "Cartes du monde de Destiny et ressources EoS",
+      "sha": "bab6a6e8ba9ee03a9b93883734e0918efdda00de",
+      "fichiers": 121,
+      "precedent": "7e03866c09db3ed3f5ae88aa24410b0944160574"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "a9d998b41c62e47984992c53735ef67c20c67352",
+      "fichiers": 58,
+      "precedent": "bab6a6e8ba9ee03a9b93883734e0918efdda00de"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "9c277ed3a942d09ac76fc440f58cf89186f58619",
+      "fichiers": 89,
+      "precedent": "a9d998b41c62e47984992c53735ef67c20c67352"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "22390623a2abd1cdd6951b1f96b6f8cf7b8b9f13",
+      "fichiers": 14,
+      "precedent": "9c277ed3a942d09ac76fc440f58cf89186f58619"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "058dcd5b018e5ae69e2c49c7613468fd9318d7e2",
+      "fichiers": 41,
+      "precedent": "22390623a2abd1cdd6951b1f96b6f8cf7b8b9f13"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "839746ae3fd5ed6c2bdf160043a2d85a31f3911d",
+      "fichiers": 108,
+      "precedent": "058dcd5b018e5ae69e2c49c7613468fd9318d7e2"
+    },
+    {
+      "nom": "Réverie et Kingambit : cinématiques, dojos et quêtes",
+      "sha": "472438e168a6b0c5c3e677df17ffdbd6f2d7d172",
+      "fichiers": 93,
+      "precedent": "839746ae3fd5ed6c2bdf160043a2d85a31f3911d"
+    },
+    {
+      "nom": "Correctifs, systèmes, bilans et sources annexes",
+      "sha": "4679c8526fd8e220b310f25776a9c0fa09ee0e3f",
+      "fichiers": 88,
+      "precedent": "472438e168a6b0c5c3e677df17ffdbd6f2d7d172"
+    },
+    {
+      "nom": "Index et inventaire de l’atelier Destiny",
+      "sha": "1fe71e705b6635b2a5c1708e6babbdc49c54d7d7",
+      "fichiers": 2,
+      "precedent": "4679c8526fd8e220b310f25776a9c0fa09ee0e3f"
+    },
+    {
+      "nom": "Intégrer le vitrage R2 et les jonctions sud sans rallonge",
+      "sha": "a55e9f16fc537d1d3aa8247e2ce7ce606d0f60b4",
+      "fichiers": 12,
+      "precedent": "1fe71e705b6635b2a5c1708e6babbdc49c54d7d7"
+    },
+    {
+      "nom": "Réintégrer les correctifs ciblés de la Falaise, du Café et du repas",
+      "sha": "bbe3756385f087be40226530b444d33d31e91705",
+      "fichiers": 8,
+      "precedent": "a55e9f16fc537d1d3aa8247e2ce7ce606d0f60b4"
+    },
+    {
+      "nom": "Documenter la publication et rendre les cartes compatibles Windows",
+      "sha": "8f80c6e2c47e681acd334be661d601a59fed2367",
+      "fichiers": 7,
+      "precedent": "bbe3756385f087be40226530b444d33d31e91705"
+    }
+  ],
+  "head": "8f80c6e2c47e681acd334be661d601a59fed2367",
+  "statut": "PASS",
+  "main": "57105372209587ee2805327170bc116c335545f9",
+  "force": false,
+  "release_creee": false,
+  "tag_cree": false,
+  "ci_declenchee_manuellement": false,
+  "exclusions": {
+    "temporaire": 70,
+    "essai non retenu": 9,
+    "copie de données natives": 1,
+    "auth": 1,
+    "archive redondante": 20,
+    "historique déjà publié": 10
+  },
+  "inventaire_paths": 2782,
+  "patches_natifs_guilde": 12,
+  "correctifs_cibles_portes": 3,
+  "liens_symboliques_convertis": 3,
+  "rapport_integration": "docs/atelier-destiny/Verification-integration.json"
+}
