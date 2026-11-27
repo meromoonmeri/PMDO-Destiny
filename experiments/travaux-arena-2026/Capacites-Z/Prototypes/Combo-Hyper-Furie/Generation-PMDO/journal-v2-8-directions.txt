@@ -1,0 +1,17 @@
+[2026/11/26 14:32:32.680] [SE]:[COMBO HYPER] début bas cible=114 témoin=114
+[2026/11/26 14:32:34.812] [SE]:[COMBO HYPER] résultat bas cible=114->66 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:35.570] [SE]:[COMBO HYPER] début bas-gauche cible=114 témoin=114
+[2026/11/26 14:32:37.618] [SE]:[COMBO HYPER] résultat bas-gauche cible=114->63 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:38.370] [SE]:[COMBO HYPER] début gauche cible=114 témoin=114
+[2026/11/26 14:32:40.438] [SE]:[COMBO HYPER] résultat gauche cible=114->63 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:41.185] [SE]:[COMBO HYPER] début haut-gauche cible=114 témoin=114
+[2026/11/26 14:32:43.235] [SE]:[COMBO HYPER] résultat haut-gauche cible=114->64 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:43.985] [SE]:[COMBO HYPER] début haut cible=114 témoin=114
+[2026/11/26 14:32:46.185] [SE]:[COMBO HYPER] résultat haut cible=114->67 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:46.989] [SE]:[COMBO HYPER] début haut-droite cible=114 témoin=114
+[2026/11/26 14:32:49.201] [SE]:[COMBO HYPER] résultat haut-droite cible=114->66 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:49.963] [SE]:[COMBO HYPER] début droite cible=114 témoin=114
+[2026/11/26 14:32:52.236] [SE]:[COMBO HYPER] résultat droite cible=114->64 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:53.135] [SE]:[COMBO HYPER] début bas-droite cible=114 témoin=114
+[2026/11/26 14:32:55.318] [SE]:[COMBO HYPER] résultat bas-droite cible=114->65 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:32:56.168] [SE]:[COMBO HYPER] FIN

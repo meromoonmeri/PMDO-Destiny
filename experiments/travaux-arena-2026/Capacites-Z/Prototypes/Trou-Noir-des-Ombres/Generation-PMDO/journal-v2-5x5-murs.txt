@@ -1,0 +1,29 @@
+[2026/11/26 14:17:08.329] [SE]:[TROU NOIR V2] début bas centre=X:7 Y:4: 3
+[2026/11/26 14:17:09.376] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:12.365] [SE]:[TROU NOIR V2] résultat bas 114->69,114->69,114->46,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:12.904] [SE]:[TROU NOIR V2] début bas-gauche centre=X:7 Y:4: 3
+[2026/11/26 14:17:13.625] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:16.505] [SE]:[TROU NOIR V2] résultat bas-gauche 114->72,114->51,114->72,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:17.006] [SE]:[TROU NOIR V2] début gauche centre=X:7 Y:4: 3
+[2026/11/26 14:17:17.773] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:20.689] [SE]:[TROU NOIR V2] résultat gauche 114->73,114->49,114->72,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:21.189] [SE]:[TROU NOIR V2] début haut-gauche centre=X:7 Y:4: 3
+[2026/11/26 14:17:22.080] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:25.230] [SE]:[TROU NOIR V2] résultat haut-gauche 114->69,114->68,114->69,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:25.826] [SE]:[TROU NOIR V2] début haut centre=X:7 Y:4: 3
+[2026/11/26 14:17:26.556] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:29.722] [SE]:[TROU NOIR V2] résultat haut 114->73,114->50,114->70,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:30.250] [SE]:[TROU NOIR V2] début haut-droite centre=X:7 Y:4: 3
+[2026/11/26 14:17:31.323] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:34.616] [SE]:[TROU NOIR V2] résultat haut-droite 114->71,114->72,114->71,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:35.139] [SE]:[TROU NOIR V2] début droite centre=X:7 Y:4: 3
+[2026/11/26 14:17:36.081] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:39.692] [SE]:[TROU NOIR V2] résultat droite 114->50,114->51,114->71,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:40.448] [SE]:[TROU NOIR V2] début bas-droite centre=X:7 Y:4: 3
+[2026/11/26 14:17:41.240] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=0 centre=X:7 Y:4: 3
+[2026/11/26 14:17:44.622] [SE]:[TROU NOIR V2] résultat bas-droite 114->70,114->50,114->71,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:17:45.137] [SE]:[TROU NOIR V2 MURS] avant interieur=wall,wall dehors=wall incassable=unbreakable
+[2026/11/26 14:17:46.986] [SE]:[TROU NOIR V2 TERRAIN] murs standards détruits=2 centre=X:7 Y:4: 3
+[2026/11/26 14:17:50.682] [SE]:[TROU NOIR V2 MURS] apres interieur=floor,floor dehors=wall incassable=unbreakable cible-derriere=114->73 charges=0
+[2026/11/26 14:17:52.479] [SE]:[TROU NOIR V2] FIN OK
+[2026/11/26 14:19:45.457] [SE]:[TROU NOIR V2 COLLISION] dedans=false dehors=true incassable=true

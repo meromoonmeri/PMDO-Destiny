@@ -1,0 +1,26 @@
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using System.Linq;
+if (args.Length != 3) throw new Exception("Usage: Patch original.dll helper.dll patched.dll");
+var resolver = new DefaultAssemblyResolver();
+resolver.AddSearchDirectory(Path.GetDirectoryName(Path.GetFullPath(args[2]))!);
+resolver.AddSearchDirectory(Path.GetDirectoryName(Path.GetFullPath(args[0]))!);
+resolver.AddSearchDirectory(Path.GetDirectoryName(Path.GetFullPath(typeof(object).Assembly.Location))!);
+var parameters = new ReaderParameters { AssemblyResolver = resolver };
+var engine=AssemblyDefinition.ReadAssembly(args[0],parameters);
+var helper=AssemblyDefinition.ReadAssembly(args[1],parameters);
+var scene=engine.MainModule.GetType("RogueEssence.Dungeon.BaseDungeonScene");
+var baseScene=engine.MainModule.GetType("RogueEssence.BaseScene");
+var draw=scene.Methods.Single(x=>x.Name=="DrawGame");
+var screen=scene.Fields.Single(x=>x.Name=="gameScreen");
+var scale=baseScene.Fields.Single(x=>x.Name=="drawScale");
+var effect=helper.MainModule.GetType("PliSpatial.Effet").Methods.Single(x=>x.Name=="Dessiner");
+var imported=engine.MainModule.ImportReference(effect);
+var il=draw.Body.GetILProcessor();
+// Unique SpriteBatch.Draw(Texture2D, Vector2, Color) of gameScreen after PostDraw.
+var calls=draw.Body.Instructions.Where(i=>i.OpCode==OpCodes.Callvirt && i.Operand is MethodReference m && m.DeclaringType.FullName=="Microsoft.Xna.Framework.Graphics.SpriteBatch" && m.Name=="Draw" && m.Parameters.Count==3 && m.Parameters[0].ParameterType.Name=="Texture2D").ToList();
+if(calls.Count!=1) throw new Exception("Expected one final screen Draw, found "+calls.Count);
+var after=calls[0].Next;
+foreach(var inst in new[]{il.Create(OpCodes.Ldarg_0),il.Create(OpCodes.Ldarg_1),il.Create(OpCodes.Ldarg_0),il.Create(OpCodes.Ldfld,screen),il.Create(OpCodes.Ldarg_0),il.Create(OpCodes.Ldfld,scale),il.Create(OpCodes.Call,imported)}) il.InsertBefore(after,inst);
+engine.Write(args[2]);
+Console.WriteLine("Patch de banc créé dans "+args[2]);

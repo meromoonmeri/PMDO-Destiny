@@ -1,0 +1,108 @@
+[2026/11/26 11:56:58.949] =========================================
+[2026/11/26 11:56:58.970] SESSION STARTED: 2026/11/26 11:56:58
+[2026/11/26 11:56:58.971] Version: 0.8.12.0
+[2026/11/26 11:56:58.971] .NET 8.0.26
+[2026/11/26 11:56:58.971] =========================================
+[2026/11/26 11:56:58.999] -----------------------------------------
+[2026/11/26 11:56:59.000] -----------------------------------------
+[2026/11/26 11:57:01.080] FNA3D Driver: OpenGL
+[2026/11/26 11:57:01.085] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+[2026/11/26 11:57:01.085] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+[2026/11/26 11:57:01.085] OpenGL Vendor: Mesa
+[2026/11/26 11:57:01.087] MojoShader Profile: glsl120
+[2026/11/26 11:57:01.126] [SE]:Initialized Lua 5.4
+[2026/11/26 11:57:01.126] [SE]:Importing .NET packages..
+[2026/11/26 11:57:01.145] [SE]: **- Lua engine started! -**
+[2026/11/26 11:57:13.361] [SE]:Exposing game engine components instances..
+[2026/11/26 11:57:13.383] [SE]:Exposing script interface..
+[2026/11/26 11:57:13.436] [SE]:Setting up lua globals..
+[2026/11/26 11:57:13.437] [SE]:Setting up lua paths..
+[2026/11/26 11:57:13.443] [SE]:Setting up lua functions...
+[2026/11/26 11:57:13.444] [SE]:Setting up debug functions...
+[2026/11/26 11:57:13.447] [SE]:Setting up default script vars...
+[2026/11/26 11:57:13.454] [SE]:Caching common lib...
+[2026/11/26 11:57:13.479] [SE]:Loading events...
+[2026/11/26 11:57:13.496] [SE]:Installing game interface functions..
+[2026/11/26 11:57:13.505] [SE]:DebugTools:initialize()
+[2026/11/26 11:57:13.509] [SE]:Registered service DebugTools!
+[2026/11/26 11:57:13.512] [SE]:UpgradeTools:initialize()
+[2026/11/26 11:57:13.513] [SE]:Registered service UpgradeTools!
+[2026/11/26 11:57:13.514] [SE]:MenuTools:initialize()
+[2026/11/26 11:57:13.514] [SE]:Registered service MenuTools!
+[2026/11/26 11:57:13.516] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+[2026/11/26 11:57:13.516] [SE]:Registered service DestinyTitleAnim!
+[2026/11/26 11:57:13.518] [SE]:Registered service StatueKangourex!
+[2026/11/26 11:57:13.521] [SE]:Registered service NiloTemoin!
+[2026/11/26 11:57:13.525] [SE]: **- Lua engine ready! -**
+[2026/11/26 11:57:13.525] [SE]:
+<!> ExampleSvc: Init..
+[2026/11/26 11:57:14.486] LuaEngine.OnMusicChange()..
+[2026/11/26 11:57:31.531] LuaEngine.LoadSavedData()..
+[2026/11/26 11:57:31.534] LuaEngine.LoadSavedData()..
+[2026/11/26 11:57:35.271] LuaEngine.LoadSavedData()..
+[2026/11/26 11:57:35.317] Zone Seed: 10872659860362012121
+[2026/11/26 11:57:35.320] Zone.OnInit(): Initializing the zone..
+[2026/11/26 11:57:35.327] Loading rsground file: intro_halo
+[2026/11/26 11:57:35.413] Completed file load.
+[2026/11/26 11:57:35.424] GroundMap.OnInit(): Initializing the map..
+[2026/11/26 11:57:35.428] GroundMap.LoadScriptEvents(): Added event Init to map intro_halo!
+[2026/11/26 11:57:35.429] GroundMap.LoadScriptEvents(): Added event Enter to map intro_halo!
+[2026/11/26 11:57:35.429] GroundMap.LoadScriptEvents(): Added event Exit to map intro_halo!
+[2026/11/26 11:57:35.429] GroundMap.LoadScriptEvents(): Added event Update to map intro_halo!
+[2026/11/26 11:57:35.430] GroundMap.LoadScriptEvents(): Added event GameSave to map intro_halo!
+[2026/11/26 11:57:35.430] GroundMap.LoadScriptEvents(): Added event GameLoad to map intro_halo!
+[2026/11/26 11:57:35.436] LuaEngine.OnGroundMapInit()..
+[2026/11/26 11:57:35.460] [SE]:[BANC MEGA] Création du Dracaufeu de test
+[2026/11/26 11:57:35.508] LuaEngine.SaveData()..
+[2026/11/26 11:57:35.674] LuaEngine.SaveData()..
+[2026/11/26 11:57:35.691] LuaEngine.OnGroundMapEnter()..
+[2026/11/26 11:57:35.691] LuaEngine.OnGroundMapExit()..
+[2026/11/26 11:57:35.693] GroundMap.~GroundMap(): Finalizing intro_halo..
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Exit!
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameSave!
+[2026/11/26 11:57:35.693] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+=>_ENV pre-cleanup:142
+=>_ENV post cleanup:141
+[2026/11/26 11:57:35.697] Zone.~Zone(): Finalizing personality_test..
+=>_ENV pre-cleanup:141
+=>_ENV post cleanup:140
+[2026/11/26 11:57:35.836] Zone Seed: 5300451978844229968
+[2026/11/26 11:57:35.836] Zone.OnInit(): Initializing the zone..
+[2026/11/26 11:57:35.838] Zone.LoadScriptEvents(): Added event Init to zone ambush_forest!
+[2026/11/26 11:57:35.839] Zone.LoadScriptEvents(): Added event EnterSegment to zone ambush_forest!
+[2026/11/26 11:57:35.839] Zone.LoadScriptEvents(): Added event ExitSegment to zone ambush_forest!
+[2026/11/26 11:57:35.839] Zone.LoadScriptEvents(): Added event Rescued to zone ambush_forest!
+[2026/11/26 11:57:35.840] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+[2026/11/26 11:57:35.840] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.EnterSegment!
+[2026/11/26 11:57:35.840] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+[2026/11/26 11:57:35.840] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+[2026/11/26 11:57:35.840] [SE]:=>> Init_ambush_forest
+[2026/11/26 11:57:35.843] Zone Seed: 5300451978844229968
+[2026/11/26 11:57:35.849] Map Count: 0
+[2026/11/26 11:57:35.850] Map Seed: 0
+[2026/11/26 11:57:36.201] Steps:
+
+[2026/11/26 11:57:36.262] Map.OnInit(): Initializing the map..
+[2026/11/26 11:57:36.264] LuaEngine.OnDungeonMapInit()..
+[2026/11/26 11:57:37.065] LuaEngine.OnMusicChange()..
+[2026/11/26 11:57:38.486] LuaEngine.OnDungeonMapEnter()..
+[2026/11/26 11:57:48.717] [SE]:[CONE Z] début bas centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:57:51.749] [SE]:[CONE Z] résultat bas 155->115,155->115,155->113,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:57:52.407] [SE]:[CONE Z] début bas-gauche centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:57:55.390] [SE]:[CONE Z] résultat bas-gauche 155->114,155->113,155->113,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:57:56.071] [SE]:[CONE Z] début gauche centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:57:59.053] [SE]:[CONE Z] résultat gauche 155->116,155->113,155->117,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:57:59.720] [SE]:[CONE Z] début haut-gauche centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:58:02.703] [SE]:[CONE Z] résultat haut-gauche 155->117,155->114,155->115,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:58:03.371] [SE]:[CONE Z] début haut centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:58:06.372] [SE]:[CONE Z] résultat haut 155->113,155->117,155->113,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:58:07.040] [SE]:[CONE Z] début haut-droite centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:58:10.020] [SE]:[CONE Z] résultat haut-droite 155->116,155->116,155->116,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:58:10.687] [SE]:[CONE Z] début droite centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:58:13.733] [SE]:[CONE Z] résultat droite 155->115,155->113,155->115,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:58:14.422] [SE]:[CONE Z] début bas-droite centre=X:34 Y:19: 49 cases: avant1, avant2, bord45, arriere1
+[2026/11/26 11:58:17.470] [SE]:[CONE Z] résultat bas-droite 155->114,155->113,155->116,155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 11:58:18.173] [SE]:[CONE Z] FIN

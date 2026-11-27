@@ -1,0 +1,26 @@
+[2026/11/26 23:49:56.310] [SE]:[PATATI Z] espece=mimikyu attaque-base=play_rough
+[2026/11/26 23:49:56.361] [SE]:[PATATI Z] début bas cible=270 témoin=270
+[2026/11/26 23:50:00.130] [SE]:[PATATI V3 KO] tirage=297/1000
+[2026/11/26 23:50:00.470] [SE]:[PATATI Z] résultat bas cible=270->245 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:01.218] [SE]:[PATATI Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 23:50:04.613] [SE]:[PATATI V3 KO] tirage=427/1000
+[2026/11/26 23:50:04.945] [SE]:[PATATI Z] résultat bas-gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:05.696] [SE]:[PATATI Z] début gauche cible=270 témoin=270
+[2026/11/26 23:50:09.095] [SE]:[PATATI V3 KO] tirage=853/1000
+[2026/11/26 23:50:09.429] [SE]:[PATATI Z] résultat gauche cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:10.179] [SE]:[PATATI Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 23:50:13.579] [SE]:[PATATI V3 KO] tirage=390/1000
+[2026/11/26 23:50:13.912] [SE]:[PATATI Z] résultat haut-gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:14.664] [SE]:[PATATI Z] début haut cible=270 témoin=270
+[2026/11/26 23:50:18.069] [SE]:[PATATI V3 KO] tirage=177/1000
+[2026/11/26 23:50:18.396] [SE]:[PATATI Z] résultat haut cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:19.146] [SE]:[PATATI Z] début haut-droite cible=270 témoin=270
+[2026/11/26 23:50:22.795] [SE]:[PATATI V3 KO] tirage=393/1000
+[2026/11/26 23:50:23.130] [SE]:[PATATI Z] résultat haut-droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:23.880] [SE]:[PATATI Z] début droite cible=270 témoin=270
+[2026/11/26 23:50:27.280] [SE]:[PATATI V3 KO] tirage=953/1000
+[2026/11/26 23:50:27.613] [SE]:[PATATI Z] résultat droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:28.363] [SE]:[PATATI Z] début bas-droite cible=270 témoin=270
+[2026/11/26 23:50:31.762] [SE]:[PATATI V3 KO] tirage=152/1000
+[2026/11/26 23:50:32.096] [SE]:[PATATI Z] résultat bas-droite cible=270->245 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:50:32.845] [SE]:[PATATI Z] FIN OK

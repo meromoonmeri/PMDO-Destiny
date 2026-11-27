@@ -1,0 +1,33 @@
+[2026/11/27 12:28:20.590] [SE]:[LAME EN PEINE V3] début bas
+[2026/11/27 12:28:22.079] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:4 Y:5: 1 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:23.585] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:26.949] [SE]:[LAME EN PEINE V3] bas cible=202->35 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:28:27.430] [SE]:[LAME EN PEINE V3] début bas-gauche
+[2026/11/27 12:28:28.782] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:3 Y:5: 6 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:29.964] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:32.945] [SE]:[LAME EN PEINE V3] bas-gauche cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 12:28:33.545] [SE]:[LAME EN PEINE V3] début gauche
+[2026/11/27 12:28:34.748] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:3 Y:4: 7 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:36.132] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:38.830] [SE]:[LAME EN PEINE V3] gauche cible=202->38 témoin=202->202 lanceur=1->83 soin-attendu=82 charges=9
+[2026/11/27 12:28:39.245] [SE]:[LAME EN PEINE V3] début haut-gauche
+[2026/11/27 12:28:40.398] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:3 Y:3: 0 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:41.620] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:44.428] [SE]:[LAME EN PEINE V3] haut-gauche cible=202->29 témoin=202->202 lanceur=1->87 soin-attendu=86 charges=9
+[2026/11/27 12:28:44.958] [SE]:[LAME EN PEINE V3] début haut
+[2026/11/27 12:28:46.165] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:4 Y:3: 7 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:47.548] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:50.247] [SE]:[LAME EN PEINE V3] haut cible=202->38 témoin=202->202 lanceur=1->83 soin-attendu=82 charges=9
+[2026/11/27 12:28:50.799] [SE]:[LAME EN PEINE V3] début haut-droite
+[2026/11/27 12:28:51.981] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:5 Y:3: 6 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:53.232] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:28:55.961] [SE]:[LAME EN PEINE V3] haut-droite cible=202->29 témoin=202->202 lanceur=1->87 soin-attendu=86 charges=9
+[2026/11/27 12:28:56.395] [SE]:[LAME EN PEINE V3] début droite
+[2026/11/27 12:28:57.681] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:5 Y:4: 1 lanceur=X:4 Y:4: 0
+[2026/11/27 12:28:58.779] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:29:01.547] [SE]:[LAME EN PEINE V3] droite cible=202->29 témoin=202->202 lanceur=1->87 soin-attendu=86 charges=9
+[2026/11/27 12:29:02.041] [SE]:[LAME EN PEINE V3] début bas-droite
+[2026/11/27 12:29:03.472] [SE]:[LAME V3] 9 rema nences/9 entailles cible=X:5 Y:5: 0 lanceur=X:4 Y:4: 0
+[2026/11/27 12:29:04.594] [SE]:[LAME V3] fracture et pli réel ; convergence vers X:4 Y:4: 0
+[2026/11/27 12:29:07.478] [SE]:[LAME EN PEINE V3] bas-droite cible=202->36 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:29:08.811] [SE]:[LAME EN PEINE V3] FIN OK

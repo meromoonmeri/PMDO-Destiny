@@ -1,0 +1,17 @@
+[2026/11/26 14:06:52.234] [SE]:[TROU NOIR Z] début bas cible=114 témoin=114
+[2026/11/26 14:06:54.039] [SE]:[TROU NOIR Z] résultat bas cible=114->73 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:06:54.838] [SE]:[TROU NOIR Z] début bas-gauche cible=114 témoin=114
+[2026/11/26 14:06:56.353] [SE]:[TROU NOIR Z] résultat bas-gauche cible=114->68 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:06:57.206] [SE]:[TROU NOIR Z] début gauche cible=114 témoin=114
+[2026/11/26 14:06:58.805] [SE]:[TROU NOIR Z] résultat gauche cible=114->71 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:06:59.606] [SE]:[TROU NOIR Z] début haut-gauche cible=114 témoin=114
+[2026/11/26 14:07:01.322] [SE]:[TROU NOIR Z] résultat haut-gauche cible=114->71 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:07:02.139] [SE]:[TROU NOIR Z] début haut cible=114 témoin=114
+[2026/11/26 14:07:03.943] [SE]:[TROU NOIR Z] résultat haut cible=114->73 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:07:05.119] [SE]:[TROU NOIR Z] début haut-droite cible=114 témoin=114
+[2026/11/26 14:07:07.002] [SE]:[TROU NOIR Z] résultat haut-droite cible=114->71 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:07:07.804] [SE]:[TROU NOIR Z] début droite cible=114 témoin=114
+[2026/11/26 14:07:09.654] [SE]:[TROU NOIR Z] résultat droite cible=114->71 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:07:10.505] [SE]:[TROU NOIR Z] début bas-droite cible=114 témoin=114
+[2026/11/26 14:07:12.239] [SE]:[TROU NOIR Z] résultat bas-droite cible=114->70 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 14:07:13.071] [SE]:[TROU NOIR Z] FIN

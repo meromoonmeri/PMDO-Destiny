@@ -1,0 +1,280 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.SkillData, RogueEssence",
+    "Name": {
+      "DefaultText": "Let's Snuggle Forever",
+      "LocalTexts": {
+        "fr": "Patati-Patattrape",
+        "de": "Herzliche Knuddelkloppe",
+        "es": "Somanta Amistosa",
+        "it": "Dolcesacco di Botte",
+        "ko": "투닥투닥프렌드타임",
+        "ja": "ぽかぼかフレンドタイム",
+        "ja-jp": "ぽかぼかフレンドタイム",
+        "zh-hans": "亲密无间大乱揍",
+        "zh-hant": "親密無間大亂揍"
+      }
+    },
+    "Desc": {
+      "DefaultText": "After obtaining Z-Power, the user, Mimikyu, punches the target with full force.",
+      "LocalTexts": {
+        "fr": "Mimiqui concentre toute la Force Z dans son corps, et attaque dans le plus grand fracas !",
+        "de": "Mimigma greift das Ziel mithilfe von Z-Kraft mit voller Wucht und viel Liebe an.",
+        "es": "Mimikyu ataca con toda su fuerza tras imbuirse del Poder Z y asesta una lluvia de golpes.",
+        "it": "Grazie al Potere Z, Mimikyu fa appello a tutte le sue forze e attacca il bersaglio tempestandolo di colpi.",
+        "ko": "Z파워를 얻은 따라큐가 전력으로 투닥투닥 공격한다.",
+        "ja": "Ｚパワーを　えた　ミミッキュが ぜんりょくで　ぽかぽか　こうげき。",
+        "ja-jp": "Ｚパワーを　得た　ミミッキュが 全力で　ぽかぽか　攻撃。",
+        "zh-hans": "得到Ｚ力量的谜拟Ｑ将全力进行乱揍攻击。",
+        "zh-hant": "獲得Ｚ力量的謎擬Ｑ 將會以全力進行亂揍攻擊。"
+      }
+    },
+    "Released": true,
+    "Comment": "",
+    "IndexNum": 726,
+    "BaseCharges": 1,
+    "Strikes": 1,
+    "HitboxAction": {
+      "$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+      "Anim": {
+        "AnimIndex": "",
+        "FrameTime": 1,
+        "StartFrame": -1,
+        "EndFrame": -1,
+        "AnimDir": -1,
+        "Alpha": 255,
+        "AnimFlip": 0
+      },
+      "AnimOffset": 0,
+      "Emitter": {
+        "$type": "RogueEssence.Content.AfterImageEmitter, RogueEssence",
+        "AnimTime": 8,
+        "BurstTime": 1,
+        "Alpha": 128,
+        "AlphaSpeed": 0
+      },
+      "WideAngle": 1,
+      "SnapBack": false,
+      "CharAnim": 5,
+      "AppearanceMod": 4,
+      "HitTiles": false,
+      "Range": 2,
+      "StopAtHit": true,
+      "StopAtWall": true,
+      "TargetAlignments": 4,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.FiniteSprinkleEmitter, RogueEssence",
+        "LocHeight": 0,
+        "Anims": [
+          {
+            "$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+            "ResultAnim": {
+              "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+              "LocHeight": 0
+            },
+            "Layer": 4,
+            "Anim": {
+              "AnimIndex": "Emote_Shock",
+              "FrameTime": 2,
+              "StartFrame": 5,
+              "EndFrame": -1,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 10,
+            "Cycles": 0,
+            "FrameOffset": 0
+          },
+          {
+            "$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+            "ResultAnim": {
+              "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+              "LocHeight": 0
+            },
+            "Layer": 4,
+            "Anim": {
+              "AnimIndex": "Lucky_Chant_Star_Yellow",
+              "FrameTime": 2,
+              "StartFrame": 4,
+              "EndFrame": 7,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 10,
+            "Cycles": 0,
+            "FrameOffset": 0
+          }
+        ],
+        "Range": 20,
+        "Speed": 80,
+        "TotalParticles": 3,
+        "HeightSpeed": 0,
+        "SpeedDiff": 0,
+        "StartHeight": 0,
+        "Layer": 2
+      },
+      "PreActions": [],
+      "ActionFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "DUN_Tackle",
+        "Emitter": {
+          "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+          "LocHeight": 0
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "LagBehindTime": 0
+    },
+    "Explosion": {
+      "TargetAlignments": 4,
+      "HitTiles": false,
+      "Range": 0,
+      "Speed": 0,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "Emitter": {
+        "$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "IntroFX": [],
+      "ExplodeFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "",
+        "Emitter": {
+          "$type": "RogueEssence.Content.FiniteReleaseEmitter, RogueEssence",
+          "LocHeight": 0,
+          "Anims": [
+            {
+              "$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+              "ResultAnim": {
+                "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+                "LocHeight": 0
+              },
+              "Layer": 0,
+              "Anim": {
+                "AnimIndex": "Smoke_White",
+                "FrameTime": 2,
+                "StartFrame": -1,
+                "EndFrame": -1,
+                "AnimDir": -1,
+                "Alpha": 255,
+                "AnimFlip": 0
+              },
+              "TotalTime": 0,
+              "Cycles": 1,
+              "FrameOffset": 0
+            }
+          ],
+          "Speed": 30,
+          "Bursts": 7,
+          "ParticlesPerBurst": 1,
+          "BurstTime": 0,
+          "StartDistance": 10,
+          "Layer": 2
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      }
+    },
+    "Data": {
+      "Element": "fairy",
+      "Category": 1,
+      "HitRate": -1,
+      "SkillStates": [
+        {
+          "$type": "PMDC.Dungeon.ContactState, PMDC"
+        },
+        {
+          "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+          "Power": 190
+        }
+      ],
+      "BeforeTryActions": [],
+      "BeforeActions": [
+        {
+          "Key": {
+            "str": [
+              0
+            ]
+          },
+          "Value": {
+            "$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+            "Script": "Patati_Charge",
+            "ArgTable": "{}"
+          }
+        }
+      ],
+      "OnActions": [],
+      "BeforeExplosions": [],
+      "BeforeHits": [],
+      "OnHits": [
+        {
+          "Key": {
+            "str": [
+              -1
+            ]
+          },
+          "Value": {
+            "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+          }
+        }
+      ],
+      "OnHitTiles": [],
+      "AfterActions": [],
+      "ElementEffects": [],
+      "IntroFX": [],
+      "HitFX": {
+        "Delay": 112,
+        "AbsoluteDelay": true,
+        "Sound": "DUN_Wake_Up_Slap",
+        "Emitter": {
+          "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+          "LocHeight": 0,
+          "finished": false,
+          "Offset": 0,
+          "Anim": {
+            "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+            "Anim": {
+              "AnimIndex": "PatatiV2_Impact",
+              "FrameTime": 1,
+              "StartFrame": -1,
+              "EndFrame": -1,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 0,
+            "Cycles": 1,
+            "FrameOffset": 0
+          },
+          "Layer": 2,
+          "UseDest": false
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "HitCharAction": {
+        "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+        "Process": 0,
+        "AnimOverride": 0
+      }
+    }
+  }
+}

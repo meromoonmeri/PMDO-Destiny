@@ -1,0 +1,17 @@
+[2026/11/26 14:40:55.093] [SE]:[GEO Z] début bas centre=X:4 Y:4: 0
+[2026/11/26 14:40:59.950] [SE]:[GEO Z] résultat bas 114->72,114->69,114->71,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:00.470] [SE]:[GEO Z] début bas-gauche centre=X:4 Y:4: 0
+[2026/11/26 14:41:05.236] [SE]:[GEO Z] résultat bas-gauche 114->73,114->70,114->73,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:05.735] [SE]:[GEO Z] début gauche centre=X:4 Y:4: 0
+[2026/11/26 14:41:10.205] [SE]:[GEO Z] résultat gauche 114->68,114->72,114->69,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:10.719] [SE]:[GEO Z] début haut-gauche centre=X:4 Y:4: 0
+[2026/11/26 14:41:15.467] [SE]:[GEO Z] résultat haut-gauche 114->70,114->73,114->71,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:15.968] [SE]:[GEO Z] début haut centre=X:4 Y:4: 0
+[2026/11/26 14:41:20.900] [SE]:[GEO Z] résultat haut 114->72,114->71,114->73,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:21.401] [SE]:[GEO Z] début haut-droite centre=X:4 Y:4: 0
+[2026/11/26 14:41:26.620] [SE]:[GEO Z] résultat haut-droite 114->71,114->71,114->69,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:27.229] [SE]:[GEO Z] début droite centre=X:4 Y:4: 0
+[2026/11/26 14:41:32.124] [SE]:[GEO Z] résultat droite 114->71,114->70,114->73,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:32.685] [SE]:[GEO Z] début bas-droite centre=X:4 Y:4: 0
+[2026/11/26 14:41:37.703] [SE]:[GEO Z] résultat bas-droite 114->69,114->72,114->69,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 14:41:39.400] [SE]:[GEO Z] FIN OK

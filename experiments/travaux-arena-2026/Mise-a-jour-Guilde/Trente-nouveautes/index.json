@@ -1,0 +1,106 @@
+[
+  {
+    "id": "nouveau-guilde-banc-feuillage",
+    "label": "Banc aux feuilles",
+    "w": 56,
+    "h": 38,
+    "wall": false,
+    "file": "banc-feuillage.png"
+  },
+  {
+    "id": "nouveau-guilde-fauteuil-lierre",
+    "label": "Fauteuil au lierre",
+    "w": 32,
+    "h": 42,
+    "wall": false,
+    "file": "fauteuil-lierre.png"
+  },
+  {
+    "id": "nouveau-guilde-table-racines",
+    "label": "Table aux racines",
+    "w": 42,
+    "h": 38,
+    "wall": false,
+    "file": "table-racines.png"
+  },
+  {
+    "id": "nouveau-guilde-pupitre-lecture",
+    "label": "Pupitre de lecture",
+    "w": 25,
+    "h": 34,
+    "wall": false,
+    "file": "pupitre-lecture.png"
+  },
+  {
+    "id": "nouveau-guilde-bibliotheque",
+    "label": "Bibliothèque de la Guilde",
+    "w": 54,
+    "h": 42,
+    "wall": false,
+    "file": "bibliotheque.png"
+  },
+  {
+    "id": "nouveau-guilde-etagere-graines",
+    "label": "Étagère murale à graines",
+    "w": 36,
+    "h": 28,
+    "wall": true,
+    "file": "etagere-graines.png"
+  },
+  {
+    "id": "nouveau-guilde-coffre-feuille",
+    "label": "Coffre aux feuilles",
+    "w": 32,
+    "h": 27,
+    "wall": false,
+    "file": "coffre-feuille.png"
+  },
+  {
+    "id": "nouveau-guilde-armoire-nature",
+    "label": "Armoire de la Guilde",
+    "w": 36,
+    "h": 46,
+    "wall": false,
+    "file": "armoire-nature.png"
+  },
+  {
+    "id": "nouveau-guilde-portemanteau-branche",
+    "label": "Portemanteau branche",
+    "w": 28,
+    "h": 44,
+    "wall": false,
+    "file": "portemanteau-branche.png"
+  },
+  {
+    "id": "nouveau-guilde-panier-baies",
+    "label": "Panier de baies",
+    "w": 28,
+    "h": 22,
+    "wall": false,
+    "file": "panier-baies.png"
+  },
+  {
+    "id": "nouveau-guilde-jardiniere-bourgeons",
+    "label": "Jardinière aux bourgeons",
+    "w": 42,
+    "h": 26,
+    "wall": false,
+    "file": "jardiniere-bourgeons.png"
+  },
+  {
+    "id": "nouveau-guilde-fougere-en-pot",
+    "label": "Fougère en pot",
+    "w": 28,
+    "h": 36,
+    "wall": false,
+    "file": "fougere-en-pot.png"
+  },
+  {
+    "id": "nouveau-guilde-pot-suspendu",
+    "label": "Pot mural de lierre",
+    "w": 27,
+    "h": 36,
+    "wall": true,
+    "file": "pot-suspendu.png"
+  }
+]

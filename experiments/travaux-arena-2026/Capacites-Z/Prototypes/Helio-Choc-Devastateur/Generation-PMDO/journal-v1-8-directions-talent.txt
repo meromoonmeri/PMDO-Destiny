@@ -1,0 +1,37 @@
+[2026/11/27 00:42:11.834] [SE]:[HELIO Z] debut bas cible=270 garde=false
+[2026/11/27 00:42:13.697] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:16.682] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:17.014] [SE]:[HELIO Z] resultat bas cible=270->234 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:17.423] [SE]:[HELIO Z] debut bas-gauche cible=270 garde=false
+[2026/11/27 00:42:19.206] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:21.539] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:21.872] [SE]:[HELIO Z] resultat bas-gauche cible=270->231 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:22.289] [SE]:[HELIO Z] debut gauche cible=270 garde=false
+[2026/11/27 00:42:24.055] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:26.389] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:26.722] [SE]:[HELIO Z] resultat gauche cible=270->234 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:27.139] [SE]:[HELIO Z] debut haut-gauche cible=270 garde=false
+[2026/11/27 00:42:28.905] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:31.239] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:31.572] [SE]:[HELIO Z] resultat haut-gauche cible=270->230 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:31.989] [SE]:[HELIO Z] debut haut cible=270 garde=false
+[2026/11/27 00:42:33.772] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:36.106] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:36.439] [SE]:[HELIO Z] resultat haut cible=270->232 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:36.855] [SE]:[HELIO Z] debut haut-droite cible=270 garde=false
+[2026/11/27 00:42:38.639] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:40.972] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:41.305] [SE]:[HELIO Z] resultat haut-droite cible=270->230 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:41.722] [SE]:[HELIO Z] debut droite cible=270 garde=false
+[2026/11/27 00:42:43.489] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:45.822] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:46.155] [SE]:[HELIO Z] resultat droite cible=270->233 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:46.572] [SE]:[HELIO Z] debut bas-droite cible=270 garde=false
+[2026/11/27 00:42:48.339] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:50.672] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:51.005] [SE]:[HELIO Z] resultat bas-droite cible=270->232 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 00:42:51.429] [SE]:[HELIO Z] debut garde mystik contournee cible=270 garde=true
+[2026/11/27 00:42:53.189] [SE]:[HELIO TALENT] avant=false suspendu=true
+[2026/11/27 00:42:55.522] [SE]:[HELIO TALENT] restaure=false
+[2026/11/27 00:42:55.855] [SE]:[HELIO Z] resultat garde mystik contournee cible=270->232 temoin=270->270 PP=0 talent_desactive=false garde=true
+[2026/11/27 00:42:56.272] [SE]:[HELIO Z] FIN OK

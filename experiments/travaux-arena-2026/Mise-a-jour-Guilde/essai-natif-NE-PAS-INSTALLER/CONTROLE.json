@@ -1,0 +1,26 @@
+{
+  "etat": "PROTOTYPE NON TESTÉ DANS LE JEU — NE PAS INSTALLER",
+  "source": "7bd2dc104706571c91a2ea4a3c45282b94eabbb6",
+  "salle": "guilde_destiny_grand_salon",
+  "dimensions": [
+    576,
+    432
+  ],
+  "pixels_par_tuile": 8,
+  "tuiles": 487,
+  "format_tuiles": "RGBA prémultiplié",
+  "sortie": "copie séparée, pas de modification du dépôt ni du jeu",
+  "invariants": [
+    "collision, entités, passages, scripts, et couches hors verdure inchangés",
+    "aucun pixel source altéré hormis prémultiplication pour l’encodage"
+  ],
+  "manques": [
+    "vérification dans PMDO et index des tiles",
+    "salles restantes",
+    "lueurs animées des 32 bourgeons",
+    "ambiances jour/aube/crépuscule/nuit",
+    "falaise et braseros",
+    "vérification visuelle des objets et des portes",
+    "parcours complet, build et release"
+  ]
+}

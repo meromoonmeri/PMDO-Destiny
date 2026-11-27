@@ -1,0 +1,72 @@
+[2026/11/27 00:17:23.683] [SE]:[DRACACO Z] début bas
+[2026/11/27 00:17:26.489] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:17:27.329] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:17:28.066] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:17:28.090] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:17:28.093] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:17:30.139] [SE]:[DRACACO Z] résultat bas cibles=270->247,270->247,270->246,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:17:30.141] [SE]:[DRACACO Z] boosts bas mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:17:30.549] [SE]:[DRACACO Z] début bas-gauche
+[2026/11/27 00:17:33.097] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:17:33.763] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:17:34.430] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:34.450] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:17:34.451] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:17:36.447] [SE]:[DRACACO Z] résultat bas-gauche cibles=270->246,270->246,270->245,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:17:36.448] [SE]:[DRACACO Z] boosts bas-gauche mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:17:36.866] [SE]:[DRACACO Z] début gauche
+[2026/11/27 00:17:39.447] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:17:40.113] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:40.780] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:40.800] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:17:40.801] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:17:42.798] [SE]:[DRACACO Z] résultat gauche cibles=270->245,270->247,270->245,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:17:42.798] [SE]:[DRACACO Z] boosts gauche mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:17:43.214] [SE]:[DRACACO Z] début haut-gauche
+[2026/11/27 00:17:45.763] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:46.430] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:47.097] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:17:47.119] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:17:47.120] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:17:49.132] [SE]:[DRACACO Z] résultat haut-gauche cibles=270->245,270->245,270->247,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:17:49.132] [SE]:[DRACACO Z] boosts haut-gauche mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:17:49.547] [SE]:[DRACACO Z] début haut
+[2026/11/27 00:17:52.363] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:53.030] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:53.697] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:17:53.718] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:17:53.719] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:17:55.714] [SE]:[DRACACO Z] résultat haut cibles=270->245,270->245,270->246,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:17:55.714] [SE]:[DRACACO Z] boosts haut mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:17:56.131] [SE]:[DRACACO Z] début haut-droite
+[2026/11/27 00:17:58.682] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:17:59.347] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:18:00.013] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:18:00.035] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:18:00.035] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:18:02.030] [SE]:[DRACACO Z] résultat haut-droite cibles=270->246,270->245,270->246,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:18:02.031] [SE]:[DRACACO Z] boosts haut-droite mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:18:02.450] [SE]:[DRACACO Z] début droite
+[2026/11/27 00:18:04.997] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:18:05.663] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:18:06.330] [SE]:[DRACACO DEGATS] avant=270 apres=245 touche=true
+[2026/11/27 00:18:06.350] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:18:06.350] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:18:08.347] [SE]:[DRACACO Z] résultat droite cibles=270->247,270->246,270->245,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:18:08.348] [SE]:[DRACACO Z] boosts droite mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:18:08.765] [SE]:[DRACACO Z] début bas-droite
+[2026/11/27 00:18:11.313] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:18:11.980] [SE]:[DRACACO DEGATS] avant=270 apres=246 touche=true
+[2026/11/27 00:18:12.649] [SE]:[DRACACO DEGATS] avant=270 apres=247 touche=true
+[2026/11/27 00:18:12.666] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=true
+[2026/11/27 00:18:12.667] [SE]:[DRACACO BONUS] activer=true
+[2026/11/27 00:18:14.790] [SE]:[DRACACO Z] résultat bas-droite cibles=270->246,270->246,270->247,235->235,270->270 allie=270->270 charges=0
+[2026/11/27 00:18:14.790] [SE]:[DRACACO Z] boosts bas-droite mod_attack=1 mod_defense=1 mod_special_attack=1 mod_special_defense=1 mod_speed=1
+[2026/11/27 00:18:15.320] [SE]:[DRACACO FEE SEULE] debut
+[2026/11/27 00:18:17.033] [SE]:[DRACACO DEGATS] avant=235 apres=235 touche=false
+[2026/11/27 00:18:17.097] [SE]:[DRACACO BONUS] activer=false
+[2026/11/27 00:18:17.430] [SE]:[DRACACO FEE SEULE] mod_attack=0 mod_defense=0 mod_special_attack=0 mod_special_defense=0 mod_speed=0 cible=235->235
+[2026/11/27 00:18:17.430] [SE]:[DRACACO SANS CIBLE] debut
+[2026/11/27 00:18:19.130] [SE]:[DRACACO BONUS] activer=false
+[2026/11/27 00:18:19.463] [SE]:[DRACACO SANS CIBLE] mod_attack=0 mod_defense=0 mod_special_attack=0 mod_special_defense=0 mod_speed=0
+[2026/11/27 00:18:19.464] [SE]:[DRACACO Z] FIN OK

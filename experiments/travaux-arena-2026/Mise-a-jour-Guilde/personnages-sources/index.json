@@ -1,0 +1,214 @@
+[
+  {
+    "id": 40,
+    "label": "Grodoudou",
+    "w": 32,
+    "h": 48,
+    "durations": [
+      40,
+      4,
+      6,
+      4
+    ],
+    "copy": null
+  },
+  {
+    "id": 441,
+    "label": "Pijako",
+    "w": 32,
+    "h": 48,
+    "durations": [
+      20,
+      6,
+      2,
+      4,
+      6,
+      4,
+      2,
+      6
+    ],
+    "copy": null
+  },
+  {
+    "id": 399,
+    "label": "Keunotor",
+    "w": 32,
+    "h": 32,
+    "durations": [
+      20,
+      14,
+      20,
+      14
+    ],
+    "copy": null
+  },
+  {
+    "id": 294,
+    "label": "Ramboum",
+    "w": 32,
+    "h": 56,
+    "durations": [
+      40,
+      1,
+      1,
+      4,
+      4,
+      2,
+      1
+    ],
+    "copy": null
+  },
+  {
+    "id": 341,
+    "label": "Écrapince",
+    "w": 32,
+    "h": 32,
+    "durations": [
+      24,
+      12
+    ],
+    "copy": null
+  },
+  {
+    "id": 192,
+    "label": "Héliatronc",
+    "w": 32,
+    "h": 56,
+    "durations": [
+      40,
+      1,
+      2,
+      3,
+      4,
+      3,
+      2,
+      1,
+      4,
+      1,
+      2,
+      3,
+      4,
+      3,
+      2,
+      1
+    ],
+    "copy": null
+  },
+  {
+    "id": 453,
+    "label": "Cradopaud",
+    "w": 32,
+    "h": 48,
+    "durations": [
+      40,
+      1,
+      2,
+      6,
+      2,
+      1,
+      1
+    ],
+    "copy": null
+  },
+  {
+    "id": 50,
+    "label": "Taupiqueur",
+    "w": 24,
+    "h": 24,
+    "durations": [
+      16,
+      16
+    ],
+    "copy": null
+  },
+  {
+    "id": 51,
+    "label": "Triopikeur",
+    "w": 32,
+    "h": 32,
+    "durations": [
+      12,
+      16
+    ],
+    "copy": null
+  },
+  {
+    "id": 358,
+    "label": "Éoko",
+    "w": 24,
+    "h": 48,
+    "durations": [
+      18,
+      8,
+      18,
+      8
+    ],
+    "copy": null
+  },
+  {
+    "id": 25,
+    "label": "Pikachu",
+    "w": 40,
+    "h": 56,
+    "durations": [
+      40,
+      2,
+      3,
+      3,
+      3,
+      2
+    ],
+    "copy": null
+  },
+  {
+    "id": 158,
+    "label": "Kaiminus",
+    "w": 32,
+    "h": 48,
+    "durations": [
+      30,
+      4,
+      2,
+      6,
+      3,
+      2,
+      3
+    ],
+    "copy": null
+  },
+  {
+    "id": 133,
+    "label": "Évoli",
+    "w": 24,
+    "h": 32,
+    "durations": [
+      16,
+      16
+    ],
+    "copy": null
+  },
+  {
+    "id": 447,
+    "label": "Riolu",
+    "w": 32,
+    "h": 40,
+    "durations": [
+      40,
+      16,
+      12,
+      16
+    ],
+    "copy": null
+  },
+  {
+    "id": 83,
+    "label": "Canarticho",
+    "w": 24,
+    "h": 32,
+    "durations": [
+      30,
+      12
+    ],
+    "copy": null
+  }
+]

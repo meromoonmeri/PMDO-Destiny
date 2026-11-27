@@ -1,0 +1,17 @@
+{
+  "poses_par_phase": 18,
+  "direction_order": [
+    "bas",
+    "bas-gauche",
+    "gauche",
+    "haut-gauche",
+    "haut",
+    "haut-droite",
+    "droite",
+    "bas-droite"
+  ],
+  "canvas": 96,
+  "ticks_per_frame": 2,
+  "generation": "chaque pose est dessinée par algorithme avec ses paramètres propres ; pas une génération IA indépendante image par image",
+  "status": "prototype"
+}

@@ -1,0 +1,8 @@
+Fontaine de la salle des missions – proposition d’aperçu
+8 images de 112 × 80 px, durée 160 ms par image, boucle 1,28 s.
+Tilesheet-Fontaine-8-images.png : bande horizontale, 8 cellules ; dimensions 896 × 80 px.
+Tilesheet-Reflets-8-images.png : mêmes cellules, reflets transparents seuls à superposer au sprite de base.
+Tilesheet-Fontaine-8px-vertical.png : 8 cellules verticales, chacune multiple de 8 px.
+Fontaine-image-01.png à 08.png : images séparées. Fontaine-base.png : eau de base sans les reflets ajoutés.
+Les images animées sont dérivées de la même génération et retouchées localement. Non intégrées ni testées dans le moteur du jeu.
+Attention : dans la carte native, la zone centrale recouvre CentreSalleMarker (280,256,16,16). L'aperçu autorise ce chevauchement expressément pour montrer la fontaine ; déplacer ou adapter le marqueur et contrôler les interactions, collisions et passages avant toute installation réelle.

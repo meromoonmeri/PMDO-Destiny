@@ -1,0 +1,26 @@
+[2026/11/26 22:43:54.556] [SE]:[FUREUR PLUMES Z] espece=decidueye attaque-base=spirit_shackle
+[2026/11/26 22:43:54.769] [SE]:[FUREUR PLUMES Z] début bas cible=270 témoin=270
+[2026/11/26 22:43:55.773] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:43:58.182] [SE]:[FUREUR PLUMES Z] résultat bas cible=270->242 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:43:58.941] [SE]:[FUREUR PLUMES Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 22:43:59.957] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:02.308] [SE]:[FUREUR PLUMES Z] résultat bas-gauche cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:03.058] [SE]:[FUREUR PLUMES Z] début gauche cible=270 témoin=270
+[2026/11/26 22:44:04.073] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:06.390] [SE]:[FUREUR PLUMES Z] résultat gauche cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:07.140] [SE]:[FUREUR PLUMES Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 22:44:08.140] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:10.473] [SE]:[FUREUR PLUMES Z] résultat haut-gauche cible=270->240 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:11.225] [SE]:[FUREUR PLUMES Z] début haut cible=270 témoin=270
+[2026/11/26 22:44:12.242] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:14.590] [SE]:[FUREUR PLUMES Z] résultat haut cible=270->242 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:15.390] [SE]:[FUREUR PLUMES Z] début haut-droite cible=270 témoin=270
+[2026/11/26 22:44:16.440] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:18.757] [SE]:[FUREUR PLUMES Z] résultat haut-droite cible=270->242 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:19.507] [SE]:[FUREUR PLUMES Z] début droite cible=270 témoin=270
+[2026/11/26 22:44:20.507] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:22.807] [SE]:[FUREUR PLUMES Z] résultat droite cible=270->242 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:23.557] [SE]:[FUREUR PLUMES Z] début bas-droite cible=270 témoin=270
+[2026/11/26 22:44:24.557] [SE]:[FUREUR PLUMES V2] preparation terminee
+[2026/11/26 22:44:26.857] [SE]:[FUREUR PLUMES Z] résultat bas-droite cible=270->240 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:44:27.624] [SE]:[FUREUR PLUMES Z] FIN OK

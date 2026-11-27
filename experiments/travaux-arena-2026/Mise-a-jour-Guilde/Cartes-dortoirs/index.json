@@ -1,0 +1,30 @@
+[
+  {
+    "id": "carte-dortoir-continent-gauche",
+    "label": "Carte des terres · style PMD · mur gauche",
+    "file": "carte-continent-gauche.png",
+    "w": 30,
+    "h": 37
+  },
+  {
+    "id": "carte-dortoir-continent-droite",
+    "label": "Carte des terres · style PMD · mur droite",
+    "file": "carte-continent-droite.png",
+    "w": 30,
+    "h": 37
+  },
+  {
+    "id": "carte-dortoir-iles-gauche",
+    "label": "Carte des îles · style PMD · mur gauche",
+    "file": "carte-iles-gauche.png",
+    "w": 30,
+    "h": 37
+  },
+  {
+    "id": "carte-dortoir-iles-droite",
+    "label": "Carte des îles · style PMD · mur droite",
+    "file": "carte-iles-droite.png",
+    "w": 30,
+    "h": 37
+  }
+]

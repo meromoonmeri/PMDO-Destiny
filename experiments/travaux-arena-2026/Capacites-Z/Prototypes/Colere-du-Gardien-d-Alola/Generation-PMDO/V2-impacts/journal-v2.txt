@@ -1,0 +1,23 @@
+[2026/11/27 13:39:42.617] [SE]:[COLERE Z] debut bas cible=270
+[2026/11/27 13:39:47.539] [SE]:[COLERE Z] resultat bas cible=270->68 attendu=68 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:39:47.885] [SE]:[COLERE Z] debut bas-gauche cible=269
+[2026/11/27 13:39:52.909] [SE]:[COLERE Z] resultat bas-gauche cible=269->68 attendu=68 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:39:53.245] [SE]:[COLERE Z] debut gauche cible=101
+[2026/11/27 13:39:58.170] [SE]:[COLERE Z] resultat gauche cible=101->26 attendu=26 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:39:58.590] [SE]:[COLERE Z] debut haut-gauche cible=7
+[2026/11/27 13:40:04.070] [SE]:[COLERE Z] resultat haut-gauche cible=7->2 attendu=2 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:04.454] [SE]:[COLERE Z] debut haut cible=4
+[2026/11/27 13:40:10.208] [SE]:[COLERE Z] resultat haut cible=4->1 attendu=1 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:10.546] [SE]:[COLERE Z] debut haut-droite cible=3
+[2026/11/27 13:40:16.303] [SE]:[COLERE Z] resultat haut-droite cible=3->1 attendu=1 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:16.913] [SE]:[COLERE Z] debut droite cible=2
+[2026/11/27 13:40:22.489] [SE]:[COLERE Z] resultat droite cible=2->1 attendu=1 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:22.937] [SE]:[COLERE Z] debut bas-droite cible=100
+[2026/11/27 13:40:27.929] [SE]:[COLERE Z] resultat bas-droite cible=100->25 attendu=25 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:28.344] [SE]:[COLERE Z] debut resistance acier cible=100
+[2026/11/27 13:40:33.262] [SE]:[COLERE Z] resultat resistance acier cible=100->25 attendu=25 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:33.598] [SE]:[COLERE Z] debut garde mystik cible=100
+[2026/11/27 13:40:38.920] [SE]:[COLERE Z] resultat garde mystik cible=100->100 attendu=100 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:39.410] [SE]:[COLERE Z] debut minimum 1 PV et KO cible=1
+[2026/11/27 13:40:45.342] [SE]:[COLERE Z] resultat minimum 1 PV et KO cible=1->0 attendu=0 temoin=270->270 allie=270->270 PP=0
+[2026/11/27 13:40:45.738] [SE]:[COLERE Z] FIN OK

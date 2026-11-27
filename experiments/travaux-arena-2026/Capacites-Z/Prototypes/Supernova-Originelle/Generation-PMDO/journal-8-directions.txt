@@ -1,0 +1,18 @@
+[2026/11/26 13:55:05.250] [SE]:[SUPERNOVA Z] espece=mew attaque-base=psychic
+[2026/11/26 13:55:05.340] [SE]:[SUPERNOVA Z] début bas centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:08.631] [SE]:[SUPERNOVA Z] résultat bas 114->63,114->60,114->59,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:09.302] [SE]:[SUPERNOVA Z] début bas-gauche centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:12.405] [SE]:[SUPERNOVA Z] résultat bas-gauche 114->63,114->63,114->58,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:13.098] [SE]:[SUPERNOVA Z] début gauche centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:16.198] [SE]:[SUPERNOVA Z] résultat gauche 114->59,114->61,114->59,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:16.866] [SE]:[SUPERNOVA Z] début haut-gauche centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:19.996] [SE]:[SUPERNOVA Z] résultat haut-gauche 114->63,114->59,114->59,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:20.781] [SE]:[SUPERNOVA Z] début haut centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:24.097] [SE]:[SUPERNOVA Z] résultat haut 114->57,114->58,114->58,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:24.769] [SE]:[SUPERNOVA Z] début haut-droite centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:28.000] [SE]:[SUPERNOVA Z] résultat haut-droite 114->61,114->62,114->61,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:28.756] [SE]:[SUPERNOVA Z] début droite centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:32.197] [SE]:[SUPERNOVA Z] résultat droite 114->61,114->60,114->59,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:32.930] [SE]:[SUPERNOVA Z] début bas-droite centre=X:23 Y:5: 18 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:55:36.138] [SE]:[SUPERNOVA Z] résultat bas-droite 114->61,114->63,114->63,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:55:36.813] [SE]:[SUPERNOVA Z] FIN

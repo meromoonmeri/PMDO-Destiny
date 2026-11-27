@@ -1,0 +1,26 @@
+[2026/11/26 16:59:23.496] [SE]:[GIGA Z] espece=pikachu attaque-base=thunderbolt
+[2026/11/26 16:59:23.936] [SE]:[GIGA Z] début bas cible=155 témoin=155
+[2026/11/26 16:59:25.276] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:27.402] [SE]:[GIGA Z] résultat bas cible=155->93 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:28.177] [SE]:[GIGA Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 16:59:29.509] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:31.426] [SE]:[GIGA Z] résultat bas-gauche cible=155->94 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:32.210] [SE]:[GIGA Z] début gauche cible=155 témoin=155
+[2026/11/26 16:59:33.542] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:35.476] [SE]:[GIGA Z] résultat gauche cible=155->93 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:36.243] [SE]:[GIGA Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 16:59:37.542] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:39.483] [SE]:[GIGA Z] résultat haut-gauche cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:40.243] [SE]:[GIGA Z] début haut cible=155 témoin=155
+[2026/11/26 16:59:41.492] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:43.443] [SE]:[GIGA Z] résultat haut cible=155->91 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:44.193] [SE]:[GIGA Z] début haut-droite cible=155 témoin=155
+[2026/11/26 16:59:45.442] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:47.366] [SE]:[GIGA Z] résultat haut-droite cible=155->94 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:48.109] [SE]:[GIGA Z] début droite cible=155 témoin=155
+[2026/11/26 16:59:49.392] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:51.309] [SE]:[GIGA Z] résultat droite cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:52.060] [SE]:[GIGA Z] début bas-droite cible=155 témoin=155
+[2026/11/26 16:59:53.392] [SE]:[GIGA Z] charge terminée
+[2026/11/26 16:59:55.309] [SE]:[GIGA Z] résultat bas-droite cible=155->89 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:59:56.059] [SE]:[GIGA Z] FIN OK

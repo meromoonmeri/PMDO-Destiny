@@ -1,0 +1,33 @@
+[2026/11/27 13:12:54.682] [SE]:[LAME EN PEINE V6] début bas
+[2026/11/27 13:12:56.504] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction Down: 0
+[2026/11/27 13:12:57.487] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:00.120] [SE]:[LAME EN PEINE V6] bas cible=202->42 témoin=202->202 lanceur=1->81 soin-attendu=80 charges=9
+[2026/11/27 13:13:00.888] [SE]:[LAME EN PEINE V6] début bas-gauche
+[2026/11/27 13:13:02.380] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction DownLeft: 1
+[2026/11/27 13:13:03.189] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:06.169] [SE]:[LAME EN PEINE V6] bas-gauche cible=202->38 témoin=202->202 lanceur=1->83 soin-attendu=82 charges=9
+[2026/11/27 13:13:06.610] [SE]:[LAME EN PEINE V6] début gauche
+[2026/11/27 13:13:08.380] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction Left: 2
+[2026/11/27 13:13:09.636] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:12.671] [SE]:[LAME EN PEINE V6] gauche cible=202->43 témoin=202->202 lanceur=1->80 soin-attendu=79 charges=9
+[2026/11/27 13:13:13.136] [SE]:[LAME EN PEINE V6] début haut-gauche
+[2026/11/27 13:13:14.395] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction UpLeft: 3
+[2026/11/27 13:13:15.428] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:17.881] [SE]:[LAME EN PEINE V6] haut-gauche cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 13:13:18.402] [SE]:[LAME EN PEINE V6] début haut
+[2026/11/27 13:13:19.723] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction Up: 4
+[2026/11/27 13:13:20.553] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:23.170] [SE]:[LAME EN PEINE V6] haut cible=202->29 témoin=202->202 lanceur=1->87 soin-attendu=86 charges=9
+[2026/11/27 13:13:23.668] [SE]:[LAME EN PEINE V6] début haut-droite
+[2026/11/27 13:13:25.176] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction UpRight: 5
+[2026/11/27 13:13:25.873] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:28.319] [SE]:[LAME EN PEINE V6] haut-droite cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 13:13:28.737] [SE]:[LAME EN PEINE V6] début droite
+[2026/11/27 13:13:30.253] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction Right: 6
+[2026/11/27 13:13:31.256] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:33.796] [SE]:[LAME EN PEINE V6] droite cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 13:13:34.202] [SE]:[LAME EN PEINE V6] début bas-droite
+[2026/11/27 13:13:35.854] [SE]:[LAME V6] neuf rémanences et neuf slashs, direction DownRight: 7
+[2026/11/27 13:13:36.799] [SE]:[LAME V6] dernier coup distinct, séparation spirituelle, absorption
+[2026/11/27 13:13:39.152] [SE]:[LAME EN PEINE V6] bas-droite cible=202->45 témoin=202->202 lanceur=1->79 soin-attendu=78 charges=9
+[2026/11/27 13:13:40.754] [SE]:[LAME EN PEINE V6] FIN OK

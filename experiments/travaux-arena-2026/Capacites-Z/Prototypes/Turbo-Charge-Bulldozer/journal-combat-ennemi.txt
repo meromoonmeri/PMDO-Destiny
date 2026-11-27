@@ -1,0 +1,96 @@
+[2026/11/26 01:27:09.757] =========================================
+[2026/11/26 01:27:09.765] SESSION STARTED: 2026/11/26 01:27:09
+[2026/11/26 01:27:09.766] Version: 0.8.12.0
+[2026/11/26 01:27:09.766] .NET 8.0.26
+[2026/11/26 01:27:09.766] =========================================
+[2026/11/26 01:27:09.779] -----------------------------------------
+[2026/11/26 01:27:09.779] -----------------------------------------
+[2026/11/26 01:27:11.224] FNA3D Driver: OpenGL
+[2026/11/26 01:27:11.224] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+[2026/11/26 01:27:11.224] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+[2026/11/26 01:27:11.224] OpenGL Vendor: Mesa
+[2026/11/26 01:27:11.225] MojoShader Profile: glsl120
+[2026/11/26 01:27:11.259] [SE]:Initialized Lua 5.4
+[2026/11/26 01:27:11.260] [SE]:Importing .NET packages..
+[2026/11/26 01:27:11.267] [SE]: **- Lua engine started! -**
+[2026/11/26 01:27:13.922] [SE]:Exposing game engine components instances..
+[2026/11/26 01:27:13.954] [SE]:Exposing script interface..
+[2026/11/26 01:27:13.963] [SE]:Setting up lua globals..
+[2026/11/26 01:27:13.964] [SE]:Setting up lua paths..
+[2026/11/26 01:27:13.972] [SE]:Setting up lua functions...
+[2026/11/26 01:27:13.972] [SE]:Setting up debug functions...
+[2026/11/26 01:27:13.977] [SE]:Setting up default script vars...
+[2026/11/26 01:27:13.986] [SE]:Caching common lib...
+[2026/11/26 01:27:14.012] [SE]:Loading events...
+[2026/11/26 01:27:14.033] [SE]:Installing game interface functions..
+[2026/11/26 01:27:14.058] [SE]:DebugTools:initialize()
+[2026/11/26 01:27:14.063] [SE]:Registered service DebugTools!
+[2026/11/26 01:27:14.065] [SE]:UpgradeTools:initialize()
+[2026/11/26 01:27:14.065] [SE]:Registered service UpgradeTools!
+[2026/11/26 01:27:14.066] [SE]:MenuTools:initialize()
+[2026/11/26 01:27:14.067] [SE]:Registered service MenuTools!
+[2026/11/26 01:27:14.067] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+[2026/11/26 01:27:14.068] [SE]:Registered service DestinyTitleAnim!
+[2026/11/26 01:27:14.069] [SE]:Registered service StatueKangourex!
+[2026/11/26 01:27:14.072] [SE]:Registered service NiloTemoin!
+[2026/11/26 01:27:14.075] [SE]: **- Lua engine ready! -**
+[2026/11/26 01:27:14.076] [SE]:
+<!> ExampleSvc: Init..
+[2026/11/26 01:27:14.992] LuaEngine.OnMusicChange()..
+[2026/11/26 01:27:31.350] LuaEngine.LoadSavedData()..
+[2026/11/26 01:27:31.352] LuaEngine.LoadSavedData()..
+[2026/11/26 01:27:35.099] LuaEngine.LoadSavedData()..
+[2026/11/26 01:27:35.131] Zone Seed: 2344483401280255128
+[2026/11/26 01:27:35.132] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:27:35.136] Loading rsground file: intro_halo
+[2026/11/26 01:27:35.198] Completed file load.
+[2026/11/26 01:27:35.205] GroundMap.OnInit(): Initializing the map..
+[2026/11/26 01:27:35.208] GroundMap.LoadScriptEvents(): Added event Init to map intro_halo!
+[2026/11/26 01:27:35.209] GroundMap.LoadScriptEvents(): Added event Enter to map intro_halo!
+[2026/11/26 01:27:35.209] GroundMap.LoadScriptEvents(): Added event Exit to map intro_halo!
+[2026/11/26 01:27:35.209] GroundMap.LoadScriptEvents(): Added event Update to map intro_halo!
+[2026/11/26 01:27:35.209] GroundMap.LoadScriptEvents(): Added event GameSave to map intro_halo!
+[2026/11/26 01:27:35.209] GroundMap.LoadScriptEvents(): Added event GameLoad to map intro_halo!
+[2026/11/26 01:27:35.216] LuaEngine.OnGroundMapInit()..
+[2026/11/26 01:27:35.230] [SE]:[BANC MEGA] Création du Dracaufeu de test
+[2026/11/26 01:27:35.259] LuaEngine.SaveData()..
+[2026/11/26 01:27:35.418] LuaEngine.SaveData()..
+[2026/11/26 01:27:35.432] LuaEngine.OnGroundMapEnter()..
+[2026/11/26 01:27:35.433] LuaEngine.OnGroundMapExit()..
+[2026/11/26 01:27:35.434] GroundMap.~GroundMap(): Finalizing intro_halo..
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Exit!
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameSave!
+[2026/11/26 01:27:35.435] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+=>_ENV pre-cleanup:142
+=>_ENV post cleanup:141
+[2026/11/26 01:27:35.438] Zone.~Zone(): Finalizing personality_test..
+=>_ENV pre-cleanup:141
+=>_ENV post cleanup:140
+[2026/11/26 01:27:35.513] Zone Seed: 3582186823890005634
+[2026/11/26 01:27:35.513] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:27:35.514] Zone.LoadScriptEvents(): Added event Init to zone ambush_forest!
+[2026/11/26 01:27:35.515] Zone.LoadScriptEvents(): Added event EnterSegment to zone ambush_forest!
+[2026/11/26 01:27:35.515] Zone.LoadScriptEvents(): Added event ExitSegment to zone ambush_forest!
+[2026/11/26 01:27:35.515] Zone.LoadScriptEvents(): Added event Rescued to zone ambush_forest!
+[2026/11/26 01:27:35.516] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+[2026/11/26 01:27:35.516] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.EnterSegment!
+[2026/11/26 01:27:35.516] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+[2026/11/26 01:27:35.516] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+[2026/11/26 01:27:35.517] [SE]:=>> Init_ambush_forest
+[2026/11/26 01:27:35.518] Zone Seed: 3582186823890005634
+[2026/11/26 01:27:35.525] Map Count: 0
+[2026/11/26 01:27:35.525] Map Seed: 0
+[2026/11/26 01:27:35.815] Steps:
+
+[2026/11/26 01:27:35.859] Map.OnInit(): Initializing the map..
+[2026/11/26 01:27:35.861] LuaEngine.OnDungeonMapInit()..
+[2026/11/26 01:27:36.674] LuaEngine.OnMusicChange()..
+[2026/11/26 01:27:38.041] LuaEngine.OnDungeonMapEnter()..
+[2026/11/26 01:27:46.139] [SE]:[Z COMBAT] équipe ajoutée
+[2026/11/26 01:27:46.145] [SE]:[Z COMBAT] ennemi Snorlax, PV=155
+[2026/11/26 01:27:46.146] [SE]:[Z COMBAT] pose hero ok
+[2026/11/26 01:27:48.620] [SE]:[Z COMBAT] touche: PV 155 -> 82 (dégâts fixes scriptés)
+[2026/11/26 01:27:50.454] [SE]:[Z COMBAT] FIN

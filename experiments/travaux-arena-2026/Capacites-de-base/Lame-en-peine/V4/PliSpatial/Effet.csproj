@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AssemblyName>PliSpatial</AssemblyName></PropertyGroup><ItemGroup>
+<Reference Include="FNA"><HintPath>/home/user/.cache/destiny-test/pli-runtime/FNA.dll</HintPath><Private>false</Private></Reference>
+<Reference Include="RogueEssence"><HintPath>/home/user/.cache/destiny-test/pli-runtime/RogueEssence.dll</HintPath><Private>false</Private></Reference>
+<Reference Include="RogueElements"><HintPath>/home/user/.cache/destiny-test/pli-runtime/RogueElements.dll</HintPath><Private>false</Private></Reference>
+</ItemGroup></Project>

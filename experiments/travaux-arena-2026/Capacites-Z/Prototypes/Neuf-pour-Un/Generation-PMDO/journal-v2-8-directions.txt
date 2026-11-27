@@ -1,0 +1,25 @@
+[2026/11/26 21:04:08.023] [SE]:[NEUF POUR UN V2] début bas
+[2026/11/26 21:04:11.541] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:14.370] [SE]:[NEUF POUR UN V2] résultat bas mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:14.942] [SE]:[NEUF POUR UN V2] début bas-gauche
+[2026/11/26 21:04:17.675] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:20.425] [SE]:[NEUF POUR UN V2] résultat bas-gauche mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:21.015] [SE]:[NEUF POUR UN V2] début gauche
+[2026/11/26 21:04:23.741] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:26.492] [SE]:[NEUF POUR UN V2] résultat gauche mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:27.075] [SE]:[NEUF POUR UN V2] début haut-gauche
+[2026/11/26 21:04:29.809] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:32.560] [SE]:[NEUF POUR UN V2] résultat haut-gauche mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:33.142] [SE]:[NEUF POUR UN V2] début haut
+[2026/11/26 21:04:35.875] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:38.626] [SE]:[NEUF POUR UN V2] résultat haut mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:39.209] [SE]:[NEUF POUR UN V2] début haut-droite
+[2026/11/26 21:04:41.958] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:44.710] [SE]:[NEUF POUR UN V2] résultat haut-droite mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:45.292] [SE]:[NEUF POUR UN V2] début droite
+[2026/11/26 21:04:48.025] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:50.775] [SE]:[NEUF POUR UN V2] résultat droite mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:51.358] [SE]:[NEUF POUR UN V2] début bas-droite
+[2026/11/26 21:04:54.091] [SE]:[NEUF POUR UN V2] huit évolutions et rayons terminés
+[2026/11/26 21:04:56.843] [SE]:[NEUF POUR UN V2] résultat bas-droite mod_attack=2 mod_defense=2 mod_special_attack=2 mod_special_defense=2 mod_speed=2 témoin=155->155 charges=0 action=TurnTaken: 2
+[2026/11/26 21:04:57.425] [SE]:[NEUF POUR UN V2] FIN OK

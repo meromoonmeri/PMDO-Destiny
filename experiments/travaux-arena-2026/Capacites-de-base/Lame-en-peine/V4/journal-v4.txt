@@ -1,0 +1,33 @@
+[2026/11/27 12:38:25.414] [SE]:[LAME EN PEINE V4] début bas
+[2026/11/27 12:38:27.903] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:28.874] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:31.688] [SE]:[LAME EN PEINE V4] bas cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 12:38:32.383] [SE]:[LAME EN PEINE V4] début bas-gauche
+[2026/11/27 12:38:33.775] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:34.407] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:37.660] [SE]:[LAME EN PEINE V4] bas-gauche cible=202->36 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:38:38.204] [SE]:[LAME EN PEINE V4] début gauche
+[2026/11/27 12:38:39.368] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:40.173] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:42.756] [SE]:[LAME EN PEINE V4] gauche cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 12:38:43.365] [SE]:[LAME EN PEINE V4] début haut-gauche
+[2026/11/27 12:38:44.657] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:45.296] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:48.120] [SE]:[LAME EN PEINE V4] haut-gauche cible=202->38 témoin=202->202 lanceur=1->83 soin-attendu=82 charges=9
+[2026/11/27 12:38:48.677] [SE]:[LAME EN PEINE V4] début haut
+[2026/11/27 12:38:50.344] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:51.040] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:53.737] [SE]:[LAME EN PEINE V4] haut cible=202->45 témoin=202->202 lanceur=1->79 soin-attendu=78 charges=9
+[2026/11/27 12:38:54.155] [SE]:[LAME EN PEINE V4] début haut-droite
+[2026/11/27 12:38:55.443] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:38:56.441] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:38:59.019] [SE]:[LAME EN PEINE V4] haut-droite cible=202->38 témoin=202->202 lanceur=1->83 soin-attendu=82 charges=9
+[2026/11/27 12:38:59.437] [SE]:[LAME EN PEINE V4] début droite
+[2026/11/27 12:39:00.653] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:39:01.681] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:39:04.521] [SE]:[LAME EN PEINE V4] droite cible=202->29 témoin=202->202 lanceur=1->87 soin-attendu=86 charges=9
+[2026/11/27 12:39:04.937] [SE]:[LAME EN PEINE V4] début bas-droite
+[2026/11/27 12:39:06.305] [SE]:[LAME V4] séquence continue de 9 coupes, fracture et convergence : X:8 Y:4: 12
+[2026/11/27 12:39:07.156] [SE]:[LAME V4] pli du rendu déclenché au début de la fracture
+[2026/11/27 12:39:09.551] [SE]:[LAME EN PEINE V4] bas-droite cible=202->36 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:39:10.803] [SE]:[LAME EN PEINE V4] FIN OK

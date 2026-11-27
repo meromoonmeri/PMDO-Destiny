@@ -1,0 +1,29 @@
+[2026/11/26 19:23:06.431] [SE]:[ELECTRO SURF Z] espece=raichu forme=1 attaque-base=thunderbolt
+[2026/11/26 19:23:07.346] [SE]:[ELECTRO SURF Z] début bas cible=155 témoin=155
+[2026/11/26 19:23:08.449] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:10.527] [SE]:[ELECTRO SURF Z] résultat bas cible=155->70 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:11.102] [SE]:[ELECTRO SURF Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 19:23:12.199] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:14.182] [SE]:[ELECTRO SURF Z] résultat bas-gauche cible=155->65 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:14.766] [SE]:[ELECTRO SURF Z] début gauche cible=155 témoin=155
+[2026/11/26 19:23:15.849] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:17.832] [SE]:[ELECTRO SURF Z] résultat gauche cible=155->67 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:18.419] [SE]:[ELECTRO SURF Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 19:23:19.515] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:21.499] [SE]:[ELECTRO SURF Z] résultat haut-gauche cible=155->72 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:22.083] [SE]:[ELECTRO SURF Z] début haut cible=155 témoin=155
+[2026/11/26 19:23:23.165] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:25.149] [SE]:[ELECTRO SURF Z] résultat haut cible=155->70 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:25.750] [SE]:[ELECTRO SURF Z] début haut-droite cible=155 témoin=155
+[2026/11/26 19:23:26.849] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:28.832] [SE]:[ELECTRO SURF Z] résultat haut-droite cible=155->70 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:29.416] [SE]:[ELECTRO SURF Z] début droite cible=155 témoin=155
+[2026/11/26 19:23:30.499] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:32.482] [SE]:[ELECTRO SURF Z] résultat droite cible=155->65 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:33.073] [SE]:[ELECTRO SURF Z] début bas-droite cible=155 témoin=155
+[2026/11/26 19:23:34.149] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:36.132] [SE]:[ELECTRO SURF Z] résultat bas-droite cible=155->72 paralysie=true témoin=155->155 paralysie=false charges=0 action=TurnTaken: 2
+[2026/11/26 19:23:36.716] [SE]:[ELECTRO SURF Z] début immunité Électrik PV=110
+[2026/11/26 19:23:37.815] [SE]:[ELECTRO SURF Z] vague chargée
+[2026/11/26 19:23:39.632] [SE]:[ELECTRO SURF Z] immunité Électrik PV=110->47 paralysie=false charges=0
+[2026/11/26 19:23:40.382] [SE]:[ELECTRO SURF Z] FIN OK

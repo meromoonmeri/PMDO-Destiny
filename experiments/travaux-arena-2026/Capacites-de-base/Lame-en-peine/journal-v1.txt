@@ -1,0 +1,17 @@
+[2026/11/27 11:13:24.667] [SE]:[LAME EN PEINE V1] début bas
+[2026/11/27 11:13:28.219] [SE]:[LAME EN PEINE V1] bas cible=202->45 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:28.642] [SE]:[LAME EN PEINE V1] début bas-gauche
+[2026/11/27 11:13:31.908] [SE]:[LAME EN PEINE V1] bas-gauche cible=202->31 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:32.379] [SE]:[LAME EN PEINE V1] début gauche
+[2026/11/27 11:13:35.925] [SE]:[LAME EN PEINE V1] gauche cible=202->31 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:36.342] [SE]:[LAME EN PEINE V1] début haut-gauche
+[2026/11/27 11:13:40.063] [SE]:[LAME EN PEINE V1] haut-gauche cible=202->43 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:40.559] [SE]:[LAME EN PEINE V1] début haut
+[2026/11/27 11:13:43.875] [SE]:[LAME EN PEINE V1] haut cible=202->36 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:44.318] [SE]:[LAME EN PEINE V1] début haut-droite
+[2026/11/27 11:13:47.841] [SE]:[LAME EN PEINE V1] haut-droite cible=202->42 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:48.258] [SE]:[LAME EN PEINE V1] début droite
+[2026/11/27 11:13:51.584] [SE]:[LAME EN PEINE V1] droite cible=202->33 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:52.034] [SE]:[LAME EN PEINE V1] début bas-droite
+[2026/11/27 11:13:55.508] [SE]:[LAME EN PEINE V1] bas-droite cible=202->43 témoin=202->202 lanceur=37->112 soin-attendu=75 charges=9
+[2026/11/27 11:13:56.851] [SE]:[LAME EN PEINE V1] FIN OK

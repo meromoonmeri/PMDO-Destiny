@@ -1,0 +1,29 @@
+[2026/11/26 23:15:45.499] [SE]:[DARK BODY Z] espece=incineroar attaque-base=darkest_lariat
+[2026/11/26 23:15:45.539] [SE]:[DARK BODY Z] début bas cible=270 témoin=270
+[2026/11/26 23:15:46.724] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:15:49.452] [SE]:[DARK BODY Z] résultat bas cible=270->239 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:15:50.196] [SE]:[DARK BODY Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 23:15:51.324] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:15:53.608] [SE]:[DARK BODY Z] résultat bas-gauche cible=270->241 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:15:54.359] [SE]:[DARK BODY Z] début gauche cible=270 témoin=270
+[2026/11/26 23:15:55.491] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:15:57.779] [SE]:[DARK BODY Z] résultat gauche cible=270->239 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:15:58.839] [SE]:[DARK BODY Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 23:16:00.175] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:02.477] [SE]:[DARK BODY Z] résultat haut-gauche cible=270->241 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:16:03.231] [SE]:[DARK BODY Z] début haut cible=270 témoin=270
+[2026/11/26 23:16:04.357] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:06.641] [SE]:[DARK BODY Z] résultat haut cible=270->240 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:16:07.396] [SE]:[DARK BODY Z] début haut-droite cible=270 témoin=270
+[2026/11/26 23:16:08.524] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:10.810] [SE]:[DARK BODY Z] résultat haut-droite cible=270->239 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:16:11.562] [SE]:[DARK BODY Z] début droite cible=270 témoin=270
+[2026/11/26 23:16:12.691] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:15.034] [SE]:[DARK BODY Z] résultat droite cible=270->239 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:16:15.778] [SE]:[DARK BODY Z] début bas-droite cible=270 témoin=270
+[2026/11/26 23:16:16.907] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:19.191] [SE]:[DARK BODY Z] résultat bas-droite cible=270->241 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:16:19.949] [SE]:[DARK BODY MURS] avant contact=wall lateral=wall incassable=unbreakable
+[2026/11/26 23:16:21.407] [SE]:[DARK BODY V2] charge terminee
+[2026/11/26 23:16:22.958] [SE]:[DARK BODY MURS] apres contact=floor lateral=wall incassable=unbreakable charges=0
+[2026/11/26 23:16:22.961] [SE]:[DARK BODY Z] FIN OK

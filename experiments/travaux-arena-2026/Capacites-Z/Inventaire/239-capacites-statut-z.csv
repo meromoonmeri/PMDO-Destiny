@@ -1,0 +1,240 @@
+﻿nom,type,base,effet,cristal
+À la Queue Z,Ténèbres,À la Queue,Augmente la Vitesse du lanceur d'un niveau,Ténébrozélite
+Abri Z,Normal,Abri,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Acidarmure Z,Poison,Acidarmure,Annule toutes les baisses de statistiques du lanceur,Toxizélite
+Acupression Z,Normal,Acupression,Augmente le taux de critiques du lanceur,Normazélite
+Affilage Z,Normal,Affilage,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Affûtage Z,Normal,Affûtage,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Aiguisage Z,Ténèbres,Aiguisage,Augmente l' Attaque du lanceur d'un niveau,Ténébrozélite
+Air Veinard Z,Normal,Air Veinard,Augmente l' Esquive du lanceur d'un niveau,Normazélite
+Allègement Z,Acier,Allègement,Annule toutes les baisses de statistiques du lanceur,Métallozélite
+Amass'Sable Z,Sol,Amass'Sable,Annule toutes les baisses de statistiques du lanceur,Terrazélite
+Amnésie Z,Psy,Amnésie,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Anneau Hydro Z,Eau,Anneau Hydro,Augmente la Défense du lanceur d'un niveau,Aquazélite
+Anti-Brume Z,Vol,Anti-Brume,Augmente la Précision du lanceur d'un niveau,Aérozélite
+Anti-Soin Z,Psy,Anti-Soin,Augmente l' Attaque Spéciale du lanceur de deux niveaux,Psychézélite
+Appel Défense Z,Insecte,Appel Défense,Augmente la Défense du lanceur d'un niveau,Insectozélite
+Appel Soins Z,Insecte,Appel Soins,Annule toutes les baisses de statistiques du lanceur,Insectozélite
+Après Vous Z,Normal,Après Vous,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Armure Z,Normal,Armure,Augmente la Défense du lanceur d'un niveau supplémentaire,Normazélite
+Aromathérapie Z,Plante,Aromathérapie,Soigne tous les PV du lanceur,Florazélite
+Assistance Z,Normal,Assistance,Choisit au hasard une capacité connue par un équipier et la transforme en capacité Z,Normazélite
+Astuce Force Z,Psy,Astuce Force,Augmente l' Attaque du lanceur d'un niveau,Psychézélite
+Atterrissage Z,Vol,Atterrissage,Annule toutes les baisses de statistiques du lanceur,Aérozélite
+Attraction Z,Normal,Attraction,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Aurore Z,Normal,Aurore,Annule toutes les baisses de statistique du lanceur,Normazélite
+Avale Z,Normal,Avale,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Bâillement Z,Normal,Bâillement,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Balance Z,Normal,Balance,Augmente la Défense du lanceur d'un niveau,Normazélite
+Barrage Z,Normal,Barrage,Augmente la Défense du lanceur d'un niveau,Normazélite
+Berceuse Z,Normal,Berceuse,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Blabla Dodo Z,Normal,Blabla Dodo,Augmente le taux de critiques du lanceur ; Choisit au hasard une capacité parmi celles connues par le lanceur et la transforme en capacité Z si c'est une capacité offensive,Normazélite
+Blockhaus Z,Poison,Blockhaus,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Boost Z,Normal,Boost,Soigne tous les PV du lanceur,Normazélite
+Bouclier Z,Psy,Bouclier,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Bouclier Royal Z,Acier,Bouclier Royal,Annule toutes les baisses de statistiques du lanceur,Métallozélite
+Boul'Armure Z,Normal,Boul'Armure,Augmente la Précision du lanceur d'un niveau,Normazélite
+Brouillard Z,Normal,Brouillard,Augmente l' Esquive du lanceur d'un niveau,Normazélite
+Brume Z,Glace,Brume,Soigne tous les PV du lanceur,Cryozélite
+Brume Capiteuse Z,Fée,Brume Capiteuse,Augmente la Défense Spéciale du lanceur de deux niveaux,Nymphézélite
+Buée Noire Z,Glace,Buée Noire,Soigne tous les PV du lanceur,Cryozélite
+Cage-Éclair Z,Électrik,Cage-Éclair,Augmente la Défense Spéciale du lanceur d'un niveau,Voltazélite
+Camaraderie Z,Normal,Camaraderie,Augmente la Défense du lanceur d'un niveau,Normazélite
+Camouflage Z,Normal,Camouflage,Augmente l' Esquive du lanceur d'un niveau,Normazélite
+Cauchemar Z,Spectre,Cauchemar,Augmente l' Attaque Spéciale du lanceur d'un niveau,Spectrozélite
+Célébration Z,Normal,Célébration,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Normazélite
+Champ Brumeux Z,Fée,Champ Brumeux,Augmente la Défense Spéciale du lanceur d'un niveau,Nymphézélite
+Champ Électrifié Z,Électrik,Champ Électrifié,Augmente la Vitesse du lanceur d'un niveau,Voltazélite
+Champ Herbu Z,Plante,Champ Herbu,Augmente la Défense du lanceur d'un niveau,Florazélite
+Champ Psychique Z,Psy,Champ Psychique,Augmente l' Attaque Spéciale du lanceur d'un niveau,Psychézélite
+Changement Vitesse Z,Acier,Chgt Vitesse,Annule toutes les baisses de statistiques du lanceur,Métallozélite
+Chargeur Z,Électrik,Chargeur,Augmente la Défense Spéciale du lanceur d'un niveau,Voltazélite
+Charme Z,Fée,Charme,Augmente la Défense du lanceur d'un niveau,Nymphézélite
+Chatouille Z,Normal,Chatouille,Augmente la Défense du lanceur d'un niveau,Normazélite
+Clairvoyance Z,Normal,Clairvoyance,Augmente le taux de critiques du lanceur,Normazélite
+Clonage Z,Normal,Clonage,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Cognobidon Z,Normal,Cognobidon,Rend des PV au lanceur avant de lancer la capacité,Normazélite
+Confidence Z,Normal,Confidence,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Conversion Z,Normal,Conversion,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Normazélite
+Conversion 2 Z,Normal,Conversion 2,Soigne tous les PV du lanceur,Normazélite
+Copie Z,Normal,Copie,Augmente la Précision du lanceur d'un niveau,Normazélite
+Copie Type Z,Normal,Copie Type,Augmente l' Attaque Spéciale du lanceur d'un niveau,Normazélite
+Cotogarde Z,Plante,Cotogarde,Annule toutes les baisses de statistiques du lanceur,Florazélite
+Coup d'Main Z,Normal,Coup d'Main,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Croco Larme Z,Ténèbres,Croco Larme,Augmente l' Attaque Spéciale du lanceur d'un niveau,Ténébrozélite
+Croissance Z,Normal,Croissance,Augmente l' Attaque Spéciale du lanceur d'un niveau,Normazélite
+Cyclone Z,Normal,Cyclone,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Danse Draco Z,Dragon,Danse Draco,Annule toutes les baisses de statistiques du lanceur,Dracozélite
+Danse-Folle Z,Normal,Danse-Folle,Augmente l' Attaque Spéciale du lanceur d'un niveau,Normazélite
+Danse-Lames Z,Normal,Danse-Lames,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Danse-Lune Z,Psy,Danse-Lune,Aucun,Psychézélite
+Danse Pluie Z,Eau,Danse Pluie,Augmente la Vitesse du lanceur d'un niveau,Aquazélite
+Danse-Plume Z,Vol,Danse-Plume,Augmente la Défense du lanceur d'un niveau,Aérozélite
+DélugePlasmique Z,Électrik,DélugePlasmique,Augmente l' Attaque Spéciale du lanceur d'un niveau,Voltazélite
+Dépit Z,Spectre,Dépit,Soigne tous les PV du lanceur,Spectrozélite
+Dernier Mot Z,Ténèbres,Dernier Mot,Soigne tous les PV du Pokémon qui entre en combat pour remplacer le lanceur,Ténébrozélite
+Détection Z,Combat,Détection,Augmente l' Esquive du lanceur d'un niveau,Combazélite
+Détrempage Z,Eau,Détrempage,Augmente l' Attaque Spéciale du lanceur d'un niveau,Aquazélite
+Distorsion Z,Psy,Distorsion,Augmente la Précision du lanceur d'un niveau,Psychézélite
+Doux Baiser Z,Fée,Doux Baiser,Augmente l' Attaque Spéciale du lanceur d'un niveau,Nymphézélite
+Doux Parfum Z,Normal,Doux Parfum,Augmente la Précision du lanceur d'un niveau,Normazélite
+E-Coque Z,Normal,E-Coque,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Échange Z,Psy,Échange,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Échange Psy Z,Psy,Échange Psy,Augmente l' Attaque Spéciale du lanceur de deux niveaux,Psychézélite
+Électrisation Z,Électrik,Électrisation,Augmente l' Attaque Spéciale du lanceur d'un niveau,Voltazélite
+Embargo Z,Ténèbres,Embargo,Augmente l' Attaque Spéciale du lanceur d'un niveau,Ténébrozélite
+Encore Z,Normal,Encore,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Engrenage Z,Acier,Engrenage,Augmente l' Attaque Spéciale du lanceur d'un niveau,Métallozélite
+Enroulement Z,Poison,Enroulement,Annule toutes les baisses de statistiques du lanceur,Toxizélite
+Entrave Z,Normal,Entrave,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Étrennes Z,Normal,Étrennes,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Normazélite
+Exuviation Z,Normal,Exuviation,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Fertilisation Z,Sol,Fertilisation,Augmente l' Attaque du lanceur d'un niveau,Terrazélite
+Feu Follet Z,Feu,Feu Follet,Augmente l' Attaque du lanceur d'un niveau,Pyrozélite
+Fil Toxique Z,Poison,Fil Toxique,Augmente la Vitesse du lanceur d'un niveau,Toxizélite
+Flair Z,Normal,Flair,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Flash Z,Normal,Flash,Augmente l' Esquive du lanceur d'un niveau,Normazélite
+Flatterie Z,Ténèbres,Flatterie,Augmente la Défense Spéciale du lanceur d'un niveau,Ténébrozélite
+Force Cosmik Z,Psy,Force Cosmik,Augmente la Défense Spéciale du lanceur d'un niveau,Psychézélite
+Force-Nature Z,Normal,Force-Nature,Choisit une capacité en fonction du terrain et la transforme en capacité Z,Normazélite
+Garde Florale Z,Fée,Garde Florale,Augmente la Défense du lanceur d'un niveau,Nymphézélite
+Garde Large Z,Roche,Garde Large,Augmente la Défense du lanceur d'un niveau,Rocazélite
+Gaz Toxik Z,Poison,Gaz Toxik,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Géo-Contrôle Z,Fée,Géo-Contrôle,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Nymphézélite
+Glas de Soin Z,Normal,Glas de Soin,Soigne tous les PV du lanceur,Normazélite
+Gonflette Z,Combat,Gonflette,Augmente l' Attaque du lanceur d'un niveau,Combazélite
+Gravité Z,Psy,Gravité,Augmente l' Attaque Spéciale du lanceur d'un niveau,Psychézélite
+Grêle Z,Glace,Grêle,Augmente la Vitesse du lanceur d'un niveau,Cryozélite
+Gribouille Z,Normal,Gribouille,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Normazélite
+Grimace Z,Normal,Grimace,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Grincement Z,Normal,Grincement,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Grobisou Z,Normal,Grobisou,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Grondement Z,Normal,Grondement,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Groz'Yeux Z,Normal,Groz'Yeux,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Halloween Z,Spectre,Halloween,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Spectrozélite
+Hâte Z,Psy,Hâte,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Hurlement Z,Normal,Hurlement,Augmente la Défense du lanceur d'un niveau,Normazélite
+Hypnose Z,Psy,Hypnose,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Imitation Z,Psy,Imitation,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Interversion Z,Psy,Interversion,Augmente la Vitesse du lanceur de deux niveaux,Psychézélite
+Jet de Sable Z,Sol,Jet de Sable,Augmente l' Esquive du lanceur d'un niveau,Terrazélite
+Lait à Boire Z,Normal,Lait à Boire,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Lance-Boue Z,Sol,Lance-Boue,Augmente la Défense Spéciale du lanceur d'un niveau,Terrazélite
+Larme à l'Œil Z,Normal,Larme à l'Œil,Augmente la Défense du lanceur d'un niveau,Normazélite
+Lévikinésie Z,Psy,Lévikinésie,Augmente l' Attaque Spéciale du lanceur de deux niveaux,Psychézélite
+Lilliput Z,Normal,Lilliput,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Lire-Esprit Z,Normal,Lire-Esprit,Augmente l' Attaque Spéciale du lanceur d'un niveau,Normazélite
+Lumiqueue Z,Insecte,Lumiqueue,Annule toutes les baisses de statistiques du lanceur,Insectozélite
+Machination Z,Ténèbres,Machination,Annule toutes les baisses de statistiques du lanceur,Ténébrozélite
+Magné-Contrôle Z,Électrik,Magné-Contrôle,Augmente la Défense Spéciale du lanceur d'un niveau,Voltazélite
+Mains Jointes Z,Normal,Mains Jointes,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Normazélite
+Malédiction Z,Spectre,Malédiction,"Si le lanceur est de type Spectre, soigne tous les PV du lanceur ; sinon, augmente l' Attaque du lanceur d'un niveau",Spectrozélite
+Maléfice Sylvain Z,Plante,Maléfice Sylvain,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Florazélite
+Métronome Z,Normal,Métronome,Choisit une capacité au hasard et la transforme en capacité Z si c'est une capacité offensive,Normazélite
+Mimi-Queue Z,Normal,Mimi-Queue,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Mimique Z,Vol,Mimique,Augmente l' Attaque du lanceur de deux niveaux et transforme la capacité copiée en capacité Z s'il s'agit d'une capacité offensive,Aérozélite
+Moi d'Abord Z,Normal,Moi d'Abord,Augmente la Vitesse du lanceur de deux niveaux et transforme la capacité copiée en capacité Z,Normazélite
+Morphing Z,Normal,Morphing,Soigne tous les PV du lanceur,Normazélite
+Mur de Fer Z,Acier,Mur de Fer,Annule toutes les baisses de statistiques du lanceur,Métallozélite
+Mur Lumière Z,Psy,Mur Lumière,Augmente la Défense Spéciale du lanceur d'un niveau,Psychézélite
+Nuée de Poudre Z,Insecte,Nuée de Poudre,Augmente la Défense Spéciale du lanceur de deux niveaux,Insectozélite
+Œil Miracle Z,Psy,Œil Miracle,Augmente l' Attaque Spéciale du lanceur d'un niveau,Psychézélite
+Onde Folie Z,Spectre,Onde Folie,Augmente l' Attaque Spéciale du lanceur d'un niveau,Spectrozélite
+Ondes Étranges Z,Électrik,Ondes Étranges,Augmente la Défense Spéciale du lanceur d'un niveau,Voltazélite
+Papillodanse Z,Insecte,Papillodanse,Annule toutes les baisses de statistiques du lanceur,Insectozélite
+Par Ici Z,Normal,Par Ici,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Para-Spore Z,Plante,Para-Spore,Augmente la Défense Spéciale du lanceur d'un niveau,Florazélite
+Paresse Z,Normal,Paresse,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Partage Force Z,Psy,Partage Force,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Partage Garde Z,Psy,Partage Garde,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Passe-Cadeau Z,Normal,Passe-Cadeau,Augmente la Vitesse du lanceur de deux niveaux,Normazélite
+Passe-Passe Z,Ténèbres,Passe-Passe,Augmente la Vitesse du lanceur de deux niveaux,Ténébrozélite
+Permucœur Z,Psy,Permucœur,Augmente le taux de critiques du lanceur,Psychézélite
+Permuforce Z,Psy,Permuforce,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Permugarde Z,Psy,Permugarde,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Permuvitesse Z,Psy,Permuvitesse,Augmente la Vitesse du lanceur d'un niveau,Psychézélite
+Photocopie Z,Normal,Photocopie,Augmente la Précision du lanceur d'un niveau et transforme la capacité copiée en capacité Z s'il s'agit d'une capacité offensive,Normazélite
+Pico-Défense Z,Plante,Pico-Défense,Augmente la Défense du lanceur d'un niveau,Florazélite
+Picots Z,Sol,Picots,Augmente la Défense du lanceur d'un niveau,Terrazélite
+Pics Toxik Z,Poison,Pics Toxik,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Piège de Roc Z,Roche,Piège de Roc,Augmente la Défense du lanceur d'un niveau,Rocazélite
+Piège de Venin Z,Poison,Piège de Venin,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Plénitude Z,Psy,Plénitude,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Poliroche Z,Roche,Poliroche,Annule toutes les baisses de statistiques du lanceur,Rocazélite
+Possessif Z,Psy,Possessif,Augmente la Défense Spéciale du lanceur de deux niveaux,Psychézélite
+Poudre Dodo Z,Plante,Poudre Dodo,Augmente la Vitesse du lanceur d'un niveau,Florazélite
+Poudre Fureur Z,Insecte,Poudre Fureur,Annule toutes les baisses de statistiques du lanceur,Insectozélite
+Poudre Toxik Z,Poison,Poudre Toxik,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Prévention Z,Combat,Prévention,Augmente la Défense du lanceur d'un niveau,Combazélite
+Prélèvem. Destin Z,Spectre,Prélèvem. Destin,Force les adversaires à ne cibler que le lanceur,Spectrozélite
+Projecteur Z,Normal,Projecteur,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Protection Z,Psy,Protection,Augmente la Défense du lanceur d'un niveau,Psychézélite
+Provoc Z,Ténèbres,Provoc,Augmente l' Attaque du lanceur d'un niveau,Ténébrozélite
+Puissance Z,Normal,Puissance,Augmente la Précision du lanceur d'un niveau,Normazélite
+Purification Z,Poison,Purification,"Augmente l' Attaque , la Défense , l' Attaque Spéciale , la Défense Spéciale et la Vitesse du lanceur d'un niveau",Toxizélite
+Racines Z,Plante,Racines,Augmente la Défense Spéciale du lanceur d'un niveau,Florazélite
+Râle Mâle Z,Normal,Râle Mâle,Augmente la Défense du lanceur d'un niveau,Normazélite
+Rancune Z,Spectre,Rancune,Force les adversaires à ne cibler que le lanceur,Spectrozélite
+Rayon Lune Z,Fée,Rayon Lune,Annule toutes les baisses de statistiques du lanceur,Nymphézélite
+Rayon Simple Z,Normal,Rayon Simple,Augmente l' Attaque Spéciale du lanceur d'un niveau,Normazélite
+Recyclage Z,Normal,Recyclage,Augmente la Vitesse du lanceur de deux niveaux,Normazélite
+Reflet Z,Normal,Reflet,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Reflet Magik Z,Psy,Reflet Magik,Augmente la Défense Spéciale du lanceur de deux niveaux,Psychézélite
+Regard Médusant Z,Normal,Regard Médusant,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Regard Noir Z,Normal,Regard Noir,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Regard Touchant Z,Fée,Regard Touchant,Augmente la Défense du lanceur d'un niveau,Nymphézélite
+Régénération Z,Normal,Régénération,Soigne tous les PV du lanceur,Normazélite
+Relais Z,Normal,Relais,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Rengorgement Z,Normal,Rengorgement,Augmente l' Attaque du lanceur d'un niveau,Normazélite
+Renversement Z,Ténèbres,Renversement,Augmente l' Attaque du lanceur d'un niveau,Ténébrozélite
+Repli Z,Eau,Repli,Augmente la Défense du lanceur d'un niveau,Aquazélite
+Repos Z,Psy,Repos,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Requiem Z,Normal,Requiem,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Rugissement Z,Normal,Rugissement,Augmente la Défense du lanceur d'un niveau,Normazélite
+Rune Protect Z,Normal,Rune Protect,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Saisie Z,Ténèbres,Saisie,Augmente la Vitesse du lanceur de deux niveaux,Ténébrozélite
+Sécrétion Z,Insecte,Sécrétion,Augmente la Vitesse du lanceur d'un niveau,Insectozélite
+Séduction Z,Normal,Séduction,Augmente la Défense Spéciale du lanceur de deux niveaux,Normazélite
+Siffl'Herbe Z,Plante,Siffl'Herbe,Augmente la Vitesse du lanceur d'un niveau,Florazélite
+Soin Z,Normal,Soin,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Soin Floral Z,Fée,Soin Floral,Annule toutes les baisses de statistiques du lanceur,Nymphézélite
+Sommation Z,Psy,Sommation,Augmente l' Attaque Spéciale du lanceur d'un niveau,Psychézélite
+Soucigraine Z,Plante,Soucigraine,Augmente la Vitesse du lanceur d'un niveau,Florazélite
+Souvenir Z,Ténèbres,Souvenir,Soigne tous les PV du Pokémon qui entre en combat pour remplacer le lanceur,Ténébrozélite
+Spore Z,Plante,Spore,Annule toutes les baisses de statistiques du lanceur,Florazélite
+Spore Coton Z,Plante,Spore Coton,Annule toutes les baisses de statistiques du lanceur,Florazélite
+Stockage Z,Normal,Stockage,Soigne tous les PV du lanceur,Normazélite
+Strido-Son Z,Acier,Strido-Son,Augmente la Défense Spéciale du lanceur d'un niveau,Métallozélite
+Suc Digestif Z,Poison,Suc Digestif,Augmente la Vitesse du lanceur d'un niveau,Toxizélite
+Synthèse Z,Plante,Synthèse,Annule toutes les baisses de statistiques du lanceur,Florazélite
+Tatamigaeshi Z,Combat,Tatamigaeshi,Augmente la Défense du lanceur d'un niveau,Combazélite
+Télékinésie Z,Psy,Télékinésie,Augmente l' Esquive du lanceur d'un niveau,Psychézélite
+Téléport Z,Psy,Téléport,Soigne tous les PV du lanceur,Psychézélite
+Tempête de Sable Z,Roche,Tempête de Sable,Augmente la Vitesse du lanceur d'un niveau,Rocazélite
+Ten-danse Z,Normal,Ten-danse,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Ténacité Z,Normal,Ténacité,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Toile Z,Insecte,Toile,Augmente la Défense du lanceur d'un niveau,Insectozélite
+Toile Gluante Z,Insecte,Toile Gluante,Augmente la Vitesse du lanceur d'un niveau,Insectozélite
+Tourmagik Z,Psy,Tourmagik,Augmente la Vitesse du lanceur de deux niveaux,Psychézélite
+Tourmente Z,Ténèbres,Tourmente,Augmente la Défense du lanceur d'un niveau,Ténébrozélite
+Tourniquet Z,Eau,Tourniquet,Augmente la Défense Spéciale du lanceur d'un niveau,Aquazélite
+Toxik Z,Poison,Toxik,Augmente la Défense du lanceur d'un niveau,Toxizélite
+Trempette Z,Normal,Trempette,Augmente l' Attaque du lanceur de trois niveaux,Normazélite
+Trou Noir Z,Ténèbres,Trou Noir,Annule toutes les baisses de statistiques du lanceur,Ténébrozélite
+Ultrason Z,Normal,Ultrason,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Vampigraine Z,Plante,Vampigraine,Annule toutes les baisses de statistiques du lanceur,Florazélite
+Vantardise Z,Normal,Vantardise,Annule toutes les baisses de statistiques du lanceur,Normazélite
+Vent Arrière Z,Vol,Vent Arrière,Augmente le taux de critiques du lanceur,Aérozélite
+Verrou Enchanté Z,Fée,Verrou Enchanté,Augmente la Défense du lanceur d'un niveau,Nymphézélite
+Verrouillage Z,Normal,Verrouillage,Augmente la Vitesse du lanceur d'un niveau,Normazélite
+Vibra Soin Z,Psy,Vibra Soin,Annule toutes les baisses de statistiques du lanceur,Psychézélite
+Vigilance Z,Fée,Vigilance,Augmente la Défense Spéciale du lanceur d'un niveau,Nymphézélite
+Vœu Z,Normal,Vœu,Augmente la Défense Spéciale du lanceur d'un niveau,Normazélite
+Vœu Soin Z,Psy,Vœu Soin,Aucun,Psychézélite
+Voile Aurore Z,Glace,Voile Aurore,Augmente la Vitesse du lanceur d'un niveau,Cryozélite
+Vol Magnétik Z,Électrik,Vol Magnétik,Augmente l' Esquive du lanceur d'un niveau,Voltazélite
+Vol-Force Z,Plante,Vol-Force,Augmente la Défense du lanceur d'un niveau,Florazélite
+Yoga Z,Psy,Yoga,Augmente l' Attaque du lanceur d'un niveau,Psychézélite
+Zénith Z,Feu,Zénith,Augmente la Vitesse du lanceur d'un niveau,Pyrozélite
+Zone Étrange Z,Psy,Zone Étrange,Augmente la Défense Spéciale du lanceur d'un niveau,Psychézélite
+Zone Magique Z,Psy,Zone Magique,Augmente la Défense Spéciale du lanceur d'un niveau,Psychézélite

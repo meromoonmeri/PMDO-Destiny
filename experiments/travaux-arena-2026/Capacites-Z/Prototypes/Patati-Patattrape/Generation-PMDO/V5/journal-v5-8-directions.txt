@@ -1,0 +1,50 @@
+[2026/11/27 00:06:39.530] [SE]:[PATATI Z] espece=mimikyu attaque-base=play_rough
+[2026/11/27 00:06:39.562] [SE]:[PATATI Z] début bas cible=270 témoin=270
+[2026/11/27 00:06:41.655] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:43.337] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:43.671] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:06:44.183] [SE]:[PATATI V5 KO] tirage=339/1000
+[2026/11/27 00:06:44.532] [SE]:[PATATI Z] résultat bas cible=270->245 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:06:45.272] [SE]:[PATATI Z] début bas-gauche cible=270 témoin=270
+[2026/11/27 00:06:46.777] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:48.437] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:48.771] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:06:49.271] [SE]:[PATATI V5 KO] tirage=17/1000
+[2026/11/27 00:06:49.604] [SE]:[PATATI Z] résultat bas-gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:06:50.355] [SE]:[PATATI Z] début gauche cible=270 témoin=270
+[2026/11/27 00:06:51.857] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:53.521] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:53.854] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:06:54.354] [SE]:[PATATI V5 KO] tirage=309/1000
+[2026/11/27 00:06:54.688] [SE]:[PATATI Z] résultat gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:06:55.438] [SE]:[PATATI Z] début haut-gauche cible=270 témoin=270
+[2026/11/27 00:06:56.942] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:58.604] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:06:58.937] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:06:59.438] [SE]:[PATATI V5 KO] tirage=386/1000
+[2026/11/27 00:06:59.771] [SE]:[PATATI Z] résultat haut-gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:07:00.521] [SE]:[PATATI Z] début haut cible=270 témoin=270
+[2026/11/27 00:07:02.026] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:03.687] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:04.021] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:07:04.521] [SE]:[PATATI V5 KO] tirage=11/1000
+[2026/11/27 00:07:04.854] [SE]:[PATATI Z] résultat haut cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:07:05.605] [SE]:[PATATI Z] début haut-droite cible=270 témoin=270
+[2026/11/27 00:07:07.107] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:08.789] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:09.121] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:07:09.621] [SE]:[PATATI V5 KO] tirage=53/1000
+[2026/11/27 00:07:09.956] [SE]:[PATATI Z] résultat haut-droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:07:10.705] [SE]:[PATATI Z] début droite cible=270 témoin=270
+[2026/11/27 00:07:12.244] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:14.037] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:14.387] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:07:14.888] [SE]:[PATATI V5 KO] tirage=303/1000
+[2026/11/27 00:07:15.225] [SE]:[PATATI Z] résultat droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:07:15.971] [SE]:[PATATI Z] début bas-droite cible=270 témoin=270
+[2026/11/27 00:07:17.513] [SE]:[PATATI V5 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:19.171] [SE]:[PATATI V5 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/27 00:07:19.504] [SE]:[PATATI V5 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/27 00:07:20.004] [SE]:[PATATI V5 KO] tirage=104/1000
+[2026/11/27 00:07:20.339] [SE]:[PATATI Z] résultat bas-droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/27 00:07:21.087] [SE]:[PATATI Z] FIN OK

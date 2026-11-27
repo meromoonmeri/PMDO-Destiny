@@ -1,0 +1,18 @@
+[2026/11/26 20:35:07.606] [SE]:[GIGA V3 Z] espece=pikachu attaque-base=thunderbolt
+[2026/11/26 20:35:07.923] [SE]:[GIGA V3 Z] début bas cible=155 témoin=155
+[2026/11/26 20:35:11.228] [SE]:[GIGA V3 Z] résultat bas cible=155->92 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:11.968] [SE]:[GIGA V3 Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 20:35:15.083] [SE]:[GIGA V3 Z] résultat bas-gauche cible=155->89 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:15.834] [SE]:[GIGA V3 Z] début gauche cible=155 témoin=155
+[2026/11/26 20:35:18.950] [SE]:[GIGA V3 Z] résultat gauche cible=155->88 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:19.702] [SE]:[GIGA V3 Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 20:35:22.817] [SE]:[GIGA V3 Z] résultat haut-gauche cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:23.567] [SE]:[GIGA V3 Z] début haut cible=155 témoin=155
+[2026/11/26 20:35:26.850] [SE]:[GIGA V3 Z] résultat haut cible=155->92 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:27.601] [SE]:[GIGA V3 Z] début haut-droite cible=155 témoin=155
+[2026/11/26 20:35:30.717] [SE]:[GIGA V3 Z] résultat haut-droite cible=155->88 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:31.467] [SE]:[GIGA V3 Z] début droite cible=155 témoin=155
+[2026/11/26 20:35:34.583] [SE]:[GIGA V3 Z] résultat droite cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:35.334] [SE]:[GIGA V3 Z] début bas-droite cible=155 témoin=155
+[2026/11/26 20:35:38.467] [SE]:[GIGA V3 Z] résultat bas-droite cible=155->94 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 20:35:39.217] [SE]:[GIGA V3 Z] FIN OK

@@ -1,0 +1,17 @@
+[2026/11/26 15:37:10.981] [SE]:[DELUGE Z] début bas centre=X:4 Y:4: 0
+[2026/11/26 15:37:15.999] [SE]:[DELUGE Z] résultat bas 114->74,114->76,114->77,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:16.491] [SE]:[DELUGE Z] début bas-gauche centre=X:4 Y:4: 0
+[2026/11/26 15:37:21.475] [SE]:[DELUGE Z] résultat bas-gauche 114->77,114->73,114->76,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:21.973] [SE]:[DELUGE Z] début gauche centre=X:4 Y:4: 0
+[2026/11/26 15:37:26.973] [SE]:[DELUGE Z] résultat gauche 114->73,114->75,114->75,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:27.473] [SE]:[DELUGE Z] début haut-gauche centre=X:4 Y:4: 0
+[2026/11/26 15:37:32.476] [SE]:[DELUGE Z] résultat haut-gauche 114->73,114->75,114->72,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:33.006] [SE]:[DELUGE Z] début haut centre=X:4 Y:4: 0
+[2026/11/26 15:37:38.142] [SE]:[DELUGE Z] résultat haut 114->72,114->76,114->77,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:38.639] [SE]:[DELUGE Z] début haut-droite centre=X:4 Y:4: 0
+[2026/11/26 15:37:43.923] [SE]:[DELUGE Z] résultat haut-droite 114->75,114->77,114->75,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:44.423] [SE]:[DELUGE Z] début droite centre=X:4 Y:4: 0
+[2026/11/26 15:37:49.439] [SE]:[DELUGE Z] résultat droite 114->74,114->73,114->73,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:49.943] [SE]:[DELUGE Z] début bas-droite centre=X:4 Y:4: 0
+[2026/11/26 15:37:55.189] [SE]:[DELUGE Z] résultat bas-droite 114->74,114->75,114->73,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:37:56.706] [SE]:[DELUGE Z] FIN OK

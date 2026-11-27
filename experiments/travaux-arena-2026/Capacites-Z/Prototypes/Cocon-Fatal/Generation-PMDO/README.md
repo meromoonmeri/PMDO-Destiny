@@ -1,0 +1,9 @@
+# Cocon Fatal — prototype de tissage
+
+Une cible est entourée de fils : le cocon se forme, se ferme, se fissure et se déchire. Références natives : `String_Shot_Web`, `String_Shot_Ball` et `Attack_Order`, conservées sous `Capacites-Z/References-PMDO-Insecte`. Sons natifs `DUN_String_Shot` et `DUN_String_Shot_2`.
+
+La planche comporte 17 poses, composées à partir de quatre images générées par IA, d'un détourage, de révélations progressives et de déplacements programmatiques ; ce ne sont pas 17 dessins originaux distincts. Les huit lignes Dir8 sont identiques parce que le cocon est symétrique à l'écran, pas des vues directionnelles dessinées séparément. Le cocon masque temporairement le sprite pendant la fermeture ; son cadrage n'est vérifié que sur Tortank et peut devoir être adapté aux autres tailles.
+
+`Cocon-Fatal-test-8-directions-son.mp4` est une capture du moteur dans une copie de banc, la caméra décalée pour dégager le journal au sud. Dans les huit directions, une cible placée à deux cases est touchée (PV 114 → 76–80), un témoin latéral reste à 114 PV, et le PP passe de 1 à 0. Placement et déclenchement scriptés ; les dégâts et PP sont gérés par PMDO. Journal : `journal-8-directions.txt`.
+
+La fiche provisoire utilise une `OffsetAction` visant une seule case à distance 2 ; puissance 100, catégorie physique, PP 1. Ce choix est expérimental et ne suit pas encore la puissance/catégorie de la capacité de base. Les murs, alliés et autres distances ou tailles ne sont pas testés. Pas d'immobilisation réelle, ni menu Z, cristal, limite d'utilisation ou intégration définitive : l'original de la copie a été restauré. Reconstruction du banc : `Sources/preparer-cocon-fatal.py` et `Sources/test-cocon-fatal.lua` ; le script de test efface les monstres de sa carte jetable et ne doit pas être exécuté en jeu réel.

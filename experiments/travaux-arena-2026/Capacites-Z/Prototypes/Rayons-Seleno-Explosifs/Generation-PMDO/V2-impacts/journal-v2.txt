@@ -1,0 +1,41 @@
+[2026/11/27 13:26:52.872] [SE]:[Selene Z] debut bas cible=270
+[2026/11/27 13:26:54.353] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:26:57.775] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:26:58.330] [SE]:[Selene Z] resultat bas cible=270->238 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:26:58.839] [SE]:[Selene Z] debut bas-gauche cible=270
+[2026/11/27 13:27:00.475] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:03.541] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:04.020] [SE]:[Selene Z] resultat bas-gauche cible=270->237 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:04.493] [SE]:[Selene Z] debut gauche cible=270
+[2026/11/27 13:27:06.112] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:09.092] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:09.452] [SE]:[Selene Z] resultat gauche cible=270->236 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:09.941] [SE]:[Selene Z] debut haut-gauche cible=270
+[2026/11/27 13:27:11.675] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:14.594] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:14.924] [SE]:[Selene Z] resultat haut-gauche cible=270->234 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:15.227] [SE]:[Selene Z] debut haut cible=270
+[2026/11/27 13:27:16.848] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:19.670] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:20.308] [SE]:[Selene Z] resultat haut cible=270->237 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:20.637] [SE]:[Selene Z] debut haut-droite cible=270
+[2026/11/27 13:27:22.289] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:25.480] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:25.908] [SE]:[Selene Z] resultat haut-droite cible=270->236 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:26.428] [SE]:[Selene Z] debut droite cible=270
+[2026/11/27 13:27:28.392] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:31.542] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:32.107] [SE]:[Selene Z] resultat droite cible=270->236 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:32.676] [SE]:[Selene Z] debut bas-droite cible=270
+[2026/11/27 13:27:34.274] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:37.161] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:37.529] [SE]:[Selene Z] resultat bas-droite cible=270->234 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:38.055] [SE]:[Selene Z] debut immunite type cible=395
+[2026/11/27 13:27:39.776] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:42.272] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:42.658] [SE]:[Selene Z] resultat immunite type cible=395->395 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:27:42.965] [SE]:[Selene Z] debut garde mystik cible=270
+[2026/11/27 13:27:44.476] [SE]:[Selene TALENT] suspendu=true
+[2026/11/27 13:27:47.274] [SE]:[Selene TALENT] restaure=false
+[2026/11/27 13:27:47.738] [SE]:[Selene Z] resultat garde mystik cible=270->236 temoin=270->270 PP=0 talent_desactive=false garde=true
+[2026/11/27 13:27:48.158] [SE]:[Selene Z] FIN OK

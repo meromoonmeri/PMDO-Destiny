@@ -1,0 +1,9 @@
+# Éruption Géo-Sismique — prototype en banc
+
+`Carchacrok-Eruption-Geo-Sismique-8-directions-son.mp4` montre le test sonore en donjon : fissures qui se propagent depuis Carchacrok, tremblement d'écran puis pointes rocheuses qui jaillissent sous les cibles. C'est une capacité générique : Carchacrok est un choix pour le test, pas un porteur exclusif.
+
+Les références PMDO Sol `Fissure`, `Earthquake_Ranger` et `Earth_Power_Eruption` sont dans `Capacites-Z/References-PMDO-Sol`. Les deux formes originales (fissures et pointe) ont été générées par IA. Les 24 poses de fissures et 18 poses de pointe sont recomposées par changement de taille, découpage, fondu et débris procéduraux ; les huit lignes sont identiques pour ces effets radiaux/verticaux. Ce ne sont pas des dessins indépendants pour chaque pose ou direction. Les impacts de cibles sont successifs.
+
+Le test utilise une `AreaAction` Full inspirée de Séisme, rayon 2 (zone maximale 5 × 5 autour du lanceur) : 24/24 cibles ont subi des dégâts dans huit orientations, 8/8 témoins à distance 3 sont restés intacts, et les PP ont été consommés. Terrain dégagé, positions des Tortank et lancement préparés par script ; la capacité, les dégâts et les PP passent par le moteur. La propagation native utilise un flood-fill, ce n'est pas une garantie de toucher au travers d'obstacles. Voir `journal-8-directions.txt`.
+
+Fissures et pointes sont uniquement visuelles : cette capacité expérimentale ne casse pas les murs. Puissance 65 et catégorie physique provisoires ; règle Z de puissance variable, conversion de la capacité de base, cristal, menu et limite Z non implémentés. Murs, alliés, autres tailles de cibles et intégration en jeu normal restent à tester. La fiche originale, l'intro et les sauvegardes de la copie ont été restaurées après le test.

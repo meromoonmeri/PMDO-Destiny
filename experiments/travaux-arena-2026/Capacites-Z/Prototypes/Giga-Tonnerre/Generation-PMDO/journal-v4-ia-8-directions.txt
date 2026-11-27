@@ -1,0 +1,18 @@
+[2026/11/26 21:23:20.240] [SE]:[GIGA V4 IA Z] espece=pikachu attaque-base=thunderbolt
+[2026/11/26 21:23:21.324] [SE]:[GIGA V4 IA Z] début bas cible=155 témoin=155
+[2026/11/26 21:23:24.794] [SE]:[GIGA V4 IA Z] résultat bas cible=155->93 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:25.537] [SE]:[GIGA V4 IA Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 21:23:28.670] [SE]:[GIGA V4 IA Z] résultat bas-gauche cible=155->89 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:29.420] [SE]:[GIGA V4 IA Z] début gauche cible=155 témoin=155
+[2026/11/26 21:23:32.536] [SE]:[GIGA V4 IA Z] résultat gauche cible=155->92 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:33.286] [SE]:[GIGA V4 IA Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 21:23:36.403] [SE]:[GIGA V4 IA Z] résultat haut-gauche cible=155->87 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:37.158] [SE]:[GIGA V4 IA Z] début haut cible=155 témoin=155
+[2026/11/26 21:23:40.306] [SE]:[GIGA V4 IA Z] résultat haut cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:41.053] [SE]:[GIGA V4 IA Z] début haut-droite cible=155 témoin=155
+[2026/11/26 21:23:44.169] [SE]:[GIGA V4 IA Z] résultat haut-droite cible=155->91 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:44.919] [SE]:[GIGA V4 IA Z] début droite cible=155 témoin=155
+[2026/11/26 21:23:48.269] [SE]:[GIGA V4 IA Z] résultat droite cible=155->87 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:49.020] [SE]:[GIGA V4 IA Z] début bas-droite cible=155 témoin=155
+[2026/11/26 21:23:52.136] [SE]:[GIGA V4 IA Z] résultat bas-droite cible=155->91 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 21:23:52.903] [SE]:[GIGA V4 IA Z] FIN OK

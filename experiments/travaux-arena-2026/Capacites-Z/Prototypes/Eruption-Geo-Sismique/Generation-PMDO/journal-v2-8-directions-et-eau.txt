@@ -1,0 +1,57 @@
+[2026/11/26 14:56:47.219] [SE]:[GEO Z] début bas centre=X:4 Y:4: 0
+
+[2026/11/26 14:56:47.474] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:56:52.222] [SE]:[GEO Z] résultat bas 114->73,114->73,114->69,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:56:52.723] [SE]:[GEO Z] début bas-gauche centre=X:4 Y:4: 0
+
+[2026/11/26 14:56:52.978] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:56:57.808] [SE]:[GEO Z] résultat bas-gauche 114->70,114->69,114->68,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:56:58.312] [SE]:[GEO Z] début gauche centre=X:4 Y:4: 0
+
+[2026/11/26 14:56:58.555] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:03.006] [SE]:[GEO Z] résultat gauche 114->73,114->70,114->73,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:03.509] [SE]:[GEO Z] début haut-gauche centre=X:4 Y:4: 0
+
+[2026/11/26 14:57:03.755] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:08.273] [SE]:[GEO Z] résultat haut-gauche 114->69,114->71,114->69,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:08.814] [SE]:[GEO Z] début haut centre=X:4 Y:4: 0
+
+[2026/11/26 14:57:09.055] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:13.522] [SE]:[GEO Z] résultat haut 114->68,114->68,114->70,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:14.022] [SE]:[GEO Z] début haut-droite centre=X:4 Y:4: 0
+
+[2026/11/26 14:57:14.273] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:18.788] [SE]:[GEO Z] résultat haut-droite 114->68,114->69,114->71,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:19.381] [SE]:[GEO Z] début droite centre=X:4 Y:4: 0
+
+[2026/11/26 14:57:19.720] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:24.188] [SE]:[GEO Z] résultat droite 114->70,114->70,114->71,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:24.689] [SE]:[GEO Z] début bas-droite centre=X:4 Y:4: 0
+
+[2026/11/26 14:57:24.940] [SE]:[GEO V2 BIOME] autotile=deep_dusk_forest_1_floor palette=volcan terrain=floor
+
+[2026/11/26 14:57:29.438] [SE]:[GEO Z] résultat bas-droite 114->73,114->70,114->70,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 14:57:29.960] [SE]:[GEO V2 EAU] refus terrain=water pp-inchanges
+
+[2026/11/26 14:57:30.288] [SE]:[GEO V2 EAU TEST] water pp=1->1 pv=74->74 action=Fail: 0
+
+[2026/11/26 14:57:30.289] [SE]:[GEO V2 EAU] refus terrain=water_poison pp-inchanges
+
+[2026/11/26 14:57:30.622] [SE]:[GEO V2 EAU TEST] water_poison pp=1->1 pv=74->74 action=Fail: 0
+
+[2026/11/26 14:57:31.622] [SE]:[GEO Z] FIN OK

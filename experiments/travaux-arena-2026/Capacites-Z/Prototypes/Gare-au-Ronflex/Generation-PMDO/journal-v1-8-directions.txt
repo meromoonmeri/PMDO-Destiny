@@ -1,0 +1,18 @@
+[2026/11/26 21:16:31.248] [SE]:[GARE AU RONFLEX Z] espece=snorlax attaque-base=giga_impact
+[2026/11/26 21:16:31.443] [SE]:[GARE AU RONFLEX Z] début bas cible=395 témoin=395
+[2026/11/26 21:16:33.383] [SE]:[GARE AU RONFLEX Z] résultat bas cible=395->304 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:34.126] [SE]:[GARE AU RONFLEX Z] début bas-gauche cible=395 témoin=395
+[2026/11/26 21:16:35.909] [SE]:[GARE AU RONFLEX Z] résultat bas-gauche cible=395->306 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:36.655] [SE]:[GARE AU RONFLEX Z] début gauche cible=395 témoin=395
+[2026/11/26 21:16:38.442] [SE]:[GARE AU RONFLEX Z] résultat gauche cible=395->308 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:39.205] [SE]:[GARE AU RONFLEX Z] début haut-gauche cible=395 témoin=395
+[2026/11/26 21:16:40.988] [SE]:[GARE AU RONFLEX Z] résultat haut-gauche cible=395->309 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:41.738] [SE]:[GARE AU RONFLEX Z] début haut cible=395 témoin=395
+[2026/11/26 21:16:43.553] [SE]:[GARE AU RONFLEX Z] résultat haut cible=395->308 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:44.722] [SE]:[GARE AU RONFLEX Z] début haut-droite cible=395 témoin=395
+[2026/11/26 21:16:46.505] [SE]:[GARE AU RONFLEX Z] résultat haut-droite cible=395->304 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:47.255] [SE]:[GARE AU RONFLEX Z] début droite cible=395 témoin=395
+[2026/11/26 21:16:49.038] [SE]:[GARE AU RONFLEX Z] résultat droite cible=395->304 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:49.788] [SE]:[GARE AU RONFLEX Z] début bas-droite cible=395 témoin=395
+[2026/11/26 21:16:51.573] [SE]:[GARE AU RONFLEX Z] résultat bas-droite cible=395->311 témoin=395->395 action=TurnTaken: 2 charges=0
+[2026/11/26 21:16:52.340] [SE]:[GARE AU RONFLEX Z] FIN OK

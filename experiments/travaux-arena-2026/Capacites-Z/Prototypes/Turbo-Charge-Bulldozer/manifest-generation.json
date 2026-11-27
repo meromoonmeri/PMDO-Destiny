@@ -1,0 +1,26 @@
+{
+  "source": "Source-generation-turbo.png",
+  "source_mode": "image générée puis détourée ; animation assemblée procéduralement",
+  "frame_size": [
+    128,
+    128
+  ],
+  "poses": 32,
+  "ticks_per_frame": 2,
+  "direction_order": [
+    "bas",
+    "bas-gauche",
+    "gauche",
+    "haut-gauche",
+    "haut",
+    "haut-droite",
+    "droite",
+    "bas-droite"
+  ],
+  "layers": [
+    "Arriere",
+    "Avant"
+  ],
+  "gameplay": "Non implémenté",
+  "reference_fidelite": "Adaptation expérimentale, non copie exacte des jeux officiels"
+}

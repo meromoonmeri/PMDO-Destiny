@@ -1,0 +1,26 @@
+[2026/11/26 22:52:18.762] [SE]:[GIGA V5 Z] espece=pikachu attaque-base=thunderbolt
+[2026/11/26 22:52:18.798] [SE]:[GIGA V5 Z] début bas cible=155 témoin=155
+[2026/11/26 22:52:20.090] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:22.084] [SE]:[GIGA V5 Z] résultat bas cible=155->89 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:22.825] [SE]:[GIGA V5 Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 22:52:24.073] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:25.976] [SE]:[GIGA V5 Z] résultat bas-gauche cible=155->87 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:26.724] [SE]:[GIGA V5 Z] début gauche cible=155 témoin=155
+[2026/11/26 22:52:27.973] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:29.840] [SE]:[GIGA V5 Z] résultat gauche cible=155->90 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:30.591] [SE]:[GIGA V5 Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 22:52:31.840] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:33.707] [SE]:[GIGA V5 Z] résultat haut-gauche cible=155->89 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:34.457] [SE]:[GIGA V5 Z] début haut cible=155 témoin=155
+[2026/11/26 22:52:35.707] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:37.574] [SE]:[GIGA V5 Z] résultat haut cible=155->87 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:38.324] [SE]:[GIGA V5 Z] début haut-droite cible=155 témoin=155
+[2026/11/26 22:52:39.573] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:41.441] [SE]:[GIGA V5 Z] résultat haut-droite cible=155->91 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:42.190] [SE]:[GIGA V5 Z] début droite cible=155 témoin=155
+[2026/11/26 22:52:43.440] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:45.308] [SE]:[GIGA V5 Z] résultat droite cible=155->94 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:46.057] [SE]:[GIGA V5 Z] début bas-droite cible=155 témoin=155
+[2026/11/26 22:52:47.307] [SE]:[GIGA Z] charge terminée
+[2026/11/26 22:52:49.174] [SE]:[GIGA V5 Z] résultat bas-droite cible=155->92 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 22:52:49.924] [SE]:[GIGA V5 Z] FIN OK

@@ -1,0 +1,25 @@
+[2026/11/26 15:58:35.555] [SE]:[PSYCHO EX Z] début bas centre=X:4 Y:4: 0
+[2026/11/26 15:58:36.461] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:58:41.085] [SE]:[PSYCHO EX Z] résultat bas 114->58,114->58,114->60,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:58:41.578] [SE]:[PSYCHO EX Z] début bas-gauche centre=X:4 Y:4: 0
+[2026/11/26 15:58:42.494] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:58:46.976] [SE]:[PSYCHO EX Z] résultat bas-gauche 114->62,114->64,114->60,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:58:47.478] [SE]:[PSYCHO EX Z] début gauche centre=X:4 Y:4: 0
+[2026/11/26 15:58:48.376] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:58:52.878] [SE]:[PSYCHO EX Z] résultat gauche 114->61,114->64,114->62,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:58:53.377] [SE]:[PSYCHO EX Z] début haut-gauche centre=X:4 Y:4: 0
+[2026/11/26 15:58:54.259] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:58:58.745] [SE]:[PSYCHO EX Z] résultat haut-gauche 114->60,114->64,114->64,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:58:59.263] [SE]:[PSYCHO EX Z] début haut centre=X:4 Y:4: 0
+[2026/11/26 15:59:00.209] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:59:04.878] [SE]:[PSYCHO EX Z] résultat haut 114->60,114->61,114->60,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:59:05.395] [SE]:[PSYCHO EX Z] début haut-droite centre=X:4 Y:4: 0
+[2026/11/26 15:59:06.276] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:59:10.993] [SE]:[PSYCHO EX Z] résultat haut-droite 114->59,114->64,114->62,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:59:11.493] [SE]:[PSYCHO EX Z] début droite centre=X:4 Y:4: 0
+[2026/11/26 15:59:12.456] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:59:17.249] [SE]:[PSYCHO EX Z] résultat droite 114->64,114->59,114->59,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:59:17.835] [SE]:[PSYCHO EX Z] début bas-droite centre=X:4 Y:4: 0
+[2026/11/26 15:59:18.743] [SE]:[PSYCHO EX] concentration terminée
+[2026/11/26 15:59:23.594] [SE]:[PSYCHO EX Z] résultat bas-droite 114->59,114->63,114->64,114->114 charges=0 action=TurnTaken: 2
+[2026/11/26 15:59:25.144] [SE]:[PSYCHO EX Z] FIN OK

@@ -1,0 +1,26 @@
+[2026/11/26 23:14:04.710] [SE]:[SYMPHONIE Z] espece=primarina attaque-base=sparkling_aria
+[2026/11/26 23:14:04.745] [SE]:[SYMPHONIE Z] début bas cible=270 témoin=270
+[2026/11/26 23:14:06.367] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:08.393] [SE]:[SYMPHONIE Z] résultat bas cible=270->256 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:09.203] [SE]:[SYMPHONIE Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 23:14:10.734] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:12.634] [SE]:[SYMPHONIE Z] résultat bas-gauche cible=270->255 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:13.385] [SE]:[SYMPHONIE Z] début gauche cible=270 témoin=270
+[2026/11/26 23:14:14.917] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:16.818] [SE]:[SYMPHONIE Z] résultat gauche cible=270->255 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:17.568] [SE]:[SYMPHONIE Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 23:14:19.101] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:21.001] [SE]:[SYMPHONIE Z] résultat haut-gauche cible=270->254 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:21.751] [SE]:[SYMPHONIE Z] début haut cible=270 témoin=270
+[2026/11/26 23:14:23.284] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:25.189] [SE]:[SYMPHONIE Z] résultat haut cible=270->256 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:25.935] [SE]:[SYMPHONIE Z] début haut-droite cible=270 témoin=270
+[2026/11/26 23:14:27.467] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:29.368] [SE]:[SYMPHONIE Z] résultat haut-droite cible=270->255 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:30.155] [SE]:[SYMPHONIE Z] début droite cible=270 témoin=270
+[2026/11/26 23:14:31.684] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:33.584] [SE]:[SYMPHONIE Z] résultat droite cible=270->255 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:34.335] [SE]:[SYMPHONIE Z] début bas-droite cible=270 témoin=270
+[2026/11/26 23:14:35.867] [SE]:[SYMPHONIE] formation de la sphere terminee
+[2026/11/26 23:14:37.768] [SE]:[SYMPHONIE Z] résultat bas-droite cible=270->256 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:14:38.518] [SE]:[SYMPHONIE Z] FIN OK

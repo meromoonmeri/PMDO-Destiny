@@ -1,0 +1,738 @@
+</script>
+<script>(() => {
+'use strict';
+const data = JSON.parse(document.getElementById('donnees').textContent);
+const $ = (id) => document.getElementById(id);
+const make = (tag, cls, value) => { const e = document.createElement(tag); if (cls) e.className = cls; if (value !== undefined) e.textContent = value; return e; };
+const svg = (name) => { const e = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); const u = document.createElementNS(e.namespaceURI, 'use'); u.setAttribute('href', '#i-' + name); e.setAttribute('aria-hidden','true'); e.append(u); return e; };
+const button = (cls,text,action,icon) => {const a=make('button',cls);a.type='button';if(icon)a.append(svg(icon));if(text)a.append(make('span','',text));if(action)a.addEventListener('click',action);return a;};
+const phases = [
+  {name:'Jour',icon:'sun',tone:'#efc786',tint:'#413526',title:'Bois doré et vitres claires des intérieurs de Grodoudou'},
+  {name:'Aube',icon:'dawn',tone:'#f1c0a8',tint:'#47332c',title:'Une lumière pêche, déclinée de la palette de Grodoudou'},
+  {name:'Crépuscule',icon:'dusk',tone:'#eda775',tint:'#482f24',title:'Les tons orangés de la façade au crépuscule'},
+  {name:'Nuit',icon:'moon',tone:'#adccf5',tint:'#2c3c4d',title:'Palette de nuit de la guilde de Grodoudou'},
+];
+const groups=['Accès principal','Aile ouest','Couloirs & chambres'];
+const cats=[['tout','Tout'],['meubles','Meubles'],['panneaux','Panneaux'],['tapis','Tapis']];
+const gameMap = new Map(data.rooms.map(r => [r.id,r]));
+const assets = new Map(data.catalog.map(a => [a.id,a]));
+const STORE='pmd-destiny:guilde:nuit-vivante:077:v1', FORM='destiny-guilde-mobilier-v1', GROD_FORM='destiny-guilde-grodoudou-v2', MAX=128;
+const grodLayouts = new Set(['bureau_maitre','refectoire','dortoir_nord_1','dortoir_nord_2','dortoir_sud_1','dortoir_sud_2'].map(n=>'guilde_destiny_'+n));
+const s={page:'atlas',room:data.rooms[0],phase:0,seuil:true,mode:'plan',before:false,compare:false,grid:false,gates:false,snap:true,category:'tout',collection:'drapeaux',palette:'tout',lianes:true,ornements:false,tool:null,selected:null,ghost:null,drag:null};
+let layout=Object.create(null), back=[], forwards=[], saveAvailable=true, flash, queued=false;
+const canvas=$('map'), ctx=canvas.getContext('2d'), roomButtons=[], phaseButtons=[], filterButtons=[], comparison=[];
+const storeImages=new Map();
+const uri=(b) => b.startsWith('data:') ? b : 'data:image/png;base64,'+b;
+// All four phases shade the decor and props with the same per-room palette.
+const ambiance=(r,p)=>p===3 ? data.nuits?.[r.nuit] : data.lumieres?.[r.nuit]?.[p];
+const visite=data.balade_nuit;
+const fondPlan=r=>visite?.fonds[r.id];
+const feuillage=r=>visite?.ronces[r.id]||data.lianes[r.id];
+const pointsLumineux=r=>visite?.lumieres[r.id]||data.lianes[r.id].points;
+const spritesAmbiance=new Map();
+function sprite(a,p,r){
+  const n=ambiance(r,p);if(!n)return a.m[p]??a.m[0];
+  const key=a.id+'|'+r.nuit+'|'+p;
+  if(!spritesAmbiance.has(key))spritesAmbiance.set(key,{source:a.m[0],lut:n.lut,patches:[]});
+  return spritesAmbiance.get(key);
+}
+for(const r of data.rooms)r.m=data.tints.map((tint,i)=>{
+  const n=ambiance(r,i),matte=fondPlan(r)?.matte;if(!n&&!i&&!matte)return [r.base,r.front];
+  const couleurs=n?{lut:n.lut,matte}:{tint,matte};
+  return [{source:r.base,...couleurs,patches:r.patches[i]}, {source:r.front,...couleurs,patches:[]}];
+});
+const blank=() => Object.create(null);
+const within=(n,a,b)=>Math.max(a,Math.min(b,n));
+const overlaps=(a,b)=>a[0]<b[0]+b[2]&&a[0]+a[2]>b[0]&&a[1]<b[1]+b[3]&&a[1]+a[3]>b[1];
+const normalized=(text)=>text.toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+const clampInt=(n)=>Math.round(n);
+function dataFor(r=s.room){return layout[r.id] || [];}
+function current(){ return dataFor().find(x=>x.id===s.selected); }
+function viewport(r=s.room){
+  if (s.mode==='plan'||!r.south) return {x:0,y:0,w:r.w,h:r.h};
+  return {x:within(r.south.x-160,0,r.w-320),y:(s.before?r.h:r.south.bottom)-240,w:320,h:240};
+}
+function why(r,a,x,y){
+  if (!Number.isInteger(x)||!Number.isInteger(y)||x<0||y<0||x+a.w>r.w||y+a.h>(r.south?.bottom??r.h)) return 'Place le meuble à l’intérieur du plan, avant le bord sud.';
+  const shape=[x,y,a.w,a.h];
+  if (r.gates.some(g=>overlaps(shape,g.rect))||r.mark.some(m=>overlaps(shape,m))) return 'Garde le seuil et son arrivée libres.';
+  const tx=Math.floor((x+a.w/2)/8),ty=Math.floor((y+a.h-5)/8);
+  if (!a.wall && r.floor[ty]?.[tx]!=='1') return 'Le pied de ce meuble doit être sur le sol praticable.';
+  return '';
+}
+function toast(text,err=false){
+  clearTimeout(flash);$('toast').textContent=text;$('toast').hidden=false;$('toast').classList.toggle('error',err);
+  flash=setTimeout(()=>$('toast').hidden=true,err?6400:4200);
+}
+function save(){
+  if (saveAvailable) {try{localStorage.setItem(STORE,JSON.stringify(payload()));return;}catch{saveAvailable=false;}}
+}
+function payload(){return {format:FORM,jeu:data.game,salles:layout};}
+function parseLayout(d){
+  if(!d || ![FORM,GROD_FORM].includes(d.format) || d.jeu!==data.game || !d.salles || Array.isArray(d.salles) || typeof d.salles!=='object') throw new Error('Ce JSON n’est pas un plan de l’atelier Destiny 0.7.7.');
+  const result=blank();
+  for (const [n,objects] of Object.entries(d.salles)) {
+    const r=gameMap.get(n);
+    if(!r||!Array.isArray(objects)||objects.length>MAX) throw new Error('Salle ou nombre d’objets incompatible.');
+    if(grodLayouts.has(n) && d.format===GROD_FORM && objects.length) throw new Error(r.label+' : ce placement utilise le plan Grodoudou. Ouvre ton projet dans la variante Grodoudou pour ne rien déplacer.');
+    const ids=new Set();
+    const cleaned=objects.map(o=>{
+      const a=o&&assets.get(o.meuble);
+      if(!a||typeof o.id!=='string'||!/^[a-z0-9-]{1,80}$/i.test(o.id)||ids.has(o.id)) throw new Error('Objet PMU inconnu ou identifiant en double.');
+      const note=why(r,a,o.x,o.y);if(note)throw new Error(r.label+' : '+note);
+      ids.add(o.id);return {id:o.id,meuble:o.meuble,x:o.x,y:o.y};
+    });
+    if(cleaned.length)result[n]=cleaned;
+  }
+  return result;
+}
+function remember(next){
+  back.push(layout);if(back.length>60)back.shift();forwards=[];layout=next;save();refresh();
+}
+function setRoomItems(items){const next=Object.assign(blank(),layout);if(items.length)next[s.room.id]=items;else delete next[s.room.id];remember(next);}
+function cancel(){s.ghost=null;s.drag=null;s.tool=null;canvas.classList.remove('dragging');}
+function undo(){if(!back.length)return;forwards.push(layout);layout=back.pop();s.selected=null;cancel();save();refresh();}
+function redo(){if(!forwards.length)return;back.push(layout);layout=forwards.pop();s.selected=null;cancel();save();refresh();}
+function selectRoom(id){const r=gameMap.get(id);if(!r)return;s.room=r;cancel();s.selected=null;s.before=false;if(!r.south)s.mode='plan';refresh();}
+function setPhase(i){s.phase=i;s.compare=false;refresh();}
+function activateTool(a){
+  s.selected=null;s.drag=null;s.ghost=null;s.tool=s.tool===a.id?null:a.id;
+  if(s.tool){s.mode='plan';s.compare=false;}
+  refresh();
+  if(s.tool&&matchMedia('(max-width:655px)').matches)$('view').scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function unique(){return globalThis.crypto?.randomUUID?.()??(Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));}
+function pos(a,x,y,snap=s.snap){const step=snap?8:1;return {x:Math.round(x/step)*step,y:Math.round(y/step)*step};}
+function place(a,p){
+  const issue=why(s.room,a,p.x,p.y);if(issue){toast(issue,true);return false;}
+  if(dataFor().length>=MAX){toast('Maximum : '+MAX+' objets par salle.',true);return false;}
+  const o={id:unique(),meuble:a.id,x:p.x,y:p.y};s.tool=null;s.ghost=null;s.selected=o.id;setRoomItems([...dataFor(),o]);return true;
+}
+function move(o,p){
+  const a=assets.get(o.meuble),issue=why(s.room,a,p.x,p.y);if(issue){toast(issue,true);refresh();return false;}
+  if(o.x===p.x&&o.y===p.y){refresh();return true;}
+  setRoomItems(dataFor().map(t=>t.id===o.id?{...o,...p}:t));return true;
+}
+function remove(o){s.selected=null;setRoomItems(dataFor().filter(t=>t.id!==o.id));toast('Meuble retiré. Tu peux annuler cette action.');}
+function duplicate(o){
+  const a=assets.get(o.meuble);const tries=[[24,0],[-24,0],[0,24],[0,-24],[16,16],[-16,16],[16,-16],[-16,-16]];
+  const p=tries.map(([dx,dy])=>pos(a,o.x+dx,o.y+dy)).find(q=>!why(s.room,a,q.x,q.y));
+  if(p)place(a,p);else{ s.tool=a.id;s.selected=null;s.ghost=null;refresh();toast('Choisis un emplacement pour la copie.'); }
+}
+function center(a){
+  const r=s.room,ox=Math.round((r.w-a.w)/16)*8,oy=Math.round((r.h*.64-a.h)/8)*8;
+  const candidates=[];
+  for(let y=0;y<=r.h-a.h;y+=8)for(let x=0;x<=r.w-a.w;x+=8){if(!why(r,a,x,y))candidates.push([x,y,(x-ox)**2+(y-oy)**2]);}
+  candidates.sort((u,v)=>u[2]-v[2]);
+  if(candidates.length)place(a,{x:candidates[0][0],y:candidates[0][1]});else toast('Pas assez de place pour cet objet dans cette salle.',true);
+}
+
+function picture(b){
+  if(storeImages.has(b))return storeImages.get(b);
+  const raw=typeof b==='string',pic=raw?new Image():make('canvas');let done;
+  const promise=new Promise(resolve=>{done=resolve;});
+  const row={pic,ready:false,promise};storeImages.set(b,row);
+  const success=()=>{row.ready=true;done(true);invalidate();};
+  const fail=()=>{done(false);toast('Une image n’a pas pu être chargée.',true);};
+  if(raw){pic.onload=success;pic.onerror=fail;pic.src=uri(b);return row;}
+  const src=picture(b.source),parts=b.patches.map(([x,y,p])=>[x,y,picture(p)]);
+  const matte=b.matte?picture(b.matte):null;
+  Promise.all([src.promise,...parts.map(([, ,p])=>p.promise),...(matte?[matte.promise]:[])]).then(results=>{
+    if(results.includes(false)){fail();return;}
+    pic.width=src.pic.width;pic.height=src.pic.height;
+    const c=pic.getContext('2d',{willReadFrequently:true});c.imageSmoothingEnabled=false;c.drawImage(src.pic,0,0);
+    const im=c.getImageData(0,0,pic.width,pic.height),pixels=im.data;
+    if(b.lut){const [red,green,blue]=b.lut;
+      for(let i=0;i<pixels.length;i+=4){pixels[i]=red[pixels[i]];pixels[i+1]=green[pixels[i+1]];pixels[i+2]=blue[pixels[i+2]];}
+    }else{const [red,green,blue]=b.tint;
+      for(let i=0;i<pixels.length;i+=4){pixels[i]=Math.round(pixels[i]*red/255);pixels[i+1]=Math.round(pixels[i+1]*green/255);pixels[i+2]=Math.round(pixels[i+2]*blue/255);}
+    }
+    c.putImageData(im,0,0);
+    for(const [x,y,p] of parts){c.clearRect(x,y,p.pic.width,p.pic.height);c.drawImage(p.pic,x,y);}
+    if(matte){c.save();c.globalCompositeOperation='destination-out';c.drawImage(matte.pic,0,0);c.restore();}
+    success();
+  }).catch(fail);
+  return row;
+}
+function drawPicture(c,b,x,y){const p=picture(b);if(p.ready)c.drawImage(p.pic,x,y);}
+function box(c,x,y,w,h,col,dash=false){c.strokeStyle=col;c.lineWidth=1;c.setLineDash(dash?[3,2]:[]);c.strokeRect(x+.5,y+.5,w,h);c.setLineDash([]);}
+function drawScene(c,r,p,view,opts={}){
+  const {grid=false,gates=false,interactive=false,items=dataFor(r),lianes=s.lianes,ms=clock.ms,gateFrame=lift.frame}=opts;
+  const vines=lianesAt(r,p,lianes), doorstep=seuilAt(r,p), gate=grilleAt(r,p);
+  c.clearRect(0,0,view.w,view.h);c.save();c.imageSmoothingEnabled=false;
+  const n=ambiance(r,p),rgb=fondPlan(r)?.rgb[p]||n?.fond;
+  const fond=rgb?`rgb(${rgb.join(',')})`:'#20221b';
+  if(c.canvas.style.getPropertyValue('--couleur-vide')!==fond)c.canvas.style.setProperty('--couleur-vide',fond);
+  c.fillStyle=fond;c.fillRect(0,0,view.w,view.h);c.translate(-view.x,-view.y);
+  drawPicture(c,r.m[p][0],0,0);
+  if(vines.length)drawPicture(c,vines[0],0,0);
+  for(const [x,y,b] of doorstep)drawPicture(c,b,x,y);
+  for(const o of ordered(items)){const a=assets.get(o.meuble);const q=interactive&&s.drag?.id===o.id ? s.drag.position : o;c.globalAlpha=q.bad?.42:1;drawObjet(c,a,p,r,q.x,q.y,ms);c.globalAlpha=1;}
+  if(interactive&&s.ghost&&s.tool){const a=assets.get(s.tool),q=s.ghost;c.globalAlpha=q.bad?.42:.76;drawObjet(c,a,p,r,q.x,q.y,ms);c.globalAlpha=1;}
+  drawPicture(c,r.m[p][1],0,0);
+  drawGrille(c,gate,gateFrame);
+  if(vines.length)drawPicture(c,vines[1],0,0);
+  const mural=muralLayer(r,p);if(mural)drawPicture(c,mural[2],mural[0],mural[1]);
+  if(vines.length&&p===3)illuminate(c,r,ms);
+  else if(c.canvas.hasAttribute('data-lueur'))c.canvas.removeAttribute('data-lueur');
+  if(grid){c.strokeStyle='#fff1d541';c.lineWidth=.5;c.beginPath();for(let x=0;x<r.w;x+=8){c.moveTo(x+.5,0);c.lineTo(x+.5,r.h);}for(let y=0;y<r.h;y+=8){c.moveTo(0,y+.5);c.lineTo(r.w,y+.5);}c.stroke();}
+  if(gates){for(let i=0;i<r.gates.length;i++){
+    const [x,y,w,h]=r.gates[i].rect;c.fillStyle='#eebd554c';c.fillRect(x,y,w,h);box(c,x,y,w-1,h-1,'#ffe3a3',true);
+    c.font='bold 9px monospace';c.textAlign='center';c.textBaseline='middle';c.fillStyle='#20190e';c.fillRect(x+w/2-6,y+h/2-6,12,12);c.fillStyle='#ffe8bb';c.fillText(i+1,x+w/2,y+h/2+.4);
+  }}
+  if(interactive){
+    const o=current();if(o){const a=assets.get(o.meuble),q=s.drag?.position??o;box(c,q.x,q.y,a.w-1,a.h-1,q.bad?'#f3a18d':'#f8d099',!!s.drag);}
+    if(s.ghost&&s.tool){const a=assets.get(s.tool),q=s.ghost;box(c,q.x,q.y,a.w-1,a.h-1,q.bad?'#f3a18d':'#f8d099',true);}
+  }
+  c.restore();
+  const scene=[...r.m[p],...vines,...(mural?[mural[2]]:[]),...nightBits(r,p,lianes),...doorstep.map(q=>q[2]),...(gate?[gate]:[]),...items.map(o=>spriteForScene(assets.get(o.meuble),p,r))].every(b=>picture(b).ready)?`${r.id}:${p}:${view.y}:${items.length}`:'';
+  if(c.canvas.dataset.scene!==scene)c.canvas.dataset.scene=scene;
+}
+function resize(c,w,h){if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;}
+function invalidate(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;draw();});}
+function draw(){
+  if(s.page!=='atelier'){paintAtlas();return;}
+  const view=viewport(), r=s.room;
+  showCloth();
+  if(s.compare){for(const [i,c] of comparison.entries()){resize(c,view.w,view.h);drawScene(c.getContext('2d'),r,i,view,{grid:s.grid,gates:s.gates});}}
+  else{resize(canvas,view.w,view.h);drawScene(ctx,r,s.phase,view,{grid:s.grid,gates:s.gates,interactive:s.mode==='plan'});}
+}
+function tell(text,err=false){$('hint').textContent=text;$('hint').classList.toggle('alert',err);}
+function hint(){
+  if(s.compare){tell('Même salle, mêmes meubles, quatre lumières. Clique sur une vue pour l’ouvrir.');return;}
+  if(s.mode==='cadre'){const b=s.room.south?.band||0;tell(!b?'Ce seuil atteint déjà le bord de la carte.':(s.before?'Caméra d’origine : '+b+' px sous le seuil.':'Caméra recadrée : '+b+' px de vide hors champ.'));return;}
+  if(s.ghost?.bad||s.drag?.position.bad){tell(s.ghost?.bad||s.drag.position.bad,true);return;}
+  if(s.tool){tell('Clique sur le plan pour poser : '+assets.get(s.tool).label+'.');return;}
+  if(current()){tell('Glisse le meuble ou utilise les flèches. Suppr pour le retirer.');return;}
+  tell(dataFor().length?'Clique sur un meuble pour le sélectionner.':'Choisis un objet PMU à droite pour commencer.');
+}
+function inspector(){
+  const panel=$('inspector'),a=s.tool&&assets.get(s.tool),o=current();panel.replaceChildren();panel.hidden=!(a||o);if(panel.hidden)return;
+  const caption=make('strong','',a?.label??assets.get(o.meuble).label);panel.append(caption);
+  if (a){panel.append(make('span','',a.w+' × '+a.h+' px · '+(data.etoffes[a.id]?'étoffe animée':a.previewOnly?'variante d’atelier':'sprite natif')));const actions=make('div','inspect-actions');actions.append(button('soft','Poser au centre',()=>center(a),'target'),button('soft','Annuler',()=>{cancel();refresh();}));panel.append(actions);}
+  else{
+    panel.append(make('span','inspect-coords','X '+o.x+' · Y '+o.y));const actions=make('div','inspect-actions');actions.append(button('soft','Dupliquer',()=>duplicate(o),'copy'),button('soft','Retirer',()=>remove(o),'trash'));panel.append(actions);
+  }
+}
+function updatePalette(){
+  const term=normalized($('query').value);const el=$('catalog'),scroll=el.scrollTop;el.replaceChildren();clothPreviews=[];
+  const cards=data.catalog.filter(a=>(a.collection??'origine')===s.collection&&(s.palette==='tout'||s.palette===a.palette)&&(s.category==='tout'||s.category===a.category)&&(!term||normalized(a.label).includes(term)));
+  $('catalog-count').textContent=cards.length;$('catalog-count').setAttribute('aria-label',cards.length+' résultats');
+  for(const a of cards){const c=button('asset','',()=>activateTool(a));c.dataset.asset=a.id;c.dataset.famille=a.collection??'origine';if(a.palette)c.dataset.palette=a.palette;c.setAttribute('aria-label',a.label);c.setAttribute('aria-pressed',String(s.tool===a.id));c.title=a.label+' · '+a.w+' × '+a.h+' px';
+    const cover=make('span','thumb'),im=make('img');im.alt='';im.src=uri(a.m[0]);im.width=a.w;im.height=a.h;cover.append(im);if(data.etoffes[a.id]){buildClothThumb(a,cover,im);c.title+=' · animé';c.dataset.anime='true';}c.append(cover,make('span','item-label',a.label));el.append(c);}
+  if(!cards.length)el.append(make('p','none','Aucun objet ne correspond à ces filtres.'));el.scrollTop=scroll;showCloth();
+}
+function refresh(){
+  if (s.selected&&!current())s.selected=null;
+  const r=s.room, v=viewport();
+  updateAtlas();
+  $('room-select').value=r.id;$('room-name').textContent=r.label;$('room-kind').textContent='SALLE '+String(r.n).padStart(2,'0')+' · DESTINY 0.7.7';$('dim').textContent=v.w+' × '+v.h+' px';
+  for(const [el,m,b] of roomButtons){el.setAttribute('aria-current',String(r===m));const n=dataFor(m).length;b.textContent=n;b.hidden=!n;}
+  for(const [i,b] of phaseButtons.entries())b.setAttribute('aria-pressed',String(i===s.phase&&!s.compare));
+  for(const [k,b] of filterButtons)b.setAttribute('aria-pressed',String(s.category===k));
+  for(const [id,value] of Object.entries({plan:s.mode==='plan',camera:s.mode==='cadre',before:s.before,gates:s.gates,grid:s.grid,compare:s.compare}))$(id).setAttribute('aria-pressed',String(value));
+  $('camera').disabled=!r.south;$('before').hidden=s.mode==='plan'||!r.south?.band;$('before').textContent=s.before?'Avant ✓':'Avant';
+  $('compare').querySelector('span').textContent=s.compare?'Vue simple':'Comparer les 4';$('mapwrap').hidden=s.compare;$('compare-view').hidden=!s.compare;$('zoom').disabled=s.compare;
+  $('mapwrap').style.setProperty('--pixel-w',v.w+'px');$('mapwrap').classList.toggle('is-one',$('zoom').value==='one');$('mapwrap').classList.toggle('is-zoom',$('zoom').value==='two');
+  canvas.classList.toggle('editable',s.mode==='plan');
+  $('accesses').replaceChildren(...portesPour(r));
+  $('undo').disabled=!back.length;$('redo').disabled=!forwards.length;$('download-ground').disabled=s.page!=='atelier'||dataFor().some(o=>assets.get(o.meuble).previewOnly);$('download-png').disabled=s.page!=='atelier';
+  const count=Object.values(layout).reduce((n,a)=>n+a.length,0);
+  $('save-state').textContent=count?`${count} objet${count>1?'s':''} dans le projet · ${saveAvailable?'copie locale':'exporte ton JSON'}`:'Projet local · aucun changement dans le jeu';
+  inspector();hint();
+  // Keep catalogue keyboard focus and scroll in place between actions.
+  for(const b of $('catalog').querySelectorAll('[data-asset]'))b.setAttribute('aria-pressed',String(s.tool===b.dataset.asset));
+  invalidate();
+}
+
+function cursor(e){
+  const v=viewport(),r=canvas.getBoundingClientRect(),scaleW=(r.width-2)/v.w,scaleH=(r.height-2)/v.h;
+  return {x:clampInt((e.clientX-r.left-1)/scaleW+v.x),y:clampInt((e.clientY-r.top-1)/scaleH+v.y)};
+}
+function mouseGhost(e){
+  const p=cursor(e);$('coords').textContent='X '+p.x+' · Y '+p.y;
+  if(s.mode!=='plan')return;
+  if(s.drag){const a=assets.get(s.drag.meuble),v=pos(a,p.x-s.drag.dx,p.y-s.drag.dy);v.bad=why(s.room,a,v.x,v.y);s.drag.position=v;hint();invalidate();}
+  else if(s.tool){const a=assets.get(s.tool),q=pos(a,p.x-a.w/2,p.y-a.h/2);q.bad=why(s.room,a,q.x,q.y);s.ghost=q;hint();invalidate();}
+}
+canvas.addEventListener('pointermove',mouseGhost);
+canvas.addEventListener('pointerleave',()=>{if(!s.drag){s.ghost=null;$('coords').textContent='X — · Y —';hint();invalidate();}});
+canvas.addEventListener('pointerdown',e=>{
+  if(s.mode!=='plan'||s.compare||e.button>0||s.drag)return;e.preventDefault();canvas.focus({preventScroll:true});
+  const t=cursor(e);
+  if(s.tool){const a=assets.get(s.tool);place(a,pos(a,t.x-a.w/2,t.y-a.h/2));return;}
+  const o=ordered(dataFor()).reverse().find(o=>{const a=assets.get(o.meuble);return t.x>=o.x&&t.y>=o.y&&t.x<o.x+a.w&&t.y<o.y+a.h;});
+  s.selected=o?.id??null;
+  if(o){s.drag={...o,dx:t.x-o.x,dy:t.y-o.y,position:o,pointer:e.pointerId};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');}
+  refresh();
+});
+canvas.addEventListener('pointerup',e=>{
+  const d=s.drag;if(!d||d.pointer!==e.pointerId)return;
+  s.drag=null;canvas.classList.remove('dragging');if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);
+  const o=current();if(o){const {x,y}=d.position;move(o,{x,y});}else refresh();
+});
+canvas.addEventListener('pointercancel',()=>{s.drag=null;canvas.classList.remove('dragging');refresh();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&s.tool){cancel();refresh();return;}
+  if(e.target.closest('input,textarea,select,[contenteditable],dialog'))return;
+  const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&k==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
+  if((e.ctrlKey||e.metaKey)&&k==='y'){e.preventDefault();redo();return;}
+  const o=current();if(!o||s.mode!=='plan'||s.compare||s.page!=='atelier')return;
+  if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();remove(o);return;}
+  const v={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+  if(v){e.preventDefault();const n=e.shiftKey?1:s.snap?8:1;move(o,{x:o.x+v[0]*n,y:o.y+v[1]*n});}
+});
+
+function download(blob,name){
+  const ref=URL.createObjectURL(blob),link=make('a');link.href=ref;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(ref),2500);
+}
+const jsonBlob=(o,pretty)=>new Blob([JSON.stringify(o,null,pretty)+'\n'],{type:'application/json'});
+function prepareExport(){
+  const virt=dataFor().some(o=>assets.get(o.meuble).previewOnly);
+  $('export-note').textContent=virt&&s.page==='atelier'?'Les nouvelles variantes et les lianes sont des éléments d’aperçu. Choisis PNG ou JSON pour les conserver.':'Le jeu n’est jamais modifié par le navigateur. Ouvre ce HTML directement si l’aperçu intégré bloque un téléchargement.';
+  $('download-ground').querySelector('small').textContent=s.page!=='atelier'?'Ouvre une salle pour exporter sa carte.':virt?'Indisponible avec les nouvelles variantes et les ornements d’atelier.':'Objets d’origine seulement · n’inclut pas les lianes, la lumière ni la grille ni l’habillage du seuil.';
+  $('download-png').querySelector('small').textContent=s.page==='atelier'?(s.room.label+' · ambiance et cadrage actuels'):'Ouvre une salle pour exporter son image.';
+  $('export-box').showModal();
+}
+async function exportPng(){
+  const r=s.room,i=s.phase,v=viewport(),items=[...dataFor()],lianes=s.lianes,ms=clock.ms,mode=s.mode,gateFrame=lift.frame,gate=grilleAt(r,i);const bits=[...r.m[i],...lianesAt(r,i,lianes),...nightBits(r,i,lianes),...seuilAt(r,i).map(q=>q[2]),...(gate?[gate]:[]),...items.map(o=>spriteForScene(assets.get(o.meuble),i,r))];
+  const ok=await Promise.all(bits.map(b=>picture(b).promise));if(ok.includes(false))throw new Error('Image non disponible.');
+  const out=make('canvas');resize(out,v.w,v.h);drawScene(out.getContext('2d'),r,i,v,{items,lianes,ms,gateFrame});
+  const b=await new Promise(resolve=>out.toBlob(resolve,'image/png'));if(!b)throw new Error('Export PNG non pris en charge.');
+  download(b,r.id+'-'+data.phases[i]+(mode==='plan'?'':'-sud')+(lianes?'-lianes':'')+'.png');
+}
+function appendDecoration(input,addition,existing){
+  const fields=[...input.matchAll(/"Decorations"\s*:\s*\[/g)];
+  if(fields.length!==1)throw new Error('Calque de décor natif introuvable.');
+  const hit=fields[0],begin=hit.index+hit[0].length-1;
+  let depth=0,quoted=false,escaped=false;
+  for(let i=begin;i<input.length;i++){
+    const c=input[i];
+    if(quoted){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')quoted=false;continue;}
+    if(c==='"'){quoted=true;continue;}
+    if(c==='['){depth++;continue;}
+    if(c===']'&&--depth===0){
+      let end=i;while(end>begin+1&&/\s/.test(input[end-1]))end--;
+      const join=(existing?',':'')+(input.includes('\r\n')?'\r\n':'\n')+'        ';
+      return input.slice(0,end)+join+JSON.stringify(addition)+input.slice(end);
+    }
+  }
+  throw new Error('Le tableau de décor natif est incomplet.');
+}
+async function exportGround(file){
+  const r=s.room,items=[...dataFor()];if(s.page!=='atelier')throw new Error('Ouvre une salle pour exporter sa carte.');
+  if(items.some(o=>assets.get(o.meuble).previewOnly))throw new Error('Les nouvelles variantes ne sont pas installées dans Destiny. Exporte un PNG ou un JSON.');
+  const name=r.id+'.rsground';
+  if(file.name!==name||file.size>12*1024*1024)throw new Error('Choisis la carte d’origine : '+name+'.');
+  if(!globalThis.crypto?.subtle)throw new Error('Ouvre le HTML directement dans un navigateur récent pour vérifier la carte locale.');
+  const raw=await file.arrayBuffer();const a=new Uint8Array(await crypto.subtle.digest('SHA-256',raw));
+  if(Array.from(a,b=>b.toString(16).padStart(2,'0')).join('')!==r.sha256)throw new Error('Ce fichier n’est pas la carte Windows 0.7.7 d’origine. Sélectionne ta copie de sauvegarde intacte.');
+  const original=new TextDecoder('utf-8',{ignoreBOM:true,fatal:true}).decode(raw);
+  const g=JSON.parse(original.replace(/^\uFEFF/,'')),meta=g.Object;
+  if(meta?.AssetName!==r.id||g.Version!==r.version||!Array.isArray(meta.Decorations))throw new Error('Carte incompatible.');
+  // Disable only the original vegetation layer. Do not reserialize the map or its 64-bit state.
+  const foliage=/("Name"\s*:\s*"04 verdure separee"\s*,\s*"Layer"\s*:\s*0\s*,\s*"Visible"\s*:\s*)true/g;
+  if(!Array.isArray(meta.Layers)||meta.Layers.filter(t=>t.Name==='04 verdure separee'&&t.Visible===true).length!==1||[...original.matchAll(foliage)].length!==1) throw new Error('Calque de verdure natif introuvable.');
+  const clean=original.replace(foliage,'$1false');
+  // Native, non-collidable decoration layer. Keep every tile, entity and trigger byte-value intact.
+  const Anims=items.map(o=>{const a=assets.get(o.meuble),q=why(r,a,o.x,o.y);if(q)throw new Error(q);return {ObjectAnim:{'$type':'RogueEssence.Content.ObjAnimData, RogueEssence',AnimIndex:a.sheet,FrameTime:60,StartFrame:-1,EndFrame:-1,AnimDir:0,Alpha:255,AnimFlip:0},MapLoc:{X:o.x,Y:o.y}};});
+  const output=items.length?appendDecoration(clean,{Name:'AtelierMobilierPMU',Layer:4,Visible:true,Anims},meta.Decorations.length>0):clean;
+  // Do not stringify the whole map: the native RNG includes unsigned 64-bit integers.
+  download(new Blob([output],{type:'application/json'}),name);
+  $('export-note').textContent='Copie sans verdure prête. Sauvegarde ta carte originale et ferme Destiny avant tout remplacement. Si tu veux le cadrage, installe-le avant de changer la carte. Le mobilier reste décoratif et traversable.';
+}
+
+// Off-line animation. The room blueprints and the position/origin of every item remain static.
+const boundedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+const clock={ms:0,play:!boundedMotion.matches,chosen:false,prev:null,next:0,raf:0};
+const TAU=2*Math.PI, stageFrames=new Map();
+let clothPreviews=[];
+const muralCache=new Map();
+function muralLayer(r,p){
+  const bit=data.ornements[r.id];if(!s.ornements||!bit)return null;
+  const key=r.id+':'+p;
+  if(!muralCache.has(key)){
+    const [x,y,source]=bit; const n=ambiance(r,p);
+    muralCache.set(key,[x,y,n?{source,lut:n.lut,patches:[]}:source]);
+  }
+  return muralCache.get(key);
+}
+function frameLueur(ms){return Math.floor(ms*data.canon.ips/1000+1e-7)%data.canon.images;}
+function nightBits(r,p,active){
+  if(p!==3||!active)return [];
+  return pointsLumineux(r).flatMap(s=>s.images.flatMap(pair=>pair.map(bit=>bit[2])));
+}
+function illuminate(c,r,ms){
+  const i=frameLueur(ms);c.save();c.globalCompositeOperation='screen';
+  if(c.canvas.dataset.lueur!==String(i))c.canvas.dataset.lueur=String(i);
+  for(const p of pointsLumineux(r)){
+    for(const [x,y,b] of p.images[i])drawPicture(c,b,x,y);
+  }
+  c.restore();
+}
+function spriteForScene(a,p,r){
+  const f=data.etoffes[a.id];if(!f)return sprite(a,p,r);
+  const colors=ambiance(r,p);if(!colors)return f.s;
+  const key=a.id+'|'+r.nuit+'|'+p;
+  if(!stageFrames.has(key))stageFrames.set(key,{source:f.s,lut:colors.lut,patches:[]});
+  return stageFrames.get(key);
+}
+function stand(c,a,source,x,y,ms,phaseOffset=0){
+  const spec=data.etoffes[a.id];
+  const pic=picture(source);if(!pic.ready)return false;
+  const index=Math.floor((Math.max(0,ms)+phaseOffset)/spec.dt)%spec.n;
+  c.drawImage(pic.pic,(index%spec.c)*a.w,Math.floor(index/spec.c)*a.h,a.w,a.h,x,y,a.w,a.h);
+  return true;
+}
+function drawObjet(c,a,p,r,x,y,ms){
+  if(data.etoffes[a.id]&&stand(c,a,spriteForScene(a,p,r),x,y,ms,r.n*73+3*x+y))return;
+  drawPicture(c,sprite(a,p,r),x,y);
+}
+function buildClothThumb(a,cover,img){
+  if(!data.etoffes[a.id])return;
+  const cv=make('canvas','apercu-etoffe');resize(cv,a.w,a.h);cv.style.width=a.w+'px';cv.setAttribute('aria-hidden','true');cv.hidden=true;
+  cover.append(cv,make('small','badge-anime','Animé'));clothPreviews.push([a,cv,img]);
+}
+const inWindow=(c,clip=null)=>{
+  const r=c.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>Math.max(0,clip?.top??0)&&r.top<Math.min(innerHeight,clip?.bottom??innerHeight);
+};
+function showCloth(onlyVisible=false){
+  if(s.page!=='atelier')return;
+  const b=onlyVisible?$('catalog').getBoundingClientRect():null;
+  for(const [a,cv,img] of clothPreviews){
+    if(onlyVisible&&!inWindow(cv.hidden?img:cv,b))continue;
+    const p=picture(data.etoffes[a.id].s);if(!p.ready)continue;
+    const c=cv.getContext('2d');c.clearRect(0,0,a.w,a.h);c.imageSmoothingEnabled=false;
+    stand(c,a,data.etoffes[a.id].s,0,0,clock.ms,a.n*113);cv.hidden=false;img.hidden=true;
+  }
+}
+function drawMotion(){
+  if(s.page!=='atelier'){
+    if(s.phase!==3||!s.lianes)return;
+    if(s.page==='atlas'){paintSeuil(true);paintGrille(true);}
+    for(const [r,c,v] of (s.page==='sud'?southPairs:atlasCards))if(inWindow(c))drawScene(c.getContext('2d'),r,3,v,{gates:s.gates});
+    return;
+  }
+  const r=s.room,v=viewport(),cloth=dataFor(r).some(o=>data.etoffes[o.meuble])||data.etoffes[s.tool];
+  if(s.compare){
+    for(const [i,c] of comparison.entries())if((cloth||(i===3&&s.lianes))&&inWindow(c))drawScene(c.getContext('2d'),r,i,v,{grid:s.grid,gates:s.gates});
+  }else if((cloth||(s.phase===3&&s.lianes))&&inWindow(canvas))drawScene(ctx,r,s.phase,v,{grid:s.grid,gates:s.gates,interactive:s.mode==='plan'});
+  if(clothPreviews.length)showCloth(true);
+}
+function advance(now){
+  clock.raf=0;if(!clock.play||document.hidden){clock.prev=null;return;}
+  clock.ms+=clock.prev===null?0:Math.min(now-clock.prev,100);clock.prev=now;
+  if(now>=clock.next){clock.next=now+73;if(!queued)drawMotion();}
+  clock.raf=requestAnimationFrame(advance);
+}
+function syncMotion(){
+  const t=$('motion-toggle');t.setAttribute('aria-pressed',String(clock.play));t.querySelector('span').textContent=clock.play?'Animations : actives':'Animations : en pause';
+  const n=t.querySelector('use');n.setAttribute('href',clock.play?'#i-pause-motion':'#i-play-motion');
+  t.title=clock.play?'Figer les étoffes, les halos et les ombres':'Relancer les étoffes, les halos et les ombres';
+  if(clock.play&&!document.hidden){if(!clock.raf){clock.prev=null;clock.next=0;clock.raf=requestAnimationFrame(advance);}}
+  else{if(clock.raf)cancelAnimationFrame(clock.raf);clock.raf=0;clock.prev=null;}
+  invalidate();
+}
+function setupMotion(){
+  $('motion-toggle').onclick=()=>{clock.chosen=true;clock.play=!clock.play;syncMotion();};
+  boundedMotion.addEventListener?.('change',e=>{if(!clock.chosen){clock.play=!e.matches;syncMotion();}});
+  document.addEventListener('visibilitychange',syncMotion);
+  syncMotion();
+}
+
+// Optional artwork, applied without mutating the room blueprint or the existing Grodoudou palettes.
+const vineLUTs = new Map();
+function lianesAt(r,p,show=s.lianes){
+  if(!show)return [];
+  const layer=feuillage(r),key=r.id+':'+p;
+  if(!vineLUTs.has(key)){
+    const matrix=ambiance(r,p)?.lut,matte=fondPlan(r)?.matte;
+    vineLUTs.set(key,[layer.s,layer.t].map(source=>matrix?{source,lut:matrix,matte,patches:[]}:source));
+  }
+  return vineLUTs.get(key);
+}
+function ordered(items){return [...items].sort((a,b)=>Number(assets.get(b.meuble).category==='tapis')-Number(assets.get(a.meuble).category==='tapis'));}
+function updateLianeUI(){
+  const b=$('toggle-lianes');b.setAttribute('aria-pressed',String(s.lianes));
+  b.querySelector('span').textContent=s.lianes?'Lianes : avec':'Lianes : sans';
+  b.classList.toggle('show-glow',s.phase===3&&s.lianes);
+  const words=s.lianes ? s.compare ? 'Lianes · bourgeons en Nuit' : s.phase===3 ? `Nuit · ${pointsLumineux(s.room).length} bourgeons éclairent le bois` : `${feuillage(s.room).v} poteaux enroulés` : 'Lianes masquées';
+  $('foliage-status').textContent=words;
+}
+$('toggle-lianes').onclick=()=>{s.lianes=!s.lianes;refresh();};
+$('collection').onchange=()=>{s.collection=$('collection').value;s.palette='tout';$('palette-pmu').value='tout';$('palette-pmu').disabled=s.collection==='origine';s.category='tout';cancel();updatePalette();refresh();};
+$('palette-pmu').onchange=()=>{s.palette=$('palette-pmu').value;cancel();updatePalette();refresh();};
+
+// Shared renderer: the overview never substitutes thumbnails for the native maps.
+const atlasCards=[], southPairs=[], atlasPhases=[];
+const atlasTabs={atlas:'tab-all',sud:'tab-south',atelier:'tab-work'};
+const countText=(n,label)=>n+' '+label+(n===1?'':'s');
+const tags=(r)=>[String(r.n).padStart(2,'0'),countText(r.gates.length,'passage')];
+function planVue(r){return {x:0,y:0,w:r.w,h:r.h};}
+function sudVue(r,avant=false){return {x:within(r.south.x-160,0,r.w-320),y:(avant?r.h:r.south.bottom)-240,w:320,h:240};}
+function changePage(page){
+  if(!(page in atlasTabs))return;
+  cancel();s.selected=null;s.page=page;
+  if(page==='atelier'){s.mode='plan';s.compare=false;s.before=false;}
+  refresh();
+}
+function openDepuisAtlas(r,mode='plan'){
+  s.page='atelier';s.mode=mode;s.compare=false;selectRoom(r.id);
+  window.scrollTo({top:0,behavior:'auto'});
+  $('room-name').focus({preventScroll:true});
+}
+function getSouthGate(r){return r.gates.find(g=>g.id==='SortieGuilde'||g.id.endsWith('Sud'));}
+function setupAtlas(){
+  for(const [page,id] of Object.entries(atlasTabs))$(id).onclick=()=>changePage(page);
+  $('atlas-gates').onclick=()=>{s.gates=!s.gates;refresh();};
+  $('visite-nuit').onclick=()=>{s.phase=3;s.lianes=true;openDepuisAtlas(gameMap.get(visite.depart));};
+  for(const [i,p] of phases.entries()){
+    const b=button('phase-choice',p.name,()=>setPhase(i),p.icon);b.dataset.atlasPhase=String(i);if(p.title)b.title=p.title;
+    b.style.setProperty('--tone',p.tone);b.style.setProperty('--tint',p.tint);
+    $('atlas-phases').append(b);atlasPhases.push(b);
+  }
+  for(const r of data.rooms){
+    const panel=make('article','atlas-card');panel.dataset.plan=r.id;
+    const open=button('atlas-open','',()=>openDepuisAtlas(r));open.setAttribute('aria-label','Ouvrir : '+r.label);
+    const scene=make('canvas','atlas-map');scene.setAttribute('aria-hidden','true');resize(scene,r.w,r.h);
+    const label=make('div','atlas-card-label');
+    label.append(make('span','atlas-num',tags(r)[0]),make('h3','',r.label));
+    const meta=make('div','atlas-card-meta');meta.append(make('span','',tags(r)[1]),make('span','','·'),make('span','',r.w+' × '+r.h+' px'));
+    const fitted=data.verdure[r.id];
+    if(fitted){const chip=make('span','badges-verdure','Verdure ajustée');chip.title=`${fitted.poteaux} poteau${fitted.poteaux===1?'':'x'}${fitted.rameaux?' · ronce au pied':''}`;meta.append(chip);}
+    if(visite.ronces[r.id])meta.append(make('span','badge-ronces-nord','Ronces au nord'));
+    if(r.id===seuil.id)meta.append(make('span','badges-seuil','Halo au seuil'));
+    open.append(scene,label,meta);panel.append(open);
+    if(r.south?.band){
+      const b=button('atlas-pin','Sud corrigé',()=>openDepuisAtlas(r,'cadre'),'cadre');
+      b.title='Voir la caméra au seuil : '+r.label;b.setAttribute('aria-label','Voir le cadre sud corrigé : '+r.label);panel.append(b);
+    }
+    $('overview-grid').append(panel);atlasCards.push([r,scene,planVue(r)]);
+    if(!r.south?.band)continue;
+    const c=make('article','atlas-pair');c.dataset.south=r.id;
+    const header=make('div','atlas-pair-head'), title=make('div');
+    title.append(make('span','atlas-num','SALLE '+tags(r)[0]),make('h3','',r.label));
+    const to=getSouthGate(r)?.dest; title.append(make('span','atlas-route','Vers : '+(gameMap.get(to)?.label||'Falaise')));
+    header.append(title,button('atlas-pin','Voir dans l’atelier',()=>openDepuisAtlas(r,'cadre'),'cadre'));c.append(header);
+    const two=make('div','atlas-duo');
+    for(const avant of [true,false]){
+      const figure=make('figure',avant?'atlas-avant':'atlas-apres');
+      const caption=make('figcaption','',avant?'Avant':'Corrigé');
+      caption.append(make('span','',avant?'Caméra d’origine':'−'+r.south.band+' px sous le passage'));
+      const cv=make('canvas','atlas-crop');resize(cv,320,240);cv.setAttribute('aria-label',r.label+(avant?' : cadre avant correctif':' : cadre corrigé'));
+      figure.append(caption,cv);two.append(figure);southPairs.push([r,cv,sudVue(r,avant)]);
+    }
+    c.append(two);$('south-grid').append(c);
+  }
+}
+function updateAtlas(){
+  const atelier=s.page==='atelier', sud=s.page==='sud';
+  $('editor').hidden=!atelier;$('atlas-page').hidden=atelier;updateFilm();updateSeuil();updateGrille();
+  $('overview-grid').hidden=sud;$('south-grid').hidden=!sud;
+  for(const [page,id] of Object.entries(atlasTabs))$(id).setAttribute('aria-pressed',String(page===s.page));
+  $('atlas-title').textContent=sud?'Les 7 sorties sud corrigées':'Les 15 salles de la guilde';
+  $('atlas-note').textContent=sud?'La caméra remonte juste au-dessus de la bande sous le passage. Les chemins ne bougent pas.':(s.lianes?'Fonds bleus relevés sur les cartes de Grodoudou. En Nuit, les bourgeons éclairent le bois et les passages conservent l’ambiance.':'Les salles natives, sans aucun calque de verdure.');
+  $('atlas-guide').textContent=(sud?'Même taille de vue (320 × 240 px), mêmes accès. Les fonds sur les côtés restent visibles.':'Les cartes « Sud corrigé » ouvrent directement le cadrage approuvé.')+' '+['Jour : lumière claire des intérieurs de Grodoudou.','Aube : déclinaison douce, aux vitres pêche.','Crépuscule : lumière orangée de la façade de Grodoudou.','Nuit : vitres bleu profond et dortoirs tamisés.'][s.phase];
+  for(const [i,b] of atlasPhases.entries())b.setAttribute('aria-pressed',String(i===s.phase));
+  $('atlas-gates').setAttribute('aria-pressed',String(s.gates));updateLianeUI();
+}
+function paintAtlas(){
+  if(s.page==='atlas'){paintSeuil();paintGrille();}
+  const rows=s.page==='sud'?southPairs:atlasCards;
+  for(const [r,cv,view] of rows)drawScene(cv.getContext('2d'),r,s.phase,view,{gates:s.gates});
+}
+
+
+try{const old=localStorage.getItem(STORE);if(old)layout=parseLayout(JSON.parse(old));}catch{saveAvailable=false;}
+for(const [i,label] of groups.entries()){
+  $('rooms').append(make('h3','',label));const opt=make('optgroup');opt.label=label;$('room-select').append(opt);
+  for(const r of data.rooms.filter(r=>r.group===i)){
+    const b=button('room-button','',()=>selectRoom(r.id));b.dataset.room=r.id;const c=make('span','room-count');b.append(make('span','n',String(r.n).padStart(2,'0')),make('span','room-label',r.label),c);$('rooms').append(b);roomButtons.push([b,r,c]);
+    const o=make('option','',r.label);o.value=r.id;opt.append(o);
+  }
+}
+$('room-select').onchange=e=>selectRoom(e.target.value);
+for(const [i,p] of phases.entries()){
+  const b=button('phase-choice',p.name,()=>setPhase(i),p.icon);b.dataset.phase=String(i);if(p.title)b.title=p.title;b.style.setProperty('--tone',p.tone);b.style.setProperty('--tint',p.tint);$('phases').append(b);phaseButtons.push(b);
+  const card=button('comparison','',()=>setPhase(i));card.setAttribute('aria-label','Agrandir : '+p.name);card.style.setProperty('--tone',p.tone);
+  const title=make('div','strip');title.append(svg(p.icon),make('span','',p.name),make('span','','Ouvrir ↗'));const c=make('canvas');card.append(title,c);$('compare-view').append(card);comparison.push(c);
+}
+for(const [id,label] of cats){const b=button('',label,()=>{s.category=id;updatePalette();refresh();});$('filters').append(b);filterButtons.push([id,b]);}
+$('query').addEventListener('input',updatePalette);
+$('compare').onclick=()=>{s.compare=!s.compare;s.ghost=null;s.drag=null;refresh();};
+$('plan').onclick=()=>{s.mode='plan';s.before=false;s.ghost=null;refresh();};
+$('camera').onclick=()=>{cancel();s.mode='cadre';s.before=false;s.selected=null;refresh();};
+$('before').onclick=()=>{s.before=!s.before;refresh();};
+$('gates').onclick=()=>{s.gates=!s.gates;refresh();};
+$('grid').onclick=()=>{s.grid=!s.grid;refresh();};
+$('zoom').onchange=()=>refresh();$('snap').onchange=e=>{s.snap=e.target.checked;s.ghost=null;refresh();};
+$('undo').onclick=undo;$('redo').onclick=redo;
+$('help').onclick=()=>$('help-box').showModal();$('export').onclick=prepareExport;
+for(const b of document.querySelectorAll('.close-dialog'))b.onclick=()=>b.closest('dialog').close();
+$('import').onclick=()=>$('layout-file').click();
+$('layout-file').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{if(f.size>1024*1024)throw new Error('Fichier trop volumineux (maximum 1 Mo).');const d=parseLayout(JSON.parse(await f.text()));s.selected=null;cancel();remember(d);toast('Plan ouvert. Tu peux annuler l’import.');}
+  catch(err){toast(err instanceof SyntaxError?'Le fichier JSON n’a pas pu être lu.':err.message,true);}
+};
+$('download-plan').onclick=()=>download(jsonBlob(payload(),2),'Mon-plan-PMU-Destiny-077.json');
+$('download-png').onclick=()=>exportPng().catch(e=>{ $('export-note').textContent=e.message; });
+$('download-ground').onclick=()=>$('ground-file').click();
+$('ground-file').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{await exportGround(f);}catch(err){$('export-note').textContent=err.message;}
+};
+
+const refBox=$('braseros-box'),refButton=$('grodoudou-play'),fire=$('grodoudou-fires');
+function showFlames(active){
+  fire.src=active?data.reference.apng:data.reference.fixe;
+  refButton.setAttribute('aria-pressed',String(active));
+  refButton.textContent=active?'Figer la boucle':'Lire la boucle d’origine';
+}
+$('braseros-reference').onclick=()=>{
+  $('destiny-foyers').src=data.reference.salon;showFlames(false);refBox.showModal();
+};
+refButton.onclick=()=>showFlames(refButton.getAttribute('aria-pressed')!=='true');
+refBox.addEventListener('close',()=>showFlames(false));
+
+
+const film=$('film-comparatif'),filmButton=$('film-button'),filmPanel=$('comparatif-video');
+film.poster=data.film.poster;
+film.muted=true;
+for(const [src,type] of [[data.film.webm,'video/webm'],[data.film.mp4,'video/mp4']]){
+  const source=make('source');source.type=type;source.src=src;film.append(source);
+}
+function filmState(){
+  const active=!film.paused&&!film.ended;filmButton.querySelector('span').textContent=active?'Mettre en pause':'Lire la vidéo';
+  filmButton.querySelector('use').setAttribute('href',active?'#i-pause-motion':'#i-play-motion');
+}
+film.addEventListener('playing',()=>{$('film-issue').hidden=true;filmState();});
+film.addEventListener('pause',filmState);film.addEventListener('ended',filmState);
+filmButton.onclick=async()=>{
+  if(!film.paused){film.pause();return;}
+  try{await film.play();}catch{filmState();$('film-issue').hidden=false;}
+};
+function updateFilm(){
+  filmPanel.hidden=s.page!=='atlas';
+  if(filmPanel.hidden)film.pause();
+}
+$('braseros-reference').addEventListener('click',()=>film.pause());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)film.pause();});
+
+$('show-salon').onclick=()=>{s.phase=3;s.lianes=true;openDepuisAtlas(data.rooms[2]);};
+$('toggle-ornements').onclick=()=>{
+  s.ornements=!s.ornements;
+  const b=$('toggle-ornements');b.setAttribute('aria-pressed',String(s.ornements));
+  b.querySelector('span').textContent=s.ornements?'Ornements : avec':'Ornements : sans';
+  refresh();
+};
+// Accueil/script/debut
+// A floor-only fixture: no item, collision, or native map entry is created.
+const seuil = data.seuil_accueil;
+const hall = gameMap.get(seuil.id);
+const seuilControls = [];
+const seuilRows = [[$('seuil-salle'),planVue(hall)],[$('seuil-detail'),seuil.detail]];
+function seuilAt(r,p){return s.seuil && r.id===seuil.id ? seuil.phases[p] : [];}
+function setupSeuil(){
+  for(const [cv,view] of seuilRows)resize(cv,view.w,view.h);
+  $('seuil-source').src=seuil.reference;
+  for(const [i,p] of phases.entries()){
+    const b=button('phase-choice',p.name,()=>setPhase(i),p.icon);
+    b.dataset.seuilPhase=String(i);b.style.setProperty('--tone',p.tone);b.style.setProperty('--tint',p.tint);
+    $('seuil-phases').append(b);seuilControls.push(b);
+  }
+  $('seuil-toggle').onclick=()=>{s.seuil=!s.seuil;refresh();};
+  $('ouvrir-accueil').onclick=()=>openDepuisAtlas(hall);
+}
+function updateSeuil(){
+  $('seuil-demo').hidden=s.page!=='atlas';
+  for(const [i,b] of seuilControls.entries())b.setAttribute('aria-pressed',String(s.phase===i));
+  $('seuil-indication').textContent=phases[s.phase].name+' · seuil sud';
+  $('seuil-legende').textContent=s.seuil?'Après':'Avant';
+  $('seuil-detail').setAttribute('aria-label',s.seuil?'Gros plan : le halo et le tapis sur le seuil de Destiny':'Gros plan : le seuil de Destiny sans habillage');
+  const b=$('seuil-toggle');b.setAttribute('aria-pressed',String(s.seuil));b.querySelector('span').textContent=s.seuil?'Halo et tapis : avec':'Halo et tapis : sans';
+  const badge=document.querySelector('.badges-seuil');if(badge)badge.hidden=!s.seuil;
+}
+function paintSeuil(visibleOnly=false){
+  for(const [cv,view] of seuilRows)if(!visibleOnly||inWindow(cv))drawScene(cv.getContext('2d'),hall,s.phase,view);
+}
+// Accueil/script/fin
+// Grille/js/debut
+// One shared latch for the existing stairs on both maps. No destination is overwritten.
+const grille=data.grille_accueil,grilleHall=gameMap.get(grille.id),grilleNext=gameMap.get(grille.dest),grilleCv=$('grille-plan');
+const lift={frame:0,target:0,moving:false};
+const lastGrille=grille.positions.length-1;
+const grilleOuverte=()=>!lift.moving&&lift.frame===lastGrille;
+const isGrilleLink=(r,g)=>grille.liens.some(([room,id])=>room===r.id&&id===g.id);
+function suivrePassage(r,g){
+  if(isGrilleLink(r,g)&&!grilleOuverte()){toast('Lève complètement la grille pour franchir l’escalier.',true);return;}
+  if(gameMap.has(g.dest))selectRoom(g.dest);
+}
+function portesPour(r){
+  return r.gates.map((g,i)=>{
+    const to=gameMap.get(g.dest), gated=isGrilleLink(r,g);
+    const p=to?button('portal',(i+1)+' · '+to.label,()=>suivrePassage(r,g)):make('span','portal-out',(i+1)+' · Falaise');
+    p.title=g.id;
+    if(gated){p.disabled=!grilleOuverte();p.dataset.grille='true';}
+    return p;
+  });
+}
+function grilleAt(r,p){return r.id===grille.id?grille.calques[p]:null;}
+function drawGrille(c,asset,frame){
+  if(!asset||frame===lastGrille)return;
+  const row=picture(asset),[x,y,w,h]=grille.rect, col=frame%grille.colonnes,line=Math.floor(frame/grille.colonnes);
+  if(row.ready)c.drawImage(row.pic,col*w,line*h,w,h,x,y,w,h);
+}
+function basculerGrille(){
+  if(lift.moving)return;
+  const start=lift.frame,end=grilleOuverte()?0:lastGrille;
+  lift.target=end;
+  if(boundedMotion.matches){lift.frame=end;draw();refresh();return;}
+  lift.moving=true;refresh();
+  const tick0=performance.now(),direction=end>start?1:-1,total=Math.abs(end-start);
+  function tick(now){
+    const step=Math.max(0,Math.min(total,Math.floor((now-tick0)*grille.ips/1000)));
+    const next=start+direction*step;
+    if(step===total){
+      // Paint the end pose before announcing it or unlocking the passage.
+      lift.frame=end;draw();lift.moving=false;refresh();return;
+    }
+    if(lift.frame!==next){lift.frame=next;invalidate();}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+function setupGrille(){
+  resize(grilleCv,grille.vues.w,grille.vues.h);
+  $('grille-ref-fermee').src=grille.reference.fermee;
+  $('grille-ref-ouverte').src=grille.reference.ouverte;
+  $('grille-sheet').src=grille.calques[0];
+  $('grille-lever').onclick=basculerGrille;
+  $('grille-editor-lever').onclick=basculerGrille;
+  $('grille-passer').onclick=()=>{if(grilleOuverte())openDepuisAtlas(grilleNext);};
+  $('grille-voir-plan').onclick=()=>openDepuisAtlas(grilleHall);
+}
+function updateGrille(){
+  $('grille-demo').hidden=s.page!=='atlas';
+  const ouvert=grilleOuverte(),goingUp=lift.target===lastGrille;
+  const msg=lift.moving?(goingUp?'En train de monter · passage bloqué':'En train de descendre · passage bloqué'):(ouvert?'Ouverte · passage libre':'Fermée · passage bloqué');
+  const action=lift.moving?(goingUp?'Ouverture…':'Fermeture…'):(ouvert?'Abaisser la grille':'Lever la grille');
+  $('grille-etat').textContent=msg;
+  $('grille-editor-status').textContent=msg;
+  $('grille-editor-tools').hidden=!s.room.gates.some(g=>isGrilleLink(s.room,g));
+  for(const key of ['grille-lever','grille-editor-lever']){const b=$(key);b.disabled=lift.moving;b.querySelector('span').textContent=action;}
+  $('grille-passer').disabled=!ouvert;
+  grilleCv.parentElement.dataset.ouvert=String(ouvert);
+  grilleCv.setAttribute('aria-label','Escalier nord : grille '+msg.toLowerCase());
+}
+function paintGrille(visibleOnly=false){
+  if(visibleOnly&&!inWindow(grilleCv))return;
+  drawScene(grilleCv.getContext('2d'),grilleHall,s.phase,grille.vues);
+  grilleCv.dataset.grilleImage=String(lift.frame);
+}
+// Grille/js/fin
+setupGrille();setupSeuil();setupAtlas();updatePalette();refresh();setupMotion();
+})();
+</script>
+</body>
+</html>

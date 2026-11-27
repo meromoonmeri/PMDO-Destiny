@@ -1,0 +1,17 @@
+[2026/11/26 13:16:47.445] [SE]:[COCON Z] début bas cible=114 témoin=114
+[2026/11/26 13:16:48.959] [SE]:[COCON Z] résultat bas cible=114->79 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:16:49.709] [SE]:[COCON Z] début bas-gauche cible=114 témoin=114
+[2026/11/26 13:16:51.243] [SE]:[COCON Z] résultat bas-gauche cible=114->78 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:16:51.993] [SE]:[COCON Z] début gauche cible=114 témoin=114
+[2026/11/26 13:16:53.526] [SE]:[COCON Z] résultat gauche cible=114->80 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:16:54.293] [SE]:[COCON Z] début haut-gauche cible=114 témoin=114
+[2026/11/26 13:16:55.831] [SE]:[COCON Z] résultat haut-gauche cible=114->77 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:16:56.576] [SE]:[COCON Z] début haut cible=114 témoin=114
+[2026/11/26 13:16:58.215] [SE]:[COCON Z] résultat haut cible=114->78 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:16:59.009] [SE]:[COCON Z] début haut-droite cible=114 témoin=114
+[2026/11/26 13:17:00.576] [SE]:[COCON Z] résultat haut-droite cible=114->76 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:17:01.328] [SE]:[COCON Z] début droite cible=114 témoin=114
+[2026/11/26 13:17:02.911] [SE]:[COCON Z] résultat droite cible=114->77 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:17:03.676] [SE]:[COCON Z] début bas-droite cible=114 témoin=114
+[2026/11/26 13:17:05.209] [SE]:[COCON Z] résultat bas-droite cible=114->77 témoin=114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:17:05.967] [SE]:[COCON Z] FIN

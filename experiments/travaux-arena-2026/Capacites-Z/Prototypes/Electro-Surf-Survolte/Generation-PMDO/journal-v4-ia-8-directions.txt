@@ -1,0 +1,52 @@
+[2026/11/26 21:25:01.350] [SE]:[ELECTRO SURF V4 IA] espece=raichu forme=1 attaque-base=thunderbolt
+[2026/11/26 21:25:01.668] [SE]:[ELECTRO SURF V4 IA] début bas
+[2026/11/26 21:25:07.954] [SE]:[ELECTRO SURF V4 IA] bas cible=1 PV=155->74 paralysie=true charges=0
+[2026/11/26 21:25:07.954] [SE]:[ELECTRO SURF V4 IA] bas cible=2 PV=155->64 paralysie=true charges=0
+[2026/11/26 21:25:07.954] [SE]:[ELECTRO SURF V4 IA] bas cible=3 PV=155->72 paralysie=true charges=0
+[2026/11/26 21:25:07.954] [SE]:[ELECTRO SURF V4 IA] bas cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:07.954] [SE]:[ELECTRO SURF V4 IA] bas cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:08.530] [SE]:[ELECTRO SURF V4 IA] début bas-gauche
+[2026/11/26 21:25:14.512] [SE]:[ELECTRO SURF V4 IA] bas-gauche cible=1 PV=155->72 paralysie=true charges=0
+[2026/11/26 21:25:14.513] [SE]:[ELECTRO SURF V4 IA] bas-gauche cible=2 PV=155->67 paralysie=true charges=0
+[2026/11/26 21:25:14.513] [SE]:[ELECTRO SURF V4 IA] bas-gauche cible=3 PV=155->70 paralysie=true charges=0
+[2026/11/26 21:25:14.513] [SE]:[ELECTRO SURF V4 IA] bas-gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:14.513] [SE]:[ELECTRO SURF V4 IA] bas-gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:15.096] [SE]:[ELECTRO SURF V4 IA] début gauche
+[2026/11/26 21:25:21.046] [SE]:[ELECTRO SURF V4 IA] gauche cible=1 PV=155->70 paralysie=true charges=0
+[2026/11/26 21:25:21.046] [SE]:[ELECTRO SURF V4 IA] gauche cible=2 PV=155->67 paralysie=true charges=0
+[2026/11/26 21:25:21.046] [SE]:[ELECTRO SURF V4 IA] gauche cible=3 PV=155->70 paralysie=true charges=0
+[2026/11/26 21:25:21.046] [SE]:[ELECTRO SURF V4 IA] gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:21.046] [SE]:[ELECTRO SURF V4 IA] gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:21.629] [SE]:[ELECTRO SURF V4 IA] début haut-gauche
+[2026/11/26 21:25:27.746] [SE]:[ELECTRO SURF V4 IA] haut-gauche cible=1 PV=155->72 paralysie=true charges=0
+[2026/11/26 21:25:27.746] [SE]:[ELECTRO SURF V4 IA] haut-gauche cible=2 PV=155->73 paralysie=true charges=0
+[2026/11/26 21:25:27.746] [SE]:[ELECTRO SURF V4 IA] haut-gauche cible=3 PV=155->71 paralysie=true charges=0
+[2026/11/26 21:25:27.746] [SE]:[ELECTRO SURF V4 IA] haut-gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:27.746] [SE]:[ELECTRO SURF V4 IA] haut-gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:28.332] [SE]:[ELECTRO SURF V4 IA] début haut
+[2026/11/26 21:25:34.279] [SE]:[ELECTRO SURF V4 IA] haut cible=1 PV=155->69 paralysie=true charges=0
+[2026/11/26 21:25:34.280] [SE]:[ELECTRO SURF V4 IA] haut cible=2 PV=155->68 paralysie=true charges=0
+[2026/11/26 21:25:34.280] [SE]:[ELECTRO SURF V4 IA] haut cible=3 PV=155->68 paralysie=true charges=0
+[2026/11/26 21:25:34.280] [SE]:[ELECTRO SURF V4 IA] haut cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:34.280] [SE]:[ELECTRO SURF V4 IA] haut cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:34.880] [SE]:[ELECTRO SURF V4 IA] début haut-droite
+[2026/11/26 21:25:40.829] [SE]:[ELECTRO SURF V4 IA] haut-droite cible=1 PV=155->74 paralysie=true charges=0
+[2026/11/26 21:25:40.829] [SE]:[ELECTRO SURF V4 IA] haut-droite cible=2 PV=155->67 paralysie=true charges=0
+[2026/11/26 21:25:40.829] [SE]:[ELECTRO SURF V4 IA] haut-droite cible=3 PV=155->69 paralysie=true charges=0
+[2026/11/26 21:25:40.829] [SE]:[ELECTRO SURF V4 IA] haut-droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:40.829] [SE]:[ELECTRO SURF V4 IA] haut-droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:41.412] [SE]:[ELECTRO SURF V4 IA] début droite
+[2026/11/26 21:25:47.362] [SE]:[ELECTRO SURF V4 IA] droite cible=1 PV=155->74 paralysie=true charges=0
+[2026/11/26 21:25:47.362] [SE]:[ELECTRO SURF V4 IA] droite cible=2 PV=155->64 paralysie=true charges=0
+[2026/11/26 21:25:47.362] [SE]:[ELECTRO SURF V4 IA] droite cible=3 PV=155->64 paralysie=true charges=0
+[2026/11/26 21:25:47.362] [SE]:[ELECTRO SURF V4 IA] droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:47.362] [SE]:[ELECTRO SURF V4 IA] droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:47.946] [SE]:[ELECTRO SURF V4 IA] début bas-droite
+[2026/11/26 21:25:54.163] [SE]:[ELECTRO SURF V4 IA] bas-droite cible=1 PV=155->68 paralysie=true charges=0
+[2026/11/26 21:25:54.163] [SE]:[ELECTRO SURF V4 IA] bas-droite cible=2 PV=155->69 paralysie=true charges=0
+[2026/11/26 21:25:54.163] [SE]:[ELECTRO SURF V4 IA] bas-droite cible=3 PV=155->71 paralysie=true charges=0
+[2026/11/26 21:25:54.163] [SE]:[ELECTRO SURF V4 IA] bas-droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 21:25:54.163] [SE]:[ELECTRO SURF V4 IA] bas-droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 21:25:54.746] [SE]:[ELECTRO SURF V4 IA] début immunité Électrik PV=110
+[2026/11/26 21:25:58.862] [SE]:[ELECTRO SURF V4 IA] immunité Électrik PV=110->47 paralysie=false charges=0
+[2026/11/26 21:25:59.612] [SE]:[ELECTRO SURF V4 IA] FIN OK

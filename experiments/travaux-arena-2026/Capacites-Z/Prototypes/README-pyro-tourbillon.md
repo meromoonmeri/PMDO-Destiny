@@ -1,0 +1,13 @@
+# Pyro-Explosion et Super Tourbillon : prototypes
+
+Images originales générées conservées dans les dossiers respectifs. Le script `Sources/generer-pyro-tourbillon.py` détoure, redimensionne et anime ces images et crée deux planches Dir8 de 32 poses et leurs banques `.dir` expérimentales. Pyro projette une boule dans l'axe de la cible ; Tourbillon est un effet radial au sol placé sur l'ennemi, répété dans les huit directions pour préserver sa perspective au sol.
+
+`pyro-et-tourbillon-8-directions-son.mp4` montre les deux prototypes en donjon PMDO 0.8.12, avec les sons de jeu `DUN_Fire_Blast` et `DUN_Whirlpool` capturés depuis le moteur. Le test déplace un vrai ennemi dans chacune des huit positions, anime le lanceur et applique à chaque fois 10 points de dégâts fixes via script ; le journal confirme 155 → 145 pour chaque passage et la planche de contrôle montre le placement. Les formes et le timing restent des prototypes à améliorer et valider : images générées et animées par transformations, pas une animation officielle certifiée ni huit dessins indépendants pour le projectile. Le vortex peut encore masquer visuellement la cible.
+
+**Non testé / non intégré :** capacité sélectionnable, visée et collisions automatiques, dégâts calculés, portée réelle, cristal et limitation Z. Aucun changement à l'installation de l'utilisateur ; uniquement la copie isolée de test. Le banc téléporte les personnages et force la cible ; il ne prouve pas le fonctionnement d'un combat ordinaire.
+
+## V2 — sprites et fiches d'essai PMDO
+
+Les dossiers `V2-PMDO` contiennent de nouvelles planches dessinées par programme pose par pose : projectile feu 8 poses × 8 vues et impact 16 poses ; tourbillon de cible 16 poses en couches avant/arrière et huit lignes. Il ne s'agit pas de 16 générations d'images IA indépendantes ni d'une fidélité artistique officielle certifiée. La V1 est conservée. Pour l'eau, le projectile bleu utilise l'effet natif PMDO `Wave_Circle_Blue` ; le vortex d'impact est nouveau.
+
+`pyro-tourbillon-v2-8-directions-pmdo.mp4` et `journal-pyro-tourbillon-v2-natif.txt` : 16 appels de `ProcessUseSkill`, cibles créées, placées et restaurées par script ; déplacement du projectile, collision, réduction des PV et PP par le moteur. Son capturé depuis le jeu. Le lanceur est Dracaufeu, la cible Ronflex. Puissance 100 et catégorie spéciale définies pour le test ; non représentatives du calcul Z lié à l'attaque d'origine. Le banc teste les huit directions sur un seul Pokémon et une seule cible, en terrain dégagé, pas les murs ni les accès normaux. Les fiches originales ont été remises dans la copie isolée après test. Ces prototypes doivent encore être affinés et les règles Z implémentées.

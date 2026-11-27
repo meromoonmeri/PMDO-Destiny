@@ -1,0 +1,18 @@
+[2026/11/26 13:35:16.859] [SE]:[PIKACHUTE Z] espece=pikachu attaque-base=volt_tackle
+[2026/11/26 13:35:17.145] [SE]:[PIKACHUTE Z] début bas cible=155 témoin=155
+[2026/11/26 13:35:19.483] [SE]:[PIKACHUTE Z] résultat bas cible=155->108 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:20.226] [SE]:[PIKACHUTE Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 13:35:22.204] [SE]:[PIKACHUTE Z] résultat bas-gauche cible=155->107 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:22.956] [SE]:[PIKACHUTE Z] début gauche cible=155 témoin=155
+[2026/11/26 13:35:24.921] [SE]:[PIKACHUTE Z] résultat gauche cible=155->108 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:25.672] [SE]:[PIKACHUTE Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 13:35:27.771] [SE]:[PIKACHUTE Z] résultat haut-gauche cible=155->107 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:28.523] [SE]:[PIKACHUTE Z] début haut cible=155 témoin=155
+[2026/11/26 13:35:30.746] [SE]:[PIKACHUTE Z] résultat haut cible=155->104 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:31.522] [SE]:[PIKACHUTE Z] début haut-droite cible=155 témoin=155
+[2026/11/26 13:35:33.784] [SE]:[PIKACHUTE Z] résultat haut-droite cible=155->107 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:34.638] [SE]:[PIKACHUTE Z] début droite cible=155 témoin=155
+[2026/11/26 13:35:36.804] [SE]:[PIKACHUTE Z] résultat droite cible=155->105 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:37.788] [SE]:[PIKACHUTE Z] début bas-droite cible=155 témoin=155
+[2026/11/26 13:35:39.964] [SE]:[PIKACHUTE Z] résultat bas-droite cible=155->108 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 13:35:40.976] [SE]:[PIKACHUTE Z] FIN

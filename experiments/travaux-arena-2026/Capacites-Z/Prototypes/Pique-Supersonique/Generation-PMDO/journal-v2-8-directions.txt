@@ -1,0 +1,26 @@
+[2026/11/26 16:38:56.014] [SE]:[PIQUE V2 Z] espece=pidgeot attaque-base=aerial_ace
+[2026/11/26 16:38:56.539] [SE]:[PIQUE V2 Z] début bas cible=155 témoin=155
+[2026/11/26 16:38:57.313] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:38:59.170] [SE]:[PIQUE V2 Z] résultat bas cible=155->101 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:38:59.930] [SE]:[PIQUE V2 Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 16:39:00.663] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:02.279] [SE]:[PIQUE V2 Z] résultat bas-gauche cible=155->101 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:03.050] [SE]:[PIQUE V2 Z] début gauche cible=155 témoin=155
+[2026/11/26 16:39:03.796] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:05.413] [SE]:[PIQUE V2 Z] résultat gauche cible=155->95 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:06.163] [SE]:[PIQUE V2 Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 16:39:06.896] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:08.546] [SE]:[PIQUE V2 Z] résultat haut-gauche cible=155->98 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:09.297] [SE]:[PIQUE V2 Z] début haut cible=155 témoin=155
+[2026/11/26 16:39:10.029] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:11.646] [SE]:[PIQUE V2 Z] résultat haut cible=155->95 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:12.397] [SE]:[PIQUE V2 Z] début haut-droite cible=155 témoin=155
+[2026/11/26 16:39:13.129] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:14.746] [SE]:[PIQUE V2 Z] résultat haut-droite cible=155->99 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:15.498] [SE]:[PIQUE V2 Z] début droite cible=155 témoin=155
+[2026/11/26 16:39:16.229] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:18.059] [SE]:[PIQUE V2 Z] résultat droite cible=155->97 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:18.980] [SE]:[PIQUE V2 Z] début bas-droite cible=155 témoin=155
+[2026/11/26 16:39:19.713] [SE]:[PIQUE V2 Z] décollage plumes et rémanence terminé
+[2026/11/26 16:39:21.446] [SE]:[PIQUE V2 Z] résultat bas-droite cible=155->96 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:39:22.379] [SE]:[PIQUE V2 Z] FIN OK

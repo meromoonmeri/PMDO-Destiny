@@ -1,0 +1,7 @@
+[2026/11/26 23:52:24.330] [SE]:[PATATI Z] espece=mimikyu attaque-base=play_rough
+[2026/11/26 23:52:24.366] [SE]:[PATATI Z] début bas cible=270 témoin=270
+[2026/11/26 23:52:28.090] [SE]:[PATATI V3 KO] tirage=0/1000
+[2026/11/26 23:52:28.090] [SE]:[PATATI V3 KO] DECLENCHE
+[2026/11/26 23:52:29.414] [SE]:[PATATI Z] résultat bas cible=270->0 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:52:29.414] [SE]:[PATATI V3 TEST] KO forcé confirmé, sprites restaurés
+[2026/11/26 23:52:30.156] [SE]:[PATATI Z] FIN OK

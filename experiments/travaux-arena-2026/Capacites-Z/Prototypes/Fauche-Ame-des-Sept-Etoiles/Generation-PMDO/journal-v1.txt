@@ -1,0 +1,19 @@
+[2026/11/27 01:01:04.692] [SE]:[Fauche Z] debut bas cible=270
+[2026/11/27 01:01:08.416] [SE]:[Fauche Z] resultat bas cible=270->236 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:08.708] [SE]:[Fauche Z] debut bas-gauche cible=270
+[2026/11/27 01:01:12.141] [SE]:[Fauche Z] resultat bas-gauche cible=270->238 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:12.440] [SE]:[Fauche Z] debut gauche cible=270
+[2026/11/27 01:01:15.873] [SE]:[Fauche Z] resultat gauche cible=270->235 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:16.174] [SE]:[Fauche Z] debut haut-gauche cible=270
+[2026/11/27 01:01:19.607] [SE]:[Fauche Z] resultat haut-gauche cible=270->238 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:19.907] [SE]:[Fauche Z] debut haut cible=270
+[2026/11/27 01:01:23.340] [SE]:[Fauche Z] resultat haut cible=270->238 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:23.640] [SE]:[Fauche Z] debut haut-droite cible=270
+[2026/11/27 01:01:27.090] [SE]:[Fauche Z] resultat haut-droite cible=270->235 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:27.390] [SE]:[Fauche Z] debut droite cible=270
+[2026/11/27 01:01:30.823] [SE]:[Fauche Z] resultat droite cible=270->237 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:31.124] [SE]:[Fauche Z] debut bas-droite cible=270
+[2026/11/27 01:01:34.557] [SE]:[Fauche Z] resultat bas-droite cible=270->237 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:34.857] [SE]:[Fauche Z] debut immunite type cible=395
+[2026/11/27 01:01:37.790] [SE]:[Fauche Z] resultat immunite type cible=395->395 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 01:01:38.090] [SE]:[Fauche Z] FIN OK

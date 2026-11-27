@@ -1,0 +1,17 @@
+[2026/11/27 10:59:23.160] [SE]:[SPATIO V1] début bas
+[2026/11/27 10:59:27.225] [SE]:[SPATIO V1] résultat bas 140->59,140->58,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:27.646] [SE]:[SPATIO V1] début bas-gauche
+[2026/11/27 10:59:31.687] [SE]:[SPATIO V1] résultat bas-gauche 140->61,140->61,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:32.128] [SE]:[SPATIO V1] début gauche
+[2026/11/27 10:59:36.164] [SE]:[SPATIO V1] résultat gauche 140->58,140->65,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:36.631] [SE]:[SPATIO V1] début haut-gauche
+[2026/11/27 10:59:40.662] [SE]:[SPATIO V1] résultat haut-gauche 140->58,140->64,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:41.077] [SE]:[SPATIO V1] début haut
+[2026/11/27 10:59:45.180] [SE]:[SPATIO V1] résultat haut 140->65,140->59,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:45.611] [SE]:[SPATIO V1] début haut-droite
+[2026/11/27 10:59:49.860] [SE]:[SPATIO V1] résultat haut-droite 140->65,140->59,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:50.318] [SE]:[SPATIO V1] début droite
+[2026/11/27 10:59:54.410] [SE]:[SPATIO V1] résultat droite 140->63,140->63,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 10:59:54.835] [SE]:[SPATIO V1] début bas-droite
+[2026/11/27 10:59:58.962] [SE]:[SPATIO V1] résultat bas-droite 140->58,140->62,122->122 charges=4 action=TurnTaken: 2
+[2026/11/27 11:00:00.127] [SE]:[SPATIO V1] FIN OK

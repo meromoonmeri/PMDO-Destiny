@@ -1,0 +1,52 @@
+{
+  "statut": "PASS",
+  "version_cliff": "0.7.7",
+  "ressources_originales_sha256_intactes": 39,
+  "cadres_de_calques_reconstruits": 84,
+  "passages_conserves": true,
+  "lune_xy": [
+    399,
+    117
+  ],
+  "ambiances": {
+    "jour": {
+      "mer_poses_distinctes": 12,
+      "braseros_poses_distinctes": 1,
+      "ombre_pixels_sous_les_marches_apres_y285": 1645,
+      "saut_alpha_max_raccord": 18,
+      "relief_et_entrees_intacts": true
+    },
+    "aube": {
+      "mer_poses_distinctes": 12,
+      "braseros_poses_distinctes": 1,
+      "ombre_pixels_sous_les_marches_apres_y285": 1213,
+      "saut_alpha_max_raccord": 27,
+      "relief_et_entrees_intacts": true
+    },
+    "crepuscule": {
+      "mer_poses_distinctes": 12,
+      "braseros_poses_distinctes": 1,
+      "ombre_pixels_sous_les_marches_apres_y285": 1332,
+      "saut_alpha_max_raccord": 23,
+      "relief_et_entrees_intacts": true
+    },
+    "nuit": {
+      "mer_poses_distinctes": 12,
+      "braseros_poses_distinctes": 4,
+      "ombre_pixels_sous_les_marches_apres_y285": 1506,
+      "saut_alpha_max_raccord": 23,
+      "relief_et_entrees_intacts": true
+    }
+  },
+  "video": {
+    "nom": "Falaise-Destiny-Ombre-et-Lune.mp4",
+    "format": "H.264 1920×1080 yuv420p, 30 i/s",
+    "images": 636,
+    "duree_s": 21.2,
+    "octets": 3036471,
+    "sha256": "bbbe71455aa58633515c484782f1560560f57fed9e74830d66c482666e50ddb3",
+    "faststart": true,
+    "decode_integral": true
+  },
+  "source_precedente_sha256": "005bc65efd4b88102eb0bedc3c484e51dd20750b2f7a99fd7d2caf02662676d5"
+}

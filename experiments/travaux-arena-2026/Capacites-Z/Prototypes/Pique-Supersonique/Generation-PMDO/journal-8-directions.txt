@@ -1,0 +1,26 @@
+[2026/11/26 16:10:55.982] [SE]:[PIQUE Z] espece=pidgeot attaque-base=aerial_ace
+[2026/11/26 16:10:56.502] [SE]:[PIQUE Z] début bas cible=155 témoin=155
+[2026/11/26 16:10:57.222] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:10:59.099] [SE]:[PIQUE Z] résultat bas cible=155->100 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:10:59.840] [SE]:[PIQUE Z] début bas-gauche cible=155 témoin=155
+[2026/11/26 16:11:00.572] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:02.222] [SE]:[PIQUE Z] résultat bas-gauche cible=155->100 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:02.972] [SE]:[PIQUE Z] début gauche cible=155 témoin=155
+[2026/11/26 16:11:03.705] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:05.322] [SE]:[PIQUE Z] résultat gauche cible=155->99 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:06.073] [SE]:[PIQUE Z] début haut-gauche cible=155 témoin=155
+[2026/11/26 16:11:06.805] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:08.439] [SE]:[PIQUE Z] résultat haut-gauche cible=155->97 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:09.189] [SE]:[PIQUE Z] début haut cible=155 témoin=155
+[2026/11/26 16:11:09.961] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:11.655] [SE]:[PIQUE Z] résultat haut cible=155->97 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:12.406] [SE]:[PIQUE Z] début haut-droite cible=155 témoin=155
+[2026/11/26 16:11:13.138] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:14.772] [SE]:[PIQUE Z] résultat haut-droite cible=155->97 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:15.522] [SE]:[PIQUE Z] début droite cible=155 témoin=155
+[2026/11/26 16:11:16.255] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:17.889] [SE]:[PIQUE Z] résultat droite cible=155->101 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:18.674] [SE]:[PIQUE Z] début bas-droite cible=155 témoin=155
+[2026/11/26 16:11:19.405] [SE]:[PIQUE Z] décollage terminé
+[2026/11/26 16:11:21.022] [SE]:[PIQUE Z] résultat bas-droite cible=155->100 témoin=155->155 action=TurnTaken: 2 charges=0
+[2026/11/26 16:11:22.123] [SE]:[PIQUE Z] FIN OK

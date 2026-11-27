@@ -1,0 +1,78 @@
+[2026/11/27 11:43:36.208] [SE]:[CANON BLINDE V2] espece=armarouge forme=0 attaque-base=flamethrower
+[2026/11/27 11:43:36.251] [SE]:[CANON BLINDE V2] début bas
+[2026/11/27 11:43:41.563] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:43:41.564] [SE]:[CANON BLINDE IMPACT] 4,7
+[2026/11/27 11:43:44.413] [SE]:[CANON BLINDE V2] bas cible=1 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:43:44.413] [SE]:[CANON BLINDE V2] bas cible=2 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:43:44.413] [SE]:[CANON BLINDE V2] bas cible=3 PV=202->137 brûlure=true charges=4
+[2026/11/27 11:43:44.413] [SE]:[CANON BLINDE V2] bas cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:43:44.413] [SE]:[CANON BLINDE V2] bas cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:43:44.415] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:43:45.071] [SE]:[CANON BLINDE V2] début bas-gauche
+[2026/11/27 11:43:50.342] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:43:50.342] [SE]:[CANON BLINDE IMPACT] 1,7
+[2026/11/27 11:43:53.137] [SE]:[CANON BLINDE V2] bas-gauche cible=1 PV=202->142 brûlure=true charges=4
+[2026/11/27 11:43:53.138] [SE]:[CANON BLINDE V2] bas-gauche cible=2 PV=202->142 brûlure=true charges=4
+[2026/11/27 11:43:53.138] [SE]:[CANON BLINDE V2] bas-gauche cible=3 PV=202->142 brûlure=true charges=4
+[2026/11/27 11:43:53.138] [SE]:[CANON BLINDE V2] bas-gauche cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:43:53.138] [SE]:[CANON BLINDE V2] bas-gauche cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:43:53.138] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:43:53.754] [SE]:[CANON BLINDE V2] début gauche
+[2026/11/27 11:43:58.754] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:43:58.755] [SE]:[CANON BLINDE IMPACT] 1,4
+[2026/11/27 11:44:01.437] [SE]:[CANON BLINDE V2] gauche cible=1 PV=202->137 brûlure=true charges=4
+[2026/11/27 11:44:01.437] [SE]:[CANON BLINDE V2] gauche cible=2 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:01.437] [SE]:[CANON BLINDE V2] gauche cible=3 PV=202->140 brûlure=true charges=4
+[2026/11/27 11:44:01.437] [SE]:[CANON BLINDE V2] gauche cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:01.437] [SE]:[CANON BLINDE V2] gauche cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:01.438] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:02.021] [SE]:[CANON BLINDE V2] début haut-gauche
+[2026/11/27 11:44:07.019] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:07.019] [SE]:[CANON BLINDE IMPACT] 1,1
+[2026/11/27 11:44:09.675] [SE]:[CANON BLINDE V2] haut-gauche cible=1 PV=202->143 brûlure=true charges=4
+[2026/11/27 11:44:09.676] [SE]:[CANON BLINDE V2] haut-gauche cible=2 PV=202->140 brûlure=true charges=4
+[2026/11/27 11:44:09.676] [SE]:[CANON BLINDE V2] haut-gauche cible=3 PV=202->143 brûlure=true charges=4
+[2026/11/27 11:44:09.676] [SE]:[CANON BLINDE V2] haut-gauche cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:09.676] [SE]:[CANON BLINDE V2] haut-gauche cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:09.677] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:10.338] [SE]:[CANON BLINDE V2] début haut
+[2026/11/27 11:44:15.848] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:15.848] [SE]:[CANON BLINDE IMPACT] 4,1
+[2026/11/27 11:44:19.052] [SE]:[CANON BLINDE V2] haut cible=1 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:19.053] [SE]:[CANON BLINDE V2] haut cible=2 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:19.053] [SE]:[CANON BLINDE V2] haut cible=3 PV=202->140 brûlure=true charges=4
+[2026/11/27 11:44:19.053] [SE]:[CANON BLINDE V2] haut cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:19.053] [SE]:[CANON BLINDE V2] haut cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:19.053] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:19.704] [SE]:[CANON BLINDE V2] début haut-droite
+[2026/11/27 11:44:24.744] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:24.744] [SE]:[CANON BLINDE IMPACT] 7,1
+[2026/11/27 11:44:27.386] [SE]:[CANON BLINDE V2] haut-droite cible=1 PV=202->140 brûlure=true charges=4
+[2026/11/27 11:44:27.386] [SE]:[CANON BLINDE V2] haut-droite cible=2 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:27.386] [SE]:[CANON BLINDE V2] haut-droite cible=3 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:27.386] [SE]:[CANON BLINDE V2] haut-droite cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:27.386] [SE]:[CANON BLINDE V2] haut-droite cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:27.387] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:28.287] [SE]:[CANON BLINDE V2] début droite
+[2026/11/27 11:44:33.340] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:33.340] [SE]:[CANON BLINDE IMPACT] 7,4
+[2026/11/27 11:44:36.091] [SE]:[CANON BLINDE V2] droite cible=1 PV=202->142 brûlure=true charges=4
+[2026/11/27 11:44:36.091] [SE]:[CANON BLINDE V2] droite cible=2 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:36.091] [SE]:[CANON BLINDE V2] droite cible=3 PV=202->138 brûlure=true charges=4
+[2026/11/27 11:44:36.091] [SE]:[CANON BLINDE V2] droite cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:36.091] [SE]:[CANON BLINDE V2] droite cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:36.092] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:36.854] [SE]:[CANON BLINDE V2] début bas-droite
+[2026/11/27 11:44:42.120] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:42.120] [SE]:[CANON BLINDE IMPACT] 7,7
+[2026/11/27 11:44:44.890] [SE]:[CANON BLINDE V2] bas-droite cible=1 PV=202->140 brûlure=true charges=4
+[2026/11/27 11:44:44.890] [SE]:[CANON BLINDE V2] bas-droite cible=2 PV=202->137 brûlure=true charges=4
+[2026/11/27 11:44:44.890] [SE]:[CANON BLINDE V2] bas-droite cible=3 PV=202->142 brûlure=true charges=4
+[2026/11/27 11:44:44.890] [SE]:[CANON BLINDE V2] bas-droite cible=4 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:44.890] [SE]:[CANON BLINDE V2] bas-droite cible=5 PV=202->202 brûlure=false charges=4
+[2026/11/27 11:44:44.891] [SE]:[CANON BLINDE V2] baisses def=-1 defspe=-1
+[2026/11/27 11:44:45.756] [SE]:[CANON BLINDE V2] début collision mur
+[2026/11/27 11:44:48.670] [SE]:[CANON BLINDE IMPACT] points=1
+[2026/11/27 11:44:48.671] [SE]:[CANON BLINDE IMPACT] 6,4
+[2026/11/27 11:44:51.489] [SE]:[CANON BLINDE V2] mur impact=6,4 attendu=6,4 derrière=202->202
+[2026/11/27 11:44:52.400] [SE]:[CANON BLINDE V2] FIN OK

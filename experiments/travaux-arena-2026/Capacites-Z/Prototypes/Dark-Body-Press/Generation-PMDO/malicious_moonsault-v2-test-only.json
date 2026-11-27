@@ -1,0 +1,282 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.SkillData, RogueEssence",
+    "Name": {
+      "DefaultText": "Malicious Moonsault",
+      "LocalTexts": {
+        "fr": "Dark Body Press",
+        "de": "Hyper Dark Crusher",
+        "es": "Hiperplancha Oscura",
+        "it": "Iperschianto delle Tenebre",
+        "ko": "하이퍼다크크러셔",
+        "ja": "ハイパーダーククラッシャー",
+        "ja-jp": "ハイパーダーククラッシャー",
+        "zh-hans": "极恶飞跃粉碎击",
+        "zh-hant": "極惡飛躍粉碎擊"
+      }
+    },
+    "Desc": {
+      "DefaultText": "The user, Incineroar, strengthens its body using its Z-Power and crashes into the target with full force.",
+      "LocalTexts": {
+        "fr": "Félinferno utilise la Force Z pour gonfler ses muscles et écraser la cible de toutes ses forces.",
+        "de": "Mit seinem durch Z-Kraft gestählten Körper stürzt sich Fuegro mit ganzer Kraft auf das Ziel.",
+        "es": "Incineroar refuerza sus músculos con el Poder Z para golpear con todas sus fuerzas a su oponente.",
+        "it": "Grazie al Potere Z, Incineroar richiama tutta la sua forza e si lancia impetuosamente sul bersaglio.",
+        "ko": "Z파워로 강한 육체를 얻은 어흥염이 전력으로 상대에게 부딪쳐 공격한다.",
+        "ja": "Ｚパワーで　タフな　にくたいを　えた ガオガエンが　ぜんりょくで あいてに　ぶつかって　こうげきする。",
+        "ja-jp": "Ｚパワーで　タフな　肉体を　得た ガオガエンが　全力で 相手に　ぶつかって　攻撃する。",
+        "zh-hans": "通过Ｚ力量得到强壮肉体的炽焰咆哮虎将全力撞向对手进行攻击。",
+        "zh-hant": "透過Ｚ力量得到 強壯肉體的熾焰咆哮虎 全力撞向對手進行攻擊。"
+      }
+    },
+    "Released": true,
+    "Comment": "",
+    "IndexNum": 696,
+    "BaseCharges": 1,
+    "Strikes": 1,
+    "HitboxAction": {
+      "$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+      "Anim": {
+        "AnimIndex": "",
+        "FrameTime": 1,
+        "StartFrame": -1,
+        "EndFrame": -1,
+        "AnimDir": -1,
+        "Alpha": 255,
+        "AnimFlip": 0
+      },
+      "AnimOffset": 0,
+      "Emitter": {
+        "$type": "RogueEssence.Content.AfterImageEmitter, RogueEssence",
+        "AnimTime": 8,
+        "BurstTime": 1,
+        "Alpha": 128,
+        "AlphaSpeed": 0
+      },
+      "WideAngle": 1,
+      "SnapBack": false,
+      "CharAnim": 5,
+      "AppearanceMod": 0,
+      "HitTiles": true,
+      "Range": 3,
+      "StopAtHit": true,
+      "StopAtWall": true,
+      "TargetAlignments": 4,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+        "LocHeight": 0,
+        "finished": false,
+        "Offset": 0,
+        "Anim": {
+          "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+          "Anim": {
+            "AnimIndex": "Smoke_Purple",
+            "FrameTime": 2,
+            "StartFrame": -1,
+            "EndFrame": -1,
+            "AnimDir": -1,
+            "Alpha": 255,
+            "AnimFlip": 0
+          },
+          "TotalTime": 0,
+          "Cycles": 1,
+          "FrameOffset": 0
+        },
+        "Layer": 2,
+        "UseDest": false
+      },
+      "PreActions": [],
+      "ActionFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "DUN_Night_Slash",
+        "Emitter": {
+          "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+          "LocHeight": 0
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "LagBehindTime": 12
+    },
+    "Explosion": {
+      "TargetAlignments": 4,
+      "HitTiles": true,
+      "Range": 0,
+      "Speed": 0,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "Emitter": {
+        "$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "IntroFX": [],
+      "ExplodeFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "",
+        "Emitter": {
+          "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+          "LocHeight": 0,
+          "finished": false,
+          "Offset": 0,
+          "Anim": {
+            "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+            "Anim": {
+              "AnimIndex": "Night_Slash_Hit",
+              "FrameTime": 1,
+              "StartFrame": -1,
+              "EndFrame": -1,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 0,
+            "Cycles": 1,
+            "FrameOffset": 0
+          },
+          "Layer": 2,
+          "UseDest": false
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      }
+    },
+    "Data": {
+      "Element": "dark",
+      "Category": 1,
+      "HitRate": -1,
+      "SkillStates": [
+        {
+          "$type": "PMDC.Dungeon.ContactState, PMDC"
+        },
+        {
+          "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+          "Power": 180
+        }
+      ],
+      "BeforeTryActions": [],
+      "BeforeActions": [
+        {
+          "Key": {
+            "str": [
+              0
+            ]
+          },
+          "Value": {
+            "$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+            "Script": "DarkBodyV2_Charge",
+            "ArgTable": "{}"
+          }
+        }
+      ],
+      "OnActions": [],
+      "BeforeExplosions": [],
+      "BeforeHits": [],
+      "OnHits": [
+        {
+          "Key": {
+            "str": [
+              -1
+            ]
+          },
+          "Value": {
+            "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+          }
+        }
+      ],
+      "OnHitTiles": [
+        {
+          "Key": {
+            "str": [
+              0
+            ]
+          },
+          "Value": {
+            "$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+            "States": [
+              {
+                "assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+                "type": "PMDC.Dungeon.WallTerrainState"
+              }
+            ],
+            "RemoveSound": "DUN_Rollout",
+            "RemoveAnim": {
+              "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+              "LocHeight": 0,
+              "finished": false,
+              "Offset": 0,
+              "Anim": {
+                "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+                "Anim": {
+                  "AnimIndex": "Wall_Break",
+                  "FrameTime": 2,
+                  "StartFrame": -1,
+                  "EndFrame": -1,
+                  "AnimDir": -1,
+                  "Alpha": 255,
+                  "AnimFlip": 0
+                },
+                "TotalTime": 0,
+                "Cycles": 1,
+                "FrameOffset": 0
+              },
+              "Layer": 2,
+              "UseDest": false
+            }
+          }
+        }
+      ],
+      "AfterActions": [],
+      "ElementEffects": [],
+      "IntroFX": [],
+      "HitFX": {
+        "Delay": 40,
+        "AbsoluteDelay": true,
+        "Sound": "DUN_Giga_Impact",
+        "Emitter": {
+          "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+          "LocHeight": 0,
+          "finished": false,
+          "Offset": 0,
+          "Anim": {
+            "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+            "Anim": {
+              "AnimIndex": "DarkBodyV2_Impact",
+              "FrameTime": 1,
+              "StartFrame": -1,
+              "EndFrame": -1,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 0,
+            "Cycles": 1,
+            "FrameOffset": 0
+          },
+          "Layer": 2,
+          "UseDest": false
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "HitCharAction": {
+        "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+        "Process": 0,
+        "AnimOverride": 0
+      }
+    }
+  }
+}

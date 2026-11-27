@@ -1,0 +1,5 @@
+[2026/11/27 00:44:46.040] [SE]:[HELIO CONTROLE] debut metal_claw hp=270
+[2026/11/27 00:44:46.916] [SE]:[HELIO CONTROLE] fin metal_claw hp=270->270 garde=true suspendu=false
+[2026/11/27 00:44:46.919] [SE]:[HELIO CONTROLE] debut searing_sunraze_smash hp=270
+[2026/11/27 00:44:51.625] [SE]:[HELIO CONTROLE] fin searing_sunraze_smash hp=270->232 garde=true suspendu=false
+[2026/11/27 00:44:51.625] [SE]:[HELIO CONTROLE] FIN OK

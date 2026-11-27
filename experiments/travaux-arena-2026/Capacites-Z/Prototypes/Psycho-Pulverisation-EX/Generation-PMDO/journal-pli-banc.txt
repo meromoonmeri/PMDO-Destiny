@@ -1,0 +1,252 @@
+[2026/11/27 10:37:59.790] =========================================
+
+[2026/11/27 10:37:59.798] SESSION STARTED: 2026/11/27 10:37:59
+
+[2026/11/27 10:37:59.799] Version: 0.8.12.0
+
+[2026/11/27 10:37:59.799] .NET 8.0.34
+
+[2026/11/27 10:37:59.799] =========================================
+
+[2026/11/27 10:37:59.819] -----------------------------------------
+
+[2026/11/27 10:37:59.819] -----------------------------------------
+
+[2026/11/27 10:38:00.000] FNA3D Driver: OpenGL
+
+[2026/11/27 10:38:00.001] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+
+[2026/11/27 10:38:00.001] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+
+[2026/11/27 10:38:00.001] OpenGL Vendor: Mesa
+
+[2026/11/27 10:38:00.001] MojoShader Profile: glsl120
+
+[2026/11/27 10:38:00.028] [SE]:Initialized Lua 5.4
+
+[2026/11/27 10:38:00.028] [SE]:Importing .NET packages..
+
+[2026/11/27 10:38:00.035] [SE]: **- Lua engine started! -**
+
+[2026/11/27 10:38:02.522] [SE]:Exposing game engine components instances..
+
+[2026/11/27 10:38:02.539] [SE]:Exposing script interface..
+
+[2026/11/27 10:38:02.543] [SE]:Setting up lua globals..
+
+[2026/11/27 10:38:02.543] [SE]:Setting up lua paths..
+
+[2026/11/27 10:38:02.547] [SE]:Setting up lua functions...
+
+[2026/11/27 10:38:02.547] [SE]:Setting up debug functions...
+
+[2026/11/27 10:38:02.550] [SE]:Setting up default script vars...
+
+[2026/11/27 10:38:02.554] [SE]:Caching common lib...
+
+[2026/11/27 10:38:02.570] [SE]:Loading events...
+
+[2026/11/27 10:38:02.581] [SE]:Installing game interface functions..
+
+[2026/11/27 10:38:02.587] [SE]:DebugTools:initialize()
+
+[2026/11/27 10:38:02.589] [SE]:Registered service DebugTools!
+
+[2026/11/27 10:38:02.590] [SE]:UpgradeTools:initialize()
+
+[2026/11/27 10:38:02.590] [SE]:Registered service UpgradeTools!
+
+[2026/11/27 10:38:02.591] [SE]:MenuTools:initialize()
+
+[2026/11/27 10:38:02.591] [SE]:Registered service MenuTools!
+
+[2026/11/27 10:38:02.591] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+
+[2026/11/27 10:38:02.592] [SE]:Registered service DestinyTitleAnim!
+
+[2026/11/27 10:38:02.592] [SE]:Registered service StatueKangourex!
+
+[2026/11/27 10:38:02.595] [SE]:Registered service NiloTemoin!
+
+[2026/11/27 10:38:02.597] [SE]: **- Lua engine ready! -**
+
+[2026/11/27 10:38:02.597] [SE]:
+<!> ExampleSvc: Init..
+
+[2026/11/27 10:38:19.293] LuaEngine.OnMusicChange()..
+
+[2026/11/27 10:38:23.003] LuaEngine.LoadSavedData()..
+
+[2026/11/27 10:38:23.005] LuaEngine.LoadSavedData()..
+
+[2026/11/27 10:38:39.038] LuaEngine.LoadSavedData()..
+
+[2026/11/27 10:38:39.091] Zone Seed: 2131181368028249458
+
+[2026/11/27 10:38:39.092] Zone.OnInit(): Initializing the zone..
+
+[2026/11/27 10:38:39.096] Loading rsground file: intro_halo
+
+[2026/11/27 10:38:39.167] Completed file load.
+
+[2026/11/27 10:38:39.173] GroundMap.OnInit(): Initializing the map..
+
+[2026/11/27 10:38:39.176] GroundMap.LoadScriptEvents(): Added event Init to map intro_halo!
+
+[2026/11/27 10:38:39.177] GroundMap.LoadScriptEvents(): Added event Enter to map intro_halo!
+
+[2026/11/27 10:38:39.177] GroundMap.LoadScriptEvents(): Added event Exit to map intro_halo!
+
+[2026/11/27 10:38:39.177] GroundMap.LoadScriptEvents(): Added event Update to map intro_halo!
+
+[2026/11/27 10:38:39.177] GroundMap.LoadScriptEvents(): Added event GameSave to map intro_halo!
+
+[2026/11/27 10:38:39.177] GroundMap.LoadScriptEvents(): Added event GameLoad to map intro_halo!
+
+[2026/11/27 10:38:39.182] LuaEngine.OnGroundMapInit()..
+
+[2026/11/27 10:38:39.220] LuaEngine.SaveData()..
+
+[2026/11/27 10:38:39.352] LuaEngine.SaveData()..
+
+[2026/11/27 10:38:39.368] LuaEngine.OnGroundMapEnter()..
+
+[2026/11/27 10:38:39.369] LuaEngine.OnGroundMapExit()..
+
+[2026/11/27 10:38:39.370] GroundMap.~GroundMap(): Finalizing intro_halo..
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Exit!
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameSave!
+
+[2026/11/27 10:38:39.370] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+
+[2026/11/27 10:38:39.374] Zone.~Zone(): Finalizing personality_test..
+
+[2026/11/27 10:38:39.819] Zone Seed: 5715668583761989323
+
+[2026/11/27 10:38:39.819] Zone.OnInit(): Initializing the zone..
+
+[2026/11/27 10:38:39.820] Zone.LoadScriptEvents(): Added event Init to zone ambush_forest!
+
+[2026/11/27 10:38:39.821] Zone.LoadScriptEvents(): Added event EnterSegment to zone ambush_forest!
+
+[2026/11/27 10:38:39.821] Zone.LoadScriptEvents(): Added event ExitSegment to zone ambush_forest!
+
+[2026/11/27 10:38:39.821] Zone.LoadScriptEvents(): Added event Rescued to zone ambush_forest!
+
+[2026/11/27 10:38:39.822] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+
+[2026/11/27 10:38:39.822] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.EnterSegment!
+
+[2026/11/27 10:38:39.822] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+
+[2026/11/27 10:38:39.822] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+
+[2026/11/27 10:38:39.822] [SE]:=>> Init_ambush_forest
+
+[2026/11/27 10:38:39.824] Zone Seed: 5715668583761989323
+
+[2026/11/27 10:38:39.829] Map Count: 0
+
+[2026/11/27 10:38:39.829] Map Seed: 0
+
+[2026/11/27 10:38:40.120] Steps:
+
+
+[2026/11/27 10:38:40.162] Map.OnInit(): Initializing the map..
+
+[2026/11/27 10:38:40.164] LuaEngine.OnDungeonMapInit()..
+
+[2026/11/27 10:38:40.938] LuaEngine.OnMusicChange()..
+
+[2026/11/27 10:38:42.431] LuaEngine.OnDungeonMapEnter()..
+
+[2026/11/27 10:38:43.774] [SE]:[PSYCHO EX V2 Z] début bas centre=X:4 Y:4: 0
+
+[2026/11/27 10:38:45.000] [SE]:[PLI SPATIAL] cible X:3 Y:4: 7
+
+[2026/11/27 10:38:47.410] [SE]:[PLI SPATIAL] cible X:4 Y:3: 7
+
+[2026/11/27 10:38:49.726] [SE]:[PLI SPATIAL] cible X:4 Y:6: 2
+
+[2026/11/27 10:38:52.333] [SE]:[PSYCHO EX V2 Z] résultat bas 114->62,114->62,114->61,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:38:52.827] [SE]:[PSYCHO EX V2 Z] début bas-gauche centre=X:4 Y:4: 0
+
+[2026/11/27 10:38:54.043] [SE]:[PLI SPATIAL] cible X:3 Y:3: 0
+
+[2026/11/27 10:38:56.310] [SE]:[PLI SPATIAL] cible X:5 Y:3: 6
+
+[2026/11/27 10:38:58.593] [SE]:[PLI SPATIAL] cible X:2 Y:6: 4
+
+[2026/11/27 10:39:01.193] [SE]:[PSYCHO EX V2 Z] résultat bas-gauche 114->61,114->63,114->59,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:01.693] [SE]:[PSYCHO EX V2 Z] début gauche centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:02.877] [SE]:[PLI SPATIAL] cible X:5 Y:4: 1
+
+[2026/11/27 10:39:05.260] [SE]:[PLI SPATIAL] cible X:4 Y:3: 7
+
+[2026/11/27 10:39:07.560] [SE]:[PLI SPATIAL] cible X:2 Y:4: 6
+
+[2026/11/27 10:39:10.209] [SE]:[PSYCHO EX V2 Z] résultat gauche 114->62,114->59,114->61,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:10.710] [SE]:[PSYCHO EX V2 Z] début haut-gauche centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:12.089] [SE]:[PLI SPATIAL] cible X:5 Y:5: 0
+
+[2026/11/27 10:39:14.524] [SE]:[PLI SPATIAL] cible X:5 Y:3: 6
+
+[2026/11/27 10:39:16.913] [SE]:[PLI SPATIAL] cible X:2 Y:2: 0
+
+[2026/11/27 10:39:19.576] [SE]:[PSYCHO EX V2 Z] résultat haut-gauche 114->60,114->64,114->62,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:20.076] [SE]:[PSYCHO EX V2 Z] début haut centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:21.323] [SE]:[PLI SPATIAL] cible X:5 Y:4: 1
+
+[2026/11/27 10:39:23.995] [SE]:[PLI SPATIAL] cible X:4 Y:5: 1
+
+[2026/11/27 10:39:26.309] [SE]:[PLI SPATIAL] cible X:4 Y:2: 6
+
+[2026/11/27 10:39:28.943] [SE]:[PSYCHO EX V2 Z] résultat haut 114->64,114->59,114->64,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:29.444] [SE]:[PSYCHO EX V2 Z] début haut-droite centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:30.681] [SE]:[PLI SPATIAL] cible X:3 Y:5: 6
+
+[2026/11/27 10:39:33.331] [SE]:[PLI SPATIAL] cible X:5 Y:5: 0
+
+[2026/11/27 10:39:35.643] [SE]:[PLI SPATIAL] cible X:6 Y:2: 4
+
+[2026/11/27 10:39:38.276] [SE]:[PSYCHO EX V2 Z] résultat haut-droite 114->61,114->58,114->60,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:38.777] [SE]:[PSYCHO EX V2 Z] début droite centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:39.996] [SE]:[PLI SPATIAL] cible X:3 Y:4: 7
+
+[2026/11/27 10:39:42.541] [SE]:[PLI SPATIAL] cible X:4 Y:5: 1
+
+[2026/11/27 10:39:44.961] [SE]:[PLI SPATIAL] cible X:6 Y:4: 2
+
+[2026/11/27 10:39:47.659] [SE]:[PSYCHO EX V2 Z] résultat droite 114->60,114->59,114->61,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:48.163] [SE]:[PSYCHO EX V2 Z] début bas-droite centre=X:4 Y:4: 0
+
+[2026/11/27 10:39:49.559] [SE]:[PLI SPATIAL] cible X:3 Y:5: 6
+
+[2026/11/27 10:39:52.026] [SE]:[PLI SPATIAL] cible X:3 Y:3: 0
+
+[2026/11/27 10:39:54.343] [SE]:[PLI SPATIAL] cible X:6 Y:6: 0
+
+[2026/11/27 10:39:56.976] [SE]:[PSYCHO EX V2 Z] résultat bas-droite 114->60,114->59,114->61,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/27 10:39:58.487] [SE]:[PSYCHO EX V2 Z] FIN OK
+

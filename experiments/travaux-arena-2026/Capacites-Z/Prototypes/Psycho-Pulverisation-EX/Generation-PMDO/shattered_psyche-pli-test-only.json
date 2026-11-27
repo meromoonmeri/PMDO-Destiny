@@ -1,0 +1,223 @@
+{
+  "Version": "0.8.12.0",
+  "Object": {
+    "$type": "RogueEssence.Data.SkillData, RogueEssence",
+    "Name": {
+      "DefaultText": "Shattered Psyche",
+      "LocalTexts": {
+        "fr": "Psycho-Pulvérisation EX",
+        "de": "Psycho-Schmetterschlag",
+        "es": "Disruptor Psíquico",
+        "it": "Impatto Psicocinetico",
+        "ko": "맥시멈사이브레이커",
+        "ja": "マキシマムサイブレイカー",
+        "ja-jp": "マキシマムサイブレイカー",
+        "zh-hans": "至高精神破坏波",
+        "zh-hant": "至高精神破壞波"
+      }
+    },
+    "Desc": {
+      "DefaultText": "The user controls the target with its Z-Power and hurts the target with full force. The power varies, depending on the original move.",
+      "LocalTexts": {
+        "fr": "Le Pokémon utilise la Force Z pour manipuler l'adversaire et lui infliger de sérieux dégâts. La puissance varie selon celle de la capacité originale.",
+        "de": "Der Anwender kontrolliert das Ziel mit Z-Kraft und macht ihm so das Leben schwer. Die Stärke variiert je nach zugrunde liegender Attacke.",
+        "es": "Emplea el Poder Z para manipular la mente del objetivo, infligiéndole un daño ingente. Su potencia depende de la del movimiento original.",
+        "it": "Chi la usa si serve del Potere Z per manipolare la mente del bersaglio causando ingenti danni. La potenza varia a seconda della mossa su cui si basa.",
+        "ko": "Z파워로 상대를 조종해 전력으로 매서운 맛을 보여준다. 원래 기술에 따라 위력이 변한다.",
+        "ja": "Ｚパワーで　あいてを　あやつり ぜんりょくで　いたい　おもいを　させる。 もとになった　わざで　いりょくが　かわる。",
+        "ja-jp": "Ｚパワーで　相手を　操り 全力で　痛い　思いを　させる。 元になった　技で　威力が　変わる。",
+        "zh-hans": "通过Ｚ力量操纵对手，全力使其感受到痛苦。威力会根据原来的招式而改变。",
+        "zh-hant": "透過Ｚ力量操縱對手， 全力使其感受到痛苦。 威力會隨原本的招式而改變。"
+      }
+    },
+    "Released": true,
+    "Comment": "",
+    "IndexNum": 648,
+    "BaseCharges": 1,
+    "Strikes": 1,
+    "HitboxAction": {
+      "$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
+      "Emitter": {
+        "$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "HitTiles": false,
+      "BurstTiles": 0,
+      "HitArea": 0,
+      "Range": 2,
+      "Speed": 10,
+      "CharAnimData": {
+        "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+        "ActionType": 31
+      },
+      "TargetAlignments": 4,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "PreActions": [],
+      "ActionFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "DUN_Psybeam",
+        "Emitter": {
+          "$type": "RogueEssence.Content.FiniteOverlayEmitter, RogueEssence",
+          "LocHeight": 0,
+          "finished": false,
+          "Offset": 0,
+          "Anim": {
+            "AnimIndex": "PsychoEX_Fragment",
+            "FrameTime": 1,
+            "StartFrame": -1,
+            "EndFrame": -1,
+            "AnimDir": -1,
+            "Alpha": 200,
+            "AnimFlip": 0
+          },
+          "Movement": {
+            "X": 42,
+            "Y": -18
+          },
+          "RepeatX": true,
+          "RepeatY": true,
+          "FadeIn": 12,
+          "FadeOut": 24,
+          "TotalTime": 180,
+          "Layer": 4,
+          "Color": "255, 255, 255, 255"
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "LagBehindTime": 0
+    },
+    "Explosion": {
+      "TargetAlignments": 4,
+      "HitTiles": false,
+      "Range": 0,
+      "Speed": 0,
+      "TileEmitter": {
+        "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "Emitter": {
+        "$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+        "LocHeight": 0
+      },
+      "IntroFX": [],
+      "ExplodeFX": {
+        "Delay": 0,
+        "AbsoluteDelay": false,
+        "Sound": "",
+        "Emitter": {
+          "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+          "LocHeight": 0
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      }
+    },
+    "Data": {
+      "Element": "psychic",
+      "Category": 2,
+      "HitRate": -1,
+      "SkillStates": [
+        {
+          "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+          "Power": 85
+        }
+      ],
+      "BeforeTryActions": [],
+      "BeforeActions": [
+        {
+          "Key": {
+            "str": [
+              0
+            ]
+          },
+          "Value": {
+            "$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+            "Script": "PsychoPli_Concentration",
+            "ArgTable": "{}"
+          }
+        }
+      ],
+      "OnActions": [],
+      "BeforeExplosions": [],
+      "BeforeHits": [
+        {
+          "Key": {
+            "str": [
+              0
+            ]
+          },
+          "Value": {
+            "$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+            "Script": "PsychoPli_Cible",
+            "ArgTable": "{}"
+          }
+        }
+      ],
+      "OnHits": [
+        {
+          "Key": {
+            "str": [
+              -1
+            ]
+          },
+          "Value": {
+            "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+          }
+        }
+      ],
+      "OnHitTiles": [],
+      "AfterActions": [],
+      "ElementEffects": [],
+      "IntroFX": [],
+      "HitFX": {
+        "Delay": 46,
+        "AbsoluteDelay": true,
+        "Sound": "DUN_Psycho_Boost",
+        "Emitter": {
+          "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+          "LocHeight": 0,
+          "finished": false,
+          "Offset": 0,
+          "Anim": {
+            "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+            "Anim": {
+              "AnimIndex": "PsychoEX_Impact",
+              "FrameTime": 2,
+              "StartFrame": -1,
+              "EndFrame": -1,
+              "AnimDir": -1,
+              "Alpha": 255,
+              "AnimFlip": 0
+            },
+            "TotalTime": 0,
+            "Cycles": 1,
+            "FrameOffset": 0
+          },
+          "Layer": 2,
+          "UseDest": false
+        },
+        "ScreenMovement": {
+          "MinShake": 0,
+          "MaxShake": 0,
+          "MaxShakeTime": 0
+        }
+      },
+      "HitCharAction": {
+        "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+        "Process": 0,
+        "AnimOverride": 0
+      }
+    }
+  }
+}

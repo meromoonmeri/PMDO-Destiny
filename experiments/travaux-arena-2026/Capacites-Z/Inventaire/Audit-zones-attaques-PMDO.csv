@@ -1,0 +1,884 @@
+﻿id,nom_jeu,released,action,portee,forme,rayons,largeur,stop_hit,stop_mur,cibles,tuiles,son_action
+absorb,Absorb,True,AreaAction,1,0,,,,,4,False,DUN_Absorb
+accelerock,Accelerock,True,DashAction,3,,,0,False,True,4,True,
+acid,Acid,True,ProjectileAction,3,,0,,True,True,4,True,DUN_Toxic
+acid_armor,Acid Armor,True,SelfAction,,,,,,,1,,
+acid_downpour,Acid Downpour,False,AttackAction,,,,0,,,4,False,
+acid_spray,Acid Spray,True,ThrowAction,3,,,,,,4,,DUN_Aqua_Tail
+acrobatics,Acrobatics,True,DashAction,3,,,0,True,True,6,True,
+acupressure,Acupressure,True,DashAction,3,,,0,True,True,2,True,DUN_SpDef_Up
+aerial_ace,Aerial Ace,True,DashAction,2,,,0,True,True,4,True,DUN_Guillotine
+aeroblast,Aeroblast,True,ProjectileAction,8,,0,,False,True,6,True,DUN_Dragon_Rush
+after_you,After You,True,AttackAction,,,,1,,,2,False,
+agility,Agility,True,AreaAction,3,0,,,,,3,False,
+air_cutter,Air Cutter,True,ProjectileAction,3,,1,,True,True,4,True,DUN_Mist
+air_slash,Air Slash,True,OffsetAction,3,1,,,,,4,True,DUN_Punishment
+all_out_pummeling,All-Out Pummeling,False,AttackAction,,,,0,,,4,False,
+ally_switch,Ally Switch,True,AreaAction,5,0,,,,,3,False,_UNK_DUN_Flash
+amnesia,Amnesia,True,SelfAction,,,,,,,1,,
+anchor_shot,Anchor Shot,True,ProjectileAction,4,,0,,True,True,6,True,_UNK_DUN_Shatter_2
+ancient_power,Ancient Power,True,ProjectileAction,4,,0,,False,True,4,True,DUN_Superpower
+apple_acid,Apple Acid,True,ProjectileAction,3,,0,,True,True,6,True,DUN_Bubble
+aqua_cutter,Aqua Cutter,True,AttackAction,,,,0,,,4,True,DUN_Fury_Cutter
+aqua_jet,Aqua Jet,True,DashAction,3,,,0,False,True,4,True,DUN_Aqua_Tail
+aqua_ring,Aqua Ring,True,AreaAction,1,0,,,,,3,False,DUN_Aqua_Ring
+aqua_step,Aqua Step,False,AttackAction,,,,0,,,4,False,
+aqua_tail,Aqua Tail,True,AttackAction,,,,2,,,4,True,DUN_Aqua_Tail_2
+arm_thrust,Arm Thrust,True,DashAction,2,,,0,True,True,6,True,DUN_Arm_Thrust
+armor_cannon,Armor Cannon,False,AttackAction,,,,0,,,4,False,
+aromatherapy,Aromatherapy,True,ProjectileAction,5,,0,,False,True,2,True,DUN_Aromatherapy_2
+aromatic_mist,Aromatic Mist,True,ProjectileAction,4,,0,,False,True,2,True,_UNK_DUN_Spray
+assist,Assist,True,SelfAction,,,,,,,1,,
+assurance,Assurance,True,AttackAction,,,,0,,,4,True,DUN_Assurance
+astonish,Astonish,True,AttackAction,,,,1,,,4,False,
+astral_barrage,Astral Barrage,False,AttackAction,,,,0,,,4,False,
+attack,Attack,True,AttackAction,,,,0,,,4,True,
+attack_order,Attack Order,True,AreaAction,4,0,,,,,4,False,DUN_Power_Swap
+attract,Attract,True,ThrowAction,3,,,,,,4,,DUN_Charm
+aura_sphere,Aura Sphere,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Aura_Sphere
+aura_wheel,Aura Wheel,False,AttackAction,,,,0,,,4,False,
+aurora_beam,Aurora Beam,True,ProjectileAction,8,,0,,True,True,4,True,DUN_Aurora_Beam
+aurora_veil,Aurora Veil,True,AreaAction,2,0,,,,,3,False,DUN_Natural_Gift
+autotomize,Autotomize,True,SelfAction,,,,,,,1,,
+avalanche,Avalanche,True,OffsetAction,1,1,,,,,4,True,DUN_Rock_Slide
+axe_kick,Axe Kick,True,DashAction,3,,,0,True,True,4,True,DUN_Cross_Chop
+baby_doll_eyes,Baby-Doll Eyes,True,ProjectileAction,8,,0,,True,True,4,False,
+baddy_bad,Baddy Bad,False,AttackAction,,,,0,,,4,False,
+baneful_bunker,Baneful Bunker,False,AttackAction,,,,0,,,4,False,
+barb_barrage,Barb Barrage,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Throw_Spike
+barrage,Barrage,True,ThrowAction,3,,,,,,4,,DUN_Throw_Arc
+barrier,Barrier,True,AreaAction,1,0,,,,,3,False,DUN_Light_Screen
+baton_pass,Baton Pass,True,ProjectileAction,2,,0,,False,False,6,False,DUN_Copycat_2
+beak_blast,Beak Blast,False,AttackAction,,,,0,,,4,False,
+beat_up,Beat Up,True,SelfAction,,,,,,,1,,
+behemoth_bash,Behemoth Bash,False,AttackAction,,,,0,,,4,False,
+behemoth_blade,Behemoth Blade,False,AttackAction,,,,0,,,4,False,
+belch,Belch,True,SelfAction,,,,,,,1,,
+belly_drum,Belly Drum,True,SelfAction,,,,,,,1,,
+bestow,Bestow,True,ThrowAction,3,,,,,,4,,DUN_Copycat_2
+bide,Bide,True,AttackAction,,,,2,,,4,True,DUN_Gravity
+bind,Bind,True,AttackAction,,,,0,,,4,True,DUN_Wrap
+bite,Bite,True,AttackAction,,,,0,,,4,True,DUN_Bite
+bitter_blade,Bitter Blade,False,AttackAction,,,,0,,,4,False,
+bitter_malice,Bitter Malice,True,OffsetAction,2,3,,,,,4,True,DUN_Foggy
+black_hole_eclipse,Black Hole Eclipse,False,AttackAction,,,,0,,,4,False,
+blast_burn,Blast Burn,True,ProjectileAction,2,,4,,True,True,4,True,DUN_Blast_Burn
+blaze_kick,Blaze Kick,True,DashAction,2,,,0,True,True,4,True,DUN_Double_Kick
+blazing_torque,Blazing Torque,False,AttackAction,,,,0,,,4,False,
+bleakwind_storm,Bleakwind Storm,False,AttackAction,,,,0,,,4,False,
+blizzard,Blizzard,True,AreaAction,4,0,,,,,4,True,DUN_Tailwind_2
+block,Block,True,AttackAction,,,,1,,,4,False,
+bloom_doom,Bloom Doom,False,AttackAction,,,,0,,,4,False,
+blue_flare,Blue Flare,False,AttackAction,,,,0,,,4,False,
+body_press,Body Press,False,AttackAction,,,,0,,,4,False,
+body_slam,Body Slam,True,AttackAction,,,,0,,,4,True,_UNK_DUN_Whip
+bolt_beak,Bolt Beak,False,AttackAction,,,,0,,,4,False,
+bolt_strike,Bolt Strike,False,AttackAction,,,,0,,,4,False,
+bone_club,Bone Club,True,AttackAction,,,,0,,,4,True,
+bone_rush,Bone Rush,True,DashAction,1,,,0,True,True,4,True,DUN_Cut
+bonemerang,Bonemerang,True,ProjectileAction,6,,0,,False,True,4,True,DUN_Throw_Arc
+boomburst,Boomburst,True,AreaAction,2,0,,,,,4,True,_UNK_DUN_Spreading_Light
+bounce,Bounce,True,DashAction,4,,,1,True,False,4,False,DUN_Tackle
+bouncy_bubble,Bouncy Bubble,False,AttackAction,,,,0,,,4,False,
+branch_poke,Branch Poke,False,AttackAction,,,,0,,,4,False,
+brave_bird,Brave Bird,True,DashAction,5,,,0,True,True,6,True,
+breaking_swipe,Breaking Swipe,False,AttackAction,,,,0,,,4,False,
+breakneck_blitz,Breakneck Blitz,False,AttackAction,,,,0,,,4,False,
+brick_break,Brick Break,True,AttackAction,,,,1,,,4,True,
+brine,Brine,True,WaveMotionAction,1,,,,False,True,4,True,DUN_Brine
+brutal_swing,Brutal Swing,True,AttackAction,,,,3,,,6,True,DUN_Spacial_Rend
+bubble,Bubble,True,AreaAction,2,1,,,,,4,True,DUN_Bubble
+bubble_beam,Bubble Beam,True,ProjectileAction,8,,0,,True,True,4,True,DUN_BubbleBeam
+bug_bite,Bug Bite,True,AttackAction,,,,0,,,4,True,
+bug_buzz,Bug Buzz,True,AreaAction,1,0,,,,,4,False,DUN_Bug_Buzz
+bulk_up,Bulk Up,True,SelfAction,,,,,,,1,,
+bulldoze,Bulldoze,True,AreaAction,1,0,,,,,4,True,DUN_Seismic_Toss
+bullet_punch,Bullet Punch,True,DashAction,3,,,0,False,True,4,True,
+bullet_seed,Bullet Seed,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Bullet_Seed
+burn_up,Burn Up,False,AttackAction,,,,0,,,4,False,
+burning_jealousy,Burning Jealousy,False,AttackAction,,,,0,,,4,False,
+buzzy_buzz,Buzzy Buzz,True,AreaAction,3,0,,,,,4,True,DUN_Discharge_2
+calm_mind,Calm Mind,True,SelfAction,,,,,,,1,,
+camouflage,Camouflage,True,SelfAction,,,,,,,1,,
+captivate,Captivate,True,ThrowAction,2,,,,,,4,,
+catastropika,Catastropika,False,AttackAction,,,,0,,,4,False,
+ceaseless_edge,Ceaseless Edge,True,ProjectileAction,2,,1,,True,True,6,True,DUN_Drain_Punch
+celebrate,Celebrate,False,AttackAction,,,,0,,,4,False,
+charge,Charge,True,SelfAction,,,,,,,1,,DUN_Charge
+charge_beam,Charge Beam,True,ProjectileAction,8,,0,,True,True,6,True,DUN_Charge_Beam
+charm,Charm,True,AttackAction,,,,0,,,4,False,DUN_Charm
+chatter,Chatter,True,AreaAction,2,0,,,,,4,False,DUN_Sing
+chilling_water,Chilling Water,False,AttackAction,,,,0,,,4,False,
+chilly_reception,Chilly Reception,False,AttackAction,,,,0,,,4,False,
+chip_away,Chip Away,True,AttackAction,,,,0,,,4,True,
+chloroblast,Chloroblast,False,AttackAction,,,,0,,,4,False,
+circle_throw,Circle Throw,True,AttackAction,,,,0,,,4,True,
+clamp,Clamp,True,AttackAction,,,,0,,,4,True,DUN_Clamp
+clanging_scales,Clanging Scales,True,AreaAction,3,1,,,,,4,False,_UNK_DUN_Clank
+clangorous_soul,Clangorous Soul,False,AttackAction,,,,0,,,4,False,
+clangorous_soulblaze,Clangorous Soulblaze,False,AttackAction,,,,0,,,4,False,
+clear_smog,Clear Smog,True,ProjectileAction,4,,0,,False,True,4,True,DUN_Whirlwind
+close_combat,Close Combat,True,AttackAction,,,,0,,,4,True,DUN_Close_Combat
+coaching,Coaching,False,AttackAction,,,,0,,,4,False,
+coil,Coil,True,SelfAction,,,,,,,1,,
+collision_course,Collision Course,False,AttackAction,,,,0,,,4,False,
+combat_torque,Combat Torque,False,AttackAction,,,,0,,,4,False,
+comet_punch,Comet Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+comeuppance,Comeuppance,False,AttackAction,,,,0,,,4,False,
+confide,Confide,True,AttackAction,,,,3,,,4,False,
+confuse_ray,Confuse Ray,True,ProjectileAction,6,,0,,True,True,4,False,DUN_Move_Start
+confusion,Confusion,True,OffsetAction,3,0,,,,,4,True,DUN_Confusion
+constrict,Constrict,True,AttackAction,,,,0,,,4,True,DUN_Wrap
+continental_crush,Continental Crush,False,AttackAction,,,,0,,,4,False,
+conversion,Conversion,True,SelfAction,,,,,,,1,,DUN_Conversion
+conversion_2,Conversion 2,True,SelfAction,,,,,,,1,,DUN_Conversion2
+copycat,Copycat,True,ThrowAction,4,,,,,,6,,
+core_enforcer,Core Enforcer,False,AttackAction,,,,0,,,4,False,
+corkscrew_crash,Corkscrew Crash,False,AttackAction,,,,0,,,4,False,
+corrosive_gas,Corrosive Gas,False,AttackAction,,,,0,,,4,False,
+cosmic_power,Cosmic Power,True,AreaAction,1,0,,,,,3,False,
+cotton_guard,Cotton Guard,True,SelfAction,,,,,,,1,,_UNK_DUN_Shatter
+cotton_spore,Cotton Spore,True,AreaAction,3,0,,,,,4,True,DUN_Wrap
+counter,Counter,True,SelfAction,,,,,,,1,,
+court_change,Court Change,True,AreaAction,5,0,,,,,7,False,
+covet,Covet,True,ThrowAction,3,,,,,,4,,
+crabhammer,Crabhammer,True,AttackAction,,,,0,,,4,True,
+crafty_shield,Crafty Shield,True,AreaAction,4,0,,,,,3,False,DUN_Aurora_Beam_2
+cross_chop,Cross Chop,True,AttackAction,,,,0,,,4,True,DUN_Cross_Chop
+cross_poison,Cross Poison,True,AttackAction,,,,0,,,4,True,DUN_Cross_Poison
+crunch,Crunch,True,AttackAction,,,,0,,,4,True,DUN_Bite
+crush_claw,Crush Claw,True,AttackAction,,,,1,,,4,True,DUN_Thunder_Fang
+crush_grip,Crush Grip,True,AttackAction,,,,0,,,4,True,
+curse,Curse,True,SelfAction,,,,,,,1,,
+cut,Cut,True,AttackAction,,,,3,,,4,True,DUN_Cut
+dark_pulse,Dark Pulse,True,AreaAction,1,0,,,,,4,True,DUN_Radar_Orb
+dark_void,Dark Void,True,AreaAction,5,0,,,,,4,False,DUN_Confusion
+darkest_lariat,Darkest Lariat,False,AttackAction,,,,0,,,4,False,
+dazzling_gleam,Dazzling Gleam,True,AreaAction,1,0,,,,,4,True,
+decorate,Decorate,True,ThrowAction,3,,,,,,2,,
+defend_order,Defend Order,True,AreaAction,2,0,,,,,3,False,DUN_Power_Swap
+defense_curl,Defense Curl,True,SelfAction,,,,,,,1,,DUN_Attack
+defog,Defog,True,AreaAction,5,0,,,,,4,True,DUN_Defog
+destiny_bond,Destiny Bond,True,ProjectileAction,6,,0,,True,True,4,False,DUN_Destiny_Bond
+detect,Detect,True,SelfAction,,,,,,,1,,DUN_Mind_Reader
+devastating_drake,Devastating Drake,False,AttackAction,,,,0,,,4,False,
+diamond_storm,Diamond Storm,True,AreaAction,4,0,,,,,4,True,DUN_Hail
+dig,Dig,True,AttackAction,,,,1,,,4,True,
+dire_claw,Dire Claw,False,AttackAction,,,,0,,,4,False,
+disable,Disable,True,ProjectileAction,6,,0,,True,True,4,False,
+disarming_voice,Disarming Voice,True,ProjectileAction,3,,0,,False,True,4,True,
+discharge,Discharge,True,AreaAction,4,0,,,,,4,True,DUN_Discharge
+dive,Dive,True,AttackAction,,,,0,,,4,True,
+dizzy_punch,Dizzy Punch,True,AttackAction,,,,0,,,4,True,DUN_Dizzy_Punch
+doodle,Doodle,False,AttackAction,,,,0,,,4,False,
+doom_desire,Doom Desire,True,ThrowAction,4,,,,,,4,,
+double_edge,Double-Edge,True,DashAction,5,,,0,False,True,6,True,DUN_Close_Combat
+double_hit,Double Hit,True,AttackAction,,,,0,,,4,True,
+double_iron_bash,Double Iron Bash,False,AttackAction,,,,0,,,4,False,
+double_kick,Double Kick,True,AttackAction,,,,0,,,4,True,DUN_Double_Kick
+double_shock,Double Shock,False,AttackAction,,,,0,,,4,False,
+double_slap,Double Slap,True,AttackAction,,,,0,,,4,True,
+double_team,Double Team,True,SelfAction,,,,,,,1,,
+draco_meteor,Draco Meteor,True,AreaAction,4,0,,,,,4,False,
+dragon_ascent,Dragon Ascent,False,AttackAction,,,,0,,,4,False,
+dragon_breath,Dragon Breath,True,ProjectileAction,5,,0,,False,True,6,True,DUN_Flamethrower
+dragon_claw,Dragon Claw,True,AttackAction,,,,0,,,4,True,DUN_Fury_Cutter
+dragon_dance,Dragon Dance,True,SelfAction,,,,,,,1,,
+dragon_darts,Dragon Darts,False,AttackAction,,,,0,,,4,False,
+dragon_energy,Dragon Energy,False,AttackAction,,,,0,,,4,False,
+dragon_hammer,Dragon Hammer,False,AttackAction,,,,0,,,4,False,
+dragon_pulse,Dragon Pulse,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Dragon_Pulse
+dragon_rage,Dragon Rage,True,ProjectileAction,2,,0,,True,True,6,True,DUN_Sacred_Fire
+dragon_rush,Dragon Rush,True,DashAction,4,,,0,True,True,4,True,
+dragon_tail,Dragon Tail,True,AttackAction,,,,2,,,4,True,_UNK_DUN_Break
+drain_punch,Drain Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+draining_kiss,Draining Kiss,True,AttackAction,,,,0,,,4,True,
+dream_eater,Dream Eater,True,ThrowAction,3,,,,,,4,,
+drill_peck,Drill Peck,True,DashAction,3,,,1,False,True,6,True,DUN_Fury_Attack
+drill_run,Drill Run,True,DashAction,3,,,1,False,False,6,True,_UNK_DUN_Drill
+drum_beating,Drum Beating,False,AttackAction,,,,0,,,4,False,
+dual_chop,Dual Chop,True,AttackAction,,,,0,,,4,True,DUN_Me_First
+dual_wingbeat,Dual Wingbeat,False,AttackAction,,,,0,,,4,False,
+dynamax_cannon,Dynamax Cannon,False,AttackAction,,,,0,,,4,False,
+dynamic_punch,Dynamic Punch,True,AttackAction,,,,1,,,4,False,DUN_Punch
+earth_power,Earth Power,True,WaveMotionAction,4,,,,False,True,6,True,DUN_Earth_Power
+earthquake,Earthquake,True,AreaAction,4,0,,,,,6,True,DUN_Trapbust_Orb
+echoed_voice,Echoed Voice,True,ProjectileAction,3,,0,,False,True,4,True,DUN_Hyper_Voice
+eerie_impulse,Eerie Impulse,True,ProjectileAction,4,,0,,False,True,4,False,DUN_Charge_Beam
+eerie_spell,Eerie Spell,False,AttackAction,,,,0,,,4,False,
+egg_bomb,Egg Bomb,True,ThrowAction,3,,,,,,4,,DUN_Attack
+electric_terrain,Electric Terrain,True,SelfAction,,,,,,,1,,
+electrify,Electrify,False,AttackAction,,,,0,,,4,False,
+electro_ball,Electro Ball,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Flash_Cannon
+electro_drift,Electro Drift,False,AttackAction,,,,0,,,4,False,
+electroweb,Electroweb,True,AreaAction,2,0,,,,,4,True,DUN_Follow_Me
+embargo,Embargo,True,AreaAction,3,1,,,,,4,False,DUN_Embargo
+ember,Ember,True,AreaAction,2,1,,,,,4,True,DUN_Ember
+encore,Encore,True,ThrowAction,2,,,,,,4,,
+endeavor,Endeavor,True,AttackAction,,,,0,,,4,True,
+endure,Endure,True,SelfAction,,,,,,,1,,DUN_Focus_Energy
+energy_ball,Energy Ball,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Energy_Ball
+entrainment,Entrainment,True,ThrowAction,4,,,,,,6,,DUN_Kinesis
+eruption,Eruption,True,AreaAction,2,0,,,,,4,True,
+esper_wing,Esper Wing,False,AttackAction,,,,0,,,4,False,
+eternabeam,Eternabeam,False,AttackAction,,,,0,,,4,False,
+expanding_force,Expanding Force,False,AttackAction,,,,0,,,4,False,
+explosion,Explosion,True,SelfAction,,,,,,,1,,DUN_Explosion
+extrasensory,Extrasensory,True,ThrowAction,3,,,,,,4,,
+extreme_evoboost,Extreme Evoboost,False,AttackAction,,,,0,,,4,False,
+extreme_speed,Extreme Speed,True,DashAction,6,,,0,False,True,4,True,DUN_Fury_Attack
+facade,Façade,True,AttackAction,,,,0,,,4,True,DUN_Tackle
+fairy_lock,Fairy Lock,True,AreaAction,3,0,,,,,6,False,DUN_Ice_Shard
+fairy_wind,Fairy Wind,True,AreaAction,4,1,,,,,4,True,DUN_Silver_Wind
+fake_out,Fake Out,True,DashAction,6,,,1,True,True,6,True,DUN_Harden
+fake_tears,Fake Tears,True,AreaAction,2,1,,,,,4,False,
+false_surrender,False Surrender,False,AttackAction,,,,0,,,4,False,
+false_swipe,False Swipe,True,AttackAction,,,,0,,,4,True,DUN_Wrap
+feather_dance,Feather Dance,True,AreaAction,2,0,,,,,4,True,DUN_Feather_Dance
+feint,Feint,True,DashAction,4,,,1,True,True,4,True,DUN_Feint_2
+feint_attack,Feint Attack,True,AttackAction,,,,1,,,4,True,
+fell_stinger,Fell Stinger,True,DashAction,2,,,1,True,True,6,True,DUN_Icicle_Spear
+fiery_dance,Fiery Dance,True,AreaAction,2,0,,,,,4,True,DUN_Fire_Spin
+fiery_wrath,Fiery Wrath,False,AttackAction,,,,0,,,4,False,
+fillet_away,Fillet Away,False,AttackAction,,,,0,,,4,False,
+final_gambit,Final Gambit,True,DashAction,2,,,0,True,True,4,True,DUN_Flare_Blitz_2
+fire_blast,Fire Blast,True,ProjectileAction,2,,3,,False,False,4,True,DUN_Fire_Blast_2
+fire_fang,Fire Fang,True,AttackAction,,,,0,,,4,True,_UNK_DUN_Splash
+fire_lash,Fire Lash,False,AttackAction,,,,0,,,4,False,
+fire_pledge,Fire Pledge,True,AreaAction,0,0,,,,,4,True,DUN_Open_Chamber
+fire_punch,Fire Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+fire_spin,Fire Spin,True,OffsetAction,3,0,,,,,4,True,DUN_Fire_Spin
+first_impression,First Impression,True,DashAction,6,,,1,True,True,6,True,DUN_Harden
+fishious_rend,Fishious Rend,False,AttackAction,,,,0,,,4,False,
+fissure,Fissure,True,ProjectileAction,3,,0,,False,True,6,True,EVT_CH20_Tower_Cracks
+flail,Flail,True,AttackAction,,,,3,,,4,True,
+flame_burst,Flame Burst,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Fire_Spin
+flame_charge,Flame Charge,True,DashAction,2,,,0,True,True,6,True,DUN_Flamethrower
+flame_wheel,Flame Wheel,True,DashAction,2,,,0,True,True,4,True,DUN_Flame_Wheel
+flamethrower,Flamethrower,True,ProjectileAction,5,,0,,False,True,6,True,DUN_Flamethrower_2
+flare_blitz,Flare Blitz,True,DashAction,5,,,0,True,True,6,True,DUN_Flare_Blitz_2
+flash,Flash,True,AreaAction,2,0,,,,,4,False,DUN_Disable
+flash_cannon,Flash Cannon,True,ProjectileAction,8,,0,,True,True,6,True,DUN_Flash_Cannon
+flatter,Flatter,True,ThrowAction,2,,,,,,6,,DUN_Kinesis
+fleur_cannon,Fleur Cannon,False,AttackAction,,,,0,,,4,False,
+fling,Fling,True,AttackAction,,,,0,,,6,True,
+flip_turn,Flip Turn,True,AttackAction,,,,0,,,4,True,DUN_Dragon_Dance
+floaty_fall,Floaty Fall,False,AttackAction,,,,0,,,4,False,
+floral_healing,Floral Healing,True,OffsetAction,1,3,,,,,3,True,DUN_Aromatherapy
+flower_shield,Flower Shield,True,AreaAction,4,0,,,,,3,True,
+flower_trick,Flower Trick,True,ThrowAction,3,,,,,,4,,_UNK_DUN_Twinkle
+fly,Fly,True,DashAction,2,,,1,True,False,4,False,DUN_Fly
+flying_press,Flying Press,True,DashAction,2,,,0,True,True,4,False,
+focus_blast,Focus Blast,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Focus_Blast_3
+focus_energy,Focus Energy,True,SelfAction,,,,,,,1,,
+focus_punch,Focus Punch,True,DashAction,2,,,0,True,True,4,True,
+follow_me,Follow Me,True,SelfAction,,,,,,,1,,DUN_Tail_Whip
+force_palm,Force Palm,True,DashAction,2,,,0,True,True,4,True,DUN_Force_Palm
+foresight,Foresight,True,ProjectileAction,8,,0,,True,True,4,False,
+forests_curse,Forest's Curse,True,WaveMotionAction,5,,,,False,False,6,False,
+foul_play,Foul Play,True,AttackAction,,,,0,,,4,True,
+freeze_dry,Freeze-Dry,True,OffsetAction,2,3,,,,,4,True,DUN_Ice_Beam_2
+freeze_shock,Freeze Shock,False,AttackAction,,,,0,,,4,False,
+freezing_glare,Freezing Glare,False,AttackAction,,,,0,,,4,False,
+freezy_frost,Freezy Frost,True,AreaAction,4,0,,,,,7,True,DUN_Icy_Wind
+frenzy_plant,Frenzy Plant,True,AreaAction,3,1,,,,,4,True,DUN_Wrap
+frost_breath,Frost Breath,True,ProjectileAction,5,,0,,False,True,6,True,DUN_Mist
+frustration,Frustration,True,AttackAction,,,,0,,,4,True,DUN_Arm_Thrust
+fury_attack,Fury Attack,True,DashAction,2,,,0,False,True,6,True,DUN_Fury_Attack
+fury_cutter,Fury Cutter,True,AttackAction,,,,0,,,4,True,DUN_Fury_Cutter
+fury_swipes,Fury Swipes,True,AttackAction,,,,0,,,4,True,DUN_Fury_Swipes
+fusion_bolt,Fusion Bolt,False,AttackAction,,,,0,,,4,False,
+fusion_flare,Fusion Flare,False,AttackAction,,,,0,,,4,False,
+future_sight,Future Sight,True,ThrowAction,3,,,,,,4,,
+gastro_acid,Gastro Acid,True,ThrowAction,3,,,,,,4,,DUN_BubbleBeam
+gear_grind,Gear Grind,False,AttackAction,,,,0,,,4,False,
+gear_up,Gear Up,False,AttackAction,,,,0,,,4,False,
+genesis_supernova,Genesis Supernova,False,AttackAction,,,,0,,,4,False,
+geomancy,Geomancy,False,AttackAction,,,,0,,,4,False,
+giga_drain,Giga Drain,True,ProjectileAction,2,,0,,True,True,4,False,DUN_Rest
+giga_impact,Giga Impact,True,DashAction,2,,,1,True,True,4,False,DUN_Giga_Impact
+gigaton_hammer,Gigaton Hammer,True,AttackAction,,,,1,,,4,False,
+gigavolt_havoc,Gigavolt Havoc,False,AttackAction,,,,0,,,4,False,
+glacial_lance,Glacial Lance,False,AttackAction,,,,0,,,4,False,
+glaciate,Glaciate,True,AreaAction,4,1,,,,,4,True,
+glaive_rush,Glaive Rush,False,AttackAction,,,,0,,,4,False,
+glare,Glare,True,ProjectileAction,8,,0,,True,True,4,False,
+glitzy_glow,Glitzy Glow,True,ProjectileAction,8,,0,,True,True,4,True,DUN_Light_Screen_2
+grass_knot,Grass Knot,True,OffsetAction,2,0,,,,,4,True,DUN_Grass_Knot
+grass_pledge,Grass Pledge,True,AreaAction,0,0,,,,,4,True,DUN_Magical_Leaf
+grass_whistle,Grass Whistle,True,ProjectileAction,4,,0,,False,True,4,False,DUN_Grass_Whistle
+grassy_glide,Grassy Glide,False,AttackAction,,,,0,,,4,False,
+grassy_terrain,Grassy Terrain,True,SelfAction,,,,,,,1,,
+grav_apple,Grav Apple,True,ThrowAction,3,,,,,,4,,DUN_Throw_Arc
+gravity,Gravity,True,SelfAction,,,,,,,1,,DUN_Gravity
+growl,Growl,True,AreaAction,4,1,,,,,4,False,DUN_Growl
+growth,Growth,True,SelfAction,,,,,,,1,,
+grudge,Grudge,True,SelfAction,,,,,,,1,,
+guard_split,Guard Split,True,ThrowAction,2,,,,,,6,,DUN_Teeter_Dance
+guard_swap,Guard Swap,True,ProjectileAction,6,,0,,True,True,6,False,
+guardian_of_alola,Guardian of Alola,False,AttackAction,,,,0,,,4,False,
+guillotine,Guillotine,True,AttackAction,,,,0,,,4,True,DUN_Fury_Cutter
+gunk_shot,Gunk Shot,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Gunk_Shot
+gust,Gust,True,AreaAction,1,0,,,,,4,True,DUN_Gust_Trap
+gyro_ball,Gyro Ball,True,DashAction,4,,,0,True,True,4,True,
+hail,Hail,True,SelfAction,,,,,,,1,,
+hammer_arm,Hammer Arm,True,AttackAction,,,,0,,,4,True,
+happy_hour,Happy Hour,False,AttackAction,,,,0,,,4,False,
+harden,Harden,True,SelfAction,,,,,,,1,,
+haze,Haze,True,AreaAction,5,0,,,,,7,False,DUN_Foggy
+head_charge,Head Charge,False,AttackAction,,,,0,,,4,False,
+head_smash,Head Smash,True,DashAction,5,,,1,True,True,6,True,DUN_Close_Combat
+headbutt,Headbutt,True,DashAction,2,,,0,True,True,4,True,DUN_Tackle
+headlong_rush,Headlong Rush,False,AttackAction,,,,0,,,4,False,
+heal_bell,Heal Bell,True,AreaAction,5,0,,,,,7,False,
+heal_block,Heal Block,True,AreaAction,4,0,,,,,4,False,DUN_Heal_Block
+heal_order,Heal Order,True,AreaAction,1,0,,,,,3,False,DUN_Power_Swap
+heal_pulse,Heal Pulse,True,ProjectileAction,4,,0,,True,True,6,False,DUN_Aura_Sphere
+healing_wish,Healing Wish,True,AreaAction,4,0,,,,,2,False,
+heart_stamp,Heart Stamp,True,AttackAction,,,,0,,,4,True,
+heart_swap,Heart Swap,True,ThrowAction,4,,,,,,6,,DUN_Copycat_2
+heat_crash,Heat Crash,True,AttackAction,,,,0,,,4,True,
+heat_wave,Heat Wave,True,AreaAction,4,0,,,,,4,True,DUN_Heat_Wave
+heavy_slam,Heavy Slam,True,AttackAction,,,,0,,,4,True,
+helping_hand,Helping Hand,True,AreaAction,3,0,,,,,2,False,DUN_Helping_Hand
+hex,Hex,True,ProjectileAction,4,,0,,True,False,4,True,
+hidden_power,Hidden Power,True,ProjectileAction,2,,4,,True,True,4,True,DUN_Petrify_Orb
+high_horsepower,High Horsepower,False,AttackAction,,,,0,,,4,False,
+high_jump_kick,High Jump Kick,True,DashAction,4,,,0,True,True,6,True,_UNK_DUN_Whip
+hold_back,Hold Back,True,AttackAction,,,,0,,,4,True,
+hold_hands,Hold Hands,False,AttackAction,,,,0,,,4,False,
+hone_claws,Hone Claws,True,SelfAction,,,,,,,1,,
+horn_attack,Horn Attack,True,DashAction,2,,,0,False,True,6,True,DUN_Fury_Attack
+horn_drill,Horn Drill,True,DashAction,2,,,1,False,False,6,True,DUN_Fire_Blast
+horn_leech,Horn Leech,True,DashAction,2,,,0,True,True,4,True,
+howl,Howl,True,AreaAction,3,0,,,,,3,False,_UNK_DUN_Mecha
+hurricane,Hurricane,True,OffsetAction,2,3,,,,,4,True,DUN_Howling_Wind
+hydro_cannon,Hydro Cannon,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Dragon_Dance
+hydro_pump,Hydro Pump,True,ProjectileAction,8,,0,,False,True,6,True,DUN_Hydro_Pump
+hydro_steam,Hydro Steam,False,AttackAction,,,,0,,,4,False,
+hydro_vortex,Hydro Vortex,False,AttackAction,,,,0,,,4,False,
+hyper_beam,Hyper Beam,True,WaveMotionAction,8,,,,False,False,6,True,DUN_Protect
+hyper_drill,Hyper Drill,True,DashAction,3,,,1,False,False,6,True,DUN_Flash_Cannon
+hyper_fang,Hyper Fang,True,AttackAction,,,,0,,,4,True,DUN_Revenge
+hyper_voice,Hyper Voice,True,AreaAction,3,1,,,,,6,False,DUN_Hyper_Voice
+hyperspace_fury,Hyperspace Fury,False,AttackAction,,,,0,,,4,False,
+hyperspace_hole,Hyperspace Hole,False,AttackAction,,,,0,,,4,False,
+hypnosis,Hypnosis,True,ProjectileAction,6,,0,,True,True,4,False,DUN_Psybeam
+ice_ball,Ice Ball,True,DashAction,4,,,0,True,True,6,True,DUN_Ice_Ball_2
+ice_beam,Ice Beam,True,ProjectileAction,8,,0,,True,True,6,True,DUN_Ice_Beam
+ice_burn,Ice Burn,False,AttackAction,,,,0,,,4,False,
+ice_fang,Ice Fang,True,AttackAction,,,,0,,,4,True,DUN_Ice_Fang
+ice_hammer,Ice Hammer,False,AttackAction,,,,0,,,4,False,
+ice_punch,Ice Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+ice_shard,Ice Shard,True,ProjectileAction,3,,0,,False,True,4,True,DUN_Ice_Shard
+ice_spinner,Ice Spinner,False,AttackAction,,,,0,,,4,False,
+icicle_crash,Icicle Crash,True,ThrowAction,3,,,,,,4,,DUN_Ice_Fang
+icicle_spear,Icicle Spear,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Icicle_Spear
+icy_wind,Icy Wind,True,AreaAction,2,1,,,,,4,True,DUN_Icy_Wind
+imprison,Imprison,True,AreaAction,3,0,,,,,4,False,
+incinerate,Incinerate,True,ProjectileAction,3,,0,,True,True,4,True,DUN_Sacred_Fire
+infernal_parade,Infernal Parade,True,ProjectileAction,4,,0,,True,True,6,True,DUN_Fire_Spin
+inferno,Inferno,True,OffsetAction,3,2,,,,,6,True,DUN_Open_Chamber
+inferno_overdrive,Inferno Overdrive,False,AttackAction,,,,0,,,4,False,
+infestation,Infestation,True,AttackAction,,,,1,,,4,True,DUN_Gunk_Shot_2
+ingrain,Ingrain,True,SelfAction,,,,,,,1,,
+instruct,Instruct,False,AttackAction,,,,0,,,4,False,
+ion_deluge,Ion Deluge,True,AreaAction,2,0,,,,,6,True,DUN_Charge_Beam
+iron_defense,Iron Defense,True,SelfAction,,,,,,,1,,
+iron_head,Iron Head,True,DashAction,2,,,0,True,True,4,True,DUN_Iron_Head
+iron_tail,Iron Tail,True,AttackAction,,,,2,,,4,True,
+jaw_lock,Jaw Lock,False,AttackAction,,,,0,,,4,False,
+jet_punch,Jet Punch,True,DashAction,4,,,0,True,False,4,True,DUN_Aura_Sphere_2
+judgment,Judgment,True,AreaAction,4,0,,,,,4,True,DUN_Judgment
+jump_kick,Jump Kick,True,DashAction,3,,,0,True,True,6,True,DUN_Tackle
+jungle_healing,Jungle Healing,False,AttackAction,,,,0,,,4,False,
+karate_chop,Karate Chop,True,AttackAction,,,,0,,,4,False,
+kinesis,Kinesis,True,AreaAction,4,1,,,,,4,False,DUN_Kinesis
+kings_shield,King's Shield,True,SelfAction,,,,,,,1,,DUN_Protect
+knock_off,Knock Off,True,AttackAction,,,,0,,,4,True,DUN_Arm_Thrust
+kowtow_cleave,Kowtow Cleave,True,DashAction,2,,,0,True,True,4,True,DUN_Guillotine
+lands_wrath,Land's Wrath,False,AttackAction,,,,0,,,4,False,
+laser_focus,Laser Focus,False,AttackAction,,,,0,,,4,False,
+lash_out,Lash Out,False,AttackAction,,,,0,,,4,False,
+last_resort,Last Resort,True,AreaAction,1,0,,,,,4,True,
+last_respects,Last Respects,False,AttackAction,,,,0,,,4,False,
+lava_plume,Lava Plume,True,AreaAction,2,0,,,,,6,True,DUN_Lava_Plume
+leaf_blade,Leaf Blade,True,AttackAction,,,,0,,,4,True,
+leaf_storm,Leaf Storm,True,ProjectileAction,5,,0,,False,True,6,True,
+leaf_tornado,Leaf Tornado,True,AreaAction,1,0,,,,,4,True,DUN_Leaf_Storm
+leafage,Leafage,True,ThrowAction,2,,,,,,4,,_UNK_DUN_Sneeze
+leech_life,Leech Life,True,AttackAction,,,,0,,,4,True,DUN_Revenge
+leech_seed,Leech Seed,True,ThrowAction,3,,,,,,4,,DUN_Leech_Seed
+leer,Leer,True,ProjectileAction,8,,0,,True,True,4,False,
+lets_snuggle_forever,Let's Snuggle Forever,False,AttackAction,,,,0,,,4,False,
+lick,Lick,True,AttackAction,,,,0,,,4,True,DUN_Absorb
+life_dew,Life Dew,True,AreaAction,4,0,,,,,3,True,DUN_Dragon_Dance
+light_of_ruin,Light of Ruin,True,WaveMotionAction,8,,,,False,False,6,True,DUN_Lunar_Dance_2
+light_screen,Light Screen,True,AreaAction,1,0,,,,,3,False,DUN_Light_Screen_2
+light_that_burns_the_sky,Light That Burns the Sky,False,AttackAction,,,,0,,,4,False,
+liquidation,Liquidation,False,AttackAction,,,,0,,,4,False,
+lock_on,Lock-On,True,SelfAction,,,,,,,1,,DUN_Move_Start
+lovely_kiss,Lovely Kiss,True,AreaAction,2,1,,,,,4,False,DUN_Lovely_Kiss
+low_kick,Low Kick,True,AttackAction,,,,0,,,4,True,DUN_Dragon_Rush
+low_sweep,Low Sweep,True,AttackAction,,,,2,,,4,True,DUN_Drill Peck_2
+lucky_chant,Lucky Chant,True,AreaAction,4,0,,,,,3,False,
+lumina_crash,Lumina Crash,False,AttackAction,,,,0,,,4,False,
+lunar_blessing,Lunar Blessing,False,AttackAction,,,,0,,,4,False,
+lunar_dance,Lunar Dance,True,AreaAction,5,0,,,,,2,False,DUN_Lunar_Dance
+lunge,Lunge,True,DashAction,3,,,0,True,True,4,True,DUN_Thief
+luster_purge,Luster Purge,True,AreaAction,2,0,,,,,4,True,
+mach_punch,Mach Punch,True,DashAction,3,,,0,False,True,4,True,DUN_Rage
+magic_coat,Magic Coat,True,AreaAction,1,0,,,,,3,False,DUN_Light_Screen
+magic_powder,Magic Powder,False,AttackAction,,,,0,,,4,False,
+magic_room,Magic Room,True,SelfAction,,,,,,,1,,
+magical_leaf,Magical Leaf,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Magical_Leaf
+magical_torque,Magical Torque,False,AttackAction,,,,0,,,4,False,
+magma_storm,Magma Storm,True,ThrowAction,3,,,,,,4,,DUN_Magma_Storm
+magnet_bomb,Magnet Bomb,True,ThrowAction,3,,,,,,4,,
+magnet_rise,Magnet Rise,True,AreaAction,1,0,,,,,3,False,DUN_Magnet_Rise
+magnetic_flux,Magnetic Flux,True,AreaAction,3,0,,,,,2,False,DUN_Discharge
+magnitude,Magnitude,True,AreaAction,4,0,,,,,6,True,DUN_Flame_Wheel
+make_it_rain,Make It Rain,False,AttackAction,,,,0,,,4,False,
+malicious_moonsault,Malicious Moonsault,False,AttackAction,,,,0,,,4,False,
+mat_block,Mat Block,False,AttackAction,,,,0,,,4,False,
+max_airstream,Max Airstream,False,AttackAction,,,,0,,,4,False,
+max_darkness,Max Darkness,False,AttackAction,,,,0,,,4,False,
+max_flare,Max Flare,False,AttackAction,,,,0,,,4,False,
+max_flutterby,Max Flutterby,False,AttackAction,,,,0,,,4,False,
+max_geyser,Max Geyser,False,AttackAction,,,,0,,,4,False,
+max_guard,Max Guard,False,AttackAction,,,,0,,,4,False,
+max_hailstorm,Max Hailstorm,False,AttackAction,,,,0,,,4,False,
+max_knuckle,Max Knuckle,False,AttackAction,,,,0,,,4,False,
+max_lightning,Max Lightning,False,AttackAction,,,,0,,,4,False,
+max_mindstorm,Max Mindstorm,False,AttackAction,,,,0,,,4,False,
+max_ooze,Max Ooze,False,AttackAction,,,,0,,,4,False,
+max_overgrowth,Max Overgrowth,False,AttackAction,,,,0,,,4,False,
+max_phantasm,Max Phantasm,False,AttackAction,,,,0,,,4,False,
+max_quake,Max Quake,False,AttackAction,,,,0,,,4,False,
+max_rockfall,Max Rockfall,False,AttackAction,,,,0,,,4,False,
+max_starfall,Max Starfall,False,AttackAction,,,,0,,,4,False,
+max_steelspike,Max Steelspike,False,AttackAction,,,,0,,,4,False,
+max_strike,Max Strike,False,AttackAction,,,,0,,,4,False,
+max_wyrmwind,Max Wyrmwind,False,AttackAction,,,,0,,,4,False,
+me_first,Me First,True,ThrowAction,4,,,,,,4,,
+mean_look,Mean Look,True,ProjectileAction,8,,0,,True,True,4,False,
+meditate,Meditate,True,SelfAction,,,,,,,1,,
+mega_drain,Mega Drain,True,AreaAction,1,1,,,,,4,False,DUN_Focus_Blast
+mega_kick,Mega Kick,True,DashAction,2,,,0,True,True,4,True,DUN_Shadow_Force
+mega_punch,Mega Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+megahorn,Megahorn,True,DashAction,3,,,0,True,True,6,True,DUN_Punishment
+memento,Memento,True,AreaAction,2,0,,,,,4,False,
+menacing_moonraze_maelstrom,Menacing Moonraze Maelstrom,False,AttackAction,,,,0,,,4,False,
+metal_burst,Metal Burst,True,SelfAction,,,,,,,1,,
+metal_claw,Metal Claw,True,AttackAction,,,,1,,,4,True,DUN_Fury_Cutter
+metal_sound,Metal Sound,True,ProjectileAction,4,,0,,False,True,4,False,DUN_Metal_Sound
+meteor_assault,Meteor Assault,False,AttackAction,,,,0,,,4,False,
+meteor_beam,Meteor Beam,False,AttackAction,,,,0,,,4,False,
+meteor_mash,Meteor Mash,True,DashAction,4,,,0,True,True,4,True,DUN_Meteor_Mash
+metronome,Metronome,True,SelfAction,,,,,,,1,,
+milk_drink,Milk Drink,True,AreaAction,2,0,,,,,2,False,
+mimic,Mimic,True,ThrowAction,4,,,,,,6,,
+mind_blown,Mind Blown,False,AttackAction,,,,0,,,4,False,
+mind_reader,Mind Reader,True,SelfAction,,,,,,,1,,DUN_Mind_Reader
+minimize,Minimize,True,SelfAction,,,,,,,1,,
+miracle_eye,Miracle Eye,True,SelfAction,,,,,,,1,,DUN_Miracle_Eye
+mirror_coat,Mirror Coat,True,SelfAction,,,,,,,1,,DUN_Light_Screen
+mirror_move,Mirror Move,True,SelfAction,,,,,,,1,,
+mirror_shot,Mirror Shot,True,ProjectileAction,2,,0,,True,True,4,True,
+mist,Mist,True,AreaAction,1,0,,,,,3,False,DUN_Pokemon_Trap
+mist_ball,Mist Ball,True,ProjectileAction,6,,0,,True,True,6,False,
+misty_explosion,Misty Explosion,False,AttackAction,,,,0,,,4,False,
+misty_terrain,Misty Terrain,True,SelfAction,,,,,,,1,,
+moonblast,Moonblast,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Rest
+moongeist_beam,Moongeist Beam,False,AttackAction,,,,0,,,4,False,
+moonlight,Moonlight,True,AreaAction,2,0,,,,,3,False,
+morning_sun,Morning Sun,True,AreaAction,4,0,,,,,3,False,DUN_Sunny_Day
+mortal_spin,Mortal Spin,True,AttackAction,,,,3,,,4,True,DUN_Gunk_Shot_2
+mountain_gale,Mountain Gale,False,AttackAction,,,,0,,,4,False,
+mud_bomb,Mud Bomb,True,ThrowAction,3,,,,,,4,,DUN_Throw_Arc
+mud_shot,Mud Shot,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Aqua_Tail
+mud_slap,Mud-Slap,True,ProjectileAction,2,,0,,True,True,4,True,DUN_Mud_Sport
+mud_sport,Mud Sport,True,AreaAction,2,0,,,,,7,True,DUN_Mud_Sport
+muddy_water,Muddy Water,True,WaveMotionAction,4,,,,False,True,4,True,DUN_Surf
+multi_attack,Multi-Attack,False,AttackAction,,,,0,,,4,False,
+mystical_fire,Mystical Fire,True,ProjectileAction,4,,0,,False,True,4,True,DUN_Sacred_Fire
+mystical_power,Mystical Power,False,AttackAction,,,,0,,,4,False,
+nasty_plot,Nasty Plot,True,SelfAction,,,,,,,1,,
+natural_gift,Natural Gift,True,AttackAction,,,,2,,,4,True,
+nature_power,Nature Power,True,SelfAction,,,,,,,1,,
+natures_madness,Nature's Madness,False,AttackAction,,,,0,,,4,False,
+needle_arm,Needle Arm,True,AttackAction,,,,0,,,4,True,DUN_Punch
+never_ending_nightmare,Never-Ending Nightmare,False,AttackAction,,,,0,,,4,False,
+night_daze,Night Daze,True,AreaAction,4,0,,,,,4,True,DUN_Radar_Orb
+night_shade,Night Shade,True,AreaAction,1,0,,,,,4,False,DUN_Night_Shade_3
+night_slash,Night Slash,True,DashAction,2,,,1,False,True,4,True,DUN_Night_Slash
+nightmare,Nightmare,True,AreaAction,4,0,,,,,4,False,DUN_Nightmare
+no_retreat,No Retreat,False,AttackAction,,,,0,,,4,False,
+noble_roar,Noble Roar,True,AreaAction,4,1,,,,,4,False,DUN_Growl
+noxious_torque,Noxious Torque,False,AttackAction,,,,0,,,4,False,
+nuzzle,Nuzzle,True,AttackAction,,,,0,,,4,True,DUN_Paralyzed
+oblivion_wing,Oblivion Wing,False,AttackAction,,,,0,,,4,False,
+obstruct,Obstruct,False,AttackAction,,,,0,,,4,False,
+oceanic_operetta,Oceanic Operetta,False,AttackAction,,,,0,,,4,False,
+octazooka,Octazooka,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Octazooka
+octolock,Octolock,False,AttackAction,,,,0,,,4,False,
+odor_sleuth,Odor Sleuth,True,AreaAction,4,0,,,,,4,False,DUN_Identify_2
+ominous_wind,Ominous Wind,True,AreaAction,4,0,,,,,4,True,DUN_Ominous_Wind
+order_up,Order Up,False,AttackAction,,,,0,,,4,False,
+origin_pulse,Origin Pulse,False,AttackAction,,,,0,,,4,False,
+outrage,Outrage,True,AttackAction,,,,0,,,4,True,
+overdrive,Overdrive,False,AttackAction,,,,0,,,4,False,
+overheat,Overheat,True,AreaAction,1,0,,,,,4,True,DUN_Overheat_2
+pain_split,Pain Split,True,ThrowAction,4,,,,,,4,,DUN_Mega_Drain_3
+parabolic_charge,Parabolic Charge,False,AttackAction,,,,0,,,4,True,
+parting_shot,Parting Shot,True,AreaAction,4,1,,,,,4,False,EVT_Emote_Complain_2
+pay_day,Pay Day,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Ice_Shard
+payback,Payback,True,AttackAction,,,,0,,,4,True,DUN_Payback_2
+peck,Peck,True,AttackAction,,,,0,,,4,True,
+perish_song,Perish Song,True,AreaAction,2,0,,,,,7,False,DUN_Perish_Song
+petal_blizzard,Petal Blizzard,True,AreaAction,4,0,,,,,4,True,DUN_Leaf_Storm_3
+petal_dance,Petal Dance,True,DashAction,2,,,2,True,True,4,True,
+phantom_force,Phantom Force,True,AttackAction,,,,0,,,4,True,
+photon_geyser,Photon Geyser,False,AttackAction,,,,0,,,4,False,
+pika_papow,Pika Papow,False,AttackAction,,,,0,,,4,False,
+pin_missile,Pin Missile,True,ProjectileAction,3,,1,,True,True,4,True,_UNK_DUN_Rustle_2
+plasma_fists,Plasma Fists,False,AttackAction,,,,0,,,4,False,
+play_nice,Play Nice,True,ThrowAction,4,,,,,,4,,DUN_Tail_Whip
+play_rough,Play Rough,True,AttackAction,,,,0,,,4,True,
+pluck,Pluck,True,AttackAction,,,,0,,,4,True,
+poison_fang,Poison Fang,True,AttackAction,,,,0,,,4,True,DUN_Bite
+poison_gas,Poison Gas,True,ProjectileAction,3,,0,,False,True,4,True,DUN_Night_Shade
+poison_jab,Poison Jab,True,DashAction,2,,,0,True,True,4,True,DUN_Poison_Jab
+poison_powder,Poison Powder,True,AreaAction,2,0,,,,,4,True,DUN_Stun_Spore
+poison_sting,Poison Sting,True,ProjectileAction,2,,0,,True,True,4,True,DUN_Throw_Spike
+poison_tail,Poison Tail,True,AttackAction,,,,2,,,4,True,
+pollen_puff,Pollen Puff,True,ThrowAction,3,,,,,,6,,DUN_Ingrain
+poltergeist,Poltergeist,False,AttackAction,,,,0,,,4,False,
+population_bomb,Population Bomb,True,DashAction,1,,,0,True,True,6,True,DUN_Fury_Attack
+pounce,Pounce,True,DashAction,3,,,0,False,True,4,True,
+pound,Pound,True,AttackAction,,,,0,,,4,True,
+powder,Powder,True,AreaAction,3,0,,,,,4,True,_UNK_DUN_Rustle
+powder_snow,Powder Snow,True,AreaAction,4,0,,,,,4,True,DUN_Snowy_Weather
+power_gem,Power Gem,True,ProjectileAction,3,,1,,True,True,4,True,DUN_Power_Gem_2
+power_shift,Power Shift,False,AttackAction,,,,0,,,4,False,
+power_split,Power Split,True,ThrowAction,2,,,,,,6,,DUN_Safeguard
+power_swap,Power Swap,True,ProjectileAction,6,,0,,True,True,6,False,
+power_trick,Power Trick,True,SelfAction,,,,,,,1,,
+power_trip,Power Trip,False,AttackAction,,,,0,,,4,False,
+power_up_punch,Power-Up Punch,True,AttackAction,,,,0,,,4,True,DUN_Feint_2
+power_whip,Power Whip,True,ProjectileAction,2,,0,,False,True,4,True,DUN_Power_Whip
+precipice_blades,Precipice Blades,False,AttackAction,,,,0,,,4,False,
+present,Present,True,ThrowAction,3,,,,,,6,,DUN_Pound
+prismatic_laser,Prismatic Laser,True,AreaAction,4,0,,,,,4,True,DUN_Aurora_Beam
+protect,Protect,True,SelfAction,,,,,,,1,,DUN_Protect
+psybeam,Psybeam,True,ProjectileAction,8,,0,,True,True,4,True,DUN_Psybeam
+psyblade,Psyblade,False,AttackAction,,,,0,,,4,False,
+psych_up,Psych Up,True,ThrowAction,4,,,,,,6,,DUN_Psych_Up
+psychic,Psychic,True,OffsetAction,3,3,,,,,4,True,DUN_Move_Start
+psychic_fangs,Psychic Fangs,False,AttackAction,,,,0,,,4,False,
+psychic_terrain,Psychic Terrain,True,SelfAction,,,,,,,1,,
+psycho_boost,Psycho Boost,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Blowback_Orb
+psycho_cut,Psycho Cut,True,ProjectileAction,2,,1,,True,True,4,True,
+psycho_shift,Psycho Shift,True,ThrowAction,4,,,,,,6,,
+psyshield_bash,Psyshield Bash,True,DashAction,3,,,0,True,True,6,True,
+psyshock,Psyshock,True,OffsetAction,2,2,,,,,4,True,DUN_Aura_Sphere
+psystrike,Psystrike,True,AreaAction,2,0,,,,,4,True,DUN_Miracle_Eye
+psywave,Psywave,True,ProjectileAction,8,,0,,False,True,6,True,DUN_Psybeam
+pulverizing_pancake,Pulverizing Pancake,False,AttackAction,,,,0,,,4,False,
+punishment,Punishment,True,DashAction,3,,,0,True,True,4,True,DUN_Thief
+purify,Purify,False,AttackAction,,,,0,,,4,False,
+pursuit,Pursuit,True,ThrowAction,4,,,,,,4,,
+pyro_ball,Pyro Ball,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Fire_Blast_2
+quash,Quash,True,AreaAction,3,0,,,,,4,False,
+quick_attack,Quick Attack,True,DashAction,3,,,0,False,True,4,True,
+quick_guard,Quick Guard,True,AreaAction,2,0,,,,,3,False,DUN_Astonish_2
+quiver_dance,Quiver Dance,True,SelfAction,,,,,,,1,,DUN_Metal_Sound
+rage,Rage,True,SelfAction,,,,,,,1,,
+rage_fist,Rage Fist,True,DashAction,2,,,0,True,True,6,True,
+rage_powder,Rage Powder,True,AreaAction,2,0,,,,,4,True,
+raging_bull,Raging Bull,False,AttackAction,,,,0,,,4,False,
+raging_fury,Raging Fury,False,AttackAction,,,,0,,,4,False,
+rain_dance,Rain Dance,True,SelfAction,,,,,,,1,,
+rapid_spin,Rapid Spin,True,AttackAction,,,,3,,,4,True,DUN_Gust_Trap
+razor_leaf,Razor Leaf,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Razor_Leaf
+razor_shell,Razor Shell,True,AttackAction,,,,2,,,4,True,DUN_Revenge
+razor_wind,Razor Wind,True,AreaAction,4,0,,,,,4,True,DUN_Tailwind_2
+recover,Recover,True,SelfAction,,,,,,,1,,
+recycle,Recycle,True,AreaAction,4,0,,,,,3,False,DUN_Teeter_Dance
+reflect,Reflect,True,AreaAction,1,0,,,,,3,False,DUN_Light_Screen
+reflect_type,Reflect Type,True,ThrowAction,4,,,,,,6,,
+refresh,Refresh,True,AreaAction,1,0,,,,,3,False,
+relic_song,Relic Song,False,AttackAction,,,,0,,,4,False,
+rest,Rest,True,SelfAction,,,,,,,1,,DUN_Radar_Orb
+retaliate,Retaliate,True,AttackAction,,,,1,,,4,True,DUN_Revenge
+return,Return,True,AttackAction,,,,0,,,4,True,
+revelation_dance,Revelation Dance,False,AttackAction,,,,0,,,4,False,
+revenge,Revenge,True,AttackAction,,,,0,,,4,True,DUN_Thief
+reversal,Reversal,True,DashAction,2,,,0,True,True,4,True,
+revival_blessing,Revival Blessing,False,AttackAction,,,,0,,,4,False,
+rising_voltage,Rising Voltage,False,AttackAction,,,,0,,,4,False,
+roar,Roar,True,AreaAction,2,1,,,,,4,False,DUN_Growl
+roar_of_time,Roar of Time,True,WaveMotionAction,8,,,,False,False,4,False,
+rock_blast,Rock Blast,True,ProjectileAction,4,,0,,True,True,6,True,_UNK_DUN_Break
+rock_climb,Rock Climb,True,DashAction,5,,,1,True,False,4,True,DUN_Rock_Smash
+rock_polish,Rock Polish,True,SelfAction,,,,,,,1,,
+rock_slide,Rock Slide,True,OffsetAction,2,1,,,,,4,True,DUN_Rock_Slide
+rock_smash,Rock Smash,True,AttackAction,,,,1,,,4,True,
+rock_throw,Rock Throw,True,ThrowAction,3,,,,,,4,,DUN_Rock_Throw
+rock_tomb,Rock Tomb,True,OffsetAction,3,0,,,,,4,True,DUN_Giga_Impact
+rock_wrecker,Rock Wrecker,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Rock_Wrecker
+role_play,Role Play,True,ThrowAction,4,,,,,,6,,DUN_Throw_Start
+rolling_kick,Rolling Kick,True,AttackAction,,,,2,,,4,True,DUN_Rock_Climb
+rollout,Rollout,True,DashAction,4,,,0,True,True,6,True,_UNK_DUN_Heave_Up
+roost,Roost,True,SelfAction,,,,,,,1,,
+rototiller,Rototiller,True,DashAction,4,,,2,False,False,0,True,_UNK_DUN_Heave_Up
+round,Round,True,AreaAction,4,0,,,,,3,False,
+ruination,Ruination,False,AttackAction,,,,0,,,4,False,
+sacred_fire,Sacred Fire,True,DashAction,5,,,2,True,True,4,True,DUN_Flamethrower_3
+sacred_sword,Sacred Sword,True,DashAction,2,,,0,True,True,4,True,DUN_Fury_Cutter
+safeguard,Safeguard,True,AreaAction,2,0,,,,,3,False,DUN_Safeguard
+salt_cure,Salt Cure,True,AreaAction,2,1,,,,,4,True,_UNK_DUN_Rustle
+sand_attack,Sand Attack,True,AreaAction,2,1,,,,,4,True,_UNK_DUN_Sneeze
+sand_tomb,Sand Tomb,True,AreaAction,1,0,,,,,4,True,
+sandsear_storm,Sandsear Storm,False,AttackAction,,,,0,,,4,False,
+sandstorm,Sandstorm,True,SelfAction,,,,,,,1,,
+sappy_seed,Sappy Seed,False,AttackAction,,,,0,,,4,False,
+savage_spin_out,Savage Spin-Out,False,AttackAction,,,,0,,,4,False,
+scald,Scald,True,ProjectileAction,2,,0,,True,True,4,True,DUN_Water_Gun_3
+scale_shot,Scale Shot,False,AttackAction,,,,0,,,4,False,
+scary_face,Scary Face,True,AreaAction,2,1,,,,,4,False,
+scorching_sands,Scorching Sands,False,AttackAction,,,,0,,,4,False,
+scratch,Scratch,True,AttackAction,,,,0,,,4,True,DUN_Scratch
+screech,Screech,True,ProjectileAction,4,,0,,False,True,4,False,DUN_Screech
+searing_shot,Searing Shot,False,AttackAction,,,,0,,,4,False,
+searing_sunraze_smash,Searing Sunraze Smash,False,AttackAction,,,,0,,,4,False,
+secret_power,Secret Power,True,AttackAction,,,,2,,,4,True,
+secret_sword,Secret Sword,True,AttackAction,,,,2,,,4,True,
+seed_bomb,Seed Bomb,True,ThrowAction,3,,,,,,4,,DUN_Worry_Seed
+seed_flare,Seed Flare,True,AreaAction,2,0,,,,,4,True,DUN_Seed_Flare
+seismic_toss,Seismic Toss,True,AttackAction,,,,0,,,4,True,
+self_destruct,Self-Destruct,True,SelfAction,,,,,,,1,,DUN_Self-Destruct
+shadow_ball,Shadow Ball,True,ProjectileAction,6,,0,,True,False,6,True,DUN_Shadow_Ball
+shadow_bone,Shadow Bone,True,AttackAction,,,,0,,,4,True,
+shadow_claw,Shadow Claw,True,AttackAction,,,,1,,,4,True,DUN_Knock_Off
+shadow_force,Shadow Force,True,DashAction,4,,,1,False,False,4,True,DUN_Night_Shade_3
+shadow_punch,Shadow Punch,True,AttackAction,,,,1,,,4,True,DUN_Punch
+shadow_sneak,Shadow Sneak,True,DashAction,3,,,1,False,False,4,True,DUN_Shadow_Sneak
+sharpen,Sharpen,True,SelfAction,,,,,,,1,,
+shattered_psyche,Shattered Psyche,False,AttackAction,,,,0,,,4,False,
+shed_tail,Shed Tail,False,AttackAction,,,,0,,,4,False,
+sheer_cold,Sheer Cold,True,AreaAction,1,0,,,,,4,True,_UNK_EVT_036
+shell_side_arm,Shell Side Arm,False,AttackAction,,,,0,,,4,False,
+shell_smash,Shell Smash,True,SelfAction,,,,,,,1,,
+shell_trap,Shell Trap,False,AttackAction,,,,0,,,4,False,
+shelter,Shelter,True,SelfAction,,,,,,,1,,
+shift_gear,Shift Gear,True,SelfAction,,,,,,,1,,DUN_Flash_Cannon
+shock_wave,Shock Wave,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Shock_Wave
+shore_up,Shore Up,False,AttackAction,,,,0,,,4,False,
+signal_beam,Signal Beam,True,ProjectileAction,8,,0,,True,True,4,True,DUN_Copycat
+silk_trap,Silk Trap,False,AttackAction,,,,0,,,4,False,
+silver_wind,Silver Wind,True,AreaAction,4,0,,,,,4,True,DUN_Silver_Wind
+simple_beam,Simple Beam,True,ProjectileAction,8,,0,,True,True,6,False,DUN_Encore_2
+sing,Sing,True,AreaAction,1,0,,,,,4,False,DUN_Sing
+sinister_arrow_raid,Sinister Arrow Raid,False,AttackAction,,,,0,,,4,False,
+sizzly_slide,Sizzly Slide,False,AttackAction,,,,0,,,4,False,
+sketch,Sketch,True,ThrowAction,3,,,,,,6,,
+skill_swap,Skill Swap,True,ProjectileAction,8,,0,,True,True,6,False,
+skitter_smack,Skitter Smack,True,AttackAction,,,,1,,,4,True,
+skull_bash,Skull Bash,True,DashAction,6,,,0,True,True,4,True,DUN_Tackle
+sky_attack,Sky Attack,True,DashAction,6,,,2,False,True,4,True,DUN_Sky_Attack
+sky_drop,Sky Drop,True,AttackAction,,,,0,,,6,False,
+sky_uppercut,Sky Uppercut,True,AttackAction,,,,0,,,4,True,
+slack_off,Slack Off,True,SelfAction,,,,,,,1,,
+slam,Slam,True,AttackAction,,,,2,,,4,True,
+slash,Slash,True,AttackAction,,,,0,,,4,True,DUN_Slash
+sleep_powder,Sleep Powder,True,AreaAction,2,0,,,,,4,True,DUN_Stun_Spore
+sleep_talk,Sleep Talk,True,SelfAction,,,,,,,1,,DUN_Move_Start
+sludge,Sludge,True,ThrowAction,2,,,,,,4,,DUN_BubbleBeam
+sludge_bomb,Sludge Bomb,True,ThrowAction,3,,,,,,4,,DUN_Throw_Arc
+sludge_wave,Sludge Wave,True,AreaAction,3,1,,,,,4,True,DUN_Magma_Storm
+smack_down,Smack Down,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Shock_Wave_2
+smart_strike,Smart Strike,False,AttackAction,,,,0,,,4,False,
+smelling_salts,Smelling Salts,True,AttackAction,,,,0,,,6,True,DUN_Smelling_Salt
+smog,Smog,True,AreaAction,2,1,,,,,4,False,DUN_Mist
+smokescreen,Smokescreen,True,ProjectileAction,5,,0,,False,True,4,True,DUN_Smokescreen
+snap_trap,Snap Trap,False,AttackAction,,,,0,,,4,False,
+snarl,Snarl,True,AreaAction,3,1,,,,,4,False,DUN_Thief
+snatch,Snatch,True,SelfAction,,,,,,,1,,
+snipe_shot,Snipe Shot,False,AttackAction,,,,0,,,4,False,
+snore,Snore,True,AreaAction,2,0,,,,,4,False,DUN_Snore
+snowscape,Snowscape,False,AttackAction,,,,0,,,4,False,
+soak,Soak,True,ThrowAction,3,,,,,,4,,DUN_Surf
+soft_boiled,Soft-Boiled,True,ThrowAction,4,,,,,,2,,_UNK_EVT_069
+solar_beam,Solar Beam,True,WaveMotionAction,8,,,,False,False,6,True,DUN_Protect
+solar_blade,Solar Blade,False,AttackAction,,,,0,,,4,False,
+sonic_boom,Sonic Boom,True,ProjectileAction,3,,0,,True,True,4,True,DUN_Swift
+soul_stealing_7_star_strike,Soul-Stealing 7-Star Strike,False,AttackAction,,,,0,,,4,False,
+spacial_rend,Spacial Rend,True,AreaAction,5,0,,,,,4,False,
+spark,Spark,True,DashAction,2,,,0,True,True,4,True,
+sparkling_aria,Sparkling Aria,True,AreaAction,3,1,,,,,6,False,DUN_Bubble
+sparkly_swirl,Sparkly Swirl,True,OffsetAction,4,3,,,,,4,True,DUN_Twister
+spectral_thief,Spectral Thief,False,AttackAction,,,,0,,,4,False,
+speed_swap,Speed Swap,True,ProjectileAction,6,,0,,True,True,6,False,
+spicy_extract,Spicy Extract,False,AttackAction,,,,0,,,4,False,
+spider_web,Spider Web,True,AreaAction,3,0,,,,,4,True,
+spike_cannon,Spike Cannon,True,ProjectileAction,6,,0,,True,True,6,True,DUN_Throw_Spike
+spikes,Spikes,True,AreaAction,3,1,,,,,4,True,DUN_Chestnut_Trap
+spiky_shield,Spiky Shield,False,AttackAction,,,,0,,,4,False,
+spin_out,Spin Out,False,AttackAction,,,,0,,,4,False,
+spirit_break,Spirit Break,False,AttackAction,,,,0,,,4,False,
+spirit_shackle,Spirit Shackle,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Pluck
+spit_up,Spit Up,True,AttackAction,,,,0,,,4,True,
+spite,Spite,True,ThrowAction,3,,,,,,4,,DUN_Night_Shade_2
+splash,Splash,True,SelfAction,,,,,,,1,,
+splintered_stormshards,Splintered Stormshards,False,AttackAction,,,,0,,,4,False,
+splishy_splash,Splishy Splash,False,AttackAction,,,,0,,,4,False,
+spore,Spore,True,AreaAction,3,0,,,,,4,True,DUN_Spore
+spotlight,Spotlight,False,AttackAction,,,,0,,,4,False,
+springtide_storm,Springtide Storm,False,AttackAction,,,,0,,,4,False,
+stealth_rock,Stealth Rock,True,ThrowAction,3,,,,,,4,,DUN_Mud_Bomb
+steam_eruption,Steam Eruption,False,AttackAction,,,,0,,,4,False,
+steamroller,Steamroller,True,DashAction,3,,,0,True,True,4,True,DUN_Wood_Hammer
+steel_beam,Steel Beam,False,AttackAction,,,,0,,,4,False,
+steel_roller,Steel Roller,False,AttackAction,,,,0,,,4,False,
+steel_wing,Steel Wing,True,DashAction,2,,,2,True,True,4,True,DUN_Wing_Attack_2
+sticky_web,Sticky Web,True,ProjectileAction,2,,0,,True,True,4,True,DUN_Sticky_Trap
+stockpile,Stockpile,True,SelfAction,,,,,,,1,,DUN_HP_Drain_2
+stoked_sparksurfer,Stoked Sparksurfer,False,AttackAction,,,,0,,,4,False,
+stomp,Stomp,True,AttackAction,,,,0,,,4,True,DUN_Stomp
+stomping_tantrum,Stomping Tantrum,False,AttackAction,,,,0,,,4,False,
+stone_axe,Stone Axe,True,AttackAction,,,,2,,,4,True,DUN_Rock_Climb
+stone_edge,Stone Edge,True,OffsetAction,2,0,,,,,4,True,DUN_Stone_Edge
+stored_power,Stored Power,True,AreaAction,1,0,,,,,4,True,DUN_Ice_Beam
+storm_throw,Storm Throw,True,AttackAction,,,,0,,,4,True,DUN_Wrap
+strange_steam,Strange Steam,False,AttackAction,,,,0,,,4,False,
+strength,Strength,True,AttackAction,,,,0,,,4,True,
+strength_sap,Strength Sap,False,AttackAction,,,,0,,,4,False,
+string_shot,String Shot,True,ProjectileAction,6,,0,,True,True,4,True,DUN_String_Shot
+struggle,Struggle,True,AttackAction,,,,0,,,4,True,DUN_Overheat
+struggle_bug,Struggle Bug,True,AreaAction,2,1,,,,,4,True,DUN_String_Shot_2
+stuff_cheeks,Stuff Cheeks,False,AttackAction,,,,0,,,4,False,
+stun_spore,Stun Spore,True,AreaAction,2,0,,,,,4,True,DUN_Stun_Spore
+submission,Submission,True,AttackAction,,,,0,,,4,True,
+substitute,Substitute,True,ThrowAction,3,,,,,,6,,
+subzero_slammer,Subzero Slammer,False,AttackAction,,,,0,,,4,False,
+sucker_punch,Sucker Punch,True,DashAction,3,,,1,False,True,4,True,DUN_Sucker_Punch
+sunny_day,Sunny Day,True,SelfAction,,,,,,,1,,
+sunsteel_strike,Sunsteel Strike,False,AttackAction,,,,0,,,4,False,
+super_fang,Super Fang,True,AttackAction,,,,0,,,4,True,DUN_Revenge
+superpower,Superpower,True,DashAction,2,,,1,True,True,4,True,DUN_Rock_Climb_2
+supersonic,Supersonic,True,ProjectileAction,3,,0,,False,True,4,False,DUN_Leech_Seed_2
+supersonic_skystrike,Supersonic Skystrike,False,AttackAction,,,,0,,,4,False,
+surf,Surf,True,DashAction,5,,,2,True,True,6,True,DUN_Surf
+surging_strikes,Surging Strikes,False,AttackAction,,,,0,,,4,False,
+swagger,Swagger,True,ThrowAction,3,,,,,,6,,
+swallow,Swallow,True,SelfAction,,,,,,,1,,
+sweet_kiss,Sweet Kiss,True,AttackAction,,,,0,,,4,True,DUN_Sweet_Kiss
+sweet_scent,Sweet Scent,True,AreaAction,4,0,,,,,4,False,DUN_Sweet_Scent
+swift,Swift,True,AreaAction,2,1,,,,,4,True,DUN_Swift
+switcheroo,Switcheroo,True,ProjectileAction,8,,0,,True,False,6,False,
+swords_dance,Swords Dance,True,SelfAction,,,,,,,1,,DUN_Swords_Dance_2
+synchronoise,Synchronoise,True,AreaAction,4,0,,,,,6,False,DUN_Heart_Swap
+synthesis,Synthesis,True,SelfAction,,,,,,,1,,
+tackle,Tackle,True,DashAction,2,,,0,True,True,4,True,DUN_Tackle
+tail_glow,Tail Glow,True,SelfAction,,,,,,,1,,
+tail_slap,Tail Slap,True,AttackAction,,,,2,,,4,True,
+tail_whip,Tail Whip,True,AreaAction,1,1,,,,,4,False,
+tailwind,Tailwind,True,DashAction,6,,,2,False,True,3,True,DUN_Tailwind_2
+take_down,Take Down,True,DashAction,4,,,0,True,True,6,True,DUN_Hammer_Arm
+take_heart,Take Heart,False,AttackAction,,,,0,,,4,False,
+tar_shot,Tar Shot,False,AttackAction,,,,0,,,4,False,
+taunt,Taunt,True,ThrowAction,4,,,,,,4,,
+tearful_look,Tearful Look,True,ProjectileAction,8,,0,,True,True,4,False,
+teatime,Teatime,False,AttackAction,,,,0,,,4,False,
+techno_blast,Techno Blast,False,AttackAction,,,,0,,,4,False,
+tectonic_rage,Tectonic Rage,False,AttackAction,,,,0,,,4,False,
+teeter_dance,Teeter Dance,True,AreaAction,3,0,,,,,7,False,
+telekinesis,Telekinesis,True,ThrowAction,3,,,,,,6,,
+teleport,Teleport,True,SelfAction,,,,,,,1,,
+ten_million_volt_thunderbolt,"10,000,000 Volt Thunderbolt",False,AttackAction,,,,0,,,4,False,
+tera_blast,Tera Blast,False,AttackAction,,,,0,,,4,False,
+terrain_pulse,Terrain Pulse,False,AttackAction,,,,0,,,4,False,
+thief,Thief,True,DashAction,2,,,0,True,True,4,True,DUN_Thief
+thousand_arrows,Thousand Arrows,False,AttackAction,,,,0,,,4,False,
+thousand_waves,Thousand Waves,False,AttackAction,,,,0,,,4,False,
+thrash,Thrash,True,DashAction,2,,,0,True,True,4,True,
+throat_chop,Throat Chop,False,AttackAction,,,,0,,,4,False,
+thunder,Thunder,True,ThrowAction,3,,,,,,4,,DUN_Shock_Wave
+thunder_cage,Thunder Cage,False,AttackAction,,,,0,,,4,False,
+thunder_fang,Thunder Fang,True,AttackAction,,,,0,,,4,True,DUN_Thunder_Fang
+thunder_punch,Thunder Punch,True,AttackAction,,,,0,,,4,True,DUN_Punch
+thunder_shock,Thunder Shock,True,ThrowAction,3,,,,,,4,,
+thunder_wave,Thunder Wave,True,ProjectileAction,2,,0,,True,True,4,True,DUN_Zap_Cannon
+thunderbolt,Thunderbolt,True,ProjectileAction,2,,4,,False,False,4,True,DUN_Shock_Wave
+thunderous_kick,Thunderous Kick,False,AttackAction,,,,0,,,4,False,
+tickle,Tickle,True,AttackAction,,,,0,,,4,True,DUN_Tickle
+tidy_up,Tidy Up,False,AttackAction,,,,0,,,4,False,
+topsy_turvy,Topsy-Turvy,False,AttackAction,,,,0,,,4,False,
+torch_song,Torch Song,False,AttackAction,,,,0,,,4,False,
+torment,Torment,True,ThrowAction,3,,,,,,4,,
+toxic,Toxic,True,ThrowAction,2,,,,,,4,,DUN_Toxic
+toxic_spikes,Toxic Spikes,True,AreaAction,1,0,,,,,7,True,_UNK_DUN_Rustle
+toxic_thread,Toxic Thread,False,AttackAction,,,,0,,,4,False,
+trailblaze,Trailblaze,True,DashAction,2,,,0,True,True,6,True,_UNK_DUN_Sneeze
+transform,Transform,True,ThrowAction,2,,,,,,6,,DUN_Substitute
+tri_attack,Tri Attack,True,ProjectileAction,8,,0,,True,True,6,True,DUN_Blowback_Orb
+trick,Trick,True,ProjectileAction,8,,0,,True,False,6,False,
+trick_or_treat,Trick-or-Treat,True,AttackAction,,,,1,,,6,False,
+trick_room,Trick Room,True,SelfAction,,,,,,,1,,
+triple_arrows,Triple Arrows,False,AttackAction,,,,0,,,4,False,
+triple_axel,Triple Axel,False,AttackAction,,,,0,,,4,False,
+triple_dive,Triple Dive,False,AttackAction,,,,0,,,4,False,
+triple_kick,Triple Kick,True,AttackAction,,,,2,,,4,True,
+trop_kick,Trop Kick,False,AttackAction,,,,0,,,4,False,
+trump_card,Trump Card,True,ProjectileAction,4,,0,,True,True,4,True,DUN_Blowback_Orb
+twin_beam,Twin Beam,True,ProjectileAction,8,,0,,True,True,4,True,DUN_Power_Swap
+twineedle,Twineedle,True,DashAction,3,,,1,False,True,4,True,DUN_Fury_Attack
+twinkle_tackle,Twinkle Tackle,False,AttackAction,,,,0,,,4,False,
+twister,Twister,True,OffsetAction,2,3,,,,,4,True,DUN_Twister
+u_turn,U-turn,True,DashAction,2,,,1,True,True,4,True,DUN_U-Turn
+uproar,Uproar,True,AreaAction,3,0,,,,,7,False,DUN_Uproar
+v_create,V-create,False,AttackAction,,,,0,,,4,False,
+vacuum_wave,Vacuum Wave,True,ProjectileAction,3,,0,,False,True,4,True,_UNK_DUN_Echo_Hit
+veevee_volley,Veevee Volley,False,AttackAction,,,,0,,,4,False,
+venom_drench,Venom Drench,True,AreaAction,2,1,,,,,4,True,DUN_Whirlpool
+venoshock,Venoshock,True,OffsetAction,2,1,,,,,4,True,DUN_Teeter_Dance
+vice_grip,Vice Grip,True,AttackAction,,,,0,,,4,True,DUN_Pound
+victory_dance,Victory Dance,True,SelfAction,,,,,,,1,,
+vine_whip,Vine Whip,True,AttackAction,,,,2,,,4,True,DUN_Punishment
+vital_throw,Vital Throw,True,AttackAction,,,,0,,,4,True,
+volt_switch,Volt Switch,True,AreaAction,1,0,,,,,4,True,
+volt_tackle,Volt Tackle,True,DashAction,5,,,0,False,True,6,True,DUN_Charge_Beam_2
+wake_up_slap,Wake-Up Slap,True,AttackAction,,,,0,,,6,True,DUN_Wake_Up_Slap
+water_gun,Water Gun,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Water_Gun_2
+water_pledge,Water Pledge,True,AreaAction,0,0,,,,,4,True,DUN_Water_Spout
+water_pulse,Water Pulse,True,ProjectileAction,3,,0,,False,True,4,True,_UNK_DUN_Water_Echo_2
+water_shuriken,Water Shuriken,False,ProjectileAction,4,,0,,False,True,4,True,
+water_sport,Water Sport,True,AreaAction,2,0,,,,,7,True,DUN_Water_Sport
+water_spout,Water Spout,True,AreaAction,2,0,,,,,4,True,DUN_Water_Spout_2
+waterfall,Waterfall,True,DashAction,3,,,0,True,True,4,True,DUN_Waterfall
+wave_crash,Wave Crash,True,DashAction,4,,,0,True,True,6,True,
+weather_ball,Weather Ball,True,ThrowAction,3,,,,,,4,,DUN_Weather_Ball
+whirlpool,Whirlpool,True,OffsetAction,2,0,,,,,4,True,DUN_Whirlpool
+whirlwind,Whirlwind,True,AreaAction,1,0,,,,,6,True,DUN_Gust_Trap
+wicked_blow,Wicked Blow,False,AttackAction,,,,0,,,4,False,
+wicked_torque,Wicked Torque,False,AttackAction,,,,0,,,4,False,
+wide_guard,Wide Guard,True,AreaAction,2,0,,,,,3,False,DUN_Aurora_Beam_2
+wild_charge,Wild Charge,True,DashAction,4,,,0,True,True,6,True,DUN_Shock_Wave
+wildbolt_storm,Wildbolt Storm,False,AttackAction,,,,0,,,4,False,
+will_o_wisp,Will-O-Wisp,True,ProjectileAction,6,,0,,True,True,4,True,DUN_Fire_Spin
+wing_attack,Wing Attack,True,DashAction,2,,,2,True,True,4,True,DUN_Wing_Attack_2
+wish,Wish,True,AreaAction,1,0,,,,,3,False,
+withdraw,Withdraw,True,SelfAction,,,,,,,1,,DUN_Clamp
+wonder_room,Wonder Room,True,SelfAction,,,,,,,1,,
+wood_hammer,Wood Hammer,True,DashAction,2,,,0,True,True,6,True,
+work_up,Work Up,True,SelfAction,,,,,,,1,,
+worry_seed,Worry Seed,True,ThrowAction,4,,,,,,6,,DUN_Bullet_Seed
+wrap,Wrap,True,AttackAction,,,,0,,,4,True,DUN_Wrap
+wring_out,Wring Out,True,AttackAction,,,,0,,,4,True,DUN_Wring_Out
+x_scissor,X-Scissor,True,AttackAction,,,,0,,,4,True,DUN_X-Scissor
+yawn,Yawn,True,ThrowAction,3,,,,,,4,,
+zap_cannon,Zap Cannon,True,ProjectileAction,6,,0,,True,True,6,False,DUN_Flash_Cannon
+zen_headbutt,Zen Headbutt,True,DashAction,2,,,0,True,True,4,True,DUN_Zen_Headbutt_2
+zing_zap,Zing Zap,True,DashAction,2,,,0,True,True,4,True,
+zippy_zap,Zippy Zap,False,AttackAction,,,,0,,,4,False,

@@ -1,0 +1,100 @@
+[2026/11/26 01:13:23.104] =========================================
+[2026/11/26 01:13:23.114] SESSION STARTED: 2026/11/26 01:13:23
+[2026/11/26 01:13:23.114] Version: 0.8.12.0
+[2026/11/26 01:13:23.115] .NET 8.0.26
+[2026/11/26 01:13:23.115] =========================================
+[2026/11/26 01:13:23.130] -----------------------------------------
+[2026/11/26 01:13:23.131] -----------------------------------------
+[2026/11/26 01:13:24.647] FNA3D Driver: OpenGL
+[2026/11/26 01:13:24.647] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+[2026/11/26 01:13:24.647] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+[2026/11/26 01:13:24.647] OpenGL Vendor: Mesa
+[2026/11/26 01:13:24.648] MojoShader Profile: glsl120
+[2026/11/26 01:13:24.678] [SE]:Initialized Lua 5.4
+[2026/11/26 01:13:24.678] [SE]:Importing .NET packages..
+[2026/11/26 01:13:24.686] [SE]: **- Lua engine started! -**
+[2026/11/26 01:13:27.397] [SE]:Exposing game engine components instances..
+[2026/11/26 01:13:27.464] [SE]:Exposing script interface..
+[2026/11/26 01:13:27.471] [SE]:Setting up lua globals..
+[2026/11/26 01:13:27.472] [SE]:Setting up lua paths..
+[2026/11/26 01:13:27.477] [SE]:Setting up lua functions...
+[2026/11/26 01:13:27.478] [SE]:Setting up debug functions...
+[2026/11/26 01:13:27.482] [SE]:Setting up default script vars...
+[2026/11/26 01:13:27.488] [SE]:Caching common lib...
+[2026/11/26 01:13:27.509] [SE]:Loading events...
+[2026/11/26 01:13:27.522] [SE]:Installing game interface functions..
+[2026/11/26 01:13:27.532] [SE]:DebugTools:initialize()
+[2026/11/26 01:13:27.535] [SE]:Registered service DebugTools!
+[2026/11/26 01:13:27.536] [SE]:UpgradeTools:initialize()
+[2026/11/26 01:13:27.536] [SE]:Registered service UpgradeTools!
+[2026/11/26 01:13:27.537] [SE]:MenuTools:initialize()
+[2026/11/26 01:13:27.537] [SE]:Registered service MenuTools!
+[2026/11/26 01:13:27.537] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+[2026/11/26 01:13:27.538] [SE]:Registered service DestinyTitleAnim!
+[2026/11/26 01:13:27.538] [SE]:Registered service StatueKangourex!
+[2026/11/26 01:13:27.541] [SE]:Registered service NiloTemoin!
+[2026/11/26 01:13:27.543] [SE]: **- Lua engine ready! -**
+[2026/11/26 01:13:27.544] [SE]:
+<!> ExampleSvc: Init..
+[2026/11/26 01:13:28.318] LuaEngine.OnMusicChange()..
+[2026/11/26 01:13:47.134] LuaEngine.LoadSavedData()..
+[2026/11/26 01:13:47.136] LuaEngine.LoadSavedData()..
+[2026/11/26 01:13:50.884] LuaEngine.LoadSavedData()..
+[2026/11/26 01:13:50.916] Zone Seed: 1702107103651807442
+[2026/11/26 01:13:50.918] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:13:50.922] Loading rsground file: intro_halo
+[2026/11/26 01:13:50.993] Completed file load.
+[2026/11/26 01:13:51.000] GroundMap.OnInit(): Initializing the map..
+[2026/11/26 01:13:51.003] GroundMap.LoadScriptEvents(): Added event Init to map intro_halo!
+[2026/11/26 01:13:51.004] GroundMap.LoadScriptEvents(): Added event Enter to map intro_halo!
+[2026/11/26 01:13:51.004] GroundMap.LoadScriptEvents(): Added event Exit to map intro_halo!
+[2026/11/26 01:13:51.004] GroundMap.LoadScriptEvents(): Added event Update to map intro_halo!
+[2026/11/26 01:13:51.004] GroundMap.LoadScriptEvents(): Added event GameSave to map intro_halo!
+[2026/11/26 01:13:51.004] GroundMap.LoadScriptEvents(): Added event GameLoad to map intro_halo!
+[2026/11/26 01:13:51.010] LuaEngine.OnGroundMapInit()..
+[2026/11/26 01:13:51.025] [SE]:[BANC MEGA] Création du Dracaufeu de test
+[2026/11/26 01:13:51.054] LuaEngine.SaveData()..
+[2026/11/26 01:13:51.192] LuaEngine.SaveData()..
+[2026/11/26 01:13:51.208] LuaEngine.OnGroundMapEnter()..
+[2026/11/26 01:13:51.209] LuaEngine.OnGroundMapExit()..
+[2026/11/26 01:13:51.210] GroundMap.~GroundMap(): Finalizing intro_halo..
+[2026/11/26 01:13:51.210] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+[2026/11/26 01:13:51.210] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+[2026/11/26 01:13:51.211] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Exit!
+[2026/11/26 01:13:51.211] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+[2026/11/26 01:13:51.211] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameSave!
+[2026/11/26 01:13:51.211] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+=>_ENV pre-cleanup:142
+=>_ENV post cleanup:141
+[2026/11/26 01:13:51.214] Zone.~Zone(): Finalizing personality_test..
+=>_ENV pre-cleanup:141
+=>_ENV post cleanup:140
+[2026/11/26 01:13:51.321] Zone Seed: 16773799341952516145
+[2026/11/26 01:13:51.322] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:13:51.323] Zone.LoadScriptEvents(): Added event Init to zone ambush_forest!
+[2026/11/26 01:13:51.324] Zone.LoadScriptEvents(): Added event EnterSegment to zone ambush_forest!
+[2026/11/26 01:13:51.324] Zone.LoadScriptEvents(): Added event ExitSegment to zone ambush_forest!
+[2026/11/26 01:13:51.324] Zone.LoadScriptEvents(): Added event Rescued to zone ambush_forest!
+[2026/11/26 01:13:51.324] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+[2026/11/26 01:13:51.325] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.EnterSegment!
+[2026/11/26 01:13:51.325] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+[2026/11/26 01:13:51.325] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+[2026/11/26 01:13:51.325] [SE]:=>> Init_ambush_forest
+[2026/11/26 01:13:51.327] Zone Seed: 16773799341952516145
+[2026/11/26 01:13:51.333] Map Count: 0
+[2026/11/26 01:13:51.333] Map Seed: 0
+[2026/11/26 01:13:51.586] Steps:
+
+[2026/11/26 01:13:51.636] Map.OnInit(): Initializing the map..
+[2026/11/26 01:13:51.638] LuaEngine.OnDungeonMapInit()..
+[2026/11/26 01:13:52.490] LuaEngine.OnMusicChange()..
+[2026/11/26 01:13:53.865] LuaEngine.OnDungeonMapEnter()..
+[2026/11/26 01:14:02.344] [SE]:[Z GENERE] bas
+[2026/11/26 01:14:03.894] [SE]:[Z GENERE] bas-gauche
+[2026/11/26 01:14:05.277] [SE]:[Z GENERE] gauche
+[2026/11/26 01:14:06.644] [SE]:[Z GENERE] haut-gauche
+[2026/11/26 01:14:08.011] [SE]:[Z GENERE] haut
+[2026/11/26 01:14:09.377] [SE]:[Z GENERE] haut-droite
+[2026/11/26 01:14:10.744] [SE]:[Z GENERE] droite
+[2026/11/26 01:14:12.111] [SE]:[Z GENERE] bas-droite
+[2026/11/26 01:14:13.482] [SE]:[Z GENERE] fin des huit directions

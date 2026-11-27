@@ -1,0 +1,30 @@
+[2026/11/26 23:25:21.437] [SE]:[ROCHES LAMES Z] espece=lycanroc attaque-base=stone_edge
+[2026/11/26 23:25:21.475] [SE]:[ROCHES LAMES Z] début bas cible=270 témoin=270
+[2026/11/26 23:25:25.006] [SE]:[ROCHES LAMES Z] résultat bas cible=270->224 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:25.750] [SE]:[ROCHES LAMES Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 23:25:29.113] [SE]:[ROCHES LAMES Z] résultat bas-gauche cible=270->221 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:29.864] [SE]:[ROCHES LAMES Z] début gauche cible=270 témoin=270
+[2026/11/26 23:25:33.213] [SE]:[ROCHES LAMES Z] résultat gauche cible=270->221 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:33.964] [SE]:[ROCHES LAMES Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 23:25:37.313] [SE]:[ROCHES LAMES Z] résultat haut-gauche cible=270->223 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:38.064] [SE]:[ROCHES LAMES Z] début haut cible=270 témoin=270
+[2026/11/26 23:25:41.413] [SE]:[ROCHES LAMES Z] résultat haut cible=270->223 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:42.164] [SE]:[ROCHES LAMES Z] début haut-droite cible=270 témoin=270
+[2026/11/26 23:25:45.517] [SE]:[ROCHES LAMES Z] résultat haut-droite cible=270->224 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:46.264] [SE]:[ROCHES LAMES Z] début droite cible=270 témoin=270
+[2026/11/26 23:25:49.613] [SE]:[ROCHES LAMES Z] résultat droite cible=270->221 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:50.364] [SE]:[ROCHES LAMES Z] début bas-droite cible=270 témoin=270
+[2026/11/26 23:25:53.713] [SE]:[ROCHES LAMES Z] résultat bas-droite cible=270->225 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:25:54.631] [SE]:[ROCHES LAMES CHAMP] avant=electric_terrain
+[2026/11/26 23:25:57.697] [SE]:[ROCHES LAMES CHAMP] retire=electric_terrain
+[2026/11/26 23:25:58.030] [SE]:[ROCHES LAMES CHAMP] apres=electric_terrain present=false
+[2026/11/26 23:25:58.197] [SE]:[ROCHES LAMES CHAMP] avant=grassy_terrain
+[2026/11/26 23:26:01.213] [SE]:[ROCHES LAMES CHAMP] retire=grassy_terrain
+[2026/11/26 23:26:01.547] [SE]:[ROCHES LAMES CHAMP] apres=grassy_terrain present=false
+[2026/11/26 23:26:01.713] [SE]:[ROCHES LAMES CHAMP] avant=misty_terrain
+[2026/11/26 23:26:04.780] [SE]:[ROCHES LAMES CHAMP] retire=misty_terrain
+[2026/11/26 23:26:05.113] [SE]:[ROCHES LAMES CHAMP] apres=misty_terrain present=false
+[2026/11/26 23:26:05.280] [SE]:[ROCHES LAMES CHAMP] avant=psychic_terrain
+[2026/11/26 23:26:08.297] [SE]:[ROCHES LAMES CHAMP] retire=psychic_terrain
+[2026/11/26 23:26:08.630] [SE]:[ROCHES LAMES CHAMP] apres=psychic_terrain present=false
+[2026/11/26 23:26:08.630] [SE]:[ROCHES LAMES Z] FIN OK

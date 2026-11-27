@@ -1,0 +1,51 @@
+[2026/11/27 13:34:50.671] [SE]:[Apocalypse Z] debut bas cible=270
+[2026/11/27 13:34:50.933] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:34:52.116] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:34:54.334] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:34:54.778] [SE]:[Apocalypse Z] resultat bas cible=270->149 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:34:55.243] [SE]:[Apocalypse Z] debut bas-gauche cible=270
+[2026/11/27 13:34:55.575] [SE]:[Apocalypse CATEGORIE] atk=200 matk=50 categorie=Physical: 1
+[2026/11/27 13:34:56.608] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:34:58.741] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:34:59.090] [SE]:[Apocalypse Z] resultat bas-gauche cible=270->136 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:34:59.393] [SE]:[Apocalypse Z] debut gauche cible=270
+[2026/11/27 13:34:59.644] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:35:01.042] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:02.826] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:03.294] [SE]:[Apocalypse Z] resultat gauche cible=270->153 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:03.878] [SE]:[Apocalypse Z] debut haut-gauche cible=270
+[2026/11/27 13:35:04.274] [SE]:[Apocalypse CATEGORIE] atk=200 matk=50 categorie=Physical: 1
+[2026/11/27 13:35:05.364] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:07.323] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:07.656] [SE]:[Apocalypse Z] resultat haut-gauche cible=270->131 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:07.956] [SE]:[Apocalypse Z] debut haut cible=270
+[2026/11/27 13:35:08.206] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:35:09.679] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:11.345] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:11.780] [SE]:[Apocalypse Z] resultat haut cible=270->139 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:12.222] [SE]:[Apocalypse Z] debut haut-droite cible=270
+[2026/11/27 13:35:12.509] [SE]:[Apocalypse CATEGORIE] atk=200 matk=50 categorie=Physical: 1
+[2026/11/27 13:35:13.807] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:15.459] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:15.940] [SE]:[Apocalypse Z] resultat haut-droite cible=270->125 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:16.395] [SE]:[Apocalypse Z] debut droite cible=270
+[2026/11/27 13:35:16.656] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:35:17.796] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:20.176] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:20.661] [SE]:[Apocalypse Z] resultat droite cible=270->150 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:20.984] [SE]:[Apocalypse Z] debut bas-droite cible=270
+[2026/11/27 13:35:21.253] [SE]:[Apocalypse CATEGORIE] atk=200 matk=50 categorie=Physical: 1
+[2026/11/27 13:35:22.780] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:24.493] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:25.059] [SE]:[Apocalypse Z] resultat bas-droite cible=270->128 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:25.440] [SE]:[Apocalypse Z] debut immunite type cible=235
+[2026/11/27 13:35:25.762] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:35:27.058] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:28.500] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:28.993] [SE]:[Apocalypse Z] resultat immunite type cible=235->235 temoin=270->270 PP=0 talent_desactive=false garde=false
+[2026/11/27 13:35:29.347] [SE]:[Apocalypse Z] debut garde mystik cible=270
+[2026/11/27 13:35:29.590] [SE]:[Apocalypse CATEGORIE] atk=50 matk=200 categorie=Magical: 2
+[2026/11/27 13:35:30.628] [SE]:[Apocalypse TALENT] suspendu=true
+[2026/11/27 13:35:32.258] [SE]:[Apocalypse TALENT] restaure=false
+[2026/11/27 13:35:32.606] [SE]:[Apocalypse Z] resultat garde mystik cible=270->142 temoin=270->270 PP=0 talent_desactive=false garde=true
+[2026/11/27 13:35:32.906] [SE]:[Apocalypse Z] FIN OK

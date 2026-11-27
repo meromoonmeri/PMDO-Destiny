@@ -1,0 +1,74 @@
+[
+  {
+    "id": "refectoire-chaleureux-table-repas",
+    "label": "Table de repas en bois",
+    "w": 88,
+    "h": 48,
+    "category": "meubles",
+    "wall": false,
+    "file": "table-repas.png"
+  },
+  {
+    "id": "refectoire-chaleureux-banc-repas",
+    "label": "Banc de réfectoire",
+    "w": 60,
+    "h": 22,
+    "category": "meubles",
+    "wall": false,
+    "file": "banc-repas.png"
+  },
+  {
+    "id": "refectoire-chaleureux-tabouret-repas",
+    "label": "Tabouret vert",
+    "w": 22,
+    "h": 20,
+    "category": "meubles",
+    "wall": false,
+    "file": "tabouret-repas.png"
+  },
+  {
+    "id": "refectoire-chaleureux-buffet-vaisselle",
+    "label": "Buffet et vaisselle",
+    "w": 54,
+    "h": 40,
+    "category": "meubles",
+    "wall": false,
+    "file": "buffet-vaisselle.png"
+  },
+  {
+    "id": "refectoire-chaleureux-etagere-vaisselle",
+    "label": "Étagère murale de vaisselle",
+    "w": 38,
+    "h": 25,
+    "category": "panneaux",
+    "wall": true,
+    "file": "etagere-vaisselle.png"
+  },
+  {
+    "id": "refectoire-chaleureux-panier-buches",
+    "label": "Panier à bûches",
+    "w": 24,
+    "h": 22,
+    "category": "meubles",
+    "wall": false,
+    "file": "panier-buches.png"
+  },
+  {
+    "id": "refectoire-chaleureux-tapis-chaleureux",
+    "label": "Tapis du réfectoire · Emblème",
+    "w": 90,
+    "h": 48,
+    "category": "tapis",
+    "wall": false,
+    "file": "tapis-chaleureux.png"
+  },
+  {
+    "id": "refectoire-chaleureux-plateau-the",
+    "label": "Plateau de thé",
+    "w": 24,
+    "h": 17,
+    "category": "meubles",
+    "wall": false,
+    "file": "plateau-the.png"
+  }
+]

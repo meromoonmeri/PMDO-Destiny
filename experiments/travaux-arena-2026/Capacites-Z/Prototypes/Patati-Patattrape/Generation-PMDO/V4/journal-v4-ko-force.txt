@@ -1,0 +1,10 @@
+[2026/11/26 23:59:45.021] [SE]:[PATATI Z] espece=mimikyu attaque-base=play_rough
+[2026/11/26 23:59:45.284] [SE]:[PATATI Z] début bas cible=270 témoin=270
+[2026/11/26 23:59:46.453] [SE]:[PATATI V4 VISUEL] debut cible_masquee=true mimiqui_masque=true
+[2026/11/26 23:59:48.114] [SE]:[PATATI V4 VISUEL] fin_costume cible_masquee=true mimiqui_masque=true
+[2026/11/26 23:59:48.449] [SE]:[PATATI V4 VISUEL] reapparition cible=true mimiqui=true
+[2026/11/26 23:59:48.949] [SE]:[PATATI V4 KO] tirage=0/1000
+[2026/11/26 23:59:48.949] [SE]:[PATATI V4 KO] DECLENCHE
+[2026/11/26 23:59:50.276] [SE]:[PATATI Z] résultat bas cible=270->0 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 23:59:50.276] [SE]:[PATATI V4 TEST] KO forcé confirmé, sprites restaurés
+[2026/11/26 23:59:51.015] [SE]:[PATATI Z] FIN OK

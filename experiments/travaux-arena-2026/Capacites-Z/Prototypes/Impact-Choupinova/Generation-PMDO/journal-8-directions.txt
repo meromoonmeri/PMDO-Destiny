@@ -1,0 +1,49 @@
+[2026/11/26 15:09:07.697] [SE]:[CHOUPINOVA Z] début bas centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:08.668] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=Down: 0
+
+[2026/11/26 15:09:13.526] [SE]:[CHOUPINOVA Z] résultat bas 114->77,114->78,114->80,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:14.089] [SE]:[CHOUPINOVA Z] début bas-gauche centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:15.018] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=DownLeft: 1
+
+[2026/11/26 15:09:19.607] [SE]:[CHOUPINOVA Z] résultat bas-gauche 114->79,114->81,114->77,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:20.156] [SE]:[CHOUPINOVA Z] début gauche centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:21.107] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=Left: 2
+
+[2026/11/26 15:09:25.618] [SE]:[CHOUPINOVA Z] résultat gauche 114->79,114->81,114->80,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:26.118] [SE]:[CHOUPINOVA Z] début haut-gauche centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:27.069] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=UpLeft: 3
+
+[2026/11/26 15:09:31.586] [SE]:[CHOUPINOVA Z] résultat haut-gauche 114->79,114->79,114->77,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:32.088] [SE]:[CHOUPINOVA Z] début haut centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:33.001] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=Up: 4
+
+[2026/11/26 15:09:37.486] [SE]:[CHOUPINOVA Z] résultat haut 114->81,114->81,114->79,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:37.987] [SE]:[CHOUPINOVA Z] début haut-droite centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:38.903] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=UpRight: 5
+
+[2026/11/26 15:09:43.418] [SE]:[CHOUPINOVA Z] résultat haut-droite 114->79,114->79,114->80,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:43.922] [SE]:[CHOUPINOVA Z] début droite centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:44.884] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=Right: 6
+
+[2026/11/26 15:09:49.452] [SE]:[CHOUPINOVA Z] résultat droite 114->78,114->79,114->79,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:49.960] [SE]:[CHOUPINOVA Z] début bas-droite centre=X:4 Y:4: 0
+
+[2026/11/26 15:09:50.868] [SE]:[CHOUPINOVA] tour complet terminé, direction restaurée=DownRight: 7
+
+[2026/11/26 15:09:55.369] [SE]:[CHOUPINOVA Z] résultat bas-droite 114->80,114->80,114->79,114->114 charges=0 action=TurnTaken: 2
+
+[2026/11/26 15:09:56.884] [SE]:[CHOUPINOVA Z] FIN OK

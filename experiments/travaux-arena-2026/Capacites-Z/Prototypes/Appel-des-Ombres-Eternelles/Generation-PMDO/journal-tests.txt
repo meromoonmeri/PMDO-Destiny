@@ -1,0 +1,34 @@
+[2026/11/26 12:25:10.706] [SE]:[OMBRES Z] début bas centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:13.663] [SE]:[OMBRES Z] résultat bas 114->73,114->74,114->73,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:14.330] [SE]:[OMBRES Z] début bas-gauche centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:17.363] [SE]:[OMBRES Z] résultat bas-gauche 114->73,114->71,114->74,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:18.030] [SE]:[OMBRES Z] début gauche centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:21.063] [SE]:[OMBRES Z] résultat gauche 114->71,114->72,114->74,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:21.730] [SE]:[OMBRES Z] début haut-gauche centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:24.747] [SE]:[OMBRES Z] résultat haut-gauche 114->70,114->69,114->69,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:25.413] [SE]:[OMBRES Z] début haut centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:28.397] [SE]:[OMBRES Z] résultat haut 114->70,114->69,114->72,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:29.065] [SE]:[OMBRES Z] début haut-droite centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:32.080] [SE]:[OMBRES Z] résultat haut-droite 114->70,114->73,114->74,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:32.747] [SE]:[OMBRES Z] début droite centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:35.763] [SE]:[OMBRES Z] résultat droite 114->73,114->72,114->70,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:36.430] [SE]:[OMBRES Z] début bas-droite centre=X:22 Y:8: 30 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 12:25:39.446] [SE]:[OMBRES Z] résultat bas-droite 114->70,114->71,114->72,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:25:40.113] [SE]:[OMBRES Z] FIN
+[2026/11/26 12:26:42.896] [SE]:[OMBRES NOMBRE] début bas nombre-cibles=0 centre=X:22 Y:8: 30
+[2026/11/26 12:26:43.997] [SE]:[OMBRES NOMBRE] résultat bas 114->114,114->114,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:44.680] [SE]:[OMBRES NOMBRE] début bas-gauche nombre-cibles=1 centre=X:22 Y:8: 30
+[2026/11/26 12:26:46.497] [SE]:[OMBRES NOMBRE] résultat bas-gauche 114->71,114->114,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:47.163] [SE]:[OMBRES NOMBRE] début gauche nombre-cibles=2 centre=X:22 Y:8: 30
+[2026/11/26 12:26:49.480] [SE]:[OMBRES NOMBRE] résultat gauche 114->70,114->73,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:50.147] [SE]:[OMBRES NOMBRE] début haut-gauche nombre-cibles=3 centre=X:22 Y:8: 30
+[2026/11/26 12:26:53.196] [SE]:[OMBRES NOMBRE] résultat haut-gauche 114->72,114->73,114->73,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:53.863] [SE]:[OMBRES NOMBRE] début haut nombre-cibles=0 centre=X:22 Y:8: 30
+[2026/11/26 12:26:54.999] [SE]:[OMBRES NOMBRE] résultat haut 114->114,114->114,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:55.663] [SE]:[OMBRES NOMBRE] début haut-droite nombre-cibles=1 centre=X:22 Y:8: 30
+[2026/11/26 12:26:57.559] [SE]:[OMBRES NOMBRE] résultat haut-droite 114->74,114->114,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:26:58.313] [SE]:[OMBRES NOMBRE] début droite nombre-cibles=2 centre=X:22 Y:8: 30
+[2026/11/26 12:27:00.896] [SE]:[OMBRES NOMBRE] résultat droite 114->69,114->74,114->114,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:27:01.563] [SE]:[OMBRES NOMBRE] début bas-droite nombre-cibles=3 centre=X:22 Y:8: 30
+[2026/11/26 12:27:04.714] [SE]:[OMBRES NOMBRE] résultat bas-droite 114->73,114->74,114->70,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 12:27:05.496] [SE]:[OMBRES NOMBRE] FIN

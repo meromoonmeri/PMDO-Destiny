@@ -1,0 +1,124 @@
+[2026/11/26 01:51:33.912] =========================================
+[2026/11/26 01:51:33.925] SESSION STARTED: 2026/11/26 01:51:33
+[2026/11/26 01:51:33.926] Version: 0.8.12.0
+[2026/11/26 01:51:33.927] .NET 8.0.26
+[2026/11/26 01:51:33.927] =========================================
+[2026/11/26 01:51:33.950] -----------------------------------------
+[2026/11/26 01:51:33.950] -----------------------------------------
+[2026/11/26 01:51:35.599] FNA3D Driver: OpenGL
+[2026/11/26 01:51:35.600] OpenGL Renderer: llvmpipe (LLVM 19.1.7, 256 bits)
+[2026/11/26 01:51:35.600] OpenGL Driver: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+[2026/11/26 01:51:35.600] OpenGL Vendor: Mesa
+[2026/11/26 01:51:35.601] MojoShader Profile: glsl120
+[2026/11/26 01:51:35.639] [SE]:Initialized Lua 5.4
+[2026/11/26 01:51:35.639] [SE]:Importing .NET packages..
+[2026/11/26 01:51:35.648] [SE]: **- Lua engine started! -**
+[2026/11/26 01:51:38.528] [SE]:Exposing game engine components instances..
+[2026/11/26 01:51:38.593] [SE]:Exposing script interface..
+[2026/11/26 01:51:38.598] [SE]:Setting up lua globals..
+[2026/11/26 01:51:38.598] [SE]:Setting up lua paths..
+[2026/11/26 01:51:38.603] [SE]:Setting up lua functions...
+[2026/11/26 01:51:38.603] [SE]:Setting up debug functions...
+[2026/11/26 01:51:38.608] [SE]:Setting up default script vars...
+[2026/11/26 01:51:38.614] [SE]:Caching common lib...
+[2026/11/26 01:51:38.636] [SE]:Loading events...
+[2026/11/26 01:51:38.652] [SE]:Installing game interface functions..
+[2026/11/26 01:51:38.659] [SE]:DebugTools:initialize()
+[2026/11/26 01:51:38.662] [SE]:Registered service DebugTools!
+[2026/11/26 01:51:38.663] [SE]:UpgradeTools:initialize()
+[2026/11/26 01:51:38.664] [SE]:Registered service UpgradeTools!
+[2026/11/26 01:51:38.665] [SE]:MenuTools:initialize()
+[2026/11/26 01:51:38.665] [SE]:Registered service MenuTools!
+[2026/11/26 01:51:38.666] [SE]:[PMD:Destiny] Service destiny_title_anim (Jour & Nuit separes + Opening) initialise.
+[2026/11/26 01:51:38.667] [SE]:Registered service DestinyTitleAnim!
+[2026/11/26 01:51:38.668] [SE]:Registered service StatueKangourex!
+[2026/11/26 01:51:38.671] [SE]:Registered service NiloTemoin!
+[2026/11/26 01:51:38.674] [SE]: **- Lua engine ready! -**
+[2026/11/26 01:51:38.675] [SE]:
+<!> ExampleSvc: Init..
+[2026/11/26 01:51:39.442] LuaEngine.OnMusicChange()..
+[2026/11/26 01:51:57.379] LuaEngine.LoadSavedData()..
+[2026/11/26 01:51:57.381] LuaEngine.LoadSavedData()..
+[2026/11/26 01:52:01.128] LuaEngine.LoadSavedData()..
+[2026/11/26 01:52:01.166] Zone Seed: 4541621206619149345
+[2026/11/26 01:52:01.167] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:52:01.171] Loading rsground file: intro_halo
+[2026/11/26 01:52:01.243] Completed file load.
+[2026/11/26 01:52:01.250] GroundMap.OnInit(): Initializing the map..
+[2026/11/26 01:52:01.253] GroundMap.LoadScriptEvents(): Added event Init to map intro_halo!
+[2026/11/26 01:52:01.254] GroundMap.LoadScriptEvents(): Added event Enter to map intro_halo!
+[2026/11/26 01:52:01.254] GroundMap.LoadScriptEvents(): Added event Exit to map intro_halo!
+[2026/11/26 01:52:01.254] GroundMap.LoadScriptEvents(): Added event Update to map intro_halo!
+[2026/11/26 01:52:01.254] GroundMap.LoadScriptEvents(): Added event GameSave to map intro_halo!
+[2026/11/26 01:52:01.255] GroundMap.LoadScriptEvents(): Added event GameLoad to map intro_halo!
+[2026/11/26 01:52:01.261] LuaEngine.OnGroundMapInit()..
+[2026/11/26 01:52:01.275] [SE]:[BANC MEGA] Création du Dracaufeu de test
+[2026/11/26 01:52:01.308] LuaEngine.SaveData()..
+[2026/11/26 01:52:01.451] LuaEngine.SaveData()..
+[2026/11/26 01:52:01.464] LuaEngine.OnGroundMapEnter()..
+[2026/11/26 01:52:01.465] LuaEngine.OnGroundMapExit()..
+[2026/11/26 01:52:01.466] GroundMap.~GroundMap(): Finalizing intro_halo..
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Init!
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Enter!
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Exit!
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.Update!
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameSave!
+[2026/11/26 01:52:01.466] ScriptEvent.DoCleanup(): Doing cleanup on CURMAPSCR.GameLoad!
+=>_ENV pre-cleanup:142
+=>_ENV post cleanup:141
+[2026/11/26 01:52:01.469] Zone.~Zone(): Finalizing personality_test..
+=>_ENV pre-cleanup:141
+=>_ENV post cleanup:140
+[2026/11/26 01:52:01.575] Zone Seed: 12748062344399777907
+[2026/11/26 01:52:01.575] Zone.OnInit(): Initializing the zone..
+[2026/11/26 01:52:01.576] Zone.LoadScriptEvents(): Added event Init to zone ambush_forest!
+[2026/11/26 01:52:01.578] Zone.LoadScriptEvents(): Added event EnterSegment to zone ambush_forest!
+[2026/11/26 01:52:01.578] Zone.LoadScriptEvents(): Added event ExitSegment to zone ambush_forest!
+[2026/11/26 01:52:01.578] Zone.LoadScriptEvents(): Added event Rescued to zone ambush_forest!
+[2026/11/26 01:52:01.578] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Init!
+[2026/11/26 01:52:01.578] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.EnterSegment!
+[2026/11/26 01:52:01.578] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.ExitSegment!
+[2026/11/26 01:52:01.578] ScriptEvent.ReloadEvent(): Reloading event CURZONESCR.Rescued!
+[2026/11/26 01:52:01.579] [SE]:=>> Init_ambush_forest
+[2026/11/26 01:52:01.581] Zone Seed: 12748062344399777907
+[2026/11/26 01:52:01.587] Map Count: 0
+[2026/11/26 01:52:01.587] Map Seed: 0
+[2026/11/26 01:52:01.879] Steps:
+
+[2026/11/26 01:52:01.931] Map.OnInit(): Initializing the map..
+[2026/11/26 01:52:01.933] LuaEngine.OnDungeonMapInit()..
+[2026/11/26 01:52:02.719] LuaEngine.OnMusicChange()..
+[2026/11/26 01:52:04.120] LuaEngine.OnDungeonMapEnter()..
+[2026/11/26 01:52:12.031] [SE]:[Z NATIVE] début PYRO bas HP=155 charges=1
+[2026/11/26 01:52:13.825] [SE]:[Z NATIVE] résultat PYRO bas HP=155 -> 129 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:14.402] [SE]:[Z NATIVE] début PYRO bas-gauche HP=155 charges=1
+[2026/11/26 01:52:16.150] [SE]:[Z NATIVE] résultat PYRO bas-gauche HP=155 -> 128 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:16.734] [SE]:[Z NATIVE] début PYRO gauche HP=155 charges=1
+[2026/11/26 01:52:18.483] [SE]:[Z NATIVE] résultat PYRO gauche HP=155 -> 129 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:19.067] [SE]:[Z NATIVE] début PYRO haut-gauche HP=155 charges=1
+[2026/11/26 01:52:20.833] [SE]:[Z NATIVE] résultat PYRO haut-gauche HP=155 -> 128 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:21.417] [SE]:[Z NATIVE] début PYRO haut HP=155 charges=1
+[2026/11/26 01:52:23.167] [SE]:[Z NATIVE] résultat PYRO haut HP=155 -> 129 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:23.750] [SE]:[Z NATIVE] début PYRO haut-droite HP=155 charges=1
+[2026/11/26 01:52:25.500] [SE]:[Z NATIVE] résultat PYRO haut-droite HP=155 -> 130 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:26.083] [SE]:[Z NATIVE] début PYRO droite HP=155 charges=1
+[2026/11/26 01:52:27.833] [SE]:[Z NATIVE] résultat PYRO droite HP=155 -> 129 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:28.417] [SE]:[Z NATIVE] début PYRO bas-droite HP=155 charges=1
+[2026/11/26 01:52:30.168] [SE]:[Z NATIVE] résultat PYRO bas-droite HP=155 -> 129 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:30.751] [SE]:[Z NATIVE] début TOURBILLON bas HP=155 charges=1
+[2026/11/26 01:52:32.367] [SE]:[Z NATIVE] résultat TOURBILLON bas HP=155 -> 116 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:32.950] [SE]:[Z NATIVE] début TOURBILLON bas-gauche HP=155 charges=1
+[2026/11/26 01:52:34.533] [SE]:[Z NATIVE] résultat TOURBILLON bas-gauche HP=155 -> 115 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:35.118] [SE]:[Z NATIVE] début TOURBILLON gauche HP=155 charges=1
+[2026/11/26 01:52:36.700] [SE]:[Z NATIVE] résultat TOURBILLON gauche HP=155 -> 116 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:37.283] [SE]:[Z NATIVE] début TOURBILLON haut-gauche HP=155 charges=1
+[2026/11/26 01:52:38.867] [SE]:[Z NATIVE] résultat TOURBILLON haut-gauche HP=155 -> 115 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:39.450] [SE]:[Z NATIVE] début TOURBILLON haut HP=155 charges=1
+[2026/11/26 01:52:41.033] [SE]:[Z NATIVE] résultat TOURBILLON haut HP=155 -> 114 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:41.617] [SE]:[Z NATIVE] début TOURBILLON haut-droite HP=155 charges=1
+[2026/11/26 01:52:43.200] [SE]:[Z NATIVE] résultat TOURBILLON haut-droite HP=155 -> 112 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:43.783] [SE]:[Z NATIVE] début TOURBILLON droite HP=155 charges=1
+[2026/11/26 01:52:45.367] [SE]:[Z NATIVE] résultat TOURBILLON droite HP=155 -> 112 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:45.950] [SE]:[Z NATIVE] début TOURBILLON bas-droite HP=155 charges=1
+[2026/11/26 01:52:47.533] [SE]:[Z NATIVE] résultat TOURBILLON bas-droite HP=155 -> 114 action=TurnTaken: 2 charges=0
+[2026/11/26 01:52:48.133] [SE]:[Z NATIVE] FIN

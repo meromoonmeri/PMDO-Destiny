@@ -1,0 +1,18 @@
+[2026/11/26 13:50:01.112] [SE]:[OMBRE IMMERSIVE] espece=gengar
+[2026/11/26 13:50:01.355] [SE]:[OMBRE IMMERSIVE] début bas centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:04.732] [SE]:[OMBRE IMMERSIVE] résultat bas 114->48,114->49,114->48,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:05.390] [SE]:[OMBRE IMMERSIVE] début bas-gauche centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:08.488] [SE]:[OMBRE IMMERSIVE] résultat bas-gauche 114->49,114->52,114->46,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:09.156] [SE]:[OMBRE IMMERSIVE] début gauche centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:12.171] [SE]:[OMBRE IMMERSIVE] résultat gauche 114->50,114->49,114->48,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:12.841] [SE]:[OMBRE IMMERSIVE] début haut-gauche centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:16.036] [SE]:[OMBRE IMMERSIVE] résultat haut-gauche 114->48,114->47,114->49,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:16.722] [SE]:[OMBRE IMMERSIVE] début haut centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:19.821] [SE]:[OMBRE IMMERSIVE] résultat haut 114->48,114->47,114->48,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:20.507] [SE]:[OMBRE IMMERSIVE] début haut-droite centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:23.588] [SE]:[OMBRE IMMERSIVE] résultat haut-droite 114->50,114->45,114->51,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:24.328] [SE]:[OMBRE IMMERSIVE] début droite centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:27.355] [SE]:[OMBRE IMMERSIVE] résultat droite 114->48,114->48,114->51,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:28.024] [SE]:[OMBRE IMMERSIVE] début bas-droite centre=X:22 Y:9: 31 cases: avant2, arriere1, cote1, hors3
+[2026/11/26 13:50:31.089] [SE]:[OMBRE IMMERSIVE] résultat bas-droite 114->50,114->46,114->50,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:50:31.771] [SE]:[OMBRE IMMERSIVE] FIN

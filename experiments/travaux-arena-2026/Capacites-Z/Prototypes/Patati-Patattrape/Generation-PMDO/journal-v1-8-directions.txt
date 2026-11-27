@@ -1,0 +1,18 @@
+[PATATI Z] espece=mimikyu attaque-base=play_rough
+[2026/11/26 22:16:43.236] [SE]:[PATATI Z] début bas cible=270 témoin=270
+[2026/11/26 22:16:46.827] [SE]:[PATATI Z] résultat bas cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:16:47.570] [SE]:[PATATI Z] début bas-gauche cible=270 témoin=270
+[2026/11/26 22:16:50.635] [SE]:[PATATI Z] résultat bas-gauche cible=270->242 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:16:51.386] [SE]:[PATATI Z] début gauche cible=270 témoin=270
+[2026/11/26 22:16:54.452] [SE]:[PATATI Z] résultat gauche cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:16:55.202] [SE]:[PATATI Z] début haut-gauche cible=270 témoin=270
+[2026/11/26 22:16:58.269] [SE]:[PATATI Z] résultat haut-gauche cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:16:59.019] [SE]:[PATATI Z] début haut cible=270 témoin=270
+[2026/11/26 22:17:02.102] [SE]:[PATATI Z] résultat haut cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:17:02.852] [SE]:[PATATI Z] début haut-droite cible=270 témoin=270
+[2026/11/26 22:17:05.919] [SE]:[PATATI Z] résultat haut-droite cible=270->243 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:17:06.669] [SE]:[PATATI Z] début droite cible=270 témoin=270
+[2026/11/26 22:17:09.735] [SE]:[PATATI Z] résultat droite cible=270->245 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:17:10.486] [SE]:[PATATI Z] début bas-droite cible=270 témoin=270
+[2026/11/26 22:17:13.552] [SE]:[PATATI Z] résultat bas-droite cible=270->244 témoin=270->270 action=TurnTaken: 2 charges=0
+[2026/11/26 22:17:14.302] [SE]:[PATATI Z] FIN OK

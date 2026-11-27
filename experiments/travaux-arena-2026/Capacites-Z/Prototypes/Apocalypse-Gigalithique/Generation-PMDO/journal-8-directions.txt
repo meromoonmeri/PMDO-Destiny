@@ -1,0 +1,17 @@
+[2026/11/26 13:23:20.515] [SE]:[GIGALITHE Z] début bas centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:23.473] [SE]:[GIGALITHE Z] résultat bas 114->78,114->78,114->79,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:24.132] [SE]:[GIGALITHE Z] début bas-gauche centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:27.031] [SE]:[GIGALITHE Z] résultat bas-gauche 114->77,114->78,114->78,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:27.699] [SE]:[GIGALITHE Z] début gauche centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:30.582] [SE]:[GIGALITHE Z] résultat gauche 114->80,114->78,114->80,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:31.247] [SE]:[GIGALITHE Z] début haut-gauche centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:34.199] [SE]:[GIGALITHE Z] résultat haut-gauche 114->79,114->80,114->78,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:34.866] [SE]:[GIGALITHE Z] début haut centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:37.880] [SE]:[GIGALITHE Z] résultat haut 114->79,114->78,114->80,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:38.597] [SE]:[GIGALITHE Z] début haut-droite centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:41.547] [SE]:[GIGALITHE Z] résultat haut-droite 114->78,114->80,114->76,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:42.217] [SE]:[GIGALITHE Z] début droite centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:45.181] [SE]:[GIGALITHE Z] résultat droite 114->77,114->80,114->78,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:45.883] [SE]:[GIGALITHE Z] début bas-droite centre=X:22 Y:8: 30 cases: centre, aile1, aile2, temoin arriere
+[2026/11/26 13:23:48.871] [SE]:[GIGALITHE Z] résultat bas-droite 114->79,114->76,114->78,114->114 action=TurnTaken: 2 charges=0
+[2026/11/26 13:23:49.531] [SE]:[GIGALITHE Z] FIN

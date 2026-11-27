@@ -1,0 +1,61 @@
+[2026/11/26 22:53:52.206] [SE]:[ELECTRO SURF V5] espece=raichu forme=1 attaque-base=thunderbolt
+[2026/11/26 22:53:52.267] [SE]:[ELECTRO SURF V5] début bas
+[2026/11/26 22:53:54.350] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:53:58.477] [SE]:[ELECTRO SURF V5] bas cible=1 PV=155->72 paralysie=true charges=0
+[2026/11/26 22:53:58.477] [SE]:[ELECTRO SURF V5] bas cible=2 PV=155->71 paralysie=true charges=0
+[2026/11/26 22:53:58.478] [SE]:[ELECTRO SURF V5] bas cible=3 PV=155->69 paralysie=true charges=0
+[2026/11/26 22:53:58.478] [SE]:[ELECTRO SURF V5] bas cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:53:58.478] [SE]:[ELECTRO SURF V5] bas cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:53:59.051] [SE]:[ELECTRO SURF V5] début bas-gauche
+[2026/11/26 22:54:00.983] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:05.000] [SE]:[ELECTRO SURF V5] bas-gauche cible=1 PV=155->70 paralysie=true charges=0
+[2026/11/26 22:54:05.001] [SE]:[ELECTRO SURF V5] bas-gauche cible=2 PV=155->65 paralysie=true charges=0
+[2026/11/26 22:54:05.001] [SE]:[ELECTRO SURF V5] bas-gauche cible=3 PV=155->67 paralysie=true charges=0
+[2026/11/26 22:54:05.001] [SE]:[ELECTRO SURF V5] bas-gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:05.001] [SE]:[ELECTRO SURF V5] bas-gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:05.584] [SE]:[ELECTRO SURF V5] début gauche
+[2026/11/26 22:54:07.516] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:11.533] [SE]:[ELECTRO SURF V5] gauche cible=1 PV=155->70 paralysie=true charges=0
+[2026/11/26 22:54:11.534] [SE]:[ELECTRO SURF V5] gauche cible=2 PV=155->64 paralysie=true charges=0
+[2026/11/26 22:54:11.534] [SE]:[ELECTRO SURF V5] gauche cible=3 PV=155->68 paralysie=true charges=0
+[2026/11/26 22:54:11.534] [SE]:[ELECTRO SURF V5] gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:11.534] [SE]:[ELECTRO SURF V5] gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:12.117] [SE]:[ELECTRO SURF V5] début haut-gauche
+[2026/11/26 22:54:14.050] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:18.067] [SE]:[ELECTRO SURF V5] haut-gauche cible=1 PV=155->69 paralysie=true charges=0
+[2026/11/26 22:54:18.067] [SE]:[ELECTRO SURF V5] haut-gauche cible=2 PV=155->73 paralysie=true charges=0
+[2026/11/26 22:54:18.067] [SE]:[ELECTRO SURF V5] haut-gauche cible=3 PV=155->73 paralysie=true charges=0
+[2026/11/26 22:54:18.067] [SE]:[ELECTRO SURF V5] haut-gauche cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:18.067] [SE]:[ELECTRO SURF V5] haut-gauche cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:18.653] [SE]:[ELECTRO SURF V5] début haut
+[2026/11/26 22:54:20.583] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:24.600] [SE]:[ELECTRO SURF V5] haut cible=1 PV=155->68 paralysie=true charges=0
+[2026/11/26 22:54:24.600] [SE]:[ELECTRO SURF V5] haut cible=2 PV=155->66 paralysie=true charges=0
+[2026/11/26 22:54:24.600] [SE]:[ELECTRO SURF V5] haut cible=3 PV=155->66 paralysie=true charges=0
+[2026/11/26 22:54:24.600] [SE]:[ELECTRO SURF V5] haut cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:24.600] [SE]:[ELECTRO SURF V5] haut cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:25.184] [SE]:[ELECTRO SURF V5] début haut-droite
+[2026/11/26 22:54:27.116] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:31.133] [SE]:[ELECTRO SURF V5] haut-droite cible=1 PV=155->73 paralysie=true charges=0
+[2026/11/26 22:54:31.134] [SE]:[ELECTRO SURF V5] haut-droite cible=2 PV=155->70 paralysie=true charges=0
+[2026/11/26 22:54:31.134] [SE]:[ELECTRO SURF V5] haut-droite cible=3 PV=155->68 paralysie=true charges=0
+[2026/11/26 22:54:31.134] [SE]:[ELECTRO SURF V5] haut-droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:31.134] [SE]:[ELECTRO SURF V5] haut-droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:31.717] [SE]:[ELECTRO SURF V5] début droite
+[2026/11/26 22:54:33.650] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:37.667] [SE]:[ELECTRO SURF V5] droite cible=1 PV=155->73 paralysie=true charges=0
+[2026/11/26 22:54:37.667] [SE]:[ELECTRO SURF V5] droite cible=2 PV=155->65 paralysie=true charges=0
+[2026/11/26 22:54:37.667] [SE]:[ELECTRO SURF V5] droite cible=3 PV=155->67 paralysie=true charges=0
+[2026/11/26 22:54:37.667] [SE]:[ELECTRO SURF V5] droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:37.667] [SE]:[ELECTRO SURF V5] droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:38.250] [SE]:[ELECTRO SURF V5] début bas-droite
+[2026/11/26 22:54:40.188] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:44.598] [SE]:[ELECTRO SURF V5] bas-droite cible=1 PV=155->74 paralysie=true charges=0
+[2026/11/26 22:54:44.599] [SE]:[ELECTRO SURF V5] bas-droite cible=2 PV=155->67 paralysie=true charges=0
+[2026/11/26 22:54:44.599] [SE]:[ELECTRO SURF V5] bas-droite cible=3 PV=155->73 paralysie=true charges=0
+[2026/11/26 22:54:44.599] [SE]:[ELECTRO SURF V5] bas-droite cible=4 PV=155->155 paralysie=false charges=0
+[2026/11/26 22:54:44.599] [SE]:[ELECTRO SURF V5] bas-droite cible=5 PV=110->110 paralysie=false charges=0
+[2026/11/26 22:54:45.395] [SE]:[ELECTRO SURF V5] début immunité Électrik PV=110
+[2026/11/26 22:54:48.191] [SE]:[ELECTRO SURF Z] charge et formation de la sphère terminées
+[2026/11/26 22:54:51.147] [SE]:[ELECTRO SURF V5] immunité Électrik PV=110->49 paralysie=false charges=0
+[2026/11/26 22:54:52.389] [SE]:[ELECTRO SURF V5] FIN OK

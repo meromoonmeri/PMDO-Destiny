@@ -1,0 +1,895 @@
+{
+  "statut": "PASS",
+  "poteaux_total": 42,
+  "poteaux_repris": 15,
+  "rameaux_courts": 6,
+  "poteaux": [
+    {
+      "salle": "Accueil",
+      "poteau": 2,
+      "nom": "Accueil · côté est",
+      "axe_avant": [
+        [
+          341,
+          76
+        ],
+        [
+          337,
+          94
+        ],
+        [
+          341,
+          114
+        ],
+        [
+          340,
+          138
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          335,
+          79
+        ],
+        [
+          336,
+          94
+        ],
+        [
+          336,
+          116
+        ],
+        [
+          336,
+          132
+        ],
+        [
+          337,
+          140
+        ]
+      ],
+      "largeur_avant": 25,
+      "largeur_ajustee": 21,
+      "anneaux_proteges": [
+        [
+          77,
+          90
+        ],
+        [
+          133,
+          144
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Salle des missions",
+      "poteau": 4,
+      "nom": "Missions · montant droit",
+      "axe_avant": [
+        [
+          526,
+          113
+        ],
+        [
+          527,
+          141
+        ],
+        [
+          522,
+          170
+        ],
+        [
+          522,
+          210
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          527,
+          121
+        ],
+        [
+          525,
+          147
+        ],
+        [
+          525,
+          172
+        ],
+        [
+          524,
+          194
+        ],
+        [
+          523,
+          209
+        ]
+      ],
+      "largeur_avant": 25,
+      "largeur_ajustee": 21,
+      "anneaux_proteges": [
+        [
+          146,
+          165
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Grand Salon",
+      "poteau": 1,
+      "nom": "Grand Salon · poteau ouest",
+      "axe_avant": [
+        [
+          59,
+          116
+        ],
+        [
+          60,
+          142
+        ],
+        [
+          59,
+          174
+        ],
+        [
+          62,
+          192
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          63,
+          124
+        ],
+        [
+          63,
+          141
+        ],
+        [
+          62,
+          160
+        ],
+        [
+          62,
+          180
+        ],
+        [
+          62,
+          191
+        ]
+      ],
+      "largeur_avant": 28,
+      "largeur_ajustee": 23,
+      "anneaux_proteges": [
+        [
+          141,
+          154
+        ],
+        [
+          181,
+          194
+        ]
+      ],
+      "rameau": true
+    },
+    {
+      "salle": "Grand Salon",
+      "poteau": 2,
+      "nom": "Grand Salon · poteau est",
+      "axe_avant": [
+        [
+          516,
+          116
+        ],
+        [
+          513,
+          145
+        ],
+        [
+          516,
+          174
+        ],
+        [
+          514,
+          192
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          515,
+          124
+        ],
+        [
+          514,
+          142
+        ],
+        [
+          513,
+          160
+        ],
+        [
+          513,
+          180
+        ],
+        [
+          513,
+          191
+        ]
+      ],
+      "largeur_avant": 28,
+      "largeur_ajustee": 23,
+      "anneaux_proteges": [
+        [
+          141,
+          154
+        ],
+        [
+          181,
+          194
+        ]
+      ],
+      "rameau": true
+    },
+    {
+      "salle": "Grand Salon",
+      "poteau": 3,
+      "nom": "Grand Salon · baie ouest",
+      "axe_avant": [
+        [
+          154,
+          81
+        ],
+        [
+          153,
+          106
+        ],
+        [
+          155,
+          134
+        ],
+        [
+          155,
+          153
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          154,
+          81
+        ],
+        [
+          157,
+          97
+        ],
+        [
+          158,
+          116
+        ],
+        [
+          158,
+          136
+        ],
+        [
+          157,
+          152
+        ]
+      ],
+      "largeur_avant": 27,
+      "largeur_ajustee": 24,
+      "anneaux_proteges": [
+        [
+          88,
+          102
+        ],
+        [
+          146,
+          158
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Grand Salon",
+      "poteau": 4,
+      "nom": "Grand Salon · baie est",
+      "axe_avant": [
+        [
+          420,
+          80
+        ],
+        [
+          420,
+          102
+        ],
+        [
+          422,
+          128
+        ],
+        [
+          420,
+          151
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          420,
+          81
+        ],
+        [
+          421,
+          97
+        ],
+        [
+          421,
+          118
+        ],
+        [
+          421,
+          137
+        ],
+        [
+          420,
+          152
+        ]
+      ],
+      "largeur_avant": 28,
+      "largeur_ajustee": 24,
+      "anneaux_proteges": [
+        [
+          88,
+          103
+        ],
+        [
+          145,
+          158
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Bureau du maître",
+      "poteau": 1,
+      "nom": "Bureau · montant de baie",
+      "axe_avant": [
+        [
+          212,
+          59
+        ],
+        [
+          209,
+          79
+        ],
+        [
+          211,
+          110
+        ],
+        [
+          211,
+          128
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          211,
+          53
+        ],
+        [
+          209,
+          69
+        ],
+        [
+          210,
+          90
+        ],
+        [
+          210,
+          108
+        ],
+        [
+          209,
+          119
+        ]
+      ],
+      "largeur_avant": 25,
+      "largeur_ajustee": 21,
+      "anneaux_proteges": [
+        [
+          56,
+          72
+        ],
+        [
+          111,
+          123
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Réfectoire",
+      "poteau": 1,
+      "nom": "Réfectoire · poteau central",
+      "axe_avant": [
+        [
+          288,
+          64
+        ],
+        [
+          285,
+          89
+        ],
+        [
+          290,
+          116
+        ],
+        [
+          288,
+          137
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          284,
+          65
+        ],
+        [
+          286,
+          81
+        ],
+        [
+          286,
+          102
+        ],
+        [
+          285,
+          122
+        ],
+        [
+          286,
+          136
+        ]
+      ],
+      "largeur_avant": 32,
+      "largeur_ajustee": 23,
+      "anneaux_proteges": [
+        [
+          68,
+          84
+        ],
+        [
+          125,
+          140
+        ]
+      ],
+      "rameau": true
+    },
+    {
+      "salle": "Réfectoire",
+      "poteau": 2,
+      "nom": "Réfectoire · côté service",
+      "axe_avant": [
+        [
+          515,
+          128
+        ],
+        [
+          519,
+          153
+        ],
+        [
+          518,
+          191
+        ],
+        [
+          518,
+          215
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          513,
+          126
+        ],
+        [
+          513,
+          148
+        ],
+        [
+          513,
+          169
+        ],
+        [
+          513,
+          195
+        ],
+        [
+          513,
+          212
+        ]
+      ],
+      "largeur_avant": 28,
+      "largeur_ajustee": 24,
+      "anneaux_proteges": [
+        [
+          147,
+          165
+        ],
+        [
+          205,
+          219
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Cuisine",
+      "poteau": 3,
+      "nom": "Cuisine · baie est",
+      "axe_avant": [
+        [
+          355,
+          63
+        ],
+        [
+          355,
+          81
+        ],
+        [
+          357,
+          102
+        ],
+        [
+          357,
+          120
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          355,
+          61
+        ],
+        [
+          356,
+          77
+        ],
+        [
+          356,
+          93
+        ],
+        [
+          357,
+          108
+        ],
+        [
+          357,
+          118
+        ]
+      ],
+      "largeur_avant": 22,
+      "largeur_ajustee": 19,
+      "anneaux_proteges": [
+        [
+          65,
+          77
+        ],
+        [
+          110,
+          121
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Couloir ouest",
+      "poteau": 1,
+      "nom": "Couloir ouest · colonne intérieure",
+      "axe_avant": [
+        [
+          141,
+          69
+        ],
+        [
+          142,
+          88
+        ],
+        [
+          144,
+          115
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          143,
+          66
+        ],
+        [
+          142,
+          79
+        ],
+        [
+          142,
+          94
+        ],
+        [
+          142,
+          106
+        ],
+        [
+          143,
+          114
+        ]
+      ],
+      "largeur_avant": 34,
+      "largeur_ajustee": 20,
+      "anneaux_proteges": [
+        [
+          70,
+          84
+        ],
+        [
+          105,
+          117
+        ]
+      ],
+      "rameau": true
+    },
+    {
+      "salle": "Couloir est",
+      "poteau": 1,
+      "nom": "Couloir est · colonne intérieure",
+      "axe_avant": [
+        [
+          336,
+          69
+        ],
+        [
+          339,
+          90
+        ],
+        [
+          336,
+          115
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          337,
+          66
+        ],
+        [
+          337,
+          79
+        ],
+        [
+          337,
+          94
+        ],
+        [
+          337,
+          107
+        ],
+        [
+          337,
+          115
+        ]
+      ],
+      "largeur_avant": 34,
+      "largeur_ajustee": 20,
+      "anneaux_proteges": [
+        [
+          70,
+          84
+        ],
+        [
+          106,
+          118
+        ]
+      ],
+      "rameau": true
+    },
+    {
+      "salle": "Dortoir nord I",
+      "poteau": 2,
+      "nom": "Dortoir nord I · poteau est",
+      "axe_avant": [
+        [
+          326,
+          76
+        ],
+        [
+          325,
+          103
+        ],
+        [
+          327,
+          127
+        ],
+        [
+          326,
+          149
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          328,
+          80
+        ],
+        [
+          329,
+          100
+        ],
+        [
+          329,
+          118
+        ],
+        [
+          329,
+          137
+        ],
+        [
+          328,
+          147
+        ]
+      ],
+      "largeur_avant": 29,
+      "largeur_ajustee": 22,
+      "anneaux_proteges": [
+        [
+          95,
+          108
+        ],
+        [
+          137,
+          151
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Dortoir nord II",
+      "poteau": 1,
+      "nom": "Dortoir nord II · poteau ouest",
+      "axe_avant": [
+        [
+          120,
+          76
+        ],
+        [
+          121,
+          103
+        ],
+        [
+          119,
+          129
+        ],
+        [
+          122,
+          148
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          120,
+          80
+        ],
+        [
+          120,
+          99
+        ],
+        [
+          120,
+          116
+        ],
+        [
+          120,
+          138
+        ],
+        [
+          121,
+          147
+        ]
+      ],
+      "largeur_avant": 31,
+      "largeur_ajustee": 22,
+      "anneaux_proteges": [
+        [
+          97,
+          109
+        ],
+        [
+          138,
+          151
+        ]
+      ],
+      "rameau": false
+    },
+    {
+      "salle": "Chambre du héros",
+      "poteau": 2,
+      "nom": "Chambre du héros · poteau extérieur",
+      "axe_avant": [
+        [
+          390,
+          115
+        ],
+        [
+          388,
+          144
+        ],
+        [
+          391,
+          170
+        ],
+        [
+          388,
+          195
+        ]
+      ],
+      "axe_ajuste": [
+        [
+          386,
+          112
+        ],
+        [
+          385,
+          129
+        ],
+        [
+          385,
+          149
+        ],
+        [
+          385,
+          167
+        ],
+        [
+          384,
+          185
+        ],
+        [
+          384,
+          193
+        ]
+      ],
+      "largeur_avant": 29,
+      "largeur_ajustee": 23,
+      "anneaux_proteges": [
+        [
+          123,
+          134
+        ],
+        [
+          142,
+          156
+        ],
+        [
+          188,
+          196
+        ]
+      ],
+      "rameau": true
+    }
+  ],
+  "source_ronce": "e638520f40302f31847871332059d63bf9c7ac9e241f575ee3335dc427fa487f",
+  "salles_ajustees": [
+    "guilde_destiny_accueil",
+    "guilde_destiny_missions",
+    "guilde_destiny_grand_salon",
+    "guilde_destiny_bureau_maitre",
+    "guilde_destiny_refectoire",
+    "guilde_destiny_cuisine",
+    "guilde_destiny_couloir_ouest",
+    "guilde_destiny_couloir_est",
+    "guilde_destiny_dortoir_nord_1",
+    "guilde_destiny_dortoir_nord_2",
+    "guilde_destiny_chambre_heros"
+  ],
+  "salles_hors_retouche_identiques": 4,
+  "images_nuit_par_salle": 4,
+  "reflets_alpha_max_255": 24,
+  "emetteurs_bourgeons": 30,
+  "pixels_retouches_nuit_3": 41982,
+  "anciens_plans_sha256": "f7ac1dc846777ab37733347318f1193754a9e9af33cb7931f5670dc97174cfad",
+  "jeu_modifie": false
+}

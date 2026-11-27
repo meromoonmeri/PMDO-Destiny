@@ -1,0 +1,33 @@
+[2026/11/27 12:46:54.321] [SE]:[LAME EN PEINE V5] début bas
+[2026/11/27 12:46:57.499] [SE]:[LAME V5] cage de 16 slashs orientée Down: 0
+[2026/11/27 12:46:58.470] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:00.945] [SE]:[LAME EN PEINE V5] bas cible=202->36 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:47:01.362] [SE]:[LAME EN PEINE V5] début bas-gauche
+[2026/11/27 12:47:02.646] [SE]:[LAME V5] cage de 16 slashs orientée DownLeft: 1
+[2026/11/27 12:47:03.671] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:06.186] [SE]:[LAME EN PEINE V5] bas-gauche cible=202->31 témoin=202->202 lanceur=1->86 soin-attendu=85 charges=9
+[2026/11/27 12:47:06.606] [SE]:[LAME EN PEINE V5] début gauche
+[2026/11/27 12:47:07.945] [SE]:[LAME V5] cage de 16 slashs orientée Left: 2
+[2026/11/27 12:47:09.138] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:11.312] [SE]:[LAME EN PEINE V5] gauche cible=202->45 témoin=202->202 lanceur=1->79 soin-attendu=78 charges=9
+[2026/11/27 12:47:11.813] [SE]:[LAME EN PEINE V5] début haut-gauche
+[2026/11/27 12:47:13.009] [SE]:[LAME V5] cage de 16 slashs orientée UpLeft: 3
+[2026/11/27 12:47:14.353] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:16.653] [SE]:[LAME EN PEINE V5] haut-gauche cible=202->33 témoin=202->202 lanceur=1->85 soin-attendu=84 charges=9
+[2026/11/27 12:47:17.223] [SE]:[LAME EN PEINE V5] début haut
+[2026/11/27 12:47:18.640] [SE]:[LAME V5] cage de 16 slashs orientée Up: 4
+[2026/11/27 12:47:19.630] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:22.564] [SE]:[LAME EN PEINE V5] haut cible=202->35 témoin=202->202 lanceur=1->84 soin-attendu=83 charges=9
+[2026/11/27 12:47:23.135] [SE]:[LAME EN PEINE V5] début haut-droite
+[2026/11/27 12:47:24.604] [SE]:[LAME V5] cage de 16 slashs orientée UpRight: 5
+[2026/11/27 12:47:25.455] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:28.021] [SE]:[LAME EN PEINE V5] haut-droite cible=202->33 témoin=202->202 lanceur=1->85 soin-attendu=84 charges=9
+[2026/11/27 12:47:28.437] [SE]:[LAME EN PEINE V5] début droite
+[2026/11/27 12:47:29.972] [SE]:[LAME V5] cage de 16 slashs orientée Right: 6
+[2026/11/27 12:47:30.971] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:33.503] [SE]:[LAME EN PEINE V5] droite cible=202->33 témoin=202->202 lanceur=1->85 soin-attendu=84 charges=9
+[2026/11/27 12:47:33.920] [SE]:[LAME EN PEINE V5] début bas-droite
+[2026/11/27 12:47:35.331] [SE]:[LAME V5] cage de 16 slashs orientée DownRight: 7
+[2026/11/27 12:47:36.571] [SE]:[LAME V5] rupture après pulsation, sans distorsion
+[2026/11/27 12:47:38.770] [SE]:[LAME EN PEINE V5] bas-droite cible=202->33 témoin=202->202 lanceur=1->85 soin-attendu=84 charges=9
+[2026/11/27 12:47:39.970] [SE]:[LAME EN PEINE V5] FIN OK
